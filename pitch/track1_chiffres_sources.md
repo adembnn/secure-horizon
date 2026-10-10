@@ -103,7 +103,7 @@
 | Chiffre | Valeur | Source |
 |---|---|---|
 | Incidents majeurs déclarés dans l'UE en 2025 | 3 383 ; ~29 % causés par un tiers ; ~10 % cyber | [P] ESAs, 3 juin 2026 |
-| Incidents majeurs déclarés à l'AMF en 2025 | 33, plus de 80 % causés par un prestataire, dont 2 chez des prestataires crypto | [S] AMF via Le Monde du Droit |
+| Incidents majeurs déclarés à l'AMF en 2025 | 33, plus de 80 % causés par un prestataire (le « 2 chez des prestataires crypto » n'est pas confirmé) | [S] AMF via Le Monde du Droit |
 | Qualité des déclarations | Délais « rarement respectés », erreurs de champs et de classification | [S] retour ACPR-AMF via Forvis Mazars |
 | Délais imposés | 4 h après classification (24 h max), 72 h, 1 mois | [P] RTS 2025/301 |
 | Prestataires crypto agréés MiCA dans l'UE | ~216 à 321 selon la date du registre (juin-juil. 2026) | [S] KPMG, ESMA |
