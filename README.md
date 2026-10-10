@@ -1,6 +1,6 @@
 # Secure Horizon
 
-Hackathon 36 h (10–11 oct. 2026), par Adem (tech) et Titouan (business).
+Hackathon 36 h (10–11 oct. 2026), par Adem et Titouan.
 **Projet : pas encore choisi.** Voir `coord/DECISIONS.md` (D-001). Pitch et commande de démo à ajouter ici une fois le projet tranché.
 
 Ce repo sert aussi de **bus de coordination** entre deux sessions Claude Code (une par humain) et des workers headless sur AWS Bedrock. Le design complet est dans `research/07_harness_design.md`, et les règles communes dans `CLAUDE.md`.
