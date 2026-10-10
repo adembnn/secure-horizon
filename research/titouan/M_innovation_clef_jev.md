@@ -32,3 +32,12 @@ Statut : synthèse de N1 (doc Clef), N2 (usages particulier), N3 (jeux de donné
 2. Un A/B Jev vs Clef-flash vs Clef sur Workers AI gratuit est faisable ce week-end, si on a un jeu étiqueté. Comme aucun benchmark indépendant n'existe, mesurer nous-mêmes serait une vraie donnée (mais petite : à annoncer comme telle).
 3. Le créneau "messages entrants + riposte + escalade" est libre et marche sur MetaMask classique : c'est compatible avec le cœur seul (Lire, Classer, Documenter, Prévenir).
 4. Risques : injection de prompt dans les messages classés, biais vers la première option, jeux de données pauvres en faux supports crypto.
+
+## 5. Gel des fonds (N4, ajouté après coup)
+- Aucun acteur ne gèle sur simple demande d'une victime. Circle [P] et Binance [P] exigent une contrainte légale ou un ordre officiel. Tether gèle sur demande vérifiée d'agence, sans ordonnance, ce que conteste une plainte du 31 août 2026 [P Forkast].
+- Délais en cas de hack : Tether environ 1 jour (Bybit), environ 7 h après Circle (Bitget) [P]. Circle plus de 24 h sur Bybit, 0 gel en 6 h sur Drift, environ 1 mois sur Cetus (selon ZachXBT, donc [V]). Gel de masse seulement par les validateurs Sui (162 M$ sur 223 M$).
+- FBI Kill Chain 2025 [P] : 3 900 dossiers, 679 M$ gelés sur 1,164 Md$ tentés (58 %), surtout virements bancaires.
+- SEAL 911 [P] : 3 300 tickets, plus de 180 M$ "sauvés" (auto-déclaré). Handle du bot à vérifier.
+- Non trouvé : formulaire public de gel chez les émetteurs et grands exchanges ; cas français (plainte, parquet) non couvert.
+- Paquet de preuves en 13 points (rapport de police, narratif daté, adresses et TxID, preuve de propriété, plainte IC3...) reconstitué, aucun émetteur ne publie sa liste (détail dans N4).
+- Lecture : notre dossier automatique a de la valeur parce que le gel dépend d'un dossier judiciaire complet, mais on ne peut pas promettre un gel. Le produit prépare la demande, il ne la déclenche pas.
