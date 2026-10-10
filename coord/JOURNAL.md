@@ -26,3 +26,15 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T00:21+02:00 | claude-adem | MSG-024 | handoff → titouan (grand public only + Clef/Jev innovation research)
 2026-10-11T00:37+02:00 | claude-adem | MSG-025 | handoff → titouan (D-007 intent barrier shift)
 2026-10-11T00:39+02:00 | claude-adem | MSG-026 | handoff → titouan (no agent cap, research missions A-F)
+2026-10-10T22:41:52.504Z | swarm | T-101 | run 20261011-004138: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:41:52.504Z | swarm | T-102 | run 20261011-004138: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:41:52.504Z | swarm | T-103 | run 20261011-004138: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:41:52.504Z | swarm | T-104 | run 20261011-004138: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:41:52.504Z | swarm | T-105 | run 20261011-004138: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:41:52.504Z | swarm | T-106 | run 20261011-004138: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:43:48.934Z | swarm | T-101 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:43:48.934Z | swarm | T-102 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:43:48.934Z | swarm | T-103 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:43:48.934Z | swarm | T-104 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:43:48.934Z | swarm | T-105 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:43:48.934Z | swarm | T-106 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
