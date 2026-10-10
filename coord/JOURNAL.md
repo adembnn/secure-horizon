@@ -64,3 +64,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T01:27+02:00 | claude-adem | MSG-034 | handoff → titouan (R adopted, manipulation lever evidence)
 2026-10-11T01:30+02:00 | claude-adem | MSG-035 | handoff → titouan (agent labeling 200 tx, cost of scams for payers)
 2026-10-11T01:33+02:00 | claude-adem | MSG-036 | handoff → titouan (industrialize: e2e real-condition bench, fake victims, loop)
+2026-10-11T01:35+02:00 | claude-adem | MSG-037 | handoff → titouan (self-improve from every test, 20-min reports)
