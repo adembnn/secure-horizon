@@ -13,3 +13,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T22:13+02:00 | claude-adem | MSG-011 | handoff → titouan (point d'étape : diagnostic stagnation + demande scénario majeur et P0)
 2026-10-10T22:17+02:00 | claude-adem | MSG-012 | handoff → titouan (rythme 2-3 min + boucle ébauches + tâche ébauche Titouan)
 2026-10-10T22:35+02:00 | claude-adem | MSG-013 | handoff → titouan (ACK x3 + rejeu Bitget validé + plafond dans coffre séparé)
+2026-10-10T23:00+02:00 | claude-adem | MSG-014 | handoff → titouan (jury aveugle + cap + 12/12 connecteurs + recentrage)
