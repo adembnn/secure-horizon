@@ -1,0 +1,79 @@
+{
+ "note": "Jeu déséquilibré artificiellement (170 attaques / 499 légitimes). Les FPR sont mesurés au niveau du SPENDER, pas de la transaction. Étiquettes ScamSniffer : biais contre les drainers neufs. Légitime présumé.",
+ "n": {
+  "dev": 329,
+  "test": 340,
+  "test_attaque": 91
+ },
+ "poids_regression": {
+  "biais": -2.611,
+  "est_contrat": -0.568,
+  "log_nonce": 1.283,
+  "log_solde": -1.04,
+  "log_taille_code": -0.279,
+  "log_approbateurs": -2.667,
+  "approbateurs_inconnus": -0.617
+ },
+ "R3_compte_externe": {
+  "modele": "R3",
+  "n": 340,
+  "auc": 0.8478308839754622,
+  "a_FPR_1pct": {
+   "fpr_cible": 0.01,
+   "seuil": 1,
+   "rappel": 0,
+   "rappel_wilson95": [
+    0,
+    0.04050543221539915
+   ],
+   "fp": 0,
+   "n_neg": 249,
+   "tp": 0,
+   "n_pos": 91
+  },
+  "a_FPR_5pct": {
+   "fpr_cible": 0.05,
+   "seuil": 1,
+   "rappel": 0,
+   "rappel_wilson95": [
+    0,
+    0.04050543221539915
+   ],
+   "fp": 0,
+   "n_neg": 249,
+   "tp": 0,
+   "n_pos": 91
+  }
+ },
+ "regression_logistique": {
+  "modele": "regression_logistique_dev_vers_test",
+  "n": 340,
+  "auc": 0.9786839666357738,
+  "a_FPR_1pct": {
+   "fpr_cible": 0.01,
+   "seuil": 1.5562751978789091,
+   "rappel": 0.7802197802197802,
+   "rappel_wilson95": [
+    0.6847588519917921,
+    0.8529798618215557
+   ],
+   "fp": 1,
+   "n_neg": 249,
+   "tp": 71,
+   "n_pos": 91
+  },
+  "a_FPR_5pct": {
+   "fpr_cible": 0.05,
+   "seuil": 0.32196817683734436,
+   "rappel": 0.8681318681318682,
+   "rappel_wilson95": [
+    0.7835113710706528,
+    0.9229296843311963
+   ],
+   "fp": 12,
+   "n_neg": 249,
+   "tp": 79,
+   "n_pos": 91
+  }
+ }
+}
