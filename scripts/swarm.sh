@@ -26,7 +26,11 @@ if [ "$DRY" = 0 ]; then
   # shellcheck disable=SC1091
   source scripts/bedrock-env.sh
   # SWARM_MODEL surcharge le modèle de .env.bedrock sans toucher au fichier de secrets (ex. us.anthropic.claude-sonnet-4-6)
-  if [ -n "${SWARM_MODEL:-}" ]; then export ANTHROPIC_MODEL="$SWARM_MODEL"; echo "Modèle des workers : $ANTHROPIC_MODEL"; fi
+  # Les agents déclarent `model: sonnet|opus` : on force aussi les alias, sinon ils pointent vers un modèle absent de Bedrock et le worker reste muet.
+  if [ -n "${SWARM_MODEL:-}" ]; then
+    export ANTHROPIC_MODEL="$SWARM_MODEL" ANTHROPIC_DEFAULT_SONNET_MODEL="$SWARM_MODEL" ANTHROPIC_DEFAULT_OPUS_MODEL="$SWARM_MODEL" ANTHROPIC_DEFAULT_HAIKU_MODEL="$SWARM_MODEL"
+    echo "Modèle des workers : $ANTHROPIC_MODEL"
+  fi
   git fetch -q origin main || { echo "ERREUR: git fetch origin main impossible (remote ?)" >&2; exit 1; }
 fi
 
