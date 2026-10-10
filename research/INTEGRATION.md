@@ -72,3 +72,4 @@ Chaque ligne ci-dessus passe alors à `intégré` ou `écarté`.
 | T-101 contrats de démo | intégré : 26 tests verts, non déployé sur Fuji | branche t/T-101 |
 | T-103 comparateur | intégré avec réserves : 67 tests verts, jargon « permit » résiduel, Clef non appelé | branche t/T-103 |
 | T1_P4_faisabilite_particulier | écarté (direction D-006 abandonnée), archivé | research/tracks/ |
+| BANC-REEL-V0 (Titouan, research/titouan/bench) | intégré : premiers chiffres mesurés ; filet naïf FP 2,8/1000 C-Chain, 31/1000 Ethereum ; R3 « spender compte externe » 80 % de rappel / 0,23 % FP mais contournable ; suites demandées : âge du contrat spender, jeu permit réel reconstruit depuis le calldata, gain de l'intention sur 200 tx étiquetées | MSG-030 |

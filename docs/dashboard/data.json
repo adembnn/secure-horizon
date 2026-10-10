@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-11T01:01",
-  "headline": "SHIFT D-007 : barrière d'intention pour wallets normaux (grand public). Tu dis ce que tu veux faire, Sentinelle calcule ce que l'opération fait vraiment, et avertit si ça diverge. Démo : drainer neuf déployé en live sur Fuji.",
+  "updated": "2026-10-11T01:06",
+  "headline": "Premiers chiffres MESURÉS (banc réel, données publiques) : le filet sans intention fait 2,8 faux positifs pour 1000 tx sur Avalanche C-Chain, 31/1000 sur Ethereum ; 82 % des vraies approbations de drainers détectées. L'intention doit faire baisser le bruit.",
   "metrics": [
     {
       "label": "Fichiers de recherche",
@@ -16,11 +16,19 @@
     },
     {
       "label": "Messages Adem → Titouan",
-      "value": "29"
+      "value": "30"
     },
     {
       "label": "Messages Titouan → Adem",
       "value": "25"
+    },
+    {
+      "label": "FP filet C-Chain",
+      "value": "0,28 %"
+    },
+    {
+      "label": "Rappel drainers réels",
+      "value": "82 %"
     }
   ],
   "stages": [
@@ -37,6 +45,11 @@
     {
       "name": "Jurés v3 tour 1 (6 juges)",
       "detail": "~60/100 ; faisabilité plafonnée tant que rien n'est mesuré",
+      "status": "done"
+    },
+    {
+      "name": "Banc réel v0 (Titouan)",
+      "detail": "49 400 tx légitimes + 1 354 attaques réelles ; R3 fort mais contournable",
       "status": "done"
     },
     {
