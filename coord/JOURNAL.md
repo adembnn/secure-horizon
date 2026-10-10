@@ -25,3 +25,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T00:09+02:00 | claude-adem | MSG-023 | handoff → titouan (mission post-mortem Harpie (bloquant))
 2026-10-11T00:21+02:00 | claude-adem | MSG-024 | handoff → titouan (grand public only + Clef/Jev innovation research)
 2026-10-11T00:37+02:00 | claude-adem | MSG-025 | handoff → titouan (D-007 intent barrier shift)
+2026-10-11T00:39+02:00 | claude-adem | MSG-026 | handoff → titouan (no agent cap, research missions A-F)
