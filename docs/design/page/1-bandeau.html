@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinelle - Bandeau d'alerte</title>
+<link rel="stylesheet" href="sentinelle.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="demo-bar">
+  <nav aria-label="Maquettes"><strong>Sentinelle</strong>
+    <a href="1-bandeau.html" aria-current="page">1 Bandeau</a><a href="2-miroir.html">2 Miroir</a><a href="3-popup.html">3 Popup</a><a href="4-accueil.html">4 Accueil</a></nav>
+  <button id="theme-btn" class="theme-btn" type="button">Thème : auto</button>
+</header>
+<main id="contenu" class="wrap">
+  <h1>Le bandeau, avant tout clic</h1>
+  <p class="lede">Sentinelle l'ajoute en haut de la page dès qu'elle se charge. Il dit le niveau, la raison en une phrase, et laisse le choix. Les sites et marques ci-dessous sont fictifs.</p>
+
+  <div class="stack">
+    <section aria-labelledby="t-danger">
+      <h2 id="t-danger" style="font-size:1.1rem;margin-top:24px">Niveau Danger</h2>
+      <p class="caption">Rouge plein, icône octogonale, mot « Danger ». Annoncé tout de suite par les lecteurs d'écran.</p>
+      <div class="browser">
+        <div class="browser-top"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">https://lumen-remboursement.example/recevoir</span></div>
+        <div class="banner danger" role="alert">
+          <svg class="ico" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 2h10l7 7v10l-7 7H9l-7-7V9z" fill="#fff"/><path d="M14 8v8M14 19.5v.5" stroke="#b3261e" stroke-width="3" stroke-linecap="round"/></svg>
+          <div><span class="tag">Danger</span>
+            <p class="msg">Ce site vient d'être créé et fait semblant d'être « Banque Lumen ». Ne signe rien ici.</p></div>
+          <div class="acts">
+            <a class="btn small" href="#">Quitter ce site</a>
+            <details><summary>Pourquoi ?</summary>
+              <div class="why"><p>Voilà ce que Sentinelle a remarqué :</p>
+              <ul><li>Le site existe depuis 2 heures. Le vrai site de Banque Lumen existe depuis 2009.</li>
+                  <li>Son adresse ressemble à celle de la vraie banque, avec un mot en plus.</li>
+                  <li>Le texte parle d'un « remboursement à récupérer vite », une phrase typique des arnaques.</li></ul>
+              <p style="margin-top:8px"><a href="2-miroir.html">Voir ce que le site te ferait vraiment signer</a></p></div>
+            </details>
+          </div>
+        </div>
+        <div class="site">
+          <span class="brand">BANQUE LUMEN</span>
+          <h2>Votre remboursement est prêt</h2>
+          <div class="gift"><p>Montant à recevoir</p><p class="amount">50 USDC</p></div>
+          <button class="fake-btn" type="button" tabindex="-1">Recevoir 50 USDC</button>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-warn">
+      <h2 id="t-warn" style="font-size:1.1rem">Niveau Attention</h2>
+      <p class="caption">Jaune pâle, icône triangulaire, mot « Attention ». Discret, ne coupe rien, peut être masqué.</p>
+      <div class="browser">
+        <div class="browser-top"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">https://offres-aurore.example/gagnants</span></div>
+        <div class="banner warn" role="status">
+          <svg class="ico" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3 26 25H2z" fill="#8a5200"/><path d="M14 11v7M14 20.5v.5" stroke="#fff3d1" stroke-width="2.6" stroke-linecap="round"/></svg>
+          <div><span class="tag">Attention</span>
+            <p class="msg">Ce site a 4 jours et te met la pression pour agir vite. Prends une minute avant de continuer.</p></div>
+          <div class="acts">
+            <details><summary>Pourquoi ?</summary>
+              <div class="why"><ul><li>Adresse du site enregistrée il y a 4 jours.</li><li>Le texte dit « dernière chance » et « offre qui expire dans 10 minutes ».</li></ul>
+              <p style="margin-top:8px">Rien de dangereux n'a été trouvé pour l'instant. Si le site te demande de connecter ton portefeuille, Sentinelle te montrera ce que ça fait avant.</p></div>
+            </details>
+            <button class="btn ghost small" type="button" style="color:var(--warn-fg);border-color:var(--warn-fg)">Masquer</button>
+          </div>
+        </div>
+        <div class="site">
+          <span class="brand" style="color:#7a3b00">AURORE REWARDS</span>
+          <h2>Dernière chance : réclamez votre bonus</h2>
+          <button class="fake-btn" type="button" tabindex="-1" style="background:#b04a00">Réclamer mon bonus</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="sentinelle.js"></script>
+</body>
+</html>

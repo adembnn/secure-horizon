@@ -1,0 +1,98 @@
+/* Sentinelle - design commun. Aucun import externe : polices système, fonctionne hors ligne.
+   Thème : clair par défaut, sombre si le système le demande, ou forcé par data-theme. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --surface-2:#eaeef3; --fg:#13202d; --muted:#445568; --line:#ccd5e0;
+  --accent:#0a5aa8; --on-accent:#ffffff; --focus:#0a5aa8;
+  --danger-solid:#b3261e; --on-danger:#ffffff; --danger-bg:#fdecea; --danger-fg:#7a1610; --danger-line:#e9a39e;
+  --warn-solid:#8a5200; --warn-bg:#fff3d1; --warn-fg:#4f3000; --warn-line:#e3b559;
+  --ok-solid:#1b6a41; --ok-bg:#e3f4ea; --ok-fg:#0f4a2b;
+  --mark:#ffe14d; --mark-fg:#13202d;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Code",Consolas,Menlo,monospace;
+  --r:10px; --shadow:0 1px 2px rgba(19,32,45,.12),0 6px 18px rgba(19,32,45,.08);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d131a; --surface:#16202a; --surface-2:#1f2b37; --fg:#e8eef5; --muted:#a8b6c5; --line:#2d3b49;
+  --accent:#7bb8f7; --on-accent:#08121d; --focus:#9ccbfa;
+  --danger-solid:#9c2019; --on-danger:#ffffff; --danger-bg:#3a1613; --danger-fg:#ffd2ce; --danger-line:#7d3731;
+  --warn-solid:#d99a2b; --warn-bg:#392909; --warn-fg:#ffe2a6; --warn-line:#7a5a1d;
+  --ok-solid:#5cc58d; --ok-bg:#10301f; --ok-fg:#bdf0d5;
+  --mark:#ffe14d; --mark-fg:#13202d; --shadow:0 1px 2px rgba(0,0,0,.5),0 6px 18px rgba(0,0,0,.35);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d131a; --surface:#16202a; --surface-2:#1f2b37; --fg:#e8eef5; --muted:#a8b6c5; --line:#2d3b49;
+  --accent:#7bb8f7; --on-accent:#08121d; --focus:#9ccbfa;
+  --danger-solid:#9c2019; --on-danger:#ffffff; --danger-bg:#3a1613; --danger-fg:#ffd2ce; --danger-line:#7d3731;
+  --warn-solid:#d99a2b; --warn-bg:#392909; --warn-fg:#ffe2a6; --warn-line:#7a5a1d;
+  --ok-solid:#5cc58d; --ok-bg:#10301f; --ok-fg:#bdf0d5;
+  --mark:#ffe14d; --mark-fg:#13202d; --shadow:0 1px 2px rgba(0,0,0,.5),0 6px 18px rgba(0,0,0,.35);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--font)}
+h1,h2,h3{line-height:1.2;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:8px;top:-60px;background:var(--surface);color:var(--fg);padding:8px 12px;border-radius:6px;z-index:99}
+.skip:focus{top:8px}
+
+/* Boutons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border-radius:8px;
+  border:2px solid var(--accent);background:var(--accent);color:var(--on-accent);font:600 1rem/1.2 var(--font);cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.danger{background:var(--danger-solid);border-color:var(--danger-solid);color:var(--on-danger)}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.btn.small{min-height:36px;padding:4px 12px;font-size:.9rem}
+
+/* Barre de démo (hors maquette) */
+.demo-bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface);font-size:.9rem;color:var(--muted)}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px 16px}
+.theme-btn{min-height:36px;padding:4px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--fg);font:inherit;cursor:pointer}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 48px}
+.lede{color:var(--muted);max-width:65ch;margin-top:8px}
+.caption{font-size:.85rem;color:var(--muted);margin:8px 0 12px;letter-spacing:.02em}
+
+/* Navigateur factice */
+.browser{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.browser-top{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.url{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font:.85rem var(--mono);color:var(--fg)}
+
+/* Bandeau injecté */
+.banner{position:sticky;top:0;z-index:5;padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start}
+.banner.danger{background:var(--danger-solid);color:var(--on-danger)}
+.banner.warn{background:var(--warn-bg);color:var(--warn-fg);border-bottom:3px solid var(--warn-solid)}
+.banner .ico{width:28px;height:28px;flex:none;margin-top:2px}
+.banner .tag{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.banner .msg{font-size:1rem;font-weight:600;max-width:70ch}
+.banner .acts{grid-column:2;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:6px}
+.banner.danger .btn{background:#fff;color:#7a1610;border-color:#fff}
+.banner.danger a,.banner.danger summary{color:#fff}
+.banner.warn a,.banner.warn summary{color:var(--warn-fg)}
+.banner summary{cursor:pointer;font-weight:700;text-decoration:underline;text-underline-offset:3px;min-height:36px;display:inline-flex;align-items:center;list-style:none}
+.banner summary::-webkit-details-marker{display:none}
+.banner details{display:contents}
+.banner details>.why{grid-column:1/-1;margin-top:8px;padding:12px 14px;border-radius:8px;font-weight:400;max-width:70ch}
+.banner.danger .why{background:rgba(0,0,0,.28)}
+.banner.warn .why{background:rgba(0,0,0,.07)}
+.why ul{margin:6px 0 0;padding-left:20px}
+
+/* Faux site */
+.site{padding:28px 20px 32px;display:grid;gap:14px;justify-items:start}
+.site .brand{font:800 1.1rem var(--font);letter-spacing:.04em;color:#0a3d62}
+.site h2{font-size:1.6rem;color:var(--fg)}
+.gift{width:100%;max-width:520px;border:2px dashed var(--line);border-radius:12px;padding:16px;background:var(--surface-2)}
+.gift .amount{font:800 2rem var(--font);color:var(--fg)}
+.fake-btn{display:inline-block;padding:12px 22px;border-radius:8px;background:#1d7a46;color:#fff;font-weight:700;border:0;font-size:1rem;min-height:44px}
+.stack{display:grid;gap:28px}
+
+/* Pastilles de statut (forme + texte, jamais la couleur seule) */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;font-weight:700;font-size:.82rem;border:1px solid}
+.pill.danger{background:var(--danger-bg);color:var(--danger-fg);border-color:var(--danger-line)}
+.pill.warn{background:var(--warn-bg);color:var(--warn-fg);border-color:var(--warn-line)}
+.pill.ok{background:var(--ok-bg);color:var(--ok-fg);border-color:var(--ok-fg)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

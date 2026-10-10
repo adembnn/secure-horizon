@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinelle - Bienvenue</title>
+<link rel="stylesheet" href="sentinelle.css">
+<style>
+.card{max-width:480px;margin:24px auto 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.screen{padding:12px 24px 8px;display:grid;gap:14px}
+.screen h1,.screen h2{font-size:1.5rem}
+.screen h1:focus,.screen h2:focus{outline:none}
+.art{width:100%;height:120px;border-radius:12px;background:var(--surface-2);display:grid;place-items:center}
+.art svg{width:96px;height:96px}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.lines li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start}
+.lines svg{width:24px;height:24px;margin-top:2px}
+.lines .no{color:var(--muted)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px 24px}
+.dots2{display:flex;gap:8px}
+.dots2 span{width:10px;height:10px;border-radius:50%;border:2px solid var(--muted)}
+.dots2 span.on{background:var(--accent);border-color:var(--accent)}
+.step-label{font-size:.85rem;color:var(--muted);padding:16px 24px 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="demo-bar">
+  <nav aria-label="Maquettes"><strong>Sentinelle</strong>
+    <a href="1-bandeau.html">1 Bandeau</a><a href="2-miroir.html">2 Miroir</a><a href="3-popup.html">3 Popup</a><a href="4-accueil.html" aria-current="page">4 Accueil</a></nav>
+  <button id="theme-btn" class="theme-btn" type="button">Thème : auto</button>
+</header>
+<main id="contenu" class="wrap">
+  <div class="card">
+    <p class="step-label" id="step-label" aria-live="polite">Étape 1 sur 3</p>
+
+    <section class="screen" data-step aria-labelledby="s1">
+      <div class="art" aria-hidden="true"><svg viewBox="0 0 96 96"><path d="M48 6 14 19v26c0 22 14 37 34 45 20-8 34-23 34-45V19z" fill="var(--accent)"/><circle cx="48" cy="44" r="14" fill="none" stroke="var(--on-accent)" stroke-width="5"/><circle cx="48" cy="44" r="4" fill="var(--on-accent)"/></svg></div>
+      <h1 id="s1">Sentinelle regarde avant toi</h1>
+      <ul class="lines">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Quand une page s'ouvre, elle vérifie si le site est un faux.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Si un doute apparaît, un bandeau s'affiche en haut, avant que tu cliques.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Quand tu dois signer, elle compare ce que la page promet à ce que ça fait vraiment.</span></li>
+      </ul>
+    </section>
+
+    <section class="screen" data-step aria-labelledby="s2" hidden>
+      <div class="art" aria-hidden="true"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="38" fill="none" stroke="var(--accent)" stroke-width="7"/><path d="M48 26v24l14 8" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/></svg></div>
+      <h2 id="s2">Elle te prévient et te fait ralentir</h2>
+      <ul class="lines">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Elle t'explique en une phrase pourquoi un site est suspect.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pour les cas graves, elle te demande de confirmer une deuxième fois.</span></li>
+        <li class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"/></svg><span><strong>Elle ne bloque pas tout.</strong> Elle peut se tromper : c'est toi qui décides, jusqu'au bout.</span></li>
+        <li class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"/></svg><span>Elle ne bouge jamais ton argent et n'ouvre pas ton portefeuille à ta place.</span></li>
+      </ul>
+    </section>
+
+    <section class="screen" data-step aria-labelledby="s3" hidden>
+      <div class="art" aria-hidden="true"><svg viewBox="0 0 96 96"><rect x="14" y="22" width="68" height="46" rx="6" fill="none" stroke="var(--accent)" stroke-width="7"/><path d="M34 80h28" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/><path d="M48 33v14M48 53v1" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></div>
+      <h2 id="s3">Rien ne quitte ton ordinateur</h2>
+      <ul class="lines">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tes pages, tes messages et tes adresses restent chez toi.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Seul le nom du site est comparé à des listes publiques d'arnaques.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="var(--ok-solid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tu peux choisir un contact de confiance. Il n'est prévenu que si tu le décides.</span></li>
+      </ul>
+    </section>
+
+    <div class="nav">
+      <button class="btn ghost" id="prev" type="button" hidden>Retour</button>
+      <span class="dots2" aria-hidden="true"><span class="on"></span><span></span><span></span></span>
+      <button class="btn" id="next" type="button">Suivant</button>
+    </div>
+  </div>
+</main>
+<script src="sentinelle.js"></script>
+<script>
+(function(){
+  var s=[].slice.call(document.querySelectorAll('[data-step]')),d=[].slice.call(document.querySelectorAll('.dots2 span')),
+      p=document.getElementById('prev'),n=document.getElementById('next'),l=document.getElementById('step-label'),i=0;
+  function show(k){
+    i=k; s.forEach(function(e,j){e.hidden=j!==i});
+    d.forEach(function(e,j){e.className=j===i?'on':''});
+    p.hidden=i===0; n.textContent=i===s.length-1?'Commencer':'Suivant';
+    l.textContent='Étape '+(i+1)+' sur '+s.length;
+    var h=s[i].querySelector('h1,h2'); h.setAttribute('tabindex','-1'); h.focus();
+  }
+  n.addEventListener('click',function(){ if(i<s.length-1) show(i+1); else window.location.href='3-popup.html'; });
+  p.addEventListener('click',function(){ if(i>0) show(i-1); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinelle - Popup</title>
+<link rel="stylesheet" href="sentinelle.css">
+<style>
+.stage{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.popup{width:400px;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.p-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.p-head h1{font-size:1rem}
+.p-head svg{width:24px;height:24px}
+.site-card{margin:16px;padding:14px;border-radius:10px;border:1px solid;display:grid;gap:6px}
+.site-card.danger{background:var(--danger-bg);color:var(--danger-fg);border-color:var(--danger-line)}
+.site-card.ok{background:var(--ok-bg);color:var(--ok-fg);border-color:var(--ok-fg)}
+.site-card .pill{justify-self:start}
+.site-card .host{font:.85rem var(--mono);word-break:break-all}
+.site-card .state{font-size:1.1rem;font-weight:800}
+.site-card .btn{justify-self:start;margin-top:4px}
+.sec{padding:4px 16px 16px;display:grid;gap:8px}
+.sec h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.alerts{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:10px}
+.alerts li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 10px;align-items:center;padding:10px 12px;font-size:.9rem}
+.alerts li+li{border-top:1px solid var(--line)}
+.alerts .t{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums}
+.alerts .w{overflow-wrap:anywhere}
+.row-sw{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.sw{position:relative;width:52px;height:30px;flex:none}
+.sw input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.sw span{position:absolute;inset:0;border-radius:999px;background:var(--surface-2);border:2px solid var(--muted)}
+.sw span::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--muted)}
+.sw input:checked+span{background:var(--accent);border-color:var(--accent)}
+.sw input:checked+span::after{transform:translateX(22px);background:var(--on-accent)}
+.sw input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
+.field{display:grid;gap:4px}
+.field label{font-weight:600;font-size:.9rem}
+.field input{min-height:44px;border-radius:8px;border:2px solid var(--muted);background:var(--surface);color:var(--fg);padding:6px 12px;font:inherit;width:100%}
+.hint{font-size:.85rem;color:var(--muted)}
+.p-foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="demo-bar">
+  <nav aria-label="Maquettes"><strong>Sentinelle</strong>
+    <a href="1-bandeau.html">1 Bandeau</a><a href="2-miroir.html">2 Miroir</a><a href="3-popup.html" aria-current="page">3 Popup</a><a href="4-accueil.html">4 Accueil</a></nav>
+  <button id="theme-btn" class="theme-btn" type="button">Thème : auto</button>
+</header>
+<main id="contenu" class="wrap">
+  <h1 class="sr">Popup de l'extension</h1>
+  <p class="lede" style="margin:0 0 20px">Le clic sur l'icône ouvre cette fenêtre de 400 px. À gauche, un site dangereux. À droite, le même écran sur un site sans problème.</p>
+  <div class="stage">
+
+    <section class="popup" aria-labelledby="p1">
+      <div class="p-head">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z" fill="var(--accent)"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2 id="p1" style="font-size:1rem">Sentinelle</h2>
+      </div>
+      <div class="site-card danger" role="status">
+        <span class="pill danger">Danger</span>
+        <span class="host">lumen-remboursement.example</span>
+        <p class="state">Ne signe rien ici.</p>
+        <p>Site créé il y a 2 heures, il imite Banque Lumen.</p>
+        <a class="btn danger small" href="2-miroir.html">Voir pourquoi</a>
+      </div>
+      <div class="sec">
+        <h3 style="font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Dernières alertes</h3>
+        <ul class="alerts">
+          <li><span class="pill danger">Danger</span><span class="w">lumen-remboursement.example</span><span class="t">09:41</span></li>
+          <li><span class="pill warn">Attention</span><span class="w">offres-aurore.example</span><span class="t">hier</span></li>
+          <li><span class="pill warn">Attention</span><span class="w">Message collé : demande de code secret</span><span class="t">lun.</span></li>
+        </ul>
+      </div>
+      <div class="sec">
+        <h3 style="font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Contact de confiance</h3>
+        <div class="row-sw">
+          <label for="ct-on" style="font-weight:600">Me proposer d'écrire à quelqu'un quand c'est grave</label>
+          <span class="sw"><input type="checkbox" id="ct-on" checked><span></span></span>
+        </div>
+        <div class="field"><label for="ct-nom">Prénom</label><input type="text" id="ct-nom" value="Inès" autocomplete="off"></div>
+        <div class="field"><label for="ct-tel">Numéro de téléphone</label><input type="tel" id="ct-tel" value="06 00 00 00 00" autocomplete="off"></div>
+        <p class="hint">Rien n'est envoyé tout seul. Sentinelle prépare un message, tu décides de l'envoyer. Le numéro reste sur cet ordinateur.</p>
+      </div>
+      <div class="p-foot"><a href="4-accueil.html">Comment ça marche</a><span>Rien ne quitte ton ordinateur</span></div>
+    </section>
+
+    <section class="popup" aria-labelledby="p2">
+      <div class="p-head">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z" fill="var(--accent)"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2 id="p2" style="font-size:1rem">Sentinelle</h2>
+      </div>
+      <div class="site-card ok" role="status">
+        <span class="pill ok">Rien à signaler</span>
+        <span class="host">echanges-nacre.example</span>
+        <p class="state">Ce site a l'air normal.</p>
+        <p>Ancien (6 ans), adresse connue, aucun texte de pression. Sentinelle reste attentive quand tu signes.</p>
+      </div>
+      <div class="sec">
+        <h3 style="font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Dernières alertes</h3>
+        <p class="hint">Aucune alerte depuis 3 jours.</p>
+      </div>
+      <div class="p-foot"><a href="4-accueil.html">Comment ça marche</a><span>Rien ne quitte ton ordinateur</span></div>
+    </section>
+
+  </div>
+</main>
+<script src="sentinelle.js"></script>
+</body>
+</html>

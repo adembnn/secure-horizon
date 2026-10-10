@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinelle - Panneau miroir</title>
+<link rel="stylesheet" href="sentinelle.css">
+<style>
+.mirror{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;max-width:880px}
+.mirror-head{background:var(--danger-solid);color:var(--on-danger);padding:16px 20px;display:grid;gap:4px}
+.mirror-head h2{font-size:1.25rem}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.col{padding:16px 20px;display:grid;gap:10px;align-content:start;border-top:1px solid var(--line)}
+.col+.col{border-left:1px solid var(--line)}
+.col h3{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.col .big{font-size:1.15rem;font-weight:700}
+.col.fait{background:var(--danger-bg);color:var(--danger-fg)}
+.col.fait h3{color:var(--danger-fg)}
+.thumb{margin:0;border:2px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface-2)}
+.thumb .shot{padding:10px 12px;display:grid;gap:4px;font-size:.75rem;color:var(--fg)}
+.thumb .shot b{font-size:.78rem;color:var(--accent)}
+.thumb mark{display:block;width:fit-content;background:var(--mark);color:var(--mark-fg);padding:2px 6px;font-weight:800;font-size:1rem;outline:2px solid var(--fg);outline-offset:1px;border-radius:3px}
+.thumb figcaption{font-size:.78rem;color:var(--muted);padding:6px 10px;border-top:1px solid var(--line);background:var(--surface)}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.facts .k{display:block;font-size:.8rem}
+.facts .v{display:block;font-weight:700}
+.addr{font-family:var(--mono);word-break:break-all}
+.confirm{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:12px;background:var(--surface)}
+.confirm .row{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
+@media (max-width:720px){.cols{grid-template-columns:1fr}.col+.col{border-left:0}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="demo-bar">
+  <nav aria-label="Maquettes"><strong>Sentinelle</strong>
+    <a href="1-bandeau.html">1 Bandeau</a><a href="2-miroir.html" aria-current="page">2 Miroir</a><a href="3-popup.html">3 Popup</a><a href="4-accueil.html">4 Accueil</a></nav>
+  <button id="theme-btn" class="theme-btn" type="button">Thème : auto</button>
+</header>
+<main id="contenu" class="wrap">
+  <h1>Le miroir : ce que dit la page, ce que ça fait</h1>
+  <p class="lede">S'ouvre au moment de signer, au-dessus de la fenêtre du portefeuille. Trois colonnes, dans l'ordre où l'on pense : ce que tu voulais, ce que la page promet, ce que la signature ferait. Données fictives.</p>
+
+  <section class="mirror" role="alertdialog" aria-labelledby="m-titre" aria-describedby="m-desc" style="margin-top:24px">
+    <div class="mirror-head">
+      <h2 id="m-titre">Stop : ce n'est pas ce qui est affiché</h2>
+      <p id="m-desc">La page promet 50 USDC. La signature donnerait en réalité accès à tous tes USDC.</p>
+    </div>
+    <div class="cols">
+      <div class="col dit">
+        <h3>Tu as dit</h3>
+        <p class="big">« Je récupère un remboursement. »</p>
+        <p>Tu attends de l'argent, tu n'as rien à donner.</p>
+      </div>
+      <div class="col affiche">
+        <h3>La page affiche</h3>
+        <figure class="thumb">
+          <div class="shot" role="img" aria-label="Capture de la page : le texte surligné en jaune « Recevez 50 USDC » sous le titre « Votre remboursement est prêt »">
+            <b>BANQUE LUMEN</b><span>Votre remboursement est prêt</span><mark>Recevez 50 USDC</mark>
+          </div>
+          <figcaption>Capture de la zone de la page, 11 oct., 09:41</figcaption>
+        </figure>
+      </div>
+      <div class="col fait">
+        <h3>La signature fait</h3>
+        <p class="big">Donne à une adresse inconnue le droit de prendre tous tes USDC.</p>
+        <ul class="facts">
+          <li><span class="k">Qui obtient le droit</span><span class="v addr">0x7f3a…c91e</span></li>
+          <li><span class="k">Combien</span><span class="v">Tout ton solde en USDC, sans limite</span></li>
+          <li><span class="k">Ce que tu reçois</span><span class="v">Rien</span></li>
+          <li><span class="k">Adresse créée</span><span class="v">il y a 12 minutes</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="confirm">
+      <div class="row">
+        <button class="btn danger" type="button">Ne pas signer</button>
+        <a href="1-bandeau.html">Pourquoi ce message ?</a>
+      </div>
+      <div class="check">
+        <input type="checkbox" id="lu" onchange="document.getElementById('go').disabled=!this.checked">
+        <label for="lu">J'ai lu ce que la signature fait vraiment et je veux continuer quand même.</label>
+      </div>
+      <div><button class="btn ghost" id="go" type="button" disabled>Continuer malgré tout</button></div>
+    </div>
+  </section>
+</main>
+<script src="sentinelle.js"></script>
+</body>
+</html>
