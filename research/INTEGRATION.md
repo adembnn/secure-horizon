@@ -27,6 +27,8 @@
 | `../pitch/comprendre_piste4.md` | Vulgarisation. Trois points structurants : une attaque en une transaction ne se bloque que dans le contrat ; la pause suppose un contrat devant les fonds ; le LEI du champ 2.8 manque pour les oracles | partiellement intégré | Limites connues ; question G7 (où poser la limite) ; registre des tiers |
 | `tracks/T1_P4_defi_dora_v2.md`, `T1_P4_defi_dora.md` | Règles DORA détaillées (RTS 2024/1772, RTS 2025/301, ITS 2025/302), idées HoneyVault / Autopilot / registre vivant | partiellement intégré | Moteur DORA. HoneyVault écarté du cœur : il vise les exploits de code, pas le circuit d'approbation (D-004) |
 
+| `tracks/T1_P4_catalogue_detecteurs.md` | Taxonomie de ~60 signaux en 8 familles. Standard partout : gros transfert, sanctions, rôles, allowlist, vélocité. **Rare : écart backend vs chaîne** (seul analogue : Forta Bridge Balance Difference). 14 signaux manquants à (a)-(e), dont : indexer les `Transfer` par `from` (drain par allowance), `delegatecall` et événements Safe (Bybit, Drift), % du solde par tx et « vidé à zéro », âge du destinataire. Le contexte ne fait que relever la sévérité | à intégrer | Détecteurs v2 : (a)-(d) + top 3 des manques au MVP. Annuaire synthétique `synthetic:true` sur Fuji |
+
 ### Apports de Claude-Titouan
 | Fichier | Apport principal | Statut | Où ça va dans le produit |
 |---|---|---|---|
