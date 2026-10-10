@@ -56,3 +56,14 @@ Rappel du filet sur les approbations d'attaque réelles (Ethereum) :
 2. Décoder les multicall et les appels via routeur pour réduire l'angle mort.
 3. Jeu d'attaques par permit et Permit2 (rejeu signé) : à fabriquer, aucune source ouverte.
 4. Latence et coût du pipeline complet une fois le comparateur disponible.
+
+## Addendum 1 (01h20) : réponses aux trois demandes d'Adem (MSG-030)
+### (1) Âge du contrat spender à la date de l'approbation (seuil fixé a priori : 7 jours)
+RÉSULTAT NÉGATIF. Sur les 162 approbations d'attaque vers un contrat (40 spenders contrats), seules 2 (1,2 %, IC95 0,3-4,4) visent un contrat de moins de 7 jours. Âge médian de ces contrats d'attaque : environ 6,7 millions de blocs (environ 2,5 ans). Sur le légitime : 0,12 % du trafic total (IC95 0,09-0,15). Le signal « contrat jeune » ne sépare PAS sur ce jeu. Combiné avec R3 (compte externe OU contrat jeune) : rappel 88,2 % des tx d'attaque, 0,39 % de FP sur le trafic (le gain vient entièrement de R3). 18 dates de création non résolues.
+Pourquoi (hypothèses à vérifier) : (a) un jeu étiqueté par liste ne contient, par construction, que des drainers déjà repérés et donc plus vieux : le biais d'étiquetage joue CONTRE un drainer neuf ; ce jeu ne peut pas valider « le filet anti-drainer neuf » ; (b) les contrats listés sont souvent des contrats de kit réutilisés.
+### (2) Jeu permit réel
+Non obtenu par cette voie. Les approbations d'attaque récoltées sont des approve directs (1 219). Dans une fenêtre de 1 million de blocs (24M-25M), 232 tx transfèrent des tokens vers les adresses listées ; 148 sont des déploiements de contrat, 35 un sélecteur de kit inconnu, 7 des transfer directs. J'ai tracé (debug_traceTransaction, drpc) les 82 non-déploiements : 0 appel permit ou Permit2 interne, 1 121 transferFrom et 10 963 transfer (volume de type distribution/poisoning). Seuls 4 événements Permit2 Approval vers des spenders listés depuis le bloc 20M. Conclusion : la liste ScamSniffer mélange drainers et adresses d'empoisonnement ; le jeu permit doit venir d'incidents nommés (K5 : hashs de signature de permit publiés, n très petit) ou d'un jeu fabriqué et signé en local.
+### (3) Gain de l'intention
+Pas encore fait : demande 2 lecteurs humains pour 200 tx (étiquettes indépendantes). À planifier avec Titouan/Adem.
+### Question « origine identifiable » 
+Non : les logs et transactions n'ont pas d'origine web. Le terme « affiché » ne se mesure donc pas sur l'historique ; il ne se mesure que sur une démo contrôlée (site de démo + Snap qui lit l'origine).

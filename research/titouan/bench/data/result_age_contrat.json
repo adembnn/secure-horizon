@@ -1,0 +1,41 @@
+{
+ "seuil_blocs": 50400,
+ "regle": "droit donné à un contrat créé depuis moins de 7 jours (à la date de l'approbation)",
+ "attaques": {
+  "tx_vers_contrat": 162,
+  "spenders_contrat": 40,
+  "tx_jeunes": 2,
+  "pct_tx_jeunes_parmi_contrats": 1.2,
+  "wilson95": [
+   0.3,
+   4.4
+  ],
+  "spenders_jeunes": 2,
+  "age_blocs_p10_p50_p90": [
+   4318650,
+   6712350,
+   9308383
+  ]
+ },
+ "legitime": {
+  "n_tx_total": 45436,
+  "droits_vers_contrat": 2304,
+  "tx_jeunes": 53,
+  "fp_pct_du_trafic_total": 0.1166,
+  "wilson95_pct": [
+   0.0892,
+   0.1525
+  ],
+  "pct_des_droits_vers_contrat": 2.3,
+  "age_blocs_p10_p50_p90": [
+   730215,
+   5463742,
+   12614552
+  ]
+ },
+ "creation_non_resolue": 18,
+ "combine_EOA_ou_contrat_jeune": {
+  "rappel_pct_tx": 88.2,
+  "fp_pct_du_trafic": 0.392
+ }
+}
