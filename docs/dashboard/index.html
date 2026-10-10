@@ -45,6 +45,23 @@ h2{font-size:1.25rem;font-weight:700}
 .conn span{font-size:.78rem}
 .note{font-size:.9rem;color:var(--ink)}
 .err{font-size:.85rem;color:var(--ko)}
+.ah{font-family:var(--display);font-stretch:80%;font-size:1.05rem;margin:0}
+.mm{overflow-x:auto;background:var(--bg);border-radius:4px;padding:8px}
+.mm pre{margin:0}
+.cap{font-size:.85rem;color:var(--muted);margin:0}
+.ctr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.ctr{grid-template-columns:1fr}}
+.cbox{border:1px solid var(--line);border-radius:6px;padding:12px;min-width:0}
+.cn{font-family:var(--mono);font-weight:500;color:var(--accent)}
+.cr{font-size:.8rem;color:var(--muted);margin-bottom:6px}
+.cbox ul{margin:0;padding-left:18px;font-size:.86rem;display:grid;gap:4px}
+code{font-family:var(--mono);font-size:.82em;word-break:break-word}
+.scrollx{overflow-x:auto}
+.rm{border-collapse:collapse;width:100%;font-size:.85rem;min-width:460px}
+.rm th,.rm td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.rm th{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:500}
+.rm td.y{color:var(--ok);font-weight:600}.rm td.n{color:var(--ko)}
+.inv{margin:0;padding-left:20px;display:grid;gap:6px;font-size:.9rem}
 </style>
 
 <div class="wrap">
@@ -56,6 +73,147 @@ h2{font-size:1.25rem;font-weight:700}
   </header>
 
   <section class="kpis" id="kpis" aria-label="Chiffres clés"></section>
+
+  <section style="display:grid;gap:16px" aria-labelledby="t-arch">
+    <div class="eyebrow">Architecture · version de travail (la v3 issue des ébauches Opus arrive)</div>
+    <h2 id="t-arch" style="font-size:1.6rem">Comment Sentinelle est construite</h2>
+    <p class="lede" style="font-size:.98rem">Deux gardes indépendants du circuit d'approbation : <b>un plafond gravé dans le coffre</b> et <b>une demande signée par le client</b>. Autour, un surveillant qui ne peut que resserrer, un journal de preuves ancré sur Fuji, et un dossier DORA prêt à relire.</p>
+
+    <div class="card">
+      <h3 class="ah">1 · Vue d'ensemble</h3>
+      <div class="mm"><pre class="mermaid">
+flowchart LR
+  subgraph CLIENT["Côté client final"]
+    APP["App du client<br/>signe sa demande<br/>(EIP-712, passkey en bonus)"]
+  end
+  subgraph CASP["Chez le prestataire crypto"]
+    BE["Backend approbateur<br/>peut être piraté"]
+  end
+  subgraph FUJI["Avalanche Fuji"]
+    REG["ClientRegistry<br/>clés clients<br/>ajout = 2 gardiens sur 3"]
+    V["GuardedVault<br/>détient les fonds<br/>plafond gravé + vérif. signature"]
+    ANC["EvidenceAnchor<br/>règles scellées<br/>racines du journal"]
+  end
+  subgraph SENT["Sentinelle, hors bande"]
+    MON["Surveillant<br/>flux temps réel Fuji"]
+    SIG["Signaux<br/>sans demande · inconnu · cumul · pouvoirs"]
+    LAD["Échelle de réponse<br/>alerte → resserrer → voie lente"]
+    J["Journal chaîné"]
+    DORA["Moteur DORA<br/>règles RTS 2024/1772"]
+  end
+  subgraph OUT["Branchements"]
+    N["Téléphone (ntfy)"]
+    C["Chat (Slack, Mattermost)"]
+    SIEM["SIEM (OCSF)"]
+    T["Ticket (Gitea, Jira)"]
+    X["Formulaire AMF (XLSX)"]
+  end
+  APP -- "demande signée" --> BE
+  BE -- "tryWithdraw" --> V
+  REG -. "clé du client ?" .-> V
+  V -- "Withdrawn / WithdrawalRefused" --> MON
+  MON --> SIG --> LAD
+  LAD -- "tighten seulement" --> V
+  LAD --> N & C & SIEM & T
+  SIG --> J
+  LAD --> J
+  J -- "racine Merkle" --> ANC
+  J --> DORA --> X
+</pre></div>
+      <p class="cap">Le backend peut mentir : il ne peut pas forger la signature d'un client, ni relever le plafond. Le surveillant ne peut que resserrer.</p>
+    </div>
+
+    <div class="cols" style="gap:16px">
+      <div class="card">
+        <h3 class="ah">2 · Un retrait honnête</h3>
+        <div class="mm"><pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant Cl as Client
+  participant BE as Backend
+  participant V as Coffre
+  participant S as Sentinelle
+  Cl->>BE: demande signée (2 000 € vers X)
+  BE->>V: tryWithdraw(demande, signature)
+  V->>V: client inscrit ? signature ? nonce ?<br/>sous les plafonds ?
+  V-->>S: Withdrawn
+  S->>S: tout est cohérent
+</pre></div>
+      </div>
+      <div class="card">
+        <h3 class="ah">3 · Le scénario Bitget</h3>
+        <div class="mm"><pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant P as Pirate dans le backend
+  participant V as Coffre
+  participant S as Sentinelle
+  participant H as Humains
+  P->>V: tryWithdraw sans demande client
+  V-->>S: WithdrawalRefused (signature absente)
+  P->>V: retraits « signés » par de faux clients
+  V-->>S: refusés au plafond par client
+  S->>V: tighten (resserre encore)
+  S->>H: téléphone + chat + ticket
+  S->>S: dossier DORA prêt, chrono 4 h
+</pre></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="ah">4 · Les trois contrats</h3>
+      <div class="ctr">
+        <div class="cbox"><div class="cn">GuardedVault</div><div class="cr">détient les fonds, non mettable à jour</div>
+          <ul><li><code>deposit(amount)</code></li><li><code>tryWithdraw(request, clientSig)</code> → refus par événement, pas de revert</li><li><code>tighten(params)</code> : valeurs ≤ actuelles seulement</li><li><code>proposeLoosen</code> / <code>executeLoosen</code> : 2 gardiens sur 3 + délai</li></ul></div>
+        <div class="cbox"><div class="cn">ClientRegistry</div><div class="cr">qui a le droit de demander un retrait</div>
+          <ul><li><code>enroll(client, key, guardianSigs)</code> : 2 sur 3 + délai + quota par jour</li><li><code>isEnrolled</code>, <code>keyOf</code></li></ul></div>
+        <div class="cbox"><div class="cn">EvidenceAnchor</div><div class="cr">la preuve, scellée sur Fuji</div>
+          <ul><li><code>commitRules(hash)</code> : avant les tests</li><li><code>anchor(root, kind)</code> : racine du journal</li><li><code>commitMandate(hash)</code> : plafonds signés par la direction</li></ul></div>
+      </div>
+    </div>
+
+    <div class="cols" style="gap:16px">
+      <div class="card">
+        <h3 class="ah">5 · Qui peut faire quoi</h3>
+        <div class="scrollx"><table class="rm">
+          <thead><tr><th>Action</th><th>Backend</th><th>Sentinelle</th><th>1 gardien</th><th>2 gardiens + délai</th></tr></thead>
+          <tbody>
+            <tr><td>Retirer avec demande client</td><td class="y">oui</td><td class="n">non</td><td class="n">non</td><td class="n">non</td></tr>
+            <tr><td>Retirer sans demande client</td><td class="n">non</td><td class="n">non</td><td class="n">non</td><td class="n">non</td></tr>
+            <tr><td>Resserrer le plafond</td><td class="n">non</td><td class="y">oui</td><td class="y">oui</td><td class="y">oui</td></tr>
+            <tr><td>Relever le plafond</td><td class="n">non</td><td class="n">non</td><td class="n">non</td><td class="y">oui</td></tr>
+            <tr><td>Inscrire un client</td><td class="n">non</td><td class="n">non</td><td class="n">non</td><td class="y">oui</td></tr>
+            <tr><td>Ancrer une preuve</td><td class="n">non</td><td class="y">oui, autre clé</td><td class="n">non</td><td class="n">non</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="card">
+        <h3 class="ah">6 · Ce que les tests doivent prouver</h3>
+        <ol class="inv">
+          <li>Quelle que soit la séquence, la sortie sur une fenêtre reste sous le plafond global.</li>
+          <li>Par client et par jour, sous le plafond par client.</li>
+          <li><code>tighten</code> ne peut jamais augmenter un paramètre.</li>
+          <li>Relâcher exige 2 gardiens sur 3 et le délai.</li>
+          <li>Une demande signée ne sert qu'une fois.</li>
+          <li>Aucun rôle ne retire sans demande valide.</li>
+        </ol>
+        <p class="cap">Prouvés par des tests aléatoires (fuzzing) : c'est la « perte maximale démontrée ».</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="ah">7 · Le dossier DORA, champ par champ</h3>
+      <div class="mm"><pre class="mermaid">
+flowchart LR
+  J["Journal chaîné<br/>chaque décision + sa transaction"] --> R{"Règles RTS 2024/1772<br/>service critique ?<br/>accès malveillant ou 2 seuils ?"}
+  R -- "majeur" --> H["Responsable conformité<br/>décide, heure enregistrée"]
+  R -- "menace bloquée" --> V10["Notification volontaire<br/>art. 10"]
+  H --> F["Notification initiale<br/>champs 1.x et 2.x<br/>chaque valeur → sa preuve"]
+  F --> X["XLSX officiel AMF<br/>déposé par un humain"]
+  F --> P["Compteur<br/>« N champs prouvés on-chain »"]
+</pre></div>
+    </div>
+  </section>
 
   <section class="cols">
     <div class="card">
