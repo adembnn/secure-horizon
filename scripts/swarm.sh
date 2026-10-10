@@ -25,6 +25,8 @@ if [ "$DRY" = 0 ]; then
   grep -q -- '--max-budget-usd' <<<"$HELP" && EXTRA+=(--max-budget-usd "$BUDGET") || echo "ATTENTION: --max-budget-usd absent, budget non plafonné" >&2
   # shellcheck disable=SC1091
   source scripts/bedrock-env.sh
+  # SWARM_MODEL surcharge le modèle de .env.bedrock sans toucher au fichier de secrets (ex. us.anthropic.claude-sonnet-4-6)
+  if [ -n "${SWARM_MODEL:-}" ]; then export ANTHROPIC_MODEL="$SWARM_MODEL"; echo "Modèle des workers : $ANTHROPIC_MODEL"; fi
   git fetch -q origin main || { echo "ERREUR: git fetch origin main impossible (remote ?)" >&2; exit 1; }
 fi
 
