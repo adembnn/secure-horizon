@@ -26,6 +26,16 @@
 | `../pitch/comprendre_piste4.md` | Vulgarisation. Trois points structurants : une attaque en une transaction ne se bloque que dans le contrat ; la pause suppose un contrat devant les fonds ; le LEI du champ 2.8 manque pour les oracles | partiellement intégré | Limites connues ; question G7 (où poser la limite) ; registre des tiers |
 | `tracks/T1_P4_defi_dora_v2.md`, `T1_P4_defi_dora.md` | Règles DORA détaillées (RTS 2024/1772, RTS 2025/301, ITS 2025/302), idées HoneyVault / Autopilot / registre vivant | partiellement intégré | Moteur DORA. HoneyVault écarté du cœur : il vise les exploits de code, pas le circuit d'approbation (D-004) |
 
+### Apports de Claude-Titouan
+| Fichier | Apport principal | Statut | Où ça va dans le produit |
+|---|---|---|---|
+| `titouan/plan_v1_1.md` | Plan en une page : Guard = module sur coffre existant, plafond en dur, voie lente, Watch, dossier « N champs sur M prouvés », règles scellées avant tests, P0/P1/P2 | à intégrer, **base de la v2** | Squelette de docs/architecture.md v2. Seuls écarts : SIEM/webhook et écran gardés légers (exigence écosystème d'Adem), accroche D-004 |
+| `titouan/A_spec_moteur_dora.md` | Logique exacte art. 6/8/9/10, RTS 2025/301. L'initial = champs 1.x et 2.x, presque tout calculable. 5 ambiguïtés en double lecture. 10 cas de test | à intégrer | Moteur DORA : exceller sur l'initial, pré-remplir l'intermédiaire, le final reste humain. Les 10 cas deviennent les tests unitaires |
+| `titouan/challenge_archi_v0.md` | Leurre absent de l'archi, plafond en dur, traceur simulé = théâtre, pré-enregistrement du hash des règles, variantes d'évasion, mandat EIP-712, plafond de 24 h | à intégrer | Banc d'essai, mandat, chrono DORA. Le traceur passe en P2 (paquet de gel en document) |
+| `titouan/reponses_msg005.md` | Pause machine acceptable si mandat signé, bornée, expirante, mode ombre. Champ 2.8 sans LEI = « à compléter par un humain ». Cas Bitget : lecture seule + point d'application indépendant | à intégrer | Échelle de réponse, champ 2.8, limites |
+| `titouan/grilling_t1_reponses_G1_G6.md` | G1 (a). Démo en deux temps : Watch rejoue Bitget, Guard rejoue Drift. 4 garde-fous de la voie lente. IA optionnelle, champs mécaniques / profil / jugement | à intégrer | Scénario de démo, échelle, rôle de l'IA |
+| `titouan/loop/round1_synthese.md` | Sa boucle de 7 jurés, 63/100. Attaques contre l'outil : empoisonnement de la ligne de base, épuisement du budget, fausse pause, clé du bot volée | à intégrer | Section « résistance de l'outil » de la v2 |
+
 ## Prochaine consolidation
 Quand la boucle des jurés, les sondes de connecteurs et la recherche sur le déploiement sont toutes rentrées, faire **docs/architecture.md v2**. Elle doit :
 1. recentrer sur D-004 ;
