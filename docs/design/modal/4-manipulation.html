@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Sentinelle — 4 Manipulation</title>
+<style>
+/* Fenêtre d'extension 400 px. Une colonne, gros texte, bouton Annuler toujours en bas, même place, même libellé. */
+:root{
+  --bg:#E9EDF3; --surface:#FFFFFF; --surface2:#F1F4F8; --fg:#13171E; --muted:#434C5A; --line:#7A8494; --line-soft:#CBD2DC;
+  --brand:#1747A6; --on-brand:#FFFFFF; --brand-soft:#E4ECFB;
+  --danger:#AF111E; --on-danger:#FFFFFF; --danger-bg:#FDEDED; --danger-fg:#6E0911; --danger-line:#AF111E;
+  --warn-band:#FFD98F; --on-warn-band:#2F1C00; --warn:#8A4B00; --on-warn:#FFFFFF; --warn-bg:#FFF5E1; --warn-line:#B45309;
+  --unk-bg:#E4E8EF; --unk-fg:#232B38; --unk-line:#4C586B;
+  --mark-bg:#FFE14D; --mark-fg:#111111;
+  --focus:#0B57D0; --shadow:0 8px 30px rgba(15,25,45,.18);
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#07090D; --surface:#171C25; --surface2:#1F2632; --fg:#EEF1F6; --muted:#B3BCCA; --line:#7C8798; --line-soft:#303949;
+  --brand:#8DB4FF; --on-brand:#08193A; --brand-soft:#1B2A4A;
+  --danger:#FF9494; --on-danger:#3A0307; --danger-bg:#2B1316; --danger-fg:#FFD9D9; --danger-line:#FF8A8A;
+  --warn-band:#4A3000; --on-warn-band:#FFE7B8; --warn:#FFB84D; --on-warn:#2A1800; --warn-bg:#2A2012; --warn-line:#FFB84D;
+  --unk-bg:#222A37; --unk-fg:#E4E9F1; --unk-line:#9AA6B8;
+  --focus:#9CC2FF; --shadow:0 8px 30px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#07090D; --surface:#171C25; --surface2:#1F2632; --fg:#EEF1F6; --muted:#B3BCCA; --line:#7C8798; --line-soft:#303949;
+  --brand:#8DB4FF; --on-brand:#08193A; --brand-soft:#1B2A4A;
+  --danger:#FF9494; --on-danger:#3A0307; --danger-bg:#2B1316; --danger-fg:#FFD9D9; --danger-line:#FF8A8A;
+  --warn-band:#4A3000; --on-warn-band:#FFE7B8; --warn:#FFB84D; --on-warn:#2A1800; --warn-bg:#2A2012; --warn-line:#FFB84D;
+  --unk-bg:#222A37; --unk-fg:#E4E9F1; --unk-line:#9AA6B8;
+  --focus:#9CC2FF; --shadow:0 8px 30px rgba(0,0,0,.6); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:18px;line-height:1.5;padding-inline:16px;padding-block:12px 32px;margin:0}
+.demo{max-width:400px;margin:0 auto 12px;display:flex;gap:8px;align-items:center;justify-content:space-between;font-size:14px;color:var(--muted)}
+.demo button{font:inherit;font-size:14px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-height:36px;cursor:pointer}
+.win{width:400px;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.top{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2);border-bottom:1px solid var(--line-soft);font-size:15px;color:var(--muted)}
+.top .brand{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--fg)}
+.top .site{margin-left:auto;min-width:0;overflow-wrap:anywhere;text-align:right;font-family:var(--mono);font-size:13px}
+svg{flex:none}
+.band{display:flex;gap:12px;align-items:flex-start;padding:16px}
+.band h1{margin:0;font-size:24px;line-height:1.2;text-wrap:balance}
+.band .tag{display:block;font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:2px}
+.band.danger{background:var(--danger);color:var(--on-danger)}
+.band.warn{background:var(--warn-band);color:var(--on-warn-band)}
+.band.unk{background:var(--unk-bg);color:var(--unk-fg);border-bottom:3px dashed var(--unk-line)}
+main{padding:16px;display:flex;flex-direction:column;gap:16px}
+p{margin:0}
+.lead{font-size:19px}
+.muted{color:var(--muted)}
+h2{margin:0;font-size:17px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:340px){.cols{grid-template-columns:1fr}}
+.col{min-width:0;border-radius:10px;padding:12px;border:2px solid var(--line-soft);background:var(--surface2);overflow-wrap:anywhere}
+.col.real{border-color:var(--danger-line);background:var(--danger-bg);color:var(--danger-fg)}
+.col.real.w{border-color:var(--warn-line);background:var(--warn-bg);color:var(--fg)}
+.col h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.col .big{display:block;font-size:26px;line-height:1.15;font-weight:800;font-variant-numeric:tabular-nums;margin-block:4px}
+.col .small{font-size:16px}
+.reasons{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.reasons li{display:flex;gap:10px;font-size:17px}
+.reasons li::before{content:"";flex:none;width:8px;height:8px;margin-top:10px;border-radius:2px;background:var(--danger-line);transform:rotate(45deg)}
+.addr{display:flex;flex-direction:column;gap:4px;border:2px solid var(--line-soft);border-radius:10px;padding:10px 12px;background:var(--surface2)}
+.addr.bad{border-color:var(--danger-line);background:var(--danger-bg);color:var(--danger-fg)}
+.addr .lbl{font-size:14px;font-weight:700}
+.addr code{font-family:var(--mono);font-size:17px;line-height:1.7;letter-spacing:.02em;overflow-wrap:anywhere}
+mark{background:var(--mark-bg);color:var(--mark-fg);font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;border-radius:2px;padding:0 1px}
+.legend{font-size:15px}
+.gate{border-top:1px solid var(--line-soft);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.gate label{font-weight:700}
+.phrase{font-weight:800;background:var(--surface2);border:1px dashed var(--line);border-radius:8px;padding:8px 10px;user-select:none}
+input[type=text],textarea{width:100%;font:inherit;color:var(--fg);background:var(--surface);border:2px solid var(--line);border-radius:10px;padding:10px 12px;min-height:48px}
+textarea{min-height:96px;resize:vertical}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;padding:10px 16px;font:inherit;font-weight:800;border-radius:12px;border:2px solid transparent;cursor:pointer;text-align:center;text-decoration:none;text-wrap:balance}
+.btn.cancel{background:var(--brand);color:var(--on-brand)}
+.btn.cancel.soft{background:transparent;color:var(--brand);border-color:var(--brand)}
+.btn.go{background:var(--warn);color:var(--on-warn)}
+.btn.quiet{background:transparent;color:var(--muted);border-color:var(--line);font-weight:700;min-height:48px}
+.btn.quiet.danger{color:var(--danger-line);border-color:var(--danger-line)}
+.btn.call{background:var(--surface);color:var(--fg);border-color:var(--fg)}
+.btn[disabled],.btn[aria-disabled=true]{opacity:1;background:var(--surface2);color:var(--muted);border:2px dashed var(--line);cursor:not-allowed}
+:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+footer{padding:12px 16px 16px;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+footer .reassure{font-size:15px;color:var(--muted);text-align:center}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.choices{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.choices legend{font-size:22px;font-weight:800;line-height:1.25;margin-bottom:10px;padding:0}
+.choice{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 14px;border:2px solid var(--line);border-radius:12px;cursor:pointer;background:var(--surface)}
+.choice input{width:24px;height:24px;accent-color:var(--brand);flex:none;margin:0}
+.choice:has(input:checked){border-color:var(--brand);background:var(--brand-soft);font-weight:700}
+.choice:has(input:focus-visible){outline:4px solid var(--focus);outline-offset:3px}
+.note{font-size:15px;color:var(--muted);display:flex;gap:8px}
+.timer{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px;border:2px solid var(--danger-line);border-radius:12px;background:var(--danger-bg);color:var(--danger-fg)}
+.timer .t{font-size:48px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.timer .bar{width:100%;height:10px;border-radius:5px;background:var(--surface);border:1px solid var(--danger-line);overflow:hidden}
+.timer .bar i{display:block;height:100%;width:100%;background:var(--danger-line);transform-origin:left}
+.quote{border-left:5px solid var(--danger-line);background:var(--surface2);padding:10px 12px;border-radius:0 10px 10px 0;font-size:17px;overflow-wrap:anywhere}
+.quote small{display:block;color:var(--muted);font-size:14px;margin-bottom:4px}
+.contact{border:2px solid var(--brand);border-radius:12px;padding:12px;background:var(--brand-soft);display:flex;flex-direction:column;gap:8px}
+.fact{border:2px solid var(--warn-line);background:var(--warn-bg);border-radius:12px;padding:12px;overflow-wrap:anywhere}
+.fact b{font-variant-numeric:tabular-nums}
+.unk-box{border:2px dashed var(--unk-line);border-radius:12px;padding:12px;background:var(--unk-bg);color:var(--unk-fg)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="demo"><span>Aperçu de la fenêtre (400 px). Données fictives.</span><button id="themeBtn" type="button">Aperçu : auto (changer)</button></div>
+<div class="win" role="alertdialog" aria-modal="true" aria-labelledby="h" aria-describedby="d">
+  <div class="top"><span class="brand"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 4.5 5.5v6c0 4.6 3.1 8.4 7.5 10 4.4-1.6 7.5-5.4 7.5-10v-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Sentinelle</span><span class="site" title="Site qui demande">assistance-securite.example</span></div>
+  <div class="band danger"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3"/><rect x="12.5" y="11" width="5" height="18" rx="2" fill="currentColor"/><rect x="22.5" y="11" width="5" height="18" rx="2" fill="currentColor"/></svg><div><span class="tag">Pause</span><h1 id="h">Fais une pause. On te met la pression.</h1></div></div>
+  <main id="d"><p class="lead"><b>Aucun vrai support ne demande ça.</b> Ni une banque, ni un conseiller, ni une plateforme. Quand quelqu'un te dit de déplacer ton argent « pour le sauver », c'est une arnaque.</p>
+  <div class="quote"><small>Le message que tu as collé</small>« Votre compte est piraté. <mark>Transférez vos fonds vers ce portefeuille sécurisé</mark> dans les 10 minutes. »</div>
+  <div class="timer" role="timer" aria-label="Temps restant avant de pouvoir continuer"><span class="t" id="t">10:00</span><span>avant de pouvoir continuer</span><div class="bar" aria-hidden="true"><i id="bar"></i></div></div>
+  <p class="vh" id="live" role="status" aria-live="polite"></p>
+  <div class="contact"><p><b>Parles-en à quelqu'un que tu connais.</b> Une minute au téléphone suffit.</p>
+  <a class="btn call" href="tel:+33600000000" id="call"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Appeler un proche</a>
+  <p class="muted" style="font-size:15px">Claire (ma fille) · 06 00 00 00 00 · choisie dans les réglages</p></div></main>
+  <footer><button class="btn quiet danger" type="button" id="cont" disabled>Continuer (après la pause)</button><button class="btn cancel" type="button" id="cancel" autofocus>Annuler, rien ne sera envoyé</button><p class="reassure">Annuler ne coûte rien et tu peux recommencer plus tard.</p></footer>
+</div>
+<script>
+(function(){
+  var r=document.documentElement,b=document.getElementById('themeBtn');
+  if(b){b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    var sysDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next=cur?(cur==='dark'?'light':'dark'):(sysDark?'light':'dark');
+    r.setAttribute('data-theme',next);b.textContent='Aperçu : '+(next==='dark'?'sombre':'clair')+' (changer)';
+  });}
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
+  /* Barrière : phrase à retaper puis 30 s */
+  var g=document.getElementById('phrase-in');
+  if(g){
+    var target=norm(g.getAttribute('data-phrase')),go=document.getElementById('go'),st=document.getElementById('gate-status'),tm=null,n=30;
+    function reset(){clearInterval(tm);tm=null;n=30;go.disabled=true;go.textContent='Continuer malgré le danger';}
+    g.addEventListener('input',function(){
+      if(norm(g.value)===target){
+        if(tm)return; st.textContent='Phrase correcte. Attends 30 secondes.';
+        go.textContent='Encore '+n+' s';
+        tm=setInterval(function(){n--;
+          if(n<=0){clearInterval(tm);go.disabled=false;go.textContent='Continuer malgré le danger';st.textContent='Tu peux continuer. Annuler reste la bonne réponse.';}
+          else{go.textContent='Encore '+n+' s';}
+        },1000);
+      } else if(tm||!go.disabled){reset();st.textContent='La phrase ne correspond plus. Recommence.';}
+    });
+  }
+  /* Question d'intention */
+  var form=document.getElementById('intent');
+  if(form){
+    var ok=document.getElementById('ok');
+    form.addEventListener('change',function(){ok.disabled=!form.querySelector('input[name=intent]:checked');});
+  }
+  /* Pause de 10 minutes */
+  var t=document.getElementById('t');
+  if(t){
+    var total=600,end=Date.now()+total*1000,bar=document.getElementById('bar'),cont=document.getElementById('cont'),live=document.getElementById('live');
+    function tick(){
+      var s=Math.max(0,Math.ceil((end-Date.now())/1000));
+      var m=Math.floor(s/60),x=s%60;
+      t.textContent=(m<10?'0':'')+m+':'+(x<10?'0':'')+x;
+      bar.style.transform='scaleX('+(s/total)+')';
+      if(s%60===0&&s>0)live.textContent='Il reste '+(s/60)+' minutes.';
+      if(s===0){clearInterval(iv);cont.disabled=false;cont.textContent='Je continue quand même';live.textContent='La pause est terminée.';}
+    }
+    var iv=setInterval(tick,1000);tick();
+  }
+})();
+</script>
+</body>
+</html>
