@@ -55,3 +55,5 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T22:59:49.519Z | swarm | T-105 | run 20261011-004753: NO_RESULT turns=- cost=$0.00 retries=0
 2026-10-10T22:59:49.519Z | swarm | T-106 | run 20261011-004753: NO_RESULT turns=- cost=$0.00 retries=0
 2026-10-11T01:00+02:00 | claude-adem | MSG-028 | handoff → titouan (no more Bedrock, Titouan runs all lots)
+2026-10-10T23:00:25.122Z | swarm | T-101 | run 20261011-005340: success turns=50 cost=$1.84 retries=0
+2026-10-11T01:01+02:00 | claude-adem | MSG-029 | handoff → titouan (v3.1 accepted, Signer's Mirror, Snap test first)
