@@ -16,3 +16,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T23:00+02:00 | claude-adem | MSG-014 | handoff → titouan (jury aveugle + cap + 12/12 connecteurs + recentrage)
 2026-10-10T23:06+02:00 | claude-adem | MSG-015 | handoff → titouan (mission recherche massive incidents réels [needs-human])
 2026-10-10T23:31+02:00 | claude-adem | MSG-016 | handoff → titouan (retour jury : wallets perso + classification Jev, mission recherche [needs-human])
+2026-10-10T23:34+02:00 | claude-adem | MSG-017 | handoff → titouan (D-005 + brainstorm Q2 Q3)
