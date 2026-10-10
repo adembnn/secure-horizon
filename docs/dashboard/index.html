@@ -83,9 +83,11 @@ code{font-family:var(--mono);font-size:.82em;word-break:break-word}
       <h3 class="ah">1 · Vue d'ensemble</h3>
       <div class="mm"><pre class="mermaid">
 flowchart LR
-  U["Utilisateur<br/>wallet normal (MetaMask)"] -- "1. intention en mots simples<br/>(5 choix ou phrase libre)" --> SNAP
-  SITE["Site web<br/>(peut être piégé)"] -- "2. transaction ou signature" --> MM["MetaMask"]
-  MM -- "onTransaction / onSignature" --> SNAP["Snap Sentinelle<br/>(T-104)"]
+  U["Utilisateur<br/>wallet normal"] -- "intention en mots simples<br/>demandée au moment de signer" --> SNAP
+  SITE["Site web<br/>(peut être piégé)"]
+  MM["Wallet (MetaMask, Rabby, Core)"]
+  SITE -. "demande interceptée avant le wallet" .-> SNAP["Extension Sentinelle<br/>enveloppe window.ethereum (T-104)"]
+  SNAP -- "relaie seulement après confirmation" --> MM
   SNAP --> API["API locale 127.0.0.1:8787<br/>(T-103)"]
   API --> ENG["Moteur d'effets (T-102)<br/>qui reçoit quoi · quel droit<br/>destinataire neuf ou sosie · âge du contrat"]
   API --> FIL["Filet sans intention<br/>droit à un compte externe · contrat neuf<br/>signature opaque"]
@@ -110,10 +112,11 @@ sequenceDiagram
   participant U as Utilisateur
   participant S as Site piégé
   participant SN as Sentinelle
+  SN-->>U: bandeau au chargement : site et contrat suspects
   F->>U: « valide ton remboursement sur ce site »
   U->>SN: « Je récupère un remboursement »
   S->>U: demande de signature (permit)
-  U->>SN: onSignature
+  U->>SN: demande interceptée avant MetaMask
   SN->>SN: effet = droit illimité sur tes USDC<br/>vers un contrat créé il y a 3 min
   SN-->>U: AVERTISSEMENT : tu as dit recevoir,<br/>en réalité tu donnes tout
 </pre></div>
@@ -139,7 +142,7 @@ sequenceDiagram
           <li><b>T-101</b> contrats de démo : faux USDC, drainer neuf en une commande, vrai routeur, adresse sosie · <i>fait, 26 tests</i></li>
           <li><b>T-102</b> moteur d'effets · <i>Titouan</i></li>
           <li><b>T-103</b> comparateur + Clef/Jev + API · <i>fait, 67 tests ; v2 chez Titouan</i></li>
-          <li><b>T-104</b> Snap MetaMask · <i>Titouan, test de 2 h d'abord</i></li>
+          <li><b>T-104</b> Extension navigateur (remplace le Snap) · <i>Titouan, prototype d'abord</i></li>
           <li><b>T-105</b> sites de démo + console jury · <i>Titouan</i></li>
           <li><b>T-106</b> banc d'essai · <i>banc réel v0 déjà mesuré</i></li>
         </ul>

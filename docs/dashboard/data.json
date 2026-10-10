@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-11T01:10",
-  "headline": "Premiers chiffres MESURÉS (banc réel, données publiques) : le filet sans intention fait 2,8 faux positifs pour 1000 tx sur Avalanche C-Chain, 31/1000 sur Ethereum ; 82 % des vraies approbations de drainers détectées. L'intention doit faire baisser le bruit.",
+  "updated": "2026-10-11T01:24",
+  "headline": "Grilling d'Adem : extension navigateur au lieu du Snap (marche avec MetaMask normal, peut vraiment retenir la demande, voit la page). Clef/Jev notent adresses et sites, y compris avant le clic. On promet « avertit et ralentit », chiffres mesurés.",
   "metrics": [
     {
       "label": "Fichiers de recherche",
@@ -63,8 +63,8 @@
       "status": "doing"
     },
     {
-      "name": "Test Snap 2 h (chemin critique)",
-      "detail": "Flask + Fuji, modale transaction et signature, fetch API locale",
+      "name": "Prototype extension (chemin critique)",
+      "detail": "Intercepte transactions et signatures, relaie après confirmation ; MetaMask normal sur Fuji",
       "status": "next"
     },
     {
@@ -107,12 +107,25 @@
     {
       "id": "D-007",
       "text": "Grand public, wallet normal : barrière d'intention avant l'envoi"
+    },
+    {
+      "id": "G-2",
+      "text": "Extension navigateur qui enveloppe window.ethereum, pas de Snap"
+    },
+    {
+      "id": "G-5",
+      "text": "Clef/Jev : noter adresses et sites (fiche calculée par le code), mesuré contre liste seule"
+    },
+    {
+      "id": "G-6",
+      "text": "Promesse : avertit et ralentit, limites dites"
     }
   ],
   "pending": [
-    "Core supporte-t-il les Snaps ? sinon Flask ou Rabby",
-    "Clé Cloudflare d'Adem pour appeler Clef en vrai",
-    "Vision Clef sur la page affichée (dit / affiché / fait) : chiffrer",
+    "Q9 découpage des 5 min et scène principale",
+    "Q10 grille de réponse (seuils 10 min / 30 s / 7 j / 50 % / 0,8)",
+    "Q12 bandeau avant le clic",
+    "Clé Cloudflare d'Adem pour Clef",
     "Déploiement Fuji de T-101"
   ],
   "scores": {
