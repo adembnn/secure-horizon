@@ -75,142 +75,100 @@ code{font-family:var(--mono);font-size:.82em;word-break:break-word}
   <section class="kpis" id="kpis" aria-label="Chiffres clés"></section>
 
   <section style="display:grid;gap:16px" aria-labelledby="t-arch">
-    <div class="eyebrow">Architecture · version de travail (la v3 issue des ébauches Opus arrive)</div>
+    <div class="eyebrow">Architecture · v3.1 (D-007, barrière d'intention)</div>
     <h2 id="t-arch" style="font-size:1.6rem">Comment Sentinelle est construite</h2>
-    <p class="lede" style="font-size:.98rem">Deux gardes indépendants du circuit d'approbation : <b>un plafond gravé dans le coffre</b> et <b>une demande signée par le client</b>. Autour, un surveillant qui ne peut que resserrer, un journal de preuves ancré sur Fuji, et un dossier DORA prêt à relire.</p>
+    <p class="lede" style="font-size:.98rem">Avant d'envoyer ou de signer, l'utilisateur dit <b>en mots simples</b> ce qu'il veut faire. Sentinelle calcule ce que l'opération <b>fait vraiment</b>, le compare, et <b>avertit et ralentit</b> si ça diverge : « Tu as dit X, en réalité Y ». Wallet normal, aucune migration.</p>
 
     <div class="card">
       <h3 class="ah">1 · Vue d'ensemble</h3>
       <div class="mm"><pre class="mermaid">
 flowchart LR
-  subgraph CLIENT["Côté client final"]
-    APP["App du client<br/>signe sa demande<br/>(EIP-712, passkey en bonus)"]
-  end
-  subgraph CASP["Chez le prestataire crypto"]
-    BE["Backend approbateur<br/>peut être piraté"]
-  end
-  subgraph FUJI["Avalanche Fuji"]
-    REG["ClientRegistry<br/>clés clients<br/>ajout = 2 gardiens sur 3"]
-    V["GuardedVault<br/>détient les fonds<br/>plafond gravé + vérif. signature"]
-    ANC["EvidenceAnchor<br/>règles scellées<br/>racines du journal"]
-  end
-  subgraph SENT["Sentinelle, hors bande"]
-    MON["Surveillant<br/>flux temps réel Fuji"]
-    SIG["Signaux<br/>sans demande · inconnu · cumul · pouvoirs"]
-    LAD["Échelle de réponse<br/>alerte → resserrer → voie lente"]
-    J["Journal chaîné"]
-    DORA["Moteur DORA<br/>règles RTS 2024/1772"]
-  end
-  subgraph OUT["Branchements"]
-    N["Téléphone (ntfy)"]
-    C["Chat (Slack, Mattermost)"]
-    SIEM["SIEM (OCSF)"]
-    T["Ticket (Gitea, Jira)"]
-    X["Formulaire AMF (XLSX)"]
-  end
-  APP -- "demande signée" --> BE
-  BE -- "tryWithdraw" --> V
-  REG -. "clé du client ?" .-> V
-  V -- "Withdrawn / WithdrawalRefused" --> MON
-  MON --> SIG --> LAD
-  LAD -- "tighten seulement" --> V
-  LAD --> N & C & SIEM & T
-  SIG --> J
-  LAD --> J
-  J -- "racine Merkle" --> ANC
-  J --> DORA --> X
+  U["Utilisateur<br/>wallet normal"] -- "intention en mots simples<br/>demandée au moment de signer" --> SNAP
+  SITE["Site web<br/>(peut être piégé)"]
+  MM["Wallet (MetaMask, Rabby, Core)"]
+  SITE -. "demande interceptée avant le wallet" .-> SNAP["Extension Sentinelle<br/>enveloppe window.ethereum (T-104)"]
+  SNAP -- "relaie seulement après confirmation" --> MM
+  SNAP --> API["API locale 127.0.0.1:8787<br/>(T-103)"]
+  API --> ENG["Moteur d'effets (T-102)<br/>qui reçoit quoi · quel droit<br/>destinataire neuf ou sosie · âge du contrat"]
+  API --> FIL["Filet sans intention<br/>droit à un compte externe · contrat neuf<br/>signature opaque"]
+  API --> CMP["Comparateur (code)<br/>dit ↔ fait"]
+  API --> AI["Clef / Jev<br/>phrase libre → intention<br/>message collé → arnaque ?<br/>ne peut qu'aggraver"]
+  CMP --> V["Verdict + réponse graduée<br/>avertir · délai · révoquer · pièces de plainte"]
+  FIL --> V
+  AI --> V
+  V --> J["Journal chaîné<br/>version des règles et du modèle"]
+  V -- "Tu as dit / En réalité" --> U
 </pre></div>
-      <p class="cap">Le backend peut mentir : il ne peut pas forger la signature d'un client, ni relever le plafond. Le surveillant ne peut que resserrer.</p>
+      <p class="cap">Le comparateur est du code. Le modèle de décision comprend la phrase et le message, mais ne peut jamais lever une alerte, seulement l'aggraver.</p>
     </div>
 
     <div class="cols" style="gap:16px">
       <div class="card">
-        <h3 class="ah">2 · Un retrait honnête</h3>
+        <h3 class="ah">2 · Scène héros : drainer neuf + faux support</h3>
         <div class="mm"><pre class="mermaid">
 sequenceDiagram
   autonumber
-  participant Cl as Client
-  participant BE as Backend
-  participant V as Coffre
-  participant S as Sentinelle
-  Cl->>BE: demande signée (2 000 € vers X)
-  BE->>V: tryWithdraw(demande, signature)
-  V->>V: client inscrit ? signature ? nonce ?<br/>sous les plafonds ?
-  V-->>S: Withdrawn
-  S->>S: tout est cohérent
+  participant F as Faux support
+  participant U as Utilisateur
+  participant S as Site piégé
+  participant SN as Sentinelle
+  SN-->>U: bandeau au chargement : site et contrat suspects
+  F->>U: « valide ton remboursement sur ce site »
+  U->>SN: « Je récupère un remboursement »
+  S->>U: demande de signature (permit)
+  U->>SN: demande interceptée avant MetaMask
+  SN->>SN: effet = droit illimité sur tes USDC<br/>vers un contrat créé il y a 3 min
+  SN-->>U: AVERTISSEMENT : tu as dit recevoir,<br/>en réalité tu donnes tout
 </pre></div>
       </div>
       <div class="card">
-        <h3 class="ah">3 · Le scénario Bitget</h3>
-        <div class="mm"><pre class="mermaid">
-sequenceDiagram
-  autonumber
-  participant P as Pirate dans le backend
-  participant V as Coffre
-  participant S as Sentinelle
-  participant H as Humains
-  P->>V: tryWithdraw sans demande client
-  V-->>S: WithdrawalRefused (signature absente)
-  P->>V: retraits « signés » par de faux clients
-  V-->>S: refusés au plafond par client
-  S->>V: tighten (resserre encore)
-  S->>H: téléphone + chat + ticket
-  S->>S: dossier DORA prêt, chrono 4 h
-</pre></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3 class="ah">4 · Les trois contrats</h3>
-      <div class="ctr">
-        <div class="cbox"><div class="cn">GuardedVault</div><div class="cr">détient les fonds, non mettable à jour</div>
-          <ul><li><code>deposit(amount)</code></li><li><code>tryWithdraw(request, clientSig)</code> → refus par événement, pas de revert</li><li><code>tighten(params)</code> : valeurs ≤ actuelles seulement</li><li><code>proposeLoosen</code> / <code>executeLoosen</code> : 2 gardiens sur 3 + délai</li></ul></div>
-        <div class="cbox"><div class="cn">ClientRegistry</div><div class="cr">qui a le droit de demander un retrait</div>
-          <ul><li><code>enroll(client, key, guardianSigs)</code> : 2 sur 3 + délai + quota par jour</li><li><code>isEnrolled</code>, <code>keyOf</code></li></ul></div>
-        <div class="cbox"><div class="cn">EvidenceAnchor</div><div class="cr">la preuve, scellée sur Fuji</div>
-          <ul><li><code>commitRules(hash)</code> : avant les tests</li><li><code>anchor(root, kind)</code> : racine du journal</li><li><code>commitMandate(hash)</code> : plafonds signés par la direction</li></ul></div>
-      </div>
-    </div>
-
-    <div class="cols" style="gap:16px">
-      <div class="card">
-        <h3 class="ah">5 · Qui peut faire quoi</h3>
+        <h3 class="ah">3 · Les trois arnaques visées</h3>
         <div class="scrollx"><table class="rm">
-          <thead><tr><th>Action</th><th>Backend</th><th>Sentinelle</th><th>1 gardien</th><th>2 gardiens + délai</th></tr></thead>
+          <thead><tr><th>Arnaque</th><th>Ce que la victime croit</th><th>Ce qui se passe</th></tr></thead>
           <tbody>
-            <tr><td>Retirer avec demande client</td><td class="y">oui</td><td class="n">non</td><td class="n">non</td><td class="n">non</td></tr>
-            <tr><td>Retirer sans demande client</td><td class="n">non</td><td class="n">non</td><td class="n">non</td><td class="n">non</td></tr>
-            <tr><td>Resserrer le plafond</td><td class="n">non</td><td class="y">oui</td><td class="y">oui</td><td class="y">oui</td></tr>
-            <tr><td>Relever le plafond</td><td class="n">non</td><td class="n">non</td><td class="n">non</td><td class="y">oui</td></tr>
-            <tr><td>Inscrire un client</td><td class="n">non</td><td class="n">non</td><td class="n">non</td><td class="y">oui</td></tr>
-            <tr><td>Ancrer une preuve</td><td class="n">non</td><td class="y">oui, autre clé</td><td class="n">non</td><td class="n">non</td></tr>
+            <tr><td>Signature piégée</td><td>« je reçois un cadeau »</td><td>elle donne le droit de tout prendre</td></tr>
+            <tr><td>Adresse piégée</td><td>« j'envoie à mon Coinbase »</td><td>adresse sosie, mêmes premiers et derniers caractères</td></tr>
+            <tr><td>Faux support</td><td>« on m'a demandé de sécuriser »</td><td>elle envoie tout à l'escroc</td></tr>
           </tbody>
         </table></div>
+        <p class="cap">Témoin : un vrai swap passe sans alerte. On ne bloque pas tout.</p>
+      </div>
+    </div>
+
+    <div class="cols" style="gap:16px">
+      <div class="card">
+        <h3 class="ah">4 · Les lots</h3>
+        <ul class="inv">
+          <li><b>T-101</b> contrats de démo : faux USDC, drainer neuf en une commande, vrai routeur, adresse sosie · <i>fait, 26 tests</i></li>
+          <li><b>T-102</b> moteur d'effets · <i>Titouan</i></li>
+          <li><b>T-103</b> comparateur + Clef/Jev + API · <i>fait, 67 tests ; v2 chez Titouan</i></li>
+          <li><b>T-104</b> Extension navigateur (remplace le Snap) · <i>Titouan, prototype d'abord</i></li>
+          <li><b>T-105</b> sites de démo + console jury · <i>Titouan</i></li>
+          <li><b>T-106</b> banc d'essai · <i>banc réel v0 déjà mesuré</i></li>
+        </ul>
       </div>
       <div class="card">
-        <h3 class="ah">6 · Ce que les tests doivent prouver</h3>
+        <h3 class="ah">5 · Mesurer sans tricher</h3>
         <ol class="inv">
-          <li>Quelle que soit la séquence, la sortie sur une fenêtre reste sous le plafond global.</li>
-          <li>Par client et par jour, sous le plafond par client.</li>
-          <li><code>tighten</code> ne peut jamais augmenter un paramètre.</li>
-          <li>Relâcher exige 2 gardiens sur 3 et le délai.</li>
-          <li>Une demande signée ne sert qu'une fois.</li>
-          <li>Aucun rôle ne retire sans demande valide.</li>
+          <li>Légitime réel : transactions publiques C-Chain et Ethereum, lecture seule.</li>
+          <li>Attaques réelles : approbations vers la liste publique Scam Sniffer ; permits reconstruits depuis la chaîne.</li>
+          <li>Règles hashées avant les tests, jeu de test gelé, une famille d'attaque gardée hors réglage.</li>
+          <li>Trois bras : sans intention, intention honnête, intention mensongère.</li>
+          <li>Ablation : Clef reste seulement s'il gagne au moins 5 points.</li>
         </ol>
-        <p class="cap">Prouvés par des tests aléatoires (fuzzing) : c'est la « perte maximale démontrée ».</p>
+        <p class="cap">Cible : faux positifs critiques ≤ 1/1000 (borne 3/n). Aujourd'hui, filet seul : 2,8/1000 sur C-Chain.</p>
       </div>
     </div>
 
     <div class="card">
-      <h3 class="ah">7 · Le dossier DORA, champ par champ</h3>
+      <h3 class="ah">6 · La boucle d'amélioration (pilotée par Titouan)</h3>
       <div class="mm"><pre class="mermaid">
 flowchart LR
-  J["Journal chaîné<br/>chaque décision + sa transaction"] --> R{"Règles RTS 2024/1772<br/>service critique ?<br/>accès malveillant ou 2 seuils ?"}
-  R -- "majeur" --> H["Responsable conformité<br/>décide, heure enregistrée"]
-  R -- "menace bloquée" --> V10["Notification volontaire<br/>art. 10"]
-  H --> F["Notification initiale<br/>champs 1.x et 2.x<br/>chaque valeur → sa preuve"]
-  F --> X["XLSX officiel AMF<br/>déposé par un humain"]
-  F --> P["Compteur<br/>« N champs prouvés on-chain »"]
+  B["Construire<br/>lots T-10x"] --> T["Tester en réel<br/>banc + Fuji"]
+  T --> R["Red team<br/>nouveaux contournements"]
+  R -- "chaque contournement<br/>devient un cas" --> T
+  T --> J["Juges sans contexte<br/>notent sur les mesures"]
+  J --> C["Corriger"] --> B
 </pre></div>
     </div>
   </section>
@@ -246,7 +204,7 @@ flowchart LR
 
   <section class="cols">
     <div class="card">
-      <h2>Connecteurs testés sur Fuji</h2>
+      <h2>Briques testées</h2>
       <div class="conn" id="conn"></div>
     </div>
     <div class="card">
@@ -272,7 +230,7 @@ flowchart LR
     $('pending').innerHTML=(d.pending||[]).length?(d.pending).map(x=>`<div class="li"><span>${esc(x)}</span><span class="pill next">à trancher</span></div>`).join(''):'<div class="li">Rien en attente</div>';
     $('innov').innerHTML=(d.innovation||[]).map(x=>`<div class="li"><span>${esc(x.name)}</span><span class="pill lv-${x.level}">${esc(x.verdict)}</span></div>`).join('');
     const c=d.connectors||{};
-    $('conn').innerHTML=`<div class="lv-ok"><b>${c.ok??'–'}</b><span>branchables, gratuits</span></div><div class="lv-warn"><b>${c.account??'–'}</b><span>compte requis</span></div><div class="lv-ko"><b>${c.absent??'–'}</b><span>absents sur Fuji</span></div>`;
+    $('conn').innerHTML=`<div class="lv-ok"><b>${c.ok??'–'}</b><span>prouvées (T-101, T-103)</span></div><div class="lv-warn"><b>${c.account??'–'}</b><span>compte requis (Clef)</span></div><div class="lv-ko"><b>${c.absent??'–'}</b><span>à prouver (Snap)</span></div>`;
     $('titouan').textContent=d.titouan||'';
     const s=d.scores||{labels:[],adem:[],titouan:[]};
     const muted=getComputedStyle(document.documentElement).getPropertyValue('--muted').trim()||'#898781';

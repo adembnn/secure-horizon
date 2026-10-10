@@ -58,3 +58,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T23:00:25.122Z | swarm | T-101 | run 20261011-005340: success turns=50 cost=$1.84 retries=0
 2026-10-11T01:01+02:00 | claude-adem | MSG-029 | handoff → titouan (v3.1 accepted, Signer's Mirror, Snap test first)
 2026-10-11T01:03+02:00 | claude-adem | MSG-030 | handoff → titouan (bench v0: contract age, real permit set, intent gain)
+2026-10-11T01:14+02:00 | claude-adem | MSG-031 | handoff → titouan (extension not Snap, address scoring with Clef)
