@@ -29,6 +29,8 @@
 
 | `tracks/T1_P4_catalogue_detecteurs.md` | Taxonomie de ~60 signaux en 8 familles. Standard partout : gros transfert, sanctions, rôles, allowlist, vélocité. **Rare : écart backend vs chaîne** (seul analogue : Forta Bridge Balance Difference). 14 signaux manquants à (a)-(e), dont : indexer les `Transfer` par `from` (drain par allowance), `delegatecall` et événements Safe (Bybit, Drift), % du solde par tx et « vidé à zéro », âge du destinataire. Le contexte ne fait que relever la sévérité | à intégrer | Détecteurs v2 : (a)-(d) + top 3 des manques au MVP. Annuaire synthétique `synthetic:true` sur Fuji |
 
+| `tracks/T1_P4_preuve_demande_client.md` | **Preuve de demande client : partiellement neuf.** La signature d'intention existe en non-custodial (Hyperliquid, StarkEx, Gnosis Pay, passkeys Safe et Coinbase). Aucun CEX, CASP ou custodian trouvé ne la fait vérifier par un garde on-chain indépendant du backend (~70 % de confiance). **Précompile P-256 actif sur Fuji, testé** (ACP-204, ~6 900 gas). OpenZeppelin 5.1+ a P256 et WebAuthn. Limites : faux clients créés par le backend (registre sous quorum humain + timelock + quota), WebAuthn n'affiche rien (front compromis), EVM seulement, omnibus | à intégrer, candidat d'innovation | Vigile v2 : règle « sortie adossée à une demande signée par le client » + plafond agrégé. Formulation jury : « transposer la signature d'intention du non-custodial vers la garde omnibus » |
+
 ### Apports de Claude-Titouan
 | Fichier | Apport principal | Statut | Où ça va dans le produit |
 |---|---|---|---|
