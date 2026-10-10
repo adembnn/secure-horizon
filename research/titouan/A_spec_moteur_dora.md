@@ -47,7 +47,7 @@ Légende : P = chaîne (prouvable on-chain) ; F = profil de l'entité saisi une 
 | 2.5 | Critères déclencheurs | C (affichage des seuils atteints) |
 | 2.6 | Étendue géographique | F + H |
 | 2.7 | Mode de découverte | C (alerte automatique) |
-| 2.8 | Origine tiers/autre entité | F (registre des tiers) ; format NOM;CODE;TYPE;info ; code absent = drapeau humain |
+| 2.8 | Origine tiers/autre entité | F (registre des tiers) ; UN SEUL format, celui des instructions ESAs : NOM_LÉGAL;CODE;LEI ou EUID;INFO. Code absent : NOM_LÉGAL;;;motif de l'absence, plus un drapeau humain visible (jamais de code deviné) |
 | 2.9 | Activation du plan de continuité | H |
 | 2.10 | Autres informations | IA/H |
 | 3.2 | Date/heure d'occurrence | P |
@@ -84,13 +84,14 @@ Légende : P = chaîne (prouvable on-chain) ; F = profil de l'entité saisi une 
 |---|---|---|---|
 | T1 | Drain stoppé en 3 min, perte 40 k€, coffre = service agréé | majeur (9(5)(b)) | non majeur, menace art. 10 à évaluer |
 | T2 | Drain de 600 k€ | majeur | majeur (9(6), plus 9(3) si > 2 h) |
-| T3 | Pause de 3 h sans attaque (fausse alerte) | non majeur : 9(3) seul ne suffit pas, il faut deux seuils | idem |
+| T3 | Pause TOTALE de 3 h sur fausse alerte (tous les clients du service bloqués) | majeur probable : 9(1) (plus de 10 % des clients touchés) + 9(3) (plus de 2 h), si services critiques (corrigé après le juré KPMG) | idem |
+| T3b | Voie lente PARTIELLE de 40 min sur fausse alerte (seuls les retraits suspects attendent) | non majeur : aucun seuil de durée atteint, à confirmer avec la règle de comptage des clients | idem |
 | T4 | Pause de 3 h et 15 % des clients touchés | majeur (9(1) + 9(3)) | idem |
 | T5 | Attaque bloquée par le contrat, aucun fonds sorti | non majeur, menace significative à évaluer | idem |
 | T6 | Deux incidents mineurs en 4 mois, même cause | majeur par récurrence si ensemble ils remplissent l'al. 1 | idem |
 | T7 | Oracle sans LEI à l'origine de l'incident | champ 2.8 produit "NOM;;?;info" + drapeau | idem |
 | T8 | Détecté à 02h00, classé à 09h00 | échéance = min(09h00 + 4 h = 13h00, 02h00 + 24 h = 02h00 J+1) = 13h00 | idem |
-| T9 | Classé à 03h00 J+1 (au-delà de 24 h après détection) | échéance 07h00 (4 h après classification) | idem |
+| T9 | Détecté à 02h00 J, classé à 03h00 J+1 (au-delà de 24 h après la prise de connaissance) | lecture stricte (retenue par défaut, juré KPMG) : les deux limites s'appliquent, l'échéance 02h00 J+1 est déjà dépassée, donc RETARD : prévenir sans délai avec les raisons (RTS 2025/301 art. 5, retard). Lecture souple (une source secondaire) : l'horloge de 4 h repart de la classification, échéance 07h00. À trancher sur le texte officiel | idem |
 | T10 | Dépôt tombant un dimanche, entité non crédit | possibilité de midi lundi (à vérifier pour les prestataires crypto) | idem |
 
 ## 7. Questions ouvertes
