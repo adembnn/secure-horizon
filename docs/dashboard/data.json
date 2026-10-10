@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-10T23:25",
-  "headline": "Jury à l'aveugle : 67/100, vrai problème confirmé, mais cible à corriger (trésoreries on-chain plutôt qu'exchanges). 12 connecteurs sur 12 prouvés en local.",
+  "updated": "2026-10-10T23:45",
+  "headline": "Vrai jury : wallets personnels + classification des menaces. Décision D-005 : un moteur, deux marchés. Le trou réel côté particulier : la réponse automatique après compromission et le paquet de preuves.",
   "metrics": [
     {
       "label": "Fichiers de recherche",
@@ -12,15 +12,15 @@
     },
     {
       "label": "Décisions actées",
-      "value": "4"
+      "value": "5"
     },
     {
       "label": "Messages Adem → Titouan",
-      "value": "13"
+      "value": "18"
     },
     {
       "label": "Messages Titouan → Adem",
-      "value": "16"
+      "value": "25"
     }
   ],
   "stages": [
@@ -50,9 +50,14 @@
       "status": "done"
     },
     {
+      "name": "Recherche wallets personnels (Titouan, 7 agents) et 33+ incidents (16 agents)",
+      "detail": "Limite et gardiens existent (Argent, Bitkey, Casa). Trou : réponse automatique après compromission, preuves police/assureur",
+      "status": "done"
+    },
+    {
       "name": "Ébauches d'architecture",
-      "detail": "3 architectes Opus 5.5, prototypes compilés et testés, 7 juges",
-      "status": "running"
+      "detail": "À refaire sur le cadrage D-005 (l'ancienne boucle visait les institutions seules)",
+      "status": "next"
     },
     {
       "name": "Rejeu du vrai vol Bitget",
@@ -91,12 +96,16 @@
     {
       "id": "Q4",
       "text": "L'outil propose la classification DORA, un humain décide et dépose"
+    },
+    {
+      "id": "D-005",
+      "text": "Un moteur, deux marchés : particuliers en entrée, institutions payantes"
     }
   ],
   "pending": [
-    "Recentrer la cible sur les trésoreries on-chain, démo unique chiffrée",
-    "Caméra en entrée, vigile au cœur, aucune clé détenue",
-    "Deadline réelle à confirmer auprès des organisateurs"
+    "Produit particulier : réponse automatique après compromission + paquet de preuves + classification Jev ?",
+    "Qui paie côté particulier (wallet, exchange, assureur) ?",
+    "Format du dossier : commun « preuve d'incident » ou deux dossiers ?"
   ],
   "scores": {
     "labels": [
@@ -150,7 +159,7 @@
     "account": 0,
     "absent": 0
   },
-  "titouan": "Plafond dans un contrat coffre séparé (adopté). Rejeu Bitget sur Avalanche (lancé). Ébauche H versée au jury.",
+  "titouan": "Particuliers à patrimoine recommandés, même moteur. 5 réserves adoptées : douleur ≠ obligation DORA, Guard doit bloquer setGuard/modules/delegatecall, Safe 1.5 auto-déployé, fail-closed.",
   "cap": {
     "verdict": "À CORRIGER",
     "time": "23:00",
