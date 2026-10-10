@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-10T23:45",
-  "headline": "Vrai jury : wallets personnels + classification des menaces. Décision D-005 : un moteur, deux marchés. Le trou réel côté particulier : la réponse automatique après compromission et le paquet de preuves.",
+  "updated": "2026-10-11T01:01",
+  "headline": "SHIFT D-007 : barrière d'intention pour wallets normaux (grand public). Tu dis ce que tu veux faire, Sentinelle calcule ce que l'opération fait vraiment, et avertit si ça diverge. Démo : drainer neuf déployé en live sur Fuji.",
   "metrics": [
     {
       "label": "Fichiers de recherche",
@@ -12,11 +12,11 @@
     },
     {
       "label": "Décisions actées",
-      "value": "5"
+      "value": "7"
     },
     {
       "label": "Messages Adem → Titouan",
-      "value": "18"
+      "value": "29"
     },
     {
       "label": "Messages Titouan → Adem",
@@ -25,53 +25,43 @@
   ],
   "stages": [
     {
-      "name": "Choisir le problème",
-      "detail": "Circuit d'approbation des sorties détourné : Bitget, KelpDAO, Drift",
+      "name": "Direction grand public (D-007)",
+      "detail": "Barrière d'intention : dit / affiché / fait. Signature piégée, adresse piégée, faux support",
       "status": "done"
     },
     {
-      "name": "État de l'art et concurrents",
-      "detail": "33 incidents, ~60 signaux, faux positifs, 6 angles de recherche",
+      "name": "Recherche O (antériorité, Snaps, mesure, Clef/Jev, vocabulaire)",
+      "detail": "Aucun projet identique ; Snap = avertir, pas bloquer ; FP ≤ 1/1000 visé",
       "status": "done"
     },
     {
-      "name": "Connecteurs testés en direct",
-      "detail": "12 sur 12 prouvés en local par une boucle avec vérificateur (Fireblocks, BitGo, Mattermost, Loki, Gitea, Safe 1.5, Zodiac, traces, Chainlink, WebSocket, AMF, ntfy)",
+      "name": "Jurés v3 tour 1 (6 juges)",
+      "detail": "~60/100 ; faisabilité plafonnée tant que rien n'est mesuré",
       "status": "done"
     },
     {
-      "name": "Innovation passée aux contradicteurs",
-      "detail": "Plafond intouchable et preuve de demande client survivent",
+      "name": "T-101 contrats de démo",
+      "detail": "26 tests verts ; déploiement Fuji à faire (clé d'Adem)",
       "status": "done"
     },
     {
-      "name": "Jury à l'aveugle (8 juges sans contexte)",
-      "detail": "67/100 · idée valable 8/8 · problème réel 8/8 · cible à corriger",
-      "status": "done"
+      "name": "T-103 comparateur + API",
+      "detail": "67 tests verts ; v2 (filet sans intention, réponse graduée, journal) chez Titouan",
+      "status": "doing"
     },
     {
-      "name": "Recherche wallets personnels (Titouan, 7 agents) et 33+ incidents (16 agents)",
-      "detail": "Limite et gardiens existent (Argent, Bitkey, Casa). Trou : réponse automatique après compromission, preuves police/assureur",
-      "status": "done"
-    },
-    {
-      "name": "Ébauches d'architecture",
-      "detail": "À refaire sur le cadrage D-005 (l'ancienne boucle visait les institutions seules)",
+      "name": "Test Snap 2 h (chemin critique)",
+      "detail": "Flask + Fuji, modale transaction et signature, fetch API locale",
       "status": "next"
     },
     {
-      "name": "Rejeu du vrai vol Bitget",
-      "detail": "Règle « inconnu > 50 % du solde » : alerte au 1er bloc, 0 faux positif sur 30 j ; 11 M$ encore présents, 8 M$ partis 98 min après",
-      "status": "done"
-    },
-    {
-      "name": "Build par les workers Bedrock",
-      "detail": "Sonnet 4.6 opérationnel, tâches T-1xx à créer",
+      "name": "T-102 moteur d'effets, T-104 Snap, T-105 sites démo, T-106 banc",
+      "detail": "Lancés par Titouan sur son Claude",
       "status": "next"
     },
     {
-      "name": "Boucle testeurs réels",
-      "detail": "Tests, invariants, démo Fuji, puis jury sur ce qui tourne",
+      "name": "Boucle : tester en réel → red team → juges → corriger",
+      "detail": "Pilotée par Titouan, notes sur résultats mesurés",
       "status": "next"
     },
     {
@@ -100,31 +90,39 @@
     {
       "id": "D-005",
       "text": "Un moteur, deux marchés : particuliers en entrée, institutions payantes"
+    },
+    {
+      "id": "D-007",
+      "text": "Grand public, wallet normal : barrière d'intention avant l'envoi"
     }
   ],
   "pending": [
-    "Produit particulier : réponse automatique après compromission + paquet de preuves + classification Jev ?",
-    "Qui paie côté particulier (wallet, exchange, assureur) ?",
-    "Format du dossier : commun « preuve d'incident » ou deux dossiers ?"
+    "Core supporte-t-il les Snaps ? sinon Flask ou Rabby",
+    "Clé Cloudflare d'Adem pour appeler Clef en vrai",
+    "Vision Clef sur la page affichée (dit / affiché / fait) : chiffrer",
+    "Déploiement Fuji de T-101"
   ],
   "scores": {
     "labels": [
       "Tour 1",
       "Tour 2",
       "Tour 3",
-      "Aveugle"
+      "Aveugle",
+      "v3 T1"
     ],
     "adem": [
       56.3,
       60.6,
       59.5,
-      67.0
+      67.0,
+      null
     ],
     "titouan": [
       63.3,
       70.1,
       null,
-      null
+      null,
+      60
     ]
   },
   "innovation": [
@@ -159,19 +157,17 @@
     "account": 0,
     "absent": 0
   },
-  "titouan": "Particuliers à patrimoine recommandés, même moteur. 5 réserves adoptées : douleur ≠ obligation DORA, Guard doit bloquer setGuard/modules/delegatecall, Safe 1.5 auto-déployé, fail-closed.",
+  "titouan": "v3.1 : comparateur en code, filet indépendant de l'intention, réponse graduée + journal, mesure 3 bras sur jeu gelé, « avertit » au lieu de « bloque ». Il pilote la boucle et lance T-102/104/105/106.",
   "cap": {
-    "verdict": "À CORRIGER",
-    "time": "23:00",
+    "verdict": "EN ROUTE",
+    "time": "01:00",
     "drifts": [
-      "Deux produits dans un même dossier, architecture obèse",
-      "L'acheteur flotte (CASP ou trésorerie on-chain ?)",
-      "Le centre de gravité sort de la détection (30 %)"
+      "Évaluation circulaire si on mesure sur nos propres cas",
+      "Snap non encore prouvé"
     ],
     "fixes": [
-      "Geler une v3 d'une page, 4 modules, tâches avant minuit",
-      "Trancher l'acheteur : trésoreries on-chain",
-      "Chiffre de tête = rejeu Bitget, mesurer les faux positifs"
+      "Jeu gelé + tx réelles C-Chain en lecture seule",
+      "Test Snap de 2 h avant le gros build"
     ]
   }
 }
