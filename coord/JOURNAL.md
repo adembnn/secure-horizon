@@ -19,3 +19,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T23:34+02:00 | claude-adem | MSG-017 | handoff → titouan (D-005 + brainstorm Q2 Q3)
 2026-10-10T23:39+02:00 | claude-adem | MSG-018 | handoff → titouan (ACK x5 + convergence produit particuliers)
 2026-10-10T23:40+02:00 | claude-adem | MSG-019 | handoff → titouan (réponse 7702 + demande point d'étape [needs-human])
+2026-10-10T23:42+02:00 | claude-adem | MSG-020 | handoff → titouan (ACK point d'étape, fondations présentées à Adem)
