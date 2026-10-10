@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-11T01:30",
-  "headline": "Mesure : la règle « contrat neuf » ne sert à rien en vrai (1,2 % des drainers réels ont un contrat de moins de 7 jours) → retirée. Angle mort trouvé par Titouan : les envois faits depuis le bouton Envoyer du wallet échappent à l'extension → tester le Snap en complément.",
+  "updated": "2026-10-11T01:36",
+  "headline": "Inventaire de Titouan (R1-R8) : notre cible la mieux détectable, les signatures piégées, pèse ~84 M$/an ; les arnaques où la victime envoie elle-même pèsent ≥ 14 Md$. Le levier pour ce gros morceau : le niveau « Manipulation » (demande retenue 10 min). On cherche les preuves que ça marche.",
   "metrics": [
     {
       "label": "Fichiers de recherche",
@@ -182,7 +182,7 @@
     "account": 1,
     "absent": 1
   },
-  "titouan": "Âge du contrat : négatif (drainers réels = vieux contrats). Permit réel introuvable sur chaîne. Extension OK mais angle mort : envois natifs du wallet, mobile, extension elle-même cible. Propose de produire les indices d'adresses pour noter avec Clef.",
+  "titouan": "R1-R8 : 22 cas de contrôle, 16 familles de signatures, 15 évasions. Clef ne génère pas de texte : il sert au message collé, aux domaines sosies et au texte de page ; les adresses sont notées par du code. Règle d'empoisonnement USENIX adoptée.",
   "cap": {
     "verdict": "EN ROUTE",
     "time": "01:00",
