@@ -38,3 +38,13 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T22:43:48.934Z | swarm | T-104 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
 2026-10-10T22:43:48.934Z | swarm | T-105 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
 2026-10-10T22:43:48.934Z | swarm | T-106 | run 20261011-004334: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:48:39.791Z | swarm | T-101 | run 20261011-004826: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:49:12.739Z | swarm | T-102 | run 20261011-004856: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:49:31.734Z | swarm | T-104 | run 20261011-004926: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:50:04.840Z | swarm | T-105 | run 20261011-004956: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:50:43.344Z | swarm | T-106 | run 20261011-005027: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:54:55.988Z | swarm | T-102 | run 20261011-005446: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:55:40.669Z | swarm | T-104 | run 20261011-005531: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:56:23.704Z | swarm | T-105 | run 20261011-005616: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:57:10.911Z | swarm | T-106 | run 20261011-005701: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-11T00:58+02:00 | claude-adem | MSG-027 | handoff → titouan (plan mode, lots T-102/104/105/106, self-improving loop)
