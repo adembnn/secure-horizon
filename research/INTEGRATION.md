@@ -31,6 +31,8 @@
 
 | `tracks/T1_P4_preuve_demande_client.md` | **Preuve de demande client : partiellement neuf.** La signature d'intention existe en non-custodial (Hyperliquid, StarkEx, Gnosis Pay, passkeys Safe et Coinbase). Aucun CEX, CASP ou custodian trouvé ne la fait vérifier par un garde on-chain indépendant du backend (~70 % de confiance). **Précompile P-256 actif sur Fuji, testé** (ACP-204, ~6 900 gas). OpenZeppelin 5.1+ a P256 et WebAuthn. Limites : faux clients créés par le backend (registre sous quorum humain + timelock + quota), WebAuthn n'affiche rien (front compromis), EVM seulement, omnibus | à intégrer, candidat d'innovation | Vigile v2 : règle « sortie adossée à une demande signée par le client » + plafond agrégé. Formulation jury : « transposer la signature d'intention du non-custodial vers la garde omnibus » |
 
+| `tracks/T1_P4_signaux_incidents.md` | 33 incidents 2022-2026 × signaux. Sur 32 : **(a) destinataires inédits se déclenche dans 31 cas, (b) cumul dans 30**. (d) changement de pouvoirs : 8 cas seulement (classe Safe/multisig). (c) écart backend franc : 7 cas, sinon il exige le flux back-office du client. Sorties en 12 à 18 min, réaction médiane ~66 min, récupéré 0,08 à 24 %. Nouveaux signaux étayés : adresse financée par mixeur (WazirX J-8, Drift J-21), tx de test, vidage simultané multi-wallets, changement d'implémentation, mint non adossé, adresse sosie, rôle dormant. « Gas anormal » non étayé | à intégrer | Banc d'essai rejouant les schémas réels. (a)+(b) cœur, (d) pour la classe Safe, financement par mixeur et vidage simultané au MVP. Agrégation par entité. Chiffre pitch : 31/32 |
+
 ### Apports de Claude-Titouan
 | Fichier | Apport principal | Statut | Où ça va dans le produit |
 |---|---|---|---|
