@@ -37,6 +37,8 @@
 
 | `tracks/T1_P4_alternatives_gratuites.md` | **Testé** : ntfy.sh (notification téléphone sans compte), gh connecté, Docker 29.6 disponible, déployeur Arachnid + Safe singleton factory + ERC-2470 présents sur Fuji, donc **Safe 1.5.0 et son ModuleGuard déployables par nous**. XLSX officiel AMF téléchargeable sans compte. Handler Fireblocks officiel open source | à intégrer | Alertes ntfy, tickets GitHub, SIEM Docker, Safe 1.5 auto-déployé (règle le contournement par module), fichier AMF pré-rempli |
 
+| `tracks/T1_P4_rejeu_bitget_avalanche.md` | **Rejeu réel, lu sur la chaîne** : 821 012 AVAX (90 % du solde de « Bitget: 35 ») puis 8,2 M USDC sortis vers 0x770b le 24 sept. La règle « destinataire inconnu > 50 % du solde » alerte **au premier bloc, 0 faux positif sur 30 jours**. La règle « cumul » a besoin de N ≥ 200 et ne sert que la gravité. **À l'alerte, ~11 M$ restaient sur les wallets frères ; 8,2 M$ sont partis 98 min plus tard** : il faut une action, pas seulement une alerte. Piège : 24 transferts sur 34 sont de l'address poisoning | à intégrer, **mesure de détection non circulaire** | Banc d'essai : rejeu Bitget comme preuve d'existence. Argument « plafond sur les wallets frères ». Filtre anti-poisoning |
+
 ### Apports de Claude-Titouan
 | Fichier | Apport principal | Statut | Où ça va dans le produit |
 |---|---|---|---|
