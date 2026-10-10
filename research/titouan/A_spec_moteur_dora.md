@@ -25,7 +25,7 @@ Quand les chiffres exacts manquent, estimer à partir de périodes de référenc
 **Étape 3, menace cyber significative (art. 10), pour les attaques bloquées avant perte.** Les trois conditions doivent toutes être vraies : (a) impact potentiel sur fonctions critiques ou sur d'autres entités, (b) forte probabilité de se matérialiser (risques applicables, capacités et intention de l'acteur, persistance), (c) si elle se matérialisait, elle remplirait art. 6 ou art. 9(1) ou art. 9(4). La notification est volontaire (contenu : RTS 2025/301 art. 6, qui demande une classification hypothétique).
 
 ## 2. Délais (RTS 2025/301 art. 5)
-- Notification initiale : "dès que possible", au plus tard 4 h après la classification en majeur, ET au plus tard 24 h après la prise de connaissance (les deux limites s'appliquent ; échéance = la plus proche). Lecture stricte retenue par défaut : un incident classé majeur après 24 h est déjà en retard et doit être signalé comme tel (voir T9). Une source secondaire propose une lecture souple (l'horloge de 4 h repart de la classification) : à trancher sur le Journal officiel, jamais en silence.
+- Notification initiale (RTS 2025/301 art. 5(1)(a) et 5(2), texte du Journal officiel lu, voir J5) : "dès que possible", au plus tard 4 h après la classification en majeur ET au plus tard 24 h après la prise de connaissance. Si la classification a lieu plus de 24 h après la prise de connaissance, l'art. 5(2) fixe l'échéance à 4 h après la classification, sans retard automatique. (Correction : la "lecture stricte" retenue plus tôt après le juré KPMG était fausse.)
 - Rapport intermédiaire : au plus tard 72 h après la notification initiale, puis mise à jour sans délai, et dès retour à l'activité régulière.
 - Rapport final : au plus tard 1 mois après l'intermédiaire (ou le dernier mis à jour).
 - Week-ends et jours fériés : dépôt possible avant midi le jour ouvré suivant, sauf pour les établissements de crédit et entités essentielles ou importantes NIS2 (initial et intermédiaire). Applicabilité à un prestataire crypto : à vérifier.
@@ -99,3 +99,18 @@ Légende : P = chaîne (prouvable on-chain) ; F = profil de l'entité saisi une 
 - Quelle source de prix pour la conversion en euros, et comment la rendre rejouable ?
 - Définition de "client touché" dans un coffre où les dépôts sont agrégés ?
 - Le contrôle mensuel des incidents récurrents est-il dans le périmètre de la démo ?
+
+## Corrections issues de la lecture des textes officiels (J5, 10/10/2026 soir)
+Les textes du Journal officiel (versions XHTML de l'Office des publications, CELEX 32024R1772, 32025R0301, 32025R0302, 32022R2554) ont été lus. Le détail et les citations sont dans research/titouan/J_recherche/J5_textes_officiels_dora.md. À appliquer au moteur :
+1. Délais : voir §2 corrigé (art. 5(1)(a) et 5(2)). T9 corrigé.
+2. Art. 9(5)(b) : "accès malveillant, non autorisé et réussi, non couvert par (a), pouvant entraîner des pertes de données". Le moteur teste d'abord (a) (quatre volets de l'art. 5 : disponibilité, authenticité, intégrité, confidentialité, avec effet sur les objectifs ou la conformité), puis (b).
+3. Art. 9(2) réputation : quatre conditions de l'art. 2(1) (médias, plaintes répétées, exigences réglementaires non tenues, perte de clients).
+4. Art. 8(2) récurrence : exclusion aussi des entités de l'art. 16(1) DORA, pas seulement les micro-entreprises.
+5. Économique : coûts bruts avant récupérations (art. 7(1)), liste a à h, exclusions 7(2), estimation à défaut de données 7(3).
+6. Durée et indisponibilité (art. 3) : début à l'occurrence, sinon à la détection ; l'indisponibilité PARTIELLE compte ("fully or partially unavailable"). Conséquence : le cas T3b (voie lente partielle) n'échappe pas automatiquement au seuil 2 h si la durée dépasse 2 h.
+7. Clients touchés (art. 1(1)) : incluent ceux qui n'ont pu utiliser le service ou ont été affectés négativement ; un client dont le retrait échoue est probablement "unable to make use of the service" (à valider par un juriste).
+8. Week-ends : report à midi du jour ouvré suivant (jour férié de l'État du déclarant), exclu pour l'initial et l'intermédiaire des établissements de crédit, contreparties centrales, plates-formes de négociation et entités NIS2 ; paramètre de l'art. 5(6). Prestataire crypto : non tranché par le texte.
+9. Art. 10 : alinéa final (seuils 9(2), (3), (5), (6) pouvant être pris en compte).
+10. Formulaire : tableau obligatoire/conditionnel du J5 §4. 1.1 n'est pas du profil (change à chaque dépôt, avec le choix "reclassified as non-major") ; 2.6 est conditionnel (seuil géographique) ; 2.10 est conditionnel ; 1.5, 1.6, 1.13, 1.14 conditionnels ; dates en ISO 8601 UTC, durées en DD:HH:MM, montants en milliers ; le format à points-virgules du champ 2.8 vient des instructions ESAs et non du règlement.
+11. À ajouter : DORA art. 19(3) (informer les clients sans délai) et art. 19(1) alinéa 4 (impossibilité technique de remplir le modèle), reclassement en non majeur (RTS 2025/301 art. 2(i)).
+Restent non relus : instructions ESAs du 16/09/2026 dans cette passe, et dates d'application.
