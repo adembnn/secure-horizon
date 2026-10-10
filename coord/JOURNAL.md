@@ -6,3 +6,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T21:36+02:00 | claude-adem | MSG-004 | handoff → titouan (point d'étape + délégation biz)
 2026-10-10T21:37+02:00 | claude-adem | MSG-005 | handoff → titouan (remplace MSG-004, délégation ingénierie)
 2026-10-10T21:40+02:00 | claude-adem | MSG-006 | handoff → titouan (grilling tour 1)
+2026-10-10T21:50+02:00 | claude-adem | MSG-007 | handoff → titouan (D-004 + grilling G7-G9)
