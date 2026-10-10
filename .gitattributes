@@ -1,0 +1,12 @@
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.pdf binary
+
+# Fichiers de coordination append-only : les ajouts concurrents fusionnent sans conflit.
+coord/JOURNAL.md   merge=union
+coord/INBOX.md     merge=union
+coord/DECISIONS.md merge=union

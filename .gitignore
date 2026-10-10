@@ -1,0 +1,37 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+.aws/
+credentials
+secrets/
+*.secret
+# NB : pas de motif **/*secret* (il ignorerait scripts/hooks/secret-guard.mjs)
+
+# Claude local
+.claude/settings.local.json
+.claude/**/*.local.*
+
+# Logs (peuvent contenir des sorties d'outils sensibles)
+logs/
+*.log
+*.jsonl
+
+# Local
+node_modules/
+__pycache__/
+.venv/
+dist/
+.DS_Store
+Thumbs.db
+
+# Hardhat
+cache/
+artifacts/
+typechain-types/
+coverage/

@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[[rules]]
+id = "aws-bedrock-api-key"
+description = "Amazon Bedrock API key (heuristique ABSK...)"
+regex = '''ABSK[A-Za-z0-9+/=]{40,}'''
+tags = ["aws", "bedrock"]

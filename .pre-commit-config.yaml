@@ -1,0 +1,22 @@
+# Couche git indépendante de Claude (protège aussi les humains).
+# Installation : python -m pip install pre-commit && pre-commit install && pre-commit run --all-files
+# Versions (rev) à rafraîchir avec : pre-commit autoupdate
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: check-merge-conflict
+  # Optionnel — nécessite GITGUARDIAN_API_KEY dans l'env (jamais dans le repo).
+  # Désactivé par défaut : sans clé, ce hook ferait échouer tous les commits.
+  # - repo: https://github.com/gitguardian/ggshield
+  #   rev: v1.55.0
+  #   hooks:
+  #     - id: ggshield
+  #       language_version: python3
+  #       stages: [pre-commit]

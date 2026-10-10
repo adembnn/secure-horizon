@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git pull*)",
+      "Bash(git fetch*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push origin t/*)",
+      "Bash(git push -u origin t/*)",
+      "Bash(git worktree *)",
+      "Bash(node scripts/*)",
+      "Bash(gh pr *)",
+      "Bash(gh issue *)",
+      "Bash(npm run *)",
+      "Bash(npm test*)",
+      "Bash(python -m pytest*)",
+      "Bash(gitleaks *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.bedrock)",
+      "Read(./.env.local)",
+      "Read(./.env.*.local)",
+      "Read(./.env.production)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(~/.aws/**)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(*--no-verify*)",
+      "Bash(rm -rf /*)",
+      "Bash(cat .env*)",
+      "Bash(type .env*)",
+      "Bash(printenv*)",
+      "Bash(env)",
+      "Bash(set)",
+      "Bash(Get-ChildItem env:*)"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "2"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/session-sync.mjs\"", "timeout": 60 }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/secret-guard.mjs\"", "timeout": 120 }
+        ]
+      },
+      {
+        "matcher": "Read|Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/file-guard.mjs\"", "timeout": 10 }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/coord-sync.mjs\"", "timeout": 90 }
+        ]
+      }
+    ]
+  }
+}
