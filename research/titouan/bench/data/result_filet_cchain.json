@@ -1,0 +1,68 @@
+{
+ "n_tx": 6325,
+ "par_type": {
+  "other": 4858,
+  "transfer": 465,
+  "native_transfer": 853,
+  "approve": 130,
+  "setApprovalForAll": 2,
+  "transferFrom": 14,
+  "permit": 3
+ },
+ "regles": {
+  "R1_droit_illimite": {
+   "k": 15,
+   "taux_pct": 0.24,
+   "wilson95_pct": [
+    0.14,
+    0.39
+   ],
+   "parmi_droits_pct": 11.1
+  },
+  "R2_setApprovalForAll_true": {
+   "k": 0,
+   "taux_pct": 0,
+   "wilson95_pct": [
+    0,
+    0.06
+   ],
+   "parmi_droits_pct": 0
+  },
+  "R3_droit_vers_compte_externe": {
+   "k": 5,
+   "taux_pct": 0.08,
+   "wilson95_pct": [
+    0.03,
+    0.18
+   ],
+   "parmi_droits_pct": 3.7
+  },
+  "R4_permit_hors_chaine_ou_permit2": {
+   "k": 3,
+   "taux_pct": 0.05,
+   "wilson95_pct": [
+    0.02,
+    0.14
+   ],
+   "parmi_droits_pct": 2.2
+  },
+  "R5_delegation_7702": {
+   "k": 0,
+   "taux_pct": 0,
+   "wilson95_pct": [
+    0,
+    0.06
+   ],
+   "parmi_droits_pct": 0
+  }
+ },
+ "droits": 135,
+ "au_moins_une_regle": {
+  "k": 18,
+  "taux_pct": 0.28,
+  "wilson95_pct": [
+   0.18,
+   0.45
+  ]
+ }
+}

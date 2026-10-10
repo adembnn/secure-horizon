@@ -1,0 +1,53 @@
+{
+ "n_tx_attaque": 1354,
+ "vus_par_decodeur_direct": 1219,
+ "par_type": {
+  "approve": 1219,
+  "transferFrom": 99,
+  "other": 36
+ },
+ "rappel_filet_sur_tout": {
+  "k": 1109,
+  "n": 1354,
+  "pct": 81.9,
+  "wilson95": [
+   79.8,
+   83.9
+  ]
+ },
+ "rappel_filet_sur_approbations_directes": {
+  "k": 1088,
+  "n": 1219,
+  "pct": 89.3,
+  "wilson95": [
+   87.4,
+   90.9
+  ]
+ },
+ "par_regle": {
+  "R1_droit_illimite": {
+   "k": 14,
+   "pct_sur_tout": 1
+  },
+  "R2_setApprovalForAll_true": {
+   "k": 0,
+   "pct_sur_tout": 0
+  },
+  "R3_droit_vers_compte_externe": {
+   "k": 1088,
+   "pct_sur_tout": 80.4
+  },
+  "R4_permit_hors_chaine_ou_permit2": {
+   "k": 0,
+   "pct_sur_tout": 0
+  },
+  "R5_delegation_7702": {
+   "k": 21,
+   "pct_sur_tout": 1.6
+  }
+ },
+ "spender_est_contrat": {
+  "contrat": 40,
+  "externe": 130
+ }
+}

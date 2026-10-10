@@ -1,0 +1,3 @@
+data/*
+!data/result_*.json
+!data/*.meta.json

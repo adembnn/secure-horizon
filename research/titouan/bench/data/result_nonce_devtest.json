@@ -1,0 +1,25 @@
+{
+ "q_attaques": [
+  39,
+  203,
+  1087
+ ],
+ "q_legit": [
+  0,
+  1474,
+  987568
+ ],
+ "seuil_choisi_sur_DEV_nonce_max": 1000,
+ "TEST": {
+  "attaques_EOA": 71,
+  "detectees": 62,
+  "rappel_spender_pct": 87.3,
+  "wilson95": [
+   77.6,
+   93.2
+  ],
+  "legit_EOA": 32,
+  "faux_positifs": 14,
+  "fpr_spender_pct": 43.8
+ }
+}
