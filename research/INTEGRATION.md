@@ -73,3 +73,6 @@ Chaque ligne ci-dessus passe alors à `intégré` ou `écarté`.
 | T-103 comparateur | intégré avec réserves : 67 tests verts, jargon « permit » résiduel, Clef non appelé | branche t/T-103 |
 | T1_P4_faisabilite_particulier | écarté (direction D-006 abandonnée), archivé | research/tracks/ |
 | BANC-REEL-V0 (Titouan, research/titouan/bench) | intégré : premiers chiffres mesurés ; filet naïf FP 2,8/1000 C-Chain, 31/1000 Ethereum ; R3 « spender compte externe » 80 % de rappel / 0,23 % FP mais contournable ; suites demandées : âge du contrat spender, jeu permit réel reconstruit depuis le calldata, gain de l'intention sur 200 tx étiquetées | MSG-030 |
+| Banc addendum 1 : âge du contrat spender | intégré (négatif) : 1,2 % des attaques visent un contrat < 7 j ; règle d'âge retirée de la grille critique ; la démo « drainer neuf » prouve le comparateur, pas l'âge | MSG-032 |
+| Banc addendum 1 : jeu permit réel | écarté (non obtenu) ; liste ScamSniffer mêle drainers et empoisonneurs ; signatures fabriquées localement, étiquetées synthétiques | MSG-032 |
+| Challenge extension (angle mort envois natifs, mobile, surface d'attaque) | intégré : extension + Snap pour envois natifs à tester ; mobile = SDK B2B2C ; politique permissions minimales | MSG-032 |
