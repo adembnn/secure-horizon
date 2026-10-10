@@ -25,7 +25,7 @@ Quand les chiffres exacts manquent, estimer à partir de périodes de référenc
 **Étape 3, menace cyber significative (art. 10), pour les attaques bloquées avant perte.** Les trois conditions doivent toutes être vraies : (a) impact potentiel sur fonctions critiques ou sur d'autres entités, (b) forte probabilité de se matérialiser (risques applicables, capacités et intention de l'acteur, persistance), (c) si elle se matérialisait, elle remplirait art. 6 ou art. 9(1) ou art. 9(4). La notification est volontaire (contenu : RTS 2025/301 art. 6, qui demande une classification hypothétique).
 
 ## 2. Délais (RTS 2025/301 art. 5)
-- Notification initiale : "dès que possible", au plus tard 4 h après la classification en majeur, et au plus tard 24 h après la prise de connaissance. Classé majeur après 24 h : l'horloge de 4 h part de la classification.
+- Notification initiale : "dès que possible", au plus tard 4 h après la classification en majeur, ET au plus tard 24 h après la prise de connaissance (les deux limites s'appliquent ; échéance = la plus proche). Lecture stricte retenue par défaut : un incident classé majeur après 24 h est déjà en retard et doit être signalé comme tel (voir T9). Une source secondaire propose une lecture souple (l'horloge de 4 h repart de la classification) : à trancher sur le Journal officiel, jamais en silence.
 - Rapport intermédiaire : au plus tard 72 h après la notification initiale, puis mise à jour sans délai, et dès retour à l'activité régulière.
 - Rapport final : au plus tard 1 mois après l'intermédiaire (ou le dernier mis à jour).
 - Week-ends et jours fériés : dépôt possible avant midi le jour ouvré suivant, sauf pour les établissements de crédit et entités essentielles ou importantes NIS2 (initial et intermédiaire). Applicabilité à un prestataire crypto : à vérifier.
@@ -89,7 +89,7 @@ Légende : P = chaîne (prouvable on-chain) ; F = profil de l'entité saisi une 
 | T4 | Pause de 3 h et 15 % des clients touchés | majeur (9(1) + 9(3)) | idem |
 | T5 | Attaque bloquée par le contrat, aucun fonds sorti | non majeur, menace significative à évaluer | idem |
 | T6 | Deux incidents mineurs en 4 mois, même cause | majeur par récurrence si ensemble ils remplissent l'al. 1 | idem |
-| T7 | Oracle sans LEI à l'origine de l'incident | champ 2.8 produit "NOM;;?;info" + drapeau | idem |
+| T7 | Oracle sans LEI à l'origine de l'incident | champ 2.8 produit "NOM_LÉGAL;;;motif de l'absence" (format unique) + drapeau humain visible | idem |
 | T8 | Détecté à 02h00, classé à 09h00 | échéance = min(09h00 + 4 h = 13h00, 02h00 + 24 h = 02h00 J+1) = 13h00 | idem |
 | T9 | Détecté à 02h00 J, classé à 03h00 J+1 (au-delà de 24 h après la prise de connaissance) | lecture stricte (retenue par défaut, juré KPMG) : les deux limites s'appliquent, l'échéance 02h00 J+1 est déjà dépassée, donc RETARD : prévenir sans délai avec les raisons (RTS 2025/301 art. 5, retard). Lecture souple (une source secondaire) : l'horloge de 4 h repart de la classification, échéance 07h00. À trancher sur le texte officiel | idem |
 | T10 | Dépôt tombant un dimanche, entité non crédit | possibilité de midi lundi (à vérifier pour les prestataires crypto) | idem |
