@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-10T22:52",
-  "headline": "Toutes les briques bloquées ont une alternative gratuite, dont Safe 1.5 déployable par nous sur Fuji. Les ébauches d'architecture sont en cours.",
+  "updated": "2026-10-10T23:25",
+  "headline": "Jury à l'aveugle : 67/100, vrai problème confirmé, mais cible à corriger (trésoreries on-chain plutôt qu'exchanges). 12 connecteurs sur 12 prouvés en local.",
   "metrics": [
     {
       "label": "Fichiers de recherche",
@@ -8,7 +8,7 @@
     },
     {
       "label": "Agents lancés",
-      "value": "~150"
+      "value": "~200"
     },
     {
       "label": "Décisions actées",
@@ -36,12 +36,17 @@
     },
     {
       "name": "Connecteurs testés en direct",
-      "detail": "17 branchables gratuits avec alternatives testées (ntfy, GitHub, Docker, Safe 1.5) ; 2 restent à compte (Fireblocks, BitGo réels)",
+      "detail": "12 sur 12 prouvés en local par une boucle avec vérificateur (Fireblocks, BitGo, Mattermost, Loki, Gitea, Safe 1.5, Zodiac, traces, Chainlink, WebSocket, AMF, ntfy)",
       "status": "done"
     },
     {
       "name": "Innovation passée aux contradicteurs",
       "detail": "Plafond intouchable et preuve de demande client survivent",
+      "status": "done"
+    },
+    {
+      "name": "Jury à l'aveugle (8 juges sans contexte)",
+      "detail": "67/100 · idée valable 8/8 · problème réel 8/8 · cible à corriger",
       "status": "done"
     },
     {
@@ -51,8 +56,8 @@
     },
     {
       "name": "Rejeu du vrai vol Bitget",
-      "detail": "Jambe Avalanche en lecture seule, mesure non circulaire",
-      "status": "running"
+      "detail": "Règle « inconnu > 50 % du solde » : alerte au 1er bloc, 0 faux positif sur 30 j ; 11 M$ encore présents, 8 M$ partis 98 min après",
+      "status": "done"
     },
     {
       "name": "Build par les workers Bedrock",
@@ -89,24 +94,27 @@
     }
   ],
   "pending": [
+    "Recentrer la cible sur les trésoreries on-chain, démo unique chiffrée",
     "Caméra en entrée, vigile au cœur, aucune clé détenue",
-    "Innovation centrée sur le plafond intouchable et la preuve de demande client",
     "Deadline réelle à confirmer auprès des organisateurs"
   ],
   "scores": {
     "labels": [
       "Tour 1",
       "Tour 2",
-      "Tour 3"
+      "Tour 3",
+      "Aveugle"
     ],
     "adem": [
       56.3,
       60.6,
-      59.5
+      59.5,
+      67.0
     ],
     "titouan": [
       63.3,
       70.1,
+      null,
       null
     ]
   },
@@ -138,9 +146,23 @@
     }
   ],
   "connectors": {
-    "ok": 17,
-    "account": 2,
+    "ok": 19,
+    "account": 0,
     "absent": 0
   },
-  "titouan": "Plafond dans un contrat coffre séparé (adopté). Rejeu Bitget sur Avalanche (lancé). Ébauche H versée au jury."
+  "titouan": "Plafond dans un contrat coffre séparé (adopté). Rejeu Bitget sur Avalanche (lancé). Ébauche H versée au jury.",
+  "cap": {
+    "verdict": "À CORRIGER",
+    "time": "23:00",
+    "drifts": [
+      "Deux produits dans un même dossier, architecture obèse",
+      "L'acheteur flotte (CASP ou trésorerie on-chain ?)",
+      "Le centre de gravité sort de la détection (30 %)"
+    ],
+    "fixes": [
+      "Geler une v3 d'une page, 4 modules, tâches avant minuit",
+      "Trancher l'acheteur : trésoreries on-chain",
+      "Chiffre de tête = rejeu Bitget, mesurer les faux positifs"
+    ]
+  }
 }

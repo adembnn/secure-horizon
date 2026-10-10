@@ -1,0 +1,22 @@
+{
+  "name": "attempt-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "s141": "npm:@safe-global/safe-contracts@^1.4.1",
+    "s15": "npm:@safe-global/safe-smart-account@^1.5.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.1.3",
+    "ethers": "^6.17.0",
+    "hardhat": "^2.29.1"
+  }
+}

@@ -39,6 +39,9 @@
 
 | `tracks/T1_P4_rejeu_bitget_avalanche.md` | **Rejeu réel, lu sur la chaîne** : 821 012 AVAX (90 % du solde de « Bitget: 35 ») puis 8,2 M USDC sortis vers 0x770b le 24 sept. La règle « destinataire inconnu > 50 % du solde » alerte **au premier bloc, 0 faux positif sur 30 jours**. La règle « cumul » a besoin de N ≥ 200 et ne sert que la gravité. **À l'alerte, ~11 M$ restaient sur les wallets frères ; 8,2 M$ sont partis 98 min plus tard** : il faut une action, pas seulement une alerte. Piège : 24 transferts sur 34 sont de l'address poisoning | à intégrer, **mesure de détection non circulaire** | Banc d'essai : rejeu Bitget comme preuve d'existence. Argument « plafond sur les wallets frères ». Filtre anti-poisoning |
 
+| `tracks/T1_P4_connecteurs_implementes.md` + `poc/connectors/` | **12 connecteurs sur 12 prouvés en local, vérifiés par un tiers** : Fireblocks (format co-signer), BitGo (policy webhook), Mattermost (format Slack), Loki (OCSF), Gitea (ticket), Safe 1.5.0 ModuleGuard, Zodiac Roles, traces sur fork Fuji, Chainlink réel + mock, WebSocket temps réel, XLSX AMF (`fill-xml.mjs`, pas exceljs seul), ntfy. Code source des PoC dans `research/poc/connectors/`, sans clés | à intégrer | Base de code réutilisable par les workers de build |
+| `cap/revue-2300.md` + `cap/jury_aveugle_2315.md` | **Revue de cap : À CORRIGER. Jury à l'aveugle : 67/100**, « pas une idée de merde » 8/8, problème réel vérifié 8/8, exécution risquée 8/8. Défaut commun : **mauvaise cible** (un CEX multi-chaînes ne migre pas vers un coffre Avalanche). Faiblesse : registre des clés clients. Ce qui vaut l'argent : dossier DORA relié aux transactions | à trancher par Adem | Recentrage proposé : trésoreries on-chain, démo unique chiffrée, coupes de la revue de cap |
+
 ### Apports de Claude-Titouan
 | Fichier | Apport principal | Statut | Où ça va dans le produit |
 |---|---|---|---|

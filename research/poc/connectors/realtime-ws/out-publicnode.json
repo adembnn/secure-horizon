@@ -1,0 +1,48 @@
+{
+ "name": "publicnode",
+ "url": "wss://avalanche-fuji-c-chain-rpc.publicnode.com",
+ "seconds": 60,
+ "blocksReceivedLive": 23,
+ "firstBlock": 59280005,
+ "lastBlock": 59280027,
+ "blocksMissingInRange": 0,
+ "blocksRecoveredByHttpsBackfill": 0,
+ "arrivalIntervalMs": {
+  "n": 22,
+  "min": 403,
+  "avg": 2437,
+  "p50": 1246,
+  "max": 12528
+ },
+ "headerTsIntervalMs": {
+  "n": 22,
+  "min": 0,
+  "avg": 2409,
+  "p50": 1000,
+  "max": 13000
+ },
+ "latencyMs_rxMinusHeaderTs_1sResolution": {
+  "n": 23,
+  "min": 1071,
+  "avg": 1692,
+  "p50": 1568,
+  "max": 2362
+ },
+ "logs": {
+  "addrFilter": 0,
+  "transferTopic": 0,
+  "unfiltered": 31
+ },
+ "connects": 2,
+ "disconnects": 1,
+ "killedAtMs": 25049,
+ "reconnects": [
+  {
+   "atMs": 25732,
+   "downMs": 683
+  }
+ ],
+ "msKillToFirstNewHeadAfterReconnect": 11103,
+ "gaps": [],
+ "errors": []
+}

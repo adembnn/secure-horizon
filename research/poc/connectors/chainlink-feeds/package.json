@@ -1,0 +1,1 @@
+{"name":"chainlink-feeds-proof","version":"1.0.0","private":true,"dependencies":{"@chainlink/contracts":"^1.5.0","ethers":"^6.17.0","hardhat":"^2.29.1"}}

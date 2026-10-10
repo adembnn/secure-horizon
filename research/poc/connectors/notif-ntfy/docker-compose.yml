@@ -1,0 +1,11 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    command: ["serve"]
+    ports:
+      - "127.0.0.1:18080:80"
+    environment:
+      NTFY_BASE_URL: http://127.0.0.1:18080
+      NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+    tmpfs:
+      - /var/cache/ntfy

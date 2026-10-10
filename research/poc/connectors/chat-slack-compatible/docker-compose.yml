@@ -1,0 +1,6 @@
+services:
+  mattermost:
+    image: mattermost/mattermost-preview
+    container_name: sentinelle-mm
+    ports:
+      - "127.0.0.1:8065:8065"

@@ -1,0 +1,48 @@
+{
+ "name": "avax-official",
+ "url": "wss://api.avax-test.network/ext/bc/C/ws",
+ "seconds": 60,
+ "blocksReceivedLive": 23,
+ "firstBlock": 59280005,
+ "lastBlock": 59280027,
+ "blocksMissingInRange": 0,
+ "blocksRecoveredByHttpsBackfill": 0,
+ "arrivalIntervalMs": {
+  "n": 22,
+  "min": 365,
+  "avg": 2454,
+  "p50": 1013,
+  "max": 12562
+ },
+ "headerTsIntervalMs": {
+  "n": 22,
+  "min": 0,
+  "avg": 2409,
+  "p50": 1000,
+  "max": 13000
+ },
+ "latencyMs_rxMinusHeaderTs_1sResolution": {
+  "n": 23,
+  "min": 1108,
+  "avg": 1608,
+  "p50": 1549,
+  "max": 2725
+ },
+ "logs": {
+  "addrFilter": 0,
+  "transferTopic": 0,
+  "unfiltered": 31
+ },
+ "connects": 2,
+ "disconnects": 1,
+ "killedAtMs": 25046,
+ "reconnects": [
+  {
+   "atMs": 25741,
+   "downMs": 695
+  }
+ ],
+ "msKillToFirstNewHeadAfterReconnect": 10895,
+ "gaps": [],
+ "errors": []
+}

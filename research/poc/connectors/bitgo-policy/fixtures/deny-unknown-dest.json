@@ -1,0 +1,21 @@
+{
+  "walletId": "5fb34d22bbd86300328d60813fcd7906",
+  "ruleId": "my-custom-webhook-deny-rule",
+  "type": "webhook",
+  "spendAmount": "900000000",
+  "approvalCount": 0,
+  "halfSigned": {
+    "txHex": "01000000000101c92fd8e311fe..."
+  },
+  "outputs": [
+    {
+      "address": "2N1SyntheticDrainAddr0000000000000",
+      "value": 900000000
+    },
+    {
+      "address": "2NA5QxTc2rDi18fgWrZCNoaa9ktp5ucWeFC",
+      "value": 814469,
+      "wallet": "5fb34d22bbd86300328d60813fcd7906"
+    }
+  ]
+}

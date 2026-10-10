@@ -1,0 +1,15 @@
+{
+  "text": ":rotating_light: *Sentinelle* - sortie de fonds bloquee (SYNTHETIC)",
+  "username": "Sentinelle",
+  "attachments": [{
+    "color": "#d00000",
+    "fallback": "Transfer 1,250,000 USDC blocked by guard",
+    "title": "Plafond depasse : 1 250 000 USDC vers 0xDEADbeef00000000000000000000000000000001",
+    "fields": [
+      {"title": "Chaine", "value": "Avalanche Fuji 43113 (local fork test)", "short": true},
+      {"title": "Regle", "value": "CAP-DAILY-EXCEEDED", "short": true},
+      {"title": "Action", "value": "Garde on-chain : transfert refuse, demande signee client requise", "short": false}
+    ],
+    "footer": "Sentinelle - NIST CSF DE.CM / RS.MA"
+  }]
+}
