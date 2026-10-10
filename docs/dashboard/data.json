@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-11T01:06",
+  "updated": "2026-10-11T01:10",
   "headline": "Premiers chiffres MESURÉS (banc réel, données publiques) : le filet sans intention fait 2,8 faux positifs pour 1000 tx sur Avalanche C-Chain, 31/1000 sur Ethereum ; 82 % des vraies approbations de drainers détectées. L'intention doit faire baisser le bruit.",
   "metrics": [
     {
@@ -140,35 +140,35 @@
   },
   "innovation": [
     {
-      "name": "Caméra (surveillance)",
-      "verdict": "existe",
+      "name": "Simulation / scan de transaction",
+      "verdict": "existe (Blockaid, Rabby, MetaMask)",
       "level": "ko"
     },
     {
-      "name": "Vigile sur Safe",
-      "verdict": "existe",
-      "level": "ko"
-    },
-    {
-      "name": "Plafond que personne ne peut relever",
-      "verdict": "neuf en assemblage",
-      "level": "ok"
-    },
-    {
-      "name": "Preuve de demande client",
-      "verdict": "partiellement neuf",
-      "level": "ok"
-    },
-    {
-      "name": "Dossier DORA prouvé par champ",
-      "verdict": "partiellement neuf",
+      "name": "Prototypes intention vs effet",
+      "verdict": "existent (TetraHelix, IntentGuard)",
       "level": "warn"
+    },
+    {
+      "name": "Intention « on m'a demandé » contre la manipulation",
+      "verdict": "non trouvé ailleurs",
+      "level": "ok"
+    },
+    {
+      "name": "Dit / affiché / fait avec vision Clef",
+      "verdict": "non trouvé, à chiffrer",
+      "level": "ok"
+    },
+    {
+      "name": "Faux positifs mesurés et publiés",
+      "verdict": "aucun concurrent ne le fait",
+      "level": "ok"
     }
   ],
   "connectors": {
-    "ok": 19,
-    "account": 0,
-    "absent": 0
+    "ok": 2,
+    "account": 1,
+    "absent": 1
   },
   "titouan": "v3.1 : comparateur en code, filet indépendant de l'intention, réponse graduée + journal, mesure 3 bras sur jeu gelé, « avertit » au lieu de « bloque ». Il pilote la boucle et lance T-102/104/105/106.",
   "cap": {
