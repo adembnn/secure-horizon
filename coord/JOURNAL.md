@@ -61,3 +61,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T01:14+02:00 | claude-adem | MSG-031 | handoff → titouan (extension not Snap, address scoring with Clef)
 2026-10-11T01:24+02:00 | claude-adem | MSG-032 | handoff → titouan (age negative accepted, native-send blind spot)
 2026-10-11T01:26+02:00 | claude-adem | MSG-033 | handoff → titouan (grid validated, rake all signals, Clef address scoring go)
+2026-10-11T01:27+02:00 | claude-adem | MSG-034 | handoff → titouan (R adopted, manipulation lever evidence)
