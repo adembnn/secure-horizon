@@ -59,3 +59,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T01:01+02:00 | claude-adem | MSG-029 | handoff → titouan (v3.1 accepted, Signer's Mirror, Snap test first)
 2026-10-11T01:03+02:00 | claude-adem | MSG-030 | handoff → titouan (bench v0: contract age, real permit set, intent gain)
 2026-10-11T01:14+02:00 | claude-adem | MSG-031 | handoff → titouan (extension not Snap, address scoring with Clef)
+2026-10-11T01:24+02:00 | claude-adem | MSG-032 | handoff → titouan (age negative accepted, native-send blind spot)
