@@ -1,0 +1,293 @@
+<title>Sentinelle Fuji</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: une console d'incident qui se lit de gauche à droite (coffre → menace → réponse → argent → régulateur → preuve), puis les pièces du dossier en dessous. */
+:root{
+  --bg:#f3f4f2; --panel:#ffffff; --ink:#16201f; --muted:#5a6664; --line:#d7dcd9;
+  --accent:#c8312f; --accent-soft:#f6dedc;
+  --ok:#2f7d55; --warn:#b7791f; --crit:#c8312f; --idle:#9aa5a2;
+  --display:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101615; --panel:#18201f; --ink:#e6ecea; --muted:#9aa7a4; --line:#2b3533;
+  --accent:#ef5a55; --accent-soft:#3a1f1e; --ok:#5cc08a; --warn:#e0a948; --crit:#ef5a55; --idle:#56625f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101615; --panel:#18201f; --ink:#e6ecea; --muted:#9aa7a4; --line:#2b3533;
+  --accent:#ef5a55; --accent-soft:#3a1f1e; --ok:#5cc08a; --warn:#e0a948; --crit:#ef5a55; --idle:#56625f; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:28px 64px;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);font-stretch:80%;text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:1.12rem;color:var(--ink)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header{display:grid;gap:14px}
+.tagrow{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--mono);font-size:.74rem;border:1px solid var(--line);border-radius:3px;padding:3px 8px;color:var(--muted);background:var(--panel)}
+section{display:grid;gap:16px}
+
+/* Console */
+.console{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.bar .clock{font-family:var(--mono);font-size:.85rem}
+.btn{font:600 .9rem var(--body);border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:4px;padding:7px 14px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:focus-visible,input:focus-visible,label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.steps{display:flex;gap:4px;flex:1;min-width:200px}
+.steps button{flex:1;height:8px;border:0;border-radius:2px;background:var(--line);cursor:pointer;padding:0}
+.steps button.on{background:var(--ink)}
+.narr{padding:14px 16px;border-bottom:1px solid var(--line);font-size:1rem;min-height:3.4em}
+.narr b{font-family:var(--mono);font-weight:500;color:var(--accent);margin-right:8px}
+.panels{display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+.p{padding:14px;border-right:1px solid var(--line);display:grid;gap:8px;align-content:start;min-width:0}
+.p:last-child{border-right:0}
+.p .what{font-size:.8rem;color:var(--muted);min-height:2.6em}
+.big{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:1.9rem;font-variant-numeric:tabular-nums;line-height:1}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.74rem;padding:2px 7px;border-radius:3px;border:1px solid var(--line)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--idle);flex:none}
+.on-ok .dot{background:var(--ok)} .on-warn .dot{background:var(--warn)} .on-crit .dot{background:var(--crit)}
+.list{display:grid;gap:5px;font-size:.82rem}
+.list div{display:flex;gap:6px;align-items:center}
+.ladder{display:grid;gap:4px}
+.rung{font-family:var(--mono);font-size:.76rem;padding:5px 7px;border-radius:3px;border:1px solid var(--line);color:var(--muted)}
+.rung.lit{color:var(--bg);border-color:transparent}
+.rung.lit.l1{background:var(--warn)} .rung.lit.l2{background:var(--warn)} .rung.lit.l3{background:var(--crit)} .rung.lit.l0{background:var(--ok)}
+.hops{display:grid;gap:3px;font-family:var(--mono);font-size:.74rem}
+.hops span{display:block;padding:3px 6px;border-left:2px solid var(--line)}
+.hops span.hit{border-color:var(--crit)}
+.verdict{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:1.25rem}
+.verdict.maj{color:var(--crit)}
+.hash{font-family:var(--mono);font-size:.72rem;word-break:break-all;color:var(--muted)}
+.disclaimer{font-size:.8rem;color:var(--muted);padding:10px 16px}
+@media (max-width:980px){.panels{grid-template-columns:repeat(3,minmax(0,1fr))}.p:nth-child(3){border-right:0}.p:nth-child(-n+3){border-bottom:1px solid var(--line)}}
+@media (max-width:560px){.panels{grid-template-columns:1fr}.p{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* Cards and tables */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid3{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.card .k{font-family:var(--mono);font-size:.74rem;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.src{font-size:.76rem;color:var(--muted)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:620px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+
+/* DORA game */
+.dora{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px}
+@media (max-width:860px){.dora{grid-template-columns:1fr}}
+.crit{display:grid;gap:10px}
+.crit label{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--panel);font-size:.9rem}
+.crit input[type=range]{width:140px;accent-color:var(--accent)}
+.crit input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+.crit .val{font-family:var(--mono);font-size:.8rem;min-width:70px;text-align:right}
+.result{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;align-content:start}
+.result .verdict{font-size:2rem}
+.met{display:grid;gap:4px;font-size:.86rem}
+.met div{display:flex;gap:8px;align-items:center}
+.mermaid-box{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Track 1 · Guardians of Value · sous-track 4 · DeFi + DORA</div>
+    <h1>Sentinelle Fuji</h1>
+    <p class="lede">Quand le coffre on-chain d'un prestataire crypto régulé est attaqué, la Sentinelle détecte, freine ou met en pause, suit l'argent, et sort la déclaration DORA prête à relire. Chaque champ est prouvé par une transaction.</p>
+    <div class="tagrow">
+      <span class="tag">NIST CSF · Detect · Respond · Recover</span>
+      <span class="tag">ATT&amp;CK T1657 · T1078 · T1190</span>
+      <span class="tag">DORA · RTS 2024/1772 · ITS 2025/302</span>
+      <span class="tag">Avalanche Fuji · chainId 43113</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-console">
+    <div class="eyebrow">Démo · à quoi ressemble l'outil</div>
+    <h2 id="t-console">Un incident, bloc par bloc</h2>
+    <div class="console">
+      <div class="bar">
+        <button class="btn" id="play" type="button">Lancer l'attaque</button>
+        <button class="btn ghost" id="reset" type="button">Revenir au début</button>
+        <div class="steps" id="steps" role="group" aria-label="Étapes de l'incident"></div>
+        <span class="clock" id="clock">bloc 0</span>
+      </div>
+      <div class="narr" id="narr" aria-live="polite"></div>
+      <div class="panels">
+        <div class="p"><div class="eyebrow">Coffre</div><div class="what">Ce que nos clients ont déposé, en direct.</div><div class="big" id="bal">5,00 M€</div><div class="muted mono" id="saved" style="font-size:.78rem"></div></div>
+        <div class="p"><div class="eyebrow">Menace</div><div class="what">Ce que la Sentinelle voit d'anormal.</div><div class="list" id="threat"></div></div>
+        <div class="p"><div class="eyebrow">Réponse</div><div class="what">Ce qu'on a fait, et qui l'a décidé.</div><div class="ladder" id="ladder"></div></div>
+        <div class="p"><div class="eyebrow">Argent</div><div class="what">Où part l'argent volé.</div><div class="hops" id="hops"></div></div>
+        <div class="p"><div class="eyebrow">Régulateur</div><div class="what">Ce que la loi exige, déjà rempli.</div><div class="verdict" id="verdict">—</div><div class="list" id="crits"></div></div>
+        <div class="p"><div class="eyebrow">Preuve</div><div class="what">Pourquoi on peut nous croire.</div><div class="hash" id="proof">Journal vide</div></div>
+      </div>
+      <div class="disclaimer">Exemple simulé sur nos propres contrats, chiffres synthétiques. Le schéma d'attaque s'inspire de Drift (avril 2026 : 31 retraits en 12 minutes).</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-regimes">
+    <div class="eyebrow">Pourquoi · cas réels 2026</div>
+    <h2 id="t-regimes">Trois façons de vider un coffre</h2>
+    <div class="grid3">
+      <div class="card"><div class="k">En une transaction</div><h3>Tectonic, 30 août 2026</h3><p>Prix d'un token gonflé par 98 emprunts en boucle, dans une seule transaction. Environ 75 M$ sortis.</p><p class="muted">Aucune pause ne peut arriver à temps. Seul un garde-fou écrit dans le contrat bloque.</p><div class="src">TRM Labs</div></div>
+      <div class="card"><div class="k">Étalée sur des minutes</div><h3>Drift, avril 2026 · Bitget, 24 sept. 2026</h3><p>Drift : 285 M$, 31 retraits en 12 minutes. Bitget : environ 387 M$ via un produit de sécurité d'un prestataire, dont environ 821 000 AVAX. Seulement 0,08 % gelé, au bout d'environ un jour.</p><p class="muted">Chaque minute compte : un plafond ou une pause automatique sauve des millions.</p><div class="src">BleepingComputer, Decrypt</div></div>
+      <div class="card"><div class="k">Préparée à l'avance</div><h3>Parallel, 7 mai 2026</h3><p>Le contrat d'attaque est repéré dès son déploiement. Pause en quelques blocs. 0 $ perdu sur 1,52 M$.</p><p class="muted">Le seul cas de pause automatique réussie daté de 2026 que nous ayons trouvé.</p><div class="src">Hypernative (éditeur)</div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-dora">
+    <div class="eyebrow">La règle · RTS 2024/1772, art. 8 et 9</div>
+    <h2 id="t-dora">Votre incident est-il « majeur » ?</h2>
+    <p class="muted">Bougez les curseurs. Un incident est majeur s'il touche un service critique et s'il y a soit un accès malveillant réussi, soit au moins deux seuils dépassés. Ensuite, le compte à rebours démarre.</p>
+    <div class="dora">
+      <div class="crit" id="dform">
+        <label for="c-crit">Service critique touché (art. 6)<input type="checkbox" id="c-crit" checked></label>
+        <label for="c-mal">Accès malveillant réussi (art. 9(5)(b))<input type="checkbox" id="c-mal"></label>
+        <label for="c-loss">Perte économique, sans déduire le récupéré<span class="val" id="v-loss"></span><input type="range" id="c-loss" min="0" max="2000" step="10" value="580"></label>
+        <label for="c-cli">Clients touchés<span class="val" id="v-cli"></span><input type="range" id="c-cli" min="0" max="40" step="1" value="3"></label>
+        <label for="c-down">Durée de la pause du service<span class="val" id="v-down"></span><input type="range" id="c-down" min="0" max="12" step="0.5" value="1.5"></label>
+        <label for="c-ms">États membres touchés<span class="val" id="v-ms"></span><input type="range" id="c-ms" min="1" max="6" step="1" value="2"></label>
+        <label for="c-data">Données perdues ou altérées<input type="checkbox" id="c-data"></label>
+        <label for="c-rep">Presse ou plaintes répétées<input type="checkbox" id="c-rep"></label>
+      </div>
+      <div class="result">
+        <div class="eyebrow">Verdict</div>
+        <div class="verdict" id="d-verdict">—</div>
+        <div class="met" id="d-met"></div>
+        <p class="muted" id="d-next" style="font-size:.88rem"></p>
+        <p class="src">Seuils : perte &gt; 100 k€ · clients &gt; 10 % · indisponibilité &gt; 2 h · au moins 2 États membres · données · réputation. Délais RTS 2025/301 : 4 h après classification (24 h max), 72 h, 1 mois.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-archi">
+    <div class="eyebrow">Comment · architecture v0</div>
+    <h2 id="t-archi">Les briques et le chemin de l'information</h2>
+    <div class="mermaid-box">
+<pre class="mermaid">
+flowchart LR
+  SIM["Simulateur<br/>clients + 3 attaques 2026"] --> V
+  subgraph Fuji["Avalanche Fuji"]
+    V["GuardedVault<br/>pause par paliers<br/>plafond de sortie<br/>invariant"]
+    O["Oracle / vérificateur<br/>de bridge"]
+    A["EvidenceAnchor"]
+  end
+  V -- "événements ~1 bloc/s" --> S["Sentinelle<br/>détecteurs déterministes"]
+  S --> L["Échelle L1 → L3"]
+  L -- "plafond / pause" --> V
+  S --> T["Traceur de fonds"]
+  T --> F["Demande de gel"]
+  S --> D["Moteur DORA"]
+  O --> R["Registre des tiers"]
+  V --> R
+  R --> D
+  D -. "texte libre" .-> LLM["Claude + sceptique"]
+  L --> J["Journal chaîné"]
+  T --> J
+  D --> J
+  J -- "racine" --> A
+  J --> UI["Tableau de bord"]
+</pre>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-comp">
+    <div class="eyebrow">Concurrents · où ils s'arrêtent</div>
+    <h2 id="t-comp">Personne ne fait le pont</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Acteur</th><th>Ce qu'il fait</th><th>Où il s'arrête</th></tr></thead>
+        <tbody>
+          <tr><td>Hypernative</td><td>Détection on-chain, pause automatique (Parallel). Surveille Avalanche.</td><td>Aucune sortie réglementaire</td></tr>
+          <tr><td>Hexagate (Chainalysis)</td><td>Monitoring gratuit pour les projets Avalanche depuis déc. 2025.</td><td>Alerte, pas de déclaration ni de registre</td></tr>
+          <tr><td>Forta, OpenZeppelin Monitor</td><td>Bots et règles de détection.</td><td>Faux positifs, réponse manuelle</td></tr>
+          <tr><td>Regnology, OneTrust, Big4</td><td>Gestion DORA, registre d'information.</td><td>Ticket saisi à la main, rien lu sur la chaîne</td></tr>
+          <tr><td>Sentinelle Fuji</td><td>Détection, réponse graduée, traçage, déclaration et registre lus on-chain, preuve ancrée.</td><td>PoC sur nos contrats Fuji, brouillon de déclaration</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-lim">
+    <div class="eyebrow">Ce qu'on dit nous-mêmes au jury</div>
+    <h2 id="t-lim">Limites connues</h2>
+    <div class="grid3">
+      <div class="card"><h3>Attaque en une transaction</h3><p>La Sentinelle arrive après. Seul l'invariant écrit dans le contrat bloque ce cas.</p></div>
+      <div class="card"><h3>Lecture de DORA</h3><p>Un exploit de code compte-t-il comme accès malveillant ? L'outil propose la lecture prudente, un humain tranche.</p></div>
+      <div class="card"><h3>Dépôt officiel</h3><p>On produit un brouillon JSON et PDF. Le format xBRL et l'envoi à l'AMF restent humains.</p></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  const fmt = v => v.toFixed(2).replace('.', ',') + ' M€';
+  const RUNGS = [['l0','L0 · surveiller'],['l1','L1 · alerte'],['l2','L2 · plafond de sortie'],['l3','L3 · pause, expire seule'],['h','Reprise · 2 gardiens sur 3']];
+  const S = [
+    {b:0, n:"Tout est calme. 1 240 clients, 5 M€ dans le coffre.", bal:5.00, th:[], lv:0, hops:[], v:null, cr:[], pr:"Journal vide"},
+    {b:3, n:"Une adresse jamais vue retire 120 k€. Signal faible : on alerte, on ne bloque personne.", bal:4.88, th:[['warn','Retrait atypique']], lv:1, hops:[], v:null, cr:[], pr:"#1 alerte · règle R-ATYP@v1"},
+    {b:6, n:"Quatre retraits en trois blocs : 9 % de la réserve. Le plafond de sortie s'enclenche automatiquement.", bal:4.55, th:[['warn','Retrait atypique'],['crit','Vélocité 9 % / 3 blocs']], lv:2, hops:[], v:null, cr:[], pr:"#2 plafond · règle R-VEL@v1"},
+    {b:8, n:"L'attaquant insiste, le seuil critique est franchi. Pause du coffre, qui expirera seule dans 2 h.", bal:4.42, th:[['warn','Retrait atypique'],['crit','Vélocité critique'],['crit','Contrat appelant inconnu']], lv:3, hops:[], v:null, cr:[], pr:"#3 pause · règle R-CRIT@v1"},
+    {b:14, n:"Le traceur suit les 580 k€ sortis : deux sauts, puis un bridge. La demande de gel est prête.", bal:4.42, th:[['crit','Vélocité critique']], lv:3, hops:[['0x7a…c1','attaquant'],['0x3f…9e','saut 1'],['0xb2…07','bridge · gel demandé']], v:null, cr:[], pr:"#4 demande de gel · 3 adresses"},
+    {b:15, n:"Le moteur DORA applique la règle : service critique, perte supérieure à 100 k€, deux pays. Incident majeur, compte à rebours de 4 h.", bal:4.42, th:[['crit','Vélocité critique']], lv:3, hops:[['0x7a…c1','attaquant'],['0x3f…9e','saut 1'],['0xb2…07','bridge · gel demandé']], v:'MAJEUR', cr:[['crit','Perte 580 k€ > 100 k€'],['crit','2 États membres : FR, BE'],['idle','Clients touchés 3 % < 10 %'],['warn','Pause 1 h 30 · seuil à 2 h']], pr:"#5 classification · RTS 2024/1772@v1"},
+    {b:16, n:"Deux gardiens humains sur trois signent la reprise. La pause s'arrête avant 2 h : pas de critère d'indisponibilité en plus.", bal:4.42, th:[], lv:4, hops:[['0x7a…c1','attaquant'],['0x3f…9e','saut 1'],['0xb2…07','bridge · gel demandé']], v:'MAJEUR', cr:[['crit','Perte 580 k€ > 100 k€'],['crit','2 États membres : FR, BE'],['idle','Clients touchés 3 % < 10 %'],['ok','Pause 1 h 52 < 2 h']], pr:"#6 reprise · 2/3 signatures"},
+    {b:17, n:"La racine du journal est ancrée sur Fuji. Un auditeur rejoue les mêmes blocs et retrouve les mêmes décisions.", bal:4.42, th:[], lv:4, hops:[['0x7a…c1','attaquant'],['0x3f…9e','saut 1'],['0xb2…07','bridge · gel demandé']], v:'MAJEUR', cr:[['crit','Perte 580 k€ > 100 k€'],['crit','2 États membres : FR, BE'],['idle','Clients touchés 3 % < 10 %'],['ok','Pause 1 h 52 < 2 h']], pr:"Racine 0x9c4e…a71b ancrée sur Fuji (exemple). 6 entrées chaînées."}
+  ];
+  const $ = id => document.getElementById(id);
+  const steps = $('steps');
+  S.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Étape '+(i+1));b.addEventListener('click',()=>{stop();render(i)});steps.appendChild(b)});
+  let cur=0, timer=null;
+  function render(i){
+    cur=i; const s=S[i];
+    [...steps.children].forEach((b,j)=>b.classList.toggle('on',j<=i));
+    $('clock').textContent='bloc +'+s.b;
+    $('narr').innerHTML='<b>'+String(i+1).padStart(2,'0')+'/'+S.length+'</b>'+s.n;
+    $('bal').textContent=fmt(s.bal);
+    $('saved').textContent = i>=3 ? 'Sauvé : '+Math.round(s.bal/5*100)+' % des dépôts' : '';
+    $('threat').innerHTML = s.th.length ? s.th.map(t=>'<div class="chip on-'+t[0]+'"><span class="dot"></span>'+t[1]+'</div>').join('') : '<div class="chip on-ok"><span class="dot"></span>Rien d\'anormal</div>';
+    $('ladder').innerHTML = RUNGS.map((r,j)=>'<div class="rung '+r[0]+(j===s.lv?' lit':'')+'">'+r[1]+'</div>').join('');
+    $('hops').innerHTML = s.hops.length ? s.hops.map((h,j)=>'<span class="'+(j===s.hops.length-1?'hit':'')+'">'+h[0]+' · '+h[1]+'</span>').join('') : '<span>Aucun fonds suivi</span>';
+    const v=$('verdict'); v.textContent = s.v || '—'; v.classList.toggle('maj', !!s.v);
+    $('crits').innerHTML = s.cr.map(c=>'<div class="chip on-'+c[0]+'"><span class="dot"></span>'+c[1]+'</div>').join('') + (s.v?'<div class="mono" style="font-size:.78rem">Notification initiale : 3 h 58 restantes</div>':'');
+    $('proof').textContent=s.pr;
+    $('play').textContent = i===S.length-1 ? 'Rejouer' : (timer ? 'Pause' : (i===0?'Lancer l\'attaque':'Continuer'));
+  }
+  function stop(){ if(timer){clearInterval(timer);timer=null} }
+  $('play').addEventListener('click',()=>{
+    if(timer){stop();render(cur);return}
+    if(cur===S.length-1) render(0);
+    timer=setInterval(()=>{ if(cur>=S.length-1){stop();render(cur);return} render(cur+1) }, 2400);
+    render(cur);
+  });
+  $('reset').addEventListener('click',()=>{stop();render(0)});
+  render(0);
+
+  // DORA game
+  const ids=['c-crit','c-mal','c-loss','c-cli','c-down','c-ms','c-data','c-rep'];
+  function dora(){
+    const crit=$('c-crit').checked, mal=$('c-mal').checked, loss=+$('c-loss').value, cli=+$('c-cli').value, down=+$('c-down').value, ms=+$('c-ms').value, data=$('c-data').checked, rep=$('c-rep').checked;
+    $('v-loss').textContent = loss>=1000 ? (loss/1000).toFixed(2).replace('.',',')+' M€' : loss+' k€';
+    $('v-cli').textContent = cli+' %';
+    $('v-down').textContent = String(down).replace('.',',')+' h';
+    $('v-ms').textContent = ms;
+    const th=[['Perte > 100 k€',loss>100],['Clients > 10 %',cli>10],['Indisponibilité > 2 h',down>2],['≥ 2 États membres',ms>=2],['Données touchées',data],['Réputation',rep]];
+    const n=th.filter(t=>t[1]).length;
+    const major = crit && (mal || n>=2);
+    const v=$('d-verdict'); v.textContent = major ? 'MAJEUR' : (crit ? 'Non majeur' : 'Hors champ'); v.classList.toggle('maj',major);
+    $('d-met').innerHTML = [['Service critique',crit],['Accès malveillant réussi',mal]].concat(th).map(t=>'<div class="chip on-'+(t[1]?'crit':'ok')+'"><span class="dot"></span>'+t[0]+(t[1]?' · oui':' · non')+'</div>').join('');
+    $('d-next').textContent = major ? 'Notification initiale dans les 4 h (24 h au plus tard après la découverte), rapport intermédiaire à 72 h, rapport final à 1 mois.'
+      : (crit ? (n===1 && !mal ? 'Un seul seuil dépassé. Si la pause dépasse 2 h, l\'incident devient majeur. Une menace bloquée peut faire l\'objet d\'une notification volontaire (art. 10).' : 'Journalisé. Une menace bloquée peut faire l\'objet d\'une notification volontaire (art. 10).') : 'Aucun service critique touché : pas de déclaration DORA.');
+  }
+  ids.forEach(i=>$(i).addEventListener('input',dora));
+  dora();
+})();
+</script>
