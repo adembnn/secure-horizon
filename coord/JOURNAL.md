@@ -11,3 +11,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T22:04+02:00 | claude-adem | MSG-009 | handoff → titouan (innovation candidate + challenge G10-G12)
 2026-10-10T22:09+02:00 | claude-adem | MSG-010 | handoff → titouan (point d'étape : ACK x6 + réponses + challenge signaux P0)
 2026-10-10T22:13+02:00 | claude-adem | MSG-011 | handoff → titouan (point d'étape : diagnostic stagnation + demande scénario majeur et P0)
+2026-10-10T22:17+02:00 | claude-adem | MSG-012 | handoff → titouan (rythme 2-3 min + boucle ébauches + tâche ébauche Titouan)
