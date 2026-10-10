@@ -1,0 +1,139 @@
+<title>Sentinelle, salle de pilotage</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : un tableau de bord de chantier, résumé en haut, étapes à gauche, preuves à droite. */
+:root{--bg:#f3f4f2;--panel:#fff;--ink:#16201f;--muted:#5a6664;--line:#d7dcd9;--accent:#c8312f;--ok:#2f7d55;--okbg:#e3f1e9;--run:#1f5fa8;--runbg:#e2ecf8;--warn:#9a6413;--warnbg:#f8ecd6;--ko:#b32b29;--kobg:#f7e1e0;--idle:#7d8986;--idlebg:#eceeed;
+--display:"Archivo",ui-sans-serif,system-ui,sans-serif;--body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101615;--panel:#18201f;--ink:#e6ecea;--muted:#9aa7a4;--line:#2b3533;--accent:#ef5a55;--ok:#5cc08a;--okbg:#173326;--run:#7fb2ee;--runbg:#16283d;--warn:#e0a948;--warnbg:#3a2c12;--ko:#ef6b67;--kobg:#3a1c1b;--idle:#8a9693;--idlebg:#222a29;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101615;--panel:#18201f;--ink:#e6ecea;--muted:#9aa7a4;--line:#2b3533;--accent:#ef5a55;--ok:#5cc08a;--okbg:#173326;--run:#7fb2ee;--runbg:#16283d;--warn:#e0a948;--warnbg:#3a2c12;--ko:#ef6b67;--kobg:#3a1c1b;--idle:#8a9693;--idlebg:#222a29;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:24px 56px;display:grid;gap:28px}
+h1,h2{font-family:var(--display);font-stretch:80%;margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:800}
+h2{font-size:1.25rem;font-weight:700}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{max-width:70ch;font-size:1.05rem}
+.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+@media (prefers-reduced-motion:no-preference){.dot{animation:pulse 2s ease-in-out infinite}@keyframes pulse{50%{opacity:.35}}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.kpi .l{font-size:.8rem;color:var(--muted)}
+.kpi .v{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.step{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;padding:9px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0}
+.step .n{font-weight:600}
+.step .d{font-size:.85rem;color:var(--muted)}
+.ic{width:10px;height:10px;border-radius:50%;margin-top:6px}
+.pill{font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.done{background:var(--okbg);color:var(--ok)}.running{background:var(--runbg);color:var(--run)}.next{background:var(--idlebg);color:var(--idle)}
+.ic.done{background:var(--ok)}.ic.running{background:var(--run)}.ic.next{background:var(--idle)}
+.lv-ok{background:var(--okbg);color:var(--ok)}.lv-warn{background:var(--warnbg);color:var(--warn)}.lv-ko{background:var(--kobg);color:var(--ko)}
+.li{display:flex;gap:10px;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.li:last-child{border-bottom:0}
+.tag{font-family:var(--mono);font-size:.74rem;color:var(--accent);min-width:42px}
+.chart{position:relative;height:210px}
+.legend{display:flex;gap:16px;font-size:.8rem;color:var(--muted);flex-wrap:wrap}
+.sw{display:inline-block;width:12px;height:3px;vertical-align:middle;margin-right:6px}
+.conn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.conn div{border-radius:4px;padding:10px;text-align:center}
+.conn b{display:block;font-family:var(--display);font-stretch:75%;font-size:1.8rem}
+.conn span{font-size:.78rem}
+.note{font-size:.9rem;color:var(--ink)}
+.err{font-size:.85rem;color:var(--ko)}
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:10px">
+    <div class="eyebrow">Track 1 · sous-track 4 · Sentinelle</div>
+    <h1>Salle de pilotage</h1>
+    <p class="lede" id="headline">Chargement de l'état du projet…</p>
+    <span class="live"><span class="dot"></span><span id="upd">mise à jour…</span></span>
+  </header>
+
+  <section class="kpis" id="kpis" aria-label="Chiffres clés"></section>
+
+  <section class="cols">
+    <div class="card">
+      <h2>Où on en est</h2>
+      <div id="stages"></div>
+    </div>
+    <div style="display:grid;gap:20px;align-content:start">
+      <div class="card">
+        <h2>Décisions actées</h2>
+        <div id="decisions"></div>
+      </div>
+      <div class="card">
+        <h2>En attente d'Adem</h2>
+        <div id="pending"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div class="card">
+      <h2>Notes du jury simulé, sur 100</h2>
+      <div class="legend"><span><span class="sw" style="background:#2a78d6"></span>Boucle Adem, plan détaillé</span><span><span class="sw" style="background:#eb6834;height:0;border-top:3px dashed #eb6834"></span>Boucle Titouan, plan d'une page</span></div>
+      <div class="chart"><canvas id="sc" role="img" aria-label="Évolution des notes du jury simulé par tour pour les deux boucles"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Innovation, après contradiction</h2>
+      <div id="innov"></div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div class="card">
+      <h2>Connecteurs testés sur Fuji</h2>
+      <div class="conn" id="conn"></div>
+    </div>
+    <div class="card">
+      <h2>Dernier échange avec Titouan</h2>
+      <p class="note" id="titouan"></p>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const LBL={done:'fait',running:'en cours',next:'prochain'};
+  let chart=null, last='';
+  function render(d){
+    $('headline').textContent=d.headline||'';
+    $('upd').textContent='Mis à jour '+(d.updated||'').replace('T',' à ');
+    $('kpis').innerHTML=(d.metrics||[]).map(m=>`<div class="kpi"><div class="l">${esc(m.label)}</div><div class="v">${esc(m.value)}</div></div>`).join('');
+    $('stages').innerHTML=(d.stages||[]).map(s=>`<div class="step"><span class="ic ${s.status}"></span><div><div class="n">${esc(s.name)}</div><div class="d">${esc(s.detail)}</div></div><span class="pill ${s.status}">${LBL[s.status]||s.status}</span></div>`).join('');
+    $('decisions').innerHTML=(d.decisions||[]).map(x=>`<div class="li"><span class="tag">${esc(x.id)}</span><span style="flex:1">${esc(x.text)}</span></div>`).join('');
+    $('pending').innerHTML=(d.pending||[]).length?(d.pending).map(x=>`<div class="li"><span>${esc(x)}</span><span class="pill next">à trancher</span></div>`).join(''):'<div class="li">Rien en attente</div>';
+    $('innov').innerHTML=(d.innovation||[]).map(x=>`<div class="li"><span>${esc(x.name)}</span><span class="pill lv-${x.level}">${esc(x.verdict)}</span></div>`).join('');
+    const c=d.connectors||{};
+    $('conn').innerHTML=`<div class="lv-ok"><b>${c.ok??'–'}</b><span>branchables, gratuits</span></div><div class="lv-warn"><b>${c.account??'–'}</b><span>compte requis</span></div><div class="lv-ko"><b>${c.absent??'–'}</b><span>absents sur Fuji</span></div>`;
+    $('titouan').textContent=d.titouan||'';
+    const s=d.scores||{labels:[],adem:[],titouan:[]};
+    const muted=getComputedStyle(document.documentElement).getPropertyValue('--muted').trim()||'#898781';
+    if(window.Chart){
+      const cfg={type:'line',data:{labels:s.labels,datasets:[
+        {data:s.adem,borderColor:'#2a78d6',backgroundColor:'#2a78d6',borderWidth:2,pointRadius:4,tension:0,spanGaps:false},
+        {data:s.titouan,borderColor:'#eb6834',backgroundColor:'#eb6834',borderWidth:2,borderDash:[5,4],pointStyle:'rectRot',pointRadius:5,tension:0,spanGaps:false}]},
+        options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false}},scales:{y:{suggestedMin:50,suggestedMax:80,ticks:{color:muted},grid:{color:'rgba(137,135,129,.18)'}},x:{ticks:{color:muted},grid:{display:false}}}}};
+      if(chart){chart.data=cfg.data;chart.update();}else{chart=new Chart($('sc'),cfg);}
+    }
+  }
+  async function load(){
+    try{
+      const r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});
+      if(!r.ok) throw new Error(r.status);
+      const txt=await r.text();
+      if(txt!==last){last=txt;render(JSON.parse(txt));}
+    }catch(e){ if(!last) $('headline').innerHTML='<span class="err">Impossible de lire l\'état du projet. Recharge la page.</span>'; }
+  }
+  load(); setInterval(load,30000);
+})();
+</script>

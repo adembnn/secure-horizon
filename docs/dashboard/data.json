@@ -1,0 +1,47 @@
+{
+  "updated": "2026-10-10T22:40",
+  "headline": "On conçoit l'architecture finale avec des prototypes testés en vrai, avant de lancer le code.",
+  "metrics": [
+    {"label": "Fichiers de recherche", "value": "29"},
+    {"label": "Agents lancés", "value": "~150"},
+    {"label": "Décisions actées", "value": "4"},
+    {"label": "Messages Adem → Titouan", "value": "13"},
+    {"label": "Messages Titouan → Adem", "value": "16"}
+  ],
+  "stages": [
+    {"name": "Choisir le problème", "detail": "Circuit d'approbation des sorties détourné : Bitget, KelpDAO, Drift", "status": "done"},
+    {"name": "État de l'art et concurrents", "detail": "33 incidents, ~60 signaux, faux positifs, 6 angles de recherche", "status": "done"},
+    {"name": "Connecteurs testés en direct", "detail": "11 branchables gratuits sur Fuji, 7 avec compte, 5 absents", "status": "done"},
+    {"name": "Innovation passée aux contradicteurs", "detail": "Plafond intouchable et preuve de demande client survivent", "status": "done"},
+    {"name": "Ébauches d'architecture", "detail": "3 architectes Opus 5.5, prototypes compilés et testés, 7 juges", "status": "running"},
+    {"name": "Rejeu du vrai vol Bitget", "detail": "Jambe Avalanche en lecture seule, mesure non circulaire", "status": "running"},
+    {"name": "Build par les workers Bedrock", "detail": "Sonnet 4.6 opérationnel, tâches T-1xx à créer", "status": "next"},
+    {"name": "Boucle testeurs réels", "detail": "Tests, invariants, démo Fuji, puis jury sur ce qui tourne", "status": "next"},
+    {"name": "Gel démo", "detail": "Dimanche 08h00 · gel définitif 12h00", "status": "next"}
+  ],
+  "decisions": [
+    {"id": "D-003", "text": "Track 1, sous-track 4 : DeFi + DORA"},
+    {"id": "D-004", "text": "Cœur : le circuit qui approuve les sorties est détourné"},
+    {"id": "Q3", "text": "La machine ne fait que freiner, reprise par 2 humains sur 3"},
+    {"id": "Q4", "text": "L'outil propose la classification DORA, un humain décide et dépose"}
+  ],
+  "pending": [
+    "Caméra en entrée, vigile au cœur, aucune clé détenue",
+    "Innovation centrée sur le plafond intouchable et la preuve de demande client",
+    "Deadline réelle à confirmer auprès des organisateurs"
+  ],
+  "scores": {
+    "labels": ["Tour 1", "Tour 2", "Tour 3"],
+    "adem": [56.3, 60.6, 59.5],
+    "titouan": [63.3, 70.1, null]
+  },
+  "innovation": [
+    {"name": "Caméra (surveillance)", "verdict": "existe", "level": "ko"},
+    {"name": "Vigile sur Safe", "verdict": "existe", "level": "ko"},
+    {"name": "Plafond que personne ne peut relever", "verdict": "neuf en assemblage", "level": "ok"},
+    {"name": "Preuve de demande client", "verdict": "partiellement neuf", "level": "ok"},
+    {"name": "Dossier DORA prouvé par champ", "verdict": "partiellement neuf", "level": "warn"}
+  ],
+  "connectors": {"ok": 11, "account": 7, "absent": 5},
+  "titouan": "Plafond dans un contrat coffre séparé (adopté). Rejeu Bitget sur Avalanche (lancé). Ébauche H versée au jury."
+}
