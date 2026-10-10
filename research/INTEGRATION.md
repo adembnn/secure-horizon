@@ -61,3 +61,14 @@ Quand la boucle des jurés, les sondes de connecteurs et la recherche sur le dé
 5. découper le build en tâches pour les workers Bedrock.
 
 Chaque ligne ci-dessus passe alors à `intégré` ou `écarté`.
+
+## D-007 barrière d'intention (11/10, 01h15)
+| Sortie | Statut | Où |
+|---|---|---|
+| O_barriere_intention (synthèse O0-OC) | intégré : filet indépendant de l'intention, réponse graduée, mesure 3 bras, « avertit » au lieu de « bloque » | MSG-029, docs/BRIEF_direction.md à mettre à jour |
+| CHALLENGE-INTENT-BARRIER-V3 (10 critiques) | intégré sauf « un seul scénario » (amendé : héros + 2 scènes courtes) | MSG-029 |
+| P_signers_mirror (dit / affiché / fait) | intégré : usage vision de Clef sur la page affichée, à chiffrer | MSG-029 |
+| Q_boucle_auto_amelioration + loop_v3/round1 (6 juges, ~60/100) | intégré : faisabilité plafonnée tant que rien n'est mesuré → test Snap et banc réel prioritaires | MSG-029 |
+| T-101 contrats de démo | intégré : 26 tests verts, non déployé sur Fuji | branche t/T-101 |
+| T-103 comparateur | intégré avec réserves : 67 tests verts, jargon « permit » résiduel, Clef non appelé | branche t/T-103 |
+| T1_P4_faisabilite_particulier | écarté (direction D-006 abandonnée), archivé | research/tracks/ |
