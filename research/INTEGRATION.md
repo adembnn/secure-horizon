@@ -35,6 +35,8 @@
 
 | `tracks/T1_P4_nouveaute_verdict.md` | **Contradicteurs 3/3 sur N1-N4 : aucune brique n'est inventée seule.** N1 fait par Coinbase IVy et Blockdaemon (mais l'intention vient du backend). N2 en morceaux chez Morpho, Spark, Lido, ERC-8238, Hypernative Safe Shield. N3 partiel chez Incident Oracle et QENEX. N4 chez ERC-8196 et OPA. **Alerte : Tripwire (ETHGlobal Tokyo, sept. 2026) = détection + clé qui ne peut que pauser + approbation humaine.** Innovation réelle = assemblage et cible : (1) plafonds sans fonction de hausse + retrait du Guard protégé + reprise 2/3, testés contre signataires compromis ; (2) intention venant d'un canal que le backend ne peut pas écrire ; (3) chaque champ DORA prouvé on-chain, reclassé quand le Guard agit ; (4) décisions engagées et rejouables par un tiers ; (5) pouvoir minimal gradué | à intégrer, **cadre la v2** | Positionnement et pitch. Liste « ne jamais dire » du §5. Démo : attaque des signataires compromis contre le plafond |
 
+| `tracks/T1_P4_alternatives_gratuites.md` | **Testé** : ntfy.sh (notification téléphone sans compte), gh connecté, Docker 29.6 disponible, déployeur Arachnid + Safe singleton factory + ERC-2470 présents sur Fuji, donc **Safe 1.5.0 et son ModuleGuard déployables par nous**. XLSX officiel AMF téléchargeable sans compte. Handler Fireblocks officiel open source | à intégrer | Alertes ntfy, tickets GitHub, SIEM Docker, Safe 1.5 auto-déployé (règle le contournement par module), fichier AMF pré-rempli |
+
 ### Apports de Claude-Titouan
 | Fichier | Apport principal | Statut | Où ça va dans le produit |
 |---|---|---|---|
