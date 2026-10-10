@@ -48,3 +48,10 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-10T22:56:23.704Z | swarm | T-105 | run 20261011-005616: NO_RESULT turns=- cost=$0.00 retries=0
 2026-10-10T22:57:10.911Z | swarm | T-106 | run 20261011-005701: NO_RESULT turns=- cost=$0.00 retries=0
 2026-10-11T00:58+02:00 | claude-adem | MSG-027 | handoff → titouan (plan mode, lots T-102/104/105/106, self-improving loop)
+2026-10-10T22:59:49.519Z | swarm | T-101 | run 20261011-004753: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:59:49.519Z | swarm | T-102 | run 20261011-004753: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:59:49.519Z | swarm | T-103 | run 20261011-004753: success turns=54 cost=$3.28 retries=0
+2026-10-10T22:59:49.519Z | swarm | T-104 | run 20261011-004753: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:59:49.519Z | swarm | T-105 | run 20261011-004753: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-10T22:59:49.519Z | swarm | T-106 | run 20261011-004753: NO_RESULT turns=- cost=$0.00 retries=0
+2026-10-11T01:00+02:00 | claude-adem | MSG-028 | handoff → titouan (no more Bedrock, Titouan runs all lots)
