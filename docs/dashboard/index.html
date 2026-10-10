@@ -74,6 +74,11 @@ code{font-family:var(--mono);font-size:.82em;word-break:break-word}
 
   <section class="kpis" id="kpis" aria-label="Chiffres clés"></section>
 
+  <section class="card" aria-labelledby="t-log">
+    <h2 id="t-log">Journal des 20 minutes : tournants et décisions</h2>
+    <div id="log"></div>
+  </section>
+
   <section style="display:grid;gap:16px" aria-labelledby="t-arch">
     <div class="eyebrow">Architecture · v3.1 (D-007, barrière d'intention)</div>
     <h2 id="t-arch" style="font-size:1.6rem">Comment Sentinelle est construite</h2>
@@ -232,6 +237,7 @@ flowchart LR
     const c=d.connectors||{};
     $('conn').innerHTML=`<div class="lv-ok"><b>${c.ok??'–'}</b><span>prouvées (T-101, T-103)</span></div><div class="lv-warn"><b>${c.account??'–'}</b><span>compte requis (Clef)</span></div><div class="lv-ko"><b>${c.absent??'–'}</b><span>à prouver (Snap)</span></div>`;
     $('titouan').textContent=d.titouan||'';
+    $('log').innerHTML=(d.log||[]).slice().reverse().map(e=>`<div class="step"><span class="tag">${esc(e.time)}</span><div style="flex:1"><div class="n">${esc(e.title)}</div><div class="d">${(e.items||[]).map(esc).join('<br>')}</div></div></div>`).join('')||'<div class="li">Premier point à venir</div>';
     const s=d.scores||{labels:[],adem:[],titouan:[]};
     const muted=getComputedStyle(document.documentElement).getPropertyValue('--muted').trim()||'#898781';
     if(window.Chart){

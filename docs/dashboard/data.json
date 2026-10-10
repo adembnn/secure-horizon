@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-11T01:36",
+  "updated": "2026-10-11T01:45",
   "headline": "Inventaire de Titouan (R1-R8) : notre cible la mieux détectable, les signatures piégées, pèse ~84 M$/an ; les arnaques où la victime envoie elle-même pèsent ≥ 14 Md$. Le levier pour ce gros morceau : le niveau « Manipulation » (demande retenue 10 min). On cherche les preuves que ça marche.",
   "metrics": [
     {
@@ -194,5 +194,42 @@
       "Jeu gelé + tx réelles C-Chain en lecture seule",
       "Test Snap de 2 h avant le gros build"
     ]
-  }
+  },
+  "log": [
+    {
+      "time": "00:45",
+      "title": "Tournant : grand public, barrière d'intention (D-007)",
+      "items": [
+        "Abandon du coffre Safe et de la réponse après coup",
+        "Cible : wallet normal, payé par wallets et exchanges"
+      ]
+    },
+    {
+      "time": "01:20",
+      "title": "Extension navigateur au lieu du Snap",
+      "items": [
+        "Le Snap n'alerte fort que sur MetaMask Flask",
+        "L'extension retient la demande et voit la page"
+      ]
+    },
+    {
+      "time": "01:30",
+      "title": "Mesures réelles du banc",
+      "items": [
+        "Filet seul : 2,8 fausses alertes / 1000 sur C-Chain, 82 % des drainers réels vus",
+        "Règle « contrat neuf » retirée : 1,2 % des drainers réels",
+        "Angle mort : envois depuis le bouton Envoyer du wallet"
+      ]
+    },
+    {
+      "time": "01:45",
+      "title": "Industrialisation lancée",
+      "items": [
+        "Banc de bout en bout en conditions réelles, toutes catégories de pièges",
+        "Fausses victimes et faux escrocs, utilisateurs honnêtes pour les fausses alertes",
+        "Boucle : tests → corrections → re-tests, livrable couverture à 07h00",
+        "3 agents design ici : avertissements, bandeau, règles d'efficacité"
+      ]
+    }
+  ]
 }
