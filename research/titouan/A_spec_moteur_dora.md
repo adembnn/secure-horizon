@@ -91,7 +91,7 @@ Légende : P = chaîne (prouvable on-chain) ; F = profil de l'entité saisi une 
 | T6 | Deux incidents mineurs en 4 mois, même cause | majeur par récurrence si ensemble ils remplissent l'al. 1 | idem |
 | T7 | Oracle sans LEI à l'origine de l'incident | champ 2.8 produit "NOM_LÉGAL;;;motif de l'absence" (format unique) + drapeau humain visible | idem |
 | T8 | Détecté à 02h00, classé à 09h00 | échéance = min(09h00 + 4 h = 13h00, 02h00 + 24 h = 02h00 J+1) = 13h00 | idem |
-| T9 | Détecté à 02h00 J, classé à 03h00 J+1 (au-delà de 24 h après la prise de connaissance) | lecture stricte (retenue par défaut, juré KPMG) : les deux limites s'appliquent, l'échéance 02h00 J+1 est déjà dépassée, donc RETARD : prévenir sans délai avec les raisons (RTS 2025/301 art. 5, retard). Lecture souple (une source secondaire) : l'horloge de 4 h repart de la classification, échéance 07h00. À trancher sur le texte officiel | idem |
+| T9 | Détecté à 02h00 J, classé à 03h00 J+1 (au-delà de 24 h après la prise de connaissance) | échéance 07h00 J+1 (4 h après la classification), pas de retard automatique : RTS 2025/301 art. 5(2), texte du JO lu (J5) | idem |
 | T10 | Dépôt tombant un dimanche, entité non crédit | possibilité de midi lundi (à vérifier pour les prestataires crypto) | idem |
 
 ## 7. Questions ouvertes
