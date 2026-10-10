@@ -54,7 +54,7 @@
 
 ## Piste 4 — SENTINELLE FUJI : « le hack déclenche la pause, et le rapport DORA s'écrit tout seul »
 
-**Douleur.** 1,26 Md$ volés en DeFi au 3e trimestre 2026, en minutes. Les prestataires crypto agréés MiCA sont soumis à DORA : 3 383 incidents majeurs déclarés en Europe en 2025, 80 % venant de tiers, et l'AMF dit que les délais de 4 h / 24 h / 72 h sont « rarement respectés ». Un protocole hacké doit en même temps arrêter l'hémorragie, tracer les fonds et remplir un formulaire de 60 champs.
+**Douleur.** 1,26 Md$ volés en DeFi au 3e trimestre 2026, en minutes. Les prestataires crypto agréés MiCA sont soumis à DORA : 3 383 incidents majeurs déclarés en Europe en 2025 (environ 29 % causés par un prestataire), plus de 80 % des 33 incidents français venant d'un prestataire, et l'AMF dit que les délais de 4 h / 24 h / 72 h sont « rarement respectés ». Un protocole hacké doit en même temps arrêter l'hémorragie, tracer les fonds et remplir un formulaire de 60 champs.
 
 **Concurrents.** Hypernative, Hexagate (gratuit sur Avalanche), Forta, Cyvers, Blockaid : détection d'anomalies on-chain avec faux positifs, pause manuelle ou par règle. Regnology, Corlytics, OneTrust, Big4 : formulaires DORA remplis à la main. Aucun outil DORA n'est alimenté par la chaîne, aucun outil on-chain ne produit la déclaration.
 
