@@ -136,3 +136,11 @@ Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est pré
   - le token n'est jamais comparé ;
   - « 1,000 » ou « 1k » sont lus comme 1.
   Ce qui tient : asked_by_someone, buy_or_swap et connect avec une sortie (15 120/15 120 en critical) ; sosie 4+4.
+- FUZZ ENCODAGE (`redteam/jury_fuzz_encoding.md`) : 3 669 cas testés, 2 141 contournements, 940 représentants. Faille centrale : un approve à montant FINI mais énorme (entre 10^7 et 10^30) enfoui dans un lot sort en ok, sans raison ; le même approve envoyé en direct sort en critical. Un approve quasi illimité dans un lot plafonne à warn. Multicall3 imbriqué : 86 % de contournement.
+  Ce qui tient :
+  - sendCalls avec approve ;
+  - calldata direct paddé ;
+  - delegatecall ;
+  - value avec calldata vide ;
+  - aucune fausse alerte sur les lots légitimes.
+  Correction : appliquer au chemin récursif la MÊME règle qu'au chemin direct, et considérer comme excessif tout montant supérieur au solde ou à N fois l'intention, pas seulement MAXU.
