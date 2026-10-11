@@ -31,7 +31,7 @@ Non. Hold up ne tient aucune clé et ne signe rien. Il ajoute ce que la personne
 Non. L'écran dit : « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. » Le portefeuille s'ouvre et demande toujours son geste.
 
 **9. Que se passe-t-il après l'alerte ?**
-La personne annule ou continue. Si elle a continué par erreur, un bouton « Révoquer ce droit » prépare la demande de retrait ; le portefeuille la signe, jamais Hold up. Une fiche d'incident dit ce qui a été demandé, montré et décidé, et chaque ligne citée se rejoue. Dans la démo web, le portefeuille est simulé ; 25 tests du module et 135 vérifications de la démo (REVOQUER). Le branchement dans l'extension reste à faire.
+La personne annule ou continue. Si elle a continué par erreur, un bouton « Révoquer ce droit » prépare la demande de retrait ; le portefeuille la signe, jamais Hold up. Une fiche d'incident dit ce qui a été demandé, montré et décidé, et chaque ligne citée se rejoue. Dans la démo web, le portefeuille est simulé ; 25 tests du module et 135 vérifications de la démo (REVOQUER). Dans l'extension, c'est branché depuis le 11 oct. à 10 h 24 : le panneau latéral liste les droits accordés sur l'onglet, avec « Révoquer » ; 13 tests du branchement, en Node. Jamais essayé dans un vrai Chrome avec un vrai portefeuille.
 
 **10. Tout se révoque en un clic ?**
 Non. Un clic seulement si une transaction suffit : approve, increaseAllowance, setApprovalForAll, Permit2.approve. Un Permit EIP-2612 ou DAI, ou un Permit2 signé, demande plusieurs étapes ou l'échéance : pas de bouton, nous l'expliquons.

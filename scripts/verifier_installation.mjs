@@ -8,7 +8,10 @@
 //   2. fichiers générés requis par les tests : les recrée s'ils manquent (cas d'un clone neuf)
 //   3. fichiers de l'extension livrée (manifeste, BUILD_INFO.json, paquets zip)
 //   4. ports de la démo (information : un port occupé sera réutilisé par `node scripts/demo.mjs`)
-//   5. suites de tests rapides, avec les chiffres réels lus dans leur sortie (rien n'est recopié à la main)
+//   5. suites de tests rapides, avec les chiffres réels lus dans leur sortie (rien n'est recopié à la main).
+//      Certaines suites réécrivent des fichiers suivis par git (sorties du moteur, build autonome, webdemo,
+//      server/test/results.json). Après chaque suite, le script remet par `git checkout --` les fichiers qui
+//      étaient propres avant, et signale en [attention] ceux qui étaient déjà modifiés (il n'y touche pas).
 //
 // Options : --donnees      ne fait que recréer les fichiers générés requis (étape 2), puis s'arrête
 //           --sans-tests   saute l'étape 5
@@ -192,7 +195,7 @@ const SUITES = [
   { nom: 'moteur d\'effets', cmd: 'npm run test:engine', run: () => courir(process.execPath, ['--test', 'research/titouan/T_banc_e2e/engine/test/*.test.mjs'], ROOT), lire: lireNodeTest, zones: ZONES.moteur },
   { nom: 'extension (avec serveur) : tests unitaires', cmd: 'npm run test:extension', run: () => courir(process.execPath, ['--test', 'research/titouan/T_banc_e2e/extension/tests/unit/*.test.mjs'], ROOT), lire: lireNodeTest, zones: ZONES.serveur },
   { nom: 'serveur de vérification et journal chaîné', cmd: 'npm run test:server', run: () => courir(process.execPath, [join(BANC, 'server', 'test', 'server.test.mjs')], ROOT), lire: (r) => { const m = r.out.match(/RESUME\s+(\{.*?"total":\d+)/); if (!m) return null; const p = Number((r.out.match(/"passed":(\d+)/) || [])[1]); const t = Number((r.out.match(/"total":(\d+)/) || [])[1]); return { pass: p, total: t, fail: t - p }; }, zones: ZONES.serveur },
-  { nom: 'RPC de garde', cmd: 'npm run test:rpc', run: () => courir(process.execPath, ['--test', 'research/demo_reelle/rpc_garde/test/*.test.mjs'], ROOT), lire: lireNodeTest },
+  { nom: 'RPC de garde', cmd: 'npm run test:rpc', run: () => courir(process.execPath, ['--test', 'research/demo_reelle/rpc_garde/test/*.test.mjs'], ROOT), lire: lireNodeTest, ...(existsSync(join(ROOT, 'blockchain', 'node_modules', 'ethers')) ? {} : { manque: 'exige ethers (blockchain/node_modules absent) : cd blockchain && npm install, puis npm run test:rpc' }) },
   { nom: 'relais du classifieur (modèle simulé)', cmd: 'node --test research/demo_reelle/classifieur/relay.test.mjs', run: () => courir(process.execPath, ['--test', 'research/demo_reelle/classifieur/relay.test.mjs'], ROOT), lire: lireNodeTest },
   { nom: 'build autonome : contrôle statique', cmd: 'node research/titouan/T_banc_e2e/extension_standalone/tests/static_check.mjs', run: () => courir(process.execPath, [join(BANC, 'extension_standalone', 'tests', 'static_check.mjs')], ROOT), lire: lireLignes, zones: ZONES.statique },
   { nom: 'build autonome : suite complète', cmd: 'node --no-warnings research/titouan/T_banc_e2e/extension_standalone/tests/run_tests.mjs', run: () => courir(process.execPath, ['--no-warnings', join(BANC, 'extension_standalone', 'tests', 'run_tests.mjs')], ROOT), lire: lireLignes, zones: ZONES.build },

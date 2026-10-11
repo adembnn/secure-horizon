@@ -19,7 +19,7 @@ Les chiffres sur le problème sont tous dans [livrables/CHIFFRES.md](livrables/C
 3. **Décoder l'effet.** Calldata, données typées (Permit, Permit2), droits accordés, fonds sortants.
 4. **Comparer.** Trois réponses : « Ça correspond à ce que tu as écrit. », « Ça ne correspond pas à ce que tu as écrit. », « Je n'ai pas pu vérifier cette demande. » Un montant écrit contre un droit plus large ne correspond pas, même sur un site connu.
 5. **Plancher de règles.** Indépendamment de la phrase : droit illimité vers une adresse inconnue, appel délégué, changement de contrôle du compte, signature illisible.
-6. **Répondre.** Niveaux : information, attention, danger, manipulation. Quand la demande correspond, l'écran dit « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. » Pour une transaction, la ligne dit comment ramener le droit au montant écrit, ou Hold up le remplace lui-même sous conditions. Pour une signature, elle dit que le droit ne peut pas être limité. Après l'alerte, la démo web (`research/titouan/T_banc_e2e/webdemo/`) montre la révocation en un clic, la fiche d'incident et le rejeu du journal, avec un portefeuille simulé ; ce n'est pas encore dans l'extension.
+6. **Répondre.** Niveaux : information, attention, danger, manipulation. Quand la demande correspond, l'écran dit « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. » Pour une transaction, la ligne dit comment ramener le droit au montant écrit, ou Hold up le remplace lui-même sous conditions. Pour une signature, elle dit que le droit ne peut pas être limité. Après l'alerte, la démo web (`research/titouan/T_banc_e2e/webdemo/`) montre la révocation en un clic, la fiche d'incident et le rejeu du journal, avec un portefeuille simulé. Dans l'extension, la révocation est branchée depuis le 11 oct. (panneau latéral, « Droits accordés », bouton « Révoquer ») mais n'a jamais été essayée dans un vrai Chrome ; la fiche d'incident n'y est pas.
 7. **Tracer.** Chaque décision écrit une ligne datée, sans la phrase écrite ni adresse. Le journal garde 500 lignes en local, chaînées par hachage : une ligne changée ou retirée au milieu se voit. Sans ancrage externe, une réécriture complète ne se voit pas. L'ancrage de la racine sur Avalanche Fuji est codé, pas déployé (voir Limites).
 
 Démo du pitch V7 (`livrables/PITCH_5MIN.md`, gestes et états prouvés dans `livrables/pitch_v7/DEMO_DEROULE.md`) : deux fenêtres, le même site Neve, l'un piraté. Sans Hold up, un droit illimité vide le compte de test (100 vers 0, lu sur la chaîne par script). Avec Hold up, la même phrase « échanger 50 USDC contre AVAX » donne « Ça ne correspond pas » et le droit est ramené à 50. Autres scènes : `pitch/DEMO_SCENES.md`.
@@ -62,14 +62,15 @@ Puis ouvre `http://localhost:8793/?mode=honnete` (parcours honnête) ou `http://
 
 | Commande | Ce qu'elle vérifie |
 |---|---|
-| `node scripts/verifier_installation.mjs` | tout ce qui suit, sauf les contrats, avec les chiffres réels |
+| `node scripts/verifier_installation.mjs` | tout ce qui suit, sauf les contrats, avec les chiffres réels ; remet ensuite à l'état de git les fichiers suivis que les suites ont réécrits, s'ils étaient propres avant |
 | `npm run test:engine` | moteur d'effets (recrée d'abord les fichiers de données générés qui manquent) |
 | `npm run test:server` | serveur de vérification, journal chaîné |
 | `npm run test:extension` | extension avec serveur : moteur de retenue, Chrome factice |
-| `npm run test:rpc` | RPC de garde |
+| `npm run test:rpc` | RPC de garde (exige `npm install` dans `blockchain/`) |
 | `node --test research/demo_reelle/classifieur/relay.test.mjs` | relais du classifieur, modèle simulé |
 | `node research/titouan/T_banc_e2e/extension_standalone/tests/static_check.mjs` | contrôle statique du build livré (permissions, un seul `fetch`, pas de secret) |
-| `node --no-warnings research/titouan/T_banc_e2e/extension_standalone/tests/run_tests.mjs` | suite du build autonome |
+| `node --no-warnings research/titouan/T_banc_e2e/extension_standalone/tests/run_tests.mjs` | suite du build autonome (reconstruit le build : réécrit des fichiers suivis) |
+| `node research/titouan/T_banc_e2e/webdemo/tests/run_webdemo_tests.mjs` | démo web (reconstruit `webdemo/engine/` : réécrit des fichiers suivis) |
 | `npm run test:contracts` (ou `node scripts/verifier_installation.mjs --complet`) | contrats de démo (Hardhat, environ 2 minutes) |
 
 Aucun nombre n'est recopié ici : ils changent à chaque version, lance la commande. Ces tests valident le code, ils ne mesurent pas la détection. Les tests de la revue de sécurité (`research/titouan/T_banc_e2e/security_review2/tests/`, `node <fichier>`) sortent en code 1 tant que leur faille est ouverte. Le 11 oct. 2026 : r01, r02, r03 et r05 passent ; r04 échoue encore (dans le moteur du build livré, un `transfer` qui joint 1 ETH reste « attention »). r04 accepte aussi « pas pu vérifier » comme correctif : un passage ne voudra pas dire que l'ETH joint est vu. r01 et r03 tournent en Node, pas dans un vrai Chrome. Détail : `security_review2/REVUE.md`.
@@ -94,7 +95,7 @@ Un seul tableau fait foi : [livrables/CHIFFRES.md](livrables/CHIFFRES.md), avec 
 - **Rien n'est déployé sur Fuji.** Le déploiement est préparé et répété sur une copie locale, mais il n'est pas exécuté (D-016) : `blockchain/DEPLOYMENTS.md` ne contient que son en-tête : tant qu'il est vide, la démo se joue sur la chaîne locale. Sans ancrage, le journal détecte une ligne modifiée ou retirée au milieu, pas une réécriture complète.
 - **Hors périmètre.** Fraude consentie (la personne veut vraiment faire ce paiement), intention vague, contrat qui change à l'exécution (MetaMask le traite mieux avec Added Protection), Ledger branché directement, mobile, envois lancés depuis le bouton Envoyer du portefeuille.
 - **Une signature ne se limite pas.** Un droit donné par Permit n'a pas de plafond modifiable : Hold up alerte et le dit. Pas de révocation en un clic non plus.
-- **Révocation hors extension.** Le bouton « Révoquer ce droit » existe dans la démo web (portefeuille simulé), pas encore dans l'extension.
+- **Révocation peu éprouvée.** Le bouton « Révoquer » existe dans la démo web (portefeuille simulé) et, depuis le 11 oct., dans le panneau latéral de l'extension. Côté extension : 13 tests en Node, aucun essai dans un vrai Chrome.
 - **Couverture partielle.** Sur 58 paires d'essai, 18 sont contrôlées : pas encore le sens d'un échange, la contrepartie, la durée d'un droit, ni à qui il est donné. Dans la démo, le droit ramené à 50 part quand même chez le pirate : la perte est bornée, pas évitée.
 - **Fausses alertes élevées.** 15 % de faux rouges sur le jeu aveugle, surtout des achats de NFT à prix quasi nul. La fatigue d'alerte est la limite principale.
 - **Où va la phrase.** Du navigateur au relais local, puis au modèle hébergé si le relais a une clé. Minimisation et durée de conservation non rédigées. Tant que le relais n'est pas épinglé sur l'identifiant de l'extension (`HOLDUP_EXTENSION_ID`, voir INSTALLATION.md), toute extension installée sur la machine peut l'appeler.
