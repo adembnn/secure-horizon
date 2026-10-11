@@ -1,0 +1,881 @@
+{
+ "checks": [
+  {
+   "name": "build_webdemo.mjs s execute sans erreur",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "build reproductible (2 constructions => meme hachage d arbre)",
+   "pass": true,
+   "detail": "c0c576b26e8e48d2"
+  },
+  {
+   "name": "engine/src copie fidele (14 fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "policy.js = run/policy.mjs (un seul chemin d import change)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "sentinelle_core.js = celui de l extension autonome, octet pour octet",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "graphe d imports de js/app.js : 25 modules, tous presents, tous relatifs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "83 cas de test (>= 30) : 8 scenarios x 6 intentions + requetes types + malformees",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "'ok' ne sort jamais : 0 sur 83 verdicts (niveau et level)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "chaque verdict : niveau valide, 4 lignes de texte, libelle sans \"OK/protege/bloque\", friction coherente",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "verdicts IDENTIQUES a la voie de reference (server/server.mjs) : 72/83",
+   "pass": false,
+   "detail": "scenario permit_piege / intention login: danger,critical,F02 vs danger,critical,F02 ; scenario permit_piege / intention pay: danger,critical,F02 vs danger,critical,F02 ; scenario permit_piege / intention receive: danger,critical,F02 vs danger,critical,F02"
+  },
+  {
+   "name": "les 8 scenarios, reponse honnete : niveaux attendus (2 sans signal, 5 danger, 1 manipulation)",
+   "pass": true,
+   "detail": "{\"envoi_simple\":\"info\",\"echange_legitime\":\"info\",\"droit_illimite\":\"danger\",\"permit_piege\":\"danger\",\"tous_les_nft\":\"danger\",\"adresse_sosie\":\"danger\",\"changement_proprietaire\":\"danger\",\"faux_support\":\"manipulation\"}"
+  },
+  {
+   "name": "aucun appel reseau (fetch/XHR/WebSocket pieges) pendant les verdicts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "PUBLIC : 144 cas, verdicts web identiques a la voie de reference : 129/144, 'ok' jamais",
+   "pass": false,
+   "detail": "P-A05-M1: danger,critical,F02 vs danger,critical,F02 ; P-A06-M1: danger,critical,F02 vs danger,critical,F02 ; P-A06-M2: danger,critical,F02 vs danger,critical,F02"
+  },
+  {
+   "name": "DEV : 385 cas, verdicts web identiques a la voie de reference : 319/385, 'ok' jamais",
+   "pass": false,
+   "detail": "changement_reseau-005: danger,critical, vs danger,critical, ; changement_reseau-006: danger,critical, vs danger,critical, ; changement_reseau-007: danger,critical, vs danger,critical,"
+  },
+  {
+   "name": "aucun appel reseau pendant l equivalence PUBLIC/DEV",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : 6 lignes chainees, chaine intacte",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : empreinte = SHA-256 de node:crypto (meme format que le journal du serveur)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "SHA-256 en JS pur = node:crypto",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : une ligne retouchee (n°4) est detectee",
+   "pass": true,
+   "detail": "le contenu de la ligne ne correspond plus à son empreinte"
+  },
+  {
+   "name": "journal : une ligne supprimee est detectee",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : sans localStorage (Node), repli en memoire sans erreur",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "colle : 4 formes acceptees (JSON-RPC tx, JSON-RPC typed, tx seule, typed seul)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "colle : exemple droit illimite et exemple permit => Danger",
+   "pass": false,
+   "detail": "danger / attention"
+  },
+  {
+   "name": "colle : entrees invalides refusees avec un message (vide, non-JSON, nombre, tableau vide, forme inconnue, trop long)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "colle : 16 exemples du jeu public chargeables, aucun 'ok'",
+   "pass": true,
+   "detail": "{\"danger\":4,\"info\":8,\"unknown\":2,\"attention\":2}"
+  },
+  {
+   "name": "panneau technique : effets decodes et signaux disponibles",
+   "pass": true,
+   "detail": "Droit donné, Adresse"
+  },
+  {
+   "name": "aucun eval / new Function / import dynamique dans 33 fichiers",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun secret (cle privee, jeton, mot de passe, phrase de recuperation) dans 33 fichiers",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun fetch / XMLHttpRequest / WebSocket / sendBeacon dans le code publie",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucune URL externe : 20 noms d hote trouves, tous fictifs (.example) ; aucun src/href/CSS externe (pas de CDN)",
+   "pass": false,
+   "detail": "exemple.org ; app.uniswap.org ; app.aave.com ; opensea.io ; wallet-interface.local ; app.safe.global ; cowswap.exchange"
+  },
+  {
+   "name": "HTML : CSP presente (default-src none, connect-src none), aucun script/style inline ni gestionnaire on*=",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "js/ : aucun innerHTML / document.write (tout passe par textContent)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun fichier .env / .pem / .key",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "taille du site : 31 fichiers, 259 Ko (environ 87 Ko compresses)",
+   "pass": true,
+   "detail": ""
+  }
+ ],
+ "notes": [
+  "LIMITE CONSTATEE : faux_support avec la reponse \"Payer quelqu'un\" donne le niveau 'info' (la pression de la page n'est lue que si le moteur voit deja un signal)."
+ ],
+ "tree_sha256": "c0c576b26e8e48d29fc115067c115234d788214f4627810effa84d1360b69a58",
+ "modules_charges": 25,
+ "scenarios": {
+  "cas": 83,
+  "identiques": 72,
+  "ecarts": [
+   {
+    "cas": "scenario permit_piege / intention login",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "cas": "scenario permit_piege / intention pay",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "cas": "scenario permit_piege / intention receive",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "cas": "scenario permit_piege / intention other",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "cas": "scenario permit_piege / intention none",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "cas": "type: permit EIP-2612 illimite",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "cas": "type: Permit2 PermitSingle illimite",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "cas": "type: wallet_addEthereumChain avec RPC http",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     null
+    ]
+   },
+   {
+    "cas": "type: MALFORMEE : corps null",
+    "web": [
+     "unknown",
+     "warn",
+     "F25"
+    ],
+    "ref": [
+     "unknown",
+     "warn",
+     null
+    ],
+    "throw": "Cannot read properties of null (reading 'method')"
+   },
+   {
+    "cas": "type: MALFORMEE : corps tableau",
+    "web": [
+     "unknown",
+     "warn",
+     "F25"
+    ],
+    "ref": [
+     "unknown",
+     "warn",
+     "F25"
+    ]
+   },
+   {
+    "cas": "type: TROP VOLUMINEUSE : 300 Ko de calldata",
+    "web": [
+     "unknown",
+     "warn",
+     "F25"
+    ],
+    "ref": [
+     "unknown",
+     "warn",
+     "F25"
+    ]
+   }
+  ],
+  "niveaux_affiches": {
+   "info": 17,
+   "danger": 47,
+   "manipulation": 4,
+   "attention": 2,
+   "unknown": 13
+  },
+  "ms_total": 534,
+  "ms_par_verdict": 6.43
+ },
+ "niveaux_scenarios": {
+  "envoi_simple": "info",
+  "echange_legitime": "info",
+  "droit_illimite": "danger",
+  "permit_piege": "danger",
+  "tous_les_nft": "danger",
+  "adresse_sosie": "danger",
+  "changement_proprietaire": "danger",
+  "faux_support": "manipulation"
+ },
+ "equivalence_PUBLIC": {
+  "cas": 144,
+  "identiques": 129,
+  "ecarts": [
+   {
+    "id": "P-A05-M1",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A06-M1",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A06-M2",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A07-M1",
+    "web": [
+     "attention",
+     "warn",
+     "F02"
+    ],
+    "ref": [
+     "attention",
+     "warn",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A07-M2",
+    "web": [
+     "attention",
+     "warn",
+     "F02"
+    ],
+    "ref": [
+     "attention",
+     "warn",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A08-M1",
+    "web": [
+     "attention",
+     "warn",
+     "F02"
+    ],
+    "ref": [
+     "attention",
+     "warn",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A14-M2",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A15-M3",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A16-M2",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-A18-M1",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F06"
+    ]
+   },
+   {
+    "id": "P-A19-M1",
+    "web": [
+     "attention",
+     "warn",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F04"
+    ]
+   },
+   {
+    "id": "P-A19-M2",
+    "web": [
+     "attention",
+     "warn",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F04"
+    ]
+   },
+   {
+    "id": "P-T2B2-M1",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-T2B4-M2",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "P-T2C1-M1",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   }
+  ],
+  "niveaux_affiches": {
+   "danger": 47,
+   "info": 42,
+   "unknown": 29,
+   "attention": 26
+  }
+ },
+ "equivalence_DEV": {
+  "cas": 385,
+  "identiques": 319,
+  "ecarts": [
+   {
+    "id": "changement_reseau-005",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     null
+    ]
+   },
+   {
+    "id": "changement_reseau-006",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     null
+    ]
+   },
+   {
+    "id": "changement_reseau-007",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     null
+    ]
+   },
+   {
+    "id": "changement_reseau-008",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     null
+    ]
+   },
+   {
+    "id": "changement_reseau-009",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     null
+    ]
+   },
+   {
+    "id": "cow_uniswapx-001",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "cow_uniswapx-002",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "cow_uniswapx-003",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "cow_uniswapx-004",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "cow_uniswapx-005",
+    "web": [
+     "danger",
+     "critical",
+     null
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "cow_uniswapx-009",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "cow_uniswapx-010",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "cow_uniswapx-011",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F17"
+    ]
+   },
+   {
+    "id": "dai_permit-007",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "dai_permit-008",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "domaine_sosie-003",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "domaine_sosie-011",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "faux_airdrop-001",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "faux_concours-007",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   },
+   {
+    "id": "faux_proche-008",
+    "web": [
+     "danger",
+     "critical",
+     "F02"
+    ],
+    "ref": [
+     "danger",
+     "critical",
+     "F02"
+    ]
+   }
+  ],
+  "niveaux_affiches": {
+   "danger": 166,
+   "info": 121,
+   "attention": 60,
+   "unknown": 38
+  }
+ },
+ "statique": {
+  "fichiers_analyses": 33,
+  "hotes_fictifs": [
+   "app.aave.com",
+   "app.example-official.org",
+   "app.safe.global",
+   "app.uniswap.org",
+   "cowswap.exchange",
+   "dex.newchain.test",
+   "echange-demo.example",
+   "exemple.org",
+   "gains-usdc-demo.example",
+   "legit.test",
+   "mint-gratuit-demo.example",
+   "opensea.io",
+   "paiement-demo.example",
+   "rembourse-demo.example",
+   "revoke.example-official.org",
+   "securite-compte-demo.example",
+   "site-inconnu.example",
+   "smart-account.example-official.org",
+   "support-demo.example",
+   "wallet-interface.local"
+  ]
+ },
+ "taille": {
+  "fichiers_publies": 31,
+  "octets_total": 265439,
+  "octets_gzip_estimes": 89363,
+  "plus_gros": [
+   {
+    "f": "engine/textes.js",
+    "b": 31233
+   },
+   {
+    "f": "engine/src/calldata.js",
+    "b": 29327
+   },
+   {
+    "f": "engine/sentinelle_core.js",
+    "b": 22306
+   },
+   {
+    "f": "engine/src/typed.js",
+    "b": 18099
+   },
+   {
+    "f": "engine/src/rules_extra.js",
+    "b": 16285
+   }
+  ]
+ },
+ "echecs": 5,
+ "verifications": 34
+}

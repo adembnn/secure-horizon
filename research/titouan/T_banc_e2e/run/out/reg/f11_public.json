@@ -1,10 +1,10 @@
 {
  "mesure": "002",
  "jeu": "REGRESSION_PUBLIQUE",
- "ts": "2026-10-11T01:43:18.416Z",
+ "ts": "2026-10-11T01:44:28.038Z",
  "public_sha256": "79b13a3eebdbbe3d449736be12043efee92f3be6940e40bb19b6e77794f9cbb6",
  "rules_hash": "f952f3fb298fc0dc9627e0129160d02621443fc2860d8d9b1a3e9e69373dba0e",
- "code_hash": "6e48d6b7729abab9f8678a997843c41114e05d901f59843cb7810bee58b712d6",
+ "code_hash": "b2466bc53caed87f7be41eaaf53b0c4e6ddee5887eeac806500075290f8dff5f",
  "n_cas": 144,
  "n_executables": 134,
  "n_non_executables": 10,
@@ -271,8 +271,8 @@
      "attrape_warn": 7,
      "rate": 1,
      "inconnu": 4,
-     "fa_critical": 5,
-     "fa_warn_exces": 5,
+     "fa_critical": 3,
+     "fa_warn_exces": 7,
      "fa_warn_toleree": 15,
      "ok": 40,
      "fraude_conforme_passe": 1,
@@ -325,11 +325,11 @@
       "hi": 0.1478
      },
      "fa_critical": {
-      "k": 5,
+      "k": 3,
       "n": 67,
-      "rate": 0.0746,
-      "lo": 0.0323,
-      "hi": 0.1631
+      "rate": 0.0448,
+      "lo": 0.0153,
+      "hi": 0.1236
      },
      "fa_warn_ou_critical": {
       "k": 25,
@@ -540,8 +540,8 @@
      "attrape_warn": 7,
      "rate": 1,
      "inconnu": 4,
-     "fa_critical": 5,
-     "fa_warn_exces": 5,
+     "fa_critical": 3,
+     "fa_warn_exces": 7,
      "fa_warn_toleree": 11,
      "ok": 35,
      "fraude_conforme_passe": 1,
@@ -594,11 +594,11 @@
       "hi": 0.1698
      },
      "fa_critical": {
-      "k": 5,
+      "k": 3,
       "n": 58,
-      "rate": 0.0862,
-      "lo": 0.0374,
-      "hi": 0.1864
+      "rate": 0.0517,
+      "lo": 0.0177,
+      "hi": 0.1414
      },
      "fa_warn_ou_critical": {
       "k": 21,
@@ -1078,8 +1078,8 @@
      "attrape_warn": 4,
      "rate": 1,
      "inconnu": 4,
-     "fa_critical": 4,
-     "fa_warn_exces": 2,
+     "fa_critical": 2,
+     "fa_warn_exces": 4,
      "fa_warn_toleree": 10,
      "ok": 30,
      "fraude_conforme_passe": 0,
@@ -1132,11 +1132,11 @@
       "hi": 0.1955
      },
      "fa_critical": {
-      "k": 4,
+      "k": 2,
       "n": 48,
-      "rate": 0.0833,
-      "lo": 0.0329,
-      "hi": 0.1955
+      "rate": 0.0417,
+      "lo": 0.0115,
+      "hi": 0.1398
      },
      "fa_warn_ou_critical": {
       "k": 16,
@@ -2388,8 +2388,8 @@
     "attrape_warn": 0,
     "rate": 0,
     "inconnu": 0,
-    "fa_critical": 2,
-    "fa_warn_exces": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
     "fa_warn_toleree": 0,
     "ok": 0,
     "fraude_conforme_passe": 0,
@@ -3816,7 +3816,7 @@
    "fiche": "A19",
    "family": "nft_listing_zero",
    "subfamily": "listing_prix_juste_frais_marketplace",
-   "verdict": "critical",
+   "verdict": "warn",
    "attendu": "ok",
    "plancher": "warn",
    "honnete": "warn",
@@ -3832,7 +3832,7 @@
    "fiche": "A19",
    "family": "nft_listing_zero",
    "subfamily": "listing_prix_juste_frais_marketplace",
-   "verdict": "critical",
+   "verdict": "warn",
    "attendu": "ok",
    "plancher": "warn",
    "honnete": "warn",
@@ -5363,7 +5363,7 @@
    "levels": {
     "sans_intention": "warn",
     "intention_honnete": "warn",
-    "intention_mensongere": "critical"
+    "intention_mensongere": "warn"
    },
    "floorCodes": [
     "far_expiry"
@@ -5372,7 +5372,9 @@
     "unexpected_outgoing"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F12:echange_conditionnel_signe"
+   ]
   },
   {
    "id": "P-A19-B2",
@@ -5385,7 +5387,7 @@
    "levels": {
     "sans_intention": "warn",
     "intention_honnete": "warn",
-    "intention_mensongere": "critical"
+    "intention_mensongere": "warn"
    },
    "floorCodes": [
     "far_expiry"
@@ -5394,7 +5396,9 @@
     "unexpected_outgoing"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F12:echange_conditionnel_signe"
+   ]
   },
   {
    "id": "P-A19-M1",
@@ -6802,5 +6806,5 @@
    "polNotes": []
   }
  ],
- "duration_ms": 475
+ "duration_ms": 546
 }

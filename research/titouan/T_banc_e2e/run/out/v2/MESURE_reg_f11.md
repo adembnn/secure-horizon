@@ -1,6 +1,6 @@
 # MESURE V2_DEV — reg_f11
 
-Généré par run/run_v2.mjs (2026-10-11T01:43:14.980Z), POLICY_FIXES=F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11, V2_DEV n=5927 (3930 Avalanche, 1997 autres ; chaîne lue dans context.chainId, sinon dans le chainId de la requête ; inconnue = « autres »). V2_TEST jamais lu.
+Généré par run/run_v2.mjs (2026-10-11T01:44:23.919Z), POLICY_FIXES=F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12, V2_DEV n=5927 (3930 Avalanche, 1997 autres ; chaîne lue dans context.chainId, sinon dans le chainId de la requête ; inconnue = « autres »). V2_TEST jamais lu.
 
 Lecture : rappel = malveillant en warn ou critical ; inconnu = non décodable, compté NON attrapé ; FA c = bénin en critical ; FA w+c brut = bénin en warn ou critical ; FA w+c excès = au-delà de la sévérité tolérée (expected). Wilson 95 %. Les « bénins » = label benin (benign_defi + benign_everyday) ; fraude conforme et ambigus à part.
 
@@ -8,17 +8,17 @@ Lecture : rappel = malveillant en warn ou critical ; inconnu = non décodable, c
 
 | bras | rappel | rappel critical | raté | inconnu | FA critical | FA warn+critical brut | FA warn+critical excès | fraude conforme alertée | ambigus ok/warn/crit |
 |---|---|---|---|---|---|---|---|---|---|
-| plancher | 98.5% [98.0-98.9] (2885/2930) | 84.2% [82.8-85.5] (2467/2930) | 45 | 0 | 0.8% [0.5-1.2] (15/1976) | 60.7% [58.6-62.9] (1200/1976) | 47.3% [45.1-49.5] (934/1976) | 58.6% [55.2-62.0] (466/795) | 99/127/0 |
-| honnête | 98.5% [98.0-98.9] (2885/2930) | 84.2% [82.8-85.5] (2467/2930) | 45 | 0 | 2.0% [1.4-2.7] (39/1976) | 61.7% [59.5-63.8] (1219/1976) | 47.9% [45.7-50.1] (946/1976) | 58.6% [55.2-62.0] (466/795) | 99/127/0 |
-| catalogue | 99.3% [98.9-99.6] (2910/2930) | 92.0% [90.9-92.9] (2695/2930) | 20 | 0 | 10.3% [9.1-11.7] (204/1976) | 65.7% [63.6-67.8] (1299/1976) | 54.3% [52.1-56.5] (1073/1976) | 83.4% [80.7-85.8] (663/795) | 84/104/38 |
+| plancher | 98.5% [98.0-98.9] (2886/2930) | 84.3% [82.9-85.6] (2470/2930) | 44 | 0 | 0.8% [0.5-1.2] (15/1976) | 60.7% [58.6-62.9] (1200/1976) | 47.3% [45.1-49.5] (934/1976) | 58.6% [55.2-62.0] (466/795) | 99/127/0 |
+| honnête | 98.5% [98.0-98.9] (2886/2930) | 84.3% [82.9-85.6] (2470/2930) | 44 | 0 | 2.0% [1.4-2.7] (39/1976) | 61.7% [59.5-63.8] (1219/1976) | 47.9% [45.7-50.1] (946/1976) | 58.6% [55.2-62.0] (466/795) | 99/127/0 |
+| catalogue | 99.3% [98.9-99.6] (2910/2930) | 92.0% [91.0-92.9] (2696/2930) | 20 | 0 | 6.5% [5.5-7.7] (129/1976) | 61.9% [59.8-64.1] (1224/1976) | 50.5% [48.3-52.7] (998/1976) | 83.4% [80.7-85.8] (663/795) | 84/104/38 |
 
 ## Avalanche (43114/43113)
 
 | bras | rappel | rappel critical | raté | inconnu | FA critical | FA warn+critical brut | FA warn+critical excès | fraude conforme alertée | ambigus ok/warn/crit |
 |---|---|---|---|---|---|---|---|---|---|
-| plancher | 98.7% [98.1-99.2] (1574/1594) | 89.5% [87.9-90.9] (1426/1594) | 20 | 0 | 1.0% [0.6-1.6] (15/1502) | 62.3% [59.8-64.7] (935/1502) | 48.3% [45.8-50.9] (726/1502) | 58.6% [54.8-62.3] (382/652) | 76/106/0 |
-| honnête | 98.7% [98.1-99.2] (1574/1594) | 89.5% [87.9-90.9] (1426/1594) | 20 | 0 | 2.3% [1.6-3.1] (34/1502) | 63.2% [60.8-65.7] (950/1502) | 49.0% [46.5-51.5] (736/1502) | 58.6% [54.8-62.3] (382/652) | 76/106/0 |
-| catalogue | 98.9% [98.3-99.3] (1577/1594) | 94.3% [93.0-95.3] (1503/1594) | 17 | 0 | 9.6% [8.2-11.2] (144/1502) | 66.7% [64.3-69.0] (1002/1502) | 54.3% [51.8-56.8] (816/1502) | 84.2% [81.2-86.8] (549/652) | 62/91/29 |
+| plancher | 98.8% [98.1-99.2] (1575/1594) | 89.6% [88.1-91.1] (1429/1594) | 19 | 0 | 1.0% [0.6-1.6] (15/1502) | 62.3% [59.8-64.7] (935/1502) | 48.3% [45.8-50.9] (726/1502) | 58.6% [54.8-62.3] (382/652) | 76/106/0 |
+| honnête | 98.8% [98.1-99.2] (1575/1594) | 89.6% [88.1-91.1] (1429/1594) | 19 | 0 | 2.3% [1.6-3.1] (34/1502) | 63.2% [60.8-65.7] (950/1502) | 49.0% [46.5-51.5] (736/1502) | 58.6% [54.8-62.3] (382/652) | 76/106/0 |
+| catalogue | 98.9% [98.3-99.3] (1577/1594) | 94.4% [93.1-95.4] (1504/1594) | 17 | 0 | 6.3% [5.1-7.6] (94/1502) | 63.4% [60.9-65.8] (952/1502) | 51.0% [48.5-53.5] (766/1502) | 84.2% [81.2-86.8] (549/652) | 62/91/29 |
 
 ## autres chaînes
 
@@ -26,7 +26,7 @@ Lecture : rappel = malveillant en warn ou critical ; inconnu = non décodable, c
 |---|---|---|---|---|---|---|---|---|---|
 | plancher | 98.1% [97.3-98.7] (1311/1336) | 77.9% [75.6-80.1] (1041/1336) | 25 | 0 | 0.0% [0.0-0.8] (0/474) | 55.9% [51.4-60.3] (265/474) | 43.9% [39.5-48.4] (208/474) | 58.7% [50.5-66.5] (84/143) | 23/21/0 |
 | honnête | 98.1% [97.3-98.7] (1311/1336) | 77.9% [75.6-80.1] (1041/1336) | 25 | 0 | 1.1% [0.5-2.4] (5/474) | 56.8% [52.3-61.1] (269/474) | 44.3% [39.9-48.8] (210/474) | 58.7% [50.5-66.5] (84/143) | 23/21/0 |
-| catalogue | 99.8% [99.3-99.9] (1333/1336) | 89.2% [87.4-90.8] (1192/1336) | 3 | 0 | 12.7% [10.0-16.0] (60/474) | 62.7% [58.2-66.9] (297/474) | 54.2% [49.7-58.7] (257/474) | 79.7% [72.4-85.5] (114/143) | 22/13/9 |
+| catalogue | 99.8% [99.3-99.9] (1333/1336) | 89.2% [87.4-90.8] (1192/1336) | 3 | 0 | 7.4% [5.4-10.1] (35/474) | 57.4% [52.9-61.8] (272/474) | 48.9% [44.5-53.4] (232/474) | 79.7% [72.4-85.5] (114/143) | 22/13/9 |
 
 ## Par famille
 
@@ -40,9 +40,9 @@ att(crit) = attrapés critical+warn / n malveillants (dont critical). Portée : 
 | benign_defi | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 1001 | 0/0/34 | 822 | 0 (0) |
 | benign_defi | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 765 | 0/0/25 | 649 | 0 (0) |
 | benign_defi | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 236 | 0/0/9 | 173 | 0 (0) |
-| benign_everyday | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 975 | 15/39/170 | 477 | 0 (0) |
-| benign_everyday | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 737 | 15/34/119 | 353 | 0 (0) |
-| benign_everyday | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 238 | 0/5/51 | 124 | 0 (0) |
+| benign_everyday | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 975 | 15/39/95 | 402 | 0 (0) |
+| benign_everyday | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 737 | 15/34/69 | 303 | 0 (0) |
+| benign_everyday | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 238 | 0/5/26 | 99 | 0 (0) |
 | fraude_conforme | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 0 | 0/0/0 | 0 | 795 (663) |
 | fraude_conforme | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 0 | 0/0/0 | 0 | 652 (549) |
 | fraude_conforme | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 0 | 0/0/0 | 0 | 143 (114) |
@@ -52,8 +52,8 @@ att(crit) = attrapés critical+warn / n malveillants (dont critical). Portée : 
 | poison_sites_tokens | tout | 1056 | 1033/1056(950) | 1033/1056(950) | 1037/1056(979) | 19 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 | poison_sites_tokens | Av | 850 | 831/850(756) | 831/850(756) | 833/850(779) | 17 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 | poison_sites_tokens | Au | 206 | 202/206(194) | 202/206(194) | 204/206(200) | 2 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
-| sig | tout | 913 | 911/913(800) | 911/913(800) | 912/913(865) | 1 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
-| sig | Av | 690 | 689/690(616) | 689/690(616) | 690/690(670) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
+| sig | tout | 913 | 912/913(803) | 912/913(803) | 912/913(866) | 1 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
+| sig | Av | 690 | 690/690(619) | 690/690(619) | 690/690(671) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 | sig | Au | 223 | 222/223(184) | 222/223(184) | 222/223(195) | 1 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 
 ## Par sous-famille
@@ -228,9 +228,9 @@ att(crit) = attrapés critical+warn / n malveillants (dont critical). Portée : 
 | benign_everyday/first_payment_in_person | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 59 | 0/0/0 | 0 | 0 (0) |
 | benign_everyday/first_payment_in_person | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 48 | 0/0/0 | 0 | 0 (0) |
 | benign_everyday/first_payment_in_person | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 11 | 0/0/0 | 0 | 0 (0) |
-| benign_everyday/nft_listing_seaport | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 75 | 0/0/75 | 75 | 0 (0) |
-| benign_everyday/nft_listing_seaport | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 50 | 0/0/50 | 50 | 0 (0) |
-| benign_everyday/nft_listing_seaport | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 25 | 0/0/25 | 25 | 0 (0) |
+| benign_everyday/nft_listing_seaport | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 75 | 0/0/0 | 0 | 0 (0) |
+| benign_everyday/nft_listing_seaport | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 50 | 0/0/0 | 0 | 0 (0) |
+| benign_everyday/nft_listing_seaport | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 25 | 0/0/0 | 0 | 0 (0) |
 | benign_everyday/nft_purchase_seaport | tout | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 56 | 0/0/0 | 56 | 0 (0) |
 | benign_everyday/nft_purchase_seaport | Av | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 40 | 0/0/0 | 40 | 0 (0) |
 | benign_everyday/nft_purchase_seaport | Au | 0 | 0/0(0) | 0/0(0) | 0/0(0) | 0 | 0 | 16 | 0/0/0 | 16 | 0 (0) |
@@ -449,8 +449,8 @@ att(crit) = attrapés critical+warn / n malveillants (dont critical). Portée : 
 | sig/personal_sign_tx_hex | tout | 58 | 57/58(41) | 57/58(41) | 57/58(41) | 1 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 | sig/personal_sign_tx_hex | Av | 42 | 42/42(31) | 42/42(31) | 42/42(31) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 | sig/personal_sign_tx_hex | Au | 16 | 15/16(10) | 15/16(10) | 15/16(10) | 1 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
-| sig/seaport_zero_price | tout | 81 | 80/81(78) | 80/81(78) | 81/81(80) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
-| sig/seaport_zero_price | Av | 64 | 63/64(61) | 63/64(61) | 64/64(63) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
+| sig/seaport_zero_price | tout | 81 | 81/81(81) | 81/81(81) | 81/81(81) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
+| sig/seaport_zero_price | Av | 64 | 64/64(64) | 64/64(64) | 64/64(64) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 | sig/seaport_zero_price | Au | 17 | 17/17(17) | 17/17(17) | 17/17(17) | 0 | 0 | 0 | 0/0/0 | 0 | 0 (0) |
 
 ## Ratés (malveillants en ok, catalogue) : 20
@@ -460,9 +460,8 @@ att(crit) = attrapés critical+warn / n malveillants (dont critical). Portée : 
 - poison_sites_tokens/token_airdrop_lure : 1
 - sig/personal_sign_tx_hex : 1
 
-## Fausses alertes critical (bénins, catalogue) : 204
+## Fausses alertes critical (bénins, catalogue) : 129
 
-- benign_everyday/nft_listing_seaport [unexpected_outgoing] : 75
 - benign_everyday/nft_setapprovalforall_marketplace [approval_for_all,unexpected_approval_connect] : 60
 - benign_everyday/add_chain_avalanche_l1 [chain_add_native_symbol_spoof] : 15
 - benign_defi/savax_submit [unknown_selector,opaque,no_incoming] : 12

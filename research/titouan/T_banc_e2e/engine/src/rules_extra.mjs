@@ -118,10 +118,10 @@ function foreignApproval(eff, ctx, flags) {
   }
 }
 
-// ---- F11 : ordre de marché signé (Seaport, y compris BulkOrder en arbre) dont le produit pour le signataire est négligeable (< 1e-6 unité) face à ce qu'il donne.
+// ---- F11 : ordre de marché signé (Seaport, y compris BulkOrder en arbre) dont le produit pour le signataire est négligeable (< 1e-4 unité) face à ce qu'il donne.
 // Raison générale : une vente à prix quasi nul n'est pas une vente mais un don ; le moteur de base ne traite que le cas exactement nul.
 // Seuil en unités humaines (décimales du jeton lues dans le contexte, 18 par défaut), indépendant de toute adresse.
-const NEGLIGIBLE_HUMAN = 1e-6;
+const NEGLIGIBLE_HUMAN = 1e-4;
 const human = (ctx, token, rawAmt) => { try { const d = token && lc(token) !== ZERO ? decOf(ctx, token) : 18; return Number(BigInt(rawAmt)) / 10 ** d; } catch { return NaN; } };
 function collectOrders(node, out, depth = 0) {
   if (!node || typeof node !== 'object' || depth > 6) return;

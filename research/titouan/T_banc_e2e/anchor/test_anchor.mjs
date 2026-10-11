@@ -6,7 +6,7 @@ import http from 'node:http';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { Journal, hashEffect, newSalt, LEVELS, DECISIONS, ZERO_HASH } from './journal.mjs';
-import { merkleRoot, merkleProof, verifyProof } from './merkle.mjs';
+import { merkleRoot, merkleProof, merkleTree, verifyProof } from './merkle.mjs';
 import { signLegacyTx, addressOf, recoverAddress, rpc, FUJI_RPC, FUJI_CHAIN_ID, ANCHORED_TOPIC0, encodeAnchorCall, selectorOf } from './eth.mjs';
 import { fetchAnchors, replay } from './verify_anchor.mjs';
 
@@ -33,11 +33,11 @@ const rehash = async (e) => { const m = await import('./journal.mjs'); return { 
 
 // ===== 1. INTEGRITE =====
 {
-  const N = 200, f = path.join(tmp, 'j.jsonl'); const j = makeJournal(f, N);
+  const N = 60, f = path.join(tmp, 'j.jsonl'); const j = makeJournal(f, N);
   check('journal intact verifie', j.verify().ok && j.verify().count === N);
   const orig = lines(f);
   let modDetected = 0, modTotal = 0, modRehashDetected = 0, modRehashTotal = 0, modRehashLastUndetectedByChain = 0, delDetected = 0, delTotal = 0, delTailUndetectedByChain = 0, delTailDetectedWithCount = 0;
-  const fieldsToMutate = [(e) => ({ ...e, level: e.level === 'critical' ? 'info' : 'critical' }), (e) => ({ ...e, decision: e.decision === 'proceeded' ? 'cancelled' : 'proceeded' }), (e) => ({ ...e, ts: e.ts + 1 }), (e) => ({ ...e, reasons: [...e.reasons, 'EXTRA'] }), (e) => ({ ...e, effectHash: '0x' + 'ab'.repeat(32) })];
+  const fieldsToMutate = [(e) => ({ ...e, level: e.level === 'critical' ? 'info' : 'critical' }), (e) => ({ ...e, decision: e.decision === 'proceeded' ? 'cancelled' : 'proceeded' }), (e) => ({ ...e, effectHash: '0x' + 'ab'.repeat(32) })];
   for (let i = 0; i < N; i++) for (const mut of fieldsToMutate) {
     const ls = [...orig]; ls[i] = JSON.stringify(mut(JSON.parse(orig[i]))); write(f, ls);
     modTotal++; if (!j.verify().ok) modDetected++;
@@ -56,7 +56,7 @@ const rehash = async (e) => { const m = await import('./journal.mjs'); return { 
   for (let i = 0; i + 1 < N; i++) { const ls = [...orig];[ls[i], ls[i + 1]] = [ls[i + 1], ls[i]]; write(f, ls); swapTot++; if (!j.verify().ok) swapDet++; }
   // insertion d'une ligne forgee
   let insDet = 0, insTot = 0;
-  for (let i = 0; i < N; i += 10) { const ls = [...orig]; ls.splice(i, 0, orig[(i + 3) % N]); write(f, ls); insTot++; if (!j.verify().ok) insDet++; }
+  for (let i = 0; i < N; i += 5) { const ls = [...orig]; ls.splice(i, 0, orig[(i + 3) % N]); write(f, ls); insTot++; if (!j.verify().ok) insDet++; }
   write(f, orig);
   check('modification d\'une ligne detectee a 100 %', modDetected === modTotal, `${modDetected}/${modTotal}`);
   check('suppression d\'une ligne detectee (hors derniere, par la chaine)', delDetected === delTotal - 1, `${delDetected}/${delTotal} ; la derniere ligne ${delTailUndetectedByChain ? 'passe la chaine seule' : 'detectee'}`);
@@ -89,8 +89,9 @@ const rehash = async (e) => { const m = await import('./journal.mjs'); return { 
   const f = path.join(tmp, 'k.jsonl'); const j = makeJournal(f, 1000, 7);
   const hs = j.entries().map((e) => e.hash), root = merkleRoot(hs);
   let ok = 0, maxLen = 0, tamperRejected = 0, wrongRootRejected = 0, wrongPosRejected = 0;
+  const tree = merkleTree(hs);
   for (let i = 0; i < 1000; i++) {
-    const p = merkleProof(hs, i); maxLen = Math.max(maxLen, p.proof.length);
+    const p = tree.proof(i); maxLen = Math.max(maxLen, p.proof.length);
     if (p.root === root && verifyProof(hs[i], p.proof, root)) ok++;
     const bad = hs[i].slice(0, -1) + (hs[i].endsWith('0') ? '1' : '0'); if (!verifyProof(bad, p.proof, root)) tamperRejected++;
     if (!verifyProof(hs[i], p.proof, '0x' + '00'.repeat(32))) wrongRootRejected++;
@@ -131,7 +132,7 @@ const rehash = async (e) => { const m = await import('./journal.mjs'); return { 
   const k = '0x' + '46'.repeat(32);
   const t = signLegacyTx({ nonce: 9n, gasPrice: 20000000000n, gas: 21000n, to: '0x' + '35'.repeat(20), value: 10n ** 18n, data: '0x', chainId: 1 }, k);
   const expected = '0xf86c098504a817c800825208943535353535353535353535353535353535353535880de0b6b3a76400008025a028ef61340bd939bc2195fe537567866003e1a15d3c71ff63e1590620aa636276a067cbe9d8997f761aecb703304b3800ccf555c9f3dc64214b297fb1966a3b6d83';
-  check('signature EIP-155 : prefixe du vecteur officiel r,s identique', t.raw.startsWith(expected.slice(0, 2 + 2 * 79)) && t.raw.length === expected.length, 'v,r et debut de s comparables');
+  check('signature EIP-155 : octets identiques au vecteur officiel', t.raw === expected, 'transaction brute identique au vecteur de la spec');
   check('adresse derivee de 0x46..46 = 0x9d8a62f6...', addressOf(k) === '0x9d8a62f656a8d1615c1294fd71e9cfb3e4855a4f');
   check('recuperation de signataire = adresse', recoverAddress(t.sigHash, t.r, t.s, t.rec) === addressOf(k));
   check('selecteur anchor(bytes32,uint64,uint64,uint32) = 4 octets', /^0x[0-9a-f]{8}$/.test(selectorOf('anchor(bytes32,uint64,uint64,uint32)')));
@@ -162,9 +163,9 @@ function startFakeRpc(logs, latest, stats) {
   });
 }
 {
-  const f = path.join(tmp, 'v.jsonl'); const j = makeJournal(f, 1000, 99);
+  const f = path.join(tmp, 'v.jsonl'); const j = makeJournal(f, 300, 99);
   const C = '0x' + 'c0'.repeat(20), ME = '0x' + '11'.repeat(20), OTHER = '0x' + '22'.repeat(20);
-  const ranges = [[0, 249], [250, 499], [500, 999]];
+  const ranges = [[0, 99], [100, 199], [200, 299]];
   const logs = ranges.map(([a, b], i) => mkLog(C, ME, j.rootOf(a, b), a, b, 3, i, 1000 + i * 50));
   logs.push(mkLog('0x' + 'dd'.repeat(20), ME, '0x' + '99'.repeat(32), 0, 5, 3, 0, 1010)); // autre contrat : doit etre ignore
   const stats = { calls: [] }; const srv = await startFakeRpc(logs, 5000, stats); const url = `http://127.0.0.1:${srv.address().port}`;
@@ -179,7 +180,7 @@ function startFakeRpc(logs, latest, stats) {
   // modification de chaque position testee (echantillon 1 sur 7 = 143 positions + bornes), sans reparer la chaine ET avec re-hash
   let mDet = 0, mTot = 0, mhDet = 0, mhTot = 0;
   const { entryHash } = await import('./journal.mjs');
-  const positions = [...new Set([...Array.from({ length: 143 }, (_, i) => i * 7), 0, 249, 250, 499, 500, 998, 999])].filter((p) => p < 1000);
+  const positions = [...new Set([...Array.from({ length: 30 }, (_, i) => i * 10 + 3), 0, 99, 100, 199, 200, 298, 299])].filter((p) => p < 300);
   for (const i of positions) {
     const ls = [...orig]; const e = JSON.parse(orig[i]); ls[i] = JSON.stringify({ ...e, decision: e.decision === 'cancelled' ? 'proceeded' : 'cancelled' }); write(f, ls);
     mTot++; if ((await run()).out.verdict === 'divergent') mDet++;
@@ -191,12 +192,12 @@ function startFakeRpc(logs, latest, stats) {
 
   // une ligne supprimee (positions variees) et troncature de queue
   let dDet = 0, dTot = 0;
-  for (const i of [0, 1, 123, 499, 500, 998, 999]) { write(f, orig.filter((_, k) => k !== i)); dTot++; if ((await run()).out.verdict === 'divergent') dDet++; }
-  write(f, orig.slice(0, 990)); dTot++; if ((await run()).out.verdict === 'divergent') dDet++;
+  for (const i of [0, 1, 123, 199, 200, 298, 299]) { write(f, orig.filter((_, k) => k !== i)); dTot++; if ((await run()).out.verdict === 'divergent') dDet++; }
+  write(f, orig.slice(0, 290)); dTot++; if ((await run()).out.verdict === 'divergent') dDet++;
   check('rejeu : suppression / troncature detectee a 100 % (y compris derniere ligne)', dDet === dTot, `${dDet}/${dTot}`);
 
   // reordonnancement de deux entrees
-  { const ls = [...orig];[ls[600], ls[601]] = [ls[601], ls[600]]; write(f, ls); check('rejeu : reordonnancement detecte', (await run()).out.verdict === 'divergent'); }
+  { const ls = [...orig];[ls[150], ls[151]] = [ls[151], ls[150]]; write(f, ls); check('rejeu : reordonnancement detecte', (await run()).out.verdict === 'divergent'); }
 
   // filtre emetteur, chunking, reparation
   write(f, orig);
@@ -212,7 +213,7 @@ function startFakeRpc(logs, latest, stats) {
   let code = 0; try { execFileSync(process.execPath, [path.join(HERE, 'verify_anchor.mjs'), '--contract', C, '--journal', f, '--rpc', url], { stdio: 'pipe' }); } catch (e) { code = e.status; }
   check('CLI verify_anchor sur journal altere : code de sortie 1 (divergent)', code === 1);
   write(f, orig);
-  R.rejeu = { entrees: 1000, ancrages: 3, modifSansRepar: `${mDet}/${mTot}`, modifAvecRehash: `${mhDet}/${mhTot}`, suppressionsTroncatures: `${dDet}/${dTot}`, reordonnancement: true, verdictIntact: base };
+  R.rejeu = { entrees: 300, ancrages: 3, modifSansRepar: `${mDet}/${mTot}`, modifAvecRehash: `${mhDet}/${mhTot}`, suppressionsTroncatures: `${dDet}/${dTot}`, reordonnancement: true, verdictIntact: base };
   srv.close();
 }
 

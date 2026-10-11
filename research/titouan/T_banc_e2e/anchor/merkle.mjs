@@ -20,17 +20,21 @@ function levels(entryHashes) {
 }
 export const merkleRoot = (entryHashes) => { const l = levels(entryHashes); return l[l.length - 1][0]; };
 
-// Preuve d'inclusion pour l'entree de position pos (0-based dans la liste fournie).
-export function merkleProof(entryHashes, pos) {
-  if (!Number.isInteger(pos) || pos < 0 || pos >= entryHashes.length) throw new Error('position hors intervalle');
-  const all = levels(entryHashes), proof = []; let i = pos;
-  for (let d = 0; d < all.length - 1; d++) {
-    const sib = i ^ 1;
-    if (sib < all[d].length) proof.push({ side: i & 1 ? 'L' : 'R', hash: all[d][sib] });
-    i >>= 1;
-  }
-  return { leaf: entryHashes[pos], pos, count: entryHashes.length, proof, root: all[all.length - 1][0] };
+// Arbre construit une fois ; proof(pos) peut ensuite etre appele pour chaque position (evite de recalculer).
+export function merkleTree(entryHashes) {
+  const all = levels(entryHashes);
+  return {
+    root: all[all.length - 1][0], count: entryHashes.length,
+    proof(pos) {
+      if (!Number.isInteger(pos) || pos < 0 || pos >= entryHashes.length) throw new Error('position hors intervalle');
+      const proof = []; let i = pos;
+      for (let d = 0; d < all.length - 1; d++) { const sib = i ^ 1; if (sib < all[d].length) proof.push({ side: i & 1 ? 'L' : 'R', hash: all[d][sib] }); i >>= 1; }
+      return { leaf: entryHashes[pos], pos, count: entryHashes.length, proof, root: all[all.length - 1][0] };
+    },
+  };
 }
+// Preuve d'inclusion pour l'entree de position pos (0-based dans la liste fournie).
+export const merkleProof = (entryHashes, pos) => merkleTree(entryHashes).proof(pos);
 // Verifie une preuve SANS avoir les autres entrees : entryHash + proof -> root attendue.
 export function verifyProof(entryHash, proof, expectedRoot) {
   if (!H32.test(entryHash) || !H32.test(expectedRoot)) return false;

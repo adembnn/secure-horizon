@@ -1,4 +1,4 @@
-// Sentinelle - moteur EMBARQUE (version autonome). Aucun reseau, aucun module Node : tourne dans un service worker MV3.
+// Hold up - moteur EMBARQUE (version autonome). Aucun reseau, aucun module Node : tourne dans un service worker MV3.
 // Meme chaine que server/server.mjs et run/run_loop.mjs : moteur d'effets (engine/src) -> comparateur d'Adem (vendor/compare, converti en JS)
 // -> politique (policy) -> textes clairs (fiches U_textes_utilisateur). Le niveau le plus bas est 'info' : 'ok' n'existe pas.
 import * as E from './src/engine.js';

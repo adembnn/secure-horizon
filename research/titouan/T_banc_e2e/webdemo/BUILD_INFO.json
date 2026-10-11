@@ -31,7 +31,7 @@
   },
   {
    "file": "engine/src/fixes.mjs",
-   "sha256": "e8e692e3f88898cda6e90a18dbb284003f4ae4442e2a4746e9564dba190e524a"
+   "sha256": "c3bdb09800c72d4ce4690e87073a5735452d42333585e71c722db5ac1e46ecc6"
   },
   {
    "file": "engine/src/keccak.mjs",
@@ -47,7 +47,7 @@
   },
   {
    "file": "engine/src/rules_extra.mjs",
-   "sha256": "760cb700251f821d6c31c34dc4ae143033dfebcf1289ac2f7cdd5d9b69ad11f7"
+   "sha256": "5267934bfe087f79fad2b1c415b269e3090a46975c7d1c21fc79cd06c75deb51"
   },
   {
    "file": "engine/src/rules.mjs",
@@ -75,23 +75,23 @@
   },
   {
    "file": "extension_standalone/src/sentinelle_core.js",
-   "sha256": "73b00aefd2eb5deba84e12952130336eb91abe6a48e268f4513977ad199acb65"
+   "sha256": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b"
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "b3395421813cd7403bead543843dbd7375f378f62c97ce87b684c5a22165396c"
+   "sha256": "ea0866e0a1ae3297e23258d3b5935e718c40abb1ebdcc3577f37cd4b21f1bbe4"
   }
  ],
  "outputs": [
   {
    "file": "engine/policy.js",
-   "bytes": 5737,
-   "sha256": "b132e86a5c4b513f73a025966debb2c3eee7023f451ecae1ff064fb04a4fa042"
+   "bytes": 6440,
+   "sha256": "8af309b9fd4a78fe64d6a75609d24c25ce744310cb3198056b7f1221379cb2bf"
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 22309,
-   "sha256": "73b00aefd2eb5deba84e12952130336eb91abe6a48e268f4513977ad199acb65"
+   "bytes": 22306,
+   "sha256": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -120,8 +120,8 @@
   },
   {
    "file": "engine/src/fixes.js",
-   "bytes": 618,
-   "sha256": "e8e692e3f88898cda6e90a18dbb284003f4ae4442e2a4746e9564dba190e524a"
+   "bytes": 609,
+   "sha256": "c3bdb09800c72d4ce4690e87073a5735452d42333585e71c722db5ac1e46ecc6"
   },
   {
    "file": "engine/src/keccak.js",
@@ -140,8 +140,8 @@
   },
   {
    "file": "engine/src/rules_extra.js",
-   "bytes": 14016,
-   "sha256": "3c38b59c2ca2bed10ef39321e4746acd5d88b7d95fd58e6c48a213277eaadb53"
+   "bytes": 16285,
+   "sha256": "ebe578c535201c3af4a2ff6523364322d33866682bc2b5edd75652f66fc3b334"
   },
   {
    "file": "engine/src/rules.js",
@@ -179,6 +179,6 @@
    "sha256": "287ca2780020efc9727937b6ee27d8c5bfbe832c2677664cfc9c3392719141a5"
   }
  ],
- "total_bytes": 204420,
- "tree_sha256": "6598e952631da8b1406438b5abcc150dcda324237372e069bc77565ac62a0464"
+ "total_bytes": 207380,
+ "tree_sha256": "c0c576b26e8e48d29fc115067c115234d788214f4627810effa84d1360b69a58"
 }

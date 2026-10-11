@@ -34,10 +34,18 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
   }
 
   // ---- F12 : un ordre signé hors chaîne (marché, solveur) est un ÉCHANGE conditionnel : ce que le signataire donne est lié à un minimum reçu.
-  // Si ce minimum n'est pas négligeable (>= 1e-6 unité, ou un NFT), « tu enverrais X » n'est pas un effet inattendu d'une signature de vente ; un produit négligeable reste attrapé par le plancher (F11).
+  // Si ce minimum n'est pas négligeable (>= 1e-4 unité, ou un NFT), « tu enverrais X » n'est pas un effet inattendu d'une signature de vente ; un produit négligeable reste attrapé par le plancher (F11).
   if (isOn('F12') && eff.kind === 'signature' && reasons.some((r) => r.code === 'unexpected_outgoing')) {
-    const exchange = (eff.incoming || []).some((i) => i.bound === 'min' && (i.std === 'erc721' || i.std === 'erc1155' || Number(i.amount) >= 1e-6));
+    const exchange = (eff.incoming || []).some((i) => i.bound === 'min' && (i.std === 'erc721' || i.std === 'erc1155' || Number(i.amount) >= 1e-4));
     if (exchange) drop('unexpected_outgoing', 'F12:echange_conditionnel_signe');
+  }
+
+  // ---- F13 : l'opérateur NFT (setApprovalForAll) accordé à un protocole de la liste connue est le mécanisme normal d'une mise en vente ou d'un échange de NFT :
+  // l'écart d'intention « tu voulais juste te connecter » est à confirmer (warn), pas une arnaque (critical). Le plancher garde son warn (opérateur sur toute la collection).
+  if (isOn('F13') && (eff.approvals || []).length && eff.approvals.every((a) => a.via === 'setApprovalForAll' && isKnownProtocol(ctx, a.spender))) {
+    let hit = false;
+    reasons = reasons.map((r) => (r.code === 'unexpected_approval_connect' || r.code === 'unexpected_approval' ? ((hit = true), { ...r, sev: 'warn' }) : r));
+    if (hit) notes.push('F13:operateur_nft_protocole_connu');
   }
 
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :

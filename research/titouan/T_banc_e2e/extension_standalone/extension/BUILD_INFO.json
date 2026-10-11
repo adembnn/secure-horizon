@@ -27,7 +27,7 @@
   },
   {
    "file": "engine/src/fixes.mjs",
-   "sha256": "e8e692e3f88898cda6e90a18dbb284003f4ae4442e2a4746e9564dba190e524a"
+   "sha256": "c3bdb09800c72d4ce4690e87073a5735452d42333585e71c722db5ac1e46ecc6"
   },
   {
    "file": "engine/src/keccak.mjs",
@@ -43,7 +43,7 @@
   },
   {
    "file": "engine/src/rules_extra.mjs",
-   "sha256": "760cb700251f821d6c31c34dc4ae143033dfebcf1289ac2f7cdd5d9b69ad11f7"
+   "sha256": "5267934bfe087f79fad2b1c415b269e3090a46975c7d1c21fc79cd06c75deb51"
   },
   {
    "file": "engine/src/rules.mjs",
@@ -99,7 +99,7 @@
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "b3395421813cd7403bead543843dbd7375f378f62c97ce87b684c5a22165396c"
+   "sha256": "ce761745beb16815d6071af6357cdb0c547ebd6e1a98727ce581be7a70587b90"
   }
  ],
  "outputs": [
@@ -115,8 +115,8 @@
   },
   {
    "file": "engine/policy.js",
-   "bytes": 5737,
-   "sha256": "b132e86a5c4b513f73a025966debb2c3eee7023f451ecae1ff064fb04a4fa042"
+   "bytes": 7183,
+   "sha256": "e356b4f4ef2c2b7c4e3f74d71f22f7953bc82373020cbc5621a63d152e5ba16c"
   },
   {
    "file": "engine/sentinelle_core.js",
@@ -150,8 +150,8 @@
   },
   {
    "file": "engine/src/fixes.js",
-   "bytes": 618,
-   "sha256": "e8e692e3f88898cda6e90a18dbb284003f4ae4442e2a4746e9564dba190e524a"
+   "bytes": 609,
+   "sha256": "c3bdb09800c72d4ce4690e87073a5735452d42333585e71c722db5ac1e46ecc6"
   },
   {
    "file": "engine/src/keccak.js",
@@ -170,8 +170,8 @@
   },
   {
    "file": "engine/src/rules_extra.js",
-   "bytes": 14016,
-   "sha256": "3c38b59c2ca2bed10ef39321e4746acd5d88b7d95fd58e6c48a213277eaadb53"
+   "bytes": 16285,
+   "sha256": "ebe578c535201c3af4a2ff6523364322d33866682bc2b5edd75652f66fc3b334"
   },
   {
    "file": "engine/src/rules.js",
@@ -229,6 +229,6 @@
    "sha256": "91230999f37714fe131603b185bef05b0f20a30f329a6710179d91ff50c99736"
   }
  ],
- "total_bytes": 287003,
- "tree_sha256": "79e232a9de303647f6c09998f23beabeb3109751de5aff0f184581f5850b976b"
+ "total_bytes": 290709,
+ "tree_sha256": "4fe67532b56df830042d175adcb4782573103e2e33d2d701d14efc9d8438765c"
 }
