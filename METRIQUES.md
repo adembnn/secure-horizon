@@ -52,7 +52,10 @@ Mesuré aussi, non utilisé dans le discours : Ethereum, 10 420/21 866 = 47,6 % 
 | Conformes reconnus (« ça correspond ») | 142/539 = 26,3 % [22,8 ; 30,2] | 197/539 = 36,5 % |
 | Conformes laissés « pas pu vérifier » | 197/539 = 36,5 % [32,6 ; 40,7] | 101/539 = 18,7 % [15,7 ; 22,2] |
 | Précision des alertes (2/3 de non conformes dans le panel) | 866/910 = 95,2 % [93,6 ; 96,4] | 997/1 082 = 92,1 % [90,4 ; 93,6] |
-| **Extension corrigée (commit `b42792d` ou suivant), réserve scellée de 2 673 paires** | **à mesurer** | **à mesurer** |
+| **Extension corrigée (commit `b42792d` ou suivant), réserve scellée de 2 673 paires** | voir sous le tableau | voir sous le tableau |
+
+**Réserve scellée : ouverte, résultat partiel.** 2 673 paires, lecture par mots-clés seule. Demandes non conformes (1 789) : 74,6 % attrapées, 0 laissée passer, 25,4 % « pas pu vérifier ». Demandes conformes (515) : 71/515 = 13,8 % de fausses alertes (27,2 % des 261 conformes vérifiées), 254/515 = 49,3 % non vérifiées. Preuve : `preuves/RESULTAT_RESERVE_MOTS.md`. Quatre réserves : (1) ouverte le 11 oct. 2026 à 11h33 par la session de Titouan (commit `61dbe40`) ; (2) bras « mots » seul, le bras avec Clef a été arrêté et n'a pas de résultat ; (3) build `6b9de2f`, antérieur à l'habillage, ce n'est pas le build livré ; (4) un fichier du code de décision était modifié hors commit au lancement. La réserve est consommée : elle ne peut plus servir de jeu neuf.
+
 
 La panne est corrigée depuis (commit `b42792d`). Le contrôle est consommé : ses erreurs sont publiées. La réserve (empreinte `8531e6119af0…`) n'a jamais été ouverte. Elle sert à une seule mesure : `node --env-file=.env --no-warnings preuves/banc.mjs --ouvrir-reserve`.
 
@@ -91,7 +94,7 @@ Le temps réel d'une décision est dominé par la personne qui écrit sa phrase.
 |---|---|---|
 | Lancement | 2 commandes après le clone : `node scripts/verifier_installation.mjs`, puis `node scripts/demo.mjs` (qui lance `npm install` dans `blockchain/` s'il manque). Ensuite, charger l'extension à la main. Relancée pour ce gel sur une copie propre, sur d'autres ports : chaîne, contrats, sites et console d'attaque démarrent ; l'extension n'a pas été chargée dans un navigateur à cette occasion | README, `livrables/INSTALLATION.md` |
 | Ce qui tourne | chaîne locale, contrats de démo, site d'échange, relais du modèle, console d'attaque simulée, extension MV3 Chrome ou Edge 114+ | `scripts/demo.mjs` |
-| Tests du code | `npm run verifier`. À remplir après la fusion : N tests, 0 échec. Ces tests valident le code, pas la détection | `scripts/verifier_installation.mjs` |
+| Tests du code | `npm run verifier`. Mesuré le 11 oct. 2026 après la fusion (commit `05547b9`) : extension 241/241 ; build autonome 44/44 ; contrôle statique 26/26 ; serveur 33/33 ; rpc 15/15 ; relais 9/9 ; démo web 135/135 ; moteur 314/316 (2 tests lisent `research/titouan/bench/data/permit2_logs.json` et `attack_approval_logs.json`, ignorés par git). `npm run verifier` sort donc en échec sur un clone neuf ; jamais « tous les tests passent ». Ces tests valident le code, pas la détection | `scripts/verifier_installation.mjs` |
 | Audit d'un clone neuf, commit `5602248`, 09h05 à 09h30 | verdict « non terminée » : parcours honnête en « pas pu vérifier » et piège non limité tant que les jetons de démo ne sont pas déclarés à la main. Corrections annoncées depuis (`b42792d` : lecture du jeton sur la chaîne), **non réauditées sur un clone neuf** | `coord/reports/AUDIT_APPLICATION_FINIE.md` |
 | Vrai portefeuille (MetaMask, Core, Rabby) | **jamais essayé** | |
 | Réseau public | **rien**. Déploiement Fuji préparé et répété sur une copie locale, non exécuté (D-016) | `blockchain/FUJI.md` |
