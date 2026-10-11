@@ -4,7 +4,7 @@
 import { check, indeterminate, emptyLocal, sanitizeLocalContext } from './engine/sentinelle_core.js';
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const DEFAULT_CFG = {
-  arm: 'A',                    // A sans delai, B delai (frictionMs), C phrase a retaper
+  arm: 'B',                    // A sans delai (temoin de l essai, jamais par defaut), B delai (frictionMs), C phrase a retaper
   frictionMs: 30000,
   manipulationHoldMs: 600000,
   timeoutMs: 3000,
