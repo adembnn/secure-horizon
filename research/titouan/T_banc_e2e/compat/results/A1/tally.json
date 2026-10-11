@@ -2,7 +2,7 @@
  "siteId": "tally",
  "url": "https://www.tally.xyz/",
  "arm": "control",
- "started": "2026-10-11T00:14:28.722Z",
+ "started": "2026-10-11T00:25:52.020Z",
  "events": [
   {
    "t": "frame",
@@ -30,7 +30,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "A282D58FB54D6C6FF89D792CB6B7A73D",
+   "frameId": "BAA25800F4AB3212C7982A2CF0CC1235",
    "status": 200,
    "url": "https://www.tally.xyz/",
    "mime": "text/html",
@@ -45,7 +45,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "A282D58FB54D6C6FF89D792CB6B7A73D",
+ "mainFrameId": "BAA25800F4AB3212C7982A2CF0CC1235",
  "loadFired": true,
  "navError": null,
  "steps": [],
@@ -66,10 +66,10 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Cactus - Explore DAOs",
-  "bodyLen": 674,
-  "nodes": 352,
+  "bodyLen": 780,
+  "nodes": 342,
   "readyState": "complete",
-  "head": "Tally is now Cactus. New name, same platform. Read all about the change and follow @CactusHQxyz for what's next. Search ⌘ K Featured DAO Ethereum ENS Decentralised naming for wallets, websites, & more. Proposals 75 Voter"
+  "head": "Tally is now Cactus. New name, same platform. Read all about the change and follow @CactusHQxyz for what's next. Search ⌘ K Featured DAO Active proposal Ethereum Compound Compound is an algorithmic, autonomous interest r"
  },
  "state0": {
   "mode": "control",
@@ -78,6 +78,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -95,10 +97,10 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Cactus - Explore DAOs",
-  "bodyLen": 674,
-  "nodes": 352,
+  "bodyLen": 780,
+  "nodes": 342,
   "readyState": "complete",
-  "head": "Tally is now Cactus. New name, same platform. Read all about the change and follow @CactusHQxyz for what's next. Search ⌘ K Featured DAO Ethereum ENS Decentralised naming for wallets, websites, & more. Proposals 75 Voter"
+  "head": "Tally is now Cactus. New name, same platform. Read all about the change and follow @CactusHQxyz for what's next. Search ⌘ K Featured DAO Active proposal Ethereum Compound Compound is an algorithmic, autonomous interest r"
  },
  "state1": {
   "mode": "control",
@@ -107,6 +109,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -133,5 +137,5 @@
   "overwritten": false
  },
  "finalUrl": "https://www.tally.xyz/",
- "ms": 7986
+ "ms": 5391
 }

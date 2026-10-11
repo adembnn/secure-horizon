@@ -1,0 +1,167 @@
+{
+ "siteId": "farcaster",
+ "url": "https://farcaster.xyz/",
+ "arm": "test",
+ "started": "2026-10-11T00:34:34.012Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://farcaster.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://farcaster.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://farcaster.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://farcaster.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://farcaster.xyz/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "5654FB19E1DB5C1540D0E492DC3D52D1",
+   "status": 200,
+   "url": "https://farcaster.xyz/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "5654FB19E1DB5C1540D0E492DC3D52D1",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://farcaster.xyz/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Farcaster",
+  "bodyLen": 501,
+  "nodes": 250,
+  "readyState": "complete",
+  "head": "Build. Share. Grow. Farcaster is the best place to find new people and express yourself through software. It's a decentralized social network where you own your identity. Sign up or Log in with email Log in with phone Do"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "removeListener": 4,
+   "then": 5,
+   "on": 3,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Farcaster",
+  "bodyLen": 501,
+  "nodes": 250,
+  "readyState": "complete",
+  "head": "Build. Share. Grow. Farcaster is the best place to find new people and express yourself through software. It's a decentralized social network where you own your identity. Sign up or Log in with email Log in with phone Do"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "removeListener": 4,
+   "then": 5,
+   "on": 3,
+   "request": 1
+  }
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://farcaster.xyz/",
+ "ms": 8104
+}

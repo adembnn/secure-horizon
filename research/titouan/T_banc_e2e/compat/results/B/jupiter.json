@@ -1,0 +1,179 @@
+{
+ "siteId": "jupiter",
+ "url": "https://jup.ag/",
+ "arm": "test",
+ "started": "2026-10-11T00:39:08.883Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://jup.ag/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://jup.ag/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "blob:https://jup.ag/935c1f49-a202-42ba-9d38-dec1dfef0221"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://jup.ag/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "95A2658A7FBE9B89FE1A4153E7F5CA3B",
+   "status": 200,
+   "url": "https://jup.ag/",
+   "mime": "text/html",
+   "csp": "base-uri 'self' https://static.jup.ag https://static-nsc8aacry.preview.jup.ag; object-src 'none'; frame-ancestors 'self'; form-action 'self'",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "29EF8F145C39E91EF3821C7EF4BDF0F7",
+   "status": 200,
+   "url": "blob:https://jup.ag/935c1f49-a202-42ba-9d38-dec1dfef0221",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "95A2658A7FBE9B89FE1A4153E7F5CA3B",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://jup.ag/",
+  "mime": "text/html",
+  "csp": "base-uri 'self' https://static.jup.ag https://static-nsc8aacry.preview.jup.ag; object-src 'none'; frame-ancestors 'self'; form-action 'self'",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Jupiter: The Home of Onchain Finance",
+  "bodyLen": 1921,
+  "nodes": 1126,
+  "readyState": "complete",
+  "head": "Jupiter Search anything / Rewards Connect SOL $109,86 0,6 % JUP $0,35763 -5,3 % Jupiter Trade Spot Stocks New Perps Predict Gacha Earn Lend Offerbook Beta Stake SOL Stake JUP Manage Portfolio Send Deposit Mobile More Get"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 1,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {
+   "request": 2
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 3,
+  "pick": {
+   "tier": 1,
+   "text": "Connect",
+   "tag": "BUTTON",
+   "x": 1309.421875,
+   "y": 27.5,
+   "top": 9.5
+  },
+  "all": [
+   "1:Connect",
+   "1:Connect",
+   "1:Connect"
+  ]
+ },
+ "clicked1": "Connect",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Jupiter: The Home of Onchain Finance",
+  "bodyLen": 2074,
+  "nodes": 1246,
+  "readyState": "complete",
+  "head": "Jupiter Search anything / Rewards Connect SOL $109,86 0,6 % JUP $0,35763 -5,3 % Jupiter Trade Spot Stocks New Perps Predict Gacha Earn Lend Offerbook Beta Stake SOL Stake JUP Manage Portfolio Send Deposit Mobile More Get"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 1,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {
+   "request": 2
+  }
+ },
+ "evN": 4,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://jup.ag/",
+ "ms": 11328
+}

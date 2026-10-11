@@ -1,0 +1,152 @@
+{
+ "siteId": "superbridge",
+ "url": "https://superbridge.app/",
+ "arm": "test",
+ "started": "2026-10-11T00:37:09.631Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://superbridge.app/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://superbridge.app/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://superbridge.app/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "91F783257B1152D13B54D4A388E22CF6",
+   "status": 200,
+   "url": "https://superbridge.app/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self' https://app.safe.global https://*.safe.global",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker",
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "91F783257B1152D13B54D4A388E22CF6",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://superbridge.app/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self' https://app.safe.global https://*.safe.global",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "Welcome to Superbridge For bridging help please head over to support & FAQs . By using this interface you agree to our Terms and Privacy Policy . Agree & continue",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Superbridge",
+  "bodyLen": 263,
+  "nodes": 205,
+  "readyState": "complete",
+  "head": "Connect Activity Ethereum Ethereum ETH Base Ethereum ETH Amount $ 0 1 2 3 4 5 6 7 8 9 Connect wallet Welcome to Superbridge For bridging help please head over to support & FAQs . By using this interface you agree to our "
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 4,
+  "wreads": {
+   "removeListener": 2,
+   "then": 2,
+   "on": 6
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "Welcome to Superbridge For bridging help please head over to support & FAQs . By using this interface you agree to our Terms and Privacy Policy . Agree & continue",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Superbridge",
+  "bodyLen": 263,
+  "nodes": 205,
+  "readyState": "complete",
+  "head": "Connect Activity Ethereum Ethereum ETH Base Ethereum ETH Amount $ 0 1 2 3 4 5 6 7 8 9 Connect wallet Welcome to Superbridge For bridging help please head over to support & FAQs . By using this interface you agree to our "
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 4,
+  "wreads": {
+   "removeListener": 2,
+   "then": 2,
+   "on": 6
+  }
+ },
+ "evN": 3,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://superbridge.app/",
+ "ms": 5768
+}

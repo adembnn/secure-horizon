@@ -1,0 +1,183 @@
+{
+ "siteId": "mmportfolio",
+ "url": "https://portfolio.metamask.io/",
+ "arm": "control",
+ "started": "2026-10-11T00:28:00.401Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://portfolio.metamask.io/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://portfolio.metamask.io/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://portfolio.metamask.io/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "web3_clientVersion",
+   "top": true,
+   "f": "https://portfolio.metamask.io/"
+  },
+  {
+   "t": "req",
+   "m": "web3_clientVersion",
+   "top": true,
+   "f": "https://portfolio.metamask.io/"
+  },
+  {
+   "t": "req",
+   "m": "web3_clientVersion",
+   "top": true,
+   "f": "https://portfolio.metamask.io/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 406 ()",
+   "url": "https://staking.api.cx.metamask.io/v1/pooled-staking/eligibility?addresses="
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "305D7F9A337B304B8DC84789E0C94835",
+   "status": 200,
+   "url": "https://portfolio.metamask.io/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'none';",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "AmazonS3"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "305D7F9A337B304B8DC84789E0C94835",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://portfolio.metamask.io/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'none';",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "AmazonS3"
+ },
+ "ui0": {
+  "modal": "Dashboard Move crypto Discover Card Tax Hub Travel Pilot Terms of Use 2 Dashboard Connect All your assets, all your accounts, all in one place. Connect Watch an address Buy and sell crypto Go from cash to crypto in seconds. Buy Swap and bridge tokens Easily swap thousands of tokens across dozens of ",
+  "modalCount": 3,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "MetaMask Portfolio",
+  "bodyLen": 1395,
+  "nodes": 317,
+  "readyState": "complete",
+  "head": "Dashboard Move crypto Discover Card Tax Hub Travel Pilot Terms of Use 2 Dashboard Connect All your assets, all your accounts, all in one place. Connect Watch an address Buy and sell crypto Go from cash to crypto in secon"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 32,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "web3_clientVersion",
+   "web3_clientVersion",
+   "web3_clientVersion"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "Dashboard Move crypto Discover Card Tax Hub Travel Pilot Terms of Use 2 Dashboard Connect All your assets, all your accounts, all in one place. Connect Watch an address Buy and sell crypto Go from cash to crypto in seconds. Buy Swap and bridge tokens Easily swap thousands of tokens across dozens of ",
+  "modalCount": 3,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "MetaMask Portfolio",
+  "bodyLen": 1395,
+  "nodes": 317,
+  "readyState": "complete",
+  "head": "Dashboard Move crypto Discover Card Tax Hub Travel Pilot Terms of Use 2 Dashboard Connect All your assets, all your accounts, all in one place. Connect Watch an address Buy and sell crypto Go from cash to crypto in secon"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 32,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "web3_clientVersion",
+   "web3_clientVersion",
+   "web3_clientVersion"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 9,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://portfolio.metamask.io/",
+ "ms": 8559
+}

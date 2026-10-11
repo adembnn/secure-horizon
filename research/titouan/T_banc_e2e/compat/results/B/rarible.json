@@ -1,0 +1,239 @@
+{
+ "siteId": "rarible",
+ "url": "https://rarible.com/",
+ "arm": "test",
+ "started": "2026-10-11T00:32:51.347Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://rarible.com/all"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://rarible.com/all"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://rarible.com/all"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://rarible.com/all"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://rarible.com/all"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cmqmm08ac001a0cjpqf6yuwh3/embedded-wallets?caid=c96afb85-e3df-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Loading the script 'https://sc-static.net/scevent.min.js' violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash https://*.coi",
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-KPV6NSV"
+  },
+  {
+   "source": "security",
+   "text": "Loading the script 'https://www.redditstatic.com/ads/pixel.js' violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash https://",
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-KPV6NSV"
+  },
+  {
+   "source": "security",
+   "text": "Loading the script 'https://static.hotjar.com/c/hotjar-2596294.js?sv=7' violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash",
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-KPV6NSV"
+  },
+  {
+   "source": "security",
+   "text": "Loading the script 'https://connect.facebook.net/en_US/fbevents.js' violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash htt",
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-KPV6NSV"
+  },
+  {
+   "source": "security",
+   "text": "Loading the script 'https://bat.bing.com/bat.js' violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash https://*.coinflow.cas",
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-KPV6NSV"
+  },
+  {
+   "source": "security",
+   "text": "Loading the script 'https://static.ads-twitter.com/uwt.js' violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash https://*.co",
+   "url": ""
+  },
+  {
+   "source": "security",
+   "text": "Loading the script 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=RFJzhp' violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval' https:",
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-KPV6NSV"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "70C095CEDF4B3EAEB3C1B5F1F4EAAF97",
+   "status": 200,
+   "url": "https://rarible.com/all",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash https://*.coinflow.cash https://*.nsureapi.com https://m1.openfpcdn.io https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' https: data: blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self' https://auth.privy.io https://rarible.com https://rarible.fun https://testnet.rarible.fun https://camp.rarible.fun https://beta-olga.rarible.fun https://beta-andre.rarible.fun https://beta-irina.rarible.fun https://beta-sigma.rarible.fun https://beta-shmeta.rarible.fun https://beta-igor.rarible.fun; child-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://www.crossmint.com https://coinflow.cash https://*.coinflow.cash https://*.nsureapi.com https://www.googleadservices.com https://googleads.g.doubleclick.net; frame-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://www.crossmint.com https://coinflow.cash https://*.coinflow.cash https://*.nsureapi.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net; connect-src 'self' blob: https://auth.privy.io wss://relay.walletconnect.com wss://relay.walletconnect.org wss://www.walletlink.org https://*.rpc.privy.systems https://explorer-api.walletconnect.com https:; worker-src 'self' blob:; manifest-src 'self'",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "5CC1CDB010C5CACD625994D383B62EE8",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cmqmm08ac001a0cjpqf6yuwh3/embedded-wallets?caid=c96afb85-e3df-4a6e-b69e-ea13ee388adb",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:3000 http://localhost:3001 https://bff.rarible.com https://live.rarible.com https://rarible.com https://rwa-marketplace-umber.vercel.app https://www.rarible.com https://www.rwa-marketplace-umber.vercel.app https://rwa.rarible.com https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-Zjc4MWJhMDItM2ZiZC00M2QwLWFiYmEtMGU4ZTNiYzU5N2Vi'; style-src 'self' 'nonce-Zjc4MWJhMDItM2ZiZC00M2QwLWFiYmEtMGU4ZTNiYzU5N2Vi'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "70C095CEDF4B3EAEB3C1B5F1F4EAAF97",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://rarible.com/all",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coinflow.cash https://*.coinflow.cash https://*.nsureapi.com https://m1.openfpcdn.io https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' https: data: blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self' https://auth.privy.io https://rarible.com https://rarible.fun https://testnet.rarible.fun https://camp.rarible.fun https://beta-olga.rarible.fun https://beta-andre.rarible.fun https://beta-irina.rarible.fun https://beta-sigma.rarible.fun https://beta-shmeta.rarible.fun https://beta-igor.rarible.fun; child-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://www.crossmint.com https://coinflow.cash https://*.coinflow.cash https://*.nsureapi.com https://www.googleadservices.com https://googleads.g.doubleclick.net; frame-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://www.crossmint.com https://coinflow.cash https://*.coinflow.cash https://*.nsureapi.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net; connect-src 'self' blob: https://auth.privy.io wss://relay.walletconnect.com wss://relay.walletconnect.org wss://www.walletlink.org https://*.rpc.privy.systems https://explorer-api.walletconnect.com https:; worker-src 'self' blob:; manifest-src 'self'",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Rarible – fastest multichain NFT Marketplace with Rewards",
+  "bodyLen": 7765,
+  "nodes": 2026,
+  "readyState": "complete",
+  "head": "Rarible Logo Explore Mint Gacha Search Icon Search Icon All Ethereum Solana Robinhood Chain MegaETH More Solana Marketplace Discover the best of Solana on Rarible Explore Solana OnChainHoodies Step into the world of OnCh"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 2,
+  "wreads": {
+   "removeListener": 1,
+   "then": 1,
+   "on": 3
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Rarible – fastest multichain NFT Marketplace with Rewards",
+  "bodyLen": 7900,
+  "nodes": 2050,
+  "readyState": "complete",
+  "head": "Can't find what you're looking for? The OG Rarible is still live with all our partner chains. Go to https://og.rarible.com/ Close Icon Rarible Logo Explore Mint Gacha Search Icon Search Icon All Ethereum Solana Robinhood"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 2,
+  "wreads": {
+   "removeListener": 1,
+   "then": 1,
+   "on": 3
+  }
+ },
+ "evN": 3,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://rarible.com/all",
+ "ms": 24697
+}

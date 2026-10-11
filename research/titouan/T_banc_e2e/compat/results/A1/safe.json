@@ -1,0 +1,196 @@
+{
+ "siteId": "safe",
+ "url": "https://app.safe.global/",
+ "arm": "control",
+ "started": "2026-10-11T00:27:12.978Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.safe.global/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.safe.global/welcome/spaces"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.safe.global/welcome/spaces"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.safe.global/welcome/spaces"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.safe.global/welcome/spaces"
+  },
+  {
+   "t": "req",
+   "m": "eth_getBalance",
+   "top": true,
+   "f": "https://app.safe.global/welcome/spaces"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "61B924D7AA7C4F1D4A268763B85498CE",
+   "status": 200,
+   "url": "https://app.safe.global/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "AmazonS3"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "61B924D7AA7C4F1D4A268763B85498CE",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.safe.global/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "AmazonS3"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Safe{Wallet} – Workspaces",
+  "bodyLen": 785,
+  "nodes": 231,
+  "readyState": "complete",
+  "head": "Connect Wallet Safe Pro My accounts New Workspaces moved to Safe Pro on Oct 6, 2026 Sign in to your Workspace By continuing you accept the Safe Pro User Terms and Privacy Policy. Connect wallet OR Continue with Google Co"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 38,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1257.546875,
+   "y": 52,
+   "top": 36
+  },
+  "all": [
+   "1:Connect Wallet",
+   "1:Connect wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 4,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 713.7578125,
+   "y": 336,
+   "area": 1510.3125
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Safe{Wallet} – Workspaces",
+  "bodyLen": 812,
+  "nodes": 242,
+  "readyState": "complete",
+  "head": "0x1111...1111 Safe Pro My accounts New Workspaces moved to Safe Pro on Oct 6, 2026 Sign in to your Workspace By continuing you accept the Safe Pro User Terms and Privacy Policy. Continue with MetaMask eth : 0x1111...1111"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 38,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_getBalance"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 8,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.safe.global/welcome/spaces",
+ "ms": 12799
+}

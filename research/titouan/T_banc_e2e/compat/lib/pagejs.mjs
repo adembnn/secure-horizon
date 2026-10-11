@@ -71,7 +71,7 @@ return JSON.stringify({ modal, modalCount: dlgs.length, wc: /walletconnect|scan 
 
 export const SNAPSHOT_STATE = `(() => { const s = window.__compat_state; if (!s) return JSON.stringify({ missing: true });
 return JSON.stringify({ mode: s.mode, reads: s.reads, sets: s.sets, overwritten: s.overwritten, req6963: s.req6963, calls: s.calls.slice(0, 60),
-  blockedSign: s.blockedSign, wcalls: s.wcalls, wreads: s.wreads }); })()`;
+  extReads: s.extReads, extReq6963: s.extReq6963, blockedSign: s.blockedSign, wcalls: s.wcalls, wreads: s.wreads }); })()`;
 
 // Empreinte d'alteration: identique pour tous les sites, comparee entre bras.
 export const TAMPER_PROBE = `(() => { const r = {}; try {

@@ -2,7 +2,7 @@
  "siteId": "opensea",
  "url": "https://opensea.io/",
  "arm": "control",
- "started": "2026-10-11T00:13:27.158Z",
+ "started": "2026-10-11T00:24:13.200Z",
  "events": [
   {
    "t": "frame",
@@ -31,15 +31,30 @@
    "f": "about:blank"
   },
   {
-   "t": "req",
-   "m": "wallet_requestPermissions",
-   "top": true,
-   "f": "https://opensea.io/"
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
   },
   {
    "t": "frame",
    "top": false,
    "f": "https://wallet.opensea.io/?clientId=client-WY2cXW6EKKZZQ8CsdbA4WqGwVf2Cjh2ZuGXgwziH9NR6p&i"
+  },
+  {
+   "t": "req6963",
+   "top": false,
+   "f": "https://wallet.opensea.io/?clientId=client-WY2cXW6EKKZZQ8CsdbA4WqGwVf2Cjh2ZuGXgwziH9NR6p&i"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://privy.wallet.opensea.io/apps/clmttiprn095fms0f1gjj9vd9/embedded-wallets?caid=774f7"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://opensea.io/"
   },
   {
    "t": "req",
@@ -48,11 +63,6 @@
    "f": "https://opensea.io/"
   },
   {
-   "t": "frame",
-   "top": false,
-   "f": "about:blank"
-  },
-  {
    "t": "req",
    "m": "eth_chainId",
    "top": true,
@@ -72,6 +82,24 @@
   },
   {
    "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
    "m": "eth_accounts",
    "top": true,
    "f": "https://opensea.io/"
@@ -84,7 +112,13 @@
   },
   {
    "t": "req",
-   "m": "eth_accounts",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "personal_sign",
    "top": true,
    "f": "https://opensea.io/"
   },
@@ -94,12 +128,28 @@
    "f": "https://opensea.io/"
   }
  ],
- "console": [],
+ "console": [
+  {
+   "top": true,
+   "text": "WalletRejectedError: Rejected\n    at new <anonymous> (https://opensea.io/_next/static/chunks/17rz-dly_xzb1.js?dpl=dpl_HKC9kc8mP2srBB4u31nJUFCqrYkz:2049:47425)\n    at M (https://opensea.io/_next/static/chunks/2bkuru-xzod2h.js?dpl=dpl_HKC9kc8mP2srBB4u31nJUFCqrYkz:2:21531)\n    at https://opensea.io/_ne"
+  }
+ ],
  "exceptions": [],
- "logErrors": [],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://privy.wallet.opensea.io/api/v1/analytics_events' from origin 'https://wallet.opensea.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present",
+   "url": "https://wallet.opensea.io/?clientId=client-WY2cXW6EKKZZQ8CsdbA4WqGwVf2Cjh2ZuGXgwziH9NR6p&iframeGeneration=1"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://privy.wallet.opensea.io/api/v1/analytics_events"
+  }
+ ],
  "docs": [
   {
-   "frameId": "6E679F574F094F7A47444F48130F0179",
+   "frameId": "2A98ABC42EBA2A728076ACBDF8D2F78D",
    "status": 200,
    "url": "https://opensea.io/",
    "mime": "text/html",
@@ -109,11 +159,21 @@
    "server": "cloudflare"
   },
   {
-   "frameId": "F71BCA1710F11C9408E10AB45DC25459",
+   "frameId": "289429B4A77AC98652CAE03C797E4A2D",
    "status": 200,
    "url": "https://wallet.opensea.io/?clientId=client-WY2cXW6EKKZZQ8CsdbA4WqGwVf2Cjh2ZuGXgwziH9NR6p&iframeGeneration=1",
    "mime": "text/html",
    "csp": null,
+   "cspRO": "script-src 'unsafe-inline' 'unsafe-eval'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=rJJsPAh7EDAfMXUobqXpCe87fjaROlB3m.d8DFffdvU-1791678262.592984-1.0.1.1-m_F6d_t9TSlinOOfURTLVCS_g8sTnA1vXr10IFAFKSs0xWU4zOXJKZsvIyyJqYvr9.4Ls79GFGz6kmVwyG3AQiwaGoN_Z2EvkuQhwn7hXYSpQtMqRci7NHUQgS0mXnM9Ep8wO27Vm0rc03tD5W0yId9MzSieiD5qMNCXanXRckiiJsfUzf2I4OWjhI2oSZya; report-to cf-csp-endpoint",
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "BC5A463C5D0AEEA3192E6BACCFB8EB62",
+   "status": 200,
+   "url": "https://privy.wallet.opensea.io/apps/clmttiprn095fms0f1gjj9vd9/embedded-wallets?caid=774f719d-12d0-4229-82b9-e9ead14372d7&client_id=client-WY2cXW6EKKZZQ8CsdbA4WqGwVf2Cjh2ZuGXgwziH9NR6p",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://creator.dev.privatesea.io https://deals.opensea.io https://opensea.io https://studio.opensea.io https://wallet.opensea.io https://privy.wallet.opensea.io https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-MzY0MGY1NzItYzQ5NC00N2NhLTkwYWItMTYyNTY5YTUxNzdh'; style-src 'self' 'nonce-MzY0MGY1NzItYzQ5NC00N2NhLTkwYWItMTYyNTY5YTUxNzdh'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
    "cspRO": null,
    "xfo": null,
    "server": "cloudflare"
@@ -124,7 +184,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "6E679F574F094F7A47444F48130F0179",
+ "mainFrameId": "2A98ABC42EBA2A728076ACBDF8D2F78D",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -142,16 +202,16 @@
   "server": "cloudflare"
  },
  "ui0": {
-  "modal": "",
-  "modalCount": 0,
+  "modal": "We use cookies We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. Accept All Reject All Manage",
+  "modalCount": 1,
   "wc": false,
   "connectedUI": false,
   "mmListed": false,
   "title": "OpenSea, exchange everything — token trading and NFT marketplace",
-  "bodyLen": 5838,
-  "nodes": 2504,
+  "bodyLen": 5700,
+  "nodes": 2453,
   "readyState": "complete",
-  "head": "Discover Collections Tokens Perpetuals Beta Swap Drops Activity Rewards Tools Beta Studio Profile Resources Settings Support / Discover All Memes Trading Cards Art PFPs Photography Gaming All Statements By visualizevalue"
+  "head": "Discover Collections Tokens Perpetuals Beta Swap Drops Activity Rewards Tools Beta Studio Profile Resources Settings Support / Sign in Discover All Memes Trading Cards Art PFPs Photography Gaming All Statements By visual"
  },
  "state0": {
   "mode": "control",
@@ -162,6 +222,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -173,7 +235,7 @@
    "tier": 2,
    "text": "Sign in",
    "tag": "BUTTON",
-   "x": 1211.8203125,
+   "x": 1239.8203125,
    "y": 32,
    "top": 12
   },
@@ -195,14 +257,14 @@
  },
  "clicked2": "Installed",
  "ui1": {
-  "modal": "We use cookies We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. Accept All Reject All Manage",
-  "modalCount": 1,
+  "modal": "Authenticate to continue Please sign in with your connected wallet to continue. Sign in Authenticate to continue Please sign in with your connected wallet to continue. Sign in",
+  "modalCount": 2,
   "wc": false,
   "connectedUI": false,
   "mmListed": false,
   "title": "OpenSea, exchange everything — token trading and NFT marketplace",
-  "bodyLen": 5725,
-  "nodes": 2438,
+  "bodyLen": 5831,
+  "nodes": 2580,
   "readyState": "complete",
   "head": "Discover Collections Tokens Perpetuals Beta Swap Drops Activity Rewards Tools Beta Studio Profile Resources Settings Support / Sign in Discover All Memes Trading Cards Art PFPs Photography Gaming All Statements By visual"
  },
@@ -219,15 +281,21 @@
    "eth_chainId",
    "eth_accounts",
    "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
    "eth_accounts",
    "eth_chainId",
-   "eth_accounts"
+   "eth_chainId",
+   "personal_sign"
   ],
-  "blockedSign": 0,
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 1,
   "wcalls": 0,
   "wreads": {}
  },
- "evN": 15,
+ "evN": 21,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -249,5 +317,5 @@
   "overwritten": false
  },
  "finalUrl": "https://opensea.io/",
- "ms": 30419
+ "ms": 15452
 }

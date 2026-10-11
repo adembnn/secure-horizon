@@ -1,0 +1,202 @@
+{
+ "siteId": "odos",
+ "url": "https://app.odos.xyz/",
+ "arm": "test",
+ "started": "2026-10-11T00:36:42.222Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.odos.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.odos.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.odos.xyz/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "A4AC343B4A9BC31B4B8A81D9C62FAC70",
+   "status": 200,
+   "url": "https://app.odos.xyz/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "Netlify"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "A4AC343B4A9BC31B4B8A81D9C62FAC70",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.odos.xyz/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "Netlify"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Odos Shutdown & Wallet Recovery",
+  "bodyLen": 7561,
+  "nodes": 864,
+  "readyState": "complete",
+  "head": "Skip to main content Official Odos shutdown site Verify that you are visiting the official Odos domain. Odos support will never ask for your private key, recovery phrase, verification code, passkey, or exported wallet fi"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 431,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {
+   "isCoinbaseWallet": 9,
+   "providers": 140,
+   "isPhantom": 10,
+   "isExodus": 2,
+   "isBinance": 2,
+   "isTrust": 2,
+   "isFireblocks": 2,
+   "isOKExWallet": 2,
+   "isZerion": 2,
+   "isOneKey": 2,
+   "isBackpack": 2,
+   "isRainbow": 2,
+   "isAvalanche": 2,
+   "isMagicEden": 10,
+   "isDawn": 10,
+   "isRabby": 2,
+   "isCoin98": 2,
+   "isAmbire": 10,
+   "isBlocto": 3,
+   "isBraveWallet": 10,
+   "isClover": 10,
+   "isFrame": 10,
+   "isGamestop": 10,
+   "isInfinex": 10,
+   "isMetaMask": 5,
+   "isOpera": 10,
+   "isSuperb": 10
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Odos Shutdown & Wallet Recovery",
+  "bodyLen": 7561,
+  "nodes": 864,
+  "readyState": "complete",
+  "head": "Skip to main content Official Odos shutdown site Verify that you are visiting the official Odos domain. Odos support will never ask for your private key, recovery phrase, verification code, passkey, or exported wallet fi"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 431,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {
+   "isCoinbaseWallet": 9,
+   "providers": 140,
+   "isPhantom": 10,
+   "isExodus": 2,
+   "isBinance": 2,
+   "isTrust": 2,
+   "isFireblocks": 2,
+   "isOKExWallet": 2,
+   "isZerion": 2,
+   "isOneKey": 2,
+   "isBackpack": 2,
+   "isRainbow": 2,
+   "isAvalanche": 2,
+   "isMagicEden": 10,
+   "isDawn": 10,
+   "isRabby": 2,
+   "isCoin98": 2,
+   "isAmbire": 10,
+   "isBlocto": 3,
+   "isBraveWallet": 10,
+   "isClover": 10,
+   "isFrame": 10,
+   "isGamestop": 10,
+   "isInfinex": 10,
+   "isMetaMask": 5,
+   "isOpera": 10,
+   "isSuperb": 10
+  }
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.odos.xyz/",
+ "ms": 6618
+}

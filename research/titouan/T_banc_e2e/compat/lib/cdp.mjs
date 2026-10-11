@@ -1,4 +1,5 @@
-// Client CDP brut (WebSocket natif Node) + lancement de Chrome headless=new avec profil temporaire.
+// Client CDP brut (WebSocket natif Node) + lancement de Chrome headless=new avec profil temporaire (dans compat/_tmp).
+// Les telechargements sont refuses au niveau navigateur des le lancement (Browser.setDownloadBehavior deny).
 import { spawn } from 'node:child_process';
 import { mkdtempSync, rmSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
@@ -47,6 +48,7 @@ export class ChromeInstance {
     if (!info) { proc.kill(); throw new Error('Chrome ne demarre pas'); }
     const conn = await Conn.connect(info.webSocketDebuggerUrl);
     await conn.send('Target.setDiscoverTargets', { discover: true });
+    await conn.send('Browser.setDownloadBehavior', { behavior: 'deny' }).catch(() => {});
     return new ChromeInstance(proc, dir, conn, info);
   }
   constructor(proc, dir, conn, info) { this.proc = proc; this.dir = dir; this.conn = conn; this.info = info; this.visits = 0; }

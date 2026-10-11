@@ -1,0 +1,141 @@
+{
+ "siteId": "collabland",
+ "url": "https://www.collab.land/",
+ "arm": "control",
+ "started": "2026-10-11T00:30:32.059Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://collab.land/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://collab.land/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://collab.land/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "BF64649A12F75E44363C6D77165246D2",
+   "status": 200,
+   "url": "https://collab.land/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "BF64649A12F75E44363C6D77165246D2",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://collab.land/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Collab.Land",
+  "bodyLen": 2560,
+  "nodes": 263,
+  "readyState": "complete",
+  "head": "Learn about Trust-First Messaging 🤝 Follow Collab.Land on X for integrations, partnerships, and all the got communi-tea 🍵 Click Here Trust what you read, build, and deploy. Intuition is the trust layer for humans and A"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Collab.Land",
+  "bodyLen": 2560,
+  "nodes": 263,
+  "readyState": "complete",
+  "head": "Learn about Trust-First Messaging 🤝 Follow Collab.Land on X for integrations, partnerships, and all the got communi-tea 🍵 Click Here Trust what you read, build, and deploy. Intuition is the trust layer for humans and A"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://collab.land/",
+ "ms": 9500
+}

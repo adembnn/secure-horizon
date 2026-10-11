@@ -1,0 +1,151 @@
+{
+ "siteId": "polygonportal",
+ "url": "https://portal.polygon.technology/",
+ "arm": "control",
+ "started": "2026-10-11T00:29:40.842Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://portal.polygon.technology/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://portal.polygon.technology/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://portal.polygon.technology/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.polygon.technology/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "0FCD5FF52302C895EE5CB31D9446F7CB",
+   "status": 200,
+   "url": "https://portal.polygon.technology/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://js.sentry-cdn.com https://wallet.polygon.technology https://accounts.google.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://assets.polygon.technology https://static.polygon.technology https://raw.githubusercontent.com https://api-polygon-tokens.polygon.technology https://www.google.com https://assets.coingecko.com https://coin-images.coingecko.com https://assets.sequence.info https://token-logos.family.co https://cdn.morpho.org; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; connect-src 'self' https://*.polygon.technology https://raw.githubusercontent.com https://api.socket.tech https://chain-proxy.wallet.coinbase.com https://firebaseinstallations.googleapis.com https://firebaseremoteconfig.googleapis.com https://firebase.googleapis.com https://firestore.googleapis.com https://iris-api.circle.com https://iris-api-sandbox.circle.com https://region1.google-analytics.com https://rpc.walletconnect.org https://verify.walletconnect.org https://pulse.walletconnect.org https://api.web3modal.org https://*.api.cx.metamask.io https://waas.sequence.app https://nodes.sequence.app https://wallet.polygon.technology https://www.google-analytics.com https://www.googletagmanager.com https://*.drpc.org https://*.infura.io https://*.alchemy.com https://*.ingest.us.sentry.io https://zkevm-rpc.com https://rpc-amoy.polygon.technology wss://www.walletlink.org/rpc wss://relay.walletconnect.org wss://relay.walletconnect.com; upgrade-insecure-requests",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "0FCD5FF52302C895EE5CB31D9446F7CB",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://portal.polygon.technology/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://js.sentry-cdn.com https://wallet.polygon.technology https://accounts.google.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://assets.polygon.technology https://static.polygon.technology https://raw.githubusercontent.com https://api-polygon-tokens.polygon.technology https://www.google.com https://assets.coingecko.com https://coin-images.coingecko.com https://assets.sequence.info https://token-logos.family.co https://cdn.morpho.org; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; connect-src 'self' https://*.polygon.technology https://raw.githubusercontent.com https://api.socket.tech https://chain-proxy.wallet.coinbase.com https://firebaseinstallations.googleapis.com https://firebaseremoteconfig.googleapis.com https://firebase.googleapis.com https://firestore.googleapis.com https://iris-api.circle.com https://iris-api-sandbox.circle.com https://region1.google-analytics.com https://rpc.walletconnect.org https://verify.walletconnect.org https://pulse.walletconnect.org https://api.web3modal.org https://*.api.cx.metamask.io https://waas.sequence.app https://nodes.sequence.app https://wallet.polygon.technology https://www.google-analytics.com https://www.googletagmanager.com https://*.drpc.org https://*.infura.io https://*.alchemy.com https://*.ingest.us.sentry.io https://zkevm-rpc.com https://rpc-amoy.polygon.technology wss://www.walletlink.org/rpc wss://relay.walletconnect.org wss://relay.walletconnect.com; upgrade-insecure-requests",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "Welcome to the Polygon Portal 🎉 I agree to the Terms of Use and Privacy Policy Hop On ⚡ Nothing in Polygon Portal should be construed as an invitation or inducement to engage in investment activity.",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Polygon Portal",
+  "bodyLen": 1524,
+  "nodes": 279,
+  "readyState": "complete",
+  "head": "Looking to bridge to X-Layer or Katana? Head over to the AggLayer Bridge for fast, unified bridging. portal Switch to Lite Connect Wallet Assets Bridge Transactions Upgrade MATIC to POL Switch to testnet Update Polygon R"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 6,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "Welcome to the Polygon Portal 🎉 I agree to the Terms of Use and Privacy Policy Hop On ⚡ Nothing in Polygon Portal should be construed as an invitation or inducement to engage in investment activity.",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Polygon Portal",
+  "bodyLen": 1524,
+  "nodes": 279,
+  "readyState": "complete",
+  "head": "Looking to bridge to X-Layer or Katana? Head over to the AggLayer Bridge for fast, unified bridging. portal Switch to Lite Connect Wallet Assets Bridge Transactions Upgrade MATIC to POL Switch to testnet Update Polygon R"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 6,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://portal.polygon.technology/",
+ "ms": 6280
+}

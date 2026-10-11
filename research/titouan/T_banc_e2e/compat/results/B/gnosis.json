@@ -1,0 +1,169 @@
+{
+ "siteId": "gnosis",
+ "url": "https://www.gnosis.io/",
+ "arm": "test",
+ "started": "2026-10-11T00:34:41.885Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.gnosis.io/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://framer.com/edit?framerSiteId=f767eb2eaf28f9ab4a30f8662abf4decd1cb1768c5538ae2c4b1b"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://www.gnosis.io/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://www.gnosis.io/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.",
+   "url": "https://www.gnosis.io/"
+  },
+  {
+   "source": "security",
+   "text": "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.",
+   "url": "https://framerusercontent.com/sites/6ZTS7zijx8mQdmE7WnTgcw/react.3j-0sUr6.mjs"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "89613C82F2512A63EB4FF0B71076E28E",
+   "status": 200,
+   "url": "https://www.gnosis.io/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Framer/26fa766"
+  },
+  {
+   "frameId": "C352C23C11845A9219D2EFDEB4519174",
+   "status": 200,
+   "url": "https://framer.com/edit?framerSiteId=f767eb2eaf28f9ab4a30f8662abf4decd1cb1768c5538ae2c4b1badfb3a6fb59&source=www.gnosis.io&features=%7B%22editorBarDisableFrameAncestorsSecurity%22%3Afalse%2C%22onPageLocalizationSupport%22%3Atrue%2C%22onPageMoveTool%22%3Atrue%2C%22onPageRichTextBlockSelection%22%3Atrue%7D&loadStart=1791678884065",
+   "mime": "text/html",
+   "csp": "default-src * data: blob: 'unsafe-inline' 'unsafe-eval'; report-uri https://sentry.io/api/2963040/security/?sentry_key=05dcfd8152434a7385d322f28af36f66; frame-ancestors www.gnosis.io",
+   "cspRO": null,
+   "xfo": null,
+   "server": "CloudFront"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "89613C82F2512A63EB4FF0B71076E28E",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://www.gnosis.io/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Framer/26fa766"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Gnosis — Re-engineering finance for human agency and access",
+  "bodyLen": 3915,
+  "nodes": 619,
+  "readyState": "complete",
+  "head": "Gnosis Pay ↗ Gnosis Chain EEZ ↗ Circles ↗ Blog Governance ↗ Contact Re-engineering finance for human agency and access Gnosis spent the last decade building at the forefront of the digitisation of capital because the cho"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Gnosis — Re-engineering finance for human agency and access",
+  "bodyLen": 3915,
+  "nodes": 619,
+  "readyState": "complete",
+  "head": "Gnosis Pay ↗ Gnosis Chain EEZ ↗ Circles ↗ Blog Governance ↗ Contact Re-engineering finance for human agency and access Gnosis spent the last decade building at the forefront of the digitisation of capital because the cho"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 3,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://www.gnosis.io/",
+ "ms": 6930
+}

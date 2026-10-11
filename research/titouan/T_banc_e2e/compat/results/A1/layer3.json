@@ -2,7 +2,7 @@
  "siteId": "layer3",
  "url": "https://layer3.xyz/",
  "arm": "control",
- "started": "2026-10-11T00:13:59.087Z",
+ "started": "2026-10-11T00:25:26.739Z",
  "events": [
   {
    "t": "frame",
@@ -67,6 +67,16 @@
  "logErrors": [
   {
    "source": "javascript",
+   "text": "Access to manifest at 'https://app.layer3.xyz/manifest.webmanifest' (redirected from 'https://layer3.xyz/manifest.webmanifest') from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Ac",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/manifest.webmanifest"
+  },
+  {
+   "source": "javascript",
    "text": "Access to font at 'https://app.layer3.xyz/fonts/inter-semibold.woff2' from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the reques",
    "url": "https://layer3.xyz/"
   },
@@ -94,6 +104,16 @@
    "source": "network",
    "text": "Failed to load resource: net::ERR_FAILED",
    "url": "https://app.layer3.xyz/fonts/inter-regular.woff2"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to manifest at 'https://app.layer3.xyz/manifest.webmanifest' (redirected from 'https://layer3.xyz/manifest.webmanifest') from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Ac",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/manifest.webmanifest"
   },
   {
    "source": "javascript",
@@ -127,7 +147,7 @@
   },
   {
    "source": "network",
-   "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT",
+   "text": "Failed to load resource: net::ERR_FAILED",
    "url": "chrome-extension://invalid/"
   },
   {
@@ -143,7 +163,7 @@
  ],
  "docs": [
   {
-   "frameId": "1D707003497CED88F28B02259E249019",
+   "frameId": "A8234AF6953872D5193FF44ABEE9C9B4",
    "status": 200,
    "url": "https://layer3.xyz/",
    "mime": "text/html",
@@ -160,7 +180,7 @@
  ],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "1D707003497CED88F28B02259E249019",
+ "mainFrameId": "A8234AF6953872D5193FF44ABEE9C9B4",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -184,7 +204,7 @@
   "mmListed": false,
   "title": "Layer3 - Discover onchain finance with one app",
   "bodyLen": 1784,
-  "nodes": 404,
+  "nodes": 403,
   "readyState": "complete",
   "head": "Log in Sign up Discover onchain finance with one app Explore crypto using the Layer3 Wallet, your gateway to the onchain economy. Get Started Platform Features Everything you need Discover, trade, stake, and earn. Layer3"
  },
@@ -198,6 +218,8 @@
    "eth_accounts",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -236,7 +258,7 @@
   "mmListed": false,
   "title": "Layer3 - Discover onchain finance with one app",
   "bodyLen": 1957,
-  "nodes": 436,
+  "nodes": 435,
   "readyState": "complete",
   "head": "Log in Sign up Discover onchain finance with one app Explore crypto using the Layer3 Wallet, your gateway to the onchain economy. Get Started Platform Features Everything you need Discover, trade, stake, and earn. Layer3"
  },
@@ -250,6 +272,8 @@
    "eth_accounts",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -276,5 +300,5 @@
   "overwritten": false
  },
  "finalUrl": "https://layer3.xyz/",
- "ms": 19617
+ "ms": 9837
 }

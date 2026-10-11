@@ -1,0 +1,666 @@
+{
+ "siteId": "velora",
+ "url": "https://app.velora.xyz/",
+ "arm": "test",
+ "started": "2026-10-11T00:36:37.910Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.velora.xyz/app"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.velora.xyz/app"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.velora.xyz/app"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cmay1fao701a3jy0lvw7gf8lt/embedded-wallets?caid=72465da7-3e33-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://nbstream.binance.click/wallet-connector' failed: Error in connection establishment: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://app.velora.xyz/app/assets/hooks-PNtQRdDY.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://safe-client.safe.global/v1/chains/1/safes/0x1111111111111111111111111111111111111111/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "4DDC71DE22BA8BAAFED85DB5BBD87812",
+   "status": 200,
+   "url": "https://app.velora.xyz/app",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "AmazonS3"
+  },
+  {
+   "frameId": "06FF663FE3F25FDE742D8C5BE01BC2D2",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cmay1fao701a3jy0lvw7gf8lt/embedded-wallets?caid=72465da7-3e33-45ae-b623-0998942b31bd&client_id=client-WY6LLYzHP4AbxSXERRPzMvEvvrQcfdghAKmAPdh4PQ1xe",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:5173 https://app.velora.xyz https://embedded.velora.xyz https://staging.paraswap.io https://velora.xyz https://www.velora.xyz https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-NjdiYmJhN2YtZjc0NC00MTRjLTgzMjItOTliYzdmOWYxYmI3'; style-src 'self' 'nonce-NjdiYmJhN2YtZjc0NC00MTRjLTgzMjItOTliYzdmOWYxYmI3'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "4DDC71DE22BA8BAAFED85DB5BBD87812",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:Browser Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.velora.xyz/app",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "AmazonS3"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Swap USDC on Ethereum | Best Rates on Velora",
+  "bodyLen": 605,
+  "nodes": 358,
+  "readyState": "complete",
+  "head": "Trade Activity Connect Wallet Fast. Fierce. Unchained. Swap Limit OTC TWAP Pay on Ethereum USDC Receive Select Token Connect Wallet Powered by Velora Protocol Velora © Cookies About Us Documentation Terms of Service Priv"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 9,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 5,
+  "wreads": {
+   "removeListener": 8,
+   "then": 10,
+   "isParaSwapEmbedded": 1,
+   "isParaSwapWallet": 1,
+   "on": 8,
+   "isCoinbaseBrowser": 1,
+   "isBinance": 1,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 683,
+   "y": 533,
+   "top": 509
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 5,
+  "pick": {
+   "text": "Browser Wallet",
+   "tag": "H5",
+   "x": 610.1875,
+   "y": 254.9921875,
+   "area": 1874.189453125
+  }
+ },
+ "clicked2": "Browser Wallet",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Swap USDC on Ethereum | Best Rates on Velora",
+  "bodyLen": 672,
+  "nodes": 382,
+  "readyState": "complete",
+  "head": "Trade Activity 0x11111...11111 Fast. Fierce. Unchained. Swap Limit OTC TWAP Pay on Ethereum Balance: 1109.8 USDC USDC ~$1.00 25% 50% 75% MAX Receive Select Token Receiving Address 0x1111...1111 Swap Powered by Velora Pro"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 9,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "wallet_getCapabilities",
+   "wallet_getCapabilities",
+   "eth_chainId",
+   "wallet_getCapabilities",
+   "eth_chainId",
+   "wallet_getCapabilities",
+   "eth_chainId",
+   "wallet_getCapabilities"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 40,
+  "wreads": {
+   "removeListener": 48,
+   "then": 48,
+   "isParaSwapEmbedded": 1,
+   "isParaSwapWallet": 1,
+   "on": 12,
+   "isCoinbaseBrowser": 1,
+   "isBinance": 1,
+   "request": 32,
+   "safe": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBlockWallet": 1,
+   "isBraveWallet": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isPortal": 1,
+   "isRabby": 2,
+   "isRainbow": 1,
+   "isStatus": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isXDEFI": 1,
+   "isZerion": 1,
+   "isMetaMask": 1
+  }
+ },
+ "evN": 69,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.velora.xyz/app/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+ "ms": 15670
+}

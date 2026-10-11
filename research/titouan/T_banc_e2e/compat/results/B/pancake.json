@@ -1,0 +1,179 @@
+{
+ "siteId": "pancake",
+ "url": "https://pancakeswap.finance/",
+ "arm": "test",
+ "started": "2026-10-11T00:36:19.191Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_CONNECTION_RESET",
+   "url": "https://bsc-dataseed1.defibit.io/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "DF4F286BCB7C7F6CEF6D0E9DA8D92848",
+   "status": 200,
+   "url": "https://pancakeswap.finance/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "DF4F286BCB7C7F6CEF6D0E9DA8D92848",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://pancakeswap.finance/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Home | PancakeSwap",
+  "bodyLen": 1417,
+  "nodes": 591,
+  "readyState": "complete",
+  "head": "Trade Swap Trade tokens instantly across supported networks Perps Trade perpetual contracts with leverage Stocks Trade tokenized stocks on-chain Buy Crypto Go from cash to crypto instantly Pools Dual Investment Beta Port"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 10,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "isBinance": 7,
+   "isTokenPocket": 3,
+   "removeListener": 4,
+   "then": 5,
+   "on": 3,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Home | PancakeSwap",
+  "bodyLen": 1417,
+  "nodes": 591,
+  "readyState": "complete",
+  "head": "Trade Swap Trade tokens instantly across supported networks Perps Trade perpetual contracts with leverage Stocks Trade tokenized stocks on-chain Buy Crypto Go from cash to crypto instantly Pools Dual Investment Beta Port"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 10,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "isBinance": 7,
+   "isTokenPocket": 3,
+   "removeListener": 4,
+   "then": 5,
+   "on": 3,
+   "request": 1
+  }
+ },
+ "evN": 6,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://pancakeswap.finance/",
+ "ms": 17218
+}

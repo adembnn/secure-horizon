@@ -1,0 +1,547 @@
+{
+ "siteId": "dydx",
+ "url": "https://dydx.trade/",
+ "arm": "control",
+ "started": "2026-10-11T00:27:34.259Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://dydx.trade/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://dydx.trade/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://dydx.trade/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://q2cxvvqjclvs.statuspage.io/embed/frame"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.turnkey.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.turnkey.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/clua5njf801bncvpa0woolzq4/embedded-wallets?caid=df658c31-35e0-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://accounts.google.com/gsi/button?type=standard&theme=outline&size=large&text=undefin"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/markets"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/markets"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/markets"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/markets"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/markets"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "06D1694A510CD916A611D4F4E554D002",
+   "status": 200,
+   "url": "https://dydx.trade/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "8400BABE57169027BE1F486C762BB5C4",
+   "status": 200,
+   "url": "https://q2cxvvqjclvs.statuspage.io/embed/frame",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "AtlassianEdge"
+  },
+  {
+   "frameId": "EA1A7293D647505229BAA6D725066CCF",
+   "status": 200,
+   "url": "https://auth.turnkey.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "CDADE1F1F27860A0137EA4540796924F",
+   "status": 200,
+   "url": "https://auth.turnkey.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "31071586AC40AAE12B3CEA96E3773465",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/clua5njf801bncvpa0woolzq4/embedded-wallets?caid=df658c31-35e0-4c39-a755-5e219d734b88&client_id=client-WY2jY1XhCXytbdxXXTwDuDToiPtTiyKCMGsX7oj25hUcF",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-ZTJjNzE1NDgtNmJjMy00Y2FlLWIwZTgtNWFjZDllZTM4ZDY4'; style-src 'self' 'nonce-ZTJjNzE1NDgtNmJjMy00Y2FlLWIwZTgtNWFjZDllZTM4ZDY4'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "655841E5FBA49038ABCD3DEA3DE21DDA",
+   "status": 200,
+   "url": "https://accounts.google.com/gsi/button?type=standard&theme=outline&size=large&text=undefined&shape=undefined&logo_alignment=undefined&width=undefined&locale=undefined&click_listener=undefined&is_fedcm_supported=true&client_id=342435645208-sdakh3u70n9lpoocq1gbikm9h1ndl3pn.apps.googleusercontent.com&iframe_id=gsi_468830_16821&cas=ulT9%2FgOINF71dtWeO%2BtvmcWaTSM3i4WZR6NjO8bxSqo",
+   "mime": "text/html",
+   "csp": "script-src 'report-sample' 'nonce-kY0QC9Zhu-0CO5_drLaKIA' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';object-src 'none';base-uri 'self';report-uri https://csp.withgoogle.com/csp/identity-sign-in-google-http\nrequire-trusted-types-for 'script';report-uri https://csp.withgoogle.com/csp/identity-sign-in-google-http",
+   "cspRO": null,
+   "xfo": null,
+   "server": "ESF"
+  }
+ ],
+ "frames": 5,
+ "frameKinds": [
+  "iframe",
+  "iframe",
+  "iframe",
+  "iframe",
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "06D1694A510CD916A611D4F4E554D002",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Sign in",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://dydx.trade/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Markets · dYdX",
+  "bodyLen": 4227,
+  "nodes": 2326,
+  "readyState": "complete",
+  "head": "Mainnet Trade Markets Portfolio MegaVault Referrals DYDX More Sign in Hide Trading Volume 24h $10,510,433 Open Interest Current $38,199,336 Fees Generated 24h Learn more → $840.83 Recently Listed New Market Oracle Price "
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 26,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Sign in",
+   "tag": "BUTTON",
+   "x": 1324.6484375,
+   "y": 22,
+   "top": 8
+  },
+  "all": [
+   "2:Sign in"
+  ]
+ },
+ "clicked1": "Sign in",
+ "clickedTier": 2,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 523.953125,
+   "y": 469.890625,
+   "area": 1930.03125
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Sign message Signatures are used to verify your ownership and to confirm wallet compatibility. New users will receive two signature requests. Generate your dYdX Chain wallet Verify that you own this wallet. Signing is free and will not send a transaction. Send request",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Markets · dYdX",
+  "bodyLen": 4492,
+  "nodes": 3029,
+  "readyState": "complete",
+  "head": "Mainnet Trade Markets Portfolio MegaVault Referrals DYDX More Hide Trading Volume 24h $10,510,433 Open Interest Current $38,199,432 Fees Generated 24h Learn more → $840.83 Recently Listed New Market Oracle Price Silver 5"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 142,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_accounts",
+   "eth_requestAccounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 43,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://dydx.trade/markets",
+ "ms": 21911
+}

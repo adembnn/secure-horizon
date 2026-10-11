@@ -1,0 +1,236 @@
+{
+ "siteId": "coinbase",
+ "url": "https://www.coinbase.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:27:57.675Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.coinbase.com/en-fr"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://login.coinbase.com/signin?client_id=258660e1-9cfe-4202-9eda-d3beedb3e118&locale=en"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://login.coinbase.com/signin?client_id=258660e1-9cfe-4202-9eda-d3beedb3e118&locale=en"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://login.coinbase.com/signin?client_id=258660e1-9cfe-4202-9eda-d3beedb3e118&locale=en"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "other",
+   "text": "Not signed in with the identity provider.",
+   "url": "https://www.coinbase.com/en-fr"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "03FB6E80EA0789E8E5D0D683263CA97A",
+   "status": 200,
+   "url": "https://www.coinbase.com/en-fr",
+   "mime": "text/html",
+   "csp": "default-src 'self' https://*.coinbase.com https://sdk.onfido.com https://assets.onfido.com https://*.withpersona.com; child-src 'self' https://*.coinbase.com https://accounts.google.com/ https://www.googletagmanager.com/ https://paywithmybank.com/start/ https://cdn1.paywithmybank.com/frontend/build/index.html https://fast.wistia.net https://ui.solaris-p.finleap.cloud https://fts-payment-initiation-wizard.solarisbank.de/ https://payment.truelayer.com https://*.sardine.ai https://sdk.onfido.com/ https://*.cb-device-intelligence.com https://*.wpstn.com https://platform.twitter.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://recaptcha.net https://www.recaptcha.net https://cdn.plaid.com/link/ https://*.doubleclick.net/ blob: https://www.youtube.com https://player.vimeo.com/video/ https://datawrapper.dwcdn.net/ https://widgets.marqeta.com https://*.paypal.com https://pay.google.com/ https://transact.atomicfi.com/ https://centinelapi.cardinalcommerce.com/V1/Cruise/Collect https://p2a.co/ https://docs.google.com/forms/ https://a.sprig.com/SmJKcmh5cDRYZX5zaWQ6YWE3ZDJhZjYtMjYxYS00NjkwLWE3ZWMtMGRjMGQyMGY2ZDk5 https://calendly.com/ https://link.tink.com/ https://jsv3.recruitics.com/ https://js.stripe.com/ https://*.withpersona.com https://embedded.cardless.com/; connect-src 'self' https://browser-intake-datadoghq.com/ https://accounts.google.com/gsi/ https://*.coinbase.com wss://*.coinbase.com https://www.tradingview.com/snapshot/ https://beacon.riskified.com https://c.riskified.com https://player.vimeo.com/api/player.js https://api.web3modal.org https://d1dwhf283nul1c.cloudfront.net/ https://cdnjs.cloudflare.com/ https://analytics.google.com https://*.google-analytics.com https://maps.googleapis.com https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.braintree-api.com https://api.braintreegateway.com https://cdn.contentful.com/ https://api.userleap.com/ https://api.sprig.com/ https://widgets.marqeta.com/client/api/v1/ https://assets.ctfassets.net/ https://images.ctfassets.net/ https://pay.google.com/ https://google.com/pay https://c.tvpixel.com/ https://p.tvpixel.com/ https://*.salesforce.com https://pulse.walletconnect.org https://verify.walletconnect.org https://mempool.space wss://relay.walletconnect.com wss://relay.walletconnect.org https://rpc.walletconnect.org https://explorer-api.walletconnect.com wss://www.walletlink.org https://metamask-sdk.api.cx.metamask.io/evt https://api.onfido.com wss://sync.onfido.com https://sdk.onfido.com/ https://cdn.sprig.com/session-replay/ https://www.google.com/pay https://api2.branch.io https://pixel-config.reddit.com/pixels/a2_gn0ni8qm85z4/config https://www.redditstatic.com/ads/conversions-config/v1/pixel/config/a2_gn0ni8qm85z4_telemetry https://conversions-config.reddit.com/v1/pixel/error https://px.ads.linkedin.com/attribution_trigger https://www.google.com/ccm/collect https://px.ads.linkedin.com/wa/ https://cdn.cookielaw.org/ https://geolocation.onetrust.com/ https://privacyportal.onetrust.com/ https://consent-api.onetrust.com/ https://*.withpersona.com https://inquiry.withpersona.com https://wa.appsflyer.com https://websdk.appsflyer.com https://api-secure.amplitude.com https://sr-client-cfg.amplitude.com https://api-sr.amplitude.com https://api.amplitude.com/ https://rba-authed-278491357830-production.s3.us-east-1.amazonaws.com wss://www.deribit.com https://history.deribit.com https://www.deribit.com https://metrics.deribit.com https://data.deribit.com wss://retail-ws-order-stargate.aws.cbhq.net; font-src * data: blob:; img-src * data: blob:; media-src * data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.coinbase.com https://www.googletagmanager.com/ https://accounts.google.com/gsi/client https://accounts.google.com/gsi/ https://*.sardine.ai https://beacon.riskified.com https://*.cb-device-intelligence.com https://player.vimeo.com/api/player.js https://sdk.onfido.com/ https://www.youtube.com/iframe_api https://*.google-analytics.com https://www.google.com https://www.gstatic.com https://maps.googleapis.com https://cdn.plaid.com/link/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net/en_US/fbevents.js https://connect.facebook.net/signals/config/ https://*.paypal.com https://images.ctfassets.net/ https://pay.google.com/ https://c.tvpixel.com/ https://p.tvpixel.com/ https://jsv3.recruitics.com/0778138b-cc59-11ef-a514-fd1759833eec.js https://static.ads-twitter.com/oct.js https://platform.twitter.com/uwt.js https://static.ads-twitter.com/uwt.js https://redditstatic.com/ads/pixel.js https://www.redditstatic.com/ads/pixel.js https://snap.licdn.com/li.lms-analytics/insight.min.js https://cdn.cookielaw.org/ https://js.stripe.com/ https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://recaptcha.net https://www.recaptcha.net https://*.withpersona.com https://wa.appsflyer.com https://websdk.appsflyer.com; style-src * data: blob: 'unsafe-inline'; frame-ancestors 'self' https://*.coinbase.com https://coinbase.com https://*.withpersona.com; report-uri /csp-logging",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "03FB6E80EA0789E8E5D0D683263CA97A",
+   "status": 200,
+   "url": "https://login.coinbase.com/signin?client_id=258660e1-9cfe-4202-9eda-d3beedb3e118&locale=en-fr&oauth_challenge=7ae1f1b9-d79a-4f82-9b69-8e49589b5181",
+   "mime": "text/html",
+   "csp": "base-uri 'none'; form-action 'self'; frame-ancestors 'self' https://keys.coinbase.com/ https://www.coinbase.com https://coinbase.com; report-uri '/csp-logging'",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "03FB6E80EA0789E8E5D0D683263CA97A",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Sign in"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://www.coinbase.com/en-fr",
+  "mime": "text/html",
+  "csp": "default-src 'self' https://*.coinbase.com https://sdk.onfido.com https://assets.onfido.com https://*.withpersona.com; child-src 'self' https://*.coinbase.com https://accounts.google.com/ https://www.googletagmanager.com/ https://paywithmybank.com/start/ https://cdn1.paywithmybank.com/frontend/build/index.html https://fast.wistia.net https://ui.solaris-p.finleap.cloud https://fts-payment-initiation-wizard.solarisbank.de/ https://payment.truelayer.com https://*.sardine.ai https://sdk.onfido.com/ https://*.cb-device-intelligence.com https://*.wpstn.com https://platform.twitter.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://recaptcha.net https://www.recaptcha.net https://cdn.plaid.com/link/ https://*.doubleclick.net/ blob: https://www.youtube.com https://player.vimeo.com/video/ https://datawrapper.dwcdn.net/ https://widgets.marqeta.com https://*.paypal.com https://pay.google.com/ https://transact.atomicfi.com/ https://centinelapi.cardinalcommerce.com/V1/Cruise/Collect https://p2a.co/ https://docs.google.com/forms/ https://a.sprig.com/SmJKcmh5cDRYZX5zaWQ6YWE3ZDJhZjYtMjYxYS00NjkwLWE3ZWMtMGRjMGQyMGY2ZDk5 https://calendly.com/ https://link.tink.com/ https://jsv3.recruitics.com/ https://js.stripe.com/ https://*.withpersona.com https://embedded.cardless.com/; connect-src 'self' https://browser-intake-datadoghq.com/ https://accounts.google.com/gsi/ https://*.coinbase.com wss://*.coinbase.com https://www.tradingview.com/snapshot/ https://beacon.riskified.com https://c.riskified.com https://player.vimeo.com/api/player.js https://api.web3modal.org https://d1dwhf283nul1c.cloudfront.net/ https://cdnjs.cloudflare.com/ https://analytics.google.com https://*.google-analytics.com https://maps.googleapis.com https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.braintree-api.com https://api.braintreegateway.com https://cdn.contentful.com/ https://api.userleap.com/ https://api.sprig.com/ https://widgets.marqeta.com/client/api/v1/ https://assets.ctfassets.net/ https://images.ctfassets.net/ https://pay.google.com/ https://google.com/pay https://c.tvpixel.com/ https://p.tvpixel.com/ https://*.salesforce.com https://pulse.walletconnect.org https://verify.walletconnect.org https://mempool.space wss://relay.walletconnect.com wss://relay.walletconnect.org https://rpc.walletconnect.org https://explorer-api.walletconnect.com wss://www.walletlink.org https://metamask-sdk.api.cx.metamask.io/evt https://api.onfido.com wss://sync.onfido.com https://sdk.onfido.com/ https://cdn.sprig.com/session-replay/ https://www.google.com/pay https://api2.branch.io https://pixel-config.reddit.com/pixels/a2_gn0ni8qm85z4/config https://www.redditstatic.com/ads/conversions-config/v1/pixel/config/a2_gn0ni8qm85z4_telemetry https://conversions-config.reddit.com/v1/pixel/error https://px.ads.linkedin.com/attribution_trigger https://www.google.com/ccm/collect https://px.ads.linkedin.com/wa/ https://cdn.cookielaw.org/ https://geolocation.onetrust.com/ https://privacyportal.onetrust.com/ https://consent-api.onetrust.com/ https://*.withpersona.com https://inquiry.withpersona.com https://wa.appsflyer.com https://websdk.appsflyer.com https://api-secure.amplitude.com https://sr-client-cfg.amplitude.com https://api-sr.amplitude.com https://api.amplitude.com/ https://rba-authed-278491357830-production.s3.us-east-1.amazonaws.com wss://www.deribit.com https://history.deribit.com https://www.deribit.com https://metrics.deribit.com https://data.deribit.com wss://retail-ws-order-stargate.aws.cbhq.net; font-src * data: blob:; img-src * data: blob:; media-src * data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.coinbase.com https://www.googletagmanager.com/ https://accounts.google.com/gsi/client https://accounts.google.com/gsi/ https://*.sardine.ai https://beacon.riskified.com https://*.cb-device-intelligence.com https://player.vimeo.com/api/player.js https://sdk.onfido.com/ https://www.youtube.com/iframe_api https://*.google-analytics.com https://www.google.com https://www.gstatic.com https://maps.googleapis.com https://cdn.plaid.com/link/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net/en_US/fbevents.js https://connect.facebook.net/signals/config/ https://*.paypal.com https://images.ctfassets.net/ https://pay.google.com/ https://c.tvpixel.com/ https://p.tvpixel.com/ https://jsv3.recruitics.com/0778138b-cc59-11ef-a514-fd1759833eec.js https://static.ads-twitter.com/oct.js https://platform.twitter.com/uwt.js https://static.ads-twitter.com/uwt.js https://redditstatic.com/ads/pixel.js https://www.redditstatic.com/ads/pixel.js https://snap.licdn.com/li.lms-analytics/insight.min.js https://cdn.cookielaw.org/ https://js.stripe.com/ https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://recaptcha.net https://www.recaptcha.net https://*.withpersona.com https://wa.appsflyer.com https://websdk.appsflyer.com; style-src * data: blob: 'unsafe-inline'; frame-ancestors 'self' https://*.coinbase.com https://coinbase.com https://*.withpersona.com; report-uri /csp-logging",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "See our cookie policy for more information on how we process your personal data. To customize your settings, Customize Cookies . choice Reject Accept",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Coinbase France - Buy & Sell Bitcoin, Ethereum, and more with trust",
+  "bodyLen": 11399,
+  "nodes": 2947,
+  "readyState": "complete",
+  "head": "Skip to content Skip to site index Get up to €150 for getting started Cryptocurrencies Individuals Trade 󰨂 Crypto Buy and sell cryptocurrencies 󰧶 Derivatives New Amplify your trades with futures and perpetual-style fut"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Sign in",
+   "tag": "A",
+   "x": 1154.3203125,
+   "y": 82,
+   "top": 60
+  },
+  "all": [
+   "2:Sign in"
+  ]
+ },
+ "clicked1": "Sign in",
+ "clickedTier": 2,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "find3": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Coinbase - Sign in",
+  "bodyLen": 169,
+  "nodes": 99,
+  "readyState": "complete",
+  "head": "Coinbase logo We use strictly necessary cookies to enable essential functions, such as security and authentication. For more information, see our Cookie Policy . Dismiss"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 14,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://login.coinbase.com/signin?client_id=258660e1-9cfe-4202-9eda-d3beedb3e118&locale=en-fr&oauth_challenge=7ae1f1b9-d79a-4f82-9b69-8e49589b5181",
+ "ms": 14627
+}

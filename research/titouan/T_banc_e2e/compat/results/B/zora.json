@@ -1,0 +1,311 @@
+{
+ "siteId": "zora",
+ "url": "https://zora.co/",
+ "arm": "test",
+ "started": "2026-10-11T00:33:07.077Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://zora.co/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://zora.co/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://zora.co/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://zora.co/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://zora.co/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://privy.zora.co/apps/clpgf04wn04hnkw0fv1m11mnb/embedded-wallets?caid=f6276757-18c6-4"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "Invalid Sentry Dsn: =https://b47d15718a5343f497259a10c33fd9e2@o389095.ingest.sentry.io/4503974312935424"
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Refused to set unsafe header \"User-Agent\"",
+   "url": "https://zora.co/_next/static/chunks/8924-2cc3a0a396c2d523.js"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "632F44388112B188808D41BC875CAFF0",
+   "status": 200,
+   "url": "https://zora.co/",
+   "mime": "text/html",
+   "csp": "report-uri https://o389095.ingest.sentry.io/api/4503974312935424/security/?sentry_key=b47d15718a5343f497259a10c33fd9e2&sentry_environment=vercel-production; default-src 'self' blob: https://*.decentralized-content.com; font-src 'self' data: *; media-src 'self' blob: *; object-src 'self' blob: *; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: * https://*.cloudflarestream.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://www.googletagmanager.com https://challenges.cloudflare.com https://vercel.live https://embed.cloudflarestream.com; child-src 'self' blob: https://*.decentralized-content.com https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org; frame-src 'self' data: blob: *; connect-src 'self' data: blob: * https://*.cloudflarestream.com; frame-ancestors 'self'",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "BDFEF0709F396EB36BB3541319168F8D",
+   "status": 200,
+   "url": "https://privy.zora.co/apps/clpgf04wn04hnkw0fv1m11mnb/embedded-wallets?caid=f6276757-18c6-43a3-963b-86f16c302dd5&client_id=client-WY2f8mnC65aGnM2LmXpwBU5GqK3kxYqJoV7pSNRJLWrp6",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://*.preview.ourzora.com https://*.preview.zora.co https://*.preview.zora.com https://bridge.zora.energy https://testnet.zora.co https://zora.co https://zora.com https://creators.zora.com https://privy.zora.co https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-ZmM1ODYyNGEtMzcwZS00NDQ1LWI0ZjktZTdjMjE4NGM3NDI3'; style-src 'self' 'nonce-ZmM1ODYyNGEtMzcwZS00NDQ1LWI0ZjktZTdjMjE4NGM3NDI3'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "632F44388112B188808D41BC875CAFF0",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://zora.co/",
+  "mime": "text/html",
+  "csp": "report-uri https://o389095.ingest.sentry.io/api/4503974312935424/security/?sentry_key=b47d15718a5343f497259a10c33fd9e2&sentry_environment=vercel-production; default-src 'self' blob: https://*.decentralized-content.com; font-src 'self' data: *; media-src 'self' blob: *; object-src 'self' blob: *; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: * https://*.cloudflarestream.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://www.googletagmanager.com https://challenges.cloudflare.com https://vercel.live https://embed.cloudflarestream.com; child-src 'self' blob: https://*.decentralized-content.com https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org; frame-src 'self' data: blob: *; connect-src 'self' data: blob: * https://*.cloudflarestream.com; frame-ancestors 'self'",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "Introducing: Custom Pairs Create and trade coins paired with memes, majors, stocks on Solana, Base, Robinhood Chain, Ethereum and BNB Chain. Continue Introducing: Custom Pairs Create and trade coins paired with memes, majors, stocks on Solana, Base, Robinhood Chain, Ethereum and BNB Chain. Continue",
+  "modalCount": 2,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Zora — Post, discover, and trade what’s next",
+  "bodyLen": 11064,
+  "nodes": 10145,
+  "readyState": "complete",
+  "head": "Your external wallet is not connected. Please connect it to use Zora, or upgrade to the Zora wallet. Connect Disclosure We use cookies to give you the best experience on Zora. Learn more Reject Accept Login Sign up All C"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 5,
+  "wreads": {
+   "chainId": 1,
+   "providers": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBlockWallet": 1,
+   "isBraveWallet": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNovaWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOneKey": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isPortal": 1,
+   "isRabby": 1,
+   "isRainbow": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1,
+   "isZerion": 1,
+   "isMetaMask": 1,
+   "isCoinbaseBrowser": 1,
+   "on": 4,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "Introducing: Custom Pairs Create and trade coins paired with memes, majors, stocks on Solana, Base, Robinhood Chain, Ethereum and BNB Chain. Continue Introducing: Custom Pairs Create and trade coins paired with memes, majors, stocks on Solana, Base, Robinhood Chain, Ethereum and BNB Chain. Continue",
+  "modalCount": 2,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Zora — Post, discover, and trade what’s next",
+  "bodyLen": 11064,
+  "nodes": 10145,
+  "readyState": "complete",
+  "head": "Your external wallet is not connected. Please connect it to use Zora, or upgrade to the Zora wallet. Connect Disclosure We use cookies to give you the best experience on Zora. Learn more Reject Accept Login Sign up All C"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 5,
+  "wreads": {
+   "chainId": 1,
+   "providers": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBlockWallet": 1,
+   "isBraveWallet": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNovaWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOneKey": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isPortal": 1,
+   "isRabby": 1,
+   "isRainbow": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1,
+   "isZerion": 1,
+   "isMetaMask": 1,
+   "isCoinbaseBrowser": 1,
+   "on": 4,
+   "request": 1
+  }
+ },
+ "evN": 9,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://zora.co/",
+ "ms": 28244
+}

@@ -1,0 +1,304 @@
+{
+ "siteId": "rainbowkit",
+ "url": "https://www.rainbowkit.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:28:10.469Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "55C43A5D68B529CEBE4E854A05896122",
+   "status": 200,
+   "url": "https://rainbowkit.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "55C43A5D68B529CEBE4E854A05896122",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://rainbowkit.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "RainbowKit",
+  "bodyLen": 2423,
+  "nodes": 721,
+  "readyState": "complete",
+  "head": "RainbowKit 2.2.11 Connect Wallet RainbowKit The best way to connect a wallet Designed for everyone. Built for developers. npm init @rainbow-me/rainbowkit@latest Copy View the Docs The siqqest Web3 teams are using Rainbow"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 9,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1241.5390625,
+   "y": 44,
+   "top": 24
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 6,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 425.15625,
+   "y": 398,
+   "area": 1449.9375
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "RainbowKit",
+  "bodyLen": 2447,
+  "nodes": 738,
+  "readyState": "complete",
+  "head": "RainbowKit 2.2.11 Ethereum Dropdown ⛱ 0x11…1111 Dropdown RainbowKit The best way to connect a wallet Designed for everyone. Built for developers. npm init @rainbow-me/rainbowkit@latest Copy View the Docs The siqqest Web3"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 9,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "eth_requestAccounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 6,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://rainbowkit.com/",
+ "ms": 13677
+}

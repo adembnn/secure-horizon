@@ -2,7 +2,7 @@
  "siteId": "rabby",
  "url": "https://rabby.io/",
  "arm": "control",
- "started": "2026-10-11T00:14:56.259Z",
+ "started": "2026-10-11T00:26:23.449Z",
  "events": [
   {
    "t": "frame",
@@ -36,7 +36,7 @@
  ],
  "docs": [
   {
-   "frameId": "B72282BE191E9A840ADB9A3FFE3960C5",
+   "frameId": "D208B2EA0FF8641D915BA793ABC1AA25",
    "status": 200,
    "url": "https://rabby.io/",
    "mime": "text/html",
@@ -51,7 +51,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "B72282BE191E9A840ADB9A3FFE3960C5",
+ "mainFrameId": "D208B2EA0FF8641D915BA793ABC1AA25",
  "loadFired": true,
  "navError": null,
  "steps": [],
@@ -84,6 +84,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -113,6 +115,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -139,5 +143,5 @@
   "overwritten": false
  },
  "finalUrl": "https://rabby.io/",
- "ms": 12942
+ "ms": 9879
 }

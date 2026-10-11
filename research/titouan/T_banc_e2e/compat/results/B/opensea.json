@@ -1,0 +1,321 @@
+{
+ "siteId": "opensea",
+ "url": "https://opensea.io/",
+ "arm": "test",
+ "started": "2026-10-11T00:32:31.479Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://wallet.opensea.io/?clientId=client-WY2cXW6EKKZZQ8CsdbA4WqGwVf2Cjh2ZuGXgwziH9NR6p&i"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://opensea.io/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://opensea.io/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "916F4BEAC85E34B7E7436720C56C4FC1",
+   "status": 200,
+   "url": "https://opensea.io/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://os2-fqbf8.quill.run https://widget.intercom.io/widget/rws4jyr5 https://js.intercomcdn.com https://static.moonpay.com https://static.seadn.io/os2/tv_library/charting_library/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://static.seadn.io/os2/tv_library/charting_library/; connect-src 'self' data: wss://gql.opensea.io wss://api.hyperliquid.xyz https://api.hyperliquid.xyz https://gql.opensea.io https://graphql.opensea.io https://features.opensea.io https://static.seadn.io https://raw2.seadn.io https://i2.seadn.io https://i2c.seadn.io https://mobile.opensea.io https://*.mux.com *.openseaprorelayproxy.com https://api.amplitude.com https://api2.amplitude.com https://sr-client-cfg.amplitude.com https://diagnostics.prod.us-west-2.amplitude.com https://o406206.ingest.sentry.io https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com/ https://os2-fqbf8.quill.run https://api.mainnet.abs.xyz https://arb1.arbitrum.io/rpc https://nova.arbitrum.io/rpc https://eth.merkle.io https://api.avax.network/ext/bc/C/rpc https://api.avax-test.network/ext/bc/C/rpc https://rpc.blast.io https://56.rpc.thirdweb.com https://mainnet.evm.nodes.onflow.org https://public-en-cypress.klaytn.net https://polygon.drpc.org https://rpc-amoy.polygon.technology https://mainnet.base.org https://sepolia.base.org https://11155111.rpc.thirdweb.com https://rpc.zora.energy https://evm-rpc.sei-apis.com/ https://rpc.berachain.com https://api.roninchain.com/rpc https://rpc.soneium.org https://mainnet.shape.network https://mainnet.unichain.org/ https://mainnet-rpc.b3.fun/http https://rpc-proxy.opensea.io wss://rpc-proxy.opensea.io https://cloudflare-eth.com https://mainnet.infura.io https://*.llamarpc.com https://*.g.alchemy.com https://*.quiknode.pro https://rpc.monad.xyz https://rpc.hyperliquid.xyz/evm https://thrumming-blue-uranium.solana-mainnet.quiknode.pro wss://thrumming-blue-uranium.solana-mainnet.quiknode.pro https://rpc.gunzchain.io https://api.infra.mainnet.somnia.network https://auth-api.infra.mainnet.somnia.network https://swr.xnftdata.com/rpc-proxy/ https://mainnet.megaeth.com/rpc https://rpc-gel.inkonchain.com https://rpc-animechain-39xf6m45e3.t.conduit.xyz/ https://wallets.opensea.io/ https://www.walletlink.org wss://www.walletlink.org https://pulse.walletconnect.org https://api.web3modal.org wss://relay.walletconnect.org https://metamask-sdk.api.cx.metamask.io https://mm-sdk-analytics.api.cx.metamask.io wss://metamask-sdk.api.cx.metamask.io wss://mm-sdk-relay.api.cx.metamask.io https://chain-proxy.wallet.coinbase.com https://cca-lite.coinbase.com https://*.intercom.io https://*.intercomcdn.com https://*.intercomassets.com wss://*.intercom.io https://prod-mainnet-temp-uploads.s3.us-east-1.amazonaws.com https://api.moonpay.com https://moonpay.com https://auth.privy.io https://mainnet.block-engine.jito.wtf https://seadn-original-media.s3.us-east-1.amazonaws.com https://vitals.vercel-insights.com; img-src 'self' blob: data: https://opensea.io https://static.opensea.io https://*.featurebase-attachments.com https://fb-usercontent.fra1.cdn.digitaloceanspaces.com https://static.seadn.io https://raw2.seadn.io https://i2.seadn.io https://i2c.seadn.io https://image.mux.com https://stream.mux.com https://*.canarytokens.org/ https://canarytokens.org/ https://*.intercomcdn.com https://*.intercomassets.com https://cdnjs.cloudflare.com/ajax/libs/twemoji/ https://cdn.prod.website-files.com https://media.veefriends.com/ https://i.ibb.co/ https://app.hyperliquid.xyz/coins/ https://pbs.twimg.com https://abs.twimg.com https://unavatar.io https://d1xpxki1g4htqu.cloudfront.net https://www.googletagmanager.com; media-src 'self' blob: data: https://raw2.seadn.io https://static.seadn.io https://i2.seadn.io https://i2c.seadn.io https://image.mux.com https://stream.mux.com; font-src 'self' https://fonts.gstatic.com https://fonts.reown.com https://static.seadn.io/os2/tv_library/charting_library/; object-src 'none'; base-uri 'self' https://static.seadn.io/os2/tv_library/charting_library/; form-action 'self'; frame-ancestors 'self' https://wallets.opensea.io/ https://privy.wallets.opensea.io; frame-src 'self' https://wallets.opensea.io/ https://privy.wallets.opensea.io https://auth.privy.io https://*.moonpay.com https://i2.seadn.io https://i2c.seadn.io https://static.seadn.io https: blob:; block-all-mixed-content; upgrade-insecure-requests;",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "85AB35645A7E2B4FE93FAB40F502329D",
+   "status": 200,
+   "url": "https://wallet.opensea.io/?clientId=client-WY2cXW6EKKZZQ8CsdbA4WqGwVf2Cjh2ZuGXgwziH9NR6p&iframeGeneration=1",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "916F4BEAC85E34B7E7436720C56C4FC1",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Sign in",
+  "option:Installed"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://opensea.io/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://os2-fqbf8.quill.run https://widget.intercom.io/widget/rws4jyr5 https://js.intercomcdn.com https://static.moonpay.com https://static.seadn.io/os2/tv_library/charting_library/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://static.seadn.io/os2/tv_library/charting_library/; connect-src 'self' data: wss://gql.opensea.io wss://api.hyperliquid.xyz https://api.hyperliquid.xyz https://gql.opensea.io https://graphql.opensea.io https://features.opensea.io https://static.seadn.io https://raw2.seadn.io https://i2.seadn.io https://i2c.seadn.io https://mobile.opensea.io https://*.mux.com *.openseaprorelayproxy.com https://api.amplitude.com https://api2.amplitude.com https://sr-client-cfg.amplitude.com https://diagnostics.prod.us-west-2.amplitude.com https://o406206.ingest.sentry.io https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com/ https://os2-fqbf8.quill.run https://api.mainnet.abs.xyz https://arb1.arbitrum.io/rpc https://nova.arbitrum.io/rpc https://eth.merkle.io https://api.avax.network/ext/bc/C/rpc https://api.avax-test.network/ext/bc/C/rpc https://rpc.blast.io https://56.rpc.thirdweb.com https://mainnet.evm.nodes.onflow.org https://public-en-cypress.klaytn.net https://polygon.drpc.org https://rpc-amoy.polygon.technology https://mainnet.base.org https://sepolia.base.org https://11155111.rpc.thirdweb.com https://rpc.zora.energy https://evm-rpc.sei-apis.com/ https://rpc.berachain.com https://api.roninchain.com/rpc https://rpc.soneium.org https://mainnet.shape.network https://mainnet.unichain.org/ https://mainnet-rpc.b3.fun/http https://rpc-proxy.opensea.io wss://rpc-proxy.opensea.io https://cloudflare-eth.com https://mainnet.infura.io https://*.llamarpc.com https://*.g.alchemy.com https://*.quiknode.pro https://rpc.monad.xyz https://rpc.hyperliquid.xyz/evm https://thrumming-blue-uranium.solana-mainnet.quiknode.pro wss://thrumming-blue-uranium.solana-mainnet.quiknode.pro https://rpc.gunzchain.io https://api.infra.mainnet.somnia.network https://auth-api.infra.mainnet.somnia.network https://swr.xnftdata.com/rpc-proxy/ https://mainnet.megaeth.com/rpc https://rpc-gel.inkonchain.com https://rpc-animechain-39xf6m45e3.t.conduit.xyz/ https://wallets.opensea.io/ https://www.walletlink.org wss://www.walletlink.org https://pulse.walletconnect.org https://api.web3modal.org wss://relay.walletconnect.org https://metamask-sdk.api.cx.metamask.io https://mm-sdk-analytics.api.cx.metamask.io wss://metamask-sdk.api.cx.metamask.io wss://mm-sdk-relay.api.cx.metamask.io https://chain-proxy.wallet.coinbase.com https://cca-lite.coinbase.com https://*.intercom.io https://*.intercomcdn.com https://*.intercomassets.com wss://*.intercom.io https://prod-mainnet-temp-uploads.s3.us-east-1.amazonaws.com https://api.moonpay.com https://moonpay.com https://auth.privy.io https://mainnet.block-engine.jito.wtf https://seadn-original-media.s3.us-east-1.amazonaws.com https://vitals.vercel-insights.com; img-src 'self' blob: data: https://opensea.io https://static.opensea.io https://*.featurebase-attachments.com https://fb-usercontent.fra1.cdn.digitaloceanspaces.com https://static.seadn.io https://raw2.seadn.io https://i2.seadn.io https://i2c.seadn.io https://image.mux.com https://stream.mux.com https://*.canarytokens.org/ https://canarytokens.org/ https://*.intercomcdn.com https://*.intercomassets.com https://cdnjs.cloudflare.com/ajax/libs/twemoji/ https://cdn.prod.website-files.com https://media.veefriends.com/ https://i.ibb.co/ https://app.hyperliquid.xyz/coins/ https://pbs.twimg.com https://abs.twimg.com https://unavatar.io https://d1xpxki1g4htqu.cloudfront.net https://www.googletagmanager.com; media-src 'self' blob: data: https://raw2.seadn.io https://static.seadn.io https://i2.seadn.io https://i2c.seadn.io https://image.mux.com https://stream.mux.com; font-src 'self' https://fonts.gstatic.com https://fonts.reown.com https://static.seadn.io/os2/tv_library/charting_library/; object-src 'none'; base-uri 'self' https://static.seadn.io/os2/tv_library/charting_library/; form-action 'self'; frame-ancestors 'self' https://wallets.opensea.io/ https://privy.wallets.opensea.io; frame-src 'self' https://wallets.opensea.io/ https://privy.wallets.opensea.io https://auth.privy.io https://*.moonpay.com https://i2.seadn.io https://i2c.seadn.io https://static.seadn.io https: blob:; block-all-mixed-content; upgrade-insecure-requests;",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "OpenSea, exchange everything — token trading and NFT marketplace",
+  "bodyLen": 5821,
+  "nodes": 2507,
+  "readyState": "complete",
+  "head": "Discover Collections Tokens Perpetuals Beta Swap Drops Activity Rewards Tools Beta Studio Profile Resources Settings Support / Discover All Memes Trading Cards Art PFPs Photography Gaming All Statements By visualizevalue"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "removeListener": 4,
+   "then": 5,
+   "on": 3,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Sign in",
+   "tag": "BUTTON",
+   "x": 1239.8203125,
+   "y": 32,
+   "top": 12
+  },
+  "all": [
+   "2:Sign in"
+  ]
+ },
+ "clicked1": "Sign in",
+ "clickedTier": 2,
+ "find2": {
+  "n": 5,
+  "pick": {
+   "text": "Installed",
+   "tag": "SPAN",
+   "x": 850.921875,
+   "y": 389.5,
+   "area": 866.8125
+  }
+ },
+ "clicked2": "Installed",
+ "ui1": {
+  "modal": "We use cookies We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. Accept All Reject All Manage",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "OpenSea, exchange everything — token trading and NFT marketplace",
+  "bodyLen": 5694,
+  "nodes": 2441,
+  "readyState": "complete",
+  "head": "Discover Collections Tokens Perpetuals Beta Swap Drops Activity Rewards Tools Beta Studio Profile Resources Settings Support / Sign in Discover All Memes Trading Cards Art PFPs Photography Gaming All Statements By visual"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 14,
+  "wreads": {
+   "removeListener": 15,
+   "then": 15,
+   "on": 5,
+   "request": 9
+  }
+ },
+ "evN": 24,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://opensea.io/",
+ "ms": 34087
+}

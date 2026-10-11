@@ -1,0 +1,234 @@
+{
+ "siteId": "sky",
+ "url": "https://app.sky.money/",
+ "arm": "test",
+ "started": "2026-10-11T00:37:07.205Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.sky.money/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.sky.money/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.sky.money/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.sky.money/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.sky.money/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Connecting to 'wss://nbstream.binance.click/wallet-connector' violates the following Content Security Policy directive: \"connect-src 'self' data: https://static.cloudflareinsights.com cloudflareinsigh",
+   "url": "https://app.sky.money/assets/dist-aACSaz5b.js"
+  },
+  {
+   "source": "security",
+   "text": "Connecting to 'wss://nbstream.binance.click/wallet-connector' violates the following Content Security Policy directive: \"connect-src 'self' data: https://proxy.sky.money https://staging-proxy.sky.mone",
+   "url": "https://app.sky.money/assets/dist-aACSaz5b.js"
+  },
+  {
+   "source": "security",
+   "text": "Connecting to 'wss://nbstream.binance.info/wallet-connector' violates the following Content Security Policy directive: \"connect-src 'self' data: https://static.cloudflareinsights.com cloudflareinsight",
+   "url": "https://app.sky.money/assets/dist-aACSaz5b.js"
+  },
+  {
+   "source": "security",
+   "text": "Connecting to 'wss://nbstream.binance.info/wallet-connector' violates the following Content Security Policy directive: \"connect-src 'self' data: https://proxy.sky.money https://staging-proxy.sky.money",
+   "url": "https://app.sky.money/assets/dist-aACSaz5b.js"
+  },
+  {
+   "source": "security",
+   "text": "Connecting to 'wss://nbstream.yshyqxx.com/wallet-connector' violates the following Content Security Policy directive: \"connect-src 'self' data: https://static.cloudflareinsights.com cloudflareinsights",
+   "url": "https://app.sky.money/assets/dist-aACSaz5b.js"
+  },
+  {
+   "source": "security",
+   "text": "Connecting to 'wss://nbstream.yshyqxx.com/wallet-connector' violates the following Content Security Policy directive: \"connect-src 'self' data: https://proxy.sky.money https://staging-proxy.sky.money ",
+   "url": "https://app.sky.money/assets/dist-aACSaz5b.js"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' https://static.cloudflareinsights.com https://challenges.cloudflare.com https://*.googletagmanager.c",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "566E9C1EDBA03CF425288CF966CA35F5",
+   "status": 200,
+   "url": "https://app.sky.money/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://challenges.cloudflare.com https://*.posthog.com https://e.sky.money https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://*.posthog.com https://e.sky.money; img-src 'self' data: blob: https://explorer-api.walletconnect.com https://*.posthog.com https://e.sky.money https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' data: https://static.cloudflareinsights.com cloudflareinsights.com https://*.posthog.com https://e.sky.money https://*.gateway.tenderly.co https://virtual.rpc.tenderly.co https://virtual.mainnet.rpc.tenderly.co https://virtual.base.rpc.tenderly.co https://virtual.arbitrum.rpc.tenderly.co https://virtual.optimism.rpc.tenderly.co https://virtual.unichain.rpc.tenderly.co https://virtual.mainnet.eu.rpc.tenderly.co https://virtual.base.eu.rpc.tenderly.co https://virtual.arbitrum.eu.rpc.tenderly.co https://virtual.optimism.eu.rpc.tenderly.co https://virtual.unichain.eu.rpc.tenderly.co https://mainnet.base.org https://mainnet.unichain.org https://mainnet.optimism.io https://safe-transaction-mainnet.safe.global https://safe-transaction-base.safe.global https://safe-transaction-arbitrum.safe.global https://safe-transaction-optimism.safe.global https://safe-transaction-unichain.safe.global https://api.safe.global wss://relay.walletconnect.com wss://relay.walletconnect.org https://pulse.walletconnect.org https://explorer-api.walletconnect.com https://api.web3modal.org https://api.cow.fi https://api.morpho.org https://api.merkl.xyz https://api-v2.pendle.finance https://chain-proxy.wallet.coinbase.com wss://www.walletlink.org https://enhanced-provider.rainbow.me https://mm-sdk-analytics.api.cx.metamask.io https://metamask-sdk.api.cx.metamask.io/evt wss://metamask-sdk.api.cx.metamask.io wss://mm-sdk-relay.api.cx.metamask.io wss://nbstream.binance.com/wallet-connector https://vote.makerdao.com https://vote.sky.money https://indexer.hyperindex.xyz https://staging-api.sky.money https://api.sky.money https://staging-proxy.sky.money https://proxy.sky.money https://info-sky.blockanalitica.com https://sky-tenderly.blockanalitica.com https://*.jetstream-account.workers.dev https://*.sentry.io https://*.ingest.sentry.io https://a.markfi.xyz https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://verify.walletconnect.com https://verify.walletconnect.org; frame-ancestors 'self' https://app.safe.global",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "566E9C1EDBA03CF425288CF966CA35F5",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.sky.money/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://challenges.cloudflare.com https://*.posthog.com https://e.sky.money https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://*.posthog.com https://e.sky.money; img-src 'self' data: blob: https://explorer-api.walletconnect.com https://*.posthog.com https://e.sky.money https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' data: https://static.cloudflareinsights.com cloudflareinsights.com https://*.posthog.com https://e.sky.money https://*.gateway.tenderly.co https://virtual.rpc.tenderly.co https://virtual.mainnet.rpc.tenderly.co https://virtual.base.rpc.tenderly.co https://virtual.arbitrum.rpc.tenderly.co https://virtual.optimism.rpc.tenderly.co https://virtual.unichain.rpc.tenderly.co https://virtual.mainnet.eu.rpc.tenderly.co https://virtual.base.eu.rpc.tenderly.co https://virtual.arbitrum.eu.rpc.tenderly.co https://virtual.optimism.eu.rpc.tenderly.co https://virtual.unichain.eu.rpc.tenderly.co https://mainnet.base.org https://mainnet.unichain.org https://mainnet.optimism.io https://safe-transaction-mainnet.safe.global https://safe-transaction-base.safe.global https://safe-transaction-arbitrum.safe.global https://safe-transaction-optimism.safe.global https://safe-transaction-unichain.safe.global https://api.safe.global wss://relay.walletconnect.com wss://relay.walletconnect.org https://pulse.walletconnect.org https://explorer-api.walletconnect.com https://api.web3modal.org https://api.cow.fi https://api.morpho.org https://api.merkl.xyz https://api-v2.pendle.finance https://chain-proxy.wallet.coinbase.com wss://www.walletlink.org https://enhanced-provider.rainbow.me https://mm-sdk-analytics.api.cx.metamask.io https://metamask-sdk.api.cx.metamask.io/evt wss://metamask-sdk.api.cx.metamask.io wss://mm-sdk-relay.api.cx.metamask.io wss://nbstream.binance.com/wallet-connector https://vote.makerdao.com https://vote.sky.money https://indexer.hyperindex.xyz https://staging-api.sky.money https://api.sky.money https://staging-proxy.sky.money https://proxy.sky.money https://info-sky.blockanalitica.com https://sky-tenderly.blockanalitica.com https://*.jetstream-account.workers.dev https://*.sentry.io https://*.ingest.sentry.io https://a.markfi.xyz https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://verify.walletconnect.com https://verify.walletconnect.org; frame-ancestors 'self' https://app.safe.global",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Sky | Savings, rewards, staking and borrowing, without giving up control",
+  "bodyLen": 1942,
+  "nodes": 1468,
+  "readyState": "complete",
+  "head": "Portfolio Earn Stake SKY Convert Connect Wallet $10.13B in circulation Operating for 8 years How hard your stablecoins work is up to you Sky.money is where you get non-custodial access to the largest yield-bearing stable"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 3,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "isBinance": 1,
+   "removeListener": 1,
+   "then": 3,
+   "on": 3,
+   "request": 1,
+   "isCoinbaseBrowser": 2
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1200.921875,
+   "y": 44,
+   "top": 24
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 3,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "SPAN",
+   "x": 559.1015625,
+   "y": 374,
+   "area": 1059.25
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Connect a wallet Connect with MetaMask Other wallets WalletConnect Search wallet +3 By connecting a wallet, you agree to Sky's Terms of Use and acknowledge its Privacy Policy .",
+  "modalCount": 2,
+  "wc": true,
+  "connectedUI": false,
+  "mmListed": true,
+  "title": "Sky | Savings, rewards, staking and borrowing, without giving up control",
+  "bodyLen": 2119,
+  "nodes": 1521,
+  "readyState": "complete",
+  "head": "Portfolio Earn Stake SKY Convert Connect Wallet $10.13B in circulation Operating for 8 years How hard your stablecoins work is up to you Sky.money is where you get non-custodial access to the largest yield-bearing stable"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 3,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 4,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "isBinance": 1,
+   "removeListener": 1,
+   "then": 4,
+   "on": 3,
+   "request": 1,
+   "isCoinbaseBrowser": 2
+  }
+ },
+ "evN": 6,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.sky.money/earn",
+ "ms": 12923
+}

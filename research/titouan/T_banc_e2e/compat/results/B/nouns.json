@@ -1,0 +1,292 @@
+{
+ "siteId": "nouns",
+ "url": "https://nouns.wtf/",
+ "arm": "test",
+ "started": "2026-10-11T00:37:45.140Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://nouns.wtf/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://nouns.wtf/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://nouns.wtf/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://www.youtube.com/embed/lOzCA7bZG_k"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://www.youtube.com/embed/oa79nN4gMPs"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://nouns.wtf/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://nouns.wtf/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://nounspot.com/embed?sidebar=true&toggle=true&addspot=true&header=true&fullpage=true"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": false,
+   "f": "https://nounspot.com/embed?sidebar=true&toggle=true&addspot=true&header=true&fullpage=true"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "https://nounspot.com/embed?sidebar=true&toggle=true&addspot=true&header=true&fullpage=true"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "Event"
+  },
+  {
+   "top": true,
+   "text": "Event"
+  }
+ ],
+ "exceptions": [
+  {
+   "top": true,
+   "text": "RpcRequestError: RPC Request failed."
+  }
+ ],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://rpc.ankr.com/eth/ws/a07dea7027816d4ebb39e8354897c5ee15708521042529b2ee6b1b32353adb47' failed: HTTP Authentication failed; no valid credentials available",
+   "url": "https://nouns.wtf/assets/index-C-691oN9.js"
+  },
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://rpc.ankr.com/eth/ws/a07dea7027816d4ebb39e8354897c5ee15708521042529b2ee6b1b32353adb47' failed: HTTP Authentication failed; no valid credentials available",
+   "url": "https://nouns.wtf/assets/index-C-691oN9.js"
+  },
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://rpc.ankr.com/eth/ws/a07dea7027816d4ebb39e8354897c5ee15708521042529b2ee6b1b32353adb47' failed: HTTP Authentication failed; no valid credentials available",
+   "url": "https://nouns.wtf/assets/index-C-691oN9.js"
+  },
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://rpc.ankr.com/eth/ws/a07dea7027816d4ebb39e8354897c5ee15708521042529b2ee6b1b32353adb47' failed: HTTP Authentication failed; no valid credentials available",
+   "url": "https://nouns.wtf/assets/index-C-691oN9.js"
+  },
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://rpc.ankr.com/eth/ws/a07dea7027816d4ebb39e8354897c5ee15708521042529b2ee6b1b32353adb47' failed: HTTP Authentication failed; no valid credentials available",
+   "url": "https://nouns.wtf/assets/index-C-691oN9.js"
+  },
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://rpc.ankr.com/eth/ws/a07dea7027816d4ebb39e8354897c5ee15708521042529b2ee6b1b32353adb47' failed: HTTP Authentication failed; no valid credentials available",
+   "url": "https://nouns.wtf/assets/index-C-691oN9.js"
+  },
+  {
+   "source": "network",
+   "text": "WebSocket connection to 'wss://rpc.ankr.com/eth/ws/a07dea7027816d4ebb39e8354897c5ee15708521042529b2ee6b1b32353adb47' failed: HTTP Authentication failed; no valid credentials available",
+   "url": "https://nouns.wtf/assets/index-C-691oN9.js"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "1D1B2082A182CF4F3046289ECB23540D",
+   "status": 200,
+   "url": "https://nouns.wtf/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Netlify"
+  },
+  {
+   "frameId": "FB4584C9915938BF72470D5BDB8F758C",
+   "status": 200,
+   "url": "https://www.youtube.com/embed/lOzCA7bZG_k",
+   "mime": "text/html",
+   "csp": "script-src 'unsafe-eval' 'self' 'unsafe-inline' https://www.google.com https://apis.google.com https://ssl.gstatic.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://*.youtube.com https://*.google.com https://*.gstatic.com https://youtube.com https://www.youtube.com https://google.com https://*.doubleclick.net https://*.googleapis.com https://www.googleadservices.com https://tpc.googlesyndication.com https://www.youtubekids.com https://www.youtube-nocookie.com https://www.youtubeeducation.com https://www-onepick-opensocial.googleusercontent.com;report-uri https://csp.withgoogle.com/csp/youtube_main/allowlist\nrequire-trusted-types-for 'script'\nbase-uri 'self';object-src 'none';script-src 'report-sample' 'nonce-f5ek_REoi3iJiJyrZNbgWA' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';report-uri https://csp.withgoogle.com/csp/youtube_main/strict",
+   "cspRO": null,
+   "xfo": null,
+   "server": "ESF"
+  },
+  {
+   "frameId": "D87F0E23F01EBE733402B60ACEA44C09",
+   "status": 200,
+   "url": "https://www.youtube.com/embed/oa79nN4gMPs",
+   "mime": "text/html",
+   "csp": "script-src 'unsafe-eval' 'self' 'unsafe-inline' https://www.google.com https://apis.google.com https://ssl.gstatic.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://*.youtube.com https://*.google.com https://*.gstatic.com https://youtube.com https://www.youtube.com https://google.com https://*.doubleclick.net https://*.googleapis.com https://www.googleadservices.com https://tpc.googlesyndication.com https://www.youtubekids.com https://www.youtube-nocookie.com https://www.youtubeeducation.com https://www-onepick-opensocial.googleusercontent.com;report-uri https://csp.withgoogle.com/csp/youtube_main/allowlist\nrequire-trusted-types-for 'script'\nbase-uri 'self';object-src 'none';script-src 'report-sample' 'nonce-twJhgVBRCWFXg5mexCpN8A' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';report-uri https://csp.withgoogle.com/csp/youtube_main/strict",
+   "cspRO": null,
+   "xfo": null,
+   "server": "ESF"
+  },
+  {
+   "frameId": "3900C5FC009133410E98347FF87FDEF5",
+   "status": 200,
+   "url": "https://nounspot.com/embed?sidebar=true&toggle=true&addspot=true&header=true&fullpage=true",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 3,
+ "frameKinds": [
+  "iframe",
+  "iframe",
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "1D1B2082A182CF4F3046289ECB23540D",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://nouns.wtf/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Netlify"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Nouns DAO",
+  "bodyLen": 8378,
+  "nodes": 358,
+  "readyState": "complete",
+  "head": "Treasury Ξ 3,788 Proposals Candidates DAO Playground Nouns Traits Explore Language Connect One Noun, Every Day, Forever. Behold, an infinite work of art! Nouns is a community-owned brand that makes a positive impact by f"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 5,
+  "wreads": {
+   "removeListener": 7,
+   "then": 9,
+   "on": 7,
+   "isFamily": 1,
+   "providers": 1,
+   "isCoinbaseBrowser": 1,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Nouns DAO",
+  "bodyLen": 8378,
+  "nodes": 358,
+  "readyState": "complete",
+  "head": "Treasury Ξ 3,788 Proposals Candidates DAO Playground Nouns Traits Explore Language Connect One Noun, Every Day, Forever. Behold, an infinite work of art! Nouns is a community-owned brand that makes a positive impact by f"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 5,
+  "wreads": {
+   "removeListener": 7,
+   "then": 9,
+   "on": 7,
+   "isFamily": 1,
+   "providers": 1,
+   "isCoinbaseBrowser": 1,
+   "request": 1
+  }
+ },
+ "evN": 13,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://nouns.wtf/",
+ "ms": 6768
+}

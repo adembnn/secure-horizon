@@ -1,0 +1,149 @@
+{
+ "siteId": "platypus",
+ "url": "https://platypus.finance/",
+ "arm": "control",
+ "started": "2026-10-11T00:30:56.643Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://platypus.finance/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://platypus.finance/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://platypus.finance/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 503 ()",
+   "url": "https://platypus.finance/styles.e2d8700875b4811080d6.css"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "6A6B4C1B1AC29CDB8B2A7DA5DA0C4D55",
+   "status": 200,
+   "url": "https://platypus.finance/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "6A6B4C1B1AC29CDB8B2A7DA5DA0C4D55",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://platypus.finance/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Platypus - A Novel StableSwap: simple, flexible and scalable",
+  "bodyLen": 2465,
+  "nodes": 384,
+  "readyState": "complete",
+  "head": "This Changes Everything A whole new kind of AMM for stableswap Lower Slippage. Simpler UX. Launch App Beta Join Community Launch App Beta Join Community Liquidity Fragmentation One of the major problems found in the firs"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Platypus - A Novel StableSwap: simple, flexible and scalable",
+  "bodyLen": 2465,
+  "nodes": 384,
+  "readyState": "complete",
+  "head": "This Changes Everything A whole new kind of AMM for stableswap Lower Slippage. Simpler UX. Launch App Beta Join Community Launch App Beta Join Community Liquidity Fragmentation One of the major problems found in the firs"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://platypus.finance/",
+ "ms": 7358
+}

@@ -1,0 +1,177 @@
+{
+ "siteId": "morpho",
+ "url": "https://app.morpho.org/",
+ "arm": "test",
+ "started": "2026-10-11T00:35:58.247Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.morpho.org/vaults"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.morpho.org/vaults"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.morpho.org/vaults"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.morpho.org/vaults"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.morpho.org/vaults"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.morpho.org/vaults"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.morpho.org/vaults"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "E5CBDB0112F8895D1918F1B47B3DDD4C",
+   "status": 200,
+   "url": "https://app.morpho.org/vaults",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'nonce-DVo6gnF3RKzbt/F6Jdds2g==' 'strict-dynamic'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.morpho.org https://api.web3modal.org https://imagedelivery.net https://canarytokens.com https://api.dicebear.com https://storage.googleapis.com https://*.ledger.com https://*.ldg-tech.com; font-src 'self' data: https://cdn.morpho.org https://fonts.reown.com; connect-src 'self' https://api.morpho.org https://api.morpho.dev https://app.blue-api.morpho.org https://app.blue-api.morpho.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://*.betterstackdata.com https://api.walletconnect.com https://api.walletconnect.org https://echo.walletconnect.com https://pulse.walletconnect.org https://relay.walletconnect.com wss://relay.walletconnect.com wss://relay.walletconnect.org https://rpc.walletconnect.org https://secure.walletconnect.org https://secure-mobile.walletconnect.com https://secure-mobile.walletconnect.org https://verify.walletconnect.com https://verify.walletconnect.org https://api.web3modal.org https://*.coinbase.com https://walletlink.org https://app.safe.global https://api.safe.global https://api.merkl.xyz https://api.dicebear.com https://spindl.link https://rpc.tempo.xyz https://*.ledger.com https://*.ldg-tech.com wss://*.ledger.com; frame-src 'self' https://app.safe.global https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.org https://secure-mobile.walletconnect.com https://secure-mobile.walletconnect.org https://wallet.tempo.xyz; frame-ancestors 'self' https://app.safe.global https://manage.mellow.finance https://manage.stage.mellow.finance; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; report-uri https://s2528827.us-east-9.betterstackdata.com/api/2558435/security/?sentry_key=JhwDTVYgzgB7KCmUwTreZoCF; report-to csp-endpoint",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "E5CBDB0112F8895D1918F1B47B3DDD4C",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.morpho.org/vaults",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'nonce-DVo6gnF3RKzbt/F6Jdds2g==' 'strict-dynamic'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.morpho.org https://api.web3modal.org https://imagedelivery.net https://canarytokens.com https://api.dicebear.com https://storage.googleapis.com https://*.ledger.com https://*.ldg-tech.com; font-src 'self' data: https://cdn.morpho.org https://fonts.reown.com; connect-src 'self' https://api.morpho.org https://api.morpho.dev https://app.blue-api.morpho.org https://app.blue-api.morpho.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://*.betterstackdata.com https://api.walletconnect.com https://api.walletconnect.org https://echo.walletconnect.com https://pulse.walletconnect.org https://relay.walletconnect.com wss://relay.walletconnect.com wss://relay.walletconnect.org https://rpc.walletconnect.org https://secure.walletconnect.org https://secure-mobile.walletconnect.com https://secure-mobile.walletconnect.org https://verify.walletconnect.com https://verify.walletconnect.org https://api.web3modal.org https://*.coinbase.com https://walletlink.org https://app.safe.global https://api.safe.global https://api.merkl.xyz https://api.dicebear.com https://spindl.link https://rpc.tempo.xyz https://*.ledger.com https://*.ldg-tech.com wss://*.ledger.com; frame-src 'self' https://app.safe.global https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.org https://secure-mobile.walletconnect.com https://secure-mobile.walletconnect.org https://wallet.tempo.xyz; frame-ancestors 'self' https://app.safe.global https://manage.mellow.finance https://manage.stage.mellow.finance; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; report-uri https://s2528827.us-east-9.betterstackdata.com/api/2558435/security/?sentry_key=JhwDTVYgzgB7KCmUwTreZoCF; report-to csp-endpoint",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "Before you continue The Morpho App is a non-custodial interface operated by the Morpho Association to give you access to the Morpho protocols. Morpho Association does not hold your assets, does not provide financial advice, and is not a regulated financial institution. Using the protocols involves r",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Morpho Vaults",
+  "bodyLen": 2834,
+  "nodes": 1888,
+  "readyState": "complete",
+  "head": "Vaults Variable Rate Markets Fixed Rate Markets Portfolio Connect Connect Vaults Variable Rate Markets Portfolio Vaults Earn by depositing into curated Morpho vaults. Total Deposits $17,042,027,065 All vaults Network Ass"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 2,
+  "wreads": {
+   "removeListener": 6,
+   "then": 10,
+   "on": 4
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "Before you continue The Morpho App is a non-custodial interface operated by the Morpho Association to give you access to the Morpho protocols. Morpho Association does not hold your assets, does not provide financial advice, and is not a regulated financial institution. Using the protocols involves r",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Morpho Vaults",
+  "bodyLen": 2834,
+  "nodes": 1888,
+  "readyState": "complete",
+  "head": "Vaults Variable Rate Markets Fixed Rate Markets Portfolio Connect Connect Vaults Variable Rate Markets Portfolio Vaults Earn by depositing into curated Morpho vaults. Total Deposits $17,042,027,065 All vaults Network Ass"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 6,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "removeListener": 10,
+   "then": 16,
+   "on": 4,
+   "isCoinbaseBrowser": 1,
+   "request": 1
+  }
+ },
+ "evN": 6,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.morpho.org/vaults",
+ "ms": 11715
+}

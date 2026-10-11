@@ -2,7 +2,7 @@
  "siteId": "galxe",
  "url": "https://app.galxe.com/",
  "arm": "control",
- "started": "2026-10-11T00:13:58.624Z",
+ "started": "2026-10-11T00:25:09.340Z",
  "events": [
   {
    "t": "frame",
@@ -90,7 +90,7 @@
  ],
  "docs": [
   {
-   "frameId": "2A812DCAF68411A817D1616D97EFB2CC",
+   "frameId": "6B09195A644499B6FDE7BB0B441F1D3D",
    "status": 200,
    "url": "https://app.galxe.com/",
    "mime": "text/html",
@@ -105,7 +105,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "2A812DCAF68411A817D1616D97EFB2CC",
+ "mainFrameId": "6B09195A644499B6FDE7BB0B441F1D3D",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -130,7 +130,7 @@
   "mmListed": false,
   "title": "Galxe - Your Web3 Growth Engine",
   "bodyLen": 7855,
-  "nodes": 2868,
+  "nodes": 2865,
   "readyState": "complete",
   "head": "Gravity L1 Mainnet is live. Alpha Mainnet is sunsetting — bridge & unstake before Nov. 1. Explore Earn Identity About More Network Log in Explore Quests Spaces Your Web3 Growth Engine Previous Join AVA Smart Program & Wi"
  },
@@ -143,6 +143,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -183,7 +185,7 @@
   "mmListed": false,
   "title": "Galxe - Your Web3 Growth Engine",
   "bodyLen": 7899,
-  "nodes": 2882,
+  "nodes": 2879,
   "readyState": "complete",
   "head": "Gravity L1 Mainnet is live. Alpha Mainnet is sunsetting — bridge & unstake before Nov. 1. Explore Earn Identity About More Network Log in Explore Quests Spaces Your Web3 Growth Engine Previous Join AVA Smart Program & Wi"
  },
@@ -204,6 +206,8 @@
    "personal_sign",
    "wallet_revokePermissions"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 1,
   "wcalls": 0,
   "wreads": {}
@@ -230,5 +234,5 @@
   "overwritten": false
  },
  "finalUrl": "https://app.galxe.com/",
- "ms": 28593
+ "ms": 15895
 }

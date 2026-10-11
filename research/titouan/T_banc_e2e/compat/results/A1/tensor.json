@@ -1,0 +1,200 @@
+{
+ "siteId": "tensor",
+ "url": "https://www.tensor.trade/",
+ "arm": "control",
+ "started": "2026-10-11T00:31:32.039Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.tensor.trade/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://platform.twitter.com/widgets/widget_iframe.1227a5674072e080ffb1ba14ac0c1079.html?o"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/uf62p"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://www.tensor.trade/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://www.tensor.trade/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://www.tensor.trade/api/turnstile/verify"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "B7A8F61E5FB216E3FD63F09B79038874",
+   "status": 200,
+   "url": "https://www.tensor.trade/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "07579D17F7941DF24E2E90DB56D23952",
+   "status": 200,
+   "url": "https://platform.twitter.com/widgets/widget_iframe.1227a5674072e080ffb1ba14ac0c1079.html?origin=https%3A%2F%2Fwww.tensor.trade",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  },
+  {
+   "frameId": "4D17B4220972B76D1751F22977A85B19",
+   "status": 200,
+   "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/uf62p/0x4AAAAAAFNQojRtH-tMOWW1/auto/fbE/new/normal?lang=auto",
+   "mime": "text/html",
+   "csp": "default-src 'none'; script-src 'nonce-0sntxBRG2vsHJNAB9vIawU' 'unsafe-eval'; script-src-attr 'none'; worker-src blob:; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://hagen.challenges.cloudflare.com https://brunhild.challenges.cloudflare.com https://valid.alg13.dnstest.challenges.cloudflare.com https://invalid.alg13.dnstest.challenges.cloudflare.com https://dual-valid.mldsa44.dnstest.challenges.cloudflare.com https://valid.mldsa44.dnstest.challenges.cloudflare.com https://dnstest.dev; frame-src 'self' blob:; child-src 'self' blob:; form-action 'none'; base-uri 'self'; trusted-types nAZtB7 default; require-trusted-types-for 'script'; sandbox allow-same-origin allow-scripts allow-popups allow-forms",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 2,
+ "frameKinds": [
+  "iframe",
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "B7A8F61E5FB216E3FD63F09B79038874",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://www.tensor.trade/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Tensor | Solana's Leading NFT Marketplace",
+  "bodyLen": 96,
+  "nodes": 95,
+  "readyState": "complete",
+  "head": "Checking to see if you’re a bot… Keeping the bots out. Saving the good stuff for you. Loading..."
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Tensor | Solana's Leading NFT Marketplace",
+  "bodyLen": 96,
+  "nodes": 95,
+  "readyState": "complete",
+  "head": "Checking to see if you’re a bot… Keeping the bots out. Saving the good stuff for you. Loading..."
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 8,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://www.tensor.trade/",
+ "ms": 7212
+}

@@ -1,0 +1,239 @@
+{
+ "siteId": "zerion",
+ "url": "https://app.zerion.io/",
+ "arm": "test",
+ "started": "2026-10-11T00:37:53.413Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/connect-wallet"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/connect-wallet"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "BF930CAA0812404EFE33FBE9D6EEA847",
+   "status": 200,
+   "url": "https://app.zerion.io/trending",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self' https://gnosis-safe.io https://dev.gnosis-safe.io https://app.safe.global https://platform.apps.ledger.com https://dapp-browser.apps.ledger.com https://*.blockscout.com chrome-extension://* moz-extension://*",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "BF930CAA0812404EFE33FBE9D6EEA847",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.zerion.io/trending",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self' https://gnosis-safe.io https://dev.gnosis-safe.io https://app.safe.global https://platform.apps.ledger.com https://dapp-browser.apps.ledger.com https://*.blockscout.com chrome-extension://* moz-extension://*",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Trending | Zerion",
+  "bodyLen": 5848,
+  "nodes": 3513,
+  "readyState": "complete",
+  "head": "Connect Wallet Portfolio Following Favorites Trade Swap & Bridge Perps Earn Explore Trending Stocks Collections Premium Rewards 0.1 USD Connect Wallet Search / Portfolio Following Favorites Trade Swap & Bridge Perps Earn"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 15,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 6,
+  "wreads": {
+   "isLedgerLive": 5,
+   "isTokenary": 2,
+   "isBitpie": 2,
+   "isAlphaWallet": 2,
+   "isTrust": 2,
+   "isExodus": 2,
+   "isTokenPocket": 2,
+   "isStatus": 2,
+   "on": 3,
+   "request": 6
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "A",
+   "x": 123.9921875,
+   "y": 45,
+   "top": 25
+  },
+  "all": [
+   "1:Connect Wallet",
+   "1:Connect wallet to manage your portfolio"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Portfolio Tracker by Zerion, Crypto Wallet for NFTs and DeFi",
+  "bodyLen": 2047,
+  "nodes": 1278,
+  "readyState": "complete",
+  "head": "Connect Wallet Portfolio Following Favorites Trade Swap & Bridge Perps Earn Explore Trending Stocks Collections Premium Rewards 0.1 USD Connect Wallet Search / Portfolio Following Favorites Trade Swap & Bridge Perps Earn"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 26,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 6,
+  "wreads": {
+   "isLedgerLive": 6,
+   "isTokenary": 3,
+   "isBitpie": 3,
+   "isAlphaWallet": 3,
+   "isTrust": 3,
+   "isExodus": 3,
+   "isTokenPocket": 3,
+   "isStatus": 3,
+   "on": 3,
+   "request": 6
+  }
+ },
+ "evN": 10,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.zerion.io/connect-wallet",
+ "ms": 13701
+}

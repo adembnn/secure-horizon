@@ -1,0 +1,331 @@
+{
+ "siteId": "balancer",
+ "url": "https://balancer.fi/",
+ "arm": "test",
+ "started": "2026-10-11T00:35:51.853Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://balancer.fi/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://balancer.fi/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://balancer.fi/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://balancer.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://balancer.fi/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://balancer.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://balancer.fi/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://balancer.fi/pools"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://balancer.fi/pools"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "EA54914FB543D822702BF848F1CA46E2",
+   "status": 200,
+   "url": "https://balancer.fi/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "EA54914FB543D822702BF848F1CA46E2",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Launch app",
+  "click2:Connect",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://balancer.fi/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Balancer—AMMs made easy",
+  "bodyLen": 4579,
+  "nodes": 1008,
+  "readyState": "complete",
+  "head": "Balancer DAO has approved an orderly winddown (BIP-928). Most pools move to withdrawals only on 30 October 2026. Withdrawals remain available after that date. Learn more Pools Swap Portfolio veBAL Launch app Balancer v3 "
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 16,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 4,
+  "wreads": {
+   "isMetaMask": 1,
+   "isBraveWallet": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBinance": 1,
+   "isBlockWallet": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNestWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isZilPay": 1,
+   "isPortal": 1,
+   "isxPortal": 1,
+   "isRabby": 3,
+   "isRainbow": 2,
+   "isStatus": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isCTRL": 1,
+   "isZeal": 1,
+   "isCoin98": 1,
+   "isMEWwallet": 1,
+   "isSafeheron": 1,
+   "isSafePal": 1,
+   "isWigwam": 1,
+   "isZerion": 1,
+   "__seif": 1,
+   "providers": 5,
+   "removeListener": 6,
+   "then": 10,
+   "on": 4,
+   "request": 2,
+   "isCoinbaseBrowser": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Launch app",
+   "tag": "A",
+   "x": 1269.96875,
+   "y": 106.78125,
+   "top": 86.78125
+  },
+  "all": [
+   "2:Launch app"
+  ]
+ },
+ "clicked1": "Launch app",
+ "clickedTier": 2,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "find3": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect",
+   "tag": "BUTTON",
+   "x": 1297.2734375,
+   "y": 106.78125,
+   "top": 86.78125
+  },
+  "all": [
+   "1:Connect"
+  ]
+ },
+ "clicked3": "Connect",
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Connect a Wallet Recommended MetaMask Rabby Wallet Coinbase Wallet Rainbow Browser Wallet WalletConnect Close Opening MetaMask... Confirm connection in the extension Loading",
+  "modalCount": 1,
+  "wc": true,
+  "connectedUI": false,
+  "mmListed": true,
+  "title": "Balancer DeFi Liquidity Pools",
+  "bodyLen": 3052,
+  "nodes": 2496,
+  "readyState": "complete",
+  "head": "Balancer DeFi Liquidity Pools Balancer DAO has approved an orderly winddown (BIP-928). Most pools move to withdrawals only on 30 October 2026. Withdrawals remain available after that date. Learn more Pools Swap Portfolio"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 16,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 5,
+  "wreads": {
+   "isMetaMask": 1,
+   "isBraveWallet": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBinance": 1,
+   "isBlockWallet": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNestWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isZilPay": 1,
+   "isPortal": 1,
+   "isxPortal": 1,
+   "isRabby": 3,
+   "isRainbow": 2,
+   "isStatus": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isCTRL": 1,
+   "isZeal": 1,
+   "isCoin98": 1,
+   "isMEWwallet": 1,
+   "isSafeheron": 1,
+   "isSafePal": 1,
+   "isWigwam": 1,
+   "isZerion": 1,
+   "__seif": 1,
+   "providers": 5,
+   "removeListener": 6,
+   "then": 10,
+   "on": 4,
+   "request": 3,
+   "isCoinbaseBrowser": 1
+  }
+ },
+ "evN": 10,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://balancer.fi/pools",
+ "ms": 20424
+}

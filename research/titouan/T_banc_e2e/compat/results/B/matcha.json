@@ -1,0 +1,676 @@
+{
+ "siteId": "matcha",
+ "url": "https://matcha.xyz/",
+ "arm": "test",
+ "started": "2026-10-11T00:36:34.761Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cm4jky54w04cfy6rt1dggrxcg/embedded-wallets?caid=edb15260-1fb1-4"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://matcha.xyz/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "20F4CEA781B8C7CD8B33D9BA686E4941",
+   "status": 200,
+   "url": "https://matcha.xyz/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self' https://farcaster.xyz https://warpcast.com https://belongtous.xyz https://dexscreener.com https://matcha-iframe.vercel.app https://www.nounspace.com",
+   "cspRO": "default-src 'self'; script-src 'self' 'sha256-ddwCmPV6Th4s8hPC6+/se4i31Hux6pJtfpDUdUYjPCY=' 'sha256-/OA0eKpAmD8wuiMZlXi205RMLag0SvHhEnhvTrDHNyY=' https://challenges.cloudflare.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://widget.usepylon.com https://www.redditstatic.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self' https://farcaster.xyz https://warpcast.com https://belongtous.xyz https://dexscreener.com https://matcha-iframe.vercel.app https://www.nounspace.com; child-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; frame-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; connect-src 'self' https://auth.privy.io https://*.rpc.privy.systems wss://relay.walletconnect.com wss://relay.walletconnect.org wss://www.walletlink.org https://explorer-api.walletconnect.com https://rpc.walletconnect.com https://rpc.walletconnect.org https://pulse.walletconnect.com https://*.quiknode.pro wss://*.quiknode.pro https://api.hyperliquid.xyz wss://api.hyperliquid.xyz https://api.hyperliquid-testnet.xyz wss://api.hyperliquid-testnet.xyz https://api.mainnet-beta.solana.com https://api.devnet.solana.com https://api.testnet.solana.com https://mainnet.block-engine.jito.wtf https://api-sdk.zora.engineering https://t.matcha.xyz https://*.amplitude.com https://*.usepylon.com wss://*.usepylon.com https://www.reddit.com https://alb.reddit.com https://www.google.com/recaptcha/ https://o372441.ingest.us.sentry.io; worker-src 'self' blob:; media-src 'self' blob: https://*.usepylon.com; manifest-src 'self'; report-uri https://o372441.ingest.us.sentry.io/api/6641518/security/?sentry_key=62df698d503e453a80ef7b0e0e2f7e41&sentry_environment=production",
+   "xfo": null,
+   "server": "Vercel"
+  },
+  {
+   "frameId": "681ACFA3714598B0102FD79C9333FF8C",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cm4jky54w04cfy6rt1dggrxcg/embedded-wallets?caid=edb15260-1fb1-4432-94c2-a768d1258c05&client_id=client-WY5eVJ4V3TGyNLUnoeXBgEADMzAtFkL9LjdV1oqsKXLpH",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://matcha.xyz https://warpcast.com https://dexscreener.com https://farcaster.xyz https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-NGNmMGE0MWItNjg5Ni00Zjk1LWI1OTYtMjYxYjEwMDFkM2Vm'; style-src 'self' 'nonce-NGNmMGE0MWItNjg5Ni00Zjk1LWI1OTYtMjYxYjEwMDFkM2Vm'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "worker",
+  "worker",
+  "worker",
+  "worker",
+  "worker",
+  "worker",
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "20F4CEA781B8C7CD8B33D9BA686E4941",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://matcha.xyz/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self' https://farcaster.xyz https://warpcast.com https://belongtous.xyz https://dexscreener.com https://matcha-iframe.vercel.app https://www.nounspace.com",
+  "cspRO": "default-src 'self'; script-src 'self' 'sha256-ddwCmPV6Th4s8hPC6+/se4i31Hux6pJtfpDUdUYjPCY=' 'sha256-/OA0eKpAmD8wuiMZlXi205RMLag0SvHhEnhvTrDHNyY=' https://challenges.cloudflare.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://widget.usepylon.com https://www.redditstatic.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self' https://farcaster.xyz https://warpcast.com https://belongtous.xyz https://dexscreener.com https://matcha-iframe.vercel.app https://www.nounspace.com; child-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; frame-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; connect-src 'self' https://auth.privy.io https://*.rpc.privy.systems wss://relay.walletconnect.com wss://relay.walletconnect.org wss://www.walletlink.org https://explorer-api.walletconnect.com https://rpc.walletconnect.com https://rpc.walletconnect.org https://pulse.walletconnect.com https://*.quiknode.pro wss://*.quiknode.pro https://api.hyperliquid.xyz wss://api.hyperliquid.xyz https://api.hyperliquid-testnet.xyz wss://api.hyperliquid-testnet.xyz https://api.mainnet-beta.solana.com https://api.devnet.solana.com https://api.testnet.solana.com https://mainnet.block-engine.jito.wtf https://api-sdk.zora.engineering https://t.matcha.xyz https://*.amplitude.com https://*.usepylon.com wss://*.usepylon.com https://www.reddit.com https://alb.reddit.com https://www.google.com/recaptcha/ https://o372441.ingest.us.sentry.io; worker-src 'self' blob:; media-src 'self' blob: https://*.usepylon.com; manifest-src 'self'; report-uri https://o372441.ingest.us.sentry.io/api/6641518/security/?sentry_key=62df698d503e453a80ef7b0e0e2f7e41&sentry_environment=production",
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Matcha | DEX aggregator by 0x | Search, trade, done.",
+  "bodyLen": 1502,
+  "nodes": 722,
+  "readyState": "complete",
+  "head": "Tokens Portfolio History Search tokens ^K Search Connect Wallet Additional Options Swap any token in seconds Swap Limit Advanced From Ethereum USDC 50% Max Sell Amount 0.00 $ To Ethereum ETH Buy Amount $0.00 Connect EVM "
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 5,
+  "wreads": {
+   "providers": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBlockWallet": 1,
+   "isBraveWallet": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNovaWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOneKey": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isPortal": 1,
+   "isRabby": 1,
+   "isRainbow": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1,
+   "isZerion": 1,
+   "isMetaMask": 1,
+   "isCoinbaseBrowser": 2,
+   "on": 8,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1212.1640625,
+   "y": 31,
+   "top": 11
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "SPAN",
+   "x": 689,
+   "y": 409,
+   "area": 4420
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Matcha | DEX aggregator by 0x | Search, trade, done.",
+  "bodyLen": 1271,
+  "nodes": 738,
+  "readyState": "complete",
+  "head": "Tokens Portfolio History Search tokens ^K Search 0x11...1111 Additional Options Swap Limit Advanced From Ethereum Balance: 1,109.8... USDC 50% Max Sell Amount 0.00 $ To Ethereum Balance: 5.71818... ETH Buy Amount $0.00 P"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "wallet_getCapabilities",
+   "eth_chainId",
+   "wallet_getCapabilities",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 34,
+  "wreads": {
+   "providers": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBlockWallet": 1,
+   "isBraveWallet": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNovaWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOneKey": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isPortal": 1,
+   "isRabby": 1,
+   "isRainbow": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1,
+   "isZerion": 1,
+   "isMetaMask": 1,
+   "isCoinbaseBrowser": 2,
+   "on": 16,
+   "request": 25,
+   "removeListener": 1
+  }
+ },
+ "evN": 63,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://matcha.xyz/",
+ "ms": 19141
+}

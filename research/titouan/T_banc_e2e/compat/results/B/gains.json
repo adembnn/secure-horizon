@@ -1,0 +1,381 @@
+{
+ "siteId": "gains",
+ "url": "https://gains.trade/",
+ "arm": "test",
+ "started": "2026-10-11T00:38:35.901Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://gains.trade/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://gains.trade/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://gains.trade/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cmqo51a3r009y0cl23tfi2ade/embedded-wallets?caid=14ae2d7b-44d3-4"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://gains.trade/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://gains.trade/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "Error checking Cross-Origin-Opener-Policy: HTTP error! status: 403"
+  },
+  {
+   "top": true,
+   "text": "Error checking Cross-Origin-Opener-Policy: HTTP error! status: 403"
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/static/1.418.6/exception-autocapture.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/array/phc_yt7nwdKBhRHUBkoX39VcDAjtSjp6VYyiSiqjDLnvwjQT/config.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/array/phc_yt7nwdKBhRHUBkoX39VcDAjtSjp6VYyiSiqjDLnvwjQT/config"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/static/exception-autocapture.js?v=1.418.6"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/flags/?v=2&compression=base64"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/e/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+   "url": "https://gains.trade/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+   "url": "https://gains.trade/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/flags/?v=2&compression=base64"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/e/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://mx.gains.trade/e/?retry_count=1"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "523E4A3E1F236F4A6E40AEABC089A76A",
+   "status": 200,
+   "url": "https://gains.trade/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "703762FDA722DDC279BB6E76024634F7",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cmqo51a3r009y0cl23tfi2ade/embedded-wallets?caid=14ae2d7b-44d3-4c9c-98df-4778786ee3be&client_id=",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://ape.gains.trade https://app.gtrade.ios https://beta.gains.trade https://gains.trade https://halize.net https://sol.gains.trade https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-NGFiMWM1NTktMTEzMy00MzY5LWFiODQtOGZlNThjMGU4OTlj'; style-src 'self' 'nonce-NGFiMWM1NTktMTEzMy00MzY5LWFiODQtOGZlNThjMGU4OTlj'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "523E4A3E1F236F4A6E40AEABC089A76A",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://gains.trade/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Gains | Home",
+  "bodyLen": 2687,
+  "nodes": 1561,
+  "readyState": "complete",
+  "head": "Gains GNS Token Mobile App NEW Stats Docs Solana en Trade Trade now on MegaETH, the fastest real-time network T r a d e E v e r y M a r k e t I n O n e P l a c e Start Trading New to Crypto? Total Volume $110B+ Total Tra"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 67,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 13,
+  "wreads": {
+   "providers": 23,
+   "isRabby": 5,
+   "isMetaMask": 3,
+   "isRainbow": 3,
+   "isBitKeep": 3,
+   "isBinance": 2,
+   "isTrustWallet": 3,
+   "removeListener": 4,
+   "then": 4,
+   "on": 16,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitski": 1,
+   "isBlockWallet": 1,
+   "isBraveWallet": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNovaWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOneKey": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isPortal": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1,
+   "isZerion": 1,
+   "isCoinbaseBrowser": 2,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Gains | Home",
+  "bodyLen": 2687,
+  "nodes": 1468,
+  "readyState": "complete",
+  "head": "Gains GNS Token Mobile App NEW Stats Docs Solana en Trade Trade now on MegaETH, the fastest real-time network T r a d e E v e r y M a r k e t I n O n e P l a c e Start Trading New to Crypto? Total Volume $110B+ Total Tra"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 67,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 13,
+  "wreads": {
+   "providers": 23,
+   "isRabby": 5,
+   "isMetaMask": 3,
+   "isRainbow": 3,
+   "isBitKeep": 3,
+   "isBinance": 2,
+   "isTrustWallet": 3,
+   "removeListener": 4,
+   "then": 4,
+   "on": 16,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitski": 1,
+   "isBlockWallet": 1,
+   "isBraveWallet": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNovaWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOneKey": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isPortal": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1,
+   "isZerion": 1,
+   "isCoinbaseBrowser": 2,
+   "request": 1
+  }
+ },
+ "evN": 9,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://gains.trade/",
+ "ms": 22341
+}

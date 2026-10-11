@@ -2,7 +2,7 @@
  "siteId": "aave",
  "url": "https://app.aave.com/",
  "arm": "control",
- "started": "2026-10-11T00:12:44.577Z",
+ "started": "2026-10-11T00:23:48.704Z",
  "events": [
   {
    "t": "frame",
@@ -41,21 +41,6 @@
    "f": "about:blank"
   },
   {
-   "t": "read1",
-   "top": false,
-   "f": "about:blank"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "https://app.family.co/injected/master"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "about:blank"
-  },
-  {
    "t": "frame",
    "top": false,
    "f": "about:blank"
@@ -66,10 +51,9 @@
    "f": "about:blank"
   },
   {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
   },
   {
    "t": "req",
@@ -139,6 +123,24 @@
   },
   {
    "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
    "m": "eth_chainId",
    "top": true,
    "f": "https://app.aave.com/"
@@ -152,65 +154,6 @@
   {
    "t": "req",
    "m": "eth_chainId",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_chainId",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
-   "top": true,
-   "f": "https://app.aave.com/"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "https://verify.walletconnect.org/v3/attestation?projectId=44f05d7b85fbbfb975c0c1273b7804e3"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
    "top": true,
    "f": "https://app.aave.com/"
   },
@@ -253,6 +196,42 @@
   {
    "t": "req",
    "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.aave.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
    "top": true,
    "f": "https://app.aave.com/"
   },
@@ -272,21 +251,6 @@
    "t": "frame",
    "top": false,
    "f": "https://app.aave.com/icons/tokens/usdt.svg"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "https://app.aave.com/icons/tokens/usdc.svg"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "https://app.aave.com/icons/tokens/cbbtc.svg"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "https://app.aave.com/icons/tokens/wbtc.svg"
   }
  ],
  "console": [
@@ -304,7 +268,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "C759FC68AA420D827528FCBA1B89526F",
+   "frameId": "656E7A50E857A53C475E3E6696CCFA6B",
    "status": 200,
    "url": "https://app.aave.com/",
    "mime": "text/html",
@@ -314,27 +278,7 @@
    "server": "cloudflare"
   },
   {
-   "frameId": "8B90B0E9CD78BC74DEAC64A174B634B3",
-   "status": 200,
-   "url": "https://app.family.co/injected/master",
-   "mime": "text/html",
-   "csp": "default-src 'self'; script-src 'self' 'nonce-ac795bdf-1b87-4266-a8ff-2aeaac118ba4'; script-src-attr 'none'; style-src 'self' 'nonce-ac795bdf-1b87-4266-a8ff-2aeaac118ba4'; style-src-attr 'none'; font-src 'self'; frame-src 'none'; frame-ancestors *; img-src 'self' https://wallets-api.family.co https://statics.app.family.co https://ipfs.io https://static.alchemyapi.io https://api.app.family.co; child-src 'self'; connect-src 'self' https://api.app.family.co wss://api.app.family.co https://s3.eu-north-1.amazonaws.com/statics.app.family.co/ https://api.lens.xyz/graphql; form-action 'none'; media-src 'none'; object-src 'none'; worker-src 'self';",
-   "cspRO": null,
-   "xfo": null,
-   "server": "cloudflare"
-  },
-  {
-   "frameId": "B128A29BD4FB5B4CED85B3EB491B9FE0",
-   "status": 200,
-   "url": "https://verify.walletconnect.org/v3/attestation?projectId=44f05d7b85fbbfb975c0c1273b7804e3&origin=https://app.aave.com&id=4e439e52b3e50c9ccd9c85e2ecff2d9ec2fecdcc68d1c7580285a851ff2661e8&decryptedId=04cf64fb790e69b69d8f178ef77fa0c812a74ecd6f8c9044a86e5c419fd9c7cf",
-   "mime": "text/html",
-   "csp": null,
-   "cspRO": null,
-   "xfo": null,
-   "server": "cloudflare"
-  },
-  {
-   "frameId": "D9BE9684ECDCBEAAC84525F3B75EA4EA",
+   "frameId": "C5D4A4B146FB0F342AC02313FE4D4716",
    "status": 200,
    "url": "https://app.aave.com/icons/tokens/usdt.svg",
    "mime": "image/svg+xml",
@@ -342,47 +286,14 @@
    "cspRO": null,
    "xfo": null,
    "server": "cloudflare"
-  },
-  {
-   "frameId": "3C93D82DF49019300EA112ECD1AE4D0D",
-   "status": 200,
-   "url": "https://app.aave.com/icons/tokens/usdc.svg",
-   "mime": "image/svg+xml",
-   "csp": null,
-   "cspRO": null,
-   "xfo": null,
-   "server": "cloudflare"
-  },
-  {
-   "frameId": "34DF0175E79AA676326BCF035FED81AE",
-   "status": 200,
-   "url": "https://app.aave.com/icons/tokens/cbbtc.svg",
-   "mime": "image/svg+xml",
-   "csp": null,
-   "cspRO": null,
-   "xfo": null,
-   "server": "cloudflare"
-  },
-  {
-   "frameId": "F45771FE3D61A4F5EA11ED94F24D8181",
-   "status": 200,
-   "url": "https://app.aave.com/icons/tokens/wbtc.svg",
-   "mime": "image/svg+xml",
-   "csp": null,
-   "cspRO": null,
-   "xfo": null,
-   "server": "cloudflare"
   }
  ],
- "frames": 2,
- "frameKinds": [
-  "iframe",
-  "iframe"
- ],
+ "frames": 0,
+ "frameKinds": [],
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "C759FC68AA420D827528FCBA1B89526F",
+ "mainFrameId": "656E7A50E857A53C475E3E6696CCFA6B",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -407,7 +318,7 @@
   "mmListed": false,
   "title": "Aave - Open Source Liquidity Protocol",
   "bodyLen": 3487,
-  "nodes": 1372,
+  "nodes": 1371,
   "readyState": "complete",
   "head": "Dashboard Markets Savings More Aave V4 Swap Bridge GHO Connect Wallet C C o o r r e e C C o o r r e e C C o o r r e e V3 Supply and borrow the widest range of assets in Aave's deepest market. Aave total deposits $ 32.44 "
  },
@@ -418,9 +329,10 @@
   "overwritten": false,
   "req6963": 3,
   "calls": [
-   "eth_accounts",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -454,25 +366,24 @@
  },
  "clicked2": "MetaMask",
  "ui1": {
-  "modal": "MetaMask Requesting Connection Open the MetaMask browser extension to connect your wallet.",
-  "modalCount": 1,
+  "modal": "",
+  "modalCount": 0,
   "wc": false,
   "connectedUI": false,
-  "mmListed": true,
+  "mmListed": false,
   "title": "Aave - Open Source Liquidity Protocol",
-  "bodyLen": 973,
-  "nodes": 615,
+  "bodyLen": 880,
+  "nodes": 575,
   "readyState": "complete",
-  "head": "Dashboard Markets Savings More Aave V4 Swap Bridge GHO C C o o r r e e C C o o r r e e C C o o r r e e V3 Supply and borrow the widest range of assets in Aave's deepest market. Net worth Net APY Health factor Available r"
+  "head": "Dashboard Markets Savings More Aave V4 Swap Bridge GHO 0x11...1111 C C o o r r e e C C o o r r e e C C o o r r e e V3 Supply and borrow the widest range of assets in Aave's deepest market. Net worth Net APY Available rew"
  },
  "state1": {
   "mode": "control",
-  "reads": 22,
+  "reads": 23,
   "sets": 0,
   "overwritten": false,
   "req6963": 3,
   "calls": [
-   "eth_accounts",
    "eth_accounts",
    "wallet_requestPermissions",
    "eth_requestAccounts",
@@ -485,18 +396,12 @@
    "eth_accounts",
    "eth_accounts",
    "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
    "eth_chainId",
    "eth_chainId",
    "eth_chainId",
-   "eth_chainId",
-   "eth_accounts",
-   "eth_accounts",
-   "eth_accounts",
-   "eth_accounts",
-   "eth_accounts",
-   "eth_accounts",
-   "eth_accounts",
-   "eth_accounts",
    "eth_chainId",
    "eth_accounts",
    "eth_accounts",
@@ -504,14 +409,22 @@
    "eth_accounts",
    "eth_accounts",
    "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
    "eth_chainId",
    "eth_chainId"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
  },
- "evN": 46,
+ "evN": 42,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -533,5 +446,5 @@
   "overwritten": false
  },
  "finalUrl": "https://app.aave.com/",
- "ms": 41080
+ "ms": 20057
 }

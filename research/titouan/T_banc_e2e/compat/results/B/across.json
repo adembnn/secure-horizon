@@ -1,0 +1,207 @@
+{
+ "siteId": "across",
+ "url": "https://app.across.to/",
+ "arm": "test",
+ "started": "2026-10-11T00:34:16.710Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://across.to/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://across.to/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://across.to/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://across.to/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://across.to/"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "ERROR: Ampli is not yet initialized. Have you called ampli.load() on app start?"
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "57FAA11E28C5AEC2EB16DE416B067681",
+   "status": 200,
+   "url": "https://across.to/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": "default-src 'self' *.across.to across.to wss://api.blocknative.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' platform.twitter.com vercel.live www.googletagmanager.com widget.intercom.io js.intercomcdn.com; connect-src wss://*.walletconnect.com *.walletconnect.com wss://api.blocknative.com mainnet.infura.io *.across.to across.to *.wallet.coinbase.com *.alchemy.com *.infura.io *.sentry.io api-iam.intercom.io nexus-websocket-a.intercom.io api.intercom.io *.intercom.io api.hyperliquid.xyz; img-src 'self' *.walletconnect.com assets.vercel.com images.ctfassets.net data: js.intercomcdn.com static.intercomassets.com downloads.intercomcdn.com uploads.intercomusercontent.com gifs.intercomcdn.com; font-src 'self' fonts.gstatic.com assets.vercel.com use.typekit.net data: js.intercomcdn.com; style-src 'self' 'unsafe-inline' p.typekit.net use.typekit.net fonts.googleapis.com; frame-src 'self' vercel.live platform.twitter.com *.walletconnect.com intercom-sheets.com; frame-ancestors 'self'; report-uri https://umaproject.uriports.com/reports/report; report-to default",
+   "xfo": "DENY",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "57FAA11E28C5AEC2EB16DE416B067681",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:CONNECT"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://across.to/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": "default-src 'self' *.across.to across.to wss://api.blocknative.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' platform.twitter.com vercel.live www.googletagmanager.com widget.intercom.io js.intercomcdn.com; connect-src wss://*.walletconnect.com *.walletconnect.com wss://api.blocknative.com mainnet.infura.io *.across.to across.to *.wallet.coinbase.com *.alchemy.com *.infura.io *.sentry.io api-iam.intercom.io nexus-websocket-a.intercom.io api.intercom.io *.intercom.io api.hyperliquid.xyz; img-src 'self' *.walletconnect.com assets.vercel.com images.ctfassets.net data: js.intercomcdn.com static.intercomassets.com downloads.intercomcdn.com uploads.intercomusercontent.com gifs.intercomcdn.com; font-src 'self' fonts.gstatic.com assets.vercel.com use.typekit.net data: js.intercomcdn.com; style-src 'self' 'unsafe-inline' p.typekit.net use.typekit.net fonts.googleapis.com; frame-src 'self' vercel.live platform.twitter.com *.walletconnect.com intercom-sheets.com; frame-ancestors 'self'; report-uri https://umaproject.uriports.com/reports/report; report-to default",
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Across Protocol - Transfer Assets Between Layer 2s and Mainnet",
+  "bodyLen": 6456,
+  "nodes": 1207,
+  "readyState": "complete",
+  "head": "0 0 TRANSFER HISTORY SUPPORT DOCS Connect Bridge & swap across chains Fast. Cheap. Secure. From $0.00 USDC Base To Set Recipient $0.00 USDC Arbitrum Across V5 Connect Wallet Scroll to learn more THE CROSSCHAIN BRIDGE Mov"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 8,
+  "wreads": {
+   "isCoinbaseBrowser": 1,
+   "then": 7,
+   "on": 8,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "CONNECT",
+   "tag": "BUTTON",
+   "x": 1227.7734375,
+   "y": 36,
+   "top": 17
+  },
+  "all": [
+   "1:CONNECT",
+   "1:CONNECT WALLET"
+  ]
+ },
+ "clicked1": "CONNECT",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Across Protocol - Transfer Assets Between Layer 2s and Mainnet",
+  "bodyLen": 6780,
+  "nodes": 1310,
+  "readyState": "complete",
+  "head": "0 0 TRANSFER HISTORY SUPPORT DOCS Connect Connect Wallet Transfer History Blog Docs Rewards Pool Support Terms of Service Connect Wallet Ethereum Wallets MetaMask Installed Coinbase Wallet WalletConnect Solana Wallets Le"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 8,
+  "wreads": {
+   "isCoinbaseBrowser": 1,
+   "then": 7,
+   "on": 8,
+   "request": 1
+  }
+ },
+ "evN": 9,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://across.to/",
+ "ms": 12286
+}

@@ -2,7 +2,7 @@
  "siteId": "benqi",
  "url": "https://app.benqi.fi/",
  "arm": "control",
- "started": "2026-10-11T00:13:04.083Z",
+ "started": "2026-10-11T00:23:55.715Z",
  "events": [
   {
    "t": "frame",
@@ -244,7 +244,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "65554B4F8216F87DE75B6FB370EE0DDF",
+   "frameId": "C69BAD931A064F8EB50A45BD4FC63FAC",
    "status": 200,
    "url": "https://app.benqi.fi/",
    "mime": "text/html",
@@ -261,7 +261,7 @@
  ],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "65554B4F8216F87DE75B6FB370EE0DDF",
+ "mainFrameId": "C69BAD931A064F8EB50A45BD4FC63FAC",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -301,6 +301,8 @@
    "eth_accounts",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -387,6 +389,8 @@
    "eth_chainId",
    "eth_chainId"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -413,5 +417,5 @@
   "overwritten": false
  },
  "finalUrl": "https://app.benqi.fi/",
- "ms": 18762
+ "ms": 12291
 }

@@ -1,0 +1,196 @@
+{
+ "siteId": "magiceden",
+ "url": "https://magiceden.io/",
+ "arm": "test",
+ "started": "2026-10-11T00:32:50.511Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://magiceden.io/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/kcqxb"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://magiceden.io/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://magiceden.io/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://magiceden.io/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://magiceden.io/favicon.ico"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://magiceden.io/favicon.ico"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-05ikCGiW8Ll3hNqnwsT3vJ' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
+   "url": ""
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-05ikCGiW8Ll3hNqnwsT3vJ' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "53F6EF709046E232FD4CB877E14B0917",
+   "status": 403,
+   "url": "https://magiceden.io/",
+   "mime": "text/html",
+   "csp": "default-src 'none'; script-src 'nonce-05ikCGiW8Ll3hNqnwsT3vJ' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+   "cspRO": "script-src 'unsafe-inline' 'unsafe-eval'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=VjZehki2dWYkB92ICXOqDIQn_pJqZzWmFp1G_Gwxb3M-1791678771.74364-1.0.1.1-80OW.CCLwo6Py_gvLbOnx6s3W.2IEA6Bva84fcYLk9F1QhipbGG4agZ1urpistcNocE4gtMmAJXBorOKYNnmAaIQqKAyr8_q0VdQe_iSZYATvPDZevmmb_48Gs.op1Opeh2juayM.oMFuSGWMwVGPmIZSTAb3bNrlQf0OkssF9I; report-to cf-csp-endpoint",
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "B4534280C61686DEFCD2B1EC36A7363F",
+   "status": 200,
+   "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/kcqxb/0x4AAAAAAADnPIDROrmt1Wwj/light/fbE/new/normal?lang=auto",
+   "mime": "text/html",
+   "csp": "default-src 'none'; script-src 'nonce-VRtgn3jYuFjdTl9via2leY' 'unsafe-eval'; script-src-attr 'none'; worker-src blob:; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://hagen.challenges.cloudflare.com https://brunhild.challenges.cloudflare.com https://valid.alg13.dnstest.challenges.cloudflare.com https://invalid.alg13.dnstest.challenges.cloudflare.com https://dual-valid.mldsa44.dnstest.challenges.cloudflare.com https://valid.mldsa44.dnstest.challenges.cloudflare.com https://dnstest.dev; frame-src 'self' blob:; child-src 'self' blob:; form-action 'none'; base-uri 'self'; trusted-types nAZtB7 default; require-trusted-types-for 'script'; sandbox allow-same-origin allow-scripts allow-popups allow-forms",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "53F6EF709046E232FD4CB877E14B0917",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "botwall: pas d interaction"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 403,
+  "url": "https://magiceden.io/",
+  "mime": "text/html",
+  "csp": "default-src 'none'; script-src 'nonce-05ikCGiW8Ll3hNqnwsT3vJ' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+  "cspRO": "script-src 'unsafe-inline' 'unsafe-eval'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=VjZehki2dWYkB92ICXOqDIQn_pJqZzWmFp1G_Gwxb3M-1791678771.74364-1.0.1.1-80OW.CCLwo6Py_gvLbOnx6s3W.2IEA6Bva84fcYLk9F1QhipbGG4agZ1urpistcNocE4gtMmAJXBorOKYNnmAaIQqKAyr8_q0VdQe_iSZYATvPDZevmmb_48Gs.op1Opeh2juayM.oMFuSGWMwVGPmIZSTAb3bNrlQf0OkssF9I; report-to cf-csp-endpoint",
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Just a moment...",
+  "bodyLen": 750,
+  "nodes": 58,
+  "readyState": "complete",
+  "head": "magiceden.io Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting "
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": true,
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Just a moment...",
+  "bodyLen": 750,
+  "nodes": 58,
+  "readyState": "complete",
+  "head": "magiceden.io Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting "
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem",
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://magiceden.io/",
+ "ms": 16877
+}

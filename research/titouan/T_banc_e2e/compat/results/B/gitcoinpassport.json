@@ -1,0 +1,35 @@
+{
+ "siteId": "gitcoinpassport",
+ "url": "https://passport.gitcoin.co/",
+ "arm": "test",
+ "started": "2026-10-11T00:38:03.724Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "chrome-error://chromewebdata/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "7CD6FCCB14A44D4AC6955FD96EEB15B2",
+ "loadFired": false,
+ "navError": "net::ERR_NAME_NOT_RESOLVED",
+ "steps": [
+  "navError"
+ ],
+ "main": null,
+ "ms": 1065
+}

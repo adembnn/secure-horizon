@@ -2,7 +2,7 @@
  "siteId": "traderjoe",
  "url": "https://lfj.gg/",
  "arm": "control",
- "started": "2026-10-11T00:12:43.175Z",
+ "started": "2026-10-11T00:23:38.201Z",
  "events": [
   {
    "t": "frame",
@@ -39,7 +39,7 @@
   {
    "t": "frame",
    "top": false,
-   "f": "https://auth.privy.io/apps/cm6t8vnaj07qv426yk4ahtox7/embedded-wallets?caid=f5b21903-b976-4"
+   "f": "https://auth.privy.io/apps/cm6t8vnaj07qv426yk4ahtox7/embedded-wallets?caid=89cdcef2-d779-4"
   },
   {
    "t": "frame",
@@ -68,7 +68,7 @@
  ],
  "docs": [
   {
-   "frameId": "D8FE2918C92F0B3F522105377590709B",
+   "frameId": "AEA8E9066C169444ED173C644B0906F4",
    "status": 200,
    "url": "https://lfj.gg/",
    "mime": "text/html",
@@ -78,11 +78,11 @@
    "server": "cloudflare"
   },
   {
-   "frameId": "C5D7937CCDED9B57144DD8AB3EF963E0",
+   "frameId": "57EF282C0B50CE0442C466E432B47021",
    "status": 200,
-   "url": "https://auth.privy.io/apps/cm6t8vnaj07qv426yk4ahtox7/embedded-wallets?caid=f5b21903-b976-4501-89ba-33570af480ea",
+   "url": "https://auth.privy.io/apps/cm6t8vnaj07qv426yk4ahtox7/embedded-wallets?caid=89cdcef2-d779-44f2-a20c-5f0344e4c8e4",
    "mime": "text/html",
-   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:3000 https://www.lfj.gg https://enable-privy-withdrawal.joe-interface-v2.pages.dev https://lfj.gg https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-YzRkZmIzZWQtNWQwZC00MzFkLWE1YzMtMTAwM2ViMDMyNmIz'; style-src 'self' 'nonce-YzRkZmIzZWQtNWQwZC00MzFkLWE1YzMtMTAwM2ViMDMyNmIz'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:3000 https://www.lfj.gg https://enable-privy-withdrawal.joe-interface-v2.pages.dev https://lfj.gg https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-ZTU1ODQyMWQtZDY0MS00ZWRiLWEzZGQtZjZlN2Q3N2IyOTZh'; style-src 'self' 'nonce-ZTU1ODQyMWQtZDY0MS00ZWRiLWEzZGQtZjZlN2Q3N2IyOTZh'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
    "cspRO": null,
    "xfo": null,
    "server": "cloudflare"
@@ -95,7 +95,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "D8FE2918C92F0B3F522105377590709B",
+ "mainFrameId": "AEA8E9066C169444ED173C644B0906F4",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -126,7 +126,7 @@
  },
  "state0": {
   "mode": "control",
-  "reads": 31,
+  "reads": 30,
   "sets": 0,
   "overwritten": false,
   "req6963": 5,
@@ -134,6 +134,8 @@
    "eth_accounts",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -181,7 +183,7 @@
  },
  "state1": {
   "mode": "control",
-  "reads": 32,
+  "reads": 31,
   "sets": 0,
   "overwritten": false,
   "req6963": 5,
@@ -189,6 +191,8 @@
    "eth_accounts",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -215,5 +219,5 @@
   "overwritten": false
  },
  "finalUrl": "https://lfj.gg/swap",
- "ms": 33111
+ "ms": 18627
 }

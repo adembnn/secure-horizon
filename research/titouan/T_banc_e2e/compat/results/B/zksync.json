@@ -1,0 +1,195 @@
+{
+ "siteId": "zksync",
+ "url": "https://portal.zksync.io/",
+ "arm": "test",
+ "started": "2026-10-11T00:39:01.162Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://portal.zksync.io/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://portal.zksync.io/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://portal.zksync.io/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.zksync.io/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.zksync.io/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://verify.walletconnect.com/09f1773e9dba3d802cf679bb1062544f"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "This version of the RudderStack JavaScript SDK is deprecated and no longer maintained. While your events are still being tracked and delivered, we strongly recommend you to migrate to the latest version (v3) for enhanced features, security updates, and ongoing support. For more details, visit the mi"
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920' violates the following Content Security Policy directive: \"script-src 'self' 'un",
+   "url": "https://portal.zksync.io/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "65CFD614E0C9B92FE8F8D96993845F81",
+   "status": 200,
+   "url": "https://portal.zksync.io/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.rudderlabs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' data: blob: https: wss:; frame-src 'self' https:; worker-src 'self' blob:; manifest-src 'self'; form-action 'self' https:",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "91E922DC102379EF8713F5D85579D88C",
+   "status": 200,
+   "url": "https://verify.walletconnect.com/09f1773e9dba3d802cf679bb1062544f",
+   "mime": "text/html",
+   "csp": "frame-ancestors https://*.portal.zksync.io https://portal.zksync.io https://localhost:* http://localhost:* https://*.localhost:* http://*.localhost:* https://127.0.0.1:* http://127.0.0.1:*",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "65CFD614E0C9B92FE8F8D96993845F81",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://portal.zksync.io/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.rudderlabs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' data: blob: https: wss:; frame-src 'self' https:; worker-src 'self' blob:; manifest-src 'self'; form-action 'self' https:",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "ZKsync Bridge is live on beta Nothing on this website should be construed as an invitation, inducement, or solicitation to engage in investment activity. You understand that the bridge, asset, and transaction features available through this website are in beta and subject to testing, further develop",
+  "modalCount": 6,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "ZKsync Bridge | Transfer funds between ZKsync and Ethereum",
+  "bodyLen": 1187,
+  "nodes": 273,
+  "readyState": "complete",
+  "head": "Beta Bridge Assets Transfers ZKsync Era Connect wallet Bridge You have withdrawals available for claiming on Ethereum network See withdrawals From Ethereum ETH Bridged () will work but is different from native . This tok"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "removeListener": 6,
+   "then": 6,
+   "on": 2,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "ZKsync Bridge is live on beta Nothing on this website should be construed as an invitation, inducement, or solicitation to engage in investment activity. You understand that the bridge, asset, and transaction features available through this website are in beta and subject to testing, further develop",
+  "modalCount": 6,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "ZKsync Bridge | Transfer funds between ZKsync and Ethereum",
+  "bodyLen": 1187,
+  "nodes": 273,
+  "readyState": "complete",
+  "head": "Beta Bridge Assets Transfers ZKsync Era Connect wallet Bridge You have withdrawals available for claiming on Ethereum network See withdrawals From Ethereum ETH Bridged () will work but is different from native . This tok"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 3,
+  "wreads": {
+   "removeListener": 6,
+   "then": 6,
+   "on": 2,
+   "request": 1
+  }
+ },
+ "evN": 7,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://portal.zksync.io/bridge",
+ "ms": 6219
+}

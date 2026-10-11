@@ -2,7 +2,7 @@
  "siteId": "curve",
  "url": "https://curve.finance/",
  "arm": "control",
- "started": "2026-10-11T00:13:17.793Z",
+ "started": "2026-10-11T00:23:58.334Z",
  "events": [
   {
    "t": "frame",
@@ -47,16 +47,6 @@
    "f": "https://www.curve.finance/"
   },
   {
-   "t": "frame",
-   "top": false,
-   "f": "about:blank"
-  },
-  {
-   "t": "read1",
-   "top": false,
-   "f": "about:blank"
-  },
-  {
    "t": "req",
    "m": "eth_chainId",
    "top": true,
@@ -67,6 +57,16 @@
    "m": "eth_call",
    "top": true,
    "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
   },
   {
    "t": "req",
@@ -100,6 +100,18 @@
   },
   {
    "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
    "m": "eth_accounts",
    "top": true,
    "f": "https://www.curve.finance/dex/ethereum/swap"
@@ -119,18 +131,6 @@
   {
    "t": "req",
    "m": "eth_chainId",
-   "top": true,
-   "f": "https://www.curve.finance/dex/ethereum/swap"
-  },
-  {
-   "t": "req",
-   "m": "eth_chainId",
-   "top": true,
-   "f": "https://www.curve.finance/dex/ethereum/swap"
-  },
-  {
-   "t": "req",
-   "m": "eth_accounts",
    "top": true,
    "f": "https://www.curve.finance/dex/ethereum/swap"
   },
@@ -217,7 +217,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "A6758E7BF7E651E48EBEDA79F19F9477",
+   "frameId": "1D253C0821589862BDC61AA0D6F357AC",
    "status": 200,
    "url": "https://www.curve.finance/",
    "mime": "text/html",
@@ -232,7 +232,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "A6758E7BF7E651E48EBEDA79F19F9477",
+ "mainFrameId": "1D253C0821589862BDC61AA0D6F357AC",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -255,22 +255,26 @@
   "wc": false,
   "connectedUI": false,
   "mmListed": false,
-  "title": "Curve.finance",
-  "bodyLen": 841,
-  "nodes": 435,
+  "title": "Swap - Curve",
+  "bodyLen": 972,
+  "nodes": 547,
   "readyState": "complete",
   "head": "Make sure you are on the right domain Always carefully check that your URL is https://www.curve.finance/. Dashboard retirement As part of ongoing maintenance and improvements on the website, the DEX dashboard has been re"
  },
  "state0": {
   "mode": "control",
-  "reads": 5,
+  "reads": 6,
   "sets": 0,
   "overwritten": false,
   "req6963": 1,
   "calls": [
    "eth_accounts",
-   "eth_accounts"
+   "eth_accounts",
+   "eth_chainId",
+   "eth_call"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -332,12 +336,12 @@
    "eth_chainId",
    "eth_accounts",
    "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
    "eth_accounts",
    "eth_chainId",
    "eth_accounts",
    "eth_chainId",
-   "eth_chainId",
-   "eth_accounts",
    "eth_chainId",
    "eth_call",
    "eth_chainId",
@@ -351,6 +355,8 @@
    "eth_chainId",
    "eth_call"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -377,5 +383,5 @@
   "overwritten": false
  },
  "finalUrl": "https://www.curve.finance/dex/ethereum/swap",
- "ms": 22559
+ "ms": 13360
 }

@@ -1,0 +1,13 @@
+{
+ "count": 1,
+ "openings": [
+  {
+   "ts": "2026-10-11T00:25:21.920Z",
+   "round": 3,
+   "rules_hash": "f952f3fb298fc0dc9627e0129160d02621443fc2860d8d9b1a3e9e69373dba0e",
+   "code_hash": "be6db070543239289ccd80c637bfd115ab7925e10adb7af4ca1b636198c828f6",
+   "test_sha256": "829660aed1303f91c20af51c28e92f9d31d9caef313278608f73bb711ff369a8",
+   "reopen": false
+  }
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "siteId": "defillama",
+ "url": "https://defillama.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:30:08.032Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://defillama.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://defillama.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://defillama.com/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "40CD183F4390ADBB913F6F91CA0C2659",
+   "status": 200,
+   "url": "https://defillama.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "40CD183F4390ADBB913F6F91CA0C2659",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://defillama.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "DefiLlama - DeFi Dashboard & Crypto Analytics",
+  "bodyLen": 15816,
+  "nodes": 3268,
+  "readyState": "complete",
+  "head": "Navigate to DeFi Dashboard Home Metrics Tools Chains Yields Stablecoins RWA Exchanges MiCA Tokens Equities Rankings Sectors Industries Earnings Calendar Pre-IPO Market Makers Universal Token Rating Support API & MCP DEX "
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "DefiLlama - DeFi Dashboard & Crypto Analytics",
+  "bodyLen": 15816,
+  "nodes": 3268,
+  "readyState": "complete",
+  "head": "Navigate to DeFi Dashboard Home Metrics Tools Chains Yields Stablecoins RWA Exchanges MiCA Tokens Equities Rankings Sectors Industries Earnings Calendar Pre-IPO Market Makers Universal Token Rating Support API & MCP DEX "
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://defillama.com/",
+ "ms": 9150
+}

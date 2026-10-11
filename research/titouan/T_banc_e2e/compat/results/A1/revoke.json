@@ -2,7 +2,7 @@
  "siteId": "revoke",
  "url": "https://revoke.cash/",
  "arm": "control",
- "started": "2026-10-11T00:14:48.485Z",
+ "started": "2026-10-11T00:26:21.386Z",
  "events": [
   {
    "t": "frame",
@@ -62,13 +62,13 @@
   },
   {
    "t": "req",
-   "m": "eth_chainId",
+   "m": "eth_accounts",
    "top": true,
    "f": "https://revoke.cash/"
   },
   {
    "t": "req",
-   "m": "eth_accounts",
+   "m": "eth_chainId",
    "top": true,
    "f": "https://revoke.cash/"
   },
@@ -108,7 +108,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "3FAB18FE05753A1E256466F4F18E3881",
+   "frameId": "DB6ACCF0D1679B4884F40F6C831E4078",
    "status": 200,
    "url": "https://revoke.cash/",
    "mime": "text/html",
@@ -123,7 +123,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "3FAB18FE05753A1E256466F4F18E3881",
+ "mainFrameId": "DB6ACCF0D1679B4884F40F6C831E4078",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -161,6 +161,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -200,7 +202,7 @@
   "connectedUI": true,
   "mmListed": false,
   "title": "Address 0x111111...111111's Approvals on Ethereum | Revoke.cash",
-  "bodyLen": 1725,
+  "bodyLen": 1679,
   "nodes": 759,
   "readyState": "complete",
   "head": "Extension Exploits Learn Premium More Blog About Us Merchandise My Dashboard 0x1111...1111 My Dashboard Account Settings Disconnect 0x111...111 My Dashboard Account Settings Disconnect Check Connected Address 0x111111..."
@@ -218,14 +220,16 @@
    "eth_chainId",
    "eth_accounts",
    "eth_chainId",
-   "eth_chainId",
    "eth_accounts",
+   "eth_chainId",
    "eth_accounts",
    "eth_accounts",
    "eth_chainId",
    "eth_chainId",
    "wallet_getCapabilities"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -252,5 +256,5 @@
   "overwritten": false
  },
  "finalUrl": "https://revoke.cash/address/0x1111111111111111111111111111111111111111?chainId=1",
- "ms": 18773
+ "ms": 15563
 }

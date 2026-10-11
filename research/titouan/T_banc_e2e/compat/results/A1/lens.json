@@ -1,0 +1,210 @@
+{
+ "siteId": "lens",
+ "url": "https://www.lens.xyz/",
+ "arm": "control",
+ "started": "2026-10-11T00:27:07.137Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cmq7g9lit00rd0djsuajezvtx/embedded-wallets?caid=039f9413-da1b-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://lens.xyz/privacy-policy?_rsc=5CB68i4pnAekjehf"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://lens.xyz/docs?_rsc=5CB68i4pnAekjehf"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "579E434624E74C179D9160E8009CD189",
+   "status": 200,
+   "url": "https://lens.xyz/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'none'",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "FD08F88FBB5AAF345B51AC4135B72C0A",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cmq7g9lit00rd0djsuajezvtx/embedded-wallets?caid=039f9413-da1b-45da-9bdc-ecc55dc2d2af",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://claim.lens.xyz https://lens-web-staging.vercel.app https://lens.xyz https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-MmJmOTRkZjUtMTE2Ny00N2VhLTkwNTItODM2YThkNjQ3YzE5'; style-src 'self' 'nonce-MmJmOTRkZjUtMTE2Ny00N2VhLTkwNTItODM2YThkNjQ3YzE5'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "579E434624E74C179D9160E8009CD189",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://lens.xyz/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'none'",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Lens",
+  "bodyLen": 2195,
+  "nodes": 1755,
+  "readyState": "complete",
+  "head": "Build with Lens News Docs FAQs Bridge New Social Layer For onchain culture and communities Developer Docs Create Account Orb 800,000+ downloads Orb is a web3 social app built on Lens Protocol that shapes the internet of "
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 10,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Lens",
+  "bodyLen": 2195,
+  "nodes": 1755,
+  "readyState": "complete",
+  "head": "Build with Lens News Docs FAQs Bridge New Social Layer For onchain culture and communities Developer Docs Create Account Orb 800,000+ downloads Orb is a web3 social app built on Lens Protocol that shapes the internet of "
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 10,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 11,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://lens.xyz/",
+ "ms": 7099
+}

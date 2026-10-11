@@ -2,7 +2,7 @@
  "siteId": "zora",
  "url": "https://zora.co/",
  "arm": "control",
- "started": "2026-10-11T00:13:58.614Z",
+ "started": "2026-10-11T00:24:56.224Z",
  "events": [
   {
    "t": "frame",
@@ -20,16 +20,6 @@
    "f": "https://zora.co/"
   },
   {
-   "t": "frame",
-   "top": false,
-   "f": "about:blank"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "about:blank"
-  },
-  {
    "t": "req6963",
    "top": true,
    "f": "https://zora.co/"
@@ -43,7 +33,17 @@
   {
    "t": "frame",
    "top": false,
-   "f": "https://privy.zora.co/apps/clpgf04wn04hnkw0fv1m11mnb/embedded-wallets?caid=cd93e8f5-5e39-4"
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://privy.zora.co/apps/clpgf04wn04hnkw0fv1m11mnb/embedded-wallets?caid=3f2ef98c-06b8-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
   }
  ],
  "console": [
@@ -58,31 +58,11 @@
    "source": "javascript",
    "text": "Refused to set unsafe header \"User-Agent\"",
    "url": "https://zora.co/_next/static/chunks/8924-2cc3a0a396c2d523.js"
-  },
-  {
-   "source": "javascript",
-   "text": "Access to fetch at 'https://base-proxy.rpc-proxy.zora.co/' from origin 'https://zora.co' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Co",
-   "url": "https://zora.co/"
-  },
-  {
-   "source": "network",
-   "text": "Failed to load resource: net::ERR_FAILED",
-   "url": "https://base-proxy.rpc-proxy.zora.co/"
-  },
-  {
-   "source": "javascript",
-   "text": "Access to fetch at 'https://base-mainnet.g.alchemy.com/v2/pMscI06wKSDxeLWocHKIrKAIXcWQ6-Ox' from origin 'https://zora.co' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is pr",
-   "url": "https://zora.co/"
-  },
-  {
-   "source": "network",
-   "text": "Failed to load resource: net::ERR_FAILED",
-   "url": "https://base-mainnet.g.alchemy.com/v2/pMscI06wKSDxeLWocHKIrKAIXcWQ6-Ox"
   }
  ],
  "docs": [
   {
-   "frameId": "8A1BC49443D81E17460852C9EAA3E9E0",
+   "frameId": "42552FFB4BC056548FC6366CE2A7D31F",
    "status": 200,
    "url": "https://zora.co/",
    "mime": "text/html",
@@ -92,11 +72,11 @@
    "server": "cloudflare"
   },
   {
-   "frameId": "A93C7DDFEC849980C26EF2F36751F69A",
+   "frameId": "D0DFB57B425E32116F1A34F3E000A5E7",
    "status": 200,
-   "url": "https://privy.zora.co/apps/clpgf04wn04hnkw0fv1m11mnb/embedded-wallets?caid=cd93e8f5-5e39-44e0-ab31-979bd1e08c6e&client_id=client-WY2f8mnC65aGnM2LmXpwBU5GqK3kxYqJoV7pSNRJLWrp6",
+   "url": "https://privy.zora.co/apps/clpgf04wn04hnkw0fv1m11mnb/embedded-wallets?caid=3f2ef98c-06b8-4435-bbdd-b2c2574e63a0&client_id=client-WY2f8mnC65aGnM2LmXpwBU5GqK3kxYqJoV7pSNRJLWrp6",
    "mime": "text/html",
-   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://*.preview.ourzora.com https://*.preview.zora.co https://*.preview.zora.com https://bridge.zora.energy https://testnet.zora.co https://zora.co https://zora.com https://creators.zora.com https://privy.zora.co https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-YjIxZTcwMWItMDQxOS00YTEzLWFlMWYtNDBiNzYwOTI0NDZm'; style-src 'self' 'nonce-YjIxZTcwMWItMDQxOS00YTEzLWFlMWYtNDBiNzYwOTI0NDZm'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://*.preview.ourzora.com https://*.preview.zora.co https://*.preview.zora.com https://bridge.zora.energy https://testnet.zora.co https://zora.co https://zora.com https://creators.zora.com https://privy.zora.co https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-Y2RkYmI4M2EtNjQ4MS00OGU5LTk2NzctMTJmNjg5NzRjYTQz'; style-src 'self' 'nonce-Y2RkYmI4M2EtNjQ4MS00OGU5LTk2NzctMTJmNjg5NzRjYTQz'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
    "cspRO": null,
    "xfo": null,
    "server": "cloudflare"
@@ -109,11 +89,11 @@
  ],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "8A1BC49443D81E17460852C9EAA3E9E0",
+ "mainFrameId": "42552FFB4BC056548FC6366CE2A7D31F",
  "loadFired": true,
  "navError": null,
  "steps": [],
- "loadTimedOut": true,
+ "loadTimedOut": false,
  "main": {
   "status": 200,
   "url": "https://zora.co/",
@@ -130,9 +110,9 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Zora — Post, discover, and trade what’s next",
-  "bodyLen": 11068,
-  "nodes": 10095,
-  "readyState": "interactive",
+  "bodyLen": 11097,
+  "nodes": 10129,
+  "readyState": "complete",
   "head": "Your external wallet is not connected. Please connect it to use Zora, or upgrade to the Zora wallet. Connect Disclosure We use cookies to give you the best experience on Zora. Learn more Reject Accept Login Sign up All C"
  },
  "state0": {
@@ -144,6 +124,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -161,9 +143,9 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Zora — Post, discover, and trade what’s next",
-  "bodyLen": 11068,
-  "nodes": 10096,
-  "readyState": "interactive",
+  "bodyLen": 11097,
+  "nodes": 10129,
+  "readyState": "complete",
   "head": "Your external wallet is not connected. Please connect it to use Zora, or upgrade to the Zora wallet. Connect Disclosure We use cookies to give you the best experience on Zora. Learn more Reject Accept Login Sign up All C"
  },
  "state1": {
@@ -175,6 +157,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -201,5 +185,5 @@
   "overwritten": false
  },
  "finalUrl": "https://zora.co/",
- "ms": 48367
+ "ms": 11608
 }

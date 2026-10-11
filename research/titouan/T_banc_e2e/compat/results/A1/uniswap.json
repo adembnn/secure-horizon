@@ -2,7 +2,7 @@
  "siteId": "uniswap",
  "url": "https://app.uniswap.org/",
  "arm": "control",
- "started": "2026-10-11T00:12:43.988Z",
+ "started": "2026-10-11T00:23:32.497Z",
  "events": [
   {
    "t": "frame",
@@ -33,12 +33,17 @@
   {
    "t": "frame",
    "top": false,
-   "f": "https://privy.app.uniswap.org/apps/cmm59god700a40bibrazsxp7n/embedded-wallets?caid=b90f958"
+   "f": "https://privy.app.uniswap.org/apps/cmm59god700a40bibrazsxp7n/embedded-wallets?caid=9430e70"
   }
  ],
  "console": [],
  "exceptions": [],
  "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
+  },
   {
    "source": "network",
    "text": "WebSocket connection to 'wss://entry-gateway.backend-prod.api.uniswap.org/ws' failed: HTTP Authentication failed; no valid credentials available",
@@ -72,7 +77,7 @@
   {
    "source": "network",
    "text": "Failed to load resource: the server responded with a status of 401 ()",
-   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
+   "url": "https://entry-gateway.backend-prod.api.uniswap.org/uniswap.compliancev2service.v1.compliancev2Service/GatedFeatures"
   },
   {
    "source": "network",
@@ -82,32 +87,37 @@
   {
    "source": "network",
    "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
    "url": "https://entry-gateway.backend-prod.api.uniswap.org/uniswap.compliancev2service.v1.compliancev2Service/GatedFeatures"
   },
   {
    "source": "network",
    "text": "Failed to load resource: the server responded with a status of 401 ()",
-   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
-  },
-  {
-   "source": "network",
-   "text": "Failed to load resource: the server responded with a status of 401 ()",
-   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
-  },
-  {
-   "source": "network",
-   "text": "Failed to load resource: the server responded with a status of 401 ()",
-   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
+   "url": "https://entry-gateway.backend-prod.api.uniswap.org/uniswap.compliancev2service.v1.compliancev2Service/FeatureGatedTokens"
   },
   {
    "source": "security",
    "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'wasm-unsafe-eval' https://challenges.cloudflare.com https://cdn.app.uniswap.org'. Either the 'unsaf",
    "url": ""
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://entry-gateway.backend-prod.api.uniswap.org/rpc/1"
   }
  ],
  "docs": [
   {
-   "frameId": "927521DBD699CD3D71A56834BE4175D9",
+   "frameId": "BBCD09BC580761F6DF98FEF9E6369592",
    "status": 200,
    "url": "https://app.uniswap.org/",
    "mime": "text/html",
@@ -117,11 +127,11 @@
    "server": null
   },
   {
-   "frameId": "5922C6213495A85A389783855C5CAE6E",
+   "frameId": "1E5259A2FEBCBC869347EA8C586CC0D3",
    "status": 200,
-   "url": "https://privy.app.uniswap.org/apps/cmm59god700a40bibrazsxp7n/embedded-wallets?caid=b90f9586-cddd-494f-86ac-9457d03c5b87&client_id=client-WY6WiUk8ZY6s7VfMZQPa4M4jJMuhssUfrnhWHZrCxaJnZ",
+   "url": "https://privy.app.uniswap.org/apps/cmm59god700a40bibrazsxp7n/embedded-wallets?caid=9430e703-ff53-468a-8a66-2102a97634ba&client_id=client-WY6WiUk8ZY6s7VfMZQPa4M4jJMuhssUfrnhWHZrCxaJnZ",
    "mime": "text/html",
-   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://app.uniswap.org https://privy.app.uniswap.org https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-YmZlMmI2M2YtYzY5Zi00MDQ5LTk0ZTItZDAzYjZjMjZmZTg0'; style-src 'self' 'nonce-YmZlMmI2M2YtYzY5Zi00MDQ5LTk0ZTItZDAzYjZjMjZmZTg0'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://app.uniswap.org https://privy.app.uniswap.org https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-MzViYjZlMGUtZDc2OC00ZTExLWE3YzEtOGU5ZDJiNGE4N2Ey'; style-src 'self' 'nonce-MzViYjZlMGUtZDc2OC00ZTExLWE3YzEtOGU5ZDJiNGE4N2Ey'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
    "cspRO": null,
    "xfo": null,
    "server": "cloudflare"
@@ -134,7 +144,7 @@
  ],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "927521DBD699CD3D71A56834BE4175D9",
+ "mainFrameId": "BBCD09BC580761F6DF98FEF9E6369592",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -157,10 +167,10 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Uniswap | Trade Crypto on DeFi’s Leading Exchange",
-  "bodyLen": 2497,
-  "nodes": 1728,
+  "bodyLen": 439,
+  "nodes": 1066,
   "readyState": "complete",
-  "head": "Uniswap Trade Explore Launches Beta Pool Portfolio Connect UNI 0% USDT 0% DAI 0% APE 0% EURC 0% ENS 0% USDP 0% COMP 0% WBTC 0% ETH 0% Swap anytime, anywhere. Sell 0 ETH $0 Buy 0 Select token $0 Get started Buy and sell c"
+  "head": "Uniswap Trade Explore Launches Beta Pool Portfolio Connect Swap anytime, anywhere. Sell 0 ETH $0 Buy 0 Select token $0 Get started Buy and sell crypto with zero app fees on 23+ networks including Ethereum, Unichain, and "
  },
  "state0": {
   "mode": "control",
@@ -171,6 +181,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -204,10 +216,10 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Uniswap | Trade Crypto on DeFi’s Leading Exchange",
-  "bodyLen": 2857,
-  "nodes": 1908,
+  "bodyLen": 2835,
+  "nodes": 1906,
   "readyState": "complete",
-  "head": "Uniswap Trade Explore Launches Beta Pool Portfolio Connect UNI 3.37% USDT 0% DAI 0.01% APE 1.34% EURC 0% ENS 0.48% USDP 0.01% COMP 1.32% WBTC 0.43% ETH 0.55% Swap anytime, anywhere. Sell 0 ETH $0 Buy 0 Select token $0 Ge"
+  "head": "Uniswap Trade Explore Launches Beta Pool Portfolio Connect MKR 0% WBTC 0% APE 0% SOL 0% LINK 0% USDP 0% POL 0% OP 0% PEPE 0% CRV 0% DAI 0% ENS 0% AAVE 0% COMP 0% Swap anytime, anywhere. Sell 0 ETH $0 Buy 0 Select token $"
  },
  "state1": {
   "mode": "control",
@@ -218,6 +230,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -246,5 +260,5 @@
   "overwritten": false
  },
  "finalUrl": "https://app.uniswap.org/",
- "ms": 35403
+ "ms": 21711
 }

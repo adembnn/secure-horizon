@@ -1,0 +1,368 @@
+{
+ "siteId": "arbbridge",
+ "url": "https://bridge.arbitrum.io/",
+ "arm": "test",
+ "started": "2026-10-11T00:37:11.086Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://portal.arbitrum.io/bridge"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 400 ()",
+   "url": "https://iris-api.circle.com/v1/attestations/0x"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute width: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://portal.arbitrum.io/_next/static/immutable/chunks/2a-1jl83mnlk8.js"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute height: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://portal.arbitrum.io/_next/static/immutable/chunks/2a-1jl83mnlk8.js"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "EDFC4A0744930C3FF3327CCD7FAD3CBD",
+   "status": 200,
+   "url": "https://portal.arbitrum.io/bridge",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "EDFC4A0744930C3FF3327CCD7FAD3CBD",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://portal.arbitrum.io/bridge",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Bridge to Arbitrum One",
+  "bodyLen": 275,
+  "nodes": 235,
+  "readyState": "complete",
+  "head": "Connect Wallet Home Bridge Earn Explore Build Bridge Txns Buy From: Ethereum ETH To: Arbitrum One - ETH Receive Send to custom address Send your funds to a different address. Be sure you mean to send it here. I have read"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 7,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 4,
+  "wreads": {
+   "removeListener": 16,
+   "then": 26,
+   "on": 4,
+   "isCoinbaseBrowser": 1,
+   "request": 2
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1285.1953125,
+   "y": 33,
+   "top": 15
+  },
+  "all": [
+   "1:Connect Wallet",
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 4,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "WUI-TEXT",
+   "x": 603.84375,
+   "y": 289,
+   "area": 1362.375
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Bridge to Arbitrum One",
+  "bodyLen": 229,
+  "nodes": 294,
+  "readyState": "complete",
+  "head": "0x111...1111 Home Bridge Earn Explore Build Bridge Txns Buy From: Ethereum ETH Balance: To: Arbitrum One - ETH Balance: Receive Send to custom address I have read and agree to the Terms and Conditions . Move funds to Arb"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 7,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 18,
+  "wreads": {
+   "removeListener": 31,
+   "then": 41,
+   "on": 6,
+   "isCoinbaseBrowser": 1,
+   "request": 13
+  }
+ },
+ "evN": 30,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://portal.arbitrum.io/bridge?destinationChain=arbitrum-one&sanitized=true&sourceChain=ethereum",
+ "ms": 28488
+}

@@ -2,7 +2,7 @@
  "siteId": "zapper",
  "url": "https://zapper.xyz/",
  "arm": "control",
- "started": "2026-10-11T00:14:59.167Z",
+ "started": "2026-10-11T00:26:34.837Z",
  "events": [
   {
    "t": "frame",
@@ -22,12 +22,7 @@
   {
    "t": "frame",
    "top": false,
-   "f": "about:blank"
-  },
-  {
-   "t": "frame",
-   "top": false,
-   "f": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/o4iyi"
+   "f": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/rayeg"
   },
   {
    "t": "frame",
@@ -41,6 +36,36 @@
   },
   {
    "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/rayeg"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:srcdoc"
+  },
+  {
+   "t": "frame",
    "top": false,
    "f": "about:blank"
   },
@@ -55,7 +80,16 @@
    "f": "https://zapper.xyz/"
   }
  ],
- "console": [],
+ "console": [
+  {
+   "top": false,
+   "text": "%c%d font-size:0;color:transparent NaN"
+  },
+  {
+   "top": false,
+   "text": "%c%d font-size:0;color:transparent NaN"
+  }
+ ],
  "exceptions": [],
  "logErrors": [
   {
@@ -75,32 +109,32 @@
   },
   {
    "source": "security",
-   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-4Gj9nTh8ZtYvwToDEVCRVY' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-XasmcotszhO6yD4PAPHsMM' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
    "url": ""
   },
   {
    "source": "security",
-   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-4Gj9nTh8ZtYvwToDEVCRVY' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-XasmcotszhO6yD4PAPHsMM' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
    "url": ""
   }
  ],
  "docs": [
   {
-   "frameId": "28BBAD607B1155CAA8A680C957D91F88",
+   "frameId": "DD6470671314DEB22327DB9CC7192524",
    "status": 403,
    "url": "https://zapper.xyz/",
    "mime": "text/html",
-   "csp": "default-src 'none'; script-src 'nonce-4Gj9nTh8ZtYvwToDEVCRVY' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+   "csp": "default-src 'none'; script-src 'nonce-XasmcotszhO6yD4PAPHsMM' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
    "cspRO": null,
    "xfo": "SAMEORIGIN",
    "server": "cloudflare"
   },
   {
-   "frameId": "CD5FCEAA48C4AD3827F747F8EDF67AFD",
+   "frameId": "1F6945AB79A25AB145BF4C8708F4A6DF",
    "status": 200,
-   "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/o4iyi/0x4AAAAAAADnPIDROrmt1Wwj/light/fbE/new/normal?lang=auto",
+   "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/rayeg/0x4AAAAAAADnPIDROrmt1Wwj/light/fbE/new/normal?lang=auto",
    "mime": "text/html",
-   "csp": "default-src 'none'; script-src 'nonce-0WyfG8keT27i91HFef7OWI' 'unsafe-eval'; script-src-attr 'none'; worker-src blob:; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://hagen.challenges.cloudflare.com https://brunhild.challenges.cloudflare.com https://valid.alg13.dnstest.challenges.cloudflare.com https://invalid.alg13.dnstest.challenges.cloudflare.com https://dual-valid.mldsa44.dnstest.challenges.cloudflare.com https://valid.mldsa44.dnstest.challenges.cloudflare.com https://dnstest.dev; frame-src 'self' blob:; child-src 'self' blob:; form-action 'none'; base-uri 'self'; trusted-types nAZtB7 default; require-trusted-types-for 'script'; sandbox allow-same-origin allow-scripts allow-popups allow-forms",
+   "csp": "default-src 'none'; script-src 'nonce-VHb7A4B2pa0K7Hj1GvWVeU' 'unsafe-eval'; script-src-attr 'none'; worker-src blob:; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://hagen.challenges.cloudflare.com https://brunhild.challenges.cloudflare.com https://valid.alg13.dnstest.challenges.cloudflare.com https://invalid.alg13.dnstest.challenges.cloudflare.com https://dual-valid.mldsa44.dnstest.challenges.cloudflare.com https://valid.mldsa44.dnstest.challenges.cloudflare.com https://dnstest.dev; frame-src 'self' blob:; child-src 'self' blob:; form-action 'none'; base-uri 'self'; trusted-types nAZtB7 default; require-trusted-types-for 'script'; sandbox allow-same-origin allow-scripts allow-popups allow-forms",
    "cspRO": null,
    "xfo": null,
    "server": "cloudflare"
@@ -111,11 +145,14 @@
   "iframe"
  ],
  "workers": [
+  "worker",
+  "worker",
+  "worker",
   "worker"
  ],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "28BBAD607B1155CAA8A680C957D91F88",
+ "mainFrameId": "DD6470671314DEB22327DB9CC7192524",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -126,7 +163,7 @@
   "status": 403,
   "url": "https://zapper.xyz/",
   "mime": "text/html",
-  "csp": "default-src 'none'; script-src 'nonce-4Gj9nTh8ZtYvwToDEVCRVY' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+  "csp": "default-src 'none'; script-src 'nonce-XasmcotszhO6yD4PAPHsMM' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
   "cspRO": null,
   "xfo": "SAMEORIGIN",
   "server": "cloudflare"
@@ -138,8 +175,8 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Just a moment...",
-  "bodyLen": 746,
-  "nodes": 58,
+  "bodyLen": 315,
+  "nodes": 47,
   "readyState": "complete",
   "head": "zapper.xyz Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting fo"
  },
@@ -150,6 +187,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -162,8 +201,8 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Just a moment...",
-  "bodyLen": 746,
-  "nodes": 58,
+  "bodyLen": 315,
+  "nodes": 47,
   "readyState": "complete",
   "head": "zapper.xyz Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting fo"
  },
@@ -174,11 +213,13 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
  },
- "evN": 8,
+ "evN": 13,
  "csp": {
   "inlineExecuted": false,
   "violations": [
@@ -203,5 +244,5 @@
   "overwritten": false
  },
  "finalUrl": "https://zapper.xyz/",
- "ms": 12321
+ "ms": 6098
 }

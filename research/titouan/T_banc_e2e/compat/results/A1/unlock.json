@@ -1,0 +1,238 @@
+{
+ "siteId": "unlock",
+ "url": "https://app.unlock-protocol.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:31:13.018Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.unlock-protocol.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.unlock-protocol.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.unlock-protocol.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.unlock-protocol.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cm0ptl8td04urb29fpotv9q9y/embedded-wallets?caid=315b0edd-2834-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdRfdYqAAAAAIEZx_w69TkLf7vcmjuQ4iF0QK"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html#url=https%3A%2F%2Fa"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://m.stripe.network/inner.html#url=https%3A%2F%2Fapp.unlock-protocol.com%2F&title=Cre"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "D672AB3D460D1B7130F40429ED5CB258",
+   "status": 200,
+   "url": "https://app.unlock-protocol.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "444C3572792D409D9DF54D369DCAB34E",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cm0ptl8td04urb29fpotv9q9y/embedded-wallets?caid=315b0edd-2834-495e-90d8-165a6d3c5c7c",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' http://airdrops.unlock-protocol.com http://localhost:3000 https://airdrops.unlock-protocol.com https://app.unlock-protocol.com https://dappcon.io https://docs.unlock-protocol.com https://punkpredictor.xyz https://unlock-protocol.com https://www.app.unlock-protocol.com https://www.docs.unlock-protocol.com https://www.unlock-protocol.com https://www.dappcon.io https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-ZmY0OTU4ZmYtYzkzOC00NWRhLTgxNjAtN2YxNTAzNGUyNTY3'; style-src 'self' 'nonce-ZmY0OTU4ZmYtYzkzOC00NWRhLTgxNjAtN2YxNTAzNGUyNTY3'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "6B6379803B00F722A4F239A22A9A4A8C",
+   "status": 200,
+   "url": "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdRfdYqAAAAAIEZx_w69TkLf7vcmjuQ4iF0QKWx&co=aHR0cHM6Ly9hcHAudW5sb2NrLXByb3RvY29sLmNvbTo0NDM.&hl=en&v=nY0xPItgwtlvjEjk2TqdwOQz&size=invisible&anchor-ms=20000&execute-ms=30000&cb=g7xh7ctp4il4",
+   "mime": "text/html",
+   "csp": "script-src 'report-sample' 'nonce-_ahwzJCm0hXoSqnjjp4WpQ' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';object-src 'none';base-uri 'self';report-uri https://csp.withgoogle.com/csp/recaptcha/1",
+   "cspRO": null,
+   "xfo": null,
+   "server": "ESF"
+  },
+  {
+   "frameId": "90A90A0591B3590ABCE398E249FB0CA5",
+   "status": 200,
+   "url": "https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html",
+   "mime": "text/html",
+   "csp": "base-uri 'none'; connect-src 'self' https://r.stripe.com; default-src 'self'; font-src 'none'; form-action 'none'; frame-src https://m.stripe.network; img-src https://q.stripe.com; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; report-uri https://q.stripe.com/csp-report",
+   "cspRO": "base-uri 'none'; connect-src 'self' https://r.stripe.com; default-src 'self'; font-src 'none'; form-action 'none'; frame-src https://m.stripe.network; img-src https://q.stripe.com; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; report-uri https://q.stripe.com/csp-report",
+   "xfo": null,
+   "server": "Cloudfront"
+  }
+ ],
+ "frames": 4,
+ "frameKinds": [
+  "iframe",
+  "iframe",
+  "iframe",
+  "iframe"
+ ],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "D672AB3D460D1B7130F40429ED5CB258",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.unlock-protocol.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "No account required ✨ , but you need to agree to our Terms of Service and Privacy Policy . I agree",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Creator Dashboard | Unlock Protocol",
+  "bodyLen": 574,
+  "nodes": 206,
+  "readyState": "complete",
+  "head": "Connect Locks A Lock is a membership smart contract you create, deploy, and own on Unlock Protocol Wallet is not connected yet. Connect it now Sign up for Updates Receive fresh news about Unlock, including new features a"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "No account required ✨ , but you need to agree to our Terms of Service and Privacy Policy . I agree",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Creator Dashboard | Unlock Protocol",
+  "bodyLen": 574,
+  "nodes": 206,
+  "readyState": "complete",
+  "head": "Connect Locks A Lock is a membership smart contract you create, deploy, and own on Unlock Protocol Wallet is not connected yet. Connect it now Sign up for Updates Receive fresh news about Unlock, including new features a"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 15,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.unlock-protocol.com/",
+ "ms": 6966
+}

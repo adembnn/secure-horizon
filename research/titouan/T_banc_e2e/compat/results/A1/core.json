@@ -2,7 +2,7 @@
  "siteId": "core",
  "url": "https://core.app/",
  "arm": "control",
- "started": "2026-10-11T00:14:56.717Z",
+ "started": "2026-10-11T00:26:31.285Z",
  "events": [
   {
    "t": "frame",
@@ -39,6 +39,11 @@
    "t": "frame",
    "top": false,
    "f": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdvI-IqAAAAAIiR8bG7qcWfXEquyX8y"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
   }
  ],
  "console": [],
@@ -48,24 +53,40 @@
    "text": "ProviderNotFoundError: Provider not found."
   }
  ],
- "logErrors": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/watchlist/trending?network=eip155:43114"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/ph/i/v0/e/?ip=0&_=1791678400093&ver=1.207.0&compression=gzip-js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/watchlist/trending?network=eip155:43114"
+  }
+ ],
  "docs": [
   {
-   "frameId": "D9EB866A07DE0B3F21F5A9A67D81B224",
+   "frameId": "0715416AC9D875F4FA2B8FC9810C2164",
    "status": 200,
    "url": "https://core.app/",
    "mime": "text/html",
-   "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-eaf6e7220bdf138923c5a3268ff15137' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-eaf6e7220bdf138923c5a3268ff15137';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
+   "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-cecee8e1b7630b4cae89fe2341057980' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-cecee8e1b7630b4cae89fe2341057980';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
    "cspRO": null,
    "xfo": "SAMEORIGIN",
    "server": "cloudflare"
   },
   {
-   "frameId": "1C3FE587DA7477340D6A675876D1CABC",
+   "frameId": "C2FFC2C29ED33B4EF8FD8E110F73D609",
    "status": 200,
-   "url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdvI-IqAAAAAIiR8bG7qcWfXEquyX8y5apyLHSf&co=aHR0cHM6Ly9jb3JlLmFwcDo0NDM.&hl=en&v=nY0xPItgwtlvjEjk2TqdwOQz&size=invisible&anchor-ms=20000&execute-ms=30000&cb=mr2a2ptapefj",
+   "url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdvI-IqAAAAAIiR8bG7qcWfXEquyX8y5apyLHSf&co=aHR0cHM6Ly9jb3JlLmFwcDo0NDM.&hl=en&v=nY0xPItgwtlvjEjk2TqdwOQz&size=invisible&anchor-ms=20000&execute-ms=30000&cb=7n35jncjll3c",
    "mime": "text/html",
-   "csp": "script-src 'report-sample' 'nonce-RKV24arLxFW3Api_N1kmig' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';object-src 'none';base-uri 'self';report-uri https://csp.withgoogle.com/csp/recaptcha/1",
+   "csp": "script-src 'report-sample' 'nonce-NsmUUaymq_BeCuWls8H5Tg' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';object-src 'none';base-uri 'self';report-uri https://csp.withgoogle.com/csp/recaptcha/1",
    "cspRO": null,
    "xfo": null,
    "server": "ESF"
@@ -76,11 +97,12 @@
   "iframe"
  ],
  "workers": [
-  "service_worker"
+  "service_worker",
+  "worker"
  ],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "D9EB866A07DE0B3F21F5A9A67D81B224",
+ "mainFrameId": "0715416AC9D875F4FA2B8FC9810C2164",
  "loadFired": true,
  "navError": null,
  "steps": [],
@@ -89,7 +111,7 @@
   "status": 200,
   "url": "https://core.app/",
   "mime": "text/html",
-  "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-eaf6e7220bdf138923c5a3268ff15137' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-eaf6e7220bdf138923c5a3268ff15137';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
+  "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-cecee8e1b7630b4cae89fe2341057980' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-cecee8e1b7630b4cae89fe2341057980';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
   "cspRO": null,
   "xfo": "SAMEORIGIN",
   "server": "cloudflare"
@@ -101,8 +123,8 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Core Wallet. Buy, Sell & Manage Crypto | Free Crypto Wallet",
-  "bodyLen": 2428,
-  "nodes": 829,
+  "bodyLen": 2151,
+  "nodes": 740,
   "readyState": "complete",
   "head": "Search Connect wallet Connect wallet Portfolio Predictions Perps New Stake Earn Contacts Discover Signals Tools Download Connect wallet Download Core for Android Get started buying, swapping, sending and receiving crypto"
  },
@@ -115,6 +137,8 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -132,8 +156,8 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Core Wallet. Buy, Sell & Manage Crypto | Free Crypto Wallet",
-  "bodyLen": 2428,
-  "nodes": 829,
+  "bodyLen": 2151,
+  "nodes": 740,
   "readyState": "complete",
   "head": "Search Connect wallet Connect wallet Portfolio Predictions Perps New Stake Earn Contacts Discover Signals Tools Download Connect wallet Download Core for Android Get started buying, swapping, sending and receiving crypto"
  },
@@ -146,11 +170,13 @@
   "calls": [
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
  },
- "evN": 7,
+ "evN": 8,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -172,5 +198,5 @@
   "overwritten": false
  },
  "finalUrl": "https://core.app/",
- "ms": 17045
+ "ms": 9827
 }

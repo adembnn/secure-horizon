@@ -21,7 +21,7 @@ export async function visit(conn, site, arm, opts = {}) {
   const T = Object.assign({ loadTimeout: 35000, settle: 4000, afterClick: 3000, hardCap: 110000 }, opts);
   const rec = { siteId: site.id, url: site.url, arm, started: new Date().toISOString(), events: [], console: [], exceptions: [], logErrors: [], docs: [],
     frames: 0, frameKinds: [], workers: [], popups: [], dialogs: 0, mainFrameId: null, loadFired: false, navError: null, steps: [] };
-  const injector = buildInjector(arm);
+  const injector = buildInjector(arm === 'ext' ? 'control' : arm);   // bras ext = meme fournisseur non enveloppe + VRAIE extension Sentinelle chargee dans Chrome
   const t0 = Date.now();
   let ctxId = null, targetId = null, topSid = null;
   const sessions = new Set();
@@ -100,11 +100,10 @@ export async function visit(conn, site, arm, opts = {}) {
   const waitFor = async (fn, ms) => { const t = Date.now(); while (Date.now() - t < ms) { if (fn()) return true; await sleep(150); } return false; };
 
   const body = async () => {
-    ({ browserContextId: ctxId } = await send('Target.createBrowserContext'));
-    ({ targetId } = await send('Target.createTarget', { url: 'about:blank', browserContextId: ctxId }));
+    ({ targetId } = await send('Target.createTarget', { url: 'about:blank' }));   // contexte par defaut (les extensions ne s'injectent pas dans un contexte prive)
     ({ sessionId: topSid } = await send('Target.attachToTarget', { targetId, flatten: true }));
     await setup(topSid, true);
-    await send('Browser.setDownloadBehavior', { behavior: 'deny', browserContextId: ctxId }).catch(() => {});
+    await send('Browser.setDownloadBehavior', { behavior: 'deny' }).catch(() => {});
     const nav = await send('Page.navigate', { url: site.url }, topSid, 40000);
     rec.navError = nav.errorText || null;
     if (!rec.navError) { await waitFor(() => rec.loadFired, T.loadTimeout); rec.loadTimedOut = !rec.loadFired; }
@@ -145,7 +144,7 @@ export async function visit(conn, site, arm, opts = {}) {
   } catch (e) { rec.fatal = String(e.message).slice(0, 200); }
   try { await send('Target.closeTarget', { targetId }, undefined, 5000); } catch (_) {}
   for (const id of popupIds) send('Target.closeTarget', { targetId: id }).catch(() => {});
-  try { if (ctxId) await send('Target.disposeBrowserContext', { browserContextId: ctxId }, undefined, 8000); } catch (_) {}
+  try { for (const o of new Set([site.url, rec.finalUrl].filter(Boolean).map(u => { try { return new URL(u).origin; } catch (_) { return null; } }).filter(Boolean))) await send('Storage.clearDataForOrigin', { origin: o, storageTypes: 'all' }, undefined, 8000); await send('Storage.clearCookies', {}, undefined, 8000); } catch (_) {}
   off();
   rec.ms = Date.now() - t0;
   return rec;

@@ -1,0 +1,246 @@
+{
+ "siteId": "gnosisbridge",
+ "url": "https://bridge.gnosischain.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:29:46.551Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount="
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "44AB201A5B626300158EF9ECDA87FE11",
+   "status": 200,
+   "url": "https://bridge.gnosischain.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "44AB201A5B626300158EF9ECDA87FE11",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://bridge.gnosischain.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": null
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Gnosis Bridge",
+  "bodyLen": 12743,
+  "nodes": 3174,
+  "readyState": "complete",
+  "head": "Bridge Search Latest Transactions Bridges Info Validators USDC swap Connect Wallet The Fast Confirmation Rule is now integrated into the bridge. Transfers from Ethereum to Gnosis Chain are now confirmed in ~ 12 seconds i"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1244.984375,
+   "y": 56,
+   "top": 32
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "SPAN",
+   "x": 741.40625,
+   "y": 446.1875,
+   "area": 1310.625
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Gnosis Bridge",
+  "bodyLen": 12862,
+  "nodes": 3218,
+  "readyState": "complete",
+  "head": "Bridge Search Latest Transactions Bridges Info Validators USDC swap 0x1111...1111 Connected with MetaMask 0x111111...111111 Ethereum Switch Network My transactions Disconnect The Fast Confirmation Rule is now integrated "
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "wallet_getCapabilities"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 15,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://bridge.gnosischain.com/?fromChainId=1&token=&amount=",
+ "ms": 11627
+}

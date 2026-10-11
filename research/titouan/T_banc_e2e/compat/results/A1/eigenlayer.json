@@ -1,0 +1,322 @@
+{
+ "siteId": "eigenlayer",
+ "url": "https://app.eigenlayer.xyz/",
+ "arm": "control",
+ "started": "2026-10-11T00:29:19.979Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.eigenlayer.xyz/"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "Error checking Cross-Origin-Opener-Policy: HTTP error! status: 500"
+  },
+  {
+   "top": true,
+   "text": "Error checking Cross-Origin-Opener-Policy: HTTP error! status: 500"
+  },
+  {
+   "top": true,
+   "text": "`DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.\n\nIf you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.\n\nFor more information, see https://radix-ui.com/primitives/docs/components/dialog"
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 500 ()",
+   "url": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "source": "violation",
+   "text": "Permissions policy violation: picture-in-picture is not allowed in this document.",
+   "url": "https://app.eigenlayer.xyz/cdn-cgi/challenge-platform/scripts/jsd/main.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 500 ()",
+   "url": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 500 ()",
+   "url": "https://app.eigenlayer.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://app.eigenlayer.xyz/_next/image?url=https%3A%2F%2Fpreprod-holesky-token-logo.s3.amazonaws.com%2F0x4d4574f50dd8b9d"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://app.eigenlayer.xyz/_next/image?url=https%3A%2F%2Fpreprod-holesky-token-logo.s3.amazonaws.com%2F0x4d4574f50dd8b9d"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://app.eigenlayer.xyz/_next/image?url=https%3A%2F%2Fpreprod-holesky-token-logo.s3.amazonaws.com%2F0x4d4574f50dd8b9d"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://app.eigenlayer.xyz/_next/image?url=https%3A%2F%2Fpreprod-holesky-token-logo.s3.amazonaws.com%2F0x4d4574f50dd8b9d"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "5D376F7781F51BEE28898304126F554C",
+   "status": 500,
+   "url": "https://app.eigenlayer.xyz/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' https://*.googletagmanager.com https://*.google-analytics.com 'nonce-ZDNkM2ViODgtMTAzMC00ZWFkLTg1MjQtMGY2N2VhMTY2Y2Fl' 'strict-dynamic' 'unsafe-inline' ; style-src 'self' 'unsafe-eval' 'unsafe-inline' https://fonts.googleapis.com/css2; font-src 'self' https://fonts.gstatic.com data:; script-src-elem 'self' https://va.vercel-scripts.com 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; frame-src https://verify.walletconnect.com https://verify.walletconnect.org; img-src 'self' blob: https://*.google-analytics.com https://*.googletagmanager.com https://*.walletconnect.com data: https://raw.githubusercontent.com/omni-network/omni/main/static/ https://eigenlayer-operator-lagr.s3.amazonaws.com/ https://get.celer.app/brevis/forEigen/ https://blog.mexc.com/wp-content/uploads/2022/09/ https://raw.githubusercontent.com/automata-network/eigenda-operator-setup/dev/ https://firebasestorage.googleapis.com/v0/b/openoracle-de73b.appspot.com/o/ https://silent-shard.avs.silencelaboratories.com/ https://raw.githubusercontent.com/eoracle/Eoracle-operator-setup/develop/ https://raw.githubusercontent.com/kaleidoscope-blockchain/witnesschain-assets/main/ https://storage.googleapis.com/anvil-avs-state/ https://raw.githubusercontent.com/brevis-network/eigendata/brv/avs/brevis/ https://raw.githubusercontent.com/alt-research/eigendata/dev/avs/AltlayerMach/ https://raw.githubusercontent.com/Lagrange-Labs/AVS-config/main/config/ https://raw.githubusercontent.com/alt-research/eigendata/dev/avs/XterioMach/ https://raw.githubusercontent.com/automata-network/multi-prover-avs-metadata/main/ https://raw.githubusercontent.com/alt-research/eigendata/dev/avs/DODOchainMach/ https://raw.githubusercontent.com/0xJomo/openoracle-configs/main/ https://mainnet-ethereum-app-metadata.s3.amazonaws.com https://testnet-usea1-hoodi-app-metadata.s3.amazonaws.com https://testnet-usea1-sepolia-app-metadata.s3.amazonaws.com https://coin-images.coingecko.com https://testnet-usea1-hoodi-token-logo.s3.amazonaws.com https://testnet-usea1-sepolia-token-logo.s3.amazonaws.com https://mainnet-ethereum-avs-metadata.s3.amazonaws.com https://mainnet-ethereum-avs-metadata.s3.us-east-1.amazonaws.com https://testnet-usea1-hoodi-avs-metadata.s3.amazonaws.com https://testnet-usea1-sepolia-avs-metadata.s3.amazonaws.com https://prod-usea1-mainnet-operator-metadata.s3.amazonaws.com https://prod-usea1-mainnet-operator-metadata.s3.us-east-1.amazonaws.com https://testnet-usea1-hoodi-operator-metadata.s3.amazonaws.com https://testnet-usea1-sepolia-operator-metadata.s3.amazonaws.com; connect-src 'self' https://*.vercel-scripts.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://polygon-mumbai-infura.wallet.coinbase.com https://cloudflare-eth.com https://api-prod-useast1.eigenlayer.xyz https://rpc.ankr.com https://mainnet-infura.wallet.coinbase.com/ https://explorer-api.walletconnect.com/ wss://*.walletconnect.org wss://relay.walletconnect.com wss://*.walletlink.org https://*.walletconnect.com https://*.alchemy.com https://webserver-mainnet-ethereum.eigenlayer.xyz https://api.web3modal.com https://ethereum-rpc.publicnode.com https://eth.merkle.io https://eth.llamarpc.com https://browser-intake-datadoghq.com/ https://rpc.walletconnect.org https://api.web3modal.org/ https://rum.browser-intake-datadoghq.com https://api.marketplace.eigenlayer.xyz https://hoodi.api.marketplace.eigenlayer.xyz https://sepolia.api.marketplace.eigenlayer.xyz https://pulse.walletconnect.org https://api-js.mixpanel.com https://rpc.hoodi.ethpandaops.io https://rpc.sepolia.ethpandaops.io https://0xrpc.io/hoodi https://ethereum-hoodi.gateway.tatum.io https://proofs-service-json.mainnet-ethereum.protocol-mainnet.eigenlabshq.net ; worker-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests;",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "5D376F7781F51BEE28898304126F554C",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:INSTALLED"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 500,
+  "url": "https://app.eigenlayer.xyz/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' https://*.googletagmanager.com https://*.google-analytics.com 'nonce-ZDNkM2ViODgtMTAzMC00ZWFkLTg1MjQtMGY2N2VhMTY2Y2Fl' 'strict-dynamic' 'unsafe-inline' ; style-src 'self' 'unsafe-eval' 'unsafe-inline' https://fonts.googleapis.com/css2; font-src 'self' https://fonts.gstatic.com data:; script-src-elem 'self' https://va.vercel-scripts.com 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; frame-src https://verify.walletconnect.com https://verify.walletconnect.org; img-src 'self' blob: https://*.google-analytics.com https://*.googletagmanager.com https://*.walletconnect.com data: https://raw.githubusercontent.com/omni-network/omni/main/static/ https://eigenlayer-operator-lagr.s3.amazonaws.com/ https://get.celer.app/brevis/forEigen/ https://blog.mexc.com/wp-content/uploads/2022/09/ https://raw.githubusercontent.com/automata-network/eigenda-operator-setup/dev/ https://firebasestorage.googleapis.com/v0/b/openoracle-de73b.appspot.com/o/ https://silent-shard.avs.silencelaboratories.com/ https://raw.githubusercontent.com/eoracle/Eoracle-operator-setup/develop/ https://raw.githubusercontent.com/kaleidoscope-blockchain/witnesschain-assets/main/ https://storage.googleapis.com/anvil-avs-state/ https://raw.githubusercontent.com/brevis-network/eigendata/brv/avs/brevis/ https://raw.githubusercontent.com/alt-research/eigendata/dev/avs/AltlayerMach/ https://raw.githubusercontent.com/Lagrange-Labs/AVS-config/main/config/ https://raw.githubusercontent.com/alt-research/eigendata/dev/avs/XterioMach/ https://raw.githubusercontent.com/automata-network/multi-prover-avs-metadata/main/ https://raw.githubusercontent.com/alt-research/eigendata/dev/avs/DODOchainMach/ https://raw.githubusercontent.com/0xJomo/openoracle-configs/main/ https://mainnet-ethereum-app-metadata.s3.amazonaws.com https://testnet-usea1-hoodi-app-metadata.s3.amazonaws.com https://testnet-usea1-sepolia-app-metadata.s3.amazonaws.com https://coin-images.coingecko.com https://testnet-usea1-hoodi-token-logo.s3.amazonaws.com https://testnet-usea1-sepolia-token-logo.s3.amazonaws.com https://mainnet-ethereum-avs-metadata.s3.amazonaws.com https://mainnet-ethereum-avs-metadata.s3.us-east-1.amazonaws.com https://testnet-usea1-hoodi-avs-metadata.s3.amazonaws.com https://testnet-usea1-sepolia-avs-metadata.s3.amazonaws.com https://prod-usea1-mainnet-operator-metadata.s3.amazonaws.com https://prod-usea1-mainnet-operator-metadata.s3.us-east-1.amazonaws.com https://testnet-usea1-hoodi-operator-metadata.s3.amazonaws.com https://testnet-usea1-sepolia-operator-metadata.s3.amazonaws.com; connect-src 'self' https://*.vercel-scripts.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://polygon-mumbai-infura.wallet.coinbase.com https://cloudflare-eth.com https://api-prod-useast1.eigenlayer.xyz https://rpc.ankr.com https://mainnet-infura.wallet.coinbase.com/ https://explorer-api.walletconnect.com/ wss://*.walletconnect.org wss://relay.walletconnect.com wss://*.walletlink.org https://*.walletconnect.com https://*.alchemy.com https://webserver-mainnet-ethereum.eigenlayer.xyz https://api.web3modal.com https://ethereum-rpc.publicnode.com https://eth.merkle.io https://eth.llamarpc.com https://browser-intake-datadoghq.com/ https://rpc.walletconnect.org https://api.web3modal.org/ https://rum.browser-intake-datadoghq.com https://api.marketplace.eigenlayer.xyz https://hoodi.api.marketplace.eigenlayer.xyz https://sepolia.api.marketplace.eigenlayer.xyz https://pulse.walletconnect.org https://api-js.mixpanel.com https://rpc.hoodi.ethpandaops.io https://rpc.sepolia.ethpandaops.io https://0xrpc.io/hoodi https://ethereum-hoodi.gateway.tatum.io https://proofs-service-json.mainnet-ethereum.protocol-mainnet.eigenlabshq.net ; worker-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests;",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Eigenlayer App",
+  "bodyLen": 1135,
+  "nodes": 579,
+  "readyState": "complete",
+  "head": "Check Status EIGEN emissions to the ETH quorum have ended. Previously allocated emissions will be burned. Learn more ↗ Dashboard Token Operator AVS Apps Dashboard Connect Wallet Dashboard Total Value Restaked 0 ETH Withd"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1194.421875,
+   "y": 99.5,
+   "top": 82.5
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 3,
+  "pick": {
+   "text": "INSTALLED",
+   "tag": "WUI-TAG",
+   "x": 804.2265625,
+   "y": 391,
+   "area": 1354.03125
+  }
+ },
+ "clicked2": "INSTALLED",
+ "ui1": {
+  "modal": "TERMS OF SERVICE & PRIVACY POLICY Last Revised on August 23, 2023 These Terms of Service (these \"Terms\") explain the terms and conditions by which you may access and use our website, www.eigenlayer.xyz (the \"Website\"), operated by or on behalf of Layr Labs, Inc. (\"Company\", \"we\" or \"us\"), our App (a",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Eigenlayer App",
+  "bodyLen": 60450,
+  "nodes": 855,
+  "readyState": "complete",
+  "head": "Check Status EIGEN emissions to the ETH quorum have ended. Previously allocated emissions will be burned. Learn more ↗ Dashboard Token Operator AVS Apps Dashboard 0x1111...1111 Dashboard Restake Total Value Restaked 0 ET"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 19,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.eigenlayer.xyz/",
+ "ms": 14943
+}

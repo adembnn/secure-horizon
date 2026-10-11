@@ -12,7 +12,7 @@ const arg = (k, d) => { const i = argv.indexOf('--' + k); return i >= 0 ? (argv[
 const sitesFile = path.resolve(HERE, arg('sites', 'sites.json'));
 const outDir = path.resolve(HERE, arg('out', 'results'));
 const rounds = String(arg('rounds', 'A1:control,B:test,A2:control')).split(',').map(s => s.split(':'));
-const nWorkers = +arg('workers', 4);
+const nWorkers = +arg('workers', 3);
 const gap = +arg('gap', 1500);
 const only = arg('only', null) ? String(arg('only')).split(',') : null;
 const force = !!arg('force', false);
@@ -22,7 +22,7 @@ const tmpBase = path.join(HERE, '_tmp');
 
 async function worker(wid, queue, round, arm) {
   let chrome = null;
-  const ensure = async () => { if (!chrome || chrome.conn.closed || chrome.visits >= 18) { if (chrome) await chrome.close(); chrome = await ChromeInstance.launch(tmpBase); } return chrome; };
+  const ensure = async () => { if (!chrome || chrome.conn.closed || chrome.visits >= 12) { if (chrome) await chrome.close(); chrome = await ChromeInstance.launch(tmpBase); } return chrome; };
   try {
     for (;;) {
       const site = queue.shift(); if (!site) break;

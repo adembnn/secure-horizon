@@ -2,7 +2,7 @@
  "siteId": "pangolin",
  "url": "https://app.pangolin.exchange/",
  "arm": "control",
- "started": "2026-10-11T00:12:43.102Z",
+ "started": "2026-10-11T00:23:32.479Z",
  "events": [
   {
    "t": "frame",
@@ -192,7 +192,7 @@
  ],
  "docs": [
   {
-   "frameId": "D40E37C181AC3BC37359FFD2CD57E6D1",
+   "frameId": "E44BD1E2376358753963C1EFEE26B0C5",
    "status": 200,
    "url": "https://app.pangolin.exchange/",
    "mime": "text/html",
@@ -207,7 +207,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "D40E37C181AC3BC37359FFD2CD57E6D1",
+ "mainFrameId": "E44BD1E2376358753963C1EFEE26B0C5",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -230,10 +230,10 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Pangolin",
-  "bodyLen": 3343,
-  "nodes": 1486,
+  "bodyLen": 3346,
+  "nodes": 1539,
   "readyState": "complete",
-  "head": "97239408 Swap Perps New Pool Leaderboards New Airdrop New Stake Stats Toggle theme Connect Wallet USDt 0.00 % $1.00 USDC 0.00 % $1.00 WAVAX ↓ 0.13 % $10.35 PNG ↑ 0.84 % $0.0327 WETH.e ↑ 0.67 % $2.50k BTC.b ↑ 0.37 % $82.8"
+  "head": "97239965 Swap Perps New Pool Leaderboards New Airdrop New Stake Stats Toggle theme Connect Wallet USDt 0.00 % $1.00 USDC 0.00 % $1.00 WAVAX ↓ 0.04 % $10.36 PNG ↑ 1.01 % $0.0327 WETH.e ↑ 0.68 % $2.50k BTC.b ↑ 0.39 % $82.8"
  },
  "state0": {
   "mode": "control",
@@ -269,6 +269,8 @@
    "eth_chainId",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -302,10 +304,10 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Pangolin",
-  "bodyLen": 4137,
-  "nodes": 1574,
+  "bodyLen": 4141,
+  "nodes": 1573,
   "readyState": "complete",
-  "head": "97239414 Swap Perps New Pool Leaderboards New Airdrop New Stake Stats Toggle theme Connect Wallet USDt 0.00 % $1.00 USDC 0.00 % $1.00 WAVAX ↓ 0.13 % $10.35 PNG ↑ 0.84 % $0.0327 WETH.e ↑ 0.67 % $2.50k BTC.b ↑ 0.37 % $82.8"
+  "head": "97239970 Swap Perps New Pool Leaderboards New Airdrop New Stake Stats Toggle theme Connect Wallet USDt 0.00 % $1.00 USDC 0.00 % $1.00 WAVAX ↓ 0.04 % $10.36 PNG ↑ 1.01 % $0.0327 WETH.e ↑ 0.68 % $2.50k BTC.b ↑ 0.39 % $82.8"
  },
  "state1": {
   "mode": "control",
@@ -341,6 +343,8 @@
    "eth_chainId",
    "eth_accounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -367,5 +371,5 @@
   "overwritten": false
  },
  "finalUrl": "https://app.pangolin.exchange/swap",
- "ms": 19456
+ "ms": 14715
 }

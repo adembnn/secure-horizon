@@ -1,0 +1,166 @@
+{
+ "siteId": "poap",
+ "url": "https://poap.xyz/",
+ "arm": "test",
+ "started": "2026-10-11T00:38:26.556Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://poap.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://poap.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://poap.xyz/"
+  }
+ ],
+ "console": [],
+ "exceptions": [
+  {
+   "top": true,
+   "text": "Error: Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+  }
+ ],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "C98060DB359CCE356EDD2E7A0124D800",
+   "status": 200,
+   "url": "https://poap.xyz/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "C98060DB359CCE356EDD2E7A0124D800",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://poap.xyz/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Welcome to POAP",
+  "bodyLen": 2833,
+  "nodes": 1658,
+  "readyState": "complete",
+  "head": "Home About About the Proof of Attendance Protocol Find out more about what a POAP is. About POAP Inc We are pioneers for the future of POAP. Case Studies Explore examples of POAP success stories. Issuers How to use POAP "
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Welcome to POAP",
+  "bodyLen": 2833,
+  "nodes": 1658,
+  "readyState": "complete",
+  "head": "Home About About the Proof of Attendance Protocol Find out more about what a POAP is. About POAP Inc We are pioneers for the future of POAP. Case Studies Explore examples of POAP success stories. Issuers How to use POAP "
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 6,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://poap.xyz/",
+ "ms": 7824
+}

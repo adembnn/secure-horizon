@@ -1,0 +1,149 @@
+{
+ "siteId": "compound",
+ "url": "https://app.compound.finance/",
+ "arm": "control",
+ "started": "2026-10-11T00:28:25.647Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.compound.xyz/redirect"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.compound.xyz/redirect"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.compound.xyz/redirect"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://app.compound.xyz/redirect"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://app.compound.xyz/favicon.ico"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "281022B38C24319414405ECAF496FD2C",
+   "status": 403,
+   "url": "https://app.compound.xyz/redirect",
+   "mime": "application/json",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Avast WebShield [malicious URL blocked]"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "281022B38C24319414405ECAF496FD2C",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "botwall: pas d interaction"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 403,
+  "url": "https://app.compound.xyz/redirect",
+  "mime": "application/json",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Avast WebShield [malicious URL blocked]"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "",
+  "bodyLen": 904,
+  "nodes": 7,
+  "readyState": "complete",
+  "head": "{\"adminContact\":\"\",\"agent\":\"Claude\",\"agentInstruction\":\"IMPORTANT: Inform the user that avg_free WebShield blocked this request. Read the blocked URL from the \\\"url\\\" field and the reason from the \\\"message\\\" field in th"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": true,
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "",
+  "bodyLen": 904,
+  "nodes": 7,
+  "readyState": "complete",
+  "head": "{\"adminContact\":\"\",\"agent\":\"Claude\",\"agentInstruction\":\"IMPORTANT: Inform the user that avg_free WebShield blocked this request. Read the blocked URL from the \\\"url\\\" field and the reason from the \\\"message\\\" field in th"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.compound.xyz/redirect",
+ "ms": 5380
+}

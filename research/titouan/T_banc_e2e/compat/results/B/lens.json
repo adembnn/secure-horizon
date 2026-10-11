@@ -1,0 +1,348 @@
+{
+ "siteId": "lens",
+ "url": "https://www.lens.xyz/",
+ "arm": "test",
+ "started": "2026-10-11T00:34:30.505Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lens.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cmq7g9lit00rd0djsuajezvtx/embedded-wallets?caid=5930f0aa-0716-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://lens.xyz/privacy-policy?_rsc=5CB68i4pnAekjehf"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://lens.xyz/docs?_rsc=5CB68i4pnAekjehf"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "18D3FBB3970D526BDAFD25D4CBFF0A86",
+   "status": 200,
+   "url": "https://lens.xyz/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'none'",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "AC128706A6EF08EE0DD5C333426AE408",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cmq7g9lit00rd0djsuajezvtx/embedded-wallets?caid=5930f0aa-0716-4dd6-8df9-3e772889fb4d",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://claim.lens.xyz https://lens-web-staging.vercel.app https://lens.xyz https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-ODE2YTc5YTYtMzhkMy00NmY5LTlmNjAtNTA4YTZlMmQ5MTQ4'; style-src 'self' 'nonce-ODE2YTc5YTYtMzhkMy00NmY5LTlmNjAtNTA4YTZlMmQ5MTQ4'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "18D3FBB3970D526BDAFD25D4CBFF0A86",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://lens.xyz/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'none'",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Lens",
+  "bodyLen": 2195,
+  "nodes": 1755,
+  "readyState": "complete",
+  "head": "Build with Lens News Docs FAQs Bridge New Social Layer For onchain culture and communities Developer Docs Create Account Orb 800,000+ downloads Orb is a web3 social app built on Lens Protocol that shapes the internet of "
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 10,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 13,
+  "wreads": {
+   "removeListener": 9,
+   "then": 11,
+   "providers": 5,
+   "isMetaMask": 5,
+   "isBraveWallet": 5,
+   "isApexWallet": 5,
+   "isAvalanche": 5,
+   "isBitKeep": 5,
+   "isBlockWallet": 5,
+   "isKuCoinWallet": 5,
+   "isMathWallet": 5,
+   "isOkxWallet": 5,
+   "isOKExWallet": 5,
+   "isOneInchIOSWallet": 5,
+   "isOneInchAndroidWallet": 5,
+   "isOpera": 5,
+   "isPhantom": 5,
+   "isPortal": 5,
+   "isRabby": 5,
+   "isTokenPocket": 5,
+   "isTokenary": 5,
+   "isUniswapWallet": 4,
+   "isZerion": 5,
+   "on": 13,
+   "request": 3,
+   "isCoinbaseBrowser": 3,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitski": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isNovaWallet": 1,
+   "isOneKey": 1,
+   "isRainbow": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Lens",
+  "bodyLen": 2195,
+  "nodes": 1755,
+  "readyState": "complete",
+  "head": "Build with Lens News Docs FAQs Bridge New Social Layer For onchain culture and communities Developer Docs Create Account Orb 800,000+ downloads Orb is a web3 social app built on Lens Protocol that shapes the internet of "
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 10,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 13,
+  "wreads": {
+   "removeListener": 9,
+   "then": 11,
+   "providers": 5,
+   "isMetaMask": 5,
+   "isBraveWallet": 5,
+   "isApexWallet": 5,
+   "isAvalanche": 5,
+   "isBitKeep": 5,
+   "isBlockWallet": 5,
+   "isKuCoinWallet": 5,
+   "isMathWallet": 5,
+   "isOkxWallet": 5,
+   "isOKExWallet": 5,
+   "isOneInchIOSWallet": 5,
+   "isOneInchAndroidWallet": 5,
+   "isOpera": 5,
+   "isPhantom": 5,
+   "isPortal": 5,
+   "isRabby": 5,
+   "isTokenPocket": 5,
+   "isTokenary": 5,
+   "isUniswapWallet": 4,
+   "isZerion": 5,
+   "on": 13,
+   "request": 3,
+   "isCoinbaseBrowser": 3,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitski": 1,
+   "isClover": 1,
+   "isCoin98": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isDefiant": 1,
+   "isDesig": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFordefi": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHaqqWallet": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isHaloWallet": 1,
+   "isNovaWallet": 1,
+   "isOneKey": 1,
+   "isRainbow": 1,
+   "isSafePal": 1,
+   "isStatus": 1,
+   "isSubWallet": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTaho": 1,
+   "isTrust": 1,
+   "isTrustWallet": 1,
+   "isTTWallet": 1,
+   "isXDEFI": 1,
+   "isZeal": 1
+  }
+ },
+ "evN": 14,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://lens.xyz/",
+ "ms": 6253
+}

@@ -1,0 +1,3485 @@
+{
+ "opening": {
+  "ts": "2026-10-11T00:25:21.920Z",
+  "round": 3,
+  "rules_hash": "f952f3fb298fc0dc9627e0129160d02621443fc2860d8d9b1a3e9e69373dba0e",
+  "code_hash": "be6db070543239289ccd80c637bfd115ab7925e10adb7af4ca1b636198c828f6",
+  "test_sha256": "829660aed1303f91c20af51c28e92f9d31d9caef313278608f73bb711ff369a8",
+  "reopen": false
+ },
+ "cases": [
+  {
+   "id": "adresse_empoisonnee-001",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe3_suffixe4_erc20",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-004",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe5_suffixe5_eth",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-005",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe6_suffixe6_erc20",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-007",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe3_suffixe4_erc20",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-008",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe5_suffixe4_eth",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-012",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe5_suffixe5_eth",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-013",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe6_suffixe6_erc20",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-016",
+   "family": "adresse_empoisonnee",
+   "subfamily": "prefixe5_suffixe4_eth",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-019",
+   "family": "adresse_empoisonnee",
+   "subfamily": "transfert_valeur_nulle_usurpe",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-028",
+   "family": "adresse_empoisonnee",
+   "subfamily": "benin_dur_bon_contact_malgre_dust",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-029",
+   "family": "adresse_empoisonnee",
+   "subfamily": "benin_dur_bon_contact_malgre_dust",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-030",
+   "family": "adresse_empoisonnee",
+   "subfamily": "benin_dur_bon_contact_malgre_dust",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-031",
+   "family": "adresse_empoisonnee",
+   "subfamily": "benin_dur_bon_contact_malgre_dust",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ]
+  },
+  {
+   "id": "adresse_empoisonnee-032",
+   "family": "adresse_empoisonnee",
+   "subfamily": "benin_dur_nouveau_destinataire_coincidence_1_1",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "adresse_empoisonnee-033",
+   "family": "adresse_empoisonnee",
+   "subfamily": "benin_dur_nouveau_destinataire_coincidence_1_1",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "adresse_empoisonnee-034",
+   "family": "adresse_empoisonnee",
+   "subfamily": "benin_dur_nouveau_destinataire_coincidence_1_1",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "approve_erc20-005",
+   "family": "approve_erc20",
+   "subfamily": "illimite_vers_eoa",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "approve_erc20-019",
+   "family": "approve_erc20",
+   "subfamily": "illimite_vers_contrat_neuf",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "approve_erc20-023",
+   "family": "approve_erc20",
+   "subfamily": "borne_vers_contrat_inconnu",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "external_spender"
+   ]
+  },
+  {
+   "id": "approve_erc20-024",
+   "family": "approve_erc20",
+   "subfamily": "borne_vers_contrat_inconnu",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "external_spender"
+   ]
+  },
+  {
+   "id": "approve_erc20-025",
+   "family": "approve_erc20",
+   "subfamily": "borne_vers_contrat_inconnu",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "external_spender"
+   ]
+  },
+  {
+   "id": "approve_erc20-026",
+   "family": "approve_erc20",
+   "subfamily": "borne_vers_contrat_inconnu",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "external_spender"
+   ]
+  },
+  {
+   "id": "approve_erc20-027",
+   "family": "approve_erc20",
+   "subfamily": "borne_vers_contrat_inconnu",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "external_spender"
+   ]
+  },
+  {
+   "id": "approve_erc20-028",
+   "family": "approve_erc20",
+   "subfamily": "borne_vers_contrat_inconnu",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "external_spender"
+   ]
+  },
+  {
+   "id": "approve_erc20-040",
+   "family": "approve_erc20",
+   "subfamily": "borne_vers_routeur_connu",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "approve_erc20-042",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-043",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-044",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-045",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-046",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-047",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-048",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-049",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-050",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-051",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-052",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "approve_erc20-053",
+   "family": "approve_erc20",
+   "subfamily": "illimite_legitime_protocole_connu",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "changement_reseau-002",
+   "family": "changement_reseau",
+   "subfamily": "switch_vers_chaine_inattendue",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "unknown",
+    "sans_intention": "unknown",
+    "intention_honnete": "unknown",
+    "intention_mensongere": "unknown"
+   },
+   "floorCodes": [],
+   "unsupported": "méthode wallet_switchEthereumChain non gérée par le moteur d'effets"
+  },
+  {
+   "id": "changement_reseau-011",
+   "family": "changement_reseau",
+   "subfamily": "benin_switch_chaine_connue",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "unknown",
+    "sans_intention": "unknown",
+    "intention_honnete": "unknown",
+    "intention_mensongere": "unknown"
+   },
+   "floorCodes": [],
+   "unsupported": "méthode wallet_switchEthereumChain non gérée par le moteur d'effets"
+  },
+  {
+   "id": "controle_admin-003",
+   "family": "controle_admin",
+   "subfamily": "upgradeTo",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "controle_admin-007",
+   "family": "controle_admin",
+   "subfamily": "upgradeTo",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "controle_admin-011",
+   "family": "controle_admin",
+   "subfamily": "upgradeTo",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "controle_admin-013",
+   "family": "controle_admin",
+   "subfamily": "renounceOwnership",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "cow_uniswapx-012",
+   "family": "cow_uniswapx",
+   "subfamily": "uniswapx_output_recipient_tiers",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "depot_exchange-007",
+   "family": "depot_exchange",
+   "subfamily": "benin_dur_gros_depot_70_pct_du_solde",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "depot_exchange-008",
+   "family": "depot_exchange",
+   "subfamily": "benin_dur_gros_depot_70_pct_du_solde",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "domaine_sosie-002",
+   "family": "domaine_sosie",
+   "subfamily": "sous_domaine_trompeur",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "approval_for_all",
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "domaine_sosie-007",
+   "family": "domaine_sosie",
+   "subfamily": "typo",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa",
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "domaine_sosie-010",
+   "family": "domaine_sosie",
+   "subfamily": "sous_domaine_trompeur",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "approval_for_all",
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "domaine_sosie-013",
+   "family": "domaine_sosie",
+   "subfamily": "benin_dur_site_legitime_premiere_visite",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "domaine_sosie-014",
+   "family": "domaine_sosie",
+   "subfamily": "benin_dur_site_legitime_premiere_visite",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "domaine_sosie-015",
+   "family": "domaine_sosie",
+   "subfamily": "benin_dur_site_legitime_premiere_visite",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "eip7702-001",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-002",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains"
+   ]
+  },
+  {
+   "id": "eip7702-003",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-004",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains"
+   ]
+  },
+  {
+   "id": "eip7702-005",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-006",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains"
+   ]
+  },
+  {
+   "id": "eip7702-007",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-008",
+   "family": "eip7702",
+   "subfamily": "authorization_chain_id_0",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains"
+   ]
+  },
+  {
+   "id": "eip7702-009",
+   "family": "eip7702",
+   "subfamily": "delegue_mutable_proxy_upgradable",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-010",
+   "family": "eip7702",
+   "subfamily": "delegue_mutable_proxy_upgradable",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-011",
+   "family": "eip7702",
+   "subfamily": "delegue_mutable_proxy_upgradable",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-012",
+   "family": "eip7702",
+   "subfamily": "delegue_mutable_proxy_upgradable",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-013",
+   "family": "eip7702",
+   "subfamily": "delegue_mutable_proxy_upgradable",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-014",
+   "family": "eip7702",
+   "subfamily": "delegue_mutable_proxy_upgradable",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-015",
+   "family": "eip7702",
+   "subfamily": "delegation_plus_sweep_dans_meme_tx",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-016",
+   "family": "eip7702",
+   "subfamily": "delegation_plus_sweep_dans_meme_tx",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-017",
+   "family": "eip7702",
+   "subfamily": "delegation_plus_sweep_dans_meme_tx",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-018",
+   "family": "eip7702",
+   "subfamily": "delegation_plus_sweep_dans_meme_tx",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-019",
+   "family": "eip7702",
+   "subfamily": "delegation_plus_sweep_dans_meme_tx",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eip7702-020",
+   "family": "eip7702",
+   "subfamily": "benin_dur_delegation_implementation_connue",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-021",
+   "family": "eip7702",
+   "subfamily": "benin_dur_delegation_implementation_connue",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-022",
+   "family": "eip7702",
+   "subfamily": "benin_dur_delegation_implementation_connue",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-023",
+   "family": "eip7702",
+   "subfamily": "benin_dur_delegation_implementation_connue",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ]
+  },
+  {
+   "id": "eip7702-024",
+   "family": "eip7702",
+   "subfamily": "benin_revocation_delegation",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "eip7702-025",
+   "family": "eip7702",
+   "subfamily": "benin_revocation_delegation",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "envoi_contact-007",
+   "family": "envoi_contact",
+   "subfamily": "eth_vers_contact_connu",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "envoi_contact-008",
+   "family": "envoi_contact",
+   "subfamily": "erc20_vers_contact_connu",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "erc4337_userop-017",
+   "family": "erc4337_userop",
+   "subfamily": "benin_dur_userop_transfert_contact",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_typed_data",
+    "unknown_typed_data_addresses",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eth_sign_aveugle-007",
+   "family": "eth_sign_aveugle",
+   "subfamily": "hash_domaine_connu_mais_aveugle",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "eth_sign_aveugle-008",
+   "family": "eth_sign_aveugle",
+   "subfamily": "hash_domaine_connu_mais_aveugle",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "faux_concours-008",
+   "family": "faux_concours",
+   "subfamily": "charge_technique_personal_sign_opaque_verification",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "faux_recruteur-001",
+   "family": "faux_recruteur",
+   "subfamily": "divulgue_asked_by_transfert",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "faux_recruteur-002",
+   "family": "faux_recruteur",
+   "subfamily": "divulgue_asked_by_transfert",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "faux_recruteur-003",
+   "family": "faux_recruteur",
+   "subfamily": "divulgue_asked_by_transfert",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "faux_remboursement-004",
+   "family": "faux_remboursement",
+   "subfamily": "fraude_conforme_pay_someone_nouveau_contact",
+   "label": "fraude_conforme",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "faux_remboursement-005",
+   "family": "faux_remboursement",
+   "subfamily": "fraude_conforme_pay_someone_nouveau_contact",
+   "label": "fraude_conforme",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "faux_remboursement-006",
+   "family": "faux_remboursement",
+   "subfamily": "fraude_conforme_pay_someone_nouveau_contact",
+   "label": "fraude_conforme",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "faux_remboursement-008",
+   "family": "faux_remboursement",
+   "subfamily": "charge_technique_approve_illimite_verification",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "faux_support-001",
+   "family": "faux_support",
+   "subfamily": "divulgue_asked_by_transfert",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "faux_token-001",
+   "family": "faux_token",
+   "subfamily": "swap_sortie_vers_faux_token_meme_symbole",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "faux_token-002",
+   "family": "faux_token",
+   "subfamily": "swap_sortie_vers_faux_token_meme_symbole",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "faux_token-003",
+   "family": "faux_token",
+   "subfamily": "swap_sortie_vers_faux_token_meme_symbole",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "faux_token-004",
+   "family": "faux_token",
+   "subfamily": "swap_sortie_vers_faux_token_meme_symbole",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "faux_token-005",
+   "family": "faux_token",
+   "subfamily": "swap_sortie_vers_faux_token_meme_symbole",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "honeypot-007",
+   "family": "honeypot",
+   "subfamily": "taxe_de_vente_95_pct",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "honeypot-008",
+   "family": "honeypot",
+   "subfamily": "taxe_de_vente_95_pct",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "increase_allowance-001",
+   "family": "increase_allowance",
+   "subfamily": "vers_eoa",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "increase_allowance-003",
+   "family": "increase_allowance",
+   "subfamily": "vers_eoa",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "increase_allowance-005",
+   "family": "increase_allowance",
+   "subfamily": "vers_eoa",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "increase_allowance-007",
+   "family": "increase_allowance",
+   "subfamily": "vers_eoa",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "approval_to_eoa"
+   ]
+  },
+  {
+   "id": "kit_drainer-001",
+   "family": "kit_drainer",
+   "subfamily": "payable_claim_valeur_elevee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "kit_drainer-002",
+   "family": "kit_drainer",
+   "subfamily": "payable_claim_valeur_elevee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "kit_drainer-005",
+   "family": "kit_drainer",
+   "subfamily": "payable_claim_valeur_elevee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "kit_drainer-006",
+   "family": "kit_drainer",
+   "subfamily": "payable_claim_valeur_elevee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "kit_drainer-009",
+   "family": "kit_drainer",
+   "subfamily": "payable_claim_valeur_elevee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "kit_drainer-010",
+   "family": "kit_drainer",
+   "subfamily": "payable_claim_valeur_elevee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "kit_drainer-011",
+   "family": "kit_drainer",
+   "subfamily": "calldata_opaque_contrat_jeune",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "mint_nft-004",
+   "family": "mint_nft",
+   "subfamily": "mint_payable_collection_connue",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "mint_nft-009",
+   "family": "mint_nft",
+   "subfamily": "mint_payable_collection_connue",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "multicall_cache-011",
+   "family": "multicall_cache",
+   "subfamily": "wallet_sendCalls_lot_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "multicall_cache-012",
+   "family": "multicall_cache",
+   "subfamily": "wallet_sendCalls_lot_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "multicall_cache-013",
+   "family": "multicall_cache",
+   "subfamily": "wallet_sendCalls_lot_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "multicall_cache-014",
+   "family": "multicall_cache",
+   "subfamily": "wallet_sendCalls_lot_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "multicall_cache-015",
+   "family": "multicall_cache",
+   "subfamily": "wallet_sendCalls_lot_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "multicall_cache-016",
+   "family": "multicall_cache",
+   "subfamily": "wallet_sendCalls_lot_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "multicall_cache-017",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_multicall3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multicall_cache-018",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_routeur_v3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "multicall_cache-019",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_sendCalls",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multicall_cache-020",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_multicall3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multicall_cache-021",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_routeur_v3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "multicall_cache-022",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_sendCalls",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multicall_cache-023",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_multicall3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multicall_cache-024",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_routeur_v3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "multicall_cache-025",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_sendCalls",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multicall_cache-026",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_multicall3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multicall_cache-027",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_routeur_v3",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "multicall_cache-028",
+   "family": "multicall_cache",
+   "subfamily": "benin_dur_multicall_legitime_sendCalls",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "multisend_delegatecall-001",
+   "family": "multisend_delegatecall",
+   "subfamily": "multisend_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "nested_approval"
+   ]
+  },
+  {
+   "id": "multisend_delegatecall-002",
+   "family": "multisend_delegatecall",
+   "subfamily": "multisend_appel_delegue_interne",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "multisend_delegatecall-003",
+   "family": "multisend_delegatecall",
+   "subfamily": "multisend_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "nested_approval"
+   ]
+  },
+  {
+   "id": "multisend_delegatecall-004",
+   "family": "multisend_delegatecall",
+   "subfamily": "multisend_appel_delegue_interne",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "multisend_delegatecall-005",
+   "family": "multisend_delegatecall",
+   "subfamily": "multisend_approve_cache",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "nested_approval"
+   ]
+  },
+  {
+   "id": "multisend_delegatecall-006",
+   "family": "multisend_delegatecall",
+   "subfamily": "multisend_appel_delegue_interne",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "nouveau_contrat_legit-001",
+   "family": "nouveau_contrat_legit",
+   "subfamily": "coffre_nouveau_jamais_utilise",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "nouveau_contrat_legit-002",
+   "family": "nouveau_contrat_legit",
+   "subfamily": "wrap_eth",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "nouveau_contrat_legit-006",
+   "family": "nouveau_contrat_legit",
+   "subfamily": "coffre_nouveau_jamais_utilise",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ]
+  },
+  {
+   "id": "nouveau_contrat_legit-007",
+   "family": "nouveau_contrat_legit",
+   "subfamily": "wrap_eth",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "permit2_allowance-006",
+   "family": "permit2_allowance",
+   "subfamily": "single_spender_inconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "approval_to_eoa",
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "permit2_allowance-013",
+   "family": "permit2_allowance",
+   "subfamily": "batch_multi_tokens",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "unlimited_allowance",
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "permit2_allowance-015",
+   "family": "permit2_allowance",
+   "subfamily": "benin_uniswap_borne_courte",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "permit2_allowance-016",
+   "family": "permit2_allowance",
+   "subfamily": "benin_uniswap_borne_courte",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "permit2_allowance-017",
+   "family": "permit2_allowance",
+   "subfamily": "benin_uniswap_borne_courte",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "permit2_allowance-018",
+   "family": "permit2_allowance",
+   "subfamily": "benin_uniswap_borne_courte",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "permit2_allowance-019",
+   "family": "permit2_allowance",
+   "subfamily": "benin_uniswap_borne_courte",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "permit2_allowance-020",
+   "family": "permit2_allowance",
+   "subfamily": "benin_uniswap_borne_courte",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "unlimited_allowance"
+   ]
+  },
+  {
+   "id": "permit2_signature_transfer-007",
+   "family": "permit2_signature_transfer",
+   "subfamily": "avec_witness_destinataire_libre",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "external_spender",
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-001",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_octets_aleatoires",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-002",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_octets_aleatoires",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-003",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_octets_aleatoires",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-004",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_octets_aleatoires",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-005",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_octets_aleatoires",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-006",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_ressemble_hash",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-007",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_ressemble_hash",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-008",
+   "family": "personal_sign_opaque",
+   "subfamily": "hex_opaque_ressemble_hash",
+   "label": "ambigu",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "personal_sign_opaque-009",
+   "family": "personal_sign_opaque",
+   "subfamily": "benin_texte_lisible",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "personal_sign_opaque-011",
+   "family": "personal_sign_opaque",
+   "subfamily": "benin_texte_lisible",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "personal_sign_opaque-015",
+   "family": "personal_sign_opaque",
+   "subfamily": "benin_dur_texte_encode_en_hex",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "pig_butchering-010",
+   "family": "pig_butchering",
+   "subfamily": "fraude_conforme_frais_retrait_fictifs",
+   "label": "fraude_conforme",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "pig_butchering-011",
+   "family": "pig_butchering",
+   "subfamily": "divulgue_asked_by_advisor",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "pig_butchering-012",
+   "family": "pig_butchering",
+   "subfamily": "divulgue_asked_by_advisor",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ]
+  },
+  {
+   "id": "presse_papiers-001",
+   "family": "presse_papiers",
+   "subfamily": "contact_adresse_remplacee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "presse_papiers-003",
+   "family": "presse_papiers",
+   "subfamily": "contact_adresse_remplacee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "presse_papiers-005",
+   "family": "presse_papiers",
+   "subfamily": "contact_adresse_remplacee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "presse_papiers-007",
+   "family": "presse_papiers",
+   "subfamily": "contact_adresse_remplacee",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "lookalike_address"
+   ]
+  },
+  {
+   "id": "safe_execution-001",
+   "family": "safe_execution",
+   "subfamily": "execTransaction_operation_1_vers_contrat_inconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "safe_execution-002",
+   "family": "safe_execution",
+   "subfamily": "execTransaction_operation_1_vers_contrat_inconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "safe_execution-003",
+   "family": "safe_execution",
+   "subfamily": "execTransaction_operation_1_vers_contrat_inconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "safe_execution-004",
+   "family": "safe_execution",
+   "subfamily": "execTransaction_operation_1_vers_contrat_inconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "safe_execution-005",
+   "family": "safe_execution",
+   "subfamily": "execTransaction_operation_1_vers_contrat_inconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "safe_execution-006",
+   "family": "safe_execution",
+   "subfamily": "execTransaction_operation_1_vers_contrat_inconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "delegatecall_unknown_target",
+    "delegatecall",
+    "opaque"
+   ]
+  },
+  {
+   "id": "safe_gouvernance-002",
+   "family": "safe_gouvernance",
+   "subfamily": "setGuard",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "safe_gouvernance-004",
+   "family": "safe_gouvernance",
+   "subfamily": "addOwnerWithThreshold_seuil_1",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "safe_gouvernance-008",
+   "family": "safe_gouvernance",
+   "subfamily": "setGuard",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "safe_gouvernance-010",
+   "family": "safe_gouvernance",
+   "subfamily": "addOwnerWithThreshold_seuil_1",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "safe_gouvernance-014",
+   "family": "safe_gouvernance",
+   "subfamily": "setGuard",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "safe_gouvernance-016",
+   "family": "safe_gouvernance",
+   "subfamily": "addOwnerWithThreshold_seuil_1",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ]
+  },
+  {
+   "id": "seaport-015",
+   "family": "seaport",
+   "subfamily": "benin_liste_prix_juste",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "seaport-016",
+   "family": "seaport",
+   "subfamily": "benin_liste_prix_juste",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "seaport-017",
+   "family": "seaport",
+   "subfamily": "benin_liste_prix_juste",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "seaport-018",
+   "family": "seaport",
+   "subfamily": "benin_liste_prix_juste",
+   "label": "benin",
+   "expected": "warn",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "far_expiry"
+   ]
+  },
+  {
+   "id": "set_approval_for_all-009",
+   "family": "set_approval_for_all",
+   "subfamily": "operateur_contrat_neuf",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "critical"
+   },
+   "floorCodes": [
+    "approval_for_all",
+    "external_spender"
+   ]
+  },
+  {
+   "id": "siwe-004",
+   "family": "siwe",
+   "subfamily": "domaine_sosie_chainid_autre",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "siwe_chain_mismatch"
+   ]
+  },
+  {
+   "id": "siwe-006",
+   "family": "siwe",
+   "subfamily": "uri_different_du_domaine",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "siwe_uri_mismatch"
+   ]
+  },
+  {
+   "id": "swap_connu-001",
+   "family": "swap_connu",
+   "subfamily": "v2_tokens_vers_eth",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-002",
+   "family": "swap_connu",
+   "subfamily": "v2_eth_vers_tokens",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-003",
+   "family": "swap_connu",
+   "subfamily": "v3_exactInputSingle",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-005",
+   "family": "swap_connu",
+   "subfamily": "v2_tokens_vers_eth",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-006",
+   "family": "swap_connu",
+   "subfamily": "v2_eth_vers_tokens",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-007",
+   "family": "swap_connu",
+   "subfamily": "v3_exactInputSingle",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-008",
+   "family": "swap_connu",
+   "subfamily": "v2_stable_stable",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-009",
+   "family": "swap_connu",
+   "subfamily": "v2_tokens_vers_eth",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-010",
+   "family": "swap_connu",
+   "subfamily": "v2_eth_vers_tokens",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-011",
+   "family": "swap_connu",
+   "subfamily": "v3_exactInputSingle",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-013",
+   "family": "swap_connu",
+   "subfamily": "v2_tokens_vers_eth",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "swap_connu-014",
+   "family": "swap_connu",
+   "subfamily": "v2_eth_vers_tokens",
+   "label": "benin",
+   "expected": "ok",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": []
+  },
+  {
+   "id": "urgence_bancaire-010",
+   "family": "urgence_bancaire",
+   "subfamily": "charge_technique_personal_sign_opaque_verification",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ]
+  },
+  {
+   "id": "verifying_contract-001",
+   "family": "verifying_contract",
+   "subfamily": "typed_data_inconnu_verifyingContract_tiers",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_typed_data",
+    "unknown_typed_data_addresses",
+    "opaque"
+   ]
+  },
+  {
+   "id": "verifying_contract-002",
+   "family": "verifying_contract",
+   "subfamily": "typed_data_inconnu_verifyingContract_tiers",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_typed_data",
+    "unknown_typed_data_addresses",
+    "opaque"
+   ]
+  },
+  {
+   "id": "verifying_contract-003",
+   "family": "verifying_contract",
+   "subfamily": "typed_data_inconnu_verifyingContract_tiers",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_typed_data",
+    "unknown_typed_data_addresses",
+    "opaque"
+   ]
+  },
+  {
+   "id": "verifying_contract-004",
+   "family": "verifying_contract",
+   "subfamily": "typed_data_inconnu_verifyingContract_tiers",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_typed_data",
+    "unknown_typed_data_addresses",
+    "opaque"
+   ]
+  },
+  {
+   "id": "verifying_contract-005",
+   "family": "verifying_contract",
+   "subfamily": "typed_data_inconnu_verifyingContract_tiers",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_typed_data",
+    "unknown_typed_data_addresses",
+    "opaque"
+   ]
+  },
+  {
+   "id": "verifying_contract-006",
+   "family": "verifying_contract",
+   "subfamily": "typed_data_inconnu_verifyingContract_tiers",
+   "label": "malveillant",
+   "expected": "critical",
+   "levels": {
+    "reference_simulation": "ok",
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn",
+    "_adem_catalogue": "ok"
+   },
+   "floorCodes": [
+    "unknown_typed_data",
+    "unknown_typed_data_addresses",
+    "opaque"
+   ]
+  }
+ ]
+}

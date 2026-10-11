@@ -1,0 +1,430 @@
+{
+ "siteId": "rainbowkit",
+ "url": "https://www.rainbowkit.com/",
+ "arm": "test",
+ "started": "2026-10-11T00:35:40.832Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://rainbowkit.com/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://eth.merkle.io/' from origin 'https://rainbowkit.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Al",
+   "url": "https://rainbowkit.com/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://eth.merkle.io/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "7941F3C407624EC6B66376F825E2502E",
+   "status": 200,
+   "url": "https://rainbowkit.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "7941F3C407624EC6B66376F825E2502E",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://rainbowkit.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "RainbowKit",
+  "bodyLen": 2423,
+  "nodes": 721,
+  "readyState": "complete",
+  "head": "RainbowKit 2.2.11 Connect Wallet RainbowKit The best way to connect a wallet Designed for everyone. Built for developers. npm init @rainbow-me/rainbowkit@latest Copy View the Docs The siqqest Web3 teams are using Rainbow"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 9,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 8,
+  "wreads": {
+   "providers": 2,
+   "isRainbow": 2,
+   "isMetaMask": 1,
+   "isBraveWallet": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBinance": 1,
+   "isBlockWallet": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNestWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isZilPay": 1,
+   "isPortal": 1,
+   "isxPortal": 1,
+   "isRabby": 1,
+   "isStatus": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 2,
+   "isCTRL": 1,
+   "isZeal": 1,
+   "isCoin98": 1,
+   "isMEWwallet": 1,
+   "isSafeheron": 1,
+   "isSafePal": 1,
+   "isWigwam": 1,
+   "isZerion": 1,
+   "__seif": 1,
+   "then": 7,
+   "on": 8,
+   "isCoinbaseBrowser": 1,
+   "request": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1241.5390625,
+   "y": 44,
+   "top": 24
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 6,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 425.15625,
+   "y": 398,
+   "area": 1449.9375
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "RainbowKit",
+  "bodyLen": 2447,
+  "nodes": 738,
+  "readyState": "complete",
+  "head": "RainbowKit 2.2.11 Ethereum Dropdown ⛱ 0x11…1111 Dropdown RainbowKit The best way to connect a wallet Designed for everyone. Built for developers. npm init @rainbow-me/rainbowkit@latest Copy View the Docs The siqqest Web3"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 9,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "eth_requestAccounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 16,
+  "wreads": {
+   "providers": 2,
+   "isRainbow": 2,
+   "isMetaMask": 1,
+   "isBraveWallet": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 1,
+   "isBackpack": 1,
+   "isBifrost": 1,
+   "isBitKeep": 1,
+   "isBitski": 1,
+   "isBinance": 1,
+   "isBlockWallet": 1,
+   "isCoinbaseWallet": 1,
+   "isDawn": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFrame": 1,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isKuCoinWallet": 1,
+   "isMathWallet": 1,
+   "isNestWallet": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOpera": 1,
+   "isPhantom": 1,
+   "isZilPay": 1,
+   "isPortal": 1,
+   "isxPortal": 1,
+   "isRabby": 1,
+   "isStatus": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isTokenPocket": 1,
+   "isTokenary": 1,
+   "isTrust": 1,
+   "isTrustWallet": 2,
+   "isCTRL": 1,
+   "isZeal": 1,
+   "isCoin98": 1,
+   "isMEWwallet": 1,
+   "isSafeheron": 1,
+   "isSafePal": 1,
+   "isWigwam": 1,
+   "isZerion": 1,
+   "__seif": 1,
+   "then": 10,
+   "on": 11,
+   "isCoinbaseBrowser": 1,
+   "request": 2,
+   "chainId": 2,
+   "selectedAddress": 1,
+   "removeListener": 2,
+   "off": 2
+  }
+ },
+ "evN": 8,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://rainbowkit.com/",
+ "ms": 14164
+}

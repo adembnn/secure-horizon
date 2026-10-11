@@ -2,7 +2,7 @@
  "siteId": "snapshot",
  "url": "https://snapshot.org/",
  "arm": "control",
- "started": "2026-10-11T00:14:20.213Z",
+ "started": "2026-10-11T00:25:38.086Z",
  "events": [
   {
    "t": "frame",
@@ -3607,7 +3607,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "05FA4F31503B336BDB42392FA682C86A",
+   "frameId": "844FFBA76AF646B4486ED55F8A4952F3",
    "status": 200,
    "url": "https://snapshot.org/",
    "mime": "text/html",
@@ -3622,7 +3622,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "05FA4F31503B336BDB42392FA682C86A",
+ "mainFrameId": "844FFBA76AF646B4486ED55F8A4952F3",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -3658,6 +3658,8 @@
   "overwritten": false,
   "req6963": 1,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -3695,13 +3697,13 @@
   "modal": "",
   "modalCount": 0,
   "wc": false,
-  "connectedUI": true,
+  "connectedUI": false,
   "mmListed": false,
   "title": "Explore",
-  "bodyLen": 800,
-  "nodes": 468,
+  "bodyLen": 706,
+  "nodes": 454,
   "readyState": "complete",
-  "head": "Home Explore Notifications Profile 0x1111...1111 Home Explore Notifications Profile Settings Onboarding Setup your profile Follow at least 3 spaces 0/3 Cast your first vote Protocol Snapshot Network Category All categori"
+  "head": "Home Explore Notifications Profile Home Explore Notifications Profile Settings Protocol Snapshot Network Category All categories Spaces Active Proposals Followers Balancer Follow 2 1.1k 37k Gitcoin Follow 1 185 151k Leag"
  },
  "state1": {
   "mode": "control",
@@ -3771,6 +3773,8 @@
    "eth_chainId",
    "eth_chainId"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -3797,5 +3801,5 @@
   "overwritten": false
  },
  "finalUrl": "https://snapshot.org/#/explore",
- "ms": 21663
+ "ms": 12422
 }

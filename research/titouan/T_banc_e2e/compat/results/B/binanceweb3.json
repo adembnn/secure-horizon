@@ -1,0 +1,174 @@
+{
+ "siteId": "binanceweb3",
+ "url": "https://www.binance.com/en/web3wallet",
+ "arm": "test",
+ "started": "2026-10-11T00:35:26.828Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.binance.com/en/web3wallet"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://web3.binance.com/en/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://web3.binance.com/en/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://web3.binance.com/en/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-715f9c65-652e-402f-b533-6f356035d74b' 'self' 'sha256-/1kD5JoNzGXSeysrQS4ALgjKZqtFyW4ybe5TFjkV7H8=' '",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "AFA647C0D6DAAF7CB248ACA610A9CD81",
+   "status": 202,
+   "url": "https://www.binance.com/en/web3wallet",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "CloudFront"
+  },
+  {
+   "frameId": "AFA647C0D6DAAF7CB248ACA610A9CD81",
+   "status": 200,
+   "url": "https://web3.binance.com/en/",
+   "mime": "text/html",
+   "csp": "object-src 'none'; script-src 'nonce-715f9c65-652e-402f-b533-6f356035d74b' 'self' 'sha256-/1kD5JoNzGXSeysrQS4ALgjKZqtFyW4ybe5TFjkV7H8=' 'sha256-/E2bbZg11+BMF2D71JiF6/3dy4EfZMoWIQvTP2D+BsM=' 'sha256-0lyVb+8+TjT4GLR5purVUMpzrPvnOma9xWEN95yeMck=' 'sha256-5Acae0zXHK/b4b/sT9SzlbPXfOrFqevQscyRyzVsGh4=' 'sha256-ArebEu1OuKzyogDfGdnHoTlXs2FtG4UFApOVtwQcY0Y=' 'sha256-HhTJH26SrrzI4tI41v17FSOSsLgVbisJZfhEbTlQZkI=' 'sha256-Imv8rgvxn2GP4QJH/s+T5I8tEtsRwclyX3+LH36ke+U=' 'sha256-InHVDAkbhnVzPA3s7T7hZ4g0F262eRQiNAxUBsu3lac=' 'sha256-MKNxhlWWMLOfwGrENJ15ZUBKF3818mYsK1p1OlmDkzc=' 'sha256-TQLlyRXsogRiaXfyuodeP64e74AFLDWPN1g90N+fNwA=' 'sha256-UljDVzKKOZircZiPHzs23nPGg3b5p+Zs1C/KYa62iwU=' 'sha256-VG5me/yQ15hEz9VsT7/BAQYswbUZR0uqGa+QfZg0Cho=' 'sha256-d4KioJC6nKQdNhzaRr8OVvVFFlMq4OvDu58jyiSCQZ0=' 'sha256-dLEmyP7TEzCA2+3N/n5GvHjOIHQBj/V/yUSCauxeG4w=' 'sha256-dxRWb87NCxmjmBNw5xAnCdyGF1BT+/Rwfz5Q3IPVN2w=' 'sha256-lFdJxRsvkeZe7zniObNfuzz8LdmNQHGKYJvhi5kBD80=' 'sha256-nzAJ/YJH6+oL/qvMvVhwFQbbLmnh9AwuJhveBoWQJRY=' 'sha256-pLgLIkvUeS4n2EXX2ZuQ1gUL3h2xpUMJ8OvV0x1d55Y=' 'sha256-pVP3wiRK6EgotPvbJ2R65xpjHaVawiUq7xpvmES7HRA=' 'sha256-sWpTkxgTaP+qCp5wa8950vcC5MmZpgN75p+Wesevfvg=' 'sha256-uVkoo8b5faQtbL2zDed9mhKFUBdX1LWCQK0IY45WBb0=' 'sha256-vchlcElImTOCWjVddl9y/GQXY7UEdRLUeaWvyiEuE2E=' blob: bnc: data: https://*.pinterest.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.wistia.com https://*.wistia.net https://accounts.binance.com https://accounts.google.com https://accounts.google.com/gsi/client https://api.smartling.com https://apis.google.com/js/api:client.js https://appleid.cdn-apple.com https://bin.bnbstatic.com https://browser.sentry-cdn.com https://cdn.cookielaw.org https://geolocation.onetrust.com https://googleads.g.doubleclick.net https://js.sentry-cdn.com https://log.bntrace.com https://maps.googleapis.com https://optimize.google.com https://privacyportal-bn.my.onetrust.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://src.litix.io https://static-file-1306379396.file.myqcloud.com https://www.google-analytics.com https://www.google.com https://www.googleadservices.com https://www.googleanalytics.com https://www.googleoptimize.com https://www.googletagmanager.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' blob: https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://accounts.google.com https://api.smartling.com https://bin.bnbstatic.com https://fast.wistia.com https://fonts.googleapis.com https://optimize.google.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com; base-uri 'self' https://*.binance.com https://*.bnbstatic.com; frame-src 'self' blob: bnc: data: https://*.advance.ai https://*.asterbroker.com https://*.asterdex.com https://*.astherus.finance https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.twimg.com https://accounts.binance.com https://accounts.google.com https://accounts.google.com/ https://api.smartling.com https://api.sumsub.com https://bid.g.doubleclick.net https://embed.reddit.com https://fast.wistia.com https://fast.wistia.net https://faster100x.com https://iframe.bubblemaps.io https://optimize.google.com https://platform.twitter.com https://player.bilibili.com https://player.twitch.tv https://t.me https://truthsocial.com https://www.binance.com https://www.facebook.com https://www.google.com https://www.instagram.com https://www.redditmedia.com https://www.tiktok.com https://www.youtube.com https://youtu.be https://youtube.com; media-src 'self' blob: https://*.asterdex.com https://*.astherus.finance https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.twimg.com https://*.wistia.com https://*.wistia.net https://accounts.google.com https://api.smartling.com https://bin.bnbstatic.com https://binance.com https://embedwistia-a.akamaihd.net https://fast.wistia.net https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com https://upload-bnbstatic-com.s3.ap-northeast-1.amazonaws.com; default-src 'self' https://*.binance.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.wistia.com https://*.wistia.net https://bin.bnbstatic.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com; connect-src 'self' https://*.agora.io:* https://*.asterdex.com https://*.astherus.finance https://*.binance.com https://*.edge.agora.io:* https://*.edge.sd-rtn.com:* https://*.litix.io https://*.s3-accelerate.amazonaws.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.sd-rtn.com:* https://*.sentry.io https://*.wistia.com https://accounts.google.com https://analytics.google.com https://api.binance.com https://api.coinmarketcap.com https://api.saasexch.com https://api.saasexch.com/bapi/themis/api/ https://api.smartling.com https://bin.bnbstatic.com https://cdn.cookielaw.org https://cdnjs.cloudflare.com https://dapi.coinmarketcap.com https://data-collect.toolsfdg.net https://dquery.sintral.io https://embedwistia-a.akamaihd.net https://fcmregistrations.googleapis.com https://firebaseinstallations.googleapis.com https://frontend-m.binance.cloud https://geolocation.onetrust.com https://googleads.g.doubleclick.net https://log.bntrace.com https://logan-log.binance.gg https://privacyportal-bn.my.onetrust.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://public.nftstatic.com https://report.binance.gg https://sensors.binance.cloud https://static-file-1306379396.file.myqcloud.com https://stats.g.doubleclick.net https://syndication.twitter.com https://upload-bnbstatic-com.s3.ap-northeast-1.amazonaws.com https://web3api.binance.com https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com https://www.tradingview.com wss://*.agora.io:* wss://*.binance.com wss://*.edge.agora.io:* wss://*.edge.sd-rtn.com:* wss://*.sd-rtn.com:* wss://*.yshyqxx.com wss://bstream.binance.com:9443 wss://bstream.yshyqxx.com:443 wss://chat-wss.yshyqxx.com wss://dws.coinmarketcap.com/ws wss://dws.sintral.io/ws wss://festream.saasexch.cc:* wss://festream.saasexch.co:* wss://festream.saasexch.com:* wss://festream.saasexch.io:* wss://haodesk.binance.im wss://margin-stream.binance.com:443 wss://margin-stream.yshyqxx.com:443 wss://meme.coinmarketcap.com/ws wss://nbstream.binance.com wss://nbstream.binance.info wss://nbstream.yshyqxx.com wss://nbstream.yshyqxx.com:443 wss://push-edge.beta.coinmarketcap.com/ws wss://stream.binance.com wss://stream.yshyqxx.com:443 wss://web3-stream.binance.com; font-src 'self' data: https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.wistia.com https://accounts.google.com https://api.smartling.com https://at.alicdn.com https://bin.bnbstatic.com https://fonts.gstatic.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com; img-src 'self' blob: data: https://*.asterdex.com https://*.astherus.finance https://*.pinimg.com https://*.pinterest.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.twimg.com https://*.wistia.com https://*.wistia.net https://accounts.google.com https://analytics.twitter.com https://api.smartling.com https://assets.dev-api.42.space https://assets.ft.42.space https://bin.bnbstatic.com https://cdn.cookielaw.org https://cdnjs.cloudflare.com https://embedwistia-a.akamaihd.net https://geolocation.onetrust.com https://googleads.g.doubleclick.net https://ipfs.secflarefdg.net https://ipfs.sintral.me https://optimize.google.com https://p.secflarefdg.net https://p.sintral.me https://privacyportal-bn.my.onetrust.com https://public-1259603563.file.myqcloud.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://public.nftstatic.com https://sensors.binance.cloud https://static-file-1259603563.file.myqcloud.com https://static-file-1306379396.file.myqcloud.com https://static.four.meme https://t.co https://upload-bnbstatic-com.s3-accelerate.amazonaws.com https://upload-bnbstatic-com.s3.ap-northeast-1.amazonaws.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com; report-to csp-endpoint; report-uri https://api.saasexch.com/bapi/fe/pda/v1/csp?app=web3-ui",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": null
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "AFA647C0D6DAAF7CB248ACA610A9CD81",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://web3.binance.com/en/",
+  "mime": "text/html",
+  "csp": "object-src 'none'; script-src 'nonce-715f9c65-652e-402f-b533-6f356035d74b' 'self' 'sha256-/1kD5JoNzGXSeysrQS4ALgjKZqtFyW4ybe5TFjkV7H8=' 'sha256-/E2bbZg11+BMF2D71JiF6/3dy4EfZMoWIQvTP2D+BsM=' 'sha256-0lyVb+8+TjT4GLR5purVUMpzrPvnOma9xWEN95yeMck=' 'sha256-5Acae0zXHK/b4b/sT9SzlbPXfOrFqevQscyRyzVsGh4=' 'sha256-ArebEu1OuKzyogDfGdnHoTlXs2FtG4UFApOVtwQcY0Y=' 'sha256-HhTJH26SrrzI4tI41v17FSOSsLgVbisJZfhEbTlQZkI=' 'sha256-Imv8rgvxn2GP4QJH/s+T5I8tEtsRwclyX3+LH36ke+U=' 'sha256-InHVDAkbhnVzPA3s7T7hZ4g0F262eRQiNAxUBsu3lac=' 'sha256-MKNxhlWWMLOfwGrENJ15ZUBKF3818mYsK1p1OlmDkzc=' 'sha256-TQLlyRXsogRiaXfyuodeP64e74AFLDWPN1g90N+fNwA=' 'sha256-UljDVzKKOZircZiPHzs23nPGg3b5p+Zs1C/KYa62iwU=' 'sha256-VG5me/yQ15hEz9VsT7/BAQYswbUZR0uqGa+QfZg0Cho=' 'sha256-d4KioJC6nKQdNhzaRr8OVvVFFlMq4OvDu58jyiSCQZ0=' 'sha256-dLEmyP7TEzCA2+3N/n5GvHjOIHQBj/V/yUSCauxeG4w=' 'sha256-dxRWb87NCxmjmBNw5xAnCdyGF1BT+/Rwfz5Q3IPVN2w=' 'sha256-lFdJxRsvkeZe7zniObNfuzz8LdmNQHGKYJvhi5kBD80=' 'sha256-nzAJ/YJH6+oL/qvMvVhwFQbbLmnh9AwuJhveBoWQJRY=' 'sha256-pLgLIkvUeS4n2EXX2ZuQ1gUL3h2xpUMJ8OvV0x1d55Y=' 'sha256-pVP3wiRK6EgotPvbJ2R65xpjHaVawiUq7xpvmES7HRA=' 'sha256-sWpTkxgTaP+qCp5wa8950vcC5MmZpgN75p+Wesevfvg=' 'sha256-uVkoo8b5faQtbL2zDed9mhKFUBdX1LWCQK0IY45WBb0=' 'sha256-vchlcElImTOCWjVddl9y/GQXY7UEdRLUeaWvyiEuE2E=' blob: bnc: data: https://*.pinterest.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.wistia.com https://*.wistia.net https://accounts.binance.com https://accounts.google.com https://accounts.google.com/gsi/client https://api.smartling.com https://apis.google.com/js/api:client.js https://appleid.cdn-apple.com https://bin.bnbstatic.com https://browser.sentry-cdn.com https://cdn.cookielaw.org https://geolocation.onetrust.com https://googleads.g.doubleclick.net https://js.sentry-cdn.com https://log.bntrace.com https://maps.googleapis.com https://optimize.google.com https://privacyportal-bn.my.onetrust.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://src.litix.io https://static-file-1306379396.file.myqcloud.com https://www.google-analytics.com https://www.google.com https://www.googleadservices.com https://www.googleanalytics.com https://www.googleoptimize.com https://www.googletagmanager.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' blob: https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://accounts.google.com https://api.smartling.com https://bin.bnbstatic.com https://fast.wistia.com https://fonts.googleapis.com https://optimize.google.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com; base-uri 'self' https://*.binance.com https://*.bnbstatic.com; frame-src 'self' blob: bnc: data: https://*.advance.ai https://*.asterbroker.com https://*.asterdex.com https://*.astherus.finance https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.twimg.com https://accounts.binance.com https://accounts.google.com https://accounts.google.com/ https://api.smartling.com https://api.sumsub.com https://bid.g.doubleclick.net https://embed.reddit.com https://fast.wistia.com https://fast.wistia.net https://faster100x.com https://iframe.bubblemaps.io https://optimize.google.com https://platform.twitter.com https://player.bilibili.com https://player.twitch.tv https://t.me https://truthsocial.com https://www.binance.com https://www.facebook.com https://www.google.com https://www.instagram.com https://www.redditmedia.com https://www.tiktok.com https://www.youtube.com https://youtu.be https://youtube.com; media-src 'self' blob: https://*.asterdex.com https://*.astherus.finance https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.twimg.com https://*.wistia.com https://*.wistia.net https://accounts.google.com https://api.smartling.com https://bin.bnbstatic.com https://binance.com https://embedwistia-a.akamaihd.net https://fast.wistia.net https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com https://upload-bnbstatic-com.s3.ap-northeast-1.amazonaws.com; default-src 'self' https://*.binance.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.wistia.com https://*.wistia.net https://bin.bnbstatic.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com; connect-src 'self' https://*.agora.io:* https://*.asterdex.com https://*.astherus.finance https://*.binance.com https://*.edge.agora.io:* https://*.edge.sd-rtn.com:* https://*.litix.io https://*.s3-accelerate.amazonaws.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.sd-rtn.com:* https://*.sentry.io https://*.wistia.com https://accounts.google.com https://analytics.google.com https://api.binance.com https://api.coinmarketcap.com https://api.saasexch.com https://api.saasexch.com/bapi/themis/api/ https://api.smartling.com https://bin.bnbstatic.com https://cdn.cookielaw.org https://cdnjs.cloudflare.com https://dapi.coinmarketcap.com https://data-collect.toolsfdg.net https://dquery.sintral.io https://embedwistia-a.akamaihd.net https://fcmregistrations.googleapis.com https://firebaseinstallations.googleapis.com https://frontend-m.binance.cloud https://geolocation.onetrust.com https://googleads.g.doubleclick.net https://log.bntrace.com https://logan-log.binance.gg https://privacyportal-bn.my.onetrust.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://public.nftstatic.com https://report.binance.gg https://sensors.binance.cloud https://static-file-1306379396.file.myqcloud.com https://stats.g.doubleclick.net https://syndication.twitter.com https://upload-bnbstatic-com.s3.ap-northeast-1.amazonaws.com https://web3api.binance.com https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com https://www.tradingview.com wss://*.agora.io:* wss://*.binance.com wss://*.edge.agora.io:* wss://*.edge.sd-rtn.com:* wss://*.sd-rtn.com:* wss://*.yshyqxx.com wss://bstream.binance.com:9443 wss://bstream.yshyqxx.com:443 wss://chat-wss.yshyqxx.com wss://dws.coinmarketcap.com/ws wss://dws.sintral.io/ws wss://festream.saasexch.cc:* wss://festream.saasexch.co:* wss://festream.saasexch.com:* wss://festream.saasexch.io:* wss://haodesk.binance.im wss://margin-stream.binance.com:443 wss://margin-stream.yshyqxx.com:443 wss://meme.coinmarketcap.com/ws wss://nbstream.binance.com wss://nbstream.binance.info wss://nbstream.yshyqxx.com wss://nbstream.yshyqxx.com:443 wss://push-edge.beta.coinmarketcap.com/ws wss://stream.binance.com wss://stream.yshyqxx.com:443 wss://web3-stream.binance.com; font-src 'self' data: https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.wistia.com https://accounts.google.com https://api.smartling.com https://at.alicdn.com https://bin.bnbstatic.com https://fonts.gstatic.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://static-file-1306379396.file.myqcloud.com; img-src 'self' blob: data: https://*.asterdex.com https://*.astherus.finance https://*.pinimg.com https://*.pinterest.com https://*.saasexch.cc https://*.saasexch.co https://*.saasexch.com https://*.saasexch.info https://*.saasexch.io https://*.twimg.com https://*.wistia.com https://*.wistia.net https://accounts.google.com https://analytics.twitter.com https://api.smartling.com https://assets.dev-api.42.space https://assets.ft.42.space https://bin.bnbstatic.com https://cdn.cookielaw.org https://cdnjs.cloudflare.com https://embedwistia-a.akamaihd.net https://geolocation.onetrust.com https://googleads.g.doubleclick.net https://ipfs.secflarefdg.net https://ipfs.sintral.me https://optimize.google.com https://p.secflarefdg.net https://p.sintral.me https://privacyportal-bn.my.onetrust.com https://public-1259603563.file.myqcloud.com https://public-1306379396.file.myqcloud.com https://public.bnbstatic.com https://public.nftstatic.com https://sensors.binance.cloud https://static-file-1259603563.file.myqcloud.com https://static-file-1306379396.file.myqcloud.com https://static.four.meme https://t.co https://upload-bnbstatic-com.s3-accelerate.amazonaws.com https://upload-bnbstatic-com.s3.ap-northeast-1.amazonaws.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com; report-to csp-endpoint; report-uri https://api.saasexch.com/bapi/fe/pda/v1/csp?app=web3-ui",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": null
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Trade Memes, Stocks, Perps & Prediction Markets | Binance Wallet",
+  "bodyLen": 455,
+  "nodes": 464,
+  "readyState": "loading",
+  "head": "Markets Memes Stocks Prediction Perpetuals Strategy Portfolio Rewards Build Search / Connect One Wallet. Everything On-Chain. Trade, invest, earn, and discover opportunities across the entire Web3 ecosystem - all from Bi"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Trade Memes, Stocks, Perps & Prediction Markets | Binance Wallet",
+  "bodyLen": 455,
+  "nodes": 467,
+  "readyState": "loading",
+  "head": "Markets Memes Stocks Prediction Perpetuals Strategy Portfolio Rewards Build Search / Connect One Wallet. Everything On-Chain. Trade, invest, earn, and discover opportunities across the entire Web3 ecosystem - all from Bi"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 3,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://web3.binance.com/en/",
+ "ms": 5348
+}

@@ -1,0 +1,141 @@
+{
+ "siteId": "instadapp",
+ "url": "https://instadapp.io/",
+ "arm": "test",
+ "started": "2026-10-11T00:38:36.351Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://instadapp.io/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://instadapp.io/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://instadapp.io/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "BED8C00504CAB24F9605C2786F743466",
+   "status": 200,
+   "url": "https://instadapp.io/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "BED8C00504CAB24F9605C2786F743466",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://instadapp.io/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Instadapp",
+  "bodyLen": 952,
+  "nodes": 1740,
+  "readyState": "complete",
+  "head": "Instadapp PRO Instadapp Lite Avocado Fluid Governance Blog Docs Explore Apps The Unified Platform for Everything DeFi Manage multiple DeFi protocols and positions utilizing a DeFi Smart Account or Avocado Smart Wallet $ "
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Instadapp",
+  "bodyLen": 952,
+  "nodes": 1740,
+  "readyState": "complete",
+  "head": "Instadapp PRO Instadapp Lite Avocado Fluid Governance Blog Docs Explore Apps The Unified Platform for Everything DeFi Manage multiple DeFi protocols and positions utilizing a DeFi Smart Account or Avocado Smart Wallet $ "
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://instadapp.io/",
+ "ms": 7371
+}

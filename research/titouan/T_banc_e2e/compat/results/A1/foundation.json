@@ -1,0 +1,152 @@
+{
+ "siteId": "foundation",
+ "url": "https://foundation.app/",
+ "arm": "control",
+ "started": "2026-10-11T00:29:57.837Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.foundation.app/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://www.foundation.app/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://www.foundation.app/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://pbs.twimg.com/profile_images/1884575583864303616/7CKuoia0_normal.jpg"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 ()",
+   "url": "https://pbs.twimg.com/profile_images/1954894256989933568/TvY4cuYA_normal.jpg"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "1F65C723C4E672E3175F145A19E4AB5E",
+   "status": 200,
+   "url": "https://www.foundation.app/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://pbs.twimg.com https://abs.twimg.com; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com; media-src 'self' https://video.twimg.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "1F65C723C4E672E3175F145A19E4AB5E",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://www.foundation.app/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://pbs.twimg.com https://abs.twimg.com; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com; media-src 'self' https://video.twimg.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Foundation is offline",
+  "bodyLen": 4725,
+  "nodes": 469,
+  "readyState": "complete",
+  "head": "April 27, 2026 Foundation is offline To our community, We’re writing to provide a clear update on the state of Foundation. Earlier this year, we entered into an agreement to sell the platform to a third party who intende"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Foundation is offline",
+  "bodyLen": 4725,
+  "nodes": 469,
+  "readyState": "complete",
+  "head": "April 27, 2026 Foundation is offline To our community, We’re writing to provide a clear update on the state of Foundation. Earlier this year, we entered into an agreement to sell the platform to a third party who intende"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://www.foundation.app/",
+ "ms": 5359
+}

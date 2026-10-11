@@ -12,7 +12,8 @@
 
   const ADDR = '0x1111111111111111111111111111111111111111';
   const state = { mode: MODE, reads: 0, sets: 0, overwritten: false, req6963: 0, calls: [], blockedSign: 0,
-                  wcalls: 0, wreads: {}, eth: null };
+                  wcalls: 0, wreads: {}, eth: null, extReads: 0, extReq6963: 0 };
+  const fromExt = () => { try { return /chrome-extension:\/\//.test(new Error().stack); } catch (_) { return false; } };   // attribue a l'extension (bras ext) les lectures qu'elle fait elle-meme
   Object.defineProperty(window, '__compat_state', { value: state, enumerable: false, configurable: true });
 
   // ---------- fournisseur EIP-1193 simule ----------
@@ -115,7 +116,7 @@
   let holder = ethObj;
   Object.defineProperty(window, 'ethereum', {
     configurable: true, enumerable: true,
-    get() { state.reads++; if (state.reads === 1) send({ t: 'read1' }); return holder; },
+    get() { if (fromExt()) { state.extReads++; return holder; } state.reads++; if (state.reads === 1) send({ t: 'read1' }); return holder; },
     set(v) { state.sets++; if (v !== ethObj) state.overwritten = true; holder = v; }
   });
 
@@ -125,7 +126,7 @@
     icon: 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><rect width="32" height="32" fill="#f6851b"/></svg>')
   });
   const announce = () => { try { window.dispatchEvent(new CustomEvent('eip6963:announceProvider', { detail: Object.freeze({ info, provider: ethObj }) })); } catch (_) {} };
-  window.addEventListener('eip6963:requestProvider', () => { state.req6963++; if (state.req6963 === 1) send({ t: 'req6963' }); announce(); });
+  window.addEventListener('eip6963:requestProvider', () => { if (fromExt()) { state.extReq6963++; announce(); return; } state.req6963++; if (state.req6963 === 1) send({ t: 'req6963' }); announce(); });
   announce();
   try { window.dispatchEvent(new Event('ethereum#initialized')); } catch (_) {}
   send({ t: 'frame' });

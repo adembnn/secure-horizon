@@ -2,7 +2,7 @@
  "siteId": "blur",
  "url": "https://blur.io/",
  "arm": "control",
- "started": "2026-10-11T00:13:37.906Z",
+ "started": "2026-10-11T00:24:30.166Z",
  "events": [
   {
    "t": "frame",
@@ -20,6 +20,21 @@
    "f": "https://blur.io/collections?showModal=true"
   },
   {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://blur.io/collections?showModal=true"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
    "t": "read1",
    "top": true,
    "f": "https://blur.io/collections?showModal=true"
@@ -30,12 +45,38 @@
    "f": "https://blur.io/collections?showModal=true"
   }
  ],
- "console": [],
+ "console": [
+  {
+   "top": true,
+   "text": "This version of the RudderStack JavaScript SDK is deprecated and no longer maintained. While your events are still being tracked and delivered, we strongly recommend you to migrate to the latest version (v3) for enhanced features, security updates, and ongoing support. For more details, visit the mi"
+  }
+ ],
  "exceptions": [],
- "logErrors": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://core-api.prod.blur.io/v1/prices"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://core-api.prod.blur.io/v1/collections?filters=%7B%22sort%22%3A%22VOLUME_ONE_DAY%22%2C%22order%22%3A%22DESC%22%7D"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://o1167924.ingest.us.sentry.io/api/4503905815035904/envelope/?sentry_key=a24751b35c6e150144ab89db9e0e7851&sentry_v"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://o1167924.ingest.us.sentry.io/api/4503905815035904/envelope/?sentry_key=a24751b35c6e150144ab89db9e0e7851&sentry_v"
+  }
+ ],
  "docs": [
   {
-   "frameId": "C43FBAD7D26ACFA8EE4309C7B79C6C7F",
+   "frameId": "54028B9A282F194B9EB2646911A17D17",
    "status": 200,
    "url": "https://blur.io/",
    "mime": "text/html",
@@ -45,7 +86,17 @@
    "server": "Vercel"
   },
   {
-   "frameId": "C43FBAD7D26ACFA8EE4309C7B79C6C7F",
+   "frameId": "54028B9A282F194B9EB2646911A17D17",
+   "status": 200,
+   "url": "https://blur.io/collections?showModal=true",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self';",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "Vercel"
+  },
+  {
+   "frameId": "54028B9A282F194B9EB2646911A17D17",
    "status": 200,
    "url": "https://blur.io/collections?showModal=true",
    "mime": "text/html",
@@ -57,10 +108,13 @@
  ],
  "frames": 0,
  "frameKinds": [],
- "workers": [],
+ "workers": [
+  "worker",
+  "worker"
+ ],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "C43FBAD7D26ACFA8EE4309C7B79C6C7F",
+ "mainFrameId": "54028B9A282F194B9EB2646911A17D17",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -83,8 +137,8 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "Blur: NFT Marketplace for Pro Traders",
-  "bodyLen": 2142,
-  "nodes": 987,
+  "bodyLen": 2162,
+  "nodes": 995,
   "readyState": "complete",
   "head": "Collections Portfolio Activity Airdrop K Connect Wallet Azuki BY Chiru Labs Floor Price 0.60 1D Volume 4.14 View Collection Azuki Kanpai Pandas Bored Ape Yacht Club Checks - VV Originals Pudgy Penguins Trending Top Colle"
  },
@@ -95,6 +149,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -127,10 +183,10 @@
   "connectedUI": false,
   "mmListed": false,
   "title": "All Collections | Blur",
-  "bodyLen": 204,
-  "nodes": 320,
+  "bodyLen": 1976,
+  "nodes": 2677,
   "readyState": "complete",
-  "head": "Collections Portfolio Activity Airdrop K Connect Wallet collections trending favorites points Floor Price Floor Price Top Bid 1D Change 7D Change 15M Volume 1D Volume 7D Volume Owners Supply Collect Trade"
+  "head": "Collections Portfolio Activity Airdrop K Connect Wallet collections trending favorites points Floor Price Floor Price Top Bid 1D Change 7D Change 15M Volume 1D Volume 7D Volume Owners Supply PudgyPenguins 2.35 2.12 -14.5"
  },
  "state1": {
   "mode": "control",
@@ -139,11 +195,13 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
  },
- "evN": 3,
+ "evN": 6,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -165,5 +223,5 @@
   "overwritten": false
  },
  "finalUrl": "https://blur.io/collections?showModal=true",
- "ms": 19206
+ "ms": 9420
 }

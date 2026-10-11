@@ -1,0 +1,178 @@
+{
+ "siteId": "lido",
+ "url": "https://stake.lido.fi/",
+ "arm": "test",
+ "started": "2026-10-11T00:34:43.623Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://stake.lido.fi/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://stake.lido.fi/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://stake.lido.fi/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'sha256-wTvVT3oJ2rMAqNUILvSYccTn53N47S3NIZbPE0ql0No=' https://matomo.lido.fi'. Either the 'unsafe-in",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "641539B686A3A4A0E38BB41DE4FE20A0",
+   "status": 200,
+   "url": "https://stake.lido.fi/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data: https://fonts.reown.com; img-src 'self' data: blob: https://*.walletconnect.org https://*.walletconnect.com; script-src 'self' 'sha256-wTvVT3oJ2rMAqNUILvSYccTn53N47S3NIZbPE0ql0No=' https://matomo.lido.fi; connect-src 'self' https: wss:; frame-src 'self' https://swap.cow.fi https://cow-ipfs.lido.fi https://*.walletconnect.org https://*.walletconnect.com; child-src 'self' https://swap.cow.fi https://cow-ipfs.lido.fi https://*.walletconnect.org https://*.walletconnect.com; worker-src 'none'; object-src 'none'; media-src 'none'; manifest-src 'self'; script-src-attr 'none'; base-uri 'none'; form-action 'self'; frame-ancestors *; report-uri https://stake.lido.fi/api/csp-report;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "641539B686A3A4A0E38BB41DE4FE20A0",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://stake.lido.fi/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data: https://fonts.reown.com; img-src 'self' data: blob: https://*.walletconnect.org https://*.walletconnect.com; script-src 'self' 'sha256-wTvVT3oJ2rMAqNUILvSYccTn53N47S3NIZbPE0ql0No=' https://matomo.lido.fi; connect-src 'self' https: wss:; frame-src 'self' https://swap.cow.fi https://cow-ipfs.lido.fi https://*.walletconnect.org https://*.walletconnect.com; child-src 'self' https://swap.cow.fi https://cow-ipfs.lido.fi https://*.walletconnect.org https://*.walletconnect.com; worker-src 'none'; object-src 'none'; media-src 'none'; manifest-src 'self'; script-src-attr 'none'; base-uri 'none'; form-action 'self'; frame-ancestors *; report-uri https://stake.lido.fi/api/csp-report;",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Stake with Lido | Lido",
+  "bodyLen": 6079,
+  "nodes": 395,
+  "readyState": "complete",
+  "head": "Stake Wrap Withdrawals Rewards Earn Connect wallet Stake Ether Stake ETH and receive stETH while staking ETH amount MAX Connect wallet Earn up to 3% APY* with EarnETH You will receive 0.0 stETH Exchange rate 1 ETH = 1 st"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 13,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect wallet",
+   "tag": "BUTTON",
+   "x": 1187.515625,
+   "y": 41,
+   "top": 18
+  },
+  "all": [
+   "1:Connect wallet",
+   "1:Connect wallet"
+  ]
+ },
+ "clicked1": "Connect wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 1,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "BUTTON",
+   "x": 834.5,
+   "y": 414,
+   "area": 23440
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Stake with Lido | Lido",
+  "bodyLen": 6268,
+  "nodes": 564,
+  "readyState": "complete",
+  "head": "Stake Wrap Withdrawals Rewards Earn Connect wallet Stake Ether Stake ETH and receive stETH while staking ETH amount MAX Connect wallet Earn up to 3% APY* with EarnETH You will receive 0.0 stETH Exchange rate 1 ETH = 1 st"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 16,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {
+   "isImToken": 1,
+   "request": 1
+  }
+ },
+ "evN": 4,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://stake.lido.fi/",
+ "ms": 13266
+}

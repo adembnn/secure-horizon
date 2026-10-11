@@ -1,0 +1,423 @@
+{
+ "siteId": "debank",
+ "url": "https://debank.com/",
+ "arm": "test",
+ "started": "2026-10-11T00:34:01.636Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/profile/0x1111111111111111111111111111111111111111"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/profile/0x1111111111111111111111111111111111111111"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' assets.debank.com 'nonce-2996948238' 'nonce-3661443193' https://www.youtube.com'. Either the 'unsafe",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "BC3F53B394645BBEDB10451B4CAB1CBA",
+   "status": 200,
+   "url": "https://debank.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "dbkserver"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "BC3F53B394645BBEDB10451B4CAB1CBA",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://debank.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "dbkserver"
+ },
+ "ui0": {
+  "modal": "We use cookies to improve your experience. Privacy Policy Reject Accept We use cookies to improve your experience. Privacy Policy Privacy Policy",
+  "modalCount": 6,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "DeBank | Your go-to portfolio tracker for Ethereum and EVM",
+  "bodyLen": 1689,
+  "nodes": 370,
+  "readyState": "complete",
+  "head": "Portfolio Community Portfolio API More Connect Wallet Whale Asset Tracking, Paid Consultations, and Web3 Dynamic Community Concise View of Portfolio Tracking Search address/Web3 ID Connect Wallet Tracking any Whale's Por"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 37,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 4,
+  "wreads": {
+   "providers": 8,
+   "isRabby": 2,
+   "isMetaMask": 1,
+   "isBraveWallet": 2,
+   "isAmbire": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 2,
+   "isBackpack": 2,
+   "isBifrost": 2,
+   "isBitKeep": 1,
+   "isBitski": 2,
+   "isBlockWallet": 1,
+   "isCoin98": 2,
+   "isFordefi": 1,
+   "isMathWallet": 1,
+   "isDesig": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOpera": 1,
+   "isOneKey": 1,
+   "isPortal": 1,
+   "isDefiant": 1,
+   "isTokenPocket": 2,
+   "isTokenary": 1,
+   "isZeal": 1,
+   "isZerion": 3,
+   "isRainbow": 2,
+   "isTrust": 2,
+   "isTrustWallet": 1,
+   "isXDEFI": 1,
+   "isStatus": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isPhantom": 1,
+   "isCoinbaseWallet": 2,
+   "isDawn": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFrame": 2,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isKuCoinWallet": 1,
+   "isSafePal": 1,
+   "isHaqqWallet": 1,
+   "isHaloWallet": 1,
+   "isNovaWallet": 1,
+   "isTTWallet": 1,
+   "isSubWallet": 1,
+   "removeListener": 7,
+   "then": 9,
+   "on": 3,
+   "request": 2
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1227.5859375,
+   "y": 32,
+   "top": 21.5
+  },
+  "all": [
+   "1:Connect Wallet",
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 3,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "SPAN",
+   "x": 420.3828125,
+   "y": 272.9921875,
+   "area": 1558.892822265625
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "We use cookies to improve your experience. Privacy Policy Reject Accept We use cookies to improve your experience. Privacy Policy Privacy Policy",
+  "modalCount": 6,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Portfolio of 0x1111…1111 | DeBank | Your go-to portfolio tracker for Ethereum and EVM",
+  "bodyLen": 1067,
+  "nodes": 572,
+  "readyState": "complete",
+  "head": "Portfolio Community Portfolio API More Search address / memo / Web3 ID 0x1111…1111 No ID 0x1111111111111111111111111111111111111111 This user has not added a bio yet $0 3689 days TVF $ 1,501 Followers 5 Following 0 Earni"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 39,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 15,
+  "wreads": {
+   "providers": 8,
+   "isRabby": 2,
+   "isMetaMask": 1,
+   "isBraveWallet": 2,
+   "isAmbire": 1,
+   "isApexWallet": 1,
+   "isAvalanche": 2,
+   "isBackpack": 2,
+   "isBifrost": 2,
+   "isBitKeep": 1,
+   "isBitski": 2,
+   "isBlockWallet": 1,
+   "isCoin98": 2,
+   "isFordefi": 1,
+   "isMathWallet": 1,
+   "isDesig": 1,
+   "isOkxWallet": 1,
+   "isOKExWallet": 1,
+   "isOneInchIOSWallet": 1,
+   "isOneInchAndroidWallet": 1,
+   "isOpera": 1,
+   "isOneKey": 1,
+   "isPortal": 1,
+   "isDefiant": 1,
+   "isTokenPocket": 2,
+   "isTokenary": 1,
+   "isZeal": 1,
+   "isZerion": 3,
+   "isRainbow": 2,
+   "isTrust": 2,
+   "isTrustWallet": 1,
+   "isXDEFI": 1,
+   "isStatus": 1,
+   "isTalisman": 1,
+   "isTally": 1,
+   "isPhantom": 1,
+   "isCoinbaseWallet": 2,
+   "isDawn": 1,
+   "isEnkrypt": 1,
+   "isExodus": 1,
+   "isFrame": 2,
+   "isFrontier": 1,
+   "isGamestop": 1,
+   "isHyperPay": 1,
+   "isImToken": 1,
+   "isKuCoinWallet": 1,
+   "isSafePal": 1,
+   "isHaqqWallet": 1,
+   "isHaloWallet": 1,
+   "isNovaWallet": 1,
+   "isTTWallet": 1,
+   "isSubWallet": 1,
+   "removeListener": 18,
+   "then": 19,
+   "on": 5,
+   "request": 10
+  }
+ },
+ "evN": 24,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://debank.com/profile/0x1111111111111111111111111111111111111111",
+ "ms": 13558
+}

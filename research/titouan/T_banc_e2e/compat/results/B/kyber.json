@@ -1,0 +1,243 @@
+{
+ "siteId": "kyber",
+ "url": "https://kyberswap.com/",
+ "arm": "test",
+ "started": "2026-10-11T00:36:20.782Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://kyberswap.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://kyberswap.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://kyberswap.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute transform: Expected transform function, \"none\".",
+   "url": "https://kyberswap.com/"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute transform: Expected transform function, \"none\".",
+   "url": "https://kyberswap.com/assets/index-d9179b19.js"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://rpc.porto.sh/' from origin 'https://kyberswap.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allo",
+   "url": "https://kyberswap.com/swap/ethereum"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://rpc.porto.sh/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://rpc.porto.sh/' from origin 'https://kyberswap.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allo",
+   "url": "https://kyberswap.com/swap/ethereum"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://rpc.porto.sh/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://rpc.porto.sh/' from origin 'https://kyberswap.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allo",
+   "url": "https://kyberswap.com/swap/ethereum"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://rpc.porto.sh/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://rpc.porto.sh/' from origin 'https://kyberswap.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allo",
+   "url": "https://kyberswap.com/swap/ethereum"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://rpc.porto.sh/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "1BA4B8F5F3F4C3CE35D5E96271D56B5F",
+   "status": 200,
+   "url": "https://kyberswap.com/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self'",
+   "cspRO": null,
+   "xfo": "sameorigin",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "1BA4B8F5F3F4C3CE35D5E96271D56B5F",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://kyberswap.com/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self'",
+  "cspRO": null,
+  "xfo": "sameorigin",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "KyberSwap - Swap, Trade & Earn Tokens on Ethereum at the Best Rate",
+  "bodyLen": 1004,
+  "nodes": 761,
+  "readyState": "complete",
+  "head": "Support Discord Telegram Email Us Trade Swap Limit Order Cross-Chain New Earn Overview Explore Pools Farming Pools My Positions Smart Exit Orders Beta Explore Vaults New My Vaults Market Campaigns Wallet Campaign Ended W"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {
+   "removeListener": 4,
+   "then": 4,
+   "on": 4,
+   "isMetaMask": 1
+  }
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect",
+   "tag": "BUTTON",
+   "x": 1188.390625,
+   "y": 40,
+   "top": 19
+  },
+  "all": [
+   "1:Connect",
+   "1:Connect"
+  ]
+ },
+ "clicked1": "Connect",
+ "clickedTier": 1,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "SPAN",
+   "x": 475.828125,
+   "y": 406.5,
+   "area": 1393.125
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Connect your Wallet Accept KyberSwap‘s Terms of Use and Privacy Policy . Last updated: 01 Sep 2026 MetaMask WalletConnect Rabby Wallet Coinbase Wallet Binance Wallet Bitget Wallet Porto",
+  "modalCount": 1,
+  "wc": true,
+  "connectedUI": false,
+  "mmListed": true,
+  "title": "KyberSwap - Swap, Trade & Earn Tokens on Ethereum at the Best Rate",
+  "bodyLen": 1353,
+  "nodes": 826,
+  "readyState": "complete",
+  "head": "Support Discord Telegram Email Us Trade Swap Limit Order Cross-Chain New Earn Overview Explore Pools Farming Pools My Positions Smart Exit Orders Beta Explore Vaults New My Vaults Market Campaigns Wallet Campaign Ended W"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {
+   "removeListener": 4,
+   "then": 4,
+   "on": 4,
+   "isMetaMask": 1
+  }
+ },
+ "evN": 7,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,autoRefreshOnNetworkChange,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://kyberswap.com/swap/ethereum",
+ "ms": 19884
+}
