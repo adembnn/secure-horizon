@@ -1,5 +1,7 @@
-/* Sentinelle - service worker : interroge le moteur, mene le mini grilling, pilote la fenetre (frame 0), journalise. */
-const API = 'http://127.0.0.1:8787';
+/* Sentinelle (version AUTONOME) - service worker MV3 de type module.
+   Le moteur est EMBARQUE (engine/) : aucun serveur, aucun appel reseau. Il mene le mini grilling, pilote la fenetre (frame 0), journalise en local.
+   Repli : si le moteur plante, le verdict est "indetermine" (traite comme un avertissement), jamais "ok". */
+import { check, indeterminate, emptyLocal, sanitizeLocalContext } from './engine/sentinelle_core.js';
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const DEFAULT_CFG = {
   arm: 'A',                    // A sans delai, B delai (frictionMs), C phrase a retaper
@@ -34,26 +36,26 @@ async function journalNow(entry) {
     arr.push(entry); if (arr.length > 500) arr.splice(0, arr.length - 500);
     await chrome.storage.local.set({ log: arr });
   } catch (_) {}
-  try { fetch(API + '/log', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(entry) }).catch(() => {}); } catch (_) {}
 }
 
-async function callCheck(body, timeoutMs) {
-  const ctl = new AbortController();
-  const timer = setTimeout(() => ctl.abort(), timeoutMs);
+// Contexte local OPTIONNEL de la personne (carnet, historique, adresses a elle, protocoles connus) : cle 'contexte' du stockage de l'extension.
+async function getLocalContext() {
+  try { const { contexte } = await chrome.storage.local.get('contexte'); return sanitizeLocalContext(contexte); } catch (_) { return emptyLocal(); }
+}
+// Remplace l'ancien appel HTTP : meme contrat (corps recu de bridge.js -> verdict), mais calcule ici, sans reseau.
+// Ne leve jamais ; si le moteur plante : verdict indetermine (avertissement), jamais 'ok'.
+async function localCheck(body) {
   const t0 = Date.now();
   try {
-    const r = await fetch(API + '/check', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal: ctl.signal });
-    if (!r.ok) return unknown('reponse HTTP ' + r.status, Date.now() - t0);
-    let j;
-    try { j = await r.json(); } catch (_) { return unknown('reponse invalide (JSON illisible)', Date.now() - t0); }
-    if (!j || typeof j !== 'object' || ![...LEVELS, 'unknown'].includes(j.level)) return unknown('reponse invalide', Date.now() - t0);
-    j.latency_ms = Date.now() - t0;
-    return j;
+    const v = check(body, await getLocalContext());
+    if (!v || !LEVELS.includes(v.level) && v.level !== 'unknown' || v.level === 'ok') throw new Error('verdict invalide');
+    return v;
   } catch (e) {
-    return unknown(ctl.signal.aborted ? 'delai depasse (' + timeoutMs + ' ms)' : 'API indisponible', Date.now() - t0);
-  } finally { clearTimeout(timer); }
+    const v = indeterminate('moteur indisponible : ' + String(e && e.message || e).slice(0, 100));
+    v.latency_ms = Date.now() - t0;
+    return v;
+  }
 }
-function unknown(why, ms) { return { level: 'unknown', indeterminate: true, why, latency_ms: ms, reasons: [] }; }
 
 // --- fenetre : toujours dans la frame 0 de l'onglet, sinon dans la frame demandeuse ---
 async function ui(ctx, spec, cfg) {
@@ -153,7 +155,7 @@ async function handleGate(msg, sender) {
   }
   const body = Object.assign({}, base, { intent: intent ? intent.choice : undefined, intent_text: intent && intent.message ? intent.message : undefined,
     pageText: msg.pageText, topOrigin: msg.topOrigin, frame: sender.frameId === 0 ? 'top' : 'child' });
-  let verdict = await callCheck(body, cfg.timeoutMs);
+  let verdict = await localCheck(body);
   let grillInfo = null;
   const eff = verdict.effects || {};
   if (cfg.grill.enabled && verdict.level !== 'unknown' && (eff.grants_right || eff.funds_out)) {
@@ -170,7 +172,7 @@ async function handleGate(msg, sender) {
     }
   }
   await journal({ type: 'verdict', origin: msg.origin, method: p.method, level: verdict.level, indeterminate: !!verdict.indeterminate, why: verdict.why, latency_ms: verdict.latency_ms, grill: grillInfo, intent: intent ? intent.choice : null, frame: body.frame });
-  if (verdict.level === 'ok') return { allow: true };
+  // Il n'existe pas de verdict 'ok' : toute demande surveillee passe par la fenetre (niveau le plus bas = 'attention' / info).
 
   for (let attempt = 0; attempt < 4; attempt++) {
     const r = await ui(ctx, { kind: 'verdict', verdict, attempt }, cfg);
@@ -178,7 +180,7 @@ async function handleGate(msg, sender) {
       decision: r.decision, time_to_decision_ms: r.time_to_decision_ms, friction_arm: cfg.arm, friction_ms: r.friction_ms, continue_enabled_after_ms: r.continue_enabled_after_ms,
       early_click_blocked: r.early_click_blocked, cancel_visible: r.cancel_visible, ui_frame: r.ui_frame, viewport: r.viewport, total_ms: Date.now() - tStart, frame: body.frame, grill: grillInfo, ui_error: r.error };
     await journal(entry);
-    if (r.decision === 'retry') { verdict = await callCheck(body, cfg.timeoutMs); if (verdict.level === 'ok') return { allow: true }; continue; }
+    if (r.decision === 'retry') { verdict = await localCheck(body); continue; }
     return r.decision === 'confirm' ? { allow: true } : { allow: false, reason: 'denied' };
   }
   return { allow: false, reason: 'denied' };
@@ -191,3 +193,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
   return false;
 });
+
+// Chauffe du moteur (le premier appel est plus lent) ; sans effet si cela echoue.
+try { check({ method: 'eth_sendTransaction', params: [{ from: '0x' + '1'.repeat(40), to: '0x' + '2'.repeat(40), value: '0x1', data: '0x' }], origin: 'https://warmup.local', chainId: '0x1' }); } catch (_) {}
+
+export { handleGate, localCheck };

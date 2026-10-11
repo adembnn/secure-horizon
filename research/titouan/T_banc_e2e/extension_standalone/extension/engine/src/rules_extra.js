@@ -1,0 +1,163 @@
+// Règles additionnelles du moteur (indépendantes de l'intention). Ne lisent que : l'effet décodé, la requête brute (structure) et le contexte fourni.
+import { isOn } from './fixes.js';
+import { parseSig, decodeParams } from './abi.js';
+import { lc } from './util.js';
+
+const lvl = (fl) => (fl.some((f) => f.severity === 'critical') ? 'critical' : fl.some((f) => f.severity === 'warn') ? 'warn' : 'ok');
+const sevRank = { info: 0, warn: 1, critical: 2 };
+
+export function addFlags(eff, flags, opacityCodes) {
+  if (!flags.length) return eff;
+  eff.risk_flags.push(...flags);
+  eff.risk_flags.sort((a, b) => sevRank[b.severity] - sevRank[a.severity]);
+  eff.level = lvl(eff.risk_flags);
+  eff.levelEvidence = lvl(eff.risk_flags.filter((f) => !(opacityCodes || new Set()).has(f.code)));
+  return eff;
+}
+
+// ---- F5 : fonctions « valeur contre service » courantes (mint, staking, dépôt de pont, enregistrement de nom) vers un protocole de la liste connue.
+// Sélecteurs CALCULÉS (keccak) à partir de signatures ABI usuelles ; aucune adresse. Le service crédite un état (jeton de reçu / NFT / nom) que le calldata ne montre pas :
+// l'appel est décodé (non opaque), n'accorde aucun droit, et le bénéficiaire éventuel est vérifié.
+const SERVICE = ['mint(uint256 quantity)', 'mint(address to,uint256 quantity)', 'submit(address referral)', 'depositETHTo(address to,uint32 gas,bytes data)', 'depositETH(uint32 gas,bytes data)', 'bridgeETHTo(address to,uint32 gas,bytes data)', 'register(string name,address owner,uint256 duration)', 'stake()'].map((sig) => parseSig(sig));
+const BENEFICIARY = { to: 'to', owner: 'owner' };
+const OPACITY_ONLY = new Set(['unknown_selector', 'opaque']);
+function serviceCall(eff, request, ctx) {
+  if (!request || request.method !== 'eth_sendTransaction') return;
+  const tx = request.params && request.params[0]; if (!tx || !tx.to) return;
+  if (!(ctx.knownSpenders || []).includes(lc(tx.to))) return;           // seulement un protocole de la liste connue
+  if (!eff.opaque || eff.approvals.length || (eff.controlChange || []).length || eff.delegation) return;
+  if (eff.risk_flags.some((f) => f.severity !== 'info' && !OPACITY_ONLY.has(f.code))) return; // une autre preuve de risque : on ne touche pas
+  const data = String(tx.data ?? tx.input ?? '0x').toLowerCase();
+  const sig = SERVICE.find((e) => data.startsWith(e.selector));
+  if (!sig) return;
+  let args; try { args = decodeParams(sig.params, '0x' + data.slice(10)); } catch { return; }       // calldata mal formé : reste opaque
+  const bKey = sig.params.map((p) => p.name).find((n) => BENEFICIARY[n]);
+  const beneficiary = bKey && typeof args[bKey] === 'string' ? lc(args[bKey]) : undefined;
+  eff.risk_flags = eff.risk_flags.filter((f) => !OPACITY_ONLY.has(f.code));
+  eff.opaque = false; eff.opaqueReasons = [];
+  eff.service = { name: sig.name, ...(beneficiary ? { beneficiary } : {}) };
+  eff.risk_flags.push({ code: 'service_call_decoded', severity: 'info', detail: `${sig.canon} vers un protocole connu : aucun droit accordé` });
+  if (beneficiary && beneficiary !== lc(ctx.from) && !(ctx.actors && ctx.actors.has(beneficiary)) && !(ctx.contacts || []).some((c) => lc(c.address) === beneficiary)) {
+    eff.risk_flags.push({ code: 'service_beneficiary_not_self', severity: 'warn', detail: `le service profite à ${beneficiary}, ni vous ni un contact` });
+  }
+}
+
+// ---- F7 : ordres signés hors chaîne (CoW, UniswapX et tout ordre de même forme). Lit la STRUCTURE du message typé : sorties (champ recipient) et montants vendu/reçu.
+//  - une sortie d'ordre destinée à un tiers (ni soi, ni protocole connu) : le produit de la vente est détourné ;
+//  - un montant minimal reçu quasi nul face au montant vendu (une plus petite unité, ou rapport < 1e-12 en unités humaines) : prix aberrant, tout est pris par le solveur / un MEV.
+const decOf = (ctx, token) => { const m = ctx.tokenMeta && ctx.tokenMeta[lc(token)]; return m && Number.isInteger(m.decimals) ? m.decimals : 18; };
+const isActor = (ctx, a) => lc(a) === lc(ctx.from) || (ctx.actors && ctx.actors.has(lc(a)));
+const ZERO = '0x' + '0'.repeat(40);
+function absurdRatio(ctx, sellTok, sellAmt, buyTok, buyAmt) {
+  try {
+    const S = BigInt(sellAmt), B = BigInt(buyAmt); if (S <= 0n) return false;
+    if (B <= 1n && S > 1000n) return true; // une seule plus petite unité (ou rien) en échange d'un montant non négligeable : aucune protection de prix
+    return B * 10n ** BigInt(decOf(ctx, sellTok)) * 10n ** 12n < S * 10n ** BigInt(decOf(ctx, buyTok));
+  } catch { return false; }
+}
+function signedOrder(request, ctx, flags) {
+  if (request.method !== 'eth_signTypedData_v4') return;
+  let td; try { td = typeof request.params[1] === 'string' ? JSON.parse(request.params[1]) : request.params[1]; } catch { return; }
+  const m = td && td.message; if (!m || typeof m !== 'object') return;
+  const known = (a) => (ctx.knownSpenders || []).includes(lc(a));
+  const outs = Array.isArray(m.outputs) ? m.outputs : m.witness && Array.isArray(m.witness.outputs) ? m.witness.outputs : null;
+  if (outs) {
+    for (const o of outs) if (o && typeof o.recipient === 'string' && lc(o.recipient) !== ZERO && !isActor(ctx, o.recipient) && !known(o.recipient)) { flags.push({ code: 'order_output_recipient_not_self', severity: 'critical', detail: `sortie d'un ordre signé versée à ${lc(o.recipient)} (ni vous ni un protocole connu)` }); break; }
+    const w = m.witness || m;
+    if (w.inputToken && outs[0] && outs[0].token && absurdRatio(ctx, w.inputToken, w.inputStartAmount ?? w.inputEndAmount, outs[0].token, outs[0].endAmount ?? outs[0].startAmount)) flags.push({ code: 'order_min_out_absurd', severity: 'critical', detail: 'montant minimal reçu aberrant face au montant vendu' });
+  }
+  if (m.sellToken && m.buyToken && m.sellAmount != null && m.buyAmount != null && absurdRatio(ctx, m.sellToken, m.sellAmount, m.buyToken, m.buyAmount)) flags.push({ code: 'order_min_out_absurd', severity: 'critical', detail: 'montant minimal reçu aberrant face au montant vendu' });
+}
+
+// ---- F8 : jetons touchés par la requête, décrits par le contexte fourni (token_info, token_registry). Un jeton est « touché » si son adresse apparaît dans la requête (calldata, message typé).
+//  - sosie de symbole : même symbole qu'un jeton de la liste de référence mais autre adresse de contrat => critical (on paierait/achèterait un faux jeton) ;
+//  - vente impossible (simulation de vente en échec) ou taxe de vente >= 50 % => critical (honeypot) ; taxe >= 10 % => warn.
+function tokenChecks(request, ctx, flags) {
+  const k = ctx._k || {}; const info = k.token_info || {}; const reg = k.token_registry || [];
+  const keys = Object.keys(info); if (!keys.length) return;
+  const hay = JSON.stringify(request.params || []).toLowerCase();
+  for (const addr of keys) {
+    const a = lc(addr).replace(/^0x/, ''); if (!hay.includes(a)) continue;
+    const ti = info[addr];
+    const ref = reg.find((r) => r.symbol && ti.symbol && String(r.symbol).toUpperCase() === String(ti.symbol).toUpperCase());
+    if (ref && lc(ref.address) !== lc(addr)) flags.push({ code: 'token_symbol_impersonation', severity: 'critical', detail: `le jeton ${lc(addr)} porte le symbole ${ti.symbol} mais n'est pas le contrat de référence ${lc(ref.address)}` });
+    const sim = String(ti.sell_simulation ?? '').toLowerCase();
+    if (sim && !['ok', 'success', 'pass', 'passed'].includes(sim)) flags.push({ code: 'token_unsellable', severity: 'critical', detail: `simulation de vente de ${ti.symbol || lc(addr)} : ${sim}` });
+    const st = Number(ti.sell_tax_pct), bt = Number(ti.buy_tax_pct);
+    if (Number.isFinite(st) && st >= 50) flags.push({ code: 'token_sell_tax_extreme', severity: 'critical', detail: `taxe de vente ${st} % sur ${ti.symbol || lc(addr)}` });
+    else if ((Number.isFinite(st) && st >= 10) || (Number.isFinite(bt) && bt >= 10)) flags.push({ code: 'token_tax_high', severity: 'warn', detail: `taxe élevée (achat ${bt} %, vente ${st} %) sur ${ti.symbol || lc(addr)}` });
+  }
+}
+
+// ---- F9 : identité du site et du nom. Le contexte fournit ce que l'utilisateur croit (claimed_site, ens.intended_name) et ce qui est réellement présenté (origin, ens.typed_name).
+//  - site : l'origine réelle diffère du site que l'utilisateur pense visiter => critical ; un nom d'hôte contenant des caractères non ASCII (homoglyphes) => critical ;
+//  - nom ENS : le nom tapé/résolu diffère du nom voulu, ou contient un caractère non ASCII, invisible ou une espace => critical.
+const norm = (h) => String(h ?? '').trim().toLowerCase().split('://').pop().split('/')[0];
+const SUSPECT_CHARS = /[^!-~]/; // tout sauf ASCII imprimable sans espace (inclut espaces, invisibles, homoglyphes)
+function identityChecks(ctx, flags) {
+  const k = ctx._k || {};
+  const origin = norm(k.origin);
+  if (origin && SUSPECT_CHARS.test(origin)) flags.push({ code: 'origin_non_ascii', severity: 'critical', detail: `l'origine du site contient des caractères non ASCII (homoglyphes possibles)` });
+  if (k.claimed_site && origin && norm(k.claimed_site) !== origin) flags.push({ code: 'site_origin_mismatch', severity: 'critical', detail: `le site visité (${origin}) n'est pas celui que l'utilisateur croit (${norm(k.claimed_site)})` });
+  const e = k.ens;
+  if (e && typeof e === 'object') {
+    const typed = e.typed_name ?? e.name, want = e.intended_name;
+    if (typeof typed === 'string' && (SUSPECT_CHARS.test(typed) || (typeof want === 'string' && typed !== want))) flags.push({ code: 'ens_name_lookalike', severity: 'critical', detail: 'le nom saisi diffère du nom voulu ou contient des caractères non ASCII / invisibles' });
+  }
+}
+
+// ---- F10 : droit illimité accordé par un sous-appel d'un lot à un bénéficiaire inconnu, alors que le propriétaire décodé n'est pas l'utilisateur (le relais, p.ex. Multicall3, exécute en son nom).
+// Rien n'est perdu si le relais appelle bien en son nom propre ; mais le portefeuille ne peut pas exclure un relais qui agit avec l'autorité de l'utilisateur (delegatecall, compte intelligent)
+// et la présence de ce droit dans une demande qui ne le mentionne pas est anormale : warn (jamais critical).
+function foreignApproval(eff, ctx, flags) {
+  for (const t of eff.thirdParty || []) {
+    if (t.kind === 'approval' && t.amount === 'unlimited' && !(ctx.knownSpenders || []).includes(lc(t.spender))) {
+      flags.push({ code: 'batch_foreign_unlimited_approval', severity: 'warn', detail: `un sous-appel accorde un droit illimité à ${lc(t.spender)} (propriétaire décodé ${t.owner}, pas vous)` });
+      return;
+    }
+  }
+}
+
+export function applyExtraRules(eff, request, ctx) {
+  const flags = [];
+  if (isOn('F10')) foreignApproval(eff, ctx, flags);
+  if (isOn('F9')) identityChecks(ctx, flags);
+  if (isOn('F8')) tokenChecks(request, ctx, flags);
+  if (isOn('F7')) signedOrder(request, ctx, flags);
+  if (isOn('F5')) serviceCall(eff, request, ctx);
+  addFlags(eff, flags);
+  return eff;
+}
+
+// ---- F6 : changement / ajout de chaîne (wallet_switchEthereumChain / wallet_addEthereumChain). Aucun transfert, mais le RPC d'une chaîne ajoutée voit et peut falsifier
+// soldes et simulations. Registre PUBLIC de chaînes bien connues (identifiants de chaînes EVM publiques, pas des données du catalogue).
+const WELL_KNOWN_CHAINS = new Set([1, 10, 56, 100, 137, 250, 324, 1101, 5000, 8453, 34443, 42161, 42170, 42220, 43114, 59144, 81457, 534352, 7777777, 11155111]);
+const MAJOR_SYMBOLS = new Set(['ETH', 'WETH', 'BTC', 'WBTC', 'USDC', 'USDT', 'DAI', 'BNB', 'MATIC', 'POL', 'AVAX', 'SOL']);
+const ETH_FAMILY = new Set([1, 10, 324, 1101, 8453, 34443, 42161, 42170, 59144, 81457, 534352, 7777777, 11155111]);
+const toNum = (v) => { try { return typeof v === 'number' ? v : Number(BigInt(v)); } catch { return NaN; } };
+export function analyzeChainRequest(request, ctx) {
+  if (!isOn('F6')) return null;
+  const p = (request.params && request.params[0]) || {};
+  const id = toNum(p.chainId);
+  const flags = [];
+  const f = (code, severity, detail) => flags.push({ code, severity, detail });
+  if (!Number.isFinite(id)) f('chain_request_malformed', 'warn', 'chainId illisible');
+  else if (request.method === 'wallet_switchEthereumChain') {
+    if (WELL_KNOWN_CHAINS.has(id)) f('chain_switch_known', 'info', `bascule vers la chaîne ${id} (registre public)`);
+    else f('chain_switch_unknown', 'warn', `bascule vers une chaîne ${id} hors registre public`);
+  } else {
+    const urls = Array.isArray(p.rpcUrls) ? p.rpcUrls : [];
+    const sym = String(p.nativeCurrency && p.nativeCurrency.symbol || '').toUpperCase();
+    const known = WELL_KNOWN_CHAINS.has(id);
+    if (!urls.length) f('chain_add_no_rpc', 'warn', 'ajout de chaîne sans RPC');
+    if (urls.some((u) => !String(u).toLowerCase().startsWith('https://'))) f('chain_add_insecure_rpc', 'critical', 'RPC non chiffré (hors https)');
+    if (known) f('chain_add_known_id_custom_rpc', 'warn', `ajout de la chaîne publique ${id} avec un RPC fourni par le site (non vérifié par le portefeuille)`);
+    else {
+      if (MAJOR_SYMBOLS.has(sym)) f('chain_add_native_symbol_spoof', 'critical', `chaîne ${id} hors registre qui se présente avec le symbole natif ${sym} : un RPC contrôlé par le site peut mentir sur soldes et simulations`);
+      else f('chain_add_unknown', 'warn', `ajout d'une chaîne ${id} hors registre public avec un RPC fourni par le site`);
+    }
+    if (known && MAJOR_SYMBOLS.has(sym) && sym === 'ETH' && !ETH_FAMILY.has(id)) f('chain_add_native_symbol_mismatch', 'warn', `symbole ETH sur une chaîne ${id} dont la monnaie native n'est pas l'ETH`);
+  }
+  const eff = { chainId: Number(ctx.chainId ?? 0), from: ctx.from, kind: 'chain', outgoing: [], incoming: [], approvals: [], counterparties: [], raw: { method: request.method, chainId: Number.isFinite(id) ? id : undefined }, opaque: false, opaqueReasons: [], controlChange: [], nested: [], risk_flags: [], level: 'ok', levelEvidence: 'ok' };
+  return addFlags(eff, flags);
+}

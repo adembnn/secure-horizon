@@ -1,0 +1,11 @@
+{
+  "_aide": "Copie ce fichier en context.local.json (meme dossier) pour dire a Sentinelle qui sont tes contacts. Sans ce fichier, toute adresse est 'inconnue'. Rien n'est envoye nulle part.",
+  "contacts": [
+    { "label": "Paul", "address": "0x1234567890abcdef1234567890abcdef12345678" }
+  ],
+  "history": [
+    { "address": "0x1234567890abcdef1234567890abcdef12345678", "direction": "sortie", "amount": "0.1", "minutes_ago": 5000 }
+  ],
+  "protected": [],
+  "knownSpenders": []
+}
