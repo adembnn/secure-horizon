@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Sentinelle, question d'intention</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: un chèque ne vaut rien si le montant en lettres contredit celui en chiffres. Ici « Tu as dit » et « En réalité » sont les deux lignes qui doivent concorder ; l'écart est cerclé à la main. Refuse la carte d'alerte rouge, le bouclier, le néon.
+OWN-WORLD: papier de sécurité #F7F8F6 (nuit #0F1829), encre bleu-noir #1C2B4A, acier #5B6B7A, rouge #B42318 réservé à l'écart. Guillochage SVG en bandeau, lignes de saisie, cases à croix, talon pointillé. Source Sans 3, B612 Mono, Caveat. Angles droits, aucune carte.
+STORY: la personne lit deux lignes, voit l'écart cerclé, comprend que le site ne fait pas ce qu'elle a dit, annule. Continuer exige de recopier à la main puis d'attendre.
+FIRST VIEWPORT: fenêtre 400 px : bandeau guilloché (nom), titre en deux lignes, cinq choix en cases à croix sur lignes de saisie, ligne de collage, puis « Annuler » pleine largeur en encre et « Vérifier » en contour dessous.
+FORM: chèque français, direction imposée (rang 1, tirage non joué), clé d445df83.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+  <div class="site" aria-hidden="true">
+    <div class="nav"><span class="logo"></span><i></i><i></i><i></i></div>
+    <h2>Votre remboursement vous attend</h2>
+    <p>Signez pour recevoir vos fonds.</p>
+    <span class="fake-btn">Réclamer</span>
+    <div class="rows"><i></i><i></i><i></i></div>
+  </div>
+  <div class="scrim"></div>
+  <div class="window" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d" tabindex="-1">
+    <div class="band"><span class="wordmark">Sentinelle</span></div>
+    <div class="body">
+      <h1 id="t">Avant de continuer : qu'essaies-tu de faire ?</h1>
+      <p class="context" id="d">Le site <b>rembourse-nova.example</b> demande une signature.</p>
+      <form onsubmit="return false">
+        <fieldset>
+          <legend class="sr">Qu'essaies-tu de faire ?</legend>
+          <label class="choice"><input type="radio" name="i" value="0" checked><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2 L14 14 M14 2 L2 14"/></svg></span><span class="txt">Recevoir de l'argent (remboursement, cadeau)</span></label>
+          <label class="choice"><input type="radio" name="i" value="1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2 L14 14 M14 2 L2 14"/></svg></span><span class="txt">Payer quelqu'un</span></label>
+          <label class="choice"><input type="radio" name="i" value="2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2 L14 14 M14 2 L2 14"/></svg></span><span class="txt">Échanger une crypto</span></label>
+          <label class="choice"><input type="radio" name="i" value="3"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2 L14 14 M14 2 L2 14"/></svg></span><span class="txt">Me connecter au site</span></label>
+          <label class="choice"><input type="radio" name="i" value="4"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2 L14 14 M14 2 L2 14"/></svg></span><span class="txt">Quelqu'un m'a demandé de le faire</span></label>
+        </fieldset>
+        <div class="paste">
+          <label for="msg">Colle ici le message qui t'a poussé à le faire</label>
+          <textarea id="msg" rows="3"></textarea>
+        </div>
+        <p class="note">Ta réponse ne peut que rendre la vérification plus stricte.</p>
+        <div class="stack">
+          <button class="btn" type="button">Annuler, rien ne sera envoyé</button>
+          <button class="btn alt" type="submit">Vérifier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

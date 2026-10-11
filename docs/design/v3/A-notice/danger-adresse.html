@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle, danger : adresse sosie (notice)</title>
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@500;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=new URLSearchParams(location.search).get('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<!--
+CONTRAT DE DIRECTION, A « La notice de pharmacie »
+THESIS: l'avertissement se lit comme une notice de médicament : rubriques dans l'ordre de lecture, une seule grille, aucune alarme rouge d'antivirus.
+OWN-WORLD: papier blanc #FFF, encre #1E2A32, vert #0B6E4F réservé au geste Annuler, rouge #C8102E réservé au pictogramme et aux cases barrées, gris #E9EEF0 pour les champs ; Atkinson Hyperlegible ; filets fins, angles droits, ni carte ni dégradé.
+STORY: en 3 s la personne pense « stop, ce n'est pas ce que je croyais » ; elle lit « Tu as dit », puis « Ce qui va se passer », puis annule sans honte.
+FIRST VIEWPORT: fenêtre blanche de 400 px ; colonne gauche de 76 px (pictogramme, puis intitulés des rubriques), colonne droite (titre, citation, montant à 44 px) ; Annuler en vert sur toute la largeur, en bas ; Continuer quand même isolé, discret, loin au-dessus.
+FORM: la notice pharmaceutique, imposée par Adem (1re de la liste) ; seed d4a5df83 (transcrit aussi d445df83).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+<div class="frame">
+<div class="site" aria-hidden="true"><div class="site__bar"><b>Exemple Wallet</b><span>Envoyer</span><span>Recevoir</span><span>Historique</span></div><div class="site__hero"><h2>Envoyer des USDC</h2><p>Montant : 1 200 USDC. Destinataire : adresse collée dans le champ ci-dessous.</p><span class="site__cta">Confirmer l'envoi</span></div><div class="site__grid"><i></i><i></i><i></i></div></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+<div class="win__scroll">
+<header class="head">
+<svg class="pict pict--danger" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="st" d="M24 5.5 45 41.5H3Z"/><path class="st" d="M24 18v12.5"/><circle class="fl" cx="24" cy="36" r="2.3"/></svg>
+<h1 class="title" id="t"><span class="sr-only">Danger : </span>Cette adresse n'est pas celle de ton compte Coinbase.</h1>
+</header>
+<section class="row" aria-labelledby="h-dit"><h2 class="row__h" id="h-dit">Tu as dit</h2><div class="row__b"><p class="quote">«&nbsp;Envoyer <b>1&nbsp;200&nbsp;USDC</b> vers mon compte Coinbase&nbsp;»</p></div></section>
+<section class="row" aria-labelledby="h-k"><h2 class="row__h" id="h-k">Adresse connue</h2><div class="row__b"><p class="note">ton historique</p><div class="addr" role="img" aria-label="Adresse connue : 0x 7a3F 9c21 B04e 5D8a 1f6C 2E90 aB47 33dE 8c15 E2b9">
+<div class="addr__r"><span class="c0">0x</span><span class="c">7</span><span class="c">a</span><span class="c">3</span><span class="c">F</span><span class="c c--m">9</span><span class="c c--m">c</span><span class="c c--m">2</span><span class="c c--m">1</span><span class="c c--m">B</span><span class="c c--m">0</span></div>
+<div class="addr__r"><span class="c0"></span><span class="c c--m">4</span><span class="c c--m">e</span><span class="c c--m">5</span><span class="c c--m">D</span><span class="c c--m">8</span><span class="c c--m">a</span><span class="c c--m">1</span><span class="c c--m">f</span><span class="c c--m">6</span><span class="c c--m">C</span></div>
+<div class="addr__r"><span class="c0"></span><span class="c c--m">2</span><span class="c c--m">E</span><span class="c c--m">9</span><span class="c c--m">0</span><span class="c c--m">a</span><span class="c c--m">B</span><span class="c c--m">4</span><span class="c c--m">7</span><span class="c c--m">3</span><span class="c c--m">3</span></div>
+<div class="addr__r"><span class="c0"></span><span class="c c--m">d</span><span class="c c--m">E</span><span class="c c--m">8</span><span class="c c--m">c</span><span class="c">1</span><span class="c c--m">5</span><span class="c">E</span><span class="c">2</span><span class="c">b</span><span class="c">9</span></div>
+</div></div></section>
+<section class="row" aria-labelledby="h-p"><h2 class="row__h" id="h-p">Adresse collée</h2><div class="row__b"><p class="note">les cases barrées sont différentes</p><div class="addr" role="img" aria-label="Adresse collée : 0x 7a3F 1d88 Ce02 77aF 0b3D 9a41 F6c2 0e5B 4d19 E2b9">
+<div class="addr__r"><span class="c0">0x</span><span class="c">7</span><span class="c">a</span><span class="c">3</span><span class="c">F</span><span class="c c--x">1</span><span class="c c--x">d</span><span class="c c--x">8</span><span class="c c--x">8</span><span class="c c--x">C</span><span class="c c--x">e</span></div>
+<div class="addr__r"><span class="c0"></span><span class="c c--x">0</span><span class="c c--x">2</span><span class="c c--x">7</span><span class="c c--x">7</span><span class="c c--x">a</span><span class="c c--x">F</span><span class="c c--x">0</span><span class="c c--x">b</span><span class="c c--x">3</span><span class="c c--x">D</span></div>
+<div class="addr__r"><span class="c0"></span><span class="c c--x">9</span><span class="c c--x">a</span><span class="c c--x">4</span><span class="c c--x">1</span><span class="c c--x">F</span><span class="c c--x">6</span><span class="c c--x">c</span><span class="c c--x">2</span><span class="c c--x">0</span><span class="c c--x">e</span></div>
+<div class="addr__r"><span class="c0"></span><span class="c c--x">5</span><span class="c c--x">B</span><span class="c c--x">4</span><span class="c c--x">d</span><span class="c">1</span><span class="c c--x">9</span><span class="c">E</span><span class="c">2</span><span class="c">b</span><span class="c">9</span></div>
+</div></div></section>
+<section class="row" aria-labelledby="h-e"><h2 class="row__h" id="h-e">Ce qui va se passer</h2><div class="row__b"><p class="body" id="d">Elle commence et finit pareil, mais le milieu est différent. C'est le piège de l'adresse sosie : quelqu'un t'a envoyé 0&nbsp;USDC depuis cette adresse pour qu'elle apparaisse dans ton historique.</p><button class="btn btn--line" type="button">Utiliser l'adresse connue</button></div></section>
+<div class="spacer" aria-hidden="true"></div>
+<section class="row" aria-labelledby="h-bar"><h2 class="row__h" id="h-bar">Barrière</h2><div class="row__b"><label class="lab" for="retype">Pour continuer quand même, recopie le premier bloc qui change dans l'adresse collée : <b>1d88</b>, puis 30&nbsp;s</label><input class="field" id="retype" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"><p class="count"><b id="clock" role="timer" aria-live="off">30 s</b><span>après le bloc recopié</span></p><p class="sr-only" id="say" role="status" aria-live="polite"></p><button class="btn btn--quiet" type="button" id="go" disabled>Continuer quand même</button></div></section>
+<div class="spacer" aria-hidden="true"></div>
+</div>
+<div class="win__foot">
+<button class="btn btn--cancel" type="button" id="cancel">Annuler</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+(function(){
+  var inp=document.getElementById('retype'),go=document.getElementById('go'),clock=document.getElementById('clock'),say=document.getElementById('say');
+  var want="1d88",n=30,tm=null;
+  function norm(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").replace(/\s+/g,' ').trim()}
+  function tick(){n--;clock.textContent=n+' s';if(n===20||n===10||n===5)say.textContent=n+' secondes restantes';if(n<=0){clearInterval(tm);clock.textContent='0 s';say.textContent='Tu peux continuer, ou annuler.';go.disabled=false;}}
+  inp.addEventListener('input',function(){if(tm||norm(inp.value)!==norm(want))return;inp.readOnly=true;say.textContent='Phrase correcte. Attends 30 secondes.';tm=setInterval(tick,1000)});
+})();
+</script><script>document.getElementById('cancel')?.focus({preventScroll:true})</script>
+</body>
+</html>

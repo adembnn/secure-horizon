@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manipulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500&family=Geist+Mono:wght@400;450;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>var t=new URLSearchParams(location.search).get('theme');if(t)document.documentElement.dataset.theme=t;</script>
+</head>
+<body>
+<main class="stage">
+  <div class="site" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="veil" aria-hidden="true"></div>
+  <section class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+    <h1 id="t">Personne de sérieux ne te demande de déplacer ton argent.</h1>
+    <p class="rule" id="d">Quelqu'un te dicte quoi faire ? Raccroche, ou ferme la discussion.</p>
+    <p class="calm">Rien n'est parti. Ta demande attend.</p>
+    <div class="actions"><button class="btn" type="button" autofocus>Annuler la demande</button><button class="btn sec" type="button">Appeler un proche</button></div>
+    <button class="why" type="button" aria-expanded="false" aria-controls="r">Pourquoi ?</button>
+    <div class="reason" id="r" hidden><p class="quote">« Ton compte est compromis. Déplace tes fonds vers le portefeuille sécurisé que je t'indique. Ne raccroche pas. »</p><p>Classé <span class="tag">faux support</span>.</p><div role="timer" aria-label="Il reste 9 minutes 41"><span class="t">9:41</span>Elle reste en attente 10 minutes.</div></div>
+  </section>
+</main>
+<script>
+document.querySelectorAll('.why').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var r = document.getElementById(b.getAttribute('aria-controls'));
+    var o = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!o)); r.hidden = o;
+  });
+});
+
+</script>
+</body>
+</html>

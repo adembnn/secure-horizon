@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle, manipulation (notice)</title>
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@500;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=new URLSearchParams(location.search).get('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<!--
+CONTRAT DE DIRECTION, A « La notice de pharmacie »
+THESIS: l'avertissement se lit comme une notice de médicament : rubriques dans l'ordre de lecture, une seule grille, aucune alarme rouge d'antivirus.
+OWN-WORLD: papier blanc #FFF, encre #1E2A32, vert #0B6E4F réservé au geste Annuler, rouge #C8102E réservé au pictogramme et aux cases barrées, gris #E9EEF0 pour les champs ; Atkinson Hyperlegible ; filets fins, angles droits, ni carte ni dégradé.
+STORY: en 3 s la personne pense « stop, ce n'est pas ce que je croyais » ; elle lit « Tu as dit », puis « Ce qui va se passer », puis annule sans honte.
+FIRST VIEWPORT: fenêtre blanche de 400 px ; colonne gauche de 76 px (pictogramme, puis intitulés des rubriques), colonne droite (titre, citation, montant à 44 px) ; Annuler en vert sur toute la largeur, en bas ; Continuer quand même isolé, discret, loin au-dessus.
+FORM: la notice pharmaceutique, imposée par Adem (1re de la liste) ; seed d4a5df83 (transcrit aussi d445df83).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+<div class="frame">
+<div class="site" aria-hidden="true"><div class="site__bar"><b>NovaWallet support</b><span>Chat</span><span>Aide</span></div><div class="site__chat"><p>Bonjour, ici le support. Votre compte est compromis.</p><p>Que dois-je faire ?</p><p>Transférez vos fonds vers le coffre sécurisé avant 15h.</p></div></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+<div class="win__scroll">
+<header class="head">
+<svg class="pict pict--manip" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="fl" d="M16.5 3h15L45 16.5v15L31.5 45h-15L3 31.5v-15Z"/><rect x="12" y="21" width="24" height="6.5" fill="var(--paper)"/></svg>
+<h1 class="title" id="t"><span class="sr-only">Manipulation : </span>Personne de sérieux ne te demande de déplacer tes fonds.</h1>
+</header>
+<section class="row" aria-labelledby="h-dit"><h2 class="row__h" id="h-dit">Tu as choisi</h2><div class="row__b"><p class="quote">«&nbsp;Quelqu'un m'a demandé de le faire&nbsp;»</p></div></section>
+<section class="row" aria-labelledby="h-msg"><h2 class="row__h" id="h-msg">Message collé</h2><div class="row__b"><p><span class="tag">classé «&nbsp;faux support&nbsp;»</span></p><p class="pasted">«&nbsp;Bonjour, ici le support NovaWallet, votre compte est compromis, transférez vos fonds vers le coffre sécurisé avant 15h.&nbsp;»</p></div></section>
+<section class="row" aria-labelledby="h-real"><h2 class="row__h" id="h-real">Ce qui va se passer</h2><div class="row__b"><p class="body" id="d">Aucun vrai support, banque ou plateforme ne demande de déplacer ton argent. Si tu es au téléphone avec cette personne, raccroche.</p><p class="body"><b>Cette demande reste en attente 10&nbsp;minutes</b></p><p class="amount" id="clock" role="timer" aria-live="off" aria-label="9 minutes 41 secondes">9:41</p></div></section>
+<section class="row" aria-labelledby="h-g"><h2 class="row__h" id="h-g">Autres gestes</h2><div class="row__b"><button class="btn btn--line" type="button">Appeler un proche</button><button class="btn btn--line" type="button">Raccrocher et me laisser un moment</button></div></section>
+</div>
+<div class="win__foot">
+<button class="btn btn--cancel" type="button" id="cancel">Annuler</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+(function(){var c=document.getElementById('clock'),s=9*60+41;setInterval(function(){if(s>0)s--;c.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')},1000)})();
+</script><script>document.getElementById('cancel')?.focus({preventScroll:true})</script>
+</body>
+</html>

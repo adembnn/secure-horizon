@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question d'intention</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="frame">
+<div class="site" aria-hidden="true"><i class="bar"></i><i class="h"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="img"></i></div>
+<div class="ext" role="dialog" aria-modal="true" aria-labelledby="t">
+  <form onsubmit="return false">
+    <fieldset>
+      <legend id="t">Qu'essaies-tu de faire ?</legend>
+      <label class="choice"><input type="radio" name="i" value="recevoir"> Recevoir de l'argent</label>
+      <label class="choice"><input type="radio" name="i" value="payer" checked> Payer quelqu'un</label>
+      <label class="choice"><input type="radio" name="i" value="echanger"> Échanger une crypto</label>
+      <label class="choice"><input type="radio" name="i" value="connexion"> Me connecter</label>
+      <label class="choice"><input type="radio" name="i" id="c-asked" value="demande"> On me l'a demandé</label>
+    </fieldset>
+    <div class="paste"><label class="sr" for="m">Message reçu</label><textarea id="m" placeholder="Colle le message reçu"></textarea></div>
+    <div class="actions">
+      <button class="btn btn-ink" id="go">Vérifier</button>
+    </div>
+    <button class="quiet" type="button" autofocus style="font-size:18px;color:var(--ink);font-weight:500;margin-bottom:8px">Annuler</button>
+  </form>
+  <script>
+    var go=document.getElementById('go'),r=document.querySelectorAll('input[name=i]');
+    function s(){go.disabled=!document.querySelector('input[name=i]:checked');go.setAttribute('aria-disabled',go.disabled)}
+    r.forEach(function(x){x.addEventListener('change',s)});s();
+  </script>
+</div>
+</main>
+</body>
+</html>

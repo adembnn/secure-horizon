@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle : danger, adresse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500;700&family=Fira+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: un panneau de terminal d'aéroport. Une information par ligne, la prochaine action sans ambiguïté. Refuse la carte SaaS, le néon crypto, le bouclier antivirus, le formulaire froid.
+OWN-WORLD: blanc #FFF, noir #111, un seul bandeau jaune #FFD200 (jamais ailleurs), rouge #C8102E pour l'écart. Angles droits, pictogramme blanc dans carré noir, lignes à étiquette noire, flèche calée au bord. Fira Sans en casse de phrase, Fira Mono pour les adresses.
+STORY: la personne lit « Tu as dit » puis « En réalité », voit l'écart, comprend que le seul geste évident est Annuler.
+FIRST VIEWPORT: fenêtre 400 px. Bandeau jaune (pictogramme 44 px, niveau, phrase-titre 28 px), deux lignes de panneau, montant 64 px en numéro de porte, Annuler noir plein avec flèche au bord, Continuer quand même isolé, pointillé, discret.
+FORM: signalétique aéroportuaire, direction imposée par Adem (position 1, pinned), clé de tirage d445df83.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+  <div class="site" aria-hidden="true">
+  <div class="site-bar"><span class="site-logo"></span><span class="site-nav"></span><span class="site-nav"></span><span class="site-nav"></span></div>
+  <div class="site-main">
+    <p class="site-h">Ton remboursement Nova est prêt</p>
+    <p class="site-p">Connecte ton portefeuille pour recevoir les fonds en quelques secondes.</p>
+    <span class="site-cta">Recevoir mon remboursement</span>
+    <div class="site-lines"><i></i><i></i><i></i></div>
+  </div>
+</div>
+  <section class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+    <header class="band">
+      <div class="band-top"><span class="picto"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 7 L43 41 H5 Z"/><path d="M24 19 V30"/><path d="M24 35 V37"/></svg></span><p class="level">Danger</p></div>
+      <h1 class="title" id="t">Cette adresse n'est pas celle de ton compte Coinbase.</h1>
+    </header>
+    <div class="body" id="d">
+      <dl class="rows">
+        <div class="row"><dt>Tu as dit</dt><dd>Envoyer 1&nbsp;200 USDC vers mon compte Coinbase</dd></div>
+        <div class="row row--wide"><dt class="cap">Adresse connue <span class="plain">(ton historique)</span></dt><dd class="addr" aria-label="0x7a3F 9c21 B04e 5D8a 1f6C 2E90 aB47 33dE 8c15 E2b9"><span>0x7a3F</span><span><b class="d">9</b><b class="d">c</b><b class="d">2</b><b class="d">1</b></span><span><b class="d">B</b><b class="d">0</b><b class="d">4</b><b class="d">e</b></span><span><b class="d">5</b><b class="d">D</b><b class="d">8</b><b class="d">a</b></span><span><b class="d">1</b><b class="d">f</b><b class="d">6</b><b class="d">C</b></span><span><b class="d">2</b><b class="d">E</b><b class="d">9</b><b class="d">0</b></span><span><b class="d">a</b><b class="d">B</b><b class="d">4</b><b class="d">7</b></span><span><b class="d">3</b><b class="d">3</b><b class="d">d</b><b class="d">E</b></span><span><b class="d">8</b><b class="d">c</b>1<b class="d">5</b></span><span>E2b9</span></dd></div>
+        <div class="row row--wide"><dt class="cap is-real">Adresse collée</dt><dd class="addr addr--new" aria-label="0x7a3F 1d88 Ce02 77aF 0b3D 9a41 F6c2 0e5B 4d19 E2b9"><span>0x7a3F</span><span><b class="d">1</b><b class="d">d</b><b class="d">8</b><b class="d">8</b></span><span><b class="d">C</b><b class="d">e</b><b class="d">0</b><b class="d">2</b></span><span><b class="d">7</b><b class="d">7</b><b class="d">a</b><b class="d">F</b></span><span><b class="d">0</b><b class="d">b</b><b class="d">3</b><b class="d">D</b></span><span><b class="d">9</b><b class="d">a</b><b class="d">4</b><b class="d">1</b></span><span><b class="d">F</b><b class="d">6</b><b class="d">c</b><b class="d">2</b></span><span><b class="d">0</b><b class="d">e</b><b class="d">5</b><b class="d">B</b></span><span><b class="d">4</b><b class="d">d</b>1<b class="d">9</b></span><span>E2b9</span></dd></div>
+      </dl>
+      <p class="note">Elle commence et finit pareil, mais le milieu est différent. C'est le piège de l'adresse sosie : quelqu'un t'a envoyé 0 USDC depuis cette adresse pour qu'elle apparaisse dans ton historique.</p>
+      <div class="actions">
+        <button class="btn btn--main" type="button" autofocus><span class="sign" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M40 24 H8"/><path d="M19 13 L8 24 L19 35"/></svg></span><span>Annuler</span></button>
+        <button class="btn" type="button"><span>Utiliser l'adresse connue</span></button>
+      </div>
+      <div class="isolated">
+        <div class="btn-row"><button class="btn" id="risk" type="button" disabled><span>Continuer quand même</span></button><output class="count" id="count" role="timer" aria-live="off">30&nbsp;s</output></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  var n = 30, c = document.getElementById('count');
+  var t = setInterval(function () {
+    n--; c.textContent = n + '\u00a0s';
+    if (n <= 0) { clearInterval(t); document.getElementById('risk').disabled = false; }
+  }, 1000);
+</script>
+</body>
+</html>

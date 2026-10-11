@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle : question d'intention</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500;700&family=Fira+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: un panneau de terminal d'aéroport. Une information par ligne, la prochaine action sans ambiguïté. Refuse la carte SaaS, le néon crypto, le bouclier antivirus, le formulaire froid.
+OWN-WORLD: blanc #FFF, noir #111, un seul bandeau jaune #FFD200 (jamais ailleurs), rouge #C8102E pour l'écart. Angles droits, pictogramme blanc dans carré noir, lignes à étiquette noire, flèche calée au bord. Fira Sans en casse de phrase, Fira Mono pour les adresses.
+STORY: la personne lit « Tu as dit » puis « En réalité », voit l'écart, comprend que le seul geste évident est Annuler.
+FIRST VIEWPORT: fenêtre 400 px. Bandeau jaune (pictogramme 44 px, niveau, phrase-titre 28 px), deux lignes de panneau, montant 64 px en numéro de porte, Annuler noir plein avec flèche au bord, Continuer quand même isolé, pointillé, discret.
+FORM: signalétique aéroportuaire, direction imposée par Adem (position 1, pinned), clé de tirage d445df83.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+  <div class="site" aria-hidden="true">
+  <div class="site-bar"><span class="site-logo"></span><span class="site-nav"></span><span class="site-nav"></span><span class="site-nav"></span></div>
+  <div class="site-main">
+    <p class="site-h">Ton remboursement Nova est prêt</p>
+    <p class="site-p">Connecte ton portefeuille pour recevoir les fonds en quelques secondes.</p>
+    <span class="site-cta">Recevoir mon remboursement</span>
+    <div class="site-lines"><i></i><i></i><i></i></div>
+  </div>
+</div>
+  <section class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+    <header class="band">
+      <div class="band-top"><span class="picto"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 18 Q15 9 24 9 Q33 9 33 17 Q33 22 27 26 Q24 28 24 32"/><path d="M24 38 V40"/></svg></span><p class="level"><b>rembourse-nova.example</b><span>demande une signature</span></p></div>
+      <h1 class="title" id="t">Avant de continuer : qu'essaies-tu de faire ?</h1>
+    </header>
+    <div class="body" id="d">
+      <div class="choices" role="radiogroup" aria-labelledby="t">
+        <label class="choice"><input type="radio" name="intent" value="Recevoir de l'argent (remboursement, cadeau)"><span class="mark"></span><span>Recevoir de l'argent (remboursement, cadeau)</span></label>
+        <label class="choice"><input type="radio" name="intent" value="Payer quelqu'un"><span class="mark"></span><span>Payer quelqu'un</span></label>
+        <label class="choice"><input type="radio" name="intent" value="Échanger une crypto"><span class="mark"></span><span>Échanger une crypto</span></label>
+        <label class="choice"><input type="radio" name="intent" value="Me connecter au site"><span class="mark"></span><span>Me connecter au site</span></label>
+        <label class="choice"><input type="radio" name="intent" value="Quelqu'un m'a demandé de le faire"><span class="mark"></span><span>Quelqu'un m'a demandé de le faire</span></label>
+      </div>
+      <label class="field" for="msg">Colle ici le message qui t'a poussé à le faire <em>(facultatif)</em></label>
+      <textarea id="msg" rows="2"></textarea>
+      <p class="note mute">Ta réponse ne peut que rendre la vérification plus stricte.</p>
+      <div class="actions">
+        <button class="btn btn--main" type="button" autofocus><span class="sign" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M40 24 H8"/><path d="M19 13 L8 24 L19 35"/></svg></span><span>Annuler, rien ne sera envoyé</span></button>
+        <button class="btn" id="go" type="button" disabled><span>Vérifier</span></button>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  document.querySelectorAll('input[name=intent]').forEach(function (r) {
+    r.addEventListener('change', function () { document.getElementById('go').disabled = false; });
+  });
+</script>
+</body>
+</html>

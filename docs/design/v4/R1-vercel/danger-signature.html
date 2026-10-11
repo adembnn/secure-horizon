@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signature piégée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500&family=Geist+Mono:wght@400;450;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>var t=new URLSearchParams(location.search).get('theme');if(t)document.documentElement.dataset.theme=t;</script>
+</head>
+<body>
+<main class="stage">
+  <div class="site" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="veil" aria-hidden="true"></div>
+  <section class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+    <h1 id="t">Ce n'est pas ce que tu as demandé.</h1>
+    <dl class="gap" id="d">
+      <div><dt>Tu crois</dt><dd>recevoir <span class="num">50 USDC</span></dd></div>
+      <div class="real"><dt>En réalité</dt><dd><span class="x">ce site pourra prendre tes <span class="num">2 480 USDC</span></span></dd></div>
+    </dl>
+    <div class="actions"><button class="btn" type="button" autofocus>Annuler</button></div>
+    <button class="why" type="button" aria-expanded="false" aria-controls="r">Pourquoi ?</button>
+    <div class="reason" id="r" hidden><p>Il pourra les prendre maintenant et plus tard, sans te redemander. Ce contrat a 3 minutes d'existence.</p></div>
+    <button class="link last" type="button">Continuer quand même</button>
+  </section>
+</main>
+<script>
+document.querySelectorAll('.why').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var r = document.getElementById(b.getAttribute('aria-controls'));
+    var o = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!o)); r.hidden = o;
+  });
+});
+
+</script>
+</body>
+</html>

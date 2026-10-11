@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manipulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="frame">
+<div class="site" aria-hidden="true"><i class="bar"></i><i class="h"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="img"></i></div>
+<div class="ext" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+  <h1 id="t">Personne de sérieux ne te demande de déplacer ton argent.</h1>
+  <p class="signal" id="d">Quelqu'un te dicte quoi faire ? Raccroche, ou ferme la discussion.</p>
+  <p>Rien n'est parti. Ta demande attend.</p>
+  <div class="actions" style="margin-top:24px">
+    <button class="btn btn-ink" autofocus>Annuler la demande</button>
+    <button class="btn">Appeler un proche</button>
+  </div>
+  <details>
+    <summary>Pourquoi ?</summary>
+    <div class="more">
+      <p class="msg">« Bonjour, ici le support. Pour sécuriser votre compte, transférez vos fonds vers ce portefeuille sécurisé. »</p>
+      <span class="tag">Faux support</span>
+      <div class="wait"><p>Elle reste en attente 10 minutes.</p><span class="timer" role="timer" aria-live="off">9:41</span></div>
+    </div>
+  </details>
+</div>
+</main>
+</body>
+</html>

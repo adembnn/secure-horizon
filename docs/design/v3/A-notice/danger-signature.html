@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle, danger : signature (notice)</title>
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@500;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=new URLSearchParams(location.search).get('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<!--
+CONTRAT DE DIRECTION, A « La notice de pharmacie »
+THESIS: l'avertissement se lit comme une notice de médicament : rubriques dans l'ordre de lecture, une seule grille, aucune alarme rouge d'antivirus.
+OWN-WORLD: papier blanc #FFF, encre #1E2A32, vert #0B6E4F réservé au geste Annuler, rouge #C8102E réservé au pictogramme et aux cases barrées, gris #E9EEF0 pour les champs ; Atkinson Hyperlegible ; filets fins, angles droits, ni carte ni dégradé.
+STORY: en 3 s la personne pense « stop, ce n'est pas ce que je croyais » ; elle lit « Tu as dit », puis « Ce qui va se passer », puis annule sans honte.
+FIRST VIEWPORT: fenêtre blanche de 400 px ; colonne gauche de 76 px (pictogramme, puis intitulés des rubriques), colonne droite (titre, citation, montant à 44 px) ; Annuler en vert sur toute la largeur, en bas ; Continuer quand même isolé, discret, loin au-dessus.
+FORM: la notice pharmaceutique, imposée par Adem (1re de la liste) ; seed d4a5df83 (transcrit aussi d445df83).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+<div class="frame">
+<div class="site" aria-hidden="true"><div class="site__bar"><b>NovaRemb</b><span>Accueil</span><span>Aide</span><span>Mon dossier</span></div><div class="site__hero"><h2>Récupérez votre remboursement</h2><p>Connectez votre portefeuille pour recevoir le montant qui vous est dû.</p><span class="site__cta">Réclamer mon remboursement</span></div><div class="site__grid"><i></i><i></i><i></i></div></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+<div class="win__scroll">
+<header class="head">
+<svg class="pict pict--danger" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="st" d="M24 5.5 45 41.5H3Z"/><path class="st" d="M24 18v12.5"/><circle class="fl" cx="24" cy="36" r="2.3"/></svg>
+<h1 class="title" id="t"><span class="sr-only">Danger : </span>Ce n'est pas ce que tu as demandé.</h1>
+</header>
+<section class="row" aria-labelledby="h-dit"><h2 class="row__h" id="h-dit">Tu as dit</h2><div class="row__b"><p class="quote">«&nbsp;Recevoir un remboursement de <b>50&nbsp;USDC</b>&nbsp;»</p></div></section>
+<section class="row" aria-labelledby="h-real"><h2 class="row__h" id="h-real">Ce qui va se passer</h2><div class="row__b"><p class="amount" aria-label="2 480 USDC">2&nbsp;480&nbsp;USDC</p><p class="body" id="d">Ce site obtiendrait le droit de prendre tous tes USDC (2&nbsp;480&nbsp;USDC), maintenant et plus tard, sans te redemander.</p><p class="note">Le contrat qui recevrait ce droit a été créé il y a 3 minutes. Il n'est connu de personne.</p></div></section>
+<section class="row" aria-labelledby="h-bar"><h2 class="row__h" id="h-bar">Barrière</h2><div class="row__b"><label class="lab" for="retype">Pour continuer quand même, recopie : <b>je donne l'accès à tous mes USDC</b>, puis 30&nbsp;s</label><input class="field" id="retype" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"><p class="count"><b id="clock" role="timer" aria-live="off">30 s</b><span>après la phrase recopiée</span></p><p class="sr-only" id="say" role="status" aria-live="polite"></p><button class="btn btn--quiet" type="button" id="go" disabled>Continuer quand même</button></div></section>
+<div class="spacer" aria-hidden="true"></div>
+</div>
+<div class="win__foot">
+<button class="btn btn--cancel" type="button" id="cancel">Annuler, rien ne sera envoyé</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+(function(){
+  var inp=document.getElementById('retype'),go=document.getElementById('go'),clock=document.getElementById('clock'),say=document.getElementById('say');
+  var want="je donne l'accès à tous mes USDC",n=30,tm=null;
+  function norm(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").replace(/\s+/g,' ').trim()}
+  function tick(){n--;clock.textContent=n+' s';if(n===20||n===10||n===5)say.textContent=n+' secondes restantes';if(n<=0){clearInterval(tm);clock.textContent='0 s';say.textContent='Tu peux continuer, ou annuler.';go.disabled=false;}}
+  inp.addEventListener('input',function(){if(tm||norm(inp.value)!==norm(want))return;inp.readOnly=true;say.textContent='Phrase correcte. Attends 30 secondes.';tm=setInterval(tick,1000)});
+})();
+</script><script>document.getElementById('cancel')?.focus({preventScroll:true})</script>
+</body>
+</html>

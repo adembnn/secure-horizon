@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Sentinelle, manipulation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: un chèque ne vaut rien si le montant en lettres contredit celui en chiffres. Ici « Tu as dit » et « En réalité » sont les deux lignes qui doivent concorder ; l'écart est cerclé à la main. Refuse la carte d'alerte rouge, le bouclier, le néon.
+OWN-WORLD: papier de sécurité #F7F8F6 (nuit #0F1829), encre bleu-noir #1C2B4A, acier #5B6B7A, rouge #B42318 réservé à l'écart. Guillochage SVG en bandeau, lignes de saisie, cases à croix, talon pointillé. Source Sans 3, B612 Mono, Caveat. Angles droits, aucune carte.
+STORY: la personne lit deux lignes, voit l'écart cerclé, comprend que le site ne fait pas ce qu'elle a dit, annule. Continuer exige de recopier à la main puis d'attendre.
+FIRST VIEWPORT: fenêtre 400 px : bandeau guilloché (nom, mention Manipulation), titre, « Tu as choisi » sur le message collé dont l'ordre de transfert est cerclé en rouge, retenue 9:41 sur une ligne de date, « Annuler » pleine largeur en encre, deux gestes en contour. Aucun « continuer ».
+FORM: chèque français, direction imposée (rang 1, tirage non joué), clé d445df83.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+  <div class="site" aria-hidden="true">
+    <div class="nav"><span class="logo"></span><i></i><i></i><i></i></div>
+    <h2>Votre compte NovaWallet</h2>
+    <p>Vérification en cours.</p>
+    <span class="fake-btn">Ouvrir</span>
+    <div class="rows"><i></i><i></i><i></i></div>
+  </div>
+  <div class="scrim"></div>
+  <div class="window" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d" tabindex="-1">
+    <div class="band"><span class="wordmark">Sentinelle</span><span class="level">Manipulation</span></div>
+    <div class="body">
+      <h1 id="t">Personne de sérieux ne te demande de déplacer tes fonds.</h1>
+      <div class="cheque">
+        <div class="line"><span class="lab">Tu as choisi</span><p class="val">Quelqu'un m'a demandé de le faire</p></div>
+        <div class="line quote"><span class="lab">Message collé<span class="tag">classé « faux support »</span></span><p class="val">« Bonjour, ici le support NovaWallet, votre compte est compromis, <span class="ecart">transférez vos fonds<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path d="M12 6 C35 -1 80 0 94 12 C104 24 82 38 48 37 C16 36 -2 26 5 14 C9 8 20 4 38 2"/></svg></span> vers le coffre sécurisé avant 15h. »</p></div>
+      </div>
+      <p class="detail" id="d">Aucun vrai support, banque ou plateforme ne demande de déplacer ton argent. Si tu es au téléphone avec cette personne, raccroche.</p>
+      <div class="date"><span>Cette demande reste en attente 10 minutes</span><span class="t" id="clock" aria-hidden="true">9:41</span></div>
+      <span class="sr" id="live" role="status">Cette demande reste en attente 9 minutes 41 secondes.</span>
+      <div class="stack">
+        <button class="btn" type="button">Annuler</button>
+        <button class="btn alt" type="button">Appeler un proche</button>
+        <button class="btn alt" type="button">Raccrocher et me laisser un moment</button>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+(function(){var s=9*60+41,c=document.getElementById('clock'),l=document.getElementById('live');
+setInterval(function(){if(s<=0)return;s--;var m=Math.floor(s/60),r=s%60;c.textContent=m+':'+(r<10?'0':'')+r;
+if(r===0)l.textContent='Cette demande reste en attente '+m+' minutes.';},1000);})();
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Sentinelle, danger : adresse</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: un chèque ne vaut rien si le montant en lettres contredit celui en chiffres. Ici « Tu as dit » et « En réalité » sont les deux lignes qui doivent concorder ; l'écart est cerclé à la main. Refuse la carte d'alerte rouge, le bouclier, le néon.
+OWN-WORLD: papier de sécurité #F7F8F6 (nuit #0F1829), encre bleu-noir #1C2B4A, acier #5B6B7A, rouge #B42318 réservé à l'écart. Guillochage SVG en bandeau, lignes de saisie, cases à croix, talon pointillé. Source Sans 3, B612 Mono, Caveat. Angles droits, aucune carte.
+STORY: la personne lit deux lignes, voit l'écart cerclé, comprend que le site ne fait pas ce qu'elle a dit, annule. Continuer exige de recopier à la main puis d'attendre.
+FIRST VIEWPORT: fenêtre 400 px : bandeau guilloché (nom, mention Danger), titre, ligne « Tu as dit », puis les deux adresses A et B en cases fixes, en deux rangées alignées, caractères différents gras et soulignés ; « Annuler » pleine largeur en encre.
+FORM: chèque français, direction imposée (rang 1, tirage non joué), clé d445df83.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+  <div class="site" aria-hidden="true">
+    <div class="nav"><span class="logo"></span><i></i><i></i><i></i></div>
+    <h2>Envoyer des fonds</h2>
+    <p>Colle l'adresse de ton compte.</p>
+    <span class="fake-btn">Envoyer</span>
+    <div class="rows"><i></i><i></i><i></i></div>
+  </div>
+  <div class="scrim"></div>
+  <div class="window" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d" tabindex="-1">
+    <div class="band"><span class="wordmark">Sentinelle</span><span class="level">Danger</span></div>
+    <div class="body">
+      <h1 id="t">Cette adresse n'est pas celle de ton compte Coinbase.</h1>
+      <div class="cheque">
+        <div class="line"><span class="lab">Tu as dit</span><p class="val">Envoyer 1 200 USDC vers mon compte Coinbase</p></div>
+      </div>
+      <div class="legend">
+        <div><span class="key" aria-hidden="true">A</span>Adresse connue (ton historique)</div>
+        <div><span class="key" aria-hidden="true">B</span>Adresse collée</div>
+      </div>
+      <div class="cmp">
+      <div class="pair">
+        <div class="addr known" role="group" aria-label="Adresse connue : 0x7a3F 9c21 B04e 5D8a 1f6C"><span class="key" aria-hidden="true">A</span><span class="chars" aria-hidden="true"><span class="g"><span class="c">0</span><span class="c">x</span><span class="c">7</span><span class="c">a</span><span class="c">3</span><span class="c">F</span></span><span class="g"><span class="c d">9</span><span class="c d">c</span><span class="c d">2</span><span class="c d">1</span></span><span class="g"><span class="c d">B</span><span class="c d">0</span><span class="c d">4</span><span class="c d">e</span></span><span class="g"><span class="c d">5</span><span class="c d">D</span><span class="c d">8</span><span class="c d">a</span></span><span class="g"><span class="c d">1</span><span class="c d">f</span><span class="c d">6</span><span class="c d">C</span></span></span></div>
+        <div class="addr pasted" role="group" aria-label="Adresse collée : 0x7a3F 1d88 Ce02 77aF 0b3D"><span class="key" aria-hidden="true">B</span><span class="chars" aria-hidden="true"><span class="g"><span class="c">0</span><span class="c">x</span><span class="c">7</span><span class="c">a</span><span class="c">3</span><span class="c">F</span></span><span class="g"><span class="c d">1</span><span class="c d">d</span><span class="c d">8</span><span class="c d">8</span></span><span class="g"><span class="c d">C</span><span class="c d">e</span><span class="c d">0</span><span class="c d">2</span></span><span class="g"><span class="c d">7</span><span class="c d">7</span><span class="c d">a</span><span class="c d">F</span></span><span class="g"><span class="c d">0</span><span class="c d">b</span><span class="c d">3</span><span class="c d">D</span></span></span></div>
+      </div>
+      <div class="pair">
+        <div class="addr known" role="group" aria-label="Adresse connue : 2E90 aB47 33dE 8c15 E2b9"><span class="key" aria-hidden="true">A</span><span class="chars" aria-hidden="true"><span class="g"><span class="c d">2</span><span class="c d">E</span><span class="c d">9</span><span class="c d">0</span></span><span class="g"><span class="c d">a</span><span class="c d">B</span><span class="c d">4</span><span class="c d">7</span></span><span class="g"><span class="c d">3</span><span class="c d">3</span><span class="c d">d</span><span class="c d">E</span></span><span class="g"><span class="c d">8</span><span class="c d">c</span><span class="c">1</span><span class="c d">5</span></span><span class="g"><span class="c">E</span><span class="c">2</span><span class="c">b</span><span class="c">9</span></span></span></div>
+        <div class="addr pasted" role="group" aria-label="Adresse collée : 9a41 F6c2 0e5B 4d19 E2b9"><span class="key" aria-hidden="true">B</span><span class="chars" aria-hidden="true"><span class="g"><span class="c d">9</span><span class="c d">a</span><span class="c d">4</span><span class="c d">1</span></span><span class="g"><span class="c d">F</span><span class="c d">6</span><span class="c d">c</span><span class="c d">2</span></span><span class="g"><span class="c d">0</span><span class="c d">e</span><span class="c d">5</span><span class="c d">B</span></span><span class="g"><span class="c d">4</span><span class="c d">d</span><span class="c">1</span><span class="c d">9</span></span><span class="g"><span class="c">E</span><span class="c">2</span><span class="c">b</span><span class="c">9</span></span></span></div>
+      </div>
+      </div>
+      <p class="detail" id="d">Elle commence et finit pareil, mais le milieu est différent. C'est le piège de l'adresse sosie : quelqu'un t'a envoyé 0 USDC depuis cette adresse pour qu'elle apparaisse dans ton historique.</p>
+      <div class="stack">
+        <button class="btn" type="button">Annuler</button>
+        <button class="btn alt" type="button">Utiliser l'adresse connue</button>
+      </div>
+      <div class="stub">
+        <p>Pour continuer quand même, recopie :</p>
+        <span class="phrase" id="phrase">1d88</span>
+        <div class="inscribe">
+          <span class="mention" aria-hidden="true">lu et compris</span>
+          <input class="field" id="copy" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Recopie la phrase pour continuer quand même" aria-describedby="phrase">
+        </div>
+        <div class="go">
+          <button class="btn ghost" id="go" type="button" disabled>Continuer quand même</button>
+          <span class="count" id="count" role="timer" aria-live="off">puis 30 s</span>
+        </div>
+        <span class="sr" id="live" role="status"></span>
+      </div>
+      <script>
+(function(){
+  var norm=function(s){return s.trim().toLowerCase().replace(/\u2019/g,"'");};
+  var p=norm(document.getElementById('phrase').textContent),
+      i=document.getElementById('copy'),g=document.getElementById('go'),
+      c=document.getElementById('count'),l=document.getElementById('live'),t=null,n=30;
+  i.addEventListener('input',function(){
+    if(norm(i.value)===p&&t===null){t=setInterval(function(){n--;c.textContent=n>0?n+' s':'';
+      if(n===15)l.textContent='15 secondes restantes';
+      if(n<=0){clearInterval(t);g.disabled=false;l.textContent='Tu peux continuer quand même.';}},1000);}
+  });
+})();
+</script>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signature piégée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="frame">
+<div class="site" aria-hidden="true"><i class="bar"></i><i class="h"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="img"></i></div>
+<div class="ext" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+  <h1 id="t">Ce n'est pas ce que tu as demandé.</h1>
+  <ul class="gap" id="d">
+    <li><span>Tu crois</span><strong>recevoir 50 USDC</strong></li>
+    <li class="real"><span>En réalité</span><strong>ce site pourra prendre tes 2 480 USDC</strong></li>
+  </ul>
+  <div class="actions">
+    <button class="btn btn-ink" autofocus>Annuler</button>
+  </div>
+  <details>
+    <summary>Pourquoi ?</summary>
+    <div class="more"><p>Il pourra les prendre maintenant et plus tard, sans te redemander. Ce contrat a 3 minutes d'existence.</p></div>
+  </details>
+  <button class="quiet" type="button">Continuer quand même</button>
+</div>
+</main>
+</body>
+</html>
