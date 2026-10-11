@@ -1,0 +1,352 @@
+
+=== moteur : serveur ===
+E1a  CONTRÔLÉ                                                     | montant du droit accordé (approve)
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS, corrigé  « Tu as écrit 50 USDC. La demande donne accès à 5 000 USDC. »
+E1b  NON CONTRÔLÉ                                                 | montant échangé (amountIn du routeur)
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+E1c  CONTRÔLÉ                                                     | montant payé (transfer)
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 20 USDC. La demande envoie 21 USDC. »
+E2a  CONTRÔLÉ                                                     | jeton payé
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 20 USDC. La demande envoie 20 USDT. »
+E2b  CONTRÔLÉ                                                     | jeton du droit accordé
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 50 USDC. La demande donne accès à 50 USDT. »
+E3   CONTRÔLÉ                                                     | destinataire d’un paiement
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : NE CORRESPOND PAS  « Le destinataire de la demande n’est pas l’adresse que tu as écrite. »
+E4   NON CONTRÔLÉ                                                 | contrepartie de l’échange (« contre AVAX »)
+       conforme : CORRESPOND, passe seul  « Tu donnes 50 USDC et tu reçois au moins 1,8 WAVAX. »
+       trahit   : CORRESPOND, passe seul  « Tu donnes 50 USDC et tu reçois au moins 1800000000000000000 jetons. »
+E5a  NON CONTRÔLÉ                                                 | montant minimal reçu, non écrit
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : CORRESPOND, passe seul  « Tu donnes jetons et tu reçois seulement rien en échange. »  [slippage_unbounded]
+E5b  NON CONTRÔLÉ                                                 | montant minimal reçu, ÉCRIT (« au moins 1,8 AVAX »)
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+E6a  NON CONTRÔLÉ                                                 | nature de l’opération : écrit échanger, la demande est un simple envoi
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : CORRESPOND, passe seul  « Cette opération envoie 50 USDC à 0xe9e9⁠…⁠e9e9, une adresse nouvelle. »
+E6b  NON CONTRÔLÉ                                                 | sens de l’échange : écrit vendre 50 USDC, la demande vend 50 AVAX
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : CORRESPOND, passe seul  « Cette opération envoie 50 AVAX à 0x7070⁠…⁠7070, une adresse nouvelle. »
+D1a  NON CONTRÔLÉ                                                 | (1) pas un droit durable : Permit2, expiration
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [far_expiry,F16:droit_illimite_protocole_connu]
+D1b  NON CONTRÔLÉ                                                 | (1) pas un droit durable : permit EIP-2612, échéance de la signature
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [far_expiry,F16:droit_illimite_protocole_connu]
+D1c  NON CONTRÔLÉ                                                 | (1) pas un droit durable : Permit2, échéance de la signature (sigDeadline)
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+D2a  CONTRÔLÉ                                                     | (2) seulement ce montant : approve illimité
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS, corrigé  « Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. »  [unlimited_allowance,F16:droit_illimite_protocole_connu]
+D2b  CONTRÔLÉ                                                     | (2) seulement ce montant : permit signé illimité
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée. »  [unlimited_allowance,F16:droit_illimite_protocole_connu]
+D2c  CONTRÔLÉ                                                     | (2) seulement ce montant : Permit2 illimité (uint160 max)
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée. »  [unlimited_allowance,F16:droit_illimite_protocole_connu]
+D2d  NON CONTRÔLÉ                                                 | (2) seulement ce montant : increaseAllowance s’ajoute à un droit déjà donné
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+D3a  EN PARTIE (la trahison donne « pas pu vérifier »)            | (3) jeton identifié par son adresse : faux jeton, droit
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : PAS PU VÉRIFIER  « Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de USDC. »
+D3b  EN PARTIE (la trahison donne « pas pu vérifier »)            | (3) jeton identifié par son adresse : faux jeton, paiement
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : PAS PU VÉRIFIER  « Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de USDC. »  [kind_missing_unvouched_recipient]
+D4a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (4) cet objet, pas toute la collection (transaction)
+       conforme : PAS PU VÉRIFIER  « Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de AVAX. »
+       trahit   : PAS PU VÉRIFIER  « Après ta signature, app.exemple.org pourra prendre tes plusieurs NFT et les futurs. »  [approval_for_all]
+D4b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (4) cet objet, pas un autre ni un deuxième (ordre Seaport)
+       conforme : PAS PU VÉRIFIER  « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. »
+       trahit   : PAS PU VÉRIFIER  « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. »
+D5a  CONTRÔLÉ                                                     | (5) ce que j’obtiens arrive sur mon compte : routeur V2, `to`
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+D5b  EN PARTIE (la trahison donne « pas pu vérifier »)            | (5) idem, routeur NON déclaré dans les réglages
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »  [unknown_selector,opaque]
+D5c  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (5) idem, multicall V3 : recipient de unwrapWETH9
+       conforme : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »
+       trahit   : NE CORRESPOND PAS  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »  [service_recipient_not_self,unknown_selector,opaque]
+D5d  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (5) ordre Seaport : le prix est versé à un tiers
+       conforme : PAS PU VÉRIFIER  « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. »
+       trahit   : NE CORRESPOND PAS  « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. »  [seaport_zero_consideration,seaport_proceeds_to_other,seaport_zero_price]
+D5e  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (5) retrait Aave : `to`
+       conforme : PAS PU VÉRIFIER  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+D5f  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (5) dépôt Aave : `onBehalfOf` (le dépôt est crédité à un tiers)
+       conforme : PAS PU VÉRIFIER  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : PAS PU VÉRIFIER  « Ton échange enverra les jetons reçus à une autre adresse, pas à toi. »  [service_beneficiary_not_self]
+D6a  CONTRÔLÉ                                                     | (6) sur ce réseau : permit signé pour une autre chaîne
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Cette signature laisse app.exemple.org prendre 50 jetons, pas plus. »  [domain_chain_mismatch,F16:droit_illimite_protocole_connu]
+D6b  NON CONTRÔLÉ                                                 | (6) sur ce réseau : transaction avec un autre chainId
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+D7   NON CONTRÔLÉ                                                 | (7) depuis ce compte : `from` est un autre compte
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+D8a  CONTRÔLÉ                                                     | (8) rien d’autre dans le lot : un second droit glissé
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 50 USDC. La demande donne accès à tout ton USDT. Réduis le plafond à 50 USDC dans ton portefeuille. »  [unlimited_allowance,external_spender]
+D8b  NON CONTRÔLÉ                                                 | (8) rien d’autre dans le lot : un envoi glissé (autre jeton)
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [F16:droit_illimite_protocole_connu,kind_missing_unvouched_recipient]
+D8c  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (8) rien d’autre dans le lot : un sweep glissé dans un multicall
+       conforme : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »
+       trahit   : NE CORRESPOND PAS  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »  [service_recipient_not_self,unknown_selector,opaque]
+D9a  NON CONTRÔLÉ                                                 | (9) aucune valeur native en plus : approve + 1 AVAX
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [kind_missing_unvouched_recipient]
+D9b  NON CONTRÔLÉ                                                 | (9) aucune valeur native en plus : swap de jetons + 3 AVAX
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : CORRESPOND, passe seul  « Cette opération envoie 3 AVAX à 0x7070⁠…⁠7070, une adresse nouvelle. »
+D9c  CONTRÔLÉ                                                     | (9) aucune valeur native en plus : paiement + 1 AVAX
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 20 USDC. La demande envoie la monnaie du réseau. »
+D10a CONTRÔLÉ                                                     | (10) personne ne prend la main : délégation EIP-7702 dans la transaction
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Si tu signes, ce programme pourra tout faire à ta place, partout. »  [delegation_7702,delegation_7702_all_chains,F16:droit_illimite_protocole_connu]
+D10b CONTRÔLÉ                                                     | (10) personne ne prend la main : changement de propriétaire
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : NE CORRESPOND PAS  « Si tu signes, 0xe9e9⁠…⁠e9e9 contrôle ton compte et tes jetons. »  [control_change]
+D10c CONTRÔLÉ                                                     | (10) personne ne prend la main : ajout d’un signataire (Safe)
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : NE CORRESPOND PAS  « Si tu signes, un inconnu pourra bouger les jetons du compte. »  [control_change]
+D10d EN PARTIE (la trahison donne « pas pu vérifier »)            | (10) personne ne prend la main : opération de compte abstrait (user operation)
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D11a EN PARTIE (la trahison donne « pas pu vérifier »)            | (11) rien de récurrent : permission ERC-7715
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D12a EN PARTIE (la trahison donne « pas pu vérifier »)            | (12) aucun réglage du portefeuille : réseau ajouté avec un RPC étranger
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Le site ajoute une chaîne publique que le portefeuille connaît déjà, avec un RPC qu'il fournit lui-même : il peut falsifier soldes et simulations. »  [chain_add_known_id_custom_rpc,chain_public_id_foreign_rpc]
+M1a  NON CONTRÔLÉ                                                 | à qui le droit est donné : spender = routeur déclaré / adresse quelconque
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [external_spender]
+M1b  NON CONTRÔLÉ                                                 | à qui le droit est donné, AUCUN réglage (installation par défaut)
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [external_spender]
+M1c  CONTRÔLÉ                                                     | à qui le droit signé est donné (permit)
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « La signature accorde un droit de dépense (limité) sur 0xb97e⁠…⁠8a6e à 0xe9e9⁠…⁠e9e9, hors protocoles connus, alors que l'intention déclarée n'est pas un échange. »  [external_spender,signed_right_not_intended]
+M2a  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | prix d’une vente : écrit 2 AVAX, l’ordre dit 0,000002 AVAX
+       conforme : PAS PU VÉRIFIER  « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. »
+       trahit   : NE CORRESPOND PAS  « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. »  [order_proceeds_negligible,seaport_zero_price]
+M2b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | prix d’une vente : écrit 2 AVAX, l’ordre dit 1,9 AVAX
+       conforme : PAS PU VÉRIFIER  « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. »
+       trahit   : PAS PU VÉRIFIER  « Tu donnes 1 jetons et tu reçois au moins 1,9 AVAX. »
+M3   AVEUGLE (« pas pu vérifier » des deux côtés)                 | durée de validité d’un ordre de vente
+       conforme : PAS PU VÉRIFIER  « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. »
+       trahit   : PAS PU VÉRIFIER  « Cette signature gratuite laisse app.exemple.org prendre tes 1 jetons. »  [far_expiry]
+M4   NON CONTRÔLÉ                                                 | frais : frais de réseau gonflés (gas × prix)
+       conforme : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+       trahit   : CORRESPOND, passe seul  « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. »
+M5   ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | pont : adresse d’arrivée
+       conforme : PAS PU VÉRIFIER  « Je ne retrouve pas ce paiement dans la demande. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+M6   AVEUGLE (« pas pu vérifier » des deux côtés)                 | pont : chaîne d’arrivée (écrit « vers Ethereum »)
+       conforme : PAS PU VÉRIFIER  « Je ne retrouve pas ce paiement dans la demande. »
+       trahit   : PAS PU VÉRIFIER  « Je ne retrouve pas ce paiement dans la demande. »
+M7   CONTRÔLÉ                                                     | signature d’un message illisible
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : NE CORRESPOND PAS  « Ce texte illisible peut autoriser le retrait de tes jetons. »  [blind_signature,opaque]
+M8   EN PARTIE (la trahison donne « pas pu vérifier »)            | délégation de vote
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »  [unknown_selector,opaque]
+M9   ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | emprunt au nom de quelqu’un / pour quelqu’un
+       conforme : PAS PU VÉRIFIER  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+M10  CONTRÔLÉ                                                     | transfert signé Permit2 (SignatureTransfer) : montant
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 50 USDC. Cette signature donne accès à 5 000 USDC et ne peut pas être limitée. »  [permit2_transfer_destination_chosen_by_spender,F16:droit_illimite_protocole_connu]
+M11  NON CONTRÔLÉ                                                 | chemin : jeton intermédiaire inconnu
+       conforme : CORRESPOND, passe seul  « Tu donnes 50 USDC et tu reçois au moins 1,8 WAVAX. »
+       trahit   : CORRESPOND, passe seul  « Tu donnes 50 USDC et tu reçois au moins 1,8 WAVAX. »
+M12  NON CONTRÔLÉ                                                 | échéance de la transaction d’échange
+       conforme : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+       trahit   : CORRESPOND, passe seul  « Nous n’avons trouvé aucun signal dangereux dans cette demande. »
+
+=== moteur : embarque ===
+E1a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | montant du droit accordé (approve)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E1b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | montant échangé (amountIn du routeur)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E1c  AVEUGLE (« pas pu vérifier » des deux côtés)                 | montant payé (transfer)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E2a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | jeton payé
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E2b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | jeton du droit accordé
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E3   AVEUGLE (« pas pu vérifier » des deux côtés)                 | destinataire d’un paiement
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E4   AVEUGLE (« pas pu vérifier » des deux côtés)                 | contrepartie de l’échange (« contre AVAX »)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E5a  NON CONTRÔLÉ                                                 | montant minimal reçu, non écrit
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : CORRESPOND, passe seul  « Tu donnes jetons et tu reçois seulement rien en échange. »  [slippage_unbounded]
+E5b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | montant minimal reçu, ÉCRIT (« au moins 1,8 AVAX »)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E6a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | nature de l’opération : écrit échanger, la demande est un simple envoi
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+E6b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | sens de l’échange : écrit vendre 50 USDC, la demande vend 50 AVAX
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D1a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (1) pas un droit durable : Permit2, expiration
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D1b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (1) pas un droit durable : permit EIP-2612, échéance de la signature
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D1c  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (1) pas un droit durable : Permit2, échéance de la signature (sigDeadline)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D2a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (2) seulement ce montant : approve illimité
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D2b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (2) seulement ce montant : permit signé illimité
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D2c  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (2) seulement ce montant : Permit2 illimité (uint160 max)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D2d  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (2) seulement ce montant : increaseAllowance s’ajoute à un droit déjà donné
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D3a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (3) jeton identifié par son adresse : faux jeton, droit
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D3b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (3) jeton identifié par son adresse : faux jeton, paiement
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D4a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (4) cet objet, pas toute la collection (transaction)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER  « Après ta signature, app.exemple.org pourra prendre tes plusieurs NFT et les futurs. »  [approval_for_all]
+D4b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (4) cet objet, pas un autre ni un deuxième (ordre Seaport)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D5a  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (5) ce que j’obtiens arrive sur mon compte : routeur V2, `to`
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+D5b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (5) idem, routeur NON déclaré dans les réglages
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »  [unknown_selector,opaque]
+D5c  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (5) idem, multicall V3 : recipient de unwrapWETH9
+       conforme : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »
+       trahit   : NE CORRESPOND PAS  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »  [service_recipient_not_self,unknown_selector,opaque,F1:no_incoming_ignore_effets_incomplets]
+D5d  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (5) ordre Seaport : le prix est versé à un tiers
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. »  [seaport_zero_consideration,seaport_proceeds_to_other,seaport_zero_price]
+D5e  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (5) retrait Aave : `to`
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+D5f  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (5) dépôt Aave : `onBehalfOf` (le dépôt est crédité à un tiers)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER  « Ton échange enverra les jetons reçus à une autre adresse, pas à toi. »  [service_beneficiary_not_self]
+D6a  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (6) sur ce réseau : permit signé pour une autre chaîne
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Cette signature laisse app.exemple.org prendre 50 jetons, pas plus. »  [domain_chain_mismatch,F16:droit_illimite_protocole_connu]
+D6b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (6) sur ce réseau : transaction avec un autre chainId
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D7   AVEUGLE (« pas pu vérifier » des deux côtés)                 | (7) depuis ce compte : `from` est un autre compte
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D8a  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (8) rien d’autre dans le lot : un second droit glissé
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 50 USDC. La demande donne accès à tout ton USDT. Réduis le plafond à 50 USDC dans ton portefeuille. »  [unlimited_allowance,external_spender,unlimited_approval_swap]
+D8b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (8) rien d’autre dans le lot : un envoi glissé (autre jeton)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D8c  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (8) rien d’autre dans le lot : un sweep glissé dans un multicall
+       conforme : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »
+       trahit   : NE CORRESPOND PAS  « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. »  [service_recipient_not_self,unknown_selector,opaque,F1:no_incoming_ignore_effets_incomplets]
+D9a  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (9) aucune valeur native en plus : approve + 1 AVAX
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D9b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (9) aucune valeur native en plus : swap de jetons + 3 AVAX
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D9c  AVEUGLE (« pas pu vérifier » des deux côtés)                 | (9) aucune valeur native en plus : paiement + 1 AVAX
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D10a ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (10) personne ne prend la main : délégation EIP-7702 dans la transaction
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Si tu signes, ce programme pourra tout faire à ta place, partout. »  [delegation_7702,delegation_7702_all_chains,F16:droit_illimite_protocole_connu]
+D10b ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (10) personne ne prend la main : changement de propriétaire
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Si tu signes, 0xe9e9⁠…⁠e9e9 contrôle ton compte et tes jetons. »  [control_change]
+D10c ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | (10) personne ne prend la main : ajout d’un signataire (Safe)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Si tu signes, un inconnu pourra bouger les jetons du compte. »  [control_change]
+D10d AVEUGLE (« pas pu vérifier » des deux côtés)                 | (10) personne ne prend la main : opération de compte abstrait (user operation)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D11a AVEUGLE (« pas pu vérifier » des deux côtés)                 | (11) rien de récurrent : permission ERC-7715
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+D12a AVEUGLE (« pas pu vérifier » des deux côtés)                 | (12) aucun réglage du portefeuille : réseau ajouté avec un RPC étranger
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Ce site te fait ajouter un réseau qu'il contrôle lui-même. »  [chain_add_known_id_custom_rpc]
+M1a  NON CONTRÔLÉ                                                 | à qui le droit est donné : spender = routeur déclaré / adresse quelconque
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [external_spender]
+M1b  NON CONTRÔLÉ                                                 | à qui le droit est donné, AUCUN réglage (installation par défaut)
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [external_spender]
+M1c  NON CONTRÔLÉ                                                 | à qui le droit signé est donné (permit)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »  [external_spender]
+M2a  ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | prix d’une vente : écrit 2 AVAX, l’ordre dit 0,000002 AVAX
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. »  [order_proceeds_negligible,seaport_zero_price]
+M2b  AVEUGLE (« pas pu vérifier » des deux côtés)                 | prix d’une vente : écrit 2 AVAX, l’ordre dit 1,9 AVAX
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+M3   AVEUGLE (« pas pu vérifier » des deux côtés)                 | durée de validité d’un ordre de vente
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER  « Cette signature gratuite laisse app.exemple.org prendre tes 1 jetons. »  [far_expiry]
+M4   AVEUGLE (« pas pu vérifier » des deux côtés)                 | frais : frais de réseau gonflés (gas × prix)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+M5   ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | pont : adresse d’arrivée
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+M6   AVEUGLE (« pas pu vérifier » des deux côtés)                 | pont : chaîne d’arrivée (écrit « vers Ethereum »)
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+M7   ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | signature d’un message illisible
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Ce texte illisible peut autoriser le retrait de tes jetons. »  [blind_signature,opaque]
+M8   AVEUGLE (« pas pu vérifier » des deux côtés)                 | délégation de vote
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »  [unknown_selector,opaque]
+M9   ALERTE DES DEUX CÔTÉS (le conforme ne passe pas non plus)    | emprunt au nom de quelqu’un / pour quelqu’un
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : NE CORRESPOND PAS  « Cette demande a des effets que tu n'as pas demandés. »  [service_recipient_not_self]
+M10  CONTRÔLÉ                                                     | transfert signé Permit2 (SignatureTransfer) : montant
+       conforme : CORRESPOND, passe seul  « La demande donne accès à 50 USDC, pas plus. »
+       trahit   : NE CORRESPOND PAS  « Tu as écrit 50 USDC. Cette signature donne accès à 5 000 USDC et ne peut pas être limitée. »  [permit2_transfer_destination_chosen_by_spender,approval_exceeds_intent,F16:droit_illimite_protocole_connu,F31:droit_plus_large_protocole_connu]
+M11  AVEUGLE (« pas pu vérifier » des deux côtés)                 | chemin : jeton intermédiaire inconnu
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+M12  AVEUGLE (« pas pu vérifier » des deux côtés)                 | échéance de la transaction d’échange
+       conforme : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »
+       trahit   : PAS PU VÉRIFIER (sans question)  « Nous n'avons pas pu vérifier cette opération sur tes jetons. »

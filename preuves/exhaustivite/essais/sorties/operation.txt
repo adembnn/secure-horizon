@@ -1,0 +1,8 @@
+phrase : « échanger 50 USDC contre AVAX »   1re demande : approve 50 USDC (conforme, continuée)   moteur : serveur
+O1 1re : CORRESPOND (allow)  |  2e = swap conforme de 50 USDC  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | passe seul après 1 s, sans question
+O2 1re : CORRESPOND (allow)  |  2e = transfer de 50 USDC vers un tiers (pas un échange)  ->  CORRESPOND | « Cette opération envoie 50 USDC à 0xe9e9⁠…⁠e9e9, une adresse nouvelle. » | passe seul après 1 s, sans question
+O3 1re : CORRESPOND (allow)  |  2e = swap de 5 000 USDC  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | passe seul après 1 s, sans question
+O4 1re : CORRESPOND (allow)  |  2e = setApprovalForAll sur une collection de NFT  ->  NE CORRESPOND PAS | « Après ta signature, app.exemple.org pourra prendre tes plusieurs NFT et les futurs. » | attente 30 s
+O5 1re : CORRESPOND (allow)  |  2e = envoi de 2 AVAX (monnaie du réseau) vers un tiers  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. Cette demande porte sur un autre jeton que la précédente. » | attente 30 s
+O6 1re : CORRESPOND (allow)  |  2e = second approve de 50 USDC pour une autre adresse  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. Tu as déjà donné une autorisation pour ça, et cette demande en ajoute une autre. » | attente 30 s
+O7 1re : CORRESPOND (allow)  |  2e = approve de 50 USDT  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. La demande donne accès à 50 USDT. » | attente 30 s

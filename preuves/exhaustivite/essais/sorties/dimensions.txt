@@ -1,0 +1,406 @@
+
+## E1a  montant du droit accordé (approve)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme approve 50 USDC  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   approve 5 000 USDC  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. La demande donne accès à 5 000 USDC. » | niveau=danger codes= | correction: Droit limité à 50 USDC
+  [embarque] conforme approve 50 USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   approve 5 000 USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E1b  montant échangé (amountIn du routeur)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap de 50 USDC  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   swap de 5 000 USDC  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme swap de 50 USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   swap de 5 000 USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E1c  montant payé (transfer)
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme transfer 20 USDC  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   transfer 21 USDC  ->  NE CORRESPOND PAS | « Tu as écrit 20 USDC. La demande envoie 21 USDC. » | niveau=danger codes= | attente 30 s
+  [embarque] conforme transfer 20 USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   transfer 21 USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E2a  jeton payé
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme transfer USDC  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   transfer 20 USDT  ->  NE CORRESPOND PAS | « Tu as écrit 20 USDC. La demande envoie 20 USDT. » | niveau=danger codes= | attente 30 s
+  [embarque] conforme transfer USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   transfer 20 USDT  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E2b  jeton du droit accordé
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme approve USDC  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   approve 50 USDT  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. La demande donne accès à 50 USDT. » | niveau=danger codes= | attente 30 s
+  [embarque] conforme approve USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   approve 50 USDT  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E3  destinataire d’un paiement
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme vers l’adresse écrite  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   vers une autre adresse  ->  NE CORRESPOND PAS | « Le destinataire de la demande n’est pas l’adresse que tu as écrite. » | niveau=danger codes= | attente 30 s
+  [embarque] conforme vers l’adresse écrite  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   vers une autre adresse  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E4  contrepartie de l’échange (« contre AVAX »)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme chemin USDC → AVAX  ->  CORRESPOND | « Tu donnes 50 USDC et tu reçois au moins 1,8 WAVAX. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   chemin USDC → jeton inconnu  ->  CORRESPOND | « Tu donnes 50 USDC et tu reçois au moins 1800000000000000000 jetons. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme chemin USDC → AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   chemin USDC → jeton inconnu  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E5a  montant minimal reçu, non écrit
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme minimum 1,8 AVAX  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   minimum 0  ->  CORRESPOND | « Tu donnes jetons et tu reçois seulement rien en échange. » | niveau=attention codes=slippage_unbounded | passe seul après 1 s
+  [embarque] conforme minimum 1,8 AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   minimum 0  ->  CORRESPOND | « Tu donnes jetons et tu reçois seulement rien en échange. » | niveau=attention codes=slippage_unbounded | passe seul après 1 s
+
+## E5b  montant minimal reçu, ÉCRIT (« au moins 1,8 AVAX »)
+phrase : « échanger 50 USDC contre au moins 1,8 AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme minimum 1,8 AVAX  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   minimum 0,000001 AVAX  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme minimum 1,8 AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   minimum 0,000001 AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E6a  nature de l’opération : écrit échanger, la demande est un simple envoi
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   transfer 50 USDC vers un tiers  ->  CORRESPOND | « Cette opération envoie 50 USDC à 0xe9e9⁠…⁠e9e9, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   transfer 50 USDC vers un tiers  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## E6b  sens de l’échange : écrit vendre 50 USDC, la demande vend 50 AVAX
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme USDC → AVAX  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   50 AVAX → USDC  ->  CORRESPOND | « Cette opération envoie 50 AVAX à 0x7070⁠…⁠7070, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme USDC → AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   50 AVAX → USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D1a  (1) pas un droit durable : Permit2, expiration
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme Permit2 50 USDC, expire dans 20 min  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   Permit2 50 USDC, n’expire jamais  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=far_expiry,F16:droit_illimite_protocole_connu | passe seul après 1 s
+  [embarque] conforme Permit2 50 USDC, expire dans 20 min  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   Permit2 50 USDC, n’expire jamais  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D1b  (1) pas un droit durable : permit EIP-2612, échéance de la signature
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme permit 50 USDC, signature valable 20 min  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   permit 50 USDC, signature valable 10 ans  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=far_expiry,F16:droit_illimite_protocole_connu | passe seul après 1 s
+  [embarque] conforme permit 50 USDC, signature valable 20 min  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   permit 50 USDC, signature valable 10 ans  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D1c  (1) pas un droit durable : Permit2, échéance de la signature (sigDeadline)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme sigDeadline 20 min  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   sigDeadline 10 ans  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme sigDeadline 20 min  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   sigDeadline 10 ans  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D2a  (2) seulement ce montant : approve illimité
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme approve 50  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   approve illimité  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. » | niveau=danger codes=unlimited_allowance,F16:droit_illimite_protocole_connu | correction: Droit limité à 50 USDC | attente 30 s
+  [embarque] conforme approve 50  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   approve illimité  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D2b  (2) seulement ce montant : permit signé illimité
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme permit 50  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   permit illimité  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée. » | niveau=danger codes=unlimited_allowance,F16:droit_illimite_protocole_connu | attente 30 s
+  [embarque] conforme permit 50  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   permit illimité  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D2c  (2) seulement ce montant : Permit2 illimité (uint160 max)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme Permit2 50  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   Permit2 max  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée. » | niveau=danger codes=unlimited_allowance,F16:droit_illimite_protocole_connu | attente 30 s
+  [embarque] conforme Permit2 50  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   Permit2 max  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D2d  (2) seulement ce montant : increaseAllowance s’ajoute à un droit déjà donné
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme approve 50 (remplace)  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   increaseAllowance +50 (s’ajoute à l’existant)  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme approve 50 (remplace)  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   increaseAllowance +50 (s’ajoute à l’existant)  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D3a  (3) jeton identifié par son adresse : faux jeton, droit
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme vrai USDC  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   jeton inconnu, 50 unités  ->  PAS PU VÉRIFIER | « Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de USDC. » | niveau=unknown codes= | attente 30 s
+  [embarque] conforme vrai USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   jeton inconnu, 50 unités  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D3b  (3) jeton identifié par son adresse : faux jeton, paiement
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme vrai USDC  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   jeton inconnu  ->  PAS PU VÉRIFIER | « Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de USDC. » | niveau=unknown codes=kind_missing_unvouched_recipient | attente 30 s
+  [embarque] conforme vrai USDC  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   jeton inconnu  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D4a  (4) cet objet, pas toute la collection (transaction)
+phrase : « vendre mon NFT numéro 12 pour 2 AVAX »   (aucun réglage)
+  [serveur] conforme approve du NFT n° 12  ->  PAS PU VÉRIFIER | « Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   setApprovalForAll  ->  PAS PU VÉRIFIER | « Après ta signature, app.exemple.org pourra prendre tes plusieurs NFT et les futurs. » | niveau=unknown codes=approval_for_all | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme approve du NFT n° 12  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   setApprovalForAll  ->  PAS PU VÉRIFIER | « Après ta signature, app.exemple.org pourra prendre tes plusieurs NFT et les futurs. » | niveau=unknown codes=approval_for_all | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+
+## D4b  (4) cet objet, pas un autre ni un deuxième (ordre Seaport)
+phrase : « vendre mon NFT numéro 12 pour 2 AVAX »   (aucun réglage)
+  [serveur] conforme offre : NFT n° 12  ->  PAS PU VÉRIFIER | « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   offre : NFT n° 12 + NFT n° 77  ->  PAS PU VÉRIFIER | « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme offre : NFT n° 12  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   offre : NFT n° 12 + NFT n° 77  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D5a  (5) ce que j’obtiens arrive sur mon compte : routeur V2, `to`
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme to = moi  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   to = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | attente 30 s
+  [embarque] conforme to = moi  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   to = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | attente 30 s
+
+## D5b  (5) idem, routeur NON déclaré dans les réglages
+phrase : « échanger 50 USDC contre AVAX »   (aucun réglage)
+  [serveur] conforme to = moi  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   to = un tiers  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes=unknown_selector,opaque | attente 30 s
+  [embarque] conforme to = moi  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   to = un tiers  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes=unknown_selector,opaque | attente 30 s
+
+## D5c  (5) idem, multicall V3 : recipient de unwrapWETH9
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme unwrap vers moi  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=unknown codes=unknown_selector,opaque | attente 30 s
+  [serveur] trahit   unwrap vers un tiers  ->  NE CORRESPOND PAS | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=danger codes=service_recipient_not_self,unknown_selector,opaque | attente 30 s
+  [embarque] conforme unwrap vers moi  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=unknown codes=unknown_selector,opaque,F1:no_incoming_ignore_effets_incomplets | attente 30 s
+  [embarque] trahit   unwrap vers un tiers  ->  NE CORRESPOND PAS | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=danger codes=service_recipient_not_self,unknown_selector,opaque,F1:no_incoming_ignore_effets_incomplets | attente 30 s
+
+## D5d  (5) ordre Seaport : le prix est versé à un tiers
+phrase : « vendre mon NFT numéro 12 pour 2 AVAX »   (aucun réglage)
+  [serveur] conforme 2 AVAX pour moi  ->  PAS PU VÉRIFIER | « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   2 AVAX pour un tiers  ->  NE CORRESPOND PAS | « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. » | niveau=danger codes=seaport_zero_consideration,seaport_proceeds_to_other,seaport_zero_price | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme 2 AVAX pour moi  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   2 AVAX pour un tiers  ->  NE CORRESPOND PAS | « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. » | niveau=danger codes=seaport_zero_consideration,seaport_proceeds_to_other,seaport_zero_price | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+
+## D5e  (5) retrait Aave : `to`
+phrase : « retirer 50 USDC de Aave »   (routeur déclaré dans les réglages)
+  [serveur] conforme to = moi  ->  PAS PU VÉRIFIER | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   to = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme to = moi  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   to = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+
+## D5f  (5) dépôt Aave : `onBehalfOf` (le dépôt est crédité à un tiers)
+phrase : « déposer 50 USDC sur Aave »   (routeur déclaré dans les réglages)
+  [serveur] conforme onBehalfOf = moi  ->  PAS PU VÉRIFIER | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   onBehalfOf = un tiers  ->  PAS PU VÉRIFIER | « Ton échange enverra les jetons reçus à une autre adresse, pas à toi. » | niveau=unknown codes=service_beneficiary_not_self | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme onBehalfOf = moi  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   onBehalfOf = un tiers  ->  PAS PU VÉRIFIER | « Ton échange enverra les jetons reçus à une autre adresse, pas à toi. » | niveau=unknown codes=service_beneficiary_not_self | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+
+## D6a  (6) sur ce réseau : permit signé pour une autre chaîne
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme domaine chainId 43114  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   domaine chainId 1 (Ethereum)  ->  NE CORRESPOND PAS | « Cette signature laisse app.exemple.org prendre 50 jetons, pas plus. » | niveau=danger codes=domain_chain_mismatch,F16:droit_illimite_protocole_connu | attente 30 s
+  [embarque] conforme domaine chainId 43114  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   domaine chainId 1 (Ethereum)  ->  NE CORRESPOND PAS | « Cette signature laisse app.exemple.org prendre 50 jetons, pas plus. » | niveau=danger codes=domain_chain_mismatch,F16:droit_illimite_protocole_connu | attente 30 s
+
+## D6b  (6) sur ce réseau : transaction avec un autre chainId
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme chainId 43114  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   chainId 1  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme chainId 43114  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   chainId 1  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D7  (7) depuis ce compte : `from` est un autre compte
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme from = compte actif  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   from = un autre compte  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme from = compte actif  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   from = un autre compte  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D8a  (8) rien d’autre dans le lot : un second droit glissé
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme lot : approve 50 + swap  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=F16:droit_illimite_protocole_connu | passe seul après 1 s
+  [serveur] trahit   lot : approve 50 + swap + approve USDT illimité  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. La demande donne accès à tout ton USDT. Réduis le plafond à 50 USDC dans ton portefeuille. » | niveau=danger codes=unlimited_allowance,external_spender
+  [embarque] conforme lot : approve 50 + swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   lot : approve 50 + swap + approve USDT illimité  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. La demande donne accès à tout ton USDT. Réduis le plafond à 50 USDC dans ton portefeuille. » | niveau=danger codes=unlimited_allowance,external_spender,unlimited_approval_swap
+
+## D8b  (8) rien d’autre dans le lot : un envoi glissé (autre jeton)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme lot : approve 50 + swap  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=F16:droit_illimite_protocole_connu | passe seul après 1 s
+  [serveur] trahit   lot : + transfer 300 USDT vers un tiers  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=F16:droit_illimite_protocole_connu,kind_missing_unvouched_recipient | passe seul après 1 s
+  [embarque] conforme lot : approve 50 + swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   lot : + transfer 300 USDT vers un tiers  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D8c  (8) rien d’autre dans le lot : un sweep glissé dans un multicall
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme multicall : swap + unwrap  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=unknown codes=unknown_selector,opaque | attente 30 s
+  [serveur] trahit   multicall : + sweepToken(USDT) vers un tiers  ->  NE CORRESPOND PAS | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=danger codes=service_recipient_not_self,unknown_selector,opaque | attente 30 s
+  [embarque] conforme multicall : swap + unwrap  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=unknown codes=unknown_selector,opaque,F1:no_incoming_ignore_effets_incomplets | attente 30 s
+  [embarque] trahit   multicall : + sweepToken(USDT) vers un tiers  ->  NE CORRESPOND PAS | « Nous n'avons pas pu vérifier cette opération sur tes 50 USDC. » | niveau=danger codes=service_recipient_not_self,unknown_selector,opaque,F1:no_incoming_ignore_effets_incomplets | attente 30 s
+
+## D9a  (9) aucune valeur native en plus : approve + 1 AVAX
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme approve seul  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   approve + 1 AVAX joint  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=kind_missing_unvouched_recipient | passe seul après 1 s
+  [embarque] conforme approve seul  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   approve + 1 AVAX joint  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D9b  (9) aucune valeur native en plus : swap de jetons + 3 AVAX
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap seul  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   swap + 3 AVAX joints  ->  CORRESPOND | « Cette opération envoie 3 AVAX à 0x7070⁠…⁠7070, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme swap seul  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   swap + 3 AVAX joints  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D9c  (9) aucune valeur native en plus : paiement + 1 AVAX
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme transfer seul  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   transfer + 1 AVAX joint  ->  NE CORRESPOND PAS | « Tu as écrit 20 USDC. La demande envoie la monnaie du réseau. » | niveau=danger codes= | attente 30 s
+  [embarque] conforme transfer seul  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   transfer + 1 AVAX joint  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D10a  (10) personne ne prend la main : délégation EIP-7702 dans la transaction
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme approve 50  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   approve 50 + authorizationList  ->  NE CORRESPOND PAS | « Si tu signes, ce programme pourra tout faire à ta place, partout. » | niveau=danger codes=delegation_7702,delegation_7702_all_chains,F16:droit_illimite_protocole_connu | attente 30 s
+  [embarque] conforme approve 50  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   approve 50 + authorizationList  ->  NE CORRESPOND PAS | « Si tu signes, ce programme pourra tout faire à ta place, partout. » | niveau=danger codes=delegation_7702,delegation_7702_all_chains,F16:droit_illimite_protocole_connu | attente 30 s
+
+## D10b  (10) personne ne prend la main : changement de propriétaire
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   transferOwnership(tiers) sur un contrat  ->  NE CORRESPOND PAS | « Si tu signes, 0xe9e9⁠…⁠e9e9 contrôle ton compte et tes jetons. » | niveau=danger codes=control_change | attente 30 s
+  [embarque] conforme swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   transferOwnership(tiers) sur un contrat  ->  NE CORRESPOND PAS | « Si tu signes, 0xe9e9⁠…⁠e9e9 contrôle ton compte et tes jetons. » | niveau=danger codes=control_change | attente 30 s
+
+## D10c  (10) personne ne prend la main : ajout d’un signataire (Safe)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   addOwnerWithThreshold(tiers, 1)  ->  NE CORRESPOND PAS | « Si tu signes, un inconnu pourra bouger les jetons du compte. » | niveau=danger codes=control_change | attente 30 s
+  [embarque] conforme swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   addOwnerWithThreshold(tiers, 1)  ->  NE CORRESPOND PAS | « Si tu signes, un inconnu pourra bouger les jetons du compte. » | niveau=danger codes=control_change | attente 30 s
+
+## D10d  (10) personne ne prend la main : opération de compte abstrait (user operation)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   eth_sendUserOperation  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] conforme swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   eth_sendUserOperation  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D11a  (11) rien de récurrent : permission ERC-7715
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   wallet_grantPermissions (50 USDC par jour)  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] conforme swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   wallet_grantPermissions (50 USDC par jour)  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## D12a  (12) aucun réglage du portefeuille : réseau ajouté avec un RPC étranger
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   wallet_addEthereumChain (Avalanche, RPC inconnu)  ->  PAS PU VÉRIFIER (sans question) | « Le site ajoute une chaîne publique que le portefeuille connaît déjà, avec un RPC qu'il fournit lui-même : il peut falsifier soldes et simulations. » | niveau=danger codes=chain_add_known_id_custom_rpc,chain_public_id_foreign_rpc | attente 30 s
+  [embarque] conforme swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   wallet_addEthereumChain (Avalanche, RPC inconnu)  ->  PAS PU VÉRIFIER (sans question) | « Ce site te fait ajouter un réseau qu'il contrôle lui-même. » | niveau=attention codes=chain_add_known_id_custom_rpc
+
+## M1a  à qui le droit est donné : spender = routeur déclaré / adresse quelconque
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme spender = routeur déclaré  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   spender = adresse quelconque  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=external_spender | passe seul après 1 s
+  [embarque] conforme spender = routeur déclaré  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   spender = adresse quelconque  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=external_spender | passe seul après 1 s
+
+## M1b  à qui le droit est donné, AUCUN réglage (installation par défaut)
+phrase : « échanger 50 USDC contre AVAX »   (aucun réglage)
+  [serveur] conforme spender = routeur  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=external_spender | passe seul après 1 s
+  [serveur] trahit   spender = adresse quelconque  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=external_spender | passe seul après 1 s
+  [embarque] conforme spender = routeur  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=external_spender | passe seul après 1 s
+  [embarque] trahit   spender = adresse quelconque  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=external_spender | passe seul après 1 s
+
+## M1c  à qui le droit signé est donné (permit)
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme spender = routeur déclaré  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   spender = adresse quelconque  ->  NE CORRESPOND PAS | « La signature accorde un droit de dépense (limité) sur 0xb97e⁠…⁠8a6e à 0xe9e9⁠…⁠e9e9, hors protocoles connus, alors que l'intention déclarée n'est pas un échange. » | niveau=danger codes=external_spender,signed_right_not_intended | attente 30 s
+  [embarque] conforme spender = routeur déclaré  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   spender = adresse quelconque  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=external_spender | passe seul après 1 s
+
+## M2a  prix d’une vente : écrit 2 AVAX, l’ordre dit 0,000002 AVAX
+phrase : « vendre mon NFT numéro 12 pour 2 AVAX »   (aucun réglage)
+  [serveur] conforme 2 AVAX  ->  PAS PU VÉRIFIER | « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   0,000002 AVAX  ->  NE CORRESPOND PAS | « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. » | niveau=danger codes=order_proceeds_negligible,seaport_zero_price | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme 2 AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   0,000002 AVAX  ->  NE CORRESPOND PAS | « Tu recevras seulement presque rien pour ton NFT, qui vaut bien plus. » | niveau=danger codes=order_proceeds_negligible,seaport_zero_price | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+
+## M2b  prix d’une vente : écrit 2 AVAX, l’ordre dit 1,9 AVAX
+phrase : « vendre mon NFT numéro 12 pour 2 AVAX »   (aucun réglage)
+  [serveur] conforme 2 AVAX  ->  PAS PU VÉRIFIER | « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   1,9 AVAX  ->  PAS PU VÉRIFIER | « Tu donnes 1 jetons et tu reçois au moins 1,9 AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme 2 AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   1,9 AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## M3  durée de validité d’un ordre de vente
+phrase : « vendre mon NFT numéro 12 pour 2 AVAX »   (aucun réglage)
+  [serveur] conforme valable 7 jours  ->  PAS PU VÉRIFIER | « Tu donnes 1 jetons et tu reçois au moins 2 AVAX. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   valable 10 ans  ->  PAS PU VÉRIFIER | « Cette signature gratuite laisse app.exemple.org prendre tes 1 jetons. » | niveau=unknown codes=far_expiry | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme valable 7 jours  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   valable 10 ans  ->  PAS PU VÉRIFIER | « Cette signature gratuite laisse app.exemple.org prendre tes 1 jetons. » | niveau=unknown codes=far_expiry | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+
+## M4  frais : frais de réseau gonflés (gas × prix)
+phrase : « payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2 »   (aucun réglage)
+  [serveur] conforme frais normaux  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   frais ≈ 20 AVAX  ->  CORRESPOND | « Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme frais normaux  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   frais ≈ 20 AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## M5  pont : adresse d’arrivée
+phrase : « envoyer 50 USDC vers Ethereum par le pont »   (routeur déclaré dans les réglages)
+  [serveur] conforme arrivée = moi  ->  PAS PU VÉRIFIER | « Je ne retrouve pas ce paiement dans la demande. » | niveau=unknown codes= | attente 30 s
+  [serveur] trahit   arrivée = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | attente 30 s
+  [embarque] conforme arrivée = moi  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   arrivée = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | attente 30 s
+
+## M6  pont : chaîne d’arrivée (écrit « vers Ethereum »)
+phrase : « envoyer 50 USDC vers Ethereum par le pont »   (routeur déclaré dans les réglages)
+  [serveur] conforme domaine 0 (Ethereum)  ->  PAS PU VÉRIFIER | « Je ne retrouve pas ce paiement dans la demande. » | niveau=unknown codes= | attente 30 s
+  [serveur] trahit   domaine 6 (Base)  ->  PAS PU VÉRIFIER | « Je ne retrouve pas ce paiement dans la demande. » | niveau=unknown codes= | attente 30 s
+  [embarque] conforme domaine 0 (Ethereum)  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   domaine 6 (Base)  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## M7  signature d’un message illisible
+phrase : « me connecter »   (aucun réglage)
+  [serveur] conforme personal_sign d’un texte  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   eth_sign d’une empreinte  ->  NE CORRESPOND PAS | « Ce texte illisible peut autoriser le retrait de tes jetons. » | niveau=danger codes=blind_signature,opaque | attente 30 s
+  [embarque] conforme personal_sign d’un texte  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   eth_sign d’une empreinte  ->  NE CORRESPOND PAS | « Ce texte illisible peut autoriser le retrait de tes jetons. » | niveau=danger codes=blind_signature,opaque | attente 30 s
+
+## M8  délégation de vote
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme swap  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   delegate(tiers)  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes=unknown_selector,opaque | attente 30 s
+  [embarque] conforme swap  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   delegate(tiers)  ->  PAS PU VÉRIFIER | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes=unknown_selector,opaque | attente 30 s
+
+## M9  emprunt au nom de quelqu’un / pour quelqu’un
+phrase : « emprunter 50 USDC sur Aave »   (routeur déclaré dans les réglages)
+  [serveur] conforme onBehalfOf = moi  ->  PAS PU VÉRIFIER | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=unknown codes= | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [serveur] trahit   onBehalfOf = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+  [embarque] conforme onBehalfOf = moi  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   onBehalfOf = un tiers  ->  NE CORRESPOND PAS | « Cette demande a des effets que tu n'as pas demandés. » | niveau=danger codes=service_recipient_not_self | relance: Que veux-tu faire, et pour combien ? | attente 30 s
+
+## M10  transfert signé Permit2 (SignatureTransfer) : montant
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme 50 USDC  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=permit2_transfer_destination_chosen_by_spender,F16:droit_illimite_protocole_connu | passe seul après 1 s
+  [serveur] trahit   5 000 USDC  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. Cette signature donne accès à 5 000 USDC et ne peut pas être limitée. » | niveau=danger codes=permit2_transfer_destination_chosen_by_spender,F16:droit_illimite_protocole_connu | attente 30 s
+  [embarque] conforme 50 USDC  ->  CORRESPOND | « La demande donne accès à 50 USDC, pas plus. » | niveau=attention codes=permit2_transfer_destination_chosen_by_spender,F16:droit_illimite_protocole_connu | passe seul après 1 s
+  [embarque] trahit   5 000 USDC  ->  NE CORRESPOND PAS | « Tu as écrit 50 USDC. Cette signature donne accès à 5 000 USDC et ne peut pas être limitée. » | niveau=danger codes=permit2_transfer_destination_chosen_by_spender,approval_exceeds_intent,F16:droit_illimite_protocole_connu,F31:droit_plus_large_protocole_connu | attente 30 s
+
+## M11  chemin : jeton intermédiaire inconnu
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme USDC → AVAX  ->  CORRESPOND | « Tu donnes 50 USDC et tu reçois au moins 1,8 WAVAX. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   USDC → jeton inconnu → AVAX  ->  CORRESPOND | « Tu donnes 50 USDC et tu reçois au moins 1,8 WAVAX. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme USDC → AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   USDC → jeton inconnu → AVAX  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+
+## M12  échéance de la transaction d’échange
+phrase : « échanger 50 USDC contre AVAX »   (routeur déclaré dans les réglages)
+  [serveur] conforme échéance 20 min  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [serveur] trahit   échéance 10 ans  ->  CORRESPOND | « Nous n’avons trouvé aucun signal dangereux dans cette demande. » | niveau=attention codes= | passe seul après 1 s
+  [embarque] conforme échéance 20 min  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
+  [embarque] trahit   échéance 10 ans  ->  PAS PU VÉRIFIER (sans question) | « Nous n'avons pas pu vérifier cette opération sur tes jetons. » | niveau=unknown codes= | attente 30 s
