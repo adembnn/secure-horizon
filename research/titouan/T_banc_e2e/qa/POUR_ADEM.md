@@ -38,3 +38,20 @@ Le contrôle écrit (`written_check.js`) attrape déjà ce cas : r02 et r03 pass
 ## 3. Rappel : B1 et B2 du rapport QA
 
 `qa/corrections_proposees.diff` (build autonome et `evaluate_plus.test.mjs`) reste à vérifier contre l'état actuel. Le build autonome passe aujourd'hui 44 / 44 (commit 45f0f0b), donc B1 semble réglé chez toi. Refaire `git apply --check` avant d'appliquer quoi que ce soit.
+
+## 4. Exception `.gitignore` pour le journal d'exemple de l'audit (11 oct., vers 11 h)
+
+Constat. `.gitignore` ligne 23 (`*.jsonl`) ignore `research/demo_reelle/audit/sample/journal.jsonl` (vérifié : `git check-ignore -v` répond `.gitignore:23:*.jsonl`). Sur un clone, ce fichier n'existe pas : la commande d'audit citée dans `livrables/SLIDE_CONFORMITE.md` (`verify_decision.mjs --journal ...`) échoue. Les requêtes d'exemple (`sample/requests/*.json`) et `make_sample_journal.mjs` sont suivis, le journal non.
+
+Correctif proposé (deux possibilités, à toi de choisir, Titouan ne touche pas à `.gitignore`) :
+- ajouter sous les exceptions existantes : `!research/demo_reelle/audit/sample/journal.jsonl`, puis régénérer le journal (`node research/demo_reelle/audit/make_sample_journal.mjs`) et le commiter ;
+- ou ne rien changer et écrire dans le README de l'audit qu'il faut lancer `make_sample_journal.mjs` d'abord.
+
+Le fichier ne contient que des décisions sur les six requêtes synthétiques du dossier : aucune donnée réelle, aucun secret. À vérifier avant de commiter.
+
+## 5. Ce qu'il reste à pousser de ton côté (état lu à 11 h, `git status`)
+
+- `research/titouan/T_banc_e2e/extension/journal_chain.js`, `gatekeeper.js`, `tests/unit/journal_champs.test.mjs`, `tools/gen_rules_fingerprint.mjs` : modifiés ou nouveaux, non commités. `node --test tests/unit/journal_champs.test.mjs` passe (6 sur 6, lancé depuis `extension/`).
+- Les champs `by`, `limited`, `rules` ne sont pas encore dans le build livré : `extension_standalone/extension/journal_chain.js` ne contient aucun `limited`. Tant qu'ils n'y sont pas, nos livrables les écrivent « en cours d'ajout ».
+- `research/titouan/T_banc_e2e/engine/out/cchain_all.json` : modifié, non commité (sortie générée ; à commiter ou à remettre, selon toi).
+- Le correctif C8 (section 1) et l'exception `.gitignore` (section 4), si tu les retiens.

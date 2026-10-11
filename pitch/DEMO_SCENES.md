@@ -38,7 +38,7 @@ Trois scènes, dans cet ordre. Durée visée : 1 minute en tout.
 - Un escroc qui souffle la phrase exacte : la comparaison ne voit rien, les règles de base voient encore un droit illimité vers une adresse inconnue.
 - Contrat qui change à l'exécution : Added Protection de MetaMask le traite mieux. Ne pas le revendiquer.
 - Ledger direct, mobile, bouton Envoyer du portefeuille : hors périmètre.
-- Point faible chiffré : 54,2 % des opérations honnêtes reçoivent au moins un avertissement (banc synthétique, A4). Objectif sous 10 %, non atteint.
+- Point faible chiffré : sur le jeu aveugle de 250 cas, notre moteur de comparaison (pas l'extension) met 15,0 % des opérations honnêtes en rouge, 30 % avec au moins une alerte. Seuil de 10 % non atteint.
 - Pas d'essai avec un vrai portefeuille : ne pas montrer ce qui n'a pas été vu.
 
 ## À ne pas montrer ni dire

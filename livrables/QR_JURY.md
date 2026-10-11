@@ -5,7 +5,7 @@ Base : `research/titouan/PITCH_V7_TITOUAN.md` (fusion avec le pitch d'Adem). Les
 ## La preuve (à savoir par coeur)
 
 **1. Votre preuve est-elle indépendante ?**
-Plus qu'avant, pas complètement. Le jeu aveugle (150 arnaques, 100 jumeaux honnêtes) a été écrit sans lire nos règles, scellé par une empreinte publiée, ouvert une seule fois, moteur figé (commit 74203da, avec trois fichiers modifiés non commités, notés au journal d'ouverture). Mais l'auteur est une IA de la même famille que celle qui nous a aidés, et les cas sont synthétiques. Il manque un jeu écrit par des personnes.
+Plus qu'avant, pas complètement. Le jeu aveugle (150 arnaques, 100 jumeaux honnêtes) a été mesuré par notre moteur de comparaison (chaîne de banc), pas par l'extension livrée. Il a été écrit sans lire nos règles, scellé par une empreinte publiée, ouvert une seule fois, moteur figé (commit 74203da, avec trois fichiers modifiés non commités, notés au journal d'ouverture). Mais l'auteur est une IA de la même famille que celle qui nous a aidés, et les cas sont synthétiques. Il manque un jeu écrit par des personnes.
 
 **2. Quels étaient vos critères, et sont-ils atteints ?**
 Publiés avant l'ouverture : au moins 80 % d'arnaques signalées, au plus 10 % de rouges sur les honnêtes. Le premier est atteint : 87,3 % [81,1 ; 91,7]. Le second non : 15,0 % [9,3 ; 23,3]. Rien n'a été réglé après l'ouverture (AVEUGLE).
@@ -19,8 +19,8 @@ Jeton différent de celui écrit : 63,2 % signalés. Chaîne ou domaine différe
 **5. La phrase écrite sert-elle vraiment ?**
 Sur le jeu aveugle, oui : le plancher sans phrase signale 64,7 %, le code avec la phrase 87,3 %, soit 34 arnaques de plus sur 150, sans aucun cas sous le plancher. Les faux rouges restent à 15 % dans les deux cas : la phrase ajoute des détections, pas de fausses alertes rouges.
 
-**6. Et votre 1,3 % de fausses alertes ?**
-Il vient de notre grille de contrôle de 1 079 paires, écrite par nous : nous ne le citons plus comme garantie. Sur le jeu aveugle, le modèle qui classe donne 16,0 % de faux rouges.
+**6. Et votre grille de 1 079 paires (86,6 %, 1,3 %) ?**
+Nous ne la citons plus. Ces chiffres venaient d'une chaîne de banc, sur un jeu devenu de réglage (une règle a été écrite d'après ses fausses alertes), et non de l'extension. Rejouée à travers l'extension livrée et le vrai relais Clef, la même grille donne 38,2 % attrapé et 9,1 % de fausses alertes, sur un build en partie en panne. Une réserve scellée de 2 673 paires mesurera une seule fois l'extension corrigée. Sur le jeu aveugle, le modèle qui classe donne 16,0 % de faux rouges.
 
 ## Le produit
 
@@ -103,8 +103,8 @@ Non. C'est un script qui envoie sur la chaîne locale les mêmes demandes que la
 **29. Votre vérification couvre-t-elle tout ?**
 Non. Sur 58 paires d'essai, 18 sont contrôlées, 7 en partie, 20 non, 13 non distinguées. Contrôlé : le montant d'un droit, un paiement (montant, jeton, destinataire), un second droit glissé dans un lot, une prise de contrôle du compte. Pas encore : le sens d'un échange, la contrepartie, le minimum reçu, la durée d'un droit, la deuxième demande d'une même phrase. Dans la scène, « ça correspond » porte sur le droit de 50 USDC, pas sur l'échange.
 
-**30. 87 %, c'est en rouge ?**
-Non, rouge ou avertissement. En rouge seul : 76,0 %. Sur la famille de la scène (droit illimité sur un échange) : 18 sur 19 signalés, 5 sur 19 en rouge, 6 sur 19 sans la phrase ; 0 faux rouge sur 13 honnêtes.
+**30. 87 %, c'est en rouge ? C'est l'extension ?**
+C'est notre moteur de comparaison, sur le jeu aveugle de 250 cas, pas l'extension chargée dans Chrome. Et c'est rouge ou avertissement. En rouge seul : 76,0 %. Sur la famille de la scène (droit illimité sur un échange) : 18 sur 19 signalés, 5 sur 19 en rouge, 6 sur 19 sans la phrase ; 0 faux rouge sur 13 honnêtes.
 
 **31. Aerodrome, le NIST, l'IA d'Anthropic ?**
 Retirés du texte dit, gardés en réserve dans `livrables/pitch_v7/QR.md` avec leurs réserves : Aerodrome (81 minutes, mesure de Blockaid sur lui-même), NIST SP 800-207 (posture d'entreprise, pas les portefeuilles, référence absente du dépôt), essai d'Anthropic (207 contrats sur 405, simulation, aucun vol réel attribué à une IA).

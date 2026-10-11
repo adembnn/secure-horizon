@@ -46,8 +46,8 @@ Gratuit pour construire une base d'utilisateurs, puis des partenaires. Pas d'abo
 ## Limites
 
 - Jamais essayé avec un vrai portefeuille. La démo tourne sur une chaîne locale pour la démo, Fuji à décider (D-013). L'API d'alertes de MetaMask ne sert pas ces chaînes : son silence là ne prouve rien.
-- Fausses alertes : en conditions produit synthétiques, 13,9 % des opérations honnêtes en rouge et 54,2 % avec au moins un avertissement. C'est la limite principale (fatigue d'alerte).
-- Jeu aveugle de 250 cas d'un autre auteur (un modèle de la même famille que les nôtres) : passé le 11 oct. 2026, ouvert une fois. Code seul : rappel 87,3 %, faux rouges 15,0 %, seuil de 10 % non atteint (`livrables/CHIFFRES.md`, A6).
+- Fausses alertes : sur le jeu aveugle, notre moteur de comparaison met 15,0 % des opérations honnêtes en rouge et 30 % reçoivent au moins une alerte. C'est la limite principale (fatigue d'alerte).
+- Jeu aveugle de 250 cas d'un autre auteur (un modèle de la même famille que les nôtres) : ouvert une fois le 11 oct. 2026 à 07:10 UTC, moteur figé `74203da`. Mesuré par notre moteur de comparaison (chaîne de banc), pas par l'extension livrée : rappel 87,3 %, faux rouges 15,0 %, seuil de 10 % non atteint (`livrables/CHIFFRES.md`, A6). Mesurée elle-même sur une autre grille, l'extension livrée fait moins bien (section « Mesure sur l'extension livrée » de `CHIFFRES.md`).
 - Revue de sécurité interne : contournements trouvés, dont un critique ; corrections non vérifiées dans un navigateur. Ne pas utiliser avec de vrais fonds.
 - Aucun test avec des personnes, aucun client, aucune mesure d'efficacité de nos écrans : ne rien inventer.
 - Journal chaîné par hachage dans les deux versions, dont le build autonome livré (`journal_chain.js`, 7 tests, export JSON depuis le panneau latéral, vérification hors ligne par `extension/tools/verify_journal.mjs`). Pas d'ancrage sur une blockchain (décision D-017) : une réécriture complète ou la suppression des dernières lignes ne se voit pas. Non vérifié dans un vrai Chrome.

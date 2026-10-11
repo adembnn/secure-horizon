@@ -84,7 +84,8 @@ Fichiers ignorés par git mais lus par des tests (un clone neuf ne les a pas) :
 
 Un seul tableau fait foi : [livrables/CHIFFRES.md](livrables/CHIFFRES.md), avec les colonnes synthétique, contrôle scellé et données réelles, la source et la date de chaque ligne. Il donne le rappel, les fausses alertes, le trafic réel et les limites de chaque mesure. Deux avertissements qui valent pour tout le dépôt :
 
-- La preuve citée en premier est le jeu aveugle (ligne A6) : 250 cas écrits sans lire nos règles, ouverts une seule fois, moteur figé. 87,3 % des arnaques signalées (64,7 % sans la phrase), mais 15,0 % de faux rouges, au-dessus du seuil de 10 % publié avant. L'auteur est une IA de la même famille que celle qui nous a aidés : pas un test humain.
+- La preuve citée en premier est le jeu aveugle (ligne A6) : 250 cas écrits sans lire nos règles, ouverts une seule fois, moteur figé, mesurés par notre moteur de comparaison (chaîne de banc), pas par l'extension livrée. 87,3 % des arnaques signalées (64,7 % sans la phrase), mais 15,0 % de faux rouges, au-dessus du seuil de 10 % publié avant. L'auteur est une IA de la même famille que celle qui nous a aidés : pas un test humain.
+- L'extension livrée, mesurée elle-même par le banc d'Adem (`preuves/`), fait moins bien sur une autre grille : 38,2 % attrapé, 9,1 % de fausses alertes, sur un build en partie en panne. Voir la section « Mesure sur l'extension livrée » de CHIFFRES.md.
 - Les fausses alertes restent la limite principale de l'approche (fatigue d'alerte).
 - Un test qui passe n'est pas une mesure de détection. Seul CHIFFRES.md mesure, et seulement sur les jeux qu'il nomme.
 
@@ -97,7 +98,7 @@ Un seul tableau fait foi : [livrables/CHIFFRES.md](livrables/CHIFFRES.md), avec 
 - **Une signature ne se limite pas.** Un droit donné par Permit n'a pas de plafond modifiable : Hold up alerte et le dit. Pas de révocation en un clic non plus.
 - **Révocation peu éprouvée.** Le bouton « Révoquer » existe dans la démo web (portefeuille simulé) et, depuis le 11 oct., dans le panneau latéral de l'extension. Côté extension : 13 tests en Node, aucun essai dans un vrai Chrome.
 - **Couverture partielle.** Sur 58 paires d'essai, 18 sont contrôlées : pas encore le sens d'un échange, la contrepartie, la durée d'un droit, ni à qui il est donné. Dans la démo, le droit ramené à 50 part quand même chez le pirate : la perte est bornée, pas évitée.
-- **Fausses alertes élevées.** 15 % de faux rouges sur le jeu aveugle, surtout des achats de NFT à prix quasi nul. La fatigue d'alerte est la limite principale.
+- **Fausses alertes élevées.** 15 % de faux rouges sur le jeu aveugle (notre moteur de comparaison), surtout des achats de NFT à prix quasi nul. La fatigue d'alerte est la limite principale.
 - **Où va la phrase.** Du navigateur au relais local, puis au modèle hébergé si le relais a une clé. Minimisation et durée de conservation non rédigées. Tant que le relais n'est pas épinglé sur l'identifiant de l'extension (`HOLDUP_EXTENSION_ID`, voir INSTALLATION.md), toute extension installée sur la machine peut l'appeler.
 - **Aucun test avec des personnes.**
 - **Principe non nouveau.** Le moindre privilège pour les approbations existe (Matcha, LI.FI, Talisman, Permit2), et le principe « dire d'abord, valider après simulation » a été décrit publiquement en février 2026. Notre apport est l'assemblage : phrase libre avant la demande, sur toute demande, comparée à l'effet, avec un plancher de règles.
