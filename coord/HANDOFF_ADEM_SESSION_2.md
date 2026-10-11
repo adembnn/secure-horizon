@@ -55,3 +55,14 @@
 4. Construire le jeu de cas de la thèse et mesurer.
 5. Reprendre deck, pitchs, fiche de défense, README et vidéo sur la thèse ; retirer l'adresse sosie et le RPC de garde.
 6. Points bloquants déjà listés dans `coord/reports/jury/` (vidéo unique, fiche d'une page, incohérence Fuji, cache de 95 Mo et jeux gelés suivis par git).
+
+## Vérification de la thèse (revenue après la rédaction ci-dessus)
+
+Détail : `research/demo_reelle/RECHERCHE_these_moindre_privilege.md`.
+
+- TOMBE : « à l'ère de l'IA, les failles sont exploitées plus vite ». Aucun vol réel attribué à l'IA avec preuve. Seule la capacité en simulation est prouvée (Anthropic SCONE-bench, 1er déc. 2025 : 207 contrats sur 405 ; article A1, arXiv 2507.05558).
+- TOMBE : « tendance en hausse ». Série Revoke.cash en dents de scie (2021 : 208,8 M$ ; 2022 : 15,4 ; 2023 : 20,4 ; 2024 : 79,5 ; 2025 : 7,4 ; 2026 : 24,1).
+- TOMBE : « mécanisme nouveau ». Matcha et LI.FI sont au montant fini par défaut, Talisman plafonne au solde, MetaMask laisse modifier, Permit2 existe. Non retrouvé : un outil qui met le montant exact de l'opération sans geste de l'utilisateur.
+- FAUX (erreur de la session, à ne pas reprendre) : une interface détournée n'utilise pas les droits déjà accordés, elle fait signer des droits NOUVEAUX vers l'attaquant.
+- TIENT : LI.FI (zéro perte pour les approbations finies) ; perte bornée ailleurs ; recommandation d'ethereum.org contre l'accès illimité ; coût d'une approbation de plus environ 0,002 à 0,003 $ sur Avalanche (calcul de l'agent, hypothèse de gaz non sourcée).
+- GRILLE : le moindre privilège se mappe sur NIST PR.AA-05 (Protect), alors que le règlement demande Detect ou Respond. À garder comme fonction secondaire derrière la comparaison intention contre effet.
