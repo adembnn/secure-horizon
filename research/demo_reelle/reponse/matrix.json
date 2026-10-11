@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "note": "Graded response of Hold up, as data. Every line is either a behaviour of the product code (source given) or a tool of this folder. Nothing here is a promise.",
+  "levels": {
+    "attention": {
+      "rank": 1,
+      "wait_s": { "extension": 0, "rpc": 0 },
+      "phrase": false,
+      "automatic": [
+        "La demande est interceptée avant le portefeuille (extension) ou avant la diffusion (RPC de garde).",
+        "L'effet réel est décodé et affiché en face de ce que la personne croit faire.",
+        "Aucun feu vert n'est affiché : le niveau le plus bas reste « Attention »."
+      ],
+      "user_must": ["Lire les deux lignes « Tu crois » et « En vrai », puis annuler ou continuer."],
+      "told": ["user"],
+      "source": "T_banc_e2e/server/server.mjs (evaluate), rpc_garde/proxy.mjs (HOLDUP_WAIT_ATTENTION_S=0)"
+    },
+    "unknown": {
+      "rank": 2,
+      "wait_s": { "extension": 30, "rpc": 0 },
+      "phrase": true,
+      "automatic": [
+        "L'opération illisible est affichée « Non vérifié », jamais validée.",
+        "Extension : sans réponse du moteur en 3 s, verdict « Non vérifié » ; sans réponse du pont, la demande est refusée (erreur 4900).",
+        "RPC de garde : une transaction illisible ou d'un type non géré n'est pas diffusée."
+      ],
+      "user_must": ["Extension : retaper « Je continue sans vérification », puis attendre 30 s pour passer outre.", "Sinon annuler."],
+      "told": ["user"],
+      "source": "extension/hold_core.js (unknown = phrase + dangerWaitMs), extension/COMPAT.md, rpc_garde/proxy.mjs (refused, HOLDUP_WAIT_UNKNOWN_S=0)"
+    },
+    "danger": {
+      "rank": 3,
+      "wait_s": { "extension": 30, "rpc": 30 },
+      "phrase": true,
+      "automatic": [
+        "Retenue de 30 s avant que « Continuer » soit accepté (RPC : réponse 409 « too_early » avant l'échéance).",
+        "RPC de garde : la transaction signée est gardée en mémoire, non diffusée, et expire seule au bout de 30 min sans décision.",
+        "Annuler reste le bouton principal, visible sans délai."
+      ],
+      "user_must": ["Extension : retaper la phrase demandée, puis attendre 30 s pour passer outre.", "Sinon annuler : rien n'est signé ni diffusé."],
+      "told": ["user"],
+      "source": "extension/gatekeeper.js (dangerWaitMs=30000), rpc_garde/proxy.mjs (HOLDUP_WAIT_DANGER_S=30, HOLDUP_HOLD_TTL_S=1800)"
+    },
+    "manipulation": {
+      "rank": 4,
+      "wait_s": { "extension": 600, "rpc": 600 },
+      "phrase": false,
+      "automatic": [
+        "Retenue de 10 min : le temps de raccrocher ou de fermer la conversation.",
+        "La phrase de pression repérée sur la page est citée à l'écran.",
+        "RPC de garde : même retenue, transaction non diffusée avant l'échéance."
+      ],
+      "user_must": ["Couper le contact avec la personne qui guide.", "Appeler quelqu'un de confiance (bouton prévu dans l'extension, le produit n'appelle ni n'écrit à personne).", "Attendre la fin de la retenue pour passer outre."],
+      "told": ["user", "trusted_contact_if_user_calls"],
+      "source": "server.mjs (findPressure -> level manipulation), extension/hold_core.js (manipulation = no phrase, manipulationHoldMs=600000), extension/gatekeeper.js (decision call_trusted), rpc_garde/proxy.mjs (HOLDUP_WAIT_MANIPULATION_S=600)"
+    }
+  },
+  "recorded": {
+    "extension": ["verdict : origine du site, méthode, niveau, fiche, codes de règle, latence du moteur, sha256 des paramètres", "décision : origine, méthode, niveau, annuler ou confirmer"],
+    "rpc": ["rpc_verdict : hash de la transaction, adresses from et to, réseau, niveau, fiche, codes de règle, durée de retenue", "rpc_decision : annuler, continuer ou expiration, durée d'attente réelle"],
+    "never": ["texte libre saisi par la personne", "paramètres complets de la demande", "signature", "clé", "nom ou contact de la personne"]
+  },
+  "told": {
+    "user": "La personne devant l'écran, au moment de la demande.",
+    "trusted_contact_if_user_calls": "Un proche, seulement si la personne l'appelle elle-même.",
+    "nobody_else": "Aucun envoi automatique : ni éditeur, ni plateforme, ni autorité. La plateforme qui intègre le moteur lit le journal et les fiches d'incident sur sa propre machine."
+  },
+  "families": {
+    "spending_right": {
+      "label": "Droit de dépense donné à un tiers",
+      "fiches": ["F01", "F03", "F12", "F30"],
+      "after_cancel": ["Rien n'a été accordé. Aucune démarche sur la chaîne."],
+      "after_sign": { "tool": "revoke", "steps": ["Lister les droits encore actifs vers l'adresse en cause.", "Signer les transactions de retrait construites par revoke.mjs (approve 0, setApprovalForAll false)."] },
+      "cannot_undo": ["Ce qui a déjà été prélevé avant le retrait du droit."]
+    },
+    "offchain_signature": {
+      "label": "Signature hors chaîne qui vaut autorisation",
+      "fiches": ["F02", "F04", "F05", "F23", "F27"],
+      "after_cancel": ["Rien n'a été signé. Aucune démarche sur la chaîne."],
+      "after_sign": { "tool": "revoke", "steps": ["Permit EIP-2612 : consommer le nonce avec le permit de remplacement construit par revoke.mjs, avant que l'attaquant utilise le sien.", "Retirer aussi tout droit déjà inscrit sur la chaîne."] },
+      "cannot_undo": ["La signature elle-même : elle reste valable jusqu'à son échéance ou jusqu'au changement de nonce.", "Permit2, ordre Seaport, message illisible : aucun outil ici, l'annulation se fait sur le contrat concerné."]
+    },
+    "account_control": {
+      "label": "Contrôle du compte cédé",
+      "fiches": ["F07", "F08", "F09", "F10", "F11"],
+      "after_cancel": ["Rien n'a changé sur le compte."],
+      "after_sign": { "tool": null, "steps": ["Déplacer ce qui reste vers un compte neuf si le compte obéit encore."] },
+      "cannot_undo": ["Un changement de propriétaire ou une délégation déjà exécutés : aucun outil ici ne les défait."]
+    },
+    "recipient": {
+      "label": "Envoi vers la mauvaise adresse",
+      "fiches": ["F13", "F14", "F17", "F19", "F24", "F29", "F31"],
+      "after_cancel": ["Rien n'est parti. Reprendre l'adresse à la source (carnet, QR du destinataire), pas dans l'historique."],
+      "after_sign": { "tool": null, "steps": ["Garder la fiche d'incident et le hash de la transaction pour un dépôt de plainte ou un signalement à la plateforme de destination."] },
+      "cannot_undo": ["Un envoi confirmé sur la chaîne est définitif."]
+    },
+    "trade": {
+      "label": "Échange ou jeton piégé",
+      "fiches": ["F15", "F16", "F18"],
+      "after_cancel": ["Rien n'a été échangé."],
+      "after_sign": { "tool": "revoke", "steps": ["Retirer le droit de dépense donné au routeur ou au jeton en cause, s'il en reste un."] },
+      "cannot_undo": ["L'échange exécuté et la valeur perdue."]
+    },
+    "pressure": {
+      "label": "Quelqu'un guide la personne",
+      "fiches": ["F21", "F22", "F28"],
+      "after_cancel": ["Rien n'est parti. Ne pas reprendre l'opération tant que le contact n'a pas été vérifié par un autre canal."],
+      "after_sign": { "tool": null, "steps": ["Couper le contact.", "Garder la fiche d'incident pour un dépôt de plainte."] },
+      "cannot_undo": ["Un envoi confirmé sur la chaîne est définitif."]
+    },
+    "site_network": {
+      "label": "Faux site ou réseau imposé",
+      "fiches": ["F06", "F20", "F32", "F33"],
+      "after_cancel": ["Rien n'a été accepté. Rouvrir le site depuis un favori."],
+      "after_sign": { "tool": null, "steps": ["Retirer le réseau ajouté dans les réglages du portefeuille.", "Se déconnecter du site dans le portefeuille."] },
+      "cannot_undo": ["Une session ouverte par une connexion signée, tant que le site ne l'a pas fermée."]
+    },
+    "unverified": {
+      "label": "Opération que le moteur n'a pas su lire",
+      "fiches": ["F25", "F26"],
+      "after_cancel": ["Rien n'est parti."],
+      "after_sign": { "tool": "revoke", "steps": ["Vérifier si un droit de dépense est apparu vers l'adresse appelée, et le retirer."] },
+      "cannot_undo": ["Tout effet d'un appel que personne n'a su décoder."]
+    }
+  }
+}

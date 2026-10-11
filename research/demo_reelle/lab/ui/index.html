@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hold up Lab</title>
+<link rel="stylesheet" href="lab.css">
+<link rel="stylesheet" href="stage.css">
+<link rel="stylesheet" href="verdict.css">
+</head>
+<body data-sample="false" data-seat="victime">
+<a class="sr" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="#/victime">Hold up <span>Lab</span></a>
+    <nav class="seats" id="seats" aria-label="Ton rôle"></nav>
+    <nav class="tabs" id="tabs" aria-label="Vues"></nav>
+    <div class="top-right"><button type="button" class="btn-quiet" id="theme-btn">Clair</button></div>
+  </div>
+  <div class="statusline">
+    <div id="status-line" aria-live="polite"></div>
+    <button type="button" class="btn-quiet" id="reset-btn">Remettre à zéro</button>
+  </div>
+  <p class="notice" id="notice" role="status"></p>
+</header>
+<div class="banner" id="banner" hidden></div>
+<main id="main" tabindex="-1"><p class="boot">Chargement…</p></main>
+
+<script src="dom.js"></script>
+<script src="mock.js"></script>
+<script src="api.js"></script>
+<script src="verdict.js"></script>
+<script src="ui.js"></script>
+<script src="stage.js"></script>
+<script src="result.js"></script>
+<script src="view_scenarios.js"></script>
+<script src="view_tools.js"></script>
+<script src="attack.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

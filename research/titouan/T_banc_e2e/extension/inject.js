@@ -77,7 +77,11 @@
   const JOURNAL = new Set(['eth_requestAccounts']);
   const HEX20 = /^0x[0-9a-fA-F]{40}$/;
 
+  // Inert deep copy, frozen : what is judged is exactly what is forwarded.
+  const freeze = O.freeze, isArr = Array.isArray, keysOf = O.keys;
+  function deepFreeze(x) { if (x && typeof x === 'object') { const ks = keysOf(x); for (let i = 0; i < ks.length; i++) deepFreeze(x[ks[i]]); freeze(x); } return x; }
   function snap(x) { return JSONp(JSONs(x === undefined ? null : x)); }
+  function thaw(x) { return JSONp(JSONs(x)); } // fresh mutable copy for the wallet (some wallets normalise the object in place)
   function guessFrom(method, params) {
     try {
       const p = Array.isArray(params) ? params : [];
@@ -108,28 +112,48 @@
     e.code = reason === 'denied' ? 4001 : 4900; // 4001 = refus utilisateur, 4900 = deconnecte
     return e;
   }
-  // Evite la double demande quand un ancien send()/sendAsync() rappelle request() en interne.
-  const approvedInflight = new Map();
-  const keyOf = (m, p) => { try { return m + '|' + JSONs(p); } catch (_) { return m + '|?'; } };
+  // Avoids a second window when a wrapped method of a wallet calls another wrapped one (legacy send() -> request(),
+  // instance method -> prototype method). A pass is one-shot and bound to the provider, its chain, the content that was
+  // approved AND the very objects forwarded to the wallet (fresh copies the page never receives). The same request sent
+  // again by the page while the wallet popup is open carries other objects : it is gated again. A pass is honoured only
+  // while our own forwarding call is on the stack (synchronous delegation) : an object the page managed to capture later is worthless.
+  // A wallet that delegates asynchronously to another wrapped method is simply asked twice (fail closed).
+  const passes = new WM(); // provider -> WeakMap(forwarded object -> key)
+  const NOPROV = {};
+  let forwarding = 0;
+  const provKey = (prov) => (prov && (typeof prov === 'object' || typeof prov === 'function') ? prov : NOPROV);
+  const chainTag = (prov) => { try { const c = prov && prov.chainId; return c == null ? '' : String(c); } catch (_) { return ''; } };
+  const keyOf = (prov, m, p) => { try { return chainTag(prov) + '|' + m + '|' + JSONs(p === undefined ? null : p); } catch (_) { return null; } };
+  const isObj = (x) => !!x && (typeof x === 'object' || typeof x === 'function');
+  function grant(prov, k, objs) {
+    if (k === null) return () => {};
+    const o = provKey(prov); let m = passes.get(o); if (!m) { m = new WM(); passes.set(o, m); }
+    const mine = []; for (const x of objs) if (isObj(x)) { m.set(x, k); mine.push(x); }
+    return () => { for (const x of mine) if (m.get(x) === k) m.delete(x); };
+  }
+  function takePass(prov, obj, k) {
+    if (forwarding <= 0 || !isObj(obj) || k === null) return false;
+    const m = passes.get(provKey(prov));
+    if (!m || m.get(obj) !== k) return false;
+    m.delete(obj);
+    return true;
+  }
+  // Forwards with a pass that dies as soon as the wallet has answered (or thrown).
+  function fwd(prov, k, objs, fn) {
+    const revoke = grant(prov, k, objs);
+    let r;
+    forwarding++;
+    try { r = fn(); } catch (e) { revoke(); throw e; } finally { forwarding--; }
+    NativePromise.resolve(r).then(revoke, revoke);
+    return r;
+  }
 
   async function gate(provider, rawRequest, method, params, entryPoint) {
-    const k = keyOf(method, params);
-    const n = approvedInflight.get(k) || 0;
-    if (n > 0) { approvedInflight.set(k, n - 1); return { allow: true, pass: true }; }
     const chainId = await chainOf(provider, rawRequest, guessChain(method, params));
     let from = guessFrom(method, params);
     if (!from) { try { from = provider.selectedAddress || null; } catch (_) {} }
-    const res = await ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top });
-    return res;
+    return ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top });
   }
-  function allowOnce(k) { approvedInflight.set(k, (approvedInflight.get(k) || 0) + 1); }
-  function fwd(k, fn) {
-    let r;
-    try { r = fn(); } catch (e) { release(k); throw e; }
-    NativePromise.resolve(r).then(() => release(k), () => release(k));
-    return r;
-  }
-  function release(k) { const n = approvedInflight.get(k) || 0; if (n > 0) approvedInflight.set(k, n - 1); }
 
   // --- enveloppes ---
   function wrapRequest(target) {
@@ -140,16 +164,23 @@
         // L'objet de la page n'est lu qu'UNE fois (un getter ou un Proxy sur "method" peut mentir d'une lecture a l'autre) :
         // la decision ET la transmission au portefeuille se font sur la meme copie inerte.
         let full;
-        try { full = snap(a); } catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
-        if (!full || typeof full !== 'object' || typeof full.method !== 'string') return rApply(t, thisArg, [full]);
+        try { full = deepFreeze(snap(a)); } catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
+        if (isArr(full)) { // request([...]) is not EIP-1193 : a batch that carries a gated method is refused, never forwarded blind
+          for (let i = 0; i < full.length; i++) if (full[i] && typeof full[i] === 'object' && GATED.has(full[i].method)) return NativePromise.reject(rejection('lot-non-supporte'));
+          return rApply(t, thisArg, [thaw(full)]);
+        }
+        if (!full || typeof full !== 'object' || typeof full.method !== 'string') return rApply(t, thisArg, [thaw(full)]);
         const method = full.method, params = full.params;
-        if (JOURNAL.has(method)) { notify({ method, params, kind: 'journal' }); return rApply(t, thisArg, [full]); }
-        if (!GATED.has(method)) return rApply(t, thisArg, [full]);
-        const k = keyOf(method, params);
+        if (JOURNAL.has(method)) { notify({ method, params, kind: 'journal' }); return rApply(t, thisArg, [thaw(full)]); }
+        if (!GATED.has(method)) return rApply(t, thisArg, [thaw(full)]);
+        const k = keyOf(thisArg, method, params);
+        // Internal call of the wallet with an object we forwarded ourselves : same content, same provider, once.
+        let ap; try { ap = a.params; } catch (_) {}
+        if (takePass(thisArg, a, k) || takePass(thisArg, ap, k)) return rApply(t, thisArg, [thaw(full)]);
         return gate(thisArg, t, method, params, 'request').then((r) => {
           if (!r.allow) throw rejection(r.reason || 'denied');
-          if (!r.pass) allowOnce(k);
-          return fwd(k, () => rApply(t, thisArg, [full]));
+          const out = thaw(full);
+          return fwd(thisArg, keyOf(thisArg, method, params), [out, out.params], () => rApply(t, thisArg, [out]));
         });
       }
     });
@@ -164,11 +195,9 @@
           if (JOURNAL.has(a0)) { notify({ method: a0, kind: 'journal' }); return rApply(t, thisArg, args); }
           if (!GATED.has(a0)) return rApply(t, thisArg, args);
           let params; try { params = a1 === undefined ? undefined : snap(a1); } catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
-          const k = keyOf(a0, params);
           return gate(thisArg, null, a0, params, 'send').then((r) => {
             if (!r.allow) throw rejection(r.reason || 'denied');
-            if (!r.pass) allowOnce(k);
-            return fwd(k, () => rApply(t, thisArg, [a0, params]));
+            return fwd(thisArg, keyOf(thisArg, a0, params), [params], () => rApply(t, thisArg, [a0, params]));
           });
         }
         if (a0 && typeof a0 === 'object' && typeof a1 === 'function') return legacyAsync(t, thisArg, a0, a1, 'send');
@@ -199,10 +228,14 @@
   function legacyAsync(t, thisArg, payload, cb, entry) {
     let items, isBatch = Array.isArray(payload);
     try { items = snap(isBatch ? payload : [payload]); } catch (_) { return cb(rejection('params-illisibles'), respErr(null, 'x')); }
-    const decisions = items.map((it) => {
-      if (!it || typeof it.method !== 'string') return NativePromise.resolve({ allow: true, pass: true, raw: true });
-      if (JOURNAL.has(it.method)) { notify({ method: it.method, kind: 'journal' }); return NativePromise.resolve({ allow: true, pass: true, raw: true }); }
-      if (!GATED.has(it.method)) return NativePromise.resolve({ allow: true, pass: true, raw: true });
+    const decisions = items.map((it, i) => {
+      if (!it || typeof it.method !== 'string') return NativePromise.resolve({ allow: true });
+      if (JOURNAL.has(it.method)) { notify({ method: it.method, kind: 'journal' }); return NativePromise.resolve({ allow: true }); }
+      if (!GATED.has(it.method)) return NativePromise.resolve({ allow: true });
+      // internal call of the wallet (send(payload, cb) -> sendAsync(payload, cb)) with an object we forwarded
+      let orig, op; try { orig = isBatch ? payload[i] : payload; op = orig && orig.params; } catch (_) {}
+      const k = keyOf(thisArg, it.method, it.params);
+      if (takePass(thisArg, orig, k) || takePass(thisArg, op, k)) return NativePromise.resolve({ allow: true });
       return gate(thisArg, null, it.method, it.params, entry);
     });
     // decisions sequentielles pour ne pas empiler plusieurs fenetres
@@ -215,16 +248,18 @@
         const firstErr = out.find(Boolean);
         return isBatch ? cb(null, out) : cb(rejection(rs[0].reason || 'denied'), firstErr);
       }
-      const keys = forward.map((it) => { const k = keyOf(it.method, it.params); if (!rs[idx[forward.indexOf(it)]].pass) allowOnce(k); return k; });
+      const revokes = forward.map((it) => (it && GATED.has(it.method) ? grant(thisArg, keyOf(thisArg, it.method, it.params), [it, it.params]) : null));
       const done = (err, resp) => {
-        keys.forEach(release);
+        revokes.forEach((rv) => { if (rv) rv(); });
         if (!isBatch) return cb(err, resp);
         const arr = Array.isArray(resp) ? resp : [];
         idx.forEach((orig, j) => { out[orig] = arr[j] !== undefined ? arr[j] : arr.find((x) => x && forward[j] && x.id === forward[j].id); });
         cb(err, out);
       };
-      rApply(t, thisArg, [isBatch ? forward : forward[0], done]);
-    });
+      forwarding++;
+      try { rApply(t, thisArg, [isBatch ? forward : forward[0], done]); } catch (e) { forwarding--; revokes.forEach((rv) => { if (rv) rv(); }); cb(e, respErr(null, 'x')); return; }
+      forwarding--;
+    }, () => cb(rejection('bridge-unavailable'), respErr(null, 'x')));
   }
   function wrapEnable(target) {
     return maskedProxy(target, { apply(t, thisArg, args) { notify({ method: 'eth_requestAccounts', kind: 'journal', via: 'enable' }); return rApply(t, thisArg, args); } });
@@ -233,23 +268,21 @@
 
   // --- patch sur place d'un fournisseur ---
   const wrappedFns = new WS();     // enveloppes deja posees
+  const patchedGetters = new WS(); // accesseurs deja remplaces
   const patched = new WM();        // fournisseur brut -> resultat (lui-meme ou proxy de repli)
   const fallbackCache = new WM();
-  function patchMethod(provider, name) {
-    let owner = provider;
-    while (owner && !hasOwn(owner, name)) owner = getProto(owner);
-    if (!owner) return true;
-    if (owner === O.prototype || owner === Function.prototype) owner = provider;
+  // Wraps the method on ONE owner. true = wrapped (or nothing to wrap), false = this owner cannot be patched.
+  function patchOwn(owner, name) {
     const d = gopd(owner, name);
     if (!d) return true;
-    if (d.get || d.set) { // accesseur: on enveloppe la valeur retournee
+    if (d.get || d.set) { // accessor : the returned value is wrapped
+      if (d.get && patchedGetters.has(d.get)) return true;
       if (!d.get || !d.configurable) return false;
       const cache = new WM();
       const g = d.get;
-      try {
-        defProp(owner, name, { get() { const f = rApply(g, this, []); if (typeof f !== 'function') return f; if (wrappedFns.has(f)) return f; let w = cache.get(f); if (!w) { w = WRAPPERS[name](f); wrappedFns.add(w); cache.set(f, w); } return w; }, set: d.set, enumerable: d.enumerable, configurable: true });
-        return true;
-      } catch (_) { return false; }
+      const get = function () { const f = rApply(g, this, []); if (typeof f !== 'function') return f; if (wrappedFns.has(f)) return f; let w = cache.get(f); if (!w) { w = WRAPPERS[name](f); wrappedFns.add(w); cache.set(f, w); } return w; };
+      patchedGetters.add(get);
+      try { defProp(owner, name, { get, set: d.set, enumerable: d.enumerable, configurable: true }); return true; } catch (_) { return false; }
     }
     const f = d.value;
     if (typeof f !== 'function' || wrappedFns.has(f)) return true;
@@ -258,6 +291,19 @@
     wrappedFns.add(w);
     try { defProp(owner, name, { value: w, writable: d.writable, enumerable: d.enumerable, configurable: d.configurable }); } catch (_) { return false; }
     return true;
+  }
+  // Every owner of the method is wrapped, from the instance up the whole prototype chain : a wallet that rebinds
+  // request on the instance keeps a second copy on its prototype, reachable with getPrototypeOf(provider).request.call(provider, ...).
+  // Idempotent (wrappedFns). The credit of gate() avoids a second window when the outer wrapper calls the inner one.
+  function patchMethod(provider, name) {
+    let ok = true, depth = 0;
+    for (let o = provider; o && o !== O.prototype && o !== Function.prototype && depth < 32; o = getProto(o), depth++) {
+      let own = false; try { own = hasOwn(o, name); } catch (_) {}
+      if (!own) continue;
+      let done = false; try { done = patchOwn(o, name); } catch (_) { done = false; }
+      if (!done) ok = false;
+    }
+    return ok;
   }
   function fallbackProxy(raw) {
     let px = fallbackCache.get(raw); if (px) return px;
@@ -345,7 +391,10 @@
     apply(t, thisArg, args) {
       const [o, k, desc] = args;
       if (o === W && k === 'ethereum' && desc && typeof desc === 'object') { installSlot(); takeOver(desc); return o; }
-      return rApply(t, thisArg, args);
+      const r = rApply(t, thisArg, args);
+      // other provider globals (window.avalanche of Core, ...) : wrapped in place as soon as they are defined
+      if (o === W && typeof k === 'string' && GLOBALS.has(k)) { try { scanGlobal(k); } catch (_) {} }
+      return r;
     }
   });
   R.defineProperty = maskedProxy(origReflectDefine, {
@@ -385,6 +434,25 @@
   };
   addL('eip6963:announceProvider', onAnnounce, true);
 
+  // --- provider globals other than window.ethereum. 'avalanche' is Core, the Avalanche wallet. ---
+  const GLOBAL_NAMES = ['avalanche', 'core', 'okxwallet', 'trustwallet', 'coinbaseWalletExtension', 'rabby', 'BinanceChain', 'tokenpocket', 'bitkeep', 'phantom', 'solflare', 'evmproviders'];
+  const GLOBALS = new Set(GLOBAL_NAMES);
+  function scanGlobal(n) {
+    let v; try { v = W[n]; } catch (_) { return; }
+    if (!v || (typeof v !== 'object' && typeof v !== 'function')) return;
+    if (looksLikeProvider(v)) wrapProvider(v);
+    try { if (looksLikeProvider(v.ethereum)) wrapProvider(v.ethereum); } catch (_) {}
+    if (n === 'evmproviders') { try { for (const k of O.keys(v)) if (looksLikeProvider(v[k])) wrapProvider(v[k]); } catch (_) {} }
+  }
+  // Late assignment (window.avalanche = provider) : caught at once by an accessor, when the name is still free.
+  for (const n of ['avalanche']) {
+    try {
+      if (gopd(W, n)) continue;
+      let val;
+      origDefine(W, n, { get() { return val; }, set(x) { val = x; try { if (looksLikeProvider(x)) wrapProvider(x); } catch (_) {} }, enumerable: true, configurable: true });
+    } catch (_) {}
+  }
+
   // --- balayage de rattrapage: delete+reassign, globales proprietaires, web3 legacy ---
   function scan() {
     try {
@@ -392,17 +460,14 @@
       installSlot();
       const d = gopd(W, 'ethereum');
       if (d && 'value' in d && looksLikeProvider(d.value)) wrapProvider(d.value);
-      for (const n of ['okxwallet', 'trustwallet', 'coinbaseWalletExtension', 'rabby', 'BinanceChain', 'tokenpocket', 'bitkeep', 'phantom', 'solflare']) {
-        let v; try { v = W[n]; } catch (_) { continue; }
-        if (looksLikeProvider(v)) wrapProvider(v);
-        else if (v && typeof v === 'object' && looksLikeProvider(v.ethereum)) wrapProvider(v.ethereum);
-      }
+      for (const n of GLOBAL_NAMES) scanGlobal(n);
       let w3; try { w3 = W.web3; } catch (_) {}
       if (w3 && looksLikeProvider(w3.currentProvider)) wrapProvider(w3.currentProvider);
     } catch (_) {}
   }
   let scans = 0;
-  const iv = setI(() => { scan(); if (++scans > 200) W.clearInterval(iv); }, 150);
+  const iv = setI(() => { scan(); if (++scans > 200) { W.clearInterval(iv); setI(scan, 2000); } }, 150);
   addL('DOMContentLoaded', scan, true);
   addL('load', scan, true);
+  scan(); // providers already injected by a wallet that ran before this script
 })();

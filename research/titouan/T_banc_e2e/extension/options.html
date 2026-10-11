@@ -1,9 +1,30 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><title>Hold up - réglages</title>
-<style>body{font:16px system-ui;max-width:640px;margin:24px auto;padding:0 16px}textarea{width:100%;height:320px;font:13px ui-monospace,monospace}</style></head>
+<html lang="fr"><head><meta charset="utf-8"><title>Hold up : réglages</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:680px;margin:24px auto;padding:0 16px;color:#000;background:#fff}h1,h2{font-weight:500}label{display:block;margin:12px 0 4px}input[type=number],input[type=text],select{font:inherit;padding:6px 10px;min-width:220px}textarea{width:100%;height:200px;font:13px ui-monospace,monospace}button{font:inherit;padding:8px 18px;border-radius:50px;border:1.5px solid #767676;background:#fff;cursor:pointer}#save{background:#000;color:#fff;border-color:#000}.hint{color:#595959;font-size:14px;margin:4px 0}.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}</style></head>
 <body><h1>Hold up : réglages</h1>
-<p>Configuration JSON (bras <code>arm</code> A, B ou C, <code>frictionMs</code>, <code>askIntent</code>, <code>grill</code>, <code>testMode</code> + <code>auto</code> pour les tests automatisés).</p>
-<textarea id="cfg" spellcheck="false"></textarea>
-<p><button id="save">Enregistrer</button> <button id="clearlog">Vider le journal</button> <span id="msg"></span></p>
-<h2>Journal</h2><pre id="log" style="white-space:pre-wrap;font-size:12px"></pre>
+<p>Version avec serveur local : le moteur tourne sur ton ordinateur (127.0.0.1:8787). Le carnet d'adresses se règle côté serveur.</p>
+<h2>Question d'intention</h2>
+<label for="askIntent">Demander « Que veux-tu faire ? » avant le verdict</label>
+<select id="askIntent">
+<option value="rights_or_funds">Quand l'opération donne un droit ou sort de l'argent</option>
+<option value="always">Pour chaque signature ou transaction</option>
+<option value="never">Jamais</option>
+</select>
+<p class="hint">Ta réponse peut seulement rendre la vérification plus stricte.</p>
+<label><input type="checkbox" id="grill"> Poser des questions de plus quand la réponse ou la demande est suspecte</label>
+<h2>Délais</h2>
+<label for="dangerWait">Danger : attente après la phrase à retaper (secondes, 5 au minimum)</label>
+<input type="number" id="dangerWait" min="5" max="600" step="1">
+<label for="manipHold">Manipulation : durée de la retenue (secondes, 30 au minimum)</label>
+<input type="number" id="manipHold" min="30" max="3600" step="1">
+<div class="row"><button id="demo" type="button">Durées de démo (10 s et 60 s)</button> <button id="product" type="button">Durées du produit (30 s et 10 min)</button></div>
+<p class="hint">Le mécanisme est le même avec les durées de démo : échéance enregistrée, Annuler toujours disponible. La fenêtre affiche « Réglage de démo » quand un délai est raccourci.</p>
+<h2>Proche à appeler</h2>
+<label for="cname">Nom</label><input type="text" id="cname" maxlength="60">
+<label for="ctel">Numéro (facultatif)</label><input type="text" id="ctel" maxlength="30">
+<h2>Affichage</h2>
+<label><input type="checkbox" id="window"> Afficher le verdict dans une fenêtre Hold up séparée (recommandé)</label>
+<p class="hint">Sans cette option, le verdict s'affiche dans la page du site, qui peut alors le masquer.</p>
+<div class="row"><button id="save" type="button">Enregistrer</button> <button id="clearlog" type="button">Vider le journal</button> <span id="msg" role="status"></span></div>
+<h2>Journal (local)</h2><pre id="log" style="white-space:pre-wrap;font-size:12px"></pre>
 <script src="options.js"></script></body></html>
