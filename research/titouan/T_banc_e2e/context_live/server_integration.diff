@@ -1,0 +1,123 @@
+--- a/server/server.mjs
++++ b/server/server.mjs
+@@ -18,6 +18,7 @@ const E = await imp(join(ROOT, 'engine', 'src', 'engine.mjs'));
+ const { compare } = await imp(join(ROOT, 'engine', 'vendor', 'compare.ts'));
+ const { applyExtraRules, analyzeChainRequest } = await imp(join(ROOT, 'engine', 'src', 'rules_extra.mjs'));
+ const { applyPolicy } = await imp(join(ROOT, 'run', 'policy.mjs'));
++const { DEFAULT_TOKENS } = await imp(join(ROOT, 'engine', 'src', 'util.mjs'));
+ const TEXTS = JSON.parse(readFileSync(join(ROOT, '..', 'U_textes_utilisateur.json'), 'utf8'));
+ const FICHES = Object.fromEntries(TEXTS.fiches.map((f) => [f.id, f]));
+ 
+@@ -55,21 +56,31 @@ function parseChain(v) {
+ }
+ function hostOf(origin) { try { return new URL(origin).hostname; } catch { return ''; } }
+ 
+-function buildCtx(body, local, from, chainId) {
++// live = faits lus sur la chaine par context_live/provider.mjs (forme toEngineContext), ou null. Un fait absent reste INCONNU (jamais rassurant par defaut).
++// Memes noms que run/run_loop.mjs buildCtx : codeOf, ageBlocks, tokenMeta, balances, _facts, _tokenInfo, _k.token_info / _k.token_registry.
++const REGISTRY_CHAINS = new Set([1, 43114]); // reseaux couverts par la table DEFAULT_TOKENS du moteur (sosies de symbole)
++function buildCtx(body, local, from, chainId, live = null) {
+   const now = Math.floor(Date.now() / 1000);
+   const tokenMeta = {};
+   for (const [a, s, d] of TOKENS) tokenMeta[lc(a)] = { symbol: s, decimals: d, stable: ['USDC', 'USDT', 'DAI'].includes(s) };
++  const L = live && typeof live === 'object' ? live : null;
++  if (L) for (const [a, m] of Object.entries(L.tokenMeta || {})) if (!tokenMeta[a] && !DEFAULT_TOKENS[a]) tokenMeta[a] = { symbol: m.symbol, decimals: m.decimals }; // jamais 'stable' d'apres la chaine
+   const known = [...CANONICAL, ...local.knownSpenders];
+   const codeSet = new Set([...known, ...Object.keys(tokenMeta)]);
++  // jetons lus sur la chaine, hors table de reference : compares a la table pour reperer un sosie de symbole (regle tokenChecks du moteur)
++  const liveTokenInfo = {};
++  if (L) for (const [a, v] of Object.entries(L.tokenInfo || {})) if (!DEFAULT_TOKENS[a]) liveTokenInfo[a] = v;
++  const registry = L && REGISTRY_CHAINS.has(chainId) ? Object.entries(DEFAULT_TOKENS).filter(([a]) => HEX20.test(a)).map(([address, t]) => ({ address, symbol: t.symbol, decimals: t.decimals })) : [];
+   const unicodeHost = (() => { try { return domainToUnicode(hostOf(body.origin)) || hostOf(body.origin); } catch { return hostOf(body.origin); } })();
+   return {
+     chainId, from, now, origin: typeof body.origin === 'string' ? body.origin : undefined,
+     protected: local.protected,
+     knownSpenders: known, knownVerifiers: new Set(known),
+     history: local.history.map((h) => ({ address: lc(h.address), ts: now - Math.round((h.minutes_ago || 0) * 60), direction: h.direction === 'sortie' ? 'out' : 'in', dust: h.direction !== 'sortie' && Number.parseFloat(h.amount) <= 0.01 })),
+-    contacts: local.contacts, tokenMeta, ageBlocks: {},
+-    codeOf: (a) => { a = lc(a); return codeSet.has(a) ? true : undefined; },
+-    _sharePct: undefined, _k: { origin: unicodeHost }, _facts: {}, _tokenInfo: {}, _book: local.contacts,
++    contacts: local.contacts, tokenMeta, ageBlocks: L ? { ...(L.ageBlocks || {}) } : {},
++    ...(L && L.balances && Object.keys(L.balances).length ? { balances: L.balances } : {}), // soldes reels -> part du solde (plus de 100 % = montant superieur au solde)
++    codeOf: (a) => { a = lc(a); if (L && L.isContract && L.isContract[a] !== undefined) return L.isContract[a]; return codeSet.has(a) ? true : undefined; },
++    _sharePct: undefined, _k: { origin: unicodeHost, ...(L ? { token_info: liveTokenInfo, token_registry: registry } : {}) }, _facts: L ? (L.facts || {}) : {}, _tokenInfo: liveTokenInfo, _book: local.contacts,
+   };
+ }
+ 
+@@ -363,7 +374,7 @@ export function scenarioFiche({ fid, pressure, pageText, funds, grants, niveau }
+ // PRESENTATION>>
+ 
+ // ------------------------------------------------------------------ evaluation
+-export function evaluate(body, local = loadLocalContext()) {
++export function evaluate(body, local = loadLocalContext(), live = null) {
+   const t0 = performance.now();
+   const method = typeof body.method === 'string' ? body.method.slice(0, 80) : '';
+   const params = Array.isArray(body.params) ? body.params : [];
+@@ -371,7 +382,7 @@ export function evaluate(body, local = loadLocalContext()) {
+   const chainId = parseChain(body.chainId) ?? parseChain((params[0] && typeof params[0] === 'object') ? params[0].chainId : undefined);
+   const from = HEX20.test(String(body.from || '')) ? lc(body.from) : (params[0] && typeof params[0] === 'object' && HEX20.test(String(params[0].from || '')) ? lc(params[0].from) : undefined);
+   let eff = null, adem = null, pol = null, failure = null, intent = null;
+-  const ctx = buildCtx(body, local, from, chainId);
++  const ctx = buildCtx(body, local, from, chainId, live);
+   try {
+     if (!method) throw new Unverifiable('methode absente');
+     eff = decode(method, params, ctx, body);
+@@ -388,7 +399,7 @@ export function evaluate(body, local = loadLocalContext()) {
+   if (failure) {
+     const t = Object.fromEntries(['croit', 'reel', 'danger', 'action'].map((k) => [k, fill(FICHES.F25[k], { jeton: 'jetons', montant: '' })]));
+     return { level: 'unknown', niveau: 'warn', indeterminate: true, why: failure, engine: 'sentinelle-local', fiche: 'F25', title: TITRE_NON_VERIFIE, opacity_only: true, texts: t, reasons: [t.danger, t.action], raisons: [{ code: 'unverifiable', severity: 'warn', detail: failure }],
+-      effects: { grants_right: false, funds_out: false }, risk_signals: [], latency_engine_ms: ms() };
++      effects: { grants_right: false, funds_out: false }, risk_signals: [], latency_engine_ms: ms(), context_live: !!live, context_missing: live ? (live.missing || []) : ['live_context_absent'] };
+   }
+ 
+   const flags = eff.risk_flags.filter((f) => f.severity !== 'info');
+@@ -447,10 +458,31 @@ export function evaluate(body, local = loadLocalContext()) {
+   if (body.intent && adem && adem.reasons.some((r) => /^unexpected_|^wrong_recipient|^amount_exceeded|^asked_by/.test(r.code))) out.intent_contradiction = true;
+   // indice de manipulation : texte de la page + droit ou sortie d'argent (jamais seul)
+   if (press && niveau !== 'info') { out.level = 'manipulation'; out.quote = press.quote; out.reasons.unshift('Un vrai support ne te demandera jamais ça.'); out.niveau = 'critical'; out.niveau_note = 'pression repérée sur la page'; }
++  // faits non verifies sur la chaine : l'interface doit afficher "non verifie" pour ces points, jamais un vert
++  out.context_live = !!live; out.context_missing = live ? (live.missing || []) : ['live_context_absent'];
+   out.latency_engine_ms = ms();
+   return out;
+ }
+ 
++// ------------------------------------------------------------------ contexte en direct (optionnel, lecture seule)
++// Active par SENTINELLE_LIVE=1 (le serveur reste sans reseau par defaut). SENTINELLE_RPC_URL force le noeud (ex. http://127.0.0.1:8545 pour une repetition sur un fork local).
++// Ne leve jamais : en cas d'echec ou de delai depasse, renvoie les faits connus et la liste des faits manquants.
++let liveProvider = null;
++export async function liveFor(body, local) {
++  if (process.env.SENTINELLE_LIVE !== '1' || !body || typeof body !== 'object') return null;
++  try {
++    liveProvider ??= await imp(join(ROOT, 'context_live', 'provider.mjs'));
++    const params = Array.isArray(body.params) ? body.params : [];
++    const p0 = params[0] && typeof params[0] === 'object' ? params[0] : {};
++    const hasLocal = local.contacts.length || local.history.length;
++    const seen = hasLocal ? [...local.contacts.map((c) => c.address), ...local.history.filter((h) => h.direction === 'sortie').map((h) => lc(h.address))] : undefined;
++    const { engine } = await liveProvider.liveEngineContext({ chainId: body.chainId ?? p0.chainId, from: HEX20.test(String(body.from || '')) ? body.from : p0.from,
++      request: { method: String(body.method || ''), params }, rpcUrl: process.env.SENTINELLE_RPC_URL || undefined, seen,
++      options: { budgetMs: Number(process.env.SENTINELLE_LIVE_BUDGET_MS || 1500) } });
++    return engine;
++  } catch { return null; }
++}
++
+ // ------------------------------------------------------------------ journal chaine par hachage (desactivable)
+ const sha = (s) => createHash('sha256').update(s).digest('hex');
+ export function makeJournal(file, enabled = true) {
+@@ -519,7 +551,7 @@ export function createHoldUpServer({ port = 8787, journalFile, journalEnabled =
+       chunks.push(c);
+     });
+     req.on('error', () => {});
+-    req.on('end', () => {
++    req.on('end', async () => {
+       if (tooBig) return;
+       let body;
+       try { body = JSON.parse(Buffer.concat(chunks).toString('utf8') || 'null'); } catch { return reply(400, { error: 'JSON illisible' }, cors); }
+@@ -530,7 +562,7 @@ export function createHoldUpServer({ port = 8787, journalFile, journalEnabled =
+         return reply(200, { ok: true }, cors);
+       }
+       let v;
+-      try { v = evaluate(body, local); }
++      try { v = evaluate(body, local, await liveFor(body, local)); }
+       catch (e) { v = { level: 'unknown', niveau: 'warn', indeterminate: true, why: 'erreur interne', reasons: [], effects: { grants_right: false, funds_out: false }, risk_signals: [], latency_engine_ms: 0 }; }
+       v.latency_ms = v.latency_engine_ms;
+       stats.n++;

@@ -1,0 +1,479 @@
+{
+ "summary": {
+  "date": "2026-10-11T02:40:58.957Z",
+  "rpc": "http://127.0.0.1:8545",
+  "budgetMs": 1500,
+  "n": 30,
+  "cold": {
+   "p50": 11,
+   "p95": 92.4,
+   "min": 6,
+   "max": 508.2,
+   "complete": 30,
+   "withExactAgeForAll": 7,
+   "avgCalls": 13.1
+  },
+  "warm_cache": {
+   "n": 9,
+   "p50": 0.5,
+   "max": 21
+  },
+  "cold_without_explorer": {
+   "n": 9,
+   "p50": 9.9,
+   "max": 26.7
+  }
+ },
+ "runs": [
+  {
+   "i": 0,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 508.2,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 1,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 45.2,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 2,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 7.8,
+   "calls": 6,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 3,
+   "shape": "approve_demo_token_drainer",
+   "mode": "cold",
+   "elapsedMs": 92.4,
+   "calls": 24,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "rpc-search"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 4,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 11.9,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 5,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 11.3,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 6,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 6.7,
+   "calls": 6,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 7,
+   "shape": "approve_demo_token_drainer",
+   "mode": "cold",
+   "elapsedMs": 27.9,
+   "calls": 24,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "rpc-search"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 8,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 11.4,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 9,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 11.3,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 10,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 7.5,
+   "calls": 6,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 11,
+   "shape": "approve_demo_token_drainer",
+   "mode": "cold",
+   "elapsedMs": 22.3,
+   "calls": 24,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "rpc-search"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 12,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 9.5,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 13,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 9.3,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 14,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 6,
+   "calls": 6,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 15,
+   "shape": "approve_demo_token_drainer",
+   "mode": "cold",
+   "elapsedMs": 24.7,
+   "calls": 24,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "rpc-search"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 16,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 11,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 17,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 9.6,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 18,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 7.4,
+   "calls": 6,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 19,
+   "shape": "approve_demo_token_drainer",
+   "mode": "cold",
+   "elapsedMs": 26.9,
+   "calls": 24,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "rpc-search"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 20,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 10.4,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 21,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 9.7,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 22,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 6.6,
+   "calls": 6,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 23,
+   "shape": "approve_demo_token_drainer",
+   "mode": "cold",
+   "elapsedMs": 27.9,
+   "calls": 24,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "rpc-search"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 24,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 11.1,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 25,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 9.7,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 26,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 7.2,
+   "calls": 6,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 27,
+   "shape": "approve_demo_token_drainer",
+   "mode": "cold",
+   "elapsedMs": 40,
+   "calls": 24,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "rpc-search"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 28,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 11.9,
+   "calls": 12,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 29,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 9.7,
+   "calls": 11,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 0,
+   "ageSources": [
+    "rpc-probe"
+   ],
+   "counterparties": 2
+  }
+ ]
+}

@@ -1,0 +1,479 @@
+{
+ "summary": {
+  "date": "2026-10-11T02:41:30.705Z",
+  "rpc": "https://api.avax.network/ext/bc/C/rpc",
+  "budgetMs": 1500,
+  "n": 30,
+  "cold": {
+   "p50": 69.9,
+   "p95": 106.8,
+   "min": 54.3,
+   "max": 183.9,
+   "complete": 30,
+   "withExactAgeForAll": 30,
+   "avgCalls": 12.3
+  },
+  "warm_cache": {
+   "n": 9,
+   "p50": 0.9,
+   "max": 78.2
+  },
+  "cold_without_explorer": {
+   "n": 9,
+   "p50": 62,
+   "max": 131.8
+  }
+ },
+ "runs": [
+  {
+   "i": 0,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 183.9,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 1,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 68.5,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 2,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 79.5,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 3,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 106.8,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 4,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 77.1,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 5,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 65.3,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 6,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 78.6,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 7,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 62.6,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 8,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 56.1,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 9,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 76.3,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 10,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 55.9,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 11,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 77.9,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 12,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 69.9,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 13,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 80.2,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 14,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 57.4,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 15,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 79.6,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 16,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 76,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 17,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 54.3,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 18,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 80.7,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 19,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 65.8,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 20,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 57.3,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 21,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 90.4,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 22,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 63.9,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 23,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 79.1,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 24,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 64.4,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 25,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 66.1,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 26,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 77.3,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  },
+  {
+   "i": 27,
+   "shape": "approve_wavax_router",
+   "mode": "cold",
+   "elapsedMs": 63.1,
+   "calls": 15,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 28,
+   "shape": "transfer_usdc",
+   "mode": "cold",
+   "elapsedMs": 63.9,
+   "calls": 14,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 2,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 2
+  },
+  {
+   "i": 29,
+   "shape": "native_send",
+   "mode": "cold",
+   "elapsedMs": 83.1,
+   "calls": 8,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "exactAge": 1,
+   "ageSources": [
+    "explorer+receipt"
+   ],
+   "counterparties": 1
+  }
+ ]
+}

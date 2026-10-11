@@ -1,0 +1,41 @@
+{
+ "date": "2026-10-11T02:41:43.542Z",
+ "note": "provider.getContext on Fuji (43113), default public RPC + Routescan, read-only.",
+ "run": {
+  "block": 59289667,
+  "complete": true,
+  "missing": [],
+  "errors": [],
+  "elapsedMs": 243.5,
+  "calls": 14,
+  "signer": {
+   "address": "0x8bcea1b8558ac307b50ad720045c35783c9efb6c",
+   "nativeBalance": "0",
+   "nonce": 0
+  },
+  "counterparties": {
+   "0xd00ae08403b9bbb9124bb305c09058e32c39a48c": {
+    "firstSeenByUser": true,
+    "ageMinBlocks": 50,
+    "isContract": true,
+    "ageBlocks": 59286142,
+    "creationBlock": 3525,
+    "ageSource": "explorer+receipt"
+   },
+   "0x8bcea1b8558ac307b50ad720045c35783c9efb6d": {
+    "firstSeenByUser": true,
+    "isContract": false
+   }
+  },
+  "tokens": {
+   "0xd00ae08403b9bbb9124bb305c09058e32c39a48c": {
+    "allowances": {
+     "0x8bcea1b8558ac307b50ad720045c35783c9efb6d": "0"
+    },
+    "symbol": "WAVAX",
+    "decimals": 18,
+    "balance": "0"
+   }
+  }
+ }
+}

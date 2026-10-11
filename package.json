@@ -1,0 +1,16 @@
+{
+  "name": "hold-up",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hold up : montre ce qu'une signature ou un envoi fait vraiment, avant que la personne ne signe. Aucune dépendance à ce niveau ; les dépendances Hardhat vivent dans blockchain/.",
+  "engines": { "node": ">=22.18" },
+  "scripts": {
+    "demo": "node scripts/demo.mjs",
+    "demo:check": "node scripts/demo.mjs --check",
+    "test:engine": "node --test \"research/titouan/T_banc_e2e/engine/test/*.test.mjs\"",
+    "test:server": "node research/titouan/T_banc_e2e/server/test/server.test.mjs",
+    "test:rpc": "node --test \"research/demo_reelle/rpc_garde/test/*.test.mjs\"",
+    "test:extension": "node --test \"research/titouan/T_banc_e2e/extension/tests/unit/*.test.mjs\"",
+    "test:contracts": "cd blockchain && npx hardhat test"
+  }
+}

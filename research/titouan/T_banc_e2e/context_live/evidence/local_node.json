@@ -1,0 +1,107 @@
+{
+ "date": "2026-10-11T02:41:43.297Z",
+ "note": "provider.getContext against the local Hardhat fork of Avalanche (read-only). No explorer locally : age = eth_getCode probe at head-50, then binary search inside that window for young contracts.",
+ "rpc": "http://127.0.0.1:8545",
+ "runs": {
+  "approve_demo_token_to_demo_drainer": {
+   "block": 97245946,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "elapsedMs": 99.9,
+   "calls": 24,
+   "signer": {
+    "address": "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+    "nativeBalance": "100000000000000000000",
+    "nonce": 3
+   },
+   "counterparties": {
+    "0xf189e9ebce19ca3fc94427e64d4fa64d4118a180": {
+     "firstSeenByUser": true,
+     "ageMaxBlocks": 49,
+     "isContract": true,
+     "ageBlocks": 19,
+     "creationBlock": 97245927,
+     "ageSource": "rpc-search"
+    },
+    "0xe2a27608d8adc1803c60b319ff7b163938c0fdfe": {
+     "firstSeenByUser": true,
+     "isContract": true,
+     "ageMaxBlocks": 49,
+     "ageBlocks": 0,
+     "creationBlock": 97245946,
+     "ageSource": "rpc-search"
+    }
+   },
+   "tokens": {
+    "0xf189e9ebce19ca3fc94427e64d4fa64d4118a180": {
+     "allowances": {
+      "0xe2a27608d8adc1803c60b319ff7b163938c0fdfe": "0"
+     },
+     "symbol": "DUSDC",
+     "decimals": 6,
+     "balance": "2480000000"
+    }
+   }
+  },
+  "approve_forked_real_usdc_to_demo_router": {
+   "block": 97245946,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "elapsedMs": 28.4,
+   "calls": 18,
+   "signer": {
+    "address": "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+    "nativeBalance": "100000000000000000000",
+    "nonce": 3
+   },
+   "counterparties": {
+    "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e": {
+     "firstSeenByUser": true,
+     "isContract": true,
+     "ageMinBlocks": 50,
+     "ageSource": "rpc-probe"
+    },
+    "0xde470275f6d4782eb249019bebff1c0cc5b4491e": {
+     "firstSeenByUser": true,
+     "isContract": true,
+     "ageMaxBlocks": 49,
+     "ageBlocks": 16,
+     "creationBlock": 97245930,
+     "ageSource": "rpc-search"
+    }
+   },
+   "tokens": {
+    "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e": {
+     "allowances": {
+      "0xde470275f6d4782eb249019bebff1c0cc5b4491e": "0"
+     },
+     "symbol": "USDC",
+     "decimals": 6,
+     "balance": "2480000000"
+    }
+   }
+  },
+  "native_send_to_plain_account": {
+   "block": 97245946,
+   "complete": true,
+   "missing": [],
+   "errors": [],
+   "elapsedMs": 4.7,
+   "calls": 6,
+   "signer": {
+    "address": "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+    "nativeBalance": "100000000000000000000",
+    "nonce": 3
+   },
+   "counterparties": {
+    "0x70997970c51812dc3a010c7d01b50e0d17dc79c8": {
+     "firstSeenByUser": true,
+     "isContract": false
+    }
+   },
+   "tokens": {}
+  }
+ }
+}

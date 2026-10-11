@@ -1,0 +1,217 @@
+{
+ "date": "2026-10-11T02:07:27.347Z",
+ "note": "raw evidence, read-only public calls",
+ "chains": {
+  "43113": {
+   "rpc": "https://api.avax-test.network/ext/bc/C/rpc",
+   "contracts": [
+    {
+     "name": "WAVAX (Fuji)",
+     "addr": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",
+     "probes": [
+      {
+       "back": 50,
+       "hasCode": true,
+       "ms": 43
+      },
+      {
+       "back": 50000,
+       "hasCode": true,
+       "ms": 62
+      },
+      {
+       "back": 2000000,
+       "hasCode": true,
+       "ms": 103
+      }
+     ],
+     "search": [],
+     "binarySearch": {
+      "firstBlockWithCode": 3525,
+      "steps": 26,
+      "stateErrors": 0,
+      "totalMs": 906
+     }
+    }
+   ],
+   "latest": 59288292,
+   "secPerBlock_last100k": 2.09155,
+   "routescan": {
+    "url": "https://api.routescan.io/v2/network/testnet/evm/43113/etherscan/api?module=contract&action=getcontractcreation&contractaddresses=0xd00ae08403B9bbb9124bB305C09058E32C39A48c",
+    "http": 200,
+    "ms": 16,
+    "body": {
+     "status": "1",
+     "message": "OK",
+     "result": [
+      {
+       "contractAddress": "0xd00ae08403b9bbb9124bb305c09058e32c39a48c",
+       "contractCreator": "0x808ce8dec9e10bed8d0892aceef9f1b8ec2f52bd",
+       "txHash": "0x8c949e1df66e65c5a7853414b618732d76c008f6c84169c5465a1a3b9d6cd130",
+       "contractFactory": ""
+      }
+     ]
+    },
+    "receipts": [
+     {
+      "contract": "0xd00ae08403b9bbb9124bb305c09058e32c39a48c",
+      "txHash": "0x8c949e1df66e65c5a7853414b618732d76c008f6c84169c5465a1a3b9d6cd130",
+      "blockNumber": 3525,
+      "contractAddressInReceipt": "0xd00ae08403b9bbb9124bb305c09058e32c39a48c",
+      "ms": 76
+     }
+    ]
+   }
+  },
+  "43114": {
+   "rpc": "https://api.avax.network/ext/bc/C/rpc",
+   "contracts": [
+    {
+     "name": "WAVAX",
+     "addr": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+     "probes": [
+      {
+       "back": 50,
+       "hasCode": true,
+       "ms": 40
+      },
+      {
+       "back": 50000,
+       "hasCode": true,
+       "ms": 312
+      },
+      {
+       "back": 2000000,
+       "hasCode": null,
+       "error": "transport: TimeoutError",
+       "ms": -1
+      }
+     ],
+     "search": [],
+     "binarySearch": {
+      "firstBlockWithCode": 820,
+      "steps": 26,
+      "stateErrors": 0,
+      "totalMs": 8971
+     }
+    },
+    {
+     "name": "USDC",
+     "addr": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48A6E",
+     "probes": [
+      {
+       "back": 50,
+       "hasCode": true,
+       "ms": 36
+      },
+      {
+       "back": 50000,
+       "hasCode": true,
+       "ms": 146
+      },
+      {
+       "back": 2000000,
+       "hasCode": true,
+       "ms": 5782
+      }
+     ],
+     "search": [
+      {
+       "block": 7312401,
+       "error": "transport: TimeoutError"
+      }
+     ],
+     "binarySearch": {
+      "firstBlockWithCode": 7388829,
+      "steps": 26,
+      "stateErrors": 1,
+      "totalMs": 44431
+     }
+    },
+    {
+     "name": "TraderJoe router v1",
+     "addr": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
+     "probes": [
+      {
+       "back": 50,
+       "hasCode": true,
+       "ms": 44
+      },
+      {
+       "back": 50000,
+       "hasCode": true,
+       "ms": 98
+      },
+      {
+       "back": 2000000,
+       "hasCode": true,
+       "ms": 5923
+      }
+     ],
+     "search": [],
+     "binarySearch": {
+      "firstBlockWithCode": 2486393,
+      "steps": 27,
+      "stateErrors": 0,
+      "totalMs": 11249
+     }
+    }
+   ],
+   "latest": 97245439,
+   "secPerBlock_last100k": 1.11945,
+   "routescan": {
+    "url": "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api?module=contract&action=getcontractcreation&contractaddresses=0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7,0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48A6E,0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
+    "http": 200,
+    "ms": 42,
+    "body": {
+     "status": "1",
+     "message": "OK",
+     "result": [
+      {
+       "contractAddress": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+       "contractCreator": "0x808ce8dec9e10bed8d0892aceef9f1b8ec2f52bd",
+       "txHash": "0xe37b854dfa9c8b20b8742469a149242000e6a3e4b60f15b078572fbc37b46472",
+       "contractFactory": ""
+      },
+      {
+       "contractAddress": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+       "contractCreator": "0xcb9968cb0d6612e1167e445774997c63a0792dbf",
+       "txHash": "0x2d71536499f10750db9e39d21711fa56c7fcfbd29ecfe9c50604fb2a002f8bea",
+       "contractFactory": ""
+      },
+      {
+       "contractAddress": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
+       "contractCreator": "0x5d3e4c0fe11e0ae4c32f0ff74b4544c49538ac61",
+       "txHash": "0x97b37f00ad5393e126940747808f8c575c081a9e154e39e772c01838d91f672c",
+       "contractFactory": ""
+      }
+     ]
+    },
+    "receipts": [
+     {
+      "contract": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+      "txHash": "0xe37b854dfa9c8b20b8742469a149242000e6a3e4b60f15b078572fbc37b46472",
+      "blockNumber": 820,
+      "contractAddressInReceipt": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+      "ms": 38
+     },
+     {
+      "contract": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+      "txHash": "0x2d71536499f10750db9e39d21711fa56c7fcfbd29ecfe9c50604fb2a002f8bea",
+      "blockNumber": 7388829,
+      "contractAddressInReceipt": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+      "ms": 34
+     },
+     {
+      "contract": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
+      "txHash": "0x97b37f00ad5393e126940747808f8c575c081a9e154e39e772c01838d91f672c",
+      "blockNumber": 2486393,
+      "contractAddressInReceipt": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
+      "ms": 34
+     }
+    ]
+   }
+  }
+ },
+ "totalRpcCalls": 127
+}

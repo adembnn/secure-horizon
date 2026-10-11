@@ -39,3 +39,14 @@ cache/
 artifacts/
 typechain-types/
 coverage/
+
+# Démo locale (scripts/demo.mjs) : fichiers générés à chaque lancement, jamais à committer
+# (adresses seules, mais elles changent à chaque déploiement ; les fichiers *.fuji.json restent suivis volontairement)
+research/demo_reelle/chain/addresses.local.json
+research/demo_reelle/chain/context.local.json
+research/demo_reelle/site/addresses.local.json
+research/demo_reelle/site/addresses.fuji.json
+research/demo_reelle/rpc_garde/context.local.json
+research/demo_reelle/rpc_garde/journal/
+research/titouan/T_banc_e2e/journal/
+blockchain/.env

@@ -1,0 +1,57 @@
+diff --git a/server/server.mjs b/server/server.mjs
+index 2626bed..ef1724f 100644
+--- a/server/server.mjs
++++ b/server/server.mjs
+@@ -5,6 +5,9 @@
+ //         node server/server.mjs --verify-journal                 (verifie la chaine de hachage et quitte)
+ // Variables : SENTINELLE_PORT (defaut 8787), SENTINELLE_JOURNAL=0 (desactive), SENTINELLE_JOURNAL_FILE, SENTINELLE_CONTEXT (fichier de contexte),
+ //             SENTINELLE_EXT_ID (si defini : seule cette extension est acceptee).
++//             HOLDUP_PLUS=0 (verdict du produit seul, sans pipeline/evaluate_plus.mjs), HOLDUP_DETECTORS=0 (sans les detecteurs),
++//             SENTINELLE_RPC_URL ou HOLDUP_RPC_URL (noeud a lire : active le contexte en direct, lecture seule ; SENTINELLE_LIVE=0 le coupe, =1 l active sur le RPC public),
++//             SENTINELLE_LIVE_BUDGET_MS (defaut 1500), HOLDUP_CLASSIFIER (clef | clef-flash | keyword ; absent = pas de lecture du message colle).
+ import http from 'node:http';
+ import { readFileSync, appendFileSync, existsSync, mkdirSync, statSync } from 'node:fs';
+ import { createHash } from 'node:crypto';
+@@ -485,6 +488,7 @@ export function verifyJournal(file) {
+ }
+ 
+ // ------------------------------------------------------------------ serveur HTTP
++let evaluatePlus = null;
+ const EXT_ORIGIN = /^chrome-extension:\/\/[a-p]{32}$/;
+ export function createHoldUpServer({ port = 8787, journalFile, journalEnabled = true, local = loadLocalContext(), extId = process.env.SENTINELLE_EXT_ID } = {}) {
+   const journal = makeJournal(journalFile || join(HERE, '..', 'journal', 'verdicts.jsonl'), journalEnabled);
+@@ -519,7 +523,7 @@ export function createHoldUpServer({ port = 8787, journalFile, journalEnabled =
+       chunks.push(c);
+     });
+     req.on('error', () => {});
+-    req.on('end', () => {
++    req.on('end', async () => {
+       if (tooBig) return;
+       let body;
+       try { body = JSON.parse(Buffer.concat(chunks).toString('utf8') || 'null'); } catch { return reply(400, { error: 'JSON illisible' }, cors); }
+@@ -529,13 +533,21 @@ export function createHoldUpServer({ port = 8787, journalFile, journalEnabled =
+         const e = body; journal.append({ type: 'ext_log', kind: String(e.type || '').slice(0, 20), origin: String(e.origin || '').slice(0, 200), method: String(e.method || '').slice(0, 60), level: String(e.level || '').slice(0, 20), decision: String(e.decision || '').slice(0, 20) });
+         return reply(200, { ok: true }, cors);
+       }
+-      let v;
+-      try { v = evaluate(body, local); }
+-      catch (e) { v = { level: 'unknown', niveau: 'warn', indeterminate: true, why: 'erreur interne', reasons: [], effects: { grants_right: false, funds_out: false }, risk_signals: [], latency_engine_ms: 0 }; }
++      // pipeline/evaluate_plus.mjs : verdict du produit + detecteurs + faits lus sur la chaine. Il appelle evaluate() lui-meme et y retombe sur toute erreur interne
++      // (jamais plus bas que le verdict du produit quand aucun fait nouveau n est connu). Si le module lui-meme ne se charge pas : ancien chemin.
++      let v, voie = 'produit';
++      try {
++        if (process.env.HOLDUP_PLUS === '0') v = evaluate(body, local);
++        else {
++          evaluatePlus ??= (await imp(join(ROOT, 'pipeline', 'evaluate_plus.mjs'))).evaluatePlus;
++          v = await evaluatePlus(body, local); voie = 'plus:' + ((v.plus && v.plus.path) || '?');
++        }
++      } catch (e0) { try { v = evaluate(body, local); voie = 'produit(repli)'; } catch (e) { v = null; } }
++      if (!v) { voie = 'erreur'; v = { level: 'unknown', niveau: 'warn', indeterminate: true, why: 'erreur interne', reasons: [], effects: { grants_right: false, funds_out: false }, risk_signals: [], latency_engine_ms: 0 }; }
+       v.latency_ms = v.latency_engine_ms;
+       stats.n++;
+       try {
+-        journal.append({ type: 'verdict', origin: String(body.origin || '').slice(0, 200), method: String(body.method || '').slice(0, 60), level: v.level, niveau: v.niveau, fiche: v.fiche || null, codes: v.codes || [], latency_ms: v.latency_ms,
++        journal.append({ type: 'verdict', origin: String(body.origin || '').slice(0, 200), method: String(body.method || '').slice(0, 60), level: v.level, niveau: v.niveau, fiche: v.fiche || null, codes: v.codes || [], latency_ms: v.latency_ms, voie, plus: v.plus ? { base: v.plus.base, product: v.plus.product, raised: (v.plus.raisedBy || []).map((f) => f.code), lowered: (v.plus.loweredBy || []).length, missing: (v.plus.missingFacts || []).length } : null,
+           params_sha256: sha(JSON.stringify(body.params === undefined ? null : body.params)) });
+       } catch { /* le journal ne doit jamais empecher le verdict */ }
+       return reply(200, v, cors);
