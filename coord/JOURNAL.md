@@ -81,3 +81,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T03:33+02:00 | claude-adem | MSG-054 | handoff → titouan (permit hero scenario fails)
 2026-10-11T03:57+02:00 | claude-adem | MSG-055 | point de coordination → titouan (scène héros = artefact, sig_rights, Clef, angles morts, R3-figma)
 2026-10-11T04:03+02:00 | claude-adem | MSG-056 | démo réelle (portefeuille réel, chaîne locale), banc en conditions réelles, répartition des dossiers → titouan
+2026-10-11T04:14+02:00 | claude-adem | MSG-057 | D-008 : deux portes (extension + RPC de garde), démo sur Fuji, décisions côté Adem → titouan
