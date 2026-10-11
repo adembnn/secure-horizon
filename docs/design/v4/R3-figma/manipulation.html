@@ -13,23 +13,25 @@
 <body>
 <div class="stage">
 <div class="site" aria-hidden="true"><i class="nav"></i><i class="logo"></i><i class="h1"></i><i class="h2"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="box"></i></div>
-<section class="win" role="alertdialog" aria-modal="true" aria-labelledby="v" aria-describedby="g">
-  <h1 class="verdict" id="v">Personne de sérieux ne te demande de déplacer ton argent.</h1>
-  <p class="instruction" id="g">Quelqu'un te dicte quoi faire&nbsp;? Raccroche, ou ferme la discussion.</p>
-  <p class="reassure">Rien n'est parti. Ta demande attend.</p>
+<div class="scrim" aria-hidden="true"></div>
+<section class="win" role="alertdialog" aria-modal="true" aria-labelledby="g">
+  <h1 class="instruction" id="g">On te dicte quoi faire&nbsp;? Raccroche.</h1>
+  <p class="reassure">Rien n'est parti.</p>
   <div class="actions">
-    <button class="btn-primary" autofocus>Annuler la demande</button>
+    <button class="btn-primary" autofocus>Annuler</button>
     <button class="btn-secondary">Appeler un proche</button>
   </div>
+  <div class="foot">
   <details>
     <summary>Pourquoi ?</summary>
     <p class="tag">Classé&nbsp;: faux support</p>
     <p class="quote">« Ici le support. Pour protéger vos fonds, transférez-les maintenant vers le portefeuille sécurisé que je vous indique. »</p>
     <div class="timer" role="timer" aria-live="off">
       <span class="t">9:41</span>
-      <span class="s">Elle reste en attente 10 minutes.</span>
+      <span class="s">En attente 10 minutes.</span>
     </div>
   </details>
+  </div>
 </section>
 </div>
 </body>
