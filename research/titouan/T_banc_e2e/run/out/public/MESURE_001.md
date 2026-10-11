@@ -110,7 +110,7 @@ T2D5  benin_dur_phrase_ressemblant_a_injection       EVM  |  0    |   0/0       
 - P-A17-B2 [hors_perimetre_evm] solana_tron_autorite/tron_transfert_simple : SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable
 - P-A17-M1 [hors_perimetre_evm] solana_tron_autorite/solana_setauthority_account_owner : SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable
 - P-A17-M2 [hors_perimetre_evm] solana_tron_autorite/tron_account_permission_update : SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable
-- P-T2B1-M1 [sans_requete_wallet] bitb_seed_phrase/fausse_fenetre_html_demande_seed : aucune requete wallet : la page 'claim-drop.test' dessine une fausse fenetre et demande la seed phrase (12 mots synthetiques) ; Sentinelle (onTransaction/onSignature) ne voit rien ; hors perimetre declare
+- P-T2B1-M1 [sans_requete_wallet] bitb_seed_phrase/fausse_fenetre_html_demande_seed : aucune requete wallet : la page 'claim-drop.test' dessine une fausse fenetre et demande la seed phrase (12 mots synthetiques) ; Hold up (onTransaction/onSignature) ne voit rien ; hors perimetre declare
 - P-T2C3-M1 [sans_requete_wallet] extension_clone_sentinelle/paquet_sentinelle_guard_test : extension clone ('sentinelle-guard.test', host_permissions <all_urls>) : aucune requete wallet a analyser ; le clone REMPLACE la barriere (hors barriere)
 - P-T2C4-M1 [sans_requete_wallet] mise_a_jour_piegee/version_2_68_cle_de_publication_fuitee : chaine d'approvisionnement (mise a jour piegee v2.68 exfiltrant vers collect.test) : aucune requete wallet
 ```

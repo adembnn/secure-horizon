@@ -1,4 +1,4 @@
-# Red team jury : ingénierie sociale contre Sentinelle
+# Red team jury : ingénierie sociale contre Hold up
 
 SYNTHÉTIQUE. Toutes les adresses, tous les messages et tous les montants sont inventés. Aucun système réel n'a été touché.
 Test en boîte noire via `redteam/check.mjs` uniquement (`engine/`, `run/` et `detectors_adem/` n'ont pas été lus). Les cas sont dans `redteam/jury_social.jsonl` : chacun porte `label`, `expected_severity`, `bypass` et le verdict observé.

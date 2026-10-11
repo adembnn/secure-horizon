@@ -3,7 +3,7 @@
 // Chaque correctif est un interrupteur (engine/src/fixes.mjs) pour la mesure A/B.
 import { isOn } from './src/fixes.js';
 import { OPACITY_CODES } from '../engine/src/engine.js';
-import { tokenInfo, DEFAULT_TOKENS } from '../engine/src/util.js';
+import { tokenInfo, DEFAULT_TOKENS, defaultTokensOn } from '../engine/src/util.js';
 
 const RANK = { info: -1, ok: 0, warn: 1, critical: 2 };
 const worst = (a, b) => (RANK[a] >= RANK[b] ? a : b);
@@ -14,9 +14,36 @@ const sevOfReason = (code) => (WARN_CODES.has(code) ? 'warn' : 'critical');
 const ademLevel = (reasons) => reasons.reduce((m, r) => worst(m, r.sev || sevOfReason(r.code)), 'ok');
 
 // ---- lecture des détails d'intention (jeton, montant, jeton reçu) : ils servent seulement à AJOUTER des raisons, jamais à baisser un niveau (monotonie).
-const NATIVE_BY_CHAIN = { 1: 'ETH', 10: 'ETH', 8453: 'ETH', 42161: 'ETH', 59144: 'ETH', 534352: 'ETH', 324: 'ETH', 81457: 'ETH', 56: 'BNB', 137: 'POL', 43114: 'AVAX', 100: 'xDAI', 250: 'FTM', 42220: 'CELO', 5000: 'MNT' };
-// famille d'un jeton : la casse, le préfixe $, les suffixes .e/.b et le préfixe W (WETH = ETH, WAVAX = AVAX) ne changent pas l'actif dit
-const tokenFamily = (s) => { const x = String(s || '').trim().toUpperCase().replace(/^\$/, '').replace(/\.[EB]$/, ''); return x.length > 3 && x[0] === 'W' ? x.slice(1) : x; };
+const NATIVE_BY_CHAIN = { 1: 'ETH', 10: 'ETH', 8453: 'ETH', 42161: 'ETH', 59144: 'ETH', 534352: 'ETH', 324: 'ETH', 81457: 'ETH', 56: 'BNB', 137: 'POL', 43114: 'AVAX', 43113: 'AVAX', 11155111: 'ETH', 17000: 'ETH', 84532: 'ETH', 421614: 'ETH', 11155420: 'ETH', 97: 'BNB', 80002: 'POL', 100: 'xDAI', 250: 'FTM', 42220: 'CELO', 5000: 'MNT' };
+// famille d'un jeton : la casse, le préfixe $ et les suffixes .e/.b ne changent pas l'actif dit. Une monnaie native et SA version enveloppée sont le même actif
+// (WETH = ETH, WAVAX = AVAX...) : liste fermée, car un W initial ne veut pas toujours dire « enveloppé » (wstETH n'est pas stETH). MATIC et POL sont le même actif.
+const WRAPPED_NATIVE = { WETH: 'ETH', WAVAX: 'AVAX', WBNB: 'BNB', WMATIC: 'POL', WPOL: 'POL', MATIC: 'POL', WFTM: 'FTM', WXDAI: 'XDAI', WCELO: 'CELO', WMNT: 'MNT', WBTC: 'BTC' };
+const tokenFamily = (s) => { const x = String(s || '').trim().toUpperCase().replace(/^\$/, '').replace(/\.[EB]$/, ''); return WRAPPED_NATIVE[x] || x; };
+const isAddrStr = (a) => typeof a === 'string' && /^0x[0-9a-fA-F]{40}$/.test(a);
+const BUY_TEXT = /\b(achet\w*|achat|acqu[ée]rir|buy\w*|purchas\w*|copping)\b/i;
+const SWAP_TEXT = /\b(echang\w*|swap\w*|convert\w*|trade\w*|troqu\w*|vend\w*|sell\w*)\b/i;
+const SELL_TEXT = /\b(vend\w*|vente|sell\w*|sale|list\w*|lister|liste)\b/i;
+// texte sans accents ni casse (pour les mots de l'intention écrite)
+const foldTxt = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+// réseaux nommés explicitement dans le texte : « sur X », « on X », « réseau X », « X mainnet », « C-Chain ». Un nom seul (« ethereum » pour le jeton) ne compte pas.
+// chaque nom désigne le réseau principal ET son réseau de test public (un réseau de test ne porte pas de valeur) ; « fuji », « sepolia » désignent le test seul
+const CHAIN_WORDS = [[/ethereum/, [1, 11155111, 17000]], [/avalanche|c-chain/, [43114, 43113]], [/base/, [8453, 84532]], [/arbitrum/, [42161, 421614]], [/optimism|op mainnet/, [10, 11155420]], [/polygon/, [137, 80002]], [/bnb chain|bsc|binance smart chain/, [56, 97]], [/fuji/, [43113]], [/sepolia/, [11155111]]];
+function chainsNamed(t) {
+  const found = new Set();
+  for (const [re, id] of CHAIN_WORDS) {
+    const w = re.source;
+    const pre = new RegExp('\\b(?:sur|on|via|reseau|network|chain|chaine|blockchain)\\s+(?:le\\s+reseau\\s+|la\\s+|l\')?(?:' + w + ')\\b');
+    const post = new RegExp('\\b(?:' + w + ')\\s+(?:mainnet|network|reseau|chain|c-chain|one|pos)\\b');
+    if (pre.test(t) || post.test(t) || (id[0] === 43114 && /\bc-chain\b/.test(t))) found.add(id);
+  }
+  return [...found];
+}
+const hostOfUrl = (u) => { if (!u) return ''; try { return new URL(String(u).includes('://') ? String(u) : 'https://' + String(u)).hostname.toLowerCase(); } catch { return ''; } };
+const sameSite = (a, b) => a === b || a.endsWith('.' + b) || b.endsWith('.' + a);
+// sites nommés dans le texte : nom d'hôte avec un domaine de premier niveau en lettres (pas « 0,5 », pas « USDC.e »)
+// (les noms de portefeuille ou d'espace, comme « aave.eth », ne sont pas des sites : exclus)
+const NOT_WEB_TLD = /\.(eth|sol|crypto|nft|lens|avax|arb|base|bnb|x|wallet|dao|blockchain|bitcoin|zil)$/;
+const hostsNamed = (s) => [...new Set((String(s || '').toLowerCase().match(/\b(?:[a-z0-9-]+\.)+[a-z]{2,24}\b/g) || []).filter((h) => /[a-z]/.test(h.split('.')[0]) && !/^\d/.test(h) && !NOT_WEB_TLD.test(h)))];
 // montants lisibles : « 1,5 », « 1.5 », « 1 000 », « 1,000 » (milliers ou décimale : on garde la lecture la plus large, jamais la plus stricte)
 function amountReadings(v) {
   if (typeof v === 'number') return Number.isFinite(v) ? [v] : [];
@@ -170,16 +197,47 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     const has = (code) => reasons.some((r) => r.code === code);
     const sameAsset = (sym) => !said || !sym || tokenFamily(sym) === said;
 
-    // F32 : un autre jeton que celui dit est engagé (vendu, ou droit accordé dessus), ou le jeton reçu n'est pas celui annoncé. Un symbole inconnu ne conclut pas.
+    // F32 : un autre jeton que celui dit est engagé (vendu, ou droit accordé dessus), ou le jeton reçu n'est pas celui annoncé.
+    // Identité d'un jeton : son adresse, puis son symbole. Le jeton dit peut être une adresse (alors seule la même adresse correspond, sauf natif / enveloppé du même
+    // réseau) ou un symbole. Un jeton engagé sans symbole connu ne conclut que si le symbole dit a une adresse connue SUR CE RÉSEAU (registre du contexte, jetons
+    // de référence du moteur, monnaie native) : alors une autre adresse n'est pas ce jeton. Même règle pour un jeton qui porte le symbole dit mais pas son adresse connue.
     if (isOn('F32') && !has('token_differs_from_intent')) {
+      const nf = tokenFamily(nat);
+      const regList = [...(((ctx._k && ctx._k.token_registry) || []).map((t) => ({ address: String(t.address || '').toLowerCase(), symbol: t.symbol }))), ...defaultTokensOn(eff.chainId)];
+      const knownSet = (fam) => { const out = new Set(regList.filter((t) => t.symbol && tokenFamily(t.symbol) === fam).map((t) => t.address)); if (fam === nf && nat) out.add('native'); return out; };
+      const idOf = (tok, given) => ({ addr: String(tok || '').toLowerCase() === 'native' ? 'native' : String(tok || '').toLowerCase(), sym: symOf(tok, given) });
+      const saidAddr = isAddrStr(intent.token) ? intent.token.toLowerCase() : null;
+      const saidFam = saidAddr ? (tokenInfo(ctx, saidAddr).symbol ? tokenFamily(tokenInfo(ctx, saidAddr).symbol) : null) : said;
+      // -> true (c'est le jeton dit), false (ce n'en est pas un), null (on ne sait pas)
+      const matches = (e) => {
+        if (saidAddr) {
+          if (e.addr === saidAddr) return true;
+          if (saidFam && saidFam === nf) { const ks = knownSet(nf); return ks.has(e.addr) && ks.has(saidAddr); }
+          return false;
+        }
+        if (!said) return true;
+        const ks = knownSet(said);
+        if (e.sym) { if (tokenFamily(e.sym) !== said) return false; return !(e.addr !== 'native' && ks.size && !ks.has(e.addr)); } // même symbole mais pas l'adresse connue de ce symbole sur ce réseau : sosie
+        if (e.addr === 'native') return null; // monnaie native d'un réseau inconnu : on ne sait pas
+        return ks.size ? false : null;
+      };
       const other = [];
-      // « jeton dit » est le jeton donné pour un paiement ou si le jeton reçu est annoncé à part (mode strict). Pour un échange avec un seul jeton dit, il peut être le jeton donné
-      // OU le jeton reçu (« acheter 821 X avec Y ») : on ne conclut que si tous les jetons engagés sont identifiés et qu'aucun n'est celui qui est dit.
+      // « jeton dit » = le jeton donné pour un paiement, si le jeton reçu est annoncé à part, ou si un montant est dit sans verbe d'achat (« échanger 50 USDC » : on
+      // donne les USDC). Avec un verbe d'achat et un seul jeton dit (« acheter 821 X avec Y »), il peut être le donné OU le reçu : on ne conclut que si aucun jeton
+      // engagé ou reçu n'est le jeton dit et que chacun est identifié.
       const strict = intent.kind !== 'buy_or_swap' || !!intent.receiveToken;
-      if (said) {
-        const engaged = [...moneyOut.map((o) => symOf(o.token, o.symbol)), ...moneyApprovals.map((a) => symOf(a.token)), ...(strict ? [] : (eff.incoming || []).map((i) => symOf(i.token, i.symbol)))];
-        if (strict) { for (const sy of engaged) if (sy && tokenFamily(sy) !== said) other.push(sy); }
-        else if ((eff.incoming || []).length && engaged.length && engaged.every(Boolean) && !engaged.some((sy) => tokenFamily(sy) === said)) other.push(engaged[0]);
+      // échange dit avec un montant et un verbe d'échange ou de vente, sans verbe d'achat (« échanger 50 USDC contre... ») : le jeton dit est celui qu'on DONNE.
+      // On conclut alors seulement si AUCUN jeton engagé (sorti ou sur lequel un droit est donné) n'est le jeton dit (un lot peut contenir d'autres droits).
+      const givenSaid = !strict && declared.length > 0 && SWAP_TEXT.test(foldTxt(intent.freeText)) && !BUY_TEXT.test(foldTxt(intent.freeText));
+      if (said || saidAddr) {
+        const engaged = [...moneyOut.map((o) => idOf(o.token, o.symbol)), ...moneyApprovals.map((a) => idOf(a.token))];
+        if (strict) { for (const e of engaged) if (matches(e) === false) other.push(e.sym || 'un jeton non identifié'); }
+        else if (givenSaid && engaged.length && engaged.map(matches).every((x) => x === false)) other.push(engaged[0].sym || 'un jeton non identifié');
+        else {
+          const all = [...engaged, ...(eff.incoming || []).filter((i) => i.std !== 'erc721' && i.std !== 'erc1155').map((i) => idOf(i.token, i.symbol))];
+          const m = all.map(matches);
+          if ((eff.incoming || []).length && engaged.length && m.every((x) => x === false)) other.push(engaged[0].sym || 'un jeton non identifié');
+        }
       }
       const wantIn = intent.kind === 'buy_or_swap' && intent.receiveToken ? tokenFamily(intent.receiveToken) : null;
       let wrongIn = null;
@@ -209,6 +267,51 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
         notes.push(sev === 'warn' ? 'F31:droit_plus_large_protocole_connu' : 'F31:droit_plus_large_inconnu');
       }
     }
+  }
+
+  // ---- F42 : l'intention dit ACHETER (verbe d'achat, aucun verbe de vente) mais l'ordre signé (Seaport : offer / consideration) fait sortir des NFT de l'utilisateur.
+  // Un achat honnête signé est une offre où l'utilisateur donne un jeton fongible (WETH, WAVAX...) et reçoit le NFT ; donner ses NFT est une vente, pas un achat.
+  // Lu par la forme de l'ordre seulement (type d'élément, offreur) ; ajoute une raison, ne baisse rien. Sans texte d'intention, la règle ne fait rien.
+  if (isOn('F42') && intent && eff.seaport && (!intent.kind || intent.kind === 'buy_or_swap')) {
+    const txt = foldTxt(intent.freeText);
+    const gives = (eff.seaport.give || []).filter((g) => Number(g.type) >= 2);
+    if (BUY_TEXT.test(txt) && !SELL_TEXT.test(txt) && gives.length && String(eff.seaport.offerer).toLowerCase() === String(ctx.from).toLowerCase()) {
+      reasons.push({ code: 'nft_given_on_buy_intent', sev: 'critical', said: 'Tu veux acheter un NFT', does: `En réalité, tu signes un ordre qui cède ${gives.length > 1 ? gives.length + ' de tes NFT' : 'ton NFT'} : c'est une vente, pas un achat.` });
+      notes.push('F42:achat_dit_vente_signee');
+    }
+  }
+
+  // ---- F43 : la signature (ou la demande) vise un autre réseau ou un autre site que celui de la demande ou de l'intention.
+  //  - réseau : chainId du domaine EIP-712, ou « Chain ID » d'un message SIWE, différent du réseau de la demande ; ou réseau NOMMÉ dans le texte d'intention
+  //    (« sur Avalanche », « on Base ») différent de celui que la demande vise ;
+  //  - site : domaine ou URI d'un message SIWE différent de l'origine de la demande ; ou site NOMMÉ dans le texte d'intention différent de l'origine ou du domaine SIWE.
+  // Le moteur voit déjà certains de ces écarts sans intention ; avec une intention, la demande ne fait pas ce qui est dit : raison propre (« ne correspond pas »).
+  // Rouge si la demande engage de la valeur (sortie, droit) ou s'il s'agit d'un site ; orange sinon. Sans intention la règle ne fait rien (monotone).
+  if (isOn('F43') && intent) {
+    const reqChain = Number(ctx.chainId ?? eff.chainId);
+    const sig = eff.signature || {};
+    const siweChain = eff.siwe && eff.siwe.fields && eff.siwe.fields['Chain ID'] !== undefined ? Number(eff.siwe.fields['Chain ID']) : undefined;
+    const signedChain = Number.isFinite(Number(sig.domainChainId)) && sig.domainChainId !== null && sig.domainChainId !== undefined ? Number(sig.domainChainId) : siweChain;
+    const value = (eff.outgoing || []).length > 0 || (eff.approvals || []).length > 0 || !!eff.delegation;
+    const txt = foldTxt(intent.freeText);
+    // le réseau ou le site NOMMÉ dans le texte n'est comparé que pour une signature (le réseau ou le site pour lequel elle vaut) ou une connexion :
+    // « passer mes USDC sur Arbitrum » (pont) ou « virer vers Crypto.com » (dépôt) nomment une destination, pas le réseau ou le site de la demande.
+    const textScope = (eff.kind === 'signature' || intent.kind === 'connect_or_accept_offer') && intent.kind !== 'send_to_my_account';
+    const named = chainsNamed(txt);
+    // réseau visé : celui de la signature, sinon le réseau DEMANDÉ par une bascule ou un ajout de chaîne, sinon celui de la demande
+    const switchTo = eff.kind === 'chain' && eff.raw && Number.isFinite(Number(eff.raw.chainId)) ? Number(eff.raw.chainId) : undefined;
+    const target = signedChain !== undefined && Number.isFinite(signedChain) ? signedChain : switchTo !== undefined ? switchTo : reqChain;
+    let chainWhy = null;
+    if (signedChain !== undefined && Number.isFinite(signedChain) && Number.isFinite(reqChain) && reqChain > 0 && signedChain !== reqChain) chainWhy = `la signature vaut pour le réseau ${signedChain}, la demande est sur le réseau ${reqChain}`;
+    else if (textScope && named.length === 1 && Number.isFinite(target) && target > 0 && !named[0].includes(target)) chainWhy = `tu as dit le réseau ${named[0][0]}, la demande vise le réseau ${target}`;
+    if (chainWhy) { reasons.push({ code: 'chain_differs_from_intent', sev: value ? 'critical' : 'warn', said: 'Tu veux agir sur ce réseau', does: `En réalité, ${chainWhy}.` }); notes.push('F43:reseau_different'); }
+    const origin = hostOfUrl(ctx.origin);
+    const siweHosts = eff.siwe ? [String(eff.siwe.domain || '').toLowerCase(), hostOfUrl(eff.siwe.fields && eff.siwe.fields.URI)].filter(Boolean) : [];
+    const sitesSaid = hostsNamed(intent.freeText);
+    let siteWhy = null;
+    if (origin && siweHosts.some((h) => !sameSite(h, origin))) siteWhy = `le message de connexion est pour ${siweHosts.find((h) => !sameSite(h, origin))}, la page est ${origin}`;
+    else if (textScope && sitesSaid.length === 1 && [origin, ...siweHosts].filter(Boolean).some((h) => !sameSite(h, sitesSaid[0]))) siteWhy = `tu as dit ${sitesSaid[0]}, la demande vient de ${[origin, ...siweHosts].filter(Boolean).find((h) => !sameSite(h, sitesSaid[0]))}`;
+    if (siteWhy) { reasons.push({ code: 'site_differs_from_intent', sev: 'critical', said: 'Tu veux agir sur ce site', does: `En réalité, ${siteWhy}.` }); notes.push('F43:site_different'); }
   }
 
   // ---- F41 : l'intention dit un mouvement de valeur (payer, échanger, envoyer) mais la demande est une signature qui ne déplace rien, n'accorde aucun droit et ne change aucun contrôle

@@ -88,7 +88,7 @@
   },
   {
    "file": "extension_standalone/src/sentinelle_core.js",
-   "sha256": "0de46347ab814abf7d7b7d3c5b680991a4686515f8e9c926310e2c22d82ed5a1"
+   "sha256": "c9f301f9f9923bc03da425c7f46d01ec93c32c0bb9433b7529a81a625745e28f"
   },
   {
    "file": "extension/revoke.js",
@@ -96,23 +96,23 @@
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "e004b78055965b418f175dfe527489dc2cf42137b0843a2051318f1a463821a5"
+   "sha256": "79d2146cd4b64e808ba7ed414ebb70ba293b0b2b9d49dea7fa9757e8dc688c8f"
   },
   {
    "file": "server/server.mjs",
-   "sha256": "111abeac7ae96a901474ca99de69c975c6b050f74922f30fd8821c53397ca546"
+   "sha256": "bb433ab24729a6c7bae146ab231e3b2464b612ebf6e13656b57028b79c2de38e"
   }
  ],
  "outputs": [
   {
    "file": "engine/policy.js",
-   "bytes": 32822,
-   "sha256": "cb14b2508f3580c05b68b7bbf03e84d1f134dff58dc602495384c0616cb4b45e"
+   "bytes": 34968,
+   "sha256": "aa44043d29d4cf86c857e9bf2c60e3a497996dfb25f66840d637401ddc4c7b40"
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 39752,
-   "sha256": "4f03980a47c8bac052f54c1431126c5acaeee25bf2b76ae83af9271805d49c60"
+   "bytes": 40162,
+   "sha256": "739198e77a2ac88177e6fed129eec085728ca1c51647112b838015cc66e2241f"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -215,6 +215,6 @@
    "sha256": "41fbd413f61525f778310da56df1e4263b606f634b51411717004dca14d23845"
   }
  ],
- "total_bytes": 333703,
- "tree_sha256": "098635489637d46afa82aa46fe9cb74cf6b7a73809346245447d39cdf78f0439"
+ "total_bytes": 336259,
+ "tree_sha256": "9213401c7c7bfb0e8c52a33e3f12bbf05a3e98507e62839894735f17b351229b"
 }

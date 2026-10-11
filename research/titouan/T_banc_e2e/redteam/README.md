@@ -1,4 +1,4 @@
-# check.mjs : boîte noire du moteur Sentinelle (red team)
+# check.mjs : boîte noire du moteur Hold up (red team)
 
 Usage : `node research/titouan/T_banc_e2e/redteam/check.mjs <cas.jsonl>` (Node >= 22.6, sans dépendance ni réseau, n'écrit aucun fichier).
 Entrée : un cas JSON par ligne au schéma de `attacks/README.md` : `request`, `context`, `intent`, plus en option `id`, `label` (`malveillant`/`benin`/...) et `expected_severity`.

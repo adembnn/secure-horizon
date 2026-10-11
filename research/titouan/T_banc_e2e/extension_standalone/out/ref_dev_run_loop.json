@@ -293,8 +293,8 @@
   },
   "intention_mensongere": {
    "counts": {
-    "attrape_critical": 224,
-    "attrape_warn": 28,
+    "attrape_critical": 227,
+    "attrape_warn": 25,
     "rate": 0,
     "inconnu": 0,
     "fa_critical": 0,
@@ -326,11 +326,11 @@
      "hi": 1
     },
     "rappel_critical": {
-     "k": 224,
+     "k": 227,
      "n": 252,
-     "rate": 0.8889,
-     "lo": 0.8441,
-     "hi": 0.922
+     "rate": 0.9008,
+     "lo": 0.8577,
+     "hi": 0.9319
     },
     "rappel_hors_inconnu": {
      "k": 252,
@@ -2962,7 +2962,9 @@
     "unexpected_approval_connect"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "domaine_sosie-003",
@@ -2989,7 +2991,9 @@
     "unexpected_approval_connect"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "domaine_sosie-004",
@@ -3043,7 +3047,9 @@
     "unexpected_approval_connect"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "domaine_sosie-006",
@@ -3123,7 +3129,9 @@
     "unexpected_approval_connect"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "domaine_sosie-011",
@@ -3150,7 +3158,9 @@
     "unexpected_approval_connect"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "domaine_sosie-012",
@@ -4949,7 +4959,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F32:jeton_different_de_lintention"
+   ]
   },
   {
    "id": "faux_token-007",
@@ -4970,7 +4982,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F32:jeton_different_de_lintention"
+   ]
   },
   {
    "id": "faux_token-008",
@@ -4991,7 +5005,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F32:jeton_different_de_lintention"
+   ]
   },
   {
    "id": "faux_token-009",
@@ -5012,7 +5028,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F32:jeton_different_de_lintention"
+   ]
   },
   {
    "id": "honeypot-001",
@@ -8120,7 +8138,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "siwe-002",
@@ -8141,7 +8161,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "siwe-003",
@@ -8154,7 +8176,7 @@
     "reference_simulation": "ok",
     "sans_intention": "warn",
     "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "intention_mensongere": "critical",
     "_adem_catalogue": "ok"
    },
    "floorCodes": [
@@ -8162,7 +8184,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "siwe-005",
@@ -8183,7 +8207,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "siwe-007",
@@ -8196,7 +8222,7 @@
     "reference_simulation": "ok",
     "sans_intention": "warn",
     "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "intention_mensongere": "critical",
     "_adem_catalogue": "ok"
    },
    "floorCodes": [
@@ -8204,7 +8230,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:site_different"
+   ]
   },
   {
    "id": "siwe-008",
@@ -8217,7 +8245,7 @@
     "reference_simulation": "ok",
     "sans_intention": "warn",
     "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "intention_mensongere": "critical",
     "_adem_catalogue": "ok"
    },
    "floorCodes": [
@@ -8225,7 +8253,10 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F43:reseau_different",
+    "F43:site_different"
+   ]
   },
   {
    "id": "siwe-009",

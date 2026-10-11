@@ -8,7 +8,7 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "098635489637d46a"
+   "detail": "9213401c7c7bfb0e"
   },
   {
    "name": "engine/src copie fidele (16 fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)",
@@ -671,7 +671,7 @@
    "detail": ""
   },
   {
-   "name": "taille du site : 41 fichiers, 463 Ko (environ 147 Ko compresses)",
+   "name": "taille du site : 41 fichiers, 466 Ko (environ 148 Ko compresses)",
    "pass": true,
    "detail": ""
   }
@@ -679,7 +679,7 @@
  "notes": [
   "LIMITE CONSTATEE : faux_support avec la reponse \"Payer quelqu'un\" donne le niveau 'attention' (la pression de la page n'est lue que si le moteur voit deja un signal)."
  ],
- "tree_sha256": "098635489637d46afa82aa46fe9cb74cf6b7a73809346245447d39cdf78f0439",
+ "tree_sha256": "9213401c7c7bfb0e8c52a33e3f12bbf05a3e98507e62839894735f17b351229b",
  "modules_charges": 31,
  "scenarios": {
   "filtres_par_la_couche_http_du_serveur": 3,
@@ -694,8 +694,8 @@
    "manipulation": 4,
    "unknown": 13
   },
-  "ms_total": 265,
-  "ms_par_verdict": 2.35
+  "ms_total": 237,
+  "ms_par_verdict": 2.09
  },
  "niveaux_scenarios": {
   "echange_honnete": "info",
@@ -764,8 +764,8 @@
  },
  "taille": {
   "fichiers_publies": 41,
-  "octets_total": 474475,
-  "octets_gzip_estimes": 150713,
+  "octets_total": 477031,
+  "octets_gzip_estimes": 151611,
   "plus_gros": [
    {
     "f": "engine/textes.js",
@@ -773,15 +773,15 @@
    },
    {
     "f": "engine/sentinelle_core.js",
-    "b": 39752
+    "b": 40162
+   },
+   {
+    "f": "engine/policy.js",
+    "b": 34968
    },
    {
     "f": "engine/src/rules_extra.js",
     "b": 34684
-   },
-   {
-    "f": "engine/policy.js",
-    "b": 32822
    },
    {
     "f": "engine/src/calldata.js",

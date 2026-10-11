@@ -247,6 +247,8 @@ export const REASON_FICHE = {
   unexpected_approval: 'F01', unexpected_approval_connect: 'F01', unexpected_delegation: 'F11', unexpected_delegation_connect: 'F11', wrong_recipient: 'F19',
   amount_exceeded: '~montant_superieur', first_seen_recipient: 'F24', unlimited_approval_swap: 'F01', no_incoming: '~rien_en_retour', permit_new_contract: 'F01',
   unexpected_outgoing: '~inattendu_envoi', approval_exceeds_intent: 'F01', token_differs_from_intent: '~jeton_different',
+  // raisons des familles (run/policy.mjs F42, F43 ; engine/src/typed.mjs) : achat dit mais NFT cédé, réseau ou site différent de l'intention, permit au type renommé
+  nft_given_on_buy_intent: 'F04', chain_differs_from_intent: 'F29', site_differs_from_intent: 'F06', permit_type_renamed: 'F01',
   // codes ajoutes par la boucle V2 (rules_extra / fixes)
   lookalike_reported: 'F13', lookalike_weak: 'F39', signed_transfer_unlimited: 'F01', signed_right_unlimited_unknown: 'F01',
   signed_calldata: 'F40', signed_text_grants_assets: 'F41', offchain_signaling: null, effect_decoded_limited: null, // offchain_signaling (info) : fiche F42, choisie dans infoFiche()
@@ -289,7 +291,8 @@ const PRIORITY = ['F21', 'F11', 'F07', 'F08', 'F09', 'F14', 'F13', 'F39', 'F20',
 function ficheOfCode(code, eff, funds) {
   if (code === 'site_origin_mismatch' && eff.siwe) return 'F06';
   if (code === 'order_proceeds_negligible' && eff.seaport) return 'F04';
-  if ((code === 'domain_chain_mismatch' || code === 'siwe_chain_mismatch') && !funds) return '~reseau_signature';
+  if ((code === 'domain_chain_mismatch' || code === 'siwe_chain_mismatch' || code === 'chain_differs_from_intent') && !funds) return '~reseau_signature';
+  if (code === 'site_differs_from_intent' && !eff.siwe) return 'F20';
   return REASON_FICHE[code];
 }
 // ---- aides de lecture de l'effet (sans reseau, sans fichier)

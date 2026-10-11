@@ -18,6 +18,9 @@ export const DEFAULT_TOKENS = {
   '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7': { symbol: 'WAVAX', decimals: 18 },
   native: { symbol: 'NATIVE', decimals: 18 },
 };
+// réseau de chaque adresse de DEFAULT_TOKENS (Ethereum = 1, Avalanche C-Chain = 43114) : sert à dire « ce symbole a une adresse connue SUR CE RÉSEAU »
+const DEFAULT_CHAIN = { 1: ['0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', '0xdac17f958d2ee523a2206206994597c13d831ec7', '0x6b175474e89094c44da98b954eedeac495271d0f', '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'], 43114: ['0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e', '0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7', '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7'] };
+export const defaultTokensOn = (chainId) => (DEFAULT_CHAIN[Number(chainId)] || []).map((address) => ({ address, ...DEFAULT_TOKENS[address] }));
 export function fmtUnits(v, decimals) {
   if (decimals == null) return v.toString();
   const s = v.toString().padStart(decimals + 1, '0');

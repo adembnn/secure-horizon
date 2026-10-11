@@ -1,4 +1,4 @@
-# jury_fuzz_encoding — contournements de Sentinelle par l'encodage et les lots
+# jury_fuzz_encoding — contournements de Hold up par l'encodage et les lots
 
 Agent : **fuzz_encoding**. Surface : encodage & lots. Tout synthetique (Avalanche 43114 / Fuji 43113). Outil unique : check.mjs (boite noire).
 

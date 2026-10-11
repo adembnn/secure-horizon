@@ -1,6 +1,6 @@
 # Protocole V2 : essai réel de Hold up avec un vrai MetaMask
 
-Date : 11 oct. 2026. Remplace `ESSAI_REEL_METAMASK.md`, écrit avant le produit figé (il parle de "Sentinelle", du serveur 8787 et d'une fenêtre dans la page : tout cela est périmé). Les fichiers `CE_QUI_PEUT_CASSER.md` et `page_essai\` datent aussi de cette époque : on les garde pour mémoire, on n'en dépend plus (sauf `page_essai\` pour Fuji, section 9).
+Date : 11 oct. 2026. Remplace `ESSAI_REEL_METAMASK.md`, écrit avant le produit figé (il parle de "Hold up", du serveur 8787 et d'une fenêtre dans la page : tout cela est périmé). Les fichiers `CE_QUI_PEUT_CASSER.md` et `page_essai\` datent aussi de cette époque : on les garde pour mémoire, on n'en dépend plus (sauf `page_essai\` pour Fuji, section 9).
 
 Ce protocole est écrit pour une personne qui n'est pas développeuse. Une case = un geste. Une commande = un bloc. Aucun agent n'a joué ce protocole : tout ce qui est écrit sous "Prévu" est une **prévision tirée du code**, pas un constat. Ton travail est de remplacer les prévisions par des constats, dans `RESULTATS_TEMPLATE.md`.
 
@@ -522,7 +522,7 @@ npm run demo:fuji
 
 - [ ] Réussite : adresses écrites dans `research\demo_reelle\chain\addresses.fuji.json` et `blockchain\DEPLOYMENTS.md`.
 - [ ] Rejoue ensuite avec la page testnet (`http://127.0.0.1:8794/`) en mettant "Réseau attendu" à `43113`, jeton = `usdc` de `addresses.fuji.json`, nom de domaine Permit `Demo USDC`, version `1`, et la même méthode qu'en 8.5 et 8.6. Captures préfixées `FUJI_`.
-- Si tu préfères l'ancienne page à 9 scénarios (Fuji codé en dur) : `node R\research\titouan\T_banc_e2e\essai_reel\page_essai\serve.mjs`, puis `http://127.0.0.1:8788/`. Elle dit "Sentinelle" dans ses textes, c'est le même produit.
+- Si tu préfères l'ancienne page à 9 scénarios (Fuji codé en dur) : `node R\research\titouan\T_banc_e2e\essai_reel\page_essai\serve.mjs`, puis `http://127.0.0.1:8788/`. Elle dit "Hold up" dans ses textes, c'est le même produit.
 
 ---
 
