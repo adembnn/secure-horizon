@@ -2,7 +2,7 @@
 
 Avant qu'une personne signe ou envoie de la crypto, Hold up lui montre ce que l'opération fait vraiment, le compare à ce qu'elle a écrit vouloir faire, et la fait attendre si les deux ne collent pas.
 
-Ce document décrit le produit actuel : son problème, son flux, ses composants réels et leurs limites. Il reste aligné sur [PRODUCT.md](../PRODUCT.md), le [README](../README.md) racine, [livrables/ARCHITECTURE.md](../livrables/ARCHITECTURE.md) (architecture de rendu, avec diagrammes de séquence et pistes d'intégration) et sur les décisions `coord/DECISIONS.md` D-007, D-008, D-009.
+Ce document décrit le produit actuel : son problème, son flux, ses composants réels et leurs limites. Il reste aligné sur la **définition du produit** donnée par [PRODUCT.md](../PRODUCT.md) (but, positionnement, principes), le [README](../README.md) racine, [livrables/ARCHITECTURE.md](../livrables/ARCHITECTURE.md) (architecture de rendu, avec diagrammes de séquence et pistes d'intégration) et les décisions `coord/DECISIONS.md` D-007, D-008, D-009. L'alignement porte sur le fond, pas sur le nom : `PRODUCT.md` emploie encore « Sentinelle » dans tout son corps et reste à renommer dans un autre lot.
 
 Ancien nom : Sentinelle. Il reste dans quelques fichiers de recherche et dans des noms techniques (variables `SENTINELLE_*`, champ `service` du serveur local). C'est le même projet.
 
@@ -121,7 +121,7 @@ Partage des rôles :
 - sous un seuil de confiance (0,6 par défaut), l'intention est « non classée » : aucune famille n'est transmise, et le moteur garde le plus strict des deux verdicts. Une intention non classée ne peut donc que **relever** un verdict, jamais l'abaisser ;
 - quand le modèle ne répond pas (pas de clé, erreur, délai), la famille vient d'un repli par mots-clés (`extension/intent_text.js`, `keyword_intent.js`), et le résultat le signale.
 
-État : ce classifieur **n'est pas branché** dans le serveur ni dans l'extension du produit livré à la rédaction. L'intégration passerait par `pipeline/evaluate_plus.mjs`. Le repli par mots-clés, lui, est présent dans l'extension. Même branché, le classifieur ne peut jamais baisser un verdict ; la règle « on m'a demandé de le faire » prime sur toute famille.
+État : le câblage **existe** déjà dans `pipeline/evaluate_plus.mjs`, qui est la route par défaut du serveur (`server/server.mjs` appelle `evaluatePlus(body, local)` sauf si `HOLDUP_PLUS === '0'`). Ce qui est **désactivé par défaut**, c'est le classifieur Clef / Jev lui-même : le détecteur de message collé ne tourne que si l'interrupteur `HOLDUP_CLASSIFIER` est positionné (« off unless set »). Sans lui, seul le repli par mots-clés tourne (`extension/intent_text.js`, `keyword_intent.js`), et **aucun modèle de langage n'est appelé sur le chemin de réponse par défaut**. Même activé, le classifieur ne peut jamais baisser un verdict ; la règle « on m'a demandé de le faire » prime sur toute famille.
 
 ## 6. Composants réels et chemins de code
 
@@ -140,7 +140,7 @@ Partage des rôles :
 | Moteur de verdict | `server/server.mjs` (`evaluate`), `engine/src`, `run/policy.mjs` | décodage, comparateur, politique, journal |
 | Serveur de vérification | `server/server.mjs` | `POST /check`, `POST /log`, 127.0.0.1 uniquement |
 | RPC de garde (deuxième porte, prototype) | `research/demo_reelle/rpc_garde/` | proxy JSON-RPC, retenue d'une transaction signée |
-| Classifieur d'intention (non branché) | `pipeline/intent_clef.mjs`, `measure_intent.mjs`, `evaluate_plus.mjs` | famille d'opération depuis le texte ou un message collé |
+| Classifieur d'intention (câblé, désactivé par défaut) | `pipeline/intent_clef.mjs`, `measure_intent.mjs`, `evaluate_plus.mjs` | famille d'opération depuis le texte ou un message collé ; actif seulement si `HOLDUP_CLASSIFIER` est positionné |
 | Journal et ancrage | `anchor/`, `EvidenceAnchor.sol` | chaîne de hachage ; ancrage Fuji écrit, non déployé |
 | Contrats de démo | `blockchain/contracts/demo/` | DemoUSDC, DemoWAVAX, DemoNFT, DemoRouter, FreshDrainer (joue l'attaquant) |
 
@@ -156,9 +156,9 @@ Aucun chiffre de détection n'est écrit à la main dans ce document. Les mesure
 
 - **Chaque porte a un angle mort.** L'extension ne voit pas un envoi lancé depuis l'écran « Envoyer » du portefeuille, ni le mobile, ni WalletConnect, ni les applications natives. Le RPC de garde ne voit pas les signatures hors chaîne. Les retraits d'une plateforme restent au geste manuel.
 - **Le RPC de garde reste un prototype**, sorti des scènes de démo par D-009. L'hébergement pour de vrais utilisateurs (authentification, limitation de débit, TLS, vie privée des transactions) n'est pas écrit.
-- **Le classifieur d'intention n'est pas branché** dans le produit livré. Aucun modèle de langage n'est appelé sur le chemin de réponse ; le produit décide par code et mots-clés.
+- **Le classifieur d'intention est désactivé par défaut.** Son câblage existe dans `pipeline/evaluate_plus.mjs` (route serveur par défaut), mais le classifieur Clef / Jev n'y tourne que si `HOLDUP_CLASSIFIER` est positionné. Par défaut, aucun modèle de langage n'est appelé sur le chemin de réponse ; le produit décide par code et mots-clés.
 - **Rien n'est déployé sur Fuji.** L'ancrage de la racine du journal est écrit et testé en local, jamais envoyé. Sans ancrage, le journal ne détecte pas une réécriture complète.
-- **Testé sur un portefeuille simulé, pas sur un vrai.** Aucun essai consigné avec MetaMask, Rabby ou Core (`essai_reel/ESSAI_REEL_RESULTATS.csv` vide).
+- **Testé sur un portefeuille simulé, pas sur un vrai.** Aucun essai consigné avec MetaMask, Rabby ou Core : `essai_reel/ESSAI_REEL_RESULTATS.csv` est un gabarit non renseigné (une ligne d'en-tête et une trentaine de lignes de scénarios dont les colonnes de résultat restent vides).
 - **Fausses alertes élevées** sur des opérations honnêtes : c'est la première limite du produit.
 - **Fraude « conforme » non couverte** : une victime qui envoie volontairement à une adresse choisie sous la guidance d'un escroc ne se distingue pas d'un envoi honnête.
 - **On avertit et on ralentit, on ne bloque pas.** Un utilisateur déterminé, ou coaché au téléphone, peut passer outre. Le service worker MV3 peut s'arrêter avant la fin d'une retenue longue.
