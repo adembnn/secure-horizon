@@ -47,10 +47,10 @@ Gratuit pour construire une base d'utilisateurs, puis des partenaires. Pas d'abo
 
 - Jamais essayé avec un vrai portefeuille. La démo tourne sur une chaîne locale pour la démo, Fuji à décider (D-013). L'API d'alertes de MetaMask ne sert pas ces chaînes : son silence là ne prouve rien.
 - Fausses alertes : en conditions produit synthétiques, 13,9 % des opérations honnêtes en rouge et 54,2 % avec au moins un avertissement. C'est la limite principale (fatigue d'alerte).
-- Jeu aveugle de 250 cas d'un autre auteur : non passé (D-012). Les mesures sont sur nos cas ou un contrôle scellé aux mêmes auteurs.
+- Jeu aveugle de 250 cas d'un autre auteur (un modèle de la même famille que les nôtres) : passé le 11 oct. 2026, ouvert une fois. Code seul : rappel 87,3 %, faux rouges 15,0 %, seuil de 10 % non atteint (`livrables/CHIFFRES.md`, A6).
 - Revue de sécurité interne : contournements trouvés, dont un critique ; corrections non vérifiées dans un navigateur. Ne pas utiliser avec de vrais fonds.
 - Aucun test avec des personnes, aucun client, aucune mesure d'efficacité de nos écrans : ne rien inventer.
-- Journal chaîné par hachage : présent dans la version serveur seulement ; non affirmé pour la version autonome.
+- Journal chaîné par hachage dans les deux versions, dont le build autonome livré (`journal_chain.js`, 7 tests, export JSON depuis le panneau latéral, vérification hors ligne par `extension/tools/verify_journal.mjs`). Pas d'ancrage sur une blockchain (décision D-017) : une réécriture complète ou la suppression des dernières lignes ne se voit pas. Non vérifié dans un vrai Chrome.
 
 ## Principes
 

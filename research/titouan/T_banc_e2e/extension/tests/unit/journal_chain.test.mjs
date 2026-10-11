@@ -29,8 +29,9 @@ test('a modified line is found (also when its own hash is recomputed : the next 
   const chain = await build(6);
   const a = clone(chain); a.entries[2].l = 'danger';
   const ra = await C.verifyChain(a); assert.equal(ra.ok, false); assert.match(ra.problems.join(' '), /n° 3.*modifiée/);
-  const b = clone(chain); b.entries[2].l = 'danger'; b.entries[2].hash = (await C.seal(b.entries[2].prev, 3, { t: b.entries[2].t, o: b.entries[2].o, type: b.entries[2].type, m: b.entries[2].m, l: 'danger', c: b.entries[2].c, d: b.entries[2].d, v: b.entries[2].v })).hash;
+  const b = clone(chain); b.entries[2].l = 'danger'; b.entries[2].hash = (await C.seal(b.entries[2].prev, 3, { t: b.entries[2].t, o: b.entries[2].o, type: b.entries[2].type, m: b.entries[2].m, l: 'danger', c: b.entries[2].c, d: b.entries[2].d, v: b.entries[2].v, by: b.entries[2].by, rules: b.entries[2].rules })).hash;
   const rb = await C.verifyChain(b); assert.equal(rb.ok, false); assert.match(rb.problems.join(' '), /n° 4.*rompu/);
+  assert.ok(!rb.problems.join(' ').includes('n° 3'), 'line 3 itself was resealed consistently');
 });
 test('a line removed in the middle is found ; so is a reordering', async () => {
   const chain = await build(6);
@@ -63,7 +64,7 @@ test('only the allowed fields are kept : no sentence, no full address, no extra 
   const s = JSON.stringify((await st.get('chain')).chain);
   assert.ok(!s.includes('payer') && !s.toLowerCase().includes(ME.slice(2)) && !s.includes('pay_someone') && !s.includes('/path'));
   const e = (await st.get('chain')).chain.entries[0];
-  assert.deepEqual(Object.keys(e).sort(), ['c', 'd', 'hash', 'l', 'm', 'n', 'o', 'prev', 't', 'type', 'v']);
+  assert.deepEqual(Object.keys(e).sort(), ['by', 'c', 'd', 'hash', 'l', 'm', 'n', 'o', 'prev', 'rules', 't', 'type', 'v']);
   assert.equal(e.o, 'shop.example'); assert.deepEqual(e.c, ['a_b']);
   const long = 'https://app.uniswap.org.' + 'x'.repeat(80) + '.evil.example';
   await C.chainAppend(st, { type: 'decision', origin: long, ts: 6 }, '0.3.0');

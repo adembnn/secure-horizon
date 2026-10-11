@@ -28,7 +28,7 @@ Trois scènes, dans cet ordre. Durée visée : 1 minute en tout.
 
 ## Après l'alerte
 - La personne annule ou continue : elle garde le dernier geste, Annuler reste visible, aucun écran n'est vert.
-- Chaque décision laisse une ligne datée. L'extension autonome garde 500 lignes locales. Le journal chaîné par hachage existe dans la version serveur seulement : ne pas l'affirmer pour l'autonome.
+- Chaque décision laisse une ligne datée. L'extension autonome garde 500 lignes locales, chaînées par hachage comme la version serveur (`journal_chain.js`, 7 tests, export JSON, `verify_journal.mjs`). Pas d'ancrage sur une blockchain (D-017).
 - Révocation d'un droit en un clic et preuve ancrée : prototypes, pas dans la démo. Ne pas les montrer comme faits. L'ancrage sur Fuji est codé, pas déployé.
 - Le panneau latéral (clic sur l'icône de l'extension) montre le journal des décisions.
 

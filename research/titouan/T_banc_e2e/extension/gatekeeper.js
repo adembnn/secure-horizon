@@ -8,7 +8,7 @@ import { ENGINE_CHOICE, KINDS, MAX_TEXT, MODEL_MIN, NO_MATCH, cleanText, interpr
 import { TEXT, answerOf, networkName, siteName } from './outcome.js';
 import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
 import { measure, readToken } from './effect_sim.js';
-import { chainAppend, sha256 } from './journal_chain.js';
+import { chainAppend, rulesTag, sha256 } from './journal_chain.js';
 import { revocationFor } from './revoke.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
@@ -244,7 +244,8 @@ const hostOf = (origin) => { try { return new URL(origin).host || String(origin)
 
 // `classify(text)` (optional) asks the relay (Clef / Jev) ; without it, or when it fails, the embedded keyword parser answers.
 // `closeMs` : how long a decided window keeps its last message before the worker removes it (0 : at once).
-export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS } = {}) {
+// `rulesFingerprint` : 12 hex given by the build (fingerprint of the embedded rule files), written in every chained line with the version.
+export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS, rulesFingerprint = null } = {}) {
   const selfUrl = chrome.runtime.getURL('');
   const windowUrl = chrome.runtime.getURL('window.html');
   const mem = new Map(); // only if chrome.storage.session is missing : the hold then does not survive the worker (journalled)
@@ -300,7 +301,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // hash-chained copy (journal_chain.js) : site, kind, level, codes, decision, build version. Never the sentence, never an address.
     if (entry.type === 'verdict' || entry.type === 'decision' || entry.type === 'partial' || entry.type === 'revocation') {
       let version = ''; try { version = chrome.runtime.getManifest().version; } catch (_) {}
-      await chainAppend(chrome.storage.local, entry, version);
+      await chainAppend(chrome.storage.local, entry, version, rulesTag(version, rulesFingerprint));
     }
     if (onJournal) { try { onJournal(entry); } catch (_) {} }
   }
@@ -844,7 +845,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       keptWin = await keepTake(tabId, frameId, origin, op, msg.rid, Date.now());
       if (keptWin) { init.ui = 'window'; init.windowId = keptWin.windowId; init.step = (keptWin.step || 1) + 1; }
       enterVerdict(init, v2, cfg, Date.now());
-      await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });
+      await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', actor: 'auto', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });
     } else if (wantIntent) { init.stage = 'intent'; init.shownAt = Date.now(); }
     else applyPlan(init, planAfterIntent(floor, null, cfg), cfg, Date.now());
 
@@ -861,7 +862,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   async function journalStage(rec) {
     if (rec.stage !== 'verdict') return;
     const v = rec.verdict;
-    await journal({ type: 'verdict', origin: rec.origin, method: rec.method, level: v.level, codes: (Array.isArray(v.codes) ? v.codes.slice(0, 7) : []).concat(v.written && v.written.corrected ? ['droit_limite'] : []), indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
+    await journal({ type: 'verdict', limited: rec.rewrite && v.written && v.written.limited ? { symbol: v.written.limited.symbol, amount: v.written.limited.amount } : undefined, origin: rec.origin, method: rec.method, level: v.level, codes: (Array.isArray(v.codes) ? v.codes.slice(0, 7) : []).concat(v.written && v.written.corrected ? ['droit_limite'] : []), indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
       friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, grill: rec.grill ? { state: rec.grill.state, floor: rec.grill.floor, answers: rec.grill.answers } : null, intent: rec.intent ? rec.intent.choice : null });
   }
 
@@ -951,7 +952,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         // really went to the wallet : the request as the site sent it, or the one Hold up limited (amounts only, never an address).
         const lim = rec.rewrite && rec.verdict.written && rec.verdict.written.limited ? rec.verdict.written.limited : null;
         const who = by === 'human' && msg.auto === true ? 'auto' : by;
-        await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by: who, gesture: who === 'human', origin: rec.origin, method: rec.method, level: rec.level, outcome: shownOutcome(rec), indeterminate: !!rec.verdict.indeterminate,
+        await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by: who, actor: who === 'human' ? 'humain' : 'auto', limited: lim ? { symbol: lim.symbol, amount: lim.amount } : undefined, gesture: who === 'human', origin: rec.origin, method: rec.method, level: rec.level, outcome: shownOutcome(rec), indeterminate: !!rec.verdict.indeterminate,
           codes: [who === 'auto' ? 'envoi_automatique' : 'geste'].concat(lim ? ['droit_limite'] : []),
           sent: lim ? { limited: true, asked: lim.before, sent: lim.amount + ' ' + lim.symbol } : { limited: false },
           time_to_decision_ms: ttd, friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, ui: rec.ui, total_ms: Date.now() - rec.createdAt });

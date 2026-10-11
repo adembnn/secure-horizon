@@ -26,7 +26,11 @@ Durée de retenue après une alerte : sur l'écart « montant écrit contre droi
 
 ## 4. Qui est alerté
 
-La personne devant l'écran, et elle seule. Une plateforme qui intègre Hold up lit le journal sur sa machine : `incident.mjs --list` et `--stats`. Alerte poussée vers un tiers : non fait.
+Sur le moment : la personne devant l'écran, et elle seule. Alerte poussée vers un tiers : non fait.
+
+Qui lit les alertes et l'export du journal ensuite :
+- Quand une plateforme intègre Hold up (exchange, fintech, portefeuille) : **son équipe fraude**. Elle récupère l'export JSON, le vérifie avec `verify_journal.mjs`, et lit les décisions (version serveur : `incident.mjs --list` et `--stats`). Elle décide des suites : contact client, signalement, registre d'incidents.
+- Pour un particulier qui l'utilise seul : **la personne elle-même**. Elle exporte le journal depuis le panneau latéral et peut le remettre à sa plateforme, à son assureur ou à la police.
 
 ## 5. Après la décision
 
@@ -35,7 +39,7 @@ La personne devant l'écran, et elle seule. Une plateforme qui intègre Hold up 
 
 ## 6. Comment c'est documenté
 
-Journal chaîné (version serveur seulement) ; ancrage de la racine de Merkle par `reponse/anchor_evidence.mjs`, fait sur chaîne locale seulement. Fuji : aucune transaction dans le dépôt. Deux formats de journal coexistent sans pont (serveur en sha256, `anchor/journal.mjs` en keccak). La version des règles n'est pas dans le journal.
+Journal chaîné par sha256 dans les deux versions : le build autonome livré (`extension_standalone/extension/journal_chain.js`, identique à `extension/journal_chain.js` ; 7 tests dans `extension/tests/unit/journal_chain.test.mjs` ; export JSON depuis le panneau latéral ; vérification hors ligne par `extension/tools/verify_journal.mjs`) et la version serveur. Pas d'ancrage sur une blockchain pour la démo ni pour le rendu (décision D-017, `coord/DECISIONS.md`) : `reponse/anchor_evidence.mjs` existe, joué sur chaîne locale seulement, aucune transaction Fuji. Champs supplémentaires du journal (qui a décidé, droit limité, règles appliquées) : en cours, ne pas les citer. Deux formats de journal coexistent sans pont (serveur en sha256, `anchor/journal.mjs` en keccak). La version des règles n'est pas dans le journal.
 
 ## 7. Temps
 
@@ -49,7 +53,7 @@ Journal chaîné (version serveur seulement) ; ancrage de la racine de Merkle pa
 
 ## 8. Limites
 
-- Avant ancrage, le détenteur du fichier peut réécrire tout le journal. Dans le build autonome, il n'y a pas de chaîne du tout.
+- Sans ancrage externe (décision D-017), le détenteur du fichier peut réécrire tout le journal, ou retirer les dernières lignes, sans que la vérification le voie. Cela vaut pour les deux versions, toutes deux chaînées.
 - Verdict et décision sont appariés par site, méthode et ordre, faute d'identifiant de requête.
 - `revoke.mjs` lit les événements depuis un bloc donné ; sur un RPC public la plage est plafonnée. Le retrait coûte des frais et arrive souvent après le vol.
 - Fiches et retraits en ligne de commande, sans bouton dans l'extension.
