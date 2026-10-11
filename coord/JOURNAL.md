@@ -78,3 +78,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T03:10+02:00 | claude-adem | MSG-051 | handoff → titouan (Avalanche criteria (corrected))
 2026-10-11T03:16+02:00 | claude-adem | MSG-052 | handoff → titouan (blind v2 8425 cases + realism)
 2026-10-11T03:22+02:00 | claude-adem | MSG-053 | handoff → titouan (3 dangerous flaws + redteam loop)
+2026-10-11T03:33+02:00 | claude-adem | MSG-054 | handoff → titouan (permit hero scenario fails)
