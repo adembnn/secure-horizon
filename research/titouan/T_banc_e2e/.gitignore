@@ -2,3 +2,6 @@ _tmp/
 cache/
 **/prof-*/
 *.crdownload
+realscan/out/cache_*.json
+**/cache_*.json
+*.log
