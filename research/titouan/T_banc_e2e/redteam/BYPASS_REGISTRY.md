@@ -33,3 +33,12 @@
 | fuzz_intent | T12 pay_someone : token déclaré != token envoyé non détecté | 80/80 | fuzz_intent-p3-02290 |
 | fuzz_intent | T13 message d escroc collé (réutilisé) sans aucun effet sur le verdict | 2576/2576 | fuzz_intent-p1-00013 |
 | fuzz_intent | T14 chaîne 43114/43113 ou context.chainId incohérent sans effet | 72/72 | fuzz_intent-p3-02640 |
+| fuzz_encoding | encodage_approve_fini_dans_lot_cecite_totale | 486/486 | fe-s2_approveFinite_mc3_agg3-0001 |
+| fuzz_encoding | encodage_lot_rabaisse_critical_en_warn | 486/486 | fe-s2_approveNearMax_mc3_agg3-0001 |
+| fuzz_encoding | multicall3_imbrique_1_4_niveaux | 619/720 | fe-mc3_aggregate_d1-0001 |
+| fuzz_encoding | calldata_padding_sous_appel_de_lot | 230/270 | fe-pad_mc3_trailing_junk-0001 |
+| fuzz_encoding | contrat_forwarder_multi_hop | 81/120 | fe-forwarder_h3-0001 |
+| fuzz_encoding | selecteurs_de_proxy | 108/240 | fe-proxy_w1-0013 |
+| fuzz_encoding | universal_router_execute_inputs | 61/192 | fe-univ_router_plain-0002 |
+| fuzz_encoding | wallet_sendCalls_2_20_appels | 36/285 | fe-sendcalls_n2-0013 |
+| fuzz_encoding | routeur_multicall_bytes | 34/270 | fe-router_multicallbytes-0055 |

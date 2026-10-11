@@ -126,3 +126,13 @@ Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est pré
   Recommandations :
   - plancher critical récursif dans les lots ;
   - fail-closed sur decode_error, unknown_typed_data et blind_signature.
+- FUZZ INTENTION (`redteam/jury_fuzz_intent.md`, avec la carte des seuils exacts) : 43 852 transferts testés, 46 % ne sortent pas en critical.
+  Pires résultats :
+  - `askedBy` ignoré hors du kind asked_by_someone (10 168/10 168) ;
+  - kind absent ou mal formé, avec la casse ou une espace (7 836/7 836) ;
+  - la part du solde ne monte jamais au-dessus de warn ; elle n'est pas recalculée ; le fractionnement passe en ok ;
+  - une poussière envoyée par l'escroc blanchit son adresse (les entrées de l'historique sont comptées comme connues) ;
+  - pay_someone n'est jamais critical vers une adresse jamais vue ;
+  - le token n'est jamais comparé ;
+  - « 1,000 » ou « 1k » sont lus comme 1.
+  Ce qui tient : asked_by_someone, buy_or_swap et connect avec une sortie (15 120/15 120 en critical) ; sosie 4+4.
