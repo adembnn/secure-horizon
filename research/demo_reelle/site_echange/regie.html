@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Régie — Hold up</title>
+<style>
+  /* Page de régie, réservée au présentateur. Volontairement sobre : noir et blanc, police
+     du système, texte seulement. Rien ici n'est montré au public ; c'est l'interrupteur de scène. */
+  :root { color-scheme: light; }
+  html, body { margin: 0; background: #fff; color: #000; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 15px; line-height: 1.5; padding: 32px; max-width: 720px; }
+  h1 { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+  p.sub { margin: 0 0 24px; }
+  hr { border: 0; border-top: 1px solid #000; margin: 24px 0; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  button { font: inherit; background: #fff; color: #000; border: 1px solid #000; padding: 10px 18px; cursor: pointer; }
+  button:hover { background: #000; color: #fff; }
+  button:disabled { opacity: .4; cursor: default; }
+  button:disabled:hover { background: #fff; color: #000; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 4px; }
+  th, td { border: 1px solid #000; padding: 6px 10px; text-align: left; font-variant-numeric: tabular-nums; }
+  th { font-weight: 600; }
+  .mono { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 13px; }
+  .note { font-size: 13px; }
+  #status { min-height: 1.5em; }
+  .big { font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<h1>Régie — scène « on pirate le site »</h1>
+<p class="sub">Réservée au présentateur. Chaîne locale uniquement. Aucun système réel.</p>
+
+<div class="row">
+  <button id="btn-etat" type="button">Lire l'état de la chaîne</button>
+  <button id="btn-pirater" type="button">Pirater le site</button>
+  <button id="btn-reset" type="button">Remettre à zéro</button>
+</div>
+
+<p id="status"></p>
+
+<div id="result"></div>
+
+<hr>
+<p class="note">
+  Le routeur « habituel » était honnête au moment de l'échange. Sa faille (une fonction d'appel
+  générique non protégée) laisse un tiers vider les droits qu'on lui a laissés : un droit illimité
+  part en entier, un droit limité déjà consommé par l'échange ne laisse rien. Service piraté branché
+  sur <span class="mono">http://127.0.0.1:8611</span> (<span class="mono">node research/demo_reelle/chain/pirater.mjs --network local --serve</span>).
+</p>
+
+<script>
+"use strict";
+(function () {
+  var API = "http://127.0.0.1:8611";
+  var $ = function (id) { return document.getElementById(id); };
+  var f6 = function (raw) { var v = BigInt(raw || 0), w = v / 1000000n, f = (v % 1000000n).toString().padStart(6, "0").slice(0, 2); return w.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + "," + f; };
+  var short = function (a) { return a ? a.slice(0, 6) + "…" + a.slice(-4) : "—"; };
+
+  function setStatus(t) { $("status").textContent = t; }
+  function busy(on) { ["btn-etat", "btn-pirater", "btn-reset"].forEach(function (id) { $(id).disabled = on; }); }
+
+  async function call(method, path) {
+    busy(true); setStatus("…");
+    try {
+      var res = await fetch(API + path, { method: method });
+      var data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || ("HTTP " + res.status));
+      return data;
+    } catch (e) {
+      setStatus("Erreur : " + e.message + ". Le service piraté (port 8611) est-il lancé ?");
+      return null;
+    } finally { busy(false); }
+  }
+
+  function accountRows(snap, victim) {
+    if (!snap || !snap.accounts) return "";
+    return snap.accounts.map(function (a) {
+      var who = a.account.toLowerCase() === String(victim).toLowerCase() ? "compte de démo" : "compte";
+      var droit = a.allowanceUnlimited ? "illimité" : f6(a.allowance) + " DUSDC";
+      return "<tr><td>" + who + "</td><td class=mono>" + short(a.account) + "</td><td>" + f6(a.balance) + " DUSDC</td><td>" + droit + "</td></tr>";
+    }).join("");
+  }
+
+  function renderState(d) {
+    var snap = d.state || d;
+    $("result").innerHTML =
+      "<p class=note>routeur habituel " + "<span class=mono>" + short(d.vulnRouter) + "</span>, pirate <span class=mono>" + short(d.collector) + "</span> : <strong>" + f6(snap.collector) + " DUSDC</strong></p>" +
+      "<table><thead><tr><th>Rôle</th><th>Adresse</th><th>Solde</th><th>Droit au routeur</th></tr></thead><tbody>" +
+      accountRows(snap, d.victim) + "</tbody></table>";
+  }
+
+  function renderPirate(d) {
+    var v = function (snap, who) { var r = (snap.accounts || []).find(function (x) { return x.account.toLowerCase() === String(who).toLowerCase(); }); return r ? f6(r.balance) : "?"; };
+    $("result").innerHTML =
+      "<p class=big>Le pirate a pris " + f6(d.total) + " DUSDC.</p>" +
+      "<table><thead><tr><th></th><th>Avant</th><th>Après</th></tr></thead><tbody>" +
+      "<tr><td>compte de démo</td><td>" + v(d.before, d.victim) + " DUSDC</td><td>" + v(d.after, d.victim) + " DUSDC</td></tr>" +
+      "<tr><td>pirate</td><td>" + f6(d.before.collector) + " DUSDC</td><td>" + f6(d.after.collector) + " DUSDC</td></tr>" +
+      "</tbody></table>" +
+      "<p class=note>Chaque compte qui a laissé un droit illimité au routeur a été vidé dans la limite de ce droit. Un droit déjà consommé par l'échange ne laisse rien à prendre.</p>";
+  }
+
+  $("btn-etat").addEventListener("click", async function () { var d = await call("GET", "/state"); if (d) { renderState(d); setStatus("État lu sur la chaîne."); } });
+  $("btn-pirater").addEventListener("click", async function () { var d = await call("POST", "/pirater"); if (d) { renderPirate(d); setStatus("Piratage exécuté sur la chaîne locale."); } });
+  $("btn-reset").addEventListener("click", async function () { var d = await call("POST", "/reset"); if (d) { renderState(d); setStatus("Scène remise à zéro : " + f6(d.restored) + " DUSDC rendus, droits révoqués."); } });
+
+  call("GET", "/state").then(function (d) { if (d) { renderState(d); setStatus("Prêt."); } });
+})();
+</script>
+</body>
+</html>

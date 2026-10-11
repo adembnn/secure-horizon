@@ -61,19 +61,32 @@ Total des gestes : environ 45 s. Le texte laisse 50 s.
 
 **« Le pirate ne peut prendre que ce que j'avais écrit. »** NON PROUVÉ comme geste. C'est une conséquence du contrat de démo : `sweepERC20` prend le plus petit du droit et du solde (`blockchain/contracts/demo/FreshDrainer.sol`). Personne n'a joué « Continuer, puis le pirate prend 50 ». Le droit de 50 part chez le contrat du pirate : ces 50 sont perdus si tu continues. Hold up ne contrôle pas à qui le droit est donné (exhaustivité, essais M1a et M1b). La perte est bornée, pas évitée. Si un juré le relève, c'est exact : réponse dans `QR.md`, question 4.
 
-## La scène voulue par le fondateur, et pourquoi elle n'est pas dans le texte
+## La scène « site honnête piraté plus tard » (construite le 11 oct.)
 
-L'idée : le site est honnête, tu échanges, il est piraté plus tard. Sans Hold up le compte tombe à zéro. Avec Hold up le droit valait 50, il est déjà dépensé, le pirate ne prend rien. C'est le cas LI.FI, et c'est la meilleure image de la thèse.
+L'idée : le site est honnête, tu échanges, il est piraté plus tard. Sans Hold up le compte tombe à zéro. Avec Hold up le droit valait 50, il est déjà dépensé, le pirate ne prend rien. C'est le cas LI.FI, et c'est la meilleure image de la thèse. Elle est désormais **CONSTRUITE et PROUVÉE**.
 
-Elle est **PAS CONSTRUITE**. Il manque trois pièces :
+Les pièces :
 
-1. Un mode de Neve honnête qui demande un droit illimité à son propre routeur. Aujourd'hui le mode honnête demande 50 exactement (`app.js`), donc un routeur piraté ne trouverait rien, avec ou sans Hold up : pas de contraste.
-2. Un routeur qu'on peut pirater. `DemoRouter.sol` n'a aucune fonction pour ça. Piste, non essayée : sur la chaîne locale, prendre la main sur l'adresse du routeur (`hardhat_impersonateAccount`) et lui faire appeler `transferFrom` sur la victime.
-3. La suite complète dans le navigateur : droit ramené à 50, échange qui le consomme, droit restant à zéro. Chaque morceau est prouvé séparément, l'enchaînement non.
+1. **Mode `?mode=habituel` de Neve** (`app.js`, `chain-utils.js`) : le site, honnête, demande par défaut un droit **illimité à son propre routeur**, puis échange 50. Même apparence que les autres modes. C'est l'usage courant d'un service réel.
+2. **Routeur à la faille volontaire** : `blockchain/contracts/demo/VulnerableRouter.sol`. Routeur d'échange honnête au moment du swap, mais sa fonction `execute()` n'est pas protégée (esprit LI.FI, 16 juillet 2024) : un tiers lui fait exécuter `transferFrom(victime, pirate, montant)` et vide les droits laissés. Tests Hardhat : `blockchain/test/demo/VulnerableRouter.test.js` (4 verts). Déployé et approvisionné par `deploy-local.js` ; l'adresse `vulnRouter` s'ajoute au fichier d'adresses sans casser les champs existants.
+3. **Le geste « on pirate le site »** : `research/demo_reelle/chain/pirater.mjs` (CLI + serveur) et le bouton de la régie `research/demo_reelle/site_echange/regie.html` (page sobre, réservée au présentateur). Il vide par la faille tous les comptes qui ont laissé un droit au routeur, affiche avant/après et le butin. Bouton « Remettre à zéro » inclus.
 
-Autre réserve : après l'échange il reste 50 USDC sur le compte, pas 100. La phrase vraie serait « il te restait 50, il te reste zéro ».
+Réserve assumée : après l'échange il reste 50 USDC, pas 100. La phrase vraie est « il te restait 50 ; sans Hold up il te reste zéro, avec Hold up tu gardes 50 ».
 
-Tant que ces trois pièces ne sont pas jouées deux fois de suite, le pitch garde la scène de l'interface détournée et laisse LI.FI porter le « zéro perte » par le fait. Ne dis jamais « le pirate ne prend rien » sur la scène actuelle.
+### État de chaque geste de cette scène
+
+| # | Geste | Commande / lieu | État | Chiffres lus sur la chaîne |
+|---|---|---|---|---|
+| H0 | Déployer la chaîne (ajoute `vulnRouter`) | `cd blockchain && npm run demo:deploy -- --network localhost` puis `node config.js` dans `site_echange/` | PROUVÉ | adresse `vulnRouter` écrite |
+| H1 | Tests du contrat vulnérable | `cd blockchain && npx hardhat test test/demo/VulnerableRouter.test.js` | PROUVÉ | 4 tests verts |
+| H2 | Preuve chiffrée des deux parcours | `node research/demo_reelle/site_echange/test/preuve_piratage.mjs` | PROUVÉ HORS NAVIGATEUR | a) 100 → 50 (échange) → **0** (pirate prend 50) ; b) 100 → 50 (droit ramené à 50, consommé) → **50** (pirate prend **0**) — TOUT VERT |
+| H3 | Scène avec Hold up, dans un vrai Chromium | `film_scene.mjs` mode `habituel` (RPC_URL, SITE_ORIGIN, ADDR_PATH, PIRATER=1), extension chargée | PROUVÉ | Verdict « Droit limité à 50 USDC. Le site demandait un accès sans limite. » ; après échange droit restant 0 ; **piratage : rien à prendre ; solde reste 50** |
+| H4 | Geste « pirater » en direct (régie) | serveur : `node research/demo_reelle/chain/pirater.mjs --network local --serve` ; page : `127.0.0.1:8793/regie.html` | PROUVÉ | bouton « Pirater » : compte de démo → 0, pirate +butin ; « Remettre à zéro » : butin rendu, droits révoqués |
+| H5 | Scène « SANS Hold up » dans le navigateur (compte → 0) | non rejouée telle quelle en direct (l'extension chargée limiterait le droit) | NON PROUVÉ en navigateur ; PROUVÉ sur la chaîne (H2, cas a) | — |
+
+**Ce qui reste exposé, cas b), dit sans exagérer** : rien de plus que l'opération elle-même. Les 50 du droit ne sont à la portée du routeur qu'entre le moment où ils sont accordés et l'échange qui les consomme ; si l'utilisateur s'arrête là, ces 50 restent exposés. Une fois l'échange fait, le droit restant est 0 et le piratage ne prend rien. Ne dis jamais « le pirate ne peut jamais rien prendre » : dis « ce que tu lui as laissé le droit de prendre se limite à ce que tu as écrit ».
+
+Phrase exacte que le présentateur peut dire sans mentir : « Même site, même phrase. Sans Hold up, le droit était illimité : le jour où le routeur est piraté, le compte passe de 50 à zéro. Avec Hold up, le droit a été ramené à 50, l'échange l'a entièrement consommé : le même piratage ne prend rien, il reste 50. »
 
 ## Ce que Hold up contrôle pendant cette démonstration, et rien de plus
 
@@ -110,6 +123,6 @@ Les trois clips de `livrables/video/` montrent l'ancien produit : ne les passe p
 5. L'animation du gant au verdict.
 6. « Cent, zéro » dans le navigateur : prouvé par script sur la chaîne, pas à travers la page.
 7. « Continuer, puis le pirate ne prend que 50 » : le droit de 50 est prouvé, le vol borné ne l'est pas.
-8. La scène « site honnête piraté plus tard, le pirate ne prend rien » : pas construite.
+8. La scène « site honnête piraté plus tard, le pirate ne prend rien » : désormais CONSTRUITE et prouvée — sur la chaîne (`preuve_piratage.mjs`, TOUT VERT) et avec Hold up dans un vrai Chromium (`film_scene.mjs` mode `habituel`). Non rejouée en direct « SANS Hold up » dans le navigateur (l'extension chargée limiterait le droit) : ce cas reste prouvé sur la chaîne uniquement.
 9. La vidéo de secours : à enregistrer.
 10. Tout ce qui touche Fuji.

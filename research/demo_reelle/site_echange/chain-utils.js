@@ -125,6 +125,22 @@ function txApproveUnlimited(addresses, from) {
     data: callData("approve(address,uint256)", [encAddr(addresses.drainer), encUint(MAX_UINT256)]),
   };
 }
+// Mode habituel : site HONNETE qui, comme beaucoup de services reels, demande un droit ILLIMITE
+// a SON PROPRE routeur (addresses.vulnRouter) avant d'echanger. Rien de malveillant ici : le routeur
+// est honnete au moment de l'echange. La faille de ce routeur ne sera exploitee que plus tard.
+function txApproveVulnUnlimited(addresses, from) {
+  return {
+    from: from, to: addresses.usdc,
+    data: callData("approve(address,uint256)", [encAddr(addresses.vulnRouter), encUint(MAX_UINT256)]),
+  };
+}
+// Mode habituel, etape 2 : echanger 50 DUSDC contre du WAVAX via le routeur habituel (vulnRouter).
+function txSwapVuln(addresses, from, amountUsdcInt) {
+  return {
+    from: from, to: addresses.vulnRouter,
+    data: callData("swapUSDCforWAVAX(uint256,uint256)", [encUint(usdcUnits(amountUsdcInt)), encUint(0n)]),
+  };
+}
 // Mode piege&via=permit : signature EIP-2612 d'une autorisation illimitee au meme contrat.
 // Domaine = DemoUSDC : ERC20Permit("Demo USDC"), version "1". Echeance lointaine et fixe.
 var PERMIT_DEADLINE = "4102444800"; // 1er janvier 2100
