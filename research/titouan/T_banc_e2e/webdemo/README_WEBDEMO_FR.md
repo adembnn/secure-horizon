@@ -69,12 +69,16 @@ Tous les chemins sont relatifs : la page marche aussi sous `https://compte.githu
 
 ## Reconstruire et vérifier
 
+Depuis `research/titouan/T_banc_e2e` :
+
 ```
 node --no-warnings webdemo/build_webdemo.mjs          # régénère engine/ et js/exemples_public.js (reproductible, hachages dans BUILD_INFO.json)
-node --no-warnings webdemo/tests/run_webdemo_tests.mjs # 81 vérifications, écrit out/RESULTATS.json
+node --no-warnings webdemo/tests/run_webdemo_tests.mjs # 135 vérifications le 11 oct. 2026, écrit out/RESULTATS.json
 ```
 
 Node 23.2 ou plus (`module.stripTypeScriptTypes`). Aucun paquet, aucun réseau.
+
+**Attention : ces deux commandes réécrivent des fichiers suivis par git.** Le test relance lui-même `build_webdemo.mjs` (deux fois, pour vérifier que le build est reproductible). Sont réécrits : `webdemo/BUILD_INFO.json`, `webdemo/engine/*`, les copies dans `webdemo/js/` et `webdemo/out/RESULTATS.json`. Le build est reproductible (aucune date) : si les sources n'ont pas bougé, git ne voit en général que `out/RESULTATS.json`. Si les sources ont bougé, tout le build change. Pour remettre le clone propre : `git checkout -- webdemo/BUILD_INFO.json webdemo/engine webdemo/js webdemo/out` (seulement si tu n'avais rien modifié toi-même dans ces fichiers). Plus simple : depuis la racine du dépôt, `node scripts/verifier_installation.mjs` lance aussi ce test et remet seul les fichiers qui étaient propres avant.
 
 Comment c'est fabriqué : `engine/src/*.mjs` est copié tel quel (seuls les suffixes d'import `.mjs` en `.js` changent, et `Buffer.byteLength` devient `TextEncoder`, qui donne le même nombre d'octets). Le comparateur d'Adem `engine/vendor/compare.ts` est converti en JavaScript par `stripTypeScriptTypes` (types effacés, logique intacte). `run/policy.mjs` et `U_textes_utilisateur.json` sont copiés. La colle « moteur vers verdict » est extraite de `server/server.mjs` (la plus à jour), sans la lecture de fichier ni le serveur HTTP ; les quatre remplacements sont listés dans `BUILD_INFO.json` et en tête de `engine/sentinelle_core.js`.
 

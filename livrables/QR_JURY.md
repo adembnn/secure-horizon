@@ -1,14 +1,14 @@
 # Les questions les plus dures, réponses vraies en deux ou trois phrases
 
-Base : `research/titouan/PITCH_V7_TITOUAN.md` (fusion avec le pitch d'Adem). Les réponses d'Adem (`livrables/pitch_v7/QR.md`) restent valables ; en cas d'écart de chiffre, `livrables/CHIFFRES.md` tranche. Produit : une extension devant le portefeuille. Étage un : la personne écrit ce qu'elle veut faire, du code compare avec l'effet de la demande. Étage deux : des règles de base qui ne dépendent pas de la phrase. Après l'alerte : révoquer en un clic, fiche d'incident, cahier rejouable. Chiffres : `livrables/CHIFFRES.md` seulement. Sources : `research/demo_reelle/RECHERCHE_metamask_couverture.md` (MM), `RECHERCHE_concurrents_particuliers.md` (CP), `RECHERCHE_these_moindre_privilege.md` (MP), `research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md` (AVEUGLE), `webdemo/RAPPORT_REVOQUER.md` (REVOQUER), `extension/RAPPORT_SECURITE_CORRECTIFS.md` (CORRECTIFS), `security_review2/REVUE.md` (REVUE).
+Base : `research/titouan/PITCH_V7_TITOUAN.md` (fusion avec le pitch d'Adem). Les réponses d'Adem (`livrables/pitch_v7/QR.md`) restent valables ; en cas d'écart de chiffre, `METRIQUES.md` (racine) tranche, puis `livrables/CHIFFRES.md`. Mis à jour le 11 oct. vers 11h20 (MSG-079, MSG-080). Produit : une extension devant le portefeuille. Étage un : la personne écrit ce qu'elle veut faire, du code compare avec l'effet de la demande. Étage deux : des règles de base qui ne dépendent pas de la phrase. Écran clé : « Ça ne correspond pas à ce que tu as écrit. », le gant, le bouton « Limiter à 50 USDC et envoyer » (la personne clique, rien ne part tout seul), et les boutons « Annuler » et « Continuer ». Après l'alerte : « Retirer l'autorisation » dans le panneau latéral (la démo web garde son libellé « Révoquer ce droit »), journal chaîné exportable, vérifiable hors ligne, et fiche technique de traçabilité (qui a agi, d'où ça vient, quand, règles, preuve de chaîne). Chiffres : `METRIQUES.md`, puis `livrables/CHIFFRES.md`. Sources : `research/demo_reelle/RECHERCHE_metamask_couverture.md` (MM), `RECHERCHE_concurrents_particuliers.md` (CP), `RECHERCHE_these_moindre_privilege.md` (MP), `research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md` (AVEUGLE), `webdemo/RAPPORT_REVOQUER.md` (REVOQUER), `extension/RAPPORT_SECURITE_CORRECTIFS.md` (CORRECTIFS), `security_review2/REVUE.md` (REVUE).
 
 ## La preuve (à savoir par coeur)
 
 **1. Votre preuve est-elle indépendante ?**
-Plus qu'avant, pas complètement. Le jeu aveugle (150 arnaques, 100 jumeaux honnêtes) a été écrit sans lire nos règles, scellé par une empreinte publiée, ouvert une seule fois, moteur figé (commit 74203da, avec trois fichiers modifiés non commités, notés au journal d'ouverture). Mais l'auteur est une IA de la même famille que celle qui nous a aidés, et les cas sont synthétiques. Il manque un jeu écrit par des personnes.
+Plus qu'avant, pas complètement. Le jeu aveugle (150 arnaques, 100 jumeaux honnêtes) a été mesuré par notre moteur de comparaison (chaîne de banc), pas par l'extension livrée. Il a été écrit sans lire nos règles, scellé par une empreinte publiée, ouvert une seule fois, moteur figé (commit 74203da, avec trois fichiers modifiés non commités, notés au journal d'ouverture). Mais l'auteur est une IA de la même famille que celle qui nous a aidés, et les cas sont synthétiques. Il manque un jeu écrit par des personnes.
 
 **2. Quels étaient vos critères, et sont-ils atteints ?**
-Publiés avant l'ouverture : au moins 80 % d'arnaques signalées, au plus 10 % de rouges sur les honnêtes. Le premier est atteint : 87,3 % [81,1 ; 91,7]. Le second non : 15,0 % [9,3 ; 23,3]. Rien n'a été réglé après l'ouverture (AVEUGLE).
+Publiés avant l'ouverture : au moins 80 % d'arnaques signalées, au plus 10 % de rouges sur les honnêtes. Le critère de détection est atteint : 87,3 % [81,1 ; 91,7]. Celui des faux rouges non : 15,0 % [9,3 ; 23,3]. Rien n'a été réglé après l'ouverture (AVEUGLE).
 
 **3. D'où viennent les 15 % de faux rouges ?**
 11 des 15 viennent d'une seule famille : un achat de NFT honnête à prix quasi nul, que nos règles lisent comme une vente bradée. Nous ne retirons pas cette famille du calcul pour afficher un meilleur taux. Avec les avertissements, 30 % des honnêtes reçoivent une alerte : c'est notre limite principale.
@@ -19,8 +19,11 @@ Jeton différent de celui écrit : 63,2 % signalés. Chaîne ou domaine différe
 **5. La phrase écrite sert-elle vraiment ?**
 Sur le jeu aveugle, oui : le plancher sans phrase signale 64,7 %, le code avec la phrase 87,3 %, soit 34 arnaques de plus sur 150, sans aucun cas sous le plancher. Les faux rouges restent à 15 % dans les deux cas : la phrase ajoute des détections, pas de fausses alertes rouges.
 
-**6. Et votre 1,3 % de fausses alertes ?**
-Il vient de notre grille de contrôle de 1 079 paires, écrite par nous : nous ne le citons plus comme garantie. Sur le jeu aveugle, le modèle qui classe donne 16,0 % de faux rouges.
+**6. Et votre grille de 1 079 paires (86,6 %, 1,3 %) ?**
+Nous ne la citons plus. Ces chiffres venaient d'une chaîne de banc, sur un jeu devenu de réglage (une règle a été écrite d'après ses fausses alertes), et non de l'extension. La seule mesure scellée de l'extension elle-même est la moitié contrôle de notre panel (2 662 paires) : 866 non conformes attrapés sur 1 752 (49,4 %), 8,2 % de fausses alertes, sans modèle. Elle a été faite sur un build qui plantait sur 19,5 % des demandes ; la panne est corrigée depuis. Une réserve scellée de 2 673 paires mesurera une seule fois l'extension corrigée. Sur le jeu aveugle, le modèle qui classe donne 16,0 % de faux rouges.
+
+**5 bis. D'où vient le 34 % ?**
+Notre mesure, sur un échantillon de blocs d'Avalanche C-Chain : 40 fenêtres de 500 blocs, lecture seule. 7 103 autorisations illimitées sur 20 753 non nulles, soit 34,2 % [33,6 ; 34,9]. Illimité veut dire au moins 2^255 ou l'offre totale du jeton. Ce sont des événements, pas des personnes. Nous ne disons jamais « la norme » (`research/titouan/Z_approbations/onchain/result_avax.json`).
 
 ## Le produit
 
@@ -31,25 +34,28 @@ Non. Hold up ne tient aucune clé et ne signe rien. Il ajoute ce que la personne
 Non. L'écran dit : « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. » Le portefeuille s'ouvre et demande toujours son geste.
 
 **9. Que se passe-t-il après l'alerte ?**
-La personne annule ou continue. Si elle a continué par erreur, un bouton « Révoquer ce droit » prépare la demande de retrait ; le portefeuille la signe, jamais Hold up. Une fiche d'incident dit ce qui a été demandé, montré et décidé, et chaque ligne citée se rejoue. Dans la démo web, le portefeuille est simulé ; 25 tests du module et 135 vérifications de la démo (REVOQUER). Le branchement dans l'extension reste à faire.
+La personne annule. Si la demande donne plus que ce qu'elle a écrit, elle peut aussi cliquer sur « Limiter à 50 USDC et envoyer » : rien ne part tout seul. Si elle a continué par erreur, le bouton « Retirer l'autorisation » du panneau latéral prépare la demande de retrait ; le portefeuille la signe, jamais Hold up. Le journal chaîné s'exporte en JSON depuis le panneau latéral et se vérifie hors ligne (`verify_journal.mjs`) ; la fiche technique de traçabilité, faite, en tire pour une ligne ou la session qui a agi, d'où ça vient, quand, quelles règles, et la preuve de chaîne (`research/titouan/T_banc_e2e/livrables/outils/fiche_tracabilite.mjs`, 7 tests verts ; depuis ce dossier : `node livrables/outils/fiche_tracabilite.mjs holdup-journal.json --n 4 --out fiche.html` ; exemple : `livrables/outils/exemple/fiche_ligne4.html`). Une ligne modifiée donne « ROMPUE ». Les champs « qui a décidé », « droit limité » et « règles » du journal sont en cours d'ajout. Dans l'extension, c'est branché depuis le 11 oct. à 10 h 24 : le panneau latéral liste ce qui est resté ouvert sur l'onglet, avec « Retirer l'autorisation » ; 13 tests du branchement, en Node. La démo web, en secours, garde le libellé « Révoquer ce droit » : portefeuille simulé, 25 tests du module et 135 vérifications (REVOQUER). Jamais essayé dans un vrai Chrome avec un vrai portefeuille.
 
-**10. Tout se révoque en un clic ?**
+**10. Tout se retire en un clic ?**
 Non. Un clic seulement si une transaction suffit : approve, increaseAllowance, setApprovalForAll, Permit2.approve. Un Permit EIP-2612 ou DAI, ou un Permit2 signé, demande plusieurs étapes ou l'échéance : pas de bouton, nous l'expliquons.
 
 **11. Où va la phrase ?**
-Dans le build livré (décision D-015), la phrase seule part vers le modèle Clef, par un relais sur la machine qui garde la clé ; jamais les montants, les jetons ni les adresses, lus par du code sur place. Base légale et durée de conservation chez le fournisseur ne sont pas rédigées : à faire avant tout service hébergé. Une option sans réseau lit la phrase par mots-clés et comprend moins de tournures.
+Dans le build livré (décision D-015), la phrase écrite, avec ce que la personne y a mis, part du navigateur vers un relais local qui garde la clé, puis vers le modèle Clef. Ni l'adresse du compte ni la demande du site ne sont envoyées : montant, jeton et adresse de la demande sont lus par du code sur place. Base légale et durée de conservation chez le fournisseur ne sont pas rédigées : à faire avant tout service hébergé. Une option sans réseau lit la phrase par mots-clés et comprend moins de tournures.
 
 **12. Qui est responsable si le modèle se trompe ?**
-Le modèle ne décide ni du montant ni de l'adresse : du code les lit et compare. Il ne peut pas baisser une alerte du code. Une erreur de sens peut manquer une alerte de comparaison ; une fausse alerte coûte un clic. La personne garde le dernier geste, le cahier dit ce qui lui a été montré. Pour l'AI Act : une décision, une ligne, l'humain tranche, sans qualification juridique établie. Les obligations des plateformes régulées restent à la plateforme qui déploie : nous ne revendiquons aucune conformité.
+Le modèle ne décide ni du montant ni de l'adresse : du code les lit et compare. Sur le jeu aveugle, il n'a baissé aucune alerte du plancher (moteur de comparaison) ; dans l'extension, avec le modèle, les ratés montent de 2,7 % à 3,7 % (contrôle scellé). Une erreur de sens peut manquer une alerte de comparaison ; une fausse alerte coûte un clic. La personne garde le dernier geste, le cahier dit ce qui lui a été montré. Pour l'AI Act : une décision, une ligne, l'humain tranche, sans qualification juridique établie. Les obligations des plateformes régulées restent à la plateforme qui déploie : nous ne revendiquons aucune conformité.
 
 **13. À quoi sert le modèle, alors ?**
 À comprendre un français familier. Sur le jeu aveugle, il n'apporte pas de gain net mesurable (88,7 % contre 87,3 %, 16 % contre 15 % de faux rouges). Il est optionnel ; ce qui compte, c'est la phrase et le code qui compare.
 
 **14. Le cahier peut-il être réécrit ?**
-Il est chaîné par hachage, aussi dans le build autonome : une ligne changée, retirée ou déplacée au milieu se voit (7 tests). La suppression des dernières lignes ou une réécriture complète ne se voit pas sans ancrage externe ; l'ancrage sur Fuji n'est pas déployé. Le cahier ne garde ni la phrase ni une adresse. L'audit a relevé deux inexactitudes : le passage automatique de la deuxième demande est noté comme une confirmation humaine, et la limitation à 50 USDC n'y figure pas. À corriger avant de parler d'auditeur.
+Il est chaîné par hachage, aussi dans le build autonome : une ligne changée, retirée ou déplacée au milieu se voit (7 tests). La suppression des dernières lignes ou une réécriture complète ne se voit pas sans ancrage externe ; pas d'ancrage sur une blockchain pour le rendu (décision D-017). Le cahier ne garde ni la phrase ni une adresse. L'audit a relevé deux inexactitudes : le passage automatique de la deuxième demande est noté comme une confirmation humaine, et la limitation à 50 USDC n'y figure pas. À corriger avant de parler d'auditeur.
 
 **15. C'est sécurisé ?**
 Nous ne le disons pas. Une revue interne a trouvé des contournements, dont un critique (une page qui remplace des fonctions natives). Les correctifs sont écrits et testés en Node (CORRECTIFS), pas vérifiés dans un vrai Chrome. Compromis, Hold up ne peut rien signer : le pire est qu'il se taise ou affiche un faux écran.
+
+**15 bis. C'est pour des particuliers, pas pour une banque ?**
+Le particulier voit l'écran. Le client, c'est l'exchange, la fintech ou le portefeuille qui l'intègre : son équipe fraude lit le journal exporté, l'auditeur le vérifie hors ligne. Le même moteur pourrait répondre avant un retrait ; non construit.
 
 ## Les autres
 
@@ -81,13 +87,13 @@ Oui, et d'autres outils sont au montant fini par défaut (MP). Notre ajout est �
 Le principe « dire d'abord, valider après » a été décrit publiquement en février 2026 (CP). Nous n'avons trouvé aucun outil grand public qui fasse écrire la phrase libre avant la demande puis la compare à l'effet, dans les documents lus. Notre apport est l'assemblage, pas le principe.
 
 **25. Votre modèle économique ? Qui paie ?**
-Pas le particulier : c'est gratuit pour lui. Paient ceux qui portent la perte : exchanges et fintechs, avec une API « verdict avant retrait » (premier revenu visé) ; portefeuilles et plateformes, avec une licence SDK (premier pilote, peut-être non payé) ; plus tard, plateformes d'agents, avec des mandats écrits. Nous cherchons des pilotes B2B maintenant. Aucun client, aucun prix de marché comparable : nos prix sont des hypothèses (`research/titouan/BM2/BM_MODELE.md`). Repère : MetaMask vend une couverture à 9,99 $ par mois (B15).
+Gratuit pour les personnes. Plus tard, une plateforme qui demande l'autorisation exacte (50 USDC pour un échange de 50, pas « tout, pour toujours ») pourra afficher « Vérifié par Hold up ». C'est elle qui paie. Critères publics, mesurés sur ses vraies demandes, pas de classement payé. C'est une hypothèse à valider avec des pilotes : aucun client, aucun revenu aujourd'hui. Repère : MetaMask vend une couverture à 9,99 $ par mois (B15).
 
 **25 bis. Pourquoi ne pas finir comme Harpie ou Wallet Guard ?**
 Harpie était payée après le vol. Nous visons un service continu, avant la signature, vendu à des plateformes. L'issue probable du secteur est l'intégration ou le rachat : nous le savons.
 
 **26. Latence ?**
-Verdict local en médiane sous 50 millisecondes, sans le modèle.
+Verdict local de l'extension, mesuré sous Node : médiane 2 ms, p95 13 ms (2 662 demandes). Avec un appel réel au modèle Clef : médiane 387 ms, p95 1,4 s. De la demande du site au verdict affiché dans un vrai navigateur : non mesuré de façon reproductible. Le vrai délai est celui de la personne qui écrit sa phrase.
 
 ## La scène d'Adem (deux fenêtres)
 
@@ -100,8 +106,8 @@ Non. C'est un script qui envoie sur la chaîne locale les mêmes demandes que la
 **29. Votre vérification couvre-t-elle tout ?**
 Non. Sur 58 paires d'essai, 18 sont contrôlées, 7 en partie, 20 non, 13 non distinguées. Contrôlé : le montant d'un droit, un paiement (montant, jeton, destinataire), un second droit glissé dans un lot, une prise de contrôle du compte. Pas encore : le sens d'un échange, la contrepartie, le minimum reçu, la durée d'un droit, la deuxième demande d'une même phrase. Dans la scène, « ça correspond » porte sur le droit de 50 USDC, pas sur l'échange.
 
-**30. 87 %, c'est en rouge ?**
-Non, rouge ou avertissement. En rouge seul : 76,0 %. Sur la famille de la scène (droit illimité sur un échange) : 18 sur 19 signalés, 5 sur 19 en rouge, 6 sur 19 sans la phrase ; 0 faux rouge sur 13 honnêtes.
+**30. 87 %, c'est en rouge ? C'est l'extension ?**
+C'est notre moteur de comparaison, sur le jeu aveugle de 250 cas, pas l'extension chargée dans Chrome. Et c'est rouge ou avertissement. En rouge seul : 76,0 %. Sur la famille de la scène (droit illimité sur un échange) : 18 sur 19 signalés, 5 sur 19 en rouge, 6 sur 19 sans la phrase ; 0 faux rouge sur 13 honnêtes.
 
 **31. Aerodrome, le NIST, l'IA d'Anthropic ?**
 Retirés du texte dit, gardés en réserve dans `livrables/pitch_v7/QR.md` avec leurs réserves : Aerodrome (81 minutes, mesure de Blockaid sur lui-même), NIST SP 800-207 (posture d'entreprise, pas les portefeuilles, référence absente du dépôt), essai d'Anthropic (207 contrats sur 405, simulation, aucun vol réel attribué à une IA).

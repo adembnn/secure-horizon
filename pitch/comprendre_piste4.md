@@ -7,7 +7,7 @@
 > Pour Adem. Objectif : tout comprendre pour pouvoir challenger et innover.
 > Rédigé le 10 oct. 2026. Le règlement `context/notion_guide.md` prime.
 > Sources : `research/tracks/T1_P4_chiffres_2026.md` (noté **[C]**), `research/tracks/T1_P4_defi_dora_v2.md` (**[v2]**), `research/tracks/T1_P4_defi_dora.md` (**[v1]**), `research/docs/D1_avalanche.md` (**[D1]**), `context/avalanche_fuji_mail.md`.
-> `docs/architecture.md` n'existe pas encore. La section 7 décrit donc le combo « Sentinelle Fuji » tel que la recherche le propose. Compare-la avec l'architecture quand elle arrivera.
+> `docs/architecture.md` n'existe pas encore. La section 7 décrit donc le combo « Sentinelle Fuji » (ancien nom) tel que la recherche le propose. Compare-la avec l'architecture quand elle arrivera.
 >
 > Trois étiquettes sont utilisées partout :
 > - **RÉEL** : fait daté, avec source.
@@ -31,7 +31,7 @@ Ils ont deux problèmes en même temps :
 1. Ils doivent arrêter l'attaque en minutes.
 2. Ils doivent déclarer l'incident vite et sans erreur. Le régulateur français constate que les délais sont « rarement respectés » et que les champs sont mal remplis (ACPR-AMF, 2026, S).
 
-**Notre réponse.** « Sentinelle Fuji » est un outil qui :
+**Notre réponse.** « Sentinelle Fuji » (ancien nom) est un outil qui :
 - surveille un contrat déployé sur le réseau de test Avalanche (Fuji) ;
 - le met en pause de façon graduée, avec des règles fixes (pas par une IA) ;
 - classe l'incident selon les critères DORA ;
@@ -253,7 +253,7 @@ Sources qui divergent sur la durée (183 M$ en 1 h contre 3 h au total) : citer 
 - Les formulaires sont remplis à la main. Les champs 2.5, 2.6, 2.8 et les montants en milliers sont les pièges classiques.
 - La demande de gel à Circle et Tether est rédigée à la main.
 
-### 5.2 Avec Sentinelle Fuji (TRANSPOSÉ + CIBLES)
+### 5.2 Avec Hold up (TRANSPOSÉ + CIBLES)
 
 **Condition indispensable.** Les fonds de retrait de X passent par un **contrat gardé** : un smart contract avec un plafond de sortie et un rôle « guardian » qui peut seulement mettre en pause. Si les fonds sont dans un compte simple, notre outil ne peut rien bloquer. Il détecte et déclare seulement.
 
@@ -357,7 +357,7 @@ Les autorités nationales transmettent les déclarations aux ESAs **en anglais**
 
 ## 7. Ce que fait chaque brique de notre outil, et pourquoi
 
-Source : combo « Sentinelle Fuji » de v1 §5 et v2 §3 (S1, S4, S5, S6, S7, S18, S9). Rien ici n'est promis comme livré. Le statut réel est dans `coord/BOARD.md`.
+Source : combo « Sentinelle Fuji » (ancien nom) de v1 §5 et v2 §3 (S1, S4, S5, S6, S7, S18, S9). Rien ici n'est promis comme livré. Le statut réel est dans `coord/BOARD.md`.
 
 **1. Le contrat gardé (« SH Vault »).**
 - *Ce que c'est :* un coffre déployé sur Fuji par un CASP fictif, avec des fonds de test.

@@ -14,27 +14,32 @@ Une demande de signature ou de transaction passe par l'extension avant d'atteind
 | Ça ne correspond pas | Alerte avec une ligne : ce que la personne a écrit, ce que la demande donne. Annuler est visible. Pour une transaction qui accorde un droit plus large que le montant écrit, Hold up remplace lui-même le droit par ce montant sous conditions (une seule somme lisible, jeton connu, rien d'autre ne sort ; ligne « Droit limité à 50 USDC », prouvé en Node, pas dans un vrai Chrome) ; sinon la ligne dit comment le ramener. Pour une signature, elle dit que le droit ne peut pas être limité. |
 | Pas pu vérifier | Phrase trop vague après une relance, appel illisible, adresse non écrite. La fenêtre le dit. Elle n'affiche jamais « correspond » par défaut. |
 
-Durée de retenue après une alerte : sur l'écart « montant écrit contre droit plus large » d'une transaction, plus d'attente de 30 s (Q16, appliqué) ; dans les autres cas, ne pas citer de durée. Dans tous les cas : une ligne de verdict et une ligne de décision dans un journal local. Version autonome : 500 lignes, chaînées par hachage (`extension/journal_chain.js`). Version serveur : chaîné par hachage (sha256).
+Durée de retenue après une alerte : sur l'écart « montant écrit contre droit plus large » d'une transaction, plus d'attente de 30 s (Q16, appliqué) ; dans les autres cas, ne pas citer de durée. Dans tous les cas : une ligne de verdict et une ligne de décision dans un journal local. Version autonome et version serveur : chaînés par hachage (sha256) ; la version autonome garde 500 lignes, avec export JSON et vérification hors ligne.
 
 ## 3. Ce qui reste humain
 
 - Annuler ou continuer. Le produit n'impose pas de décision définitive.
-- Demander la fiche d'incident : `node reponse/incident.mjs --journal <journal> --seq <n> --out <dossier>`. Elle liste ce qu'elle établit et ce qu'elle n'établit pas.
+- Trace documentée de la version livrée : panneau latéral, bouton « Exporter le journal (JSON) », puis `node extension/tools/verify_journal.mjs export.json` (sortie 0 cohérent, 1 rompu). Une ligne modifiée, retirée ou déplacée au milieu se voit.
+- Fiche d'incident (prototype pour le journal du serveur, pas encore dans l'extension) : `node reponse/incident.mjs --journal <journal> --seq <n> --out <dossier>`. Elle liste ce qu'elle établit et ce qu'elle n'établit pas.
 - Signer les retraits de droits après une signature dangereuse : `reponse/revoke.mjs` lit les droits actifs et construit les transactions (`approve 0`, `setApprovalForAll false`). Il ne signe pas et n'envoie rien.
 - Porter plainte, prévenir un assureur ou une plateforme : aucun envoi automatique.
 
 ## 4. Qui est alerté
 
-La personne devant l'écran, et elle seule. Une plateforme qui intègre Hold up lit le journal sur sa machine : `incident.mjs --list` et `--stats`. Alerte poussée vers un tiers : non fait.
+Sur le moment : la personne devant l'écran, et elle seule. Alerte poussée vers un tiers : non fait.
+
+Qui lit les alertes et l'export du journal ensuite :
+- Quand une plateforme intègre Hold up (exchange, fintech, portefeuille) : **son équipe fraude**. Elle récupère l'export JSON, le vérifie avec `verify_journal.mjs`, et lit les décisions (version serveur : `incident.mjs --list` et `--stats`). Elle décide des suites : contact client, signalement, registre d'incidents.
+- Pour un particulier qui l'utilise seul : **la personne elle-même**. Elle exporte le journal depuis le panneau latéral et peut le remettre à sa plateforme, à son assureur ou à la police.
 
 ## 5. Après la décision
 
-**Annulé.** Rien n'est parti. Fiche d'incident sur demande, JSON et HTML. Le journal ne garde pas encore la phrase écrite ni les paramètres complets : non fait.
+**Annulé.** Rien n'est parti. Ligne du journal chaîné exportable et vérifiable ; fiche d'incident en prototype (journal du serveur). Le journal ne garde pas encore la phrase écrite ni les paramètres complets : non fait.
 **Signé.** Droit de dépense : retrait par `revoke.mjs`, testé sur chaîne locale (3 droits retirés, le vol échoue ensuite). Permit EIP-2612 : un permit sans effet (soi vers soi, montant 0) consomme le nonce ; c'est une course, si l'attaquant passe avant, c'est perdu. Envoi vers une mauvaise adresse : rien ne le défait. Permit2 et ordres Seaport : non fait.
 
 ## 6. Comment c'est documenté
 
-Journal chaîné (version serveur seulement) ; ancrage de la racine de Merkle par `reponse/anchor_evidence.mjs`, fait sur chaîne locale seulement. Fuji : aucune transaction dans le dépôt. Deux formats de journal coexistent sans pont (serveur en sha256, `anchor/journal.mjs` en keccak). La version des règles n'est pas dans le journal.
+Journal chaîné par sha256 dans les deux versions : le build autonome livré (`extension_standalone/extension/journal_chain.js`, identique à `extension/journal_chain.js` ; 7 tests dans `extension/tests/unit/journal_chain.test.mjs` ; export JSON depuis le panneau latéral ; vérification hors ligne par `extension/tools/verify_journal.mjs`) et la version serveur. Pas d'ancrage sur une blockchain pour la démo ni pour le rendu (décision D-017, `coord/DECISIONS.md`) : `reponse/anchor_evidence.mjs` existe, joué sur chaîne locale seulement, aucune transaction Fuji. Champs supplémentaires du journal (qui a décidé, droit limité, règles appliquées) : en cours, ne pas les citer. Deux formats de journal coexistent sans pont (serveur en sha256, `anchor/journal.mjs` en keccak). La version des règles n'est pas dans le journal.
 
 ## 7. Temps
 
@@ -48,7 +53,7 @@ Journal chaîné (version serveur seulement) ; ancrage de la racine de Merkle pa
 
 ## 8. Limites
 
-- Avant ancrage, le détenteur du fichier peut réécrire tout le journal. Dans le build autonome, la chaîne couvre les 500 dernières lignes.
+- Sans ancrage externe (décision D-017), le détenteur du fichier peut réécrire tout le journal, ou retirer les dernières lignes, sans que la vérification le voie. Cela vaut pour les deux versions, toutes deux chaînées.
 - Verdict et décision sont appariés par site, méthode et ordre, faute d'identifiant de requête.
 - `revoke.mjs` lit les événements depuis un bloc donné ; sur un RPC public la plage est plafonnée. Le retrait coûte des frais et arrive souvent après le vol.
 - Fiches et retraits en ligne de commande, sans bouton dans l'extension.

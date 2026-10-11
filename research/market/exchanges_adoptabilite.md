@@ -1,6 +1,6 @@
 # Exchanges et CASP : peut-on adopter un contrôle des sorties indépendant SANS migrer les fonds ? (10 oct. 2026)
 
-Périmètre : question décisive de Sentinelle. Lu avant : `research/tracks/T1_P4_connecteurs_implementes.md`, `research/tracks/T1_P4_deploiement_reglementaire.md`, `research/cap/jury_aveugle_2315.md`. Règlement : `context/notion_guide.md` (prime).
+Périmètre : question décisive de Hold up. Lu avant : `research/tracks/T1_P4_connecteurs_implementes.md`, `research/tracks/T1_P4_deploiement_reglementaire.md`, `research/cap/jury_aveugle_2315.md`. Règlement : `context/notion_guide.md` (prime).
 
 Légende : **[P]** page éditeur/officielle ouverte et lue aujourd'hui ; **[S]** secondaire (presse, blog, agrégat) ; **[V]** vérifié par test direct (aucun dans ce fichier : je n'ai exécuté aucun appel) ; **[ÀV]** à vérifier ; **[?]** introuvable, ne pas affirmer ; **[analyse]** mon raisonnement, pas un fait sourcé. Les sorties de moteur de recherche sont des extraits : les pages marquées [P] ont été ouvertes avec WebFetch, les autres sont [S] ou [ÀV].
 

@@ -80,11 +80,11 @@ Conséquences de conception [analyse] :
 | **Tenderly** | API REST + alertes + Virtual TestNets | Appel d'API de simulation par un portefeuille ou une dapp ; comparaison de hash de transactions Safe. | Aucune doc retrouvée pour un usage en « porte » obligatoire de signature. | [P*] https://docs.tenderly.co/simulations/overview |
 | **Forta Firewall** | **Contrat** (attestation on-chain) / filtre de rollup | Pour un protocole : les transactions listées doivent porter une attestation de contrôles réussis, sinon revert. Pour un rollup : filtre avant le séquenceur. Dit ne pas couvrir les compromissions de clé. Chiffres de rappel et de faux positifs = vendeur. | Aucune annonce 2026 retrouvée (voir fichier état de l'art). | [P*] https://docs.forta.network/en/latest/what-is-forta-firewall/ |
 | **Venn (Ironblocks)** | Réseau d'opérateurs + pare-feu on-chain | Politiques branchées au contrat. | Dernier contenu daté : 2024. | [S] https://www.businesswire.com/news/home/20240925419323/en |
-| **Notre Sentinelle** | Service + Guard/contrat à resserrement seul | Voir §5. | | |
+| **Hold up** | Service + Guard/contrat à resserrement seul | Voir §5. | | |
 
 Lecture [analyse] :
 - **Trois familles** : SDK/API (Blockaid, Tenderly), extension (Pocket Universe, Wallet Guard, Rabby), **point d'application dans le chemin de signature** (Hypernative via Safe Guard ou API, Forta/Venn via contrat).
-- **Trustee (gagnant 2025) = extension grand public**. Ce que le jury a aimé : un **score de risque avec explication lisible**. Cela se transpose sans changer de client : chaque verdict de la Sentinelle doit sortir en une phrase (déjà prévu : « Argent parti vers des inconnus : X % du solde en 10 min ») avec une pastille de risque. Mais l'extension comme produit n'est pas défendable face à un CASP (voir Wallet Guard, Blowfish).
+- **Trustee (gagnant 2025) = extension grand public**. Ce que le jury a aimé : un **score de risque avec explication lisible**. Cela se transpose sans changer de client : chaque verdict de Hold up doit sortir en une phrase (déjà prévu : « Argent parti vers des inconnus : X % du solde en 10 min ») avec une pastille de risque. Mais l'extension comme produit n'est pas défendable face à un CASP (voir Wallet Guard, Blowfish).
 
 ---
 
@@ -123,7 +123,7 @@ Oui à titre d'agent contractuel du CASP, non à titre de droit propre. Conditio
 **DORA : ce qui change pour nous comme fournisseur** [analyse] :
 - Entrée au **registre d'information** du CASP (art. 28(3)) avec LEI et fonction supportée ; la décision « critique ou importante » appartient au CASP (art. 28(4)). Un veto dans le chemin de signature de la garde sera probablement classé critique ⇒ art. 30(3) : SLA chiffrés, droits d'audit, participation aux tests (TLPT), plan de sortie, assistance en cas d'incident.
 - **Sous-traitance** : nos propres tiers (Bedrock, RPC, hébergeur) tombent dans la chaîne de sous-traitance du CASP (RTS 2025/532) ; c'est ce que porte notre inventaire des tiers.
-- Une défaillance de la Sentinelle qui rend les retraits indisponibles compte dans la classification d'incident du CASP (moteur DORA, « auto-incident »).
+- Une défaillance de Hold up qui rend les retraits indisponibles compte dans la classification d'incident du CASP (moteur DORA, « auto-incident »).
 
 **RGPD** [analyse] : les adresses de clients, rapprochées d'un fichier client du CASP, sont des données personnelles **pour le CASP** ; l'éditeur qui les traite est **sous-traitant** (art. 28 RGPD, avec accord de traitement) dès qu'il reçoit le rapprochement ; en mode Watch pur sur adresses publiques sans rapprochement, la qualification est contextuelle (approche relative, arrêt SRB). Notre choix « rien de lisible on-chain, journal HMAC » reste le bon réflexe. Position finale de l'EDPB sur les adresses : **[ÀV]**.
 
@@ -137,7 +137,7 @@ Oui à titre d'agent contractuel du CASP, non à titre de droit propre. Conditio
 | Données | Synthétiques, `synthetic:true`, bandeau permanent | Données clients réelles = RGPD, accord de traitement |
 | Droits | Aucun : pas de CASP réel, pas de client, donc pas d'obligation MiCA/DORA qui s'applique à la démo | Contrat art. 30 DORA, politique de garde amendée (MiCA 75(3)), entrée au registre (28(3)) |
 | Attaques | Simulées sur nos contrats uniquement (règlement du hackathon : aucune action contre un système réel) | Aucun test offensif sans accord écrit et périmètre (TLPT encadré par le CASP) |
-| Clés | Jetables, `.env.local` gitignoré | KMS/HSM du CASP, rôle de la Sentinelle limité au resserrement |
+| Clés | Jetables, `.env.local` gitignoré | KMS/HSM du CASP, rôle de Hold up limité au resserrement |
 | Fournisseur tiers cité | Mock étiqueté SIMULATION (jamais « Fireblocks » à l'oral) | Intégration contractuelle |
 | Ce qu'on peut dire | « Voici un veto à resserrement seul sur un Safe de test. » | « Votre direction signe la charte ; nous exécutons. » |
 
@@ -169,7 +169,7 @@ Oui à titre d'agent contractuel du CASP, non à titre de droit propre. Conditio
 2. **Dépendance à la même source de données** : la plupart recalculent à partir du service de transactions Safe ou de l'interface web, celle que l'attaquant contrôlait. Seul le mode manuel de BootNode évite ce piège.
 3. **Le matériel affiche un hash** pour une transaction Safe (selon Safe et Candide, un vendeur concurrent : à prendre comme point de vue) ; le clear signing de bout en bout pour Safe n'est **pas confirmé** **[ÀV]**.
 4. **Pas de règle sémantique** du type « une transaction Safe dont l'opération est un `delegatecall` ou qui modifie l'implémentation du proxy est refusée sans liste d'adresses approuvées ». C'est exactement ce qu'un **Guard à resserrement seul** peut faire côté contrat, sans dépendre de l'interface [analyse, à tester sur Fuji]. Notre détecteur D7 (changement de pouvoir : `Upgraded`, rôles, owner) est le seul signal précoce avant la sortie ; **le délai réel entre l'écrasement de l'implémentation et le premier transfert à Bybit n'est pas établi dans mes sources** : ne pas citer de durée.
-5. **Le cas Bybit n'est pas notre périmètre « prévention complète »** : ni notre Sentinelle (lecture de blocs, post-signature) ni un Guard n'empêchent un signataire de signer si l'appareil l'y autorise ; le Guard refuse à l'exécution on-chain, ce qui est le dernier point où une règle peut encore tenir.
+5. **Le cas Bybit n'est pas notre périmètre « prévention complète »** : ni Hold up (lecture de blocs, post-signature) ni un Guard n'empêchent un signataire de signer si l'appareil l'y autorise ; le Guard refuse à l'exécution on-chain, ce qui est le dernier point où une règle peut encore tenir.
 
 Mapping de cette section : NIST CSF 2.0 **PR.AA-05** (privilèges minimaux), **DE.CM-01**, **DE.AE-02**, **RS.MI-02** ; ATT&CK **T1195.002** (compromission de la chaîne logicielle) et **T1565.002** (manipulation de données transmises) **[ÀV]**, **T1657** ; D3FEND **D3-AZET** (seuil d'autorisation, vérifié dans le fichier D4) ; OWASP ASI / ATLAS : non applicable (pas d'agent IA dans le chemin).
 
@@ -207,7 +207,7 @@ Mapping de cette section : NIST CSF 2.0 **PR.AA-05** (privilèges minimaux), **D
 
 ### 5.3 Comment le démontrer sur Fuji (scénario de 3 minutes, sans nommer d'éditeur)
 
-1. **Watch** : on colle l'adresse d'un Safe de test ; la Sentinelle affiche le solde, les sorties, la fraîcheur. (Mode 1, déjà prévu.)
+1. **Watch** : on colle l'adresse d'un Safe de test ; Hold up affiche le solde, les sorties, la fraîcheur. (Mode 1, déjà prévu.)
 2. **Installer le veto** : transaction Safe qui active `SentinelGuard` sur le Safe de test. Écran : « Ce que ce gardien peut faire : resserrer. Ce qu'il ne peut pas : signer, libérer, changer un rôle » (matrice générée depuis les rôles on-chain).
 3. **Attaque simulée** : signataires de test compromis, sorties vers adresses neuves ; D1/D2/D3 montent, L2 puis L3 ; le Guard refuse la transaction suivante (`revert` visible sur Snowtrace) ; la voie rapide d'un client déjà en liste blanche continue.
 4. **Cas Bybit en miniature** : une transaction Safe `delegatecall` vers un contrat de test qui remplace l'implémentation du proxy est **refusée par règle** (liste d'adresses approuvées) ; D7 émet l'alerte. Étiqueter : « inspiré d'un schéma d'attaque public, sur contrats de test ».

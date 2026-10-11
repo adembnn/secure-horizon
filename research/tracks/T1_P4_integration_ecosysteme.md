@@ -1,4 +1,4 @@
-# T1 P4 : Sentinelle Fuji, carte d'intégration à l'écosystème du client (10 oct. 2026)
+# T1 P4 : Hold up, carte d'intégration à l'écosystème du client (10 oct. 2026)
 
 Périmètre : Track 1 sous-track 4. Critère jury visé : « Faisabilité et intégration 20 % : le PoC marche-t-il ? S'intègre-t-il aux outils d'une banque, d'une fintech ou d'un protocole ? ». Règlement de référence : `context/notion_guide.md`. Architecture : `docs/architecture.md` (v0).
 
@@ -17,7 +17,7 @@ Effort PoC (avant dimanche matin) : **S** moins d'1 h, **M** 1 à 3 h, **L** plu
 1. **Huit intégrations réelles dans le PoC** (section 12) : OpenZeppelin Contracts, ethers v6 sur Fuji avec double RPC, tests d'invariants Foundry, sortie OCSF + Slack, GLEIF + registre ESMA, sorties DORA alignées sur les modèles officiels, signature EIP-712 + ancrage, Bedrock + Guardrails. Toutes sont publiques, sans contrat commercial.
 2. **Plusieurs produits cités ont changé ou fermé.** OpenZeppelin Defender : arrêt annoncé le 1er juil. 2026 [V]. « Glacier » est devenu la Data API d'Avalanche (Builder Hub), mais l'en-tête `x-glacier-api-key` est resté [V]. Hexagate est passé chez Chainalysis [S]. Le registre MiCA ESMA est passé de fichiers CSV à un système IT intégré « mi-2026 » [V], à re-vérifier.
 3. **Trois trous de plateforme à connaître sur Fuji** : EAS n'est pas déployé officiellement sur Avalanche [V], le Safe Transaction Service ne liste pas Fuji [V], et les Webhooks Avalanche n'exposent que `address_activity` [V]. Ça pousse vers notre propre `EvidenceAnchor` et un contrat de gardiens maison pour le PoC, avec les connecteurs Safe/EAS montrés « prêts ».
-4. **Deux limites honnêtes** : aucune API publique trouvée pour déposer à l'AMF (DORA) ni à Tracfin (ERMES) [?]. On le dit : la Sentinelle produit le dossier, un humain le dépose.
+4. **Deux limites honnêtes** : aucune API publique trouvée pour déposer à l'AMF (DORA) ni à Tracfin (ERMES) [?]. On le dit : Hold up produit le dossier, un humain le dépose.
 5. **Ce que ça démontre au jury** : on parle le langage du RSSI (OCSF, SIEM, ticket), du conformité (LEI, registre d'information, Travel Rule), du dev Solidity (OZ, ERC-4626, invariants) et de l'auditeur (rejeu, ancrage, signature).
 
 ---
@@ -67,7 +67,7 @@ Pour tous : NIST CSF 2.0 **PR.PS** (plateforme), **RS.MI** (confinement) ; ATT&C
 |---|---|
 | Quoi | Standard de coffre tokenisé (Final) [C]. Interface `deposit/withdraw/redeem`, `maxWithdraw`, `maxRedeem`. |
 | Qui | Presque tous les coffres DeFi et la plupart des fonds tokenisés sur EVM. |
-| Branchement | Hériter de `ERC4626` d'OZ, **surcharger `maxWithdraw` et `maxRedeem`** pour renvoyer le plafond de sortie courant (la spec demande que ces fonctions tiennent compte des limites globales, par [C] à vérifier dans https://eips.ethereum.org/EIPS/eip-4626). Ainsi tout intégrateur (agrégateur, UI, custodian) voit la limite sans connaître la Sentinelle. |
+| Branchement | Hériter de `ERC4626` d'OZ, **surcharger `maxWithdraw` et `maxRedeem`** pour renvoyer le plafond de sortie courant (la spec demande que ces fonctions tiennent compte des limites globales, par [C] à vérifier dans https://eips.ethereum.org/EIPS/eip-4626). Ainsi tout intégrateur (agrégateur, UI, custodian) voit la limite sans connaître Hold up. |
 | Effort | **S** à **M**. |
 | Démontre | « Notre plafond est lisible par n'importe quel intégrateur standard » : c'est l'argument d'intégration le plus fort côté protocole. Aussi : protection contre l'attaque d'inflation via l'offset de décimales d'OZ [C]. |
 
@@ -150,7 +150,7 @@ Payload d'exemple Webhook Avalanche [V, structure de la doc ; `chainId` 43113 su
   }
 }
 ```
-Pour recevoir les logs, il faut `"includeLogs": true` et `"includeInternalTxs": true` [V]. Conséquence de conception : on ne peut pas filtrer par topic côté Avalanche, donc la Sentinelle filtre elle-même. L'adaptateur normalise vers le même `ChainEvent` que le provider ethers.
+Pour recevoir les logs, il faut `"includeLogs": true` et `"includeInternalTxs": true` [V]. Conséquence de conception : on ne peut pas filtrer par topic côté Avalanche, donc Hold up filtre elle-même. L'adaptateur normalise vers le même `ChainEvent` que le provider ethers.
 
 ---
 
@@ -160,10 +160,10 @@ Mapping commun : NIST **DE.CM**, **DE.AE**, **ID.RA-02** (renseignement sur les 
 
 | Outil | Statut 2026 | Qui l'utilise | Comment on s'y branche | Effort | Décision |
 |---|---|---|---|---|---|
-| **OpenZeppelin Monitor** | Actif, open source, Rust, AGPL-3.0, Docker [V] | Anciens utilisateurs de Defender (arrêt le 1er juil. 2026) | Config JSON (réseau, moniteur, trigger). Notre Sentinelle peut **être appelée par un trigger webhook** de Monitor, ou l'inverse. AGPL : ne pas le copier dans notre code, le brancher par HTTP | M | Connecteur prêt ; argument « vous avez migré de Defender ? Voici où on se branche » |
-| **Forta** | Docs « latest » : Firewall (screening avant exécution), bots, Risk Graph MCP. Avalanche supporté dans les anciennes docs 0.1 ; couverture du Firewall sur Avalanche non confirmée [S/?] | Protocoles DeFi | Bot Forta émet une alerte → webhook → `POST /ingest/external-alert` de la Sentinelle | M | Connecteur prêt (entrée) |
+| **OpenZeppelin Monitor** | Actif, open source, Rust, AGPL-3.0, Docker [V] | Anciens utilisateurs de Defender (arrêt le 1er juil. 2026) | Config JSON (réseau, moniteur, trigger). Hold up peut **être appelée par un trigger webhook** de Monitor, ou l'inverse. AGPL : ne pas le copier dans notre code, le brancher par HTTP | M | Connecteur prêt ; argument « vous avez migré de Defender ? Voici où on se branche » |
+| **Forta** | Docs « latest » : Firewall (screening avant exécution), bots, Risk Graph MCP. Avalanche supporté dans les anciennes docs 0.1 ; couverture du Firewall sur Avalanche non confirmée [S/?] | Protocoles DeFi | Bot Forta émet une alerte → webhook → `POST /ingest/external-alert` de Hold up | M | Connecteur prêt (entrée) |
 | **Tenderly** | « 98+ réseaux », Fuji non confirmé dans la page lue [V/?] | Développeurs (simulation, Virtual TestNets) | Alerte Tenderly → webhook ; simulation d'une tx de reprise avant de la signer | M | Connecteur prêt, vérifier Fuji |
-| **Hypernative** | API et webhooks (le guide Cantina décrit URL + secret d'en-tête) [S] ; doc officielle derrière login [?] | CASP, émetteurs, protocoles | Entrée : webhook vers la Sentinelle ; sortie : la Sentinelle appelle leur API de screening si le client a une licence | M | Connecteur prêt, **adaptateur à contrat ouvert** |
+| **Hypernative** | API et webhooks (le guide Cantina décrit URL + secret d'en-tête) [S] ; doc officielle derrière login [?] | CASP, émetteurs, protocoles | Entrée : webhook vers Hold up ; sortie : Hold up appelle leur API de screening si le client a une licence | M | Connecteur prêt, **adaptateur à contrat ouvert** |
 | **Hexagate (Chainalysis)** | Racheté [S] ; incident d'alertes juin 2026 [S] | Idem | Idem Hypernative | M | Connecteur prêt |
 | **TRM** | `POST https://api.trmlabs.com/public/v1/sanctions/screening` [V, cf. `research/docs/D4_apis_protocoles_referentiels.md`] ; 1 req/s, 100/jour sans clé | CASP, banques | Screening sanctions de chaque adresse de sortie dans le traceur | S | **Option PoC** (bien pour le traceur) |
 | **Chainalysis** | Oracle de sanctions on-chain **déprécié**, absent de Fuji [V, D4] ; API KYT/Reactor sous contrat | CASP, banques | Connecteur « demande de gel / traçage » | M | Citer, ne pas promettre |
@@ -186,7 +186,7 @@ Règle de conception : une alerte externe **n'active jamais seule** L3. Elle aug
 
 ## 6. Custody et ops des CASP : comment pause et plafond se traduisent chez eux
 
-Principe : le coffre on-chain est **un** des actifs du CASP. Le reste de ses fonds est chez un custodian. Une Sentinelle utile doit pouvoir **aussi** durcir la politique du custodian. Tout ce qui suit est **[C] sauf mention contraire** ; aucune API de custodian n'a pu être testée (accès sous contrat).
+Principe : le coffre on-chain est **un** des actifs du CASP. Le reste de ses fonds est chez un custodian. Hold up utile doit pouvoir **aussi** durcir la politique du custodian. Tout ce qui suit est **[C] sauf mention contraire** ; aucune API de custodian n'a pu être testée (accès sous contrat).
 
 Mapping commun : NIST **PR.AA**, **RS.MI** ; ATT&CK **T1657** ; D3FEND **D3-AZET**. OWASP/ATLAS : non applicable.
 
@@ -224,7 +224,7 @@ Exemple OCSF « Detection Finding » (classe 2004) : champs à valider contre le
   "category_uid": 2, "activity_id": 1, "type_uid": 200401,
   "severity_id": 4, "time": 1760119200000,
   "metadata": { "version": "1.9.0",
-    "product": { "name": "Sentinelle Fuji", "vendor_name": "Secure Horizon" } },
+    "product": { "name": "Hold up", "vendor_name": "Secure Horizon" } },
   "finding_info": { "uid": "inc-0001", "title": "Drain rate above threshold",
     "types": ["onchain-outflow-velocity"],
     "analytic": { "name": "velocity@v3", "type_id": 1 } },
@@ -279,7 +279,7 @@ Mapping commun : NIST **GV.OC** (contexte organisationnel et obligations légale
 | Canal technique de dépôt | **Non confirmé**. Aucune source n'établit que ONEGATE soit le canal du dépôt d'incident [?]. | recherche web 10 oct. |
 | Bilan 2025 | L'AMF a publié un rapport sur les incidents majeurs 2025 (33 incidents majeurs français, plus de 80 % venant de prestataires) [S, un site juridique citant l'AMF] | https://www.lemondedudroit.fr/banque-finance/304-finance/105970-amf-rapport-sur-les-incidents-majeurs-en-2025-au-titre-du-reglement-dora.html |
 
-Conséquence produit : la Sentinelle génère un **dossier de déclaration structuré** (JSON + PDF) dont les rubriques portent les numéros officiels des champs, et dit explicitement « dépôt manuel ». Ne pas annoncer d'API AMF.
+Conséquence produit : Hold up génère un **dossier de déclaration structuré** (JSON + PDF) dont les rubriques portent les numéros officiels des champs, et dit explicitement « dépôt manuel ». Ne pas annoncer d'API AMF.
 
 ### 8.2 Registre d'information DORA (ITS 2024/2956)
 
@@ -292,7 +292,7 @@ Conséquence produit : la Sentinelle génère un **dossier de déclaration struc
 | Outils open source | Aucun outil de référence vérifié [?]. L'EBA publie la taxonomie et les règles de validation. | https://www.eba.europa.eu/node/18087 |
 | Excel | L'EBA dit ne pas pouvoir fournir une solution Excel qui garde l'intégrité référentielle. | [S] |
 
-Ce que la Sentinelle produit sans prétendre faire le dépôt officiel :
+Ce que Hold up produit sans prétendre faire le dépôt officiel :
 - des **lignes de type `B_05.01`** (prestataires TIC : oracle, vérificateur de pont, RPC, hébergeur) et `B_06.01` (fonctions) en CSV, **clés cohérentes** avec LEI, pour que le CASP n'ait qu'à les fusionner à son registre ;
 - **un contrôle de cohérence** (toutes les clés étrangères existent, LEI valide) ;
 - **l'indication des points uniques de défaillance**.
@@ -309,7 +309,7 @@ Source : https://www.gleif.org/en/lei-data/gleif-lei-look-up-api/access-the-api
 ### 8.4 Registre MiCA de l'ESMA (CASP agréé ?) : choisi pour le PoC
 
 - Cinq fichiers CSV : livres blancs, émetteurs d'ARTs, émetteurs d'EMTs, **CASP autorisés (Titre V)**, entités non conformes ; mise à jour hebdomadaire ; intégration aux systèmes IT d'ESMA « mi-2026 » [V]. Nom `CASPS.csv` [S] ; JSON/API non trouvée [V absence].
-- Usage : au démarrage, la Sentinelle vérifie que le client déclaré figure dans le registre (statut, État membre d'origine, services autorisés) et affiche la date de fraîcheur de la source ; elle sait aussi dire « entité absente ».
+- Usage : au démarrage, Hold up vérifie que le client déclaré figure dans le registre (statut, État membre d'origine, services autorisés) et affiche la date de fraîcheur de la source ; elle sait aussi dire « entité absente ».
 - Le chiffre de l'architecture (362 CASP, 36 en France, 7 oct. 2026) vient de `research/tracks/T1_P4_chiffres_2026.md` (agrégateur) : à faire confirmer avec le fichier officiel.
 - Effort **S** (télécharger, parser, mettre en cache). Aucune donnée personnelle.
 
@@ -320,14 +320,14 @@ Source : https://esma.europa.eu/esmas-activities/digital-finance-and-innovation/
 - **IVMS101** est le modèle de données commun pour originateur et bénéficiaire [S]. **TRP** (Travel Rule Protocol) est un protocole d'échange [C].
 - **Notabene** : API pour identifier la contrepartie, échanger en IVMS101, gérer l'autorisation ; points d'entrée `txValidate`, `txCreate`, `txUpdate`, webhook de notification, webhook d'adresse entrante, bac à sable, routage UE ou US [S, devx.notabene.id].
 - **Sumsub** : KYC, AML, surveillance de transactions et Travel Rule ; protocoles supportés annoncés (TRP, TRISA, Sygna) [S] ; lien direct Notabene-Sumsub non trouvé [?].
-- Pour la Sentinelle : au moment de L3, une sortie bloquée ne doit pas déclencher un envoi Travel Rule ; la **demande de gel** doit citer les VASP contreparties identifiables. Connecteur prêt avec un exemple IVMS101 minimal (`originator.originatorPersons`, `beneficiary.beneficiaryPersons`, `originatingVASP`). Effort **M**, non fait.
+- Pour Hold up : au moment de L3, une sortie bloquée ne doit pas déclencher un envoi Travel Rule ; la **demande de gel** doit citer les VASP contreparties identifiables. Connecteur prêt avec un exemple IVMS101 minimal (`originator.originatorPersons`, `beneficiary.beneficiaryPersons`, `originatingVASP`). Effort **M**, non fait.
 - Sources : https://devx.notabene.id/docs/welcome ; https://docs.dfns.co/integrations/travel-rule/notabene
 
 ### 8.6 Tracfin (ERMES) et déclaration de soupçon
 
 - ERMES est le téléservice de Tracfin pour déposer une déclaration de soupçon (DS) ; le déclarant doit être inscrit. Nouveau formulaire modulaire généralisé en 2024 pour les 49 professions déclarantes [S, pages Tracfin, actu-juridique]. **Aucune API de dépôt automatisée** trouvée [?].
 - La DS doit en principe être faite avant l'exécution, sinon « sans délai » [S].
-- Pour la Sentinelle : un **brouillon de texte d'analyse du soupçon** (faits on-chain, adresses, montants, preuves) que la personne en charge de la conformité colle dans ERMES. Pas d'envoi. Le LLM n'écrit pas les faits, seulement la mise en forme, avec le sceptique. Effort **S**, après la fiche DORA.
+- Pour Hold up : un **brouillon de texte d'analyse du soupçon** (faits on-chain, adresses, montants, preuves) que la personne en charge de la conformité colle dans ERMES. Pas d'envoi. Le LLM n'écrit pas les faits, seulement la mise en forme, avec le sceptique. Effort **S**, après la fiche DORA.
 - Sources : https://ermesdemo.tracfin.finances.gouv.fr/Documentation/GuideUtilisateurs.pdf ; https://www.avocatparis.org/actualites/lbc-ft-dematerialisation-de-la-declaration-de-soupcon-depuis-le-1er-juin-2024
 
 ---
@@ -336,7 +336,7 @@ Source : https://esma.europa.eu/esmas-activities/digital-finance-and-innovation/
 
 Tout est **[C]**, à vérifier :
 - **Stablecoins réglementés** (USDC, USDT sur Avalanche) : l'émetteur peut geler une adresse ; il n'existe pas d'API publique pour cela : le canal est une demande documentée (contact conformité de l'émetteur, SEAL 911 pour l'urgence). Le produit génère donc un **dossier de demande de gel** standard (adresses, hashs, montants, sauts, preuve ancrée).
-- **ERC-3643 (T-REX)**, utilisé pour les titres/fonds tokenisés permissionnés : `pause()`, `setAddressFrozen()` côté émetteur. La Sentinelle déclenche ces fonctions seulement si elle a le rôle `agent`, ce qui correspond au `SENTINEL_ROLE` limité du §3.1.
+- **ERC-3643 (T-REX)**, utilisé pour les titres/fonds tokenisés permissionnés : `pause()`, `setAddressFrozen()` côté émetteur. Hold up déclenche ces fonctions seulement si elle a le rôle `agent`, ce qui correspond au `SENTINEL_ROLE` limité du §3.1.
 
 Démontre : « l'émetteur de fonds tokenisé » du client-cible (archi §1). Effort **S** (texte et un adaptateur factice).
 
@@ -353,7 +353,7 @@ Mapping commun : NIST **DE.AE**, **RS.AN** (analyse de l'incident, preuve), **GV
 | **`EvidenceAnchor` sur Fuji** | notre contrat (archi §2) | `anchor(bytes32 root, bytes32 incidentId)` + événement | S | **PoC** |
 | **EAS** | `@ethereum-attestation-service/eas-sdk 2.10.0`, ethers `^6.13.2` [V npm] ; **pas de déploiement officiel sur Avalanche/Fuji** [V] | Possibilité de déployer `EAS` + `SchemaRegistry` sur Fuji ; schéma ex. `bytes32 root, bytes32 incidentId, uint8 tier` | M | Connecteur prêt : le même enregistrement lisible par les outils d'attestation |
 | **OpenTimestamps** | npm `opentimestamps 0.4.9` [V] ; calendriers publics [C] | Horodater la racine dans Bitcoin (preuve `.ots` acquise après quelques heures) | S/M | Connecteur prêt : « preuve hors Avalanche » |
-| **Sigstore / Rekor v2** | rekor-tiles, instance publique dont l'URL change ~tous les 6 mois [V] ; PyPI `sigstore 4.5.0` [V] | Signer le *build* de la Sentinelle (version des règles) et publier dans le journal de transparence | M | Citer seulement (le CI GitHub est réservé à Adem) |
+| **Sigstore / Rekor v2** | rekor-tiles, instance publique dont l'URL change ~tous les 6 mois [V] ; PyPI `sigstore 4.5.0` [V] | Signer le *build* de Hold up (version des règles) et publier dans le journal de transparence | M | Citer seulement (le CI GitHub est réservé à Adem) |
 | **in-toto** | Attestation de chaîne d'approvisionnement logicielle [C] | Prédicat « règle@version exécutée sur blocs A..B » | M | Citer : correspond à notre « règle@version » |
 | **SOC 2 / ISAE 3402** | Cadres d'assurance, pas des API [C] | Le journal chaîné et rejouable est une **preuve candidate** de contrôle (qui a décidé, quand, avec quelle règle) | S (texte) | Fiche de défense : « se range sous un contrôle SOC 2 » sans prétendre être certifié |
 
@@ -413,7 +413,7 @@ Un dossier `connectors/` avec, par connecteur : `README.md`, `adapter.ts` (inter
 9. **Émetteurs** : ERC-3643 (`setAddressFrozen`, `pause`), stablecoins (dossier de demande de gel).
 10. **Dépôts humains** : AMF (DORA) et Tracfin (ERMES) : génération du dossier, aucun envoi.
 
-### 12.3 Schéma : la Sentinelle dans l'écosystème du client
+### 12.3 Schéma : Hold up dans l'écosystème du client
 
 ```mermaid
 flowchart LR
@@ -432,7 +432,7 @@ flowchart LR
     end
   end
 
-  subgraph Sentinelle["Sentinelle Fuji"]
+  subgraph HoldUp["Hold up"]
     direction TB
     ING["Ingestion normalisée<br/>ethers v6 + 2e RPC"]
     DET["Détecteurs déterministes<br/>+ score"]

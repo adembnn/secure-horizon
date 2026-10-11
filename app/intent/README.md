@@ -1,6 +1,6 @@
 # @sentinelle/intent
 
-**Intent Barrier** - Core decision engine for Sentinelle.
+**Intent Barrier** - Core decision engine for Hold up.
 
 Compares user intent with actual transaction effects to detect drainer attacks, phishing, and scams before they happen.
 

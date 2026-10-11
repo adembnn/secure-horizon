@@ -1,6 +1,6 @@
 # Protocole V2 : essai réel de Hold up avec un vrai MetaMask
 
-Date : 11 oct. 2026. Remplace `ESSAI_REEL_METAMASK.md`, écrit avant le produit figé (il parle de "Sentinelle", du serveur 8787 et d'une fenêtre dans la page : tout cela est périmé). Les fichiers `CE_QUI_PEUT_CASSER.md` et `page_essai\` datent aussi de cette époque : on les garde pour mémoire, on n'en dépend plus (sauf `page_essai\` pour Fuji, section 9).
+Date : 11 oct. 2026. Remplace `ESSAI_REEL_METAMASK.md`, écrit avant le produit figé (il emploie l'ancien nom de code du projet, parle du serveur 8787 et d'une fenêtre dans la page : tout cela est périmé). Les fichiers `CE_QUI_PEUT_CASSER.md` et `page_essai\` datent aussi de cette époque : on les garde pour mémoire, on n'en dépend plus (sauf `page_essai\` pour Fuji, section 9).
 
 Ce protocole est écrit pour une personne qui n'est pas développeuse. Une case = un geste. Une commande = un bloc. Aucun agent n'a joué ce protocole : tout ce qui est écrit sous "Prévu" est une **prévision tirée du code**, pas un constat. Ton travail est de remplacer les prévisions par des constats, dans `RESULTATS_TEMPLATE.md`.
 
@@ -26,7 +26,7 @@ Ce que l'essai doit répondre :
 
 ## 1. Ce qu'il faut avoir, et ce qui manque aujourd'hui
 
-Vérifié par lecture du dépôt le 11 oct. 2026 sur cette machine.
+Vérifié par lecture du dépôt le 11 oct. 2026 sur cette machine (relu vers 10 h 45 : chemins, commandes, textes de l'extension).
 
 | Élément | État | Ce que tu dois faire |
 |---|---|---|
@@ -36,12 +36,12 @@ Vérifié par lecture du dépôt le 11 oct. 2026 sur cette machine.
 | `blockchain\node_modules` | **absent** : Hardhat n'est pas installé | `npm install` dans `blockchain\` (section 4, Internet requis, environ une minute, ~640 paquets) |
 | Compilateur Solidity 0.8.24 | pas encore téléchargé | se télécharge tout seul au premier `compile` (Internet) |
 | `research\demo_reelle\chain\addresses.local.json` | **absent** | créé par la commande `deploy-local.js` (section 4) |
-| `research\demo_reelle\site_echange\addresses.local.json` | **périmé** (chaîne 43114, anciennes adresses) | recopié par `config.js` après le déploiement (section 4). Ne lance jamais le site Neve avant cette recopie |
-| Contrats du coffre (scène "signataire aveugle") | **n'existent pas** : `blockchain\contracts\demo\` ne contient que DemoUSDC, DemoWAVAX, DemoNFT, DemoRouter, FreshDrainer. `pitch\DEMO_SCENES.md` dit "à bâtir, non fait" | la scène coffre est sautée (section 6.3). Elle n'est pas un échec |
+| `research\demo_reelle\site_echange\addresses.local.json` | **absent** (fichier ignoré par git, jamais dans un clone) | créé par `config.js` après le déploiement (section 4.4), à partir de `chain\addresses.local.json`. Ne lance jamais le site Neve avant cette copie |
+| Contrats du coffre (scène "signataire aveugle") | **n'existent pas** : `blockchain\contracts\demo\` ne contient que DemoUSDC, DemoWAVAX, DemoNFT, DemoRouter, FreshDrainer, VulnerableRouter (aucun coffre). `pitch\DEMO_SCENES.md` dit "à bâtir, non fait" | la scène coffre est sautée (section 6.3). Elle n'est pas un échec |
 | Réseau Sepolia dans Hardhat | **absent** de `blockchain\hardhat.config.js` (seulement `localhost` et `fuji`) | on n'en a pas besoin : on utilise l'USDC de test de Circle (section 8) |
 | `blockchain\DEPLOYMENTS.md` | vide (en-tête seulement) | rien n'est déployé sur Fuji. La section 9 est optionnelle |
 | Paquet zip de l'extension | on ne l'utilise pas | on charge le **dossier** `extension_standalone\extension` |
-| Icône de l'extension | le manifeste n'a pas d'icône | Chrome affiche une lettre : normal, ce n'est pas une erreur |
+| Icône de l'extension | le manifeste déclare des icônes (`icons\icon16.png` à `icon128.png`) | Chrome affiche l'icône de Hold up |
 
 Contrôle rapide, sans rien installer ni lancer :
 
@@ -53,7 +53,7 @@ cd C:\Users\detot\Documents\secure-horizon
 node scripts/demo.mjs --check
 ```
 
-- [ ] Réussite : "Node >= 22.18 : oui", ports 8545, 8791, 8792 "libre". "blockchain/node_modules : absent" est **attendu**.
+- [ ] Réussite : "Node >= 22.18 : oui", ports 8545, 8793, 8789, 8792, 8791 "libre". "blockchain/node_modules : absent (npm install sera lancé)" est **attendu**. La commande ne lance rien.
 - [ ] Échec : un port "OCCUPÉ". Va à la panne P6.
 
 Outil pour les captures : touche **Windows + Maj + S**, puis enregistre dans `R\research\titouan\T_banc_e2e\essai_reel\captures\` (crée le dossier `captures`). Utilise **exactement** les noms de fichier donnés (format .png).
@@ -83,20 +83,21 @@ Réglage MetaMask à faire une fois : MetaMask, menu (trois points), Paramètres
 C:\Users\detot\Documents\secure-horizon\research\titouan\T_banc_e2e\extension_standalone\extension
 ```
 
-- [ ] La carte "Hold up (autonome)", version 0.3.0, apparaît **sans bouton rouge "Erreurs"**. Capture : `01_extension_carte.png`.
+- [ ] La carte "Hold up", version 0.3.0, apparaît **sans bouton rouge "Erreurs"**. Capture : `01_extension_carte.png`.
 - [ ] Si tu as chargé une autre version de Hold up (dossier `extension\`, avec serveur) : désactive-la. Une seule à la fois.
 - [ ] Épingle Hold up, puis **clique sur son icône**. Un panneau latéral s'ouvre.
-- [ ] Le panneau dit "Hold up est actif.", "Version 0.3.0 · Aucune connexion réseau", "Aujourd'hui : 0 demandes vérifiées, 0 annulées", "Aucune demande pour l'instant." Capture : `02_panneau_lateral_vide.png`.
+- [ ] Le panneau dit "Hold up est actif.", "Version 0.3.0" (la mention "Aucune connexion réseau" n'apparaît qu'avec la variante `extension_sans_reseau`), "Aujourd'hui" puis "0 demande vérifiée, 0 annulée.", une section "Droits accordés" ("Aucun droit accordé sur cet onglet."), "Dernières demandes" et "Aucune demande pour l'instant." Capture : `02_panneau_lateral_vide.png`.
 
 Critères :
 - Réussite : carte sans erreur et panneau "Hold up est actif.".
 - Échec : bouton "Erreurs" (ouvre-le, copie le message dans la fiche, **stop**), ou panneau "Hold up est inactif." (panne P1), ou rien ne s'ouvre au clic (panne P2).
 
-Réglages de l'extension (une fois) : `chrome://extensions`, carte Hold up, "Détails", "Options de l'extension".
-- [ ] Clique "Durées de démo (10 s et 60 s)" puis "Enregistrer" (évite d'attendre 30 s et 10 min). À remettre en "Durées du produit" à la fin (section 11).
-- [ ] Vérifie que la case "Afficher la question et la réponse dans une fenêtre Hold up séparée" est cochée.
+Réglages de l'extension (une fois) : `chrome://extensions`, carte Hold up, "Détails", "Options de l'extension". La page s'appelle "Hold up : réglages".
+- [ ] Section "Délais" : mets `10` dans "La demande ne correspond pas : attente avant « Continuer », en secondes (5 au minimum)" et `60` dans "Pression repérée sur la page : durée de la retenue, en secondes (30 au minimum)", puis "Enregistrer" (évite d'attendre 30 s et 10 min). À remettre à `30` et `600` à la fin (section 11).
+- [ ] Laisse "Demander « Que veux-tu faire ? »" sur sa valeur par défaut. Note dans la fiche si la case "Limiter le droit au montant que j'ai écrit, quand un site demande plus" est cochée ou non : elle change ce que S1-B propose.
+- La fenêtre séparée est le comportement normal : il n'y a plus de case à cocher pour elle.
 
-Le champ "Mon contexte" se remplit plus tard (sections 5 et 8), car il contient des adresses qui n'existent pas encore.
+La section "Contrats que j'utilise" se remplit plus tard (sections 5 et 8), car elle contient des adresses qui n'existent pas encore.
 
 ---
 
@@ -245,19 +246,14 @@ Vérifie : le solde affiche 100 (AVAX de test). Importer le jeton : "Importer de
 
 Capture : `03_metamask_reseau_local_compte.png` (nom du réseau, nom du compte, solde 100, sans clé visible).
 
-### 5.3 Dire à Hold up quel jeton est "USDC"
+### 5.3 Dire à Hold up quel contrat est le routeur
 
-Hold up ne compare "50 USDC" à une demande que s'il connaît le jeton par son adresse. Sinon il répond "Je n'ai pas pu vérifier cette demande" (revue S2). Le fichier `ESSAI_HUMAIN.md` donne `"symbol":"DemoUSDC"` : avec la phrase "50 USDC" cela ne correspondrait pas. **Écris le symbole `USDC`.**
+Le champ "Mon contexte" (texte JSON) n'existe plus dans les réglages. Pour le jeton, il n'y a rien à saisir : quand Hold up ne connaît pas un jeton par son adresse, il demande au portefeuille, en lecture seule, son nom et ses décimales. DemoUSDC se présente comme `DUSDC`, 6 décimales : ce nom contient "USDC", donc la phrase "50 USDC" doit pouvoir lui correspondre (prévision tirée de `gatekeeper.js`, fonction `declaredTokens`, à confirmer). Si la lecture échoue, Hold up répond "Je n'ai pas pu vérifier cette demande" (revue S2).
 
-- [ ] Options de Hold up, champ "Mon contexte", colle ce texte en remplaçant les deux adresses (`usdc` et `router` de 4.3), puis "Enregistrer" :
+- [ ] Options de Hold up, section "Contrats que j'utilise", champ "Adresse du contrat" : colle l'adresse `router` de 4.3, clique "Ajouter", puis "Enregistrer" en bas de la page.
+- [ ] Le message à côté de "Enregistrer" est un succès, sans erreur.
 
-```json
-{"tokens":[{"address":"ADRESSE_USDC","symbol":"USDC","decimals":6,"chainId":31337}],"knownSpenders":["ADRESSE_ROUTER"]}
-```
-
-- [ ] Le message de l'enregistrement est un succès, sans erreur de format.
-
-Note : `knownSpenders` = le routeur est "connu" ; le FreshDrainer ne l'est pas. C'est ce qui fait la différence "routeur connu / adresse neuve" (prévision tirée du code, à confirmer).
+Note : le routeur ajouté ici est "connu" ; le FreshDrainer ne l'est pas. C'est ce qui fait la différence "routeur connu / adresse neuve" (prévision tirée du code, à confirmer).
 
 ---
 
@@ -308,7 +304,7 @@ Prévu : "Ça ne correspond pas à ce que tu as écrit." ; ligne qui dit que tu 
 
 Captures : `S1B_holdup_question.png`, `S1B_holdup_verdict.png`. Puis :
 - [ ] Clique "Annuler". Le site doit dire "Opération annulée.". MetaMask ne s'est pas ouvert. Capture `S1B_apres_annuler.png`.
-- [ ] Relance la demande. Clique "Continuer" (suis ce que Hold up demande : phrase à retaper, compte à rebours de 10 s). MetaMask s'ouvre. Capture `S1B_metamask_approve_illimite.png` : note ce que MetaMask écrit pour le montant ("Unlimited" ?) et pour l'adresse, et s'il y a une alerte.
+- [ ] Relance la demande. Clique "Continuer" (suis ce que Hold up demande : attente de 10 s avant que "Continuer" soit possible, avec les délais réglés en section 3 ; note toute autre étape demandée). MetaMask s'ouvre. Capture `S1B_metamask_approve_illimite.png` : note ce que MetaMask écrit pour le montant ("Unlimited" ?) et pour l'adresse, et s'il y a une alerte.
 - [ ] **Rejette** dans MetaMask (bouton Rejeter). Ne confirme pas.
 
 | S1-B piège | MetaMask seul (section 7) | Avec Hold up |
@@ -472,12 +468,7 @@ Réussite : une ligne de constat par bouton (alerte oui ou non). **L'absence d'a
 
 ### 8.6 Puis avec Hold up
 
-- [ ] Réactive Hold up. Options, "Mon contexte" (remplace le contenu) :
-
-```json
-{"tokens":[{"address":"0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238","symbol":"USDC","decimals":6,"chainId":11155111}],"knownSpenders":["0x000000000022D473030F116dDEE9F6B43aC78BA3"]}
-```
-
+- [ ] Réactive Hold up. Rien à saisir dans les réglages : l'USDC de Circle se présente comme `USDC`, 6 décimales (lu par le portefeuille), et Permit2 (`0x000000000022D473030F116dDEE9F6B43aC78BA3`) est dans la liste publique que Hold up connaît déjà. Retire le routeur local de "Contrats que j'utilise" si tu veux un état propre (il ne gêne pas sur Sepolia).
 - [ ] Recharge la page. Rejoue S1a, S1b, S1c, S6a, S6b avec la phrase `échanger 50 USDC` (pour S6a et S6b, tape `me connecter`). Captures `SEP_S1a_holdup.png` ... `SEP_S6b_holdup.png` pour le verdict Hold up, plus l'écran MetaMask quand il s'ouvre.
 
 | Bouton | Hold up prévu | Hold up observé | MetaMask s'ouvre avant Hold up ? |
@@ -522,7 +513,7 @@ npm run demo:fuji
 
 - [ ] Réussite : adresses écrites dans `research\demo_reelle\chain\addresses.fuji.json` et `blockchain\DEPLOYMENTS.md`.
 - [ ] Rejoue ensuite avec la page testnet (`http://127.0.0.1:8794/`) en mettant "Réseau attendu" à `43113`, jeton = `usdc` de `addresses.fuji.json`, nom de domaine Permit `Demo USDC`, version `1`, et la même méthode qu'en 8.5 et 8.6. Captures préfixées `FUJI_`.
-- Si tu préfères l'ancienne page à 9 scénarios (Fuji codé en dur) : `node R\research\titouan\T_banc_e2e\essai_reel\page_essai\serve.mjs`, puis `http://127.0.0.1:8788/`. Elle dit "Sentinelle" dans ses textes, c'est le même produit.
+- Si tu préfères l'ancienne page à 9 scénarios (Fuji codé en dur) : `node C:\Users\detot\Documents\secure-horizon\research\titouan\T_banc_e2e\essai_reel\page_essai\serve.mjs`, puis `http://127.0.0.1:8788/`. Ses textes peuvent porter l'ancien nom de code du projet : c'est le même produit.
 
 ---
 
@@ -537,13 +528,13 @@ npm run demo:fuji
 | P5 | MetaMask refuse d'ajouter le réseau ("ID de chaîne différent") | T1 n'est pas en 31337 (mode fork lancé avant), ou nœud arrêté | regarde T1 (`chainId=31337`). Arrête (Ctrl+C), relance 4.2 avec `plain`, redéploie (4.3), recopie (4.4) |
 | P6 | Port occupé (8545, 8791, 8793, 8794, 8792) | un ancien nœud ou serveur tourne encore | trouve le processus : `netstat -ano \| findstr :8545`, puis `taskkill /PID <numéro> /F`. Ou ferme les anciennes fenêtres PowerShell |
 | P7 | `npm install` ou `hardhat` échoue, "node absent", "'npm' n'est pas reconnu" | Node non installé ou pas dans le PATH ; pas d'Internet ; antivirus | `node -v` doit répondre. Sinon réinstalle Node 22.18+ depuis nodejs.org et rouvre PowerShell. Vérifie la connexion. Pour "Cannot find module hardhat" : `npm install` n'a pas été fait dans `blockchain\` |
-| P8 | Le site Neve affiche "Service indisponible" ou "Mauvais réseau" | `addresses.local.json` du site absent ou périmé (ancien 43114), ou MetaMask pas sur `Local Hold up` | refais `config.js` (4.4) après le déploiement, recharge ; sélectionne le bon réseau dans MetaMask |
+| P8 | Le site Neve affiche "Service indisponible" ou "Mauvais réseau" | `site_echange\addresses.local.json` absent (pas encore créé par `config.js`) ou d'un ancien déploiement, ou MetaMask pas sur `Local Hold up` | refais `config.js` (4.4) après le déploiement, recharge ; sélectionne le bon réseau dans MetaMask |
 | P9 | Aucun robinet Sepolia ne donne de fonds | robinets saturés ou qui exigent un solde réel | essaie un autre robinet gratuit ; le robinet à minage (pk910) n'exige rien mais prend du temps ; réessaie plus tard. Ne paie jamais. Si bloqué : saute la section 8 et note-le (c'est la section la plus utile, retente) |
 | P10 | MetaMask affiche "Security check unavailable" partout sur Sepolia | l'API d'alertes injoignable (réseau, bloqueur de contenu, "Basic functionality" coupée dans MetaMask) | MetaMask, Paramètres, Sécurité : active les alertes de sécurité ; coupe un bloqueur de pub le temps du test. Note le message, c'est déjà un constat |
 | P11 | MetaMask local : "nonce trop élevé", transaction qui reste "en attente" | tu as redémarré le nœud local, MetaMask garde l'ancien état | MetaMask, Paramètres, Avancé, "Effacer les données d'activité et de nonce" (Clear activity tab data), recharge |
 | P12 | Une fenêtre MetaMask reste cachée derrière Chrome, "rien ne se passe" | fenêtre MetaMask non passée au premier plan sous Windows | regarde la barre des tâches ; la pastille du renard indique le nombre de demandes en attente ; rejette-les avant de rejouer |
-| P13 | Hold up : la fenêtre ne s'ouvre pas au premier plan, l'écran s'affiche dans la page | Chrome a refusé la fenêtre séparée (repli prévu) | note-le : c'est une ligne `ui_fallback` dans le journal des options |
-| P14 | Hold up répond "Je n'ai pas pu vérifier cette demande" pour tout | jeton absent de "Mon contexte" ou mauvais `chainId`/symbole | refais 5.3 (ou 8.6) : adresse exacte, `"symbol":"USDC"`, chaîne 31337 ou 11155111 |
+| P13 | Hold up : la fenêtre ne s'ouvre pas au premier plan, l'écran s'affiche dans la page | Chrome a refusé la fenêtre séparée (repli prévu, journalisé `ui_fallback`) | note-le dans la fiche, avec la capture de l'écran dans la page |
+| P14 | Hold up répond "Je n'ai pas pu vérifier cette demande" pour tout | le nom du jeton n'a pas pu être lu par le portefeuille (mauvais réseau, nœud arrêté), ou le nom lu ne contient pas celui de la phrase | vérifie que MetaMask est sur le bon réseau et que T1 tourne ; tape le nom que le jeton affiche dans MetaMask ; pour un routeur local, refais 5.3 |
 | P15 | Après 30 s d'attente Hold up semble figé | le service worker de Chrome s'est arrêté | normal ; la fenêtre doit rester utilisable et reprendre (c'est un contrôle de `ESSAI_HUMAIN.md`, n°6). Si "Annuler" ne répond plus, note-le |
 | P16 | Le site Glacier affiche "Service indisponible" | pas de `config.js` du site Glacier exécuté ou chaîne non déployée | 4.5, commande `config.js`, puis F5 |
 
@@ -551,9 +542,9 @@ npm run demo:fuji
 
 ## 11. Fin de session
 
-- [ ] Options de Hold up : "Durées du produit", "Enregistrer".
-- [ ] Lis le "Journal (local)" dans les options : chaque demande doit avoir une ligne `verdict` puis une ligne `decision`. Copie les lignes `ui_fallback` ou en erreur dans la fiche. Capture `99_journal_options.png`.
-- [ ] Panneau latéral : capture `98_panneau_apres_essai.png` (compteurs "vérifiées" et "annulées", liste des dernières demandes).
+- [ ] Options de Hold up, section "Délais" : remets `30` et `600`, puis "Enregistrer".
+- [ ] Le journal n'est plus dans les options : il est dans le panneau latéral ("Dernières demandes"). Vérifie qu'à chaque demande jouée correspond une ligne. Note les écarts dans la fiche. Capture `99_journal_panneau.png`.
+- [ ] Panneau latéral : capture `98_panneau_apres_essai.png` (compteurs "vérifiées" et "annulées", section "Droits accordés", liste des dernières demandes).
 - [ ] Arrête les fenêtres T1 à T5 (Ctrl+C). Les comptes et jetons locaux disparaissent avec le nœud.
 - [ ] Remplis `RESULTATS_TEMPLATE.md` (copie-le d'abord en `RESULTATS_AAAA-MM-JJ.md`), joins le dossier `captures\`.
 - [ ] Ne commit rien qui contienne une clé. Les captures ne doivent montrer ni phrase de récupération ni clé privée.

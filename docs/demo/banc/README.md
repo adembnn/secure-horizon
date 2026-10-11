@@ -1,6 +1,6 @@
 > **PÉRIMÉ le 11/10/2026 : voir livrables\**
 
-# Page de démo : le banc d'essai de Sentinelle
+# Page de démo : le banc d'essai de Hold up
 
 Page autonome pour le pitch : `index.html` lit tout son contenu dans `data.json`. Pour changer un chiffre, on modifie seulement `data.json`, jamais le code.
 

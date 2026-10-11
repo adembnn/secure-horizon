@@ -1,6 +1,6 @@
 # Brief commun aux attaquants red team (en continu)
 
-Tu joues un attaquant ou un juré qui veut CASSER Sentinelle, une barrière d'intention qui avertit avant une signature crypto piégée.
+Tu joues un attaquant ou un juré qui veut CASSER Hold up, une barrière d'intention qui avertit avant une signature crypto piégée.
 
 - **Boîte noire.** INTERDIT de lire `engine/`, `run/`, `detectors_adem/` et `vendor_t103/`. Ton seul outil : `node "C:\Users\Adem\Secure Horizon\research\titouan\T_banc_e2e\redteam\check.mjs" <fichier.jsonl>`, qui renvoie `level_final` (critical, warn ou ok) pour chaque cas. Le format des cas est décrit dans `redteam/README.md`, `attacks/README.md` (section Schema) et `docs/intent-barrier.md` ; un exemple se trouve dans `redteam/exemple.jsonl`.
 - **Volume.** Ne fabrique pas 60 cas à la main. Écris un GÉNÉRATEUR/FUZZER (Node, ethers v6 importé par chemin absolu `C:\Users\Adem\Secure Horizon\blockchain\node_modules\ethers\lib.esm\index.js`) qui produit des centaines à des milliers de variantes, les passe dans `check.mjs` par lots, garde les contournements, puis mute AUTOUR des contournements trouvés. Vise au moins 2 000 attaques testées.

@@ -8,7 +8,7 @@ Date de la recherche : 10 oct. 2026. Légende : [P] = source primaire (page édi
 2. Les gros budgets des DAO vont aux audits et prestataires de sécurité, pas à la surveillance : **Compound ~2,04 M$/an (renouvellement proposé 1,70 M$)** et OpenZeppelin 4 M$/an en 2025. La surveillance en temps réel pèse 15 à 80 k$/an chez Balancer. [P][V]
 3. Côté entreprises, les médianes Vendr sont à 40 k$/an (TRM), 39 k$ (Fireblocks), 150 k$ (Blockaid), 175 k$ (Chainalysis). [S][V]
 4. Le capital afflue vers le segment (Blockaid 50 M$ série B, Hypernative 40 M$ série B, Elliptic 120 M$ série D à 670 M$, TRM 1 Md$), mais l'achat de sécurité par les DAO est lent et contesté (vote Compound rejeté).
-5. Fourchette réaliste pour Sentinelle : 15 à 60 k$/an pour DAO/protocole, 40 à 150 k$/an pour CASP/fintech crypto, 100 à 250 k$/an (hypothèse) si le dossier DORA est vendu à une entité financière régulée. Canal : intégration policy/webhook dans les plateformes de garde (Fireblocks, BitGo) et Safe, puis direct.
+5. Fourchette réaliste pour Hold up : 15 à 60 k$/an pour DAO/protocole, 40 à 150 k$/an pour CASP/fintech crypto, 100 à 250 k$/an (hypothèse) si le dossier DORA est vendu à une entité financière régulée. Canal : intégration policy/webhook dans les plateformes de garde (Fireblocks, BitGo) et Safe, puis direct.
 
 ## 1. Prix publics ou rapportés
 
@@ -102,7 +102,7 @@ Non trouvé en source primaire chiffrée. La page Deloitte « DORA European Surv
 
 **Qui paie le plus et le plus facilement.** (1) Les acheteurs réglementés et les exchanges paient le plus (médianes 150 à 175 k$) et achètent sur budget récurrent, mais le cycle est long et la preuve est faible ici. (2) Les DAO paient peu (15 à 80 k$) sur un vote public, avec un risque de rejet comme à Compound ; elles sont rapides à signer quand un conseiller le recommande. (3) Émetteurs RWA et stablecoins : acheteurs plausibles (Hypernative cite Circle, Ethena, Invesco ; Paxos a racheté Fordefi) mais aucun prix public [?].
 
-**Fourchette réaliste pour Sentinelle (hypothèses fondées sur les repères ci-dessus, pas sur des devis).**
+**Fourchette réaliste pour Hold up (hypothèses fondées sur les repères ci-dessus, pas sur des devis).**
 
 | Segment | Fourchette annuelle | Ancrage |
 |---|---|---|

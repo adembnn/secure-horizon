@@ -1,4 +1,4 @@
-# Red team juré : faux positifs de Sentinelle sur des opérations honnêtes (Avalanche)
+# Red team juré : faux positifs de Hold up sur des opérations honnêtes (Avalanche)
 
 Point de vue : juré développeur Avalanche (Team1) qui utilise la DeFi tous les jours. Méthode en boîte noire, avec `redteam/check.mjs` comme seul outil. Je n'ai lu ni `engine/`, ni `run/`, ni `detectors_adem/`.
 Jeu de test : `redteam/jury_fp.jsonl`, 123 opérations légitimes, toutes `label = benin`. Les utilisateurs sont synthétiques. Les adresses de protocoles sont les adresses publiques mainnet (C-Chain 43114) : LFJ v1 / LB 2.1 / LB 2.2, Pangolin, Odos, 1inch v6, ParaSwap, Uniswap UR, Permit2, Aave v3 Pool et Gateway, Benqi qiAVAX / qiUSDCn, sAVAX, WAVAX, CCTP TokenMessenger, WETH.e / BTC.b (pont Core), Seaport 1.5 et le conduit OpenSea.
@@ -44,7 +44,7 @@ L'objectif du contrat est FP critical < 2 %. Ici, on est à 17,9 %. Si on exclut
 
 ## Ce qu'un juré dirait sur scène
 
-> « J'ai fait ma semaine DeFi normale sur Avalanche : un swap sur LFJ, un dépôt Aave, du sAVAX, un pont CCTP et un remboursement à un pote de 10,5 AVAX. Sentinelle m'a crié à l'arnaque une fois sur six et m'a mis un orange deux fois sur trois. Au troisième rouge sur mon propre dépôt Aave, je la désinstalle, et c'est le jour où un vrai drainer arrive que je ne l'ai plus. »
+> « J'ai fait ma semaine DeFi normale sur Avalanche : un swap sur LFJ, un dépôt Aave, du sAVAX, un pont CCTP et un remboursement à un pote de 10,5 AVAX. Hold up m'a crié à l'arnaque une fois sur six et m'a mis un orange deux fois sur trois. Au troisième rouge sur mon propre dépôt Aave, je la désinstalle, et c'est le jour où un vrai drainer arrive que je ne l'ai plus. »
 
 ## Limites de ce jeu
 

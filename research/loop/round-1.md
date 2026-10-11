@@ -25,7 +25,7 @@ Thèmes qui reviennent chez presque tous les critiques :
 2. Périmètre irréaliste pour environ 10 h (7 sur 7).
 3. Conformité réduite à DORA, réponse à « qui est responsable » absente (6 sur 7).
 4. Valeur de la blockchain faible : ancrage final, testnet, journal réécrivable (6 sur 7).
-5. Pause globale auto-expirante : fail-open, déni de service, clé Sentinelle (6 sur 7).
+5. Pause globale auto-expirante : fail-open, déni de service, clé Hold up (6 sur 7).
 6. Produit lié à un coffre maison, pas d'intégration, vecteurs dominants (clés, infra) non couverts (5 sur 7).
 
 ## 2. Défauts relevés
@@ -36,7 +36,7 @@ Thèmes qui reviennent chez presque tous les critiques :
 | kpmg-r1-02 | kpmg | majeur | Moteur DORA classe depuis des mesures on-chain : omnibus, dénominateur, pays injectés |
 | kpmg-r1-03 | kpmg | majeur | Références et horloge DORA approximatives (art. 9(5)(b), 4 h sans point de départ) |
 | kpmg-r1-04 | kpmg | majeur | L2/L3 bloquent les retraits sans base contractuelle, coût du faux positif non chiffré |
-| kpmg-r1-05 | kpmg | majeur | Pause expirante fail-open, clé Sentinelle non gouvernée, Sentinelle = tiers TIC |
+| kpmg-r1-05 | kpmg | majeur | Pause expirante fail-open, clé Hold up non gouvernée, Hold up = tiers TIC |
 | kpmg-r1-06 | kpmg | majeur | Valeur de preuve surestimée (testnet, ancrage final, hash non salé, LLM non rejouable) |
 | kpmg-r1-07 | kpmg | majeur | Registre des tiers lu on-chain ≠ registre d'informations ; AWS absent |
 | kpmg-r1-08 | kpmg | majeur | Métriques circulaires, seuils réglés sur le test |
@@ -62,7 +62,7 @@ Thèmes qui reviennent chez presque tous les critiques :
 | kryptosphere-r1-08 | kryptosphere | majeur | Ancrage sur testnet = horodatage, complétude non démontrée |
 | kryptosphere-r1-09 | kryptosphere | majeur | Périmètre trop large, démo sur nos propres contrats, intégration réduite à Slack |
 | redteam-r1-01 | redteam | bloquant | Seuils fixes publics, contournables (drain lent, Sybil, sortie sans Withdraw, latence) |
-| redteam-r1-02 | redteam | bloquant | Modèle de pouvoirs sous-spécifié : `revokeRole` désarme la Sentinelle |
+| redteam-r1-02 | redteam | bloquant | Modèle de pouvoirs sous-spécifié : `revokeRole` désarme Hold up |
 | redteam-r1-03 | redteam | majeur | La défense est un déni de service ; pause expirante ; auto-incident DORA |
 | redteam-r1-04 | redteam | bloquant | Périmètre loin des pertes réelles ; qui migre ses fonds ? |
 | redteam-r1-05 | redteam | majeur | Métriques circulaires, pas de baseline, bruit RPC |
@@ -78,13 +78,13 @@ Thèmes qui reviennent chez presque tous les critiques :
 | rssi-r1-05 | rssi | bloquant | « Qui est responsable » sans réponse écrite ; sceptique = LLM |
 | rssi-r1-06 | rssi | majeur | Champs DORA off-chain ; registre ≠ entités juridiques ; AML absent |
 | rssi-r1-07 | rssi | majeur | Valeur de l'ancrage sur testnet surévaluée |
-| rssi-r1-08 | rssi | majeur | Sentinelle = SPOF, cible, nouveau tiers ICT, mode dégradé |
+| rssi-r1-08 | rssi | majeur | Hold up = SPOF, cible, nouveau tiers ICT, mode dégradé |
 | rssi-r1-09 | rssi | majeur | Périmètre irréaliste, traceur sur adresses simulées |
 | pitch-r1-01 | pitch | bloquant | Phrase de pitch à 4 produits, pas de scène à retenir |
 | pitch-r1-02 | pitch | majeur | 6 panneaux + onglet, jargon, pas de séquence |
 | pitch-r1-03 | pitch | bloquant | 3 attaques au lieu d'un scénario, pas de coupe, pas de repli |
 | pitch-r1-04 | pitch | bloquant | Évaluation circulaire, pas de jeu séparé |
-| pitch-r1-05 | pitch | majeur | La Sentinelle ne voit que la chaîne, vélocité = limiteur classique, outils gratuits existants |
+| pitch-r1-05 | pitch | majeur | Hold up ne voit que la chaîne, vélocité = limiteur classique, outils gratuits existants |
 | pitch-r1-06 | pitch | majeur | Client CASP avec custodian ; intégration faible |
 | pitch-r1-07 | pitch | majeur | Pause = risque (DoS, incident DORA), traceur décor |
 | pitch-r1-08 | pitch | majeur | Responsabilité = une phrase, pas de coupe-circuit |
@@ -93,7 +93,7 @@ Thèmes qui reviennent chez presque tous les critiques :
 | regles-r1-01 | regles | bloquant | Périmètre irréaliste, pas de chemin critique ni coupe-feu |
 | regles-r1-02 | regles | bloquant | Évaluation circulaire, attaque 3 comptée en détection |
 | regles-r1-03 | regles | majeur | Attaques « modelées sur 2026 » infidèles (Bitget, Drift, Resolv non sourcé) |
-| regles-r1-04 | regles | majeur | Sentinelle cible et risque, gardiens sans SLA |
+| regles-r1-04 | regles | majeur | Hold up cible et risque, gardiens sans SLA |
 | regles-r1-05 | regles | majeur | Playbook exigé inexistant, demande de gel sans canal |
 | regles-r1-06 | regles | bloquant | Mapping NIST/ATT&CK/D3FEND provisoire et incomplet |
 | regles-r1-07 | regles | majeur | Conformité = DORA et références non vérifiées |
@@ -176,7 +176,7 @@ Statut : toutes les 43 propositions ont été **retenues**, aucune rejetée en b
 | Produit | Notre coffre protégé | Un produit, trois sorties : Watch (aucune migration), Guard (optionnel), Dossier |
 | Détection | Événements `Withdraw`, seuils « à calibrer » | OutflowLedger sur les sorties de valeur : D1 destinataires inédits, D2 multi-échelles, D3 delta de solde, D7 changement de pouvoir ; seuils uniquement dans `config.frozen.json` |
 | Réponse | Pause globale avec expiration automatique | Voie rapide / voie lente, file différée annulable, NORMAL / RESTREINT, sortie par 2 gardiens, plafond agrégé, formule de perte max |
-| Pouvoirs | Non spécifiés | Un modèle : ADMIN derrière timelock, SENTINEL qui ne peut que resserrer, 3 gardiens ; budget de restriction ; heartbeat non ouvrant ; Sentinelle dans son propre inventaire de tiers |
+| Pouvoirs | Non spécifiés | Un modèle : ADMIN derrière timelock, SENTINEL qui ne peut que resserrer, 3 gardiens ; budget de restriction ; heartbeat non ouvrant ; Hold up dans son propre inventaire de tiers |
 | Responsabilité | « Règles signées par la direction » | Charte EIP-712 + PolicyRegistry (hash), RACI, classification humaine nommée, coût de faux positif en valeur × minutes, auto-incident compté |
 | Banc d'essai | Circulaire, un jeu | Calibration + held-out scellé + rejeu réel conditionnel ; ancre B1 < B2 ; critères d'échec d'avance ; IC ; baseline ; ablation ; adaptatif ; courbe de vitesse |
 | Preuve | Une racine Merkle en fin d'incident | `reasonHash` dans la tx de réponse, EvidenceAnchor v2 avec `seq`, ancrage à chaque palier, `verify` à 3 contrôles, démo de suppression, feuilles HMAC et crypto-shredding |

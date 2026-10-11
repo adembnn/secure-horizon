@@ -1,5 +1,5 @@
 // fuzz_sig : banc defensif. Genere des cas de signature SYNTHETIQUES et mesure
-// comment le detecteur Sentinelle les classe. Aucune cle, aucun systeme reel.
+// comment le detecteur Hold up les classe. Aucune cle, aucun systeme reel.
 // usage: node fuzz_sig.mjs <out.jsonl> <n> <seed>
 import fs from "node:fs";
 import * as E from "file:///C:/Users/Adem/Secure%20Horizon/blockchain/node_modules/ethers/lib.esm/index.js";

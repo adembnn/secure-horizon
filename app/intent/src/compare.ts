@@ -1,5 +1,5 @@
 /**
- * Sentinelle Intent Barrier - Comparator
+ * Hold up Intent Barrier - Comparator
  * Compares user intent with actual transaction effects
  * Rules based on docs/intent-barrier.md
  */

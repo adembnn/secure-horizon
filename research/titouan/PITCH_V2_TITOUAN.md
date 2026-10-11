@@ -1,5 +1,7 @@
 # Pitch Hold up V2 (corrigé par audit, avec la tournure du moindre privilège), 11/10/2026
 
+> **ARCHIVE, ne pas dire (11 oct., MSG-080).** Les chiffres d'autres chaînes ont été remplacés dans cette version : nous adressons Avalanche seulement (34 %, une autorisation sur trois, notre mesure sur un échantillon de blocs). Version à dire : `livrables/PITCH_5MIN.md`, `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md`.
+
 Source: PITCH_AUDIT.md section (e). Ajout de Titouan: la ligne « moindre privilège » dans Le problème.
 
 ### 0:00 à 0:30. L'accroche (scène jouée, sans slide)
@@ -9,7 +11,7 @@ Deuxième temps : même demande, mais le droit va à une adresse neuve, que pers
 [Réserve à ne pas dire à voix haute mais à savoir : ce que MetaMask affiche pour une adresse neuve n'a pas encore été vu en vrai. Source : code et doc publics (`RECHERCHE_metamask_couverture.md`, lignes « Contrat jamais vu » et ajout du 11 oct.). À vérifier sur Sepolia avant de l'affirmer comme observé. Si le jury demande : « d'après son code et sa doc, pas observé à l'écran ». Jamais « MetaMask ne le voit pas ». Cohérent avec F31 : bénéficiaire connu = orange, sinon rouge (`attacks_decalage/RAPPORT.md`).]
 
 ### 0:30 à 1:15. Le problème
-« Les portefeuilles préviennent de ce qu'ils reconnaissent : sites listés, drainers connus. Mais une demande peut être légitime pour tous les détecteurs et ne pas être ce que vous vouliez. Dans un échantillon de blocs que nous avons lus, 48 % des droits de dépense non nuls sont illimités sur Ethereum, 34 % sur Avalanche. Mesure interne, échantillon non représentatif. Donner un droit illimité, c'est le contraire du principe de base de la sécurité : le moindre privilège. On ne laisse à un service que ce dont il a besoin pour ce que l'on fait. Le jour où ce service est compromis, on perd ce qu'on lui a laissé le droit de prendre : 50, ou tout. Chez Bybit en février 2025, l'interface affichait un virement, les signataires ont signé un delegatecall : environ 1,5 milliard de dollars. »
+« Les portefeuilles préviennent de ce qu'ils reconnaissent : sites listés, drainers connus. Mais une demande peut être légitime pour tous les détecteurs et ne pas être ce que vous vouliez. 34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs. Donner un droit illimité, c'est le contraire du principe de base de la sécurité : le moindre privilège. On ne laisse à un service que ce dont il a besoin pour ce que l'on fait. Le jour où ce service est compromis, on perd ce qu'on lui a laissé le droit de prendre : 50, ou tout. Chez Bybit en février 2025, l'interface affichait un virement, les signataires ont signé un delegatecall : environ 1,5 milliard de dollars. »
 
 ### 1:15 à 2:00. La solution
 « Hold up est une extension de navigateur. Avant que vous voyiez la demande, elle pose une question : qu'est-ce que tu veux faire ? Vous l'écrivez avec vos mots. Du code lit dans la demande le montant, le jeton, l'adresse et le droit accordé, puis compare. Si ça correspond, le portefeuille s'ouvre seul après une seconde. Sinon, une alerte d'une ligne, et Annuler reste visible. Si on ne peut pas vérifier, on le dit. La personne décide. »

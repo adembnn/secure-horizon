@@ -1,5 +1,5 @@
 <!-- PÉRIMÉ le 11/10/2026 : voir livrables\ -->
-<title>Sentinelle Fuji</title>
+<title>Hold up</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -102,8 +102,8 @@ tr:last-child td{border-bottom:0}
 <div class="wrap">
   <header>
     <div class="eyebrow">Track 1 · Guardians of Value · sous-track 4 · DeFi + DORA</div>
-    <h1>Sentinelle Fuji</h1>
-    <p class="lede">Quand le coffre on-chain d'un prestataire crypto régulé est attaqué, la Sentinelle détecte, freine ou met en pause, suit l'argent, et sort la déclaration DORA prête à relire. Chaque champ est prouvé par une transaction.</p>
+    <h1>Hold up</h1>
+    <p class="lede">Quand le coffre on-chain d'un prestataire crypto régulé est attaqué, Hold up détecte, freine ou met en pause, suit l'argent, et sort la déclaration DORA prête à relire. Chaque champ est prouvé par une transaction.</p>
     <div class="tagrow">
       <span class="tag">NIST CSF · Detect · Respond · Recover</span>
       <span class="tag">ATT&amp;CK T1657 · T1078 · T1190</span>
@@ -125,7 +125,7 @@ tr:last-child td{border-bottom:0}
       <div class="narr" id="narr" aria-live="polite"></div>
       <div class="panels">
         <div class="p"><div class="eyebrow">Coffre</div><div class="what">Ce que nos clients ont déposé, en direct.</div><div class="big" id="bal">5,00 M€</div><div class="muted mono" id="saved" style="font-size:.78rem"></div></div>
-        <div class="p"><div class="eyebrow">Menace</div><div class="what">Ce que la Sentinelle voit d'anormal.</div><div class="list" id="threat"></div></div>
+        <div class="p"><div class="eyebrow">Menace</div><div class="what">Ce que Hold up voit d'anormal.</div><div class="list" id="threat"></div></div>
         <div class="p"><div class="eyebrow">Réponse</div><div class="what">Ce qu'on a fait, et qui l'a décidé.</div><div class="ladder" id="ladder"></div></div>
         <div class="p"><div class="eyebrow">Argent</div><div class="what">Où part l'argent volé.</div><div class="hops" id="hops"></div></div>
         <div class="p"><div class="eyebrow">Régulateur</div><div class="what">Ce que la loi exige, déjà rempli.</div><div class="verdict" id="verdict">—</div><div class="list" id="crits"></div></div>
@@ -182,7 +182,7 @@ flowchart LR
     O["Oracle / vérificateur<br/>de bridge"]
     A["EvidenceAnchor"]
   end
-  V -- "événements ~1 bloc/s" --> S["Sentinelle<br/>détecteurs déterministes"]
+  V -- "événements ~1 bloc/s" --> S["Hold up<br/>détecteurs déterministes"]
   S --> L["Échelle L1 → L3"]
   L -- "plafond / pause" --> V
   S --> T["Traceur de fonds"]
@@ -212,7 +212,7 @@ flowchart LR
           <tr><td>Hexagate (Chainalysis)</td><td>Monitoring gratuit pour les projets Avalanche depuis déc. 2025.</td><td>Alerte, pas de déclaration ni de registre</td></tr>
           <tr><td>Forta, OpenZeppelin Monitor</td><td>Bots et règles de détection.</td><td>Faux positifs, réponse manuelle</td></tr>
           <tr><td>Regnology, OneTrust, Big4</td><td>Gestion DORA, registre d'information.</td><td>Ticket saisi à la main, rien lu sur la chaîne</td></tr>
-          <tr><td>Sentinelle Fuji</td><td>Détection, réponse graduée, traçage, déclaration et registre lus on-chain, preuve ancrée.</td><td>PoC sur nos contrats Fuji, brouillon de déclaration</td></tr>
+          <tr><td>Hold up</td><td>Détection, réponse graduée, traçage, déclaration et registre lus on-chain, preuve ancrée.</td><td>PoC sur nos contrats Fuji, brouillon de déclaration</td></tr>
         </tbody>
       </table>
     </div>
@@ -222,7 +222,7 @@ flowchart LR
     <div class="eyebrow">Ce qu'on dit nous-mêmes au jury</div>
     <h2 id="t-lim">Limites connues</h2>
     <div class="grid3">
-      <div class="card"><h3>Attaque en une transaction</h3><p>La Sentinelle arrive après. Seul l'invariant écrit dans le contrat bloque ce cas.</p></div>
+      <div class="card"><h3>Attaque en une transaction</h3><p>Hold up arrive après. Seul l'invariant écrit dans le contrat bloque ce cas.</p></div>
       <div class="card"><h3>Lecture de DORA</h3><p>Un exploit de code compte-t-il comme accès malveillant ? L'outil propose la lecture prudente, un humain tranche.</p></div>
       <div class="card"><h3>Dépôt officiel</h3><p>On produit un brouillon JSON et PDF. Le format xBRL et l'envoi à l'AMF restent humains.</p></div>
     </div>

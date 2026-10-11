@@ -1,6 +1,6 @@
 > **PÉRIMÉ le 11/10/2026 : voir livrables\**
 
-# Sentinelle : maquettes de la fenêtre d'extension
+# Hold up : maquettes de la fenêtre d'extension
 
 Six écrans HTML/CSS autonomes (un fichier chacun, aucune dépendance, aucune police externe), largeur 400 px, clair et sombre automatiques (`prefers-color-scheme`). Le bouton « Aperçu » en haut sert seulement à basculer le thème pendant la revue. Données, sites et monnaie sont fictifs : sites en `.example`, monnaie « USDX », adresses inventées.
 
@@ -83,6 +83,6 @@ Aucune référence ne porte sur les wallets crypto : l'efficacité de ce design 
 
 - **Contrastes** : calculés à la main sur les paires principales, à passer dans un outil (Lighthouse, axe) sur chaque thème.
 - **Test à 5 personnes de plus de 60 ans** : comprennent-elles « Tu as dit / En réalité » sans explication ? Le bouton Annuler est-il trouvé en moins de 3 s ?
-- **Limites de MetaMask Snap** : les écrans montrent l'idéal. Un Snap n'affiche que des composants limités et ne peut pas désactiver le bouton de signature (voir `docs/BRIEF_direction.md` § 6). La barrière de 30 s et la pause de 10 min supposent donc la fenêtre de l'extension Sentinelle qui s'interpose avant le wallet.
+- **Limites de MetaMask Snap** : les écrans montrent l'idéal. Un Snap n'affiche que des composants limités et ne peut pas désactiver le bouton de signature (voir `docs/BRIEF_direction.md` § 6). La barrière de 30 s et la pause de 10 min supposent donc la fenêtre de l'extension Hold up qui s'interpose avant le wallet.
 - **Barrière de 30 s sur le faux positif** : à mesurer sur le banc d'essai (fatigue). Si elle s'applique à des opérations honnêtes, l'utilisateur apprendra à contourner.
 - **Après la pause de 10 min**, que se passe-t-il ? Ici, « Je continue quand même » se débloque. À décider avec Titouan (le brief § 11 pose la question du contact de confiance).

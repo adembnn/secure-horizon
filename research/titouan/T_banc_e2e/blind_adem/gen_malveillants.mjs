@@ -120,6 +120,7 @@ const SP_T = {
 };
 const ZERO = '0x0000000000000000000000000000000000000000';
 const Z32 = '0x' + '00'.repeat(32);
+// constante publique OpenSea (conduit key Seaport), pas un secret
 const OS_CONDUITKEY = '0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000';
 const seaportDomain = (chainId, vc = SEAPORT) => ({ name: 'Seaport', version: '1.5', chainId, verifyingContract: vc });
 function seaportMsg(o) { return { zone: ZERO, zoneHash: Z32, salt: BigInt('0x' + hexs(32)), conduitKey: OS_CONDUITKEY, counter: 0, orderType: 0, startTime: NOW, endTime: NOW + 86400 * 30, ...o }; }

@@ -7,7 +7,7 @@ Règle d'Adem : « mettre en avant sur l'interface UNIQUEMENT les infos importan
 ## Principes
 1. Au premier regard (3 s), trois choses au maximum : le verdict en une phrase, l'écart (ce que tu crois / ce qui se passe) et le bouton Annuler.
 2. Tout le reste est derrière « Pourquoi ? » (dépliable) : âge du contrat, explications, nom du site.
-3. Aucun texte qui parle de Sentinelle elle-même, aucun libellé décoratif, aucune icône qui ne porte pas d'information.
+3. Aucun texte qui parle de Hold up elle-même, aucun libellé décoratif, aucune icône qui ne porte pas d'information.
 4. Un seul accent de couleur, posé sur l'écart, nulle part ailleurs.
 5. Les montants et les adresses sont les plus grandes données de l'écran.
 
@@ -47,4 +47,4 @@ Règle d'Adem : « mettre en avant sur l'interface UNIQUEMENT les infos importan
   - On m'a demandé de le faire
 - Lien discret : « Coller le message reçu »
 - Actions : Vérifier / Annuler
-- Rien d'autre : pas d'explication sur Sentinelle, pas de mention « ta réponse rend la vérification plus stricte » (on la met dans l'aide).
+- Rien d'autre : pas d'explication sur Hold up, pas de mention « ta réponse rend la vérification plus stricte » (on la met dans l'aide).

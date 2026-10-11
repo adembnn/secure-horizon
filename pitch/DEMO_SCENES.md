@@ -28,7 +28,7 @@ Trois scènes, dans cet ordre. Durée visée : 1 minute en tout.
 
 ## Après l'alerte
 - La personne annule ou continue : elle garde le dernier geste, Annuler reste visible, aucun écran n'est vert.
-- Chaque décision laisse une ligne datée. L'extension autonome garde 500 lignes locales. Le journal chaîné par hachage existe dans la version serveur seulement : ne pas l'affirmer pour l'autonome.
+- Chaque décision laisse une ligne datée. L'extension autonome garde 500 lignes locales, chaînées par hachage comme la version serveur (`journal_chain.js`, 7 tests, export JSON, `verify_journal.mjs`). Pas d'ancrage sur une blockchain (D-017).
 - Révocation d'un droit en un clic et preuve ancrée : prototypes, pas dans la démo. Ne pas les montrer comme faits. L'ancrage sur Fuji est codé, pas déployé.
 - Le panneau latéral (clic sur l'icône de l'extension) montre le journal des décisions.
 
@@ -38,7 +38,7 @@ Trois scènes, dans cet ordre. Durée visée : 1 minute en tout.
 - Un escroc qui souffle la phrase exacte : la comparaison ne voit rien, les règles de base voient encore un droit illimité vers une adresse inconnue.
 - Contrat qui change à l'exécution : Added Protection de MetaMask le traite mieux. Ne pas le revendiquer.
 - Ledger direct, mobile, bouton Envoyer du portefeuille : hors périmètre.
-- Point faible chiffré : 54,2 % des opérations honnêtes reçoivent au moins un avertissement (banc synthétique, A4). Objectif sous 10 %, non atteint.
+- Point faible chiffré : sur le jeu aveugle de 250 cas, notre moteur de comparaison (pas l'extension) met 15,0 % des opérations honnêtes en rouge, 30 % avec au moins une alerte. Seuil de 10 % non atteint.
 - Pas d'essai avec un vrai portefeuille : ne pas montrer ce qui n'a pas été vu.
 
 ## À ne pas montrer ni dire

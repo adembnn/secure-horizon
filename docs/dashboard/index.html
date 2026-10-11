@@ -1,5 +1,5 @@
 <!-- PÉRIMÉ le 11/10/2026 : voir livrables\ -->
-<title>Sentinelle, salle de pilotage</title>
+<title>Hold up, salle de pilotage</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout : un tableau de bord de chantier, résumé en haut, étapes à gauche, preuves à droite. */
@@ -67,7 +67,7 @@ code{font-family:var(--mono);font-size:.82em;word-break:break-word}
 
 <div class="wrap">
   <header style="display:grid;gap:10px">
-    <div class="eyebrow">Track 1 · sous-track 4 · Sentinelle</div>
+    <div class="eyebrow">Track 1 · sous-track 4 · Hold up</div>
     <h1>Salle de pilotage</h1>
     <p class="lede" id="headline">Chargement de l'état du projet…</p>
     <span class="live"><span class="dot"></span><span id="upd">mise à jour…</span></span>
@@ -82,8 +82,8 @@ code{font-family:var(--mono);font-size:.82em;word-break:break-word}
 
   <section style="display:grid;gap:16px" aria-labelledby="t-arch">
     <div class="eyebrow">Architecture · v3.1 (D-007, barrière d'intention)</div>
-    <h2 id="t-arch" style="font-size:1.6rem">Comment Sentinelle est construite</h2>
-    <p class="lede" style="font-size:.98rem">Avant d'envoyer ou de signer, l'utilisateur dit <b>en mots simples</b> ce qu'il veut faire. Sentinelle calcule ce que l'opération <b>fait vraiment</b>, le compare, et <b>avertit et ralentit</b> si ça diverge : « Tu as dit X, en réalité Y ». Wallet normal, aucune migration.</p>
+    <h2 id="t-arch" style="font-size:1.6rem">Comment Hold up est construite</h2>
+    <p class="lede" style="font-size:.98rem">Avant d'envoyer ou de signer, l'utilisateur dit <b>en mots simples</b> ce qu'il veut faire. Hold up calcule ce que l'opération <b>fait vraiment</b>, le compare, et <b>avertit et ralentit</b> si ça diverge : « Tu as dit X, en réalité Y ». Wallet normal, aucune migration.</p>
 
     <div class="card">
       <h3 class="ah">1 · Vue d'ensemble</h3>
@@ -92,7 +92,7 @@ flowchart LR
   U["Utilisateur<br/>wallet normal"] -- "intention en mots simples<br/>demandée au moment de signer" --> SNAP
   SITE["Site web<br/>(peut être piégé)"]
   MM["Wallet (MetaMask, Rabby, Core)"]
-  SITE -. "demande interceptée avant le wallet" .-> SNAP["Extension Sentinelle<br/>enveloppe window.ethereum (T-104)"]
+  SITE -. "demande interceptée avant le wallet" .-> SNAP["Extension Hold up<br/>enveloppe window.ethereum (T-104)"]
   SNAP -- "relaie seulement après confirmation" --> MM
   SNAP --> API["API locale 127.0.0.1:8787<br/>(T-103)"]
   API --> ENG["Moteur d'effets (T-102)<br/>qui reçoit quoi · quel droit<br/>destinataire neuf ou sosie · âge du contrat"]
@@ -117,7 +117,7 @@ sequenceDiagram
   participant F as Faux support
   participant U as Utilisateur
   participant S as Site piégé
-  participant SN as Sentinelle
+  participant SN as Hold up
   SN-->>U: bandeau au chargement : site et contrat suspects
   F->>U: « valide ton remboursement sur ce site »
   U->>SN: « Je récupère un remboursement »

@@ -122,7 +122,7 @@ leurre, signature puis vidage par le service local, la console affiche 2 430 Dem
 Extension : elle ne contient aucun chainId en dur, elle prend celui du portefeuille. Le serveur
 (`T_banc_e2e/server/server.mjs`) connaît 43113. Interrogé avec `chainId 0xa869` sur les contrats de la répétition, il
 classe en danger le Permit illimité et l'approve illimité vers le FreshDrainer. Pour le contexte en direct, lancer le
-serveur avec `SENTINELLE_RPC_URL=https://api.avax-test.network/ext/bc/C/rpc`.
+serveur avec `HOLDUP_RPC_URL=https://api.avax-test.network/ext/bc/C/rpc` (ancien nom accepté en repli : `SENTINELLE_RPC_URL`).
 
 ## Robinets (vérifié le 11 oct. 2026)
 

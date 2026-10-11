@@ -1,11 +1,11 @@
 > **PÉRIMÉ (11 oct. 2026).** Direction D-007 (retenue graduée, deux portes, démo sur Fuji). Produit figé actuel : `coord/HANDOFF_ADEM_SESSION_2.md` et `README.md`. Fuji n'est pas déployé.
 
-# Brief de direction : Sentinelle, barrière d'intention (D-007, 11 oct. 2026, 01h)
+# Brief de direction : Hold up, barrière d'intention (D-007, 11 oct. 2026, 01h)
 
 > Pour Adem, Titouan et tous les agents. Contrat technique : `docs/intent-barrier.md`. Décision : `coord/DECISIONS.md` D-007.
 
 ## 1. En une phrase
-Avant qu'un particulier envoie ou signe quoi que ce soit avec son wallet normal, il dit en mots simples ce qu'il veut faire. Sentinelle calcule ce que l'opération fait **vraiment**. Si les deux ne correspondent pas, elle l'arrête avec un message qui reprend ses propres mots : « Tu as dit : je paie Paul. En réalité : cette adresse n'est pas celle de Paul. »
+Avant qu'un particulier envoie ou signe quoi que ce soit avec son wallet normal, il dit en mots simples ce qu'il veut faire. Hold up calcule ce que l'opération fait **vraiment**. Si les deux ne correspondent pas, elle l'arrête avec un message qui reprend ses propres mots : « Tu as dit : je paie Paul. En réalité : cette adresse n'est pas celle de Paul. »
 
 ## 2. Pour qui
 - **Utilisateur** : le grand public, avec un wallet normal (MetaMask et équivalents). Pas de Safe, pas d'EIP-7702, aucune migration.
@@ -62,7 +62,7 @@ Conclusion : une fois l'argent parti, presque rien ne revient. **Il faut agir av
 
 ## 7. Démo (3 min, en live sur Avalanche Fuji)
 1. On déploie un **drainer tout neuf** devant le jury, en une commande. Il n'est dans aucune liste noire.
-2. **Faux site « remboursement »** : un juré dit « je récupère mon remboursement ». Sentinelle bloque : « Tu as dit : recevoir 50 USDC. En réalité : ce site obtiendrait le droit de prendre tous tes USDC. »
+2. **Faux site « remboursement »** : un juré dit « je récupère mon remboursement ». Hold up bloque : « Tu as dit : recevoir 50 USDC. En réalité : ce site obtiendrait le droit de prendre tous tes USDC. »
 3. **Faux support** : conversation scriptée, marques fictives. L'utilisateur choisit « On m'a demandé de le faire » et colle le message. Clef le classe en faux support, et c'est bloqué.
 4. **Adresse piégée** : sosie généré en direct, caractères différents surlignés.
 5. **Témoin** : un vrai swap passe sans alerte, ce qui prouve qu'on ne bloque pas tout.

@@ -47,7 +47,7 @@ Thèmes qui reviennent chez plusieurs critiques :
 | kpmg-r2-08 | kpmg | majeur | Gabarit INITIAL ne correspond pas aux champs de l'ITS ; durée d'indisponibilité provoquée par nous |
 | kpmg-r2-09 | kpmg | majeur | Cycle de vie de la charte : toute recalibration invalide les preuves, pas de revalidation |
 | kpmg-r2-10 | kpmg | majeur | P0 = 42,5 h pour 40 h ; `verified:true` posé par un modèle ; coupe-feu 22h30 dépassé |
-| avalanche-r2-finality-is-a-non-feature | avalanche | majeur | La finalité est une propriété du réseau, pas un apport de la Sentinelle |
+| avalanche-r2-finality-is-a-non-feature | avalanche | majeur | La finalité est une propriété du réseau, pas un apport de Hold up |
 | avalanche-r2-no-avalanche-incident-in-replay | avalanche | bloquant | Aucun incident C-Chain nommé ; rejeu réel conditionnel et probablement vide |
 | avalanche-r2-bridge-router-blind-spot | avalanche | bloquant | D1 aveugle quand la sortie passe par un pont ou routeur « connu » |
 | avalanche-r2-rpc-no-trace-no-internal-transfers | avalanche | majeur | RPC public sans traces : transferts internes sans destinataire, limites de logs |
@@ -183,7 +183,7 @@ Statut : 49 propositions, **47 retenues** (presque toutes avec amendements), **2
 |---|---|---|
 | Jumeau : contrat séparé ou drapeau | reponse-r2-10 et rssi : contrat `UnguardedVault` ; pitch, regles : drapeau immuable `guardsEnabled` | **Drapeau immuable sur le même code** : « même code de retrait, une seule variable » est l'argument causal ; le déploiement garde deux adresses |
 | `ResponseEvidence` : niveau et `entryBytes` | reponse-r2-01 les émet ; conformite-r2-01 les supprime | **conformite-r2-01 prime** : `reasonHash` et `blockNumber` seulement ; limite « Guard public par construction » écrite |
-| Heartbeat | v1 : plafond conservateur sur absence de battement ; conformite-r2-11 et redteam : levier de déni de service | **Heartbeat retiré** ; la panne de la Sentinelle ne change pas les retraits |
+| Heartbeat | v1 : plafond conservateur sur absence de battement ; conformite-r2-11 et redteam : levier de déni de service | **Heartbeat retiré** ; la panne de Hold up ne change pas les retraits |
 | HMAC et shred en P0 ? | demo-r2-budget : sortis du P0 ; conformite-r2-02 : `client_ref` dès le début | **`client_ref` en P0** (schéma, 10 lignes), `shred` avec contrôle de gel en P1 |
 | N d'exécutions de latence | 10 (demo), 30 (chainsource), 20 (rssi, regles) | **N = 20 partout**, rapporté tel quel |
 | Held-out : deux lots, B réservé, ou un seul | demo-r2-branche-echec vs bench-v2 | **Un seul mécanisme** : sources G et W, critère par famille, règle de décision ancrée ; B réserve en bonus |

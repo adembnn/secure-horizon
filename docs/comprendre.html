@@ -1,5 +1,5 @@
 <!-- PÉRIMÉ le 11/10/2026 : voir livrables\ -->
-<title>Sentinelle, le dossier pour comprendre</title>
+<title>Hold up, le dossier pour comprendre</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout : un dossier de lecture, chapitres numérotés car c'est une progression réelle (bases → attaques → marché → nous), avec un schéma interactif par chapitre clé. */
@@ -69,7 +69,7 @@ nav.toc a:hover{border-color:var(--ink)}
 <div class="wrap">
   <header style="display:grid;gap:14px">
     <div class="eyebrow">Dossier de lecture · Adem et Titouan · 11 oct. 2026</div>
-    <h1>Comprendre Sentinelle, de la transaction au vol</h1>
+    <h1>Comprendre Hold up, de la transaction au vol</h1>
     <p class="lede">Chaque chapitre commence par une explication en clair, puis la mécanique exacte. Les exemples sont de vrais cas, datés et chiffrés.</p>
     <nav class="toc" aria-label="Chapitres">
       <a href="#c1">1 · Une transaction</a><a href="#c2">2 · Les autorisations</a><a href="#c3">3 · Les comptes à plusieurs clés</a><a href="#c4">4 · Comment on vole</a><a href="#c5">5 · Que fait Hexagate</a><a href="#c6">6 · Le trou qu'on comble</a><a href="#c7">7 · Glossaire</a>
@@ -153,7 +153,7 @@ nav.toc a:hover{border-color:var(--ink)}
         <tr><td>Argent, Bitkey, Casa, Coinbase Vault</td><td>Particuliers</td><td class="m">limites, délais</td><td class="m">gardiens, manuel</td><td class="n">non</td></tr>
         <tr><td>Revoke.cash, Webacy</td><td>Particuliers</td><td class="n">non</td><td class="m">révocation manuelle ou « au mieux »</td><td class="n">non</td></tr>
         <tr><td>Harpie</td><td>Particuliers</td><td class="n">non</td><td class="y">interceptait les vols</td><td class="n">non</td></tr>
-        <tr><td class="us"><b>Sentinelle</b></td><td class="us">Particuliers à patrimoine, puis institutions</td><td class="us"><span class="y">refus des mandats inconnus</span></td><td class="us"><span class="y">automatique, dans des limites intouchables</span></td><td class="us"><span class="y">oui, ancrées</span></td></tr>
+        <tr><td class="us"><b>Hold up</b></td><td class="us">Particuliers à patrimoine, puis institutions</td><td class="us"><span class="y">refus des mandats inconnus</span></td><td class="us"><span class="y">automatique, dans des limites intouchables</span></td><td class="us"><span class="y">oui, ancrées</span></td></tr>
       </tbody>
     </table></div>
     <p class="src">Harpie a fermé le 27 mars 2025. Sources : research/titouan/J_wallets_perso/W2, W4, W6.</p>
@@ -161,10 +161,10 @@ nav.toc a:hover{border-color:var(--ink)}
 
   <section id="c6" aria-labelledby="t6">
     <div class="chap"><span class="n">6</span><h2 id="t6">Le problème technique qu'on adresse</h2></div>
-    <div class="clear"><span class="tag">En clair</span><p>Dans tous les vols, le voleur passe par quelque chose qui a le droit de dire oui : ta clé, ton téléphone, l'interface que tu crois, le serveur d'une plateforme. Ce « circuit d'approbation » ment. Tant que la protection fait confiance à ce circuit, elle tombe avec lui. Sentinelle met une règle que ce circuit ne peut pas lever, agit seule quand il est compromis, et garde la preuve de tout.</p></div>
+    <div class="clear"><span class="tag">En clair</span><p>Dans tous les vols, le voleur passe par quelque chose qui a le droit de dire oui : ta clé, ton téléphone, l'interface que tu crois, le serveur d'une plateforme. Ce « circuit d'approbation » ment. Tant que la protection fait confiance à ce circuit, elle tombe avec lui. Hold up met une règle que ce circuit ne peut pas lever, agit seule quand il est compromis, et garde la preuve de tout.</p></div>
     <div class="grid3">
       <div class="card"><div class="eyebrow">Pièce 1</div><h3>La limite intouchable</h3><p>Ton compte refuse les mandats vers des inconnus, plafonne les sorties, met en attente les nouvelles destinations. Seuls tes gardiens, avec un délai, peuvent relâcher.</p><p class="src"><code>Guard</code> + handler ERC-1271 + plafond à seau</p></div>
-      <div class="card"><div class="eyebrow">Pièce 2</div><h3>La réponse automatique</h3><p>Si ta clé est volée, la Sentinelle, hors de ton téléphone, resserre à zéro, révoque les mandats et déplace les fonds vers un coffre à délai. Elle ne peut rien faire d'autre.</p><p class="src">Module à destination unique, rôle « resserrer seulement »</p></div>
+      <div class="card"><div class="eyebrow">Pièce 2</div><h3>La réponse automatique</h3><p>Si ta clé est volée, Hold up, hors de ton téléphone, resserre à zéro, révoque les mandats et déplace les fonds vers un coffre à délai. Elle ne peut rien faire d'autre.</p><p class="src">Module à destination unique, rôle « resserrer seulement »</p></div>
       <div class="card"><div class="eyebrow">Pièce 3</div><h3>La preuve</h3><p>Chaque événement est horodaté et son empreinte est gravée sur Avalanche. Tu remets un dossier prêt à la police ou à l'assureur. Pour une institution, c'est le dossier DORA.</p><p class="src">Format « preuve d'incident », ancrage sur Fuji</p></div>
     </div>
     <div class="card">
@@ -203,7 +203,7 @@ nav.toc a:hover{border-color:var(--ink)}
     {k:'Diffuser',c:"Le chèque signé est déposé dans la salle d'attente publique. Tout le monde peut le voir, y compris un voleur qui surveille.",t:"La transaction est envoyée à un nœud par RPC (eth_sendRawTransaction) et propagée au mempool. Un attaquant qui la voit peut tenter de passer devant en payant plus de gas.",x:"eth_sendRawTransaction(0x02f8…)\n→ mempool"},
     {k:'Inclure',c:"Les validateurs prennent le chèque, vérifient la signature et le solde, et l'inscrivent dans une nouvelle page du registre.",t:"Un validateur l'inclut dans un bloc. Sur Avalanche C-Chain, un bloc arrive toutes les ~2 s (mesuré sur Fuji : 2,27 s en moyenne). Le code des contrats appelés s'exécute à ce moment.",x:"bloc 96 072 657\n  tx 0x9865…  status: success"},
     {k:'Finaliser',c:"La page est validée par le réseau. C'est définitif : impossible d'annuler ou de rappeler les fonds.",t:"Avalanche atteint la finalité en ~1 à 2 s via son consensus. Pas de retour arrière possible, contrairement à un virement bancaire.",x:"finalized: true\n(irréversible)"},
-    {k:'Lire',c:"N'importe qui peut lire la page dans l'explorateur public : qui a envoyé, combien, à qui, et quand.",t:"Les explorateurs (Snowtrace, Routescan) indexent blocs, transactions et événements (logs). C'est sur ces données publiques que Sentinelle surveille et construit ses preuves.",x:"testnet.snowtrace.io/tx/0x9865…"}
+    {k:'Lire',c:"N'importe qui peut lire la page dans l'explorateur public : qui a envoyé, combien, à qui, et quand.",t:"Les explorateurs (Snowtrace, Routescan) indexent blocs, transactions et événements (logs). C'est sur ces données publiques que Hold up surveille et construit ses preuves.",x:"testnet.snowtrace.io/tx/0x9865…"}
   ];
   const bar=document.querySelector('#tx .st-bar'), c=document.getElementById('tx-clear'), t=document.getElementById('tx-tech');
   S.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.textContent=(i+1)+' · '+s.k;b.addEventListener('click',()=>show(i));bar.appendChild(b)});

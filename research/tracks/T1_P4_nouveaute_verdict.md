@@ -1,4 +1,4 @@
-# Sentinelle : est-ce innovant ? Verdict de nouveauté N1 à N4 (10 oct. 2026)
+# Hold up : est-ce innovant ? Verdict de nouveauté N1 à N4 (10 oct. 2026)
 
 Statut : recherche, aucun autre fichier du projet modifié. Méthode : balayage de ~100 fiches (éditeurs, Safe, GitHub, hackathons, académique, regtech) puis 3 contre-experts par revendication, chargés de **réfuter**. Résultat : **les 4 revendications sont réfutées 3 sur 3 comme « invention »**. Aucune ne survit comme « première mondiale ». Ce qui survit, c'est un **assemblage** précis, défendable si on le dit honnêtement.
 
@@ -156,7 +156,7 @@ Proximité : TP = très proche, P = partiel, V = voisin. Dates = lecture ou publ
 2. **Intention venant d'un canal que le backend ne peut pas écrire** (demande du client final signée sur son appareil, journal externe en lecture seule). Douleur : N1 tombe si l'intention vient du backend compromis. C'est le seul moyen de rendre N1 non trivial, et c'est la faiblesse que Blockdaemon cite chez les autres. À présenter comme complément de N2, jamais comme garantie seule.
 3. **Dossier DORA dont chaque champ est prouvé on-chain, et qui se reclasse quand le Guard agit.** Douleur : le prestataire a 4 h pour notifier avec des chiffres sûrs, et les outils actuels demandent une saisie manuelle de ce qu'ils ne peuvent pas prouver. Inclure un linter ESAs, un taux de sur-déclaration (répond à l'AFME) et un JSON canonique découplé du canal de dépôt.
 4. **Règles@version scellées, décisions engagées au fil de l'eau, rejeu par un tiers sans clé de l'éditeur.** Douleur : « pourquoi vos règles n'ont-elles pas vu l'attaque ? » devant le superviseur ; un hash de configuration ne prouve pas qui a décidé quoi. Combler le trou : racine Merkle des décisions, hash du contenu et non d'un commit, procédure de changement d'urgence d'une règle (art. 17 du RTS 2024/1774).
-5. **Sentinelle à pouvoir minimal, graduée et auto-expirante, sans piège de liveness.** Douleur : les pauses globales gèlent tout (Lido 21 jours, Fireblocks gel total) et un pauseur expiré laisse sans protection. Nous proposons plafond réduit ou file « attends 5 min » par transaction, pouvoir qui expire proprement avec renouvellement testé. Mesurer et publier le coût en cas légitimes (AID-Guard annonce 35 à 44 points de perte d'utilité en profil strict) et le taux de faux positifs.
+5. **Hold up à pouvoir minimal, graduée et auto-expirante, sans piège de liveness.** Douleur : les pauses globales gèlent tout (Lido 21 jours, Fireblocks gel total) et un pauseur expiré laisse sans protection. Nous proposons plafond réduit ou file « attends 5 min » par transaction, pouvoir qui expire proprement avec renouvellement testé. Mesurer et publier le coût en cas légitimes (AID-Guard annonce 35 à 44 points de perte d'utilité en profil strict) et le taux de faux positifs.
 
 Ordre de présentation conseillé : 1 (cœur), 3 (valeur DORA), 4 (confiance), 5 (finesse), 2 (complément).
 

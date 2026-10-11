@@ -1,4 +1,4 @@
-/* Sentinelle - design commun. Aucun import externe : polices système, fonctionne hors ligne.
+/* Hold up - design commun. Aucun import externe : polices système, fonctionne hors ligne.
    Thème : clair par défaut, sombre si le système le demande, ou forcé par data-theme. */
 :root{
   --bg:#f3f5f8; --surface:#ffffff; --surface-2:#eaeef3; --fg:#13202d; --muted:#445568; --line:#ccd5e0;

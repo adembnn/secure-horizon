@@ -1,4 +1,4 @@
-# PROOF - alerte Sentinelle au format Slack, livree dans Mattermost auto-heberge
+# PROOF - alerte Hold up au format Slack, livree dans Mattermost auto-heberge
 
 ## Approche
 Docker Desktop (demarre manuellement, il etait arrete) -> image `mattermost/mattermost-preview` (Mattermost 11.11.1, build 35958890150), port 127.0.0.1:8065. Tout par API REST : creation admin (premier utilisateur, sans auth), login, `PUT /config/patch` pour activer `EnableIncomingWebhooks`, creation equipe `sentinelle`, canal `alertes-sorties`, webhook entrant, POST du payload Slack (text + attachments colores + fields), relecture par `GET /api/v4/channels/{id}/posts`. Identifiants jetables generes au runtime par le script, jamais ecrits. Donnees synthetiques. Aucun fichier .env lu, aucun service externe, aucune chaine blockchain utilisee.

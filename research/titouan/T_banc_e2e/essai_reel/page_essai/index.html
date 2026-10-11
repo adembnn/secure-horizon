@@ -179,7 +179,7 @@
       log('RÉSULTAT : la demande a abouti. Réponse : ' + String(typeof r === 'string' ? r.slice(0, 80) : JSON.stringify(r)).slice(0, 120), 'ok');
       return r;
     } catch (e) {
-      var hint = e && e.code === 4001 ? ' (refus : par Sentinelle ou par MetaMask, regarde le message)' : e && e.code === 4900 ? ' (4900 : Sentinelle a bloqué par prudence)' : '';
+      var hint = e && e.code === 4001 ? ' (refus : par Hold up ou par MetaMask, regarde le message)' : e && e.code === 4900 ? ' (4900 : Hold up a bloqué par prudence)' : '';
       log('RÉSULTAT : refusée. code=' + (e && e.code) + ' message=' + (e && e.message) + hint, 'bad');
     } finally {
       clearInterval(tick); $('wait').style.display = 'none';

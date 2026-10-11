@@ -1,5 +1,5 @@
 /**
- * Sentinelle Intent Barrier - HTTP Server
+ * Hold up Intent Barrier - HTTP Server
  * POST /check endpoint for intent vs effects comparison
  * Listens on 127.0.0.1:8787 with CORS enabled
  */
@@ -280,7 +280,7 @@ export function startServer(port: number = PORT, host: string = HOST): void {
   });
 
   server.listen(port, host, () => {
-    console.log(`Sentinelle Intent Barrier server running at http://${host}:${port}`);
+    console.log(`Hold up Intent Barrier server running at http://${host}:${port}`);
     console.log('Endpoints:');
     console.log('  POST /check    - Compare intent with effects');
     console.log('  POST /classify - Classify a message for scam detection');

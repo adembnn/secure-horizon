@@ -1,4 +1,4 @@
-# Jury DeFi — red team boîte noire sur Sentinelle
+# Jury DeFi — red team boîte noire sur Hold up
 
 Juré Kryptosphère, attaque en boîte noire via `redteam/check.mjs`. Tout est synthétique :
 aucune clé, aucune adresse réelle de victime, aucune action contre un système réel.

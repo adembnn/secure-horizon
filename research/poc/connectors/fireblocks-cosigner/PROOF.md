@@ -5,7 +5,7 @@ Réimplémentation Node fidèle (zéro dépendance, `node:crypto` + `node:http`)
 - `POST /v2/tx_sign_request`, corps = JWT brut RS256 signé par la clé privée du Co-Signer ; vérifié avec la clé publique du Co-Signer (403 si signature invalide ou illisible, 401 si expiré, comme `authenticate.py`).
 - Réponse = JWT brut RS256 (`text/plain`) signé par la clé privée du handler : `{action, requestId, rejectionReason}`, `requestId` recopié (comme `callback_response.py`).
 - Champs de la demande selon la doc developers.fireblocks.com (txId, requestId, operation, asset, amount/amountStr, sourceType, destAddress, signerId...). Actions documentées : APPROVE, REJECT, RETRY, IGNORE ; le handler n'émet que APPROVE/REJECT.
-- Politique Sentinelle (`src/policy.mjs`) : APPROVE seulement si adresse dans la liste blanche synthétique ET `amountUSD` <= plafond 10 000 ; sinon REJECT avec raison.
+- Politique Hold up (`src/policy.mjs`) : APPROVE seulement si adresse dans la liste blanche synthétique ET `amountUSD` <= plafond 10 000 ; sinon REJECT avec raison.
 - `src/fake-cosigner.mjs` : faux Co-Signer qui signe et envoie 2 demandes, vérifie les réponses (signature, requestId, action), plus 4 tests négatifs.
 - Clés RSA-2048 jetables générées par `gen-keys.sh` (dossier `keys/`, gitignoré). Aucune clé existante lue. Aucun réseau externe, aucune chaîne, aucun Docker lancé (donc rien à `docker compose down`).
 

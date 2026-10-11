@@ -49,7 +49,7 @@
  "console": [
   {
    "top": true,
-   "text": "Invalid Sentry Dsn: =https://b47d15718a5343f497259a10c33fd9e2@o389095.ingest.sentry.io/4503974312935424"
+   "text": "Invalid Sentry Dsn: =[CAVIARDE]"
   }
  ],
  "exceptions": [],

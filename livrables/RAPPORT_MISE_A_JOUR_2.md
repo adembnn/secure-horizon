@@ -43,10 +43,10 @@ Base : pitch V3 de Titouan (`research/titouan/PITCH_V3_TITOUAN.md`), audit `PITC
 
 Vérifié par grep sur `livrables/`, `README.md`, `pitch/DEMO_SCENES.md` : un seul jeu de valeurs (47,6 / 34,2 / 83,85 / 106 106 / 71,3 / 13,9 / 54,2 / 228 / 166 / 86,6 / 7,7 / 1,3 / 64,4 / 76,84 / 0,30 / 32,31 / 47,33). Les mots interdits n'apparaissent que dans les listes d'interdits et dans des phrases qui les nient. Aucun tiret long. Les chiffres retirés ne figurent que dans la liste « retirés » de CHIFFRES.md. Écarts qui subsistent :
 
-1. Fichiers périmés hors de ce qui est réécrit (bandeaux déjà posés ou à poser) : `docs/architecture.md`, `docs/BRIEF_direction.md`, `docs/intent-barrier.md`, `docs/comprendre.html`, `docs/explainer.html`, `docs/dashboard/index.html`, `docs/demo/banc/*`, `docs/design/*` (hors v5) contiennent « Sentinelle » et des anciens chiffres (18,39 ms, 45 %, 83,8, 0,28). Non réécrits.
+1. Fichiers périmés hors de ce qui est réécrit (bandeaux déjà posés ou à poser) : `docs/architecture.md`, `docs/BRIEF_direction.md`, `docs/intent-barrier.md`, `docs/comprendre.html`, `docs/explainer.html`, `docs/dashboard/index.html`, `docs/demo/banc/*`, `docs/design/*` (hors v5) contiennent « Hold up » et des anciens chiffres (18,39 ms, 45 %, 83,8, 0,28). Non réécrits.
 2. `pitch/JURY_ATTAQUES.md`, `pitch/comprendre_piste4.md`, `pitch/track1_chiffres_sources.md`, `pitch/track1_4_pitches.md` : anciens (déjà bannerisés) ; `JURY_ATTAQUES.md` dit « 100 % sur DEV » et « 24/33 ».
-3. `research/titouan/W_livrables/*` (cinq brouillons) : « Sentinelle », 0,28 %, « Clef classe l'intention » ; bandeau déjà posé, non réécrits.
-4. `PRODUCT.md` (hors périmètre) cite encore Sentinelle et « Démo sur Avalanche Fuji ». `coord/DECISIONS.md` D-007 et D-008 parlent de Fuji.
+3. `research/titouan/W_livrables/*` (cinq brouillons) : « Hold up », 0,28 %, « Clef classe l'intention » ; bandeau déjà posé, non réécrits.
+4. `PRODUCT.md` (hors périmètre) cite encore Hold up et « Démo sur Avalanche Fuji ». `coord/DECISIONS.md` D-007 et D-008 parlent de Fuji.
 5. `pitch/DEMO_SCENES.md` : non réécrit dans cette passe (pas de plancher de règles dans la scène 2, pas de contrôle scellé). Rien de faux, mais à aligner.
 6. Nombres de tests : README = moteur 288/290, serveur 33/33, extension 83/83, autonome 39/39, contrats 30 ; aucun relancé. Les tests r01 à r04 de la revue échouaient à leur rédaction.
 7. Les trois clips de `livrables/video/` montrent l'ancien produit. La vidéo unique n'est pas enregistrée.

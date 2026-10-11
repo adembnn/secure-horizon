@@ -1,0 +1,54 @@
+diff --git a/research/titouan/T_banc_e2e/pipeline/test/evaluate_plus.test.mjs b/research/titouan/T_banc_e2e/pipeline/test/evaluate_plus.test.mjs
+index 6db2850..5e3a0f3 100644
+--- a/research/titouan/T_banc_e2e/pipeline/test/evaluate_plus.test.mjs
++++ b/research/titouan/T_banc_e2e/pipeline/test/evaluate_plus.test.mjs
+@@ -23,6 +23,7 @@ const setOwner = { method: 'eth_sendTransaction', params: [{ from: ME, to: '0x'
+ 
+ // existing cases only (no generated attack) : a slice of each replay file
+ function sample(file, n) {
++  if (!existsSync(join(ROOT, 'redteam', file))) throw new Error('redteam/' + file + ' manque' + (file === 'V2_DEV_norm.jsonl' ? ' (fichier généré, ignoré par git). Lancer, depuis research/titouan/T_banc_e2e : node redteam/normalize_v2.mjs blind_adem/v2/V2_DEV.jsonl redteam/V2_DEV_norm.jsonl (ou, depuis la racine du dépôt : node scripts/verifier_installation.mjs --donnees)' : ''));
+   const lines = readFileSync(join(ROOT, 'redteam', file), 'utf8').split(/\r?\n/).filter((l) => l.trim());
+   const step = Math.max(1, Math.floor(lines.length / n)); const out = [];
+   for (let i = 0; i < lines.length && out.length < n; i += step) out.push(normalizeCase(JSON.parse(lines[i])));
+diff --git a/research/titouan/T_banc_e2e/pipeline/test/monotone_pipeline.test.mjs b/research/titouan/T_banc_e2e/pipeline/test/monotone_pipeline.test.mjs
+index cbf0f34..975bf93 100644
+--- a/research/titouan/T_banc_e2e/pipeline/test/monotone_pipeline.test.mjs
++++ b/research/titouan/T_banc_e2e/pipeline/test/monotone_pipeline.test.mjs
+@@ -4,7 +4,7 @@
+ // Jeux de réglage seulement (1 cas sur HOLDUP_STRICT_STEP, défaut 4 ; HOLDUP_STRICT_STEP=1 pour tout rejouer). Jamais V2_TEST ni attacks/TEST.jsonl.
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+-import { readdirSync } from 'node:fs';
++import { readdirSync, existsSync } from 'node:fs';
+ import { join } from 'node:path';
+ import { ROOT, readCases, runCase, D } from '../measure.mjs';
+ import { makeEvaluatePlus, benchLevel } from '../evaluate_plus.mjs';
+@@ -14,6 +14,7 @@ const STEP = Math.max(1, Number(process.env.HOLDUP_STRICT_STEP) || 4);
+ const files = [join(ROOT, 'redteam', 'V2_DEV_norm.jsonl'), ...readdirSync(join(ROOT, 'redteam')).filter((f) => /^jury_.*\.jsonl$/.test(f)).map((f) => join(ROOT, 'redteam', f)),
+   join(ROOT, 'attacks', 'DEV.jsonl'), join(ROOT, 'attacks_public', 'PUBLIC.jsonl')];
+ for (const f of files) assert.ok(!/V2_TEST|attacks[\\/]TEST/i.test(f));
++for (const f of files) if (!existsSync(f)) throw new Error(f + ' manque (fichier généré, ignoré par git). Lancer, depuis research/titouan/T_banc_e2e : ' + (/V2_DEV_norm/.test(f) ? 'node redteam/normalize_v2.mjs blind_adem/v2/V2_DEV.jsonl redteam/V2_DEV_norm.jsonl' : 'node attacks_public/gen_public.mjs') + ' (ou, depuis la racine du dépôt : node scripts/verifier_installation.mjs --donnees)');
+ const cases = files.flatMap((f) => readCases(f).filter((x, i) => x.c && i % STEP === 0));
+ const refMode = (m) => (m.includes('+known') || m === 'full' ? 'product+known' : 'product');
+ 
+diff --git a/research/titouan/T_banc_e2e/run/mesure_monotonie.mjs b/research/titouan/T_banc_e2e/run/mesure_monotonie.mjs
+index 468b585..db9b6ae 100644
+--- a/research/titouan/T_banc_e2e/run/mesure_monotonie.mjs
++++ b/research/titouan/T_banc_e2e/run/mesure_monotonie.mjs
+@@ -2,7 +2,7 @@
+ // Pour chaque cas des jeux DEV (attacks/DEV.jsonl), attacks_public/PUBLIC.jsonl, redteam/V2_DEV_norm.jsonl (jamais V2_TEST, jamais attacks/TEST.jsonl) :
+ // niveau sans intention (none), avec le type seul (type), avec l'intention détaillée (full). Violation = un niveau plus bas qu'un bras qui a MOINS d'information.
+ //   node run/mesure_monotonie.mjs [--detectors] [--guard] [--list] [--json=out.json]
+-import { readFileSync, writeFileSync } from 'node:fs';
++import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+ import { join, dirname } from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import { prepare, runArm, normalizeCase, RANK } from './arms.mjs';
+@@ -15,6 +15,7 @@ export async function mesure(files = JEUX, opts = {}) {
+   const res = { opts, jeux: {}, violations: [] };
+   for (const f of files) {
+     if (/TEST|V2_TEST/.test(f)) throw new Error('jeu scellé refusé : ' + f);
++    if (!existsSync(join(ROOT, f))) throw new Error(f + ' manque (fichier généré, ignoré par git). Lancer, depuis research/titouan/T_banc_e2e : ' + (/V2_DEV_norm/.test(f) ? 'node redteam/normalize_v2.mjs blind_adem/v2/V2_DEV.jsonl redteam/V2_DEV_norm.jsonl' : 'node attacks_public/gen_public.mjs') + ' (ou, depuis la racine du dépôt : node scripts/verifier_installation.mjs --donnees)');
+     const lines = readFileSync(join(ROOT, f), 'utf8').replace(/^﻿/, '').split(/\r?\n/).filter((l) => l.trim());
+     const S = { n: 0, none_to_type: 0, type_to_full: 0, none_to_full: 0, scam_lost_type: 0, scam_lost_full: 0, scam_gain_type: 0, scam_gain_full: 0, scams: 0, benins: 0, miss_none: 0, miss_type: 0, miss_full: 0, fa_none: 0, fa_type: 0, fa_full: 0 };
+     for (const line of lines) {

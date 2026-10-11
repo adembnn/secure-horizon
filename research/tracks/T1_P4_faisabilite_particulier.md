@@ -18,7 +18,7 @@
 | Handler | le guichet | contrat auquel le Safe transmet tout appel qu'il ne connaît pas, y compris la question « cette signature est-elle de toi ? » (ERC-1271, `isValidSignature`) |
 | Mandat | le prélèvement automatique | `approve`, `setApprovalForAll`, `permit`, Permit2 : autoriser un tiers à prélever, qui le fera ensuite par `transferFrom` |
 | Seau | le compte-gouttes | réserve de sortie de capacité B qui se remplit de r par seconde ; sur une durée τ, il sort au plus B + r·τ |
-| Sentinelle | l'agent de sécurité dehors | service hors du téléphone, qui peut seulement resserrer, révoquer et mettre au coffre |
+| Hold up | l'agent de sécurité dehors | service hors du téléphone, qui peut seulement resserrer, révoquer et mettre au coffre |
 | Coffre à délai | le coffre temporisé | contrat qui ne rend les fonds qu'au Safe, après un délai pendant lequel on peut annuler |
 | Gardiens | les proches | 3 personnes ou appareils, qui ne sont pas propriétaires du Safe |
 
@@ -26,11 +26,11 @@
 
 1. Les 6 prototypes tournent : 197 tests de mécanisme verts **[rejoué]**. Les 6 ont aussi été cassés par leur red team, sur 102 scénarios d'attaque écrits.
 2. Ce qui tient partout : retirer le Guard, ajouter un module, changer de propriétaire ou faire un `delegatecall` échoue. Deux exceptions seulement : un module activé avant le Guard sur Safe 1.4.1, et un `delegatecall` qu'on aurait explicitement autorisé. Quand rien ne fuit par ailleurs, le seau borne bien une clé volée. Perte mesurée = B + r·τ (100 sEUR à τ = 0, 124 sEUR à 24 h). La red team n'a trouvé aucun vol au-delà de cette borne en 15 attaques.
-3. Ce qui casse, en deux familles. (a) La valeur sort par un chemin que le Guard ne mesure pas : signatures ERC-1271, remboursement de gaz du Safe, sélecteur inconnu, actif non suivi, mandat hérité. (b) La vivacité : une seule clé (un gardien, la Sentinelle ou le propriétaire) peut bloquer la récupération pour toujours.
+3. Ce qui casse, en deux familles. (a) La valeur sort par un chemin que le Guard ne mesure pas : signatures ERC-1271, remboursement de gaz du Safe, sélecteur inconnu, actif non suivi, mandat hérité. (b) La vivacité : une seule clé (un gardien, Hold up ou le propriétaire) peut bloquer la récupération pour toujours.
 4. La faille la plus grave : le handler standard du Safe valide toute signature du propriétaire. Un permit vide alors tout le solde sans aucune transaction du Safe (300 000 sUSD en 2 transactions). Correction : un handler sans ERC-1271, posé à la création et verrouillé. Elle est testée dans 3 prototypes et je l'ai rejouée aujourd'hui sur Safe 1.4.1 et 1.5.0.
 5. Ce qui n'est pas à nous : plafond, délai, gardiens, liste blanche, « resserrer vite, relâcher lentement » (Ready/Argent, Bitkey, Casa, Coinbase Vault, Safe, Zodiac, et surtout le brouillon ERC-8238). Ce que nous n'avons trouvé nulle part : la réponse automatique hors appareil à pouvoirs bornés, la fermeture du canal des signatures au niveau du compte, et le paquet de preuves vérifiable sans nous croire.
 6. Jev ne touche pas la borne de perte : il peut relever une alerte, jamais l'abaisser. Il n'a jamais été appelé (aucune clé, aucun appel API), donc sa précision est inconnue.
-7. L'architecture minimale : un Safe 1.5.0 neuf, un seul Guard à refus par défaut (Transaction Guard et Module Guard), un handler sans ERC-1271, un module Sentinelle à 3 gestes, un coffre à délai, une gouvernance asymétrique et une ancre de preuves.
+7. L'architecture minimale : un Safe 1.5.0 neuf, un seul Guard à refus par défaut (Transaction Guard et Module Guard), un handler sans ERC-1271, un module Hold up à 3 gestes, un coffre à délai, une gouvernance asymétrique et une ancre de preuves.
 8. Faisabilité : le P0 (seed volée, drainer, réponse, preuve) se construit en assemblant `seed-stolen` et `evidence-pack` avec 6 changements connus : portage en 1.5.0 avec Module Guard, installation atomique avec handler sans ERC-1271, règle `gasPrice == 0` partout, révocation typée, gouvernance asymétrique avec gel qui expire, correctifs A11 et A12 du paquet. Le chantier encore ouvert est la gouvernance (vivacité), pas la borne.
 
 ---
@@ -45,12 +45,12 @@
 |---|---|---|---|---|---|
 | Drainer par mandat (`approve`, `setApprovalForAll`) | `ApprovalGuard` (Safe 1.4.1) : refuse de créer un mandat vers un spender non listé ; seau mesuré par écart de solde ; handler sans ERC-1271 | Oui : 34/34 en local, fuzz de 300 séquences sans violation, 15/15 mutants tués **[rejoué]** ; 34/34 en fork de Fuji **[annoncé]** | Oui : 11 attaques sur 16, dont 50 000 USDC via `redeem` pour un seau de 1 000 par jour | Annoncé : 0 vers un inconnu, la limite pour un spender listé. Après : non bornée pour tout actif détenu sous une forme non suivie ; limite × nombre de cycles pour un spender listé compromis | mandats antérieurs, gardiens manipulés, sélecteurs absents de la liste, interface détournée |
 | Drainer par signature hors chaîne (`permit`, Permit2) | `PermitGate` (handler ERC-1271 à refus par défaut, qui recalcule l'empreinte de la demande) + `HandlerLockGuard` | Oui : 26/26 avec le vrai bytecode Permit2 de Fuji **[rejoué, identité vérifiée]** | Oui : 12 attaques sur 16 ; sans aucune clé, n'importe qui vide la liste blanche | Annoncé : 0 par permit vers un inconnu. Après : tout le solde si l'initialisation n'est pas atomique (10 000 jetons) ou si un relayeur listé paie un destinataire choisi par l'appelant | EOA et EIP-7702 (pas de handler), transactions directes du propriétaire, ordres non recalculés (PermitBatch, Seaport, CoW) |
-| Seed ou clé volée | `SentinelGuard` à refus par défaut + `SentinelModule.respond()` + `DelayVault` + handler sans ERC-1271 | Oui : 39/39 ; 150 plannings aléatoires **[rejoué]** | Seulement en disponibilité : la clé Sentinelle seule gèle tout pour toujours. Aucun vol au-delà de la borne en 15 attaques | Σ min(solde, B + r·τ) par actif : 100 sEUR à τ = 0, 124 sEUR à 24 h. Inchangé après la red team | mandats antérieurs, propriétaire + 2 gardiens, DeFi, NFT |
+| Seed ou clé volée | `SentinelGuard` à refus par défaut + `SentinelModule.respond()` + `DelayVault` + handler sans ERC-1271 | Oui : 39/39 ; 150 plannings aléatoires **[rejoué]** | Seulement en disponibilité : la clé Hold up seule gèle tout pour toujours. Aucun vol au-delà de la borne en 15 attaques | Σ min(solde, B + r·τ) par actif : 100 sEUR à τ = 0, 124 sEUR à 24 h. Inchangé après la red team | mandats antérieurs, propriétaire + 2 gardiens, DeFi, NFT |
 | Empoisonnement d'adresse, nouvelle destination | `NewDestinationGuard` (Safe 1.4.1 et 1.5.0) : carnet d'adresses, voie instantanée plafonnée, file de 24 h, sosie (3 premiers + 3 derniers caractères) = gardien obligatoire | Oui : 58/58 sur les deux versions ; 20/20 sosies détectés dès 3 + 3 caractères **[rejoué]** | Oui : 9 attaques sur 20, dont tout le solde (300 000 sUSD) par ERC-1271. Correctif rejoué : 5 attaques passent à « défendu » | Annoncé : 200 sEUR par jour en instantané. Après : tout le solde par signature (corrigé) ; une destination « assaisonnée » devient illimitée | premier paiement à un inconnu, gardien qui valide sans regarder, sosie de moins de 3 caractères d'un côté |
 | Faux support, contrainte physique (le propriétaire signe tout) | `DelayGuard` (Safe 1.5.0) : seau instantané, tout le reste en file de 24 h, un seul gardien peut annuler | Oui : 21/21 **[rejoué]** | Oui : 3 vols et 3 nuisances sur 20. Le propriétaire seul évince le gardien vigilant : 90 AVAX sur 100 partent en 48 h | Annoncé : 1 AVAX + 1 par jour en instantané, tout si personne n'annule en 24 h. Après : il faut 2 gardiens vigilants, pas 1 | séquestration plus longue que le délai, gardiens sous la même menace, alerte réelle (non codée) |
 | Après le vol : réponse et paquet de preuves | `SentinelGuard` (Safe 1.5.0) + module + coffre + `EvidenceAnchor` + scripts du paquet | Oui : 19/19 ; perte 260 sur 1 000, 700 mis au coffre, réponse en 4 blocs **[rejoué]** | Oui : 8 attaques sur 15. Remboursement de gaz : 900 aEUR pour un plafond de 100 ; paquet qui sous-déclare | Annoncé : plafond + recharge + anciens mandats. Après : 90 % du solde par remboursement de gaz (correction connue, voir 2.2) | tentatives refusées (aucun événement), natif sorti hors Guard, conformité DORA |
 
-**Ce que ces tests prouvent, et ce qu'ils ne prouvent pas.** Ils prouvent la logique des contrats sur une chaîne locale, avec des attaquants qui détiennent les clés qu'on leur donne. Ils ne prouvent rien sur : l'ordre réel des transactions sur Avalanche, la latence d'une vraie Sentinelle, les jetons réels (USDC v2.2 n'a pas été testé, seulement une imitation), le gaz réel, l'ergonomie, le comportement des gardiens humains, ni la précision de Jev.
+**Ce que ces tests prouvent, et ce qu'ils ne prouvent pas.** Ils prouvent la logique des contrats sur une chaîne locale, avec des attaquants qui détiennent les clés qu'on leur donne. Ils ne prouvent rien sur : l'ordre réel des transactions sur Avalanche, la latence d'une vraie Hold up, les jetons réels (USDC v2.2 n'a pas été testé, seulement une imitation), le gaz réel, l'ergonomie, le comportement des gardiens humains, ni la précision de Jev.
 
 ### 1.1 Drainer par mandat
 
@@ -78,7 +78,7 @@
   - ATK-3 : `vault.redeem(parts, attaquant, safe)` ; 50 000 USDC, le solde USDC du Safe ne bouge pas ;
   - ATK-4, ATK-5, ATK-6 : `transferAndCall`, `allow` de Comet (30 000 USDC), `transferPunk` ;
   - ATK-7 : un mandat antérieur au Guard ;
-  - ATK-8 : le module Sentinelle approuve le NFT n°0 ;
+  - ATK-8 : le module Hold up approuve le NFT n°0 ;
   - ATK-12 et ATK-13 : veto d'un seul gardien, gel permanent.
 - Leçon : une liste de sélecteurs interdits est perdue d'avance, il faut un **refus par défaut**. Et un mandat doit **coûter son montant dans le seau au moment où il est donné**.
 
@@ -126,7 +126,7 @@
   - drain lent : 110,0025 sEUR pour une borne de 110,00278 ;
   - `approve` puis prélèvement : débité une seule fois ;
   - contrôle ERC-1271 : 900 sEUR volés avec le handler standard, refus avec le handler sans signature ;
-  - courses dans le même bloc : attaquant en premier, perte = B exactement ; Sentinelle en premier, perte 0 ; la Sentinelle décode un `setGuard(0)` en attente et le devance ;
+  - courses dans le même bloc : attaquant en premier, perte = B exactement ; Hold up en premier, perte 0 ; Hold up décode un `setGuard(0)` en attente et le devance ;
   - 150 plannings aléatoires : pire rapport perte/borne = 0,953.
 
 | τ (délai de réponse) | perte jeton (sEUR) | borne B + r·τ | perte native (AVAX) | borne |
@@ -136,10 +136,10 @@
 | 1 h | 100,9999 | 101,0013 | 3,9999 | 4,0028 |
 | 6 h | 105,9999 | 106,0013 | 10,0 (solde épuisé) | 14,0 |
 | 24 h | 123,9999 | 124,0013 | 10,0 (solde épuisé) | 50,0 |
-| 24 h sans Sentinelle | 123,9999 | 124,0005 | 10,0 | - |
+| 24 h sans Hold up | 123,9999 | 124,0005 | 10,0 | - |
 
 - Attention aux réglages : avec r = 2 AVAX par heure pour un solde de 10 AVAX, tout le natif part en 4 à 5 h si personne ne réagit (mesuré : 10,0 perdus à τ = 6 h). Le seau protège en proportion de B et r. Règle proposée : B + r × (temps de réaction des gardiens) doit rester une petite part du solde.
-- Cassé, uniquement en disponibilité : D2 (la clé Sentinelle seule gèle, puis annule chaque tentative de dégel des gardiens, 4 tours de suite), D3 (un gardien hostile oppose son veto à toute récupération), D1 (la clé du propriétaire annule les propositions du coffre via le Safe). Ont tenu : A1 à A9 (réentrance, 20 drains de suite, `delegatecall`, modules, ERC-1271, autres jetons, aller-retour par le coffre, course de mempool).
+- Cassé, uniquement en disponibilité : D2 (la clé Hold up seule gèle, puis annule chaque tentative de dégel des gardiens, 4 tours de suite), D3 (un gardien hostile oppose son veto à toute récupération), D1 (la clé du propriétaire annule les propositions du coffre via le Safe). Ont tenu : A1 à A9 (réentrance, 20 drains de suite, `delegatecall`, modules, ERC-1271, autres jetons, aller-retour par le coffre, course de mempool).
 
 ### 1.4 Empoisonnement d'adresse et nouvelle destination
 
@@ -149,8 +149,8 @@
 - `NewDestinationGuard.sol` sert à la fois de Transaction Guard et de Module Guard. Il applique trois voies :
   - destination connue : libre ;
   - destination nouvelle et petite : instantanée, sous un plafond cumulé par destination (50 sEUR) et un seau par jeton (200 sEUR par jour) ;
-  - tout le reste passe par `queue()`, attend 24 h, sort une seule fois avec un montant exact, et reste annulable par le Safe, un gardien ou la Sentinelle. `confirm()` d'un gardien ramène l'attente à 1 h.
-- Sosie : la clé de comparaison est formée des 3 premiers et 3 derniers caractères hexadécimaux. Une adresse qui partage cette clé avec une adresse connue n'a jamais la voie instantanée ; elle attend 24 h et exige un gardien. L'événement `LookalikeDetected(to, knownAddress)` nomme le contact imité. `flag()` (Sentinelle) importe sur la chaîne l'historique complet calculé hors chaîne.
+  - tout le reste passe par `queue()`, attend 24 h, sort une seule fois avec un montant exact, et reste annulable par le Safe, un gardien ou Hold up. `confirm()` d'un gardien ramène l'attente à 1 h.
+- Sosie : la clé de comparaison est formée des 3 premiers et 3 derniers caractères hexadécimaux. Une adresse qui partage cette clé avec une adresse connue n'a jamais la voie instantanée ; elle attend 24 h et exige un gardien. L'événement `LookalikeDetected(to, knownAddress)` nomme le contact imité. `flag()` (Hold up) importe sur la chaîne l'historique complet calculé hors chaîne.
 - Prouvé **[rejoué]**, 58/58 :
   - scénario complet : le propriétaire copie le sosie et envoie 5 000 ; rien ne part, le gardien annule ;
   - la poussière reçue ne crée aucune confiance ;
@@ -187,14 +187,14 @@
 
 ### 1.6 Après le vol : réponse et paquet de preuves
 
-*En clair* : quand la Sentinelle voit une sortie anormale, elle serre le compte-gouttes, révoque les mandats et met le reste au coffre. Puis elle écrit un dossier dont l'empreinte est gravée sur la chaîne.
+*En clair* : quand Hold up voit une sortie anormale, elle serre le compte-gouttes, révoque les mandats et met le reste au coffre. Puis elle écrit un dossier dont l'empreinte est gravée sur la chaîne.
 
 *Techniquement* (`evidence-pack/`, Safe 1.5.0) :
 - `SentinelGuard.sol` (seau natif + 1 jeton ; `approve` consomme le seau ; `tighten` réservé au module lié ; `proposeLoosen`, `approveLoosen`, `executeLoosen` ; fenêtre d'administration). `SentinelModule.sol` : `tighten`, `revokeApproval`, `sweepToken`, `sweepNative`, avec le coffre comme destination constante. Événements `SentinelAction(kind, ruleId, ref, target, asset, amount)` et `ApprovalRevoked`. `DelayVault.sol`, `EvidenceAnchor.sol`, et les scripts `evidencePack.js`, `renderers.js`, `classifier.js` (sections 4 et 5).
 - Scénario rejoué **[rejoué]** :
   - une approbation de 500 existe avant le Guard ;
   - l'attaquant tente 5 actions refusées, sort 60 sous le plafond, et le tiers prélève 200 avec l'ancien mandat ;
-  - la Sentinelle répond. Perte : 260 sur 1 000 ; 700 mis au coffre ; mandat de 300 supprimé ; réponse au bloc 23 pour une première sortie au bloc 19 (4 blocs, dont 2 de latence injectée par le test) ;
+  - Hold up répond. Perte : 260 sur 1 000 ; 700 mis au coffre ; mandat de 300 supprimé ; réponse au bloc 23 pour une première sortie au bloc 19 (4 blocs, dont 2 de latence injectée par le test) ;
   - paquet : 33 événements, 23 756 octets ; 4 falsifications détectées.
 - Cassé :
   - A1 et A2 : le Guard ignore `gasPrice`, `gasToken` et `refundReceiver`. L'attaquant signe une transaction anodine avec `baseGas = 900e18`, `gasToken = aEUR` : 900 aEUR pour un plafond de 100, seau intact. Variante native : 10 AVAX tombent à ≈ 2 pour un plafond de 1 ;
@@ -259,11 +259,11 @@ Pourquoi c'est la plus grave :
 | 3 | Valeur qui sort par un chemin non mesuré (sélecteur inconnu, parts de coffre, WAVAX, position de prêt) | la clé | 50 000 USDC pour un seau de 1 000 par jour | `drainer-approve` | refus par défaut des cibles et des sélecteurs ; WAVAX suivi comme le natif | oui : `seed-stolen` A6 et `poisoning` B1 tiennent |
 | 4 | Fonctions « réservées au Safe » appelables par tous via le handler | rien ; pour voler : un `init` séparé + la clé | liste blanche effacée ; 10 000 jetons | `drainer-permit` | vérifier les 20 derniers octets ; `init` atomique | non |
 | 5 | Mandat rafraîchi en boucle par un spender listé | un spender listé compromis | 8 000 pour une limite de 200 | `drainer-approve`, `drainer-permit` (R5) | débiter le seau au moment du mandat ; budget cumulatif | oui, dans `seed-stolen` |
-| 6 | Une seule clé bloque la récupération | une clé de gardien, ou la clé Sentinelle, ou la clé du propriétaire | gel permanent (4 tours) ; 700 aEUR bloqués | 5 sur 6 | gouvernance asymétrique, gel qui expire, rotation (section 6) | non |
+| 6 | Une seule clé bloque la récupération | une clé de gardien, ou la clé Hold up, ou la clé du propriétaire | gel permanent (4 tours) ; 700 aEUR bloqués | 5 sur 6 | gouvernance asymétrique, gel qui expire, rotation (section 6) | non |
 | 7 | Éviction du seul gardien vigilant | la clé du propriétaire + 48 h | 90 AVAX sur 100 | `fake-support-social` | changer un gardien exige l'accord d'un autre gardien | non |
 | 8 | Contrôles faits seulement à la mise en file | la clé + le bon ordre d'opérations | sosie payé sans gardien ; 300 000 vers une adresse signalée | `poisoning-newdest` | revérifier au moment de la libération | oui (rejoué aujourd'hui) |
 | 9 | Mandats antérieurs à la protection | rien | 201 000 sEUR | 5 sur 6 | Safe neuf : un compte neuf n'a aucun mandat | par construction |
-| 10 | Révocation par `approve(x, 0)` sur un NFT, qui approuve le jeton n°0 | la clé Sentinelle ou la clé du propriétaire | NFT n°0 | `drainer-approve`, `poisoning-newdest` | révocation typée : ERC-20 seulement si `allowance()` répond ; NFT par `setApprovalForAll(op, false)` | côté propriétaire oui (A4) ; côté module non |
+| 10 | Révocation par `approve(x, 0)` sur un NFT, qui approuve le jeton n°0 | la clé Hold up ou la clé du propriétaire | NFT n°0 | `drainer-approve`, `poisoning-newdest` | révocation typée : ERC-20 seulement si `allowance()` répond ; NFT par `setApprovalForAll(op, false)` | côté propriétaire oui (A4) ; côté module non |
 | 11 | Paquet qui sous-déclare, ou que l'on gonfle | la clé ; n'importe qui pour le gonflement | 50 déclarés pour 100 volés ; 176 Ko de bruit | `evidence-pack` | appariement 1 pour 1 des journaux ; filtre des entrées inconnues | non |
 
 ---
@@ -305,7 +305,7 @@ Pourquoi c'est la plus grave :
 Le brouillon **ERC-8238** est le voisin le plus proche du « compte protégé » : plafond par époque, coffre à délai annulable, resserrer tout de suite, relâcher sous délai, pause qui expire seule, gardiens. Il faut le citer nous-mêmes, avant que le jury le fasse.
 
 **Ce que nous n'avons trouvé nulle part** (absence de résultat, pas preuve d'absence) :
-1. **La réponse automatique après compromission, par un service hors appareil dont les pouvoirs on-chain sont bornés par construction** : geler, révoquer, déplacer vers un coffre dont la seule destination est le Safe. Les voisins sont manuels (Webacy, la pause d'ERC-8238), se limitent à révoquer (Revoke.cash Ultimate), visent les institutions (Hypernative, Hexagate) ou restent des projets de hackathon (Tripwire, SafePanicModules). Prouvé par `seed-stolen` : une transaction `respond()` ; avec une Sentinelle en premier, perte 0 ; avec l'attaquant en premier, perte = B.
+1. **La réponse automatique après compromission, par un service hors appareil dont les pouvoirs on-chain sont bornés par construction** : geler, révoquer, déplacer vers un coffre dont la seule destination est le Safe. Les voisins sont manuels (Webacy, la pause d'ERC-8238), se limitent à révoquer (Revoke.cash Ultimate), visent les institutions (Hypernative, Hexagate) ou restent des projets de hackathon (Tripwire, SafePanicModules). Prouvé par `seed-stolen` : une transaction `respond()` ; avec Hold up en premier, perte 0 ; avec l'attaquant en premier, perte = B.
 2. **La fermeture du canal des signatures au niveau du compte** : un handler verrouillé par le Guard. En P1, un filtre de permits qui recalcule l'empreinte Permit2 sur la chaîne et vérifie le spender. K4 n'a trouvé aucun handler filtrant ; ERC-8238 ne parle ni de permit ni d'ERC-1271.
 3. **Le paquet de preuves ancré** : vérifiable par un tiers sans nous croire, divulgation d'un seul événement par preuve de Merkle, deux rendus (police et assureur, brouillon DORA). Aucun outil grand public trouvé (W4) ; côté DORA, la génération existe, pas le lien champ par champ vers la chaîne (nouveauté N3).
 4. **Le contrôle du sosie appliqué on-chain contre le carnet du compte**, qui force un gardien. Ailleurs, ce sont des avertissements côté client (MetaMask, Trust Wallet), ou des listes blanches d'exchange sans détection de sosie.
@@ -346,7 +346,7 @@ Ce qui est prouvé, et ce qui ne l'est pas :
 
 **Où Jev compte vraiment** :
 - Il n'a **aucun effet sur la borne de perte**. Celle-ci tient même si Jev se trompe, s'arrête ou se fait injecter.
-- Il change seulement **quand** la Sentinelle agit, et **quand** on dérange un gardien, sur les cas qu'aucune règle dure ne tranche.
+- Il change seulement **quand** Hold up agit, et **quand** on dérange un gardien, sur les cas qu'aucune règle dure ne tranche.
 - Un faux positif coûte un gel. Il n'est réversible que si la gouvernance l'est vraiment : les attaques D2 et A10 montrent qu'un gel peut devenir un blocage. D'où le gel qui expire, en section 6.
 
 **À corriger** :
@@ -365,14 +365,14 @@ Ce qui est prouvé, et ce qui ne l'est pas :
 - `chain` : `chainId` et fenêtre de blocs ; `protectedAccount` : Safe, coffre, Guard, module, jeton, ancre ; `knownAddresses` : contacts connus.
 - `rules` : hash des règles scellé sur la chaîne avant l'incident (`RulesCommitted`), hash attendu, définitions, et `sealedBeforeFirstAttack`.
 - `events` : la liste des journaux décodés (bloc, horodatage, tx, contrat, événement, arguments, feuille), leur nombre et leur `merkleRoot`.
-- `derived` : sorties (`guarded` vrai ou faux), adresses destinataires suspectes (« attribution non établie »), actions de la Sentinelle avec la règle qui les a déclenchées, resserrements, mandats révoqués, décisions des gardiens (qui a proposé, qui a approuvé, exécuté ou non), métriques (premier bloc d'attaque, premier bloc de réponse, délai en blocs et en secondes, montants perdus, montants mis au coffre).
-- `offChainObservations` : tentatives refusées, vues par simulation, avec la mention « attestées par la clé Sentinelle, non reproductibles depuis la chaîne » ;
+- `derived` : sorties (`guarded` vrai ou faux), adresses destinataires suspectes (« attribution non établie »), actions de Hold up avec la règle qui les a déclenchées, resserrements, mandats révoqués, décisions des gardiens (qui a proposé, qui a approuvé, exécuté ou non), métriques (premier bloc d'attaque, premier bloc de réponse, délai en blocs et en secondes, montants perdus, montants mis au coffre).
+- `offChainObservations` : tentatives refusées, vues par simulation, avec la mention « attestées par la clé Hold up, non reproductibles depuis la chaîne » ;
 - `limits` : ce que le paquet ne prouve pas.
 
 **Les empreintes** :
 - feuille = `keccak256(canon({chainId, address, blockHash, txHash, logIndex, topics, data}))`. Arbre de Merkle à paires ordonnées, où un nœud impair est promu.
 - `digest = keccak256(canon(core))`. La forme canonique : JSON UTF-8, clés triées récursivement, sans espaces, entiers seulement, uint256 en chaîne décimale.
-- La clé « ancreur », distincte de la clé Sentinelle, appelle `EvidenceAnchor.anchor(incidentId, kind, digest, eventsRoot, toBlock)`. Le contrat ne fait qu'ajouter et numérote les révisions. Son propre événement `Anchored` est exclu du paquet, pour éviter la circularité.
+- La clé « ancreur », distincte de la clé Hold up, appelle `EvidenceAnchor.anchor(incidentId, kind, digest, eventsRoot, toBlock)`. Le contrat ne fait qu'ajouter et numérote les révisions. Son propre événement `Anchored` est exclu du paquet, pour éviter la circularité.
 
 **`verifyPack`** fait 4 contrôles indépendants :
 1. le `digest` recalculé ;
@@ -404,7 +404,7 @@ Ce qui est prouvé, et ce qui ne l'est pas :
   - Pour un particulier, DORA ne s'applique pas : c'est l'export pour une plateforme ou un assureur.
 
 **Ce qui doit changer avant de montrer le paquet** (red team) :
-- A11 : le paquet apparie un `Transfer` du jeton à une sortie du Guard par (tx, destinataire, montant). Un prélèvement de 50 par un ancien mandat, caché dans la même transaction qu'une sortie gardée de 50, disparaît : 100 volés, 50 déclarés, et `verifyPack` passe quand même. Correction : apparier 1 pour 1 par `logIndex`, et faire calculer à la Sentinelle Σ `Transfer` depuis le Safe − Σ `Outflow` du Guard, par transaction.
+- A11 : le paquet apparie un `Transfer` du jeton à une sortie du Guard par (tx, destinataire, montant). Un prélèvement de 50 par un ancien mandat, caché dans la même transaction qu'une sortie gardée de 50, disparaît : 100 volés, 50 déclarés, et `verifyPack` passe quand même. Correction : apparier 1 pour 1 par `logIndex`, et faire calculer à Hold up Σ `Transfer` depuis le Safe − Σ `Outflow` du Guard, par transaction.
 - A12 : n'importe qui peut émettre des `Transfer` vers le Safe ; 400 poussières font passer le paquet de 5 645 à 176 753 octets. Correction : garder seulement un agrégat pour les entrées d'expéditeurs inconnus sous un seuil.
 - A2b : un remboursement de gaz en natif ne laisse aucun `Transfer` (seulement `ExecutionSuccess(payment)`). Le paquet ne le verrait pas. La vraie correction est en amont (faille n° 2).
 - L'ancre prouve l'existence et l'intégrité à une date, pas la vérité juridique des faits. Sur Fuji, ce n'est pas un horodatage qualifié eIDAS (nouveauté N4).
@@ -432,7 +432,7 @@ flowchart TB
     QUORUM["Gouvernance<br/>relâcher = 2 gardiens sur 3 + délai"]
     ANCHOR["EvidenceAnchor<br/>règles scellées, empreintes des paquets"]
   end
-  subgraph OFF["Hors chaîne (service Sentinelle)"]
+  subgraph OFF["Hors chaîne (service Hold up)"]
     WATCH["Veilleur<br/>mempool, journaux, preview()"]
     RULES["Règles de code<br/>montant, nouveauté, sosie, mandat"]
     JEV["Jev<br/>sens du texte, relève seulement"]
@@ -464,7 +464,7 @@ sequenceDiagram
   actor T as Voleur (seed)
   participant S as Safe
   participant G as PolicyGuard
-  participant W as Sentinelle
+  participant W as Hold up
   participant M as SentinelModule
   participant V as Coffre à délai
   actor Q as Gardiens
@@ -498,7 +498,7 @@ sequenceDiagram
 | Coffre | **`DelayVault`** : rend seulement au Safe après délai ; ailleurs, seulement par 2 sur 3 + délai | aller-retour par le coffre borné à B (A7) | `seed-stolen/DelayVault` |
 | Gouvernance | **asymétrique** (règles ci-dessous) | D1, D2, D3, A8, A9, A10, ATK-12, ATK-13, G2, G3 | `Quorum.sol` à réécrire |
 | Preuve | **`EvidenceAnchor`** + `evidencePack.js` avec les correctifs A11 et A12 | 4 falsifications détectées | `evidence-pack` |
-| Service | veilleur (mempool + journaux + `preview()` + inventaire des mandats), règles de code, Jev en relève seulement, clé de réponse, clé d'ancrage séparée, alertes décodées aux gardiens | course gagnée quand la Sentinelle passe en premier ; `preview()` classe une transaction en attente | `seed-stolen` (veilleur de test), `classifier.js` |
+| Service | veilleur (mempool + journaux + `preview()` + inventaire des mandats), règles de code, Jev en relève seulement, clé de réponse, clé d'ancrage séparée, alertes décodées aux gardiens | course gagnée quand Hold up passe en premier ; `preview()` classe une transaction en attente | `seed-stolen` (veilleur de test), `classifier.js` |
 
 **Les règles du `PolicyGuard`** (toutes déjà écrites quelque part, et testées) :
 1. Seul le Safe appelle ; verrou contre la réentrance.
@@ -510,25 +510,25 @@ sequenceDiagram
 7. Destinations : vers un contact connu, sortie sous le seau ; vers une nouvelle destination, voie instantanée seulement pour un petit montant ; sinon file de 24 h. Un sosie ou une destination signalée exige un gardien. Tout est revérifié au moment de la libération (O1, O2).
 
 **La gouvernance asymétrique** (nouveau ; répond aux 12 blocages trouvés : D1, D2, D3, ATK-12, ATK-13, G2, G3, G4, A8 et A10 d'`evidence-pack`, R2 et R9 de `drainer-permit`) :
-- **Resserrer est immédiat**, ouvert à une seule clé parmi la Sentinelle, un gardien et le Safe : baisser un seau, geler, verrouiller le coffre, annuler une demande **du propriétaire**.
+- **Resserrer est immédiat**, ouvert à une seule clé parmi Hold up, un gardien et le Safe : baisser un seau, geler, verrouiller le coffre, annuler une demande **du propriétaire**.
 - **Relâcher demande 2 gardiens sur 3 + délai**. Le délai court depuis le 2e vote (A9). Une proposition expire.
-- **Annuler ce que 2 gardiens ont approuvé demande 2 gardiens**. Ni la Sentinelle ni le Safe ne peuvent le faire (D1, D2). Un seul gardien non plus (D3, A8, ATK-12).
+- **Annuler ce que 2 gardiens ont approuvé demande 2 gardiens**. Ni Hold up ni le Safe ne peuvent le faire (D1, D2). Un seul gardien non plus (D3, A8, ATK-12).
 - **Un gel expire de lui-même** (24 à 72 h, comme ERC-8238 et les GateSeal de Lido). Il n'est réarmable qu'un nombre limité de fois sans un gardien (ATK-13, D2, A10). Le gel ne borne pas la perte, le seau la borne : laisser le gel expirer ne rouvre que B + r·τ.
-- **Remplacer un gardien ou la Sentinelle** : 2 sur 3 + délai, avec au moins un gardien autre que la cible. La cible ne peut pas l'annuler, et le propriétaire seul ne peut jamais le faire (A8).
+- **Remplacer un gardien ou Hold up** : 2 sur 3 + délai, avec au moins un gardien autre que la cible. La cible ne peut pas l'annuler, et le propriétaire seul ne peut jamais le faire (A8).
 - **Un gardien n'est pas une copie de la seed** : il doit être sur un autre appareil ou une autre personne, sinon la clé volée vaut déjà 1 gardien sur 3.
 
 **Invariants à tester sur l'assemblage** (rejouer les 102 scénarios des red teams comme suite de non-régression) :
 - I1, perte bornée : pour tout actif suivi a et tout intervalle τ, sortie(a) ≤ B_a + r_a·τ, quel que soit le chemin (transaction du Safe, module, signature, remboursement).
-- I2, rien d'invisible : aucun solde suivi ne baisse sans débit du Guard, ou la Sentinelle l'écrit dans le paquet en N blocs.
+- I2, rien d'invisible : aucun solde suivi ne baisse sans débit du Guard, ou Hold up l'écrit dans le paquet en N blocs.
 - I3, pas d'administration sans quorum : propriétaires, seuil, Guard, Module Guard, modules et handler ne changent pas sans 2 sur 3 + délai.
-- I4, Sentinelle bornée : ses appels ne peuvent qu'abaisser la capacité de sortie ou déplacer vers le coffre ; jamais créer un mandat.
-- I5, vivacité : 2 gardiens honnêtes rendent toujours l'accès en un temps borné, quoi que fasse une seule autre clé (propriétaire, Sentinelle ou 3e gardien). C'est l'invariant violé 12 fois par les red teams.
+- I4, Hold up bornée : ses appels ne peuvent qu'abaisser la capacité de sortie ou déplacer vers le coffre ; jamais créer un mandat.
+- I5, vivacité : 2 gardiens honnêtes rendent toujours l'accès en un temps borné, quoi que fasse une seule autre clé (propriétaire, Hold up ou 3e gardien). C'est l'invariant violé 12 fois par les red teams.
 - I6, preuve fidèle : le total des sorties du paquet égale Σ `Transfer` depuis le Safe sur la fenêtre.
 
 **Ordre de construction** (le temps fixe l'ordre, pas le périmètre) :
 - **P0, démo D-006** :
   - Safe 1.5.0 neuf + `PolicyGuard` (règles 1 à 6) + handler sans ERC-1271 + `SentinelModule` + `DelayVault` + gouvernance asymétrique ;
-  - Sentinelle à règles de code ; paquet avec les correctifs A11 et A12 ; ancrage ;
+  - Hold up à règles de code ; paquet avec les correctifs A11 et A12 ; ancrage ;
   - rejeu des scénarios.
   - Point de départ : `seed-stolen` (porté sur 1.5.0) et `evidence-pack`.
 - **P1** :
@@ -574,7 +574,7 @@ sequenceDiagram
 
 **Preuves déjà dans le dépôt** :
 - `research/poc/connectors/safe15-moduleguard/` : le Module Guard de 1.5.0 bloque un module ; en 1.4.1, le module contourne le Guard. 7 tests verts en local et en fork de Fuji.
-- `research/poc/connectors/zodiac-roles/` : Zodiac Roles v2, avec le bytecode officiel 2.1.0, limite une clé « Sentinelle » à `tighten()`. 9 tests verts dans 3 modes. C'est une alternative au module maison, mais elle passe par un module (donc par le Module Guard en 1.5.0).
+- `research/poc/connectors/zodiac-roles/` : Zodiac Roles v2, avec le bytecode officiel 2.1.0, limite une clé « Hold up » à `tighten()`. 9 tests verts dans 3 modes. C'est une alternative au module maison, mais elle passe par un module (donc par le Module Guard en 1.5.0).
 
 **Pour rejouer** : `cd <dossier> && npx hardhat test`. Variantes : `FORK=1` dans `drainer-approve` (lecture seule de Fuji) ; `GUARD_NAME=NewDestinationGuardFixed npx hardhat test test/redteam.test.js --grep "1.5.0"` dans `poisoning-newdest-redteam`.
 

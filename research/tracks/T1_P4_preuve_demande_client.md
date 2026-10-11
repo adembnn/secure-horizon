@@ -112,7 +112,7 @@ Conséquence [analyse] : si on veut lier la signature à **notre domaine** (anti
 1. `IntentGuard` (Safe Guard ou smart account avec hook) : accepte une sortie si (a) elle correspond à un **intent** `{client, token, montant, destination, nonce, deadline, chainId, verifyingContract}` signé par la clé enregistrée du client (EIP-712 ECDSA **ou** WebAuthn P-256 via le précompile), (b) nonce non utilisé et deadline valide, (c) montant dans le plafond du client **et** dans le plafond agrégé de la fenêtre.
 2. `ClientRegistry` : clé publique par client, **avec délai (timelock) et quota d'enrôlements**, administré par quorum d'humains hors ligne (pas par le backend).
 3. `Perimeter` : racine Merkle d'adresses internes (cold, warm, sweeps) signée par un quorum d'admins ; plafond séparé ; toute destination hors périmètre ET hors intent = revert.
-4. Sentinelle : lit les `revert`/événements du garde, alerte, enregistre (DE.AE-02), abaisse les plafonds (RS.MI).
+4. Hold up : lit les `revert`/événements du garde, alerte, enregistre (DE.AE-02), abaisse les plafonds (RS.MI).
 5. Lots : un retrait client = un intent ; pour des batches, le backend soumet un lot d'intents (ou une racine) ; la vérification est par feuille.
 6. Sur Fuji uniquement, comptes de test, clients synthétiques (règle « aucune donnée réelle »).
 
@@ -125,7 +125,7 @@ Effort pour le hackathon [estimation de moi, non mesurée] : contrat de base + t
 | # | Limite | Détail [analyse sauf mention] | Ce qui reste couvert |
 |---|---|---|---|
 | 1 | **Modèle omnibus** | Les fonds clients sont mélangés dans un hot wallet ; le garde ne voit pas les soldes internes du livre. Une signature prouve « une clé enregistrée demande X vers Y », **pas** que le client a le solde ni que la clé appartient à un vrai client KYC | Plafond par client et agrégé ; réconciliation avec le livre hors chaîne |
-| 2 | **Enrôlement = nouveau point faible** | Un backend compromis peut enregistrer N **faux clients** avec leurs propres clés et signer N retraits. Perte maximale ≈ N × plafond | Timelock + quota d'enrôlement + plafond agrégé + alerte Sentinelle sur la croissance du registre ; registre administré par quorum humain |
+| 2 | **Enrôlement = nouveau point faible** | Un backend compromis peut enregistrer N **faux clients** avec leurs propres clés et signer N retraits. Perte maximale ≈ N × plafond | Timelock + quota d'enrôlement + plafond agrégé + alerte Hold up sur la croissance du registre ; registre administré par quorum humain |
 | 3 | **Interface client compromise** (schéma Bybit au niveau client) | Une clé passkey signe un challenge ; WebAuthn **n'affiche rien** de ce que l'on signe (le texte vient de la page web). Si l'attaquant contrôle le front servi (pas seulement le backend), il fait signer une adresse de destination à lui | Liste d'adresses de retrait enregistrée par signature + délai de refroidissement ; appli native à affichage de confiance ; sinon limite non résolue. L'extension WebAuthn « transaction confirmation » existe sur le papier mais je ne l'ai pas vérifiée **[ÀV]** |
 | 4 | **Compte client compromis** | Passkeys synchronisées (iCloud/Google) = phishing/vol de session possible. Le plafond par client borne le dommage unitaire ; un botnet de comptes volés le multiplie | Plafond agrégé, vélocité, détection comportementale |
 | 5 | **Clients institutionnels via API** | Pas de téléphone : ils signent avec leur propre HSM/clé de service (EIP-712) enregistrée dans le registre ; compatible, plus simple, mais la clé API de l'institution reste une cible | Plafond par client institutionnel plus élevé, allow-list de destinations |
@@ -138,7 +138,7 @@ Effort pour le hackathon [estimation de moi, non mesurée] : contrat de base + t
 | 12 | **Gouvernance / responsabilité** | Le garde et le registre font partie de la politique de garde du CASP (MiCA art. 75(3)) et du registre DORA art. 28(3) ; si le garde bloque à tort, c'est une indisponibilité du CASP. Fail-closed vs fail-open à décider | Mode de panne écrit |
 | 13 | **Pas de preuve de sauvetage** | Aucun chiffre ne prouve que ce schéma aurait empêché Bitget ; il faudra un rejeu synthétique | À mesurer |
 
-**Ce que le plafond seul couvre déjà** (D-004) : la perte maximale par fenêtre pour tous les scénarios ci-dessus. L'ajout de la preuve de demande apporte : (i) refus **dès la première** sortie fabriquée sous le plafond ; (ii) un signal net pour la Sentinelle (« sortie sans intent »), au lieu d'un seuil statistique ; (iii) réduction du plafond utile (chaque client = son plafond, non un plafond global).
+**Ce que le plafond seul couvre déjà** (D-004) : la perte maximale par fenêtre pour tous les scénarios ci-dessus. L'ajout de la preuve de demande apporte : (i) refus **dès la première** sortie fabriquée sous le plafond ; (ii) un signal net pour Hold up (« sortie sans intent »), au lieu d'un seuil statistique ; (iii) réduction du plafond utile (chaque client = son plafond, non un plafond global).
 
 ---
 
@@ -152,7 +152,7 @@ Effort pour le hackathon [estimation de moi, non mesurée] : contrat de base + t
 
 **Formulation honnête (à répéter à l'oral)** :
 
-> « Les exchanges font déjà signer leurs utilisateurs quand ils sont non-custodial, et Safe ou Coinbase vérifient des passkeys on-chain. Ce que nous n'avons pas trouvé, c'est un exchange ou un custodian dont le hot wallet refuse de payer sans une demande signée par le client final, vérifiée par un contrat que le backend ne contrôle pas. Nous transposons ce schéma du non-custodial vers la garde omnibus. Il n'arrête pas les faux clients enregistrés par un backend compromis, ni un front compromis, ni les chaînes non-EVM : c'est pour cela qu'il s'ajoute à un plafond agrégé et à une Sentinelle, il ne les remplace pas. »
+> « Les exchanges font déjà signer leurs utilisateurs quand ils sont non-custodial, et Safe ou Coinbase vérifient des passkeys on-chain. Ce que nous n'avons pas trouvé, c'est un exchange ou un custodian dont le hot wallet refuse de payer sans une demande signée par le client final, vérifiée par un contrat que le backend ne contrôle pas. Nous transposons ce schéma du non-custodial vers la garde omnibus. Il n'arrête pas les faux clients enregistrés par un backend compromis, ni un front compromis, ni les chaînes non-EVM : c'est pour cela qu'il s'ajoute à un plafond agrégé et à Hold up, il ne les remplace pas. »
 
 À éviter : « nouveau », « inédit », « inviolable », « aurait empêché Bitget ».
 
@@ -171,7 +171,7 @@ IDs à recontrôler sur les sites officiels ; non revérifiés aujourd'hui.
 | Abaisser les plafonds, retenir | **RS.MI-01/02** (confinement), RS.MA-01 | T1657 | D3-AZET | n/a |
 | Registre et périmètre : gouvernance par quorum | GV.RR (rôles), PR.AA-05 | T1199 / T1195 (accès via tiers / chaîne d'approvisionnement) [ÀV] | n/a | n/a |
 
-Note : cette idée est surtout **Protect** ; pour viser Detect/Respond comme le règlement le demande, c'est la Sentinelle qui lit les rejets du garde et réagit. À écrire ainsi dans le frontmatter de la tâche, pas l'inverse.
+Note : cette idée est surtout **Protect** ; pour viser Detect/Respond comme le règlement le demande, c'est Hold up qui lit les rejets du garde et réagit. À écrire ainsi dans le frontmatter de la tâche, pas l'inverse.
 
 ## 6. À vérifier
 

@@ -1,6 +1,6 @@
 > **PÉRIMÉ le 11/10/2026 : voir livrables\**
 
-# Sentinelle : maquettes de l'extension (HTML/CSS autonome)
+# Hold up : maquettes de l'extension (HTML/CSS autonome)
 
 Ouvrir les fichiers directement dans un navigateur. Aucun import externe, aucune dépendance. Marques, sites et adresses fictifs (domaines `.example`).
 
@@ -19,7 +19,7 @@ Ouvrir les fichiers directement dans un navigateur. Aucun import externe, aucune
 - **Annonces** : `role="alert"` pour Danger, `role="status"` pour Attention, `alertdialog` pour le miroir.
 - **Ralentir sans bloquer** : « Ne pas signer » est l'action principale ; « Continuer malgré tout » reste grisé jusqu'à la case « J'ai lu ce que la signature fait vraiment ».
 - **Thèmes** : clair par défaut, sombre selon le système, forçable via `data-theme` sur `<html>`. Polices système (une extension ne doit pas charger de police distante).
-- **Vie privée affichée** : le contact de confiance ne reçoit rien tout seul ; Sentinelle prépare un message que la personne envoie elle-même.
+- **Vie privée affichée** : le contact de confiance ne reçoit rien tout seul ; Hold up prépare un message que la personne envoie elle-même.
 
 ## À brancher
 - Injecter le bandeau dans un Shadow DOM pour que les styles du site n'interfèrent pas.

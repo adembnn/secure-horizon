@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const { createHoldUpServer, verifyJournal, loadLocalContext } = await import(pathToFileURL(join(HERE, '..', 'server.mjs')).href);
 
-const tmp = mkdtempSync(join(tmpdir(), 'sentinelle-test-'));
+const tmp = mkdtempSync(join(tmpdir(), 'holdup-test-'));
 const PAUL = '0x1234567890abcdef1234567890abcdef12345678';
 const SOSIE = '0x1234' + '9'.repeat(32) + '5678'; // meme debut (0x1234) et meme fin (5678) que Paul
 const ctxFile = join(tmp, 'ctx.json');

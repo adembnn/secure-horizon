@@ -1,4 +1,4 @@
-# Dossier de décision Sentinelle (10 oct. 2026, ~23h45)
+# Dossier de décision Hold up (10 oct. 2026, ~23h45)
 
 > Sources : `research/market/segments_acheteurs.md`, `prix_et_traction.md`, `exchanges_adoptabilite.md`, `research/cap/jury_aveugle_2315.md`, `research/tracks/T1_P4_*`. Les chiffres [V] viennent d'éditeurs, les « calc. » sont des calculs à partir de chiffres publiés.
 

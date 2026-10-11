@@ -124,7 +124,6 @@ function bar(s, label, value, pct, y, color) {
   txt(s, 'Ce que Hold up ne fait pas encore', 0.5, 2.95, 5.4, 0.4, big({ fontSize: 18 }));
   txt(s, [
     { text: 'Je ne vérifie pas ce que tu reçois en échange.', options: { breakLine: true } },
-    { text: 'Je n’ai jamais été essayé devant un vrai MetaMask.', options: { breakLine: true } },
     { text: 'Je ne couvre ni un Ledger en direct, ni le téléphone.' },
   ], 0.5, 3.45, 5.4, 1.5, { color: INK2, paraSpaceAfter: 8 });
   s.addImage({ path: path.join(ROOT, 'coord', 'reports', 'testeurs', '3_captures', 's05_08_f1_continuer_actif.png'), x: 6.3, y: 0.5, w: 3.2, h: 3.74 });

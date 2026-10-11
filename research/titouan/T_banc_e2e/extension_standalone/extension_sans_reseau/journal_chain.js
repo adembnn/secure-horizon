@@ -34,7 +34,7 @@ const str = (x, max) => (typeof x === 'string' ? x.slice(0, max) : '');
  *   rules   version du build, suivie de '+' et d'une empreinte courte (12 hex) des règles quand le build la fournit. */
 // Empreinte des fichiers de règles embarqués : ligne réécrite par tools/gen_rules_fingerprint.mjs (à lancer avant chaque build final).
 // Ici et non dans un module à part : journal_chain.js est déjà copié par les deux builds, aucun changement de build n'est nécessaire.
-export const RULES_FINGERPRINT = '0fb71e11c034'; export const RULES_FILES = 26; // @RULES_FINGERPRINT@
+export const RULES_FINGERPRINT = '067bb3ba44cb'; export const RULES_FILES = 26; // @RULES_FINGERPRINT@
 export const BY = ['humain', 'auto', 'holdup'];
 const HUMAN_BY = new Set(['human', 'window-closed', 'tab-closed']);
 export function byOf(e) {

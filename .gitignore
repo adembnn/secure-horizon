@@ -57,3 +57,5 @@ research/demo_reelle/rpc_garde/journal/
 research/titouan/T_banc_e2e/journal/
 blockchain/.env
 research/demo_reelle/site_echange/addresses.local.json
+# Requis par la commande d'audit de la slide conformité (journal synthétique, domaines .example)
+!research/demo_reelle/audit/sample/journal.jsonl

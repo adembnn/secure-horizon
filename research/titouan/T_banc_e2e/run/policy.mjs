@@ -63,11 +63,7 @@ const DETAIL_KINDS = new Set(['buy_or_swap', 'pay_someone', 'send_to_my_account'
 const ZERO_ADDR ='0x' + '0'.repeat(40);
 const isKnownProtocol = (ctx, a) => !!a && (ctx.knownSpenders || []).includes(String(a).toLowerCase());
 
-// Une monnaie courante (« 25 $ », « 50 dollars » : jeton dit = USD) n'est pas un jeton : elle ne nomme ni le jeton donné ni un montant comparable à n'importe quel jeton.
-const MONEY_WORDS = new Set(['USD', 'DOLLAR', 'DOLLARS']);
 export function applyPolicy({ eff, adem, ctx, intent, request }) {
-  // Les règles de détail (F31, F32, F33) ne lisent pas une monnaie courante ; la comparaison à un jeton stable connu par son adresse est faite côté phrase (extension/written_check.js).
-  if (intent && typeof intent.token === 'string' && MONEY_WORDS.has(intent.token.trim().toUpperCase())) intent = { ...intent, token: undefined, amount: undefined };
   const notes = [];
   let flags = eff.risk_flags.map((f) => ({ ...f }));
   let reasons = adem ? adem.reasons.map((r) => ({ ...r })) : [];
