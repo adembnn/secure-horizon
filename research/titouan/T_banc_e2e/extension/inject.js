@@ -280,7 +280,8 @@
   function grant(prov, k, objs) {
     if (k === null) return () => {};
     const o = provKey(prov); let m = wmGet(passes, o); if (!m) { m = new WM(); wmSet(passes, o, m); }
-    for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) { wmSet(m, x, k); wmSet(passesAny, x, { __proto__: null, k, m }); } }
+    const c = chainTag(prov); // the chain of the provider the pass is granted for
+    for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) { wmSet(m, x, k); wmSet(passesAny, x, { __proto__: null, k, m, c }); } }
     return () => { for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) { if (wmGet(m, x) === k) wmDel(m, x); const y = wmGet(passesAny, x); if (y && y.k === k && y.m === m) wmDel(passesAny, x); } } };
   }
   function takePass(prov, obj, k) {
@@ -288,7 +289,10 @@
     const m = wmGet(passes, provKey(prov));
     const any = wmGet(passesAny, obj);
     if (m && wmGet(m, obj) === k) { wmDel(m, obj); if (any && any.m === m) wmDel(passesAny, obj); return true; }
-    if (!any || any.k !== k) return false; // another `this` inside the wallet : the forwarded object itself is the proof
+    // An inner object of the wallet that exposes no chain at all (MetaMask : provider._rpcEngine, whose handle() is wrapped too) gives
+    // a key without the chain part : the pass then holds on the same content, with the chain of the provider it was granted for.
+    // An inner object that names ANOTHER chain is still asked again (fail closed).
+    if (!any || (any.k !== k && !(chainTag(prov) === '' && any.k === any.c + k))) return false; // another `this` inside the wallet : the forwarded object itself is the proof
     wmDel(passesAny, obj); if (wmGet(any.m, obj) === k) wmDel(any.m, obj); // one pass, whichever object of the wallet uses it
     return true;
   }

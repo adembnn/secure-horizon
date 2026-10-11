@@ -291,6 +291,46 @@ test('(f bis) a wallet reached through two objects : the request forwarded to th
   assert.equal(P.gates.length, 2, 'a replay by the page is gated');
 });
 
+// The shape of a connected MetaMask (13.50) : a Proxy in front of the instance, request and _rpcRequest bound to the instance,
+// request() builds a new payload and calls _rpcRequest(payload, cb), which calls _rpcEngine.handle(payload, cb). The provider knows
+// its chain, the inner engine has no chainId at all. All three entry points are wrapped : ONE page call must be asked ONCE.
+// Before this test existed, the engine's key had no chain part, the pass was refused and the same transaction was asked a second
+// time within the same operation ("Tu as déjà donné une autorisation pour ça", seen on app.pangolin.exchange, 11 Oct.).
+const METAMASK = (engineChain) => `
+  class Engine { constructor() { this.handled = []; ${engineChain ? `this.chainId = '${engineChain}';` : ''} }
+    handle(payload, cb) { this.handled.push(payload); cb(null, { id: payload.id, jsonrpc: '2.0', result: 'result:' + payload.method }); } }
+  class MetaMask {
+    constructor() { this.chainId = '0xa86a'; this.selectedAddress = '0x' + 'a1'.repeat(20); this._rpcEngine = new Engine();
+      this.request = this.request.bind(this); this._rpcRequest = this._rpcRequest.bind(this); }
+    request(a) { return new Promise((res, rej) => this._rpcRequest({ id: 1, jsonrpc: '2.0', method: a.method, params: a.params }, (e, r) => (e ? rej(e) : res(r.result)))); }
+    _rpcRequest(payload, cb) { return this._rpcEngine.handle(payload, cb); }
+  }
+  window.mm = new MetaMask(); window.ethereum = new Proxy(mm, {});`;
+test('(f quater) a connected MetaMask (Proxy, bound request, _rpcRequest, engine without chainId) : one page call is asked once', async () => {
+  const P = page({ decide: () => true });
+  P.run(METAMASK(''));
+  await sleep(250); // the provider, its prototype chain and its engine are wrapped
+  const r = await settle(P.run(`ethereum.request({ method: 'eth_sendTransaction', params: ${TXP} })`));
+  assert.equal(r.ok, true); assert.equal(r.value, 'result:eth_sendTransaction');
+  assert.equal(P.gates.length, 1, 'asked once');
+  assert.equal(P.run(`mm._rpcEngine.handled.filter((c) => c.method === 'eth_sendTransaction').length`), 1, 'the engine received it once');
+  // once the wallet has answered, the same request sent again by the page is a new request : asked again
+  await settle(P.run(`ethereum.request({ method: 'eth_sendTransaction', params: ${TXP} })`));
+  assert.equal(P.gates.length, 2, 'a replay by the page is gated');
+  // the page calling the engine itself, with its own object, is gated too
+  await settle(P.run(`new Promise((res) => mm._rpcEngine.handle({ id: 9, jsonrpc: '2.0', method: 'eth_sendTransaction', params: ${TXP} }, () => res()))`));
+  assert.equal(P.gates.length, 3, 'a direct call to the engine is gated');
+});
+
+test('(f quinquies) an inner object that names ANOTHER chain than the provider is asked again (fail closed)', async () => {
+  const P = page({ decide: () => true });
+  P.run(METAMASK('0x1'));
+  await sleep(250);
+  const r = await settle(P.run(`ethereum.request({ method: 'eth_sendTransaction', params: ${TXP} })`));
+  assert.equal(r.ok, true);
+  assert.equal(P.gates.length, 2, 'the pass does not cross to another chain');
+});
+
 test('(f ter) the pass follows the forwarded object only : a copy handed to the second object is asked again (fail closed)', async () => {
   const P = page({ decide: () => true });
   P.run(WALLET + `; window.avalanche = new Wallet();
