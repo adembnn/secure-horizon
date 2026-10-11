@@ -1,3 +1,5 @@
+> **À RELIRE (11 oct. 2026).** Écrit avant le produit figé : les étapes RPC de garde (section 4) ne servent plus à la démo. Pour la démo : site Neve (port 8793), extension autonome reconstruite, voir `livrables/PITCH_5MIN.md` section « Avant d'entrer ».
+
 # Installer et lancer Hold up (du clone à la démo)
 
 Durée : environ 15 minutes, dont 5 de téléchargement la première fois. Tout reste sur ta machine (127.0.0.1). Aucun vrai fonds, aucune vraie clé, aucun compte à créer.

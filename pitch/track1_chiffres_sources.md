@@ -1,3 +1,5 @@
+> **OBSOLÈTE pour Hold up (11 oct. 2026).** Chiffres des quatre sous-tracks, hors produit figé. Les chiffres de Hold up sont dans `livrables/CHIFFRES.md`.
+
 # Track 1 — les 4 sous-tracks, chiffres sourcés uniquement
 
 > Périmètre de chaque sous-track : texte exact du guide officiel (`context/notion_guide.md`). Chiffres : extraits de `research/tracks/T1_P*_v2.md`, chaque ligne a sa source. [P] = source primaire (régulateur, police, rapport officiel). [S] = presse ou agrégateur. [V] = chiffre d'un vendeur. Ne mettre en slide que [P] ou [S] recoupé.

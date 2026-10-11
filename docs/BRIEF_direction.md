@@ -1,3 +1,5 @@
+> **PÉRIMÉ (11 oct. 2026).** Direction D-007 (retenue graduée, deux portes, démo sur Fuji). Produit figé actuel : `coord/HANDOFF_ADEM_SESSION_2.md` et `README.md`. Fuji n'est pas déployé.
+
 # Brief de direction : Sentinelle, barrière d'intention (D-007, 11 oct. 2026, 01h)
 
 > Pour Adem, Titouan et tous les agents. Contrat technique : `docs/intent-barrier.md`. Décision : `coord/DECISIONS.md` D-007.

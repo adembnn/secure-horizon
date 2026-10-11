@@ -1,3 +1,5 @@
+> **BROUILLON PÉRIMÉ (11 oct. 2026).** Écrit avant le produit figé. Version à jour : `livrables/` (fiche, playbook, slide, README racine) et `livrables/CHIFFRES.md` pour les chiffres. Ne pas citer ce fichier.
+
 # Fiche de défense : Hold up (Track 1)
 
 **Menace.** Camille reçoit un faux message de support. Elle veut échanger 50 USDC. La demande, banale pour un portefeuille, lui fait signer un droit de dépense illimité. Hold up décode l'effet réel, le compare à l'intention qu'elle a écrite, répond « ça ne correspond pas » avec une ligne ("tu as dit X, ça fait Y") et ralentit. Elle garde la décision. Aucune garantie.

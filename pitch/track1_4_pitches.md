@@ -1,3 +1,5 @@
+> **OBSOLÈTE (11 oct. 2026).** Pitchs des quatre pistes avant le choix du produit figé. Produit actuel : `livrables/PITCH_5MIN.md`.
+
 # Track 1 — 4 pitchs, un par piste (v1, 10 oct. 2026)
 
 > Format identique pour chaque piste : douleur, concurrents, innovation, technique, démo, phrase de fin. Détails et sources dans `research/tracks/T1_P*_v2.md`.

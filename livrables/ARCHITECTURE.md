@@ -1,3 +1,5 @@
+> **À RELIRE (11 oct. 2026).** Décrit « un moteur, deux portes ». Depuis D-009 et le produit figé, le RPC de garde n'est plus une porte du produit (prototype dans `research/demo_reelle/rpc_garde/`) et la saisie de l'intention est une phrase libre. Les sections sur le moteur, le journal et l'ancrage restent valables. Chiffres : `livrables/CHIFFRES.md`.
+
 # Architecture de Hold up
 
 Ce document décrit ce qui tourne aujourd'hui, avec le fichier qui le prouve, puis comment le même moteur se brancherait sur un portefeuille, une fintech ou une plateforme. Dans la section 5, chaque ligne dit si elle **existe** ou si elle est **conçue seulement**. Pour lancer le tout : [INSTALLATION.md](INSTALLATION.md).

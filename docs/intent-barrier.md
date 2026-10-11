@@ -1,3 +1,5 @@
+> **PÉRIMÉ (11 oct. 2026).** Contrat de D-007 : choix d'intention par boutons, démo sur Fuji, deux portes. Le produit figé utilise une phrase libre. Voir `coord/HANDOFF_ADEM_SESSION_2.md`.
+
 # Sentinelle — barrière d'intention (architecture v3, D-007)
 
 > Une page. Contrat d'interface commun à toutes les tâches T-101 à T-106. Si tu changes un schéma ici, préviens dans INBOX.

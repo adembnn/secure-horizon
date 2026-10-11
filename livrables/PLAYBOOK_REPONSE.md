@@ -1,71 +1,56 @@
 # Playbook de réponse : Hold up
 
-Une page. État du 11 oct. 2026. Chaque ligne renvoie à du code testé dans `research/demo_reelle/reponse/` (23 tests, `node --test "research/demo_reelle/reponse/test/*.test.mjs"`) ou au produit. Ce qui n'existe pas est écrit « non fait ».
+Une page, produit figé, état du 11 oct. 2026. Ce qui n'existe pas est écrit « non fait ». Le code de réponse est dans `research/demo_reelle/reponse/` (23 tests, `node --test "research/demo_reelle/reponse/test/*.test.mjs"`), écrit pour l'ancien produit : il lit le journal du serveur et reste valable pour les fiches et les retraits de droits.
 
 ## 1. Déclencheur
 
-Une demande de portefeuille reçoit un verdict du moteur, par l'une des deux portes : l'extension (avant signature) ou le RPC de garde (après signature, avant diffusion). Il n'y a pas de niveau « OK ». La réponse dépend du niveau et de la famille de menace : la table est une donnée, `reponse/matrix.json`, lue par `respond()` dans `matrix.mjs`. Un test vérifie que ses durées sont celles du code qui tourne.
+Une demande de signature ou de transaction passe par l'extension avant d'atteindre le portefeuille. La personne a écrit ce qu'elle veut faire. Le résultat est l'un de trois : « Ça correspond à ce que tu as écrit. », « Ça ne correspond pas à ce que tu as écrit. », « Je n'ai pas pu vérifier cette demande. » Le RPC de garde n'est plus une porte du produit : il reste un prototype dans le dépôt.
 
 ## 2. Ce qui est automatique
 
-| Niveau | Retenue | Ce que fait le produit seul |
-|---|---|---|
-| Attention | 0 s | Affiche « Tu crois » face à « En vrai ». La personne décide. |
-| Non vérifié | 30 s (extension), 0 s (RPC) | N'affiche jamais de validation. Extension : phrase à retaper, puis 30 s. RPC : une transaction illisible n'est pas diffusée. |
-| Danger | 30 s | Extension : phrase à retaper, puis 30 s. RPC : transaction gardée, « Continuer » refusé avant l'échéance, abandon au bout de 30 min sans décision. |
-| Manipulation | 10 min | Retenue de 10 min sur les deux portes, sans phrase à retaper. La phrase de pression repérée sur la page est citée. |
+| Résultat | Ce que fait le produit |
+|---|---|
+| Ça correspond | Rien. Le portefeuille s'ouvre seul après une seconde. Les signaux que le portefeuille donne déjà restent les siens. |
+| Ça ne correspond pas | Alerte avec une ligne : ce que la personne a écrit, ce que la demande donne. Annuler est visible. Pour une transaction qui accorde un droit plus large que le montant écrit, la ligne dit comment le ramener à ce montant. Pour une signature, elle dit que le droit ne peut pas être limité. |
+| Pas pu vérifier | Phrase trop vague après une relance, appel illisible, adresse non écrite. La fenêtre le dit. Elle n'affiche jamais « correspond » par défaut. |
 
-Dans tous les cas : une ligne de verdict et une ligne de décision sont écrites dans un journal local chaîné par hachage (sha256).
+Durée de retenue après une alerte : question ouverte (décision Q16 : correction sans attente de 30 s, recommandée, non tranchée à la rédaction). Ne pas citer de durée. Dans tous les cas : une ligne de verdict et une ligne de décision dans un journal local chaîné par hachage (sha256).
 
 ## 3. Ce qui reste humain
 
-- **Annuler ou passer outre.** Le produit ne bloque jamais définitivement.
-- **Appeler un proche.** L'extension propose le bouton et note qu'il a été utilisé. Elle n'appelle et n'écrit à personne.
-- **Demander la fiche d'incident.** Elle n'est produite que sur demande : `node reponse/incident.mjs --journal <journal> --seq <n> --out <dossier>`.
-- **Signer les retraits de droits** après une signature dangereuse. `reponse/revoke.mjs` lit les droits encore actifs sur la chaîne et construit les transactions exactes (`approve 0`, `setApprovalForAll false`). Il ne signe pas et n'envoie rien.
-- **Porter plainte, prévenir un assureur ou une plateforme.** Aucun envoi automatique.
+- Annuler ou continuer. Le produit n'impose pas de décision définitive.
+- Demander la fiche d'incident : `node reponse/incident.mjs --journal <journal> --seq <n> --out <dossier>`. Elle liste ce qu'elle établit et ce qu'elle n'établit pas.
+- Signer les retraits de droits après une signature dangereuse : `reponse/revoke.mjs` lit les droits actifs et construit les transactions (`approve 0`, `setApprovalForAll false`). Il ne signe pas et n'envoie rien.
+- Porter plainte, prévenir un assureur ou une plateforme : aucun envoi automatique.
 
 ## 4. Qui est alerté
 
-La personne devant l'écran, et elle seule. Un proche, si elle l'appelle. Personne d'autre : ni éditeur, ni plateforme, ni autorité. Une plateforme qui intègre le moteur lit le journal sur sa propre machine : `incident.mjs --list` donne la file des alertes Danger et Manipulation, `--stats` donne par niveau le nombre d'alertes, d'annulations, de passages outre et les temps médians. Alerte poussée vers un tiers (webhook, courriel) : non fait.
+La personne devant l'écran, et elle seule. Une plateforme qui intègre Hold up lit le journal sur sa machine : `incident.mjs --list` et `--stats`. Alerte poussée vers un tiers : non fait.
 
 ## 5. Après la décision
 
-**La personne a annulé.** Rien n'est parti. Sur demande, fiche d'incident en JSON et en une page HTML : ce qui a été demandé, par quel site ou quelle transaction, par quelle porte, les règles déclenchées, la chronologie, les lignes de journal et leurs empreintes. Le journal ne garde pas les paramètres de la demande. Si la personne les a encore, `--request` vérifie qu'ils correspondent à l'empreinte journalisée, puis les décode à nouveau avec le moteur. La fiche liste ce qu'elle établit et ce qu'elle n'établit pas (qui était devant l'écran, qui est derrière le site, l'heure exacte).
-
-**La personne a signé.** Selon la famille :
-- droit de dépense : retrait par `revoke.mjs`. Testé sur chaîne locale : 3 droits accordés, 3 détectés, 3 retirés, le vol échoue ensuite ;
-- permit EIP-2612 : la signature ne laisse aucune trace sur la chaîne et reste valable jusqu'à son échéance. `revoke.mjs` construit un permit sans effet (soi vers soi, montant 0) qui consomme le nonce. Testé : la signature de l'attaquant devient inutilisable. C'est une course : si l'attaquant passe avant, c'est perdu ;
-- envoi vers une mauvaise adresse, contrôle du compte cédé : rien ne le défait. La fiche d'incident reste la seule pièce.
-Permit2, ordres Seaport : non fait.
+**Annulé.** Rien n'est parti. Fiche d'incident sur demande, JSON et HTML. Le journal ne garde pas encore la phrase écrite ni les paramètres complets : non fait.
+**Signé.** Droit de dépense : retrait par `revoke.mjs`, testé sur chaîne locale (3 droits retirés, le vol échoue ensuite). Permit EIP-2612 : un permit sans effet (soi vers soi, montant 0) consomme le nonce ; c'est une course, si l'attaquant passe avant, c'est perdu. Envoi vers une mauvaise adresse : rien ne le défait. Permit2 et ordres Seaport : non fait.
 
 ## 6. Comment c'est documenté
 
-- Journal local chaîné. Une ligne modifiée est détectée (test).
-- Ancrage : `reponse/anchor_evidence.mjs` calcule une racine de Merkle sur les empreintes des lignes, l'inscrit dans le contrat `EvidenceAnchor`, puis vérifie une fiche d'incident contre la chaîne par preuve d'inclusion, sans le journal. Sur la chaîne vont une racine de 32 octets, deux numéros de ligne et un numéro de version. Aucune adresse, aucun nom de site, aucun texte.
-- **Fait sur chaîne locale seulement.** Fuji attend une clé de test approvisionnée. Aucun ancrage périodique n'est branché.
-- **Deux formats de journal coexistent, sans pont.** Le serveur et le RPC de garde écrivent un journal sha256. `T_banc_e2e/anchor/journal.mjs` définit un autre format (keccak, JSON canonique, empreinte salée de l'effet) qu'aucune porte n'écrit. Ses scripts d'ancrage et de vérification fonctionnent sur ce format (vérifié sur nœud local). La preuve des fiches d'incident utilise le journal que le produit écrit vraiment.
-- La version des règles n'est pas dans le journal : l'ancrage porte `0`.
+Journal local chaîné ; ancrage de la racine de Merkle par `reponse/anchor_evidence.mjs`, fait sur chaîne locale seulement. Fuji : aucune transaction dans le dépôt. Deux formats de journal coexistent sans pont (serveur en sha256, `anchor/journal.mjs` en keccak). La version des règles n'est pas dans le journal.
 
 ## 7. Temps
 
 | Mesure | Valeur | Source |
 |---|---|---|
-| Détection (latence du moteur, extension) | médiane 25,94 ms, p95 38,73 ms, n = 400, requêtes synthétiques | `T_banc_e2e/server/test/results.json` |
-| Détection, porte RPC | à mesurer : la latence n'est pas journalisée par cette porte | |
-| Retenue imposée | 30 s (Danger), 10 min (Manipulation) : réglages, pas des mesures | `matrix.json` |
-| Décision d'une personne réelle | à mesurer : aucun essai avec des personnes | |
-| Construction du plan de retrait | 146 ms et 161 ms, n = 2, chaîne locale | `reponse/demo.mjs` |
-| Construction d'une fiche d'incident | 4 ms, n = 2 | `reponse/demo.mjs` |
+| Verdict local | médiane 18,39 ms, p95 34,08 ms (400 requêtes, sans réseau, sans Clef) | `server/test/results.json` |
+| Appel à Clef-flash | p50 369 ms, p95 1 083 ms (classifieur de messages, même modèle) | `redteam/classifier_measure.json` |
+| Décision d'une personne réelle | à mesurer | |
+| Plan de retrait de droits | 146 ms et 161 ms, n = 2, chaîne locale | `reponse/demo.mjs` |
 | Ancrage et vérification sur Fuji | à mesurer | |
-
-Chaque fiche d'incident calcule ses propres temps de détection et de réponse à partir des heures du journal.
 
 ## 8. Limites
 
-- Avant ancrage, le détenteur du fichier peut réécrire tout le journal. L'ancrage borne seulement la date après laquelle rien n'a changé.
-- Porte extension : verdict et décision sont appariés par site, méthode et ordre, faute d'identifiant de requête. « Passer outre » ne prouve pas que la personne a signé ensuite.
-- `revoke.mjs` lit les événements depuis un bloc donné. Sur un RPC public la plage est plafonnée : il faudrait un indexeur. Le retrait coûte des frais et arrive souvent après le vol.
-- Les fiches et les retraits se lancent en ligne de commande. Aucun bouton dans l'extension.
-- Classification DORA : laissée de côté. Une fiche fournirait l'heure de détection, la source de détection, le type et les règles. Elle ne fournit ni le nombre de clients touchés, ni les montants, ni la durée d'indisponibilité, qui sont les critères de classement et que seule la plateforme connaît. Un tableau pré-rempli sans ces champs serait de la décoration.
-- Tout a été joué par un script sur une chaîne locale. Démonstration complète : `node research/demo_reelle/reponse/demo.mjs`.
+- Avant ancrage, le détenteur du fichier peut réécrire tout le journal.
+- Verdict et décision sont appariés par site, méthode et ordre, faute d'identifiant de requête.
+- `revoke.mjs` lit les événements depuis un bloc donné ; sur un RPC public la plage est plafonnée. Le retrait coûte des frais et arrive souvent après le vol.
+- Fiches et retraits en ligne de commande, sans bouton dans l'extension.
+- Classification DORA laissée de côté : les critères de classement (clients touchés, montants, durée) ne sont connus que de la plateforme.
+- Tout a été joué par un script sur une chaîne locale.

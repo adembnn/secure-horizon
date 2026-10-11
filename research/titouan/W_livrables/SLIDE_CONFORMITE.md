@@ -1,3 +1,5 @@
+> **BROUILLON PÉRIMÉ (11 oct. 2026).** Écrit avant le produit figé. Version à jour : `livrables/` (fiche, playbook, slide, README racine) et `livrables/CHIFFRES.md` pour les chiffres. Ne pas citer ce fichier.
+
 # Slide conformité : contenu
 
 Titre proposé : **Une décision, une preuve, un rejeu.**

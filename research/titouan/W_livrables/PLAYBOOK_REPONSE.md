@@ -1,3 +1,5 @@
+> **BROUILLON PÉRIMÉ (11 oct. 2026).** Écrit avant le produit figé. Version à jour : `livrables/` (fiche, playbook, slide, README racine) et `livrables/CHIFFRES.md` pour les chiffres. Ne pas citer ce fichier.
+
 # Playbook de réponse : Hold up
 
 Une page. Statut : brouillon du 11 oct. 2026, mis à jour avec les livraisons d'Adem (non rejouées ici). Ce qui est "prévu" n'est pas livré. Les chemins sont relatifs à `research/titouan/`.

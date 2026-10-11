@@ -1,26 +1,22 @@
-# Script de la vidéo de démo : 2 min 45
+# Script de la vidéo de démo : un seul fichier, 2 min 40
 
-Format : 1280x720, navigateur sans interface (headless), 30 images par seconde, lisible sans son : chaque plan porte une légende en bas de l'image (22 px minimum, fond uni). La voix off est facultative et reprend la légende mot pour mot.
-Règle de vérité : la vidéo montre ce qui tourne réellement. Aucun plan du Lab avec le bandeau « Données d'exemple » (serveur factice). Aucun plan de la démo autonome au portefeuille simulé, sauf s'il porte la légende « démo autonome, portefeuille simulé ».
+Format : 1280x720, 30 images par seconde, fenêtre de navigateur de bureau, lisible sans son. Chaque plan porte une légende en bas de l'image (22 px minimum, fond uni). La voix off est facultative et reprend la légende mot pour mot.
+Règle de vérité : la vidéo montre ce qui tourne réellement, sur la chaîne locale, avec l'extension chargée. Pas de Fuji, pas de portefeuille simulé sans le dire, pas de montage qui change un verdict. Chaque plan est une prise continue.
+Ancien matériel : les trois clips de `livrables/video/` montrent l'ancien produit (leurre, retenue, RPC de garde, sosie d'adresse). Ils ne servent plus. Aucun plan de la vidéo finale n'en vient.
+Enregistrement : script de rejeu `research/demo_reelle/site_echange/test/film_scene.mjs` (arguments : dossier playwright-core, chrome.exe, dossier de sortie, racine du dépôt, mode `honnete|piege|permit`, phrase). Non lancé à la rédaction : le garde-fou de la session refuse un Chromium avec débogage. À jouer à la main sur la machine d'Adem ou de Titouan.
 
-## Ce qui est déjà enregistré dans `livrables/video/` (relevé à 04h40)
-- `1_sans_holdup_le_vol.mp4` (30 s, 1280x720, légendes françaises) : leurre Glacier Rewards, console attaquant, 2 480 USDC de test qui passent chez l'attaquant sur la réplique locale. Réel. Sert de plans 1 à 3.
-- `3_envoi_depuis_le_portefeuille_rpc.mp4` (35 s) : envoi tapé dans le portefeuille vers une adresse sosie, page de décision du RPC de garde, Annuler, rien n'est parti. Réel (porte RPC). Sert de plan 7.
-- `2_avec_holdup_les_alertes.mp4` (72 s) : c'est la démo autonome avec faux portefeuille (bandeau « tout est fictif »). Le propriétaire a écarté cette démo comme démo du jury. À ne pas monter, sauf légendée comme ci-dessus.
-
-## Plans
-
-| # | Durée | Source | Légende à l'image (et voix) |
+| # | Durée | Source à enregistrer | Légende à l'image (et voix) |
 |---|---|---|---|
-| 1 à 3 | 0:00 à 0:30 | `1_sans_holdup_le_vol.mp4` tel quel | Légendes de la prise. Vérifier que la première dit « compte de test, argent fictif ». |
-| 4 | 0:30 à 0:45 | À enregistrer : même parcours `http://localhost:8791/index.html`, extension Hold up chargée, écran Danger avant la fenêtre du wallet. Si l'extension n'est pas stable : même requête dans le Lab (plan 5). | « Avec Hold up. Tu crois : un message sans frais. En vrai : le site prend tes jetons. » |
-| 5 | 0:45 à 0:58 | Clic « Annuler », puis `http://localhost:8791/attaquant.html` : soldes inchangés (état remis à zéro avant la prise : `reset.mjs`, puis `node research/demo_reelle/site/config.js`) | « Annuler : rien n'a bougé. Continuer reste retardé. » |
-| 6 | 0:58 à 1:20 | À enregistrer : Lab `http://127.0.0.1:8801`, un scénario malveillant, les deux colonnes | « Hold up Lab. À gauche, ce que Hold up dit. À droite, ce qui arrive sur la chaîne si on signe. » |
-| 7 | 1:20 à 1:55 | `3_envoi_depuis_le_portefeuille_rpc.mp4` tel quel | Légendes de la prise, plus au début : « Deuxième porte : envoi tapé dans le portefeuille, après la signature, avant la diffusion. » |
-| 8 | 1:55 à 2:10 | À enregistrer : Lab, scénario honnête, puis un cas manqué, deux plans de 7 s | « La moitié des scénarios sont honnêtes. Une fausse alerte, une attaque manquée : comptées. » (écrire la légende après avoir vu l'écran ; couper le plan si le Lab n'en produit pas) |
-| 9 | 2:10 à 2:30 | À enregistrer : Lab, résumé « tout jouer » | « X scénarios : rappel Y, fausses alertes Z. Mesuré sur nos scénarios. » Chiffres lus à l'écran, jamais saisis de mémoire. |
-| 10 | 2:30 à 2:45 | Slide 5 du deck (`livrables/deck/holdup.pptx`), exportée en image 1280x720 | « Mesuré sur nos jeux, pas sur de vrais utilisateurs. Ancrage Fuji non déployé. Attaquez le Lab. » |
+| 1 | 0:00 à 0:10 | Titre fixe : « Hold up. Tu écris ce que tu veux faire. Il dit si la demande correspond. » | Idem. Mention « chaîne locale, argent fictif » en petit |
+| 2 | 0:10 à 0:25 | Site Neve, mode piège. Le champ « Que veux-tu faire sur Neve ? » : on tape « échanger 50 USDC contre AVAX » | « J'écris ce que je veux faire, avant de voir la demande. » |
+| 3 | 0:25 à 0:55 | Le site envoie la demande. Fenêtre Hold up : « Ça ne correspond pas à ce que tu as écrit. » et la ligne sur le droit illimité. Le portefeuille ne s'ouvre pas | « Le site demande un droit sur tout l'USDC. Tu avais écrit 50. Ça ne correspond pas. » |
+| 4 | 0:55 à 1:10 | Même plan, bouton Annuler. Contrôle de la chaîne : le droit n'existe pas | « Annuler : rien n'est accordé. La personne décide toujours. » |
+| 5 | 1:10 à 1:35 | Neve, mode honnête, même phrase. « Ça correspond à ce que tu as écrit. » puis le portefeuille s'ouvre seul après une seconde | « Même phrase, site honnête : 50 USDC, pas plus. Ça correspond. Rien à cliquer. » |
+| 6 | 1:35 à 1:55 | Neve, mode piège par signature (`via=permit`) : « Ça ne correspond pas », avec la ligne « cette signature ne peut pas être limitée » | « Une signature accorde un droit sans transaction. Elle ne peut pas être limitée. On le dit. » |
+| 7 | 1:55 à 2:15 | Glacier Rewards : phrase « me connecter », la page demande un droit de dépense : « Ça ne correspond pas » | « Tu voulais te connecter. La page demande un droit de dépense. » |
+| 8 | 2:15 à 2:30 | Rejeu du moteur sur le coffre à signatures multiples (`demo_typologie/safe_signataire.mjs`) : virement de 20 USDC écrit, appel délégué reçu | « Scène synthétique, adresses factices, inspirée du cas Bybit. Elle montre le décodage, pas l'attaque. » |
+| 9 | 2:30 à 2:40 | Slide « ce qu'on ne couvre pas », puis slide des mesures | « Mesuré sur nos cas écrits par nous. Jeu aveugle pas encore passé. Fraude voulue, intention vague, contrat qui change : hors périmètre. » |
 
-Si le serveur du Lab (8800) ne répond pas : couper les plans 6, 8 et 9, la vidéo tombe à 1 min 55 et reste valable (consigne : 2 à 3 minutes). Dans ce cas, garder la slide 5 et ajouter la slide 4 (deux portes) pendant 10 s.
-Montage : coupes sèches, ni musique ni transition. Titre fixe de 2 s en tête (« Hold up, Track 1 Fintech Security ») seulement si la durée reste sous 3 min.
-Prérequis avant chaque prise live : `curl http://127.0.0.1:8800/api/health` ; chaîne locale lancée ; leurre servi sur 8791 (`node docs/demo/serve_static.mjs research/demo_reelle/site 8791`).
+Total : 2 min 40. Si le plan 8 ne se rejoue pas : le couper, la vidéo tombe à 2 min 25 et reste valable (consigne : 2 à 3 minutes).
+Montage : coupes sèches, ni musique ni transition. Légendes écrites après avoir vu l'écran. Si la fenêtre affiche une autre phrase que celles de `extension/outcome.js`, la légende reprend la phrase affichée.
+Avant chaque prise : chaîne locale lancée, site Neve servi sur 8793, extension reconstruite, trois modes rejoués une fois sans enregistrer.

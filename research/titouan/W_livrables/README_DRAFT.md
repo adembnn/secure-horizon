@@ -1,3 +1,5 @@
+> **BROUILLON PÉRIMÉ (11 oct. 2026).** Écrit avant le produit figé. Version à jour : `livrables/` (fiche, playbook, slide, README racine) et `livrables/CHIFFRES.md` pour les chiffres. Ne pas citer ce fichier.
+
 # Hold up (brouillon de README jury)
 
 Statut : brouillon du 11 oct. 2026, repositionné selon la décision D-009 (`coord/DECISIONS.md`), écrit à partir des fichiers de mesure du repo. Les chemins sont relatifs à la racine du repo. Tout chiffre est suivi de sa source. Ce qui n'est pas mesuré est dit "non mesuré". Aucune promesse de résultat.

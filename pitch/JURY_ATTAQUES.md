@@ -1,3 +1,5 @@
+> **OBSOLÈTE (11 oct. 2026).** Écrit pour l'ancien produit (nom Sentinelle, retenue graduée, deux portes, chiffres retirés). Ne pas s'en servir en préparation. Version à jour : `livrables/QR_JURY.md`, chiffres : `livrables/CHIFFRES.md`.
+
 # Sentinelle face au jury : attaques, réponses, aveux
 
 > Préparation du round 1 (dim. 13h00) et de la finale. Rédigé le 11 oct. 2026 à partir des sources listées en fin de fichier.

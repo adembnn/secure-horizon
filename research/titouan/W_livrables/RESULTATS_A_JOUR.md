@@ -1,3 +1,5 @@
+> **BROUILLON PÉRIMÉ (11 oct. 2026).** Écrit avant le produit figé. Version à jour : `livrables/` (fiche, playbook, slide, README racine) et `livrables/CHIFFRES.md` pour les chiffres. Ne pas citer ce fichier.
+
 # Résultats à jour : tous les chiffres, leur source, leur statut
 
 Mise à jour du 11 oct. 2026 (après la boucle V2, le trafic réel moteur actuel, le banc en conditions produit). Intervalles : Wilson 95 %, sauf mention. Chemins relatifs à `research/titouan/`. `T` = `T_banc_e2e/`. Le produit s'appelle Hold up. Les noms de fichiers du code gardent parfois l'ancien nom (`sentinelle_core.js`).

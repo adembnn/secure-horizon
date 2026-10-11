@@ -1,3 +1,5 @@
+> **PÉRIMÉ (11 oct. 2026).** Architecture de la piste 4 (DeFi + DORA), abandonnée. Conservée comme recherche. Architecture actuelle : `livrables/ARCHITECTURE.md`.
+
 # Sentinelle Fuji — architecture v2
 
 > Track 1 « Guardians of Value », sous-track 4 : détection et réponse DeFi + DORA.
