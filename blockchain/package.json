@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "chain:local": "node scripts/chain-local.js",
+    "demo:deploy": "hardhat run scripts/demo/deploy-local.js",
+    "demo:fuji": "hardhat run scripts/demo/deploy-fuji.js --network fuji"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +16,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "5.1.0",
     "dotenv": "^16.6.1",
     "hardhat": "^2.29.1"
   }
