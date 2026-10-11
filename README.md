@@ -96,7 +96,7 @@ Fichiers ignorés par git mais lus par des tests (un clone neuf ne les a pas) :
 Le document de référence est [METRIQUES.md](METRIQUES.md) : chaque chiffre y est donné avec son dénominateur, son intervalle, ce qu'il mesure, la commande et le fichier de preuve. Les chiffres sur le problème (données du monde) restent dans [livrables/CHIFFRES.md](livrables/CHIFFRES.md). Quatre chiffres à retenir, avec leur qualification :
 
 - **34 %** des autorisations de dépense non nulles sont illimitées sur Avalanche C-Chain : 7 103 sur 20 753 = 34,2 % [33,6 ; 34,9]. Notre mesure, sur un échantillon de blocs (40 fenêtres de 500 blocs, lecture seule d'un RPC public). Elle compte des événements, pas des personnes.
-- **87 %** des écarts signalés avec la phrase : 131/150 = 87,3 % [81,1 ; 91,7]. Moteur de comparaison, jeu aveugle de 250 cas d'un autre auteur, ouvert une fois. Ce n'est pas l'extension livrée.
+- **87 %** des écarts signalés avec la phrase : 131/150 = 87,3 % [81,1 ; 91,7]. Moteur de comparaison, jeu aveugle de 250 cas d'un autre auteur (une IA de la même famille que celle qui a aidé à écrire le produit), ouvert une fois. Ce n'est pas l'extension livrée.
 - **65 %** sans la phrase, même mesure : 97/150 = 64,7 % [56,7 ; 71,9]. C'est le plancher de règles seul.
 - **15 %** d'alertes rouges à tort, même mesure : 15/100 = 15,0 % [9,3 ; 23,3]. L'objectif de 10 % publié avant l'ouverture est manqué.
 
