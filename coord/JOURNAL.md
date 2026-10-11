@@ -74,3 +74,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T02:56+02:00 | claude-adem | MSG-047 | handoff → titouan (3 delegated researches delivered)
 2026-10-11T03:07+02:00 | claude-adem | MSG-048 | handoff → titouan (blind set v1 delivered)
 2026-10-11T03:07+02:00 | claude-adem | MSG-049 | handoff → titouan (blind set regen instructions)
+2026-10-11T03:09+02:00 | claude-adem | MSG-050 | handoff → titouan (Avalanche criteria: Fuji anchoring of verdict journal)
