@@ -1,22 +1,22 @@
 {
-  "updated": "2026-10-11T04:50",
+  "updated": "2026-10-11T05:00",
   "headline": "Red team à grande échelle : environ 60 000 attaques testées en boîte noire sur le vrai moteur. Trou majeur trouvé : la signature permit (scène héros de la démo) ne sort jamais en critique. À corriger avant la démo. Passation en cours vers un nouvel agent.",
   "metrics": [
     {
       "label": "Attaques red team testées",
-      "value": "≈ 60 000"
+      "value": "≈ 95 000"
     },
     {
-      "label": "Cas écrits à l'aveugle",
-      "value": "8 575"
+      "label": "Ratées V2_DEV (boucle)",
+      "value": "244 → 49"
     },
     {
-      "label": "Rappel filet réel (n=33)",
-      "value": "73 %"
+      "label": "Fausses alertes V2_DEV",
+      "value": "204 → 79"
     },
     {
-      "label": "Fausses alertes jury (n=123)",
-      "value": "18 %"
+      "label": "Fausses alertes (32 545 honnêtes)",
+      "value": "16 %"
     },
     {
       "label": "Messages Adem → Titouan",
@@ -239,6 +239,17 @@
         "Jury faux positifs : 22 sur 123 opérations honnêtes en critique",
         "Ce qui tient : Seaport, eth_sign, sosies forts, sendCalls, aucune fausse alerte sur les contacts",
         "Passation écrite : coord/HANDOFF_ADEM_SESSION.md"
+      ]
+    },
+    {
+      "time": "05:00",
+      "title": "Boucle de détection : 6 tours",
+      "items": [
+        "Sur V2_DEV : arnaques ratées 244 → 49, fausses alertes 204 → 79, sans régression",
+        "Détecteurs : honeypot et taxe (testés sur fork réel), lots, permit, sosies 3+4, ordres NFT à 0",
+        "Permit pas entièrement réglé : 879 contournements de signatures restent sur le fichier des jurés",
+        "Fuzz faux positifs : 16 % en critique sur 32 545 opérations honnêtes (sAVAX, abonnements, contact après poussière)",
+        "À intégrer dans le moteur de Titouan ; Jev/Clef et le message collé toujours pas branchés"
       ]
     }
   ]
