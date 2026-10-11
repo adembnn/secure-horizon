@@ -21,12 +21,11 @@ Principe : l'image montre, le texte confirme, la voix soutient. Environ 150 mots
 | 0:30 à 0:40 | Fond uni. Le mot Hold up s'écrit. | « Hold up » puis « Donne seulement ce qu'il faut. » | « Hold up. » |
 | 0:40 à 1:10 | Capture réelle : la fenêtre de l'extension s'ouvre. Le curseur tape « échanger 50 USDC ». La fenêtre répond en rouge, deux lignes face à face : « Tu as écrit 50 » et « La demande donne tout ». Zoom sur le bouton « Limiter à 50 ». | « Ça ne correspond pas. » | « Tu écris ce que tu veux faire. Hold up lit la demande, et compare. » |
 | 1:10 à 1:40 | Écran partagé. Gauche : sans Hold up, solde 100 à 0. Droite : avec Hold up, le droit de 50 sert l'échange, un compteur « Droit restant » arrive à 0, le solde reste. | « Sans » / « Avec » puis « Rien à prendre. » | « Même piratage. Cette fois, il ne reste rien à prendre. » |
-| 1:40 à 2:05 | Démo web : le bouton « Révoquer ce droit », un clic, la demande « droit remis à zéro » s'ouvre dans le portefeuille, signée. La fiche d'incident défile (quoi, quand, que faire). Bandeau : « portefeuille simulé ». | « Reprendre l'autorisation. » | « Un droit déjà donné ? Un clic pour le reprendre. Et une fiche garde la trace. » |
-| 2:05 à 2:25 | Deux barres qui montent : 65 % puis 87 %. Légende fine : « 250 cas écrits sans voir nos règles ». | « 65 % → 87 % » | « Testé sur deux cent cinquante cas écrits sans voir nos règles : quatre-vingt-sept pour cent signalés. » |
-| 2:25 à 2:40 | Trois mots qui apparaissent un à un sur fond uni : « Gratuit. » puis « Financé par les plateformes sobres. » | « Gratuit pour toi. » | « Gratuit pour toi. Financé, plus tard, par les plateformes qui ne demandent que le nécessaire. » |
-| 2:40 à 3:00 | Retour aux deux fenêtres du début, calmes. Fondu vers la carte finale : logo, lien du dépôt, code QR. | « Tout site peut tomber. Ce qu'il emporte, c'est toi qui le décides. » | « Tout site peut tomber. Ce qu'il emporte avec lui, c'est toi qui le décides. » |
+| 1:40 à 2:15 | Démo web : le bouton « Révoquer ce droit », un clic, la demande « droit remis à zéro » s'ouvre dans le portefeuille, signée. La fiche d'incident défile (quoi, quand, que faire). Bandeau : « portefeuille simulé ». | « Reprendre l'autorisation. » | « Un droit déjà donné ? Un clic pour le reprendre. Et une fiche garde la trace. » |
+| 2:15 à 2:35 | Deux barres qui montent : 65 % puis 87 %. Légende fine : « 250 cas écrits sans voir nos règles ». | « 65 % → 87 % » | « Testé sur deux cent cinquante cas écrits sans voir nos règles : quatre-vingt-sept pour cent signalés. » |
+| 2:35 à 3:00 | Retour aux deux fenêtres du début, calmes. Fondu vers la carte finale : logo, lien du dépôt, code QR. | « Tout site peut tomber. Ce qu'il emporte, c'est toi qui le décides. » | « Tout site peut tomber. Ce qu'il emporte avec lui, c'est toi qui le décides. » |
 
-Total de voix : environ 150 mots, soit 65 secondes de parole sur 180 secondes. Le reste est image, son et lecture.
+Total de voix : environ 130 mots, soit 65 secondes de parole sur 180 secondes. Le reste est image, son et lecture.
 
 ## Ce qu'il faut tourner (liste des plans)
 1. Deux fenêtres identiques du site de démo Neve (research/demo_reelle/site_echange), mode honnête et mode piège.
@@ -43,7 +42,6 @@ Total de voix : environ 150 mots, soit 65 secondes de parole sur 180 secondes. L
 - Le piratage est une scène de démonstration sur une copie locale d'Avalanche : le dire en petit.
 - La révocation est simulée dans la démo web : « portefeuille simulé » reste affiché.
 - LI.FI est cité comme un fait public (rapport de LI.FI) : 11,6 M$ et 153 portefeuilles, sans plus.
-- La phrase sur les plateformes financeuses est une intention, pas un contrat.
 - Rien sur les fausses alertes à l'oral : elles figurent dans la fiche de défense et dans les réponses aux questions.
 
 ## Variantes de la dernière phrase
