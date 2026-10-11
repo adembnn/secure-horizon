@@ -1,0 +1,1744 @@
+{
+ "flows": {
+  "zoom125_correspond": {
+   "nom": "zoom125_correspond",
+   "mode": "honnete",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 1.25,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "339x401",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi contre AVAX Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "339x401",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site Ça correspond à ce que tu as écrit. Je ne connais pas ce contrat. Il pourra prendre 50 DUSDC, pas plus. La monnaie 0x7f00…ad9c se présente comme DUSDC. Compris par Clef en 0,7 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2677",
+     "vue": "339x401",
+     "etape": "réponse"
+    },
+    {
+     "etat": "waiting",
+     "reponse": null,
+     "texte": "Ce site C’est parti vers ton portefeuille. J’attends la suite de ton échange. Rien d’autre ne partira sans vérification. Fermer",
+     "boutons": [
+      "Fermer"
+     ],
+     "focus": "C’est parti vers ton portefeuille.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2677",
+     "vue": "339x401",
+     "etape": "suite"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site, deuxième demande du même échange Ça correspond à ce que tu as écrit. D’après mon essai, 50 DUSDC sortent de ton compte et 0,5 DWAVAX y entre. Compris par Clef en 0,7 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "339x401",
+     "etape": "suite"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "C’est parti vers ton portefeuille.",
+     "boutons": [],
+     "focus": "\n\n\nC’est parti vers ton portefeuille.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "339x401",
+     "etape": "suite"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 144,
+    "police": "16px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [
+    {
+     "type": "transaction",
+     "vers": "0x7F00A7d1Cf59dCf0857aD6bDa376ecaA0662aD9C",
+     "selecteur": "0x095ea7b3",
+     "droit_demande": "50 (brut 50000000)",
+     "beneficiaire": "0xe2a27608d8adc1803c60b319ff7b163938c0fdfe"
+    },
+    {
+     "type": "transaction",
+     "vers": "0xE2a27608D8ADC1803C60B319ff7b163938c0FDfe",
+     "selecteur": "0x16418b0f"
+    }
+   ],
+   "site": "Échange effectué. Vous avez reçu de l'AVAX.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 859,
+     "perdues": 2,
+     "plus_longue_ms": 34.7
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 54,
+     "perdues": 1,
+     "plus_longue_ms": 34.7
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.4
+    }
+   }
+  },
+  "zoom125_limite": {
+   "nom": "zoom125_limite",
+   "mode": "habituel",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 1.25,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "339x401",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi contre AVAX Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "339x401",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "mismatch",
+     "texte": "Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 DUSDC. La demande donne accès à tout ton DUSDC. Compris par Clef en 0,2 s Annuler Limiter à 50 DUSDC et envoyer",
+     "boutons": [
+      "Annuler",
+      "Limiter à 50 DUSDC et envoyer"
+     ],
+     "focus": "Annuler",
+     "gant": true,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2157",
+     "vue": "339x401",
+     "etape": "réponse"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "Demande annulée. Rien n’a été envoyé.",
+     "boutons": [],
+     "focus": "\n\n\nDemande annulée. Rien n’a été envoyé.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2157",
+     "vue": "339x401",
+     "etape": "annulée"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 144,
+    "police": "16px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [],
+   "site": "Opération annulée.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 493,
+     "perdues": 1,
+     "plus_longue_ms": 14.1
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 57,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.7
+    },
+    "gant_340ms": {
+     "images": 49,
+     "perdues": 0,
+     "plus_longue_ms": 7.3
+    }
+   }
+  },
+  "zoom150_correspond": {
+   "nom": "zoom150_correspond",
+   "mode": "honnete",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 1.5,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "283x334",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi contre AVAX Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "283x334",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site Ça correspond à ce que tu as écrit. Je ne connais pas ce contrat. Il pourra prendre 50 DUSDC, pas plus. La monnaie 0x7f00…ad9c se présente comme DUSDC. Compris par Clef en 0,4 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2246",
+     "vue": "283x334",
+     "etape": "réponse"
+    },
+    {
+     "etat": "waiting",
+     "reponse": null,
+     "texte": "Ce site C’est parti vers ton portefeuille. J’attends la suite de ton échange. Rien d’autre ne partira sans vérification. Fermer",
+     "boutons": [
+      "Fermer"
+     ],
+     "focus": "C’est parti vers ton portefeuille.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2246",
+     "vue": "283x334",
+     "etape": "suite"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site, deuxième demande du même échange Ça correspond à ce que tu as écrit. D’après mon essai, 50 DUSDC sortent de ton compte et 0,5 DWAVAX y entre. Compris par Clef en 0,4 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "283x334",
+     "etape": "suite"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "C’est parti vers ton portefeuille.",
+     "boutons": [],
+     "focus": "\n\n\nC’est parti vers ton portefeuille.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "283x334",
+     "etape": "suite"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 136,
+    "police": "14px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [
+    {
+     "type": "transaction",
+     "vers": "0x7F00A7d1Cf59dCf0857aD6bDa376ecaA0662aD9C",
+     "selecteur": "0x095ea7b3",
+     "droit_demande": "50 (brut 50000000)",
+     "beneficiaire": "0xe2a27608d8adc1803c60b319ff7b163938c0fdfe"
+    },
+    {
+     "type": "transaction",
+     "vers": "0xE2a27608D8ADC1803C60B319ff7b163938c0FDfe",
+     "selecteur": "0x16418b0f"
+    }
+   ],
+   "site": "Échange effectué. Vous avez reçu de l'AVAX.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 777,
+     "perdues": 0,
+     "plus_longue_ms": 7.7
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 58,
+     "perdues": 0,
+     "plus_longue_ms": 7.7
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    }
+   }
+  },
+  "zoom150_limite": {
+   "nom": "zoom150_limite",
+   "mode": "habituel",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 1.5,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "283x334",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi contre AVAX Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "283x334",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "mismatch",
+     "texte": "Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 DUSDC. La demande donne accès à tout ton DUSDC. Compris par Clef en 0,4 s Annuler Limiter à 50 DUSDC et envoyer",
+     "boutons": [
+      "Annuler",
+      "Limiter à 50 DUSDC et envoyer"
+     ],
+     "focus": "Annuler",
+     "gant": true,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2303",
+     "vue": "283x334",
+     "etape": "réponse"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "Demande annulée. Rien n’a été envoyé.",
+     "boutons": [],
+     "focus": "\n\n\nDemande annulée. Rien n’a été envoyé.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2303",
+     "vue": "283x334",
+     "etape": "annulée"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 136,
+    "police": "14px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [],
+   "site": "Opération annulée.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 491,
+     "perdues": 0,
+     "plus_longue_ms": 8.2
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 57,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.5
+    },
+    "gant_340ms": {
+     "images": 49,
+     "perdues": 0,
+     "plus_longue_ms": 7.2
+    }
+   }
+  },
+  "zoom200_correspond": {
+   "nom": "zoom200_correspond",
+   "mode": "honnete",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 2,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Que veux-tu faire ? quoi combien à qui Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "212x251",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Que veux-tu faire ? quoi échanger combien 50 DUSDC contre quoi contre AVAX Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "212x251",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ça correspond à ce que tu as écrit. Je ne connais pas ce contrat. Il pourra prendre 50 DUSDC, pas plus. La monnaie 0x7f00…ad9c se présente comme DUSDC. Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2398",
+     "vue": "212x251",
+     "etape": "réponse"
+    },
+    {
+     "etat": "waiting",
+     "reponse": null,
+     "texte": "C’est parti vers ton portefeuille. J’attends la suite de ton échange. Fermer",
+     "boutons": [
+      "Fermer"
+     ],
+     "focus": "C’est parti vers ton portefeuille.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2398",
+     "vue": "212x251",
+     "etape": "suite"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ça correspond à ce que tu as écrit. D’après mon essai, 50 DUSDC sortent de ton compte et 0,5 DWAVAX y entre. Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "212x251",
+     "etape": "suite"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "C’est parti vers ton portefeuille.",
+     "boutons": [],
+     "focus": "\n\n\nC’est parti vers ton portefeuille.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "212x251",
+     "etape": "suite"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 114,
+    "police": "13px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [
+    {
+     "type": "transaction",
+     "vers": "0x7F00A7d1Cf59dCf0857aD6bDa376ecaA0662aD9C",
+     "selecteur": "0x095ea7b3",
+     "droit_demande": "50 (brut 50000000)",
+     "beneficiaire": "0xe2a27608d8adc1803c60b319ff7b163938c0fdfe"
+    },
+    {
+     "type": "transaction",
+     "vers": "0xE2a27608D8ADC1803C60B319ff7b163938c0FDfe",
+     "selecteur": "0x16418b0f"
+    }
+   ],
+   "site": "Échange effectué. Vous avez reçu de l'AVAX.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 767,
+     "perdues": 4,
+     "plus_longue_ms": 13.7
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 57,
+     "perdues": 0,
+     "plus_longue_ms": 7.2
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.6
+    }
+   }
+  },
+  "zoom200_limite": {
+   "nom": "zoom200_limite",
+   "mode": "habituel",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 2,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Que veux-tu faire ? quoi combien à qui Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "212x251",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Que veux-tu faire ? quoi échanger combien 50 DUSDC contre quoi contre AVAX Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "212x251",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "mismatch",
+     "texte": "Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 DUSDC. La demande donne accès à tout ton DUSDC. Annuler Limiter à 50 DUSDC et envoyer",
+     "boutons": [
+      "Annuler",
+      "Limiter à 50 DUSDC et envoyer"
+     ],
+     "focus": "Annuler",
+     "gant": true,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "3520",
+     "vue": "212x251",
+     "etape": "réponse"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "Demande annulée. Rien n’a été envoyé.",
+     "boutons": [],
+     "focus": "\n\n\nDemande annulée. Rien n’a été envoyé.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "3520",
+     "vue": "212x251",
+     "etape": "annulée"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 114,
+    "police": "13px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [],
+   "site": "Opération annulée.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 633,
+     "perdues": 10,
+     "plus_longue_ms": 13.9
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 58,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "gant_340ms": {
+     "images": 49,
+     "perdues": 0,
+     "plus_longue_ms": 7
+    }
+   }
+  },
+  "a_honnete": {
+   "nom": "a_honnete",
+   "mode": "honnete",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 1,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi contre AVAX Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site Ça correspond à ce que tu as écrit. Je ne connais pas ce contrat. Il pourra prendre 50 DUSDC, pas plus. La monnaie 0x7f00…ad9c se présente comme DUSDC. Compris par Clef en 0,4 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2383",
+     "vue": "424x501",
+     "etape": "réponse"
+    },
+    {
+     "etat": "waiting",
+     "reponse": null,
+     "texte": "Ce site C’est parti vers ton portefeuille. J’attends la suite de ton échange. Rien d’autre ne partira sans vérification. Fermer",
+     "boutons": [
+      "Fermer"
+     ],
+     "focus": "C’est parti vers ton portefeuille.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2383",
+     "vue": "424x501",
+     "etape": "suite"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site, deuxième demande du même échange Ça correspond à ce que tu as écrit. D’après mon essai, 50 DUSDC sortent de ton compte et 0,5 DWAVAX y entre. Compris par Clef en 0,4 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "424x501",
+     "etape": "suite"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "C’est parti vers ton portefeuille.",
+     "boutons": [],
+     "focus": "\n\n\nC’est parti vers ton portefeuille.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "424x501",
+     "etape": "suite"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 144,
+    "police": "16px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [
+    {
+     "type": "transaction",
+     "vers": "0x7F00A7d1Cf59dCf0857aD6bDa376ecaA0662aD9C",
+     "selecteur": "0x095ea7b3",
+     "droit_demande": "50 (brut 50000000)",
+     "beneficiaire": "0xe2a27608d8adc1803c60b319ff7b163938c0fdfe"
+    },
+    {
+     "type": "transaction",
+     "vers": "0xE2a27608D8ADC1803C60B319ff7b163938c0FDfe",
+     "selecteur": "0x16418b0f"
+    }
+   ],
+   "site": "Échange effectué. Vous avez reçu de l'AVAX.",
+   "images": 213,
+   "film": "film_correspond.webm",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 790,
+     "perdues": 8,
+     "plus_longue_ms": 13.9
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 57,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.2
+    }
+   }
+  },
+  "c_permit": {
+   "nom": "c_permit",
+   "mode": "permit",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 1,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi contre AVAX Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "mismatch",
+     "texte": "Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 DUSDC. Si tu continues, ce site pourra prendre tout ton DUSDC. Compris par Clef en 0,4 s Continuer dans 30 s Annuler",
+     "boutons": [
+      "Continuer (inactif)",
+      "Annuler"
+     ],
+     "focus": "Annuler",
+     "gant": true,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2458",
+     "vue": "424x501",
+     "etape": "réponse"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "Demande annulée. Rien n’a été envoyé.",
+     "boutons": [],
+     "focus": "\n\n\nDemande annulée. Rien n’a été envoyé.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2458",
+     "vue": "424x501",
+     "etape": "annulée"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 144,
+    "police": "16px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [],
+   "site": "Opération annulée.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 502,
+     "perdues": 4,
+     "plus_longue_ms": 13.8
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 58,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.3
+    },
+    "gant_340ms": {
+     "images": 49,
+     "perdues": 0,
+     "plus_longue_ms": 7.3
+    }
+   }
+  },
+  "d_vague": {
+   "nom": "d_vague",
+   "mode": "honnete",
+   "phrase": "échanger des DUSDC contre AVAX",
+   "zoom": 1,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien contre quoi Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "frappe"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Tu as écrit « échanger des DUSDC contre AVAX » Combien ? Ce que j’ai compris quoi échanger combien contre quoi Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "relance"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Tu as écrit « échanger des DUSDC contre AVAX » Combien ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "relance remplie"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site Ça correspond à ce que tu as écrit. Je ne connais pas ce contrat. Il pourra prendre 50 DUSDC, pas plus. La monnaie 0x7f00…ad9c se présente comme DUSDC. Compris par Clef en 0,2 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "4067",
+     "vue": "424x501",
+     "etape": "réponse"
+    },
+    {
+     "etat": "waiting",
+     "reponse": null,
+     "texte": "Ce site C’est parti vers ton portefeuille. J’attends la suite de ton échange. Rien d’autre ne partira sans vérification. Fermer",
+     "boutons": [
+      "Fermer"
+     ],
+     "focus": "C’est parti vers ton portefeuille.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "4067",
+     "vue": "424x501",
+     "etape": "suite"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site, deuxième demande du même échange Ça correspond à ce que tu as écrit. D’après mon essai, 50 DUSDC sortent de ton compte et 0,5 DWAVAX y entre. Compris par Clef en 0,2 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "424x501",
+     "etape": "suite"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "C’est parti vers ton portefeuille.",
+     "boutons": [],
+     "focus": "\n\n\nC’est parti vers ton portefeuille.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "424x501",
+     "etape": "suite"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 144,
+    "police": "16px"
+   },
+   "compris": [
+    "échanger",
+    "(combien)",
+    "(contre quoi)"
+   ],
+   "relance": {
+    "titre": "Combien ?",
+    "rappel": "Tu as écrit « échanger des DUSDC contre AVAX »",
+    "manque": [
+     "combien"
+    ]
+   },
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [
+    {
+     "type": "transaction",
+     "vers": "0x7F00A7d1Cf59dCf0857aD6bDa376ecaA0662aD9C",
+     "selecteur": "0x095ea7b3",
+     "droit_demande": "50 (brut 50000000)",
+     "beneficiaire": "0xe2a27608d8adc1803c60b319ff7b163938c0fdfe"
+    },
+    {
+     "type": "transaction",
+     "vers": "0xE2a27608D8ADC1803C60B319ff7b163938c0FDfe",
+     "selecteur": "0x16418b0f"
+    }
+   ],
+   "site": "Échange effectué. Vous avez reçu de l'AVAX.",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 1055,
+     "perdues": 16,
+     "plus_longue_ms": 14.2
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 58,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "question_vers_reponse_500ms": {
+     "images": 71,
+     "perdues": 1,
+     "plus_longue_ms": 12.3
+    }
+   }
+  },
+  "b_habituel_clavier": {
+   "nom": "b_habituel_clavier",
+   "mode": "habituel",
+   "phrase": "échanger 50 DUSDC contre AVAX",
+   "zoom": 1,
+   "etapes": [
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi combien à qui Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier (inactif)"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "question"
+    },
+    {
+     "etat": "question",
+     "reponse": null,
+     "texte": "Ce site veut utiliser ton portefeuille. Que veux-tu faire ? Ce que j’ai compris quoi échanger combien 50 DUSDC contre quoi contre AVAX Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte. Je compare ta phrase à la demande. Annuler Vérifier",
+     "boutons": [
+      "Annuler",
+      "Vérifier"
+     ],
+     "focus": "champ",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": null,
+     "vue": "424x501",
+     "etape": "frappe"
+    },
+    {
+     "etat": "answer",
+     "reponse": "mismatch",
+     "texte": "Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 DUSDC. La demande donne accès à tout ton DUSDC. Compris par Clef en 0,9 s Annuler Limiter à 50 DUSDC et envoyer",
+     "boutons": [
+      "Annuler",
+      "Limiter à 50 DUSDC et envoyer"
+     ],
+     "focus": "Annuler",
+     "gant": true,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2896",
+     "vue": "424x501",
+     "etape": "réponse"
+    },
+    {
+     "etat": "waiting",
+     "reponse": null,
+     "texte": "Ce site C’est parti vers ton portefeuille. Autorisation limitée à 50 DUSDC. J’attends la suite de ton échange. Rien d’autre ne partira sans vérification. Fermer",
+     "boutons": [
+      "Fermer"
+     ],
+     "focus": "C’est parti vers ton portefeuille.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2896",
+     "vue": "424x501",
+     "etape": "après la limite"
+    },
+    {
+     "etat": "waiting",
+     "reponse": null,
+     "texte": "Ce site C’est parti vers ton portefeuille. Autorisation limitée à 50 DUSDC. J’attends la suite de ton échange. Rien d’autre ne partira sans vérification. Fermer",
+     "boutons": [
+      "Fermer"
+     ],
+     "focus": "C’est parti vers ton portefeuille.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "2896",
+     "vue": "424x501",
+     "etape": "suite"
+    },
+    {
+     "etat": "answer",
+     "reponse": "match",
+     "texte": "Ce site, deuxième demande du même échange Ça correspond à ce que tu as écrit. D’après mon essai, 50 DUSDC sortent de ton compte et 0,5 DWAVAX y entre. Compris par Clef en 0,9 s Annuler Ça part vers ton portefeuille.",
+     "boutons": [
+      "Annuler"
+     ],
+     "focus": "Ça correspond à ce que tu as écrit.",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "424x501",
+     "etape": "suite"
+    },
+    {
+     "etat": "end",
+     "reponse": null,
+     "texte": "C’est parti vers ton portefeuille.",
+     "boutons": [],
+     "focus": "\n\n\nC’est parti vers ton portefeuille.\n\n\n\n\n\n",
+     "gant": false,
+     "defile": false,
+     "hors_cadre": [],
+     "reduit": "",
+     "fond": "rgb(0, 0, 0)",
+     "titre": "Hold up : Ce site",
+     "detect_ms": "0",
+     "vue": "424x501",
+     "etape": "suite"
+    }
+   ],
+   "champ": {
+    "placeholder": "",
+    "valeur": "\"\"",
+    "couleur": "rgb(179, 179, 179)",
+    "opacite": "1",
+    "h": 144,
+    "police": "16px"
+   },
+   "compris": [
+    "échanger",
+    "50 DUSDC",
+    "contre AVAX"
+   ],
+   "focus_apres_tab": "Limiter à 50 DUSDC et envoyer",
+   "fenetre_fermee_seule": true,
+   "fenetres": 1,
+   "portefeuille": [
+    {
+     "type": "transaction",
+     "vers": "0x7F00A7d1Cf59dCf0857aD6bDa376ecaA0662aD9C",
+     "selecteur": "0x095ea7b3",
+     "droit_demande": "50 (brut 50000000)",
+     "beneficiaire": "0x688f01ff7f8e48ed6a209fc965c77e2980af7c21"
+    },
+    {
+     "type": "transaction",
+     "vers": "0x688F01FF7f8e48ED6A209fC965c77e2980af7c21",
+     "selecteur": "0x16418b0f"
+    }
+   ],
+   "site": "Échange effectué. Vous avez reçu de l'AVAX.",
+   "images": 214,
+   "film": "film_ne_correspond_pas_limiter.webm",
+   "fluidite": {
+    "hz": 145,
+    "mediane_ms": 6.9,
+    "tout": {
+     "images": 911,
+     "perdues": 9,
+     "plus_longue_ms": 13.9
+    },
+    "saut_de_mise_en_page": 0,
+    "ouverture_400ms": {
+     "images": 58,
+     "perdues": 0,
+     "plus_longue_ms": 7.3
+    },
+    "question_vers_reponse_500ms": {
+     "images": 72,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    },
+    "gant_340ms": {
+     "images": 49,
+     "perdues": 0,
+     "plus_longue_ms": 7.1
+    }
+   }
+  }
+ },
+ "pages": {
+  "onglet_du_site": 1740299643,
+  "panneau": {
+   "texte": "Hold up Actif Ce que tu as laissé ouvert 127.0.0.1:8793 peut dépenser 50 DUSDC. Retirer l’autorisation Ton portefeuille te demandera de confirmer. Aujourd’hui 11:21 127.0.0.1:8793 Ça correspondait. 11:21 127.0.0.1:8793 Ça ne correspondait pas. Tu as limité l’autorisation à 50 DUSDC. 11:21 127.0.0.1:8793 Ça correspondait. 11:21 127.0.0.1:8793 Ça correspondait. 11:21 127.0.0.1:8793 Ça ne correspondait pas. Tu n’as rien envoyé. 11:21 127.0.0.1:8793 Ça correspondait. 11:21 127.0.0.1:8793 Ça correspondait. 11:20 127.0.0.1:8793 Ça ne correspondait pas. Tu n’as rien envoyé. 11:20 127.0.0.1:8793 Ça correspondait. 11:20 127.0.0.1:8793 Ça correspondait. 11:20 127.0.0.1:8793 Ça ne correspondait pas. Tu n’as rien envoyé. 11:20 127.0.0.1:8793 Ça correspondait. 11:20 127.0.0.1:8793 Ça correspondait. 11:20 127.0.0.1:8793 Ça ne correspondait pas. Tu n’as rien envoyé. 11:20 127.0.0.1:8793 Ça correspondai",
+   "boutons": [
+    "Retirer l’autorisation",
+    "Effacer le journal",
+    "Réglages",
+    "Exporter le journal"
+   ],
+   "defile_horizontal": false
+  },
+  "panneau_apres_retrait": [
+   "hu-right is-done : 127.0.0.1:8793 ne peut plus rien dépenser. Retirée"
+  ],
+  "retrait_arrive_au_portefeuille": [
+   {
+    "type": "transaction",
+    "vers": "0x7f00a7d1cf59dcf0857ad6bda376ecaa0662ad9c",
+    "selecteur": "0x095ea7b3",
+    "droit_demande": "0 (brut 0)",
+    "beneficiaire": "0x688f01ff7f8e48ed6a209fc965c77e2980af7c21"
+   }
+  ],
+  "popup_ouverture": "ouvert par chrome.action.openPopup ; page du popup ouverte dans un onglet, onglet actif simulé = le site",
+  "popup_page_du_navigateur": "Hold up Rien à vérifier ici Je ne peux pas agir sur cette page. C’est une page du navigateur. Aucun site ne peut s’y servir de ton portefeuille. Journal Réglages",
+  "popup": "Hold up Actif Je vérifie ce site. 127.0.0.1:8793 À 11:21, ça correspondait. Journal Réglages",
+  "popup_pause": "Hold up En pause En pause sur ce site. Ce que demande 127.0.0.1:8793 va droit à ton portefeuille. À 11:21, ça correspondait. Journal Réglages",
+  "pastille_en_pause": "II",
+  "sites_en_pause": [
+   "http://127.0.0.1:8793"
+  ],
+  "pastille_apres_reprise": "1",
+  "en_pause": {
+   "fenetres_hold_up": 0,
+   "demandes_au_portefeuille": 2,
+   "site": "Opération impossible pour le moment. Réessayez.",
+   "pastille": "II"
+  },
+  "g_reglages": {
+   "texte": "Réglages La question Je te demande ce que tu veux faire à chaque demande quand un site veut une autorisation ou de l’argent jamais Je limite l’autorisation au montant que tu as écrit Oui L’attente Quand ça ne correspond pas, tu attends avant de pouvoir envoyer quand même secondes Quand quelqu’un te presse sur la page, je retiens la demande minutes Le carnet d’adresses Les personnes que tu paies souvent. Je m’en sers pour repérer une adresse qui ressemble à l’une d’elles sans être la même. Aucune adresse pour l’instant. Ajouter Mes adresses Tes autres comptes. Un envoi vers l’un d’eux n’est pas un envoi à un inconnu. Aucune adresse pour l’instant. Ajouter Les contrats que j’utilise Je connais",
+   "boutons": [
+    "Ajouter",
+    "Ajouter",
+    "Ajouter",
+    "Exporter le journal",
+    "Effacer le journal"
+   ],
+   "defile": false
+  },
+  "reglage_enregistre": {
+   "message": "Enregistré.",
+   "cfg": {
+    "askIntent": "always",
+    "dangerWaitMs": 45000,
+    "limitUnlimited": true,
+    "manipulationHoldMs": 600000
+   }
+  },
+  "reglage_hors_bornes": {
+   "invalide": "true",
+   "erreur": "Entre 5 et 600 secondes. J’ai gardé 45.",
+   "json": false
+  },
+  "g_bienvenue": {
+   "texte": "Écris ce que tu veux faire. Je vérifie que le site demande la même chose. Hold up est en place. Si ça ne colle pas, je lève la main. Je ne valide rien à ta place : ton portefeuille te demande toujours de confirmer. Réglages",
+   "boutons": [
+    "Réglages"
+   ],
+   "defile": false
+  }
+ },
+ "erreurs": [
+  "[site] Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ],
+ "bienvenue_ouverte_au_premier_lancement": true,
+ "droit_restant_routeur_du_site": "0",
+ "solde": 200,
+ "journal": [
+  {
+   "type": "verdict",
+   "detect_ms": 4067,
+   "read_ms": 220
+  },
+  {
+   "type": "decision",
+   "decision": "confirm",
+   "by": "auto",
+   "outcome": "match"
+  },
+  {
+   "type": "decision",
+   "decision": "same_intent"
+  },
+  {
+   "type": "verdict",
+   "detect_ms": 0,
+   "read_ms": 220
+  },
+  {
+   "type": "decision",
+   "decision": "confirm",
+   "by": "auto",
+   "outcome": "match"
+  },
+  {
+   "type": "decision",
+   "decision": "answer",
+   "classifier": "clef"
+  },
+  {
+   "type": "verdict",
+   "detect_ms": 2896,
+   "read_ms": 906
+  },
+  {
+   "type": "verdict",
+   "limited": {
+    "amount": "50",
+    "symbol": "DUSDC"
+   },
+   "detect_ms": 2896,
+   "read_ms": 906
+  },
+  {
+   "type": "decision",
+   "decision": "confirm",
+   "by": "human",
+   "outcome": "mismatch",
+   "limited": {
+    "amount": "50",
+    "symbol": "DUSDC"
+   }
+  },
+  {
+   "type": "decision",
+   "decision": "same_intent"
+  },
+  {
+   "type": "verdict",
+   "detect_ms": 0,
+   "read_ms": 906
+  },
+  {
+   "type": "decision",
+   "decision": "confirm",
+   "by": "auto",
+   "outcome": "match"
+  },
+  {
+   "type": "revocation",
+   "decision": "submitted"
+  },
+  {
+   "type": "decision",
+   "decision": "paused",
+   "by": "pause"
+  }
+ ],
+ "journal_chaine": {
+  "lignes": 52,
+  "derniere": {
+   "by": "auto",
+   "c": [],
+   "d": "paused",
+   "hash": "90da43a24a29ae15844f34d947631a75b42e89bcd7cbc10f9355869627aedef1",
+   "l": "",
+   "m": "eth_sendTransaction",
+   "n": 52,
+   "o": "127.0.0.1:8793",
+   "prev": "382aeeae4c43f1a2e9d64e3c5d6ddca6212bbc3f826bd38538834ed1fa36b4dc",
+   "rules": "0.3.0+0fb71e11c034",
+   "t": 1791710515564,
+   "type": "decision",
+   "v": "0.3.0"
+  },
+  "phrase_ou_adresse": false
+ }
+}

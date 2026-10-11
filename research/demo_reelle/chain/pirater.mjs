@@ -25,9 +25,12 @@ import {
 } from "./lib.mjs";
 
 const PORT = Number(process.env.HOLDUP_PIRATE_PORT || 8611);
+// HOLDUP_SITE_ORIGINS (comma-separated) adds origins for an isolated rehearsal served on other local ports.
 const ALLOWED_ORIGINS = new Set([
   "http://localhost:8793", "http://127.0.0.1:8793",
   "http://localhost:8791", "http://127.0.0.1:8791",
+
+  ...String(process.env.HOLDUP_SITE_ORIGINS || "").split(",").map((o) => o.trim()).filter((o) => /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(o)),
 ]);
 const ALLOWED_HOSTS = new Set([`127.0.0.1:${PORT}`, `localhost:${PORT}`]);
 
