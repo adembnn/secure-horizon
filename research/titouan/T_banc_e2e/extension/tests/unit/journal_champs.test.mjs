@@ -116,6 +116,8 @@ async function gate(payload, tab = TAB) {
     rid,
     write: async (text) => { clock.advance(1000); const v = await view(); return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'answer', text }, win()); },
     go: async (auto) => { clock.advance(1000); const v = await view(); return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'continue', phraseOk: true, auto }, win()); },
+    // "Limiter à 50 USDC et envoyer" (founder's decision, 11 Oct. : a wider right is limited by a gesture of the person, never by itself)
+    limit: async () => { clock.advance(1000); const v = await view(); return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'limit' }, win()); },
     cancel: async () => { const v = await view(); return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'cancel' }, win()); }
   };
 }
@@ -123,13 +125,14 @@ const chain = () => F.state.local.chain;
 
 test('gatekeeper : the window going on by itself is "auto", a click is "humain", the limited right is "USDC:50" ; rules = version + fingerprint', async () => {
   worker({ rulesFingerprint: '0123456789ab' });
-  const a = await gate(approve(MAX)); await a.write(SAID); assert.equal((await a.go(true)).status, 'allow');
-  const b = await gate(approve(50n * U), TAB + 1); await b.write(SAID); assert.equal((await b.go(false)).status, 'allow');
+  // a : unlimited right, limited by the person's gesture (the window never sends it by itself). b : it matches, the window goes on by itself.
+  const a = await gate(approve(MAX)); await a.write(SAID); assert.equal((await a.go(true)).status, 'ignored', 'never limited nor sent without the gesture'); assert.equal((await a.limit()).status, 'allow');
+  const b = await gate(approve(50n * U), TAB + 1); await b.write(SAID); assert.equal((await b.go(true)).status, 'allow');
   const c = await gate(approve(50n * U), TAB + 2); await c.write(SAID); await c.cancel();
   const ch = chain(); const confirms = ch.entries.filter((e) => e.type === 'decision' && e.d === 'confirm');
   assert.equal(confirms.length, 2);
-  assert.equal(confirms[0].by, 'auto', 'not a human confirmation'); assert.equal(confirms[0].limited, 'USDC:50');
-  assert.equal(confirms[1].by, 'humain'); assert.ok(!('limited' in confirms[1]));
+  assert.equal(confirms[0].by, 'humain', 'the limit is a gesture of the person'); assert.equal(confirms[0].limited, 'USDC:50');
+  assert.equal(confirms[1].by, 'auto', 'not a human confirmation'); assert.ok(!('limited' in confirms[1]));
   assert.ok(ch.entries.some((e) => e.type === 'verdict' && e.limited === 'USDC:50' && e.by === 'holdup'), 'the verdict where Hold up limited the right');
   assert.ok(ch.entries.some((e) => e.type === 'decision' && e.d === 'cancel' && e.by === 'humain'));
   assert.ok(ch.entries.every((e) => e.rules === '9.9.9+0123456789ab' && typeof e.by === 'string'));

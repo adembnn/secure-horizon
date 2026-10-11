@@ -1,0 +1,2235 @@
+[
+ {
+  "id": "E1a",
+  "dimension": "montant du droit accordé (approve)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "approve 50 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "approve 5 000 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Droit limité à 50 USDC. Le site demandait un accès à 5 000 USDC.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": true
+  }
+ },
+ {
+  "id": "E1b",
+  "dimension": "montant échangé (amountIn du routeur)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap de 50 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "swap de 5 000 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande échange 5 000 USDC.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E1c",
+  "dimension": "montant payé (transfer)",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "transfer 20 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "transfer 21 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 20 USDC. La demande envoie 21 USDC.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E2a",
+  "dimension": "jeton payé",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "transfer USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "transfer 20 USDT",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 20 USDC. La demande envoie 20 USDT.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E2b",
+  "dimension": "jeton du droit accordé",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "approve USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "approve 50 USDT",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande donne accès à 50 USDT.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E3",
+  "dimension": "destinataire d’un paiement",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "vers l’adresse écrite",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "vers une autre adresse",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Le destinataire de la demande n’est pas l’adresse que tu as écrite.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E4",
+  "dimension": "contrepartie de l’échange (« contre AVAX »)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "chemin USDC → AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 WAVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "chemin USDC → jeton inconnu",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Je ne connais pas le jeton que cette demande te rend : je ne peux pas vérifier que c’est du AVAX.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E5a",
+  "dimension": "montant minimal reçu, non écrit",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "minimum 1,8 AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "minimum 0",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "slippage_unbounded"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "La demande accepte que tu ne reçoives presque rien en échange (minimum garanti : 0 AVAX).",
+   "level": "danger",
+   "codes": [
+    "slippage_unbounded"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E5b",
+  "dimension": "montant minimal reçu, ÉCRIT (« au moins 1,8 AVAX »)",
+  "phrase": "échanger 50 USDC contre au moins 1,8 AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "minimum 1,8 AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "minimum 0,000001 AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "La demande accepte que tu ne reçoives presque rien en échange (minimum garanti : 0,000001 AVAX).",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E6a",
+  "dimension": "nature de l’opération : écrit échanger, la demande est un simple envoi",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "transfer 50 USDC vers un tiers",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. Cette demande envoie 50 USDC à une autre adresse, sans rien te rendre.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "E6b",
+  "dimension": "sens de l’échange : écrit vendre 50 USDC, la demande vend 50 AVAX",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "USDC → AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "50 AVAX → USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande échange 50 AVAX.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D1a",
+  "dimension": "(1) pas un droit durable : Permit2, expiration",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "Permit2 50 USDC, expire dans 20 min",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "Permit2 50 USDC, n’expire jamais",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "far_expiry",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus. S’il n’est pas utilisé, ce droit reste ouvert sans limite de durée.",
+   "level": "attention",
+   "codes": [
+    "far_expiry",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D1b",
+  "dimension": "(1) pas un droit durable : permit EIP-2612, échéance de la signature",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "permit 50 USDC, signature valable 20 min",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "permit 50 USDC, signature valable 10 ans",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "far_expiry",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus. Cette signature reste utilisable pendant 9 ans.",
+   "level": "attention",
+   "codes": [
+    "far_expiry",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D1c",
+  "dimension": "(1) pas un droit durable : Permit2, échéance de la signature (sigDeadline)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "sigDeadline 20 min",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "sigDeadline 10 ans",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus. Cette signature reste utilisable pendant 9 ans.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D2a",
+  "dimension": "(2) seulement ce montant : approve illimité",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "approve 50",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "approve illimité",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "unlimited_allowance",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. Réduis le plafond à 50 USDC dans ton portefeuille.",
+   "level": "danger",
+   "codes": [
+    "unlimited_allowance",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D2b",
+  "dimension": "(2) seulement ce montant : permit signé illimité",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "permit 50",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "permit illimité",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "unlimited_allowance",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée.",
+   "level": "danger",
+   "codes": [
+    "unlimited_allowance",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D2c",
+  "dimension": "(2) seulement ce montant : Permit2 illimité (uint160 max)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "Permit2 50",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "Permit2 max",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "unlimited_allowance",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée.",
+   "level": "danger",
+   "codes": [
+    "unlimited_allowance",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D2d",
+  "dimension": "(2) seulement ce montant : increaseAllowance s’ajoute à un droit déjà donné",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "approve 50 (remplace)",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "increaseAllowance +50 (s’ajoute à l’existant)",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus. Ce montant s’ajoute au droit déjà donné.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D3a",
+  "dimension": "(3) jeton identifié par son adresse : faux jeton, droit",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "vrai USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "jeton inconnu, 50 unités",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de USDC.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D3b",
+  "dimension": "(3) jeton identifié par son adresse : faux jeton, paiement",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "vrai USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "jeton inconnu",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "kind_missing_unvouched_recipient"
+   ],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de USDC.",
+   "level": "unknown",
+   "codes": [
+    "kind_missing_unvouched_recipient"
+   ],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D4a",
+  "dimension": "(4) cet objet, pas toute la collection (transaction)",
+  "phrase": "vendre mon NFT numéro 12 pour 2 AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "approve du NFT n° 12",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de AVAX.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "setApprovalForAll",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "approval_for_all"
+   ],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Cette demande donne accès à tous tes NFT de cette collection, pas seulement à celui que tu vends.",
+   "level": "unknown",
+   "codes": [
+    "approval_for_all"
+   ],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D4b",
+  "dimension": "(4) cet objet, pas un autre ni un deuxième (ordre Seaport)",
+  "phrase": "vendre mon NFT numéro 12 pour 2 AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "offre : NFT n° 12",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cet ordre vend ton NFT n° 12 et te verse 2 AVAX.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "offre : NFT n° 12 + NFT n° 77",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cet ordre met en vente 2 NFT, pas un seul.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D5a",
+  "dimension": "(5) ce que j’obtiens arrive sur mon compte : routeur V2, `to`",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "to = moi",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "to = un tiers",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "service_recipient_not_self"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Ce que tu dois recevoir part sur un autre compte que le tien (0xe9e9…e9e9).",
+   "level": "danger",
+   "codes": [
+    "service_recipient_not_self"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D5b",
+  "dimension": "(5) idem, routeur NON déclaré dans les réglages",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "to = moi",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "to = un tiers",
+   "stage0": "intent",
+   "floor": "unknown",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Ce que tu dois recevoir part sur un autre compte que le tien (0xe9e9…e9e9).",
+   "level": "danger",
+   "codes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D5c",
+  "dimension": "(5) idem, multicall V3 : recipient de unwrapWETH9",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "unwrap vers moi",
+   "stage0": "intent",
+   "floor": "unknown",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "unknown",
+   "codes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "waitMs": 30000,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "unwrap vers un tiers",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "service_recipient_not_self",
+    "unknown_selector",
+    "opaque"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Ce que tu dois recevoir part sur un autre compte que le tien (0xe9e9…e9e9).",
+   "level": "danger",
+   "codes": [
+    "service_recipient_not_self",
+    "unknown_selector",
+    "opaque"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D5d",
+  "dimension": "(5) ordre Seaport : le prix est versé à un tiers",
+  "phrase": "vendre mon NFT numéro 12 pour 2 AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "2 AVAX pour moi",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cet ordre vend ton NFT n° 12 et te verse 2 AVAX.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "2 AVAX pour un tiers",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "seaport_zero_consideration",
+    "seaport_proceeds_to_other",
+    "seaport_zero_price"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Le prix de cette vente est versé à une autre adresse que la tienne.",
+   "level": "danger",
+   "codes": [
+    "seaport_zero_consideration",
+    "seaport_proceeds_to_other",
+    "seaport_zero_price"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D5e",
+  "dimension": "(5) retrait Aave : `to`",
+  "phrase": "retirer 50 USDC de Aave",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "to = moi",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "relance": "Que veux-tu faire, et pour combien ?",
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Nous n’avons trouvé aucun signal dangereux dans cette demande.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "to = un tiers",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "service_recipient_not_self"
+   ],
+   "relance": "Que veux-tu faire, et pour combien ?",
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cette demande a des effets que tu n'as pas demandés.",
+   "level": "danger",
+   "codes": [
+    "service_recipient_not_self"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "D5f",
+  "dimension": "(5) dépôt Aave : `onBehalfOf` (le dépôt est crédité à un tiers)",
+  "phrase": "déposer 50 USDC sur Aave",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "onBehalfOf = moi",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "relance": "Que veux-tu faire, et pour combien ?",
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Nous n’avons trouvé aucun signal dangereux dans cette demande.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "onBehalfOf = un tiers",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "service_beneficiary_not_self"
+   ],
+   "relance": "Que veux-tu faire, et pour combien ?",
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Ton échange enverra les jetons reçus à une autre adresse, pas à toi.",
+   "level": "unknown",
+   "codes": [
+    "service_beneficiary_not_self"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "D6a",
+  "dimension": "(6) sur ce réseau : permit signé pour une autre chaîne",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "domaine chainId 43114",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "domaine chainId 1 (Ethereum)",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "domain_chain_mismatch",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cette demande vaut sur un autre réseau que celui où tu es.",
+   "level": "danger",
+   "codes": [
+    "domain_chain_mismatch",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D6b",
+  "dimension": "(6) sur ce réseau : transaction avec un autre chainId",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "chainId 43114",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "chainId 1",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cette demande vaut sur un autre réseau que celui où tu es.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D7",
+  "dimension": "(7) depuis ce compte : `from` est un autre compte",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "from = compte actif",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "from = un autre compte",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cette demande part d’un autre compte que celui que tu utilises.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D8a",
+  "dimension": "(8) rien d’autre dans le lot : un second droit glissé",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "lot : approve 50 + swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "lot : approve 50 + swap + approve USDT illimité",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande donne accès à tout ton USDT. Réduis le plafond à 50 USDC dans ton portefeuille.",
+   "level": "danger",
+   "codes": [
+    "unlimited_allowance",
+    "external_spender"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D8b",
+  "dimension": "(8) rien d’autre dans le lot : un envoi glissé (autre jeton)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "lot : approve 50 + swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "lot : + transfer 300 USDT vers un tiers",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "F16:droit_illimite_protocole_connu",
+    "kind_missing_unvouched_recipient"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande envoie aussi 300 USDT à une autre adresse.",
+   "level": "danger",
+   "codes": [
+    "F16:droit_illimite_protocole_connu",
+    "kind_missing_unvouched_recipient"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D8c",
+  "dimension": "(8) rien d’autre dans le lot : un sweep glissé dans un multicall",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "multicall : swap + unwrap",
+   "stage0": "intent",
+   "floor": "unknown",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "unknown",
+   "codes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "waitMs": 30000,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "multicall : + sweepToken(USDT) vers un tiers",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "service_recipient_not_self",
+    "unknown_selector",
+    "opaque"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Ce que tu dois recevoir part sur un autre compte que le tien (0xe9e9…e9e9).",
+   "level": "danger",
+   "codes": [
+    "service_recipient_not_self",
+    "unknown_selector",
+    "opaque"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D9a",
+  "dimension": "(9) aucune valeur native en plus : approve + 1 AVAX",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "approve seul",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "approve + 1 AVAX joint",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "kind_missing_unvouched_recipient"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande envoie aussi 1 AVAX à une autre adresse.",
+   "level": "danger",
+   "codes": [
+    "kind_missing_unvouched_recipient"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D9b",
+  "dimension": "(9) aucune valeur native en plus : swap de jetons + 3 AVAX",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap seul",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "swap + 3 AVAX joints",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. La demande envoie aussi 3 AVAX à une autre adresse.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D9c",
+  "dimension": "(9) aucune valeur native en plus : paiement + 1 AVAX",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "transfer seul",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "transfer + 1 AVAX joint",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 20 USDC. La demande envoie 1 AVAX.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D10a",
+  "dimension": "(10) personne ne prend la main : délégation EIP-7702 dans la transaction",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "approve 50",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "approve 50 + authorizationList",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Si tu signes, ce programme pourra tout faire à ta place, partout.",
+   "level": "danger",
+   "codes": [
+    "delegation_7702",
+    "delegation_7702_all_chains",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 30000,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D10b",
+  "dimension": "(10) personne ne prend la main : changement de propriétaire",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "transferOwnership(tiers) sur un contrat",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "control_change"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Si tu signes, 0xe9e9⁠…⁠e9e9 contrôle ton compte et tes jetons.",
+   "level": "danger",
+   "codes": [
+    "control_change"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "D10c",
+  "dimension": "(10) personne ne prend la main : ajout d’un signataire (Safe)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "addOwnerWithThreshold(tiers, 1)",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "control_change"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Si tu signes, un inconnu pourra bouger les jetons du compte.",
+   "level": "danger",
+   "codes": [
+    "control_change"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "D10d",
+  "dimension": "(10) personne ne prend la main : opération de compte abstrait (user operation)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "eth_sendUserOperation",
+   "stage0": "verdict",
+   "floor": "unknown",
+   "floorCodes": [],
+   "sansQuestion": true,
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Nous n'avons pas pu vérifier cette opération sur tes jetons.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "D11a",
+  "dimension": "(11) rien de récurrent : permission ERC-7715",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "wallet_grantPermissions (50 USDC par jour)",
+   "stage0": "verdict",
+   "floor": "unknown",
+   "floorCodes": [],
+   "sansQuestion": true,
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Ce site demande un droit durable sur ton compte. Je ne sais pas en lire les limites.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "D12a",
+  "dimension": "(12) aucun réglage du portefeuille : réseau ajouté avec un RPC étranger",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "wallet_addEthereumChain (Avalanche, RPC inconnu)",
+   "stage0": "verdict",
+   "floor": "danger",
+   "floorCodes": [
+    "chain_add_known_id_custom_rpc",
+    "chain_public_id_foreign_rpc"
+   ],
+   "sansQuestion": true,
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Le site ajoute une chaîne publique que le portefeuille connaît déjà, avec un RPC qu'il fournit lui-même : il peut falsifier soldes et simulations.",
+   "level": "danger",
+   "codes": [
+    "chain_add_known_id_custom_rpc",
+    "chain_public_id_foreign_rpc"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "M1a",
+  "dimension": "à qui le droit est donné : spender = routeur déclaré / adresse quelconque",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "spender = routeur déclaré",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "spender = adresse quelconque",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "external_spender"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Je ne connais pas ce contrat (0xe9e9…e9e9). Il pourra prendre 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [
+    "external_spender"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M1b",
+  "dimension": "à qui le droit est donné, AUCUN réglage (installation par défaut)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "spender = routeur",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "external_spender"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Je ne connais pas ce contrat (0x7070…7070). Il pourra prendre 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [
+    "external_spender"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "spender = adresse quelconque",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "external_spender"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Je ne connais pas ce contrat (0xe9e9…e9e9). Il pourra prendre 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [
+    "external_spender"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M1c",
+  "dimension": "à qui le droit signé est donné (permit)",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "spender = routeur déclaré",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "spender = adresse quelconque",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "external_spender",
+    "signed_right_not_intended"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "La signature accorde un droit de dépense (limité) sur 0xb97e⁠…⁠8a6e à 0xe9e9⁠…⁠e9e9, hors protocoles connus, alors que l'intention déclarée n'est pas un échange.",
+   "level": "danger",
+   "codes": [
+    "external_spender",
+    "signed_right_not_intended"
+   ],
+   "waitMs": 30000,
+   "written": "match",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M2a",
+  "dimension": "prix d’une vente : écrit 2 AVAX, l’ordre dit 0,000002 AVAX",
+  "phrase": "vendre mon NFT numéro 12 pour 2 AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "2 AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cet ordre vend ton NFT n° 12 et te verse 2 AVAX.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "0,000002 AVAX",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "order_proceeds_negligible",
+    "seaport_zero_price"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 2 AVAX. Cet ordre vend pour 0,000002 AVAX.",
+   "level": "danger",
+   "codes": [
+    "order_proceeds_negligible",
+    "seaport_zero_price"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M2b",
+  "dimension": "prix d’une vente : écrit 2 AVAX, l’ordre dit 1,9 AVAX",
+  "phrase": "vendre mon NFT numéro 12 pour 2 AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "2 AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cet ordre vend ton NFT n° 12 et te verse 2 AVAX.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "1,9 AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 2 AVAX. Cet ordre vend pour 1,9 AVAX.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M3",
+  "dimension": "durée de validité d’un ordre de vente",
+  "phrase": "vendre mon NFT numéro 12 pour 2 AVAX",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "valable 7 jours",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cet ordre vend ton NFT n° 12 et te verse 2 AVAX.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "valable 10 ans",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "far_expiry"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cet ordre reste utilisable pendant 9 ans.",
+   "level": "danger",
+   "codes": [
+    "far_expiry"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M4",
+  "dimension": "frais : frais de réseau gonflés (gas × prix)",
+  "phrase": "payer 20 USDC à 0xb2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "frais normaux",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Cette opération envoie 20 USDC à 0xb2b2⁠…⁠b2b2, une adresse nouvelle.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "frais ≈ 20 AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cette demande peut te coûter jusqu’à 20 AVAX de frais.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M5",
+  "dimension": "pont : adresse d’arrivée",
+  "phrase": "envoyer 50 USDC vers Ethereum par le pont",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "arrivée = moi",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Je ne retrouve pas ce paiement dans la demande.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "arrivée = un tiers",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "service_recipient_not_self"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cette demande a des effets que tu n'as pas demandés.",
+   "level": "danger",
+   "codes": [
+    "service_recipient_not_self"
+   ],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M6",
+  "dimension": "pont : chaîne d’arrivée (écrit « vers Ethereum »)",
+  "phrase": "envoyer 50 USDC vers Ethereum par le pont",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "domaine 0 (Ethereum)",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Je ne retrouve pas ce paiement dans la demande.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "domaine 6 (Base)",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Je ne retrouve pas ce paiement dans la demande.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M7",
+  "dimension": "signature d’un message illisible",
+  "phrase": "me connecter",
+  "routeur_declare": false,
+  "serveur_conforme": {
+   "demande": "personal_sign d’un texte",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "Nous n’avons trouvé aucun signal dangereux dans cette demande.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "eth_sign d’une empreinte",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Ce texte illisible peut autoriser le retrait de tes jetons.",
+   "level": "danger",
+   "codes": [
+    "blind_signature",
+    "opaque"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "M8",
+  "dimension": "délégation de vote",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "swap",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "delegate(tiers)",
+   "stage0": "intent",
+   "floor": "unknown",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Nous n'avons pas pu vérifier cette opération sur tes jetons.",
+   "level": "unknown",
+   "codes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "M9",
+  "dimension": "emprunt au nom de quelqu’un / pour quelqu’un",
+  "phrase": "emprunter 50 USDC sur Aave",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "onBehalfOf = moi",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "relance": "Que veux-tu faire, et pour combien ?",
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Nous n’avons trouvé aucun signal dangereux dans cette demande.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "onBehalfOf = un tiers",
+   "stage0": "intent",
+   "floor": "danger",
+   "floorCodes": [
+    "service_recipient_not_self"
+   ],
+   "relance": "Que veux-tu faire, et pour combien ?",
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cette demande a des effets que tu n'as pas demandés.",
+   "level": "danger",
+   "codes": [
+    "service_recipient_not_self"
+   ],
+   "waitMs": 30000,
+   "corrected": false
+  }
+ },
+ {
+  "id": "M10",
+  "dimension": "transfert signé Permit2 (SignatureTransfer) : montant",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "50 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "permit2_transfer_destination_chosen_by_spender",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande donne accès à 50 USDC, pas plus.",
+   "level": "attention",
+   "codes": [
+    "permit2_transfer_destination_chosen_by_spender",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "5 000 USDC",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [
+    "permit2_transfer_destination_chosen_by_spender",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Tu as écrit 50 USDC. Cette signature donne accès à 5 000 USDC et ne peut pas être limitée.",
+   "level": "danger",
+   "codes": [
+    "permit2_transfer_destination_chosen_by_spender",
+    "F16:droit_illimite_protocole_connu"
+   ],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M11",
+  "dimension": "chemin : jeton intermédiaire inconnu",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "USDC → AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 WAVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "USDC → jeton inconnu → AVAX",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "unverifiable",
+   "headline": "Je n’ai pas pu vérifier cette demande.",
+   "line": "Cet échange passe par un jeton que je ne connais pas.",
+   "level": "unknown",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "unverifiable",
+   "corrected": false
+  }
+ },
+ {
+  "id": "M12",
+  "dimension": "échéance de la transaction d’échange",
+  "phrase": "échanger 50 USDC contre AVAX",
+  "routeur_declare": true,
+  "serveur_conforme": {
+   "demande": "échéance 20 min",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "match",
+   "headline": "Ça correspond à ce que tu as écrit.",
+   "line": "La demande échange 50 USDC contre au moins 1,8 AVAX, sur ton compte.",
+   "level": "attention",
+   "codes": [],
+   "waitMs": 0,
+   "auto": true,
+   "written": "match",
+   "corrected": false
+  },
+  "serveur_trahit": {
+   "demande": "échéance 10 ans",
+   "stage0": "intent",
+   "floor": "attention",
+   "floorCodes": [],
+   "outcome": "mismatch",
+   "headline": "Ça ne correspond pas à ce que tu as écrit.",
+   "line": "Cet échange reste exécutable pendant 9 ans, pas seulement maintenant.",
+   "level": "danger",
+   "codes": [],
+   "waitMs": 30000,
+   "written": "mismatch",
+   "corrected": false
+  }
+ }
+]

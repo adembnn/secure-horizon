@@ -4,7 +4,18 @@
  *   signIn(method, params, origin)   -> true when the request is a "Sign-In with Ethereum" message for THIS site (no window)
  *   relance(intent)                  -> the one follow-up question when the sentence is too vague, else null
  *   requestFacts(body)               -> { grants: [{ token, spender, raw, unlimited }], sends: [{ token, to, raw }] }
- *   writtenCheck(body, intent, tokens) -> null, or { outcome: 'match' | 'mismatch' | 'unverifiable', line, address_diff? }
+ *   writtenCheck(body, intent, tokens) -> null (nothing to compare : the engine's verdict stands), or the object below. STABLE SHAPE :
+ *       outcome          'match' | 'mismatch' | 'unverifiable'
+ *       line             string | null : one French sentence that says what the request does (never 'sûr')
+ *       address_diff?    { expected, actual } : the recipient written against the recipient of the request
+ *       fixable?         true : the gap is a right wider than the written amount, in a transaction, and nothing else leaves
+ *       limit?           { amount, symbol, requested, spender, token } : only with fixable, token known and the one written. amount / symbol :
+ *                        what was written ; requested : 'sans limite' or '5 000 USDC' ; spender, token : addresses. The window may offer
+ *                        'Limiter à N et envoyer' (limitPlan() builds the request). Without it, a wider right cannot be limited.
+ *       spender_unknown? address : outcome 'match', a right BOUNDED by the written amount given to a contract outside the public list
+ *                        and the settings ; the line says so ('Je ne connais pas ce contrat (0x…). Il pourra prendre N, pas plus.')
+ *       right_remains?   true : outcome 'match', the bounded right or its signature stays usable long after the operation ; the line says so
+ *     tokens : the map built by tokensOf(contexte, chainId) (it also carries the known spenders). body.from and body.chainId are read.
  *   effectCheck(effect, intent)      -> the same answer, from the MEASURED effect of a call nobody can read (effect_sim.js)
  *   usedBy(body, effect)             -> what one request takes from the written amount : { grants, out } (storable, no bigint)
  *   limitPlan(body, intent, tokens, chain) -> null, or { params, amount, symbol } : the SAME request with every spending right wider than
@@ -55,10 +66,23 @@ const NATIVE = { 1: 'ETH', 10: 'ETH', 8453: 'ETH', 42161: 'ETH', 59144: 'ETH', 5
 export const BUILTIN_SPENDERS = Object.freeze({
   any: ['0x000000000022d473030f116ddee9f6b43ac78ba3', '0x0000000000000068f116a894984e2db1123eb395'],
   1: ['0x66a9893cc07d91d95644aedd05d03f95e1dba8af', '0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca', '0x23617e59a5925b2a4bf75d73ff6711cd0b29de85', '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-    '0xe592427a0aece92de3edee1f18e0157c05861564', '0x7a250d5630b4cf539739df2c5dacb4c659f2488d', '0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2', '0x28b5a0e9c621a5badaa536219b3a228c8168cf5d'],
+    '0xe592427a0aece92de3edee1f18e0157c05861564', '0x7a250d5630b4cf539739df2c5dacb4c659f2488d', '0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2', '0x28b5a0e9c621a5badaa536219b3a228c8168cf5d',
+    '0xd01607c3c5ecaba394d8be377a08590149325722'],
   43114: ['0x794a61358d6845594f94dc1db02a252b5b4814ad', '0x94b75331ae8d42c1b61065089b7d48fe14aa73b7', '0xbb00ff08d01d300023c629e8ffffcb65a5a578ce', '0xe54ca86531e17ef3616d22ca28b0d458b6c89106',
-    '0x28b5a0e9c621a5badaa536219b3a228c8168cf5d']
+    '0x28b5a0e9c621a5badaa536219b3a228c8168cf5d', '0x2825ce5921538d17cc15ae00a8b24ff759c6cdae']
 });
+// A service the sentence may NAME, and its addresses in the public list above. Only when the name is written and the list knows the service
+// on this network can "the right goes somewhere else" be said ; any other name proves nothing (the list is short on purpose).
+const SERVICES = [
+  { name: 'Uniswap', word: /\buniswap\b/, by: { 1: BUILTIN_SPENDERS[1].slice(0, 6), 43114: BUILTIN_SPENDERS[43114].slice(1, 3) } },
+  { name: 'Aave', word: /\baave\b/, by: { 1: ['0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2', '0xd01607c3c5ecaba394d8be377a08590149325722'], 43114: ['0x794a61358d6845594f94dc1db02a252b5b4814ad', '0x2825ce5921538d17cc15ae00a8b24ff759c6cdae'] } },
+  { name: 'Pangolin', word: /\bpangolin\b/, by: { 43114: ['0xe54ca86531e17ef3616d22ca28b0d458b6c89106'] } }
+];
+function namedService(text, chain) {
+  const t = String(text || '').toLowerCase();
+  for (const s of SERVICES) if (s.word.test(t) && chain != null && s.by[chain]) return { name: s.name, addresses: s.by[chain].concat(BUILTIN_SPENDERS.any) };
+  return null;
+}
 // The known spenders travel with the token map (tokensOf) under a symbol key : copied by Object.assign, invisible to Object.keys and JSON.
 const SPENDERS = Symbol.for('holdup.knownSpenders');
 // Defaults of the written intent ("nothing lasts after this operation") : beyond these, the request no longer matches.
@@ -340,6 +364,8 @@ export function writtenCheck(body, intent, tokens = {}) {
   }
   if (!r && why && (facts.grants.length || facts.sends.length || facts.swaps.length)) return { outcome: 'unverifiable', line: why };
   if (!r && flags.cannot) return { outcome: 'unverifiable', line: flags.cannot };
+  // facts the journal keeps : the right went to a contract nobody here knows ; something stays open after the operation
+  if (r && r.outcome === 'match' && (flags.spender || flags.remains)) return Object.assign({}, r, flags.spender ? { spender_unknown: flags.spender } : {}, flags.remains ? { right_remains: true } : {});
   return r;
 }
 // The written amount, read every way it can be read ("1,500" : 1500 or 1.5). A request exceeds it only when it exceeds every reading.
@@ -366,27 +392,38 @@ function writtenCore(facts, intent, tokens, flags) {
   // in the same request, and no right of the request is a signature.
   const fixable = facts.sends.length === 0 && facts.swaps.length === 0 && facts.grants.every((x) => !x.signed);
   // 1) a spending right against the written amount
+  // A right wider than what was written, that CAN be limited (a transaction, nothing else leaves, token known and the one written) : the
+  // answer is still "mismatch" ; `limit` says what the window may offer ("Limiter à N et envoyer"). Nothing is limited without that gesture.
+  const propose = (g, a, requested) => (fixable && !a.other && !a.unknown ? { limit: { amount: intent.amount, symbol: intent.symbol, requested, spender: g.spender, token: g.token } } : {});
   for (const g of facts.grants) {
     const a = assetOf(g.token, intent.symbol, tokens), want = toRaw(intent.amount, a.decimals);
     if (a.unknown) flags.unknown = true;
     // A transaction's ceiling can be edited in the wallet before confirming ; a signature's cannot.
-    if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce), ...(g.signed || money ? {} : { fixable }) };
+    if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce), ...(g.signed || money ? {} : { fixable, ...propose(g, a, "sans limite") }) };
     // the written amount is what I GET ("acheter 0,5 WETH") : what I give is not written, a right on it cannot be compared
     if (get && !intent.nft) { flags.cannot = 'Tu n’as pas écrit combien tu donnes : je ne peux pas vérifier ce droit.'; continue; }
     if (a.other) return { outcome: 'mismatch', line: said + ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' };
-    if (want == null || exceeds(g.raw, intent, a.decimals)) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' + reduce), ...(g.signed || money || intent.amountAlt ? {} : { fixable }) };
-    // nothing lasts after this operation : a right or a signature that stays usable for long is not what was written
-    if (g.until != null && g.until > BigInt(now + RIGHT_MAX_S)) return { outcome: 'mismatch', line: 'Ce droit ne s’arrête pas après ton opération : il reste ouvert ' + duration(Number(g.until > 2n ** 40n ? 2n ** 40n : g.until) - now) + '.' };
-    if (g.sigUntil != null && g.sigUntil > BigInt(now + SIGN_MAX_S)) return { outcome: 'mismatch', line: 'Cette signature reste utilisable ' + duration(Number(g.sigUntil > 2n ** 40n ? 2n ** 40n : g.sigUntil) - now) + '.' };
-    // who gets the right : a contract of the public list or of the settings, or the very contract that does the exchange in the same request
+    if (want == null || exceeds(g.raw, intent, a.decimals)) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' + reduce), ...(g.signed || money || intent.amountAlt ? {} : { fixable, ...propose(g, a, fromRaw(g.raw, a.decimals) + " " + a.symbol) }) };
+    // From here on the right is BOUNDED by the written amount. Product decision (boucle2/JOURNAL.md, tour 4) : Hold up bounds what it lets
+    // through, it does not claim to recognise services. A bounded right matches ; what the person should know is SAID on the line, not held.
+    const amountText = fromRaw(g.raw, a.decimals) + ' ' + a.symbol;
+    let own = 'La demande donne accès à ' + amountText + ', pas plus.';
+    // who gets the right
     if (known && g.spender && !known.has(g.spender)) {
-      const routers = facts.swaps.map((s) => s.router);
-      if (routers.length && !routers.includes(g.spender)) return { outcome: 'mismatch', line: 'Le droit est donné à ' + shortA(g.spender) + ', une autre adresse que celle qui fait l’échange.' };
-      if (!routers.length) flags.cannot = 'Tu donnes ce droit à ' + shortA(g.spender) + ', une adresse que je ne connais pas.';
+      // the sentence names a service of the public list, and the right goes to an address that is not that service : not what was written
+      const svc = namedService(intent.text, chain);
+      if (svc && !svc.addresses.includes(g.spender)) return { outcome: 'mismatch', line: 'Tu as écrit ' + svc.name + '. Le droit est donné à ' + shortA(g.spender) + ', qui n’est pas ' + svc.name + '.' };
+      // neither the token nor the contract is known : nothing bounds anything
+      if (a.unknown) return { outcome: 'mismatch', line: 'Je ne connais ni ce jeton ni le contrat ' + shortA(g.spender) + ' qui reçoit le droit.' };
+      flags.spender = g.spender;
+      own = 'Je ne connais pas ce contrat (' + shortA(g.spender) + '). Il pourra prendre ' + amountText + ', pas plus.';
     }
-    // increaseAllowance adds to the right that already exists : the total is not in the request
-    if (g.adds && !flags.cannot) flags.cannot = 'Cette demande ajoute ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' au droit déjà donné : je ne peux pas vérifier le total.';
-    line = 'La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ', pas plus.';
+    // increaseAllowance adds to the right that already exists : said, since the total is not in the request
+    if (g.adds) own += ' Ce montant s’ajoute au droit déjà donné.';
+    // a right or a signature with no end close by : bounded, so not an alert ; what stays open after the operation is said
+    if (g.until != null && g.until > BigInt(now + RIGHT_MAX_S)) { own += ' S’il n’est pas utilisé, ce droit reste ouvert ' + duration(Number(g.until > 2n ** 40n ? 2n ** 40n : g.until) - now) + '.'; flags.remains = true; }
+    else if (g.sigUntil != null && g.sigUntil > BigInt(now + SIGN_MAX_S)) { own += ' Cette signature reste utilisable ' + duration(Number(g.sigUntil > 2n ** 40n ? 2n ** 40n : g.sigUntil) - now) + '.'; flags.remains = true; }
+    line = line && line !== own ? line + ' ' + own : own;
   }
   const sendText = (s) => { const a = assetOf(s.token, intent.symbol, tokens, chain); return s.token == null ? (a.symbol ? fromRaw(s.raw, 18) + ' ' + a.symbol : 'de la monnaie du réseau') : a.unknown ? 'un jeton que je ne connais pas' : fromRaw(s.raw, a.decimals) + ' ' + a.symbol; };
   // 2) a payment : recipient and amount must be the ones written
@@ -456,8 +493,6 @@ function writtenCore(facts, intent, tokens, flags) {
     if (!s.exactOut && !lo.unknown && tiny(minOut, lo.decimals)) return { outcome: 'mismatch', line: 'La demande accepte que tu ne reçoives presque rien en échange (minimum garanti : ' + outText + ').' };
     if (!s.exactOut && lo.unknown && minOut === 0n) return { outcome: 'mismatch', line: 'La demande accepte que tu ne reçoives rien en échange.' };
     if (intent.min && !lo.unknown && lo.family === fam(intent.min.symbol)) { const w = toRaw(intent.min.amount, lo.decimals); if (w != null && minOut * 100n < w * 99n) return { outcome: 'mismatch', line: 'Tu as écrit au moins ' + fr(intent.min.amount) + ' ' + intent.min.symbol + '. La demande te garantit seulement ' + outText + '.' }; }
-    // two stable tokens are worth the same : a guaranteed minimum under half of what is given is not an exchange at a normal price
-    if (!s.exactOut && !li.unknown && !lo.unknown && STABLE.has(baseSym(li.symbol)) && STABLE.has(baseSym(lo.symbol)) && minOut * 10n ** BigInt(li.decimals) * 2n < s.amountIn * 10n ** BigInt(lo.decimals)) return { outcome: 'mismatch', line: 'La demande te garantit seulement ' + outText + ' pour ' + inText + '.' };
     // until when
     if (s.deadline != null && s.deadline > BigInt(now + SIGN_MAX_S)) return { outcome: 'mismatch', line: 'Cet échange reste exécutable ' + duration(Number(s.deadline > 2n ** 40n ? 2n ** 40n : s.deadline) - now) + ', pas seulement maintenant.' };
     if (!lo.unknown && !li.unknown) swapLine = 'La demande échange ' + inText + ' contre au moins ' + outText + ', sur ton compte.';
@@ -497,7 +532,8 @@ function writtenCore(facts, intent, tokens, flags) {
     }
   }
   if (facts.unread && !facts.grants.length) return null; // part of the request is not read here : the engine's verdict stands
-  if (facts.swaps.length) return { outcome: 'match', line: swapLine || line };
+  // an exchange with a right in the same request : the exchange is described, and what the person must know about the right stays on the line
+  if (facts.swaps.length) return { outcome: 'match', line: swapLine && line && (flags.spender || flags.remains) ? (swapLine + ' ' + line).slice(0, 240) : swapLine || line };
   if (facts.nftAll.length) return { outcome: 'match', line };
   if (orderLine != null) return { outcome: 'match', line: orderLine || null };
   return facts.grants.length ? { outcome: 'match', line } : null;

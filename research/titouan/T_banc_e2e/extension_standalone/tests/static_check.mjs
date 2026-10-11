@@ -69,7 +69,8 @@ m('manifest_version 3', mf.manifest_version === 3);
 m('service worker de type module', mf.background && mf.background.type === 'module' && mf.background.service_worker === 'background.js');
 // storage : reglages, journal local et demandes retenues (storage.session) ; alarms : echeances de la retenue quand le service worker est arrete.
 // La fenetre de verdict (chrome.windows.create d'une page de l'extension) et les messages vers l'onglet demandeur ne demandent aucune permission.
-m('permissions = [storage, alarms, sidePanel] seulement (le panneau latéral ne demande aucun accès réseau ni aucun site)', JSON.stringify(mf.permissions) === '["storage","alarms","sidePanel"]', JSON.stringify(mf.permissions));
+// activeTab : le popup de la barre d'outils lit le site de l'onglet courant, au clic sur l'icone seulement (aucun acces permanent a un site, pas de permission "tabs").
+m('permissions = [storage, alarms, sidePanel, activeTab] seulement (ni "tabs", ni acces permanent a un site)', JSON.stringify(mf.permissions) === '["storage","alarms","sidePanel","activeTab"]', JSON.stringify(mf.permissions));
 if (NO_NETWORK) {
   m('aucune host_permission', !('host_permissions' in mf) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
   m('aucun appel reseau dans le dossier (le client du relais est un stub)', relayFetch === 0, String(relayFetch));
@@ -98,7 +99,7 @@ for (const p of files.filter((x) => x.endsWith('.html'))) {
 const bgTxt = readFileSync(join(EXT, 'background.js'), 'utf8');
 m('aucun crochet de test dans le service worker livre', !/testHook|TEST_HOOK|__holdupTestHook/.test(bgTxt) && /createGatekeeper\(\{ check: localCheck, classify: classifyViaRelay\s*\}\)/.test(bgTxt));
 m('aucun fichier ne pose le crochet de test ni un mode auto', files.filter((p) => /\.(js|html|json)$/.test(p) && !/BUILD_INFO\.json$/.test(p)).every((p) => !/__holdupTestHook|testMode|cfg\.auto\b/.test(readFileSync(p, 'utf8'))));
-m('fenetre presente (window.html + ui/screen.*)', ['window.html', 'window.js', 'window.css', 'ui/screen.js', 'ui/screen.css', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'outcome.js'].every((f) => files.some((p) => rel(p) === f)));
+m('fenetre presente (window.html + ui/screen.js + feuilles du systeme)', ['window.html', 'window.js', 'window.css', 'ui/screen.js', 'ui/tokens.css', 'ui/components.css', 'ui/motion.css', 'popup.html', 'welcome.html', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'outcome.js'].every((f) => files.some((p) => rel(p) === f)));
 
 // chaque module du dossier livre doit se charger : une erreur de syntaxe dans une source du moteur rend le service worker inchargeable
 {

@@ -20,7 +20,9 @@ const ROOT = resolve(HERE, '..');                 // T_banc_e2e
 const TEST_HOOK = process.argv.includes('--test-hook');
 const NO_NETWORK = TEST_HOOK || process.argv.includes('--no-network');
 const OUT_NAME = TEST_HOOK ? 'extension_test' : NO_NETWORK ? 'extension_sans_reseau' : 'extension';
-const OUT = join(HERE, OUT_NAME);
+// --out <dir> : writes there instead of the folder of the tree (a trial build never replaces the shipped one)
+const OUT_ARG = process.argv.indexOf('--out');
+const OUT = OUT_ARG > 0 && process.argv[OUT_ARG + 1] ? resolve(process.argv[OUT_ARG + 1]) : join(HERE, OUT_NAME);
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const rd = (p) => readFileSync(p);
 const written = [];
@@ -39,11 +41,13 @@ function rewriteImports(text, extra = []) {
   return s.replace(/((?:from|import)\s*\(?\s*)(['"])(\.{1,2}\/[^'"]+?)\.(?:mjs|ts)\2/g, '$1$2$3.js$2');
 }
 
-rmSync(OUT, { recursive: true, force: true });
+// Le dossier est vide avant d'ecrire. Sous Windows, un dossier ouvert ailleurs (navigateur qui a charge l'extension, explorateur) ne se
+// supprime pas : on vide alors son contenu, ce qui revient au meme pour le build.
+try { rmSync(OUT, { recursive: true, force: true }); } catch (_) { for (const f of readdirSync(OUT)) rmSync(join(OUT, f), { recursive: true, force: true, maxRetries: 3, retryDelay: 100 }); }
 mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
-for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'journal_chain.js', 'revoke.js', 'window.html', 'window.css', 'window.js', 'options.html', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
+for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'journal_chain.js', 'revoke.js', 'window.html', 'window.css', 'window.js', 'options.html', 'options.js', 'popup.html', 'popup.js', 'welcome.html', 'welcome.js']) put(f, src(join(ROOT, 'extension', f)));
 // Default build : the relay client is shipped as is (its only call : the written sentence, to the loopback relay).
 // --no-network : it is replaced by a stub that never calls anything (the keyword parser answers), and the manifest grants no host
 // and sets connect-src 'none'. The source file ../extension/classifier_client.js is then hashed but not shipped.
@@ -51,7 +55,7 @@ const client = src(join(ROOT, 'extension', 'classifier_client.js'));
 if (!NO_NETWORK) put('classifier_client.js', client);
 else put('classifier_client.js', ['/* Hold up (standalone) - no network. The written intent is classified by the embedded keyword parser. */', 'export const RELAY = null;', 'export const RELAY_TIMEOUT_MS = 0;', 'export async function classifyViaRelay() { return null; }', ''].join(String.fromCharCode(10)));
 // 1 bis) surface de la fenetre (extension/ui) : la question ecrite puis la reponse. Systeme : docs/design/v5/DESIGN.md
-for (const f of ['screen.css', 'screen.js', 'sidepanel.html', 'sidepanel.css', 'sidepanel.js']) put('ui/' + f, src(join(ROOT, 'extension', 'ui', f)));
+for (const f of ['tokens.css', 'components.css', 'motion.css', 'screen.js', 'fields.js', 'sidepanel.html', 'sidepanel.js']) put('ui/' + f, src(join(ROOT, 'extension', 'ui', f)));
 for (const f of ['icon16.png', 'icon32.png', 'icon48.png', 'icon128.png']) put('icons/' + f, src(join(ROOT, 'extension', 'icons', f)));
 // 2) fichiers propres a la version autonome
 let extensionId = null;

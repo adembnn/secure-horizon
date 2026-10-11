@@ -53,6 +53,7 @@ async function gate(payload, origin = SITE, frameId = 0) {
   g.view = async () => (await F.send({ type: 'hu.view', rid }, F.win(winOf(rid), rid))).view;
   g.write = async (text) => { clock.advance(1000); const v = await g.view(); return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'answer', text }, F.win(winOf(rid), rid)); };
   g.go = async () => { const v = await g.view(); return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'continue', phraseOk: true }, F.win(winOf(rid), rid)); };
+  g.limit = async () => { clock.advance(700); const v = await g.view(); return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'limit' }, F.win(winOf(rid), rid)); };
   g.poll = () => F.send({ type: 'hu.poll', rid }, page);
   return g;
 }
@@ -121,37 +122,40 @@ test('decision 2 : the first screen shows the site name given by the browser and
   const g = await gate(Object.assign({ origin: 'https://banque-officielle.example', url: 'https://banque-officielle.example' }, approve(MAX)));
   const v = await g.view();
   assert.equal(v.stage, 'intent');
-  assert.deepEqual(Object.keys(v.screen).sort(), ['kind', 'max', 'placeholder', 'title']);
-  assert.equal(v.screen.title, 'Que veux-tu faire sur echange.exemple.org ?', 'the origin comes from the sender, never from the page');
-  const shown = v.screen.title + ' ' + v.screen.placeholder;
+  assert.deepEqual(Object.keys(v.screen).sort(), ['kind', 'max', 'placeholder', 'site', 'title']);
+  assert.equal(v.screen.title, 'Que veux-tu faire ?');
+  assert.equal(v.screen.site, 'echange.exemple.org', 'the origin comes from the sender, never from the page');
+  const shown = v.screen.title + ' ' + v.screen.site + ' ' + v.screen.placeholder;
   for (const secret of [USDC, ROUTER, ME, 'approve', 'Approve', '999', '0xdead', 'banque-officielle', 'illimité', 'eth_sendTransaction']) assert.ok(!shown.includes(secret), 'not shown : ' + secret);
   const S = surface(); S.ui.show(v.screen, 'intent:1');
-  assert.deepEqual(S.texts(), ['Que veux-tu faire sur echange.exemple.org ?', 'Annuler', 'Vérifier'], 'the title, the two buttons, nothing else');
+  assert.deepEqual(S.texts().map((t) => t.replace(/[  ]/g, ' ')), ['echange.exemple.org', ' veut utiliser ton portefeuille.', 'Que veux-tu faire ?', 'Ce que j’ai compris', 'quoi', 'combien', 'à qui', 'Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte.', 'Je compare ta phrase à la demande.', 'Annuler', 'Vérifier'], 'the title, the three empty places, what is assumed, the two buttons : nothing of the request');
 });
 
-test('decision 3 : one free-text field, empty, with the greyed example ; no shortcut, no prefill, no last intent', async () => {
+test('decision 3 : one free-text field, empty, without any example in it ; no shortcut, no prefill, no last intent', async () => {
   worker();
   const a = await gate(approve(50n * U));
   await a.write('échanger 50 USDC contre AVAX');
   const b = await gate(SWAP); // a second request of the same site, right after
   const v = await b.view();
-  assert.equal(v.screen.placeholder, 'Par exemple : échanger 50 USDC contre AVAX');
+  assert.equal(v.screen.placeholder, '', 'no example : a greyed sentence reads as already written');
   assert.ok(!('value' in v.screen) && !('choices' in v.screen) && !('last' in v.screen));
   const S = surface(); S.ui.show(Object.assign({ value: 'échanger 50 USDC contre AVAX' }, v.screen), 'intent:1');
   assert.equal(S.find('textarea').length, 1); assert.equal(S.find('input').length + S.find('select').length, 0);
   assert.equal(S.find('textarea')[0].value, '', 'nothing is ever written for the person');
-  assert.equal(S.find('textarea')[0].placeholder, 'Par exemple : échanger 50 USDC contre AVAX');
+  assert.equal(S.find('textarea')[0].placeholder, '', 'the field opens empty : the person writes it');
   assert.deepEqual(S.find('button').map((x) => x.textContent), ['Annuler', 'Vérifier']);
 });
 
 test('decision 4 : a vague sentence gets ONE follow-up, never two ; still vague = not verified with the delay, never better than nothing written', async () => {
-  for (const [first, ask] of [['ok', 'Que veux-tu faire, et pour combien ?'], ['valider', 'Que veux-tu faire, et pour combien ?'], ['échanger', 'Combien, et de quel jeton ?'],
-    ['envoyer', 'Combien, et à qui ?'], ['envoyer 20 USDC', 'À qui ? Colle l’adresse dans ta phrase.']]) {
+  for (const [first, ask] of [['ok', 'Que veux-tu faire, et pour combien ?'], ['valider', 'Que veux-tu faire, et pour combien ?'], ['échanger', 'Combien ?'],
+    ['envoyer', 'Combien ?'], ['envoyer 20 USDC', 'À quelle adresse ?']]) {
     worker();
     const g = await gate(transfer(FRIEND, 20n * U));
     const q = await g.write(first);
     assert.equal(q.status, 'next'); assert.equal(q.view.stage, 'intent', first);
-    assert.deepEqual(q.view.screen, { kind: 'question', title: ask, placeholder: 'Par exemple : échanger 50 USDC contre AVAX', max: 500 - first.length - 1, first }, first); // the follow-up recalls the first sentence
+    const qs = q.view.screen; // the follow-up recalls the first sentence
+    assert.deepEqual({ kind: qs.kind, site: qs.site, title: qs.title, max: qs.max, first: qs.first }, { kind: 'question', site: 'echange.exemple.org', title: ask, max: 500 - first.length - 1, first }, first);
+    assert.equal(qs.placeholder, '', 'the follow-up field is empty too : no example');
     const r = await g.write(first === 'ok' ? 'oui' : first);
     assert.equal(r.view.stage, 'verdict', first + ' : no second follow-up');
     assert.notEqual(r.view.screen.outcome, 'match');
@@ -236,7 +240,7 @@ test('decision 7 : when it matches, the sentence stays about a second, then the 
   const m = await gate(permit(MAX)); const rm = await m.write('échanger 50 USDC contre AVAX');
   assert.equal(rm.view.screen.outcome, 'mismatch'); assert.ok(!rm.view.screen.autoMs);
   const S2 = surface(); S2.ui.show(rm.view.screen, 'verdict:answer');
-  assert.deepEqual(S2.find('button').map((x) => x.textContent), ['Annuler', 'Continuer']); assert.equal(S2.timers.filter((t) => t.f && t.ms === 1000).length, 0);
+  assert.deepEqual(S2.find('button').map((x) => x.textContent), ['Continuer', 'Annuler']); assert.equal(S2.timers.filter((t) => t.f && t.ms === 1000).length, 0);
 });
 
 test('decision 8 : a written amount against a larger spending right is a mismatch, even for a known site or contract', async () => {
@@ -244,16 +248,17 @@ test('decision 8 : a written amount against a larger spending right is a mismatc
   worker('attention'); // the engine itself finds nothing to say (known contract)
   const say = async (payload, text) => { const g = await gate(payload); const r = await g.write(text); return Object.assign({ g }, r.view.screen); };
   let s = await say(approve(MAX), 'échanger 50 USDC contre AVAX');
-  // Founder's decision (11 Oct.) : the only gap is a right wider than the written amount and Hold up brought it back to that amount
-  // in the request itself : it matches. The token is known, the amount is certain. No waiting time.
-  assert.equal(s.outcome, 'match'); assert.equal(s.headline, 'Ça correspond à ce que tu as écrit.');
-  assert.equal(s.line, 'Droit limité à 50 USDC. Le site demandait un accès sans limite.'); assert.equal(s.fix, null);
-  assert.equal(s.leftMs, 0); clock.advance(1000); assert.equal((await s.g.go()).status, 'allow');
-  assert.equal((await s.g.poll()).params[0].data, approve(50n * U).params[0].data, 'what goes to the wallet is the limited request');
+  // Founder's decision (11 Oct.) : a right wider than the written amount is a mismatch ; the limit is offered, never applied by itself.
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.');
+  assert.equal(s.said, 'Tu as écrit 50 USDC.'); assert.equal(s.does, 'La demande donne accès à tout ton USDC.'); assert.equal(s.fix, null);
+  assert.equal(s.limit.label, 'Limiter à 50 USDC et envoyer');
+  clock.advance(1000); assert.equal((await s.g.go()).status, 'ignored'); assert.equal((await s.g.poll()).state, 'pending');
+  assert.equal((await limitedBy(s.g, '50 USDC')).params[0].data, approve(50n * U).params[0].data, 'what goes to the wallet is the limited request');
   s = await say(approve(500n * U), 'échanger 50 USDC contre AVAX');
-  assert.equal(s.outcome, 'match'); assert.equal(s.line, 'Droit limité à 50 USDC. Le site demandait un accès à 500 USDC.');
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.does, 'La demande donne accès à 500 USDC.'); assert.equal(s.limit.label, 'Limiter à 50 USDC et envoyer');
+  assert.equal((await limitedBy(s.g, '50 USDC')).params[0].data, approve(50n * U).params[0].data);
   s = await say(permit(MAX), 'échanger 50 USDC contre AVAX');
-  assert.equal(s.outcome, 'mismatch'); assert.equal(s.line, 'Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée.');
+  assert.equal(s.outcome, 'mismatch'); assert.ok(!s.limit, 'a signature cannot be limited'); assert.equal(s.line, 'Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée.');
   s = await say(permit(51n * U), 'j’autorise ce site, échanger 50 USDC contre AVAX');
   assert.equal(s.outcome, 'mismatch', 'saying "I authorise" does not cover more than the amount written');
   s = await say({ method: 'wallet_sendCalls', chainId: '0xa869', from: ME, params: [{ from: ME, calls: [{ to: ROUTER, data: '0x12345678' }, { to: USDC, data: '0x095ea7b3' + pad(ROUTER) + pad(MAX) }] }] }, 'échanger 50 USDC contre AVAX');
@@ -261,9 +266,27 @@ test('decision 8 : a written amount against a larger spending right is a mismatc
   s = await say(approve(50n * U), 'échanger 50 USDC contre AVAX');
   assert.equal(s.outcome, 'match'); assert.equal(s.line, 'La demande donne accès à 50 USDC, pas plus.');
   s = await say(approve(50n * U), 'échanger 0,5 USDC contre AVAX');
-  assert.equal(s.outcome, 'match'); assert.equal(s.line, 'Droit limité à 0,5 USDC. Le site demandait un accès à 50 USDC.');
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.limit.label, 'Limiter à 0,5 USDC et envoyer');
+  assert.equal((await limitedBy(s.g, '0,5 USDC')).params[0].data, approve(500000n).params[0].data);
   s = await say(permit(51n * U), 'échanger 50 USDC contre AVAX');
   assert.equal(s.outcome, 'mismatch'); assert.equal(s.leftMs, 30000, 'a signature cannot be limited : it does not match, with the delay');
+});
+
+test('demo scene : a reward site (unlimited permit) opens an empty field, no example of an exchange before or after the sentence', async () => {
+  worker();
+  const g = await gate(permit(MAX));
+  const v = await g.view();
+  assert.equal(v.stage, 'intent');
+  const words = (screen) => { const S = surface(); S.ui.show(screen, 'intent:' + (screen.first ? 2 : 1)); const f = S.find('textarea')[0]; return { value: f.value, placeholder: f.placeholder, shown: S.texts().join(' ') }; };
+  const open = words(v.screen);
+  assert.equal(open.value, '', 'nothing is written for the person'); assert.equal(open.placeholder, '', 'no greyed example in the field');
+  for (const w of ['USDC', 'AVAX', 'échanger']) assert.ok(!open.shown.includes(w) && !String(v.screen.placeholder).includes(w), 'not shown before the person writes : ' + w);
+  const r = await g.write('récupérer ma récompense');
+  if (r.view.stage === 'intent') { // the one follow-up : its field is empty too, and only the person's own words are recalled
+    const again = words(r.view.screen);
+    assert.equal(again.value, ''); assert.equal(again.placeholder, ''); assert.equal(r.view.screen.first, 'récupérer ma récompense');
+    for (const w of ['USDC', 'AVAX', 'échanger']) assert.ok(!again.shown.includes(w), 'not shown at the follow-up : ' + w);
+  } else assert.equal(r.view.stage, 'verdict');
 });
 
 test('demo scene : "échanger 50 USDC contre AVAX" on an exchange site', async () => {
@@ -277,10 +300,10 @@ test('demo scene : "échanger 50 USDC contre AVAX" on an exchange site', async (
       assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.'); assert.ok(!s.autoMs);
       assert.equal(s.line, 'Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée.');
       assert.equal(s.leftMs, 30000, 'a signature cannot be corrected : the alert keeps its delay');
-    } else { assert.equal(s.headline, 'Ça correspond à ce que tu as écrit.'); assert.equal(s.line, 'Droit limité à 50 USDC. Le site demandait un accès sans limite.'); assert.equal(s.leftMs, 0); }
+    } else { assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.'); assert.equal(s.outcome, 'mismatch'); assert.equal(s.limit.label, 'Limiter à 50 USDC et envoyer'); assert.ok(!s.autoMs); }
     clock.advance(5000);
     if (signed) { assert.equal((await g.go()).status, 'again'); assert.equal((await g.poll()).state, 'pending', 'held'); }
-    else { assert.equal((await g.go()).status, 'allow'); const p = await g.poll(); assert.equal(p.state, 'allow'); assert.equal(p.params[0].data, approve(50n * U).params[0].data, 'the wallet gets 50, not everything'); }
+    else { const p = await limitedBy(g, '50 USDC'); assert.equal(p.state, 'allow'); assert.equal(p.params[0].data, approve(50n * U).params[0].data, 'the wallet gets 50, not everything'); }
   }
   // the honest variant : approve of exactly 50, then the swap. Both match and leave by themselves.
   for (const step of [approve(50n * U), SWAP]) {
@@ -296,24 +319,36 @@ test('demo scene : "échanger 50 USDC contre AVAX" on an exchange site', async (
 
 // ------------------------------------------------------------------------------------------------ Q16 / Q17
 const SENT = (p) => p.params[0].data;
-test('Q17 : the unlimited right is replaced by the written amount before the wallet, with the line ; spender and token unchanged', async () => {
+// Founder's decision (11 Oct.) : a wider right is never limited by itself. The screen is a mismatch that offers the limit ; only the human
+// gesture 'limit' (window) limits and allows at once ; 'continue' on that screen is ignored.
+const LINE_WIDE = 'Tu as écrit 50 USDC. La demande donne accès à tout ton USDC.';
+async function limitedBy(g, amountText) {
+  assert.equal((await g.go()).status, 'ignored', 'Continuer cannot send the wide right from the limit screen');
+  assert.equal((await g.poll()).state, 'pending');
+  const r = await g.limit(); assert.equal(r.status, 'allow'); assert.equal(r.limited, 'Autorisation limitée à ' + amountText + '.');
+  const p = await g.poll(); assert.equal(p.state, 'allow'); return p;
+}
+test('Q17 : the unlimited right is offered a limit to the written amount ; only the human gesture applies it, with spender and token unchanged', async () => {
   await knowToken(); worker();
   const g = await gate(approve(MAX));
   const s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
-  assert.equal(s.outcome, 'match'); assert.equal(s.headline, 'Ça correspond à ce que tu as écrit.'); assert.equal(s.line, 'Droit limité à 50 USDC. Le site demandait un accès sans limite.');
-  assert.equal(s.leftMs, 0, 'no 30 s wait : the request was corrected'); assert.equal(s.autoMs, 1000);
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.');
+  assert.equal(s.said, 'Tu as écrit 50 USDC.'); assert.equal(s.does, 'La demande donne accès à tout ton USDC.');
+  assert.deepEqual(s.limit, { label: 'Limiter à 50 USDC et envoyer', amount: '50', symbol: 'USDC' }); assert.ok(!s.autoMs, 'nothing leaves by itself');
   const st = surface(); st.ui.show(s, 'a:1');
-  assert.ok(st.texts().includes('Droit limité à 50 USDC. Le site demandait un accès sans limite.'));
-  assert.equal((await g.poll()).state, 'pending', 'nothing leaves before the window says so');
+  assert.ok(st.texts().includes('Limiter à 50 USDC et envoyer') || st.find('button').length >= 1);
   clock.advance(1000);
-  assert.equal((await g.go()).status, 'allow');
-  const p = await g.poll();
-  assert.equal(p.state, 'allow'); assert.equal(p.params.length, 1);
+  const p = await limitedBy(g, '50 USDC');
+  assert.equal(p.params.length, 1);
   assert.equal(SENT({ params: p.params }), approve(50n * U).params[0].data);
   assert.equal(p.params[0].to, USDC); assert.equal(p.params[0].from, ME);
   // decimal comma, 6 decimals
   const h = await gate(approve(MAX)); const sh = (await h.write('échanger 12,5 USDC contre AVAX')).view.screen;
-  assert.equal(sh.line, 'Droit limité à 12,5 USDC. Le site demandait un accès sans limite.'); clock.advance(1000); await h.go(); assert.equal(SENT({ params: (await h.poll()).params }), approve(12500000n).params[0].data);
+  assert.equal(sh.outcome, 'mismatch'); assert.equal(sh.limit.symbol, 'USDC'); assert.equal(sh.limit.label, 'Limiter à 12,5 USDC et envoyer');
+  const ph = await limitedBy(h, '12,5 USDC'); assert.equal(SENT({ params: ph.params }), approve(12500000n).params[0].data);
+  // the gesture is refused in the first 600 ms of the screen
+  const e = await gate(approve(MAX)); await e.write('échanger 50 USDC contre AVAX');
+  const v = await e.view(); assert.equal((await F.send({ type: 'hu.decision', rid: e.rid, seq: v.seq, decision: 'limit' }, F.win(e.win(), e.rid))).status, 'again');
 });
 
 test('Q17 : a right already within the written amount is not touched, nor a right of another token', async () => {
@@ -373,8 +408,8 @@ test('point 1 : a token nobody knows by its address is read on its own contract 
   assert.equal(s.outcome, 'match'); assert.equal(s.line, 'La demande donne accès à 50 USDC, pas plus.' + TOLD + 'USDC.'); assert.ok(asked > 0, 'symbol() was read through the wallet');
   // trap : the unlimited right is limited, and the line still says where the name comes from
   g = await gate(approve(MAX)); s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
-  assert.equal(s.outcome, 'match'); assert.equal(s.line, 'Droit limité à 50 USDC. Le site demandait un accès sans limite.' + TOLD + 'USDC.');
-  clock.advance(1000); await g.go(); assert.equal((await g.poll()).params[0].data, approve(50n * U).params[0].data, 'the wallet gets 50');
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.limit.label, 'Limiter à 50 USDC et envoyer'); assert.equal(s.does, 'La demande donne accès à tout ton USDC.');
+  clock.advance(1000); assert.equal((await limitedBy(g, '50 USDC')).params[0].data, approve(50n * U).params[0].data, 'the wallet gets 50');
   // a contract that takes the name with other decimals than USDC's is not believed : never a match, never a rewrite, the delay
   F.chrome.tabs.sendMessage = async (tabId, msg) => { const d = msg.params[0].data; return { ok: true, result: d.startsWith('0x95d89b41') ? abi('USDC') : '0x' + pad(18n) }; };
   for (const amount of [50n * U, MAX]) {

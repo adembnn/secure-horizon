@@ -1,0 +1,79 @@
+/* Hold up : jetons du système de design (docs/design/system/DESIGN.md).
+ * Sobre : noir, blanc, deux gris. Aucune couleur. Une seule police, celle du système. Deux graisses, 400 et 600.
+ * Deux surfaces : la page (blanche en clair, noire en sombre) et la fenêtre de vérification (toujours noire).
+ * Les composants ne lisent que --hu-page, --hu-ink, --hu-ink-2, --hu-ink-3 et --hu-wash ; la classe .hu-k les rebranche sur le noir.
+ *
+ * Contrastes WCAG 2.x, calculés (outil/contrastes.mjs)
+ *   clair         : encre 21,00 · encre-2 #555 7,46 · encre-3 #767676 4,54 (bord de contrôle, 3:1 demandé)
+ *   sombre, noir  : encre 21,00 · encre-2 #b3b3b3 10,02 · encre-3 #808080 5,32 */
+:root {
+  --hu-page: #ffffff;
+  --hu-ink: #000000;
+  --hu-ink-2: #555555;      /* texte secondaire : site, heure, exemple, ce qui n'est pas encore dit */
+  --hu-ink-3: #767676;      /* bord d'un champ, bouton pas encore possible. Jamais du texte. */
+  --hu-wash: #ececec;       /* fond d'un champ en lecture seule */
+  --hu-frame: #d0d0d0;      /* bord d'un cadre de planche, jamais dans l'extension */
+
+  /* la fenêtre de vérification : toujours noire, quel que soit le thème */
+  --hu-k: #000000;
+  --hu-k-ink: #ffffff;
+  --hu-k-2: #b3b3b3;
+  --hu-k-3: #808080;
+  --hu-k-wash: #222222;
+
+  /* typographie : la police du système, rien à télécharger */
+  --hu-font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
+  --hu-regular: 400;
+  --hu-strong: 600;
+  --hu-t-xl: 28px/36px;     /* bienvenue, une fois */
+  --hu-t-l: 22px/28px;      /* la question, les trois phrases de verdict, titre de page */
+  --hu-t-m: 18px/24px;      /* état du popup et du panneau */
+  --hu-b-l: 16px/24px;      /* ta phrase, la ligne d'explication, ce que j'ai compris */
+  --hu-b-m: 14px/20px;      /* texte courant, site, heure, boutons */
+
+  /* trait et rayons */
+  --hu-stroke: 1px;         /* bord d'un champ, bouton pas encore possible, interrupteur */
+  --hu-r: 6px;              /* bouton, champ */
+  --hu-focus: 2px;
+  --hu-focus-gap: 2px;
+
+  /* espacements : grille de 4 px */
+  --hu-1: 4px; --hu-2: 8px; --hu-3: 12px; --hu-4: 16px; --hu-5: 20px; --hu-6: 24px; --hu-8: 32px; --hu-10: 40px; --hu-12: 48px; --hu-16: 64px;
+
+  /* tailles */
+  --hu-win-w: 424px;        /* intérieur de la fenêtre créée en 440 × 540 */
+  --hu-win-h: 501px;
+  --hu-ctl: 40px;           /* bouton plein */
+  --hu-ctl-s: 36px;         /* champ de réglage */
+  --hu-glove: 88px;
+
+  /* durées et courbes (MOTION.md) */
+  --hu-d-1: 80ms;           /* sortie, appui */
+  --hu-d-2: 120ms;          /* survol, fondu court */
+  --hu-d-3: 160ms;          /* interrupteur, valeur qui arrive */
+  --hu-d-4: 200ms;          /* entrée d'un écran, ligne du journal */
+  --hu-d-glove: 340ms;      /* le gant qui se lève */
+  --hu-d-leave: 1000ms;     /* « Ça correspond » : la phrase reste une seconde avant le départ */
+  --hu-e: cubic-bezier(0.2, 0, 0, 1);         /* standard */
+  --hu-e-in: cubic-bezier(0.16, 1, 0.3, 1);   /* arrivée */
+  --hu-e-out: cubic-bezier(0.4, 0, 1, 1);     /* sortie */
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --hu-page: #000000; --hu-ink: #ffffff; --hu-ink-2: #b3b3b3; --hu-ink-3: #808080; --hu-wash: #222222; --hu-frame: #4a4a4a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --hu-page: #000000; --hu-ink: #ffffff; --hu-ink-2: #b3b3b3; --hu-ink-3: #808080; --hu-wash: #222222; --hu-frame: #4a4a4a;
+  color-scheme: dark;
+}
+
+/* le noir : mêmes noms, valeurs de la fenêtre. À poser sur la fenêtre de vérification et sur le repli dans la page. */
+.hu-k {
+  --hu-page: var(--hu-k); --hu-ink: var(--hu-k-ink); --hu-ink-2: var(--hu-k-2); --hu-ink-3: var(--hu-k-3); --hu-wash: var(--hu-k-wash);
+  color-scheme: dark;
+}

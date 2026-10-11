@@ -1,0 +1,172 @@
+export function writtenCheck(body, intent, tokens = {}) {
+  if (!intent || !intent.amount || !intent.symbol) return null;
+  const facts = requestFacts(body), flags = { unknown: false, cannot: null };
+  const r = writtenCore(facts, intent, tokens, flags);
+  const why = facts.tooBig ? 'Cette demande contient trop d’appels pour que je les lise tous.' : facts.ambiguous ? 'Cette demande se lit de deux façons différentes : je ne peux pas la vérifier.' : null;
+  if (r && r.outcome === 'match') {
+    if (why) return { outcome: 'unverifiable', line: why };
+    if (flags.unknown) return { outcome: 'unverifiable', line: intent.symbol === MONEY ? 'Je ne connais pas ce jeton : je ne peux pas vérifier qu’il vaut des dollars.' : 'Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de ' + intent.symbol + '.' };
+    if (flags.cannot) return { outcome: 'unverifiable', line: flags.cannot };
+  }
+  if (!r && why && (facts.grants.length || facts.sends.length || facts.swaps.length)) return { outcome: 'unverifiable', line: why };
+  if (!r && flags.cannot) return { outcome: 'unverifiable', line: flags.cannot };
+  return r;
+}
+// The written amount, read every way it can be read ("1,500" : 1500 or 1.5). A request exceeds it only when it exceeds every reading.
+function readings(intent, decimals) { return [intent.amount, intent.amountAlt].filter((a) => a != null && a !== '').map((a) => toRaw(a, decimals)).filter((x) => x != null); }
+const exceeds = (raw, intent, decimals) => { const w = readings(intent, decimals); return !w.length || w.every((x) => raw > x); };
+const isExactly = (raw, intent, decimals) => readings(intent, decimals).some((x) => raw === x);
+const tiny = (raw, decimals) => raw === 0n || (decimals != null && decimals >= 6 && raw * 1000000n <= 10n ** BigInt(decimals)); // nothing, or less than a millionth of a unit
+
+function writtenCore(facts, intent, tokens, flags) {
+  const money = intent.symbol === MONEY, chain = facts.chain, me = facts.me, now = nowS();
+  const said = 'Tu as écrit ' + fr(intent.amount) + ' ' + (money ? 'dollars' : intent.symbol) + '.';
+  const reduce = money ? '' : ' Réduis le plafond à ' + fr(intent.amount) + ' ' + intent.symbol + ' dans ton portefeuille.';
+  const pay = PAY_KINDS.has(intent.kind), get = intent.side === 'get';
+  const known = spendersOf(tokens);
+  const mine = (a) => !!a && (a === ROUTER_SENDER || (me != null && a === me));
+  let line = null;
+  // 0) another network, or another account, than the one the wallet is on
+  if (facts.otherChain) return { outcome: 'mismatch', line: 'Cette demande vaut sur un autre réseau que celui où tu es.' };
+  if (facts.otherFrom) return { outcome: 'mismatch', line: 'Cette demande part d’un autre compte que celui que tu utilises.' };
+  // A wider right can be corrected (capped to the written amount) only when it comes from a transaction, nothing else leaves
+  // in the same request, and no right of the request is a signature.
+  const fixable = facts.sends.length === 0 && facts.swaps.length === 0 && facts.grants.every((x) => !x.signed);
+  // 1) a spending right against the written amount
+  for (const g of facts.grants) {
+    const a = assetOf(g.token, intent.symbol, tokens), want = toRaw(intent.amount, a.decimals);
+    if (a.unknown) flags.unknown = true;
+    // A transaction's ceiling can be edited in the wallet before confirming ; a signature's cannot.
+    if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce), ...(g.signed || money ? {} : { fixable }) };
+    // the written amount is what I GET ("acheter 0,5 WETH") : what I give is not written, a right on it cannot be compared
+    if (get && !intent.nft) { flags.cannot = 'Tu n’as pas écrit combien tu donnes : je ne peux pas vérifier ce droit.'; continue; }
+    if (a.other) return { outcome: 'mismatch', line: said + ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' };
+    if (want == null || exceeds(g.raw, intent, a.decimals)) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' + reduce), ...(g.signed || money || intent.amountAlt ? {} : { fixable }) };
+    // nothing lasts after this operation : a right or a signature that stays usable for long is not what was written
+    if (g.until != null && g.until > BigInt(now + RIGHT_MAX_S)) return { outcome: 'mismatch', line: 'Ce droit ne s’arrête pas après ton opération : il reste ouvert ' + duration(Number(g.until > 2n ** 40n ? 2n ** 40n : g.until) - now) + '.' };
+    if (g.sigUntil != null && g.sigUntil > BigInt(now + SIGN_MAX_S)) return { outcome: 'mismatch', line: 'Cette signature reste utilisable ' + duration(Number(g.sigUntil > 2n ** 40n ? 2n ** 40n : g.sigUntil) - now) + '.' };
+    // who gets the right : a contract of the public list or of the settings, or the very contract that does the exchange in the same request
+    if (known && g.spender && !known.has(g.spender)) {
+      const routers = facts.swaps.map((s) => s.router);
+      if (routers.length && !routers.includes(g.spender)) return { outcome: 'mismatch', line: 'Le droit est donné à ' + shortA(g.spender) + ', une autre adresse que celle qui fait l’échange.' };
+      if (!routers.length) flags.cannot = 'Tu donnes ce droit à ' + shortA(g.spender) + ', une adresse que je ne connais pas.';
+    }
+    // increaseAllowance adds to the right that already exists : the total is not in the request
+    if (g.adds && !flags.cannot) flags.cannot = 'Cette demande ajoute ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' au droit déjà donné : je ne peux pas vérifier le total.';
+    line = 'La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ', pas plus.';
+  }
+  const sendText = (s) => { const a = assetOf(s.token, intent.symbol, tokens, chain); return s.token == null ? (a.symbol ? fromRaw(s.raw, 18) + ' ' + a.symbol : 'de la monnaie du réseau') : a.unknown ? 'un jeton que je ne connais pas' : fromRaw(s.raw, a.decimals) + ' ' + a.symbol; };
+  // 2) a payment : recipient and amount must be the ones written
+  const payment = () => {
+    for (const s of facts.sends) {
+      const a = assetOf(s.token, intent.symbol, tokens, chain);
+      if (a.unknown) flags.unknown = true;
+      if (a.other) return { outcome: 'mismatch', line: said + ' La demande envoie ' + (a.symbol ? fromRaw(s.raw, a.decimals) + ' ' + a.symbol : 'la monnaie du réseau') + '.' };
+      if (!isExactly(s.raw, intent, a.decimals)) return { outcome: 'mismatch', line: said + ' La demande envoie ' + fromRaw(s.raw, a.decimals) + ' ' + a.symbol + '.' };
+      if (intent.address && lc(s.to) !== lc(intent.address)) return { outcome: 'mismatch', line: 'Le destinataire de la demande n’est pas l’adresse que tu as écrite.', address_diff: { expected: intent.address, actual: s.to } };
+    }
+    if (!intent.address) return { outcome: 'unverifiable', line: 'Tu n’as pas écrit d’adresse : je ne peux pas vérifier le destinataire.' };
+    return { outcome: 'match', line: null };
+  };
+  if (pay) {
+    if (facts.swaps.length || facts.orders.length) return { outcome: 'mismatch', line: said + ' Cette demande n’est pas un paiement : c’est un échange.' };
+    if (!facts.sends.length) return facts.grants.length ? { outcome: 'match', line } : { outcome: 'unverifiable', line: 'Je ne retrouve pas ce paiement dans la demande.' };
+    return payment();
+  }
+  // 3) anything that is not a payment : nothing else may leave. A transfer or a value sent next to a right or an exchange is one thing more ;
+  //    a request that only sends (transfer, bare value) is not the operation written, unless the sentence names who receives it.
+  const away = facts.sends.filter((s) => !mine(s.to));
+  if (away.length) {
+    if (facts.grants.length || facts.swaps.length || facts.orders.length) return { outcome: 'mismatch', line: said + ' La demande envoie aussi ' + sendText(away[0]) + ' à une autre adresse.' };
+    if (!facts.unread && intent.kind === 'buy_or_swap') { // only when the sentence was understood as an exchange, a purchase, a sale or a right
+      if (intent.nft && !get && known && away.every((s) => s.token == null && known.has(s.to))) return null; // buying an NFT pays a marketplace of the public list or of the settings : the engine's verdict stands
+      if (intent.address && !(intent.facts && intent.facts.grant)) return payment(); // a named recipient makes it a payment, unless the sentence gives a right
+      return { outcome: 'mismatch', line: said + ' Cette demande envoie ' + sendText(away[0]) + ' à une autre adresse, sans rien te rendre.' };
+    }
+  }
+  // a right on a whole NFT collection is never what a sentence with one amount says. Selling one NFT may need it for a marketplace of the
+  // public list or of the settings : even then it is wider than the sale, and it cannot be said to match.
+  for (const n of facts.nftAll) {
+    const sale = intent.nft && get && known && known.has(n.operator);
+    if (!sale) return { outcome: 'mismatch', line: said + ' Cette demande donne à ' + shortA(n.operator) + ' accès à tous tes NFT de cette collection.' };
+    flags.cannot = 'Cette demande donne accès à tous tes NFT de cette collection, pas seulement à celui que tu vends.';
+  }
+  // 4) an exchange read in the call : what I give, what I get, how much at least, on which account, until when
+  const wantOut = intent.counter || null; // "contre AVAX" (side give) or "avec des USDC" (side get) : the other side, when written
+  let swapLine = null;
+  for (const s of facts.swaps) {
+    const li = legOf(s.nativeIn ? null : s.tokenIn, tokens, chain);
+    // where the output really goes : straight to the recipient, or held by the router then unwrapped / swept
+    let outToken = s.tokenOut, rcpt = s.to, minOut = s.minOut;
+    if (rcpt === ROUTER_SELF || rcpt === s.router) {
+      const c = facts.collects.find((x) => x.router === s.router && (x.token == null || x.token === s.tokenOut));
+      if (!c) { flags.cannot = 'Je ne vois pas sur quel compte arrive ce que tu reçois.'; rcpt = null; }
+      else { rcpt = c.to; if (c.token == null) outToken = null; if (c.min > 0n && (minOut === 0n || c.token == null)) minOut = c.min; }
+    }
+    const lo = legOf(outToken, tokens, chain);
+    if ((s.via || []).some((t) => legOf(t, tokens, chain).unknown) && !flags.cannot) flags.cannot = 'Cet échange passe par un jeton que je ne connais pas.';
+    const inText = li.unknown ? 'un jeton que je ne connais pas' : fromRaw(s.amountIn, li.decimals) + ' ' + (li.symbol || 'de la monnaie du réseau');
+    const outText = lo.unknown ? 'un jeton que je ne connais pas' : fromRaw(minOut, lo.decimals) + ' ' + (lo.symbol || 'de la monnaie du réseau');
+    if (rcpt && !mine(rcpt)) return { outcome: 'mismatch', line: 'Ce que tu dois recevoir part sur un autre compte que le tien (' + shortA(rcpt) + ').' };
+    const given = get ? wantOut : (money ? null : intent.symbol), got = get ? intent.symbol : wantOut;
+    // what I give
+    if (money && !get) { if (li.unknown) flags.unknown = true; else if (!STABLE.has(baseSym(li.symbol))) return { outcome: 'mismatch', line: said + ' La demande échange ' + inText + '.' }; }
+    else if (given) { if (li.unknown) flags.unknown = true; else if (li.family && li.family !== fam(given)) return { outcome: 'mismatch', line: (get ? 'Tu as écrit payer en ' + given + '.' : said) + ' La demande échange ' + inText + '.' }; }
+    if (!get && !li.unknown && li.decimals != null && exceeds(s.amountIn, intent, li.decimals)) return { outcome: 'mismatch', line: said + ' La demande échange ' + inText + '.' };
+    // what I get
+    if (got) {
+      if (lo.unknown) { if (!flags.cannot) flags.cannot = 'Je ne connais pas le jeton que cette demande te rend : je ne peux pas vérifier que c’est du ' + got + '.'; }
+      else if (lo.family && lo.family !== fam(got)) return { outcome: 'mismatch', line: 'Tu as écrit ' + (get ? fr(intent.amount) + ' ' + got : 'contre ' + got) + '. La demande te rend du ' + lo.symbol + '.' };
+    }
+    if (get && !lo.unknown && lo.decimals != null) { const w = toRaw(intent.amount, lo.decimals); if (w == null || minOut * 10n < w * 8n) return { outcome: 'mismatch', line: said + ' La demande te garantit seulement ' + outText + '.' }; }
+    // how much at least
+    if (!s.exactOut && !lo.unknown && tiny(minOut, lo.decimals)) return { outcome: 'mismatch', line: 'La demande accepte que tu ne reçoives presque rien en échange (minimum garanti : ' + outText + ').' };
+    if (!s.exactOut && lo.unknown && minOut === 0n) return { outcome: 'mismatch', line: 'La demande accepte que tu ne reçoives rien en échange.' };
+    if (intent.min && !lo.unknown && lo.family === fam(intent.min.symbol)) { const w = toRaw(intent.min.amount, lo.decimals); if (w != null && minOut * 100n < w * 99n) return { outcome: 'mismatch', line: 'Tu as écrit au moins ' + fr(intent.min.amount) + ' ' + intent.min.symbol + '. La demande te garantit seulement ' + outText + '.' }; }
+    // two stable tokens are worth the same : a guaranteed minimum under half of what is given is not an exchange at a normal price
+    if (!s.exactOut && !li.unknown && !lo.unknown && STABLE.has(baseSym(li.symbol)) && STABLE.has(baseSym(lo.symbol)) && minOut * 10n ** BigInt(li.decimals) * 2n < s.amountIn * 10n ** BigInt(lo.decimals)) return { outcome: 'mismatch', line: 'La demande te garantit seulement ' + outText + ' pour ' + inText + '.' };
+    // until when
+    if (s.deadline != null && s.deadline > BigInt(now + SIGN_MAX_S)) return { outcome: 'mismatch', line: 'Cet échange reste exécutable ' + duration(Number(s.deadline > 2n ** 40n ? 2n ** 40n : s.deadline) - now) + ', pas seulement maintenant.' };
+    if (!lo.unknown && !li.unknown) swapLine = 'La demande échange ' + inText + ' contre au moins ' + outText + ', sur ton compte.';
+  }
+  // something collected by the router goes to another account (unwrap, sweep)
+  const stray = facts.collects.find((c) => !mine(c.to));
+  if (stray) return { outcome: 'mismatch', line: 'Ce que tu dois recevoir part sur un autre compte que le tien (' + shortA(stray.to) + ').' };
+  // 5) a market order about an NFT (sale, or purchase offer), when the sentence is about an NFT
+  let orderLine = null;
+  if (intent.nft) for (const o of facts.orders) {
+    const nftOut = o.offer.filter((x) => x.type >= 2), moneyOut = o.offer.filter((x) => x.type < 2), nftIn = o.cons.filter((x) => x.type >= 2), moneyIn = o.cons.filter((x) => x.type < 2);
+    const leg = (x) => legOf(x.type === 0 ? null : x.token, tokens, chain);
+    if (me && o.offerer !== me) return { outcome: 'mismatch', line: 'Cet ordre est signé au nom d’un autre compte que le tien.' };
+    if (o.end != null && o.end > BigInt(now + ORDER_MAX_S)) return { outcome: 'mismatch', line: 'Cet ordre reste utilisable ' + duration(Number(o.end > 2n ** 40n ? 2n ** 40n : o.end) - now) + '.' };
+    if (get) { // a sale : one NFT leaves, the written price comes to me
+      if (moneyOut.length) return { outcome: 'mismatch', line: 'Tu as écrit une vente. Cet ordre te fait aussi donner des jetons.' };
+      if (nftOut.some((x) => x.type >= 4)) return { outcome: 'mismatch', line: 'Cet ordre met en vente toute la collection, pas un seul NFT.' };
+      if (nftOut.length !== 1 || nftOut[0].amount !== 1n) return { outcome: 'mismatch', line: 'Cet ordre met en vente ' + (nftOut.length || 'aucun') + ' NFT, pas un seul.' };
+      if (intent.nftId && nftOut[0].id !== intent.nftId) return { outcome: 'mismatch', line: 'Cet ordre met en vente le NFT n° ' + nftOut[0].id.slice(0, 12) + ', pas le n° ' + intent.nftId + '.' };
+      let toMe = 0n, total = 0n, dec = null, sym = null, unknownLeg = false;
+      for (const x of moneyIn) { const l = leg(x); if (!l.unknown && l.family === fam(intent.symbol)) total += x.amount; if (!mine(x.to)) continue; if (l.unknown || !l.family) { unknownLeg = true; continue; } if (l.family !== fam(intent.symbol)) return { outcome: 'mismatch', line: said + ' Cet ordre te paie en ' + l.symbol + '.' }; toMe += x.amount; dec = l.decimals; sym = l.symbol; }
+      if (unknownLeg && toMe === 0n) { flags.unknown = true; orderLine = ''; continue; }
+      if (toMe === 0n) return { outcome: 'mismatch', line: moneyIn.length ? 'Le prix de cette vente est versé à une autre adresse que la tienne.' : 'Cet ordre donne ton NFT sans rien te verser.' };
+      const want = toRaw(intent.amount, dec);
+      if (want == null || total * 100n < want * 99n) return { outcome: 'mismatch', line: said + ' Cet ordre vend pour ' + fromRaw(total, dec) + ' ' + sym + '.' };
+      if (toMe * 10n < want * 9n) return { outcome: 'mismatch', line: said + ' Cet ordre te verse seulement ' + fromRaw(toMe, dec) + ' ' + sym + '.' };
+      orderLine = 'Cet ordre vend ton NFT n° ' + nftOut[0].id.slice(0, 12) + ' et te verse ' + fromRaw(toMe, dec) + ' ' + sym + '.';
+    } else { // a purchase offer : at most the written price leaves, the NFT comes to me
+      if (nftOut.length) return { outcome: 'mismatch', line: 'Tu as écrit un achat. Cet ordre met en vente un de tes NFT.' };
+      let offered = 0n, dec = null, sym = null;
+      for (const x of moneyOut) { const l = leg(x); if (l.unknown || !l.family) { flags.unknown = true; continue; } if (!money && l.family !== fam(intent.symbol)) return { outcome: 'mismatch', line: said + ' Cet ordre offre des ' + l.symbol + '.' }; if (money && !STABLE.has(baseSym(l.symbol))) return { outcome: 'mismatch', line: said + ' Cet ordre offre des ' + l.symbol + '.' }; offered += x.amount; dec = l.decimals; sym = l.symbol; }
+      if (dec != null && exceeds(offered, intent, dec)) return { outcome: 'mismatch', line: said + ' Cet ordre offre ' + fromRaw(offered, dec) + ' ' + sym + '.' };
+      const forMe = nftIn.filter((x) => mine(x.to));
+      if (!forMe.length) return { outcome: 'mismatch', line: nftIn.length ? 'Le NFT acheté irait sur un autre compte que le tien.' : 'Cet ordre ne te donne aucun NFT en échange.' };
+      if (intent.nftId && !forMe.some((x) => x.type >= 4 || x.id === intent.nftId)) return { outcome: 'mismatch', line: 'Cet ordre achète un autre NFT que le n° ' + intent.nftId + '.' };
+      if (dec != null) orderLine = 'Cet ordre offre ' + fromRaw(offered, dec) + ' ' + sym + ' pour un NFT livré sur ton compte.';
+    }
+  }
+  if (facts.unread && !facts.grants.length) return null; // part of the request is not read here : the engine's verdict stands
+  if (facts.swaps.length) return { outcome: 'match', line: swapLine || line };
+  if (facts.nftAll.length) return { outcome: 'match', line };
+  if (orderLine != null) return { outcome: 'match', line: orderLine || null };
+  return facts.grants.length ? { outcome: 'match', line } : null;
+}
+

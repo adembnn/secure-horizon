@@ -4,14 +4,15 @@
   "version": "0.3.0",
   "description": "Écris ce que tu veux faire. Hold up te dit si la demande de signature correspond.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3GFisqzyqjVsp4Ocsnih/E35W/GgeWtCk6NRfiFCImkdR031gN0Vad2oR0b9awzQtXoqEEmjPlyZeZpym2/IabdtIIkvPQL/GmUmN/vG9eI5kqvyFnRRgSSyhuuVoxNAVac3R3mpvic7IAcmzS7Q/hidT3nUl0DGeUu2aKySMtq8YI3Bz+auUgP7ZtwCxz1Ofmo5vvpc+jkkkvTEqD93/C8jWXKMW9Fdyt0ytTTwkx6VoaLChSptJXV9sV2SwmjrUIJbTukiZ/uKJD+nePfcT0ktn975dqm6FsDc10ThU5phRK0cPWgKZhekYAEn7wwOEyKwCRqiGLNjHrivAO6AwIDAQAB",
-  "minimum_chrome_version": "114",
+  "minimum_chrome_version": "116",
   "permissions": [
     "storage",
     "alarms",
-    "sidePanel"
+    "sidePanel",
+    "activeTab"
   ],
   "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
-  "action": { "default_title": "Hold up", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" } },
+  "action": { "default_title": "Hold up", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }, "default_popup": "popup.html" },
   "side_panel": { "default_path": "ui/sidepanel.html" },
   "host_permissions": [
     "http://127.0.0.1:8789/*"

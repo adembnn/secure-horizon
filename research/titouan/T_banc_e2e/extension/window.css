@@ -1,5 +1,13 @@
-/* Hold up - the window page only hosts the surface (ui/screen.css draws everything, tokens in docs/design/v5/DESIGN.md). */
-html, body { height: 100%; margin: 0; overflow: hidden; }
-body { background: #ffffff; }
-@media (prefers-color-scheme: dark) { body { background: #131313; } }
+/* Hold up - the window page only hosts the surface (ui/tokens.css, ui/components.css, ui/motion.css draw everything). */
+/* The verification window is always black, whatever the theme : this sheet is the first one, the page is black from its first frame. */
+html, body { height: 100%; margin: 0; overflow: hidden; background: #000; }
 #hu { height: 100%; }
+/* "Limiter à 50 USDC et envoyer" + "Ne rien envoyer" : when the window is narrow (zoom), the two gestures stack, the advised one on top,
+   as the two gestures of any answer do (components.css, .hu-dock:has(.hu-wait)). */
+@container (max-width: 400px) {
+  .hu-dock--limit { flex-direction: column-reverse; align-items: stretch; gap: var(--hu-2); }
+  .hu-dock--limit .hu-word { align-self: center; }
+}
+/* The sentence of an answer takes the focus when nothing is to be pressed ("Ça correspond", the wait for the next request) : it is
+   read by a screen reader, it is not a control and draws no focus frame. */
+#hu .hu-verdict:focus, #hu .hu-verdict:focus-visible { outline: none; }

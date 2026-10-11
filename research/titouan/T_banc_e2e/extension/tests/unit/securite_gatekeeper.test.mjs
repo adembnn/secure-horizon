@@ -24,7 +24,7 @@ async function run({ engine, params, classify, text, pad = 0, known = true }) {
   let v = (await F.send({ type: 'hu.view', rid }, win)).view;
   const first = v.stage;
   if (v.stage === 'intent') { clock.advance(1000); v = (await F.send({ type: 'hu.decision', rid, seq: 1, decision: 'answer', text }, win)).view; }
-  const res = { first, outcome: v.screen && v.screen.outcome, waitMs: v.friction && v.friction.waitMs, phrase: v.friction && v.friction.phrase, auto: v.screen && v.screen.autoMs, line: v.screen && v.screen.line, level: v.verdict && v.verdict.level, fix: v.screen && v.screen.fix };
+  const res = { first, outcome: v.screen && v.screen.outcome, waitMs: v.friction && v.friction.waitMs, phrase: v.friction && v.friction.phrase, auto: v.screen && v.screen.autoMs, line: v.screen && v.screen.line, level: v.verdict && v.verdict.level, fix: v.screen && v.screen.fix, limit: v.screen && v.screen.limit, said: v.screen && v.screen.said, does: v.screen && v.screen.does };
   clock.restore(); delete globalThis.chrome;
   return res;
 }
@@ -37,10 +37,11 @@ test('S4 : danger for another reason (flagged spender, any signal, unexplained d
     assert.ok(r.waitMs > 0 && r.phrase === true, JSON.stringify(extra) + ' ' + JSON.stringify(r));
   }
 });
-test('S4 : the plain gap (attention, or danger explained only by the unlimited right) keeps its relief : no delay, the correction', async () => {
+test('S4 : the plain gap (attention, or danger explained only by the unlimited right) keeps its relief : the limit is offered (no delay on that gesture), nothing happens by itself', async () => {
   for (const eng of [verdict('attention'), verdict('danger', { codes: ['unlimited_allowance', 'external_spender'] })]) {
     const r = await run({ engine: eng, params: [{ from: ME, to: TOKEN, data: APPROVE_MAX }], classify: model('buy_or_swap', 0.95, { grant: 0.9 }), text: SWAP });
-    assert.equal(r.waitMs, 0); assert.equal(r.phrase, false); assert.equal(r.outcome, 'match'); assert.equal(r.line, 'Droit limité à 50 USDC. Le site demandait un accès sans limite.');
+    assert.equal(r.waitMs, 30000, 'the way as written by the site keeps its delay ; the limit gesture (decisions.test.mjs) has none'); assert.equal(r.phrase, true); assert.equal(r.outcome, 'mismatch'); assert.ok(!r.auto, 'nothing is limited or sent by itself');
+    assert.equal(r.limit.label, 'Limiter à 50 USDC et envoyer'); assert.equal(r.said, 'Tu as écrit 50 USDC.'); assert.equal(r.does, 'La demande donne accès à tout ton USDC.');
   }
 });
 test('S3 through the gatekeeper : transfer + 1 ETH is not "match", no automatic send', async () => {

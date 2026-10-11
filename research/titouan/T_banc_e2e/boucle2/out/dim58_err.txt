@@ -1,0 +1,18 @@
+(node:30256) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Adem/Secure%20Horizon/research/titouan/T_banc_e2e/extension/gatekeeper.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\Adem\Secure Horizon\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:fs:2397
+    return binding.writeFileUtf8(
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\Users\Adem\Secure Horizon\research\titouan\T_banc_e2e\boucle2\sorties\dimensions.json'
+    at writeFileSync (node:fs:2397:20)
+    at file:///C:/Users/Adem/Secure%20Horizon/research/titouan/T_banc_e2e/boucle2/dim58.mjs:154:1 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Adem\\Secure Horizon\\research\\titouan\\T_banc_e2e\\boucle2\\sorties\\dimensions.json'
+}
+
+Node.js v25.6.0
