@@ -63,3 +63,27 @@ test('S7 : a request that stays too big once slimmed (huge data) fails closed : 
   assert.equal(r.first, 'verdict'); assert.equal(r.outcome, 'unverifiable'); assert.ok(r.waitMs > 0); assert.ok(!r.auto);
   assert.match(r.line, /trop grande/);
 });
+
+test('S13 : five cancels in a row from one origin block it for 60 s ; at most 10 requests are held at once', async () => {
+  const clock = fakeClock(); const F = makeChrome(); globalThis.chrome = F.chrome;
+  createGatekeeper({ check: async () => verdict('attention', { effects: { grants_right: false, funds_out: true } }), classify: model('pay_someone', 0.95) });
+  const body = { method: 'eth_sendTransaction', params: [{ from: ME, to: TOKEN, data: TRANSFER_20 }], chainId: '0x1', from: ME };
+  let denied = 0;
+  for (let i = 1; i <= 8; i++) {
+    const rid = 'rid-flood-' + String(i).padStart(3, '0'), pg = F.page(100 + i, 'https://spam.example');
+    const r = await F.send({ type: 'gate', rid, payload: Object.assign({ kind: 'gate' }, body) }, pg);
+    if (r && r.done && r.allow === false) { denied++; continue; }
+    let wid = null; for (const [id, o] of F.state.windows) if (o.url.endsWith('window.html#' + rid)) wid = id;
+    await F.send({ type: 'hu.decision', rid, seq: 1, decision: 'cancel' }, F.win(wid, rid));
+  }
+  assert.ok(denied >= 3, 'after five cancels the origin is refused without a window : ' + denied);
+  clock.advance(61000);
+  const rid = 'rid-flood-099', r = await F.send({ type: 'gate', rid, payload: Object.assign({ kind: 'gate' }, body) }, F.page(199, 'https://spam.example'));
+  assert.ok(r.pending, 'after 60 s it is asked again');
+  clock.restore(); delete globalThis.chrome;
+});
+test('S16 : the local storage is made readable by trusted contexts only', async () => {
+  const F = makeChrome(); let level = null; F.chrome.storage.local.setAccessLevel = async (o) => { level = o.accessLevel; }; globalThis.chrome = F.chrome;
+  createGatekeeper({ check: async () => verdict('attention') });
+  assert.equal(level, 'TRUSTED_CONTEXTS'); delete globalThis.chrome;
+});

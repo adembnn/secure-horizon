@@ -123,3 +123,35 @@ test('S5 : bridge.js ignores a port message that does not carry its token', asyn
   assert.match(src, /newToken\(\)/);
   assert.match(src, /crypto\.getRandomValues/);
 });
+
+// ---- document.open() : the connection is dropped, nothing goes on the old channel, a fresh token is needed
+const DOC = `class Document { open() { return this; } write() {} writeln() {} } window.Document = Document; window.document = new Document();`;
+test('S5 : document.open() / write() drop the connection : pending requests fail closed, new ones wait for a fresh port and token, the old token is dead', async () => {
+  let release; const held = new Promise((r) => { release = r; });
+  let first = true;
+  const P = page({ decide: () => (first ? (first = false, held) : true), before: DOC });
+  P.run(SETUP);
+  P.run(`__go('a', () => ${REQ})`);
+  await sleep(150);
+  assert.equal(P.gates.length, 1);
+  const oldPort = P.ctx._port;
+  P.run(`document.open()`);
+  await sleep(30);
+  assert.equal(P.run('__out.a.error.code'), 4900, 'the request that was waiting failed closed');
+  // a new request issued right away is not sent anywhere until the new connection exists, then it goes through the NEW channel
+  P.run(`__go('b', () => ${REQ})`);
+  await sleep(30);
+  assert.equal(P.gates.length, 1, 'nothing sent while disconnected');
+  await sleep(300);
+  assert.equal(P.ctx.reconnects, 1, 'a fresh hello was sent');
+  assert.equal(P.gates.length, 2);
+  assert.equal(P.run('__out.b.value'), 'ok'); assert.equal(P.run('ethereum.reached'), 1);
+  // a forged "allow" on the old channel with the old token is worthless now
+  release(true);
+  P.run(`__go('c', () => ${REQ})`);
+  oldPort.postMessage({ t: 'result', id: 3, allow: true, reason: '', k: TOKEN });
+  await sleep(250);
+  assert.equal(P.run('ethereum.reached'), 2, 'only the real answer (id 3 through the new channel) let it through, once');
+  P.run('document.write("x")'); await sleep(300);
+  assert.equal(P.ctx.reconnects, 2, 'write() drops it too');
+});

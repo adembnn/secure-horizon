@@ -26,3 +26,4 @@ button { min-height: 40px; padding: 0 16px; color: var(--ink); background: trans
 button:hover { background: var(--hover); border-color: var(--ink); }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 32px; }
+.danger-note { color: var(--signal); font-size: 14px; line-height: 1.45; }

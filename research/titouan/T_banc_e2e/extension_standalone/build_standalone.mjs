@@ -37,7 +37,7 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
-for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
+for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'journal_chain.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
 // Zero network in the standalone build : the relay client is replaced by a stub that never calls anything (the keyword parser answers),
 // and the manifest grants no host and sets connect-src 'none'. The source file ../extension/classifier_client.js is hashed but not shipped.
 src(join(ROOT, 'extension', 'classifier_client.js'));

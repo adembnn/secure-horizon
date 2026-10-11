@@ -7,7 +7,8 @@ import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_c
 import { ENGINE_CHOICE, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
 import { TEXT, answerOf, siteName } from './outcome.js';
 import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
-import { measure, readToken } from './effect_sim.js';
+import { measure } from './effect_sim.js';
+import { chainAppend } from './journal_chain.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const RANK = { attention: 1, unknown: 2, danger: 3, manipulation: 4 };
@@ -21,6 +22,7 @@ const DEFAULT_CFG = {
   limitUnlimited: true,         // Q17 : replace a spending right wider than the written amount by that amount, before the wallet sees it
   contact: { name: '', tel: '' }
 };
+const FLOOD = { maxPending: 10, cancelsBeforeBlock: 5, blockMs: 60000 }; // S13 : at most 10 held requests in all ; five cancels in a row from one origin = refused for 60 s
 const INTENT_METHODS = new Set(['eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign',
   'eth_signTypedData', 'eth_signTypedData_v1', 'eth_signTypedData_v3', 'eth_signTypedData_v4', 'wallet_sendCalls', 'eth_sendRawTransaction']);
 // Values shown by the verdict surface ('demande' opens its paste box) -> choice understood by the engine (null = no declared intent, objective floor).
@@ -161,6 +163,9 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     clear: (name) => chrome.alarms.clear(name)
   } : null;
   const store = new HoldStore({ storage: session, alarms, allowAuto: !!testHook });
+  // S16 : the journal, the settings and the local context are readable by the extension's own pages only, not by content scripts.
+  try { const p = chrome.storage.local.setAccessLevel && chrome.storage.local.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+  const cancelRun = new Map(); // origin -> { n, until } (memory only : a restarted worker forgets, which is the lenient side)
 
   async function getCfg() {
     let cfg = null;
@@ -181,12 +186,27 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   function journal(entry) { journalChain = journalChain.then(() => journalNow(entry), () => journalNow(entry)); return journalChain; }
   async function journalNow(entry) {
     entry.ts = Date.now();
+    // S13/S19 : consecutive cancels per origin ; a confirmed decision is also kept in its own ring that spam cannot push out
+    if (entry.type === 'decision' && entry.origin) {
+      if (entry.decision === 'cancel' && entry.by !== 'expired') {
+        if (cancelRun.size > 200) cancelRun.clear();
+        const c = cancelRun.get(entry.origin) || { n: 0, until: 0 }; c.n++; if (c.n >= FLOOD.cancelsBeforeBlock) c.until = entry.ts + FLOOD.blockMs; cancelRun.set(entry.origin, c);
+      } else if (entry.decision === 'confirm') cancelRun.delete(entry.origin);
+      if (entry.decision === 'confirm') {
+        try { const { confirms } = await chrome.storage.local.get('confirms'); const a = Array.isArray(confirms) ? confirms : []; a.push({ ts: entry.ts, origin: entry.origin, method: entry.method, level: entry.level || null }); if (a.length > 200) a.splice(0, a.length - 200); await chrome.storage.local.set({ confirms: a }); } catch (_) {}
+      }
+    }
     try {
       const { log } = await chrome.storage.local.get('log');
       const arr = Array.isArray(log) ? log : [];
       arr.push(entry); if (arr.length > 500) arr.splice(0, arr.length - 500);
       await chrome.storage.local.set({ log: arr });
     } catch (_) {}
+    // hash-chained copy (journal_chain.js) : site, kind, level, codes, decision, build version. Never the sentence, never an address.
+    if (entry.type === 'verdict' || entry.type === 'decision' || entry.type === 'partial') {
+      let version = ''; try { version = chrome.runtime.getManifest().version; } catch (_) {}
+      await chainAppend(chrome.storage.local, entry, version);
+    }
     if (onJournal) { try { onJournal(entry); } catch (_) {} }
   }
 
@@ -234,12 +254,9 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // only when that amount is certain. Otherwise the line keeps its advice (cap it in the wallet).
     let rewrite = null;
     if (w && w.fixable && cfg.limitUnlimited !== false && !rec.slim) { // a slimmed body is never written back into the request
-      const chain = {};
-      try {
-        const need = [...new Set(requestFacts(rec.body).grants.map((g) => g.token).filter((t) => t && !tokens[t]))].slice(0, 4);
-        for (const t of need) { const m = await readToken(rpcOf(rec.tabId, rec.frameId, rec.rid), t); if (m) chain[t] = m; }
-      } catch (_) {}
-      const plan = limitPlan(rec.body, intent, tokens, chain);
+      // S15 : the symbol is NOT read on the token contract (a contract can call itself USDC). Only a token known by its address
+      // (built-in list, local context) is ever rewritten ; any other gets the alert and the advice, no rewrite.
+      const plan = limitPlan(rec.body, intent, tokens, {});
       if (plan) {
         rewrite = { params: plan.params };
         w = Object.assign({}, w, { line: w.line.replace(/ Réduis le plafond.*$/, ''), fix: limitText(plan), limited: { amount: plan.amount, symbol: plan.symbol } });
@@ -353,7 +370,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       const std = frictionFor(v.level, DEFAULT_CFG).waitMs;
       const secs = Math.round(f.waitMs / 1000);
       if (v.level === 'manipulation') view.note = 'Ta demande reste retenue. Tu peux annuler à tout moment.';
-      else if (f.phrase) view.note = 'Pour continuer : retape la phrase et attends ' + secs + ' s. Annuler reste possible.';
+      else if (f.phrase) view.note = 'Pour continuer : attends ' + secs + ' s. Annuler reste possible.';
       if (f.waitMs && f.waitMs !== std) view.note += ' Réglage de démo : ' + secs + ' s au lieu de ' + Math.round(std / 1000) + ' s.';
       if (rec.called) view.contact = { name: cfg.contact.name || 'Un proche de confiance', tel: cfg.contact.tel || '' };
     }
@@ -421,6 +438,13 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   async function onGate(msg, sender) {
     const p = msg.payload || {};
     const origin = originOf(sender);
+    if (p.kind === 'journal' && p.method === 'interception_partielle') {
+      // window.ethereum could not be wrapped on this page : said in the journal and in the side panel, never hidden
+      try { const cur = (await chrome.storage.local.get('partial')).partial; const m = cur && typeof cur === 'object' ? cur : {}; m[hostOf(origin)] = Date.now();
+        const keys = Object.keys(m).sort((a, b) => m[b] - m[a]).slice(0, 20); const out = {}; for (const k of keys) out[k] = m[k]; await chrome.storage.local.set({ partial: out }); } catch (_) {}
+      await journal({ type: 'partial', origin, method: 'interception_partielle', frame: sender.frameId === 0 ? 'top' : 'child' });
+      return { done: true, allow: true };
+    }
     if (p.kind === 'journal') {
       // not a gate (nothing waits for this answer). At most one line per origin and method every 10 s : a page cannot flush the decisions out of the journal.
       const jk = origin + '|' + String(p.method).slice(0, 40), now = Date.now();
@@ -428,6 +452,12 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       return { done: true, allow: true };
     }
     if (!fromPage(sender)) return { done: true, allow: false, reason: 'onglet-inconnu' };
+    { // S13 : an origin that cancelled twice in a row waits 60 s ; nobody can hold more than 10 windows at once
+      const c = cancelRun.get(origin);
+      if (c && c.n >= FLOOD.cancelsBeforeBlock) { if (Date.now() < c.until) return { done: true, allow: false, reason: 'denied' }; cancelRun.delete(origin); }
+      let pend = 0; try { pend = (await store.all()).filter((r) => r.status === 'pending').length; } catch (_) {}
+      if (pend >= FLOOD.maxPending) return { done: true, allow: false, reason: 'denied' };
+    }
     if (typeof p.method !== 'string' || p.method.length > 80) return { done: true, allow: false, reason: 'demande-invalide' };
     if (!validRid(msg.rid)) return { done: true, allow: false, reason: 'demande-invalide' };
     const tabId = sender.tab.id, frameId = sender.frameId;
@@ -474,7 +504,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   async function journalStage(rec) {
     if (rec.stage !== 'verdict') return;
     const v = rec.verdict;
-    await journal({ type: 'verdict', origin: rec.origin, method: rec.method, level: v.level, indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
+    await journal({ type: 'verdict', origin: rec.origin, method: rec.method, level: v.level, codes: Array.isArray(v.codes) ? v.codes.slice(0, 8) : [], indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
       friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, grill: rec.grill ? { state: rec.grill.state, floor: rec.grill.floor, answers: rec.grill.answers } : null, intent: rec.intent ? rec.intent.choice : null });
   }
 

@@ -55,8 +55,9 @@
     const el = (tag, text, cls) => { const e = doc.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
     const clear = () => { while (root.firstChild) root.removeChild(root.firstChild); };
     async function render() {
-      let log = [], active = false;
+      let log = [], active = false, partial = {};
       try { log = (await env.chrome.storage.local.get('log')).log; } catch (_) {}
+      try { const p = (await env.chrome.storage.local.get('partial')).partial; if (p && typeof p === 'object') partial = p; } catch (_) {}
       try { const r = await env.chrome.runtime.sendMessage({ type: 'hu.poll', rid: 'etat-0000000000' }); active = !!r && typeof r.state === 'string'; } catch (_) { active = false; }
       let mf = {}; try { mf = env.chrome.runtime.getManifest() || {}; } catch (_) {}
       const csp = mf.content_security_policy && mf.content_security_policy.extension_pages || '';
@@ -66,6 +67,8 @@
       root.appendChild(el('h1', 'Hold up'));
       root.appendChild(el('p', active ? 'Hold up est actif.' : 'Hold up est inactif.'));
       root.appendChild(el('p', 'Version ' + (mf.version || 'inconnue') + (offline ? ' · Aucune connexion réseau' : ''), 'quiet'));
+      const cut = Object.keys(partial).filter((k) => Number.isFinite(partial[k])).sort((a, b) => partial[b] - partial[a]).slice(0, 5);
+      if (cut.length) root.appendChild(el('p', 'Interception partielle : sur ' + cut.map(siteLabel).join(', ') + ', le fournisseur du portefeuille n’a pas pu être entouré. Des demandes peuvent partir sans passer par Hold up.', 'danger-note'));
       root.appendChild(el('h2', 'Aujourd’hui'));
       const c = el('ul', null, 'counters');
       for (const [n, label] of [[s.today.checked, 'demandes vérifiées'], [s.today.cancelled, 'annulées']]) { const li = el('li'); li.appendChild(el('b', String(n))); li.appendChild(el('span', label, 'quiet')); c.appendChild(li); }
@@ -88,15 +91,24 @@
       const opt = el('button', 'Ouvrir les réglages'); opt.setAttribute('type', 'button');
       opt.addEventListener('click', () => { try { env.chrome.runtime.openOptionsPage(); } catch (_) {} });
       const del = el('button', 'Effacer l’historique'); del.setAttribute('type', 'button');
-      del.addEventListener('click', async () => { try { await env.chrome.storage.local.remove('log'); } catch (_) {} await render(); });
-      actions.appendChild(opt); actions.appendChild(del); root.appendChild(actions);
+      del.addEventListener('click', async () => { try { await env.chrome.storage.local.remove(['log', 'chain']); } catch (_) {} await render(); });
+      const exp = el('button', 'Exporter le journal (JSON)'); exp.setAttribute('type', 'button');
+      exp.addEventListener('click', async () => {
+        let chain = null; try { chain = (await env.chrome.storage.local.get('chain')).chain; } catch (_) {}
+        const body = JSON.stringify({ format: 'holdup-journal', version: 1, anchor: chain && chain.anchor || null, entries: chain && Array.isArray(chain.entries) ? chain.entries : [] }, null, 1);
+        if (env.save) env.save('holdup-journal.json', body);
+      });
+      root.appendChild(el('p', 'Le journal est chaîné : une ligne changée, retirée ou déplacée se voit avec tools/verify_journal.mjs. Il ne contient ni ta phrase ni d’adresse.', 'quiet'));
+      actions.appendChild(exp); actions.appendChild(opt); actions.appendChild(del); root.appendChild(actions);
     }
     return { render };
   }
 
   global.HoldupPanel = { summarize, siteLabel, mount, MAX_ROWS };
   if (global.document && global.chrome && global.document.getElementById && global.document.getElementById('panel')) {
-    const m = mount(global.document, global.document.getElementById('panel'), { chrome: global.chrome, now: () => Date.now() });
+    const m = mount(global.document, global.document.getElementById('panel'), { chrome: global.chrome, now: () => Date.now(), save: (name, text) => {
+      const a = global.document.createElement('a'); a.href = global.URL.createObjectURL(new global.Blob([text], { type: 'application/json' })); a.download = name; a.click();
+    } });
     m.render();
     try { global.chrome.storage.onChanged.addListener((ch, area) => { if (area === 'local' && ch.log) m.render(); }); } catch (_) {}
   }

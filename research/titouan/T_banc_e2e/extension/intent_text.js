@@ -83,10 +83,15 @@ const FR = [
   ['connect_or_accept_offer', /\b(connect|connexion|login|identifi|sign in|inscri|reclam|claim|recevoir|recois|recuper)/],
   ['pay_someone', /\b(pay|paie|envoy|envoi|transf|vire|verse|regl|rembourse[rz]?\b|send|donner?\b)/]
 ];
+// "donner à Uniswap le droit d'utiliser 250 USDC", "give Aave permission to spend" : GIVING A RIGHT, not paying someone. The verb "donner"
+// is only a payment when no right is being given. General rule (a verb of giving followed, close by, by a right/access/permission to use
+// or move funds), not a list of phrases. Measured by pipeline/grille (23 false alarms on the sealed control came from this reading).
+const GIVE_RIGHT = /\b(donn\w*|accord\w*|offr\w*|give|giv\w+|grant\w*|allow\w*)\b[^.!?]{0,80}\b((le |un |ce )?droit (a \S+( \S+){0,2} )?(d'|de |du |d'un )?(utilis|depens|prendre|deplac|touch|retir|gerer|transfer|manipul|spend|use|move)|(l'|un |cet )?acces (a|aux?|to)\b|l'?autorisation|la permission|permission|allowance|approval|right to (spend|use|move|access)|access to)/;
 const FACT_RE = {
   asked: FR[0][1],
   receive: /\b(recevoir|recois|recuper|reclam|remboursement|gagn|cadeau|airdrop|claim|receive|refund|reward)/,
-  grant: /\b(autoris|approuv|approve|allow|permission|donner (l'|un )?acces|droit de (depenser|prendre|deplacer))/
+  grant: /\b(autoris|approuv|approve|allow|permission|donner (l'|un )?acces|droit de (depenser|prendre|deplacer))/,
+  giveRight: GIVE_RIGHT
 };
 export async function keywordClassify(text) {
   const t = cleanText(text), f = fold(t);
@@ -98,6 +103,8 @@ export async function keywordClassify(text) {
   }
   const facts = {};
   for (const id of Object.keys(FACT_RE)) facts[id] = t && FACT_RE[id].test(f) ? 1 : 0;
+  if (facts.giveRight) { facts.grant = 1; if (kind === 'pay_someone') { kind = NO_MATCH; confidence = 0; } } // a right is given, nobody is paid
+  delete facts.giveRight;
   if (kind === 'asked_by_someone') facts.asked = 1;
   return { source: 'keywords', model: false, kind, confidence, facts };
 }

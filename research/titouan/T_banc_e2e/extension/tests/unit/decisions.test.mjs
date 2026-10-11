@@ -90,11 +90,11 @@ test('decision 1 : a window only for what moves value or grants a right ; connec
   vm.runInContext('class CustomEvent { constructor(t, i) { this.type = t; this.detail = i && i.detail; } }; globalThis.CustomEvent = CustomEvent;'
     + 'window.ethereum = { calls: [], async request(a) { this.calls.push(a.method); return "ok:" + a.method; } };', sb);
   vm.runInContext(readFileSync(join(DIR, 'inject.js'), 'utf8'), sb);
-  const free = ['eth_requestAccounts', 'eth_accounts', 'eth_chainId', 'eth_call', 'eth_getBalance', 'eth_blockNumber', 'wallet_switchEthereumChain', 'wallet_addEthereumChain', 'wallet_requestPermissions'];
+  const free = ['eth_requestAccounts', 'eth_accounts', 'eth_chainId', 'eth_call', 'eth_getBalance', 'eth_blockNumber', 'wallet_switchEthereumChain', 'wallet_requestPermissions'];
   for (const m of free) assert.equal(await vm.runInContext(`ethereum.request({ method: '${m}', params: [{ chainId: '0xa869' }] })`, sb), 'ok:' + m, m + ' reaches the wallet directly');
   assert.deepEqual(sb.gates, [], 'none of them is held');
-  for (const m of ['eth_sendTransaction', 'eth_signTypedData_v4', 'eth_signTypedData', 'personal_sign']) await vm.runInContext(`ethereum.request({ method: '${m}', params: [{}] })`, sb).catch(() => {});
-  assert.deepEqual(sb.gates, ['eth_sendTransaction', 'eth_signTypedData_v4', 'eth_signTypedData', 'personal_sign'], 'these are held');
+  for (const m of ['eth_sendTransaction', 'eth_signTypedData_v4', 'eth_signTypedData', 'personal_sign', 'wallet_addEthereumChain']) await vm.runInContext(`ethereum.request({ method: '${m}', params: [{}] })`, sb).catch(() => {});
+  assert.deepEqual(sb.gates, ['eth_sendTransaction', 'eth_signTypedData_v4', 'eth_signTypedData', 'personal_sign', 'wallet_addEthereumChain'], 'these are held');
   for (const t of timers) { clearTimeout(t); clearInterval(t); } for (const x of ports) { try { x.close(); } catch (_) {} }
 
   // worker side : a recognised Sign-In with Ethereum for this very site opens no window ; anything else does
@@ -346,19 +346,20 @@ test('Q16 : the delay stays when the engine itself found something else (look-al
   assert.equal(s.outcome, 'mismatch'); assert.equal(s.leftMs, 30000); assert.equal((await g.go()).status, 'again');
 });
 
-test('Q17 : the node is asked for the token when the local context does not know it', async () => {
+test('S15 : a token known only by what its own contract says (symbol() = USDC) is never rewritten : alert and advice only', async () => {
   await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [] } });
   worker();
   const abi = (s) => '0x' + pad(32n) + pad(BigInt(s.length)) + Buffer.from(s).toString('hex').padEnd(64, '0');
+  let asked = 0;
   F.chrome.tabs.sendMessage = async (tabId, msg) => {
     if (msg.type !== 'hu.rpc' || msg.method !== 'eth_call') return { ok: false };
+    if (String(msg.params[0].data).startsWith('0x95d89b41')) asked++;
     const d = msg.params[0].data; return { ok: true, result: d.startsWith('0x95d89b41') ? abi('USDC') : '0x' + pad(6n) };
   };
   const g = await gate(approve(MAX)); const s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
-  assert.equal(s.fix, 'Droit limité à 50 USDC'); clock.advance(1000); await g.go(); assert.equal(SENT({ params: (await g.poll()).params }), approve(50n * U).params[0].data);
-  // a token that calls itself something else is not rewritten
-  F.chrome.tabs.sendMessage = async (tabId, msg) => ({ ok: true, result: msg.params[0].data.startsWith('0x95d89b41') ? abi('SCAM') : '0x' + pad(6n) });
-  const h = await gate(approve(MAX)); assert.equal((await h.write('échanger 50 USDC contre AVAX')).view.screen.fix, null);
+  assert.equal(s.fix, null, 'no rewrite on the word of the contract'); assert.match(s.line, /Réduis le plafond à 50 USDC/);
+  clock.advance(1000); await g.go(); assert.equal((await g.poll()).params, undefined, 'the request goes as written by the site');
+  assert.equal(asked, 0, 'symbol() is not even asked');
 });
 
 test('Q17 : the page side forwards the limited params to the wallet ; a signature never gets other params', async () => {

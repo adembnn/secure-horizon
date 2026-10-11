@@ -104,3 +104,52 @@ Contenu : état (actif ou inactif, déterminé par une réponse du service worke
 Données : lues dans le journal existant (`log`). Le panneau n'écrit rien sauf l'effacement. Le journal ne contient ni la phrase écrite ni une adresse (testé sur un vrai passage par le gatekeeper). Les décisions de signature restent dans la fenêtre séparée.
 Tests : `sidepanel.test.mjs` (7).
 Non vérifié : affichage réel dans Chrome (pas de navigateur lancé).
+
+---
+
+## Deuxième passe (journal chaîné, intention, restes de la revue)
+
+Cette section remplace les lignes "partiel" et "non corrigé" plus haut quand elle les contredit.
+
+### Priorité 1 : `intent_text.js`, "donner à X le droit d'utiliser…"
+
+Cause : le mot "donner" était lu comme un paiement. Correction générale : un verbe de don (donner, accorder, offrir, give, grant, allow) suivi, à moins de 80 caractères, d'un droit d'utiliser ou de dépenser, d'un accès, d'une autorisation, d'une permission ou d'une allowance est un droit donné, pas un paiement. Le type n'est plus `pay_someone` et le fait `grant` est levé. "Donner 20 USDC à Paul" et "pour son droit d'entrée" restent des paiements.
+Preuve de non-régression, bras code seul, moitié réglage (`mesure_code.mjs --split=reglage`), avant puis après : identique à la ligne.
+- correspond lu "correspond" 298, "ne correspond pas" 0, invérifiable 9.
+- ne correspond pas lu "correspond" 2, "ne correspond pas" 448, invérifiable 2.
+- Rappel 448 sur 452 (99,1 %). Faux positifs 0 sur 307. Invérifiable reconnu 332 sur 332.
+Le réglage ne contenait pas cette tournure : il ne bouge donc pas, ce qui est le résultat attendu. Le contrôle scellé n'a pas été ouvert. Tests : `securite_intent.test.mjs`.
+
+### Priorité 2 : journal chaîné (build autonome compris)
+
+`extension/journal_chain.js` (copié dans le build autonome) et `gatekeeper.js`. Chaque ligne de type verdict, decision ou partial ajoute une entrée `{n, t, o, type, m, l, c, d, v, prev, hash}`, `hash = SHA-256(prev + contenu canonique)` (crypto.subtle, aucun réseau). Site coupé par le milieu, jamais la phrase, jamais une adresse, codes filtrés (une adresse n'y passe pas).
+- `verifyChain()` détecte une ligne modifiée, une ligne retirée au milieu, une ligne déplacée. Elle dit que la suppression des dernières lignes et la réécriture complète ne se détectent pas sans ancrage externe.
+- Borne de 500 entrées. À la troncature, la dernière entrée retirée devient le point d'ancrage `{n, hash}` : la suite reste vérifiable.
+- Panneau latéral : bouton "Exporter le journal (JSON)". "Effacer l'historique" efface aussi la chaîne.
+- Vérification hors ligne : `node extension/tools/verify_journal.mjs export.json` (sortie 0 cohérent, 1 rompu, 2 illisible).
+Tests : `journal_chain.test.mjs` (7 : modification, suppression, réordonnancement, limite honnête, borne, champs, export et outil).
+
+### Restes de la revue
+
+- S15 corrigé : la réécriture Q17 n'accepte que les jetons connus par adresse (liste intégrée, contexte local). `symbol()` n'est plus lu sur la chaîne. Test dans `decisions.test.mjs`.
+- S5 renforcé : `document.open()`, `write()` et `writeln()` sur le document de la page coupent la connexion. Les demandes en attente échouent fermé, les nouvelles attendent un nouveau port et un nouveau jeton, l'ancien jeton est mort. Le pont ne remplace son port que sur un `hello` marqué `re`, et remet son écouteur toutes les 100 ms. Reste impossible depuis un script de contenu : la fenêtre de quelques millisecondes entre `document.open()` et la remise de l'écouteur (une page qui anticipe peut y lire un `hello`). Sans secret partagé avant le premier échange, ce trou ne se ferme pas. Un port volé ne permet que de refuser des demandes, jamais de les laisser passer sans le jeton du pont.
+- S6 corrigé pour `sendTransaction` et `signTransaction` : retenus comme `eth_sendTransaction` et `eth_signTransaction`. Quand le portefeuille rappelle ensuite `request()` avec le même objet de transaction, il n'y a pas de seconde fenêtre. Autres méthodes propres à un portefeuille (inconnues, signatures variables) : non traitées. Jamais testé avec un vrai MetaMask, Rabby ou Coinbase.
+- S10 : fournisseur non patchable derrière un `window.ethereum` non configurable : détecté, écrit dans le journal (type `partial`) et affiché dans le panneau latéral ("Interception partielle"). Fermeture impossible, l'objet est gelé.
+- S11 corrigé : après un "allow", le réseau est relu ; s'il a changé, la demande est refusée (4900).
+- S12 corrigé : `wallet_addEthereumChain` est retenu. Cela change la décision produit n°1 ("changement de réseau sans fenêtre") pour l'ajout seulement ; `wallet_switchEthereumChain` reste libre. Le test de la décision 1 a été adapté.
+- S13 partiel : au plus 10 demandes retenues en tout ; cinq annulations de suite depuis une origine = refus pendant 60 s (mémoire du service worker, oubliée si le worker redémarre). Non fait : n'ouvrir la fenêtre que si l'onglet est actif (vol de focus).
+- S16 corrigé : `chrome.storage.local.setAccessLevel(TRUSTED_CONTEXTS)` au démarrage. Non testé dans Chrome.
+- S18 corrigé par le texte : la note ne dit plus "retape la phrase" (la fenêtre n'en affiche pas). Les réglages (`options.html`) parlent encore de phrase : non touché.
+- S19 partiel : les décisions "continuée" ont un anneau à part (`confirms`, 200) que le spam ne repousse pas. L'anneau principal reste à 500 lignes.
+- S14 non corrigé : la fusion monotone des faits du modèle et des mots-clés demande de toucher `interpret` et ses tests ; hors du délai.
+- S17 non corrigé ici : `relay.mjs` et `server.mjs` ne sont pas dans mes fichiers. À faire par leur propriétaire : définir `HOLDUP_EXTENSION_ID` au démarrage.
+- S20, S21 : documentation seulement. La vraie fenêtre est une fenêtre séparée avec `chrome-extension://` dans sa barre ; le dossier `extension/` du mode serveur contient `tests/` et `mock_engine.mjs` et doit être exclu du paquet ; en navigation privée Hold up n'agit pas sans autorisation explicite.
+- r01 : la ligne 21 avait des guillemets simples imbriqués ; corrigée dans le dépôt (un seul remplacement, `"function"`). Sortie 0.
+- COMPAT.md point 16 : la phrase écrite part vers le relais (8789), le texte de page vers le moteur (8787), et rien en version autonome.
+
+### État final
+
+- Unitaires : tous les fichiers de `extension/tests/unit/` passent un à un, sauf `revoke.test.mjs` (fichier d'un autre agent, rejoué sur le build il cherche `revoke.js` absent du build).
+- Version autonome : 34 contrôles sur 39. Les 5 échecs ne viennent pas de ces correctifs : (1) trois contrôles d'équivalence serveur/autonome comparent le moteur courant (`engine/src`, modifié à 8 h 48 et 9 h 00 par d'autres agents) à `sentinelle_core.js` embarqué, qui date de 6 h 49 : les textes diffèrent ("USDC" contre "jetons"), ainsi que quelques niveaux ; (2) le rejeu des unitaires sur le build échoue à cause de `revoke.test.mjs`. À régénérer par le propriétaire du moteur avant le jeu aveugle.
+- Build refait une fois : 44 fichiers, arbre 48ca0a51bbdfdb0b. Zip : SHA-256 51cd51b5…33e0.
+- r01, r02, r03, r05 sortent 0. r04 sort 1 (moteur, hors de mes fichiers).

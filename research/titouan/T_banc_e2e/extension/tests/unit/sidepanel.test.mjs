@@ -36,11 +36,11 @@ test('state, version, offline line (standalone), counters, how it works, the two
   assert.ok(tx.includes('Version 0.3.0 · Aucune connexion réseau'));
   assert.deepEqual(t.D.all(t.root).filter((e) => e.tag === 'b').map((e) => e.textContent), ['2', '1'], 'verified today, cancelled today');
   assert.equal(tx.filter((x) => /^(Un site demande|Tu écris|Tu continues)/.test(x)).length, 3, 'three lines "Comment ça marche"');
-  assert.deepEqual(t.buttons().map((b) => b.textContent), ['Ouvrir les réglages', 'Effacer l’historique']);
+  assert.deepEqual(t.buttons().map((b) => b.textContent), ['Exporter le journal (JSON)', 'Ouvrir les réglages', 'Effacer l’historique']);
   assert.ok(tx.includes('Transaction · Danger · Annulée · 15:29'));
   assert.ok(tx.includes('Transaction · Attention · Continuée · 15:28'));
   assert.ok(!tx.some((x) => /\bOK\b|sûr\b/.test(x.replace('que c’est sûr', ''))), 'never a green OK');
-  t.buttons()[0].listeners.click[0](); assert.equal(t.chrome.opened, true);
+  t.buttons()[1].listeners.click[0](); assert.equal(t.chrome.opened, true);
 });
 test('inactive when the worker does not answer ; server build shows no "Aucune connexion réseau"', async () => {
   const t = panel({ alive: false, manifest: { version: '0.2.0', content_security_policy: { extension_pages: "connect-src http://127.0.0.1:8787" } } }); await t.p.render();
@@ -59,7 +59,7 @@ test('at most 20 requests, newest first ; the site is cut in the middle, never t
 test('"Effacer l’historique" removes the journal and the list is empty', async () => {
   const t = panel({ log: [dec(1), dec(2)] }); await t.p.render();
   assert.equal(t.D.all(t.root).filter((e) => e.className === 'site').length, 2);
-  await t.buttons()[1].listeners.click[0]();
+  await t.buttons()[2].listeners.click[0]();
   assert.equal(t.F.state.local.log, undefined);
   assert.ok(t.texts().includes('Aucune demande pour l’instant.'));
 });
@@ -106,4 +106,21 @@ test('manifests and files : sidePanel permission, Chrome 114, panel files, no ne
   assert.ok(/<script src="sidepanel\.js"><\/script>/.test(html) && !/<script>[^<]/.test(html) && !/\son[a-z]+=/.test(html));
   const css = readFileSync(join(DIR, 'ui', 'sidepanel.css'), 'utf8');
   assert.ok(!/gradient|box-shadow:\s*[^0n]|emoji/i.test(css.replace(/box-shadow:\s*none/g, '')));
+});
+
+test('S10 : a page where the provider could not be wrapped is said in the panel and written in the journal and the chain', async () => {
+  const clock = fakeClock(); const F = makeChrome(); globalThis.chrome = F.chrome;
+  const { createGatekeeper } = await load('gatekeeper.js');
+  createGatekeeper({ check: async () => ({ level: 'attention', texts: {}, reasons: [], effects: {}, risk_signals: [] }) });
+  const page = F.page(11, 'https://shop.example');
+  const r = await F.send({ type: 'gate', rid: 'rid-partial-001', payload: { kind: 'journal', method: 'interception_partielle' } }, page);
+  assert.equal(r.done, true);
+  assert.ok(F.state.local.partial['shop.example'] > 0);
+  assert.ok(F.state.local.log.some((e) => e.type === 'partial')); assert.ok(F.state.local.chain.entries.some((e) => e.type === 'partial'));
+  const t = panel({ log: [] }); t.F.state.local.partial = F.state.local.partial;
+  const chrome2 = t.chrome; chrome2.storage = F.chrome.storage;
+  const D = dom(), sb = { Date, URL, console }; sb.window = sb; vm.createContext(sb); vm.runInContext(SRC, sb);
+  const root = D.mk('main'); await sb.HoldupPanel.mount(D.document, root, { chrome: chrome2, now: () => Date.now() }).render();
+  assert.ok(D.all(root).some((e) => /^Interception partielle : sur shop\.example/.test(e.textContent)));
+  clock.restore(); delete globalThis.chrome;
 });

@@ -16,7 +16,8 @@
     const d = ev.data;
     if (ev.source !== window || !d || d.__sentinelle !== 'hello' || !ev.ports || !ev.ports[0]) return;
     ev.stopImmediatePropagation(); // the page never sees a port, not even the ones of the retries that arrive after the connection
-    if (port) return;
+    if (port && d.re !== true) return; // a second hello is a retry : ignored. Only a hello marked "re" (inject.js dropped its connection after document.open()) replaces the port.
+    if (port) { try { port.onmessage = null; port.close(); } catch (_) {} }
     port = ev.ports[0];
     token = newToken();
     port.onmessage = onPortMsg;
@@ -24,8 +25,9 @@
   }
   window.addEventListener('message', onHello, true);
   // document.open() (document.write in an about:blank iframe) removes the window listeners : put it back until connected.
-  const rearm = setInterval(() => { if (port) clearInterval(rearm); else window.addEventListener('message', onHello, true); }, 20);
-  setTimeout(() => clearInterval(rearm), 5000);
+  // Put back every 20 ms until connected, then every 100 ms for good (a later document.open() clears it again).
+  let rearmN = 0;
+  setInterval(() => { if (!port || ++rearmN % 5 === 0) window.addEventListener('message', onHello, true); }, 20);
 
   function pageText() {
     try { const b = document.body; return b ? (b.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 4000) : ''; } catch (_) { return ''; }

@@ -331,7 +331,7 @@ export function limitPlan(body, intent, tokens = {}, chain = {}) {
     if (!((sel === '0x095ea7b3' || sel === '0x39509351') && (data.length - 10) / 64 >= 2)) continue;
     let raw; try { raw = BigInt('0x' + word(data, 1)); } catch (_) { return null; }
     if (raw <= 0n) continue;
-    const token = lc(tx.to), meta = tokens[token] || chain[token];
+    const token = lc(tx.to), meta = tokens[token]; // S15 : `chain` (read on the contract) is never trusted
     // the token must be known by its own contract (or the local context), and be the one the person wrote : else, no guess
     if (!meta || !meta.symbol || !Number.isInteger(meta.decimals) || String(meta.symbol).toUpperCase() !== intent.symbol) return null;
     const want = toRaw(intent.amount, meta.decimals);
@@ -345,7 +345,7 @@ export function limitPlan(body, intent, tokens = {}, chain = {}) {
   const after = requestFacts(Object.assign({}, body, { params: copy }));
   if (after.grants.length !== facts.grants.length) return null;
   for (const g of after.grants) {
-    const meta = tokens[g.token] || chain[g.token]; if (!meta) return null;
+    const meta = tokens[g.token]; if (!meta) return null;
     const want = toRaw(intent.amount, meta.decimals); if (want == null || g.raw > want) return null;
   }
   return { params: copy, amount: intent.amount, symbol: intent.symbol };

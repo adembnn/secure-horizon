@@ -13,7 +13,7 @@
   /* NATIVES-BEGIN */
   const W = window;
   const O = Object, R = Reflect, P = Proxy;
-  const NativePromise = Promise, WM = WeakMap, WS = WeakSet, MapC = Map, SetC = Set, ErrorC = Error, Str = String;
+  const BigIntC = BigInt, NativePromise = Promise, WM = WeakMap, WS = WeakSet, MapC = Map, SetC = Set, ErrorC = Error, Str = String;
   const fnCall = Function.prototype.call, fnBind = Function.prototype.bind;
   const uncurry = fnBind.bind(fnCall); // uncurry(f)(self, ...args) === f.call(self, ...args), sans jamais relire .call
   const defProp = O.defineProperty, gopd = O.getOwnPropertyDescriptor, getProto = O.getPrototypeOf, objCreate = O.create;
@@ -86,7 +86,8 @@
   let nextId = 1;
   function whenReady(fn) { if (readyFlag) { fn(); return; } mapSet(readyQueue, qn++, fn); }
   function flushReady() { while (qdone < qn) { const fn = mapGet(readyQueue, qdone); mapDel(readyQueue, qdone); qdone++; try { fn(); } catch (_) {} } }
-  function connect() {
+  // re = true : a new connection after document.open() / write() cleared the window listeners. The old port and token are dead.
+  function connect(re) {
     let tries = 0;
     const attempt = () => {
       if (readyFlag || tries++ > 60) return;
@@ -110,10 +111,23 @@
         flushReady();
       });
       if (portStart) portStart(p1);
-      try { postMsg({ __sentinelle: 'hello' }, '*', [ch.port2]); } catch (_) {}
+      try { postMsg({ __sentinelle: 'hello', re: re === true }, '*', [ch.port2]); } catch (_) {}
       setT(attempt, 25);
     };
-    attempt();
+    if (re) setT(attempt, 150); else attempt(); // after a document.open(), wait until the bridge has put its listener back
+  }
+  // S5 : document.open() / write() / writeln() on the page's own document clears the window listeners, and a page listener put there
+  // straight after could take the port of the next "hello". The connection is therefore dropped at once : pending requests fail closed,
+  // new ones wait for a fresh port and a fresh token (nothing is sent on the old channel).
+  function dropConnection() {
+    if (!readyFlag) return;
+    readyFlag = false; token = ''; port = null;
+    for (let id = 1; id < nextId; id++) {
+      if (!mapHas(pending, id)) continue;
+      const p = mapGet(pending, id); mapDel(pending, id); clearT(p.ackTimer);
+      try { p.cb(decision(false, 'bridge-unavailable', undefined)); } catch (_) {}
+    }
+    connect(true);
   }
   function onPort(ev) {
     const d = dataOf(ev); if (!isObj(d)) return;
@@ -159,16 +173,26 @@
     });
   }
   function notify(payload) { whenReady(() => { try { portPost(port, { t: 'notify', id: 0, k: token, payload }); } catch (_) {} }); }
-  connect();
+  connect(false);
+  if (W.Document && W.Document.prototype) {
+    const DOC_METHODS = ['open', 'write', 'writeln'];
+    for (let di = 0; di < DOC_METHODS.length; di++) {
+      const name = DOC_METHODS[di];
+      const d = getDesc(W.Document.prototype, name);
+      if (!d || typeof d.value !== 'function' || !d.configurable) continue;
+      const w = maskedProxy(d.value, { __proto__: null, apply(t, thisArg, args) { const r = rApply(t, thisArg, args); if (thisArg === W.document) dropConnection(); return r; } });
+      try { defProp(W.Document.prototype, name, { __proto__: null, value: w, writable: d.writable, enumerable: d.enumerable, configurable: true }); } catch (_) {}
+    }
+  }
 
   // --- methodes surveillees ---
   const GATED = new SetC(['eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign',
     'eth_signTypedData', 'eth_signTypedData_v1', 'eth_signTypedData_v3', 'eth_signTypedData_v4',
     'wallet_sendCalls', 'eth_sendRawTransaction',
-    // connexion (eth_requestAccounts, wallet_requestPermissions), lectures et changement de reseau (wallet_switchEthereumChain,
-    // wallet_addEthereumChain) ne deplacent rien et n'accordent aucun droit de depense : ils passent directement, sans fenetre.
+    // connexion (eth_requestAccounts, wallet_requestPermissions), lectures et changement de reseau (wallet_switchEthereumChain)
+    // ne deplacent rien (wallet_addEthereumChain, lui, est retenu : un noeud RPC choisi par la page voit et peut falsifier tout le reste) et n'accordent aucun droit de depense : ils passent directement, sans fenetre.
     // droits durables et dechiffrement : non decodes par le moteur, donc ecran "Non verifie" plutot que passage silencieux
-    'wallet_grantPermissions', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
+    'wallet_addEthereumChain', 'wallet_grantPermissions', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
   const JOURNAL = new SetC(['eth_requestAccounts']);
   function isHex20(s) {
     if (typeof s !== 'string' || s.length !== 42 || chCode(s, 0) !== 48 || (chCode(s, 1) | 32) !== 120) return false;
@@ -272,11 +296,17 @@
     if (!r || !isArr(r.params) || (method !== 'eth_sendTransaction' && method !== 'wallet_sendCalls')) return undefined;
     return r.params; // already a structural copy (onPort)
   }
+  const normChain = (x) => { try { return Str(BigIntC(x)); } catch (_) { return Str(x); } };
   function gate(provider, rawRequest, method, params, entryPoint, cb) {
     chainOf(provider, rawRequest, guessChain(method, params), (chainId) => {
       let from = guessFrom(method, params);
       if (!from) { try { from = provider.selectedAddress || null; } catch (_) {} }
-      ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top }, { provider, rawRequest }, cb);
+      // S11 : after an "allow" (it can come minutes later) the network is read again. If the page switched it meanwhile, the request
+      // is refused : the same bytes on another network are another request.
+      ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top }, { provider, rawRequest }, (r) => {
+        if (!r.allow || chainId == null) { cb(r); return; }
+        chainOf(provider, rawRequest, null, (now) => { cb(now != null && normChain(now) !== normChain(chainId) ? decision(false, 'reseau-change', undefined) : r); });
+      });
     });
   }
 
@@ -303,8 +333,8 @@
         if (!setHas(GATED, method)) return rApply(t, thisArg, [thaw(full)]);
         const k = keyOf(thisArg, method, params);
         // Internal call of the wallet with an object we forwarded ourselves : same content, same provider, once.
-        let ap; try { ap = a.params; } catch (_) {}
-        if (takePass(thisArg, a, k) || takePass(thisArg, ap, k)) return rApply(t, thisArg, [pinParams(thaw(full))]);
+        let ap, ap0; try { ap = a.params; ap0 = isArr(ap) ? ap[0] : undefined; } catch (_) {}
+        if (takePass(thisArg, a, k) || takePass(thisArg, ap, k) || takePass(thisArg, ap0, k)) return rApply(t, thisArg, [pinParams(thaw(full))]);
         return new NativePromise((resolve, reject) => {
           gate(thisArg, t, method, params, 'request', (r) => {
             try {
@@ -448,11 +478,36 @@
       }
     });
   }
+  // Wallet-specific direct entry points (provider.sendTransaction(tx), provider.signTransaction(tx)) : held as the JSON-RPC method they stand for.
+  // When the wallet then calls its own request() with the very transaction object we forwarded, that inner call is not asked twice
+  // (same object, same content, once : takePass on params[0]).
+  function makeDirect(method) {
+    return function (target) {
+      return maskedProxy(target, {
+        __proto__: null,
+        apply(t, thisArg, args) {
+          const a0 = args[0];
+          if (!isObj(a0)) return rApply(t, thisArg, args);
+          let tx; try { tx = snap(a0); } catch (_) { return rejected(rejection('params-illisibles')); }
+          return new NativePromise((resolve, reject) => {
+            gate(thisArg, null, method, [tx], 'direct', (r) => {
+              try {
+                if (!r.allow) { reject(rejection(r.reason || 'denied')); return; }
+                const lim = limited(r, method), out = clone(lim !== undefined && isObj(lim[0]) ? lim[0] : tx);
+                const rest = [out]; for (let i = 1; i < args.length; i++) setOwn(rest, i, args[i]);
+                settleWith(resolve, reject, fwd(thisArg, keyOf(thisArg, method, [out]), [out], () => rApply(t, thisArg, rest)));
+              } catch (e) { reject(e); }
+            });
+          });
+        }
+      });
+    };
+  }
   function wrapEnable(target) {
     return maskedProxy(target, { __proto__: null, apply(t, thisArg, args) { notify({ method: 'eth_requestAccounts', kind: 'journal', via: 'enable' }); return rApply(t, thisArg, args); } });
   }
-  const WRAPPERS = { __proto__: null, request: wrapRequest, send: wrapSend, sendAsync: wrapSendAsync, enable: wrapEnable, _rpcRequest: wrapInternal, handle: wrapInternal };
-  const PROVIDER_METHODS = ['request', 'send', 'sendAsync', 'enable', '_rpcRequest'];
+  const WRAPPERS = { __proto__: null, request: wrapRequest, send: wrapSend, sendAsync: wrapSendAsync, enable: wrapEnable, _rpcRequest: wrapInternal, handle: wrapInternal, sendTransaction: makeDirect('eth_sendTransaction'), signTransaction: makeDirect('eth_signTransaction') };
+  const PROVIDER_METHODS = ['request', 'send', 'sendAsync', 'enable', '_rpcRequest', 'sendTransaction', 'signTransaction'];
 
   // --- patch sur place d'un fournisseur ---
   const wrappedFns = new WS();     // enveloppes deja posees
@@ -529,7 +584,7 @@
       let has = false; try { has = typeof p[name] === 'function' || name in p; } catch (_) {}
       if (!has) continue;
       let ownerOk = false; try { ownerOk = patchMethod(p, name); } catch (_) { ownerOk = false; }
-      if (!ownerOk && name !== '_rpcRequest') ok = false;
+      if (!ownerOk && name !== '_rpcRequest' && name !== 'sendTransaction' && name !== 'signTransaction') ok = false;
     }
     // inner JSON-RPC engine of MetaMask-like wallets (best effort : a failure here does not change how the provider is exposed)
     try { const eng = p._rpcEngine; if (isObj(eng) && typeof eng.handle === 'function') patchMethod(eng, 'handle'); } catch (_) {}
@@ -558,6 +613,10 @@
     if (ext && ext.set) { rApply(ext.set, W, [v]); } else current = v;
     if (looksLikeProvider(v)) wrapProvider(v);
   };
+  // The page holds a provider we could not patch in place (frozen, not rewritable) behind a non configurable window.ethereum : the journal
+  // and the side panel say "interception partielle" instead of pretending. Once per page.
+  let partialNoted = false;
+  function notePartial() { if (partialNoted) return; partialNoted = true; notify({ method: 'interception_partielle', kind: 'journal' }); }
   function installSlot() {
     const d = getDesc(W, 'ethereum');
     if (d && (d.get === slotGet)) return;
@@ -566,7 +625,7 @@
       if (!d.configurable) {
         // impossible de remplacer l'emplacement : on envelopper en place. Si le fournisseur n'est pas patchable sur place
         // (methode non reinscriptible), la page garde l'objet brut : limite connue, voir RAPPORT_SECURITE_CORRECTIFS.md (S10).
-        try { wrapProvider(hasOwnU(d, 'value') ? d.value : slotGet()); } catch (_) {}
+        try { const raw = hasOwnU(d, 'value') ? d.value : slotGet(); if (isObj(raw) && wrapProvider(raw) !== raw) notePartial(); } catch (_) {}
         return;
       }
     }

@@ -13,7 +13,7 @@ export const cleanAll = () => { while (cleanups.length) { try { cleanups.pop()()
 
 // token : the token the fake bridge gives (null = a "ready" without token, as an old or forged bridge would). decide(payload) -> bool | promise of bool.
 export function page({ decide = () => true, bridge = true, before = '', token = TOKEN } = {}) {
-  const gates = [], notes = [], listeners = {}, timers = new Set(), ports = [];
+  let cur = token; const gates = [], notes = [], listeners = {}, timers = new Set(), ports = [];
   const sb = {
     console,
     setTimeout: (f, ms, ...a) => { const t = setTimeout(f, ms, ...a); timers.add(t); return t; },
@@ -26,19 +26,19 @@ export function page({ decide = () => true, bridge = true, before = '', token = 
     postMessage: (data, origin, transfer) => {
       if (!bridge || !data || data.__sentinelle !== 'hello' || !transfer || !transfer[0]) return;
       const port = transfer[0];
-      if (sb._port) return;
-      sb._port = port;
+      if (sb._port && !data.re) return;
+      if (data.re && token !== null) cur = token + 'r' + ((sb.reconnects || 0) + 1); sb._port = port; sb.reconnects = (sb.reconnects || 0) + (data.re ? 1 : 0);
       port.onmessage = async (ev) => {
         const m = ev.data;
-        if (m.t === 'notify') { if (token === null || m.k === token) notes.push(m.payload); return; }
+        if (m.t === 'notify') { if (token === null || m.k === cur) notes.push(m.payload); return; }
         if (m.t !== 'gate') return;
-        if (token !== null && m.k !== token) return; // the page side must echo the token
-        port.postMessage({ t: 'ack', id: m.id, k: token });
+        if (token !== null && m.k !== cur) return; // the page side must echo the token
+        port.postMessage({ t: 'ack', id: m.id, k: cur });
         gates.push(m.payload);
         let allow = false; try { allow = !!(await decide(m.payload)); } catch (_) {}
-        port.postMessage({ t: 'result', id: m.id, k: token, allow, reason: allow ? '' : 'denied' });
+        port.postMessage({ t: 'result', id: m.id, k: cur, allow, reason: allow ? '' : 'denied' });
       };
-      port.postMessage(token === null ? { t: 'ready' } : { t: 'ready', k: token });
+      port.postMessage(token === null ? { t: 'ready' } : { t: 'ready', k: cur });
     }
   };
   sb.window = sb; sb.top = sb; sb.self = sb; sb.globalThis = sb;
