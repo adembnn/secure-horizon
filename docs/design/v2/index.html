@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Sentinelle, planche des écrans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@500;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
+<style>
+:root{--papier:#F5F5F0;--encre:#1D1B3A;--crayon:#4D4B66;--tampon:#4527A0;--sur-tampon:#FFFFFF;--bureau:#D8D9E2;
+  --police:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,"Segoe UI",Roboto,Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--papier:#1B1936;--encre:#F2F0FC;--crayon:#BDBAD8;--tampon:#B9A8FF;--sur-tampon:#1B1936;--bureau:#100F24;color-scheme:dark}}
+:root[data-theme="dark"]{--papier:#1B1936;--encre:#F2F0FC;--crayon:#BDBAD8;--tampon:#B9A8FF;--sur-tampon:#1B1936;--bureau:#100F24;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bureau);color:var(--encre);font-family:var(--police);font-size:18px;line-height:1.5}
+.tete{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between;padding:32px 32px 8px;max-width:1500px;margin:0 auto}
+h1{margin:0;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.01em}
+.tete p{margin:6px 0 0;max-width:60ch;color:var(--crayon)}
+.theme{display:flex;border:3px solid var(--encre);border-radius:8px;overflow:hidden}
+.theme button{font:inherit;font-weight:700;font-size:16px;min-height:44px;padding:6px 16px;background:transparent;color:var(--encre);border:0;cursor:pointer}
+.theme button[aria-pressed="true"]{background:var(--tampon);color:var(--sur-tampon)}
+:focus-visible{outline:3px solid var(--encre);outline-offset:3px}
+section{max-width:1500px;margin:0 auto;padding:24px 32px 8px}
+h2{margin:0 0 4px;font-size:21px;line-height:1.25;font-weight:800}
+section>p{margin:0;color:var(--crayon);max-width:70ch}
+.rang{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;padding:20px 4px 28px}
+figure{margin:0;flex:none}
+figcaption{margin-top:10px;max-width:400px;font-size:16px;color:var(--crayon)}
+figcaption a{color:var(--tampon);font-weight:700}
+iframe{display:block;border:0;background:transparent;width:420px;height:900px}
+iframe.large{width:664px}
+</style>
+</head>
+<body>
+<header class="tete">
+  <div>
+    <h1>Sentinelle, tous les écrans</h1>
+    <p>Chaque écran répond à la même question : ce que la personne a dit, contre ce que l’opération fait. Les adresses et les sites sont inventés.</p>
+  </div>
+  <div class="theme" role="group" aria-label="Thème d’affichage">
+    <button type="button" data-t="auto" aria-pressed="true">Auto</button>
+    <button type="button" data-t="light" aria-pressed="false">Clair</button>
+    <button type="button" data-t="dark" aria-pressed="false">Sombre</button>
+  </div>
+</header>
+
+<section aria-labelledby="s1">
+  <h2 id="s1">Avant de signer</h2>
+  <div class="rang">
+    <figure><iframe title="Question d’intention" data-ecran="intention" src="intention.html" height="900"></iframe><figcaption>La personne dit ce qu’elle veut faire. Aucune réponse n’est cochée d’avance.</figcaption></figure>
+    <figure><iframe class="large" title="Bandeau sur le site" data-ecran="bandeau-site" src="bandeau-site.html"></iframe><figcaption>Le bandeau apparaît avant le clic, sur la page du site.</figcaption></figure>
+    <figure><iframe title="Fenêtre de l’extension" data-ecran="popup" src="popup.html"></iframe><figcaption>La fenêtre de l’extension, hors alerte.</figcaption></figure>
+  </div>
+</section>
+
+<section aria-labelledby="s2">
+  <h2 id="s2">Quand les deux ne correspondent pas</h2>
+  <p>Du plus grave au plus doux. Le même geste « Ne pas signer » est toujours le premier bouton.</p>
+  <div class="rang">
+    <figure><iframe title="Danger, signature" data-ecran="danger-signature" src="danger-signature.html"></iframe><figcaption>Danger : la signature donne le droit de tout prendre.</figcaption></figure>
+    <figure><iframe title="Danger, adresse" data-ecran="danger-adresse" src="danger-adresse.html"></iframe><figcaption>Danger : une adresse qui imite celle de Paul.</figcaption></figure>
+    <figure><iframe title="Pause, manipulation" data-ecran="manipulation" src="manipulation.html"></iframe><figcaption>Pause : quelqu’un met la pression. On propose de couper la ligne.</figcaption></figure>
+    <figure><iframe title="Attention" data-ecran="attention" src="attention.html"></iframe><figcaption>Attention : un doute, un seul clic.</figcaption></figure>
+    <figure><iframe title="Vérification impossible" data-ecran="verification-impossible" src="verification-impossible.html"></iframe><figcaption>Non vérifié : ni rouge ni vert.</figcaption></figure>
+    <figure><iframe title="Dit, affiché, fait" data-ecran="miroir" src="miroir.html"></iframe><figcaption>Le miroir : ce que la personne a dit, ce que le site affiche, ce que l’opération fait.</figcaption></figure>
+  </div>
+</section>
+
+<script>
+(function(){
+  var frames=[].slice.call(document.querySelectorAll('iframe')),theme='auto',root=document.documentElement;
+  function apply(t){
+    theme=t;
+    if(t==='auto'){root.removeAttribute('data-theme');}else{root.setAttribute('data-theme',t);}
+    frames.forEach(function(f){try{f.contentWindow.postMessage({theme:t==='auto'?null:t},'*');}catch(e){}});
+    [].forEach.call(document.querySelectorAll('.theme button'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-t')===t));});
+  }
+  [].forEach.call(document.querySelectorAll('.theme button'),function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-t'));});});
+  addEventListener('message',function(e){
+    if(!e.data||!e.data.hauteur){return;}
+    frames.forEach(function(f){if(f.contentWindow===e.source){f.style.height=e.data.hauteur+'px';}});
+  });
+  frames.forEach(function(f){f.addEventListener('load',function(){if(theme!=='auto'){try{f.contentWindow.postMessage({theme:theme},'*');}catch(e){}}});});
+})();
+</script>
+</body>
+</html>

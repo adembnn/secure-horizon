@@ -2,8 +2,8 @@
 id: T-102
 title: Moteur d'effets — ce que fait réellement une transaction ou une signature
 lane: tech
-status: todo
-owner: none
+status: doing
+owner: titouan
 agent: builder-backend
 branch: t/T-102
 depends_on: []

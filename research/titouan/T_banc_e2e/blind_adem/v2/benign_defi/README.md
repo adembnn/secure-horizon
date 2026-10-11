@@ -1,0 +1,10 @@
+# V2 BENIGN_DEFI : opérations DeFi bénignes difficiles (SYNTHÉTIQUE)
+Reproduire : `node gen.mjs` (graine 20261011, ethers v6 du dossier `blockchain/`), puis `node validate.mjs`. Le validateur régénère le jeu et le compare octet pour octet.
+Total : 1 410 cas, tous avec `label: benin`. 1 166 sont `hard` (83 %). Sévérité : 1 143 `ok` et 267 `warn`. Découpe : DEV 1 001, TEST 409. Chaînes : 43114 = 1 006, 1 = 319, 43113 = 85.
+Swaps (430) : LFJ v1 et Liquidity Book (60 + 60), Pangolin 50, Uniswap Universal Router 70, Uniswap direct sur Ethereum 50, 1inch v5 60, ParaSwap/Velora v6.2 40, Odos 40.
+Droits (320) : approbations illimitées vers des routeurs officiels 80, signatures Permit2 70, permit EIP-2612 40, approve vers Permit2 40, multicall SwapRouter02 50, increaseAllowance 40.
+Lending, staking, wrap et LP (410) : Aave v3 140 (supply, withdraw max, borrow, repay max, lot EIP-5792, collatéral), passerelle Aave 40, Benqi 60, sAVAX 50, wrap et unwrap 60, liquidité 60.
+Ponts, révocations et gouvernance (300) : Core / Avalanche Bridge 50, CCTP 50, Stargate v1 40, révocations (approve 0, Permit2 lockdown, setApprovalForAll false) 60, délégation de vote 50.
+`warn` : part du solde > 50 %, Stargate v1 legacy, calldata Odos compacte non décodable, approbation illimitée depuis un front-end tiers, intention absente sur une opération sensible, gros montant envoyé à l'adresse de dépôt du pont. Chaque cas a sa justification dans `expected_severity_justification`.
+Approximations (679 cas) : adresses dont la somme de contrôle est valide mais l'attribution vient de ma mémoire (UR et SwapRouter02 sur Avalanche, LB 2.2, Odos, passerelle Aave, aTokens, adresse de dépôt Core, CCTP Fuji), routeurs Fuji et exécuteurs d'agrégateurs dérivés de la graine, ABI reconstruites de mémoire (LB, Augustus v6.2, Odos, Stargate, unwrap, sAVAX, délégation EIP-712). La signature Permit2 intégrée dans `execute` est faite d'octets nuls.
+Champs ajoutés au schéma : `hard_signals`, `imitates_category`, `expected_severity_justification`, ainsi que `context.origin_kind` et `context.victim.persona`. L'intention est `null` dans 16 % des cas, ce qui correspond à une intention absente.

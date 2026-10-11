@@ -2,8 +2,8 @@
 id: T-105
 title: Sites de démo (fausse offre, faux support, vrai swap) + console jury
 lane: tech
-status: todo
-owner: none
+status: doing
+owner: titouan
 agent: builder-frontend
 branch: t/T-105
 depends_on: []
