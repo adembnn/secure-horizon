@@ -106,7 +106,7 @@ function decode(method, params, ctx, body) {
   }
 }
 // copie de run_loop.mergeEffects (fusion des effets d'un lot)
-function mergeEffects(list) {
+export function mergeEffects(list) {
   if (list.length === 1) return list[0];
   const lvlOf = (flags) => (flags.some((f) => f.severity === 'critical') ? 'critical' : flags.some((f) => f.severity === 'warn') ? 'warn' : 'ok');
   const m = JSON.parse(JSON.stringify(list[0]));
@@ -223,7 +223,7 @@ export const REASON_FICHE = {
   domain_chain_mismatch: 'F29', domain_without_chainid: '~signature_rejouable',
   // reseaux
   chain_add_insecure_rpc: 'F32', chain_add_known_id_custom_rpc: 'F32', chain_add_native_symbol_mismatch: 'F32', chain_add_native_symbol_spoof: 'F32', chain_add_no_rpc: 'F32',
-  chain_add_unknown: 'F32', chain_request_malformed: 'F33', chain_switch_unknown: 'F33', chain_switch_known: null,
+  chain_add_unknown: 'F32', chain_request_malformed: 'F33', chain_switch_unknown: 'F33', chain_switch_known: null, chain_add_known_official_rpc: null,
   // verification impossible (opacite)
   unknown_selector: 'F25', opaque: 'F25', decode_error: 'F25', short_calldata: 'F25', contract_creation: 'F25', no_handler: 'F25', depth_limit: 'F25', too_many_children: 'F25',
   ur_command_opaque: 'F25', ur_command_unknown: 'F25', ur_length_mismatch: 'F25', multisend_truncated: 'F25', multisend_bad_op: 'F25', typed_decode_error: 'F25',

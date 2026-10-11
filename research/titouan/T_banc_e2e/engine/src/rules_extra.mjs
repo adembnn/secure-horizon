@@ -3,6 +3,7 @@ import { isOn } from './fixes.mjs';
 import { parseSig, decodeParams } from './abi.mjs';
 import { lc } from './util.mjs';
 import { decodeLibraryCall } from './protocols_extra.mjs';
+import { matchLens } from './rules.mjs';
 import { OPACITY_CODES } from './engine.mjs';
 
 const lvl = (fl) => (fl.some((f) => f.severity === 'critical') ? 'critical' : fl.some((f) => f.severity === 'warn') ? 'warn' : 'ok');
@@ -196,6 +197,38 @@ function wrapDeposit(eff, request, ctx, flags) {
   flags.push({ code: 'service_call_decoded', severity: 'info', detail: 'envoi natif à un jeton du registre : dépôt, reçu crédité à l expéditeur' });
 }
 
+// ---- Adresse sosie (USENIX Sec. 2025 : préfixe >= 3 ET suffixe >= 4 caractères hexa communs avec une adresse connue de l'utilisateur, sans être identique).
+// Le comparateur du dépôt n'appelle jamais sa fonction 4+4 ; le moteur de base a déjà la règle 3+4, ce bloc la complète :
+//  F21 : le fournisseur de contexte (surveillance du presse-papiers, indexeur) PEUT signaler qu'une contrepartie ressemble à une adresse connue (counterparty_facts[a].lookalikeOf) : critical.
+//  F22 : le sosie est celui qui n'est PAS la vraie. Si la destination a déjà été payée par l'utilisateur (sortie dans l'historique) et que l'adresse « dont elle serait le sosie » n'a jamais
+//        reçu de paiement (poussière entrante seulement), c'est la destination qui est la vraie ; l'alerte est retirée (elle vise le sosie qui traîne dans l'historique, pas la destination).
+//  F23 : score continu : préfixe >= 2 ET suffixe >= 3 (sans atteindre 3+4) avec une adresse déjà payée ou un contact, pour une destination jamais payée : warn (critical reste réservé à 3+4).
+const isAddrS = (a) => typeof a === 'string' && /^0x[0-9a-fA-F]{40}$/.test(a);
+const outHist = (ctx) => new Set((ctx.history || []).filter((h) => h.direction === 'out').map((h) => lc(h.address)));
+function lookalikeRules(eff, ctx, flags) {
+  const paid = outHist(ctx);
+  const self = lc(ctx.from);
+  const contacts = new Set((ctx.contacts || []).map((c) => lc(c.address)));
+  for (const cp of eff.counterparties || []) {
+    const D = cp.address;
+    if (isOn('F21')) {
+      const la = ctx._facts && ctx._facts[D] && ctx._facts[D].lookalikeOf;
+      if (isAddrS(la) && lc(la) !== D) { if (!cp.lookalikeOf) cp.lookalikeOf = lc(la); flags.push({ code: 'lookalike_reported', severity: 'critical', detail: `${D} est signalée comme sosie de ${lc(la)} par le fournisseur de contexte`, address: D, lookalikeOf: lc(la) }); }
+    }
+    if (isOn('F22') && cp.lookalikeOf && paid.has(D) && !paid.has(lc(cp.lookalikeOf)) && lc(cp.lookalikeOf) !== self) {
+      eff.risk_flags = eff.risk_flags.filter((f) => !((f.code === 'address_poisoning' || f.code === 'lookalike_address') && f.address === D));
+      delete cp.lookalikeOf; cp.realAddress = true;
+    }
+    if (isOn('F23') && !cp.lookalikeOf && !paid.has(D) && !contacts.has(D) && D !== self && !(ctx.knownSpenders || []).includes(D)) {
+      for (const A of new Set([...paid, ...contacts, self])) {
+        if (!A || A === D) continue;
+        const m = matchLens(D, A);
+        if (m.prefix >= 2 && m.suffix >= 3) { flags.push({ code: 'lookalike_weak', severity: 'warn', detail: `${D} partage ${m.prefix} caractères de début et ${m.suffix} de fin avec ${A}`, address: D }); break; }
+      }
+    }
+  }
+}
+
 export function applyExtraRules(eff, request, ctx) {
   const flags = [];
   if (isOn('F11')) marketOrderProceeds(request, ctx, flags);
@@ -206,7 +239,9 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F5')) serviceCall(eff, request, ctx);
   if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
   if (isOn('F18')) wrapDeposit(eff, request, ctx, flags);
+  if (isOn('F21') || isOn('F22') || isOn('F23')) lookalikeRules(eff, ctx, flags);
   addFlags(eff, flags);
+  if (isOn('F22')) recompute(eff);
   return eff;
 }
 
