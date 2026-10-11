@@ -54,3 +54,22 @@
 | fuzz_fp | FP : addEthereumChain L1 Avalanche (Dexalot, Beam, DFK) → chain_add_native_symbol_spoof | 45/200 | FZFP-032136 |
 | fuzz_fp | FP : intention adjacente cochée de bonne foi (connect au lieu de swap/approve) → unexpected_approval_connect | 1353/1960 | voir jsonl |
 | fuzz_fp | Fatigue : agrégateurs, lending, ponts, votes → warn unknown_selector/opaque/unknown_typed_data | 18606/32545 warn | - |
+| fuzz_control | ownership/nominateNewOwner (Synthetix) → warn (unknown_selector) | 1807/1807 | FC-nominateNewOwner-10864 |
+| fuzz_control | ownership/_setPendingAdmin (Compound) → warn | 1803/1803 | FC-setPendingAdmin-12095 |
+| fuzz_control | ownership/setPendingOwner → warn | 1780/1780 | FC-setPendingOwner-13322 |
+| fuzz_control | ownership/proposeOwner → warn | 1756/1756 | FC-proposeOwner-14526 |
+| fuzz_control | ownership/pushOwner (two-step) → warn | 1753/1753 | FC-pushOwner-15706 |
+| fuzz_control | ownership/pushManagement (Yearn) → warn | 1820/1820 | FC-pushManagement-16883 |
+| fuzz_control | ownership/transferOwnership(address,uint256) delayed → warn | 1804/1804 | FC-transferOwnershipDelayed-18129 |
+| fuzz_control | ownership/transferOwnership(address,address) overload → warn | 1781/1781 | FC-transferOwnership2-19355 |
+| fuzz_control | ownership/setAdmin → warn | 1812/1812 | FC-setAdmin-20560 |
+| fuzz_control | ownership/addOwner(address) 1-arg → warn | 1792/1792 | FC-addOwner1-21796 |
+| fuzz_control | ownership/setImplementation (non-UUPS proxy) → warn | 1765/1765 | FC-setImplementation-23012 |
+| fuzz_control | ownership/setGovernance → warn | 1771/1771 | FC-setGovernance-24201 |
+| fuzz_control | ownership/transferManagement → warn | 1768/1768 | FC-transferManagement-25401 |
+| fuzz_control | ownership/beginDefaultAdminTransfer (AccessControlDefaultAdminRules) → warn | 1782/1782 | FC-setPendingDefaultAdmin-26594 |
+| fuzz_control | method/eth_signTransaction → unknown (unsupported) | 312/312 | FC-signTx-27797 |
+| fuzz_control | method/wallet_requestPermissions → unknown (unsupported) | 312/312 | FC-reqPerm-27796 |
+| fuzz_control | chain/switchEthereumChain_to_signature → ok/warn | 312/312 | FC-switch-27795 |
+| fuzz_control | chain/addEthereumChain malicious RPC (fake Avalanche) → warn | 271/312 | FC-addChain-27794 |
+| fuzz_control | FP benin/self_safe_admin changeThreshold+enableModule+setGuard → critical (own Safe) | hand-verified | FC-benignSafe-28322 |

@@ -168,3 +168,14 @@ Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est pré
   - staking sAVAX/stETH (720/800) ;
   - abonnements et paiements marchands avec autorisation (520/680).
   Fatigue à 100 % sur les agrégateurs, Aave, Benqi, CCTP et Snapshot, faute de décodage.
+- FUZZ CONTRÔLE (`redteam/jury_fuzz_control.md`) : 38 251 cas testés, environ 26 200 contournements, 373 représentants.
+  Faille structurelle : les opérations d'administration sont reconnues par une liste blanche de sélecteurs. Tout sélecteur de prise de contrôle absent de la liste (nominateNewOwner, _setPendingAdmin, pushManagement, setImplementation, setGovernance…) tombe donc en warn, jamais en critical.
+  Autres trous :
+  - eth_signTransaction et wallet_requestPermissions ne sont pas gérés (`unknown`) ;
+  - le RPC de wallet_addEthereumChain n'est pas évalué ;
+  - faux positif : l'administration légitime de son propre Safe sort en critical, faute d'IntentKind « administration ».
+  Ce qui tient : les sélecteurs canoniques (transferOwnership, upgradeTo, grantRole…), y compris enveloppés.
+
+## Bilan red team à la passation
+Environ 135 000 cas testés en boîte noire. 3 jurés et 7 fuzzers ; social et tokens bloqués par le classifieur.
+Registre : `redteam/BYPASS_REGISTRY.md`. Contournements à rejouer : `redteam/jury_*.jsonl`, avec `node redteam/check.mjs` (chaîne de Titouan) ou `node redteam/check_plus.mjs` (avec les détecteurs d'Adem).
