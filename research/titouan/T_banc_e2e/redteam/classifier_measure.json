@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-11T01:56:17.009Z",
+  "date": "2026-10-11T04:10:01.121Z",
   "n_textes_uniques": 3210,
   "avec_message_colle": 1348,
   "par_label": {
@@ -33,7 +33,60 @@
       }
     },
     "clef-flash": {
-      "ignore": "CF_ACCOUNT_ID / CF_API_TOKEN absents de l'environnement"
+      "appels_reussis": 3203,
+      "replis_mots_cles": 7,
+      "erreurs": [
+        "délai dépassé (4000 ms)",
+        "HTTP 429 : AiError: AiError: Capacity temporarily exceeded, please try again. (9468d953-cc64-4bf4-9ccc-5d2e4bf8dc4c)"
+      ],
+      "latence_ms": {
+        "p50": 369,
+        "p95": 1083
+      },
+      "tokens_entree": 1681665,
+      "cout_usd": 0.0639,
+      "seuils": {
+        "0.3": {
+          "rappel_malveillant_pct": 73,
+          "n_malveillant": 1392,
+          "fausses_alertes_benin_pct": 0.4,
+          "n_benin": 1199,
+          "autres_labels_signales": {
+            "fraude_conforme": "369/504",
+            "ambigu": "2/115"
+          }
+        },
+        "0.5": {
+          "rappel_malveillant_pct": 72,
+          "n_malveillant": 1392,
+          "fausses_alertes_benin_pct": 0.3,
+          "n_benin": 1199,
+          "autres_labels_signales": {
+            "fraude_conforme": "364/504",
+            "ambigu": "1/115"
+          }
+        },
+        "0.7": {
+          "rappel_malveillant_pct": 71,
+          "n_malveillant": 1392,
+          "fausses_alertes_benin_pct": 0.3,
+          "n_benin": 1199,
+          "autres_labels_signales": {
+            "fraude_conforme": "353/504",
+            "ambigu": "1/115"
+          }
+        },
+        "0.9": {
+          "rappel_malveillant_pct": 52.2,
+          "n_malveillant": 1392,
+          "fausses_alertes_benin_pct": 0.3,
+          "n_benin": 1199,
+          "autres_labels_signales": {
+            "fraude_conforme": "270/504",
+            "ambigu": "0/115"
+          }
+        }
+      }
     }
   }
 }
