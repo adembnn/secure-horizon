@@ -13,11 +13,11 @@
  "valeurs_nulles": 5127,
  "erc721_ignores": 752,
  "droits_non_nuls": 21866,
- "illimites_tous": 10427,
- "part_illimitee_tous": 0.4768590505808104,
+ "illimites_tous": 10420,
+ "part_illimitee_tous": 0.47653891886947775,
  "wilson_tous": [
-  0.4702434246134041,
-  0.4834828063072625
+  0.4699235470432121,
+  0.48316253292181155
  ],
  "spenders_distincts": 2250,
  "jetons_distincts_top25": 3464,
@@ -32,7 +32,7 @@
     0.8057307999370752
    ],
    "mediane_borne_rel_offre": 0.000001,
-   "n_borne_avec_offre": 501,
+   "n_borne_avec_offre": 492,
    "proprietaires_distincts": 1914,
    "jetons_distincts": 1275,
    "code_octets": 9152
@@ -46,8 +46,8 @@
     0.5404816406573475,
     0.5906033652408125
    ],
-   "mediane_borne_rel_offre": 0.004791,
-   "n_borne_avec_offre": 651,
+   "mediane_borne_rel_offre": 0.0047911802536670526,
+   "n_borne_avec_offre": 649,
    "proprietaires_distincts": 1083,
    "jetons_distincts": 823,
    "code_octets": 21943
@@ -61,8 +61,8 @@
     0.3371713096403874,
     0.3954239739875162
    ],
-   "mediane_borne_rel_offre": 0,
-   "n_borne_avec_offre": 664,
+   "mediane_borne_rel_offre": 1.2631687430966084e-7,
+   "n_borne_avec_offre": 648,
    "proprietaires_distincts": 502,
    "jetons_distincts": 381,
    "code_octets": 24294
@@ -76,7 +76,7 @@
     0.4555065579945344,
     0.5223706198226558
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 2.0996738974799396e-7,
    "n_borne_avec_offre": 437,
    "proprietaires_distincts": 547,
    "jetons_distincts": 397,
@@ -91,8 +91,8 @@
     0.7138127109920822,
     0.7743646130833677
    ],
-   "mediane_borne_rel_offre": 0.000001,
-   "n_borne_avec_offre": 202,
+   "mediane_borne_rel_offre": 9.762283888208881e-7,
+   "n_borne_avec_offre": 197,
    "proprietaires_distincts": 682,
    "jetons_distincts": 475,
    "code_octets": 2133
@@ -106,8 +106,8 @@
     0.24704879011058395,
     0.3207761985273955
    ],
-   "mediane_borne_rel_offre": 0,
-   "n_borne_avec_offre": 409,
+   "mediane_borne_rel_offre": 3.390896634316566e-7,
+   "n_borne_avec_offre": 404,
    "proprietaires_distincts": 322,
    "jetons_distincts": 313,
    "code_octets": 22484
@@ -121,8 +121,8 @@
     0.5715498817645238,
     0.6583391750193158
    ],
-   "mediane_borne_rel_offre": 0,
-   "n_borne_avec_offre": 182,
+   "mediane_borne_rel_offre": 5.499769718554917e-8,
+   "n_borne_avec_offre": 181,
    "proprietaires_distincts": 441,
    "jetons_distincts": 245,
    "code_octets": 8320
@@ -151,7 +151,7 @@
     0,
     0.009631893964922415
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 4.140884617392772e-7,
    "n_borne_avec_offre": 395,
    "proprietaires_distincts": 1,
    "jetons_distincts": 23,
@@ -196,8 +196,8 @@
     0.06625826306496739,
     0.13331911379001204
    ],
-   "mediane_borne_rel_offre": 0,
-   "n_borne_avec_offre": 268,
+   "mediane_borne_rel_offre": 1.2362568355479188e-8,
+   "n_borne_avec_offre": 265,
    "proprietaires_distincts": 228,
    "jetons_distincts": 110,
    "code_octets": 5176
@@ -211,7 +211,7 @@
     0.31056980427873093,
     0.42856902681405146
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 4.008368954770537e-8,
    "n_borne_avec_offre": 159,
    "proprietaires_distincts": 124,
    "jetons_distincts": 122,
@@ -220,13 +220,13 @@
   {
    "spender": "0xe592427a0aece92de3edee1f18e0157c05861564",
    "n": 248,
-   "illimites": 125,
-   "pct": 0.5040322580645161,
+   "illimites": 123,
+   "pct": 0.4959677419354839,
    "wilson": [
-    0.4422191187987896,
-    0.5657223809375527
+    0.43427761906244744,
+    0.5577808812012104
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 2.9140175596680512e-8,
    "n_borne_avec_offre": 123,
    "proprietaires_distincts": 91,
    "jetons_distincts": 78,
@@ -241,7 +241,7 @@
     0.5322926035096355,
     0.6591435855875515
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 2.939080206547017e-9,
    "n_borne_avec_offre": 91,
    "proprietaires_distincts": 130,
    "jetons_distincts": 94,
@@ -256,7 +256,7 @@
     0.021472458952407104,
     0.07523957284332937
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 2.0657624044705175e-9,
    "n_borne_avec_offre": 213,
    "proprietaires_distincts": 138,
    "jetons_distincts": 9,
@@ -271,8 +271,8 @@
     0.6098788943108419,
     0.7363525894191242
    ],
-   "mediane_borne_rel_offre": 0.000002,
-   "n_borne_avec_offre": 67,
+   "mediane_borne_rel_offre": 0.000004186238892274302,
+   "n_borne_avec_offre": 63,
    "proprietaires_distincts": 186,
    "jetons_distincts": 128,
    "code_octets": 4590
@@ -286,8 +286,8 @@
     0.10395304480748267,
     0.20243374562620395
    ],
-   "mediane_borne_rel_offre": 0.000015,
-   "n_borne_avec_offre": 169,
+   "mediane_borne_rel_offre": 0.00001763595461664699,
+   "n_borne_avec_offre": 168,
    "proprietaires_distincts": 192,
    "jetons_distincts": 126,
    "code_octets": 287
@@ -301,8 +301,8 @@
     0.1914261898657782,
     0.3133240804580325
    ],
-   "mediane_borne_rel_offre": 0,
-   "n_borne_avec_offre": 143,
+   "mediane_borne_rel_offre": 4.9575708624e-7,
+   "n_borne_avec_offre": 141,
    "proprietaires_distincts": 65,
    "jetons_distincts": 83,
    "code_octets": 1610
@@ -316,8 +316,8 @@
     0.5841177088644169,
     0.7234170034172893
    ],
-   "mediane_borne_rel_offre": 0,
-   "n_borne_avec_offre": 60,
+   "mediane_borne_rel_offre": 4.646945390821036e-7,
+   "n_borne_avec_offre": 59,
    "proprietaires_distincts": 110,
    "jetons_distincts": 83,
    "code_octets": 24497
@@ -331,8 +331,8 @@
     0.22430691478764062,
     0.36212716400326045
    ],
-   "mediane_borne_rel_offre": 0.000001,
-   "n_borne_avec_offre": 116,
+   "mediane_borne_rel_offre": 0.0000011767369830461638,
+   "n_borne_avec_offre": 112,
    "proprietaires_distincts": 116,
    "jetons_distincts": 23,
    "code_octets": 2400
@@ -346,8 +346,8 @@
     0.5388683293625073,
     0.6883463381426022
    ],
-   "mediane_borne_rel_offre": 0,
-   "n_borne_avec_offre": 61,
+   "mediane_borne_rel_offre": 9.022371207767288e-7,
+   "n_borne_avec_offre": 59,
    "proprietaires_distincts": 118,
    "jetons_distincts": 97,
    "code_octets": 1229
@@ -361,7 +361,7 @@
     0,
     0.025984567266588023
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 3.0160482285052373e-12,
    "n_borne_avec_offre": 144,
    "proprietaires_distincts": 144,
    "jetons_distincts": 5,
@@ -376,7 +376,7 @@
     0,
     0.02634090684688045
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 1.1324690616747348e-10,
    "n_borne_avec_offre": 142,
    "proprietaires_distincts": 142,
    "jetons_distincts": 4,
@@ -385,13 +385,13 @@
   {
    "spender": "0xba12222222228d8ba445958a75a0704d566bf2c8",
    "n": 136,
-   "illimites": 65,
-   "pct": 0.47794117647058826,
+   "illimites": 64,
+   "pct": 0.47058823529411764,
    "wilson": [
-    0.3957536153824567,
-    0.5613406970395979
+    0.3886637521314314,
+    0.554128664431308
    ],
-   "mediane_borne_rel_offre": 0,
+   "mediane_borne_rel_offre": 1.9876725177062156e-7,
    "n_borne_avec_offre": 71,
    "proprietaires_distincts": 46,
    "jetons_distincts": 34,

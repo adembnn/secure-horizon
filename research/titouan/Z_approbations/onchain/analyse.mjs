@@ -3,7 +3,7 @@ import fs from "node:fs";
 import { rpc, wilson, pool } from "../../bench/lib.mjs";
 const chain = process.argv[2];
 const meta = JSON.parse(fs.readFileSync(`cache/${chain}.meta.json`));
-const URL = meta.rpc;
+const URL = chain === "avax" ? "https://avalanche-c-chain-rpc.publicnode.com" : meta.rpc; // lectures d'état (offre, code) ; l'API avax.network bannit les rafales
 const rows = fs.readFileSync(`cache/${chain}.approvals.jsonl`, "utf8").split("\n").filter(Boolean).map(JSON.parse);
 const T255 = 1n << 255n;
 let total = 0, zero = 0, n721 = 0, ev = [];
@@ -14,7 +14,7 @@ const top = [...by.entries()].sort((a, b) => b[1].length - a[1].length).slice(0,
 const tokens = [...new Set(top.flatMap(([, l]) => l.map(e => e.t)))];
 const supF = `cache/${chain}.supply.json`;
 const supply = {}; const sc = fs.existsSync(supF) ? JSON.parse(fs.readFileSync(supF)) : {};
-await pool(tokens, 3, async t => { if (t in sc) { supply[t] = sc[t] === null ? null : BigInt(sc[t]); return; } try { const r = await rpc(URL, "eth_call", [{ to: t, data: "0x18160ddd" }, "latest"]); supply[t] = r && r.length >= 3 ? BigInt(r) : null; } catch { supply[t] = null; } });
+await pool(tokens, 3, async t => { await new Promise(r=>setTimeout(r,60)); if (t in sc) { supply[t] = sc[t] === null ? null : BigInt(sc[t]); return; } try { const r = await rpc(URL, "eth_call", [{ to: t, data: "0x18160ddd" }, "latest"]); supply[t] = r && r.length >= 3 ? BigInt(r) : null; } catch { supply[t] = null; } });
 fs.writeFileSync(supF, JSON.stringify(Object.fromEntries(Object.entries(supply).map(([k,v])=>[k,v===null?null:v.toString()]))));
 const code = {};
 await pool(top.map(x => x[0]), 3, async s => { const c = await rpc(URL, "eth_getCode", [s, "latest"]); code[s] = c && c !== "0x" ? (c.length - 2) / 2 : 0; });
