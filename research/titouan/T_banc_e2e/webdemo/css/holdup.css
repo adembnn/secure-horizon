@@ -205,3 +205,9 @@ details.tech p { max-width: none; margin: 4px 0 8px; }
   .choice span { min-height: 44px; font-size: 17px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* Comparaison intention ecrite / effet reel : jamais de vert, jamais de "OK". */
+.written { margin: 0 0 20px; font-size: 18px; color: var(--muted); text-align: center; }
+.match { margin: -8px 0 24px; font-size: 20px; line-height: 1.3; font-weight: 500; }
+.match-no { color: var(--red); }
+.match-yes { color: var(--ink); font-weight: 400; }

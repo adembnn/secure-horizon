@@ -5,6 +5,7 @@ export const PAUL = '0x13baa57127a952cc2065443714d4c823aacec5e7';        // cont
 export const PAUL_SOSIE = '0x13bac5ff9d0736535f7612edf967d189dd4ac5e7';  // sosie fictif (memes debut et fin)
 const TRAP = '0x' + 'b2'.repeat(20);                   // adresse fictive du "site piege"
 const TRAP_CONTRACT = '0x' + 'c3'.repeat(20);
+const SWAP_SPENDER = '0x' + 'd4'.repeat(20);           // contrat fictif du faux "echange rapide"
 const USDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
 const WETH = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
 const COW = '0x9008D19f58AAbD9eD0D60971565AA8510560ab41';
@@ -46,6 +47,9 @@ export const SCENARIOS = [
     body: send('https://paiement-demo.example', tx(PAUL, '0x', '0x16345785d8a0000')) },
   { id: 'echange_legitime', titre: 'Échange légitime', site: 'Échange décentralisé (fictif)', resume: 'Échanger 0,1 WETH contre au moins 300 USDC, reçus sur ton compte', origin: 'https://echange-demo.example', intentHonnete: 'swap',
     body: typed('https://echange-demo.example', SWAP_ORDER) },
+  { id: 'echange_droit_illimite', titre: 'Échanger 50 USDC : droit illimité demandé', site: 'Échange décentralisé (fictif)', resume: 'Tu veux échanger 50 USDC contre de l’ETH. Le site demande d’abord une « autorisation »', origin: 'https://echange-rapide-demo.example', intentHonnete: 'swap',
+    ecrit: 'Échanger 50 USDC contre de l’ETH', intentDetails: { token: 'USDC', amount: '50', receiveToken: 'ETH' },
+    body: send('https://echange-rapide-demo.example', tx(USDC, '0x095ea7b3' + w(SWAP_SPENDER) + MAX)) },
   { id: 'droit_illimite', titre: 'Droit illimité vers un site piège', site: 'Faux site de gains (fictif)', resume: '« Valider ton accès » pour recevoir 50 USDC', origin: 'https://gains-usdc-demo.example', intentHonnete: 'receive',
     body: send('https://gains-usdc-demo.example', tx(USDC, '0x095ea7b3' + w(TRAP) + MAX)) },
   { id: 'permit_piege', titre: 'Signature de permit piège', site: 'Faux site de remboursement (fictif)', resume: '« Signer pour te connecter » (aucun envoi visible)', origin: 'https://rembourse-demo.example', intentHonnete: 'login',

@@ -36,7 +36,7 @@
   },
   {
    "file": "engine/src/fixes.mjs",
-   "sha256": "968790ecc1df25d6c4a2ef44db101f96274ead52dc4b73db9666235d4f0600f0"
+   "sha256": "7ac324e0123fa6ca23722965394975e226ce44d7dcad3dd3f35205d2ac617ab1"
   },
   {
    "file": "engine/src/keccak.mjs",
@@ -88,23 +88,23 @@
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "4ebd1b064ebc78ba4c644292b2c3f2f4cbf16335b84c56502e2df43440bc876d"
+   "sha256": "b5746d2070f8ba5ef5607e28779a0e58d80e8ba3268c1d43e2879a48689d69f0"
   },
   {
    "file": "server/server.mjs",
-   "sha256": "4b5ba39f6a441771f4ef035bc8ffd38a1e7f7522eb944931fee00c95d8a62b3f"
+   "sha256": "4413ce8452a7053bae5d688c88e2f3b3451d63f51401da0e977783d524478443"
   }
  ],
  "outputs": [
   {
    "file": "engine/policy.js",
-   "bytes": 15058,
-   "sha256": "bab15576d429f0e37d8e79dd35657952f7c868186975825d5d0323909741f2dd"
+   "bytes": 22958,
+   "sha256": "3564ae890c1613e112dbf9eb69f366bb51d9f386053ac37a1fb563355ad15c6f"
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 34967,
-   "sha256": "38b39cf16c86cd271f69cc8a0f09a30656d77d33adca63294386dad1186c5de4"
+   "bytes": 36513,
+   "sha256": "b4947eb0f4ea158a6a488b81356a86a3931addd40429f684cd52080bf816ac6f"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -133,8 +133,8 @@
   },
   {
    "file": "engine/src/fixes.js",
-   "bytes": 804,
-   "sha256": "968790ecc1df25d6c4a2ef44db101f96274ead52dc4b73db9666235d4f0600f0"
+   "bytes": 825,
+   "sha256": "7ac324e0123fa6ca23722965394975e226ce44d7dcad3dd3f35205d2ac617ab1"
   },
   {
    "file": "engine/src/keccak.js",
@@ -197,6 +197,6 @@
    "sha256": "287ca2780020efc9727937b6ee27d8c5bfbe832c2677664cfc9c3392719141a5"
   }
  ],
- "total_bytes": 259453,
- "tree_sha256": "5f434b5a8d21b41ad1f3c8c0911e699960fe1ae3588ea84e59d9d4ef8db8e874"
+ "total_bytes": 268920,
+ "tree_sha256": "1cdc3f7ce9fb931e6cc3252a915325f57c540973d3651a49b0cbc347fed542eb"
 }

@@ -36,8 +36,9 @@ const treeOf = () => JSON.parse(readFileSync(join(WD, 'BUILD_INFO.json'), 'utf8'
     if (a !== b) { diffs++; console.log('  difference inattendue : ' + f); }
   }
   ok(diffs === 0 && n >= 14, `engine/src copie fidele (${n} fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)`);
-  const pol = readFileSync(join(ROOT, 'run', 'policy.mjs'), 'utf8').replace("'../engine/src/fixes.mjs'", "'./src/fixes.js'");
-  ok(pol === readFileSync(join(WD, 'engine', 'policy.js'), 'utf8'), 'policy.js = run/policy.mjs (un seul chemin d import change)');
+  // run/policy.mjs importe trois modules du moteur (fixes, engine, util) ; la copie les lit dans engine/src/ : ce sont les SEULS changements (3 chemins), le reste est identique octet pour octet.
+  const pol = readFileSync(join(ROOT, 'run', 'policy.mjs'), 'utf8').replace("'../engine/src/fixes.mjs'", "'./src/fixes.js'").replace("'../engine/src/engine.mjs'", "'./src/engine.js'").replace("'../engine/src/util.mjs'", "'./src/util.js'");
+  ok(pol === readFileSync(join(WD, 'engine', 'policy.js'), 'utf8'), 'policy.js = run/policy.mjs (seuls 3 chemins d import changent : fixes, engine, util)');
   { const gen = readFileSync(join(WD, 'engine', 'sentinelle_core.js'), 'utf8'); const srv = readFileSync(join(ROOT, 'server', 'server.mjs'), 'utf8').replace(/\r\n/g, '\n');
     const i0 = srv.indexOf('function buildCtx'), i1 = srv.indexOf('function decode'); const bc = srv.slice(i0, i1).trim();
     const patches = JSON.parse(readFileSync(join(WD, 'BUILD_INFO.json'), 'utf8')).patches_sentinelle_core;
@@ -93,9 +94,9 @@ function fixRef(r) { if (r && r.texts) for (const k of Object.keys(r.texts)) { c
 const BAD_WORDS = /\b(ok|protégé|protege|bloqué|bloque|sûr|sur et sécurisé|safe)\b/i;
 
 const cases = [];
-for (const s of S.SCENARIOS) for (const i of [s.intentHonnete, 'pay', 'receive', 'asked', 'other', 'none']) cases.push({ name: `scenario ${s.id} / intention ${i}`, body: M.withIntent(s.body, i === 'other' || i === 'swap' ? 'none' : i), local: 'scen' });
+for (const s of S.SCENARIOS) for (const i of [s.intentHonnete, 'pay', 'receive', 'asked', 'other', 'none']) cases.push({ name: `scenario ${s.id} / intention ${i}`, body: M.withIntent(s.body, i === 'other' ? 'none' : i, i === s.intentHonnete ? s.intentDetails : undefined), local: 'scen' });
 for (const q of REQUESTS) { const b = q.body; const isObj = b && typeof b === 'object' && !Array.isArray(b); const raw = isObj ? (({ _local, ...r }) => r)(b) : b; cases.push({ name: 'type: ' + q.name, body: raw, local: isObj && b._local === 'contact' ? 'scen' : 'empty' }); }
-ok(cases.length >= 30, `${cases.length} cas de test (>= 30) : 8 scenarios x 6 intentions + requetes types + malformees`);
+ok(cases.length >= 30, `${cases.length} cas de test (>= 30) : 9 scenarios x 6 intentions + requetes types + malformees`);
 
 let okSeen = 0, identical = 0, bad = []; const diffs = []; const levels = {};
 const t0 = performance.now();
@@ -122,10 +123,10 @@ R.scenarios = { filtres_par_la_couche_http_du_serveur: filtered, correctif_jours
 
 // les 8 scenarios : avec l'intention honnete, ce qu'on attend (le plancher objectif ne depend pas de l'intention)
 {
-  const expect = { envoi_simple: 'info', echange_legitime: 'info', droit_illimite: 'danger', permit_piege: 'danger', tous_les_nft: 'danger', adresse_sosie: 'danger', changement_proprietaire: 'danger', faux_support: 'manipulation' };
+  const expect = { envoi_simple: 'info', echange_legitime: 'info', echange_droit_illimite: 'danger', droit_illimite: 'danger', permit_piege: 'danger', tous_les_nft: 'danger', adresse_sosie: 'danger', changement_proprietaire: 'danger', faux_support: 'manipulation' };
   const got = {}; let all = true;
-  for (const s of S.SCENARIOS) { const k = M.displayLevel(M.check(M.withIntent(s.body, s.intentHonnete === 'swap' ? 'none' : s.intentHonnete), webLocal)).key; got[s.id] = k; if (k !== expect[s.id]) all = false; }
-  ok(all, 'les 8 scenarios, reponse honnete : niveaux attendus (2 sans signal, 5 danger, 1 manipulation)', JSON.stringify(got));
+  for (const s of S.SCENARIOS) { const k = M.displayLevel(M.check(M.withIntent(s.body, s.intentHonnete, s.intentDetails), webLocal)).key; got[s.id] = k; if (k !== expect[s.id]) all = false; }
+  ok(all, 'les 9 scenarios, reponse honnete : niveaux attendus (2 sans signal, 6 danger, 1 manipulation)', JSON.stringify(got));
   R.niveaux_scenarios = got;
   // une reponse fausse sur le faux support ne doit PAS faire baisser a tort : on constate honnetement ce qui se passe
   const fs = S.SCENARIOS.find((s) => s.id === 'faux_support');
@@ -200,14 +201,17 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   const sc = (id) => S.SCENARIOS.find((s) => s.id === id);
   const btn = (txt) => [...dom.body.querySelectorAll('button')].find((b) => b.textContent.includes(txt));
   const txt = () => dom.body.textContent;
+  // la question d'intention = pilules (boutons radio) + bouton « Vérifier » : on coche comme une personne, puis on valide
+  const isModal = () => { const w = dom.body.querySelector('section'); return !!w && w.getAttribute('role') === 'alertdialog' && w.getAttribute('aria-modal') === 'true'; }; // la fenetre n'affiche plus le texte « Hold up ! » : on verifie qu'elle est bien une fenetre modale qui retient la demande
+  const choose = (label) => { const l = [...dom.body.querySelectorAll('label')].find((x) => x.textContent.includes(label)); if (!l) throw new Error('choix introuvable : ' + label); l.querySelector('input').click(); btn('Vérifier').click(); };
   const ALLTXT = [];
   // 1) droit illimite : question -> verdict Danger -> delai -> continuer
   let p = HU.holdRequest({ body: sc('droit_illimite').body, local: S.LOCAL, delaySec: 5, askIntent: true, siteLabel: 'faux site' });
   const q1 = txt(); ALLTXT.push(q1);
-  ok(q1.includes('Hold up !') && q1.includes('Qu’essaies-tu de faire ?') && !!btn('Annuler') && !!btn('Recevoir'), 'fenetre : "Hold up !", question d intention en une phrase, boutons, Annuler visible');
-  btn('Recevoir').click();
+  ok(isModal() && q1.includes('Rien n’a été envoyé') && q1.includes('Qu’essaies-tu de faire ?') && !!btn('Annuler') && !!btn('Vérifier') && dom.body.querySelectorAll('input').length === 6, 'fenetre : "Hold up !", question d intention en une phrase, 6 choix, Vérifier, Annuler visible');
+  choose('Recevoir');
   const v1 = txt(); ALLTXT.push(v1); const cont = btn('Continuer quand même');
-  ok(v1.includes('Danger') && v1.includes('Tu as dit') && v1.includes('En réalité') && v1.includes('Ce que le moteur a vu') && !!btn('Annuler'), 'fenetre : niveau Danger, "Tu as dit / En réalité", panneau technique, Annuler visible');
+  ok(v1.includes('Danger') && v1.includes('Tu crois') && v1.includes('En vrai') && v1.includes('Voir les preuves techniques') && !!btn('Annuler'), 'fenetre : niveau Danger, "Tu crois / En vrai", panneau technique, Annuler visible');
   ok(cont && cont.disabled && txt().includes('Tu pourras continuer dans'), 'friction : "Continuer quand même" bloque pendant le delai, avec compte a rebours');
   for (let i = 0; i < 9; i++) dom.tick();
   ok(cont.disabled, 'friction : toujours bloque a 9 s (Danger = 10 s minimum meme si le delai choisi est 5 s)');
@@ -217,8 +221,8 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   ok(r1.decision === 'sign' && r1.level === 'danger' && r1.verdict.niveau === 'critical' && dom.body.children.length === 0 && dom.timersActive() === 0, 'fenetre : decision enregistree, fenetre retiree, minuteur arrete');
   // 2) faux support : Manipulation, Annuler pendant le delai
   p = HU.holdRequest({ body: sc('faux_support').body, local: S.LOCAL, delaySec: 0, askIntent: true });
-  btn('demandé de le faire').click(); const v2 = txt(); ALLTXT.push(v2);
-  ok(v2.includes('Manipulation') && v2.includes('Sur la page') && btn('Continuer quand même').disabled, 'fenetre : faux support => Manipulation, citation de la page, continuer bloque (30 s minimum)');
+  choose('demandé de le faire'); const v2 = txt(); ALLTXT.push(v2);
+  ok(v2.includes('Manipulation') && v2.includes('Message vu sur la page') && btn('Continuer quand même').disabled, 'fenetre : faux support => Manipulation, citation de la page, continuer bloque (30 s minimum)');
   btn('Annuler').click(); const r2 = await p;
   ok(r2.decision === 'cancel' && r2.level === 'manipulation' && dom.body.children.length === 0, 'Annuler marche a tout moment, meme pendant le delai');
   // 3) Echap = annuler
@@ -228,10 +232,28 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   // 4) aucun signal : jamais "OK", rappel que ce n est pas une garantie, pas de delai
   p = HU.holdRequest({ body: sc('envoi_simple').body, local: S.LOCAL, delaySec: 5, askIntent: false });
   const v4 = txt(); ALLTXT.push(v4);
-  ok(v4.includes('Aucun signal trouvé') && v4.includes('pas une garantie') && !btn('Continuer quand même').disabled, 'aucun signal : libelle "Aucun signal trouvé" + "pas une garantie", pas de delai inutile');
-  btn('Continuer quand même').click(); await p;
+  ok(v4.includes('Aucun signal trouvé') && v4.includes('pas une garantie') && !!btn('Continuer') && !btn('Continuer').disabled && !btn('Continuer quand même'), 'aucun signal : libelle "Aucun signal trouvé" + "pas une garantie", pas de delai inutile');
+  btn('Continuer').click(); await p;
   const all = ALLTXT.join(' ');
   ok(!/\b(OK|Ok|protégé|bloqué|Bloqué|Protégé|sûr|safe)\b/.test(all), 'aucun ecran n affiche OK / protégé / bloqué / sûr (' + ALLTXT.length + ' ecrans lus)');
+  // 4b) scene « echanger 50 USDC » : intention ecrite contre effet reel
+  p = HU.holdRequest({ body: sc('echange_droit_illimite').body, local: S.LOCAL, delaySec: 0, askIntent: true, siteLabel: 'faux echange', intentDetails: sc('echange_droit_illimite').intentDetails, ecrit: sc('echange_droit_illimite').ecrit, honnete: 'swap' });
+  const q5 = txt(); ALLTXT.push(q5);
+  choose('Échanger'); const v5 = txt(); ALLTXT.push(v5);
+  ok(q5.includes('Tu as écrit : « Échanger 50 USDC contre de l’ETH »') && v5.includes('Ce que tu voulais') && v5.includes('Ce que la demande fait') && v5.includes('Ça ne correspond pas.') && v5.includes('Danger') && btn('Continuer quand même').disabled, 'scene echange 50 USDC : intention ecrite, « Ça ne correspond pas. », niveau Danger, continuer bloque');
+  btn('Annuler').click(); const r5 = await p;
+  ok(r5.decision === 'cancel' && r5.verdict.raisons.some((r) => r.code === 'approval_exceeds_intent') && r5.verdict.raisons.some((r) => r.code === 'unlimited_allowance'), 'scene echange 50 USDC : le comparateur retient « droit au-dela de l intention » (approval_exceeds_intent) et le droit illimite', r5.verdict.raisons.map((r) => r.code).join(','));
+  // reponse differente de l'honnete : pas de comparaison ecrite (elle ne vaut que pour l'intention ecrite), le plancher reste Danger
+  p = HU.holdRequest({ body: sc('echange_droit_illimite').body, local: S.LOCAL, delaySec: 0, askIntent: true, intentDetails: sc('echange_droit_illimite').intentDetails, ecrit: sc('echange_droit_illimite').ecrit, honnete: 'swap' });
+  choose('Payer'); const v5b = txt(); ALLTXT.push(v5b);
+  ok(!v5b.includes('Ça correspond') && v5b.includes('Danger') && !v5b.includes('Ce que tu voulais'), 'scene echange 50 USDC : autre reponse => pas de comparaison ecrite, toujours Danger');
+  btn('Annuler').click(); await p;
+  // « Ça correspond » : jamais de vert ni de OK, rappel que ce n est pas une garantie
+  { const UI = await imp(join(WD, 'js', 'ui.js')); const vi = M.check(M.withIntent(sc('envoi_simple').body, 'pay'), M.sanitizeLocalContext(S.LOCAL));
+    const parts = UI.verdictParts(vi, { body: sc('envoi_simple').body, local: S.LOCAL, intentKey: 'pay', compare: { voulu: 'Envoyer 0,1 ETH à Paul' } });
+    const box = document.createElement('div'); box.append(...parts.top); const tt = box.textContent; ALLTXT.push(tt);
+    const css = readFileSync(join(WD, 'css', 'holdup.css'), 'utf8'); const rule = (css.match(/\.match-yes\s*\{[^}]*\}/) || [''])[0];
+    ok(M.displayLevel(vi).key === 'info' && tt.includes('Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.') && rule.length > 0 && !/green|#0[0-9a-f]{5}|#[0-9a-f]{2}[c-f][0-9a-f]{3}/i.test(rule), '« Ça correspond » ne s affiche qu avec « pas une garantie » et sans style vert'); }
   // 5) page : tous les identifiants utilises par app.js existent dans index.html
   const html = readFileSync(join(WD, 'index.html'), 'utf8'); const app = readFileSync(join(WD, 'js', 'app.js'), 'utf8');
   const ids = [...app.matchAll(/\$\('#([\w-]+)'\)/g)].map((m) => m[1]); const missingIds = [...new Set(ids)].filter((i) => !new RegExp('id="' + i + '"').test(html) && !new RegExp("id: '" + i + "'").test(app));
@@ -250,14 +272,15 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   await imp(join(WD, 'js', 'app.js'));
   const btns = () => [...dom.body.querySelectorAll('button')];
   const scen = dom.body.querySelectorAll('.scen');
-  ok(scen.length === 8, 'app.js : 8 scenarios affiches');
+  ok(scen.length === 9, 'app.js : 9 scenarios affiches');
   // un scenario piege, de bout en bout
   scen.find((b) => b.getAttribute('data-id') === 'tous_les_nft').click();
   ok(E('wallet-req').textContent.includes('Signer') && E('wallet-req').textContent.includes('mint-gratuit-demo.example') && E('wallet-req').textContent.includes('Rejeter'), 'app.js : le faux portefeuille affiche la requete avec Signer / Rejeter');
   E('wallet-req').querySelector('.btn-wallet-yes').click();
+  const isModalApp = () => { const w = dom.body.querySelector('section'); return !!w && w.getAttribute('role') === 'alertdialog'; };
   const find = (txt) => btns().find((b) => b.textContent.includes(txt));
-  ok(!!find('Annuler') && dom.body.textContent.includes('Hold up !'), 'app.js : cliquer Signer ouvre la fenetre Hold up avant toute signature');
-  find('Recevoir').click();
+  ok(!!find('Annuler') && isModalApp(), 'app.js : cliquer Signer ouvre la fenetre Hold up avant toute signature');
+  find('Vérifier') && document.querySelectorAll('input').find((i) => i.getAttribute('value') === 'receive').click(); find('Vérifier').click();
   ok(dom.body.textContent.includes('Danger'), 'app.js : verdict Danger pour "autorisation de tous les NFT"');
   find('Annuler').click(); await new Promise((r) => setTimeout(r, 5));
   ok(E('wallet-out').textContent.includes('Rien n’a été signé'), 'app.js : annulation => "Rien n a ete signe"');
@@ -265,7 +288,7 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   E('colle-text').value = JSON.stringify({ to: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', value: '0x0', data: '0x095ea7b3' + '0'.repeat(24) + 'b2'.repeat(20) + 'f'.repeat(64) });
   E('colle-origin').value = 'https://site.example'; E('colle-intent').value = 'pay';
   E('colle-go').click();
-  ok(E('colle-out').textContent.includes('Danger') && E('colle-out').textContent.includes('Tu as dit'), 'app.js : mode colle => verdict Danger affiche', E('colle-out').textContent.slice(0, 300));
+  ok(E('colle-out').textContent.includes('Danger') && E('colle-out').textContent.includes('Tu crois'), 'app.js : mode colle => verdict Danger affiche', E('colle-out').textContent.slice(0, 300));
   E('colle-text').value = 'pas du json'; E('colle-go').click();
   ok(E('colle-out').textContent.includes('pas du JSON valide'), 'app.js : mode colle => erreur claire sur un texte invalide');
   // journal

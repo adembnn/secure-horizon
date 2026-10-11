@@ -71,7 +71,14 @@ export function verdictParts(v, opts = {}) {
     const quietLv = lv.key === 'info' || lv.key === 'unknown'; // pas d'alerte : le titre nomme l'etat, la phrase rappelle que ce n'est pas une garantie
     top.push(h('h1', { class: 'verdict', ...idAttr }, quietLv ? lv.label + '.' : fx(lv.sentence, o)));
     if (quietLv) top.push(h('p', { class: 'reassure' }, fx(lv.sentence, o)));
-    if (v.address_diff) {
+    if (opts.compare && lv.key !== 'unknown' && !v.address_diff) {
+      // intention ECRITE contre effet reel. Jamais de vert ni de "OK" : meme quand rien n'est vu, on dit que ce n'est pas une garantie.
+      const match = lv.key === 'info';
+      top.push(h('dl', { class: 'gap gap-' + lv.key },
+        h('div', {}, h('dt', {}, 'Ce que tu voulais'), h('dd', {}, '« ' + opts.compare.voulu + ' »')),
+        h('div', { class: 'real' }, h('dt', {}, 'Ce que la demande fait'), h('dd', {}, fx(t.reel, o)))),
+      h('p', { class: 'match ' + (match ? 'match-yes' : 'match-no') }, match ? 'Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.' : 'Ça ne correspond pas.'));
+    } else if (v.address_diff) {
       const a = addrBlock(v.address_diff);
       top.push(a.node); if (a.count) top.push(h('p', { class: 'count' }, a.count));
     } else if (lv.key === 'unknown') {
@@ -83,7 +90,7 @@ export function verdictParts(v, opts = {}) {
     }
   }
   const why = [];
-  if (lv.key === 'manipulation' || v.address_diff) { // l'ecart est replie : on le redonne ici
+  if (lv.key === 'manipulation' || v.address_diff || (opts.compare && lv.key !== 'unknown')) { // l'ecart est replie : on le redonne ici
     if (lv.key !== 'unknown') why.push(h('p', {}, 'Tu crois : « ' + fx(t.croit, o) + ' »'), h('p', {}, 'En vrai : ' + fx(t.reel, o)));
   }
   if (t.danger) why.push(h('p', { class: 'danger-line' }, fx(t.danger, o)));

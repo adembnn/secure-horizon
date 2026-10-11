@@ -8,7 +8,7 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "61509e449e407aad"
+   "detail": "1cdc3f7ce9fb931e"
   },
   {
    "name": "engine/src copie fidele (15 fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)",
@@ -16,12 +16,12 @@
    "detail": ""
   },
   {
-   "name": "policy.js = run/policy.mjs (un seul chemin d import change)",
+   "name": "policy.js = run/policy.mjs (seuls 3 chemins d import changent : fixes, engine, util)",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "sentinelle_core.js genere depuis server/server.mjs (buildCtx identique, regles Seaport presentes), 4 patchs documentes",
+   "name": "sentinelle_core.js genere depuis server/server.mjs (buildCtx identique, regles Seaport presentes), 3 patchs documentes",
    "pass": true,
    "detail": ""
   },
@@ -31,12 +31,12 @@
    "detail": ""
   },
   {
-   "name": "83 cas de test (>= 30) : 8 scenarios x 6 intentions + requetes types + malformees",
+   "name": "89 cas de test (>= 30) : 9 scenarios x 6 intentions + requetes types + malformees",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "'ok' ne sort jamais : 0 sur 83 verdicts (niveau et level)",
+   "name": "'ok' ne sort jamais : 0 sur 89 verdicts (niveau et level)",
    "pass": true,
    "detail": ""
   },
@@ -46,14 +46,14 @@
    "detail": ""
   },
   {
-   "name": "verdicts IDENTIQUES a la voie de reference (server/server.mjs) : 83/83",
+   "name": "verdicts IDENTIQUES a la voie de reference (server/server.mjs) : 89/89",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "les 8 scenarios, reponse honnete : niveaux attendus (2 sans signal, 5 danger, 1 manipulation)",
+   "name": "les 9 scenarios, reponse honnete : niveaux attendus (2 sans signal, 6 danger, 1 manipulation)",
    "pass": true,
-   "detail": "{\"envoi_simple\":\"info\",\"echange_legitime\":\"info\",\"droit_illimite\":\"danger\",\"permit_piege\":\"danger\",\"tous_les_nft\":\"danger\",\"adresse_sosie\":\"danger\",\"changement_proprietaire\":\"danger\",\"faux_support\":\"manipulation\"}"
+   "detail": "{\"envoi_simple\":\"info\",\"echange_legitime\":\"info\",\"echange_droit_illimite\":\"danger\",\"droit_illimite\":\"danger\",\"permit_piege\":\"danger\",\"tous_les_nft\":\"danger\",\"adresse_sosie\":\"danger\",\"changement_proprietaire\":\"danger\",\"faux_support\":\"manipulation\"}"
   },
   {
    "name": "aucun appel reseau (fetch/XHR/WebSocket pieges) pendant les verdicts",
@@ -123,7 +123,7 @@
   {
    "name": "colle : 16 exemples du jeu public chargeables, aucun 'ok'",
    "pass": true,
-   "detail": "{\"danger\":4,\"info\":8,\"unknown\":2,\"attention\":2}"
+   "detail": "{\"danger\":4,\"info\":8,\"attention\":3,\"unknown\":1}"
   },
   {
    "name": "panneau technique : effets decodes et signaux disponibles",
@@ -131,12 +131,12 @@
    "detail": "Droit donné, Adresse"
   },
   {
-   "name": "fenetre : \"Hold up !\", question d intention en une phrase, boutons, Annuler visible",
+   "name": "fenetre : \"Hold up !\", question d intention en une phrase, 6 choix, Vérifier, Annuler visible",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "fenetre : niveau Danger, \"Tu as dit / En réalité\", panneau technique, Annuler visible",
+   "name": "fenetre : niveau Danger, \"Tu crois / En vrai\", panneau technique, Annuler visible",
    "pass": true,
    "detail": ""
   },
@@ -186,12 +186,32 @@
    "detail": ""
   },
   {
+   "name": "scene echange 50 USDC : intention ecrite, « Ça ne correspond pas. », niveau Danger, continuer bloque",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene echange 50 USDC : le comparateur retient « droit au-dela de l intention » (approval_exceeds_intent) et le droit illimite",
+   "pass": true,
+   "detail": "unlimited_allowance,external_spender,unlimited_approval_swap,approval_exceeds_intent"
+  },
+  {
+   "name": "scene echange 50 USDC : autre reponse => pas de comparaison ecrite, toujours Danger",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "« Ça correspond » ne s affiche qu avec « pas une garantie » et sans style vert",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "app.js : syntaxe valide, 22 identifiants HTML tous presents",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "app.js : 8 scenarios affiches",
+   "name": "app.js : 9 scenarios affiches",
    "pass": true,
    "detail": ""
   },
@@ -218,7 +238,7 @@
   {
    "name": "app.js : mode colle => verdict Danger affiche",
    "pass": true,
-   "detail": "DangerCe n’est pas ce que tu as demandé.Tu as ditJe veux seulement faire mon échange sur site.example.Ton intention : Payer quelqu'unEn réalitéTu donnes à site.example le droit de prendre tes jetons sans limite.Ce droit dure tant que tu ne le retires pas toi-même.Refuse, ou autorise seulement jetons"
+   "detail": "Ce n’est pas ce que tu as demandé.Tu crois« Je veux seulement faire mon échange sur site.example. »En vraiTu donnes à site.example le droit de prendre tes jetons sans limite.Pourquoi ?Ce droit dure tant que tu ne le retires pas toi-même.Refuse, ou autorise seulement ce qu'il faut pour cet échange.Ni"
   },
   {
    "name": "app.js : mode colle => erreur claire sur un texte invalide",
@@ -271,7 +291,7 @@
    "detail": ""
   },
   {
-   "name": "aucune URL externe : 20 noms d hote trouves, fictifs (.example/.test) ou etiquettes de test dans js/exemples_public.js (donnees, jamais chargees) ; aucun src/href/CSS externe (pas de CDN)",
+   "name": "aucune URL externe : 21 noms d hote trouves, fictifs (.example/.test) ou etiquettes de test dans js/exemples_public.js (donnees, jamais chargees) ; aucun src/href/CSS externe (pas de CDN)",
    "pass": true,
    "detail": ""
   },
@@ -291,7 +311,7 @@
    "detail": ""
   },
   {
-   "name": "taille du site : 34 fichiers, 279 Ko (environ 94 Ko compresses)",
+   "name": "taille du site : 34 fichiers, 341 Ko (environ 114 Ko compresses)",
    "pass": true,
    "detail": ""
   }
@@ -299,27 +319,28 @@
  "notes": [
   "LIMITE CONSTATEE : faux_support avec la reponse \"Payer quelqu'un\" donne le niveau 'info' (la pression de la page n'est lue que si le moteur voit deja un signal)."
  ],
- "tree_sha256": "61509e449e407aad4610af1857001cd861ec628c0444270bf7b9a0d9b19635d8",
+ "tree_sha256": "1cdc3f7ce9fb931e6cc3252a915325f57c540973d3651a49b0cbc347fed542eb",
  "modules_charges": 27,
  "scenarios": {
   "filtres_par_la_couche_http_du_serveur": 3,
-  "correctif_jours_absorbe": 7,
-  "cas": 83,
-  "identiques": 83,
+  "correctif_jours_absorbe": 0,
+  "cas": 89,
+  "identiques": 89,
   "ecarts": [],
   "niveaux_affiches": {
-   "info": 17,
-   "danger": 47,
+   "info": 19,
+   "danger": 52,
    "manipulation": 4,
-   "attention": 2,
+   "attention": 1,
    "unknown": 13
   },
-  "ms_total": 517,
-  "ms_par_verdict": 6.23
+  "ms_total": 267,
+  "ms_par_verdict": 3
  },
  "niveaux_scenarios": {
   "envoi_simple": "info",
   "echange_legitime": "info",
+  "echange_droit_illimite": "danger",
   "droit_illimite": "danger",
   "permit_piege": "danger",
   "tous_les_nft": "danger",
@@ -334,8 +355,8 @@
   "niveaux_affiches": {
    "danger": 49,
    "info": 42,
-   "unknown": 29,
-   "attention": 24
+   "attention": 26,
+   "unknown": 27
   }
  },
  "equivalence_DEV": {
@@ -344,9 +365,9 @@
   "ecarts": [],
   "niveaux_affiches": {
    "danger": 170,
-   "info": 121,
-   "attention": 56,
-   "unknown": 38
+   "attention": 62,
+   "info": 118,
+   "unknown": 35
   }
  },
  "statique": {
@@ -359,6 +380,7 @@
    "cowswap.exchange",
    "dex.newchain.test",
    "echange-demo.example",
+   "echange-rapide-demo.example",
    "gains-usdc-demo.example",
    "legit.test",
    "mint-gratuit-demo.example",
@@ -376,31 +398,31 @@
  },
  "taille": {
   "fichiers_publies": 34,
-  "octets_total": 286075,
-  "octets_gzip_estimes": 96425,
+  "octets_total": 349069,
+  "octets_gzip_estimes": 116466,
   "plus_gros": [
    {
+    "f": "engine/sentinelle_core.js",
+    "b": 36513
+   },
+   {
     "f": "engine/textes.js",
-    "b": 31233
+    "b": 34355
+   },
+   {
+    "f": "engine/src/rules_extra.js",
+    "b": 32002
    },
    {
     "f": "engine/src/calldata.js",
     "b": 29327
    },
    {
-    "f": "engine/sentinelle_core.js",
-    "b": 21203
-   },
-   {
-    "f": "engine/src/rules_extra.js",
-    "b": 19359
-   },
-   {
-    "f": "engine/src/typed.js",
-    "b": 18099
+    "f": "engine/policy.js",
+    "b": 22958
    }
   ]
  },
  "echecs": 0,
- "verifications": 59
+ "verifications": 63
 }

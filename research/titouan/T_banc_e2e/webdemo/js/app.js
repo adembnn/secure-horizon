@@ -67,7 +67,7 @@ function select(id) {
 async function sign(s) {
   const btn = $('#sign-btn'); btn.disabled = true;
   const out = clear($('#wallet-out'));
-  const r = await holdRequest({ body: s.body, local: LOCAL, delaySec: cfg.delay, askIntent: cfg.ask, siteLabel: s.site });
+  const r = await holdRequest({ body: s.body, local: LOCAL, delaySec: cfg.delay, askIntent: cfg.ask, siteLabel: s.site, intentDetails: s.intentDetails || null, ecrit: s.ecrit || '', honnete: s.intentHonnete });
   btn.disabled = false;
   logEntry({ source: 'demo', scenario: s.id, intent: r.intentKey, level: r.level, niveau: r.verdict && r.verdict.niveau, fiche: r.verdict && r.verdict.fiche, decision: r.decision, delay_s: r.delaySec ?? null, ms: r.ms });
   out.textContent = r.decision === 'cancel'
@@ -95,7 +95,7 @@ function verifyPasted() {
   if (r.error) { out.append(h('p', { class: 'error', role: 'alert' }, r.error)); return; }
   const ctxLocal = { contacts: [], history: [], protected: [], knownSpenders: [] }; // en mode colle, le moteur ne connait ni tes contacts ni ton historique
   const b = r.body;
-  const sendBody = withIntent(b, b.intent === 'swap' || b.intent === 'other' ? 'none' : b.intent);
+  const sendBody = withIntent(b, b.intent === 'other' ? 'none' : b.intent);
   const v = check(sendBody, sanitizeLocalContext(ctxLocal));
   const box = h('div', { class: 'verdict' });
   renderVerdict(box, v, { body: sendBody, local: ctxLocal, intentKey: b.intent && b.intent !== 'none' ? b.intent : null });

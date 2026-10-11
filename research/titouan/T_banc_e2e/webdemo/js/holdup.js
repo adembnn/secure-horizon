@@ -7,7 +7,8 @@ import { check, displayLevel, frictionSeconds, withIntent, sanitizeLocalContext 
 const mmss = (s) => (s >= 60 ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : s + ' s');
 
 // Retourne une promesse { decision: 'cancel' | 'sign', intentKey, verdict, level, delaySec, ms }
-export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteLabel = '' }) {
+// intentDetails (optionnel) : jeton, montant, jeton recu dits par la personne ; ecrit (optionnel) : l'intention en une phrase. Ils ne servent que si la reponse choisie est l'intention honnete du scenario (honnete).
+export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteLabel = '', intentDetails = null, ecrit = '', honnete = null }) {
   return new Promise((resolve) => {
     const t0 = performance.now();
     const previous = document.activeElement;
@@ -51,6 +52,7 @@ export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteL
       } }, 'Vérifier');
       const fs = h('fieldset', { class: 'choices' },
         h('legend', {}, h('h1', { class: 'question', id: 'hu-title' }, 'Qu’essaies-tu de faire ?')),
+        ecrit ? h('p', { class: 'written' }, 'Tu as écrit : « ' + ecrit + ' »') : null,
         INTENTS.map(([k, label]) => h('label', { class: 'choice' }, h('input', { type: 'radio', name: 'intent', value: k }), h('span', {}, label))));
       fs.addEventListener('change', () => go.removeAttribute('aria-disabled'));
       frame([
@@ -60,12 +62,15 @@ export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteL
     }
 
     function stepVerdict() {
-      const b = withIntent(body, state.intentKey === 'other' || state.intentKey === 'swap' ? 'none' : state.intentKey); // 'swap' et 'other' n'ont pas de traduction dans le comparateur : plancher objectif seul (voir README)
+      // 'swap' est lu par le comparateur (toIntent) ; 'other' n'a pas de traduction : plancher objectif seul.
+      const useDetails = !!intentDetails && !!ecrit && state.intentKey === honnete;
+      const b0 = withIntent(body, state.intentKey === 'other' ? 'none' : state.intentKey);
+      const b = useDetails ? { ...b0, intent_details: intentDetails } : b0;
       const v = check(b, sanitizeLocalContext(local));
       state.verdict = v;
       const lv = displayLevel(v);
       const delay = frictionSeconds(lv.key, delaySec); state.delay = delay;
-      const parts = verdictParts(v, { body: b, local, intentKey: askIntent ? state.intentKey : null, ids: true });
+      const parts = verdictParts(v, { body: b, local, intentKey: askIntent ? state.intentKey : null, ids: true, compare: useDetails ? { voulu: ecrit } : null });
       const bodyKids = [h('div', { id: 'hu-desc' }, parts.top)];
       let timerBig = null;
       if (lv.key === 'manipulation') {

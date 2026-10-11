@@ -48,7 +48,7 @@ for (const f of readdirSync(join(ROOT, 'engine', 'src')).filter((x) => x.endsWit
   src(join(ROOT, 'engine', 'vendor', 'types.ts')); // type seul, efface a la conversion (hache pour la trace)
 }
 // 3) politique
-put('engine/policy.js', rewriteImports(src(join(ROOT, 'run', 'policy.mjs')).toString('utf8'), [["'../engine/src/fixes.mjs'", "'./src/fixes.js'"]]));
+put('engine/policy.js', rewriteImports(src(join(ROOT, 'run', 'policy.mjs')).toString('utf8'), [["'../engine/src/fixes.mjs'", "'./src/fixes.js'"], ["'../engine/src/engine.mjs'", "'./src/engine.js'"], ["'../engine/src/util.mjs'", "'./src/util.js'"]]));
 // 4) textes clairs
 {
   const j = JSON.parse(src(join(ROOT, '..', 'U_textes_utilisateur.json')).toString('utf8'));

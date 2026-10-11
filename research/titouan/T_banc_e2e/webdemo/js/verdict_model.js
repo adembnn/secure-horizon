@@ -18,7 +18,7 @@ export function frictionSeconds(key, cfg) {
   if (key === 'manipulation') return Math.max(c, 30); // le produit retient 10 min ; la demo raccourcit a 30 s
   return c;
 }
-export const withIntent = (body, intentKey) => (intentKey && intentKey !== 'none' ? { ...body, intent: intentKey } : { ...body });
+export const withIntent = (body, intentKey, details) => (intentKey && intentKey !== 'none' ? { ...body, intent: intentKey, ...(details ? { intent_details: details } : {}) } : { ...body });
 
 const sh = (a) => (typeof a === 'string' && a.length > 12 ? a.slice(0, 6) + '…' + a.slice(-4) : String(a));
 // Ce que le moteur d'effets a decode (pour le panneau technique). Meme chaine que le verdict, sans l'intention. Ne leve jamais.

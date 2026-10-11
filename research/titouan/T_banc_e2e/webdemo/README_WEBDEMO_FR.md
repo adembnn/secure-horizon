@@ -8,7 +8,7 @@ Un lien, rien à installer. Le jury ouvre la page, choisit un scénario, clique 
 
 | Page | Contenu |
 |---|---|
-| `index.html#demo` | Faux site + faux portefeuille, 8 scénarios en un clic (envoi simple, échange légitime, droit illimité vers un site piège, signature de permit piège, autorisation de tous les NFT, changement de propriétaire du compte, faux support, et un envoi vers une adresse proche de celle d'un contact, gardé comme cas de test du moteur, pas comme apport de Hold up). Au clic sur « Signer » : question d'intention, puis « Tu as dit / En réalité » (4 lignes de texte clair), niveau, friction (délai réglable, Annuler toujours visible), panneau « Ce que le moteur a vu » pour le jury technique. |
+| `index.html#demo` | Faux site + faux portefeuille, 9 scénarios en un clic (envoi simple, échange légitime, « échanger 50 USDC » où le site réclame un droit illimité, droit illimité vers un site piège, signature de permit piège, autorisation de tous les NFT, changement de propriétaire du compte, faux support, et un envoi vers une adresse proche de celle d'un contact, gardé comme cas de test du moteur, pas comme apport de Hold up). Au clic sur « Signer » : question d'intention, puis « Tu crois / En vrai » (4 lignes de texte clair), niveau, friction (délai réglable, Annuler toujours visible), panneau « Voir les preuves techniques » pour le jury technique. La scène « échanger 50 USDC » affiche en plus l'intention écrite contre l'effet réel (« Ce que tu voulais » / « Ce que la demande fait ») et conclut « Ça ne correspond pas. » ; si rien n'est vu, la phrase est « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. », jamais un OK ni un vert. |
 | `index.html#colle` | « Colle une transaction » : on colle une requête `eth_sendTransaction` ou `eth_signTypedData_v4` (ou une transaction / un message seul) et on lit le verdict. Marche sur téléphone : c'est la version « application compagnon » sans installation. 16 exemples synthétiques du jeu public. |
 | `index.html#journal` | Journal local dans le navigateur, chaîné par hachage (SHA-256 de la ligne précédente + celle-ci). Bouton « Retoucher une ligne » pour montrer que la chaîne se casse. |
 | `limites.html` | Page « Limites » honnête. |
@@ -56,7 +56,7 @@ Tous les chemins sont relatifs : la page marche aussi sous `https://compte.githu
 
 ```
 node --no-warnings webdemo/build_webdemo.mjs          # régénère engine/ et js/exemples_public.js (reproductible, hachages dans BUILD_INFO.json)
-node --no-warnings webdemo/tests/run_webdemo_tests.mjs # 59 vérifications, écrit out/RESULTATS.json
+node --no-warnings webdemo/tests/run_webdemo_tests.mjs # 63 vérifications, écrit out/RESULTATS.json
 ```
 
 Node 23.2 ou plus (`module.stripTypeScriptTypes`). Aucun paquet, aucun réseau.
@@ -65,7 +65,7 @@ Comment c'est fabriqué : `engine/src/*.mjs` est copié tel quel (seuls les suff
 
 ## Ce que cela prouve
 
-- Le **même moteur** d'effets, le même comparateur et la même politique que le banc donnent, dans un navigateur, les mêmes verdicts : 83 cas (les 8 scénarios sous 6 réponses, plus les requêtes types et malformées), les 144 cas du jeu PUBLIC et les 385 du jeu DEV sont identiques, champ par champ, à la voie de référence (`server/server.mjs`, modules d'origine).
+- Le **même moteur** d'effets, le même comparateur et la même politique que le banc donnent, dans un navigateur, les mêmes verdicts : 89 cas (les 9 scénarios sous 6 réponses, plus les requêtes types et malformées), les 144 cas du jeu PUBLIC et les 385 du jeu DEV sont identiques, champ par champ, à la voie de référence (`server/server.mjs`, modules d'origine).
 - « ok » ne sort jamais : le plus bas est « Aucun signal trouvé », avec la phrase « ce n'est pas une garantie ». Aucun écran n'affiche « OK » ni « protégé ».
 - La page n'a besoin d'aucun serveur ni d'aucune bibliothèque externe (aucune URL externe chargée, pas de CDN, pas de `eval`, pas de secret), et le calcul prend environ 4 ms par verdict.
 - Un jury peut juger la **présentation** (question d'intention, « Tu as dit / En réalité », friction, annulation) et le **texte clair** sans rien installer.
@@ -82,7 +82,7 @@ Comment c'est fabriqué : `engine/src/*.mjs` est copié tel quel (seuls les suff
 
 ## Approximations connues (voir aussi `limites.html`)
 
-- Les réponses « Échanger une crypto » et « Autre » ne sont pas traduites en intention pour le comparateur (la colle de l'extension ne les connaît pas) : le verdict repose alors sur le seul moteur d'effets.
+- La réponse « Autre » n'est pas traduite en intention : le verdict repose alors sur le seul moteur d'effets.
 - Faux support : si la personne répond « Payer quelqu'un » à un envoi simple vers une adresse inconnue, le niveau reste « Aucun signal trouvé » : la pression lue sur la page n'est utilisée que si le moteur voit déjà un signal. Seule la réponse « On m'a demandé de le faire » déclenche « Manipulation ». C'est le cas de la fraude conforme.
 - Textes de fiche approximatifs : l'ETH natif s'affiche « NATIVE » ; « ton contact » peut désigner une adresse inconnue ; un échange légitime est décrit « Cette opération envoie 0.1 WETH à ton contact, comme tu l'as dit » (la fiche F26 « aucun signal » parle d'envoi, pas d'échange).
 - Sans compte signataire dans la requête collée, le moteur lit un droit comme celui d'un tiers et baisse le niveau. La page suppose alors que c'est toi qui signes et le dit.

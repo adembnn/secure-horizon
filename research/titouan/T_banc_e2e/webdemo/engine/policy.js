@@ -2,7 +2,8 @@
 // selon les RAISONS du comparateur et l'OPACITÉ / la complétude des effets décodés. Aucune lecture de label, d'id de cas ou d'adresse littérale.
 // Chaque correctif est un interrupteur (engine/src/fixes.mjs) pour la mesure A/B.
 import { isOn } from './src/fixes.js';
-import { OPACITY_CODES } from '../engine/src/engine.js';
+import { OPACITY_CODES } from './src/engine.js';
+import { tokenInfo, DEFAULT_TOKENS } from './src/util.js';
 
 const RANK = { info: -1, ok: 0, warn: 1, critical: 2 };
 const worst = (a, b) => (RANK[a] >= RANK[b] ? a : b);
@@ -12,7 +13,27 @@ const WARN_CODES = new Set(['new_contract', 'high_balance_share', 'unlimited_app
 const sevOfReason = (code) => (WARN_CODES.has(code) ? 'warn' : 'critical');
 const ademLevel = (reasons) => reasons.reduce((m, r) => worst(m, r.sev || sevOfReason(r.code)), 'ok');
 
-const ZERO_ADDR = '0x' + '0'.repeat(40);
+// ---- lecture des détails d'intention (jeton, montant, jeton reçu) : ils servent seulement à AJOUTER des raisons, jamais à baisser un niveau (monotonie).
+const NATIVE_BY_CHAIN = { 1: 'ETH', 10: 'ETH', 8453: 'ETH', 42161: 'ETH', 59144: 'ETH', 534352: 'ETH', 324: 'ETH', 81457: 'ETH', 56: 'BNB', 137: 'POL', 43114: 'AVAX', 100: 'xDAI', 250: 'FTM', 42220: 'CELO', 5000: 'MNT' };
+// famille d'un jeton : la casse, le préfixe $, les suffixes .e/.b et le préfixe W (WETH = ETH, WAVAX = AVAX) ne changent pas l'actif dit
+const tokenFamily = (s) => { const x = String(s || '').trim().toUpperCase().replace(/^\$/, '').replace(/\.[EB]$/, ''); return x.length > 3 && x[0] === 'W' ? x.slice(1) : x; };
+// montants lisibles : « 1,5 », « 1.5 », « 1 000 », « 1,000 » (milliers ou décimale : on garde la lecture la plus large, jamais la plus stricte)
+function amountReadings(v) {
+  if (typeof v === 'number') return Number.isFinite(v) ? [v] : [];
+  if (typeof v !== 'string') return [];
+  const t = v.replace(/[\s  ]/g, '');
+  if (!t) return [];
+  const out = [];
+  if (/^\d+$/.test(t)) out.push(Number(t));
+  else if (/^\d+[.,]\d+$/.test(t)) { out.push(Number(t.replace(',', '.'))); if (/^\d{1,3}[.,]\d{3}$/.test(t)) out.push(Number(t.replace(/[.,]/, ''))); }
+  else if (/^\d{1,3}([.,]\d{3})+$/.test(t)) out.push(Number(t.replace(/[.,]/g, '')));
+  else if (/^\d{1,3}(,\d{3})+\.\d+$/.test(t)) out.push(Number(t.replace(/,/g, '')));
+  else if (/^\d{1,3}(\.\d{3})+,\d+$/.test(t)) out.push(Number(t.replace(/\./g, '').replace(',', '.')));
+  return out.filter(Number.isFinite);
+}
+const DETAIL_KINDS = new Set(['buy_or_swap', 'pay_someone', 'send_to_my_account']);
+
+const ZERO_ADDR ='0x' + '0'.repeat(40);
 const isKnownProtocol = (ctx, a) => !!a && (ctx.knownSpenders || []).includes(String(a).toLowerCase());
 
 export function applyPolicy({ eff, adem, ctx, intent, request }) {
@@ -134,6 +155,62 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     });
   }
 
+  // ---- F31 / F32 / F33 : l'intention DÉTAILLÉE (jeton, montant, jeton reçu) comparée aux effets. Ces règles ne lisent que des détails : sans détail (type seul ou aucune intention)
+  // elles ne font rien, donc ajouter de l'information ne peut que monter le niveau. Elles couvrent ce que le comparateur d'Adem ne regarde pas pour un échange
+  // (jeton, montant, droit plus large que le montant dit). Aucune adresse, aucun identifiant de cas : seulement la forme des effets.
+  if (intent && DETAIL_KINDS.has(intent.kind) && (isOn('F31') || isOn('F32') || isOn('F33'))) {
+    const nat = NATIVE_BY_CHAIN[Number(eff.chainId)];
+    const symOf = (tok, given) => { if (given && given !== 'NATIVE' && given !== 'native') return given; const t = String(tok || '').toLowerCase(); return t === 'native' ? nat : tokenInfo(ctx, t).symbol; };
+    const said = intent.token ? tokenFamily(intent.token) : null;
+    const declared = amountReadings(intent.amount); const declaredMax = declared.length ? Math.max(...declared) : NaN;
+    // les frais en monnaie native versés à un protocole connu (pont, routeur) accompagnent l'opération : ils ne sont pas « un autre jeton » quand le jeton dit n'est pas la monnaie native
+    const feeToProtocol = (o) => (o.std === 'native' || String(o.token).toLowerCase() === 'native') && isKnownProtocol(ctx, o.to) && !!said && said !== tokenFamily(nat);
+    const moneyOut = (eff.outgoing || []).filter((o) => (o.std === 'native' || o.std === 'erc20' || o.std === undefined) && !feeToProtocol(o));
+    const moneyApprovals = (eff.approvals || []).filter((a) => a.via !== 'setApprovalForAll' && a.std !== 'nft_all' && a.std !== 'nft_one');
+    const has = (code) => reasons.some((r) => r.code === code);
+    const sameAsset = (sym) => !said || !sym || tokenFamily(sym) === said;
+
+    // F32 : un autre jeton que celui dit est engagé (vendu, ou droit accordé dessus), ou le jeton reçu n'est pas celui annoncé. Un symbole inconnu ne conclut pas.
+    if (isOn('F32') && !has('token_differs_from_intent')) {
+      const other = [];
+      // « jeton dit » est le jeton donné pour un paiement ou si le jeton reçu est annoncé à part (mode strict). Pour un échange avec un seul jeton dit, il peut être le jeton donné
+      // OU le jeton reçu (« acheter 821 X avec Y ») : on ne conclut que si tous les jetons engagés sont identifiés et qu'aucun n'est celui qui est dit.
+      const strict = intent.kind !== 'buy_or_swap' || !!intent.receiveToken;
+      if (said) {
+        const engaged = [...moneyOut.map((o) => symOf(o.token, o.symbol)), ...moneyApprovals.map((a) => symOf(a.token)), ...(strict ? [] : (eff.incoming || []).map((i) => symOf(i.token, i.symbol)))];
+        if (strict) { for (const sy of engaged) if (sy && tokenFamily(sy) !== said) other.push(sy); }
+        else if ((eff.incoming || []).length && engaged.length && engaged.every(Boolean) && !engaged.some((sy) => tokenFamily(sy) === said)) other.push(engaged[0]);
+      }
+      const wantIn = intent.kind === 'buy_or_swap' && intent.receiveToken ? tokenFamily(intent.receiveToken) : null;
+      let wrongIn = null;
+      if (wantIn) {
+        // jeton reçu : s'il est identifié et différent, c'est un écart ; s'il n'est pas identifié alors que le jeton annoncé est un jeton connu (registre, monnaie native), ce n'est pas le bon non plus
+        const insAll = (eff.incoming || []).map((i) => symOf(i.token, i.symbol));
+        const ins = insAll.filter(Boolean);
+        const knownFam = new Set([...Object.values(ctx.tokenMeta || {}), ...Object.values(DEFAULT_TOKENS)].map((t) => t && t.symbol).filter((x) => x && x !== 'NATIVE').map(tokenFamily).concat(Object.values(NATIVE_BY_CHAIN).map(tokenFamily)));
+        if (insAll.length && !ins.some((sy) => tokenFamily(sy) === wantIn)) { if (ins.length) wrongIn = ins[0]; else if (knownFam.has(wantIn)) wrongIn = 'un jeton non identifié'; }
+      }
+      if (other.length || wrongIn) {
+        reasons.push({ code: 'token_differs_from_intent', sev: 'critical', said: `Tu veux ${intent.kind === 'buy_or_swap' ? 'échanger' : 'envoyer'} ${intent.token || 'un autre jeton'}`, does: `En réalité, la demande engage ${other[0] || wrongIn}.` });
+        notes.push('F32:jeton_different_de_lintention');
+      }
+    }
+    // F33 : plus que le montant dit part du compte (le comparateur ne le vérifie que pour un paiement). Tolérance d'arrondi de 1 %.
+    if (isOn('F33') && Number.isFinite(declaredMax) && declaredMax > 0 && !has('amount_exceeded')) {
+      const over = moneyOut.find((o) => sameAsset(symOf(o.token, o.symbol)) && Number.isFinite(Number(o.amount)) && Number(o.amount) > declaredMax * 1.01);
+      if (over) { reasons.push({ code: 'amount_exceeded', sev: 'critical', said: `Tu veux utiliser ${intent.amount} ${intent.token || ''}`.trim(), does: `En réalité, ${over.amount} ${symOf(over.token, over.symbol) || 'tokens'} partiraient.` }); notes.push('F33:montant_superieur_a_lintention'); }
+    }
+    // F31 : un droit de dépense (approve, permit, Permit2) plus large que le montant dit. Bénéficiaire connu = orange, sinon rouge.
+    if (isOn('F31') && Number.isFinite(declaredMax) && declaredMax > 0 && !has('approval_exceeds_intent')) {
+      const wide = moneyApprovals.find((a) => sameAsset(symOf(a.token)) && (a.amount === 'unlimited' || (Number.isFinite(Number(a.amount)) && tokenInfo(ctx, a.token).decimals != null && Number(a.amount) > declaredMax * 1.01)));
+      if (wide) {
+        const sev = isKnownProtocol(ctx, wide.spender) ? 'warn' : 'critical';
+        reasons.push({ code: 'approval_exceeds_intent', sev, said: `Tu veux utiliser ${intent.amount} ${intent.token || ''}`.trim(), does: wide.amount === 'unlimited' ? 'En réalité, ce site obtiendrait le droit de prendre tout ton solde de ce jeton, sans te redemander.' : `En réalité, ce site obtiendrait le droit de prendre ${wide.amount}, plus que prévu.` });
+        notes.push(sev === 'warn' ? 'F31:droit_plus_large_protocole_connu' : 'F31:droit_plus_large_inconnu');
+      }
+    }
+  }
+
   const floor = lvlOf(flags);
   let level = floor;
   const notIdentity = reasons.length !== (adem ? adem.reasons.length : 0) || reasons.some((r) => r.sev);
@@ -153,7 +230,6 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
 // (détecteurs) lisent le type d'intention et peuvent, elles, rendre un cas moins sévère avec un type qu'avec rien : cette garde ferme ce trou.
 // 'unknown' reste 'unknown' (non vérifié, jamais ok). Aucun 'ok' n'est produit ici.
 export function monotoneGuard(levelWithIntent, levelWithout) {
-  const R = { unknown: 1, ok: 0, warn: 1, critical: 2 };
-  if (levelWithIntent === 'unknown' || levelWithout === 'unknown') return levelWithIntent === 'unknown' ? (R[levelWithout] > 1 ? levelWithout : 'unknown') : levelWithIntent;
-  return R[levelWithout] > R[levelWithIntent] ? levelWithout : levelWithIntent;
+  const R = { ok: 0, unknown: 0.5, warn: 1, critical: 2 }; // 'unknown' = non vérifié (orange) : au-dessus de ok, sous warn
+  return (R[levelWithout] ?? 0) > (R[levelWithIntent] ?? 0) ? levelWithout : levelWithIntent;
 }
