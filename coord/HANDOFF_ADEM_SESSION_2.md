@@ -66,3 +66,23 @@ Détail : `research/demo_reelle/RECHERCHE_these_moindre_privilege.md`.
 - FAUX (erreur de la session, à ne pas reprendre) : une interface détournée n'utilise pas les droits déjà accordés, elle fait signer des droits NOUVEAUX vers l'attaquant.
 - TIENT : LI.FI (zéro perte pour les approbations finies) ; perte bornée ailleurs ; recommandation d'ethereum.org contre l'accès illimité ; coût d'une approbation de plus environ 0,002 à 0,003 $ sur Avalanche (calcul de l'agent, hypothèse de gaz non sourcée).
 - GRILLE : le moindre privilège se mappe sur NIST PR.AA-05 (Protect), alors que le règlement demande Detect ou Respond. À garder comme fonction secondaire derrière la comparaison intention contre effet.
+
+## DÉLÉGATION COMPLÈTE À TITOUAN (session Adem arrêtée, plus de crédit)
+
+Tous les agents de la session Adem sont arrêtés. Titouan et sa session prennent la main sur TOUS les dossiers, y compris `extension/`, `extension_standalone/`, `pipeline/`, `detectors_adem/`, `research/demo_reelle/`, `livrables/`, `blockchain/`. Plus de partage de dossiers.
+
+Produit figé par Adem : l'utilisateur écrit ce qu'il veut faire ; Clef dit si la demande correspond ou non ; si non, alerte ; si oui, rien. On garde aussi les signaux qu'un portefeuille donne déjà. Phrase sûre : « MetaMask affiche "illimité" sans alerte et ne sait ni combien tu voulais donner ni à qui. »
+
+Deux agents ont été interrompus EN PLEIN TRAVAIL. Leur état est commité tel quel, non vérifié :
+1. Correctifs de l'extension (`extension/effect_sim.js`, `gatekeeper.js`, `written_check.js`, `ui/screen.js`, `tests/unit/operation.test.mjs`, site Neve). Objectifs : une intention couvre les demandes successives de la même opération ; vérifier un échange illisible par simulation ; pas de conseil « réduis le plafond » sur une signature ; accents du site Neve (il en était là). À FAIRE EN PREMIER : `node --test` sur `extension/tests/unit/`, puis `node extension_standalone/build_standalone.mjs`, puis rejouer la scène.
+2. Quadrillage des faux positifs / faux négatifs (`pipeline/grille/`, peut-être vide ou partiel). Le cahier des charges complet est ci-dessous.
+
+### Cahier des charges du quadrillage (à relancer)
+Grille d'au moins 1 500 paires « phrase écrite / demande », vérité connue par construction. Demandes : approbation exacte, supérieure, illimitée ; Permit et Permit2 ; setApprovalForAll ; envois avec bon ou mauvais destinataire, montant, jeton ; échanges ; NFT ; dépôt ; connexion ; appel illisible. Phrases : précises, familières, fautes, virgule décimale, « 50 dollars », sans montant, vagues, hors sujet, « me connecter » face à une demande qui accorde un droit. Couper en deux moitiés (réglage, contrôle) ; corriger sur réglage seulement ; mesurer une seule fois sur contrôle. Comparer : (a) code seul, (b) Clef classe puis code compare, (c) Clef juge direct (intention + effet décrit en clair, questions `noul`), (d) combinaison la plus stricte. Règles dures : intention vague jamais mieux que pas d'intention ; montants, jetons, adresses extraits par code ; en cas de doute, « invérifiable ». Clef : `node --env-file=.env <script>` (clés dans le `.env` d'Adem, non versionné : Titouan doit avoir les siennes), client `detectors_adem/clef_client.mjs`, classement existant `pipeline/intent_clef.mjs`.
+
+### Ensuite
+- Brancher le décideur retenu dans l'extension (relais `research/demo_reelle/classifieur/relay.mjs`).
+- Rejouer et filmer la scène Neve. Script de rejeu : copié dans `research/demo_reelle/site_echange/test/film_scene.mjs` (arguments : dossier playwright-core, chrome.exe, dossier de sortie, racine du dépôt, mode `honnete|piege|permit`, phrase).
+- Design (MSG-065) : ordinateur uniquement, skills de design, zéro décor.
+- Livrables : deck, pitchs, fiche de défense, README, vidéo, alignés sur le produit figé. Chiffres et phrases autorisées dans `research/demo_reelle/RECHERCHE_*.md`.
+- Services locaux qui tournaient sur la machine d'Adem (à relancer chez soi) : chaîne `npm run chain:local` dans `blockchain/` puis `npm run demo:deploy` ; site Neve sur 8793 (`.claude/launch.json`).
