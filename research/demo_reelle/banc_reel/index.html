@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Banc d'essai Hold up, Avalanche</title>
+<style>
+  /* Page d'essai de l'equipe Hold up. Ce n'est pas un site d'echange : chaque bouton envoie au portefeuille une vraie demande
+     vers de vrais contrats d'Avalanche (routeur Pangolin, jeton USDC). Rien n'est envoye tant que le portefeuille ne signe pas. */
+  :root { color-scheme: light; }
+  html, body { margin: 0; background: #fff; color: #000; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; line-height: 1.5; padding: 32px 16px 64px; }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+  p.sub { margin: 0 0 8px; }
+  #etat { margin: 0 0 28px; font-size: 14px; }
+  section { border-top: 1px solid #000; padding: 20px 0; }
+  h2 { font-size: 17px; font-weight: 600; margin: 0 0 6px; }
+  dl { margin: 0 0 14px; display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; font-size: 15px; }
+  dt { color: #555; }
+  dd { margin: 0; }
+  code { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 14px; background: #f2f2f2; padding: 1px 5px; }
+  button { font: inherit; background: #000; color: #fff; border: 1px solid #000; padding: 10px 18px; cursor: pointer; }
+  button:hover { background: #fff; color: #000; }
+  button:disabled { opacity: .4; cursor: default; }
+  .resultat { min-height: 1.5em; margin: 10px 0 0; font-size: 15px; }
+  footer { border-top: 1px solid #000; padding-top: 16px; font-size: 13px; color: #555; }
+</style>
+</head>
+<body>
+<main>
+<h1>Banc d'essai Hold up</h1>
+<p class="sub">Vraies demandes vers de vrais contrats d'Avalanche : le routeur d'échange Pangolin et le jeton USDC. Page d'essai, pas un site d'échange.</p>
+<p id="etat">Portefeuille non connecté.</p>
+
+<section>
+  <h2>1. Un échange qui fait ce qu'on a écrit</h2>
+  <dl>
+    <dt>La demande</dt><dd>échanger 50 AVAX contre de l'USDC, l'USDC revient sur ton compte</dd>
+    <dt>À écrire</dt><dd><code>échanger 50 AVAX contre USDC</code></dd>
+    <dt>Réponse attendue</dt><dd>Ça correspond</dd>
+  </dl>
+  <button id="b1" type="button">Échanger 50 AVAX contre USDC</button>
+  <p class="resultat" id="r1"></p>
+</section>
+
+<section>
+  <h2>2. Le même bouton, mais l'USDC part chez quelqu'un d'autre</h2>
+  <dl>
+    <dt>La demande</dt><dd>le même échange, sauf que l'USDC est versé sur une autre adresse que la tienne</dd>
+    <dt>À écrire</dt><dd><code>échanger 50 AVAX contre USDC</code></dd>
+    <dt>Réponse attendue</dt><dd>Ça ne correspond pas</dd>
+  </dl>
+  <button id="b2" type="button">Échanger 50 AVAX contre USDC</button>
+  <p class="resultat" id="r2"></p>
+</section>
+
+<section>
+  <h2>3. Le même bouton, mais cent fois le montant</h2>
+  <dl>
+    <dt>La demande</dt><dd>un échange de 5 000 AVAX au lieu de 50</dd>
+    <dt>À écrire</dt><dd><code>échanger 50 AVAX contre USDC</code></dd>
+    <dt>Réponse attendue</dt><dd>Ça ne correspond pas</dd>
+  </dl>
+  <button id="b3" type="button">Échanger 50 AVAX contre USDC</button>
+  <p class="resultat" id="r3"></p>
+</section>
+
+<section>
+  <h2>4. Une autorisation limitée à ce qu'on a écrit</h2>
+  <dl>
+    <dt>La demande</dt><dd>autoriser le routeur Pangolin à prendre 50 USDC, pas plus</dd>
+    <dt>À écrire</dt><dd><code>échanger 50 USDC contre AVAX</code></dd>
+    <dt>Réponse attendue</dt><dd>Ça correspond</dd>
+  </dl>
+  <button id="b4" type="button">Autoriser l'échange de 50 USDC</button>
+  <p class="resultat" id="r4"></p>
+</section>
+
+<section>
+  <h2>5. Le même bouton, mais l'autorisation est illimitée</h2>
+  <dl>
+    <dt>La demande</dt><dd>autoriser le routeur Pangolin à prendre tout ton USDC, sans limite et sans date de fin</dd>
+    <dt>À écrire</dt><dd><code>échanger 50 USDC contre AVAX</code></dd>
+    <dt>Réponse attendue</dt><dd>Ça ne correspond pas</dd>
+  </dl>
+  <button id="b5" type="button">Autoriser l'échange de 50 USDC</button>
+  <p class="resultat" id="r5"></p>
+</section>
+
+<footer>
+  Les boutons 1 à 3, puis 4 et 5, portent le même texte exprès : seul ce que la demande fait vraiment change.
+  Annuler dans Hold up ou dans le portefeuille n'envoie rien. Continuer envoie une vraie transaction sur Avalanche.
+</footer>
+</main>
+
+<script>
+"use strict";
+(function () {
+  // Adresses publiques sur Avalanche C-Chain (43114). Source de chacune : research/titouan/T_banc_e2e/pipeline/known_protocols.json.
+  var ROUTEUR = "0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106"; // routeur Pangolin
+  var WAVAX = "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7";
+  var USDC = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E";
+  var AUTRE = "0x000000000000000000000000000000000000dEaD"; // une adresse qui n'est pas la tienne
+  var CHAINE = "0xa86a";
+  var $ = function (id) { return document.getElementById(id); };
+  var mot = function (hex) { return String(hex).replace(/^0x/, "").toLowerCase().padStart(64, "0"); };
+  var nombre = function (n) { return mot(BigInt(n).toString(16)); };
+  var avax = function (n) { return "0x" + (BigInt(n) * 1000000000000000000n).toString(16); };
+  // swapExactAVAXForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline)
+  function echange(minimum, beneficiaire) {
+    var fin = Math.floor(Date.now() / 1000) + 1200;
+    return "0xa2a1623d" + nombre(minimum) + nombre(128) + mot(beneficiaire) + nombre(fin) + nombre(2) + mot(WAVAX) + mot(USDC);
+  }
+  // approve(address spender, uint256 amount)
+  function autorisation(montant) { return "0x095ea7b3" + mot(ROUTEUR) + nombre(montant); }
+  var ILLIMITE = (1n << 256n) - 1n;
+
+  // Le portefeuille : celui qui s'annonce (EIP-6963), MetaMask de preference, sinon window.ethereum.
+  var annonces = [];
+  window.addEventListener("eip6963:announceProvider", function (e) { if (e && e.detail && e.detail.provider) annonces.push(e.detail); });
+  window.dispatchEvent(new Event("eip6963:requestProvider"));
+  function portefeuille() {
+    var mm = annonces.find(function (a) { return a.info && a.info.rdns === "io.metamask"; });
+    return (mm && mm.provider) || (annonces[0] && annonces[0].provider) || window.ethereum || null;
+  }
+  var court = function (a) { return a ? a.slice(0, 6) + "…" + a.slice(-4) : ""; };
+
+  async function compte(p) {
+    var comptes = await p.request({ method: "eth_requestAccounts" });
+    var id = await p.request({ method: "eth_chainId" });
+    if (String(id).toLowerCase() !== CHAINE) {
+      await p.request({ method: "wallet_switchEthereumChain", params: [{ chainId: CHAINE }] });
+      id = await p.request({ method: "eth_chainId" });
+    }
+    if (String(id).toLowerCase() !== CHAINE) throw new Error("Le portefeuille n'est pas sur Avalanche.");
+    $("etat").textContent = "Portefeuille connecté : " + court(comptes[0]) + ", réseau Avalanche.";
+    return comptes[0];
+  }
+
+  function brancher(n, fabriquer) {
+    $("b" + n).addEventListener("click", async function () {
+      var sortie = $("r" + n), bouton = this;
+      var p = portefeuille();
+      if (!p) { sortie.textContent = "Aucun portefeuille trouvé dans ce navigateur."; return; }
+      bouton.disabled = true; sortie.textContent = "Demande envoyée au portefeuille…";
+      try {
+        var moi = await compte(p);
+        var tx = fabriquer(moi); tx.from = moi;
+        var h = await p.request({ method: "eth_sendTransaction", params: [tx] });
+        sortie.textContent = "Transaction envoyée : " + h;
+      } catch (e) {
+        sortie.textContent = e && e.code === 4001 ? "Annulé : rien n'est parti." : "Rien n'est parti (" + String((e && e.message) || e).slice(0, 120) + ").";
+      }
+      bouton.disabled = false;
+    });
+  }
+  brancher(1, function (moi) { return { to: ROUTEUR, value: avax(50), data: echange(400000000n, moi) }; });
+  brancher(2, function () { return { to: ROUTEUR, value: avax(50), data: echange(400000000n, AUTRE) }; });
+  brancher(3, function (moi) { return { to: ROUTEUR, value: avax(5000), data: echange(400000000n, moi) }; });
+  brancher(4, function () { return { to: USDC, value: "0x0", data: autorisation(50000000n) }; });
+  brancher(5, function () { return { to: USDC, value: "0x0", data: autorisation(ILLIMITE) }; });
+})();
+</script>
+</body>
+</html>
