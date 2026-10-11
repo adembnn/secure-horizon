@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hold up : essai réel</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1c1c1a;--mut:#6b6b66;--card:#fff;--line:#e3e2dc;--acc:#1c1c1a}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#f0efe9;--mut:#a3a29a;--card:#202020;--line:#34342f;--acc:#f0efe9}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:32px 0 8px}
+.mut{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
+button,a.btn{font:inherit;background:var(--acc);color:var(--bg);border:0;border-radius:8px;padding:9px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+button.sec{background:transparent;color:var(--fg);border:1px solid var(--line)}
+code{background:var(--line);padding:1px 5px;border-radius:4px;font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:1px 8px;color:var(--mut)}
+#log{white-space:pre-wrap;font:13px/1.4 ui-monospace,monospace;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;min-height:60px}
+input[type=text]{font:inherit;width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg)}
+</style></head><body><main>
+<h1>Hold up : essai avec ton vrai portefeuille</h1>
+<p class="mut">Rien de réel : tu ne signes jamais. À la fin de chaque scénario, tu refuses dans MetaMask. Utilise un compte MetaMask sans fonds.</p>
+
+<h2>1. Installer l'extension</h2>
+<div class="card">
+<div class="row"><a class="btn" href="hold-up-standalone.zip" download>Télécharger l'extension (zip)</a></div>
+<p class="mut">Dézippe. Ouvre <code>chrome://extensions</code>, active « Mode développeur », « Charger l'extension non empaquetée », choisis le dossier <code>extension</code> dézippé. Recharge cette page ensuite.</p>
+<p class="mut">Pour que la phrase soit lue par le modèle, lance le relais à la racine du dépôt : <code>node scripts/demo.mjs</code>. Sans lui, la lecture par mots-clés s'applique.</p>
+</div>
+
+<h2>2. Connecter le portefeuille</h2>
+<div class="card row">
+<button id="conn">Connecter</button><button class="sec" id="avax">Passer sur Avalanche</button>
+<span id="state" class="mut">Pas connecté.</span>
+</div>
+
+<h2>3. Choisir un scénario</h2>
+<p class="mut">Clique sur « Lancer ». La fenêtre Hold up s'ouvre avant MetaMask et te demande « Que veux-tu faire ? ». Écris la phrase proposée, ou la tienne.</p>
+<div id="list"></div>
+
+<h2>Scénario libre</h2>
+<div class="card"><p class="mut">Droit de dépense (approve) sur l'USDC. Écris « max » pour un droit illimité, ou un nombre d'USDC.</p>
+<div class="row"><input type="text" id="cu_sp" placeholder="Adresse du bénéficiaire (0x…)" value="0x7Ee0aA1d1C6c3b2B1d6A3b1a5E5f6c7d8e9f0a1B"></div>
+<div class="row" style="margin-top:8px"><input type="text" id="cu_amt" value="max" style="max-width:200px"><button id="cu_go">Lancer</button></div></div>
+
+<h2>Journal de la page</h2><div id="log">Rien encore.</div>
+<p class="mut">Après l'essai : panneau latéral de Hold up, « Exporter le journal ».</p>
+
+<script>
+const $ = i => document.getElementById(i);
+const USDC = '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E';
+const UNKNOWN = '0x7Ee0aA1d1C6c3b2B1d6A3b1a5E5f6c7d8e9f0a1B';
+const FRIEND = '0x5a52E96BAcdaBb82fd05763E25335261B270Efcb';
+const MAXN = '115792089237316195423570985008687907853269984665640564039457584007913129639935';
+const pad = h => h.replace(/^0x/, '').toLowerCase().padStart(64, '0');
+const num = n => BigInt(n).toString(16).padStart(64, '0');
+const approve = (sp, amt) => '0x095ea7b3' + pad(sp) + (amt === 'max' ? 'f'.repeat(64) : num(amt));
+const log = m => { const old = $('log').textContent; $('log').textContent = new Date().toLocaleTimeString() + '  ' + m + (old === 'Rien encore.' ? '' : '\n' + old); };
+let acct = null;
+const chain = async () => parseInt(await ethereum.request({ method: 'eth_chainId' }), 16);
+async function connect() {
+  if (!window.ethereum) { $('state').textContent = 'Aucun portefeuille détecté.'; return; }
+  try { const a = await ethereum.request({ method: 'eth_requestAccounts' }); acct = a[0]; $('state').textContent = acct.slice(0, 8) + '… · chaîne ' + await chain(); }
+  catch (e) { $('state').textContent = 'Refusé : ' + (e.message || e); }
+}
+$('conn').onclick = connect;
+$('avax').onclick = async () => {
+  try { await ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0xa86a' }] }); connect(); }
+  catch (e) {
+    try { await ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0xa86a', chainName: 'Avalanche C-Chain', nativeCurrency: { name: 'AVAX', symbol: 'AVAX', decimals: 18 }, rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'], blockExplorerUrls: ['https://snowtrace.io'] }] }); connect(); }
+    catch (x) { log('Réseau : ' + (x.message || x)); }
+  }
+};
+const permit = cid => JSON.stringify({
+  types: {
+    EIP712Domain: [{ name: 'name', type: 'string' }, { name: 'version', type: 'string' }, { name: 'chainId', type: 'uint256' }, { name: 'verifyingContract', type: 'address' }],
+    Permit: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }, { name: 'value', type: 'uint256' }, { name: 'nonce', type: 'uint256' }, { name: 'deadline', type: 'uint256' }]
+  },
+  primaryType: 'Permit',
+  domain: { name: 'USD Coin', version: '2', chainId: cid, verifyingContract: USDC },
+  message: { owner: acct, spender: UNKNOWN, value: MAXN, nonce: 0, deadline: '9999999999' }
+});
+const tx = data => ({ method: 'eth_sendTransaction', params: [{ from: acct, to: USDC, data, value: '0x0' }] });
+const hex = s => '0x' + [...new TextEncoder().encode(s)].map(b => b.toString(16).padStart(2, '0')).join('');
+const S = [
+  { id: 'ok_envoi', t: 'Envoi simple de 50 USDC à un ami', k: 'honnête', say: 'envoyer 50 USDC à un ami', exp: '« Ça correspond ». Le portefeuille s\'ouvre. Jamais de vert « OK ».', run: () => tx('0xa9059cbb' + pad(FRIEND) + num(50000000)) },
+  { id: 'ok_approve50', t: 'Autorisation limitée à 50 USDC', k: 'honnête', say: 'échanger 50 USDC', exp: '« Ça correspond » : le droit est de 50, comme écrit.', run: () => tx(approve(UNKNOWN, 50000000)) },
+  { id: 'piege_illimite', t: 'Je veux échanger 50 USDC, le site demande tout', k: 'piège', say: 'échanger 50 USDC', exp: '« Ça ne correspond pas » : tu as écrit 50, la demande donne tout. Option : limiter à 50.', run: () => tx(approve(UNKNOWN, 'max')) },
+  { id: 'permit', t: '« Se connecter » qui est un Permit illimité', k: 'piège', say: 'me connecter', exp: '« Ça ne correspond pas » : tu voulais te connecter, la signature donne un droit de dépense. Pas de transaction, signature hors chaîne.', run: async () => ({ method: 'eth_signTypedData_v4', params: [acct, permit(await chain())] }) },
+  { id: 'nft', t: 'Droit sur toute ma collection NFT', k: 'piège', say: 'voir mes NFT', exp: 'Alerte : droit sur tous les NFT donné à une adresse inconnue.', run: () => ({ method: 'eth_sendTransaction', params: [{ from: acct, to: UNKNOWN, data: '0xa22cb465' + pad(UNKNOWN) + num(1), value: '0x0' }] }) },
+  { id: 'texte', t: 'Message de connexion sans danger', k: 'honnête', say: 'me connecter', exp: '« Ça correspond ». Aucun droit demandé.', run: () => ({ method: 'personal_sign', params: [hex('Connexion a Hold up Essai. Aucun droit demande.'), acct] }) },
+  { id: 'pression', t: 'Droit illimité sous pression', k: 'piège', say: 'recevoir une récompense', exp: 'Alerte forte même avec une phrase innocente : droit illimité vers une adresse inconnue. Le titre de la page contient un texte de pression.', run: () => { document.title = 'Le support te demande d\'agir vite : valide maintenant'; return tx(approve(UNKNOWN, 'max')); } }
+];
+$('list').innerHTML = S.map(s => '<div class="card"><div class="row"><b>' + s.t + '</b><span class="tag">' + s.k + '</span></div><p class="mut" style="margin:6px 0">Écris dans Hold up : <code>' + s.say + '</code><br>Attendu : ' + s.exp + '</p><button data-id="' + s.id + '">Lancer</button></div>').join('');
+async function go(req) {
+  if (!acct) { await connect(); if (!acct) return; }
+  try {
+    const r = await req();
+    log(r.method + ' demandé. Attente de ta décision…');
+    const out = await ethereum.request(r);
+    log('Résultat : ' + JSON.stringify(out).slice(0, 100) + ' (tu as signé : refuse la prochaine fois)');
+  } catch (e) { log('Fin : ' + (e.code === 4001 ? 'refusé ou annulé (normal)' : (e.message || e))); }
+}
+$('list').onclick = e => { const id = e.target.dataset && e.target.dataset.id; if (id) go(S.find(s => s.id === id).run); };
+$('cu_go').onclick = () => go(() => { const v = $('cu_amt').value.trim(); return tx(approve($('cu_sp').value.trim(), v === 'max' ? 'max' : Math.round(Number(v) * 1e6))); });
+</script></main></body></html>
