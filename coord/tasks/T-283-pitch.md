@@ -2,8 +2,8 @@
 id: T-283
 title: Pitch round 1 (5+2 min) et finale (3+3 min) + Q&R
 lane: biz
-status: todo
-owner: none
+status: claimed
+owner: adem
 agent: pitch-writer
 branch: t/T-283
 depends_on: []
@@ -14,7 +14,7 @@ threat_refs: []
 deadline: 2026-10-11T12:00+02:00
 budget_usd: 3
 created_by: claude-adem
-updated: 2026-10-10T12:00+02:00
+updated: 2026-10-11T09:48+02:00
 ---
 ## Objectif
 Deux versions chronométrées du pitch (round 1 : 5 min + 2 min de Q&R ; finale : 3 min + 3 min de Q&R) et 15 questions dures avec réponses.

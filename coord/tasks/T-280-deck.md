@@ -2,8 +2,8 @@
 id: T-280
 title: Deck de 8 slides maximum
 lane: biz
-status: todo
-owner: none
+status: claimed
+owner: adem
 agent: pitch-writer
 branch: t/T-280
 depends_on: []
@@ -14,7 +14,7 @@ threat_refs: []
 deadline: 2026-10-11T12:00+02:00
 budget_usd: 3
 created_by: claude-adem
-updated: 2026-10-10T12:00+02:00
+updated: 2026-10-11T09:48+02:00
 ---
 ## Objectif
 Deck de 8 slides max : problème, cible, solution, démo, business model, équipe (+ mapping NIST CSF / OWASP Agentic / ATLAS).

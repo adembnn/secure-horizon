@@ -2,8 +2,8 @@
 id: T-281
 title: Vidéo de démo de 2 à 3 min
 lane: biz
-status: todo
-owner: none
+status: claimed
+owner: adem
 agent: demo-tester
 branch: t/T-281
 depends_on: []
@@ -14,7 +14,7 @@ threat_refs: []
 deadline: 2026-10-11T12:00+02:00
 budget_usd: 3
 created_by: claude-adem
-updated: 2026-10-10T12:00+02:00
+updated: 2026-10-11T09:48+02:00
 ---
 ## Objectif
 Enregistrer la vidéo de démo de 2 à 3 min (filet de sécurité si la démo live plante), d'après pitch/demo-script.md. Données synthétiques uniquement, aucun secret à l'écran.

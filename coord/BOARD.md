@@ -1,6 +1,6 @@
 # BOARD (généré par `node scripts/board.mjs` — ne pas éditer)
 
-_MAJ 2026-10-11T01:12:31.579Z_
+_MAJ 2026-10-11T07:48:43.575Z_
 
 ## DOING (4)
 
@@ -11,10 +11,16 @@ _MAJ 2026-10-11T01:12:31.579Z_
 | [T-105](tasks/T-105-demo-sites.md) | Sites de démo (fausse offre, faux support, vrai swap) + console jury | tech | titouan | builder-frontend | [] |
 | [T-106](tasks/T-106-bench.md) | Banc d'essai — faux positifs, faux négatifs, latence | tech | titouan | builder-backend | [] |
 
-## CLAIMED (0)
+## CLAIMED (6)
 
 | ID | Titre | Lane | Owner | Agent | Dépend de |
 |---|---|---|---|---|---|
+| [T-180](tasks/T-180-readme.md) | README final (problème, architecture, installation, limites connues) | tech | adem | builder-backend | [] |
+| [T-181](tasks/T-181-livrable-track.md) | Livrable spécifique à la track retenue | tech | adem | builder-backend | [] |
+| [T-280](tasks/T-280-deck.md) | Deck de 8 slides maximum | biz | adem | pitch-writer | [] |
+| [T-281](tasks/T-281-video-demo.md) | Vidéo de démo de 2 à 3 min | biz | adem | demo-tester | [] |
+| [T-282](tasks/T-282-fiche-defense.md) | Fiche de défense d'une page | biz | adem | pitch-writer | [] |
+| [T-283](tasks/T-283-pitch.md) | Pitch round 1 (5+2 min) et finale (3+3 min) + Q&R | biz | adem | pitch-writer | [] |
 
 ## REVIEW (0)
 
@@ -26,16 +32,10 @@ _MAJ 2026-10-11T01:12:31.579Z_
 | ID | Titre | Lane | Owner | Agent | Dépend de |
 |---|---|---|---|---|---|
 
-## TODO (6)
+## TODO (0)
 
 | ID | Titre | Lane | Owner | Agent | Dépend de |
 |---|---|---|---|---|---|
-| [T-180](tasks/T-180-readme.md) | README final (problème, architecture, installation, limites connues) | tech | none | builder-backend | [] |
-| [T-181](tasks/T-181-livrable-track.md) | Livrable spécifique à la track retenue | tech | none | builder-backend | [] |
-| [T-280](tasks/T-280-deck.md) | Deck de 8 slides maximum | biz | none | pitch-writer | [] |
-| [T-281](tasks/T-281-video-demo.md) | Vidéo de démo de 2 à 3 min | biz | none | demo-tester | [] |
-| [T-282](tasks/T-282-fiche-defense.md) | Fiche de défense d'une page | biz | none | pitch-writer | [] |
-| [T-283](tasks/T-283-pitch.md) | Pitch round 1 (5+2 min) et finale (3+3 min) + Q&R | biz | none | pitch-writer | [] |
 
 ## DONE (2)
 
