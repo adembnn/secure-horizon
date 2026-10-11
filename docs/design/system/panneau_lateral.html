@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Hold up Panneau latéral</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+</head>
+<body class="hu pl">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<!-- Le gant : copie de docs/design/system/logo/logo_mono_blanc.svg (main seule ; le pli du pouce est tracé de la couleur du fond, sans masque : moins cher à peindre). L'icône : logo_small.svg. -->
+<symbol id="hu-glove" viewBox="0 0 512 512"><g transform="translate(11 -56) rotate(8 256 256)" fill="currentColor" stroke-linecap="round"><path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/><path d="M214 388Q122 374 86 282" fill="none" stroke="currentColor" stroke-width="70"/><rect x="172" y="440" width="196" height="62" rx="24"/><path d="M170 322Q206 334 214 378" fill="none" stroke="var(--hu-page)" stroke-width="16"/></g></symbol>
+<symbol id="hu-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2.25" fill="#000"/><g fill="#fff"><path d="M4 3.5A1.5 1.5 0 0 1 7 3.5V7.5A.5 .5 0 0 0 8 7.5V2.5A1.5 1.5 0 0 1 11 2.5V7.5A.5 .5 0 0 0 12 7.5V4A1.5 1.5 0 0 1 15 4V9A3 3 0 0 1 12 12H7A3 3 0 0 1 4 9Z"/><path d="M5.6 9.6Q3.4 9.4 2.3 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><rect x="6" y="13" width="7" height="2" rx="1"/></g></symbol>
+</svg>
+<h1 class="pl-title">Panneau latéral</h1>
+<main class="pl-views">
+<figure class="pl-view" id="v-pan-journal" style="--w:360"><figcaption>Panneau latéral. D’abord ce que tu peux encore fermer, ensuite ce qui s’est passé.</figcaption><div class="pl-frame" style="--w:360;--h:680">
+<div class="hu hu-panel">
+<div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
+<div class="hu-scroll" tabindex="0" role="region" aria-label="Journal">
+<h2 class="hu-h">Ce que tu as laissé ouvert</h2>
+<ul>
+<li class="hu-right"><p>app.neve.exchange peut dépenser 50 USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+<li class="hu-right"><p>old-farm.example peut dépenser tout ton USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+</ul>
+<p class="hu-note">C’est ton portefeuille qui signe le retrait.</p>
+<h2 class="hu-h">Aujourd’hui</h2>
+<ol>
+<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as annulé.</span></p></li>
+<li class="hu-entry"><time>14:30</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
+<li class="hu-entry"><time>11:07</time><p><span class="hu-entry-site">glacier-rewards.example</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as annulé.</span></p></li>
+</ol>
+<h2 class="hu-h">Hier</h2>
+<ol>
+<li class="hu-entry"><time>18:44</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Je n’ai pas pu vérifier. Tu as annulé.</span></p></li>
+<li class="hu-entry"><time>09:12</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
+</ol>
+</div>
+<div class="hu-foot"><button type="button" class="hu-word">Effacer le journal</button><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</div></figure>
+
+<figure class="pl-view" id="v-pan-ouvert" style="--w:360"><figcaption>« Ce que tu as laissé ouvert » pendant un retrait : un droit en cours, un droit retiré. Effacer demande un second clic.</figcaption><div class="pl-frame" style="--w:360;--h:680">
+<div class="hu hu-panel">
+<div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
+<div class="hu-scroll" tabindex="0" role="region" aria-label="Journal">
+<h2 class="hu-h">Ce que tu as laissé ouvert</h2>
+<ul>
+<li class="hu-right is-busy"><p>app.neve.exchange peut dépenser 50 USDC.</p><span class="hu-right-note" role="status">En cours…</span></li>
+<li class="hu-right is-done"><p class="hu-2">old-farm.example ne peut plus rien dépenser.</p><span class="hu-right-note" role="status">Retiré</span></li>
+<li class="hu-right"><p>pool.glacier.example peut dépenser 1 200 USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+</ul>
+<p class="hu-note">C’est ton portefeuille qui signe le retrait.</p>
+<h2 class="hu-h">Aujourd’hui</h2>
+<ol>
+<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as continué.</span></p></li>
+<li class="hu-entry"><time>14:30</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
+</ol>
+</div>
+<div class="hu-foot"><button type="button" class="hu-word">Effacer pour de bon ?</button><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</div></figure>
+
+<figure class="pl-view" id="v-pan-vide" style="--w:360"><figcaption>Panneau, état vide.</figcaption><div class="pl-frame" style="--w:360;--h:680">
+<div class="hu hu-panel">
+<div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
+<div class="hu-scroll">
+<p class="hu-state">Rien à raconter pour l’instant.</p>
+<p class="hu-empty">Dès qu’un site te demande une signature, je te demande ce que tu veux faire. Ce que je réponds s’écrit ici.</p>
+<div class="hu-links"><button type="button" class="hu-word">Essayer sur une page de test</button></div>
+</div>
+<div class="hu-foot"><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</div></figure>
+</main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* Hold up : mouvement (docs/design/system/MOTION.md). Dépend de tokens.css et de components.css.
+ * Règles : seulement transform et opacity. Sans cette feuille, ou sans aucune classe d'état, tout est visible et à sa place.
+ * Le code pose UNE classe d'état sur le conteneur (.hu-win, .hu-pop, .hu-panel) et la retire à la fin de l'animation :
+ *   hu-is-opening    la surface vient de s'ouvrir (fenêtre, popup, panneau)
+ *   hu-is-entering   un écran arrive (question, relance, verdict). Avec le gant s'il est là.
+ *   hu-is-leaving    l'écran en place s'efface avant d'être remplacé
+ *   hu-is-next       demande suivante de la même opération, dans la même fenêtre
+ *   hu-is-busy       la vérification dure depuis plus de 150 ms (classe d'état durable, pas une animation)
+ *   hu-is-departing  « Ça correspond » : le trait se vide pendant une seconde
+ *   hu-is-ready      la retenue est finie (classe d'état durable)
+ *   hu-is-closing    la fenêtre va se fermer
+ * Les éléments qui bougent portent .hu-m ; --hu-i (0, 1, 2) les décale de 40 ms. */
+
+@keyframes hu-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hu-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes hu-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes hu-side { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+@keyframes hu-up-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-6px); } }
+@keyframes hu-drain { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes hu-push { from { transform: translateY(var(--hu-dy, 0)); } to { transform: none; } }
+/* le gant : il se ramasse (41 ms), monte d'un trait (146 ms), s'arrête net avec un seul tassement (153 ms). Pas de rebond, pas de boucle. */
+@keyframes hu-glove {
+  0%   { opacity: 0; transform: translateY(10px) scale(1, 1); animation-timing-function: cubic-bezier(0, 0, 0.4, 1); }
+  12%  { opacity: 1; transform: translateY(12px) scale(1.03, 0.95); animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
+  55%  { opacity: 1; transform: translateY(-4px) scale(0.98, 1.04); animation-timing-function: cubic-bezier(0.3, 0, 0.4, 1); }
+  78%  { opacity: 1; transform: translateY(1px) scale(1.015, 0.975); animation-timing-function: cubic-bezier(0, 0, 0.3, 1); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ouverture : le fond est déjà noir (ou déjà de la couleur de la page), seul le contenu arrive */
+.hu-is-opening > * { animation: hu-fade 140ms var(--hu-e) both; }
+
+/* un écran arrive */
+.hu-is-entering .hu-m { animation: hu-rise var(--hu-d-4) var(--hu-e-in) both; animation-delay: calc(var(--hu-i, 0) * 40ms); }
+.hu-is-entering .hu-glove { animation: hu-glove var(--hu-d-glove) linear both; will-change: transform; }
+.hu-is-entering .hu-dock, .hu-is-next .hu-dock { animation: hu-fade var(--hu-d-2) var(--hu-e) both; }
+.hu-is-next .hu-m { animation: hu-side var(--hu-d-4) var(--hu-e-in) both; animation-delay: calc(var(--hu-i, 0) * 40ms); }
+
+/* l'écran en place s'efface : plus court que l'arrivée */
+.hu-is-leaving .hu-m, .hu-is-leaving .hu-glove, .hu-is-leaving .hu-dock { animation: hu-out var(--hu-d-1) var(--hu-e-out) both; }
+
+/* « Ça correspond » puis départ */
+.hu-is-departing .hu-leave-bar { animation: hu-drain var(--hu-d-leave) linear both; }
+.hu-is-closing .hu-stage { animation: hu-up-out var(--hu-d-2) var(--hu-e-out) both; }
+
+/* changements d'état sur place : des transitions, donc interruptibles */
+.hu-under > * { transition: opacity var(--hu-d-2) var(--hu-e); }
+.hu-wait-count { transition: opacity var(--hu-d-3) var(--hu-e); }
+.hu-slot-q { transition: opacity var(--hu-d-1) var(--hu-e-out); }
+.hu-slot-v { transform: translateY(4px); transition: opacity var(--hu-d-3) var(--hu-e-in), transform var(--hu-d-3) var(--hu-e-in); }
+.hu-slot.is-filled .hu-slot-v { transform: none; }
+
+/* journal : la ligne neuve arrive en tête, les suivantes descendent (--hu-dy = moins la hauteur de la ligne neuve) */
+.hu-entry.is-arriving { animation: hu-rise var(--hu-d-4) var(--hu-e-in) both; }
+.is-pushed { animation: hu-push var(--hu-d-4) var(--hu-e) both; }
+
+/* mouvement réduit : plus de déplacement, les fondus courts restent. Le trait qui se vide reste : il dit le temps. */
+@media (prefers-reduced-motion: reduce) {
+  .hu-is-entering .hu-m, .hu-is-next .hu-m, .hu-entry.is-arriving { animation-name: hu-fade; animation-duration: var(--hu-d-2); animation-delay: 0s; }
+  .hu-is-entering .hu-glove { animation: hu-fade var(--hu-d-2) var(--hu-e) both; will-change: auto; }
+  .hu-is-closing .hu-stage { animation-name: hu-out; }
+  .is-pushed { animation: none; }
+  .hu-slot-v { transform: none; transition: opacity var(--hu-d-2) var(--hu-e); }
+  .hu-cuff { transition: none; }
+  .hu-cuff:not([aria-disabled="true"]):active, .hu-cuff.is-press { transform: none; }
+  .hu-switch input::before, .hu-switch input::after { transition: opacity var(--hu-d-2) var(--hu-e); }
+}
+/* la même chose, forcée par un attribut (motion.html, tests) */
+:root[data-motion="reduced"] .hu-is-entering .hu-m, :root[data-motion="reduced"] .hu-is-next .hu-m, :root[data-motion="reduced"] .hu-entry.is-arriving { animation-name: hu-fade; animation-duration: var(--hu-d-2); animation-delay: 0s; }
+:root[data-motion="reduced"] .hu-is-entering .hu-glove { animation: hu-fade var(--hu-d-2) var(--hu-e) both; will-change: auto; }
+:root[data-motion="reduced"] .hu-is-closing .hu-stage { animation-name: hu-out; }
+:root[data-motion="reduced"] .is-pushed { animation: none; }
+:root[data-motion="reduced"] .hu-slot-v { transform: none; transition: opacity var(--hu-d-2) var(--hu-e); }
+:root[data-motion="reduced"] .hu-cuff { transition: none; }
+:root[data-motion="reduced"] .hu-cuff:not([aria-disabled="true"]):active, :root[data-motion="reduced"] .hu-cuff.is-press { transform: none; }
+:root[data-motion="reduced"] .hu-switch input::before, :root[data-motion="reduced"] .hu-switch input::after { transition: opacity var(--hu-d-2) var(--hu-e); }

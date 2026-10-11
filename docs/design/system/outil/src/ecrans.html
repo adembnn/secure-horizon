@@ -1,0 +1,372 @@
+<!-- Source des écrans. outil/construire.mjs en tire un fichier HTML par <file>, planche.html, et les gabarits de motion.html.
+     [[win états]] … [[/win]] : la fenêtre de vérification.  [[slot question|valeur|état]] : une place de « Ce que j'ai compris ».
+     [[addr libellé|adresse|autre adresse]] : une adresse en deux rangs, comparée à l'autre. -->
+
+<file name="ecran_question" title="Question" section="La fenêtre de vérification">
+<view id="q-vide" w="424" h="501" cap="La question, à l’ouverture. Le curseur est dans le champ.">
+[[win]]
+<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<h1 class="hu-title hu-m" id="q-vide-t">Que veux-tu faire ?</h1>
+<textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-vide-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500"></textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi||]][[slot combien||]][[slot à qui||]]</div>
+<div class="hu-under hu-m" style="--hu-i:1"><p class="hu-assume">Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte.</p><p class="hu-busy" aria-hidden="true">Je compare ta phrase à la demande.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
+[[/win]]
+</view>
+
+<view id="q-frappe" w="424" h="501" cap="Pendant la frappe. Deux valeurs sont arrivées, la troisième attend.">
+[[win]]
+<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<h1 class="hu-title hu-m" id="q-frappe-t">Que veux-tu faire ?</h1>
+<textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-frappe-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500">échanger 50 USDC</textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi|échanger|filled]][[slot combien|50 USDC|filled]][[slot contre quoi||]]</div>
+<div class="hu-under hu-m" style="--hu-i:1"><p class="hu-assume">Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte.</p><p class="hu-busy" aria-hidden="true">Je compare ta phrase à la demande.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff">Vérifier</button></div>
+[[/win]]
+</view>
+
+<view id="q-complet" w="424" h="501" cap="Tout est compris. Le compte qui signe est rappelé sous les trois places.">
+[[win]]
+<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<h1 class="hu-title hu-m" id="q-complet-t">Que veux-tu faire ?</h1>
+<textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-complet-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500">échanger 50 USDC contre AVAX</textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi|échanger|filled]][[slot combien|50 USDC|filled]][[slot contre quoi|contre AVAX|filled]]<span class="hu-got-from">depuis ton compte 0x71c4…9a3f</span></div>
+<div class="hu-under hu-m" style="--hu-i:1"><p class="hu-assume">Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte.</p><p class="hu-busy" aria-hidden="true">Je compare ta phrase à la demande.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff">Vérifier</button></div>
+[[/win]]
+</view>
+
+<view id="q-erreur" w="424" h="501" cap="Entrée sur un champ vide. La phrase d’erreur prend la place de la ligne grise, rien ne bouge.">
+[[win]]
+<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<h1 class="hu-title hu-m" id="q-erreur-t">Que veux-tu faire ?</h1>
+<textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-erreur-t" aria-invalid="true" aria-describedby="q-erreur-e" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500"></textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi||]][[slot combien||]][[slot à qui||]]</div>
+<div class="hu-under hu-m" style="--hu-i:1"><p class="hu-error" id="q-erreur-e" role="alert">Écris d’abord ce que tu veux faire.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
+[[/win]]
+</view>
+
+<view id="q-compare" w="424" h="501" cap="La vérification dure plus de 150 ms : le champ se fige, le bouton le dit.">
+[[win busy]]
+<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<h1 class="hu-title hu-m" id="q-compare-t">Que veux-tu faire ?</h1>
+<textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-compare-t" readonly spellcheck="false" maxlength="500">échanger 50 USDC contre AVAX</textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi|échanger|filled]][[slot combien|50 USDC|filled]][[slot contre quoi|contre AVAX|filled]]</div>
+<div class="hu-under hu-m" style="--hu-i:1"><p class="hu-assume" aria-hidden="true">Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte.</p><p class="hu-busy">Je compare ta phrase à la demande.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Je compare…</button></div>
+[[/win]]
+</view>
+</file>
+
+<file name="ecran_relance" title="Relance">
+<view id="r-combien" w="424" h="501" cap="Relance « Combien ? ». Une seule relance par demande ; elle ne demande que ce qui manque.">
+[[win]]
+<p class="hu-head hu-head--wrap hu-m">Tu as écrit <b>« échanger des USDC contre AVAX »</b></p>
+<h1 class="hu-title hu-m" id="r-combien-t">Combien ?</h1>
+<textarea class="hu-field hu-field--short hu-m" style="--hu-i:1" aria-labelledby="r-combien-t" placeholder="50 USDC" spellcheck="false" maxlength="120"></textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi|échanger|filled]][[slot combien||missing]][[slot contre quoi|contre AVAX|filled]]</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
+[[/win]]
+</view>
+
+<view id="r-adresse" w="424" h="501" cap="Relance « À quelle adresse ? ».">
+[[win]]
+<p class="hu-head hu-head--wrap hu-m">Tu as écrit <b>« envoyer 20 USDC à Léa »</b></p>
+<h1 class="hu-title hu-m" id="r-adresse-t">À quelle adresse ?</h1>
+<textarea class="hu-field hu-field--short hu-m" style="--hu-i:1" aria-labelledby="r-adresse-t" placeholder="colle l’adresse ici" spellcheck="false" maxlength="120"></textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi|envoyer|filled]][[slot combien|20 USDC|filled]][[slot à qui||missing]]</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
+[[/win]]
+</view>
+
+<view id="r-jeton" w="424" h="501" cap="Relance « Quel jeton ? ».">
+[[win]]
+<p class="hu-head hu-head--wrap hu-m">Tu as écrit <b>« échanger 50 contre AVAX »</b></p>
+<h1 class="hu-title hu-m" id="r-jeton-t">Quel jeton ?</h1>
+<textarea class="hu-field hu-field--short hu-m" style="--hu-i:1" aria-labelledby="r-jeton-t" placeholder="USDC" spellcheck="false" maxlength="120"></textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi|échanger|filled]][[slot 50 de quoi||missing]][[slot contre quoi|contre AVAX|filled]]</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
+[[/win]]
+</view>
+
+<view id="r-contre" w="424" h="501" cap="Relance « Contre quoi ? ». La réponse est écrite : Vérifier devient possible.">
+[[win]]
+<p class="hu-head hu-head--wrap hu-m">Tu as écrit <b>« échanger 50 USDC »</b></p>
+<h1 class="hu-title hu-m" id="r-contre-t">Contre quoi ?</h1>
+<textarea class="hu-field hu-field--short hu-m" style="--hu-i:1" aria-labelledby="r-contre-t" placeholder="AVAX" spellcheck="false" maxlength="120">AVAX</textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi|échanger|filled]][[slot combien|50 USDC|filled]][[slot contre quoi|contre AVAX|filled]]</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff">Vérifier</button></div>
+[[/win]]
+</view>
+</file>
+
+<file name="ecran_correspond" title="Ça correspond">
+<view id="c-simple" w="424" h="501" cap="Ça correspond. Pas de bouton : la demande part seule après une seconde, le trait se vide pour le dire.">
+[[win match]]
+<p class="hu-head"><b>app.neve.exchange</b></p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.<span class="hu-leave-bar"></span></p></div>
+[[/win]]
+</view>
+
+<view id="c-limite" w="424" h="501" cap="Ça correspond, et j’ai limité le droit que le site demandait.">
+[[win match]]
+<p class="hu-head"><b>app.neve.exchange</b></p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
+<p class="hu-fix hu-m" style="--hu-i:2"><b>Droit limité à 50 USDC</b><span>Le site demandait tout ton USDC.</span></p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.<span class="hu-leave-bar"></span></p></div>
+[[/win]]
+</view>
+
+<view id="c-etape1" w="424" h="501" cap="Une opération en deux demandes : la première. La fenêtre reste ouverte pour la seconde.">
+[[win match]]
+<p class="hu-head"><b>app.neve.exchange</b>, demande 1 sur 2</p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Cette demande laisse le site prendre 50 USDC, pas plus.</p>
+<p class="hu-next hu-m" style="--hu-i:2">Ensuite, l’échange contre AVAX.</p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.<span class="hu-leave-bar"></span></p></div>
+[[/win]]
+</view>
+
+<view id="c-etape2" w="424" h="501" cap="La seconde demande, dans la même fenêtre. Je ne repose pas la question.">
+[[win match]]
+<p class="hu-head"><b>app.neve.exchange</b>, demande 2 sur 2</p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.<span class="hu-leave-bar"></span></p></div>
+[[/win]]
+</view>
+</file>
+
+<file name="ecran_ne_correspond_pas" title="Ça ne correspond pas">
+<view id="n-montant" w="424" h="501" cap="Le montant. Le gant ne paraît qu’ici. Annuler est le geste conseillé, Continuer attend.">
+[[win mismatch]]
+<div class="hu-mid">
+<svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Tu as écrit 50 USDC.</p>
+<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">La demande en prend 5 000.</p>
+</div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+[[/win]]
+</view>
+
+<view id="n-destinataire" w="424" h="501" cap="Le destinataire. Les deux adresses, rang par rang : ce qui diffère est en blanc.">
+[[win mismatch]]
+<div class="hu-mid">
+<svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
+<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">La demande envoie à une autre adresse.</p>
+[[addr Adresse que tu as écrite|0x12ab34cd56ef7890a1b2c3d4e5f60718293a89ef|0x12ab34cd56ef0000a1b2c3d4e5f6071829bb89ef]]
+[[addr Adresse de cette demande|0x12ab34cd56ef0000a1b2c3d4e5f6071829bb89ef|0x12ab34cd56ef7890a1b2c3d4e5f60718293a89ef]]
+</div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+[[/win]]
+</view>
+
+<view id="n-nature" w="424" h="501" cap="La nature de l’opération.">
+[[win mismatch]]
+<div class="hu-mid">
+<svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Tu as écrit un échange.</p>
+<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">Cette demande envoie tes jetons sans rien te rendre.</p>
+</div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+[[/win]]
+</view>
+
+<view id="n-duree" w="424" h="501" cap="Un droit sans date de fin.">
+[[win mismatch]]
+<div class="hu-mid">
+<svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Tu as écrit un échange de 50 USDC.</p>
+<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">Ce droit ne s’arrête pas après ton opération : il n’a pas de date de fin.</p>
+</div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+[[/win]]
+</view>
+
+<view id="n-pret" w="424" h="501" cap="La retenue est finie : le compte s’efface, Continuer devient un geste. Annuler reste le geste conseillé.">
+[[win mismatch ready]]
+<div class="hu-mid">
+<svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Tu as écrit 50 USDC.</p>
+<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">La demande en prend 5 000.</p>
+</div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word">Continuer</button><span class="hu-wait-count" aria-hidden="true">dans <span class="hu-num">0</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+[[/win]]
+</view>
+</file>
+
+<file name="ecran_non_verifie" title="Pas pu vérifier">
+<view id="u-moteur" w="424" h="501" cap="La vérification n’a pas répondu. Jamais de phrase rassurante ici, et un geste pour réessayer.">
+[[win unverifiable]]
+<p class="hu-head"><b>app.neve.exchange</b></p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Je n’ai pas pu vérifier cette demande.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">La vérification n’a pas répondu.</p>
+<p class="hu-line hu-m" style="--hu-i:1"><button type="button" class="hu-word">Réessayer</button></p>
+</div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">8</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+[[/win]]
+</view>
+
+<view id="u-phrase" w="424" h="501" cap="Je n’ai pas compris la phrase, même après la relance.">
+[[win unverifiable]]
+<p class="hu-head"><b>app.neve.exchange</b></p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Je n’ai pas pu vérifier cette demande.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Je n’ai pas compris ta phrase.</p>
+<p class="hu-line hu-m" style="--hu-i:1"><button type="button" class="hu-word">Écrire autrement</button></p>
+</div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">8</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+[[/win]]
+</view>
+</file>
+
+<file name="repli_dans_la_page" title="Repli dans la page" section="Quand la fenêtre ne peut pas s’ouvrir">
+<view id="repli" w="960" h="600" cap="La même question, posée sur la page du site. Le minimum, rien d’autre.">
+<div class="pl-site"><div class="pl-site-in" aria-hidden="true"><p>app.neve.exchange</p><p>La page du site, derrière. Elle ne reçoit plus les clics tant que la question est là.</p></div>
+<div class="hu-over"><div class="hu-over-box"><div class="hu hu-k hu-win" role="dialog" aria-modal="true" aria-labelledby="repli-t"><div class="hu-stage">
+<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<h1 class="hu-title hu-m" id="repli-t">Que veux-tu faire ?</h1>
+<textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="repli-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500"></textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span>[[slot quoi||]][[slot combien||]][[slot à qui||]]</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
+</div></div></div></div>
+</div>
+</view>
+</file>
+
+<file name="popup" title="Popup" section="Tous les jours">
+<view id="pop-actif" w="320" cap="Popup de la barre d’outils, actif.">
+<div class="hu hu-pop">
+<div class="hu-top"><span class="hu-name">Hold up</span><label class="hu-switch"><input type="checkbox" role="switch" checked aria-label="Vérifier ce site"><span class="hu-switch-on">Actif</span><span class="hu-switch-off">En pause</span></label></div>
+<p class="hu-state">Je vérifie ce site.</p><p>app.neve.exchange</p>
+<p class="hu-last">À 14:32, ça ne correspondait pas. Tu as annulé.</p>
+<div class="hu-links"><button type="button" class="hu-word">Journal</button><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</view>
+
+<view id="pop-pause" w="320" cap="Popup, en pause sur ce site.">
+<div class="hu hu-pop">
+<div class="hu-top"><span class="hu-name">Hold up</span><label class="hu-switch"><input type="checkbox" role="switch" aria-label="Vérifier ce site"><span class="hu-switch-on">Actif</span><span class="hu-switch-off">En pause</span></label></div>
+<p class="hu-state">En pause sur ce site.</p><p>Ce que demande app.neve.exchange va droit à ton portefeuille.</p>
+<div class="hu-links"><button type="button" class="hu-word">Journal</button><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</view>
+
+<view id="pop-rien" w="320" cap="Popup, sur une page où il n’y a rien à vérifier.">
+<div class="hu hu-pop">
+<div class="hu-top"><span class="hu-name">Hold up</span><label class="hu-switch"><input type="checkbox" role="switch" disabled aria-label="Vérifier ce site"><span class="hu-switch-off">Rien à vérifier ici</span></label></div>
+<p class="hu-state">Je ne peux pas agir sur cette page.</p><p>C’est une page du navigateur. Aucun site ne peut y demander de signature.</p>
+<div class="hu-links"><button type="button" class="hu-word">Journal</button><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</view>
+</file>
+
+<file name="panneau_lateral" title="Panneau latéral">
+<view id="pan-journal" w="360" h="680" cap="Panneau latéral. D’abord ce que tu peux encore fermer, ensuite ce qui s’est passé.">
+<div class="hu hu-panel">
+<div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
+<div class="hu-scroll" tabindex="0" role="region" aria-label="Journal">
+<h2 class="hu-h">Ce que tu as laissé ouvert</h2>
+<ul>
+<li class="hu-right"><p>app.neve.exchange peut dépenser 50 USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+<li class="hu-right"><p>old-farm.example peut dépenser tout ton USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+</ul>
+<p class="hu-note">C’est ton portefeuille qui signe le retrait.</p>
+<h2 class="hu-h">Aujourd’hui</h2>
+<ol>
+<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as annulé.</span></p></li>
+<li class="hu-entry"><time>14:30</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
+<li class="hu-entry"><time>11:07</time><p><span class="hu-entry-site">glacier-rewards.example</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as annulé.</span></p></li>
+</ol>
+<h2 class="hu-h">Hier</h2>
+<ol>
+<li class="hu-entry"><time>18:44</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Je n’ai pas pu vérifier. Tu as annulé.</span></p></li>
+<li class="hu-entry"><time>09:12</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
+</ol>
+</div>
+<div class="hu-foot"><button type="button" class="hu-word">Effacer le journal</button><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</view>
+
+<view id="pan-ouvert" w="360" h="680" cap="« Ce que tu as laissé ouvert » pendant un retrait : un droit en cours, un droit retiré. Effacer demande un second clic.">
+<div class="hu hu-panel">
+<div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
+<div class="hu-scroll" tabindex="0" role="region" aria-label="Journal">
+<h2 class="hu-h">Ce que tu as laissé ouvert</h2>
+<ul>
+<li class="hu-right is-busy"><p>app.neve.exchange peut dépenser 50 USDC.</p><span class="hu-right-note" role="status">En cours…</span></li>
+<li class="hu-right is-done"><p class="hu-2">old-farm.example ne peut plus rien dépenser.</p><span class="hu-right-note" role="status">Retiré</span></li>
+<li class="hu-right"><p>pool.glacier.example peut dépenser 1 200 USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+</ul>
+<p class="hu-note">C’est ton portefeuille qui signe le retrait.</p>
+<h2 class="hu-h">Aujourd’hui</h2>
+<ol>
+<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as continué.</span></p></li>
+<li class="hu-entry"><time>14:30</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
+</ol>
+</div>
+<div class="hu-foot"><button type="button" class="hu-word">Effacer pour de bon ?</button><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</view>
+
+<view id="pan-vide" w="360" h="680" cap="Panneau, état vide.">
+<div class="hu hu-panel">
+<div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
+<div class="hu-scroll">
+<p class="hu-state">Rien à raconter pour l’instant.</p>
+<p class="hu-empty">Dès qu’un site te demande une signature, je te demande ce que tu veux faire. Ce que je réponds s’écrit ici.</p>
+<div class="hu-links"><button type="button" class="hu-word">Essayer sur une page de test</button></div>
+</div>
+<div class="hu-foot"><button type="button" class="hu-word">Réglages</button></div>
+</div>
+</view>
+</file>
+
+<file name="options" title="Réglages" section="Les pages en onglet">
+<view id="options" w="1280" h="800" cap="Réglages. Chaque changement s’enregistre seul.">
+<div class="hu hu-tab"><div class="hu-tab-in"><div class="hu-col">
+<h1 class="hu-page-title">Réglages</h1>
+<p role="status">Enregistré.</p>
+<h2 class="hu-h">La question</h2>
+<div class="hu-set"><label for="o-ask">Je te demande ce que tu veux faire</label><span class="hu-set-ctl"><span class="hu-pick"><select class="hu-select" id="o-ask"><option>avant chaque signature</option><option>quand la demande donne un droit ou sort de l’argent</option><option>jamais</option></select><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></span></span></div>
+<div class="hu-set"><span id="o-win-l">Je pose la question dans une fenêtre à part<span class="hu-set-msg hu-2">Sinon elle s’affiche dans la page du site, qui peut la masquer.</span></span><label class="hu-switch hu-set-ctl"><input type="checkbox" role="switch" checked aria-labelledby="o-win-l"><span class="hu-switch-on">Oui</span><span class="hu-switch-off">Non</span></label></div>
+<div class="hu-set"><span id="o-lim-l">Je limite le droit au montant que tu as écrit</span><label class="hu-switch hu-set-ctl"><input type="checkbox" role="switch" checked aria-labelledby="o-lim-l"><span class="hu-switch-on">Oui</span><span class="hu-switch-off">Non</span></label></div>
+<h2 class="hu-h">L’attente</h2>
+<div class="hu-set"><label for="o-wait">Quand ça ne correspond pas, tu attends avant de pouvoir continuer</label><span class="hu-set-ctl"><input class="hu-input" id="o-wait" type="number" min="5" max="600" value="30" inputmode="numeric"> secondes</span></div>
+<div class="hu-set"><label for="o-hold">Quand quelqu’un te presse sur la page, je retiens la demande</label><span class="hu-set-ctl"><input class="hu-input" id="o-hold" type="number" min="1" max="60" value="10" inputmode="numeric"> minutes</span></div>
+<h2 class="hu-h">Le journal</h2>
+<p class="hu-2">Il reste sur cet ordinateur. Il ne contient ni ta phrase ni d’adresse.</p>
+<div class="hu-links" style="margin-top:12px"><button type="button" class="hu-word">Exporter le journal</button><button type="button" class="hu-word">Effacer le journal</button></div>
+</div></div></div>
+</view>
+</file>
+
+<file name="bienvenue" title="Bienvenue">
+<view id="bienvenue" w="1280" h="800" cap="Bienvenue, à l’installation.">
+<div class="hu hu-tab hu-welcome"><div class="hu-tab-in"><div class="hu-col">
+<svg class="hu-mark" role="img" aria-label="Hold up"><use href="#hu-icon"/></svg>
+<h1 class="hu-welcome-title">Écris ce que tu veux faire. Je vérifie que le site demande la même chose.</h1>
+<p class="hu-welcome-text">Hold up est en place. Si ça ne colle pas, je lève la main.</p>
+<p class="hu-welcome-text">Je ne signe rien : ton portefeuille te demande toujours de confirmer.</p>
+<div class="hu-go"><button type="button" class="hu-cuff">Essayer sur une page de test</button><button type="button" class="hu-word">Réglages</button></div>
+</div></div></div>
+</view>
+</file>

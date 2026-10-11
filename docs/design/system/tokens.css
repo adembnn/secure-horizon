@@ -1,81 +1,79 @@
 /* Hold up : jetons du système de design (docs/design/system/DESIGN.md).
- * Noir, blanc, gris. Une seule couleur : --hu-signal, réservée aux mots du verdict négatif.
- * Thème clair par défaut, thème sombre selon le système. data-theme="light|dark" sur <html> force un thème (planche, tests).
+ * Sobre : noir, blanc, deux gris. Aucune couleur. Une seule police, celle du système. Deux graisses, 400 et 600.
+ * Deux surfaces : la page (blanche en clair, noire en sombre) et la fenêtre de vérification (toujours noire).
+ * Les composants ne lisent que --hu-page, --hu-ink, --hu-ink-2, --hu-ink-3 et --hu-wash ; la classe .hu-k les rebranche sur le noir.
  *
- * Contrastes WCAG 2.x (calculés, voir DESIGN.md §3)
- *   clair  : encre 21,00 · encre-2 6,69 (6,08 sur fond-2) · signal 5,85 · bord de contrôle 3,69
- *   sombre : encre 18,43 · encre-2 8,33 (7,11 sur fond-2) · signal 7,52 · bord de contrôle 4,89 */
+ * Contrastes WCAG 2.x, calculés (outil/contrastes.mjs)
+ *   clair         : encre 21,00 · encre-2 #555 7,46 · encre-3 #767676 4,54 (bord de contrôle, 3:1 demandé)
+ *   sombre, noir  : encre 21,00 · encre-2 #b3b3b3 9,96 · encre-3 #808080 5,32 */
 :root {
-  /* couleurs */
-  --hu-bg: #ffffff;        /* fond de toute surface */
-  --hu-bg-2: #f4f4f4;      /* survol, bandeau, zone en retrait */
-  --hu-bg-3: #e6e6e6;      /* appui */
-  --hu-ink: #000000;       /* texte, bouton plein, focus */
-  --hu-ink-2: #5c5c5c;     /* texte secondaire, exemple, heure */
-  --hu-line: #e0e0e0;      /* filet de séparation, bord inactif (non porteur) */
-  --hu-edge: #858585;      /* bord d'un contrôle actif (3:1 au minimum) */
-  --hu-signal: #c4221a;    /* les mots du verdict négatif, rien d'autre */
-  --hu-on-ink: #ffffff;    /* texte sur bouton plein */
+  --hu-page: #ffffff;
+  --hu-ink: #000000;
+  --hu-ink-2: #555555;      /* texte secondaire : site, heure, exemple, ce qui n'est pas encore dit */
+  --hu-ink-3: #767676;      /* bord d'un champ, bouton pas encore possible. Jamais du texte. */
+  --hu-wash: #ececec;       /* fond d'un champ en lecture seule */
+  --hu-frame: #d0d0d0;      /* bord d'un cadre de planche, jamais dans l'extension */
 
-  /* typographie : polices du système, aucune police téléchargée */
-  --hu-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
-  --hu-mono: "Cascadia Mono", "SF Mono", ui-monospace, Consolas, "Roboto Mono", monospace; /* adresses seulement */
-  --hu-text-xs: 12px;  --hu-lh-xs: 16px;   /* heure, indication, touche */
-  --hu-text-s: 14px;   --hu-lh-s: 20px;    /* base de l'application */
-  --hu-text-m: 16px;   --hu-lh-m: 24px;    /* champ d'intention, ligne d'explication */
-  --hu-text-l: 24px;   --hu-lh-l: 32px;    /* question, verdict, titre de page */
+  /* la fenêtre de vérification : toujours noire, quel que soit le thème */
+  --hu-k: #000000;
+  --hu-k-ink: #ffffff;
+  --hu-k-2: #b3b3b3;
+  --hu-k-3: #808080;
+  --hu-k-wash: #222222;
+
+  /* typographie : la police du système, rien à télécharger */
+  --hu-font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
   --hu-regular: 400;
   --hu-strong: 600;
+  --hu-t-xl: 28px/36px;     /* bienvenue, une fois */
+  --hu-t-l: 22px/28px;      /* la question, les trois phrases de verdict, titre de page */
+  --hu-t-m: 18px/24px;      /* état du popup et du panneau */
+  --hu-b-l: 16px/24px;      /* ta phrase, la ligne d'explication, ce que j'ai compris */
+  --hu-b-m: 14px/20px;      /* texte courant, site, heure, boutons */
 
-  /* espacements : grille de 4 px */
-  --hu-1: 4px; --hu-2: 8px; --hu-3: 12px; --hu-4: 16px; --hu-5: 20px; --hu-6: 24px; --hu-8: 32px; --hu-12: 48px;
-
-  /* tailles */
-  --hu-control: 32px;      /* hauteur d'un bouton, d'un champ de réglage ; zone cliquable minimale */
-  --hu-row: 40px;          /* hauteur minimale d'une rangée de réglage ou de journal */
-
-  /* rayons */
-  --hu-r: 6px;             /* bouton, champ */
-  --hu-r-key: 4px;         /* touche de clavier */
-  --hu-r-full: 999px;      /* interrupteur et pastille d'icône seulement */
-
-  /* bordures et focus */
-  --hu-border: 1px;
+  /* trait et rayons */
+  --hu-stroke: 1px;         /* bord d'un champ, bouton pas encore possible, interrupteur */
+  --hu-r: 6px;              /* bouton, champ */
   --hu-focus: 2px;
   --hu-focus-gap: 2px;
 
-  /* durées */
-  --hu-fast: 120ms;        /* couleur de fond, bord */
-  --hu-move: 160ms;        /* bouton de l'interrupteur */
-  --hu-ease: cubic-bezier(0.2, 0, 0, 1);
+  /* espacements : grille de 4 px */
+  --hu-1: 4px; --hu-2: 8px; --hu-3: 12px; --hu-4: 16px; --hu-5: 20px; --hu-6: 24px; --hu-8: 32px; --hu-10: 40px; --hu-12: 48px; --hu-16: 64px;
+
+  /* tailles */
+  --hu-win-w: 424px;        /* intérieur de la fenêtre créée en 440 × 540 */
+  --hu-win-h: 501px;
+  --hu-ctl: 40px;           /* bouton plein */
+  --hu-ctl-s: 36px;         /* champ de réglage */
+  --hu-glove: 88px;
+
+  /* durées et courbes (MOTION.md) */
+  --hu-d-1: 80ms;           /* sortie, appui */
+  --hu-d-2: 120ms;          /* survol, fondu court */
+  --hu-d-3: 160ms;          /* interrupteur, valeur qui arrive */
+  --hu-d-4: 200ms;          /* entrée d'un écran, ligne du journal */
+  --hu-d-glove: 340ms;      /* le gant qui se lève */
+  --hu-d-leave: 1000ms;     /* « Ça correspond » : le trait qui se vide avant le départ */
+  --hu-e: cubic-bezier(0.2, 0, 0, 1);         /* standard */
+  --hu-e-in: cubic-bezier(0.16, 1, 0.3, 1);   /* arrivée */
+  --hu-e-out: cubic-bezier(0.4, 0, 1, 1);     /* sortie */
 
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --hu-bg: #000000; --hu-bg-2: #171717; --hu-bg-3: #262626;
-    --hu-ink: #f0f0f0; --hu-ink-2: #a3a3a3;
-    --hu-line: #2e2e2e; --hu-edge: #7a7a7a;
-    --hu-signal: #ff6b5e; --hu-on-ink: #000000;
+    --hu-page: #000000; --hu-ink: #ffffff; --hu-ink-2: #b3b3b3; --hu-ink-3: #808080; --hu-wash: #222222; --hu-frame: #4a4a4a;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --hu-bg: #000000; --hu-bg-2: #171717; --hu-bg-3: #262626;
-  --hu-ink: #f0f0f0; --hu-ink-2: #a3a3a3;
-  --hu-line: #2e2e2e; --hu-edge: #7a7a7a;
-  --hu-signal: #ff6b5e; --hu-on-ink: #000000;
+  --hu-page: #000000; --hu-ink: #ffffff; --hu-ink-2: #b3b3b3; --hu-ink-3: #808080; --hu-wash: #222222; --hu-frame: #4a4a4a;
   color-scheme: dark;
 }
 
-/* La pastille de l'icône de barre d'outils est dessinée par le navigateur : ses couleurs ne suivent pas le thème. */
-:root {
-  --hu-badge-ink: #000000;     /* demande en attente, non vérifiée, pause : texte blanc 21,00 */
-  --hu-badge-signal: #c4221a;  /* dernière réponse « ne correspond pas » : texte blanc 5,85 */
-  --hu-badge-text: #ffffff;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root { --hu-fast: 0ms; --hu-move: 0ms; }
+/* le noir : mêmes noms, valeurs de la fenêtre. À poser sur la fenêtre de vérification et sur le repli dans la page. */
+.hu-k {
+  --hu-page: var(--hu-k); --hu-ink: var(--hu-k-ink); --hu-ink-2: var(--hu-k-2); --hu-ink-3: var(--hu-k-3); --hu-wash: var(--hu-k-wash);
+  color-scheme: dark;
 }
