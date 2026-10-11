@@ -91,6 +91,7 @@ const SEAPORT = [
   { v: "1.5", addr: "0x00000000000000ADc04C56Bf30aC9d3c0aAF14dC" },
   { v: "1.6", addr: "0x0000000000000068F116a894984e2DB1123eB395" },
 ];
+// constante publique OpenSea (conduit key Seaport), pas un secret
 const OPENSEA_CONDUIT_KEY = "0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000";
 const NFTS_ETH = [
   { label: "BoredApeYachtClub", addr: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" },
