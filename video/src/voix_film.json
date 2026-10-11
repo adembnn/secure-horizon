@@ -1,0 +1,292 @@
+{
+ "note": "Texte du film, reecrit court pour un ton de bande-annonce (demande du fondateur, 11 oct. 2026). Faits et chiffres inchanges. voix = graphie envoyee a la synthese ; st = sous-titre ; pause = silence apres la ligne (s). A VALIDER par le fondateur : ce n'est plus son texte mot pour mot.",
+ "lignes": [
+  {
+   "id": "o1",
+   "plan": 1,
+   "voix": "Juillet deux mille vingt-quatre.",
+   "st": "Juillet 2024.",
+   "pause": 0.5
+  },
+  {
+   "id": "o2",
+   "plan": 1,
+   "voix": "Lifi. Une plateforme connue.",
+   "st": "LI.FI. Une plateforme connue.",
+   "pause": 0.75
+  },
+  {
+   "id": "o3",
+   "plan": 1,
+   "voix": "Piratée.",
+   "st": "Piratée.",
+   "pause": 0.9
+  },
+  {
+   "id": "o4",
+   "plan": 1,
+   "voix": "Onze millions six cent mille dollars.",
+   "st": "Onze millions six cent mille dollars.",
+   "pause": 0.3
+  },
+  {
+   "id": "o5",
+   "plan": 1,
+   "voix": "Partis.",
+   "st": "Partis.",
+   "pause": 0.55
+  },
+  {
+   "id": "o6",
+   "plan": 1,
+   "voix": "Cent cinquante-trois portefeuilles. Vidés.",
+   "st": "Cent cinquante-trois portefeuilles. Vidés.",
+   "pause": 1.0
+  },
+  {
+   "id": "o7",
+   "plan": 1,
+   "voix": "Tous avaient laissé une autorisation illimitée.",
+   "st": "Tous avaient laissé une autorisation illimitée.",
+   "pause": 0.8
+  },
+  {
+   "id": "o8",
+   "plan": 1,
+   "voix": "Ceux qui l'avaient limitée ?",
+   "st": "Ceux qui l'avaient limitée ?",
+   "pause": 0.7
+  },
+  {
+   "id": "o9",
+   "plan": 1,
+   "voix": "Rien perdu.",
+   "st": "Rien perdu.",
+   "pause": 1.3
+  },
+  {
+   "id": "o10",
+   "plan": 2,
+   "voix": "Toute plateforme sera piratée un jour.",
+   "st": "Toute plateforme sera piratée un jour.",
+   "pause": 0.7
+  },
+  {
+   "id": "o11",
+   "plan": 2,
+   "voix": "La vraie question :",
+   "st": "La vraie question :",
+   "pause": 0.35
+  },
+  {
+   "id": "o12",
+   "plan": 2,
+   "voix": "Qu'est-ce que je lui ai laissé le droit de prendre ?",
+   "st": "Qu'est-ce que je lui ai laissé le droit de prendre ?",
+   "pause": 1.5
+  },
+  {
+   "id": "p1",
+   "plan": 2,
+   "voix": "Chaque plateforme te fait signer une autorisation.",
+   "st": "Chaque plateforme te fait signer une autorisation.",
+   "pause": 0.4
+  },
+  {
+   "id": "p2",
+   "plan": 2,
+   "voix": "Presque personne ne la lit.",
+   "st": "Presque personne ne la lit.",
+   "pause": 1.5
+  },
+  {
+   "id": "p3",
+   "plan": 2,
+   "voix": "Sur Avalanche, trente-quatre pour cent sont illimitées.",
+   "st": "Sur Avalanche, trente-quatre pour cent sont illimitées.",
+   "pause": 0.45
+  },
+  {
+   "id": "p4",
+   "plan": 2,
+   "voix": "Une sur trois.",
+   "st": "Une sur trois.",
+   "pause": 1.5
+  },
+  {
+   "id": "h1",
+   "plan": 3,
+   "voix": "Hold up.",
+   "st": "Hold up.",
+   "pause": 0.45
+  },
+  {
+   "id": "h2",
+   "plan": 3,
+   "voix": "Une extension. Posée devant ton portefeuille.",
+   "st": "Une extension. Posée devant ton portefeuille.",
+   "pause": 0.6
+  },
+  {
+   "id": "h3",
+   "plan": 3,
+   "voix": "Avant de signer, une question.",
+   "st": "Avant de signer, une question.",
+   "pause": 0.4
+  },
+  {
+   "id": "h4",
+   "plan": 3,
+   "voix": "Que veux-tu faire ?",
+   "st": "Que veux-tu faire ?",
+   "pause": 1.6
+  },
+  {
+   "id": "h5",
+   "plan": 3,
+   "voix": "Tu écris : échanger cinquante dollars.",
+   "st": "Tu écris : échanger cinquante dollars.",
+   "pause": 2.3
+  },
+  {
+   "id": "h6",
+   "plan": 3,
+   "voix": "Elle lit ce que la demande fait vraiment.",
+   "st": "Elle lit ce que la demande fait vraiment.",
+   "pause": 1.4
+  },
+  {
+   "id": "h7",
+   "plan": 3,
+   "voix": "Et elle compare.",
+   "st": "Et elle compare.",
+   "pause": 2.4
+  },
+  {
+   "id": "h8",
+   "plan": 3,
+   "voix": "Le site demande tous tes dollars.",
+   "st": "Le site demande tous tes dollars.",
+   "pause": 2.4
+  },
+  {
+   "id": "h9",
+   "plan": 3,
+   "voix": "Ça ne correspond pas.",
+   "st": "Ça ne correspond pas.",
+   "pause": 0.9
+  },
+  {
+   "id": "h10",
+   "plan": 3,
+   "voix": "Tu as écrit cinquante. La demande donne tout.",
+   "st": "Tu as écrit cinquante. La demande donne tout.",
+   "pause": 1.4
+  },
+  {
+   "id": "h11",
+   "plan": 3,
+   "voix": "Un geste. Le droit revient à cinquante.",
+   "st": "Un geste. Le droit revient à cinquante.",
+   "pause": 2.8
+  },
+  {
+   "id": "k1",
+   "plan": 4,
+   "voix": "Maintenant, on pirate ce site.",
+   "st": "Maintenant, on pirate ce site.",
+   "pause": 1.9
+  },
+  {
+   "id": "k2",
+   "plan": 4,
+   "voix": "Sans Hold up : le compte tombe à zéro.",
+   "st": "Sans Hold up : le compte tombe à zéro.",
+   "pause": 2.0
+  },
+  {
+   "id": "k3",
+   "plan": 4,
+   "voix": "Avec Hold up : le droit de cinquante a servi à l'échange.",
+   "st": "Avec Hold up : le droit de cinquante a servi à l'échange.",
+   "pause": 1.2
+  },
+  {
+   "id": "k4",
+   "plan": 4,
+   "voix": "Il ne reste rien à prendre.",
+   "st": "Il ne reste rien à prendre.",
+   "pause": 2.4
+  },
+  {
+   "id": "r1",
+   "plan": 5,
+   "voix": "Tu as déjà donné un droit trop large ?",
+   "st": "Tu as déjà donné un droit trop large ?",
+   "pause": 0.7
+  },
+  {
+   "id": "r2",
+   "plan": 5,
+   "voix": "Révoquer, ce n'est pas annuler la transaction.",
+   "st": "Révoquer, ce n'est pas annuler la transaction.",
+   "pause": 0.4
+  },
+  {
+   "id": "r3",
+   "plan": 5,
+   "voix": "C'est reprendre l'autorisation.",
+   "st": "C'est reprendre l'autorisation.",
+   "pause": 1.4
+  },
+  {
+   "id": "r4",
+   "plan": 5,
+   "voix": "Hold up prépare la transaction. Ton portefeuille la signe.",
+   "st": "Hold up prépare la transaction. Ton portefeuille la signe.",
+   "pause": 3.0
+  },
+  {
+   "id": "m1",
+   "plan": 6,
+   "voix": "Deux cent cinquante cas. Écrits sans voir nos règles.",
+   "st": "Deux cent cinquante cas. Écrits sans voir nos règles.",
+   "pause": 0.8
+  },
+  {
+   "id": "m2",
+   "plan": 6,
+   "voix": "Quatre-vingt-sept pour cent des demandes dangereuses : signalées.",
+   "st": "Quatre-vingt-sept pour cent des demandes dangereuses : signalées.",
+   "pause": 1.7
+  },
+  {
+   "id": "m3",
+   "plan": 6,
+   "voix": "Sans la phrase de l'utilisateur : soixante-cinq.",
+   "st": "Sans la phrase de l'utilisateur : soixante-cinq.",
+   "pause": 3.4
+  },
+  {
+   "id": "f1",
+   "plan": 7,
+   "voix": "Tout site peut tomber.",
+   "st": "Tout site peut tomber.",
+   "pause": 0.9
+  },
+  {
+   "id": "f2",
+   "plan": 7,
+   "voix": "Ce qu'il emporte, c'est toi qui le décides.",
+   "st": "Ce qu'il emporte, c'est toi qui le décides.",
+   "pause": 2.4
+  },
+  {
+   "id": "f3",
+   "plan": 7,
+   "voix": "Hold up.",
+   "st": "Hold up.",
+   "pause": 2.8
+  }
+ ]
+}
