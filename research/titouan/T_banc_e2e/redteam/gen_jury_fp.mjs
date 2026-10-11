@@ -102,6 +102,7 @@ function seaportListing(tokenId, priceAvax) {
         { itemType: '0', token: '0x0000000000000000000000000000000000000000', identifierOrCriteria: '0', startAmount: (price - fee).toString(), endAmount: (price - fee).toString(), recipient: ME },
         { itemType: '0', token: '0x0000000000000000000000000000000000000000', identifierOrCriteria: '0', startAmount: fee.toString(), endAmount: fee.toString(), recipient: OS_FEE }],
       orderType: '0', startTime: '1791720000', endTime: '1794312000', zoneHash: '0x' + '00'.repeat(32), salt: '12345678901234567890',
+      // constante publique OpenSea (conduit key Seaport), pas un secret
       conduitKey: '0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000', counter: '0' });
 }
 const siwe = (domain, uri, stmt) => {

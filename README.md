@@ -132,6 +132,9 @@ Une unité : une phrase et une demande de site. Trois réponses possibles, plus 
 - **Où va la phrase.** Du navigateur au relais local, puis au modèle hébergé si le relais a une clé. Minimisation et durée de conservation non rédigées. Tant que le relais n'est pas épinglé sur l'identifiant de l'extension (`HOLDUP_EXTENSION_ID`, voir INSTALLATION.md), toute extension installée sur la machine peut l'appeler.
 - **Aucun test avec des personnes.** Le temps de décision d'une personne n'est pas mesuré.
 - **Principe non nouveau.** Le moindre privilège pour les approbations existe (Matcha, LI.FI, Talisman, Permit2), et le principe « dire d'abord, valider après simulation » a été décrit publiquement en février 2026. Notre apport est l'assemblage : phrase libre avant la demande, sur toute demande, comparée à l'effet, avec un plancher de règles.
+- **Constantes et données publiques.** La `key` des manifests de l'extension est une clé publique qui fixe l'identifiant de l'extension, pas un secret.
+- **Clé de conduit OpenSea.** Celle des jeux de test est une constante publique du protocole Seaport, pas un secret.
+- **Données on-chain.** `research/titouan/T_banc_e2e/realscan/out/` contient des adresses et transactions publiques lues sur la chaîne, pseudonymes, aucune donnée personnelle.
 
 ## Référentiels
 

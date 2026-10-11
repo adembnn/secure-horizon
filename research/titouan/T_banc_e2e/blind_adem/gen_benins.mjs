@@ -255,6 +255,7 @@ const P2DOMAIN = [{ name: "name", type: "string" }, { name: "chainId", type: "ui
 // =====================================================================
 {
   const f = "nft_market";
+  // constante publique OpenSea (conduit key Seaport), pas un secret
   const OS_KEY = "0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000";
   const listing = (chainId, price, nativeSym, nft, tokenId, sub, reason, intentText) => {
     const gross = parseEther(price);

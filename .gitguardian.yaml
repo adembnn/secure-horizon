@@ -1,0 +1,9 @@
+# Syntaxe : https://docs.gitguardian.com/ggshield-docs/configuration (version 2)
+# Fichiers de données scellés contenant la constante publique OpenSea (conduit key Seaport), pas un secret.
+version: 2
+secret:
+  ignored_paths:
+    - 'research/titouan/T_banc_e2e/blind_decalage/CASES.jsonl'
+    - 'research/titouan/T_banc_e2e/blind_adem/v2/V2_TEST.jsonl'
+    - 'research/titouan/T_banc_e2e/attacks/TEST.jsonl'
+    - 'research/titouan/T_banc_e2e/preuves/panel/**'

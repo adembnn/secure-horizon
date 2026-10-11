@@ -77,6 +77,7 @@ const SEAPORT_IFACE = new Interface([
 // public protocol addresses (from memory; flagged in approximation where cross-chain deployment is assumed)
 const SEAPORT_16 = getAddress("0x0000000000000068f116a894984e2ddb6e4f0f2f");
 const OPENSEA_CONDUIT = getAddress("0x1e0049783f008a0085193e00003d00cd54003c71");
+// constante publique OpenSea (conduit key Seaport), pas un secret
 const OPENSEA_CONDUIT_KEY = "0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000";
 const OPENSEA_FEE = getAddress("0x0000a26b00c1f0df003000390027140000faa719");
 const BLUR_DELEGATE = getAddress("0x00000000000111abe46ff893f3b2fdf1f759a8a8");
