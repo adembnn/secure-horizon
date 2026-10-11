@@ -158,14 +158,14 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
   // ---- F31 / F32 / F33 : l'intention DÉTAILLÉE (jeton, montant, jeton reçu) comparée aux effets. Ces règles ne lisent que des détails : sans détail (type seul ou aucune intention)
   // elles ne font rien, donc ajouter de l'information ne peut que monter le niveau. Elles couvrent ce que le comparateur d'Adem ne regarde pas pour un échange
   // (jeton, montant, droit plus large que le montant dit). Aucune adresse, aucun identifiant de cas : seulement la forme des effets.
-  if (intent && DETAIL_KINDS.has(intent.kind) && (isOn('F31') || isOn('F32') || isOn('F33'))) {
+  if (intent && (DETAIL_KINDS.has(intent.kind) || !intent.kind) && (isOn('F31') || isOn('F32') || isOn('F33'))) {
     const nat = NATIVE_BY_CHAIN[Number(eff.chainId)];
     const symOf = (tok, given) => { if (given && given !== 'NATIVE' && given !== 'native') return given; const t = String(tok || '').toLowerCase(); return t === 'native' ? nat : tokenInfo(ctx, t).symbol; };
     const said = intent.token ? tokenFamily(intent.token) : null;
     const declared = amountReadings(intent.amount); const declaredMax = declared.length ? Math.max(...declared) : NaN;
     // les frais en monnaie native versés à un protocole connu (pont, routeur) accompagnent l'opération : ils ne sont pas « un autre jeton » quand le jeton dit n'est pas la monnaie native
     const feeToProtocol = (o) => (o.std === 'native' || String(o.token).toLowerCase() === 'native') && isKnownProtocol(ctx, o.to) && !!said && said !== tokenFamily(nat);
-    const moneyOut = (eff.outgoing || []).filter((o) => (o.std === 'native' || o.std === 'erc20' || o.std === undefined) && !feeToProtocol(o));
+    const moneyOut = [...(eff.outgoing || []), ...((eff.service && eff.service.spent) || [])].filter((o) => (o.std === 'native' || o.std === 'erc20' || o.std === undefined) && !feeToProtocol(o));
     const moneyApprovals = (eff.approvals || []).filter((a) => a.via !== 'setApprovalForAll' && a.std !== 'nft_all' && a.std !== 'nft_one');
     const has = (code) => reasons.some((r) => r.code === code);
     const sameAsset = (sym) => !said || !sym || tokenFamily(sym) === said;
@@ -209,6 +209,14 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
         notes.push(sev === 'warn' ? 'F31:droit_plus_large_protocole_connu' : 'F31:droit_plus_large_inconnu');
       }
     }
+  }
+
+  // ---- F41 : l'intention dit un mouvement de valeur (payer, échanger, envoyer) mais la demande est une signature qui ne déplace rien, n'accorde aucun droit et ne change aucun contrôle
+  // (connexion, texte libre) : elle ne fait pas ce qui est dit. À confirmer (warn), jamais critical (rien ne part). Sans type d'intention la règle ne fait rien (monotone).
+  if (isOn('F41') && intent && DETAIL_KINDS.has(intent.kind) && eff.kind === 'signature' && !eff.opaque && !eff.delegation
+    && ![eff.outgoing, eff.incoming, eff.approvals, eff.controlChange, eff.nested].some((x) => (x || []).length)) {
+    reasons.push({ code: 'request_moves_nothing', sev: 'warn', said: 'Tu veux déplacer des fonds', does: 'Cette demande ne déplace rien : elle ne fait pas ce que tu as dit.' });
+    notes.push('F41:signature_sans_mouvement_vs_intention_de_valeur');
   }
 
   const floor = lvlOf(flags);

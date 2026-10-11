@@ -270,7 +270,12 @@ export async function evaluateWithIntent(run, body, local, opts = {}, cls, floor
   const f = wrap(floor || await run(body, local, base));
   const d = cls && cls.details ? cls.details : null;
   const hasDetail = d && (d.amount !== undefined || d.token || d.counterpartyAddress || d.counterpartyLabel);
-  if (!hasDetail) return { ...f, floorLevel: f.level, rawLevel: f.level, path: 'floor' };
+  if (!hasDetail) {
+    // texte écrit mais non compris : invérifiable (orange), jamais vert ; le plancher plus haut est conservé
+    const written = cls && cls.reason && cls.reason !== 'empty' && !cls.classified;
+    if (written && rankOf(f.level) < rankOf('unknown')) return { ...f, level: 'unknown', floorLevel: f.level, rawLevel: f.level, path: 'not_understood' };
+    return { ...f, floorLevel: f.level, rawLevel: f.level, path: 'floor' };
+  }
   const w = wrap(await run(body, local, { ...base, intent: d }));
   const kept = stricter(f, w);
   return { ...kept, floorLevel: f.level, rawLevel: w.level, path: kept === w ? 'raised_by_details' : 'floor' };

@@ -1,0 +1,52 @@
+{
+ "choix": {
+  "id": "P05",
+  "cible": [
+   "^GRILLE[|](approbation|permit|permit2|setApprovalForAll)"
+  ],
+  "hypothese": "Sans genre d'acte lu, un droit accordé sur un autre jeton que celui dit (jeton dit extrait par le code, côté dépensé pour un achat) est un écart : la lecture « stricte » du jeton s'applique aussi au texte sans genre. P03 l'avait mise en lecture d'échange, ce qui masquait les droits sur un mauvais jeton.",
+  "edits": [
+   {
+    "file": "run/policy.mjs",
+    "find": "      const strict = (!!intent.kind && intent.kind !== 'buy_or_swap') || !!intent.receiveToken;",
+    "replace": "      const strict = intent.kind !== 'buy_or_swap' || !!intent.receiveToken;"
+   }
+  ]
+ },
+ "avant": {
+  "reg": 74.8531219406018,
+  "val": 76.4029041883323,
+  "jeuxReg": {
+   "DEV": 85.34,
+   "PUBLIC": 71.15,
+   "V2_DEV": 89.24,
+   "DECALAGE": 71.29,
+   "GRILLE": 57.25
+  },
+  "jeuxVal": {
+   "DEV": 88.46,
+   "PUBLIC": 71.25,
+   "V2_DEV": 89.79,
+   "DECALAGE": 70.81,
+   "GRILLE": 61.71
+  }
+ },
+ "apres": {
+  "reg": 76.23071391384595,
+  "val": 77.4329041883323,
+  "jeuxReg": {
+   "DEV": 85.34,
+   "PUBLIC": 71.15,
+   "V2_DEV": 89.24,
+   "DECALAGE": 71.29,
+   "GRILLE": 64.13
+  },
+  "jeuxVal": {
+   "DEV": 88.46,
+   "PUBLIC": 71.25,
+   "V2_DEV": 89.79,
+   "DECALAGE": 70.81,
+   "GRILLE": 66.86
+  }
+ }
+}

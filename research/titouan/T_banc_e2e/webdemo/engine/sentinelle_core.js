@@ -461,6 +461,9 @@ export function evaluate(body, local = emptyLocal()) {
   // scénario d'arnaque repéré sur la page (faux remboursement, faux support, cadeau, recruteur) : remplace une fiche générique
   const scen = (funds || grants) && pt ? scenarioFiche({ fid, pressure: press, pageText: pt, funds, grants, niveau }) : null;
   if (scen) { fid = scen; texts = buildTexts(scen, eff, host, { chainId: chainId ?? eff.chainId, contact }); source = 'fiche'; }
+  // niveau affiché : l'envoi vers une adresse nouvelle (F31) passe de « info » à « warn » (attention). Le niveau du moteur reste dans niveau_moteur.
+  const nivMoteur = niveau;
+  if (niveau === 'info' && !scen) niveau = pres.niveau || niveau;
   // niveau affiché : l'envoi vers une adresse nouvelle (F31) et le jeton non reconnu (F36) passent de « info » à « warn » (attention). Le niveau du moteur reste dans niveau_moteur.
   const nivMoteur = niveau;
   if (niveau === 'info' && !scen) niveau = pres.niveau || niveau;

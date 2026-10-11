@@ -1,0 +1,126 @@
+diff --git a/pipeline/intent_clef.mjs b/pipeline/intent_clef.mjs
+index b75a2ec..edd3d21 100644
+--- a/pipeline/intent_clef.mjs
++++ b/pipeline/intent_clef.mjs
+@@ -270,7 +270,12 @@ export async function evaluateWithIntent(run, body, local, opts = {}, cls, floor
+   const f = wrap(floor || await run(body, local, base));
+   const d = cls && cls.details ? cls.details : null;
+   const hasDetail = d && (d.amount !== undefined || d.token || d.counterpartyAddress || d.counterpartyLabel);
+-  if (!hasDetail) return { ...f, floorLevel: f.level, rawLevel: f.level, path: 'floor' };
++  if (!hasDetail) {
++    // texte écrit mais non compris : invérifiable (orange), jamais vert ; le plancher plus haut est conservé
++    const written = cls && cls.reason && cls.reason !== 'empty' && !cls.classified;
++    if (written && rankOf(f.level) < rankOf('unknown')) return { ...f, level: 'unknown', floorLevel: f.level, rawLevel: f.level, path: 'not_understood' };
++    return { ...f, floorLevel: f.level, rawLevel: f.level, path: 'floor' };
++  }
+   const w = wrap(await run(body, local, { ...base, intent: d }));
+   const kept = stricter(f, w);
+   return { ...kept, floorLevel: f.level, rawLevel: w.level, path: kept === w ? 'raised_by_details' : 'floor' };
+diff --git a/engine/src/fixes.mjs b/engine/src/fixes.mjs
+index f448d6e..6e1e9e4 100644
+--- a/engine/src/fixes.mjs
++++ b/engine/src/fixes.mjs
+@@ -1,5 +1,5 @@
+ // Interrupteurs des correctifs (A/B). POLICY_FIXES = "none" | "all" | "F1,F2,..." ; défaut = liste KEPT (correctifs gardés après mesure).
+-export const KEPT = ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'F13', 'F14', 'F15', 'F16', 'F17', 'F18', 'F19', 'F21', 'F22', 'F23', 'F24', 'F25', 'F26', 'F27', 'F28', 'F29', 'F30', 'F31', 'F32', 'F33', 'F34']; // F20 annulé (adoucit des fraudes conformes critical->warn)
++export const KEPT = ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'F13', 'F14', 'F15', 'F16', 'F17', 'F18', 'F19', 'F21', 'F22', 'F23', 'F24', 'F25', 'F26', 'F27', 'F28', 'F29', 'F30', 'F31', 'F32', 'F33', 'F34', 'F41']; // F20 annulé (adoucit des fraudes conformes critical->warn)
+ export const ALL = [...KEPT, ...Array.from({ length: 30 }, (_, i) => 'F' + (11 + i))];
+ const raw = (typeof process !== 'undefined' && process.env && process.env.POLICY_FIXES) || '';
+ const on = raw === '' ? new Set(KEPT) : raw === 'none' ? new Set() : raw === 'all' ? new Set(ALL) : new Set(raw.split(',').map((s) => s.trim()).filter(Boolean));
+diff --git a/run/policy.mjs b/run/policy.mjs
+index 1c419b2..f83d2d7 100644
+--- a/run/policy.mjs
++++ b/run/policy.mjs
+@@ -158,14 +158,14 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
+   // ---- F31 / F32 / F33 : l'intention DÉTAILLÉE (jeton, montant, jeton reçu) comparée aux effets. Ces règles ne lisent que des détails : sans détail (type seul ou aucune intention)
+   // elles ne font rien, donc ajouter de l'information ne peut que monter le niveau. Elles couvrent ce que le comparateur d'Adem ne regarde pas pour un échange
+   // (jeton, montant, droit plus large que le montant dit). Aucune adresse, aucun identifiant de cas : seulement la forme des effets.
+-  if (intent && DETAIL_KINDS.has(intent.kind) && (isOn('F31') || isOn('F32') || isOn('F33'))) {
++  if (intent && (DETAIL_KINDS.has(intent.kind) || !intent.kind) && (isOn('F31') || isOn('F32') || isOn('F33'))) {
+     const nat = NATIVE_BY_CHAIN[Number(eff.chainId)];
+     const symOf = (tok, given) => { if (given && given !== 'NATIVE' && given !== 'native') return given; const t = String(tok || '').toLowerCase(); return t === 'native' ? nat : tokenInfo(ctx, t).symbol; };
+     const said = intent.token ? tokenFamily(intent.token) : null;
+     const declared = amountReadings(intent.amount); const declaredMax = declared.length ? Math.max(...declared) : NaN;
+     // les frais en monnaie native versés à un protocole connu (pont, routeur) accompagnent l'opération : ils ne sont pas « un autre jeton » quand le jeton dit n'est pas la monnaie native
+     const feeToProtocol = (o) => (o.std === 'native' || String(o.token).toLowerCase() === 'native') && isKnownProtocol(ctx, o.to) && !!said && said !== tokenFamily(nat);
+-    const moneyOut = (eff.outgoing || []).filter((o) => (o.std === 'native' || o.std === 'erc20' || o.std === undefined) && !feeToProtocol(o));
++    const moneyOut = [...(eff.outgoing || []), ...((eff.service && eff.service.spent) || [])].filter((o) => (o.std === 'native' || o.std === 'erc20' || o.std === undefined) && !feeToProtocol(o));
+     const moneyApprovals = (eff.approvals || []).filter((a) => a.via !== 'setApprovalForAll' && a.std !== 'nft_all' && a.std !== 'nft_one');
+     const has = (code) => reasons.some((r) => r.code === code);
+     const sameAsset = (sym) => !said || !sym || tokenFamily(sym) === said;
+@@ -211,6 +211,14 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
+     }
+   }
+ 
++  // ---- F41 : l'intention dit un mouvement de valeur (payer, échanger, envoyer) mais la demande est une signature qui ne déplace rien, n'accorde aucun droit et ne change aucun contrôle
++  // (connexion, texte libre) : elle ne fait pas ce qui est dit. À confirmer (warn), jamais critical (rien ne part). Sans type d'intention la règle ne fait rien (monotone).
++  if (isOn('F41') && intent && DETAIL_KINDS.has(intent.kind) && eff.kind === 'signature' && !eff.opaque && !eff.delegation
++    && ![eff.outgoing, eff.incoming, eff.approvals, eff.controlChange, eff.nested].some((x) => (x || []).length)) {
++    reasons.push({ code: 'request_moves_nothing', sev: 'warn', said: 'Tu veux déplacer des fonds', does: 'Cette demande ne déplace rien : elle ne fait pas ce que tu as dit.' });
++    notes.push('F41:signature_sans_mouvement_vs_intention_de_valeur');
++  }
++
+   const floor = lvlOf(flags);
+   let level = floor;
+   const notIdentity = reasons.length !== (adem ? adem.reasons.length : 0) || reasons.some((r) => r.sev);
+diff --git a/engine/src/protocols_extra.mjs b/engine/src/protocols_extra.mjs
+index 8dcc7f4..1c2a79a 100644
+--- a/engine/src/protocols_extra.mjs
++++ b/engine/src/protocols_extra.mjs
+@@ -46,10 +46,10 @@ const TABLE = [
+   T('sweepToken(address token,uint256 amountMinimum,address recipient)', 'swap', { ben: ['recipient'] }),
+   T('refundETH()', 'misc'),
+   // --- prêt (Aave V3 et gateway, Compound/Benqi)
+-  T('supply(address asset,uint256 amount,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'] }),
++  T('supply(address asset,uint256 amount,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'], spend: ['asset', 'amount'] }),
+   T('withdraw(address asset,uint256 amount,address to)', 'withdraw', { ben: ['to'] }),
+   T('borrow(address asset,uint256 amount,uint256 interestRateMode,uint16 referralCode,address onBehalfOf)', 'borrow', { ben: ['onBehalfOf'] }),
+-  T('repay(address asset,uint256 amount,uint256 interestRateMode,address onBehalfOf)', 'repay', { ben: ['onBehalfOf'] }),
++  T('repay(address asset,uint256 amount,uint256 interestRateMode,address onBehalfOf)', 'repay', { ben: ['onBehalfOf'], spend: ['asset', 'amount'] }),
+   T('setUserUseReserveAsCollateral(address asset,bool useAsCollateral)', 'misc'),
+   T('depositETH(address pool,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'] }),
+   T('withdrawETH(address pool,uint256 amount,address to)', 'withdraw', { ben: ['to'] }),
+@@ -87,7 +87,7 @@ export function decodeLibraryCall(call, ctx, depth = 0) {
+     for (const d of inner) {
+       const r = decodeLibraryCall({ ...call, data: d }, ctx, depth + 1);
+       if (!r) return null;                                              // un sous-appel inconnu : le tout reste opaque
+-      out.beneficiaries.push(...r.beneficiaries); out.minOutZero = out.minOutZero || r.minOutZero; out.severe = out.severe || r.severe; out.inner.push(r.name);
++      out.beneficiaries.push(...r.beneficiaries); out.minOutZero = out.minOutZero || r.minOutZero; out.severe = out.severe || r.severe; out.inner.push(r.name); (out.spent ||= []).push(...(r.spent || []));
+     }
+     return out;
+   }
+@@ -102,6 +102,8 @@ export function decodeLibraryCall(call, ctx, depth = 0) {
+   // constantes de routeur : 0x…01 = l'appelant (msg.sender), 0x…02 = le routeur lui-même (étape intermédiaire d'un lot)
+   const ONE = '0x' + '0'.repeat(39) + '1', TWO = '0x' + '0'.repeat(39) + '2';
+   const resolved = beneficiaries.map((b) => (b === ONE ? lc(ctx.from) : b === TWO ? lc(call.to) : b));
+-  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries: resolved, minOutZero };
++  const spent = [];
++  if (e.spend) { const t = get(args, e.spend[0]), a = get(args, e.spend[1]); if (typeof t === 'string' && typeof a === 'bigint') spent.push({ token: lc(t), amountRaw: a }); }
++  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries: resolved, minOutZero, spent };
+ }
+ export const LIBRARY_SELECTORS = new Set([...BY_SEL.keys(), ...MC_BY_SEL.keys()]);
+diff --git a/engine/src/rules_extra.mjs b/engine/src/rules_extra.mjs
+index fcfd1e8..c105dfd 100644
+--- a/engine/src/rules_extra.mjs
++++ b/engine/src/rules_extra.mjs
+@@ -1,7 +1,7 @@
+ // Règles additionnelles du moteur (indépendantes de l'intention). Ne lisent que : l'effet décodé, la requête brute (structure) et le contexte fourni.
+ import { isOn } from './fixes.mjs';
+ import { parseSig, decodeParams } from './abi.mjs';
+-import { lc } from './util.mjs';
++import { lc, tokenInfo, fmtUnits } from './util.mjs';
+ import { decodeLibraryCall } from './protocols_extra.mjs';
+ import { extractAbiEffect, isMulticallSelector } from './effects_abi.mjs';
+ import { matchLens } from './rules.mjs';
+@@ -177,6 +177,11 @@ function libraryCalls(eff, request, ctx, flags) {
+     eff.risk_flags = eff.risk_flags.filter((f) => f.code !== 'opaque'); eff.opaque = false; eff.opaqueReasons = [];
+   }
+   eff.service = eff.service || { name: decoded[0].name, trusted: true };
++  { // montants que le service tire du compte (dépôt, remboursement) : jeton et montant lisibles, comparés ensuite à l'intention
++    const spent = [];
++    for (const r of decoded) for (const s of r.spent || []) { const inf = tokenInfo(ctx, s.token); if (inf.decimals != null) spent.push({ token: s.token, symbol: inf.symbol, std: 'erc20', amount: fmtUnits(s.amountRaw, inf.decimals) }); }
++    if (spent.length) eff.service.spent = spent;
++  }
+   const self = lc(ctx.from); const okAddr = (a) => a === self || (ctx.contacts || []).some((c) => lc(c.address) === a) || (ctx.knownSpenders || []).includes(a);
+   for (const r of decoded) {
+     flags.push({ code: 'service_call_decoded', severity: 'info', detail: `${r.name} (${r.kind}) vers un protocole de confiance` });

@@ -1,12 +1,18 @@
 {
- "iter": 4,
- "echecsConsecutifs": 0,
- "essais": {},
+ "iter": 6,
+ "echecsConsecutifs": 1,
+ "essais": {
+  "GRILLE|connexion": [
+   "P06"
+  ]
+ },
  "gains": [
-  0.744315915436772,
-  0.048718971495191,
-  0.6481605351170714,
-  0.432107023411362
+  0.744,
+  0.05,
+  0.65,
+  0.43,
+  1.38,
+  0
  ],
  "courbe": [
   {
@@ -42,31 +48,51 @@
    "val": 76.4029041883323,
    "label": "P04",
    "decision": "accepté"
+  },
+  {
+   "it": 5,
+   "reg": 76.23071391384595,
+   "val": 77.4329041883323,
+   "label": "P05",
+   "decision": "accepté"
+  },
+  {
+   "it": 6,
+   "reg": 76.23071391384595,
+   "val": 77.4329041883323,
+   "label": "P06",
+   "decision": "rejeté"
   }
  ],
  "accepte": [
   "P01",
   "P02",
   "P03",
-  "P04"
+  "P04",
+  "P05"
  ],
- "rejete": [],
+ "rejete": [
+  {
+   "id": "P06",
+   "motif": "réglage ne monte pas"
+  }
+ ],
  "cur": {
-  "reg": 74.8531219406018,
-  "val": 76.4029041883323,
+  "reg": 76.23071391384595,
+  "val": 77.4329041883323,
   "jeuxReg": {
    "DEV": 85.34,
    "PUBLIC": 71.15,
    "V2_DEV": 89.24,
    "DECALAGE": 71.29,
-   "GRILLE": 57.25
+   "GRILLE": 64.13
   },
   "jeuxVal": {
    "DEV": 88.46,
    "PUBLIC": 71.25,
    "V2_DEV": 89.79,
    "DECALAGE": 70.81,
-   "GRILLE": 61.71
+   "GRILLE": 66.86
   }
  }
 }

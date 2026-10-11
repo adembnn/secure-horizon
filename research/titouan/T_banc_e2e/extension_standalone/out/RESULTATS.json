@@ -8,7 +8,7 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "48ca0a51bbdfdb0b"
+   "detail": "54bd1a9d033f7d55"
   },
   {
    "name": "le service worker enregistre son ecouteur onMessage (demande inconnue => unknown, lu comme un refus)",
@@ -92,8 +92,8 @@
   },
   {
    "name": "chaine 31337 : envoi natif juge et libelle en AVAX",
-   "pass": true,
-   "detail": "J'envoie à l'adresse que j'ai choisie. Cette opération envoie 1 AVAX à 0xb2b2…b2b2, une adresse nouvelle. Un envoi vers une mauvaise adresse ne peut pas être ré"
+   "pass": false,
+   "detail": "Aucune alerte ne s'affiche, donc je peux signer sans crainte. Nous n'avons pas pu vérifier cette opération sur tes jetons. Elle peut être piégée comme elle peut"
   },
   {
    "name": "chaine 31337 : approve illimite vers un inconnu => critical",
@@ -102,8 +102,8 @@
   },
   {
    "name": "chaine 43114 : envoi natif juge et libelle en AVAX",
-   "pass": true,
-   "detail": "J'envoie à l'adresse que j'ai choisie. Cette opération envoie 1 AVAX à 0xb2b2…b2b2, une adresse nouvelle. Un envoi vers une mauvaise adresse ne peut pas être ré"
+   "pass": false,
+   "detail": "Aucune alerte ne s'affiche, donc je peux signer sans crainte. Nous n'avons pas pu vérifier cette opération sur tes jetons. Elle peut être piégée comme elle peut"
   },
   {
    "name": "chaine 43114 : approve illimite vers un inconnu => critical",
@@ -112,8 +112,8 @@
   },
   {
    "name": "chaine 43113 : envoi natif juge et libelle en AVAX",
-   "pass": true,
-   "detail": "J'envoie à l'adresse que j'ai choisie. Cette opération envoie 1 AVAX à 0xb2b2…b2b2, une adresse nouvelle. Un envoi vers une mauvaise adresse ne peut pas être ré"
+   "pass": false,
+   "detail": "Aucune alerte ne s'affiche, donc je peux signer sans crainte. Nous n'avons pas pu vérifier cette opération sur tes jetons. Elle peut être piégée comme elle peut"
   },
   {
    "name": "chaine 43113 : approve illimite vers un inconnu => critical",
@@ -142,8 +142,8 @@
   },
   {
    "name": "bloc PRESENTATION identique octet pour octet dans server.mjs et src/sentinelle_core.js",
-   "pass": false,
-   "detail": "21637 / 18759 caracteres"
+   "pass": true,
+   "detail": "21637 / 21637 caracteres"
   },
   {
    "name": "server/server.mjs se charge (moteur de reference)",
@@ -151,19 +151,19 @@
    "detail": ""
   },
   {
-   "name": "EQUIVALENCE SERVEUR/AUTONOME requetes types : 94/132 verdicts complets identiques (33 requetes x 4 variantes)",
+   "name": "EQUIVALENCE SERVEUR/AUTONOME requetes types : 116/132 verdicts complets identiques (33 requetes x 4 variantes)",
    "pass": false,
-   "detail": "approve illimite USDC vers un inconnu/sans intention [texts,real] {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r <> {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le || approve illimite USDC vers un inconnu/intention pay [texts,real] {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r <> {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le || approve illimite USDC vers un inconnu/intention receive [texts,real] {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r <> {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le || approve illimite USDC vers un inconnu/intention asked + texte de page [texts,real] {\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\", <> {\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
+   "detail": "approve illimite vers Permit2 (protocole connu)/sans intention [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,throws] \"attention\" ; \"info\" <>  ;  || envoi simple 0.5 ETH vers un inconnu/sans intention [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,niveau_moteur,throws] \"attention\" ; \"warn\" <>  ;  || envoi simple 0.5 ETH vers un inconnu/intention pay [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,niveau_moteur,throws] \"attention\" ; \"warn\" <>  ;  || envoi simple 0.5 ETH vers un contact connu (contexte local)/sans intention [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,throws] \"attention\" ; \"info\" <>  ; "
   },
   {
-   "name": "EQUIVALENCE SERVEUR/AUTONOME DEV : 916/1540 verdicts complets identiques (385 requetes x 4 variantes)",
+   "name": "EQUIVALENCE SERVEUR/AUTONOME DEV : 1228/1540 verdicts complets identiques (385 requetes x 4 variantes)",
    "pass": false,
-   "detail": "adresse_empoisonnee-002/sans intention [niveau,niveau_moteur] \"warn\" ; \"info\" <> \"info\" ;  || adresse_empoisonnee-002/intention pay [niveau,niveau_moteur] \"warn\" ; \"info\" <> \"info\" ;  || adresse_empoisonnee-003/sans intention [niveau,niveau_moteur] \"warn\" ; \"info\" <> \"info\" ;  || adresse_empoisonnee-003/intention pay [niveau,niveau_moteur] \"warn\" ; \"info\" <> \"info\" ; "
+   "detail": "adresse_empoisonnee-002/sans intention [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,niveau_moteur,throws] \"attention\" ; \"warn\" <>  ;  || adresse_empoisonnee-002/intention pay [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,niveau_moteur,throws] \"attention\" ; \"warn\" <>  ;  || adresse_empoisonnee-003/sans intention [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,niveau_moteur,throws] \"attention\" ; \"warn\" <>  ;  || adresse_empoisonnee-003/intention pay [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,niveau_moteur,throws] \"attention\" ; \"warn\" <>  ; "
   },
   {
-   "name": "EQUIVALENCE SERVEUR/AUTONOME PUBLIC : 360/576 verdicts complets identiques (144 requetes x 4 variantes)",
+   "name": "EQUIVALENCE SERVEUR/AUTONOME PUBLIC : 459/576 verdicts complets identiques (144 requetes x 4 variantes)",
    "pass": false,
-   "detail": "P-A05-B1/sans intention [fiche,texts,reasons,title,real] \"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris <> \"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr || P-A05-B1/intention pay [fiche,texts,reasons,title,real] \"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris <> \"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr || P-A05-B1/intention receive [fiche,texts,reasons,title,real] \"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris <> \"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr || P-A05-B1/intention asked + texte de page [texts,real] {\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye <> {\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
+   "detail": "P-A01-B2/sans intention [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,throws] \"attention\" ; \"info\" <>  ;  || P-A01-B2/intention pay [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,throws] \"attention\" ; \"info\" <>  ;  || P-A01-B2/intention receive [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,throws] \"attention\" ; \"info\" <>  ;  || P-A01-B2/intention asked + texte de page [level,niveau,fiche,texts,texts_source,reasons,raisons,codes,effects,risk_signals,opacity_only,title,said,real,throws] \"attention\" ; \"info\" <>  ; "
   },
   {
    "name": "E) sans contexte reseau : aucun 'ok' sur 519 cas reels du banc (DEV + PUBLIC)",
@@ -183,7 +183,7 @@
   {
    "name": "tests unitaires rejoues sur le dossier construit : 144 reussis, 1 en echec",
    "pass": false,
-   "detail": "✖ C:\\Users\\detot\\Documents\\secure-horizon\\research\\titouan\\T_banc_e2e\\extension\\tests\\unit\\revoke.test.mjs (719.1046ms) | ✖ failing tests: | ✖ C:\\Users\\detot\\Documents\\secure-horizon\\research\\titouan\\T_banc_e2e\\extension\\tests\\unit\\revoke.test.mjs (719.1046ms)"
+   "detail": "✖ C:\\Users\\detot\\Documents\\secure-horizon\\research\\titouan\\T_banc_e2e\\extension\\tests\\unit\\revoke.test.mjs (835.4102ms) | ✖ failing tests: | ✖ C:\\Users\\detot\\Documents\\secure-horizon\\research\\titouan\\T_banc_e2e\\extension\\tests\\unit\\revoke.test.mjs (835.4102ms)"
   },
   {
    "name": "surface de la fenetre : ui/screen.* (plus de cadre ui_holdup ni d iframe)",
@@ -199,14 +199,14 @@
  "notes": [
   "Attentes de detection non satisfaites parmi les 35 requetes types : aucune"
  ],
- "tree_sha256": "48ca0a51bbdfdb0bf716bc6c4d87b3c4530735359bcdce73f42b323c053d68b2",
+ "tree_sha256": "54bd1a9d033f7d55f87bdbd374cb6873939945c86cd321d8944e3bba416687cd",
  "requests": [
   {
    "name": "approve illimite USDC vers un inconnu",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 3.04,
+   "ms": 4.84,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -220,8 +220,8 @@
    "name": "approve limite 100 USDC vers un inconnu",
    "niveau": "warn",
    "level": "attention",
-   "fiche": "F01",
-   "ms": 0.89,
+   "fiche": "F34",
+   "ms": 0.67,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -233,17 +233,18 @@
   },
   {
    "name": "approve illimite vers Permit2 (protocole connu)",
-   "niveau": "info",
-   "level": "attention",
-   "fiche": "F26",
-   "ms": 1.24,
+   "niveau": "warn",
+   "level": "unknown",
+   "fiche": "F25",
+   "why": "erreur interne du moteur : Assignment to constant variable.",
+   "ms": 1.98,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "attention",
-   "friction": "none",
+   "ecran": "unknown",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -251,7 +252,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 8.1,
+   "ms": 5.43,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -266,7 +267,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 5.57,
+   "ms": 2.84,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -278,47 +279,50 @@
   },
   {
    "name": "envoi simple 0.5 ETH vers un inconnu",
-   "niveau": "info",
-   "level": "attention",
-   "fiche": "F31",
-   "ms": 0.81,
+   "niveau": "warn",
+   "level": "unknown",
+   "fiche": "F25",
+   "why": "erreur interne du moteur : Assignment to constant variable.",
+   "ms": 0.85,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "attention",
-   "friction": "none",
+   "ecran": "unknown",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
    "name": "envoi simple 0.5 ETH vers un contact connu (contexte local)",
-   "niveau": "info",
-   "level": "attention",
-   "fiche": "F26",
-   "ms": 1.84,
+   "niveau": "warn",
+   "level": "unknown",
+   "fiche": "F25",
+   "why": "erreur interne du moteur : Assignment to constant variable.",
+   "ms": 0.53,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "attention",
-   "friction": "none",
+   "ecran": "unknown",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
    "name": "transfer ERC-20 100 USDC",
-   "niveau": "info",
-   "level": "attention",
-   "fiche": "F31",
-   "ms": 0.51,
+   "niveau": "warn",
+   "level": "unknown",
+   "fiche": "F25",
+   "why": "erreur interne du moteur : Assignment to constant variable.",
+   "ms": 0.42,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "attention",
-   "friction": "none",
+   "ecran": "unknown",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -326,7 +330,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F03",
-   "ms": 0.57,
+   "ms": 0.33,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -341,7 +345,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F07",
-   "ms": 0.82,
+   "ms": 1.28,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -356,7 +360,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F13",
-   "ms": 1,
+   "ms": 0.46,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -371,7 +375,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 1.39,
+   "ms": 0.63,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -383,17 +387,18 @@
   },
   {
    "name": "personal_sign texte banal",
-   "niveau": "info",
-   "level": "attention",
-   "fiche": "F26",
-   "ms": 1.88,
+   "niveau": "warn",
+   "level": "unknown",
+   "fiche": "F25",
+   "why": "erreur interne du moteur : Assignment to constant variable.",
+   "ms": 2.16,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "attention",
-   "friction": "none",
+   "ecran": "unknown",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -401,7 +406,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.63,
+   "ms": 0.65,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -416,7 +421,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 2.23,
+   "ms": 1.72,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -431,7 +436,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F32",
-   "ms": 1.62,
+   "ms": 1.01,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -443,17 +448,18 @@
   },
   {
    "name": "wallet_switchEthereumChain",
-   "niveau": "info",
-   "level": "attention",
-   "fiche": "F26",
-   "ms": 0.48,
+   "niveau": "warn",
+   "level": "unknown",
+   "fiche": "F25",
+   "why": "erreur interne du moteur : Assignment to constant variable.",
+   "ms": 0.52,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "attention",
-   "friction": "none",
+   "ecran": "unknown",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -462,7 +468,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (RLP: liste tronquée)",
-   "ms": 1.89,
+   "ms": 0.95,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -478,7 +484,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode absente",
-   "ms": 0.22,
+   "ms": 0.31,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -493,7 +499,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.08,
+   "ms": 0.31,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -509,7 +515,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.24,
+   "ms": 0.13,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -525,7 +531,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.1,
+   "ms": 0.09,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -536,7 +542,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.06,
+   "ms": 0.02,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -547,7 +553,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (Cannot convert abc to a BigInt)",
-   "ms": 0.55,
+   "ms": 0.46,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -563,7 +569,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode eth_foo non geree par le moteur d'effets",
-   "ms": 0.1,
+   "ms": 0.24,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -579,7 +585,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "eth_signTypedData (v1) non gere",
-   "ms": 0.1,
+   "ms": 0.26,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -595,7 +601,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete trop volumineuse (300229 octets, max 262144)",
-   "ms": 1.56,
+   "ms": 2.73,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -611,7 +617,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "lot de calls illisible",
-   "ms": 0.25,
+   "ms": 0.16,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -627,7 +633,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "effets non lisibles : unknown_selector",
-   "ms": 1.64,
+   "ms": 3.58,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -642,7 +648,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F11",
-   "ms": 0.61,
+   "ms": 0.62,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -657,7 +663,7 @@
    "niveau": "critical",
    "level": "manipulation",
    "fiche": "F01",
-   "ms": 7.18,
+   "ms": 6.41,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -672,7 +678,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 1.1,
+   "ms": 0.46,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -687,7 +693,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F20",
-   "ms": 1.41,
+   "ms": 1.84,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -699,17 +705,18 @@
   },
   {
    "name": "origine absente",
-   "niveau": "info",
-   "level": "attention",
-   "fiche": "F31",
-   "ms": 0.45,
+   "niveau": "warn",
+   "level": "unknown",
+   "fiche": "F25",
+   "why": "erreur interne du moteur : Assignment to constant variable.",
+   "ms": 0.69,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "attention",
-   "friction": "none",
+   "ecran": "unknown",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -718,7 +725,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx non geree par le moteur d'effets",
-   "ms": 0.28,
+   "ms": 0.13,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -736,7 +743,7 @@
   "ecarts": 0,
   "pct_identite": 100,
   "diffs": [],
-  "latence_moyenne_ms_par_verdict": 2.24
+  "latence_moyenne_ms_par_verdict": 1.72
  },
  "equiv_public": {
   "jeu": "PUBLIC (executables)",
@@ -746,7 +753,7 @@
   "ecarts": 0,
   "pct_identite": 100,
   "diffs": [],
-  "latence_moyenne_ms_par_verdict": 1.67
+  "latence_moyenne_ms_par_verdict": 1.47
  },
  "n_public_non_exec": 10,
  "equiv_serveur": [
@@ -754,403 +761,383 @@
    "jeu": "requetes types",
    "requetes": 33,
    "comparaisons": 132,
-   "identiques": 94,
-   "ecarts": 38,
+   "identiques": 116,
+   "ecarts": 16,
    "non_comparees_chaine_locale": 0,
    "diffs": [
-    {
-     "id": "approve illimite USDC vers un inconnu",
-     "variante": "sans intention",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
-    },
-    {
-     "id": "approve illimite USDC vers un inconnu",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
-    },
-    {
-     "id": "approve illimite USDC vers un inconnu",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
-    },
-    {
-     "id": "approve illimite USDC vers un inconnu",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
-    },
-    {
-     "id": "approve limite 100 USDC vers un inconnu",
-     "variante": "sans intention",
-     "champs": [
-      "fiche",
-      "texts",
-      "reasons",
-      "title",
-      "real"
-     ],
-     "serveur": "\"F34\" ; {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre 100 USDC, pas plus.\",\"danger\":\"Seuls 100 USDC peuvent part",
-     "autonome": "\"F01\" ; {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que "
-    },
-    {
-     "id": "approve limite 100 USDC vers un inconnu",
-     "variante": "intention pay",
-     "champs": [
-      "fiche",
-      "texts",
-      "reasons",
-      "title",
-      "real"
-     ],
-     "serveur": "\"F34\" ; {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre 100 USDC, pas plus.\",\"danger\":\"Seuls 100 USDC peuvent part",
-     "autonome": "\"F01\" ; {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que "
-    },
-    {
-     "id": "approve limite 100 USDC vers un inconnu",
-     "variante": "intention receive",
-     "champs": [
-      "fiche",
-      "texts",
-      "reasons",
-      "title",
-      "real"
-     ],
-     "serveur": "\"F34\" ; {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre 100 USDC, pas plus.\",\"danger\":\"Seuls 100 USDC peuvent part",
-     "autonome": "\"F01\" ; {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que "
-    },
-    {
-     "id": "approve limite 100 USDC vers un inconnu",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 100 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 100 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
-    },
     {
      "id": "approve illimite vers Permit2 (protocole connu)",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
       "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
       "said",
-      "real"
+      "real",
+      "throws"
      ],
-     "serveur": "\"F37\" ; {\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Un programme connu pourra prendre tous tes USDC, sans limite de montant.\",\"danger\":\"Le droit reste ouvert tant ",
-     "autonome": "\"F26\" ; {\"croit\":\"Je fais l'opération simple que j'ai demandée.\",\"reel\":\"Nous n’avons trouvé aucun signal dangereux dans cette demande.\",\"danger\":\"Notre vérification est limitée: elle peut rater un pi"
-    },
-    {
-     "id": "approve illimite vers Permit2 (protocole connu)",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
-    },
-    {
-     "id": "approve illimite vers Permit2 (protocole connu)",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
-    },
-    {
-     "id": "approve illimite vers Permit2 (protocole connu)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
-    },
-    {
-     "id": "permit EIP-2612 illimite",
-     "variante": "sans intention",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vau",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurati"
-    },
-    {
-     "id": "permit EIP-2612 illimite",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vau",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurati"
-    },
-    {
-     "id": "permit EIP-2612 illimite",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vau",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurati"
-    },
-    {
-     "id": "permit EIP-2612 illimite",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
-    },
-    {
-     "id": "Permit2 PermitSingle illimite",
-     "variante": "sans intention",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vau",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurati"
-    },
-    {
-     "id": "Permit2 PermitSingle illimite",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vau",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurati"
-    },
-    {
-     "id": "Permit2 PermitSingle illimite",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vau",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.exemple-defi.org prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurati"
-    },
-    {
-     "id": "Permit2 PermitSingle illimite",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
      "id": "envoi simple 0.5 ETH vers un inconnu",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "envoi simple 0.5 ETH vers un inconnu",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "envoi simple 0.5 ETH vers un contact connu (contexte local)",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "envoi simple 0.5 ETH vers un contact connu (contexte local)",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
      "id": "transfer ERC-20 100 USDC",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "transfer ERC-20 100 USDC",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve illimite + page de pression (faux support)",
+     "id": "personal_sign texte banal",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve illimite + page de pression (faux support)",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
-    },
-    {
-     "id": "approve illimite + page de pression (faux support)",
+     "id": "personal_sign texte banal",
      "variante": "intention receive",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve illimite + page de pression (faux support)",
+     "id": "personal_sign texte banal",
      "variante": "intention asked + texte de page",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve illimite avec intention \"payer quelqu un\"",
+     "id": "wallet_switchEthereumChain",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve illimite avec intention \"payer quelqu un\"",
+     "id": "wallet_switchEthereumChain",
      "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve illimite avec intention \"payer quelqu un\"",
+     "id": "wallet_switchEthereumChain",
      "variante": "intention receive",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes USDC sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le r",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.exemple-defi.org.\",\"reel\":\"Tu donnes à app.exemple-defi.org le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve illimite avec intention \"payer quelqu un\"",
+     "id": "wallet_switchEthereumChain",
      "variante": "intention asked + texte de page",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
-    },
-    {
-     "id": "origine sosie punycode (xn--)",
-     "variante": "sans intention",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je suis sur le site officiel de xn--unswap-9ya.org.\",\"reel\":\"Ce site, xn--unswap-9ya.org, imite xn--unswap-9ya.org pour vider tes 0.000005 USDC.\",\"danger\":\"L'adresse du site ressemble à la v",
-     "autonome": "{\"croit\":\"Je suis sur le site officiel de xn--unswap-9ya.org.\",\"reel\":\"Ce site, xn--unswap-9ya.org, imite xn--unswap-9ya.org pour vider tes 0.000005 jetons.\",\"danger\":\"L'adresse du site ressemble à la"
-    },
-    {
-     "id": "origine sosie punycode (xn--)",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je suis sur le site officiel de xn--unswap-9ya.org.\",\"reel\":\"Ce site, xn--unswap-9ya.org, imite xn--unswap-9ya.org pour vider tes 0.000005 USDC.\",\"danger\":\"L'adresse du site ressemble à la v",
-     "autonome": "{\"croit\":\"Je suis sur le site officiel de xn--unswap-9ya.org.\",\"reel\":\"Ce site, xn--unswap-9ya.org, imite xn--unswap-9ya.org pour vider tes 0.000005 jetons.\",\"danger\":\"L'adresse du site ressemble à la"
-    },
-    {
-     "id": "origine sosie punycode (xn--)",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je suis sur le site officiel de xn--unswap-9ya.org.\",\"reel\":\"Ce site, xn--unswap-9ya.org, imite xn--unswap-9ya.org pour vider tes 0.000005 USDC.\",\"danger\":\"L'adresse du site ressemble à la v",
-     "autonome": "{\"croit\":\"Je suis sur le site officiel de xn--unswap-9ya.org.\",\"reel\":\"Ce site, xn--unswap-9ya.org, imite xn--unswap-9ya.org pour vider tes 0.000005 jetons.\",\"danger\":\"L'adresse du site ressemble à la"
-    },
-    {
-     "id": "origine sosie punycode (xn--)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 0.000005 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'e",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 0.000005 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
      "id": "origine absente",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "origine absente",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     }
    ]
   },
@@ -1158,409 +1145,965 @@
    "jeu": "DEV",
    "requetes": 385,
    "comparaisons": 1540,
-   "identiques": 916,
-   "ecarts": 624,
+   "identiques": 1228,
+   "ecarts": 312,
    "non_comparees_chaine_locale": 0,
    "diffs": [
     {
      "id": "adresse_empoisonnee-002",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-002",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-003",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-003",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-006",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-006",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-009",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-009",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-010",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-010",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-011",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-011",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-014",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-014",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-015",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-015",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-017",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-017",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-018",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-018",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-020",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-020",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-021",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-021",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-022",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-022",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-023",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-023",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-024",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-024",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-025",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-025",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-026",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-026",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-027",
      "variante": "sans intention",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
      "id": "adresse_empoisonnee-027",
      "variante": "intention pay",
      "champs": [
+      "level",
       "niveau",
-      "niveau_moteur"
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"warn\" ; \"info\"",
-     "autonome": "\"info\" ; "
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve_erc20-001",
+     "id": "approve_erc20-029",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.1inch.io.\",\"reel\":\"Tu donnes à app.1inch.io le droit de prendre tes USDT sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le retires pas toi-m",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.1inch.io.\",\"reel\":\"Tu donnes à app.1inch.io le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le retires pas toi"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve_erc20-001",
+     "id": "approve_erc20-029",
      "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.1inch.io.\",\"reel\":\"Tu donnes à app.1inch.io le droit de prendre tes USDT sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le retires pas toi-m",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.1inch.io.\",\"reel\":\"Tu donnes à app.1inch.io le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le retires pas toi"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve_erc20-001",
+     "id": "approve_erc20-029",
      "variante": "intention receive",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je veux seulement faire mon échange sur app.1inch.io.\",\"reel\":\"Tu donnes à app.1inch.io le droit de prendre tes USDT sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le retires pas toi-m",
-     "autonome": "{\"croit\":\"Je veux seulement faire mon échange sur app.1inch.io.\",\"reel\":\"Tu donnes à app.1inch.io le droit de prendre tes jetons sans limite.\",\"danger\":\"Ce droit dure tant que tu ne le retires pas toi"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "approve_erc20-001",
+     "id": "approve_erc20-029",
      "variante": "intention asked + texte de page",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDT à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     }
    ]
   },
@@ -1568,463 +2111,951 @@
    "jeu": "PUBLIC",
    "requetes": 144,
    "comparaisons": 576,
-   "identiques": 360,
-   "ecarts": 216,
+   "identiques": 459,
+   "ecarts": 117,
    "non_comparees_chaine_locale": 0,
    "diffs": [
     {
-     "id": "P-A05-B1",
+     "id": "P-A01-B2",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-B1",
+     "id": "P-A01-B2",
      "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-B1",
+     "id": "P-A01-B2",
      "variante": "intention receive",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-B1",
+     "id": "P-A01-B2",
      "variante": "intention asked + texte de page",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-B2",
+     "id": "P-A03-B2",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.aave.com prendre 500 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autorisati",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.aave.com prendre tes 500 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procu"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-B2",
+     "id": "P-A03-B2",
      "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.aave.com prendre 500 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autorisati",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.aave.com prendre tes 500 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procu"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-B2",
+     "id": "P-A03-B2",
      "variante": "intention receive",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.aave.com prendre 500 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autorisati",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.aave.com prendre tes 500 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procu"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-B2",
+     "id": "P-A03-B2",
      "variante": "intention asked + texte de page",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 500 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 500 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-M1",
+     "id": "P-A04-B1",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça va",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurat"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-M1",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça va",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurat"
-    },
-    {
-     "id": "P-A05-M1",
+     "id": "P-A04-B1",
      "variante": "intention receive",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça va",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procurat"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-M1",
+     "id": "P-A04-B1",
      "variante": "intention asked + texte de page",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-M2",
+     "id": "P-A04-B2",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse verify-ownership.test prendre 2500 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une ",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes 2500 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-M2",
-     "variante": "intention pay",
-     "champs": [
-      "fiche",
-      "texts",
-      "reasons",
-      "title",
-      "real"
-     ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse verify-ownership.test prendre 2500 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une ",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes 2500 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut"
-    },
-    {
-     "id": "P-A05-M2",
+     "id": "P-A04-B2",
      "variante": "intention receive",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse verify-ownership.test prendre 2500 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une ",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse verify-ownership.test prendre tes 2500 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A05-M2",
+     "id": "P-A04-B2",
      "variante": "intention asked + texte de page",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 2500 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoy",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 2500 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'env"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A06-B1",
+     "id": "P-A09-B2",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A06-B1",
+     "id": "P-A09-B2",
      "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A06-B1",
-     "variante": "intention receive",
-     "champs": [
-      "fiche",
-      "texts",
-      "reasons",
-      "title",
-      "real"
-     ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
-    },
-    {
-     "id": "P-A06-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
-    },
-    {
-     "id": "P-A06-B2",
+     "id": "P-A09-M2",
      "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 100 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 100 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A06-B2",
+     "id": "P-A09-M2",
      "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 100 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 100 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"info\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A06-B2",
-     "variante": "intention receive",
-     "champs": [
-      "fiche",
-      "texts",
-      "reasons",
-      "title",
-      "real"
-     ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 100 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 100 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
-    },
-    {
-     "id": "P-A06-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 100 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 100 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
-    },
-    {
-     "id": "P-A06-M1",
+     "id": "P-A11-B1",
      "variante": "sans intention",
      "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vaut un",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procuration s"
-    },
-    {
-     "id": "P-A06-M1",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vaut un",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procuration s"
-    },
-    {
-     "id": "P-A06-M1",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vaut un",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procuration s"
-    },
-    {
-     "id": "P-A06-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
-    },
-    {
-     "id": "P-A06-M2",
-     "variante": "sans intention",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vaut un",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procuration s"
-    },
-    {
-     "id": "P-A06-M2",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vaut un",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procuration s"
-    },
-    {
-     "id": "P-A06-M2",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes USDC sans date de fin.\",\"danger\":\"Signer ne coûte rien, mais ça vaut un",
-     "autonome": "{\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse claim-token.test prendre tes jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une procuration s"
-    },
-    {
-     "id": "P-A06-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoyer."
-    },
-    {
-     "id": "P-A07-B1",
-     "variante": "sans intention",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je change mes jetons et je les reçois sur mon compte.\",\"reel\":\"Ton échange enverra les 250 USDC reçus à une autre adresse, pas à toi.\",\"danger\":\"Le site a mis l'adresse d'une autre personne ",
-     "autonome": "{\"croit\":\"Je change mes jetons et je les reçois sur mon compte.\",\"reel\":\"Ton échange enverra les 250 jetons reçus à une autre adresse, pas à toi.\",\"danger\":\"Le site a mis l'adresse d'une autre personn"
-    },
-    {
-     "id": "P-A07-B1",
-     "variante": "intention pay",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je change mes jetons et je les reçois sur mon compte.\",\"reel\":\"Ton échange enverra les 250 USDC reçus à une autre adresse, pas à toi.\",\"danger\":\"Le site a mis l'adresse d'une autre personne ",
-     "autonome": "{\"croit\":\"Je change mes jetons et je les reçois sur mon compte.\",\"reel\":\"Ton échange enverra les 250 jetons reçus à une autre adresse, pas à toi.\",\"danger\":\"Le site a mis l'adresse d'une autre personn"
-    },
-    {
-     "id": "P-A07-B1",
-     "variante": "intention receive",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Je change mes jetons et je les reçois sur mon compte.\",\"reel\":\"Ton échange enverra les 250 USDC reçus à une autre adresse, pas à toi.\",\"danger\":\"Le site a mis l'adresse d'une autre personne ",
-     "autonome": "{\"croit\":\"Je change mes jetons et je les reçois sur mon compte.\",\"reel\":\"Ton échange enverra les 250 jetons reçus à une autre adresse, pas à toi.\",\"danger\":\"Le site a mis l'adresse d'une autre personn"
-    },
-    {
-     "id": "P-A07-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "texts",
-      "real"
-     ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
-    },
-    {
-     "id": "P-A07-B2",
-     "variante": "sans intention",
-     "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A07-B2",
+     "id": "P-A11-B1",
      "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A07-B2",
-     "variante": "intention receive",
+     "id": "P-A11-B2",
+     "variante": "sans intention",
      "champs": [
+      "level",
+      "niveau",
       "fiche",
       "texts",
+      "texts_source",
       "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
       "title",
-      "real"
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "\"F35\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature laisse app.uniswap.org prendre 250 USDC, pas plus.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une autoris",
-     "autonome": "\"F02\" ; {\"croit\":\"Je signe un simple message, sans payer de frais.\",\"reel\":\"Cette signature gratuite laisse app.uniswap.org prendre tes 250 jetons.\",\"danger\":\"Signer ne coûte rien, mais ça vaut une pr"
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     },
     {
-     "id": "P-A07-B2",
-     "variante": "intention asked + texte de page",
+     "id": "P-A11-B2",
+     "variante": "intention pay",
      "champs": [
+      "level",
+      "niveau",
+      "fiche",
       "texts",
-      "real"
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
      ],
-     "serveur": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 USDC à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envoye",
-     "autonome": "{\"croit\":\"Le support me guide pour protéger mes fonds.\",\"reel\":\"Tu envoies 250 jetons à un escroc: personne ne pourra les récupérer.\",\"danger\":\"Un vrai support ne te demande jamais de signer ni d'envo"
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A11-M1",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A11-M1",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A11-M2",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A11-M2",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-B1",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-B1",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-B2",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-B2",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-M1",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-M1",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-M2",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A12-M2",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A13-B1",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A13-B1",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A13-B2",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A13-B2",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A13-M1",
+     "variante": "sans intention",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
+    },
+    {
+     "id": "P-A13-M1",
+     "variante": "intention pay",
+     "champs": [
+      "level",
+      "niveau",
+      "fiche",
+      "texts",
+      "texts_source",
+      "reasons",
+      "raisons",
+      "codes",
+      "effects",
+      "risk_signals",
+      "opacity_only",
+      "title",
+      "said",
+      "real",
+      "niveau_moteur",
+      "throws"
+     ],
+     "serveur": "\"attention\" ; \"warn\"",
+     "autonome": " ; "
     }
    ]
   }
@@ -2034,56 +3065,56 @@
   "distribution": {
    "critical": 204,
    "warn": 80,
-   "info": 184,
-   "unknown": 51
+   "info": 0,
+   "unknown": 235
   },
   "par_label": {
    "malveillant": {
     "n": 317,
     "critical": 190,
     "warn": 36,
-    "info": 68,
-    "unknown": 23
+    "info": 0,
+    "unknown": 91
    },
    "ambigu": {
     "n": 19,
     "critical": 2,
     "warn": 9,
-    "info": 8,
-    "unknown": 0
+    "info": 0,
+    "unknown": 8
    },
    "benin": {
     "n": 157,
     "critical": 12,
     "warn": 35,
-    "info": 82,
-    "unknown": 28
+    "info": 0,
+    "unknown": 110
    },
    "fraude_conforme": {
     "n": 26,
     "critical": 0,
     "warn": 0,
-    "info": 26,
-    "unknown": 0
+    "info": 0,
+    "unknown": 26
    }
   },
-  "latence_moyenne_ms": 2.07,
-  "latence_p95_ms": 9.76,
-  "latence_max_ms": 15.92
+  "latence_moyenne_ms": 3.11,
+  "latence_p95_ms": 13.49,
+  "latence_max_ms": 27.83
  },
  "taille": {
   "fichiers": 45,
-  "octets": 597367,
-  "ko": 583.37
+  "octets": 601652,
+  "ko": 587.55
  },
  "latence_requetes_types_ms": {
-  "moyenne": 1.44,
-  "max": 8.1
+  "moyenne": 1.31,
+  "max": 6.41
  },
  "unit_sur_build": {
   "pass": 144,
   "fail": 1
  },
- "echecs": 5,
+ "echecs": 7,
  "total_checks": 39
 }

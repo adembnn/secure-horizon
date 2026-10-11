@@ -46,10 +46,10 @@ const TABLE = [
   T('sweepToken(address token,uint256 amountMinimum,address recipient)', 'swap', { ben: ['recipient'] }),
   T('refundETH()', 'misc'),
   // --- prêt (Aave V3 et gateway, Compound/Benqi)
-  T('supply(address asset,uint256 amount,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'] }),
+  T('supply(address asset,uint256 amount,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'], spend: ['asset', 'amount'] }),
   T('withdraw(address asset,uint256 amount,address to)', 'withdraw', { ben: ['to'] }),
   T('borrow(address asset,uint256 amount,uint256 interestRateMode,uint16 referralCode,address onBehalfOf)', 'borrow', { ben: ['onBehalfOf'] }),
-  T('repay(address asset,uint256 amount,uint256 interestRateMode,address onBehalfOf)', 'repay', { ben: ['onBehalfOf'] }),
+  T('repay(address asset,uint256 amount,uint256 interestRateMode,address onBehalfOf)', 'repay', { ben: ['onBehalfOf'], spend: ['asset', 'amount'] }),
   T('setUserUseReserveAsCollateral(address asset,bool useAsCollateral)', 'misc'),
   T('depositETH(address pool,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'] }),
   T('withdrawETH(address pool,uint256 amount,address to)', 'withdraw', { ben: ['to'] }),
@@ -87,7 +87,7 @@ export function decodeLibraryCall(call, ctx, depth = 0) {
     for (const d of inner) {
       const r = decodeLibraryCall({ ...call, data: d }, ctx, depth + 1);
       if (!r) return null;                                              // un sous-appel inconnu : le tout reste opaque
-      out.beneficiaries.push(...r.beneficiaries); out.minOutZero = out.minOutZero || r.minOutZero; out.severe = out.severe || r.severe; out.inner.push(r.name);
+      out.beneficiaries.push(...r.beneficiaries); out.minOutZero = out.minOutZero || r.minOutZero; out.severe = out.severe || r.severe; out.inner.push(r.name); (out.spent ||= []).push(...(r.spent || []));
     }
     return out;
   }
@@ -102,6 +102,8 @@ export function decodeLibraryCall(call, ctx, depth = 0) {
   // constantes de routeur : 0x…01 = l'appelant (msg.sender), 0x…02 = le routeur lui-même (étape intermédiaire d'un lot)
   const ONE = '0x' + '0'.repeat(39) + '1', TWO = '0x' + '0'.repeat(39) + '2';
   const resolved = beneficiaries.map((b) => (b === ONE ? lc(ctx.from) : b === TWO ? lc(call.to) : b));
-  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries: resolved, minOutZero };
+  const spent = [];
+  if (e.spend) { const t = get(args, e.spend[0]), a = get(args, e.spend[1]); if (typeof t === 'string' && typeof a === 'bigint') spent.push({ token: lc(t), amountRaw: a }); }
+  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries: resolved, minOutZero, spent };
 }
 export const LIBRARY_SELECTORS = new Set([...BY_SEL.keys(), ...MC_BY_SEL.keys()]);

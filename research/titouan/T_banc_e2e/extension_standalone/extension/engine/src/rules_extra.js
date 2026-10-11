@@ -1,7 +1,7 @@
 // Règles additionnelles du moteur (indépendantes de l'intention). Ne lisent que : l'effet décodé, la requête brute (structure) et le contexte fourni.
 import { isOn } from './fixes.js';
 import { parseSig, decodeParams } from './abi.js';
-import { lc } from './util.js';
+import { lc, tokenInfo, fmtUnits } from './util.js';
 import { decodeLibraryCall } from './protocols_extra.js';
 import { extractAbiEffect, isMulticallSelector } from './effects_abi.js';
 import { matchLens } from './rules.js';
@@ -177,6 +177,11 @@ function libraryCalls(eff, request, ctx, flags) {
     eff.risk_flags = eff.risk_flags.filter((f) => f.code !== 'opaque'); eff.opaque = false; eff.opaqueReasons = [];
   }
   eff.service = eff.service || { name: decoded[0].name, trusted: true };
+  { // montants que le service tire du compte (dépôt, remboursement) : jeton et montant lisibles, comparés ensuite à l'intention
+    const spent = [];
+    for (const r of decoded) for (const s of r.spent || []) { const inf = tokenInfo(ctx, s.token); if (inf.decimals != null) spent.push({ token: s.token, symbol: inf.symbol, std: 'erc20', amount: fmtUnits(s.amountRaw, inf.decimals) }); }
+    if (spent.length) eff.service.spent = spent;
+  }
   const self = lc(ctx.from); const okAddr = (a) => a === self || (ctx.contacts || []).some((c) => lc(c.address) === a) || (ctx.knownSpenders || []).includes(a);
   for (const r of decoded) {
     flags.push({ code: 'service_call_decoded', severity: 'info', detail: `${r.name} (${r.kind}) vers un protocole de confiance` });
