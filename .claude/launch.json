@@ -30,6 +30,16 @@
         "8801"
       ],
       "port": 8801
+    },
+    {
+      "name": "holdup-site-echange",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "docs/demo/serve_static.mjs",
+        "research/demo_reelle/site_echange",
+        "8793"
+      ],
+      "port": 8793
     }
   ]
 }
