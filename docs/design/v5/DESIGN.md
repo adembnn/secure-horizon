@@ -145,3 +145,48 @@ Contrastes calculés (WCAG 2.x) :
 Les quatre états : question (champ libre, exemple en encre-2), correspond (phrase en encre, seul Annuler, ouverture du portefeuille après 1 s), ne correspond pas (phrase en signal, Annuler plein, Continuer discret et inactif jusqu'à la fin du délai), pas pu vérifier (phrase en encre, Annuler plein, Continuer discret).
 
 Captures du 11/10 dans `captures/` (préfixe `2026-10-11_`), rendues par `ui/screen.js` avec des données fixes dans le navigateur intégré.
+
+## 11. Sites de démo
+
+Ajoutée le 11 oct. 2026. Trois surfaces de démonstration, pour ordinateur seulement (1280 et 1920 de large). Elles reprennent les jetons ci-dessus, mais ce sont des pages tierces ou des outils : elles gardent leur propre marque fictive.
+
+Fichiers : `research/demo_reelle/site_echange/` (Neve, échange crédible), `research/demo_reelle/site/` (Glacier Rewards : leurre, message reçu, console de l'attaquant), `research/demo_reelle/lab/ui/` (le Lab). Captures : `captures/sites_*_2026-10-11.jpg`.
+
+### Ce qui a changé
+
+- **Neve.** Une colonne de 480 px sous un en-tête pleine largeur. Deux champs sur fond gris très clair (montant en 36 px, jeton dans un bord fin), une flèche, une ligne de taux, un bouton plein de 52 px, une ligne d'état. Accent unique `#0b6b86` (sigle, point du réseau, bouton). Mode sombre suivi par le système. Titre sans tiret long.
+- **Glacier Rewards.** Mur blanc, titre en graisse 400, deux colonnes (texte à gauche, panneau de 420 px à droite). Retirés : ombres, silhouettes de montagnes, pastilles rondes, ronds numérotés, pulsation d'état, aperçu de lien décoratif, bandeau ambre. La console de l'attaquant garde de grands chiffres (jusqu'à 136 px) mais perd ses cartes, ses pastilles vertes et son jaune : encre, un seul rouge pour le gain de l'attaquant.
+- **Lab.** Jetons v5 (encre `#171717`, rouge `#c9281c`, fond sombre `#131313`), rayon 8 px partout (les gélules de 50 px disparaissent), aucune ombre, bords de 1 px, graisses ramenées à 500 au plus, pile de polices système. Les fausses pages des appâts (`stage.css`) perdent leurs dégradés et leurs ombres.
+- Textes : tirets longs remplacés par deux-points, points de suspension retirés des états, « Temps restant » pour le compte à rebours, adresse de portefeuille sans mention de norme.
+- Aucun `.js`, aucun `id`, aucun `data-` modifié.
+
+### Contrastes (WCAG 2.x, calculés)
+
+| Surface | Paire | Ratio |
+|---|---|---|
+| Neve clair | encre sur blanc | 17,9:1 |
+| Neve clair | encre-2 sur blanc / sur fond de champ | 6,7:1 / 6,1:1 |
+| Neve clair | blanc sur bouton `#0b6b86` (survol `#095a72`) | 6,1:1 (7,7:1) |
+| Neve clair | signal `#c9281c` sur blanc | 5,5:1 |
+| Neve clair | bouton inactif (`#5c5c5c` sur `#ececec`) | 5,7:1 |
+| Neve sombre | encre / encre-2 sur `#131313` | 15,9:1 / 7,4:1 |
+| Neve sombre | texte `#0b1418` sur bouton `#4fb0cc` | 7,5:1 |
+| Neve sombre | signal `#ff7061` | 6,9:1 |
+| Glacier clair | encre `#14212b` / gris `#4a5a67` sur blanc | 16,4:1 / 7,1:1 |
+| Glacier clair | blanc sur bouton `#0b6b86` (survol `#08566e`) | 6,1:1 (8,2:1) |
+| Glacier clair | rouge `#b3261e` | 6,5:1 |
+| Glacier clair | bouton inactif (`#566673` sur `#e9edf0`) | 5,0:1 |
+| Console | encre / gris / gris pâle sur `#0b0f13` | 17,5:1 / 10,1:1 / 7,4:1 |
+| Console | rouge `#ff8a77` / lien `#7fd0ea` | 8,4:1 / 11,1:1 |
+| Lab clair | encre / gris / rouge | 17,9:1 / 6,7:1 / 5,5:1 |
+| Lab sombre | encre / gris / rouge | 15,9:1 / 7,4:1 / 6,9:1 |
+| Bords actifs (non texte) | `#8c8c8c` clair, `#7a7a7a` sombre, `#8794a0` Glacier | 3,4:1, 4,3:1, 3,1:1 |
+
+Focus visible partout : contour de 2 px (encre, jaune `#f0c060` sur la console).
+
+### Ce qui reste
+
+- `verdict.css` du Lab est une copie de la surface v4 (DOM de `verdict.js`) : les couleurs, rayons et ombres suivent v5, mais l'étiquette « Danger » et les graisses du DOM v4 restent. À recopier depuis l'extension v5 quand `verdict.js` sera réécrit.
+- Les fausses pages d'appâts du Lab (`stage.css`) gardent leurs teintes propres (violet, bleu) : ce sont des tiers.
+- Textes écrits par les `.js` (par exemple « Installez MetaMask ou Core », « Opération annulée. ») non touchés.
+- Les captures sont en miniature de 800 px (outil de capture du volet), états simulés par le DOM quand aucun portefeuille ni service n'est présent.

@@ -64,7 +64,7 @@ footer.disclaimer {
   border-top: 1px solid var(--line);
   background: var(--bg);
 }
-body.console footer.disclaimer { border-top-color: var(--night-line); color: var(--night-faint); background: transparent; }
+body.console footer.disclaimer { padding-inline: max(56px, calc((100% - 1680px) / 2 + 56px)); border-top-color: var(--night-line); color: var(--night-faint); background: transparent; }
 
 /* ====================================================================
    SITE : index.html
@@ -175,7 +175,7 @@ body.lure-site .lure-wrap { flex: 1; display: flex; justify-content: center; ali
    CONSOLE PRÉSENTATEUR : attaquant.html
    ==================================================================== */
 body.console { background: var(--night); color: var(--night-ink); }
-.c-shell { flex: 1; width: 100%; max-width: 1480px; margin: 0 auto; padding: 40px 56px 48px; }
+.c-shell { flex: 1; width: 100%; max-width: 1680px; margin: 0 auto; padding: 40px 56px 48px; }
 .c-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
 .c-head h1 { font-size: 20px; font-weight: 400; margin: 0; color: var(--night-dim); letter-spacing: -0.005em; }
 .c-head-right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -193,10 +193,11 @@ body.console { background: var(--night); color: var(--night-ink); }
 
 .c-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 48px; }
 .c-num { border-top: 1px solid var(--night-line); padding: 24px 0 0; min-width: 0; }
+.c-num p { margin: 0; }
 .c-num .who { font-size: 20px; color: var(--night-dim); margin: 0 0 16px; font-weight: 400; }
 .c-num .val {
   font-family: var(--font-display);
-  font-size: clamp(3.4rem, 7.2vw, 7rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1;
+  font-size: clamp(3.4rem, 7.2vw, 8.5rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1;
   font-variant-numeric: tabular-nums; color: var(--night-ink); white-space: nowrap;
   transition: color 250ms ease;
 }
