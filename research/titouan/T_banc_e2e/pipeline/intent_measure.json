@@ -1,0 +1,852 @@
+{
+ "date": "2026-10-11T04:24:12.211Z",
+ "fichiers": [
+  "V2_DEV.jsonl",
+  "jury_defi.jsonl",
+  "jury_fp.jsonl",
+  "jury_fuzz_address.jsonl",
+  "jury_fuzz_control.jsonl",
+  "jury_fuzz_encoding.jsonl",
+  "jury_fuzz_fp.jsonl",
+  "jury_fuzz_intent.jsonl",
+  "jury_fuzz_sig.jsonl",
+  "jury_social.jsonl"
+ ],
+ "seuil": 0.6,
+ "cas": 9908,
+ "cas_avec_texte": 8721,
+ "textes_uniques": 2366,
+ "textes_avec_plusieurs_genres": 85,
+ "textes_sans_genre": 0,
+ "appels": {
+  "cles_presentes": true,
+  "faits_cette_execution": 0,
+  "total_cumule": 2370,
+  "avant": 2370,
+  "plafond": 4000,
+  "refuses_par_le_plafond": 0,
+  "textes_avec_reponse": 2366,
+  "textes_en_echec": 0,
+  "erreurs": [],
+  "textes_sans_appel": 0,
+  "latence_ms": {
+   "p50": 367,
+   "p95": 1147,
+   "max": 5551
+  },
+  "tokens_entree": 2065869,
+  "tokens_sortie": 0,
+  "tokens_entree_par_appel": 873,
+  "cout_usd": 0.0785,
+  "cout_usd_pour_1000_intentions": 0.0332
+ },
+ "genre": {
+  "keyword": {
+   "n": 2366,
+   "ok": 1135,
+   "wrong": 365,
+   "none": 866,
+   "n_single": 2281,
+   "ok_single": 1104,
+   "wrong_single": 348,
+   "none_single": 829,
+   "replis": 0,
+   "confusion": {
+    "buy_or_swap": {
+     "buy_or_swap": 563,
+     "non classée": 405,
+     "connect_or_accept_offer": 5,
+     "pay_someone": 13,
+     "send_to_my_account": 3
+    },
+    "send_to_my_account": {
+     "non classée": 126,
+     "pay_someone": 116,
+     "send_to_my_account": 59,
+     "asked_by_someone": 43,
+     "connect_or_accept_offer": 15,
+     "buy_or_swap": 6
+    },
+    "connect_or_accept_offer": {
+     "non classée": 186,
+     "asked_by_someone": 3,
+     "buy_or_swap": 23,
+     "send_to_my_account": 14,
+     "connect_or_accept_offer": 54,
+     "pay_someone": 1
+    },
+    "pay_someone": {
+     "pay_someone": 415,
+     "non classée": 105,
+     "buy_or_swap": 3,
+     "send_to_my_account": 2,
+     "connect_or_accept_offer": 3,
+     "asked_by_someone": 90
+    },
+    "asked_by_someone": {
+     "pay_someone": 8,
+     "non classée": 7,
+     "asked_by_someone": 13
+    }
+   },
+   "raisons": {
+    "ok": 1351,
+    "no_match": 866,
+    "asked": 149
+   },
+   "exact_pct": 48,
+   "faux_pct": 15.4,
+   "non_classee_pct": 36.6,
+   "exact_parmi_classees_pct": 75.7,
+   "exact_un_seul_genre_pct": 48.4
+  },
+  "clef": {
+   "n": 2366,
+   "ok": 1597,
+   "wrong": 345,
+   "none": 424,
+   "n_single": 2281,
+   "ok_single": 1551,
+   "wrong_single": 324,
+   "none_single": 406,
+   "replis": 0,
+   "confusion": {
+    "buy_or_swap": {
+     "buy_or_swap": 855,
+     "non classée": 111,
+     "connect_or_accept_offer": 3,
+     "send_to_my_account": 13,
+     "asked_by_someone": 5,
+     "pay_someone": 2
+    },
+    "send_to_my_account": {
+     "non classée": 59,
+     "send_to_my_account": 229,
+     "buy_or_swap": 22,
+     "pay_someone": 1,
+     "asked_by_someone": 54
+    },
+    "connect_or_accept_offer": {
+     "non classée": 99,
+     "buy_or_swap": 112,
+     "asked_by_someone": 4,
+     "connect_or_accept_offer": 63,
+     "send_to_my_account": 2,
+     "pay_someone": 1
+    },
+    "pay_someone": {
+     "pay_someone": 386,
+     "non classée": 135,
+     "asked_by_someone": 91,
+     "send_to_my_account": 4,
+     "buy_or_swap": 2
+    },
+    "asked_by_someone": {
+     "pay_someone": 8,
+     "non classée": 2,
+     "asked_by_someone": 18
+    }
+   },
+   "raisons": {
+    "ok": 1771,
+    "no_match": 181,
+    "below_threshold": 228,
+    "asked": 171,
+    "too_vague": 15
+   },
+   "exact_pct": 67.5,
+   "faux_pct": 14.6,
+   "non_classee_pct": 17.9,
+   "exact_parmi_classees_pct": 82.2,
+   "exact_un_seul_genre_pct": 68
+  }
+ },
+ "variantes_regles": {
+  "clef_sans_regle_demande": {
+   "n": 2366,
+   "ok": 1597,
+   "wrong": 319,
+   "none": 450,
+   "n_single": 2281,
+   "ok_single": 1551,
+   "wrong_single": 298,
+   "none_single": 432,
+   "replis": 0,
+   "confusion": {
+    "buy_or_swap": {
+     "buy_or_swap": 858,
+     "non classée": 112,
+     "connect_or_accept_offer": 3,
+     "send_to_my_account": 13,
+     "asked_by_someone": 1,
+     "pay_someone": 2
+    },
+    "send_to_my_account": {
+     "non classée": 79,
+     "send_to_my_account": 230,
+     "buy_or_swap": 22,
+     "pay_someone": 1,
+     "asked_by_someone": 33
+    },
+    "connect_or_accept_offer": {
+     "non classée": 99,
+     "buy_or_swap": 112,
+     "asked_by_someone": 4,
+     "connect_or_accept_offer": 63,
+     "send_to_my_account": 2,
+     "pay_someone": 1
+    },
+    "pay_someone": {
+     "pay_someone": 386,
+     "non classée": 136,
+     "asked_by_someone": 90,
+     "send_to_my_account": 4,
+     "buy_or_swap": 2
+    },
+    "asked_by_someone": {
+     "pay_someone": 8,
+     "non classée": 6,
+     "asked_by_someone": 14
+    }
+   },
+   "raisons": {
+    "ok": 1916,
+    "no_match": 181,
+    "below_threshold": 250,
+    "too_vague": 19
+   },
+   "exact_pct": 67.5,
+   "faux_pct": 13.5,
+   "non_classee_pct": 19,
+   "exact_parmi_classees_pct": 83.4,
+   "exact_un_seul_genre_pct": 68
+  },
+  "clef_sans_regle_vague": {
+   "n": 2366,
+   "ok": 1612,
+   "wrong": 345,
+   "none": 409,
+   "n_single": 2281,
+   "ok_single": 1565,
+   "wrong_single": 324,
+   "none_single": 392,
+   "replis": 0,
+   "confusion": {
+    "buy_or_swap": {
+     "buy_or_swap": 855,
+     "non classée": 111,
+     "connect_or_accept_offer": 3,
+     "send_to_my_account": 13,
+     "asked_by_someone": 5,
+     "pay_someone": 2
+    },
+    "send_to_my_account": {
+     "non classée": 59,
+     "send_to_my_account": 229,
+     "buy_or_swap": 22,
+     "pay_someone": 1,
+     "asked_by_someone": 54
+    },
+    "connect_or_accept_offer": {
+     "non classée": 99,
+     "buy_or_swap": 112,
+     "asked_by_someone": 4,
+     "connect_or_accept_offer": 63,
+     "send_to_my_account": 2,
+     "pay_someone": 1
+    },
+    "pay_someone": {
+     "pay_someone": 400,
+     "non classée": 121,
+     "asked_by_someone": 91,
+     "send_to_my_account": 4,
+     "buy_or_swap": 2
+    },
+    "asked_by_someone": {
+     "pay_someone": 8,
+     "non classée": 2,
+     "asked_by_someone": 18
+    }
+   },
+   "raisons": {
+    "ok": 1786,
+    "no_match": 181,
+    "below_threshold": 228,
+    "asked": 171
+   },
+   "exact_pct": 68.1,
+   "faux_pct": 14.6,
+   "non_classee_pct": 17.3,
+   "exact_parmi_classees_pct": 82.4,
+   "exact_un_seul_genre_pct": 68.6
+  },
+  "clef_choix_seul": {
+   "n": 2366,
+   "ok": 1615,
+   "wrong": 320,
+   "none": 431,
+   "n_single": 2281,
+   "ok_single": 1568,
+   "wrong_single": 299,
+   "none_single": 414,
+   "replis": 0,
+   "confusion": {
+    "buy_or_swap": {
+     "buy_or_swap": 858,
+     "non classée": 112,
+     "connect_or_accept_offer": 3,
+     "send_to_my_account": 13,
+     "asked_by_someone": 1,
+     "pay_someone": 2
+    },
+    "send_to_my_account": {
+     "non classée": 79,
+     "send_to_my_account": 230,
+     "buy_or_swap": 22,
+     "pay_someone": 1,
+     "asked_by_someone": 33
+    },
+    "connect_or_accept_offer": {
+     "non classée": 99,
+     "buy_or_swap": 112,
+     "asked_by_someone": 4,
+     "connect_or_accept_offer": 63,
+     "send_to_my_account": 2,
+     "pay_someone": 1
+    },
+    "pay_someone": {
+     "pay_someone": 400,
+     "non classée": 121,
+     "asked_by_someone": 91,
+     "send_to_my_account": 4,
+     "buy_or_swap": 2
+    },
+    "asked_by_someone": {
+     "pay_someone": 8,
+     "non classée": 3,
+     "asked_by_someone": 17
+    }
+   },
+   "raisons": {
+    "ok": 1935,
+    "no_match": 181,
+    "below_threshold": 250
+   },
+   "exact_pct": 68.3,
+   "faux_pct": 13.5,
+   "non_classee_pct": 18.2,
+   "exact_parmi_classees_pct": 83.5,
+   "exact_un_seul_genre_pct": 68.7
+  }
+ },
+ "seuils": {
+  "0.4": {
+   "exact_pct": 68.3,
+   "faux_pct": 16.7,
+   "non_classee_pct": 15
+  },
+  "0.5": {
+   "exact_pct": 69,
+   "faux_pct": 16.1,
+   "non_classee_pct": 14.9
+  },
+  "0.6": {
+   "exact_pct": 67.5,
+   "faux_pct": 14.6,
+   "non_classee_pct": 17.9
+  },
+  "0.7": {
+   "exact_pct": 64.6,
+   "faux_pct": 13.6,
+   "non_classee_pct": 21.9
+  },
+  "0.8": {
+   "exact_pct": 59.6,
+   "faux_pct": 12.7,
+   "non_classee_pct": 27.7
+  },
+  "0.9": {
+   "exact_pct": 43.3,
+   "faux_pct": 11.3,
+   "non_classee_pct": 45.4
+  }
+ },
+ "champs": {
+  "amount": {
+   "n": 2760,
+   "ok": 1113,
+   "none": 1588,
+   "wrong": 59,
+   "inText": 1155,
+   "inText_ok": 1113,
+   "inText_none": 2,
+   "inText_wrong": 40
+  },
+  "token": {
+   "n": 3107,
+   "ok": 1547,
+   "none": 1406,
+   "wrong": 154,
+   "inText": 1664,
+   "inText_ok": 1542,
+   "inText_none": 17,
+   "inText_wrong": 105
+  },
+  "sans_montant_dans_le_cas": {
+   "n": 844,
+   "montant_lu": 153
+  },
+  "modele_voit_un_montant_non_lu": 6,
+  "exemples_ecarts": [
+   {
+    "texte": "wrap 1465",
+    "attendu": "1465",
+    "lu": null
+   },
+   {
+    "texte": "wrap 4.88",
+    "attendu": "4.88",
+    "lu": null
+   },
+   {
+    "texte": "list my Bored Ape Yacht Club #7405 for 17.255 ETH on OpenSea",
+    "jeton_attendu": "Bored Ape Yacht Club",
+    "lu": "ETH"
+   },
+   {
+    "texte": "mettre en vente mon Steady Stack Titans #8490 à 123.1 AVAX sur OpenSea",
+    "jeton_attendu": "Steady Stack Titans",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "mettre en vente mon Dokyo #4192 à 162.0 AVAX sur OpenSea",
+    "jeton_attendu": "Dokyo",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "mettre en vente mon Dokyo #9450 à 210.8 AVAX sur OpenSea",
+    "jeton_attendu": "Dokyo",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "list my Smol Joes #7173 for 481.1 AVAX on OpenSea",
+    "jeton_attendu": "Smol Joes",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "list my chikn #5432 for 52.8 AVAX on OpenSea",
+    "jeton_attendu": "chikn",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "mettre en vente mon Smol Joes #6395 à 326.4 AVAX sur OpenSea",
+    "jeton_attendu": "Smol Joes",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "mettre en vente mon Pudgy Penguins #9138 à 12.261 ETH sur OpenSea",
+    "jeton_attendu": "Pudgy Penguins",
+    "lu": "ETH"
+   },
+   {
+    "texte": "list my Bored Ape Yacht Club #7516 for 19.016 ETH on OpenSea",
+    "jeton_attendu": "Bored Ape Yacht Club",
+    "lu": "ETH"
+   },
+   {
+    "texte": "list my Smol Joes #9106 for 275.9 AVAX on OpenSea",
+    "jeton_attendu": "Smol Joes",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "list my Bored Ape Yacht Club #2847 for 17.214 ETH on OpenSea",
+    "jeton_attendu": "Bored Ape Yacht Club",
+    "lu": "ETH"
+   },
+   {
+    "texte": "list my Dokyo #7233 for 417.2 AVAX on OpenSea",
+    "jeton_attendu": "Dokyo",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "mettre en vente mon Azuki #1147 à 2.963 ETH sur OpenSea",
+    "jeton_attendu": "Azuki",
+    "lu": "ETH"
+   },
+   {
+    "texte": "mettre en vente mon Azuki #4139 à 2.412 ETH sur OpenSea",
+    "jeton_attendu": "Azuki",
+    "lu": "ETH"
+   },
+   {
+    "texte": "list my Pudgy Penguins #7432 for 9.137 ETH on OpenSea",
+    "jeton_attendu": "Pudgy Penguins",
+    "lu": "ETH"
+   },
+   {
+    "texte": "list my Pudgy Penguins #6100 for 13.951 ETH on OpenSea",
+    "jeton_attendu": "Pudgy Penguins",
+    "lu": "ETH"
+   },
+   {
+    "texte": "mettre en vente mon Pudgy Penguins #5268 à 9.061 ETH sur OpenSea",
+    "jeton_attendu": "Pudgy Penguins",
+    "lu": "ETH"
+   },
+   {
+    "texte": "list my Smol Joes #9217 for 143.4 AVAX on OpenSea",
+    "jeton_attendu": "Smol Joes",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "list my chikn #6990 for 46.2 AVAX on OpenSea",
+    "jeton_attendu": "chikn",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "mettre en vente mon Dokyo #3801 à 81.6 AVAX sur OpenSea",
+    "jeton_attendu": "Dokyo",
+    "lu": "AVAX"
+   },
+   {
+    "texte": "list my Pudgy Penguins #253 for 12.019 ETH on OpenSea",
+    "jeton_attendu": "Pudgy Penguins",
+    "lu": "ETH"
+   },
+   {
+    "texte": "list my Pudgy Penguins #6949 for 12.251 ETH on OpenSea",
+    "jeton_attendu": "Pudgy Penguins",
+    "lu": "ETH"
+   }
+  ]
+ },
+ "rejeu": {
+  "population": "cas avec texte libre et étiquette malveillant / benin",
+  "n": 7779,
+  "autres_etiquettes": 942,
+  "tous": {
+   "sans": {
+    "arnaques": 5321,
+    "ratees": 920,
+    "honnetes": 2458,
+    "fausses_alertes": 623,
+    "orange_honnetes": 302,
+    "non_verifie_honnetes": 545
+   },
+   "reference": {
+    "arnaques": 5321,
+    "ratees": 752,
+    "honnetes": 2458,
+    "fausses_alertes": 768,
+    "orange_honnetes": 255,
+    "non_verifie_honnetes": 540
+   },
+   "mots_cles": {
+    "arnaques": 5321,
+    "ratees": 810,
+    "honnetes": 2458,
+    "fausses_alertes": 700,
+    "orange_honnetes": 317,
+    "non_verifie_honnetes": 518
+   },
+   "clef": {
+    "arnaques": 5321,
+    "ratees": 804,
+    "honnetes": 2458,
+    "fausses_alertes": 645,
+    "orange_honnetes": 300,
+    "non_verifie_honnetes": 576
+   },
+   "mots_cles_details": {
+    "arnaques": 5321,
+    "ratees": 742,
+    "honnetes": 2458,
+    "fausses_alertes": 676,
+    "orange_honnetes": 316,
+    "non_verifie_honnetes": 534
+   },
+   "clef_details": {
+    "arnaques": 5321,
+    "ratees": 748,
+    "honnetes": 2458,
+    "fausses_alertes": 627,
+    "orange_honnetes": 301,
+    "non_verifie_honnetes": 584
+   }
+  },
+  "normal": {
+   "arnaques_vertes_sans_intention": 298,
+   "arretees": {
+    "reference": 34,
+    "mots_cles": 0,
+    "clef": 0,
+    "mots_cles_details": 34,
+    "clef_details": 26
+   },
+   "orange": {
+    "reference": 28,
+    "mots_cles": 28,
+    "clef": 25,
+    "mots_cles_details": 28,
+    "clef_details": 25
+   },
+   "par_ecart": {
+    "reference": {
+     "destinataire": 16,
+     "montant_vs_montant_envoye": 12,
+     "jeton": 14
+    },
+    "mots_cles": {},
+    "clef": {},
+    "mots_cles_details": {
+     "destinataire": 16,
+     "montant_vs_montant_envoye": 12,
+     "jeton": 14
+    },
+    "clef_details": {
+     "montant_vs_montant_envoye": 12,
+     "jeton": 14
+    }
+   },
+   "non_classees": {
+    "mots_cles": 15,
+    "clef": 198
+   },
+   "arretees_par_fichier": {
+    "V2_DEV.jsonl": {
+     "n": 10,
+     "reference": 0,
+     "mots_cles": 0,
+     "clef": 0,
+     "mots_cles_details": 0,
+     "clef_details": 0
+    },
+    "jury_defi.jsonl": {
+     "n": 1,
+     "reference": 0,
+     "mots_cles": 0,
+     "clef": 0,
+     "mots_cles_details": 0,
+     "clef_details": 0
+    },
+    "jury_fuzz_address.jsonl": {
+     "n": 41,
+     "reference": 0,
+     "mots_cles": 0,
+     "clef": 0,
+     "mots_cles_details": 0,
+     "clef_details": 0
+    },
+    "jury_fuzz_control.jsonl": {
+     "n": 8,
+     "reference": 0,
+     "mots_cles": 0,
+     "clef": 0,
+     "mots_cles_details": 0,
+     "clef_details": 0
+    },
+    "jury_fuzz_encoding.jsonl": {
+     "n": 48,
+     "reference": 0,
+     "mots_cles": 0,
+     "clef": 0,
+     "mots_cles_details": 0,
+     "clef_details": 0
+    },
+    "jury_fuzz_intent.jsonl": {
+     "n": 180,
+     "reference": 34,
+     "mots_cles": 0,
+     "clef": 0,
+     "mots_cles_details": 34,
+     "clef_details": 26
+    },
+    "jury_social.jsonl": {
+     "n": 10,
+     "reference": 0,
+     "mots_cles": 0,
+     "clef": 0,
+     "mots_cles_details": 0,
+     "clef_details": 0
+    }
+   },
+   "textes": {
+    "phrase": 99,
+    "un_mot_ou_presque": 199
+   },
+   "honnetes_vertes_sans_intention": 988,
+   "cout": {
+    "reference": {
+     "rouge": 47,
+     "non_verifie": 0,
+     "orange": 50,
+     "non_classee": 0,
+     "pas_pu_verifier_si_regle_gardien": 0
+    },
+    "mots_cles": {
+     "rouge": 33,
+     "non_verifie": 0,
+     "orange": 41,
+     "non_classee": 439,
+     "pas_pu_verifier_si_regle_gardien": 225
+    },
+    "clef": {
+     "rouge": 23,
+     "non_verifie": 0,
+     "orange": 42,
+     "non_classee": 258,
+     "pas_pu_verifier_si_regle_gardien": 63
+    },
+    "mots_cles_details": {
+     "rouge": 24,
+     "non_verifie": 0,
+     "orange": 41,
+     "non_classee": 439,
+     "pas_pu_verifier_si_regle_gardien": 226
+    },
+    "clef_details": {
+     "rouge": 14,
+     "non_verifie": 0,
+     "orange": 42,
+     "non_classee": 258,
+     "pas_pu_verifier_si_regle_gardien": 63
+    }
+   },
+   "cout_par_ecart": {
+    "reference": {
+     "montant_vs_montant_envoye": 12,
+     "on_me_l_a_demande": 13,
+     "jeton": 2,
+     "rien_depenser_vs_droit_ou_fonds": 10,
+     "destinataire": 4,
+     "paiement_ou_echange_vs_droit": 6
+    },
+    "mots_cles": {
+     "montant_vs_montant_envoye": 11,
+     "rien_depenser_vs_droit_ou_fonds": 13,
+     "jeton": 9
+    },
+    "clef": {
+     "montant_vs_montant_envoye": 12,
+     "paiement_ou_echange_vs_droit": 2,
+     "jeton": 9
+    },
+    "mots_cles_details": {
+     "montant_vs_montant_envoye": 11,
+     "rien_depenser_vs_droit_ou_fonds": 13
+    },
+    "clef_details": {
+     "montant_vs_montant_envoye": 12,
+     "paiement_ou_echange_vs_droit": 2
+    }
+   }
+  },
+  "non_rouge": {
+   "arnaques_non_rouges_sans_intention": 920,
+   "arretees": {
+    "reference": 194,
+    "mots_cles": 132,
+    "clef": 137,
+    "mots_cles_details": 197,
+    "clef_details": 190
+   },
+   "par_ecart": {
+    "reference": {
+     "rien_depenser_vs_droit_ou_fonds": 15,
+     "destinataire": 92,
+     "montant_vs_montant_envoye": 56,
+     "paiement_ou_echange_vs_droit": 12,
+     "montant_vs_droit": 1,
+     "jeton": 38,
+     "on_me_l_a_demande": 1
+    },
+    "mots_cles": {
+     "rien_depenser_vs_droit_ou_fonds": 19,
+     "on_me_l_a_demande": 32,
+     "paiement_ou_echange_vs_droit": 11,
+     "montant_vs_montant_envoye": 28,
+     "destinataire": 47,
+     "montant_vs_droit": 1,
+     "jeton": 2
+    },
+    "clef": {
+     "rien_depenser_vs_droit_ou_fonds": 15,
+     "on_me_l_a_demande": 35,
+     "paiement_ou_echange_vs_droit": 10,
+     "montant_vs_montant_envoye": 28,
+     "destinataire": 55,
+     "montant_vs_droit": 1,
+     "jeton": 2
+    },
+    "mots_cles_details": {
+     "rien_depenser_vs_droit_ou_fonds": 19,
+     "on_me_l_a_demande": 32,
+     "montant_vs_montant_envoye": 48,
+     "paiement_ou_echange_vs_droit": 11,
+     "destinataire": 67,
+     "montant_vs_droit": 1,
+     "jeton": 38
+    },
+    "clef_details": {
+     "rien_depenser_vs_droit_ou_fonds": 15,
+     "on_me_l_a_demande": 35,
+     "montant_vs_montant_envoye": 47,
+     "paiement_ou_echange_vs_droit": 10,
+     "destinataire": 55,
+     "montant_vs_droit": 1,
+     "jeton": 38
+    }
+   },
+   "honnetes_non_rouges_sans_intention": 1835,
+   "deviennent_rouges": {
+    "reference": 222,
+    "mots_cles": 134,
+    "clef": 127,
+    "mots_cles_details": 121,
+    "clef_details": 118
+   }
+  },
+  "adoucissements": {
+   "reference": 130,
+   "mots_cles": 93,
+   "clef": 145,
+   "mots_cles_details": 100,
+   "clef_details": 150,
+   "arnaques": {
+    "reference": 49,
+    "mots_cles": 27,
+    "clef": 26,
+    "mots_cles_details": 23,
+    "clef_details": 22
+   }
+  },
+  "chemins": {
+   "mots_cles": {
+    "classified": 6428,
+    "floor": 2212,
+    "raised_by_details": 62,
+    "classified+no_spend": 19
+   },
+   "clef": {
+    "classified": 6544,
+    "floor": 2150,
+    "raised_by_details": 27
+   }
+  },
+  "replis_clef": 0,
+  "invariant": {
+   "cas": 8721,
+   "comparaisons": 21893,
+   "contre_exemples": 0,
+   "moteur_brut_plus_bas": 0,
+   "non_classees_reelles": {
+    "mots_cles": 2274,
+    "clef": 2177
+   },
+   "non_classees_reelles_plus_bas": 0,
+   "exemples": []
+  },
+  "erreurs": 0
+ },
+ "duree_s": 59
+}
