@@ -52,6 +52,7 @@ export function decodeTypedData(input, ctx) {
   const td = typeof input === 'string' ? JSON.parse(input) : input;
   const root = newSigRoot(ctx, 'typed', td.primaryType);
   const meta = { primaryType: td.primaryType };
+  if (td.domain && td.domain.chainId !== undefined) { try { meta.domainChainId = Number(BigInt(td.domain.chainId)); } catch { /* chainId illisible : non renseigné */ } } // réseau visé par la signature (lu par la politique, F43)
   try {
     const types = { ...td.types }; if (!types.EIP712Domain) types.EIP712Domain = domainType(td.domain || {});
     const full = { ...td, types };
@@ -64,8 +65,11 @@ export function decodeTypedData(input, ctx) {
   const vc = lc(td.domain?.verifyingContract);
   let kind = 'unknown';
   try {
-    if (P === 'Permit' && has(td, P, 'owner', 'spender', 'value', 'nonce', 'deadline')) {
-      kind = 'permit2612'; checkDomain(root, td, ctx);
+    if (has(td, P, 'owner', 'spender', 'value', 'nonce', 'deadline')) {
+      // forme ERC-2612 lue par ses CHAMPS : un primaryType renommé (« Login », « Session »...) ne change pas ce que la signature accorde.
+      // Le nom non standard est lui-même signalé : un jeton ERC-2612 ne vérifie que le type « Permit », un autre nom vise un contrat sur mesure.
+      kind = P === 'Permit' ? 'permit2612' : 'permit2612.renamed'; checkDomain(root, td, ctx);
+      if (P !== 'Permit') flag(root, 'permit_type_renamed', 'warn', `le message « ${P} » a la forme d'un permit ERC-2612 (owner, spender, value, nonce, deadline) : droit de dépense lu par ses champs`);
       root.acts.push({ t: 'approval', std: 'erc20', token: vc, owner: lc(m.owner), spender: lc(m.spender), amount: big(m.value), via: 'permit', expiry: num(m.deadline), revoke: big(m.value) === 0n });
     } else if (has(td, P, 'holder', 'spender', 'nonce', 'expiry', 'allowed')) {
       kind = 'permitDAI'; checkDomain(root, td, ctx);
@@ -137,7 +141,10 @@ function seaport(root, td, ctx, m) {
   if (get.length === 0 || (selfTotal === 0n && get.every((g) => g.type <= 1))) {
     flag(root, 'seaport_zero_consideration', 'critical', `l'offerer ne reçoit rien en échange de ${give.length} élément(s) (bilan net négatif)`);
   }
-  for (const [k, o] of fungOther) {
+  // offre d'ACHAT (l'offreur ne donne que du fongible et reçoit au moins un NFT) : les commissions et redevances versées à des tiers sont prises sur ce qu'il donne,
+  // ce n'est pas « son produit » qui part ailleurs. La règle « produit détourné » ne vaut que pour une vente (ou un échange dont l'offreur reçoit du fongible).
+  const isBid = give.length > 0 && give.every((g) => g.type <= 1) && get.some((g) => g.type >= 2);
+  for (const [k, o] of isBid ? [] : fungOther) {
     const s = fungSelf.get(k) || 0n;
     if (o + s > 0n && Number((o * 1000n) / (o + s)) > 200) flag(root, 'seaport_proceeds_to_other', 'warn', `${(Number((o * 1000n) / (o + s)) / 10).toFixed(1)} % du produit va à d'autres adresses`);
   }

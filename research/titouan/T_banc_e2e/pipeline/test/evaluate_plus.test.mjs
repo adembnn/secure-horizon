@@ -47,9 +47,12 @@ test('raise-only : without any new fact the verdict is never below the product (
   const run = makeEvaluatePlus(D); let raised = 0;
   for (const c of CASES) {
     const { body, local } = input(c);
-    const p = benchLevel(D.evaluate(body, local)); const v = await run(body, local, { live: null, knownProtocols: false });
+    const pv = D.evaluate(body, local); const p = benchLevel(pv); const v = await run(body, local, { live: null, knownProtocols: false });
+    // la chaîne rejouée reproduit le niveau du MOTEUR du produit ; le produit peut ensuite relever l'AFFICHAGE (envoi vers une adresse nouvelle : info -> warn,
+    // champ niveau_moteur). Le niveau final de evaluatePlus, lui, ne doit jamais être sous le niveau affiché du produit (assertion suivante).
+    const pMoteur = pv.niveau_moteur ? (pv.niveau_moteur === 'critical' ? 'critical' : pv.niveau_moteur === 'warn' ? 'warn' : 'ok') : p;
     assert.ok(RK[benchLevel(v)] >= RK[p], `${c.id} : produit ${p}, plus ${benchLevel(v)}`);
-    assert.equal(v.plus.base, p, `${c.id} : la chaine rejouee (${v.plus.base}) doit valoir le verdict du produit (${p}) quand aucun fait n'est ajoute`);
+    assert.equal(v.plus.base, pMoteur, `${c.id} : la chaine rejouee (${v.plus.base}) doit valoir le verdict du moteur du produit (${pMoteur}) quand aucun fait n'est ajoute`);
     if (RK[benchLevel(v)] > RK[p]) raised++;
   }
   assert.ok(raised > 0, 'au moins un cas doit etre releve par un detecteur');

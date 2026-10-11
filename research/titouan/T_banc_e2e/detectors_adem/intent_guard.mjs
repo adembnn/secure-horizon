@@ -113,7 +113,16 @@ export const intentGuard = {
     const sends = ['pay_someone', 'send_to_my_account'].includes(kc) || !kc;
 
     // (2) token said vs sent
-    if (sends && typeof intent.token === 'string' && intent.token) {
+    // le jeton dit peut être une ADRESSE de contrat : seule la même adresse correspond (ou la monnaie native si l'adresse est sa version enveloppée)
+    const saidAddr = isAddr(intent.token) ? lc(intent.token) : null;
+    const saidAddrSym = saidAddr ? ((ctx.tokenMeta || {})[saidAddr] || {}).symbol || null : null;
+    if (sends && saidAddr) {
+      for (const o of outs) {
+        if (lc(o.token) === saidAddr) continue;
+        if (o.std === 'native' && saidAddrSym && family(saidAddrSym) === family(NATIVE_SYMBOL[Number(ctx.chainId)] || '')) continue;
+        flags.push({ code: 'token_mismatch', severity: 'critical', detail: `vous avez donné le jeton ${saidAddr}, la demande envoie ${sentSymbol(ctx, o) || lc(o.token)} (${o.amount})` }); break;
+      }
+    } else if (sends && typeof intent.token === 'string' && intent.token) {
       const said = family(intent.token);
       for (const o of outs) {
         const sym = sentSymbol(ctx, o);
@@ -127,7 +136,7 @@ export const intentGuard = {
     if (sends && intent.amount !== undefined && outs.length) {
       const readings = amountReadings(intent.amount);
       if (readings.length) {
-        const said = typeof intent.token === 'string' ? family(intent.token) : '';
+        const said = saidAddr ? (saidAddrSym ? family(saidAddrSym) : '') : typeof intent.token === 'string' ? family(intent.token) : '';
         const sentTotal = outs.filter((o) => !said || family(sentSymbol(ctx, o)) === said).reduce((s, o) => s + Number(o.amount || 0), 0);
         if (sentTotal > Math.max(...readings) * 1.01) flags.push({ code: 'amount_exceeded_robust', severity: 'critical', detail: `vous avez dit ${intent.amount}, la demande envoie ${sentTotal}` });
         // `covered` ne sert qu'à baisser : il faut que la lecture la PLUS PETITE (celle du comparateur : « 1,000 » = 1) couvre aussi le montant envoyé.
