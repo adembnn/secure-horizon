@@ -125,7 +125,7 @@ const OPT = { report: args.includes('--report'), base: args.includes('--base'), 
 const files = args.filter((a) => !a.startsWith('--'));
 const RANK = { ok: 0, warn: 1, critical: 2 };
 
-function check(c, fallbackId) {
+async function check(c, fallbackId) {
   const t0 = performance.now();
   const out = { id: c.id ?? fallbackId };
   const done = () => { out.ms = Math.round((performance.now() - t0) * 100) / 100; return out; };
@@ -149,18 +149,22 @@ function check(c, fallbackId) {
     }
     out.level_base = out.level_final;
     if (!OPT.base) {
+      const lowers = []; let ademCritical = false;
       for (const d of DETECTORS) {
         if (OPT.only.length && !OPT.only.includes(d.id)) continue;
         if (OPT.skip.includes(d.id)) continue;
-        let r; try { r = d.run({ c, ctx, eff, request: c.request, intent: c.intent, level: out.level_final, reasons: out.reasons, adem: out._adem, policy: out._vM }); } catch (e) { out.reasons.push(`[adem-error] ${d.id} : ${e.message}`); continue; }
+        let r; try { r = await d.run({ c, ctx, eff, request: c.request, intent: c.intent, level: out.level_final, reasons: out.reasons, adem: out._adem, policy: out._vM }); } catch (e) { out.reasons.push(`[adem-error] ${d.id} : ${e.message}`); continue; }
         if (!r) continue;
         for (const f of r.flags || []) {
           out.reasons.push(`[adem:${f.severity}] ${d.id}/${f.code} : ${f.detail}`);
           const cur = out.level_final === 'unknown' ? -1 : RANK[out.level_final];
           if (RANK[f.severity] > cur) out.level_final = f.severity;
         }
-        if (r.lower && RANK[r.lower.to] < RANK[out.level_final]) { out.reasons.push(`[adem-fix] ${d.id} : ${out.level_final} -> ${r.lower.to} : ${r.lower.why}`); out.level_final = r.lower.to; }
+        if (r.lower) lowers.push({ id: d.id, ...r.lower });
+        if ((r.flags || []).some((f) => f.severity === 'critical')) ademCritical = true;
       }
+      // documented false-positive corrections apply last, and never against a critical raised by another Adem detector
+      for (const l of lowers) if (!ademCritical && RANK[l.to] < RANK[out.level_final]) { out.reasons.push(`[adem-fix] ${l.id} : ${out.level_final} -> ${l.to} : ${l.why}`); out.level_final = l.to; }
     }
     delete out._adem; delete out._vM;
   } catch (e) {
@@ -180,15 +184,17 @@ for (const file of files) {
   if (/V2_TEST/i.test(file)) { console.error('Refus : V2_TEST est gelé.'); process.exit(2); }
   let text; try { text = readFileSync(file, 'utf8'); } catch (e) { console.error(`Lecture impossible : ${e.message}`); process.exit(2); }
   const src = file.split(/[\\/]/).pop();
-  text.replace(/^﻿/, '').split(/\r?\n/).forEach((line, i) => {
-    if (!line.trim()) return;
+  const lines = text.replace(/^﻿/, '').split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim()) continue;
     const fallbackId = `${src}:${i + 1}`;
     let c;
-    try { c = normalizeCase(JSON.parse(line)); } catch (e) { sum.n++; sum.unknown++; if (!OPT.report && !OPT.quiet) console.log(JSON.stringify({ id: fallbackId, level_final: 'unknown', error: `JSON invalide : ${e.message}` })); return; }
-    const r = check(c, fallbackId);
+    try { c = normalizeCase(JSON.parse(line)); } catch (e) { sum.n++; sum.unknown++; if (!OPT.report && !OPT.quiet) console.log(JSON.stringify({ id: fallbackId, level_final: 'unknown', error: `JSON invalide : ${e.message}` })); continue; }
+    const r = await check(c, fallbackId);
     if (!OPT.report && !OPT.quiet && !OPT.fails) console.log(JSON.stringify(r));
     sum.n++; if (r.level_final === 'unknown') sum.unknown++;
-    if (c.label === undefined) return;
+    if (c.label === undefined) continue;
     anyLabel = true; sum.n_labeled++;
     const key = (src.startsWith('jury') ? src.replace(/\.jsonl$/, '') + ':' : '') + (c.family || '?') + '/' + (c.subfamily || '?');
     const F = (fam[key] ??= { label: c.label, n: 0, ratees: 0, fa: 0, warn: 0, ok: 0, crit: 0, gained: 0, lost: 0 });
@@ -202,7 +208,7 @@ for (const file of files) {
       if (r.level_final === 'critical') { sum.fausses_alertes++; F.fa++; failures.push({ type: 'fausse_alerte', id: r.id, family: key, level_final: r.level_final, reasons: r.reasons }); if (r.level_base !== 'critical') F.lost++; }
       else if (r.level_final === 'warn') sum.warn_benins++;
     }
-  });
+  }
 }
 if (OPT.fails) for (const f of failures) console.log(JSON.stringify(f));
 if (OPT.report) {

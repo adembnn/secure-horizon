@@ -42,3 +42,15 @@
 | fuzz_encoding | universal_router_execute_inputs | 61/192 | fe-univ_router_plain-0002 |
 | fuzz_encoding | wallet_sendCalls_2_20_appels | 36/285 | fe-sendcalls_n2-0013 |
 | fuzz_encoding | routeur_multicall_bytes | 34/270 | fe-router_multicallbytes-0055 |
+| fuzz_fp | FP : paiement au vrai contact du carnet quand un sosie est dans l'historique → lookalike_address | 360/360 | FZFP-027906 |
+| fuzz_fp | FP : staking liquide payable au token (sAVAX submit, Lido submit) → no_incoming | 720/800 | FZFP-016984 |
+| fuzz_fp | FP : approve plafonné marchand/abonnement, checkout approve+pay sendCalls (pay_someone) → unexpected_approval | 520/680 | FZFP-013744 |
+| fuzz_fp | FP : approve LP token au routeur pour retrait de liquidité → unexpected_approval | 174/240 | FZFP-019984 |
+| fuzz_fp | FP : mint NFT public payant (collection récente) → no_incoming | 266/360 | FZFP-023864 |
+| fuzz_fp | FP : SIWE origine/domaine légitimement différents (www, rebrand, sous-domaine) → siwe_domain_mismatch | 180/200 | FZFP-024984 |
+| fuzz_fp | FP : EIP-7702 vers MetaMask DeleGator officiel ou révocation vers 0x0 → delegation_7702 | 195/240 | FZFP-032312 |
+| fuzz_fp | FP : wrap natif (deposit / envoi simple au WAVAX/WETH) → no_incoming | 178/400 | FZFP-010185 |
+| fuzz_fp | FP : DAI permit legacy allowed=true vers routeur connu → unlimited_allowance | 90/240 | FZFP-013217 |
+| fuzz_fp | FP : addEthereumChain L1 Avalanche (Dexalot, Beam, DFK) → chain_add_native_symbol_spoof | 45/200 | FZFP-032136 |
+| fuzz_fp | FP : intention adjacente cochée de bonne foi (connect au lieu de swap/approve) → unexpected_approval_connect | 1353/1960 | voir jsonl |
+| fuzz_fp | Fatigue : agrégateurs, lending, ponts, votes → warn unknown_selector/opaque/unknown_typed_data | 18606/32545 warn | - |

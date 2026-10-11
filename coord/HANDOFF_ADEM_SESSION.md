@@ -144,3 +144,27 @@ Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est pré
   - value avec calldata vide ;
   - aucune fausse alerte sur les lots légitimes.
   Correction : appliquer au chemin récursif la MÊME règle qu'au chemin direct, et considérer comme excessif tout montant supérieur au solde ou à N fois l'intention, pas seulement MAXU.
+
+## Résultats finaux des derniers agents (~05h00)
+- BOUCLE DE DÉTECTION (`redteam/LOOP_JOURNAL.md`, `detectors_adem/`, `redteam/check_plus.mjs`), 6 tours. Sur V2_DEV normalisé : arnaques ratées 244 → 49, fausses alertes 204 → 79, sans régression.
+  Détecteurs gardés :
+  - `indirect_pull`
+  - `lookalike_known` (3+4)
+  - `spend_rights` (permit et droits vers un spender non vérifiable)
+  - `token_guard` (registre officiel et simulation de revente)
+  - `sim_events` (filet de simulation sur fork)
+  - `nft_orders`
+  Test réel sur fork Hardhat local : honeypot ok → critical, taxe 99 % ok → critical, sélecteur drainant inconnu warn → critical, jeton sain ok.
+  ⚠️ Sur les fichiers des jurés, mesurés une seule fois, le gain est partiel : fuzz_sig 1 101 → 879 contournements restants (le PERMIT N'EST DONC PAS ENTIÈREMENT RÉGLÉ : vérifier la scène héros avec check_plus avant la démo), fuzz_encoding 940 → 879, jury_defi 31 → 22, fuzz_address 299 → 273. Les fausses alertes des jurés ne bougent pas (jury_fp 22, fuzz_fp 509).
+  Pas faits :
+  - classifieur de message collé ;
+  - seuil cumulé sur les envois fractionnés ;
+  - personal_sign de calldata ;
+  - carnet empoisonné.
+  Ces détecteurs sont dans une COPIE de la chaîne : il faut les intégrer au moteur de Titouan.
+- FUZZ FAUX POSITIFS (`redteam/jury_fuzz_fp.md`) : 32 545 opérations honnêtes, 16,2 % en critical et 57,2 % en warn. Déclarer honnêtement son intention donne 3 fois plus de fausses alertes que de ne rien déclarer (12 % contre 4 %), et une intention vague donne les mêmes verdicts qu'une intention complète.
+  Pires cas :
+  - vrai contact en critical après de la poussière d'un sosie (360/360) ;
+  - staking sAVAX/stETH (720/800) ;
+  - abonnements et paiements marchands avec autorisation (520/680).
+  Fatigue à 100 % sur les agrégateurs, Aave, Benqi, CCTP et Snapshot, faute de décodage.
