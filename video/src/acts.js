@@ -65,13 +65,12 @@ const legend = (str, a = .7, y = 1046) => T(str, 48, y, 21, { al: 'left', a });
 // ================= PLAN 2b : l'autorisation que personne ne lit ; une sur trois =================
 const A2 = { a: T2, b: T3, draw(t) {
   X.save(); cam(t, T2, T3, { s0: 1, s1: 1.06, dx: -40, r0: .006, r1: -.008 });
-  // emplacement reserve : l'ecran d'autorisation du vrai portefeuille (prise du fondateur). Il arrive, personne ne le lit, il est balaye.
+  // une poche, seule : la main de la plateforme descend le long de sa corde et s'y installe (l'autorisation qu'on signe), puis tout est balaye
   const tOut = L.p2.debut - .25, tIn = T2 + .05;
-  if (t < tOut + .4) { const k = E.arrive(seg(t, tIn, tIn + .45)), o = E.pars(seg(t, tOut, tOut + .35));
-    X.save(); X.translate(W / 2 + (1 - k) * 1500 - o * 300, 470 - o * 1300); X.rotate((1 - k) * .12 - o * .35);
-    X.strokeStyle = INK; X.lineWidth = 3; X.setLineDash([14, 10]); X.beginPath(); X.roundRect(-250, -350, 500, 700, 14); X.fillStyle = BLK; X.fill(); X.stroke(); X.setLineDash([]);
-    T('emplacement réservé', 0, -30, 30); T("écran d'autorisation du portefeuille", 0, 14, 24, { a: .7 }); T('prise réelle du fondateur', 0, 48, 24, { a: .7 });
-    for (let i = 0; i < 7; i++) { X.globalAlpha = .28; X.fillStyle = INK; X.fillRect(-190, 110 + i * 30, 380 - (i % 3) * 70, 6); } X.globalAlpha = 1;
+  if (t < tOut + .4) { const k = E.arrive(seg(t, tIn, tIn + .45)), o = E.pars(seg(t, tOut, tOut + .35)), rest = surfY(1) - 40, tH = L.p1.debut - .25;
+    const wy = pose(t, [[tH, -190], [tH + .5, rest - 10, E.glisse], [tH + .62, rest + 4, E.pars], [tH + .8, rest, E.doux]]);
+    X.save(); X.translate((1 - k) * 1500 - o * 300, -o * 1300); X.rotate((1 - k) * .12 - o * .3);
+    pk(W / 2, 300, 3.6, { seed: 55, lv: 1, wy, curl: pose(t, [[tH, .5], [tH + .5, 0, E.arrive], [tH + .8, .14, E.doux]]), jolt: pose(t, [[tH + .58, 0], [tH + .66, 5, E.arrive], [tH + .9, 0, E.doux]]), cordTo: [0, -300] });
     X.restore(); }
   // neuf poches : une sur trois a la main libre (illimitee), les autres sont nouees
   const t0 = L.p3.debut - .75, tDim = L.p4.debut - .35;
@@ -100,8 +99,8 @@ function reelFrame(t) {      // numero d'image (1..184) de la prise reelle a l'i
 function fenetre(t) {
   X.save(); X.translate(WX, WY + lerp(1100, 0, E.arrive(seg(t, T3 + .1, T3 + .6)))); X.scale(WS, WS);
   const im = REEL[clamp(Math.round(reelFrame(t)), 1, 184) - 1];
-  X.fillStyle = '#000'; X.fillRect(0, 0, 440, 540); if (im && im.complete) X.drawImage(im, 0, 0, 440, 540);
-  X.strokeStyle = '#808080'; X.lineWidth = 1; X.strokeRect(0, 0, 440, 540);
+  X.fillStyle = '#000'; X.fillRect(0, 0, 440, 520); if (im && im.complete) X.drawImage(im, 0, 0, 424, 501, 0, 0, 440, 520);     // la prise porte une marge grise a droite et en bas : rognee
+  X.strokeStyle = '#808080'; X.lineWidth = 1; X.strokeRect(0, 0, 440, 520);
   X.restore();
 }
 const A3 = { a: T3, b: T4, draw(t) {
