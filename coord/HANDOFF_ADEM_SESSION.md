@@ -69,3 +69,11 @@ Adem n'a bientôt plus de crédit ; un autre agent prend le relais. Tout est sur
 - La relance automatique des vagues (cron) est arrêtée, car elle se perdait à la fin de la session et coûtait des crédits. À relancer seulement si besoin, par surface, sur les champs structurés.
 - `redteam/V2_DEV_norm.jsonl` (> 20 Mo) n'est pas commité : le régénérer avec `node redteam/normalize_v2.mjs`.
 - Des agents lancés juste avant la passation (jurés, fuzzers sig/encoding/address/intent/control/fp, boucle de détection) peuvent encore écrire dans `redteam/` et `detectors_adem/` : commiter ce qu'ils déposent.
+- JURÉ FAUX POSITIFS (`redteam/jury_fp.md`) : sur 123 opérations honnêtes sur Avalanche, 22 sortent en critical (17,9 %) et 63 en warn. À corriger en priorité :
+  - le séparateur décimal français (« 10,5 AVAX » vu comme un montant supérieur à celui annoncé) ;
+  - un vrai contact passe en critical dès qu'un sosie a envoyé de la poussière ;
+  - il manque un type d'intention « déposer/prêter/bridger » (Aave, Benqi, CCTP en critical) ;
+  - le staking sAVAX ;
+  - l'ajout de Fuji avec son RPC officiel ;
+  - la première mise en vente OpenSea ;
+  - les fonctions swap*AVAX de LFJ/Pangolin, non décodées.
