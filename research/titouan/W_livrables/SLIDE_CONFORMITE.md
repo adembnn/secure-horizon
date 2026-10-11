@@ -7,9 +7,9 @@ Statut : brouillon du 11 oct. 2026. Aucune conformité n'est affirmée. Ce qui n
 ## Colonne 1 : comment un auditeur vérifie une décision
 
 1. **Journal chaîné par hachage.** Chaque verdict devient une ligne : horodatage, hachage de la ligne précédente, niveau, codes de règle, empreinte des paramètres. Une ligne modifiée ou supprimée casse la chaîne. Commande : `node server/server.mjs --verify-journal`. État : fait en local (`research/titouan/T_banc_e2e/server/server.mjs`).
-2. **Ancrage sur Fuji.** La racine du journal est écrite par lots sur la blockchain de test Avalanche Fuji, pour qu'une alerte montrée, son heure et le choix de l'utilisateur ne puissent pas être réécrits après coup. Un vérificateur en lecture seule recalcule les racines et les compare à celles enregistrées. État : en cours, non livré. Les contrats ne sont pas encore listés (`blockchain/DEPLOYMENTS.md`). Fuji est un réseau de test : cela démontre le mécanisme, pas une valeur légale.
+2. **Ancrage sur Fuji.** La racine du journal est écrite par lots sur la blockchain de test Avalanche Fuji, pour qu'une alerte montrée, son heure et le choix de l'utilisateur ne puissent pas être réécrits après coup. Un vérificateur en lecture seule recalcule les racines et les compare à celles enregistrées. État : code prêt, 42 vérifications locales OK (`research/titouan/T_banc_e2e/anchor/ANCHOR_README.md`). Le contrat est compilé et déployé sur un nœud local par Adem (`coord/INBOX.md` MSG-058), pas par nous. Rien n'est déployé sur Fuji : `blockchain/DEPLOYMENTS.md` est vide. Fuji est un réseau de test : cela démontre le mécanisme, pas une valeur légale.
 3. **Version des règles.** Les règles ont une empreinte (`f952f3fb298f`, `research/titouan/T_banc_e2e/COUVERTURE.md`). À faire : écrire cette empreinte et la version du modèle dans chaque ligne de journal (`coord/INBOX.md` MSG-051).
-4. **Rejeu.** Le banc rejoue les cas contre une empreinte de règles donnée, avec jeu gelé dont le hachage est publié avant ouverture (`research/titouan/T_banc_e2e/attacks/TEST_HASH.txt`, `blind_adem/v2/V2_TEST.sha256`). Chaque ouverture du jeu TEST est journalisée (`run/out/TEST_OUVERTURES.json`).
+4. **Rejeu.** Le banc rejoue les cas contre une empreinte de règles donnée, avec jeu gelé dont le hachage est publié avant ouverture (`research/titouan/T_banc_e2e/attacks/TEST_HASH.txt`, `blind_adem/v2/V2_TEST.sha256`). Chaque ouverture du jeu TEST est journalisée (`run/out/TEST_OUVERTURES.json`). Le jeu TEST ouvert une fois est contaminé. V2_TEST reste à ouvrir une seule fois ; V2_DEV (99,7 % attrapées, 1,0 % de fausses alertes critical) est synthétique et réglé, pas un test indépendant (`run/out/v2/MESURE_FINAL.md`).
 5. **Explicabilité.** Chaque avertissement vient de code déterministe et cite ses raisons ("tu as dit X, ça fait Y"). Le verdict ne dépend pas d'un score opaque.
 
 Limite à dire : un journal chaîné prouve l'intégrité et l'ordre. Il ne prouve pas que les règles étaient bonnes.
@@ -35,4 +35,4 @@ Pertinent pour des clients prestataires (par exemple un prestataire de services 
 ## À dire à l'oral en une phrase
 
 "Chaque décision laisse une ligne que personne ne peut modifier sans que cela se voie, rattachée à une version de règles que l'on peut rejouer."
-(La partie "sans que cela se voie" dépend de l'ancrage Fuji. Ne la dire qu'une fois l'ancrage livré et testé.)
+(La partie "sans que cela se voie" dépend de l'ancrage sur chaîne. Ne la dire qu'une fois l'ancrage déployé et testé sur Fuji.)

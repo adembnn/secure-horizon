@@ -198,6 +198,9 @@ export const REASON_FICHE = {
   unexpected_approval: 'F01', unexpected_approval_connect: 'F01', unexpected_delegation: 'F11', unexpected_delegation_connect: 'F11', wrong_recipient: 'F19',
   amount_exceeded: '~montant_superieur', first_seen_recipient: 'F24', unlimited_approval_swap: 'F01', no_incoming: '~rien_en_retour', permit_new_contract: 'F01',
   unexpected_outgoing: '~inattendu_envoi',
+  // codes ajoutes par la boucle V2 (rules_extra / fixes)
+  lookalike_reported: 'F13', lookalike_weak: 'F13', signed_transfer_unlimited: 'F01', signed_right_unlimited_unknown: 'F01',
+  signed_calldata: 'F05', signed_text_grants_assets: 'F05', offchain_signaling: null,
   // droits de depense
   approval_for_all: 'F03', nft_all: 'F03', nft_one: null, unlimited_allowance: 'F01', approval_to_eoa: 'F01', external_spender: 'F01', far_expiry: 'F01', no_expiry: 'F01',
   dai_permit_no_amount: 'F01', recurring_spend_permission: 'F30', allowance_decrease: null, revocation: null, permit2_lockdown: null,

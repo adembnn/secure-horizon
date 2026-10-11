@@ -1,6 +1,6 @@
 # Playbook de réponse : Hold up
 
-Une page. Statut : brouillon du 11 oct. 2026. Ce qui est "prévu" n'est pas livré. Les chemins sont relatifs à `research/titouan/`.
+Une page. Statut : brouillon du 11 oct. 2026, mis à jour avec les livraisons d'Adem (non rejouées ici). Ce qui est "prévu" n'est pas livré. Les chemins sont relatifs à `research/titouan/`.
 
 ## 1. Principe
 
@@ -28,7 +28,7 @@ On avertit et on ralentit. On ne retire pas le choix à l'utilisateur. La répon
 
 - **La décision de signer.** L'utilisateur peut passer outre. Le temps de décision est journalisé (`time_to_decision_ms`), pas encore mesuré sur des personnes.
 - **Appeler un proche, raccrocher, attendre.** Seuls des gestes qui cassent la guidance d'un escroc ont une logique solide (`docs/design/REGLES_avertissements.md`, TL;DR 5).
-- **Contester une fausse alerte.** Le canal de signalement n'est pas construit.
+- **Contester une fausse alerte.** Le canal de signalement n'est pas construit. Le niveau de fausses alertes à connaître : 1,0 % de critical sur V2_DEV (synthétique et réglé), 0,30 % de critical sur le trafic réel C-Chain, 3,33 % sur Ethereum (`RESULTATS_A_JOUR.md`).
 - **Publier, corriger ou retirer une règle.** Prévu : règles signées, mode ombre, déploiement par paliers, retour à la version précédente en un geste (`V_workflow_souris_chat.md`). Non implémenté à la rédaction.
 - **Déclarer un incident à un régulateur.** Hors périmètre d'un outil pour particulier.
 
@@ -36,8 +36,8 @@ On avertit et on ralentit. On ne retire pas le choix à l'utilisateur. La répon
 
 - Journal local chaîné par hachage (sha256) : chaque ligne contient le hachage de la précédente. `node server/server.mjs --verify-journal` dit si la chaîne est intacte.
 - Champs journalisés par verdict : origine, méthode, niveau, fiche, codes de règle, latence, empreinte des paramètres. Le journal de l'extension ajoute la décision de l'utilisateur.
-- Manque connu : la version des règles et du modèle ne figure pas encore dans la ligne de journal du serveur. À ajouter (demande d'Adem, `coord/INBOX.md` MSG-051).
-- Ancrage de la racine du journal sur Fuji : en cours, non livré. Sans ancrage, quelqu'un qui contrôle le fichier peut le réécrire en entier et recalculer la chaîne.
+- Manque connu : la version des règles et du modèle ne figure pas encore dans la ligne de journal du serveur. Le module `T_banc_e2e/anchor/journal.mjs` a les champs `rulesVersion` et `modelVersion`, à brancher sur le serveur (demande d'Adem, `coord/INBOX.md` MSG-051).
+- Ancrage de la racine du journal : le code (racine de Merkle, preuves d'inclusion, vérificateur en lecture seule) passe 42 vérifications locales (`T_banc_e2e/anchor/ANCHOR_README.md`). Le contrat `EvidenceAnchor.sol` n'a pas été compilé chez nous. Adem l'a compilé et déployé sur un nœud local avec son Hardhat (`coord/INBOX.md` MSG-058). Rejeu sur chaîne local annoncé dans `coord/reports/critere_reponse.md`, non rejoué ici. Aucun déploiement sur Fuji listé. Sans ancrage, quelqu'un qui contrôle le fichier peut le réécrire en entier et recalculer la chaîne.
 - Les règles sont versionnées par empreinte (`f952f3fb298f` dans `T_banc_e2e/COUVERTURE.md`). Le banc rejoue les cas contre cette empreinte.
 
 ## 6. Responsabilité
