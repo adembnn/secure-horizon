@@ -8,4 +8,5 @@ import { spendRights } from './spend_rights.mjs';
 import { tokenGuard } from './token_guard.mjs';
 import { simEvents } from './sim_events.mjs';
 import { nftOrders } from './nft_orders.mjs';
-export const DETECTORS = [indirectPull, lookalikeKnown, spendRights, tokenGuard, simEvents, nftOrders];
+import { sigRights } from './sig_rights.mjs';
+export const DETECTORS = [indirectPull, lookalikeKnown, spendRights, tokenGuard, simEvents, nftOrders, sigRights];
