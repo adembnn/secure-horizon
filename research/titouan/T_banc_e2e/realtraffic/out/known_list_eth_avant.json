@@ -1,0 +1,407 @@
+{
+ "avertissement": "Liste CIRCULAIRE : les 100 destinataires les plus fréquents de l'échantillon lui-même. Ce n'est pas une liste publique indépendante ; elle mesure un plafond (tout le trafic concentré est 'connu'), pas la couverture réelle d'un catalogue.",
+ "n_tx_echantillon": 6000,
+ "part_du_trafic_pct": 41,
+ "top": [
+  {
+   "to": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+   "n": 725
+  },
+  {
+   "to": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+   "n": 332
+  },
+  {
+   "to": "0x3fc91a3afd70395cd496c647d5a6cc9d4b2b7fad",
+   "n": 95
+  },
+  {
+   "to": "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+   "n": 63
+  },
+  {
+   "to": "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+   "n": 53
+  },
+  {
+   "to": "0x3328f7f4a1d1c57c35df56bbf0c9dcafca309c49",
+   "n": 47
+  },
+  {
+   "to": "0x0000000000001ff3684f28c67538d4d072c22734",
+   "n": 40
+  },
+  {
+   "to": "0x974caa59e49682cda0ad2bbe82983419a2ecc400",
+   "n": 40
+  },
+  {
+   "to": "0x80a64c6d7f12c47b7c66c5b4e20e72bc1fcd5d9e",
+   "n": 31
+  },
+  {
+   "to": "0x881d40237659c251811cec9c364ef91dc08d300c",
+   "n": 29
+  },
+  {
+   "to": "0xa69babef1ca67a37ffaf7a485dfff3382056e78c",
+   "n": 27
+  },
+  {
+   "to": "0x0000000000000068f116a894984e2db1123eb395",
+   "n": 25
+  },
+  {
+   "to": "0x111111125421ca6dc452d289314280a0f8842a65",
+   "n": 25
+  },
+  {
+   "to": "0x1111111254eeb25477b68fb85ed929f73a960582",
+   "n": 24
+  },
+  {
+   "to": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+   "n": 24
+  },
+  {
+   "to": "0x51c72848c68a965f66fa7a88855f9f7784502a7f",
+   "n": 21
+  },
+  {
+   "to": "0x787b8840100d9baadd7463f4a73b5ba73b00c6ca",
+   "n": 21
+  },
+  {
+   "to": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+   "n": 20
+  },
+  {
+   "to": "0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43",
+   "n": 20
+  },
+  {
+   "to": "0x0000000071727de22e5e9d8baf0edac6f37da032",
+   "n": 19
+  },
+  {
+   "to": "0x1ab4973a48dc892cd9971ece8e01dcc7688f8f23",
+   "n": 19
+  },
+  {
+   "to": "0xa26148ae51fa8e787df319c04137602cc018b521",
+   "n": 19
+  },
+  {
+   "to": "0x278d858f05b94576c1e6f73285886876ff6ef8d2",
+   "n": 18
+  },
+  {
+   "to": "0x68d3a973e7272eb388022a5c6518d9b2a2e66fbf",
+   "n": 18
+  },
+  {
+   "to": "0xa023f08c70a23abc7edfc5b6b5e171d78dfc947e",
+   "n": 18
+  },
+  {
+   "to": "0xbe0ed4138121ecfc5c0e56b40517da27e6c5226b",
+   "n": 18
+  },
+  {
+   "to": "0x00005ea00ac477b1030ce78506496e8c2de24bf5",
+   "n": 17
+  },
+  {
+   "to": "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae",
+   "n": 17
+  },
+  {
+   "to": "0x514910771af9ca656af840dff83e8264ecf986ca",
+   "n": 17
+  },
+  {
+   "to": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+   "n": 17
+  },
+  {
+   "to": "0x1f2f10d1c40777ae1da742455c65828ff36df387",
+   "n": 15
+  },
+  {
+   "to": "0x28b1dc1a5e3699a428bc51d234dfab7c9cb2a183",
+   "n": 15
+  },
+  {
+   "to": "0x4cd00e387622c35bddb9b4c962c136462338bc31",
+   "n": 15
+  },
+  {
+   "to": "0xbb5952f5ad81d3a5bc5e921b72ecdf4d96cfbe03",
+   "n": 15
+  },
+  {
+   "to": "0x16c94a503a400a215db4bac0659d04cd268e872a",
+   "n": 14
+  },
+  {
+   "to": "0xa5f565650890fba1824ee0f21ebbbf660a179934",
+   "n": 14
+  },
+  {
+   "to": "0xeff6cb8b614999d130e537751ee99724d01aa167",
+   "n": 14
+  },
+  {
+   "to": "0xfbd4cdb413e45a52e2c8312f670e9ce67e794c37",
+   "n": 14
+  },
+  {
+   "to": "0x6b175474e89094c44da98b954eedeac495271d0f",
+   "n": 13
+  },
+  {
+   "to": "0xf3de3c0d654fda23dad170f0f320a92172509127",
+   "n": 13
+  },
+  {
+   "to": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+   "n": 12
+  },
+  {
+   "to": "0xb5d85cbf7cb3ee0d56b3bb207d5fc4b82f43f511",
+   "n": 12
+  },
+  {
+   "to": "0xccc88a9d1b4ed6b0eaba998850414b24f1c315be",
+   "n": 12
+  },
+  {
+   "to": "0xcffad3200574698b78f32232aa9d63eabd290703",
+   "n": 12
+  },
+  {
+   "to": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+   "n": 11
+  },
+  {
+   "to": "0x2e0856fcfdaee8479b01d2b1965c1b57304b8148",
+   "n": 11
+  },
+  {
+   "to": "0xbdb3ba9ffe392549e1f8658dd2630c141fdf47b6",
+   "n": 11
+  },
+  {
+   "to": "0xeba88149813bec1cccccfdb0dacefaaa5de94cb1",
+   "n": 11
+  },
+  {
+   "to": "0xff00000000000000000000000000000000008453",
+   "n": 11
+  },
+  {
+   "to": "0x0000000aa232009084bd71a5797d089aa4edfad4",
+   "n": 10
+  },
+  {
+   "to": "0x12f45b75bce61b15495d158e19152b8fda1862ce",
+   "n": 10
+  },
+  {
+   "to": "0x5ff137d4b0fdcd49dca30c7cf57e578a026d2789",
+   "n": 10
+  },
+  {
+   "to": "0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2",
+   "n": 10
+  },
+  {
+   "to": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+   "n": 10
+  },
+  {
+   "to": "0xe592427a0aece92de3edee1f18e0157c05861564",
+   "n": 10
+  },
+  {
+   "to": "0x267be1c1d684f78cb4f6a176c4911b741e4ffdc0",
+   "n": 9
+  },
+  {
+   "to": "0x26d85a13212433fe6a8381969c2b0db390a0b0ae",
+   "n": 9
+  },
+  {
+   "to": "0x68d30f47f19c07bccef4ac7fae2dc12fca3e0dc9",
+   "n": 9
+  },
+  {
+   "to": "0xd0ec028a3d21533fdd200838f39c85b03679285d",
+   "n": 9
+  },
+  {
+   "to": "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
+   "n": 9
+  },
+  {
+   "to": "0xff37b4ee7981af82669b2fd0e998f0b5649dcedd",
+   "n": 9
+  },
+  {
+   "to": "0x307576dd4f73f91bb8c4a2edb762938e8e067d31",
+   "n": 8
+  },
+  {
+   "to": "0x589dedbd617e0cbcb916a9223f4d1300c294236b",
+   "n": 8
+  },
+  {
+   "to": "0x663dc15d3c1ac63ff12e45ab68fea3f0a883c251",
+   "n": 8
+  },
+  {
+   "to": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+   "n": 8
+  },
+  {
+   "to": "0xb685760ebd368a891f27ae547391f4e2a289895b",
+   "n": 8
+  },
+  {
+   "to": "0xeb943c230218e0da7b2ca18b81f7eb7fbbbe9665",
+   "n": 8
+  },
+  {
+   "to": "0x2781246fe707bb15cee3e5ea354e2154a2877b16",
+   "n": 7
+  },
+  {
+   "to": "0x92d6c1e31e14520e676a687f0a93788b716beff5",
+   "n": 7
+  },
+  {
+   "to": "0x9642b23ed1e01df1092b92641051881a322f5d4e",
+   "n": 7
+  },
+  {
+   "to": "0xba47cbfdd61029833841fcaa2ec2591ddfa87e51",
+   "n": 7
+  },
+  {
+   "to": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+   "n": 7
+  },
+  {
+   "to": "0xe73d53e3a982ab2750a0b76f9012e18b256cc243",
+   "n": 7
+  },
+  {
+   "to": "0xff00000000000000000000000000000000000480",
+   "n": 7
+  },
+  {
+   "to": "0x173272739bd7aa6e4e214714048a9fe699453059",
+   "n": 6
+  },
+  {
+   "to": "0x3b4d794a66304f130a4db8f2551b0070dfcf5ca7",
+   "n": 6
+  },
+  {
+   "to": "0x3c11f6265ddec22f4d049dde480615735f451646",
+   "n": 6
+  },
+  {
+   "to": "0x467d66b9c85f6b7c4af575c8d8894b0704b04bf7",
+   "n": 6
+  },
+  {
+   "to": "0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca",
+   "n": 6
+  },
+  {
+   "to": "0x57e114b691db790c35207b2e685d4a43181e6061",
+   "n": 6
+  },
+  {
+   "to": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+   "n": 6
+  },
+  {
+   "to": "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45",
+   "n": 6
+  },
+  {
+   "to": "0x6a000f20005980200259b80c5102003040001068",
+   "n": 6
+  },
+  {
+   "to": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+   "n": 6
+  },
+  {
+   "to": "0x888888888889758f76e7103c6cbf23abbf58f946",
+   "n": 6
+  },
+  {
+   "to": "0x8ffa3b35e0066ca2e95e21ffc5eaf256f0d2c597",
+   "n": 6
+  },
+  {
+   "to": "0x95835589f6e03a9a0f3bae95ab41c75122101fc8",
+   "n": 6
+  },
+  {
+   "to": "0xd34225a8ca9cfa5666d85815929821c8f2ec7f38",
+   "n": 6
+  },
+  {
+   "to": "0xee7ae85f2fe2239e27d9c1e23fffe168d63b4055",
+   "n": 6
+  },
+  {
+   "to": "0xefad1194da8083452897cb016be75dc77148a2c6",
+   "n": 6
+  },
+  {
+   "to": "0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3",
+   "n": 6
+  },
+  {
+   "to": "0x00000000009e50a7ddb7a7b0e2ee6604fd120e49",
+   "n": 5
+  },
+  {
+   "to": "0x00fe78205f5f0e63b8ad2b2ae5337f538a610e04",
+   "n": 5
+  },
+  {
+   "to": "0x03f34be1bf910116595db1b11e9d1b2ca5d59659",
+   "n": 5
+  },
+  {
+   "to": "0x0de8bf93da2f7eecb3d9169422413a9bef4ef628",
+   "n": 5
+  },
+  {
+   "to": "0x28c6c06298d514db089934071355e5743bf21d60",
+   "n": 5
+  },
+  {
+   "to": "0x388c818ca8b9251b393131c08a736a67ccb19297",
+   "n": 5
+  },
+  {
+   "to": "0x3a10dc1a145da500d5fba38b9ec49c8ff11a981f",
+   "n": 5
+  },
+  {
+   "to": "0x4313c378cc91ea583c91387b9216e2c03096b27f",
+   "n": 5
+  },
+  {
+   "to": "0x458c2a06ba8dc3def078513ad98e9da8ced39e02",
+   "n": 5
+  }
+ ]
+}

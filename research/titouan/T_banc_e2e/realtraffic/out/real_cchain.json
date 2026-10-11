@@ -4,17 +4,19 @@
  "n_tx_disponibles": 6325,
  "n_tx_analysees": 6325,
  "sous_echantillonnage": "aucun",
- "fixes_actifs": "defaut KEPT=F1,F2,F3,F4,F5,F6,F7,F8,F9,F10",
+ "fixes_actifs": "defaut KEPT=F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,F13,F14,F15,F16,F17,F18,F19,F21,F22,F23,F24,F25,F26,F27,F28,F29,F30,F31,F32,F33,F34",
  "version_fichiers_sha256_16": {
   "engine/src/engine.mjs": "3c2de1406af6b2be",
+  "engine/src/effects_abi.mjs": "ce0126ecbc6f8fa3",
+  "engine/src/protocols_extra.mjs": "a1d1efd5532eb9d3",
   "engine/src/rules.mjs": "75914eca31de948b",
-  "engine/src/rules_extra.mjs": "5267934bfe087f79",
-  "engine/src/fixes.mjs": "c3bdb09800c72d4c",
+  "engine/src/rules_extra.mjs": "032e882b2bf09ee1",
+  "engine/src/fixes.mjs": "4821242c9d42616d",
   "engine/src/calldata.mjs": "994b969530cd9fae",
   "engine/src/registry.mjs": "e93b80f646cda08a",
   "engine/src/abi.mjs": "cb215b90b180391f",
   "engine/src/util.mjs": "006143001b9834d3",
-  "run/policy.mjs": "ce761745beb16815",
+  "run/policy.mjs": "b5746d2070f8ba5e",
   "run/run_loop.mjs": "fa04e8c5b0e7b293"
  },
  "fichiers_modifies_pendant_la_mesure": false,
@@ -36,30 +38,30 @@
     ]
    },
    "warn": {
-    "k": 4860,
+    "k": 4790,
     "n": 6325,
-    "pct": 76.838,
+    "pct": 75.731,
     "wilson95_pct": [
-     75.782,
-     77.861
+     74.659,
+     76.772
     ]
    },
    "info": {
-    "k": 13,
+    "k": 203,
     "n": 6325,
-    "pct": 0.206,
+    "pct": 3.209,
     "wilson95_pct": [
-     0.12,
-     0.351
+     2.803,
+     3.673
     ]
    },
    "ok": {
-    "k": 1433,
+    "k": 1313,
     "n": 6325,
-    "pct": 22.656,
+    "pct": 20.759,
     "wilson95_pct": [
-     21.641,
-     23.704
+     19.777,
+     21.776
     ]
    },
    "inconnu": {
@@ -86,12 +88,12 @@
      ]
     },
     "warn": {
-     "k": 0,
+     "k": 120,
      "n": 853,
-     "pct": 0,
+     "pct": 14.068,
      "wilson95_pct": [
-      0,
-      0.448
+      11.895,
+      16.563
      ]
     },
     "info": {
@@ -104,12 +106,12 @@
      ]
     },
     "ok": {
-     "k": 853,
+     "k": 733,
      "n": 853,
-     "pct": 100,
+     "pct": 85.932,
      "wilson95_pct": [
-      99.552,
-      100
+      83.437,
+      88.105
      ]
     },
     "inconnu": {
@@ -221,100 +223,100 @@
     }
    },
    "appel_connu": {
-    "n": 145,
-    "part_du_trafic_pct": 2.29,
+    "n": 335,
+    "part_du_trafic_pct": 5.3,
     "critical": {
      "k": 3,
-     "n": 145,
-     "pct": 2.069,
+     "n": 335,
+     "pct": 0.896,
      "wilson95_pct": [
-      0.706,
-      5.906
+      0.305,
+      2.599
      ]
     },
     "warn": {
      "k": 44,
-     "n": 145,
-     "pct": 30.345,
+     "n": 335,
+     "pct": 13.134,
      "wilson95_pct": [
-      23.449,
-      38.256
+      9.932,
+      17.173
      ]
     },
     "info": {
-     "k": 0,
-     "n": 145,
-     "pct": 0,
+     "k": 190,
+     "n": 335,
+     "pct": 56.716,
      "wilson95_pct": [
-      0,
-      2.581
+      51.364,
+      61.916
      ]
     },
     "ok": {
      "k": 98,
-     "n": 145,
-     "pct": 67.586,
+     "n": 335,
+     "pct": 29.254,
      "wilson95_pct": [
-      59.599,
-      74.665
+      24.639,
+      34.339
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 145,
+     "n": 335,
      "pct": 0,
      "wilson95_pct": [
       0,
-      2.581
+      1.134
      ]
     }
    },
    "opaque": {
-    "n": 4706,
-    "part_du_trafic_pct": 74.4,
+    "n": 4516,
+    "part_du_trafic_pct": 71.4,
     "critical": {
      "k": 1,
-     "n": 4706,
-     "pct": 0.021,
+     "n": 4516,
+     "pct": 0.022,
      "wilson95_pct": [
       0.004,
-      0.12
+      0.125
      ]
     },
     "warn": {
-     "k": 4705,
-     "n": 4706,
-     "pct": 99.979,
+     "k": 4515,
+     "n": 4516,
+     "pct": 99.978,
      "wilson95_pct": [
-      99.88,
+      99.875,
       99.996
      ]
     },
     "info": {
      "k": 0,
-     "n": 4706,
+     "n": 4516,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.082
+      0.085
      ]
     },
     "ok": {
      "k": 0,
-     "n": 4706,
+     "n": 4516,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.082
+      0.085
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 4706,
+     "n": 4516,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.082
+      0.085
      ]
     }
    },
@@ -369,25 +371,26 @@
    }
   },
   "latence_ms": {
-   "moyenne": 0.0744,
-   "p50": 0.0365,
-   "p95": 0.2009,
-   "p99": 0.6753,
-   "max": 8.396
+   "moyenne": 0.1109,
+   "p50": 0.0513,
+   "p95": 0.3431,
+   "p99": 0.9581,
+   "max": 10.645
   },
   "alerte_critical_ou_warn": {
-   "k": 4879,
+   "k": 4809,
    "n": 6325,
-   "pct": 77.138,
+   "pct": 76.032,
    "wilson95_pct": [
-    76.087,
-    78.157
+    74.964,
+    77.068
    ]
   },
   "codes_des_alertes": {
-   "w:unknown_selector": 4796,
-   "w:opaque": 4713,
+   "w:unknown_selector": 4606,
+   "w:opaque": 4523,
    "w:external_spender": 120,
+   "w:lookalike_weak": 120,
    "w:erc4337_handleOps": 39,
    "w:embedded_calls": 23,
    "w:slippage_unbounded": 20,
@@ -398,16 +401,15 @@
    "w:decode_error": 2,
    "w:nested_approval": 1,
    "c:embedded_calls": 1,
-   "w:batch_foreign_unlimited_approval": 1,
-   "w:short_calldata": 1
+   "w:batch_foreign_unlimited_approval": 1
   },
   "opaque_total": {
-   "k": 4713,
+   "k": 4523,
    "n": 6325,
-   "pct": 74.514,
+   "pct": 71.51,
    "wilson95_pct": [
-    73.425,
-    75.573
+    70.385,
+    72.609
    ]
   }
  },
@@ -424,30 +426,30 @@
     ]
    },
    "warn": {
-    "k": 4809,
+    "k": 4738,
     "n": 6325,
-    "pct": 76.032,
+    "pct": 74.909,
     "wilson95_pct": [
-     74.964,
-     77.068
+     73.826,
+     75.962
     ]
    },
    "info": {
-    "k": 13,
+    "k": 203,
     "n": 6325,
-    "pct": 0.206,
+    "pct": 3.209,
     "wilson95_pct": [
-     0.12,
-     0.351
+     2.803,
+     3.673
     ]
    },
    "ok": {
-    "k": 1485,
+    "k": 1366,
     "n": 6325,
-    "pct": 23.478,
+    "pct": 21.597,
     "wilson95_pct": [
-     22.45,
-     24.539
+     20.6,
+     22.628
     ]
    },
    "inconnu": {
@@ -474,12 +476,12 @@
      ]
     },
     "warn": {
-     "k": 0,
+     "k": 120,
      "n": 853,
-     "pct": 0,
+     "pct": 14.068,
      "wilson95_pct": [
-      0,
-      0.448
+      11.895,
+      16.563
      ]
     },
     "info": {
@@ -492,12 +494,12 @@
      ]
     },
     "ok": {
-     "k": 853,
+     "k": 733,
      "n": 853,
-     "pct": 100,
+     "pct": 85.932,
      "wilson95_pct": [
-      99.552,
-      100
+      83.437,
+      88.105
      ]
     },
     "inconnu": {
@@ -572,12 +574,12 @@
      ]
     },
     "warn": {
-     "k": 53,
+     "k": 52,
      "n": 135,
-     "pct": 39.259,
+     "pct": 38.519,
      "wilson95_pct": [
-      31.428,
-      47.685
+      30.735,
+      46.937
      ]
     },
     "info": {
@@ -590,12 +592,12 @@
      ]
     },
     "ok": {
-     "k": 55,
+     "k": 56,
      "n": 135,
-     "pct": 40.741,
+     "pct": 41.481,
      "wilson95_pct": [
-      32.82,
-      49.174
+      33.518,
+      49.916
      ]
     },
     "inconnu": {
@@ -609,100 +611,100 @@
     }
    },
    "appel_connu": {
-    "n": 182,
-    "part_du_trafic_pct": 2.88,
+    "n": 372,
+    "part_du_trafic_pct": 5.88,
     "critical": {
      "k": 3,
-     "n": 182,
-     "pct": 1.648,
+     "n": 372,
+     "pct": 0.806,
      "wilson95_pct": [
-      0.562,
-      4.734
+      0.275,
+      2.344
      ]
     },
     "warn": {
      "k": 81,
-     "n": 182,
-     "pct": 44.505,
+     "n": 372,
+     "pct": 21.774,
      "wilson95_pct": [
-      37.473,
-      51.765
+      17.88,
+      26.245
      ]
     },
     "info": {
-     "k": 0,
-     "n": 182,
-     "pct": 0,
+     "k": 190,
+     "n": 372,
+     "pct": 51.075,
      "wilson95_pct": [
-      0,
-      2.067
+      46.01,
+      56.118
      ]
     },
     "ok": {
      "k": 98,
-     "n": 182,
-     "pct": 53.846,
+     "n": 372,
+     "pct": 26.344,
      "wilson95_pct": [
-      46.599,
-      60.935
+      22.126,
+      31.046
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 182,
+     "n": 372,
      "pct": 0,
      "wilson95_pct": [
       0,
-      2.067
+      1.022
      ]
     }
    },
    "opaque": {
-    "n": 4669,
-    "part_du_trafic_pct": 73.82,
+    "n": 4479,
+    "part_du_trafic_pct": 70.81,
     "critical": {
      "k": 1,
-     "n": 4669,
-     "pct": 0.021,
+     "n": 4479,
+     "pct": 0.022,
      "wilson95_pct": [
       0.004,
-      0.121
+      0.126
      ]
     },
     "warn": {
-     "k": 4668,
-     "n": 4669,
-     "pct": 99.979,
+     "k": 4478,
+     "n": 4479,
+     "pct": 99.978,
      "wilson95_pct": [
-      99.879,
+      99.874,
       99.996
      ]
     },
     "info": {
      "k": 0,
-     "n": 4669,
+     "n": 4479,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.082
+      0.086
      ]
     },
     "ok": {
      "k": 0,
-     "n": 4669,
+     "n": 4479,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.082
+      0.086
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 4669,
+     "n": 4479,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.082
+      0.086
      ]
     }
    },
@@ -757,24 +759,25 @@
    }
   },
   "latence_ms": {
-   "moyenne": 0.0989,
-   "p50": 0.0642,
-   "p95": 0.2214,
-   "p99": 0.7257,
-   "max": 6.162
+   "moyenne": 0.1445,
+   "p50": 0.0849,
+   "p95": 0.4255,
+   "p99": 0.9899,
+   "max": 8.859
   },
   "alerte_critical_ou_warn": {
-   "k": 4827,
+   "k": 4756,
    "n": 6325,
-   "pct": 76.316,
+   "pct": 75.194,
    "wilson95_pct": [
-    75.253,
-    77.348
+    74.114,
+    76.243
    ]
   },
   "codes_des_alertes": {
-   "w:unknown_selector": 4759,
-   "w:opaque": 4676,
+   "w:unknown_selector": 4569,
+   "w:opaque": 4486,
+   "w:lookalike_weak": 120,
    "w:external_spender": 67,
    "w:erc4337_handleOps": 39,
    "w:service_beneficiary_not_self": 37,
@@ -786,25 +789,24 @@
    "w:ur_command_opaque": 2,
    "w:decode_error": 2,
    "w:nested_approval": 1,
-   "w:unlimited_allowance": 1,
    "c:embedded_calls": 1
   },
   "opaque_total": {
-   "k": 4676,
+   "k": 4486,
    "n": 6325,
-   "pct": 73.929,
+   "pct": 70.925,
    "wilson95_pct": [
-    72.833,
-    74.996
+    69.793,
+    72.031
    ]
   }
  },
  "croisement_A_vers_B": {
-  "warn->warn": 4808,
-  "ok->ok": 1433,
+  "warn->warn": 4738,
+  "ok->ok": 1313,
+  "info->info": 203,
   "warn->ok": 52,
   "critical->critical": 18,
-  "info->info": 13,
-  "critical->warn": 1
+  "critical->ok": 1
  }
 }

@@ -3,6 +3,7 @@ import { isOn } from './fixes.mjs';
 import { parseSig, decodeParams } from './abi.mjs';
 import { lc } from './util.mjs';
 import { decodeLibraryCall } from './protocols_extra.mjs';
+import { extractAbiEffect, isMulticallSelector } from './effects_abi.mjs';
 import { matchLens } from './rules.mjs';
 import { OPACITY_CODES } from './engine.mjs';
 
@@ -197,6 +198,26 @@ function wrapDeposit(eff, request, ctx, flags) {
   flags.push({ code: 'service_call_decoded', severity: 'info', detail: 'envoi natif à un jeton du registre : dépôt, reçu crédité à l expéditeur' });
 }
 
+// ---- F34 : effet lu par ABI publique, pour toute cible (voir effects_abi.mjs). Conditions cumulatives, toutes nécessaires :
+//  - l'appel est opaque UNIQUEMENT parce que le sélecteur est hors registre (aucune autre cause d'opacité, aucun sous-appel) ;
+//  - aucun droit, aucun changement de contrôle, aucune délégation, aucun tiers décodé, aucun appel encapsulé repéré, aucune autre preuve de risque ;
+//  - la fonction est dans la table ABI et chaque bénéficiaire est l'utilisateur lui-même ; une valeur native jointe n'est admise que pour les fonctions qui l'attendent.
+// Résultat : opacité levée, drapeau info `effect_decoded_limited` (jamais vert : le contrat n'est pas vérifié). Ne peut que retirer des drapeaux d'opacité.
+function abiEffect(eff, request, ctx, flags) {
+  if (!request || request.method !== 'eth_sendTransaction' || !eff.opaque) return;
+  const tx = request.params && request.params[0]; if (!tx || !tx.to) return;
+  if (eff.approvals.length || (eff.controlChange || []).length || eff.delegation || (eff.thirdParty || []).length || (eff.embedded || []).length) return;
+  // sous-appels : admis seulement pour un multicall dont tous les sous-appels sont des appels opaques sans effet décodé (extractAbiEffect les relit un par un)
+  if ((eff.nested || []).length && !(isMulticallSelector(eff.raw && eff.raw.selector) && eff.nested.every((n) => n.opaque && n.family === 'unknown' && !(n.acts || []).length))) return;
+  if ((eff.opaqueReasons || []).some((c) => c !== 'unknown_selector')) return;
+  if (eff.risk_flags.some((f) => f.severity !== 'info' && !OPACITY_ONLY.has(f.code))) return;
+  const r = extractAbiEffect(tx, ctx); if (!r) return;
+  eff.risk_flags = eff.risk_flags.filter((f) => !OPACITY_ONLY.has(f.code));
+  eff.opaque = false; eff.opaqueReasons = [];
+  eff.effectLimited = { name: r.name, kind: r.kind, verified: false };
+  flags.push({ code: 'effect_decoded_limited', severity: 'info', detail: `${r.name} (${r.kind}) : effet lu dans l'appel, le produit revient à l'utilisateur ; contrat non vérifié` });
+}
+
 // ---- Adresse sosie (USENIX Sec. 2025 : préfixe >= 3 ET suffixe >= 4 caractères hexa communs avec une adresse connue de l'utilisateur, sans être identique).
 // Le comparateur du dépôt n'appelle jamais sa fonction 4+4 ; le moteur de base a déjà la règle 3+4, ce bloc la complète :
 //  F21 : le fournisseur de contexte (surveillance du presse-papiers, indexeur) PEUT signaler qu'une contrepartie ressemble à une adresse connue (counterparty_facts[a].lookalikeOf) : critical.
@@ -317,6 +338,7 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F5')) serviceCall(eff, request, ctx);
   if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
   if (isOn('F18')) wrapDeposit(eff, request, ctx, flags);
+  if (isOn('F34') && !ctx._noF34) abiEffect(eff, request, ctx, flags);
   signatureShapes(eff, request, ctx, flags);
   if (isOn('F30')) offchainSignaling(eff, request, ctx);
   if (isOn('F21') || isOn('F22') || isOn('F23')) lookalikeRules(eff, ctx, flags);

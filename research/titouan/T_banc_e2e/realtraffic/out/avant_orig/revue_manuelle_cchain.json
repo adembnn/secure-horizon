@@ -1,0 +1,647 @@
+[
+ {
+  "n": 1,
+  "niveau": "critical",
+  "to": "0x62ed..c661",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité vers contrat inconnu (3 approbateurs distincts) : ni preuve de légitimité ni de malveillance"
+ },
+ {
+  "n": 2,
+  "niveau": "critical",
+  "to": "0x5e0e..fb59",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité vers contrat de 14 ko, 1 approbateur"
+ },
+ {
+  "n": 3,
+  "niveau": "critical",
+  "to": "0x898d..8dc7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité vers contrat de 18 ko, 1 approbateur"
+ },
+ {
+  "n": 4,
+  "niveau": "critical",
+  "to": "0x49d5..0bab",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "F",
+  "pourquoi": "approve illimité vers un routeur de type multicall utilisé par 16 portefeuilles distincts dans l'échantillon"
+ },
+ {
+  "n": 5,
+  "niveau": "critical",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité USDt vers contrat de 2 ko, 1 approbateur"
+ },
+ {
+  "n": 6,
+  "niveau": "critical",
+  "to": "0x49d5..0bab",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité vers contrat de 2 ko, 1 approbateur"
+ },
+ {
+  "n": 7,
+  "niveau": "critical",
+  "to": "0xce16..d666",
+  "selecteur": "846a1bc6",
+  "decode": null,
+  "raisons": [
+   "c:embedded_calls",
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "appel opaque (2,5 ko) contenant un approve, destinataire vu 1 fois"
+ },
+ {
+  "n": 8,
+  "niveau": "critical",
+  "to": "0xb31f..66c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "F",
+  "pourquoi": "approve illimité WAVAX vers le routeur 1inch v6 (agrégateur public connu)"
+ },
+ {
+  "n": 9,
+  "niveau": "critical",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité vers contrat de 8,6 ko, 3 approbateurs"
+ },
+ {
+  "n": 10,
+  "niveau": "critical",
+  "to": "0xe18e..9aa9",
+  "selecteur": "f2fde38b",
+  "decode": null,
+  "raisons": [
+   "c:control_change"
+  ],
+  "label": "I",
+  "pourquoi": "transferOwnership vers un proxy de 171 octets (forme d'un proxy Safe) : admin légitime plausible, alerte défendable"
+ },
+ {
+  "n": 11,
+  "niveau": "critical",
+  "to": "0x2a53..8f32",
+  "selecteur": "f2fde38b",
+  "decode": null,
+  "raisons": [
+   "c:control_change"
+  ],
+  "label": "I",
+  "pourquoi": "idem 10"
+ },
+ {
+  "n": 12,
+  "niveau": "critical",
+  "to": "0x2b2c..a4be",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité vers contrat de 2 ko, 1 approbateur"
+ },
+ {
+  "n": 13,
+  "niveau": "critical",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "idem 9"
+ },
+ {
+  "n": 14,
+  "niveau": "critical",
+  "to": "0xb97e..8a6e",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "U",
+  "pourquoi": "approve illimité USDC vers un compte externe (sans code) : signal classique de risque"
+ },
+ {
+  "n": 15,
+  "niveau": "critical",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "idem 9"
+ },
+ {
+  "n": 16,
+  "niveau": "critical",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "U",
+  "pourquoi": "approve illimité USDt vers un compte externe (sans code)"
+ },
+ {
+  "n": 17,
+  "niveau": "critical",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité USDt vers contrat de 24 ko, 1 approbateur"
+ },
+ {
+  "n": 18,
+  "niveau": "critical",
+  "to": "0x5ca4..9533",
+  "selecteur": "f2fde38b",
+  "decode": null,
+  "raisons": [
+   "c:control_change"
+  ],
+  "label": "I",
+  "pourquoi": "idem 10"
+ },
+ {
+  "n": 19,
+  "niveau": "critical",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "c:unlimited_allowance",
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve illimité USDt vers contrat de 2 ko, 1 approbateur"
+ },
+ {
+  "n": 20,
+  "niveau": "warn",
+  "to": "0x1111..2a65",
+  "selecteur": "07ed2379",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "swap via le routeur 1inch (agrégateur connu, 8 portefeuilles) : sélecteur non décodé"
+ },
+ {
+  "n": 21,
+  "niveau": "warn",
+  "to": "0x9702..a8c7",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "w:external_spender"
+  ],
+  "label": "F",
+  "pourquoi": "approve vers un contrat utilisé par 11 approbateurs et 25 appelants"
+ },
+ {
+  "n": 22,
+  "niveau": "warn",
+  "to": "0x0000..a032",
+  "selecteur": "765e827f",
+  "decode": "execute",
+  "raisons": [
+   "w:erc4337_handleOps"
+  ],
+  "label": "I",
+  "pourquoi": "bundler ERC-4337 (EntryPoint), pas un portefeuille utilisateur direct"
+ },
+ {
+  "n": 23,
+  "niveau": "warn",
+  "to": "0x60ae..33d4",
+  "selecteur": "38ed1739",
+  "decode": null,
+  "raisons": [
+   "w:slippage_unbounded"
+  ],
+  "label": "U",
+  "pourquoi": "swap avec minimum reçu = 0 (risque de sandwich réel)"
+ },
+ {
+  "n": 24,
+  "niveau": "warn",
+  "to": "null",
+  "selecteur": "60806040",
+  "decode": null,
+  "raisons": [
+   "w:contract_creation",
+   "w:opaque"
+  ],
+  "label": "U",
+  "pourquoi": "déploiement de contrat : rare pour un utilisateur, code non analysé"
+ },
+ {
+  "n": 25,
+  "niveau": "warn",
+  "to": "0x5acc..c6c6",
+  "selecteur": "3593564c",
+  "decode": null,
+  "raisons": [
+   "w:decode_error",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "Universal Router : sous-commande non décodée (limite du décodeur)"
+ },
+ {
+  "n": 26,
+  "niveau": "warn",
+  "to": "0x661e..f08d",
+  "selecteur": "3593564c",
+  "decode": null,
+  "raisons": [
+   "w:ur_command_opaque",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "Universal Router : V4_SWAP non décodé (limite du décodeur)"
+ },
+ {
+  "n": 27,
+  "niveau": "warn",
+  "to": "0x391e..a604",
+  "selecteur": null,
+  "decode": null,
+  "raisons": [
+   "w:short_calldata",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "valeur ~17 AVAX vers un compte externe avec 3 octets de données"
+ },
+ {
+  "n": 28,
+  "niveau": "warn",
+  "to": "0xa457..936e",
+  "selecteur": "4c0e6a97",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat vu 2 fois, 1 émetteur"
+ },
+ {
+  "n": 29,
+  "niveau": "warn",
+  "to": "0xc005..eec6",
+  "selecteur": "9b62f8b4",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 1 seul émetteur, 101 appels (robot)"
+ },
+ {
+  "n": 30,
+  "niveau": "warn",
+  "to": "0x278d..f8d2",
+  "selecteur": "a00597a0",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "contrat appelé par 37 portefeuilles distincts, sélecteur non décodé"
+ },
+ {
+  "n": 31,
+  "niveau": "warn",
+  "to": "0x3c7b..dfc2",
+  "selecteur": "03000001",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat vu par 7 émetteurs"
+ },
+ {
+  "n": 32,
+  "niveau": "warn",
+  "to": "0x0000..2734",
+  "selecteur": "2213bc0b",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "contrat appelé par 11 portefeuilles distincts, avec valeur"
+ },
+ {
+  "n": 33,
+  "niveau": "warn",
+  "to": "0x5d8c..3bfa",
+  "selecteur": "6fadcf72",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 1 seul émetteur (robot)"
+ },
+ {
+  "n": 34,
+  "niveau": "warn",
+  "to": "0xbb00..78ce",
+  "selecteur": "5023b4df",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 4 émetteurs"
+ },
+ {
+  "n": 35,
+  "niveau": "warn",
+  "to": "0x829c..02e5",
+  "selecteur": "452d744c",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat vu 1 fois"
+ },
+ {
+  "n": 36,
+  "niveau": "warn",
+  "to": "0x278d..f8d2",
+  "selecteur": "a00597a0",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "idem 30"
+ },
+ {
+  "n": 37,
+  "niveau": "warn",
+  "to": "0x278d..f8d2",
+  "selecteur": "a00597a0",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "idem 30"
+ },
+ {
+  "n": 38,
+  "niveau": "warn",
+  "to": "0x0ac0..af13",
+  "selecteur": "2f139e4f",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 1 seul émetteur, 124 appels (robot)"
+ },
+ {
+  "n": 39,
+  "niveau": "warn",
+  "to": "0xf9b0..8081",
+  "selecteur": "4a502f39",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 1 seul émetteur, 137 appels (robot)"
+ },
+ {
+  "n": 40,
+  "niveau": "warn",
+  "to": "0xcce9..d550",
+  "selecteur": "01000000",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "contrat appelé par 64 portefeuilles distincts"
+ },
+ {
+  "n": 41,
+  "niveau": "warn",
+  "to": "0x278d..f8d2",
+  "selecteur": "a00597a0",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "idem 30"
+ },
+ {
+  "n": 42,
+  "niveau": "warn",
+  "to": "0xcce9..d550",
+  "selecteur": "03000000",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "idem 40"
+ },
+ {
+  "n": 43,
+  "niveau": "warn",
+  "to": "0xd229..33d0",
+  "selecteur": "9bad26a6",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 1 seul émetteur"
+ },
+ {
+  "n": 44,
+  "niveau": "warn",
+  "to": "0xeb97..067c",
+  "selecteur": "00000000",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "contrat appelé par 56 portefeuilles distincts"
+ },
+ {
+  "n": 45,
+  "niveau": "warn",
+  "to": "0x30f7..e161",
+  "selecteur": "f2d04ca3",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "contrat appelé par 25 portefeuilles distincts"
+ },
+ {
+  "n": 46,
+  "niveau": "warn",
+  "to": "0xdbbd..9672",
+  "selecteur": "7111a994",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 1 seul émetteur, 3 appels"
+ },
+ {
+  "n": 47,
+  "niveau": "warn",
+  "to": "0xcd94..43f6",
+  "selecteur": "095ea7b3",
+  "decode": null,
+  "raisons": [
+   "w:external_spender"
+  ],
+  "label": "I",
+  "pourquoi": "approve vers contrat à 9 approbateurs"
+ },
+ {
+  "n": 48,
+  "niveau": "warn",
+  "to": "0x0b44..4f39",
+  "selecteur": "ac9650d8",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "multicall vers le routeur à 16 portefeuilles (voir 4)"
+ },
+ {
+  "n": 49,
+  "niveau": "warn",
+  "to": "0xf9b0..8081",
+  "selecteur": "4a502f39",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "I",
+  "pourquoi": "contrat à 1 seul émetteur (robot)"
+ },
+ {
+  "n": 50,
+  "niveau": "warn",
+  "to": "0xeb97..067c",
+  "selecteur": "00000000",
+  "decode": null,
+  "raisons": [
+   "w:unknown_selector",
+   "w:opaque"
+  ],
+  "label": "F",
+  "pourquoi": "idem 44"
+ }
+]

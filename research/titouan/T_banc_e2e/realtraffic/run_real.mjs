@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 const CHAIN = process.argv[2];
+const TAG = process.env.OUT_TAG ? '_' + process.env.OUT_TAG : ''; // OUT_TAG=avant : écrit real_<chaîne>_avant.json sans écraser les sorties de référence
 const HERE = path.resolve(import.meta.dirname);
 const ROOT = path.resolve(HERE, '..');
 const imp = (p) => import(pathToFileURL(path.join(ROOT, p)).href);
@@ -18,7 +19,7 @@ const CFG = {
 if (!CFG) throw new Error('chain?');
 
 // ---- hash de version des fichiers utilisés, relu juste avant le chargement (et re-vérifié à la fin)
-const used = ['engine/src/engine.mjs', 'engine/src/rules.mjs', 'engine/src/rules_extra.mjs', 'engine/src/fixes.mjs', 'engine/src/calldata.mjs', 'engine/src/registry.mjs', 'engine/src/abi.mjs', 'engine/src/util.mjs', 'run/policy.mjs', 'run/run_loop.mjs'];
+const used = ['engine/src/engine.mjs', 'engine/src/effects_abi.mjs', 'engine/src/protocols_extra.mjs', 'engine/src/rules.mjs', 'engine/src/rules_extra.mjs', 'engine/src/fixes.mjs', 'engine/src/calldata.mjs', 'engine/src/registry.mjs', 'engine/src/abi.mjs', 'engine/src/util.mjs', 'run/policy.mjs', 'run/run_loop.mjs'];
 const hashes = () => Object.fromEntries(used.map((f) => [f, createHash('sha256').update(fs.readFileSync(path.join(ROOT, f))).digest('hex').slice(0, 16)]));
 const h0 = hashes();
 const E = await imp('engine/src/engine.mjs');
@@ -74,7 +75,7 @@ function runMode(ctxExtra) {
       det = eff.risk_flags.filter((f) => f.severity !== 'info').map((f) => f.detail).slice(0, 2);
     } catch (e) { level = 'inconnu'; err = String(e.message || e).slice(0, 120); type = typeOf(t, { opaque: true }); }
     const ms = performance.now() - t0;
-    return { i: rows.length, hash: t.hash, to: t.to, sel: selOf(t), type, level, codes, notes, opaque, name, err, det, value: t.value, len: ((t.input || '0x').length - 2) / 2, ms };
+    return { i: rows.length, hash: t.hash, from: lc(t.from), to: t.to, sel: selOf(t), type, level, codes, notes, opaque, name, err, det, value: t.value, len: ((t.input || '0x').length - 2) / 2, ms };
   };
   for (const t of txs.slice(0, 300)) one(t); // échauffement JIT (non compté)
   for (const t of txs) rows.push(one(t));
@@ -111,8 +112,8 @@ const res = {
   mode_B_sans_intention_avec_protocoles_connus: summarize(rowsB),
 };
 const cr = {}; for (let i = 0; i < rowsA.length; i++) { const k = rowsA[i].level + '->' + rowsB[i].level; cr[k] = (cr[k] || 0) + 1; } res.croisement_A_vers_B = cr;
-fs.writeFileSync(path.join(OUT, `real_${CHAIN}.json`), JSON.stringify(res, null, 1));
-fs.writeFileSync(path.join(OUT, `known_list_${CHAIN}.json`), JSON.stringify({ avertissement: "Liste CIRCULAIRE : les 100 destinataires les plus fréquents de l'échantillon lui-même. Ce n'est pas une liste publique indépendante ; elle mesure un plafond (tout le trafic concentré est 'connu'), pas la couverture réelle d'un catalogue.", n_tx_echantillon: txs.length, part_du_trafic_pct: +(100 * knownShare).toFixed(1), top: top.map(([a, c]) => ({ to: a, n: c })) }, null, 1));
-fs.writeFileSync(path.join(CACHE, `rows_${CHAIN}.json`), JSON.stringify({ A: rowsA, B: rowsB }));
+fs.writeFileSync(path.join(OUT, `real_${CHAIN}${TAG}.json`), JSON.stringify(res, null, 1));
+fs.writeFileSync(path.join(OUT, `known_list_${CHAIN}${TAG}.json`), JSON.stringify({ avertissement: "Liste CIRCULAIRE : les 100 destinataires les plus fréquents de l'échantillon lui-même. Ce n'est pas une liste publique indépendante ; elle mesure un plafond (tout le trafic concentré est 'connu'), pas la couverture réelle d'un catalogue.", n_tx_echantillon: txs.length, part_du_trafic_pct: +(100 * knownShare).toFixed(1), top: top.map(([a, c]) => ({ to: a, n: c })) }, null, 1));
+fs.writeFileSync(path.join(CACHE, `rows_${CHAIN}${TAG}.json`), JSON.stringify({ A: rowsA, B: rowsB }));
 const brief = (s) => ({ par_niveau: Object.fromEntries(Object.entries(s.par_niveau).map(([k, v]) => [k, `${v.k} (${v.pct}% [${v.wilson95_pct}])`])), par_type_n: Object.fromEntries(Object.entries(s.par_type).map(([k, v]) => [k, v.n])), opaque: s.opaque_total.pct, lat: s.latence_ms, codes: s.codes_des_alertes });
 console.log(JSON.stringify({ n: txs.length, modifies: res.fichiers_modifies_pendant_la_mesure, A: brief(res.mode_A_sans_intention_sans_contexte), B: brief(res.mode_B_sans_intention_avec_protocoles_connus), croisement: cr }, null, 1));

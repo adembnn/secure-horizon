@@ -1,0 +1,68 @@
+{
+ "A": {
+  "n": 6000,
+  "violations": {
+   "rouge_descend": 0,
+   "orange_preuve_descend": 0,
+   "vert_cree": 0
+  },
+  "monte": 0,
+  "descend_opacite_seule": 38,
+  "inchange": 5962,
+  "exemples_violation": [],
+  "violations_total": 0,
+  "avertissements_pct": {
+   "avant": 32.867,
+   "apres": 32.233
+  },
+  "rouges_pct": {
+   "avant": 3.333,
+   "apres": 3.333
+  },
+  "info_pct": {
+   "avant": 1.067,
+   "apres": 1.7
+  },
+  "vert_pct": {
+   "avant": 62.733,
+   "apres": 62.733
+  },
+  "rouges_n": {
+   "avant": 200,
+   "apres": 200
+  }
+ },
+ "B": {
+  "n": 6000,
+  "violations": {
+   "rouge_descend": 0,
+   "orange_preuve_descend": 0,
+   "vert_cree": 0
+  },
+  "monte": 0,
+  "descend_opacite_seule": 28,
+  "inchange": 5972,
+  "exemples_violation": [],
+  "violations_total": 0,
+  "avertissements_pct": {
+   "avant": 30.983,
+   "apres": 30.517
+  },
+  "rouges_pct": {
+   "avant": 1.9,
+   "apres": 1.9
+  },
+  "info_pct": {
+   "avant": 2.233,
+   "apres": 2.7
+  },
+  "vert_pct": {
+   "avant": 64.883,
+   "apres": 64.883
+  },
+  "rouges_n": {
+   "avant": 114,
+   "apres": 114
+  }
+ }
+}

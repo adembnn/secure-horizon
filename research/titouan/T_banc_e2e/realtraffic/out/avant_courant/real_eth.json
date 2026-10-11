@@ -1,0 +1,814 @@
+{
+ "chaine": "eth",
+ "chainId": 1,
+ "n_tx_disponibles": 42918,
+ "n_tx_analysees": 6000,
+ "sous_echantillonnage": "6000 sur 42918, Fisher-Yates graine 20261011",
+ "fixes_actifs": "defaut KEPT=F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,F13,F14,F15,F16,F17,F18,F19,F21,F22,F23,F24,F25,F26,F27,F28,F29,F30,F31,F32,F33",
+ "version_fichiers_sha256_16": {
+  "engine/src/engine.mjs": "3c2de1406af6b2be",
+  "engine/src/rules.mjs": "75914eca31de948b",
+  "engine/src/rules_extra.mjs": "9c10cdbf81af9958",
+  "engine/src/fixes.mjs": "7ac324e0123fa6ca",
+  "engine/src/calldata.mjs": "994b969530cd9fae",
+  "engine/src/registry.mjs": "e93b80f646cda08a",
+  "engine/src/abi.mjs": "cb215b90b180391f",
+  "engine/src/util.mjs": "006143001b9834d3",
+  "run/policy.mjs": "b5746d2070f8ba5e",
+  "run/run_loop.mjs": "fa04e8c5b0e7b293"
+ },
+ "fichiers_modifies_pendant_la_mesure": false,
+ "liste_connue": {
+  "taille": 100,
+  "part_du_trafic_pct": 41,
+  "circulaire": true
+ },
+ "mode_A_sans_intention_sans_contexte": {
+  "n": 6000,
+  "par_niveau": {
+   "critical": {
+    "k": 200,
+    "n": 6000,
+    "pct": 3.333,
+    "wilson95_pct": [
+     2.908,
+     3.818
+    ]
+   },
+   "warn": {
+    "k": 1972,
+    "n": 6000,
+    "pct": 32.867,
+    "wilson95_pct": [
+     31.689,
+     34.066
+    ]
+   },
+   "info": {
+    "k": 64,
+    "n": 6000,
+    "pct": 1.067,
+    "wilson95_pct": [
+     0.836,
+     1.36
+    ]
+   },
+   "ok": {
+    "k": 3764,
+    "n": 6000,
+    "pct": 62.733,
+    "wilson95_pct": [
+     61.502,
+     63.948
+    ]
+   },
+   "inconnu": {
+    "k": 0,
+    "n": 6000,
+    "pct": 0,
+    "wilson95_pct": [
+     0,
+     0.064
+    ]
+   }
+  },
+  "par_type": {
+   "native": {
+    "n": 2232,
+    "part_du_trafic_pct": 37.2,
+    "critical": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    },
+    "warn": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    },
+    "ok": {
+     "k": 2232,
+     "n": 2232,
+     "pct": 100,
+     "wilson95_pct": [
+      99.828,
+      100
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    }
+   },
+   "erc20_transfer": {
+    "n": 1421,
+    "part_du_trafic_pct": 23.68,
+    "critical": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    },
+    "warn": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    },
+    "ok": {
+     "k": 1421,
+     "n": 1421,
+     "pct": 100,
+     "wilson95_pct": [
+      99.73,
+      100
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    }
+   },
+   "approve": {
+    "n": 334,
+    "part_du_trafic_pct": 5.57,
+    "critical": {
+     "k": 124,
+     "n": 334,
+     "pct": 37.126,
+     "wilson95_pct": [
+      32.118,
+      42.426
+     ]
+    },
+    "warn": {
+     "k": 178,
+     "n": 334,
+     "pct": 53.293,
+     "wilson95_pct": [
+      47.936,
+      58.576
+     ]
+    },
+    "info": {
+     "k": 22,
+     "n": 334,
+     "pct": 6.587,
+     "wilson95_pct": [
+      4.39,
+      9.771
+     ]
+    },
+    "ok": {
+     "k": 10,
+     "n": 334,
+     "pct": 2.994,
+     "wilson95_pct": [
+      1.634,
+      5.423
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 334,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      1.137
+     ]
+    }
+   },
+   "appel_connu": {
+    "n": 283,
+    "part_du_trafic_pct": 4.72,
+    "critical": {
+     "k": 64,
+     "n": 283,
+     "pct": 22.615,
+     "wilson95_pct": [
+      18.126,
+      27.837
+     ]
+    },
+    "warn": {
+     "k": 76,
+     "n": 283,
+     "pct": 26.855,
+     "wilson95_pct": [
+      22.027,
+      32.304
+     ]
+    },
+    "info": {
+     "k": 42,
+     "n": 283,
+     "pct": 14.841,
+     "wilson95_pct": [
+      11.171,
+      19.453
+     ]
+    },
+    "ok": {
+     "k": 101,
+     "n": 283,
+     "pct": 35.689,
+     "wilson95_pct": [
+      30.333,
+      41.428
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 283,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      1.339
+     ]
+    }
+   },
+   "opaque": {
+    "n": 1727,
+    "part_du_trafic_pct": 28.78,
+    "critical": {
+     "k": 12,
+     "n": 1727,
+     "pct": 0.695,
+     "wilson95_pct": [
+      0.398,
+      1.211
+     ]
+    },
+    "warn": {
+     "k": 1715,
+     "n": 1727,
+     "pct": 99.305,
+     "wilson95_pct": [
+      98.789,
+      99.602
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 1727,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.222
+     ]
+    },
+    "ok": {
+     "k": 0,
+     "n": 1727,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.222
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 1727,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.222
+     ]
+    }
+   },
+   "creation": {
+    "n": 3,
+    "part_du_trafic_pct": 0.05,
+    "critical": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    },
+    "warn": {
+     "k": 3,
+     "n": 3,
+     "pct": 100,
+     "wilson95_pct": [
+      43.849,
+      100
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    },
+    "ok": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    }
+   }
+  },
+  "latence_ms": {
+   "moyenne": 0.0771,
+   "p50": 0.0307,
+   "p95": 0.2536,
+   "p99": 0.8174,
+   "max": 25.377
+  },
+  "alerte_critical_ou_warn": {
+   "k": 2172,
+   "n": 6000,
+   "pct": 36.2,
+   "wilson95_pct": [
+    34.993,
+    37.425
+   ]
+  },
+  "codes_des_alertes": {
+   "w:opaque": 1730,
+   "w:unknown_selector": 1718,
+   "w:external_spender": 329,
+   "c:unlimited_allowance": 154,
+   "w:slippage_unbounded": 97,
+   "w:embedded_calls": 36,
+   "w:erc4337_handleOps": 30,
+   "w:ur_command_opaque": 23,
+   "w:unlimited_allowance": 20,
+   "c:swap_recipient_not_self": 16,
+   "c:approval_for_all": 14,
+   "c:router_payout_to_other": 9,
+   "c:embedded_calls": 8,
+   "w:contract_creation": 3,
+   "w:nested_approval": 3
+  },
+  "opaque_total": {
+   "k": 1730,
+   "n": 6000,
+   "pct": 28.833,
+   "wilson95_pct": [
+    27.701,
+    29.993
+   ]
+  }
+ },
+ "mode_B_sans_intention_avec_protocoles_connus": {
+  "n": 6000,
+  "par_niveau": {
+   "critical": {
+    "k": 114,
+    "n": 6000,
+    "pct": 1.9,
+    "wilson95_pct": [
+     1.584,
+     2.277
+    ]
+   },
+   "warn": {
+    "k": 1859,
+    "n": 6000,
+    "pct": 30.983,
+    "wilson95_pct": [
+     29.826,
+     32.165
+    ]
+   },
+   "info": {
+    "k": 134,
+    "n": 6000,
+    "pct": 2.233,
+    "wilson95_pct": [
+     1.889,
+     2.639
+    ]
+   },
+   "ok": {
+    "k": 3893,
+    "n": 6000,
+    "pct": 64.883,
+    "wilson95_pct": [
+     63.666,
+     66.081
+    ]
+   },
+   "inconnu": {
+    "k": 0,
+    "n": 6000,
+    "pct": 0,
+    "wilson95_pct": [
+     0,
+     0.064
+    ]
+   }
+  },
+  "par_type": {
+   "native": {
+    "n": 2232,
+    "part_du_trafic_pct": 37.2,
+    "critical": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    },
+    "warn": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    },
+    "ok": {
+     "k": 2232,
+     "n": 2232,
+     "pct": 100,
+     "wilson95_pct": [
+      99.828,
+      100
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 2232,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.172
+     ]
+    }
+   },
+   "erc20_transfer": {
+    "n": 1421,
+    "part_du_trafic_pct": 23.68,
+    "critical": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    },
+    "warn": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    },
+    "ok": {
+     "k": 1421,
+     "n": 1421,
+     "pct": 100,
+     "wilson95_pct": [
+      99.73,
+      100
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 1421,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.27
+     ]
+    }
+   },
+   "approve": {
+    "n": 334,
+    "part_du_trafic_pct": 5.57,
+    "critical": {
+     "k": 77,
+     "n": 334,
+     "pct": 23.054,
+     "wilson95_pct": [
+      18.859,
+      27.862
+     ]
+    },
+    "warn": {
+     "k": 100,
+     "n": 334,
+     "pct": 29.94,
+     "wilson95_pct": [
+      25.279,
+      35.057
+     ]
+    },
+    "info": {
+     "k": 22,
+     "n": 334,
+     "pct": 6.587,
+     "wilson95_pct": [
+      4.39,
+      9.771
+     ]
+    },
+    "ok": {
+     "k": 135,
+     "n": 334,
+     "pct": 40.419,
+     "wilson95_pct": [
+      35.294,
+      45.762
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 334,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      1.137
+     ]
+    }
+   },
+   "appel_connu": {
+    "n": 335,
+    "part_du_trafic_pct": 5.58,
+    "critical": {
+     "k": 28,
+     "n": 335,
+     "pct": 8.358,
+     "wilson95_pct": [
+      5.846,
+      11.815
+     ]
+    },
+    "warn": {
+     "k": 90,
+     "n": 335,
+     "pct": 26.866,
+     "wilson95_pct": [
+      22.401,
+      31.855
+     ]
+    },
+    "info": {
+     "k": 112,
+     "n": 335,
+     "pct": 33.433,
+     "wilson95_pct": [
+      28.594,
+      38.647
+     ]
+    },
+    "ok": {
+     "k": 105,
+     "n": 335,
+     "pct": 31.343,
+     "wilson95_pct": [
+      26.611,
+      36.499
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 335,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      1.134
+     ]
+    }
+   },
+   "opaque": {
+    "n": 1675,
+    "part_du_trafic_pct": 27.92,
+    "critical": {
+     "k": 9,
+     "n": 1675,
+     "pct": 0.537,
+     "wilson95_pct": [
+      0.283,
+      1.018
+     ]
+    },
+    "warn": {
+     "k": 1666,
+     "n": 1675,
+     "pct": 99.463,
+     "wilson95_pct": [
+      98.982,
+      99.717
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 1675,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.229
+     ]
+    },
+    "ok": {
+     "k": 0,
+     "n": 1675,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.229
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 1675,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      0.229
+     ]
+    }
+   },
+   "creation": {
+    "n": 3,
+    "part_du_trafic_pct": 0.05,
+    "critical": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    },
+    "warn": {
+     "k": 3,
+     "n": 3,
+     "pct": 100,
+     "wilson95_pct": [
+      43.849,
+      100
+     ]
+    },
+    "info": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    },
+    "ok": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    },
+    "inconnu": {
+     "k": 0,
+     "n": 3,
+     "pct": 0,
+     "wilson95_pct": [
+      0,
+      56.151
+     ]
+    }
+   }
+  },
+  "latence_ms": {
+   "moyenne": 0.1039,
+   "p50": 0.0547,
+   "p95": 0.2981,
+   "p99": 0.739,
+   "max": 28.862
+  },
+  "alerte_critical_ou_warn": {
+   "k": 1973,
+   "n": 6000,
+   "pct": 32.883,
+   "wilson95_pct": [
+    31.706,
+    34.083
+   ]
+  },
+  "codes_des_alertes": {
+   "w:opaque": 1678,
+   "w:unknown_selector": 1666,
+   "w:external_spender": 160,
+   "w:slippage_unbounded": 97,
+   "c:unlimited_allowance": 64,
+   "w:unlimited_allowance": 41,
+   "w:embedded_calls": 36,
+   "w:erc4337_handleOps": 30,
+   "w:ur_command_opaque": 23,
+   "c:swap_recipient_not_self": 16,
+   "c:approval_for_all": 14,
+   "c:router_payout_to_other": 9,
+   "c:embedded_calls": 8,
+   "w:contract_creation": 3,
+   "w:nested_approval": 3
+  },
+  "opaque_total": {
+   "k": 1678,
+   "n": 6000,
+   "pct": 27.967,
+   "wilson95_pct": [
+    26.845,
+    29.116
+   ]
+  }
+ },
+ "croisement_A_vers_B": {
+  "ok->ok": 3764,
+  "warn->warn": 1841,
+  "info->info": 64,
+  "critical->critical": 113,
+  "critical->ok": 50,
+  "warn->info": 51,
+  "warn->ok": 79,
+  "critical->info": 19,
+  "critical->warn": 18,
+  "warn->critical": 1
+ }
+}

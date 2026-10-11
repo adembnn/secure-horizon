@@ -4,17 +4,19 @@
  "n_tx_disponibles": 42918,
  "n_tx_analysees": 6000,
  "sous_echantillonnage": "6000 sur 42918, Fisher-Yates graine 20261011",
- "fixes_actifs": "defaut KEPT=F1,F2,F3,F4,F5,F6,F7,F8,F9,F10",
+ "fixes_actifs": "defaut KEPT=F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,F13,F14,F15,F16,F17,F18,F19,F21,F22,F23,F24,F25,F26,F27,F28,F29,F30,F31,F32,F33,F34",
  "version_fichiers_sha256_16": {
   "engine/src/engine.mjs": "3c2de1406af6b2be",
+  "engine/src/effects_abi.mjs": "ce0126ecbc6f8fa3",
+  "engine/src/protocols_extra.mjs": "a1d1efd5532eb9d3",
   "engine/src/rules.mjs": "75914eca31de948b",
-  "engine/src/rules_extra.mjs": "5267934bfe087f79",
-  "engine/src/fixes.mjs": "c3bdb09800c72d4c",
+  "engine/src/rules_extra.mjs": "032e882b2bf09ee1",
+  "engine/src/fixes.mjs": "4821242c9d42616d",
   "engine/src/calldata.mjs": "994b969530cd9fae",
   "engine/src/registry.mjs": "e93b80f646cda08a",
   "engine/src/abi.mjs": "cb215b90b180391f",
   "engine/src/util.mjs": "006143001b9834d3",
-  "run/policy.mjs": "ce761745beb16815",
+  "run/policy.mjs": "b5746d2070f8ba5e",
   "run/run_loop.mjs": "fa04e8c5b0e7b293"
  },
  "fichiers_modifies_pendant_la_mesure": false,
@@ -36,21 +38,21 @@
     ]
    },
    "warn": {
-    "k": 1972,
+    "k": 1934,
     "n": 6000,
-    "pct": 32.867,
+    "pct": 32.233,
     "wilson95_pct": [
-     31.689,
-     34.066
+     31.062,
+     33.427
     ]
    },
    "info": {
-    "k": 64,
+    "k": 102,
     "n": 6000,
-    "pct": 1.067,
+    "pct": 1.7,
     "wilson95_pct": [
-     0.836,
-     1.36
+     1.402,
+     2.059
     ]
    },
    "ok": {
@@ -221,100 +223,100 @@
     }
    },
    "appel_connu": {
-    "n": 283,
-    "part_du_trafic_pct": 4.72,
+    "n": 321,
+    "part_du_trafic_pct": 5.35,
     "critical": {
      "k": 64,
-     "n": 283,
-     "pct": 22.615,
+     "n": 321,
+     "pct": 19.938,
      "wilson95_pct": [
-      18.126,
-      27.837
+      15.934,
+      24.653
      ]
     },
     "warn": {
      "k": 76,
-     "n": 283,
-     "pct": 26.855,
+     "n": 321,
+     "pct": 23.676,
      "wilson95_pct": [
-      22.027,
-      32.304
+      19.354,
+      28.621
      ]
     },
     "info": {
-     "k": 42,
-     "n": 283,
-     "pct": 14.841,
+     "k": 80,
+     "n": 321,
+     "pct": 24.922,
      "wilson95_pct": [
-      11.171,
-      19.453
+      20.505,
+      29.932
      ]
     },
     "ok": {
      "k": 101,
-     "n": 283,
-     "pct": 35.689,
+     "n": 321,
+     "pct": 31.464,
      "wilson95_pct": [
-      30.333,
-      41.428
+      26.629,
+      36.738
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 283,
+     "n": 321,
      "pct": 0,
      "wilson95_pct": [
       0,
-      1.339
+      1.183
      ]
     }
    },
    "opaque": {
-    "n": 1727,
-    "part_du_trafic_pct": 28.78,
+    "n": 1689,
+    "part_du_trafic_pct": 28.15,
     "critical": {
      "k": 12,
-     "n": 1727,
-     "pct": 0.695,
+     "n": 1689,
+     "pct": 0.71,
      "wilson95_pct": [
-      0.398,
-      1.211
+      0.407,
+      1.238
      ]
     },
     "warn": {
-     "k": 1715,
-     "n": 1727,
-     "pct": 99.305,
+     "k": 1677,
+     "n": 1689,
+     "pct": 99.29,
      "wilson95_pct": [
-      98.789,
-      99.602
+      98.762,
+      99.593
      ]
     },
     "info": {
      "k": 0,
-     "n": 1727,
+     "n": 1689,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.222
+      0.227
      ]
     },
     "ok": {
      "k": 0,
-     "n": 1727,
+     "n": 1689,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.222
+      0.227
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 1727,
+     "n": 1689,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.222
+      0.227
      ]
     }
    },
@@ -369,24 +371,24 @@
    }
   },
   "latence_ms": {
-   "moyenne": 0.1435,
-   "p50": 0.0592,
-   "p95": 0.5012,
-   "p99": 1.5229,
-   "max": 49.094
+   "moyenne": 0.1136,
+   "p50": 0.0448,
+   "p95": 0.3731,
+   "p99": 1.1224,
+   "max": 25.985
   },
   "alerte_critical_ou_warn": {
-   "k": 2172,
+   "k": 2134,
    "n": 6000,
-   "pct": 36.2,
+   "pct": 35.567,
    "wilson95_pct": [
-    34.993,
-    37.425
+    34.365,
+    36.787
    ]
   },
   "codes_des_alertes": {
-   "w:opaque": 1730,
-   "w:unknown_selector": 1718,
+   "w:opaque": 1692,
+   "w:unknown_selector": 1680,
    "w:external_spender": 329,
    "c:unlimited_allowance": 154,
    "w:slippage_unbounded": 97,
@@ -402,12 +404,12 @@
    "w:nested_approval": 3
   },
   "opaque_total": {
-   "k": 1730,
+   "k": 1692,
    "n": 6000,
-   "pct": 28.833,
+   "pct": 28.2,
    "wilson95_pct": [
-    27.701,
-    29.993
+    27.076,
+    29.352
    ]
   }
  },
@@ -415,39 +417,39 @@
   "n": 6000,
   "par_niveau": {
    "critical": {
-    "k": 113,
+    "k": 114,
     "n": 6000,
-    "pct": 1.883,
+    "pct": 1.9,
     "wilson95_pct": [
-     1.569,
-     2.259
+     1.584,
+     2.277
     ]
    },
    "warn": {
-    "k": 1980,
+    "k": 1831,
     "n": 6000,
-    "pct": 33,
+    "pct": 30.517,
     "wilson95_pct": [
-     31.821,
-     34.2
+     29.364,
+     31.694
     ]
    },
    "info": {
-    "k": 64,
+    "k": 162,
     "n": 6000,
-    "pct": 1.067,
+    "pct": 2.7,
     "wilson95_pct": [
-     0.836,
-     1.36
+     2.319,
+     3.141
     ]
    },
    "ok": {
-    "k": 3843,
+    "k": 3893,
     "n": 6000,
-    "pct": 64.05,
+    "pct": 64.883,
     "wilson95_pct": [
-     62.827,
-     65.255
+     63.666,
+     66.081
     ]
    },
    "inconnu": {
@@ -572,12 +574,12 @@
      ]
     },
     "warn": {
-     "k": 147,
+     "k": 100,
      "n": 334,
-     "pct": 44.012,
+     "pct": 29.94,
      "wilson95_pct": [
-      38.786,
-      49.374
+      25.279,
+      35.057
      ]
     },
     "info": {
@@ -590,12 +592,12 @@
      ]
     },
     "ok": {
-     "k": 88,
+     "k": 135,
      "n": 334,
-     "pct": 26.347,
+     "pct": 40.419,
      "wilson95_pct": [
-      21.911,
-      31.321
+      35.294,
+      45.762
      ]
     },
     "inconnu": {
@@ -609,100 +611,100 @@
     }
    },
    "appel_connu": {
-    "n": 283,
-    "part_du_trafic_pct": 4.72,
+    "n": 363,
+    "part_du_trafic_pct": 6.05,
     "critical": {
-     "k": 27,
-     "n": 283,
-     "pct": 9.541,
+     "k": 28,
+     "n": 363,
+     "pct": 7.713,
      "wilson95_pct": [
-      6.64,
-      13.525
+      5.39,
+      10.922
      ]
     },
     "warn": {
-     "k": 112,
-     "n": 283,
-     "pct": 39.576,
+     "k": 90,
+     "n": 363,
+     "pct": 24.793,
      "wilson95_pct": [
-      34.055,
-      45.377
+      20.631,
+      29.484
      ]
     },
     "info": {
-     "k": 42,
-     "n": 283,
-     "pct": 14.841,
+     "k": 140,
+     "n": 363,
+     "pct": 38.567,
      "wilson95_pct": [
-      11.171,
-      19.453
+      33.705,
+      43.67
      ]
     },
     "ok": {
-     "k": 102,
-     "n": 283,
-     "pct": 36.042,
+     "k": 105,
+     "n": 363,
+     "pct": 28.926,
      "wilson95_pct": [
-      30.67,
-      41.789
+      24.501,
+      33.792
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 283,
+     "n": 363,
      "pct": 0,
      "wilson95_pct": [
       0,
-      1.339
+      1.047
      ]
     }
    },
    "opaque": {
-    "n": 1727,
-    "part_du_trafic_pct": 28.78,
+    "n": 1647,
+    "part_du_trafic_pct": 27.45,
     "critical": {
      "k": 9,
-     "n": 1727,
-     "pct": 0.521,
+     "n": 1647,
+     "pct": 0.546,
      "wilson95_pct": [
-      0.274,
-      0.987
+      0.288,
+      1.035
      ]
     },
     "warn": {
-     "k": 1718,
-     "n": 1727,
-     "pct": 99.479,
+     "k": 1638,
+     "n": 1647,
+     "pct": 99.454,
      "wilson95_pct": [
-      99.013,
-      99.726
+      98.965,
+      99.712
      ]
     },
     "info": {
      "k": 0,
-     "n": 1727,
+     "n": 1647,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.222
+      0.233
      ]
     },
     "ok": {
      "k": 0,
-     "n": 1727,
+     "n": 1647,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.222
+      0.233
      ]
     },
     "inconnu": {
      "k": 0,
-     "n": 1727,
+     "n": 1647,
      "pct": 0,
      "wilson95_pct": [
       0,
-      0.222
+      0.233
      ]
     }
    },
@@ -757,28 +759,28 @@
    }
   },
   "latence_ms": {
-   "moyenne": 0.1557,
-   "p50": 0.0894,
-   "p95": 0.4646,
-   "p99": 1.1584,
-   "max": 44.308
+   "moyenne": 0.1217,
+   "p50": 0.0645,
+   "p95": 0.3417,
+   "p99": 0.8769,
+   "max": 23.237
   },
   "alerte_critical_ou_warn": {
-   "k": 2093,
+   "k": 1945,
    "n": 6000,
-   "pct": 34.883,
+   "pct": 32.417,
    "wilson95_pct": [
-    33.687,
-    36.099
+    31.244,
+    33.612
    ]
   },
   "codes_des_alertes": {
-   "w:opaque": 1730,
-   "w:unknown_selector": 1718,
+   "w:opaque": 1650,
+   "w:unknown_selector": 1638,
    "w:external_spender": 160,
-   "w:unlimited_allowance": 110,
    "w:slippage_unbounded": 97,
    "c:unlimited_allowance": 64,
+   "w:unlimited_allowance": 41,
    "w:embedded_calls": 36,
    "w:erc4337_handleOps": 30,
    "w:ur_command_opaque": 23,
@@ -790,21 +792,25 @@
    "w:nested_approval": 3
   },
   "opaque_total": {
-   "k": 1730,
+   "k": 1650,
    "n": 6000,
-   "pct": 28.833,
+   "pct": 27.5,
    "wilson95_pct": [
-    27.701,
-    29.993
+    26.385,
+    28.644
    ]
   }
  },
  "croisement_A_vers_B": {
   "ok->ok": 3764,
-  "warn->warn": 1893,
-  "info->info": 64,
+  "warn->warn": 1813,
+  "info->info": 102,
   "critical->critical": 113,
-  "critical->warn": 87,
-  "warn->ok": 79
+  "critical->ok": 50,
+  "warn->info": 41,
+  "warn->ok": 79,
+  "critical->info": 19,
+  "critical->warn": 18,
+  "warn->critical": 1
  }
 }

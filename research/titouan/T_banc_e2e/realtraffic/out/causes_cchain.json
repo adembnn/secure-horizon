@@ -1,0 +1,393 @@
+{
+ "chaine": "cchain",
+ "n": 6325,
+ "avertissements_par_cause_avant": {
+  "opaque : sélecteur inconnu": 4250,
+  "opaque : préfixe non-sélecteur (octet de mode + zéros)": 436,
+  "preuve d'effet (droit, bénéficiaire, prix, sosie)": 243,
+  "ERC-4337 handleOps": 39,
+  "création de contrat": 7,
+  "Universal Router, commande non décodée": 2,
+  "calldata mal formé": 2,
+  "opaque : donnée sans sélecteur (< 4 octets)": 1
+ },
+ "avertissements_par_cause_apres": {
+  "opaque : sélecteur inconnu": 4060,
+  "opaque : préfixe non-sélecteur (octet de mode + zéros)": 436,
+  "preuve d'effet (droit, bénéficiaire, prix, sosie)": 243,
+  "ERC-4337 handleOps": 39,
+  "création de contrat": 7,
+  "Universal Router, commande non décodée": 2,
+  "calldata mal formé": 2,
+  "opaque : donnée sans sélecteur (< 4 octets)": 1
+ },
+ "top30_selecteurs_inconnus_avant": [
+  {
+   "selecteur": "0xa00597a0",
+   "n": 337,
+   "pct_des_tx": 5.33,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 15,
+   "signature_publique": "BrrrrrrrrrrrrrZ2826820544()",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 337
+  },
+  {
+   "selecteur": "0x9bad26a6",
+   "n": 306,
+   "pct_des_tx": 4.84,
+   "cibles_distinctes": 22,
+   "expediteurs_distincts": 22,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 306
+  },
+  {
+   "selecteur": "0x35faa416",
+   "n": 200,
+   "pct_des_tx": 3.16,
+   "cibles_distinctes": 3,
+   "expediteurs_distincts": 3,
+   "signature_publique": "sweep()",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 200
+  },
+  {
+   "selecteur": "0x00000000",
+   "n": 183,
+   "pct_des_tx": 2.89,
+   "cibles_distinctes": 5,
+   "expediteurs_distincts": 91,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": true,
+   "encore_avertissement_apres": 183
+  },
+  {
+   "selecteur": "0x01000000",
+   "n": 173,
+   "pct_des_tx": 2.74,
+   "cibles_distinctes": 2,
+   "expediteurs_distincts": 60,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 173
+  },
+  {
+   "selecteur": "0x8b04f947",
+   "n": 127,
+   "pct_des_tx": 2.01,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 26,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 127
+  },
+  {
+   "selecteur": "0x4a502f39",
+   "n": 121,
+   "pct_des_tx": 1.91,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 1,
+   "signature_publique": "postStateList(address[],uint128[],uint64[],uint64[],uint256)",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 121
+  },
+  {
+   "selecteur": "0x2f139e4f",
+   "n": 120,
+   "pct_des_tx": 1.9,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 1,
+   "signature_publique": "execute_route(uint256,uint256,address,address,(address,address,address,uint8,uint24,address,bytes32,int128[])[])",
+   "famille": "échange / routeur",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 120
+  },
+  {
+   "selecteur": "0xd0295134",
+   "n": 110,
+   "pct_des_tx": 1.74,
+   "cibles_distinctes": 3,
+   "expediteurs_distincts": 1,
+   "signature_publique": "tuneParameters(address,uint256,uint256,uint256,uint256,uint256)",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 110
+  },
+  {
+   "selecteur": "0xcf1393d9",
+   "n": 103,
+   "pct_des_tx": 1.63,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 1,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 103
+  },
+  {
+   "selecteur": "0x9b62f8b4",
+   "n": 101,
+   "pct_des_tx": 1.6,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 1,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 101
+  },
+  {
+   "selecteur": "0x6fadcf72",
+   "n": 100,
+   "pct_des_tx": 1.58,
+   "cibles_distinctes": 16,
+   "expediteurs_distincts": 16,
+   "signature_publique": "forward(address,bytes)",
+   "famille": "exécution groupée / relais",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 100
+  },
+  {
+   "selecteur": "0xaae42407",
+   "n": 94,
+   "pct_des_tx": 1.49,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 6,
+   "signature_publique": "IPredict(uint128,bytes6,bytes25,int16,bytes18,uint128,bytes,bytes15)",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 94
+  },
+  {
+   "selecteur": "0x9324b8c2",
+   "n": 75,
+   "pct_des_tx": 1.19,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 3,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 75
+  },
+  {
+   "selecteur": "0xe21fd0e9",
+   "n": 63,
+   "pct_des_tx": 1,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 20,
+   "signature_publique": "swap((address,address,bytes,(address,address,address[],uint256[],address[],uint256[],address,uint256,uint256,uint256,bytes),bytes))",
+   "famille": "échange / routeur",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 63
+  },
+  {
+   "selecteur": "0xac9650d8",
+   "n": 62,
+   "pct_des_tx": 0.98,
+   "cibles_distinctes": 12,
+   "expediteurs_distincts": 36,
+   "signature_publique": "multicall(bytes[])",
+   "famille": "exécution groupée / relais",
+   "lu_par_table_abi": true,
+   "encore_avertissement_apres": 62
+  },
+  {
+   "selecteur": "0x2213bc0b",
+   "n": 62,
+   "pct_des_tx": 0.98,
+   "cibles_distinctes": 2,
+   "expediteurs_distincts": 13,
+   "signature_publique": "exec(address,address,uint256,address,bytes)",
+   "famille": "exécution groupée / relais",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 62
+  },
+  {
+   "selecteur": "0xf1910f70",
+   "n": 59,
+   "pct_des_tx": 0.93,
+   "cibles_distinctes": 2,
+   "expediteurs_distincts": 15,
+   "signature_publique": "swapExactIn(address,address,address,uint256,uint256,address,uint256,bytes)",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 59
+  },
+  {
+   "selecteur": "0xac756684",
+   "n": 48,
+   "pct_des_tx": 0.76,
+   "cibles_distinctes": 3,
+   "expediteurs_distincts": 1,
+   "signature_publique": "tunePrice(address,uint256,uint256,uint256)",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 48
+  },
+  {
+   "selecteur": "0x20265830",
+   "n": 42,
+   "pct_des_tx": 0.66,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 1,
+   "signature_publique": "liquidateAsset(string[],address[][])",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 42
+  },
+  {
+   "selecteur": "0x348011ae",
+   "n": 42,
+   "pct_des_tx": 0.66,
+   "cibles_distinctes": 3,
+   "expediteurs_distincts": 1,
+   "signature_publique": "publishStatements(string[],string[],uint256[],address[],uint256[])",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 42
+  },
+  {
+   "selecteur": "0x03000000",
+   "n": 42,
+   "pct_des_tx": 0.66,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 29,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 42
+  },
+  {
+   "selecteur": "0xa026383e",
+   "n": 41,
+   "pct_des_tx": 0.65,
+   "cibles_distinctes": 2,
+   "expediteurs_distincts": 6,
+   "signature_publique": "exactInputSingle((address,address,int24,address,uint256,uint256,uint256,uint160))",
+   "famille": "échange / routeur",
+   "lu_par_table_abi": true,
+   "encore_avertissement_apres": 0
+  },
+  {
+   "selecteur": "0x9e0ee74c",
+   "n": 41,
+   "pct_des_tx": 0.65,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 14,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 41
+  },
+  {
+   "selecteur": "0x40c10f19",
+   "n": 38,
+   "pct_des_tx": 0.6,
+   "cibles_distinctes": 2,
+   "expediteurs_distincts": 2,
+   "signature_publique": "mint(address,uint256)",
+   "famille": "mint",
+   "lu_par_table_abi": true,
+   "encore_avertissement_apres": 38
+  },
+  {
+   "selecteur": "0x49c36c07",
+   "n": 38,
+   "pct_des_tx": 0.6,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 9,
+   "signature_publique": "initiateApeBreedingByOwner6538289081()",
+   "famille": "entretien / oracle / robot (noms)",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 38
+  },
+  {
+   "selecteur": "0x80c3da8d",
+   "n": 37,
+   "pct_des_tx": 0.58,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 5,
+   "signature_publique": "batchExecute(address[],bytes[])",
+   "famille": "exécution groupée / relais",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 37
+  },
+  {
+   "selecteur": "0x5c182fb9",
+   "n": 35,
+   "pct_des_tx": 0.55,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 8,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 35
+  },
+  {
+   "selecteur": "0x771d503f",
+   "n": 35,
+   "pct_des_tx": 0.55,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 10,
+   "signature_publique": null,
+   "famille": "sélecteur non cherché dans la base",
+   "lu_par_table_abi": false,
+   "encore_avertissement_apres": 35
+  },
+  {
+   "selecteur": "0x1764babc",
+   "n": 33,
+   "pct_des_tx": 0.52,
+   "cibles_distinctes": 1,
+   "expediteurs_distincts": 2,
+   "signature_publique": "exactOutputSingle((address,address,address,address,uint256,uint256,uint256,uint160))",
+   "famille": "échange / routeur",
+   "lu_par_table_abi": true,
+   "encore_avertissement_apres": 0
+  }
+ ],
+ "familles_des_selecteurs_inconnus_avant_selon_nom_public": {
+  "sélecteur non cherché dans la base": 2721,
+  "entretien / oracle / robot (noms)": 1198,
+  "échange / routeur": 385,
+  "exécution groupée / relais": 308,
+  "mint": 39,
+  "autre nom public": 28,
+  "dépôt / pont / prêt": 21
+ },
+ "appels_decodes_sans_alerte_ou_connus_avant": {
+  "native": 853,
+  "erc20_transfer": 479,
+  "appel_connu": 103,
+  "execute": 23,
+  "transfer": 10,
+  "exactInputSingle": 7,
+  "executeBatch": 2
+ },
+ "selecteurs_passes_de_warn_a_info": {
+  "a026383e": 41,
+  "1764babc": 33,
+  "5023b4df": 33,
+  "c714e838": 33,
+  "1679c792": 32,
+  "07ed2379": 6,
+  "2a443fae": 6,
+  "69328dec": 3,
+  "4e71d92d": 1,
+  "92fe8e70": 1,
+  "80500d20": 1
+ },
+ "opaques_restants": {
+  "n": 4522,
+  "part_expediteur_10tx_ou_plus_dans_echantillon_pct": 52.9,
+  "part_cible_3_expediteurs_ou_moins_pct": 50.5,
+  "part_valeur_native_jointe_pct": 5.2
+ }
+}
