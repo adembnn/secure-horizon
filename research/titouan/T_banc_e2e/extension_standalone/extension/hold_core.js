@@ -27,8 +27,10 @@ export function frictionFor(level, cfg = {}) {
 }
 
 // Puts a record on its verdict screen : the deadline starts now, as an absolute timestamp.
+// `verdict.relief` (set by the gatekeeper only, never taken from the engine) : the one gap whose correction is already done or
+// offered (a spending right wider than the written amount, in a transaction) has no waiting time. Never on Manipulation.
 export function enterVerdict(rec, verdict, cfg, now) {
-  const f = frictionFor(verdict.level, cfg);
+  const f = verdict.relief === true && verdict.level !== 'manipulation' ? { phrase: false, waitMs: 0 } : frictionFor(verdict.level, cfg);
   rec.stage = 'verdict';
   rec.verdict = verdict;
   rec.level = verdict.level;

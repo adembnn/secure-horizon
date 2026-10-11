@@ -79,7 +79,7 @@
   },
   {
    "file": "extension_standalone/src/manifest.json",
-   "sha256": "9197f229710272041a60e8f1952335b619ec6c3ad9efc7dde47b93ce60d56288"
+   "sha256": "06473dda4bbd6fc948665cfbbeb91d43b2a659fa9455a8ded7f3f55e6e467103"
   },
   {
    "file": "extension_standalone/src/options.html",
@@ -91,7 +91,7 @@
   },
   {
    "file": "extension/bridge.js",
-   "sha256": "465268ca79c74b57a5724b17015bfe2026bc6ab4c8290e3df8cc766f9ccabdef"
+   "sha256": "888a6c9ed5ba547bdf654a130da615a07996ccc72bb77b2f2fbab8195ac2c10f"
   },
   {
    "file": "extension/classifier_client.js",
@@ -99,23 +99,23 @@
   },
   {
    "file": "extension/effect_sim.js",
-   "sha256": "5b6cd1bac3594178e64615012f1e306a4ae2ec43137054fc8a8070106c4f8a82"
+   "sha256": "2e221e0786a91cca77db33f034fa4537671a34fa0684baddd62b1fcd70e00f12"
   },
   {
    "file": "extension/gatekeeper.js",
-   "sha256": "58390331b6f5d3dbd7d12f3213881e23291ac7f693c3de3dc266d7a4851fc2b6"
+   "sha256": "3e227bf422b71df3ce1d3832b2792dff8fbbc039300bbf3a322a20636c5ba957"
   },
   {
    "file": "extension/hold_core.js",
-   "sha256": "54c185160c8fe9794369e4a334c8f7e146b164c87c998f8984e5f1056043298c"
+   "sha256": "aa7c50036ab3d0e37ff959d20f23686bc08f23a3a968bea3dc340a4d65f2f04b"
   },
   {
    "file": "extension/inject.js",
-   "sha256": "0df04418345ca2fbb84c00ada03f3699310da55fba09b3abe82306e929e7f9d3"
+   "sha256": "7352123d31007cd3c60b37c74c3bd5f6d3214ff748627378a314f6994f9b969d"
   },
   {
    "file": "extension/intent_text.js",
-   "sha256": "f9dc55dcf9f23a479f8eca7e38954cf696071737a42b9c18436e11e609c73e67"
+   "sha256": "df3d6a4954dc686ee36a37203e1c33722626f174cf06e1715dd1b0405e470a53"
   },
   {
    "file": "extension/keyword_intent.js",
@@ -123,19 +123,19 @@
   },
   {
    "file": "extension/options.js",
-   "sha256": "9c06a4a780e1ecff01bdba672cc46055a5a5fa2508ded20bdf5c8ca2c2c3df2b"
+   "sha256": "3b59021f1fa72ee9c5b83ec218699a9d61627a286a19b5b1e80482d561e20a95"
   },
   {
    "file": "extension/outcome.js",
-   "sha256": "db376f74f0b53bea2e687351e2693953bee5f26a9d887cedf9e637162edf1b4e"
+   "sha256": "a44e820a9663390a232dbd0063b3f042c2701878a132edc41c77519030e28eeb"
   },
   {
    "file": "extension/ui/screen.css",
-   "sha256": "3199081b9753aeaffb219ddc351f38c5c4ba1f1cf7a7943f751052a996d1f408"
+   "sha256": "dd98c23f57fb2450b1d5092009e444844a054d6772d2ec2bd8feb29566be7672"
   },
   {
    "file": "extension/ui/screen.js",
-   "sha256": "b248cf2d90b90df75eab590f5962026882c10e32a275b9bab5f87e7eec4e606f"
+   "sha256": "630ab48bd32e124f2e9d613097ceafe41fe9270556d084a1574f7519ee2b2929"
   },
   {
    "file": "extension/window.css",
@@ -143,7 +143,7 @@
   },
   {
    "file": "extension/window.html",
-   "sha256": "f61f4ea75410aa6f207aa490a57896a9d70f851b35b9d6b2458e4666d9c1a9e7"
+   "sha256": "cf3387482d9f4e9e3e272968b1a20dc26c729892727a879b837f3ad2baedda16"
   },
   {
    "file": "extension/window.js",
@@ -151,7 +151,7 @@
   },
   {
    "file": "extension/written_check.js",
-   "sha256": "0c943c73d51e0be45d42b1168dd7c2e5479d45184ba5aa4b5a294f36059b39dd"
+   "sha256": "ebabaa02025fcdc5ea49b4a116daf36875fa0302bed45d8dca7289a6ced4c0b9"
   },
   {
    "file": "run/policy.mjs",
@@ -166,18 +166,18 @@
   },
   {
    "file": "bridge.js",
-   "bytes": 33876,
-   "sha256": "465268ca79c74b57a5724b17015bfe2026bc6ab4c8290e3df8cc766f9ccabdef"
+   "bytes": 34457,
+   "sha256": "888a6c9ed5ba547bdf654a130da615a07996ccc72bb77b2f2fbab8195ac2c10f"
   },
   {
    "file": "classifier_client.js",
-   "bytes": 1188,
-   "sha256": "131390f4556cea734b9ff742e0ab7a4226356d151c6f8be91aed93e941e06e30"
+   "bytes": 226,
+   "sha256": "dd87c86f2acb5edd9b51062fc8f491bdc4115733624e612760233fb3e1da04c8"
   },
   {
    "file": "effect_sim.js",
-   "bytes": 11988,
-   "sha256": "5b6cd1bac3594178e64615012f1e306a4ae2ec43137054fc8a8070106c4f8a82"
+   "bytes": 12898,
+   "sha256": "2e221e0786a91cca77db33f034fa4537671a34fa0684baddd62b1fcd70e00f12"
   },
   {
    "file": "engine/policy.js",
@@ -281,23 +281,23 @@
   },
   {
    "file": "gatekeeper.js",
-   "bytes": 43669,
-   "sha256": "58390331b6f5d3dbd7d12f3213881e23291ac7f693c3de3dc266d7a4851fc2b6"
+   "bytes": 46660,
+   "sha256": "3e227bf422b71df3ce1d3832b2792dff8fbbc039300bbf3a322a20636c5ba957"
   },
   {
    "file": "hold_core.js",
-   "bytes": 10439,
-   "sha256": "54c185160c8fe9794369e4a334c8f7e146b164c87c998f8984e5f1056043298c"
+   "bytes": 10958,
+   "sha256": "aa7c50036ab3d0e37ff959d20f23686bc08f23a3a968bea3dc340a4d65f2f04b"
   },
   {
    "file": "inject.js",
-   "bytes": 27126,
-   "sha256": "0df04418345ca2fbb84c00ada03f3699310da55fba09b3abe82306e929e7f9d3"
+   "bytes": 28237,
+   "sha256": "7352123d31007cd3c60b37c74c3bd5f6d3214ff748627378a314f6994f9b969d"
   },
   {
    "file": "intent_text.js",
-   "bytes": 10177,
-   "sha256": "f9dc55dcf9f23a479f8eca7e38954cf696071737a42b9c18436e11e609c73e67"
+   "bytes": 11106,
+   "sha256": "df3d6a4954dc686ee36a37203e1c33722626f174cf06e1715dd1b0405e470a53"
   },
   {
    "file": "keyword_intent.js",
@@ -306,8 +306,8 @@
   },
   {
    "file": "manifest.json",
-   "bytes": 1220,
-   "sha256": "9197f229710272041a60e8f1952335b619ec6c3ad9efc7dde47b93ce60d56288"
+   "bytes": 1085,
+   "sha256": "06473dda4bbd6fc948665cfbbeb91d43b2a659fa9455a8ded7f3f55e6e467103"
   },
   {
    "file": "options.html",
@@ -316,23 +316,23 @@
   },
   {
    "file": "options.js",
-   "bytes": 2472,
-   "sha256": "9c06a4a780e1ecff01bdba672cc46055a5a5fa2508ded20bdf5c8ca2c2c3df2b"
+   "bytes": 2921,
+   "sha256": "3b59021f1fa72ee9c5b83ec218699a9d61627a286a19b5b1e80482d561e20a95"
   },
   {
    "file": "outcome.js",
-   "bytes": 6434,
-   "sha256": "db376f74f0b53bea2e687351e2693953bee5f26a9d887cedf9e637162edf1b4e"
+   "bytes": 6640,
+   "sha256": "a44e820a9663390a232dbd0063b3f042c2701878a132edc41c77519030e28eeb"
   },
   {
    "file": "ui/screen.css",
-   "bytes": 6542,
-   "sha256": "3199081b9753aeaffb219ddc351f38c5c4ba1f1cf7a7943f751052a996d1f408"
+   "bytes": 7036,
+   "sha256": "dd98c23f57fb2450b1d5092009e444844a054d6772d2ec2bd8feb29566be7672"
   },
   {
    "file": "ui/screen.js",
-   "bytes": 8262,
-   "sha256": "b248cf2d90b90df75eab590f5962026882c10e32a275b9bab5f87e7eec4e606f"
+   "bytes": 8699,
+   "sha256": "630ab48bd32e124f2e9d613097ceafe41fe9270556d084a1574f7519ee2b2929"
   },
   {
    "file": "window.css",
@@ -341,8 +341,8 @@
   },
   {
    "file": "window.html",
-   "bytes": 375,
-   "sha256": "f61f4ea75410aa6f207aa490a57896a9d70f851b35b9d6b2458e4666d9c1a9e7"
+   "bytes": 369,
+   "sha256": "cf3387482d9f4e9e3e272968b1a20dc26c729892727a879b837f3ad2baedda16"
   },
   {
    "file": "window.js",
@@ -351,10 +351,10 @@
   },
   {
    "file": "written_check.js",
-   "bytes": 19917,
-   "sha256": "0c943c73d51e0be45d42b1168dd7c2e5479d45184ba5aa4b5a294f36059b39dd"
+   "bytes": 25395,
+   "sha256": "ebabaa02025fcdc5ea49b4a116daf36875fa0302bed45d8dca7289a6ced4c0b9"
   }
  ],
- "total_bytes": 496957,
- "tree_sha256": "a8df66e3e63b83774fdfe2b98081e891b16ea7f921c1bcf480f34c1bbd39dae8"
+ "total_bytes": 509959,
+ "tree_sha256": "dbedea9ba8f9cbaf512ab3ce30e338cd5c4a07423611ef14c9b5d5da1566052c"
 }

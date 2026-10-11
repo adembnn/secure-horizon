@@ -164,3 +164,12 @@ export async function measure(body, rpc, tokens = {}) {
   const grants = rights.map((r) => ({ token: r.token, spender: r.spender, raw: r.raw.toString(), unlimited: r.raw >= UNLIMITED_FROM, symbol: meta[r.token].symbol, decimals: meta[r.token].decimals, known: meta[r.token].known }));
   return { ok: true, account, out, in: inn, grants, nftOut, nftIn, nftRight };
 }
+
+// The name and the decimals a token contract gives for itself (two read-only calls on the wallet's node). null unless both are readable.
+export async function readToken(rpc, address) {
+  if (typeof rpc !== 'function' || !HEX20.test(String(address || ''))) return null;
+  let symbol = null, decimals = null;
+  try { symbol = abiString(await rpc('eth_call', [{ to: lc(address), data: SEL.symbol }, 'latest'])); } catch (_) {}
+  try { const r = await rpc('eth_call', [{ to: lc(address), data: SEL.decimals }, 'latest']); const d = typeof r === 'string' && /^0x[0-9a-fA-F]{64}$/.test(r) ? big(r) : null; if (d != null && d <= 36n) decimals = Number(d); } catch (_) {}
+  return symbol && decimals != null ? { symbol, decimals } : null;
+}

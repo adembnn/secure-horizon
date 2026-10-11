@@ -4,9 +4,9 @@
  * the page side from the storage. Nothing here keeps a decision in memory : the worker can die at any time.
  * Fallback : if the window cannot be created, the in-page overlay of bridge.js is used and the journal says so. */
 import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_core.js';
-import { ENGINE_CHOICE, amountIsSure, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
+import { ENGINE_CHOICE, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
 import { TEXT, answerOf, siteName } from './outcome.js';
-import { effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
+import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
 import { measure, readToken } from './effect_sim.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
@@ -235,7 +235,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // so a vague sentence never does better than no sentence at all.
     if ((!intent.clear || intent.vague) && RANK.unknown > (RANK[v.level] || 0)) v = Object.assign({}, v, { level: 'unknown' });
     // Q16 : for this one gap there is no waiting time, only the correction. Not when anything else is wrong with the request.
-    if (relief && intent.clear && !intent.vague && amountIsSure(intent.text) && v.written && v.written.outcome === 'mismatch' && ['attention', 'danger'].includes(v.level) && !v.indeterminate
+    if (relief && canCorrect(intent) && v.written && v.written.outcome === 'mismatch' && ['attention', 'danger'].includes(v.level) && !v.indeterminate
       && !v.intent_contradiction && !v.address_diff && !(v.risk_signals || []).includes('lookalike')) v = Object.assign({}, v, { relief: true });
     else rewrite = rewrite && v.written && v.written.limited ? rewrite : null;
     return { v, used, rewrite };

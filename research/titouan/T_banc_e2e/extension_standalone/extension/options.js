@@ -3,7 +3,12 @@ const $ = (id) => document.getElementById(id);
 const PRODUCT = { dangerWaitMs: 30000, manipulationHoldMs: 600000 };
 const DEMO = { dangerWaitMs: 10000, manipulationHoldMs: 60000 };
 const num = (id, lo, hi, dflt) => { const n = Math.round(Number($(id).value) * 1000); return Number.isFinite(n) ? Math.min(hi, Math.max(lo, n)) : dflt; };
+// Q17 : "Hold up limite lui-même le droit au montant écrit". On par défaut. La case a l'id `limitUnlimited` dans options.html ;
+// sans la case, la valeur déjà enregistrée est conservée telle quelle.
+let kept = true;
 function fill(cfg) {
+  kept = cfg.limitUnlimited !== false;
+  if ($('limitUnlimited')) $('limitUnlimited').checked = kept;
   $('askIntent').value = cfg.askIntent === true ? 'always' : cfg.askIntent === false ? 'never' : ['never', 'rights_or_funds', 'always'].includes(cfg.askIntent) ? cfg.askIntent : 'always';
   $('dangerWait').value = Math.round((cfg.dangerWaitMs ?? cfg.frictionMs ?? PRODUCT.dangerWaitMs) / 1000);
   $('manipHold').value = Math.round((cfg.manipulationHoldMs ?? PRODUCT.manipulationHoldMs) / 1000);
@@ -14,7 +19,8 @@ function read() {
     askIntent: $('askIntent').value,
     dangerWaitMs: num('dangerWait', 5000, 600000, PRODUCT.dangerWaitMs),
     manipulationHoldMs: num('manipHold', 30000, 3600000, PRODUCT.manipulationHoldMs),
-    verdictWindow: $('window').checked
+    verdictWindow: $('window').checked,
+    limitUnlimited: $('limitUnlimited') ? $('limitUnlimited').checked : kept
   };
 }
 async function load() {

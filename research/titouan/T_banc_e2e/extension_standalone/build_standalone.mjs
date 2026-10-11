@@ -37,7 +37,11 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
-for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'classifier_client.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
+for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
+// Zero network in the standalone build : the relay client is replaced by a stub that never calls anything (the keyword parser answers),
+// and the manifest grants no host and sets connect-src 'none'. The source file ../extension/classifier_client.js is hashed but not shipped.
+src(join(ROOT, 'extension', 'classifier_client.js'));
+put('classifier_client.js', ['/* Hold up (standalone) - no network. The written intent is classified by the embedded keyword parser. */', 'export const RELAY = null;', 'export const RELAY_TIMEOUT_MS = 0;', 'export async function classifyViaRelay() { return null; }', ''].join(String.fromCharCode(10)));
 // 1 bis) surface de la fenetre (extension/ui) : la question ecrite puis la reponse. Systeme : docs/design/v5/DESIGN.md
 for (const f of ['screen.css', 'screen.js']) put('ui/' + f, src(join(ROOT, 'extension', 'ui', f)));
 // 2) fichiers propres a la version autonome

@@ -246,7 +246,7 @@ test('decision 8 : a written amount against a larger spending right is a mismatc
   assert.equal(s.outcome, 'mismatch'); assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.');
   // Q16 + Q17 : the token is known, the amount is certain : Hold up limits the right itself, no waiting time
   assert.equal(s.line, 'Tu as écrit 50 USDC. La demande donne accès à tout ton USDC.'); assert.equal(s.fix, 'Droit limité à 50 USDC');
-  assert.equal(s.leftMs, 0); assert.equal((await s.g.go()).status, 'allow');
+  assert.equal(s.leftMs, 0); clock.advance(1000); assert.equal((await s.g.go()).status, 'allow');
   s = await say(approve(500n * U), 'échanger 50 USDC contre AVAX');
   assert.equal(s.outcome, 'mismatch'); assert.equal(s.line, 'Tu as écrit 50 USDC. La demande donne accès à 500 USDC.'); assert.equal(s.fix, 'Droit limité à 50 USDC');
   s = await say(permit(MAX), 'échanger 50 USDC contre AVAX');
@@ -375,8 +375,9 @@ test('Q17 : the page side forwards the limited params to the wallet ; a signatur
   vm.runInContext(readFileSync(join(DIR, 'inject.js'), 'utf8'), sb);
   const asked = approve(MAX).params;
   await vm.runInContext(`ethereum.request({ method: 'eth_sendTransaction', params: ${JSON.stringify(asked)} })`, sb);
-  assert.deepEqual(JSON.parse(sb.got[0]).params, LIM, 'the wallet receives the limited request');
+  const sent = sb.got.map((x) => JSON.parse(x)).filter((x) => x.method === 'eth_sendTransaction' || x.method === 'eth_signTypedData_v4');
+  assert.deepEqual(sent[0].params, LIM, 'the wallet receives the limited request');
   await vm.runInContext(`ethereum.request({ method: 'eth_signTypedData_v4', params: ['x', 'y'] })`, sb);
-  assert.deepEqual(JSON.parse(sb.got[1]).params, ['x', 'y']);
+  assert.deepEqual(sb.got.map((x) => JSON.parse(x)).filter((x) => x.method === 'eth_signTypedData_v4')[0].params, ['x', 'y']);
   for (const t of timers) { clearTimeout(t); clearInterval(t); } for (const x of ports) { try { x.close(); } catch (_) {} }
 });

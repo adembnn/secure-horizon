@@ -12,7 +12,10 @@ $zip  = Join-Path $dist 'hold-up-standalone.zip'
 
 # 2) zip : dossier racine "hold-up-standalone\", separateurs "/" (compatibles avec tous les outils)
 New-Item -ItemType Directory -Force $dist | Out-Null
-if (Test-Path $zip) { Remove-Item $zip -Force }
+if (Test-Path $zip) {
+  try { Remove-Item -LiteralPath $zip -Force -ErrorAction Stop }
+  catch { $tree = (Get-Content (Join-Path $ext 'BUILD_INFO.json') -Raw | ConvertFrom-Json).tree_sha256.Substring(0, 8); $zip = Join-Path $dist ('hold-up-standalone-' + $tree + '.zip'); Write-Warning ('zip existant non supprimable, ecriture sous : ' + $zip); if (Test-Path $zip) { Remove-Item -LiteralPath $zip -Force } }
+}
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $fs = [System.IO.File]::Open($zip, [System.IO.FileMode]::CreateNew)

@@ -19,14 +19,14 @@
    "detail": "[\"storage\",\"alarms\"]"
   },
   {
-   "name": "host_permissions = le relais local 127.0.0.1:8789 et rien d autre",
+   "name": "aucune host_permission",
    "pass": true,
-   "detail": "[\"http://127.0.0.1:8789/*\"]"
+   "detail": ""
   },
   {
-   "name": "un seul appel reseau dans tout le dossier livre : fetch vers le relais local, dans classifier_client.js",
+   "name": "aucun appel reseau dans le dossier livre (le client du relais est un stub)",
    "pass": true,
-   "detail": "1"
+   "detail": "0"
   },
   {
    "name": "aucune permission optionnelle",
@@ -39,9 +39,9 @@
    "detail": ""
   },
   {
-   "name": "CSP : script-src self, connect-src = le relais local seulement",
+   "name": "CSP : script-src self, connect-src 'none'",
    "pass": true,
-   "detail": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789"
+   "detail": "script-src 'self'; object-src 'self'; connect-src 'none'"
   },
   {
    "name": "seuls bridge.js / inject.js en scripts de contenu, fichiers presents",

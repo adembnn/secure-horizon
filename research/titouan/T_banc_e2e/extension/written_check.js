@@ -249,6 +249,12 @@ export function operationCheck(used, mine, intent, tokens = {}) {
 // is known (local context, or read on the chain through the wallet's node) and its symbol IS the written symbol, with known decimals ;
 // nothing else leaves in the request. A signature (Permit, Permit2) is never rewritten : its ceiling is signed, there is nothing to replace.
 // `chain` : { [tokenAddress]: { symbol, decimals } } read from the token contract itself.
+// The sentence allows Hold up to correct a right : one certain amount, about trading or giving a right, nobody told the person to do it.
+export function canCorrect(intent) {
+  if (!intent || !intent.clear || intent.vague || !intent.amount || !intent.symbol || !intent.text || !amountIsSure(intent.text)) return false;
+  if (PAY_KINDS.has(intent.kind) || intent.kind === 'asked_by_someone' || (intent.facts && (intent.facts.asked || intent.facts.receive))) return false;
+  return intent.kind === 'buy_or_swap' || !!(intent.facts && intent.facts.grant);
+}
 export function limitPlan(body, intent, tokens = {}, chain = {}) {
   if (!body || !intent || !intent.clear || !intent.amount || !intent.symbol || !intent.text || !amountIsSure(intent.text)) return null;
   if (PAY_KINDS.has(intent.kind) || intent.kind === 'asked_by_someone' || (intent.facts && (intent.facts.asked || intent.facts.receive))) return null;

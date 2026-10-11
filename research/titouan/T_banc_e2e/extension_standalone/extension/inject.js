@@ -164,6 +164,11 @@
     return r;
   }
 
+  // Request limited by Hold up (Q17) : the worker answers with the params to forward, only for a transaction or a batch of calls.
+  function limited(r, method) {
+    if (!r || !isArr(r.params) || (method !== 'eth_sendTransaction' && method !== 'wallet_sendCalls')) return undefined;
+    try { return snap(r.params); } catch (_) { return undefined; }
+  }
   async function gate(provider, rawRequest, method, params, entryPoint) {
     const chainId = await chainOf(provider, rawRequest, guessChain(method, params));
     let from = guessFrom(method, params);
@@ -196,7 +201,8 @@
         return gate(thisArg, t, method, params, 'request').then((r) => {
           if (!r.allow) throw rejection(r.reason || 'denied');
           const out = thaw(full);
-          return fwd(thisArg, keyOf(thisArg, method, params), [out, out.params], () => rApply(t, thisArg, [out]));
+          const lim = limited(r, method); if (lim !== undefined) out.params = lim;
+          return fwd(thisArg, keyOf(thisArg, method, out.params), [out, out.params], () => rApply(t, thisArg, [out]));
         });
       }
     });
@@ -213,7 +219,8 @@
           let params; try { params = a1 === undefined ? undefined : snap(a1); } catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
           return gate(thisArg, null, a0, params, 'send').then((r) => {
             if (!r.allow) throw rejection(r.reason || 'denied');
-            return fwd(thisArg, keyOf(thisArg, a0, params), [params], () => rApply(t, thisArg, [a0, params]));
+            const lim = limited(r, a0), p2 = lim !== undefined ? lim : params;
+            return fwd(thisArg, keyOf(thisArg, a0, p2), [p2], () => rApply(t, thisArg, [a0, p2]));
           });
         }
         if (a0 && typeof a0 === 'object' && typeof a1 === 'function') return legacyAsync(t, thisArg, a0, a1, 'send');
@@ -257,7 +264,7 @@
     // decisions sequentielles pour ne pas empiler plusieurs fenetres
     NativePromise.all(decisions).then((rs) => {
       const forward = [], idx = [];
-      items.forEach((it, i) => { if (rs[i].allow) { forward.push(it); idx.push(i); } });
+      items.forEach((it, i) => { if (rs[i].allow) { const lim = it && limited(rs[i], it.method); forward.push(lim !== undefined ? Object.assign({}, it, { params: lim }) : it); idx.push(i); } });
       const out = new Array(items.length);
       rs.forEach((r, i) => { if (!r.allow) out[i] = respErr(items[i] && items[i].id, r.reason || 'denied'); });
       if (!forward.length) {

@@ -51,6 +51,7 @@
 .hu-title:focus { outline: none; }
 .hu[data-outcome="mismatch"] .hu-title { color: var(--hu-signal); }
 .hu-line { margin: 16px 0 0; text-wrap: pretty; overflow-wrap: anywhere; }
+.hu-fix { color: var(--hu-ink-2); }
 .hu-quiet { margin: 12px 0 0; font-size: 14px; line-height: 1.45; color: var(--hu-ink-2); }
 .hu-note { margin: 20px 0 0; font-size: 13px; line-height: 1.4; color: var(--hu-ink-2); }
 .hu-end { margin: auto; padding: 32px; max-width: 360px; text-align: center; text-wrap: balance; }

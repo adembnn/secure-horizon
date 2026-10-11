@@ -67,12 +67,12 @@ m('service worker de type module', mf.background && mf.background.type === 'modu
 // storage : reglages, journal local et demandes retenues (storage.session) ; alarms : echeances de la retenue quand le service worker est arrete.
 // La fenetre de verdict (chrome.windows.create d'une page de l'extension) et les messages vers l'onglet demandeur ne demandent aucune permission.
 m('permissions = [storage, alarms] seulement', JSON.stringify(mf.permissions) === '["storage","alarms"]', JSON.stringify(mf.permissions));
-m('host_permissions = le relais local 127.0.0.1:8789 et rien d autre', JSON.stringify(mf.host_permissions) === '["http://127.0.0.1:8789/*"]' && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
-m('un seul appel reseau dans tout le dossier livre : fetch vers le relais local, dans classifier_client.js', relayFetch === 1, String(relayFetch));
+m('aucune host_permission', !('host_permissions' in mf) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
+m('aucun appel reseau dans le dossier livre (le client du relais est un stub)', relayFetch === 0, String(relayFetch));
 m('aucune permission optionnelle', !('optional_permissions' in mf));
 m('pas de externally_connectable / web_accessible_resources / update_url', !('externally_connectable' in mf) && !('web_accessible_resources' in mf) && !('update_url' in mf));
 const csp = (mf.content_security_policy || {}).extension_pages || '';
-m('CSP : script-src self, connect-src = le relais local seulement', /script-src 'self'/.test(csp) && /connect-src http:\/\/127\.0\.0\.1:8789(;|$)/.test(csp) && !/https:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp) && (csp.match(/http:/g) || []).length === 1, csp);
+m("CSP : script-src self, connect-src 'none'", /script-src 'self'/.test(csp) && /connect-src 'none'(;|$)/.test(csp) && !/https?:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp), csp);
 m('seuls bridge.js / inject.js en scripts de contenu, fichiers presents', (mf.content_scripts || []).every((c) => c.js.every((f) => files.some((p) => rel(p) === f))));
 
 // pages de l'extension : scripts locaux seulement, aucun script en ligne, aucun gestionnaire en attribut
