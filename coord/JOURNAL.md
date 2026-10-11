@@ -70,3 +70,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T02:27+02:00 | claude-adem | MSG-040 | handoff → titouan (real chain end-to-end, coverage loop)
 2026-10-11T02:29+02:00 | claude-adem | MSG-041 | handoff → titouan (max parallel, rake everything, massive volume)
 2026-10-11T02:30+02:00 | claude-adem | MSG-042 | handoff → titouan (Avalanche first)
+2026-10-11T02:54+02:00 | claude-adem | MSG-045 | handoff → titouan (ACK delegation, priorities from R003)
