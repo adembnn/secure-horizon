@@ -1,6 +1,17 @@
 # Brancher revoke.js dans l'extension (spécification)
 
-Statut : spécification seule. Aucun fichier existant de l'extension n'a été modifié. `revoke.js` et `tests/unit/revoke.test.mjs` sont nouveaux. À brancher plus tard par la personne qui tient `gatekeeper.js`, `background.js`, `inject.js`, `bridge.js` et `ui/`.
+Statut (11/10/2026) : côté JS branché et testé. L'écran reste à faire dans `ui/` (Adem), voir la section 10.
+
+Fait :
+- `gatekeeper.js` : après « continue » (décision `confirm`), `keepGrant` calcule `revocationFor` sur la demande telle qu'elle est partie (les params limités par Hold up s'il y en a), garde le résultat dans `storage.session`, clé `hu:grant:<tabId>`, cinq au plus, effacé à la fermeture de l'onglet. Badge `1` sur l'icône. `wallet_sendCalls` : chaque appel est lu.
+- Messages `hu.revoke.get`, `hu.revoke.send`, `hu.revoke.check` : acceptés seulement depuis `ui/sidepanel.html`. Un message qui porte `request`, `params`, `to`, `data`, `from`, `method`, `tx` ou `value` est refusé (`{ refused: true }`).
+- `hu.revoke.send` n'envoie que les cas `revocable` et `oneClick` (sinon `{ state: 'error', code: 'not_one_click' }`).
+- `bridge.js` relaie `hu.revoke.run` vers `inject.js` par le canal privé, et refuse si le site de l'onglet a changé (`origin_changed`).
+- `inject.js` appelle la méthode `request` d'origine du fournisseur de la dernière demande autorisée de ce cadre. Pas de nouvelle retenue, donc pas de boucle.
+- La marque : jeton du service worker, 32 hexa, usage unique, 8 s, lié à l'onglet, au cadre et à l'empreinte SHA-256 du contenu. Il ne sert que si le portefeuille repasse plus tard par une méthode enveloppée avec une copie. Un jeton inventé, réutilisé, tardif, d'un autre onglet ou pour un autre contenu est ignoré : la demande est retenue comme les autres. La page ne voit jamais le jeton et ne peut pas l'ajouter (la charge envoyée au pont est construite par `inject.js`).
+- Journal chaîné : ligne `revocation` (m = kind, d = submitted | rejected | error). Journal local : `request_sha256`, aucune adresse.
+- Tests : `tests/unit/revoke_branchement.test.mjs` (13 tests).
+- Limite connue : pendant 8 s, la page peut renvoyer exactement la même demande de retrait et elle passera une fois sans question. Elle ne fait que remettre le droit à zéro.
 
 ## 1. Ce que revoke.js fournit
 
@@ -91,3 +102,32 @@ Pas de nouvelle permission, pas de nouvel hôte, la CSP ne bouge pas (revoke.js 
 - Les cas `two_steps` et `oneClick: false` (Permit, Permit2 avec signature) ne sont qu'expliqués. Brancher `permitNonceSpendTx` demande de recevoir la signature du portefeuille (`eth_signTypedData_v4`) puis d'envoyer la seconde demande : deux allers-retours, à faire après le premier branchement.
 - Aucun inventaire des droits existants (c'est le rôle de `research/demo_reelle/reponse/revoke.mjs`, qui lit la chaîne ; il demande `ethers`, absent de `blockchain/node_modules` dans ce dépôt).
 - Une révocation ne ramène pas ce qui a déjà été pris.
+
+## 10. Ce que l'UI doit ajouter (pour Adem, dans `ui/sidepanel.js`)
+
+Aucun autre fichier à toucher : pas de permission, pas de manifeste. L'identifiant d'onglet s'obtient par `chrome.tabs.query({ active: true, currentWindow: true })` (l'`id` ne demande pas la permission `tabs`).
+
+**Où.** Dans le panneau latéral, une section « Droit accordé », juste après « Hold up est actif. » et avant « Aujourd'hui ». Absente si `hu.revoke.get` répond `{ none: true }` : le test actuel du panneau attend alors exactement les trois boutons existants.
+
+**Données.** `chrome.runtime.sendMessage({ type: 'hu.revoke.get', tabId })` rend `{ result, origin, at, id, wallet, grants: [{ id, result, origin, at, wallet }] }` (le plus récent d'abord). Afficher un bloc par droit, cinq au plus. Ne rien stocker côté panneau.
+
+**Contenu d'un bloc**, tout en `textContent` :
+1. Titre : « Tu as continué. {site} peut maintenant dépenser {jeton} sans limite. » si `result.grant.unlimited`, sinon « Tu as continué. {site} peut maintenant dépenser {jeton}. ». {site} vient de `origin` (même coupe que `siteLabel`). {jeton} : « tes jetons », ou le libellé déjà dans `result.says`.
+2. Grille à 2 rangées : « Qui reçoit le droit » (`result.grant.spender`, adresse complète, groupes de 4) et « Montant » (« sans limite » ou `result.grant.amount`).
+3. Avant le bouton, toujours : « Ton portefeuille va afficher le nom du site, pas Hold up. C'est normal : lis bien ce que la demande fait. Elle remet le droit à zéro. »
+4. Bouton selon `buttonLabel(result)` (copier la fonction de `revoke.js`, ou tester `result.status === 'revocable' && result.oneClick`) :
+   - « Révoquer ce droit » : bouton plein, le seul bouton plein de l'écran. Clic : `{ type: 'hu.revoke.send', tabId, id }`. Ne jamais mettre `params`, `to`, `data` ou `from` dans ce message : il serait refusé.
+   - « Voir comment annuler ce droit » : bouton discret qui déplie `result.steps` puis `result.limits`. Aucun envoi.
+   - `needs_info` et `not_revocable_by_click` : pas de bouton, seulement `result.says`.
+5. Sous le bouton : « Hold up prépare la demande de retrait. Ton portefeuille te la montre, c'est toi qui signes. Hold up ne signe jamais. »
+6. Toujours, en petit : « Une signature hors chaîne (Permit) ne se révoque pas toujours en un clic. Retirer un droit ne ramène pas ce qui est déjà parti. »
+
+**Après le clic** (réponse de `hu.revoke.send`) :
+- `submitted` : « Retrait envoyé à ton portefeuille. » Puis, après quelques secondes, `{ type: 'hu.revoke.check', tabId, id }` : `zero` → « Le droit est à zéro. » ; `still_active` → « Le droit est encore actif. La transaction n'est peut-être pas encore confirmée. » ; `unknown` → « Je n'ai pas pu relire le droit. »
+- `rejected` : « Tu as rejeté la demande. Le droit est toujours actif. » Le bouton reste actif.
+- `error` avec `code` `no_provider`, `origin_changed`, `no_answer` ou `timeout` : « Ouvre à nouveau le site ou ton portefeuille, puis reviens ici. » Bouton inactif jusqu'au prochain rendu.
+- `error` avec `not_one_click` : ne doit pas arriver (pas de bouton plein dans ce cas).
+
+**Règles.** Pas de rouge (réservé à « Ça ne correspond pas »). Jamais les mots OK, bloqué, sûr, protégé, garanti, remboursement. Pas de tiret long. Le bouton est désactivé pendant l'attente de la réponse (le portefeuille peut rester ouvert plusieurs minutes, délai maximal 5 min).
+
+**Tests à ajouter dans `sidepanel.test.mjs`** : section absente sans droit ; « Révoquer ce droit » présent pour un approve illimité, absent pour un Permit ; le message envoyé ne contient que `type`, `tabId`, `id` ; `rejected` laisse le bouton actif ; aucun mot interdit.

@@ -92,9 +92,26 @@
     try { port.postMessage({ t: 'rpc', id: w.id, k: token, n, method: msg.method, params: msg.params }); } catch (_) { reads.delete(n); clearTimeout(timer); sendResponse({ ok: false }); return false; }
     return true; // answered later
   }
+  // Revocation prepared by Hold up (revoke.js), asked by the service worker only (chrome.runtime messages come from the extension,
+  // never from the page). Relayed to inject.js, which hands it to the wallet's own request method. Hold up never signs.
+  // The site must still be the one that received the right : otherwise nothing is sent.
+  const revokes = new Map(); let revokeN = 0;
+  const hereOrigin = () => (location.origin === 'null' ? location.href.split('#')[0] : location.origin);
+  function relayRevoke(msg, sendResponse) {
+    if (!port) { sendResponse({ state: 'error', code: 'no_provider' }); return false; }
+    if (msg.origin !== hereOrigin()) { sendResponse({ state: 'error', code: 'origin_changed' }); return false; }
+    const op = msg.op === 'read' ? 'read' : msg.op === 'send' ? 'send' : null;
+    if (!op || (op === 'send' && msg.method !== 'eth_sendTransaction') || (op === 'read' && msg.method !== 'eth_call') || !Array.isArray(msg.params)) { sendResponse({ state: 'error', code: 'refused' }); return false; }
+    const n = ++revokeN;
+    const timer = setTimeout(() => { if (revokes.delete(n)) sendResponse({ state: 'error', code: 'timeout' }); }, op === 'read' ? 9000 : 295000);
+    revokes.set(n, (m) => { clearTimeout(timer); sendResponse({ state: typeof m.state === 'string' ? m.state : 'error', code: m.code, result: m.result }); });
+    try { port.postMessage({ t: 'revoke', k: token, n, op, tok: typeof msg.tok === 'string' ? msg.tok : '', method: msg.method, params: msg.params }); } catch (_) { revokes.delete(n); clearTimeout(timer); sendResponse({ state: 'error', code: 'no_provider' }); return false; }
+    return true; // answered later
+  }
   function onPortMsg(ev) {
     const m = ev.data; if (!m || m.k !== token) return;
     if (m.t === 'rpcResult') { const cb = reads.get(m.n); if (cb) { reads.delete(m.n); cb(m); } return; }
+    if (m.t === 'revokeResult') { const cb = revokes.get(m.n); if (cb) { revokes.delete(m.n); cb(m); } return; }
     if (m.t === 'gate') { port.postMessage({ t: 'ack', id: m.id, k: token }); startGate(m); }
     else if (m.t === 'notify') {
       send({ type: 'gate', payload: Object.assign({}, m.payload, { kind: 'journal' }), origin: location.origin, url: location.href }).catch(() => {});
@@ -441,6 +458,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (!msg) return false;
     if (msg.type === 'hu.rpc') return relayRead(msg, sendResponse);
+    if (msg.type === 'hu.revoke.run') return relayRevoke(msg, sendResponse);
     if (msg.type === 'hu.result' && waits.has(msg.rid)) poll(msg.rid);           // the decision is ready : fetch it now
     else if (msg.type === 'hu.banner' && window === window.top) bannerCheck();
     return false;

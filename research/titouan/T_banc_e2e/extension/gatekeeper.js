@@ -8,7 +8,8 @@ import { ENGINE_CHOICE, KINDS, MODEL_MIN, NO_MATCH, cleanText, interpret, keywor
 import { TEXT, answerOf, siteName } from './outcome.js';
 import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
 import { measure } from './effect_sim.js';
-import { chainAppend } from './journal_chain.js';
+import { chainAppend, sha256 } from './journal_chain.js';
+import { revocationFor } from './revoke.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const RANK = { attention: 1, unknown: 2, danger: 3, manipulation: 4 };
@@ -72,6 +73,48 @@ const RPC_MS = 8000;            // one read relayed to the wallet's node (a trac
 // The engine could not READ the call (unknown function), and that is its only reason : the one case where a measured effect may
 // replace "not verified". An engine that failed, or any other finding, never qualifies.
 const unreadable = (v) => !!v && v.level === 'unknown' && v.indeterminate === true && v.opacity_only === true && Array.isArray(v.codes) && v.codes.length > 0;
+
+// ---- revocation (revoke.js, REVOKE_BRANCHEMENT.md) : the right a confirmed request granted is kept in storage.session only,
+// per tab, five at most. The side panel asks for it by tab id, never sends a request itself. Hold up never signs : the request
+// goes to the wallet of the page through inject.js, with a one-shot token so that it is not held and asked again.
+const GRANT_KEY = 'hu:grant:';
+const REVTOK_KEY = 'hu:revtok:';
+const MAX_GRANTS = 5;
+const REVOKE = { tokenMs: 8000, sendMs: 300000, readMs: 9000 };
+const REQUEST_FIELDS = ['request', 'requests', 'params', 'to', 'data', 'input', 'from', 'method', 'tx', 'value'];
+const carriesRequest = (msg) => REQUEST_FIELDS.some((k) => Object.prototype.hasOwnProperty.call(msg, k));
+// stable text of a JSON value (sorted keys) : the same request always gives the same fingerprint
+function stable(x) {
+  if (x === null || typeof x !== 'object') return JSON.stringify(x === undefined ? null : x);
+  if (Array.isArray(x)) return '[' + x.map(stable).join(',') + ']';
+  return '{' + Object.keys(x).sort().filter((k) => x[k] !== undefined).map((k) => JSON.stringify(k) + ':' + stable(x[k])).join(',') + '}';
+}
+export const requestHash = (method, params) => sha256(stable([String(method), params === undefined ? null : params]));
+const randHex = (n) => { const a = new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a, (b) => b.toString(16).padStart(2, '0')).join(''); };
+// Read used after the wallet answered : is the right at zero ? Selectors : allowance(address,address), isApprovedForAll(address,address),
+// getApproved(uint256), Permit2 allowance(address,address,address). Checked against keccak in tests/unit/revoke_branchement.test.mjs.
+export const READ_SEL = { allowance: '0xdd62ed3e', isApprovedForAll: '0xe985e9c5', getApproved: '0x081812fc', permit2Allowance: '0x927da105' };
+const word = (a) => String(a).toLowerCase().replace(/^0x/, '').padStart(64, '0');
+export function readCallOf(result) {
+  const g = result && result.grant; if (!g || typeof g !== 'object') return null;
+  const ok = (a) => typeof a === 'string' && /^0x[0-9a-f]{40}$/i.test(a);
+  switch (result.kind) {
+    case 'erc20_approve': case 'erc20_increaseAllowance': case 'erc20_permit_call':
+      return ok(g.token) && ok(g.owner) && ok(g.spender) ? { to: g.token, data: READ_SEL.allowance + word(g.owner) + word(g.spender), zero: 'uint' } : null;
+    case 'setApprovalForAll':
+      return ok(g.token) && ok(g.owner) && ok(g.spender) ? { to: g.token, data: READ_SEL.isApprovedForAll + word(g.owner) + word(g.spender), zero: 'uint' } : null;
+    case 'erc721_approve':
+      return ok(g.token) && /^[0-9]+$/.test(String(g.tokenId)) ? { to: g.token, data: READ_SEL.getApproved + BigInt(g.tokenId).toString(16).padStart(64, '0'), zero: 'uint' } : null;
+    case 'permit2_approve': case 'permit2_permit_call':
+      return ok(g.owner) && ok(g.token) && ok(g.spender) ? { to: '0x000000000022d473030f116ddee9f6b43ac78ba3', data: READ_SEL.permit2Allowance + word(g.owner) + word(g.token) + word(g.spender), zero: 'uint' } : null;
+    default: return null;
+  }
+}
+// first 32-byte word of an eth_call answer : 0 -> 'zero', anything else -> 'still_active', unreadable -> 'unknown'
+export function readState(hex) {
+  if (typeof hex !== 'string' || !/^0x[0-9a-fA-F]{64,}$/.test(hex)) return 'unknown';
+  try { return BigInt('0x' + hex.slice(2, 66)) === 0n ? 'zero' : 'still_active'; } catch (_) { return 'unknown'; }
+}
 
 // --- social questions (escalation only : an answer can raise the level, never lower it) ---
 const SOCIAL_Q = {
@@ -203,7 +246,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       await chrome.storage.local.set({ log: arr });
     } catch (_) {}
     // hash-chained copy (journal_chain.js) : site, kind, level, codes, decision, build version. Never the sentence, never an address.
-    if (entry.type === 'verdict' || entry.type === 'decision' || entry.type === 'partial') {
+    if (entry.type === 'verdict' || entry.type === 'decision' || entry.type === 'partial' || entry.type === 'revocation') {
       let version = ''; try { version = chrome.runtime.getManifest().version; } catch (_) {}
       await chainAppend(chrome.storage.local, entry, version);
     }
@@ -351,6 +394,111 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     return used;
   }
 
+  // ---------- revocation of a right granted by a confirmed request ----------
+  const grantKey = (tabId) => GRANT_KEY + tabId;
+  async function grantsOf(tabId) {
+    if (!Number.isInteger(tabId)) return [];
+    const v = await opRead(grantKey(tabId));
+    return Array.isArray(v) ? v : [];
+  }
+  // The request as it went to the wallet (the limited params when Hold up limited the right), turned into revocations.
+  async function keepGrant(rec) {
+    try {
+      const b = rec.body;
+      if (!b || typeof b.method !== 'string' || !Array.isArray(b.params)) return;
+      const params = rec.rewrite && Array.isArray(rec.rewrite.params) && rec.verdict && rec.verdict.written && rec.verdict.written.limited ? rec.rewrite.params : b.params;
+      let tokens = {};
+      try { tokens = tokensOf((await chrome.storage.local.get('contexte')).contexte, b.chainId); } catch (_) {}
+      const optsFor = (to) => { const t = typeof to === 'string' ? tokens[to.toLowerCase()] : null; return t ? { tokenKind: 'erc20', tokenLabel: 'tes ' + t.symbol } : {}; }; // known by its address : a token with decimals. Otherwise nothing is guessed.
+      const asked = [];
+      if (b.method === 'wallet_sendCalls') {
+        const c = params[0] && typeof params[0] === 'object' ? params[0] : {};
+        const calls = Array.isArray(c.calls) ? c.calls.slice(0, 16) : [];
+        for (const x of calls) if (x && typeof x === 'object') asked.push([{ method: 'eth_sendTransaction', chainId: c.chainId || b.chainId, from: c.from || b.from, params: [{ from: c.from || b.from, to: x.to, data: x.data || x.input, chainId: c.chainId || b.chainId }] }, x.to]);
+      } else asked.push([{ method: b.method, params, chainId: b.chainId, from: b.from }, params[0] && params[0].to]);
+      const found = [];
+      for (const [req, to] of asked) { const r = revocationFor(req, optsFor(to)); if (r && r.status !== 'not_a_grant') found.push(r); }
+      if (!found.length) return;
+      await store.lock(async () => {
+        const list = await grantsOf(rec.tabId);
+        for (const result of found) list.push({ id: randHex(8), rid: rec.rid, frameId: rec.frameId, origin: rec.origin, at: Date.now(), result, wallet: null });
+        while (list.length > MAX_GRANTS) list.shift();
+        await session.set({ [grantKey(rec.tabId)]: list });
+      });
+      try { const p = chrome.action && chrome.action.setBadgeText && chrome.action.setBadgeText({ text: '1', tabId: rec.tabId }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+    } catch (_) { /* no revocation offered : nothing else changes */ }
+  }
+  async function grantFor(msg) {
+    const list = await grantsOf(msg.tabId);
+    if (!list.length) return null;
+    if (msg.id == null) return list[list.length - 1];
+    return list.find((g) => g.id === msg.id) || null;
+  }
+  async function saveGrant(tabId, g) {
+    await store.lock(async () => {
+      const list = await grantsOf(tabId), i = list.findIndex((x) => x.id === g.id);
+      if (i >= 0) { list[i] = g; await session.set({ [grantKey(tabId)]: list }); }
+    });
+  }
+  // One message to the frame that made the request (bridge.js -> inject.js). Never throws : null when nobody answers in time.
+  function revokeRun(tabId, frameId, payload, ms) {
+    return new Promise((resolve) => {
+      const timer = setTimeout(() => resolve(null), ms);
+      const done = (x) => { clearTimeout(timer); resolve(x && typeof x === 'object' ? x : null); };
+      let p; try { p = chrome.tabs.sendMessage(tabId, payload, { frameId }); } catch (_) { return done(null); }
+      Promise.resolve(p).then(done, () => done(null));
+    });
+  }
+  // The mark of a revocation prepared by Hold up : a token made here, single use, a few seconds, bound to the tab, the frame and
+  // the exact content. Whatever a page writes in a request is never trusted : without this token in storage.session, the request
+  // is held and asked about like any other.
+  async function takeRevokeToken(tok, tabId, frameId, method, params) {
+    if (typeof tok !== 'string' || !/^[0-9a-f]{32}$/.test(tok)) return false;
+    let h; try { h = await requestHash(method, params); } catch (_) { return false; }
+    return store.lock(async () => {
+      const k = REVTOK_KEY + tok, t = await opRead(k);
+      if (!t) return false;
+      try { await session.remove(k); } catch (_) {} // single use, whatever the outcome
+      return t.tabId === tabId && t.frameId === frameId && Date.now() <= t.exp && t.hash === h;
+    });
+  }
+  // sender.url is set by the browser : a content script or a page never carries the URL of the extension's own panel
+  const fromPanel = (s) => typeof s.url === 'string' && s.url.split('#')[0].split('?')[0] === chrome.runtime.getURL('ui/sidepanel.html');
+  const REVOKE_HANDLERS = {
+    'hu.revoke.get': async (msg) => {
+      const list = await grantsOf(msg.tabId);
+      if (!list.length) return { none: true };
+      const last = list[list.length - 1];
+      return { result: last.result, origin: last.origin, at: last.at, id: last.id, wallet: last.wallet, grants: list.slice().reverse().map((g) => ({ id: g.id, result: g.result, origin: g.origin, at: g.at, wallet: g.wallet })) };
+    },
+    'hu.revoke.send': async (msg) => {
+      const g = await grantFor(msg);
+      if (!g) return { state: 'error', code: 'none' };
+      const index = msg.index == null ? 0 : msg.index;
+      const r = g.result;
+      // only what ONE transaction really removes is sent from here ; the rest is explained in the panel
+      if (!r || r.status !== 'revocable' || r.oneClick !== true || !Number.isInteger(index) || index < 0 || index >= r.requests.length) return { state: 'error', code: 'not_one_click' };
+      const q = r.requests[index];
+      if (!q || q.method !== 'eth_sendTransaction' || q.submitTo !== 'wallet' || !Array.isArray(q.params)) return { state: 'error', code: 'not_one_click' };
+      const tok = randHex(16), hash = await requestHash(q.method, q.params);
+      await store.lock(async () => { await session.set({ [REVTOK_KEY + tok]: { tabId: msg.tabId, frameId: g.frameId, hash, exp: Date.now() + REVOKE.tokenMs, gid: g.id } }); });
+      const a = await revokeRun(msg.tabId, g.frameId, { type: 'hu.revoke.run', op: 'send', tok, origin: g.origin, method: q.method, params: q.params }, REVOKE.sendMs);
+      try { await session.remove(REVTOK_KEY + tok); } catch (_) {}
+      const state = a && ['submitted', 'rejected', 'error'].includes(a.state) ? a.state : 'error';
+      const code = a ? (typeof a.code === 'string' || typeof a.code === 'number' ? a.code : undefined) : 'no_answer';
+      g.wallet = state; g.sentAt = Date.now(); await saveGrant(msg.tabId, g);
+      await journal({ type: 'revocation', origin: g.origin, method: r.kind, kind: r.kind, decision: state, wallet: state, request_sha256: hash });
+      return code === undefined ? { state } : { state, code };
+    },
+    'hu.revoke.check': async (msg) => {
+      const g = await grantFor(msg);
+      const c = g && readCallOf(g.result);
+      if (!c) return { state: 'unknown' };
+      const a = await revokeRun(msg.tabId, g.frameId, { type: 'hu.revoke.run', op: 'read', origin: g.origin, method: 'eth_call', params: [{ to: c.to, data: c.data }, 'latest'] }, REVOKE.readMs);
+      return { state: a && a.state === 'read' ? readState(a.result) : 'unknown' };
+    }
+  };
+
   const fromExtensionPage = (s) => typeof s.url === 'string' && s.url.startsWith(selfUrl);
   const fromWindow = (s) => typeof s.url === 'string' && s.url.split('#')[0].split('?')[0] === windowUrl && s.tab && s.tab.windowId != null;
   const fromPage = (s) => !!(s.tab && s.tab.id != null && typeof s.frameId === 'number' && !fromExtensionPage(s));
@@ -472,6 +620,16 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     if (typeof p.method !== 'string' || p.method.length > 80) return { done: true, allow: false, reason: 'demande-invalide' };
     if (!validRid(msg.rid)) return { done: true, allow: false, reason: 'demande-invalide' };
     const tabId = sender.tab.id, frameId = sender.frameId;
+    // The revocation Hold up itself handed to the wallet came back through a wrapped method (a wallet that delegates later) :
+    // with its valid token it goes on without a new question. Any other token, forged, reused, late, from another tab or for
+    // another content, is ignored : the request is held and asked about like any other.
+    if (p.revokeToken !== undefined) {
+      if (await takeRevokeToken(p.revokeToken, tabId, frameId, p.method, p.params)) {
+        await journal({ type: 'journal', origin, method: p.method, note: 'retrait prepare par Hold up : transmis au portefeuille sans nouvelle question', frame: frameId === 0 ? 'top' : 'child' });
+        return { done: true, allow: true };
+      }
+      await journal({ type: 'journal', origin, method: p.method, note: 'marque de retrait refusee : demande retenue comme les autres', frame: frameId === 0 ? 'top' : 'child' });
+    }
     // A connection (Sign-In with Ethereum naming this very site, asked by the top frame) moves nothing and grants nothing : no window.
     if (frameId === 0 && signIn(p.method, p.params, origin)) { await journal({ type: 'journal', origin, method: p.method, note: 'connexion reconnue : aucune fenetre', frame: 'top' }); return { done: true, allow: true }; }
     const old = await store.get(msg.rid);
@@ -594,6 +752,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by, origin: rec.origin, method: rec.method, level: rec.level, indeterminate: !!rec.verdict.indeterminate,
           time_to_decision_ms: ttd, friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, ui: rec.ui, total_ms: Date.now() - rec.createdAt });
         await closeUi(s.rec);
+        await keepGrant(s.rec);
         return { status: 'allow' };
       }
       if (s.status === 'again') { await journal({ type: 'early_continue', why: s.why, left_ms: s.leftMs, origin: rec.origin, method: rec.method, level: rec.level, ui: rec.ui }); return { status: 'again', why: s.why, view: viewOf(s.rec, cfg) }; }
@@ -673,6 +832,13 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       return decide(msg.rid, msg, 'human');
     }
   };
+  // Side panel only. A message that carries a request (to, data, from, params...) is refused : the worker reads it from storage.session.
+  for (const name of Object.keys(REVOKE_HANDLERS)) {
+    HANDLERS[name] = async (msg, sender) => {
+      if (!fromPanel(sender) || carriesRequest(msg) || !Number.isInteger(msg.tabId)) return { refused: true, state: 'error', code: 'refused' };
+      return REVOKE_HANDLERS[name](msg, sender);
+    };
+  }
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (!msg || typeof msg.type !== 'string' || !Object.prototype.hasOwnProperty.call(HANDLERS, msg.type) || !sender || sender.id !== chrome.runtime.id) return false;
     HANDLERS[msg.type](msg, sender).then(sendResponse, (e) => sendResponse({ done: true, allow: false, state: 'unknown', status: 'ignored', reason: 'erreur: ' + String(e && e.message || e).slice(0, 80) }));
@@ -698,6 +864,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   if (chrome.tabs && chrome.tabs.onRemoved) chrome.tabs.onRemoved.addListener((tabId) => {
     store.all().then((all) => { for (const r of all) if (r.tabId === tabId && r.status === 'pending') refuse(r.rid, 'tab-closed'); });
     opDrop(tabId, null);
+    Promise.resolve().then(() => session.remove(grantKey(tabId))).catch(() => {});
   });
   if (chrome.runtime.onStartup) chrome.runtime.onStartup.addListener(() => { sweep(); });
   if (!(chrome.storage && chrome.storage.session)) journal({ type: 'note', note: 'chrome.storage.session absent : la retenue ne survit pas a un arret du service worker' });
