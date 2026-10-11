@@ -47,3 +47,8 @@ export function parseTyped(request) {
   try { return typeof request.params[1] === 'string' ? JSON.parse(request.params[1]) : request.params[1]; } catch { return null; }
 }
 export const big = (v) => { try { return BigInt(v); } catch { return 0n; } };
+
+// RÈGLE PRODUIT : un détecteur ne peut qu'AGGRAVER un verdict. Les corrections `lower` (dust_guard, intent_guard, nft_orders) sont COUPÉES
+// dans le chemin produit : elles ne sont rendues qu'au banc, sous le drapeau HOLDUP_BENCH_LOWER=1 (pour mesurer ce qu'elles auraient fait).
+// Même avec le drapeau, pipeline/evaluate_plus.mjs ignore toute baisse (le niveau final n'est jamais sous le serveur seul).
+export const benchLower = () => typeof process !== 'undefined' && !!process.env && process.env.HOLDUP_BENCH_LOWER === '1';

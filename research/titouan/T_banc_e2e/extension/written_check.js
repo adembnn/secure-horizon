@@ -7,6 +7,9 @@
  *   writtenCheck(body, intent, tokens) -> null, or { outcome: 'match' | 'mismatch' | 'unverifiable', line, address_diff? }
  *   effectCheck(effect, intent)      -> the same answer, from the MEASURED effect of a call nobody can read (effect_sim.js)
  *   usedBy(body, effect)             -> what one request takes from the written amount : { grants, out } (storable, no bigint)
+ *   limitPlan(body, intent, tokens, chain) -> null, or { params, amount, symbol } : the SAME request with every spending right wider than
+ *                                    the written amount replaced by that amount (Q17). Only when it is certain, never guessed.
+ *   limitText(plan)                  -> 'Droit limité à 50 USDC'
  *   operationCheck(used, mine, intent, tokens) -> null, or a mismatch when the requests of ONE written intent, added up, exceed it
  *
  * Rules :
@@ -18,6 +21,7 @@
  *     gives no advice nobody can follow ;
  *   - no address is known here : token decimals come from the optional local context (`tokens`), else from the usual
  *     decimals of the symbol the person wrote. */
+import { amountIsSure } from './intent_text.js';
 const HEX20 = /^0x[0-9a-fA-F]{40}$/;
 const lc = (a) => String(a).toLowerCase();
 const UNLIMITED_FROM = 2n ** 128n; // nobody owns that much of anything : from here on the right is "everything"
@@ -141,13 +145,16 @@ export function writtenCheck(body, intent, tokens = {}) {
   const said = 'Tu as écrit ' + fr(intent.amount) + ' ' + intent.symbol + '.';
   const reduce = ' Réduis le plafond à ' + fr(intent.amount) + ' ' + intent.symbol + ' dans ton portefeuille.';
   let line = null;
+  // A wider right can be corrected (capped to the written amount) only when it comes from a transaction, nothing else leaves
+  // in the same request, and no right of the request is a signature.
+  const fixable = facts.sends.length === 0 && facts.grants.every((x) => !x.signed);
   // 1) a spending right against the written amount
   for (const g of facts.grants) {
     const a = assetOf(g.token, intent.symbol, tokens), want = toRaw(intent.amount, a.decimals);
     // A transaction's ceiling can be edited in the wallet before confirming ; a signature's cannot.
-    if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce) };
+    if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce), ...(g.signed ? {} : { fixable }) };
     if (a.other) return { outcome: 'mismatch', line: said + ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' };
-    if (want == null || g.raw > want) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' + reduce) };
+    if (want == null || g.raw > want) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' + reduce), ...(g.signed ? {} : { fixable }) };
     line = 'La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ', pas plus.';
   }
   // 2) a payment : recipient and amount must be the ones written
@@ -235,3 +242,56 @@ export function operationCheck(used, mine, intent, tokens = {}) {
   }
   return null;
 }
+
+// ---------------------------------------------------------------- Q17 : Hold up writes the written amount into the request itself
+// Certain or nothing. Required : a transaction (or a batch of calls) ; one amount in the sentence, readable one way only, extracted by code ;
+// an intent that is about trading or giving a right (not paying, not "someone asked me", not receiving) ; for each wider right the token
+// is known (local context, or read on the chain through the wallet's node) and its symbol IS the written symbol, with known decimals ;
+// nothing else leaves in the request. A signature (Permit, Permit2) is never rewritten : its ceiling is signed, there is nothing to replace.
+// `chain` : { [tokenAddress]: { symbol, decimals } } read from the token contract itself.
+export function limitPlan(body, intent, tokens = {}, chain = {}) {
+  if (!body || !intent || !intent.clear || !intent.amount || !intent.symbol || !intent.text || !amountIsSure(intent.text)) return null;
+  if (PAY_KINDS.has(intent.kind) || intent.kind === 'asked_by_someone' || (intent.facts && (intent.facts.asked || intent.facts.receive))) return null;
+  if (!(intent.kind === 'buy_or_swap' || (intent.facts && intent.facts.grant))) return null;
+  const method = body.method, params = Array.isArray(body.params) ? body.params : [];
+  let calls;
+  if (method === 'eth_sendTransaction') calls = params[0] && typeof params[0] === 'object' ? [params[0]] : [];
+  else if (method === 'wallet_sendCalls') calls = params[0] && Array.isArray(params[0].calls) ? params[0].calls.slice(0, 64) : [];
+  else return null;
+  const facts = requestFacts(body);
+  if (facts.sends.length || !facts.grants.length || facts.grants.some((g) => g.signed)) return null;
+  let copy; try { copy = JSON.parse(JSON.stringify(body.params)); } catch (_) { return null; }
+  const ccalls = method === 'eth_sendTransaction' ? [copy[0]] : copy[0].calls.slice(0, 64);
+  let changed = 0;
+  for (let i = 0; i < calls.length; i++) {
+    const tx = calls[i], ctx = ccalls[i];
+    if (!tx || typeof tx !== 'object') continue;
+    const value = big(tx.value); if (value == null || value > 0n) return null;
+    const field = typeof tx.data === 'string' && tx.data.length > 2 ? 'data' : typeof tx.input === 'string' ? 'input' : null;
+    if (!field || !HEX20.test(String(tx.to || ''))) continue;
+    const data = tx[field];
+    if (!/^0x[0-9a-fA-F]*$/.test(data) || data.length < 10) continue;
+    const sel = data.slice(0, 10).toLowerCase();
+    if (!((sel === '0x095ea7b3' || sel === '0x39509351') && (data.length - 10) / 64 >= 2)) continue;
+    let raw; try { raw = BigInt('0x' + word(data, 1)); } catch (_) { return null; }
+    if (raw <= 0n) continue;
+    const token = lc(tx.to), meta = tokens[token] || chain[token];
+    // the token must be known by its own contract (or the local context), and be the one the person wrote : else, no guess
+    if (!meta || !meta.symbol || !Number.isInteger(meta.decimals) || String(meta.symbol).toUpperCase() !== intent.symbol) return null;
+    const want = toRaw(intent.amount, meta.decimals);
+    if (want == null) return null;
+    if (raw <= want) continue;
+    ctx[field] = data.slice(0, 10 + 64) + want.toString(16).padStart(64, '0') + data.slice(74 + 64);
+    changed++;
+  }
+  if (!changed) return null;
+  // proof by reading again : nothing of the new request exceeds what was written
+  const after = requestFacts(Object.assign({}, body, { params: copy }));
+  if (after.grants.length !== facts.grants.length) return null;
+  for (const g of after.grants) {
+    const meta = tokens[g.token] || chain[g.token]; if (!meta) return null;
+    const want = toRaw(intent.amount, meta.decimals); if (want == null || g.raw > want) return null;
+  }
+  return { params: copy, amount: intent.amount, symbol: intent.symbol };
+}
+export const limitText = (plan) => 'Droit limité à ' + fr(plan.amount) + ' ' + plan.symbol;

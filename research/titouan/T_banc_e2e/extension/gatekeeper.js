@@ -4,10 +4,10 @@
  * the page side from the storage. Nothing here keeps a decision in memory : the worker can die at any time.
  * Fallback : if the window cannot be created, the in-page overlay of bridge.js is used and the journal says so. */
 import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_core.js';
-import { ENGINE_CHOICE, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
+import { ENGINE_CHOICE, amountIsSure, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
 import { TEXT, answerOf, siteName } from './outcome.js';
-import { effectCheck, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
-import { measure } from './effect_sim.js';
+import { effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
+import { measure, readToken } from './effect_sim.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const RANK = { attention: 1, unknown: 2, danger: 3, manipulation: 4 };
@@ -18,6 +18,7 @@ const DEFAULT_CFG = {
   askIntent: 'always',          // 'never' | 'rights_or_funds' | 'always' : intent question before the verdict
   verdictWindow: true,          // false = always the in-page overlay (trial only)
   grill: { enabled: true, shuffle: true, maxQuestions: 4 },
+  limitUnlimited: true,         // Q17 : replace a spending right wider than the written amount by that amount, before the wallet sees it
   contact: { name: '', tel: '' }
 };
 const INTENT_METHODS = new Set(['eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign',
@@ -141,6 +142,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     c.grill = Object.assign({}, DEFAULT_CFG.grill, cfg.grill || {});
     c.grill.enabled = false; // the extra questions are retired : the person writes one sentence, the window answers once
     c.contact = Object.assign({}, DEFAULT_CFG.contact, cfg.contact || {});
+    c.limitUnlimited = cfg.limitUnlimited !== false;
     if (cfg.dangerWaitMs == null && cfg.frictionMs != null) c.dangerWaitMs = cfg.frictionMs; // former name
     if (c.askIntent === true) c.askIntent = 'always'; else if (c.askIntent === false) c.askIntent = 'never';
     if (!['never', 'rights_or_funds', 'always'].includes(c.askIntent)) c.askIntent = DEFAULT_CFG.askIntent;
@@ -166,6 +168,8 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     try { v = await check(body, cfg); } catch (e) { v = null; }
     if (!v || typeof v !== 'object' || !(v.level in RANK || v.level === 'ok')) v = { level: 'unknown', indeterminate: true, why: 'moteur indisponible', reasons: [], effects: { grants_right: false, funds_out: false }, risk_signals: [] };
     if (v.level === 'ok') v.level = 'attention';
+    // fields only this file may set : whatever an engine sends under these names is dropped
+    delete v.relief; delete v.written;
     return v;
   }
 
@@ -177,11 +181,11 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     return Object.assign(interpret(raw, text), { text });
   }
   // Runs the engine with what was understood and keeps the strictest verdict (strict-only : a sentence never lowers a level).
-  // -> { v, used } : `used` is what this request takes from the written amount (kept for the next requests of the same intent).
+  // -> { v, used, rewrite } : `used` is what this request takes from the written amount (kept for the next requests of the same intent).
   // `op` : the operation this request belongs to, when the sentence was written for an earlier request.
   async function judgeWithIntent(rec, intent, cfg, op = null) {
     let v = rec.verdict;
-    if (!rec.body) return { v, used: null };
+    if (!rec.body) return { v, used: null, rewrite: null };
     const ask = (choice, kind) => safeCheck(Object.assign({}, rec.body, { intent: choice || undefined, intent_kind: kind, intent_text: intent.text,
       intent_amount: intent.amount, intent_symbol: intent.symbol }), cfg);
     if (intent.clear) v = stricter(v, await ask(ENGINE_CHOICE[intent.kind], intent.kind));
@@ -198,8 +202,24 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     }
     let w = effect && effect.ok ? effectCheck(effect, intent) : writtenCheck(rec.body, intent, tokens);
     if (!w && effect && effect.failed) w = { outcome: 'unverifiable', line: 'La simulation échoue : le réseau refuserait cette demande telle quelle.' };
-    const used = usedBy(rec.body, effect);
-    if (op && !(w && w.outcome === 'mismatch')) { const over = operationCheck(await usedSoFar(op, rec), used, intent, tokens); if (over) w = over; }
+    // Q17 : a spending right wider than the written amount, in a transaction : Hold up writes the amount into the request itself,
+    // only when that amount is certain. Otherwise the line keeps its advice (cap it in the wallet).
+    let rewrite = null;
+    if (w && w.fixable && cfg.limitUnlimited !== false) {
+      const chain = {};
+      try {
+        const need = [...new Set(requestFacts(rec.body).grants.map((g) => g.token).filter((t) => t && !tokens[t]))].slice(0, 4);
+        for (const t of need) { const m = await readToken(rpcOf(rec.tabId, rec.frameId, rec.rid), t); if (m) chain[t] = m; }
+      } catch (_) {}
+      const plan = limitPlan(rec.body, intent, tokens, chain);
+      if (plan) {
+        rewrite = { params: plan.params };
+        w = Object.assign({}, w, { line: w.line.replace(/ Réduis le plafond.*$/, ''), fix: limitText(plan), limited: { amount: plan.amount, symbol: plan.symbol } });
+      }
+    }
+    const used = usedBy(rewrite ? Object.assign({}, rec.body, { params: rewrite.params }) : rec.body, effect);
+    let relief = !!(w && w.fixable);
+    if (op && !(w && w.outcome === 'mismatch')) { const over = operationCheck(await usedSoFar(op, rec), used, intent, tokens); if (over) { w = over; rewrite = null; relief = false; } }
     if (w) {
       // The engine already found worse on its own : its line stays, this check only adds its outcome.
       const worse = w.outcome !== 'mismatch' && ((RANK[v.level] || 0) > RANK.unknown || v.intent_contradiction);
@@ -214,7 +234,11 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // Nothing understood, or still too vague after the one follow-up : it cannot be said to match. At least "not verified" (same delay as Danger),
     // so a vague sentence never does better than no sentence at all.
     if ((!intent.clear || intent.vague) && RANK.unknown > (RANK[v.level] || 0)) v = Object.assign({}, v, { level: 'unknown' });
-    return { v, used };
+    // Q16 : for this one gap there is no waiting time, only the correction. Not when anything else is wrong with the request.
+    if (relief && intent.clear && !intent.vague && amountIsSure(intent.text) && v.written && v.written.outcome === 'mismatch' && ['attention', 'danger'].includes(v.level) && !v.indeterminate
+      && !v.intent_contradiction && !v.address_diff && !(v.risk_signals || []).includes('lookalike')) v = Object.assign({}, v, { relief: true });
+    else rewrite = rewrite && v.written && v.written.limited ? rewrite : null;
+    return { v, used, rewrite };
   }
 
   // ---------- reads relayed to the wallet's own node (bridge.js -> inject.js -> the provider the request came through) ----------
@@ -400,7 +424,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     const op = kept && INTENT_METHODS.has(p.method) && cfg.askIntent !== 'never' ? await opGet(tabId, frameId, origin, Date.now()) : null;
     if (op) {
       const j = await judgeWithIntent({ rid: msg.rid, tabId, frameId, body: kept, verdict: floor }, op.intent, cfg, op);
-      init.intent = op.intent; init.opAt = op.writtenAt; init.used = j.used;
+      init.intent = op.intent; init.opAt = op.writtenAt; init.used = j.used; init.rewrite = j.rewrite;
       enterVerdict(init, j.v, cfg, Date.now());
       await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });
     } else if (wantIntent) { init.stage = 'intent'; init.shownAt = Date.now(); }
@@ -451,10 +475,10 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         return { status: 'next', view: viewOf(r.rec, cfg) };
       }
       if (again) intent.vague = true;
-      const { v, used } = await judgeWithIntent(rec, intent, cfg);
+      const { v, used, rewrite } = await judgeWithIntent(rec, intent, cfg);
       await journal({ type: 'decision', stage: 'intent', decision: 'answer', intent: intent.kind || 'unclear', classifier: intent.source, facts: intent.facts, origin: rec.origin, method: rec.method, time_to_decision_ms: ttd, ui: rec.ui });
       const op = await opOpen(rec, intent, Date.now());
-      r = await store.advance(rid, seq, (x, now) => { x.intent = intent; x.used = used; x.opAt = op ? op.writtenAt : null; enterVerdict(x, v, cfg, now); });
+      r = await store.advance(rid, seq, (x, now) => { x.intent = intent; x.used = used; x.rewrite = rewrite; x.opAt = op ? op.writtenAt : null; enterVerdict(x, v, cfg, now); });
     } else if (rec.stage === 'intent' && d === 'answer') {
       const choice = msg.value in INTENT_ENGINE ? (msg.value === 'demande' ? 'asked' : msg.value) : 'other';
       const intent = { choice, message: typeof msg.message === 'string' ? msg.message.slice(0, 2000) : '' };
@@ -488,7 +512,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       r = await store.advance(rid, seq, (x) => { x.called = true; });
     } else if (rec.stage === 'verdict' && d === 'retry' && rec.level === 'unknown' && rec.body && (rec.retries || 0) < 3) {
       const v = await safeCheck(rec.body, cfg);
-      r = await store.advance(rid, seq, (x, now) => { x.retries = (x.retries || 0) + 1; enterVerdict(x, v, cfg, now); });
+      r = await store.advance(rid, seq, (x, now) => { x.retries = (x.retries || 0) + 1; x.rewrite = null; enterVerdict(x, v, cfg, now); });
     } else if (rec.stage === 'verdict' && d === 'continue') {
       const s = await store.submit(rid, { seq, decision: 'continue', phraseOk: msg.phraseOk === true, by, meta: { screen: msg.screen } });
       if (s.status === 'allow') {
@@ -535,6 +559,8 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         r.rec = (await store.get(msg.rid)) || r.rec;
       }
       const out = { state: r.state };
+      // The request goes to the wallet with the right Hold up limited (only the one the screen said it limited)
+      if (r.state === 'allow' && r.rec.rewrite && Array.isArray(r.rec.rewrite.params) && r.rec.verdict && r.rec.verdict.written && r.rec.verdict.written.limited) out.params = r.rec.rewrite.params;
       if (r.state === 'pending') { out.ui = r.rec.ui; if (r.rec.ui === 'overlay') out.view = viewOf(r.rec, await getCfg()); }
       return out;
     },

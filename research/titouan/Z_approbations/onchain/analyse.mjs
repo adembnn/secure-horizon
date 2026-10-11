@@ -12,8 +12,10 @@ const by = new Map(); for (const e of ev) { (by.get(e.s) || by.set(e.s, []).get(
 const top = [...by.entries()].sort((a, b) => b[1].length - a[1].length).slice(0, 25);
 // offre totale des jetons concernés (état actuel)
 const tokens = [...new Set(top.flatMap(([, l]) => l.map(e => e.t)))];
-const supply = {};
-await pool(tokens, 3, async t => { try { const r = await rpc(URL, "eth_call", [{ to: t, data: "0x18160ddd" }, "latest"]); supply[t] = r && r.length >= 3 ? BigInt(r) : null; } catch { supply[t] = null; } });
+const supF = `cache/${chain}.supply.json`;
+const supply = {}; const sc = fs.existsSync(supF) ? JSON.parse(fs.readFileSync(supF)) : {};
+await pool(tokens, 3, async t => { if (t in sc) { supply[t] = sc[t] === null ? null : BigInt(sc[t]); return; } try { const r = await rpc(URL, "eth_call", [{ to: t, data: "0x18160ddd" }, "latest"]); supply[t] = r && r.length >= 3 ? BigInt(r) : null; } catch { supply[t] = null; } });
+fs.writeFileSync(supF, JSON.stringify(Object.fromEntries(Object.entries(supply).map(([k,v])=>[k,v===null?null:v.toString()]))));
 const code = {};
 await pool(top.map(x => x[0]), 3, async s => { const c = await rpc(URL, "eth_getCode", [s, "latest"]); code[s] = c && c !== "0x" ? (c.length - 2) / 2 : 0; });
 const isUnl = e => e.v >= T255 || (supply[e.t] != null && supply[e.t] > 0n && e.v >= supply[e.t]);
@@ -25,7 +27,7 @@ const out = { chain, meta, evenements_erc20_total: total, valeurs_nulles: zero, 
 let top_n = 0;
 for (const [s, l] of top) {
   const u = l.filter(isUnl).length, b = l.filter(e => !isUnl(e));
-  const rel = b.filter(e => supply[e.t] > 0n && supply[e.t] != null).map(e => Number(e.v * 1000000n / supply[e.t]) / 1e6);
+  const rel = b.filter(e => supply[e.t] > 0n && supply[e.t] != null).map(e => Number(e.v) / Number(supply[e.t]));
   top_n += l.length;
   out.top.push({ spender: s, n: l.length, illimites: u, pct: u / l.length, wilson: wilson(u, l.length), mediane_borne_rel_offre: med(rel), n_borne_avec_offre: rel.length,
     proprietaires_distincts: new Set(l.map(e => e.o)).size, jetons_distincts: new Set(l.map(e => e.t)).size, code_octets: code[s] });

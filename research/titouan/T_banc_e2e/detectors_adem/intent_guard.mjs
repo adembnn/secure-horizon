@@ -25,7 +25,7 @@
 //      named Paul" : any entry with that label is accepted ; "I pay Paul at a new address he just gave me" : one confirmation, the book
 //      is the reference the user chose. Labels are compared without case, accents or repeated spaces.
 // NIST CSF DE.AE-02, DE.AE-06, RS.MI ; MITRE ATT&CK T1657 ; OWASP ASI01 (goal hijack: intent not enforced) ; D3FEND D3-UBA (user behavior analysis).
-import { lc, isAddr, isKnown, isSelf, trustedAddresses } from './util.mjs';
+import { lc, isAddr, isKnown, isSelf, trustedAddresses, benchLower } from './util.mjs';
 
 export const KINDS = new Set(['asked_by_someone', 'buy_or_swap', 'connect_or_accept_offer', 'pay_someone', 'send_to_my_account']);
 export const canonicalKind = (raw) => {
@@ -130,7 +130,9 @@ export const intentGuard = {
         const said = typeof intent.token === 'string' ? family(intent.token) : '';
         const sentTotal = outs.filter((o) => !said || family(sentSymbol(ctx, o)) === said).reduce((s, o) => s + Number(o.amount || 0), 0);
         if (sentTotal > Math.max(...readings) * 1.01) flags.push({ code: 'amount_exceeded_robust', severity: 'critical', detail: `vous avez dit ${intent.amount}, la demande envoie ${sentTotal}` });
-        else covered = true;
+        // `covered` ne sert qu'à baisser : il faut que la lecture la PLUS PETITE (celle du comparateur : « 1,000 » = 1) couvre aussi le montant envoyé.
+        // La lecture la plus large sert à lever moins d'alertes, jamais à en retirer une.
+        else if (sentTotal <= Math.min(...readings) * 1.01) covered = true;
       }
     }
 
@@ -161,7 +163,8 @@ export const intentGuard = {
     }
 
     // false-positive repair : the comparator's only critical is amount_exceeded and the amount typed ("1,000", "1k") covers what is sent
-    if (!flags.length && covered && policy) {
+    // COUPÉ dans le chemin produit (jamais de baisse) ; rendu au banc seulement (HOLDUP_BENCH_LOWER=1)
+    if (benchLower() && !flags.length && covered && policy) {
       const crit = (policy.reasons || []).filter((r) => (r.sev || (WARN_CODES.has(r.code) ? 'warn' : 'critical')) === 'critical');
       const engineCrit = (eff.risk_flags || []).some((f) => f.severity === 'critical');
       if (crit.length && crit.every((r) => r.code === 'amount_exceeded') && !engineCrit) return { lower: { to: 'warn', why: `amount_exceeded vient de la lecture parseFloat de « ${intent.amount} » ; relu avec séparateurs et suffixes, le montant envoyé est couvert` } };

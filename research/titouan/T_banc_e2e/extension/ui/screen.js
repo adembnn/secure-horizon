@@ -56,10 +56,13 @@
       function submit() {
         var text = field.value.replace(/\s+/g, ' ').trim();
         if (busy) return;
-        if (!text) { field.focus(); return; }
+        if (!text) { field.setAttribute('aria-invalid', 'true'); field.classList.add('is-error'); field.focus(); return; }
         lock(); on.onSubmit(text);
       }
-      field.addEventListener('input', function () { if (!busy) setEnabled(go, !!field.value.trim()); });
+      field.addEventListener('input', function () {
+        field.removeAttribute('aria-invalid'); field.classList.remove('is-error');
+        if (!busy) setEnabled(go, !!field.value.trim());
+      });
       field.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); submit(); } });
       go.addEventListener('click', submit);
       if (s.checking) lock();
@@ -73,6 +76,7 @@
       var title = el('h1', 'hu-title', s.headline); title.tabIndex = -1;
       f.col.appendChild(title);
       f.col.appendChild(el('p', 'hu-line', s.line));
+      if (s.fix) f.col.appendChild(el('p', 'hu-line hu-fix', s.fix)); // "Droit limité à 50 USDC" : what Hold up already corrected
       if (s.addresses) {
         f.col.appendChild(addressBlock(s.labels.expected, s.addresses.expected, s.addresses.expectedFull));
         f.col.appendChild(addressBlock(s.labels.actual, s.addresses.actual, s.addresses.actualFull));

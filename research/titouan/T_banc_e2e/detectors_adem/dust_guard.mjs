@@ -13,7 +13,7 @@
 //      paid, or is the destination (that is the attack, and it stays critical), nor when any other critical reason exists.
 //      Objection : "a poisoner could also have been paid before" ; then the lookalike has an outgoing entry and the rule does not fire.
 // NIST CSF DE.AE-02, DE.AE-04 ; MITRE ATT&CK T1036 (masquerading), T1657 ; OWASP ASI09 (human trust exploitation) ; D3FEND D3-ID (identifier analysis).
-import { lc, isAddr, isKnown, isSelf, trustedAddresses } from './util.mjs';
+import { lc, isAddr, isKnown, isSelf, trustedAddresses, benchLower } from './util.mjs';
 
 const WARN_CODES = new Set(['new_contract', 'high_balance_share', 'unlimited_approval_swap', 'low_confidence']);
 const LOOKALIKE_REASONS = new Set(['lookalike_address', 'address_poisoning']);
@@ -45,7 +45,8 @@ export const dustGuard = {
       return !trusted.has(real) || poisonDeals || !dustIn.has(poison); // keep critical unless: real is vouched, poison is a pure dust sender
     });
     if (bad) return null;
-    const otherWarn = (policy.reasons || []).some((r) => !LOOKALIKE_REASONS.has(r.code)) || (eff.risk_flags || []).some((f) => f.severity === 'warn' && !LOOKALIKE_REASONS.has(f.code));
-    return { lower: { to: otherWarn ? 'warn' : 'ok', why: 'le destinataire est dans le carnet ou déjà payé ; seul le sosie ayant envoyé de la poussière le fait paraître suspect (le sosie n\'est ni au carnet ni payé)' } };
+    // COUPÉ dans le chemin produit (règle : jamais de baisse, jamais de vert). Rendu seulement au banc (HOLDUP_BENCH_LOWER=1), et jamais jusqu'à `ok` : plancher `warn`.
+    if (!benchLower()) return null;
+    return { lower: { to: 'warn', why: 'le destinataire est dans le carnet ou déjà payé ; seul le sosie ayant envoyé de la poussière le fait paraître suspect (le sosie n\'est ni au carnet ni payé)' } };
   },
 };

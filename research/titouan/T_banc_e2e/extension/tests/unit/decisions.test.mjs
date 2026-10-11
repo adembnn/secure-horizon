@@ -244,10 +244,11 @@ test('decision 8 : a written amount against a larger spending right is a mismatc
   const say = async (payload, text) => { const g = await gate(payload); const r = await g.write(text); return Object.assign({ g }, r.view.screen); };
   let s = await say(approve(MAX), 'échanger 50 USDC contre AVAX');
   assert.equal(s.outcome, 'mismatch'); assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.');
-  assert.equal(s.line, 'Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. Réduis le plafond à 50 USDC dans ton portefeuille.');
-  assert.equal(s.leftMs, 30000); assert.equal((await s.g.go()).status, 'again');
+  // Q16 + Q17 : the token is known, the amount is certain : Hold up limits the right itself, no waiting time
+  assert.equal(s.line, 'Tu as écrit 50 USDC. La demande donne accès à tout ton USDC.'); assert.equal(s.fix, 'Droit limité à 50 USDC');
+  assert.equal(s.leftMs, 0); assert.equal((await s.g.go()).status, 'allow');
   s = await say(approve(500n * U), 'échanger 50 USDC contre AVAX');
-  assert.equal(s.outcome, 'mismatch'); assert.equal(s.line, 'Tu as écrit 50 USDC. La demande donne accès à 500 USDC. Réduis le plafond à 50 USDC dans ton portefeuille.');
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.line, 'Tu as écrit 50 USDC. La demande donne accès à 500 USDC.'); assert.equal(s.fix, 'Droit limité à 50 USDC');
   s = await say(permit(MAX), 'échanger 50 USDC contre AVAX');
   assert.equal(s.outcome, 'mismatch'); assert.equal(s.line, 'Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée.');
   s = await say(permit(51n * U), 'j’autorise ce site, échanger 50 USDC contre AVAX');
@@ -268,7 +269,12 @@ test('demo scene : "échanger 50 USDC contre AVAX" on an exchange site', async (
     assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.');
     assert.ok(/^Tu as écrit 50 USDC\. (La demande|Cette signature) donne accès à tout ton USDC/.test(s.line));
     assert.equal(s.noModel, true, 'classified without a model'); assert.ok(!s.autoMs);
-    clock.advance(5000); assert.equal((await g.go()).status, 'again'); assert.equal((await g.poll()).state, 'pending', 'held');
+    const signed = trap.method === 'eth_signTypedData_v4';
+    if (signed) { assert.equal(s.leftMs, 30000, 'a signature cannot be corrected : the alert keeps its delay'); assert.equal(s.fix, null); }
+    else { assert.equal(s.leftMs, 0); assert.equal(s.fix, 'Droit limité à 50 USDC'); }
+    clock.advance(5000);
+    if (signed) { assert.equal((await g.go()).status, 'again'); assert.equal((await g.poll()).state, 'pending', 'held'); }
+    else { assert.equal((await g.go()).status, 'allow'); const p = await g.poll(); assert.equal(p.state, 'allow'); assert.equal(p.params[0].data, approve(50n * U).params[0].data, 'the wallet gets 50, not everything'); }
   }
   // the honest variant : approve of exactly 50, then the swap. Both match and leave by themselves.
   for (const step of [approve(50n * U), SWAP]) {
@@ -277,4 +283,100 @@ test('demo scene : "échanger 50 USDC contre AVAX" on an exchange site', async (
     assert.equal(s.headline, 'Ça correspond à ce que tu as écrit.'); assert.equal(s.autoMs, 1000);
     clock.advance(1000); assert.equal((await g.go()).status, 'allow'); assert.equal((await g.poll()).state, 'allow');
   }
+});
+
+// ------------------------------------------------------------------------------------------------ Q16 / Q17
+const SENT = (p) => p.params[0].data;
+test('Q17 : the unlimited right is replaced by the written amount before the wallet, with the line ; spender and token unchanged', async () => {
+  await knowToken(); worker();
+  const g = await gate(approve(MAX));
+  const s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.'); assert.equal(s.fix, 'Droit limité à 50 USDC');
+  assert.equal(s.leftMs, 0, 'Q16 : no 30 s wait, only the correction'); assert.ok(!s.autoMs, 'never leaves by itself');
+  const st = surface(); st.ui.show(s, 'a:1');
+  assert.ok(st.texts().includes('Droit limité à 50 USDC'));
+  assert.equal((await g.poll()).state, 'pending', 'nothing leaves before a gesture');
+  clock.advance(1000);
+  assert.equal((await g.go()).status, 'allow');
+  const p = await g.poll();
+  assert.equal(p.state, 'allow'); assert.equal(p.params.length, 1);
+  assert.equal(SENT({ params: p.params }), approve(50n * U).params[0].data);
+  assert.equal(p.params[0].to, USDC); assert.equal(p.params[0].from, ME);
+  // decimal comma, 6 decimals
+  const h = await gate(approve(MAX)); const sh = (await h.write('échanger 12,5 USDC contre AVAX')).view.screen;
+  assert.equal(sh.fix, 'Droit limité à 12,5 USDC'); clock.advance(1000); await h.go(); assert.equal(SENT({ params: (await h.poll()).params }), approve(12500000n).params[0].data);
+});
+
+test('Q17 : a right already within the written amount is not touched, nor a right of another token', async () => {
+  await knowToken(); worker();
+  let g = await gate(approve(50n * U)); let s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
+  assert.equal(s.outcome, 'match'); assert.equal(s.fix, null); clock.advance(1000); await g.go(); assert.equal((await g.poll()).params, undefined);
+  const OTHER_T = '0x' + '9f'.repeat(20);
+  g = await gate(send(OTHER_T, '0x095ea7b3' + pad(ROUTER) + pad(MAX))); s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.fix, null, 'a token nobody can name is not rewritten');
+});
+
+test('Q17 : never guessed. Two amounts, an ambiguous amount, a payment : alert only, delay kept', async () => {
+  await knowToken(); worker();
+  for (const text of ['échanger 50 USDC contre 1 AVAX', 'échanger 1,000 USDC contre AVAX', 'envoyer 50 USDC à ' + FRIEND, 'on m’a demandé d’échanger 50 USDC']) {
+    const g = await gate(approve(MAX)); const s = (await g.write(text)).view.screen;
+    assert.equal(s.fix, null, text); assert.equal(s.outcome === 'mismatch' || s.outcome === 'unverifiable', true, text); assert.ok(s.leftMs >= 30000, 'delay kept : ' + text);
+  }
+  // the token is not in the local context and the wallet's node cannot be read : no rewrite, the advice stays, no waiting time for the plain gap
+  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [] } });
+  const g = await gate(approve(MAX)); const s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
+  assert.equal(s.fix, null); assert.equal(s.line, 'Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. Réduis le plafond à 50 USDC dans ton portefeuille.');
+  assert.equal(s.leftMs, 0, 'Q16 : only the correction'); clock.advance(1000); await g.go(); assert.equal((await g.poll()).params, undefined, 'the request goes as written by the site');
+});
+
+test('Q17 : the option can be switched off ; and what an engine says in `relief` or `written` is dropped', async () => {
+  await knowToken(); worker('attention', { relief: true, written: { outcome: 'match', line: 'x' } });
+  await F.chrome.storage.local.set({ cfg: { limitUnlimited: false } });
+  const g = await gate(approve(MAX)); const s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
+  assert.equal(s.fix, null); assert.match(s.line, /Réduis le plafond à 50 USDC/); clock.advance(1000); await g.go(); assert.equal((await g.poll()).params, undefined);
+  // the gaps that are not this one keep their delay
+  const t = await gate(transfer(FRIEND, 200n * U)); const st = (await t.write('envoyer 20 USDC à ' + FRIEND)).view.screen;
+  assert.equal(st.outcome, 'mismatch'); assert.equal(st.leftMs, 30000);
+});
+
+test('Q16 : the delay stays when the engine itself found something else (look-alike address)', async () => {
+  await knowToken(); worker('danger', { risk_signals: ['lookalike'] });
+  const g = await gate(approve(MAX)); const s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.leftMs, 30000); assert.equal((await g.go()).status, 'again');
+});
+
+test('Q17 : the node is asked for the token when the local context does not know it', async () => {
+  worker();
+  const abi = (s) => '0x' + pad(32n) + pad(BigInt(s.length)) + Buffer.from(s).toString('hex').padEnd(64, '0');
+  F.chrome.tabs.sendMessage = async (tabId, msg) => {
+    if (msg.type !== 'hu.rpc' || msg.method !== 'eth_call') return { ok: false };
+    const d = msg.params[0].data; return { ok: true, result: d.startsWith('0x95d89b41') ? abi('USDC') : '0x' + pad(6n) };
+  };
+  const g = await gate(approve(MAX)); const s = (await g.write('échanger 50 USDC contre AVAX')).view.screen;
+  assert.equal(s.fix, 'Droit limité à 50 USDC'); clock.advance(1000); await g.go(); assert.equal(SENT({ params: (await g.poll()).params }), approve(50n * U).params[0].data);
+  // a token that calls itself something else is not rewritten
+  F.chrome.tabs.sendMessage = async (tabId, msg) => ({ ok: true, result: msg.params[0].data.startsWith('0x95d89b41') ? abi('SCAM') : '0x' + pad(6n) });
+  const h = await gate(approve(MAX)); assert.equal((await h.write('échanger 50 USDC contre AVAX')).view.screen.fix, null);
+});
+
+test('Q17 : the page side forwards the limited params to the wallet ; a signature never gets other params', async () => {
+  const ports = [], timers = new Set();
+  const sb = { console, clearTimeout, clearInterval, addEventListener() {}, dispatchEvent() { return true; }, got: [],
+    setTimeout: (f, ms, ...a) => { const t = setTimeout(f, ms, ...a); timers.add(t); return t; }, setInterval: (f, ms) => { const t = setInterval(f, ms); timers.add(t); return t; },
+    MessageChannel: class { constructor() { const c = new MessageChannel(); ports.push(c.port1, c.port2); this.port1 = c.port1; this.port2 = c.port2; } } };
+  const LIM = [{ from: ME, to: USDC, data: approve(50n * U).params[0].data }];
+  sb.postMessage = (data, origin, transfer) => { if (!data || data.__sentinelle !== 'hello' || sb.port) return; sb.port = transfer[0];
+    sb.port.onmessage = (ev) => { const m = ev.data; if (m.t !== 'gate') return; sb.port.postMessage({ t: 'ack', id: m.id }); sb.port.postMessage({ t: 'result', id: m.id, allow: true, reason: '', params: LIM }); };
+    sb.port.postMessage({ t: 'ready' }); };
+  sb.window = sb; sb.top = sb; sb.self = sb; sb.globalThis = sb;
+  vm.createContext(sb);
+  vm.runInContext('class CustomEvent { constructor(t, i) { this.type = t; this.detail = i && i.detail; } }; globalThis.CustomEvent = CustomEvent;'
+    + 'window.ethereum = { async request(a) { window.got.push(JSON.stringify(a)); return "ok"; } };', sb);
+  vm.runInContext(readFileSync(join(DIR, 'inject.js'), 'utf8'), sb);
+  const asked = approve(MAX).params;
+  await vm.runInContext(`ethereum.request({ method: 'eth_sendTransaction', params: ${JSON.stringify(asked)} })`, sb);
+  assert.deepEqual(JSON.parse(sb.got[0]).params, LIM, 'the wallet receives the limited request');
+  await vm.runInContext(`ethereum.request({ method: 'eth_signTypedData_v4', params: ['x', 'y'] })`, sb);
+  assert.deepEqual(JSON.parse(sb.got[1]).params, ['x', 'y']);
+  for (const t of timers) { clearTimeout(t); clearInterval(t); } for (const x of ports) { try { x.close(); } catch (_) {} }
 });

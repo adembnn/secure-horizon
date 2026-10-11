@@ -1,0 +1,403 @@
+{
+ "chain": "avax",
+ "meta": {
+  "chain": "avax",
+  "pin": 97252253,
+  "lo": 92252253,
+  "seed": 20261011,
+  "fenetre_blocs": 500,
+  "rpc": "https://api.avax.network/ext/bc/C/rpc",
+  "topic0": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+ },
+ "evenements_erc20_total": 34393,
+ "valeurs_nulles": 13640,
+ "erc721_ignores": 313,
+ "droits_non_nuls": 20753,
+ "illimites_tous": 7094,
+ "part_illimitee_tous": 0.341830096853467,
+ "wilson_tous": [
+  0.33540648331087675,
+  0.3483122574054373
+ ],
+ "spenders_distincts": 398,
+ "jetons_distincts_top25": 213,
+ "top": [
+  {
+   "spender": "0x5485a0751a249225d3ba2f6f296551507e22547f",
+   "n": 2404,
+   "illimites": 21,
+   "pct": 0.008735440931780365,
+   "wilson": [
+    0.005720603034188327,
+    0.013317858632060814
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 2383,
+   "proprietaires_distincts": 7,
+   "jetons_distincts": 8,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x0b4478e810d48b5882d4019d435a2f864bab4f39",
+   "n": 1585,
+   "illimites": 383,
+   "pct": 0.2416403785488959,
+   "wilson": [
+    0.22120646668380897,
+    0.26332364632430966
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 1202,
+   "proprietaires_distincts": 58,
+   "jetons_distincts": 7,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+   "n": 1377,
+   "illimites": 159,
+   "pct": 0.11546840958605664,
+   "wilson": [
+    0.09964759718989731,
+    0.13342881070511395
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 1218,
+   "proprietaires_distincts": 134,
+   "jetons_distincts": 53,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x757121c9a8259c4d6b6956c283355b2902a6baa2",
+   "n": 1130,
+   "illimites": 1125,
+   "pct": 0.995575221238938,
+   "wilson": [
+    0.9896837077102537,
+    0.9981085906143095
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 5,
+   "proprietaires_distincts": 11,
+   "jetons_distincts": 2,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x000000000022d473030f116ddee9f6b43ac78ba3",
+   "n": 1123,
+   "illimites": 905,
+   "pct": 0.8058771148708815,
+   "wilson": [
+    0.7817168879581994,
+    0.8279517646723035
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 213,
+   "proprietaires_distincts": 76,
+   "jetons_distincts": 31,
+   "code_octets": 0
+  },
+  {
+   "spender": "0xfd1c727d8a2259493c66899f478ebfea41329545",
+   "n": 1097,
+   "illimites": 0,
+   "pct": 0,
+   "wilson": [
+    0,
+    0.0034896937034356256
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 1097,
+   "proprietaires_distincts": 18,
+   "jetons_distincts": 2,
+   "code_octets": 0
+  },
+  {
+   "spender": "0xbb00ff08d01d300023c629e8ffffcb65a5a578ce",
+   "n": 868,
+   "illimites": 210,
+   "pct": 0.24193548387096775,
+   "wilson": [
+    0.21462226479796145,
+    0.2715229248786954
+   ],
+   "mediane_borne_rel_offre": 0.000001,
+   "n_borne_avec_offre": 655,
+   "proprietaires_distincts": 25,
+   "jetons_distincts": 12,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x0000000000001ff3684f28c67538d4d072c22734",
+   "n": 741,
+   "illimites": 39,
+   "pct": 0.05263157894736842,
+   "wilson": [
+    0.038737390824007595,
+    0.07114046777035664
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 678,
+   "proprietaires_distincts": 74,
+   "jetons_distincts": 38,
+   "code_octets": 0
+  },
+  {
+   "spender": "0xabfc48e8bed7b26762745f3139555f320119709d",
+   "n": 723,
+   "illimites": 353,
+   "pct": 0.48824343015214383,
+   "wilson": [
+    0.4519654158500344,
+    0.5246457192308416
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 362,
+   "proprietaires_distincts": 17,
+   "jetons_distincts": 14,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x9357e52260bd5a4c704c02a285608ba6698f405f",
+   "n": 606,
+   "illimites": 606,
+   "pct": 1,
+   "wilson": [
+    0.9937006593187477,
+    1
+   ],
+   "mediane_borne_rel_offre": null,
+   "n_borne_avec_offre": 0,
+   "proprietaires_distincts": 1,
+   "jetons_distincts": 9,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x3fed017ec0f5517cdf2e8a9a4156c64d74252146",
+   "n": 551,
+   "illimites": 48,
+   "pct": 0.08711433756805807,
+   "wilson": [
+    0.06633435342142179,
+    0.11361177895221423
+   ],
+   "mediane_borne_rel_offre": 0.00004,
+   "n_borne_avec_offre": 499,
+   "proprietaires_distincts": 27,
+   "jetons_distincts": 13,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
+   "n": 497,
+   "illimites": 141,
+   "pct": 0.2837022132796781,
+   "wilson": [
+    0.24584580940891684,
+    0.3248767503784491
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 147,
+   "proprietaires_distincts": 80,
+   "jetons_distincts": 38,
+   "code_octets": 0
+  },
+  {
+   "spender": "0xd6f5fe1250363a75319d10ae4981aa5aa62ddfb0",
+   "n": 471,
+   "illimites": 471,
+   "pct": 1,
+   "wilson": [
+    0.9919097231582069,
+    1
+   ],
+   "mediane_borne_rel_offre": null,
+   "n_borne_avec_offre": 0,
+   "proprietaires_distincts": 4,
+   "jetons_distincts": 3,
+   "code_octets": 0
+  },
+  {
+   "spender": "0xcce9174424bdd18ef444846bdaccecd8ebbad550",
+   "n": 361,
+   "illimites": 361,
+   "pct": 1,
+   "wilson": [
+    0.9894704989781866,
+    1
+   ],
+   "mediane_borne_rel_offre": null,
+   "n_borne_avec_offre": 0,
+   "proprietaires_distincts": 1,
+   "jetons_distincts": 3,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x94b75331ae8d42c1b61065089b7d48fe14aa73b7",
+   "n": 335,
+   "illimites": 0,
+   "pct": 0,
+   "wilson": [
+    0,
+    0.011337450891508009
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 335,
+   "proprietaires_distincts": 1,
+   "jetons_distincts": 3,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x40aa958dd87fc8305b97f2ba922cddca374bcd7f",
+   "n": 315,
+   "illimites": 163,
+   "pct": 0.5174603174603175,
+   "wilson": [
+    0.46239992127515034,
+    0.5720999683252032
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 141,
+   "proprietaires_distincts": 46,
+   "jetons_distincts": 28,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x5acc35397d2ce81ac54a4b1c6d9e1fb29f8ec6c6",
+   "n": 245,
+   "illimites": 7,
+   "pct": 0.02857142857142857,
+   "wilson": [
+    0.013907365478111732,
+    0.05779125726020854
+   ],
+   "mediane_borne_rel_offre": 0.000005,
+   "n_borne_avec_offre": 238,
+   "proprietaires_distincts": 7,
+   "jetons_distincts": 8,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x20f6ee51340adeed01a59b0e65cb3703f3dc860c",
+   "n": 223,
+   "illimites": 91,
+   "pct": 0.4080717488789238,
+   "wilson": [
+    0.3456512349790417,
+    0.4736059030414978
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 121,
+   "proprietaires_distincts": 24,
+   "jetons_distincts": 20,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x18556da13313f3532c54711497a8fedac273220e",
+   "n": 203,
+   "illimites": 127,
+   "pct": 0.625615763546798,
+   "wilson": [
+    0.5572861872112079,
+    0.68927930058235
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 74,
+   "proprietaires_distincts": 20,
+   "jetons_distincts": 63,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x26a56f289eb7fc3c11e6f656bf3286f3ddb27b6c",
+   "n": 188,
+   "illimites": 188,
+   "pct": 1,
+   "wilson": [
+    0.9799751461622506,
+    1
+   ],
+   "mediane_borne_rel_offre": null,
+   "n_borne_avec_offre": 0,
+   "proprietaires_distincts": 127,
+   "jetons_distincts": 35,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x671094c35c94814bd53eceabd44991e5a846609a",
+   "n": 184,
+   "illimites": 184,
+   "pct": 1,
+   "wilson": [
+    0.9795487261607653,
+    1
+   ],
+   "mediane_borne_rel_offre": null,
+   "n_borne_avec_offre": 0,
+   "proprietaires_distincts": 1,
+   "jetons_distincts": 3,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x6a000f20005980200259b80c5102003040001068",
+   "n": 176,
+   "illimites": 45,
+   "pct": 0.2556818181818182,
+   "wilson": [
+    0.19692865422467734,
+    0.32487275323611026
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 127,
+   "proprietaires_distincts": 30,
+   "jetons_distincts": 14,
+   "code_octets": 0
+  },
+  {
+   "spender": "0xb304f8caec0350ab3ccda10d8d7acdc993fc8dfb",
+   "n": 175,
+   "illimites": 0,
+   "pct": 0,
+   "wilson": [
+    0,
+    0.021480460921843688
+   ],
+   "mediane_borne_rel_offre": null,
+   "n_borne_avec_offre": 0,
+   "proprietaires_distincts": 1,
+   "jetons_distincts": 1,
+   "code_octets": 0
+  },
+  {
+   "spender": "0x4cd00e387622c35bddb9b4c962c136462338bc31",
+   "n": 172,
+   "illimites": 0,
+   "pct": 0,
+   "wilson": [
+    0,
+    0.021846934968744597
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 168,
+   "proprietaires_distincts": 40,
+   "jetons_distincts": 2,
+   "code_octets": 0
+  },
+  {
+   "spender": "0xc8b8fcbdb5c019d7802ffb0b39603395d7d3915c",
+   "n": 144,
+   "illimites": 50,
+   "pct": 0.3472222222222222,
+   "wilson": [
+    0.2743455215337146,
+    0.4280386517977428
+   ],
+   "mediane_borne_rel_offre": 0,
+   "n_borne_avec_offre": 94,
+   "proprietaires_distincts": 17,
+   "jetons_distincts": 9,
+   "code_octets": 0
+  }
+ ],
+ "n_top25": 15894,
+ "part_top25": 0.7658651761191153
+}

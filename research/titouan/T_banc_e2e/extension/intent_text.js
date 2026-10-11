@@ -120,6 +120,23 @@ export function extractFields(text) {
   return out;
 }
 
+// True only when the sentence holds ONE amount and that amount cannot be read two ways. This is the condition for Hold up to
+// write that amount into a request itself : an amount is never guessed.
+//   - two different amounts ("50 USDC contre 1 AVAX") : which one is the limit ? not sure ;
+//   - "1,000 USDC" / "1.000 USDC" : one thousand or one ? not sure.
+export function amountIsSure(text) {
+  const t = cleanText(text), seen = new Set();
+  let ambiguous = false;
+  for (const re of [AMOUNT_KNOWN, AMOUNT_OTHER]) {
+    const g = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g');
+    for (const m of t.matchAll(g)) {
+      seen.add(m[1].replace(/ /g, '') + (m[2] || '').replace(',', '.') + ' ' + m[3].toUpperCase());
+      if (m[2] && m[2].length === 4 && m[1].length <= 3) ambiguous = true; // "1,000" : a decimal comma or a thousands separator
+    }
+  }
+  return seen.size === 1 && !ambiguous;
+}
+
 // Whatever came back (relay or keyword path) -> what the gatekeeper uses. Unknown shapes are "not clear", never an intent.
 export function interpret(raw, text = '') {
   const r = raw && typeof raw === 'object' ? raw : {};

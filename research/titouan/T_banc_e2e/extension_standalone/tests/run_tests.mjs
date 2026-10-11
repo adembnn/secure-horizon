@@ -272,7 +272,7 @@ function bridgeBody(c) { const k = c.context; const o = /^https?:/.test(k.origin
 // Base : server/test/presentation.test.mjs. Le bloc PRESENTATION doit etre identique octet pour octet ; puis evaluate() du serveur et du moteur embarque
 // sont compares champ par champ (tout sauf le nom du moteur et les latences) sur les requetes types, DEV, PUBLIC (si present), avec et sans intention.
 {
-  const blockOf = (t) => { const i = t.indexOf('// <<PRESENTATION'), j = t.indexOf('// PRESENTATION>>', i); return i < 0 || j < 0 ? null : t.slice(t.indexOf('\n', i) + 1, j); };
+  const blockOf = (t) => { const i = t.indexOf('// <<PRESENTATION'), j = t.indexOf('// PRESENTATION>>', i); return i < 0 || j < 0 ? null : t.slice(t.indexOf('\n', i) + 1, j).replace(/\r\n/g, '\n'); }; // un depot Windows peut convertir les fins de ligne
   const bs = blockOf(readFileSync(join(ROOT, 'server', 'server.mjs'), 'utf8')), bc = blockOf(readFileSync(join(SA, 'src', 'sentinelle_core.js'), 'utf8'));
   ok(!!bs && bs === bc, 'bloc PRESENTATION identique octet pour octet dans server.mjs et src/sentinelle_core.js', bs ? bs.length + ' / ' + (bc || '').length + ' caracteres' : 'marqueurs absents');
   let SRV = null, loadErr = '';

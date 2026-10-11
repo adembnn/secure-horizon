@@ -117,3 +117,31 @@ Focus visible (contour encre 2 px), Échap annule, focus posé sur le champ puis
 - Titre de marque dans la fenêtre, texte qui parle de Hold up.
 - Rayons de pilule, tout arrondi, tout centré dans une carte.
 - Police téléchargée, CDN, image.
+
+## 11. Révision du 11/10 (bureau seulement)
+
+Cible : fenêtre d'extension de navigateur de bureau, 440 × 540 fixe, clavier d'abord. Aucune mise en page mobile. Aucun changement de texte ni de classe : seuls `ui/screen.css`, `window.html`, `window.css`, `options.html` bougent.
+
+Ce qui change :
+- Tailles de bureau : texte 16 (au lieu de 17), titre 24 / 1,25 (27), bouton 15 et 40 px de haut (48), ligne de délai 14, adresse 15. Marge haute 40.
+- Requête de conteneur sur la largeur retirée (plus de variante étroite). Celle sur la hauteur reste.
+- Bouton inactif : ni survol ni appui. Appui actif ajouté. Mode contraste forcé géré.
+- Erreur du champ : `aria-invalid="true"` ou `.is-error` met le bord en signal. Le JS ne la pose pas encore (champ vide : le focus revient au champ). À brancher par l'autre agent si on veut la montrer.
+- `window.html` : méta `color-scheme` à la place du viewport mobile, pas de flash blanc en sombre.
+- Page options : mêmes jetons, clair et sombre, boutons à 8 px (plus de pilule), champs à bord 1 px, focus encre, erreur `:user-invalid`, journal en mono discret, indications reliées par `aria-describedby`. Aucun identifiant changé.
+
+Contrastes calculés (WCAG 2.x) :
+
+| Paire | Clair | Sombre |
+|---|---|---|
+| Encre sur fond | 17,93 | 15,87 |
+| Encre-2 sur fond (exemple, délai, note) | 6,69 | 7,37 |
+| Encre-2 sur survol (bouton plein inactif) | 6,13 | 6,53 |
+| Signal sur fond (phrase, bord d'erreur) | 5,52 | 6,85 |
+| Bord de contrôle sur fond | 3,36 | 4,33 |
+| Texte du bouton plein sur encre | 17,93 | 15,87 |
+| Bord inactif sur fond (exempté, non porteur) | 1,26 | 1,31 |
+
+Les quatre états : question (champ libre, exemple en encre-2), correspond (phrase en encre, seul Annuler, ouverture du portefeuille après 1 s), ne correspond pas (phrase en signal, Annuler plein, Continuer discret et inactif jusqu'à la fin du délai), pas pu vérifier (phrase en encre, Annuler plein, Continuer discret).
+
+Captures du 11/10 dans `captures/` (préfixe `2026-10-11_`), rendues par `ui/screen.js` avec des données fixes dans le navigateur intégré.

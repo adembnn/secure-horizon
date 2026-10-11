@@ -1,0 +1,177 @@
+{
+ "total": 2170,
+ "reglage": 1091,
+ "controle": 1079,
+ "parTruth": {
+  "ne_correspond_pas": {
+   "reglage": 452,
+   "controle": 461
+  },
+  "correspond": {
+   "reglage": 309,
+   "controle": 299
+  },
+  "inverifiable": {
+   "reglage": 330,
+   "controle": 319
+  }
+ },
+ "parFamille": {
+  "approbation": {
+   "reglage": 155,
+   "controle": 175
+  },
+  "permit": {
+   "reglage": 74,
+   "controle": 76
+  },
+  "permit2": {
+   "reglage": 91,
+   "controle": 79
+  },
+  "setApprovalForAll": {
+   "reglage": 80,
+   "controle": 90
+  },
+  "envoi_jeton": {
+   "reglage": 144,
+   "controle": 156
+  },
+  "envoi_natif": {
+   "reglage": 87,
+   "controle": 63
+  },
+  "echange": {
+   "reglage": 123,
+   "controle": 147
+  },
+  "nft": {
+   "reglage": 70,
+   "controle": 70
+  },
+  "depot": {
+   "reglage": 94,
+   "controle": 76
+  },
+  "connexion": {
+   "reglage": 103,
+   "controle": 97
+  },
+  "illisible": {
+   "reglage": 70,
+   "controle": 50
+  }
+ },
+ "parStyle": {
+  "sans_montant": {
+   "reglage": 222,
+   "controle": 218
+  },
+  "precis": {
+   "reglage": 241,
+   "controle": 248
+  },
+  "dollars": {
+   "reglage": 21,
+   "controle": 34
+  },
+  "fautes": {
+   "reglage": 115,
+   "controle": 101
+  },
+  "lettres": {
+   "reglage": 19,
+   "controle": 10
+  },
+  "vague": {
+   "reglage": 72,
+   "controle": 64
+  },
+  "virgule": {
+   "reglage": 93,
+   "controle": 119
+  },
+  "familier": {
+   "reglage": 166,
+   "controle": 159
+  },
+  "injection_suffixe": {
+   "reglage": 61,
+   "controle": 57
+  },
+  "horsujet": {
+   "reglage": 41,
+   "controle": 33
+  },
+  "injection": {
+   "reglage": 40,
+   "controle": 36
+  }
+ },
+ "parRelation": {
+  "mauvais_acte": {
+   "reglage": 126,
+   "controle": 127
+  },
+  "plus_grand": {
+   "reglage": 116,
+   "controle": 117
+  },
+  "mauvais_jeton": {
+   "reglage": 77,
+   "controle": 70
+  },
+  "aligne": {
+   "reglage": 249,
+   "controle": 247
+  },
+  "dollars": {
+   "reglage": 21,
+   "controle": 34
+  },
+  "vague": {
+   "reglage": 72,
+   "controle": 64
+  },
+  "sans_protocole": {
+   "reglage": 34,
+   "controle": 36
+  },
+  "fautes": {
+   "reglage": 79,
+   "controle": 74
+  },
+  "mauvais_beneficiaire": {
+   "reglage": 32,
+   "controle": 43
+  },
+  "sans_montant": {
+   "reglage": 60,
+   "controle": 58
+  },
+  "sans_jeton": {
+   "reglage": 31,
+   "controle": 34
+  },
+  "injection_suffixe": {
+   "reglage": 61,
+   "controle": 57
+  },
+  "horsujet": {
+   "reglage": 41,
+   "controle": 33
+  },
+  "injection": {
+   "reglage": 40,
+   "controle": 36
+  },
+  "mauvais_destinataire": {
+   "reglage": 38,
+   "controle": 35
+  },
+  "sans_destinataire": {
+   "reglage": 14,
+   "controle": 14
+  }
+ }
+}

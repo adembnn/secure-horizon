@@ -34,11 +34,13 @@
   }
 
   const waits = new Map(); // rid -> { id (of inject.js), fails, timer, overlay }
-  function finish(rid, allow, reason) {
+  function finish(rid, allow, reason, params) {
     const w = waits.get(rid); if (!w) return;
     waits.delete(rid); clearTimeout(w.timer);
     if (w.overlay) w.overlay.abort();
-    try { port.postMessage({ t: 'result', id: w.id, allow: !!allow, reason: allow ? '' : (reason || 'denied') }); } catch (_) {}
+    const out = { t: 'result', id: w.id, allow: !!allow, reason: allow ? '' : (reason || 'denied') };
+    if (allow && Array.isArray(params)) out.params = params; // request limited by Hold up (Q17)
+    try { port.postMessage(out); } catch (_) {}
     send({ type: 'hu.ack', rid }).catch(() => {});
   }
   // Asks the worker for the state of the request. Works the same after a worker restart : the answer comes from the storage.
@@ -50,7 +52,7 @@
       if (!waits.has(rid)) return;
       if (!r || typeof r.state !== 'string') { if (++w.fails > 20) return finish(rid, false, 'extension-indisponible'); return again(1000); }
       w.fails = 0;
-      if (r.state === 'allow') return finish(rid, true);
+      if (r.state === 'allow') return finish(rid, true, '', r.params);
       if (r.state !== 'pending') return finish(rid, false, 'denied'); // deny, or unknown to the worker : fail closed
       if (r.ui === 'overlay' && r.view) overlayShow(rid, r.view);
       again(1000);

@@ -1,26 +1,37 @@
-/* Neve — echange de jetons. Sobre : une colonne, bords fins, aucune ombre, aucun degrade,
-   une seule teinte chromatique (le sigle). Repris des jetons de docs/design/v5/DESIGN.md. */
+/* Neve : page d'échange de jetons (marque fictive, chaîne de test).
+   Une colonne, bords fins, aucune ombre, aucun dégradé. Un seul accent (le bouton d'action et le sigle).
+   Jetons repris de docs/design/v5/DESIGN.md. Ordinateur seulement.
+   Contrastes (WCAG 2.x, calculés) : voir docs/design/v5/DESIGN.md, section « Sites de démo ». */
 
 :root {
   --bg: #ffffff;
+  --wash: #f5f5f5;
   --ink: #171717;
   --ink-2: #5c5c5c;
   --line: #e5e5e5;
   --edge: #8c8c8c;
   --accent: #0b6b86;
-  --ok: #171717;
+  --on-accent: #ffffff;
+  --accent-hover: #095a72;
   --bad: #c9281c;
+  --ok: #171717;
+  --off-bg: #ececec;
+  --off-ink: #5c5c5c;
+  color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #131313; --ink: #ededed; --ink-2: #a3a3a3; --line: #2b2b2b; --edge: #7a7a7a;
-    --accent: #3ea3bf; --ok: #ededed; --bad: #ff7061;
+    --bg: #131313; --wash: #1c1c1c; --ink: #ededed; --ink-2: #a3a3a3; --line: #2b2b2b; --edge: #7a7a7a;
+    --accent: #4fb0cc; --on-accent: #0b1418; --accent-hover: #6cc0d8; --bad: #ff7061; --ok: #ededed;
+    --off-bg: #232323; --off-ink: #a3a3a3;
+    color-scheme: dark;
   }
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
+  min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
   font: 400 16px/1.5 "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
@@ -28,49 +39,51 @@ body {
 }
 ::selection { background: var(--ink); color: var(--bg); }
 
+/* En-tête */
 .top { border-bottom: 1px solid var(--line); }
 .top-inner {
-  max-width: 420px; margin: 0 auto; padding: 16px 20px;
+  max-width: 1200px; margin: 0 auto; padding: 18px 40px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.wordmark { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; letter-spacing: -0.01em; }
+.wordmark { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; }
 .wordmark svg { color: var(--accent); }
 
-.net { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
-.net i { width: 7px; height: 7px; border-radius: 50%; background: var(--edge); }
+.net { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+.net i { width: 8px; height: 8px; border-radius: 50%; background: var(--edge); }
 .net.ok i { background: var(--accent); }
 .net.bad i { background: var(--bad); }
 
-.page { max-width: 420px; margin: 0 auto; padding: 48px 20px 32px; }
+/* Page */
+.page { max-width: 1200px; margin: 0 auto; padding: 88px 40px 48px; }
 
-.swap { border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
-.swap h1 { margin: 0 0 20px; font-size: 24px; font-weight: 400; letter-spacing: -0.015em; }
+.swap { width: 100%; max-width: 480px; margin: 0 auto; border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+.swap h1 { margin: 0 0 20px; font-size: 24px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.2; }
 
-.leg { padding: 12px 0; }
-.leg-label { display: block; font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
-.leg-row { display: flex; align-items: baseline; justify-content: space-between; }
-.leg-amount { font-size: 28px; font-weight: 400; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.leg-token { font-size: 15px; color: var(--ink-2); font-weight: 500; }
+.leg { padding: 16px 20px 18px; background: var(--wash); border-radius: 10px; }
+.leg-label { display: block; font-size: 14px; color: var(--ink-2); margin-bottom: 8px; }
+.leg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.leg-amount { font-size: 36px; line-height: 1.15; font-weight: 400; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.leg-token { padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); font-size: 15px; font-weight: 500; color: var(--ink); }
 
-.arrow { display: flex; justify-content: center; color: var(--ink-2); margin: 4px 0; }
-.arrow svg { border: 1px solid var(--line); border-radius: 8px; padding: 5px; }
+.arrow { position: relative; z-index: 1; display: flex; justify-content: center; margin: -14px 0; }
+.arrow svg { box-sizing: content-box; padding: 7px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; color: var(--ink-2); outline: 4px solid var(--bg); }
 
-.rate { margin: 16px 0 24px; font-size: 13px; color: var(--ink-2); }
+.rate { margin: 20px 0 20px; font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 
 .btn {
-  width: 100%; height: 48px; border: 1px solid var(--ink); border-radius: 8px;
-  background: var(--ink); color: var(--bg);
-  font: 500 16px/1.2 inherit; cursor: pointer;
-  transition: opacity 120ms ease, background 120ms ease;
+  width: 100%; height: 52px; border: 1px solid var(--accent); border-radius: 8px;
+  background: var(--accent); color: var(--on-accent);
+  font: 500 16px/1.2 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
 }
-.btn:hover:not(:disabled) { opacity: 0.88; }
+.btn:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
 .btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.btn:disabled { background: var(--bg); color: var(--ink-2); border-color: var(--line); cursor: default; }
+.btn:disabled { background: var(--off-bg); border-color: var(--off-bg); color: var(--off-ink); cursor: default; }
 
-.state { margin: 12px 0 0; font-size: 15px; line-height: 1.45; color: var(--ink-2); min-height: 1.45em; }
+.state { margin: 14px 0 0; font-size: 15px; line-height: 1.45; color: var(--ink-2); min-height: 1.45em; }
 .state.ok .text { color: var(--ok); }
 .state.bad .text { color: var(--bad); }
 
-.foot { margin-top: 24px; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.foot { max-width: 480px; margin: 20px auto 0; font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 
 @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }

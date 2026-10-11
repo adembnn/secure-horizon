@@ -12,7 +12,7 @@
 //           - setApprovalForAll : the operator is a known protocol (marketplace conduit), the collection is the one the
 //             user declared listing (context.nft.collection), intent = selling / listing.
 // NIST CSF DE.AE-02, RS.AN ; MITRE ATT&CK T1657 ; OWASP ASI09 (human-agent trust exploitation) ; D3FEND D3-DA.
-import { lc, isAddr, isKnown, parseTyped, big } from './util.mjs';
+import { lc, isAddr, isKnown, parseTyped, big, benchLower } from './util.mjs';
 
 const SELL_WORDS = /\b(list|listing|sell|selling|sale|vend|vendre|vends|vente|lister|liste)\b/i;
 const OPENSEA_CONDUIT_KEY = '0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000'; // public (OpenSea docs)
@@ -71,7 +71,8 @@ export const nftOrders = {
       }
       if (flags.length) return { flags };
       const vcKnown = td.domain && isKnown(ctx, td.domain.verifyingContract);
-      if (honest && vcKnown && intent && SELL_WORDS.test(String(intent.freeText || '')) && policy && policy.floorLevel !== 'critical') {
+      // `lower` COUPÉ dans le chemin produit (jamais de baisse) ; rendu au banc seulement (HOLDUP_BENCH_LOWER=1)
+      if (benchLower() && honest && vcKnown && intent && SELL_WORDS.test(String(intent.freeText || '')) && policy && policy.floorLevel !== 'critical') {
         return { lower: { to: 'warn', why: 'listing NFT honnête : contrat de marché connu, conduit officiel, prix cohérent payé à vous, intention de vendre' } };
       }
       return null;
@@ -82,7 +83,8 @@ export const nftOrders = {
       const coll = c.context && c.context.nft && c.context.nft.collection;
       const sameColl = isAddr(coll) && eff.approvals.every((a) => lc(a.token) === lc(coll));
       const noValue = !(eff.outgoing || []).length && !(eff.controlChange || []).length && !eff.delegation;
-      if (all && sameColl && noValue && intent && SELL_WORDS.test(String(intent.freeText || '')) && policy && policy.floorLevel !== 'critical') {
+      // `lower` COUPÉ dans le chemin produit ; extra.nft.collection ne doit jamais venir de la page (voir pipeline/evaluate_plus.mjs, provenance de `extra`)
+      if (benchLower() && all && sameColl && noValue && intent && SELL_WORDS.test(String(intent.freeText || '')) && policy && policy.floorLevel !== 'critical') {
         return { lower: { to: 'warn', why: 'approbation de collection au conduit d\'une place de marché connue, pour la collection que vous mettez en vente' } };
       }
     }

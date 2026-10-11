@@ -8,7 +8,7 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "5d6134e3ffb76e4a"
+   "detail": "a8df66e3e63b8377"
   },
   {
    "name": "le service worker enregistre son ecouteur onMessage (demande inconnue => unknown, lu comme un refus)",
@@ -136,9 +136,14 @@
    "detail": ""
   },
   {
-   "name": "bloc PRESENTATION identique octet pour octet dans server.mjs et src/sentinelle_core.js",
+   "name": "EQUIVALENCE PUBLIC (executables) : 402/402 verdicts identiques (100 %) sur 134 cas x 3 bras",
    "pass": true,
-   "detail": "18759 / 18759 caracteres"
+   "detail": ""
+  },
+  {
+   "name": "bloc PRESENTATION identique octet pour octet dans server.mjs et src/sentinelle_core.js",
+   "pass": false,
+   "detail": "18983 / 18759 caracteres"
   },
   {
    "name": "server/server.mjs se charge (moteur de reference)",
@@ -156,7 +161,12 @@
    "detail": ""
   },
   {
-   "name": "E) sans contexte reseau : aucun 'ok' sur 385 cas reels du banc (DEV + PUBLIC)",
+   "name": "EQUIVALENCE SERVEUR/AUTONOME PUBLIC : 576/576 verdicts complets identiques (144 requetes x 4 variantes)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "E) sans contexte reseau : aucun 'ok' sur 519 cas reels du banc (DEV + PUBLIC)",
    "pass": true,
    "detail": "0"
   },
@@ -166,7 +176,7 @@
    "detail": "0"
   },
   {
-   "name": "E) 4 lignes de texte clair non vides sur 385 verdicts",
+   "name": "E) 4 lignes de texte clair non vides sur 519 verdicts",
    "pass": true,
    "detail": "0"
   },
@@ -187,17 +197,16 @@
   }
  ],
  "notes": [
-  "Attentes de detection non satisfaites parmi les 35 requetes types : aucune",
-  "attacks_public/PUBLIC.jsonl absent : equivalence PUBLIC non executee"
+  "Attentes de detection non satisfaites parmi les 35 requetes types : aucune"
  ],
- "tree_sha256": "5d6134e3ffb76e4ac469ba2dba2ab4ff83d58ec3eb6a71d20f9c41ffab139223",
+ "tree_sha256": "a8df66e3e63b83774fdfe2b98081e891b16ea7f921c1bcf480f34c1bbd39dae8",
  "requests": [
   {
    "name": "approve illimite USDC vers un inconnu",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 1.61,
+   "ms": 3.97,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -212,7 +221,7 @@
    "niveau": "warn",
    "level": "attention",
    "fiche": "F01",
-   "ms": 0.47,
+   "ms": 1.17,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -227,7 +236,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.45,
+   "ms": 0.53,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -242,7 +251,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 4.48,
+   "ms": 9.26,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -257,7 +266,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 2.19,
+   "ms": 4.83,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -272,7 +281,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.24,
+   "ms": 0.78,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -287,7 +296,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.29,
+   "ms": 0.78,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -302,7 +311,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.2,
+   "ms": 0.44,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -317,7 +326,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F03",
-   "ms": 0.21,
+   "ms": 0.36,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -332,7 +341,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F07",
-   "ms": 0.36,
+   "ms": 0.55,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -347,7 +356,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F13",
-   "ms": 0.22,
+   "ms": 0.31,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -362,7 +371,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.42,
+   "ms": 0.59,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -377,7 +386,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.89,
+   "ms": 1.19,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -392,7 +401,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.16,
+   "ms": 0.5,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -407,7 +416,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 0.62,
+   "ms": 1.47,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -422,7 +431,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F32",
-   "ms": 0.36,
+   "ms": 0.89,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -437,7 +446,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.07,
+   "ms": 0.17,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -453,7 +462,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (RLP: liste tronquée)",
-   "ms": 0.42,
+   "ms": 0.53,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -469,7 +478,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode absente",
-   "ms": 0.11,
+   "ms": 0.15,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -484,7 +493,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.05,
+   "ms": 0.07,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -500,7 +509,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.15,
+   "ms": 0.07,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -516,7 +525,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.02,
+   "ms": 0.04,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -538,7 +547,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (Cannot convert abc to a BigInt)",
-   "ms": 0.14,
+   "ms": 0.15,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -554,7 +563,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode eth_foo non geree par le moteur d'effets",
-   "ms": 0.05,
+   "ms": 0.06,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -570,7 +579,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "eth_signTypedData (v1) non gere",
-   "ms": 0.05,
+   "ms": 0.17,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -586,7 +595,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete trop volumineuse (300229 octets, max 262144)",
-   "ms": 0.51,
+   "ms": 1.12,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -602,7 +611,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "lot de calls illisible",
-   "ms": 0.11,
+   "ms": 0.19,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -618,7 +627,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "effets non lisibles : unknown_selector",
-   "ms": 0.41,
+   "ms": 0.51,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -633,7 +642,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F11",
-   "ms": 0.28,
+   "ms": 0.37,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -648,7 +657,7 @@
    "niveau": "critical",
    "level": "manipulation",
    "fiche": "F01",
-   "ms": 3.6,
+   "ms": 4.7,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -663,7 +672,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 0.18,
+   "ms": 0.45,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -678,7 +687,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F20",
-   "ms": 0.46,
+   "ms": 0.58,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -693,7 +702,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.17,
+   "ms": 0.23,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -709,7 +718,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx non geree par le moteur d'effets",
-   "ms": 0.1,
+   "ms": 0.16,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -727,12 +736,19 @@
   "ecarts": 0,
   "pct_identite": 100,
   "diffs": [],
-  "latence_moyenne_ms_par_verdict": 0.76
+  "latence_moyenne_ms_par_verdict": 1.52
  },
  "equiv_public": {
-  "saute": "PUBLIC.jsonl absent"
+  "jeu": "PUBLIC (executables)",
+  "cas": 134,
+  "comparaisons": 402,
+  "identiques": 402,
+  "ecarts": 0,
+  "pct_identite": 100,
+  "diffs": [],
+  "latence_moyenne_ms_par_verdict": 1.09
  },
- "n_public_non_exec": 0,
+ "n_public_non_exec": 10,
  "equiv_serveur": [
   {
    "jeu": "requetes types",
@@ -751,23 +767,32 @@
    "ecarts": 0,
    "non_comparees_chaine_locale": 0,
    "diffs": []
+  },
+  {
+   "jeu": "PUBLIC",
+   "requetes": 144,
+   "comparaisons": 576,
+   "identiques": 576,
+   "ecarts": 0,
+   "non_comparees_chaine_locale": 0,
+   "diffs": []
   }
  ],
  "offline": {
-  "n": 385,
+  "n": 519,
   "distribution": {
-   "critical": 159,
-   "warn": 54,
-   "info": 137,
-   "unknown": 35
+   "critical": 204,
+   "warn": 80,
+   "info": 183,
+   "unknown": 52
   },
   "par_label": {
    "malveillant": {
-    "n": 252,
-    "critical": 152,
-    "warn": 30,
-    "info": 54,
-    "unknown": 16
+    "n": 317,
+    "critical": 190,
+    "warn": 36,
+    "info": 68,
+    "unknown": 23
    },
    "ambigu": {
     "n": 19,
@@ -777,37 +802,37 @@
     "unknown": 0
    },
    "benin": {
-    "n": 90,
-    "critical": 5,
-    "warn": 15,
-    "info": 51,
-    "unknown": 19
+    "n": 157,
+    "critical": 12,
+    "warn": 35,
+    "info": 81,
+    "unknown": 29
    },
    "fraude_conforme": {
-    "n": 24,
+    "n": 26,
     "critical": 0,
     "warn": 0,
-    "info": 24,
+    "info": 26,
     "unknown": 0
    }
   },
-  "latence_moyenne_ms": 0.72,
-  "latence_p95_ms": 3.38,
-  "latence_max_ms": 4.77
+  "latence_moyenne_ms": 1.25,
+  "latence_p95_ms": 5.57,
+  "latence_max_ms": 15.76
  },
  "taille": {
   "fichiers": 40,
-  "octets": 507308,
-  "ko": 495.42
+  "octets": 507543,
+  "ko": 495.65
  },
  "latence_requetes_types_ms": {
-  "moyenne": 0.57,
-  "max": 4.48
+  "moyenne": 1.07,
+  "max": 9.26
  },
  "unit_sur_build": {
   "pass": 76,
   "fail": 0
  },
- "echecs": 0,
- "total_checks": 37
+ "echecs": 1,
+ "total_checks": 39
 }
