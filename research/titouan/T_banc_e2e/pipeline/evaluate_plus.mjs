@@ -21,17 +21,21 @@
 //   rpcUrl     : node to read (default : SENTINELLE_RPC_URL / HOLDUP_RPC_URL, else the provider's public RPC for the chain).
 //
 // Result : the same object as `evaluate` (level, niveau, fiche, title, texts, reasons, raisons, codes, effects, said, real...) plus
-//   plus : { path, level, base, product, raisedBy: [{ code, severity, detail }], loweredBy: [...], relaxedByFacts, facts, missingFacts,
-//            notVerified, errors, ms: { product, live, chain, detectors, total } }
+//   plus : { path, level, base, product, floor, raisedBy: [{ code, severity, detail }], loweredBy: [] (always empty), lowerIgnored, relaxedByFacts (always false),
+//            intentArms, facts, missingFacts, notVerified, rejectedInputs, errors, ms: { product, live, chain, detectors, total } }
 //
-// Rules, in this order :
-//   1. the product chain (engine -> extra rules -> comparator -> policy) is run on the richest context available : the request, the local
-//      context and the live facts. A fact that is not known stays unknown : it is simply absent from the context, there is no default.
-//   2. the detectors run in the order of detectors_adem/index.mjs, exactly as redteam/check_plus.mjs does : a flag can only RAISE the level ;
-//      a detector lowers only through its documented `lower` correction, applied last and never against a critical raised by another detector.
-//   3. with NO extra fact (no live fact, no richer intent) the result is never below the product's own verdict. With real facts the chain may
-//      conclude lower than the product did blind (that is what the facts are for) ; it is reported in plus.relaxedByFacts.
-//   4. any internal error falls back to the product verdict ; if the product itself fails, the answer is "not verified" (orange), never green.
+// STRICT RULE (non negotiable) : the layer of the product (detectors, chain facts, public list of protocols, intent) can only RAISE a verdict.
+//   FLOOR = the answer of server.evaluate(body, local) alone (no public list, no fact, no detector ; and also without the intent if one was sent).
+//   final level >= FLOOR, always. Never a green level produced by this layer : if the floor is not green, the result is not green.
+//   1. the FLOOR is computed first. pipeline/known_protocols.json is injected only AFTERWARDS, for the chain and the detectors (so `plus.product` is the server alone).
+//   2. the product chain (engine -> extra rules -> comparator -> policy) runs on the richest context : request, local context, live facts, public list.
+//      A fact that is not known stays unknown : it is simply absent from the context, there is no default.
+//   3. the detectors run in the order of detectors_adem/index.mjs : a flag can only RAISE. A `lower` correction is never applied (reported in plus.lowerIgnored).
+//   4. if an intent is given, the chain is run a second time WITHOUT it and the level is run/policy.mjs monotoneGuard(with, without) : intent never lowers.
+//   5. final = max(chain level, FLOOR). `relaxedByFacts` no longer exists : a fact explains a higher level, never a lower one.
+//   6. any internal error falls back to the FLOOR ; if the server itself fails, the answer is "not verified" (orange), never green.
+// PROVENANCE of the inputs : see BODY_NEVER_READ and EXTRA_FROM_CLIENT below. `opts.live` (and its `extra`) is given by the CODE that calls evaluatePlus (chain provider,
+// extension reader), never by the request body ; the body keys that look like facts or lists are ignored and listed in plus.rejectedInputs.
 //
 // The core (makeEvaluatePlus) has no Node import : give it the functions of your bundle (engine, policy, server presentation, detectors) to
 // use it in a service worker. `evaluatePlus` is the Node binding : it loads server/server.mjs, the engine and detectors_adem/ on first use.
@@ -41,6 +45,16 @@ const HEX20 = /^0x[0-9a-fA-F]{40}$/;
 const RANK = { ok: 0, warn: 1, critical: 2 };
 const nowMs = () => (typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now());
 const r2 = (x) => Math.round(x * 100) / 100;
+// Same scale and same rule as run/policy.mjs monotoneGuard (used when the bundle does not give it) : the result is never under `levelWithout`.
+const monotoneGuardLocal = (withI, without) => ({ ok: 0, unknown: 0.5, warn: 1, critical: 2 }[without] ?? 0) > ({ ok: 0, unknown: 0.5, warn: 1, critical: 2 }[withI] ?? 0) ? without : withI;
+// PROVENANCE. The request body is what the page can influence. evaluatePlus reads from it ONLY : method, params, origin, chainId, from, intent, intent_text,
+// pasted_message, pageText (and the server reads the same ones). These keys are never read, whoever sends them ; they are listed in plus.rejectedInputs :
+const BODY_NEVER_READ = ['extra', 'context', 'live', 'facts', 'known_protocols', 'knownProtocols', 'knownSpenders', 'known_spenders', 'token_registry', 'balances', 'nft', 'quote',
+  'clipboard', 'simulation', 'sell_pool', 'claimed_site', 'token_info', 'address_book', 'contacts', 'history', 'local', 'protected', 'detectors', 'options'];
+// `extra` (facts.extra) comes ONLY from the caller's code (opts.live : the chain provider, the extension's own simulation / clipboard reader), never from the body.
+// Outside the bench (source 'bench') only these keys are accepted ; origin, nft.collection, token_registry and balances are dropped (a registry would make every
+// address in it "trusted" for the detectors ; origin is body.origin normalised here ; the others have no client that is not the page).
+const EXTRA_FROM_CLIENT = new Set(['clipboard', 'simulation', 'quote', 'sell_pool', 'claimed_site', 'token_info']);
 
 // Same public constants as server/server.mjs buildCtx (not exported there). plus.drift is measured by pipeline/measure.mjs : it must stay 0.
 export const CANONICAL = ['0x000000000022D473030F116dDEE9F6B43aC78BA3', '0xcA11bde05977b3631167028862bE2a173976CA11', '0x9008D19f58AAbD9eD0D60971565AA8510560ab41',
@@ -149,7 +163,7 @@ export function makeEvaluatePlus(D) {
       codeOf: (a) => { a = lc(a); if (F && F.isContract[a] !== undefined) return !!F.isContract[a]; if (facts[a] && facts[a].isContract !== undefined) return !!facts[a].isContract; return codeSet.has(a) ? true : undefined; },
       ...(quote ? { expectedOut: () => BigInt(quote) } : {}),
       _sharePct: F ? F.sharePct : undefined,
-      _k: { ...X, origin: X.origin !== undefined ? X.origin : unicodeHost, token_info: tokenInfo, token_registry: registry },
+      _k: { ...X, origin: unicodeHost, token_info: tokenInfo, token_registry: registry },
       _facts: facts, _tokenInfo: tokenInfo, _book: local.contacts || [],
     };
   }
@@ -289,31 +303,52 @@ export function makeEvaluatePlus(D) {
       raisons: [{ code: 'unverifiable', severity: 'warn', detail: why }], effects: { grants_right: false, funds_out: false }, risk_signals: [], latency_engine_ms: 0 };
   };
 
+  // ---- provenance of what the chain is fed with (see the header of this file). Nothing from the request body reaches `extra`, the facts or the lists.
+  function scrubFacts(F) {
+    if (!F) return { F, rejected: [] };
+    const rejected = [];
+    const x = {};
+    for (const [k, v] of Object.entries(F.extra || {})) {
+      if (k === 'origin') { rejected.push('extra.origin'); continue; } // the origin is body.origin, normalised here ; never overridden
+      if (F.source !== 'bench' && !EXTRA_FROM_CLIENT.has(k)) { rejected.push('extra.' + k); continue; }
+      x[k] = v;
+    }
+    return { F: { ...F, extra: x }, rejected };
+  }
+
   return async function evaluatePlus(body, local, opts = {}) {
     const T0 = nowMs();
     const o = { detectors: true, classifier: undefined, budgetMs: 1500, detectorTimeoutMs: 1500, ...opts };
     local = { contacts: [], history: [], protected: [], knownSpenders: [], ...(local || {}) };
-    // public per-chain list of known protocols (pipeline/known_protocols.json) : given to the product AND to the detectors, like an entry of context.local.json
-    if (o.knownProtocols !== false && D.knownProtocols && body && typeof body === 'object') {
-      const p0 = Array.isArray(body.params) && body.params[0] && typeof body.params[0] === 'object' ? body.params[0] : {};
-      const list = D.knownProtocols[String(parseChain(body.chainId) ?? parseChain(p0.chainId))];
-      if (list && list.length) local = { ...local, knownSpenders: [...new Set([...(local.knownSpenders || []), ...list])] };
-    }
+    const isObj = !!body && typeof body === 'object';
+    const rejected = isObj ? BODY_NEVER_READ.filter((k) => k in body).map((k) => 'body.' + k) : [];
     const ms = { product: 0, live: 0, chain: 0, detectors: 0, total: 0 };
     const errors = [];
-    // ---- the product's own answer (always computed : it is the fallback and the floor)
-    let P = null;
-    { const t = nowMs(); try { P = D.evaluate(body, local); } catch (e) { errors.push('produit : ' + String((e && e.message) || e).slice(0, 120)); } ms.product = r2(nowMs() - t); }
+    // ---- the FLOOR : the server's own answer, computed on the caller's context WITHOUT the public list (and, if an intent was sent, also without it).
+    // The final level is never below it. The public list is injected only afterwards, for the chain and the detectors.
+    let P = null, P0 = null;
+    { const t = nowMs(); try { P = D.evaluate(body, local); } catch (e) { errors.push('produit : ' + String((e && e.message) || e).slice(0, 120)); }
+      if (isObj && (body.intent !== undefined || body.intent_text !== undefined)) { try { P0 = D.evaluate({ ...body, intent: undefined, intent_text: undefined }, local); } catch { P0 = null; } }
+      ms.product = r2(nowMs() - t); }
     const pLevel = P ? benchLevel(P) : 'unknown';
+    let floorV = P, floorLevel = pLevel;
+    if (P0) { const l0 = benchLevel(P0); if (!P || rk(l0) > rk(pLevel)) { floorV = P0; floorLevel = l0; } }
     const finish = (v, plus) => {
       ms.total = r2(nowMs() - T0);
-      v.plus = { ...plus, product: pLevel, errors, ms };
+      v.plus = { ...plus, product: pLevel, floor: floorLevel, errors, ms, rejectedInputs: [...rejected, ...(plus.rejectedInputs || [])] };
       v.context_live = !!plus.liveUsed; v.context_missing = plus.missingFacts;
       v.latency_engine_ms = ms.total;
       return v;
     };
+    // public per-chain list of known protocols (pipeline/known_protocols.json) : given to the chain AND to the detectors, never to the floor
+    let localPlus = local;
+    if (o.knownProtocols !== false && D.knownProtocols && isObj) {
+      const p0 = Array.isArray(body.params) && body.params[0] && typeof body.params[0] === 'object' ? body.params[0] : {};
+      const list = D.knownProtocols[String(parseChain(body.chainId) ?? parseChain(p0.chainId))];
+      if (list && list.length) localPlus = { ...local, knownSpenders: [...new Set([...(local.knownSpenders || []), ...list])] };
+    }
     try {
-      if (!body || typeof body !== 'object') throw new Error('requete illisible');
+      if (!isObj) throw new Error('requete illisible');
       const method = typeof body.method === 'string' ? body.method.slice(0, 80) : '';
       const params = Array.isArray(body.params) ? body.params : [];
       const host = hostOf(body.origin);
@@ -323,94 +358,98 @@ export function makeEvaluatePlus(D) {
       const request = { method, params };
 
       const LV = await liveFacts(o.live, body, local, from, chainId, o); ms.live = LV.ms;
-      const F = LV.F;
+      const SF = scrubFacts(LV.F); const F = SF.F; rejected.push(...SF.rejected);
       const I = toIntent(body, o.intent);
-      const richer = hasAnyFact(F) || !!I.rich;
+      const guard = D.monotoneGuard || monotoneGuardLocal;
 
-      // ---- 1. the product chain on the richest context
-      const tC = nowMs();
-      const ctx = buildCtx(body, local, from, chainId, F);
-      let eff = null, adem = null, pol = null, base = 'unknown', unreadable = null, seaportCrit = null;
-      try {
-        if (!method) throw new Unverifiable('methode absente');
-        eff = decode(method, params, ctx);
-        D.applyExtraRules(eff, request, ctx);
-        if (eff.shareOfBalancePct === undefined && ctx._sharePct !== undefined && !(eff.outgoing || []).length) eff.shareOfBalancePct = ctx._sharePct;
-        adem = I.intent ? D.compare(I.intent, eff) : null;
-        pol = D.applyPolicy({ eff, adem, ctx, intent: I.intent, request });
-        base = pol.level === 'critical' ? 'critical' : pol.level === 'warn' ? 'warn' : 'ok';
-      } catch (e) {
-        unreadable = e instanceof Unverifiable ? e.message : 'analyse impossible (' + String((e && e.message) || e).slice(0, 120) + ')';
-        if (!(e instanceof Unverifiable)) errors.push('moteur : ' + unreadable);
-        eff = null; adem = null; pol = null;
-      }
-      // server rule (raise only) : Seaport order giving an NFT for (almost) nothing in native currency
-      if (eff && eff.seaport) {
-        const give = eff.seaport.give || [], get = eff.seaport.get || [];
-        let total = 0n; try { total = get.reduce((t, g) => t + BigInt(g.min || 0), 0n); } catch { /* ignore */ }
-        if (give.some((g) => g.type >= 2) && get.every((g) => g.type === 0) && total < 10n ** 15n) {
-          seaportCrit = { code: 'seaport_zero_price', severity: 'critical', detail: 'ordre de vente NFT a un prix quasi nul (' + total + ' wei)' }; eff.seaportPriceWei = total.toString(); base = 'critical';
-        }
-      }
-      ms.chain = r2(nowMs() - tC);
-
-      // ---- 2. detectors : same loop as redteam/check_plus.mjs
-      const tD = nowMs();
-      let level = base; const raised = [], lowers = [], loweredBy = []; let ademCritical = false, top = null;
-      const list = o.detectors === false ? [] : Array.isArray(o.detectors) ? o.detectors : (D.DETECTORS || []);
-      const X = F ? F.extra : {};
-      const dIntent = I.intent || I.aside || {};
-      const capIntent = !I.rich && !I.intent && o.intentPremise === 'warn';
-      const c = { request, intent: dIntent, context: { ...X, chainId, victim: from, origin: X.origin !== undefined ? X.origin : body.origin, address_book: local.contacts || [], history: local.history || [], token_info: ctx._tokenInfo } };
-      const reasons = eff ? eff.risk_flags.filter((f) => f.severity !== 'info').map((f) => `[${f.severity}] ${f.code}`) : [];
-      for (const d of list) {
-        if (o.classifier === false && d.id === 'pasted_message') continue;
-        let r;
+      // ---- one pass of the chain for a given intent : product chain on the richest context, then the detectors (same loop as redteam/check_plus.mjs)
+      async function runChain(Ix) {
+        const tC = nowMs();
+        const ctx = buildCtx(body, localPlus, from, chainId, F);
+        let eff = null, adem = null, pol = null, base = 'unknown', unreadable = null, seaportCrit = null;
         try {
-          let timer; const late = new Promise((res) => { timer = setTimeout(() => res('__timeout__'), o.detectorTimeoutMs); });
-          const p = Promise.resolve().then(() => d.run({ c, ctx, eff, request, intent: dIntent, level, reasons, adem, policy: pol })); p.catch(() => {});
-          r = await Promise.race([p, late]); clearTimeout(timer);
-          if (r === '__timeout__') { errors.push(`detecteur ${d.id} : delai depasse`); continue; }
-        } catch (e) { errors.push(`detecteur ${d.id} : ${String((e && e.message) || e).slice(0, 120)}`); continue; }
-        if (!r) continue;
-        for (const f0 of r.flags || []) {
-          if (!(f0.severity in RANK)) continue;
-          // a flag whose premise is the DECLARED intent is not a red screen when the user declared none (product only ; a full Intent object keeps the bench rule)
-          const f = capIntent && INTENT_PREMISE.has(f0.code) && f0.severity === 'critical' ? { ...f0, severity: 'warn' } : f0;
-          raised.push({ code: f.code, severity: f.severity, detail: humanize(f.detail), by: d.id });
-          const cur = level === 'unknown' ? -1 : RANK[level];
-          if (RANK[f.severity] > cur) { level = f.severity; top = raised[raised.length - 1]; }
+          if (!method) throw new Unverifiable('methode absente');
+          eff = decode(method, params, ctx);
+          D.applyExtraRules(eff, request, ctx);
+          if (eff.shareOfBalancePct === undefined && ctx._sharePct !== undefined && !(eff.outgoing || []).length) eff.shareOfBalancePct = ctx._sharePct;
+          adem = Ix.intent ? D.compare(Ix.intent, eff) : null;
+          pol = D.applyPolicy({ eff, adem, ctx, intent: Ix.intent, request });
+          base = pol.level === 'critical' ? 'critical' : pol.level === 'warn' ? 'warn' : 'ok';
+        } catch (e) {
+          unreadable = e instanceof Unverifiable ? e.message : 'analyse impossible (' + String((e && e.message) || e).slice(0, 120) + ')';
+          if (!(e instanceof Unverifiable)) errors.push('moteur : ' + unreadable);
+          eff = null; adem = null; pol = null;
         }
-        if (r.lower) lowers.push({ id: d.id, ...r.lower });
-        if ((r.flags || []).some((f) => f.severity === 'critical' && !(capIntent && INTENT_PREMISE.has(f.code)))) ademCritical = true;
+        // server rule (raise only) : Seaport order giving an NFT for (almost) nothing in native currency
+        if (eff && eff.seaport) {
+          const give = eff.seaport.give || [], get = eff.seaport.get || [];
+          let total = 0n; try { total = get.reduce((t, g) => t + BigInt(g.min || 0), 0n); } catch { /* ignore */ }
+          if (give.some((g) => g.type >= 2) && get.every((g) => g.type === 0) && total < 10n ** 15n) {
+            seaportCrit = { code: 'seaport_zero_price', severity: 'critical', detail: 'ordre de vente NFT a un prix quasi nul (' + total + ' wei)' }; eff.seaportPriceWei = total.toString(); base = 'critical';
+          }
+        }
+        ms.chain += r2(nowMs() - tC);
+        const tD = nowMs();
+        let level = base; const raised = [], lowerIgnored = []; let top = null;
+        const list = o.detectors === false ? [] : Array.isArray(o.detectors) ? o.detectors : (D.DETECTORS || []);
+        const X = F ? F.extra : {};
+        const dIntent = Ix.intent || Ix.aside || {};
+        const capIntent = !Ix.rich && !Ix.intent && o.intentPremise === 'warn';
+        const c = { request, intent: dIntent, context: { ...X, chainId, victim: from, origin: body.origin, address_book: localPlus.contacts || [], history: localPlus.history || [], token_info: ctx._tokenInfo } };
+        const reasons = eff ? eff.risk_flags.filter((f) => f.severity !== 'info').map((f) => `[${f.severity}] ${f.code}`) : [];
+        for (const d of list) {
+          if (o.classifier === false && d.id === 'pasted_message') continue;
+          let r;
+          try {
+            let timer; const late = new Promise((res) => { timer = setTimeout(() => res('__timeout__'), o.detectorTimeoutMs); });
+            const p = Promise.resolve().then(() => d.run({ c, ctx, eff, request, intent: dIntent, level, reasons, adem, policy: pol })); p.catch(() => {});
+            r = await Promise.race([p, late]); clearTimeout(timer);
+            if (r === '__timeout__') { errors.push(`detecteur ${d.id} : delai depasse`); continue; }
+          } catch (e) { errors.push(`detecteur ${d.id} : ${String((e && e.message) || e).slice(0, 120)}`); continue; }
+          if (!r) continue;
+          for (const f0 of r.flags || []) {
+            if (!(f0.severity in RANK)) continue;
+            // a flag whose premise is the DECLARED intent is not a red screen when the user declared none (product only ; a full Intent object keeps the bench rule)
+            const f = capIntent && INTENT_PREMISE.has(f0.code) && f0.severity === 'critical' ? { ...f0, severity: 'warn' } : f0;
+            raised.push({ code: f.code, severity: f.severity, detail: humanize(f.detail), by: d.id });
+            const cur = level === 'unknown' ? -1 : RANK[level];
+            if (RANK[f.severity] > cur) { level = f.severity; top = raised[raised.length - 1]; }
+          }
+          // a `lower` correction is NEVER applied : a layer of the product may only raise a verdict. It is only reported.
+          if (r.lower) lowerIgnored.push({ by: d.id, to: r.lower.to });
+        }
+        ms.detectors += r2(nowMs() - tD);
+        if (top && RANK[top.severity] !== RANK[level]) top = null;
+        return { eff, adem, pol, base, unreadable, seaportCrit, level, raised, top, lowerIgnored };
       }
-      for (const l of lowers) if (!ademCritical && RANK[l.to] < RANK[level]) { loweredBy.push({ from: level, to: l.to, why: l.why, by: l.id }); level = l.to; top = null; }
-      ms.detectors = r2(nowMs() - tD);
-      if (top && RANK[top.severity] !== RANK[level]) top = null;
 
-      // ---- 3. against the product's own answer
-      const pressure = !!P && P.level === 'manipulation';
-      let final = level, path = 'plus', relaxed = false;
-      const pOwnCritical = pressure || (!!P && (P.codes || []).includes('seaport_zero_price') && !seaportCrit);
-      if (rk(pLevel) > rk(final)) {
-        if (pOwnCritical || (!richer && !loweredBy.length)) { final = pLevel; path = 'product'; } // nothing more was known : the product's answer stands
-        else relaxed = !loweredBy.length; // a known fact or a documented correction explains the lower level
+      // ---- 1. the chain with the intent, 2. the same chain WITHOUT intent : adding intent information never lowers (run/policy.mjs monotoneGuard)
+      const R1 = await runChain(I);
+      let R = R1, level = R1.level, dual = false;
+      if (I.intent || I.rich) {
+        dual = true;
+        const I0 = toIntent({ ...body, intent: undefined, intent_text: undefined }, null);
+        const R0 = await runChain(I0);
+        level = guard(R1.level, R0.level);
+        if (rk(R0.level) > rk(R1.level)) R = R0;
       }
-      const plus = { path, level: final, base, raisedBy: raised.filter((f) => RANK[f.severity] > (base === 'unknown' ? -1 : RANK[base]) || f === top).map(({ code, severity, detail }) => ({ code, severity, detail })),
-        signals: raised.map(({ code, severity, by }) => ({ code, severity, by })), loweredBy, relaxedByFacts: relaxed, liveUsed: !!F,
+
+      // ---- 3. against the FLOOR : never below the server alone. No fact, no list, no detector, no intent can lower the answer.
+      const raisedOver = rk(level) > rk(floorLevel);
+      const plus = { path: raisedOver ? 'plus' : 'product', level: raisedOver ? level : floorLevel, base: R1.base,
+        raisedBy: R.raised.filter((f) => RANK[f.severity] > (R.base === 'unknown' ? -1 : RANK[R.base]) || f === R.top).map(({ code, severity, detail }) => ({ code, severity, detail })),
+        signals: R.raised.map(({ code, severity, by }) => ({ code, severity, by })), loweredBy: [], lowerIgnored: [...R1.lowerIgnored], relaxedByFacts: false, intentArms: dual, liveUsed: !!F,
         facts: F ? { isContract: F.isContract, ageBlocks: F.ageBlocks, balances: Object.keys(F.balances), tokens: F.tokenMeta, allowances: F.allowances } : {},
         missingFacts: LV.missing, notVerified: LV.missing.length ? 'Certains points n’ont pas pu être vérifiés sur le réseau : ' + (F ? LV.missing.length + ' fait(s) manquant(s).' : 'aucune lecture du réseau.') : null };
-      if (path === 'product' || (P && final === pLevel && !top && !loweredBy.length && !relaxed)) return finish({ ...P }, { ...plus, path: path === 'product' ? 'product' : 'plus' });
-      if (final === 'unknown') return finish(P ? { ...P } : unverified(unreadable || 'analyse impossible'), plus);
-      const A = { eff, pol, adem, method, host, chainId, raised, seaportCrit };
-      const v = render(A, final === 'critical' ? 'critical' : final === 'warn' ? 'warn' : 'info', top, body, local, loweredBy.length > 0);
-      if (pressure && P && final !== 'critical') { v.level = 'manipulation'; v.niveau = 'critical'; v.quote = P.quote; }
+      if (!raisedOver || level === 'unknown') return finish(floorV ? { ...floorV } : unverified(R.unreadable || 'analyse impossible'), { ...plus, path: 'product', level: floorLevel });
+      const A = { eff: R.eff, pol: R.pol, adem: R.adem, method, host, chainId, raised: R.raised, seaportCrit: R.seaportCrit };
+      const v = render(A, level === 'critical' ? 'critical' : 'warn', R.top, body, localPlus, false);
       return finish(v, plus);
     } catch (e) {
-      // ---- 4. internal error : the product's answer, or "not verified". Never green.
+      // ---- 4. internal error : the floor (the server's own answer), or "not verified". Never green.
       errors.push('plus : ' + String((e && e.message) || e).slice(0, 160));
-      const v = P ? { ...P } : unverified('erreur interne');
-      return finish(v, { path: 'fallback', level: P ? pLevel : 'unknown', base: 'unknown', raisedBy: [], signals: [], loweredBy: [], relaxedByFacts: false, liveUsed: false, facts: {}, missingFacts: ['live_context_absent'], notVerified: null });
+      const v = floorV ? { ...floorV } : unverified('erreur interne');
+      return finish(v, { path: 'fallback', level: floorV ? floorLevel : 'unknown', base: 'unknown', raisedBy: [], signals: [], loweredBy: [], relaxedByFacts: false, liveUsed: false, facts: {}, missingFacts: ['live_context_absent'], notVerified: null });
     }
   };
 }
@@ -426,7 +465,7 @@ export async function loadNodeDeps(over = {}) {
   try { const kp = JSON.parse(fs.readFileSync(new URL('./known_protocols.json', import.meta.url), 'utf8')); for (const [c, l] of Object.entries(kp)) if (Array.isArray(l)) knownProtocols[c] = l.filter((e) => e && HEX20.test(String(e.address))).map((e) => lc(e.address)); } catch { knownProtocols = {}; }
   return { evaluate: S.evaluate, E, compare: C.compare, applyExtraRules: R.applyExtraRules, analyzeChainRequest: R.analyzeChainRequest, applyPolicy: Pol.applyPolicy, mergeEffects: S.mergeEffects,
     present: S.present, scenarioFiche: S.scenarioFiche, findPressure: S.findPressure, buildTexts: S.buildTexts, buildSecours: S.buildSecours, SECOURS_TITRE: S.SECOURS_TITRE, TITRE_NON_VERIFIE: S.TITRE_NON_VERIFIE,
-    fiches: Object.fromEntries(texts.fiches.map((f) => [f.id, f])), DETECTORS: Det.DETECTORS, DEFAULT_TOKENS: U.DEFAULT_TOKENS, domainToUnicode: url.domainToUnicode,
+    fiches: Object.fromEntries(texts.fiches.map((f) => [f.id, f])), DETECTORS: Det.DETECTORS, monotoneGuard: Pol.monotoneGuard, DEFAULT_TOKENS: U.DEFAULT_TOKENS, domainToUnicode: url.domainToUnicode,
     knownProtocols, provider: () => import(u('../context_live/provider.mjs')), env: () => process.env, loadLocalContext: S.loadLocalContext, ...over };
 }
 // Environment switches (read at call time) : HOLDUP_PLUS=0 -> product verdict only ; HOLDUP_DETECTORS=0 -> no detector ;

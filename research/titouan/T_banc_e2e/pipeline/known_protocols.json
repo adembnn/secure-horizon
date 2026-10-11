@@ -1,16 +1,153 @@
 {
-  "_about": "Public reference data: contracts a wallet may call 'known' on each chain. Every address was read on the primary source given in `source` on 2026-10-11 (not from memory, not from the measurement sets). Loaded by pipeline/evaluate_plus.mjs into knownSpenders (option knownProtocols: false turns it off). The 5 cross-chain canonical contracts already known to server.mjs (Permit2, Multicall3, CoW settlement, Seaport 1.6, Safe MultiSendCallOnly) are not repeated. NOT included because the primary source could not be read today: LFJ / Trader Joe routers (docs.lfj.gg answered 403), Pangolin, GMX, Stargate, Avalanche Bridge, Benqi lending markets. The local demo contracts are NOT loaded from research/demo_reelle/chain/addresses.local.json: that file also holds the attacker's contracts; the lab and the RPC door pass their own knownSpenders.",
-  "43114": [
-    { "address": "0x794a61358D6845594F94dc1DB02A252b5b4814aD", "name": "Aave V3 Pool", "why": "lending pool: supply / borrow / repay", "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Avalanche.ts (POOL)" },
-    { "address": "0x2825cE5921538d17cc15Ae00a8B24fF759C6CDaE", "name": "Aave V3 WrappedTokenGateway", "why": "deposit of native AVAX into Aave", "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Avalanche.ts (WETH_GATEWAY)" },
-    { "address": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE", "name": "BENQI sAVAX", "why": "liquid staking: submit AVAX, receive sAVAX", "source": "https://docs.benqi.fi/resources/contracts/benqi-liquid-staking" },
-    { "address": "0x94b75331ae8d42c1b61065089b7d48fe14aa73b7", "name": "Uniswap UniversalRouter", "why": "swap router", "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments" },
-    { "address": "0xbb00FF08d01D300023C629E8fFfFcb65A5a578cE", "name": "Uniswap SwapRouter02", "why": "swap router", "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments" },
-    { "address": "0x655C406EBFa14EE2006250925e54ec43AD184f8B", "name": "Uniswap V3 NonfungiblePositionManager", "why": "liquidity positions", "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments" },
-    { "address": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d", "name": "Circle CCTP TokenMessengerV2", "why": "USDC bridge (burn and mint)", "source": "https://developers.circle.com/cctp/evm-smart-contracts" }
-  ],
-  "43113": [
-    { "address": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA", "name": "Circle CCTP TokenMessengerV2 (Fuji)", "why": "USDC bridge on the testnet", "source": "https://developers.circle.com/cctp/evm-smart-contracts" }
-  ],
-  "1": []
+ "1": [
+  {
+   "address": "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+   "name": "Uniswap UniversalRouter",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v4/deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca",
+   "name": "Uniswap Universal Router 2.1.1",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v4/deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x23617e59A5925b2A4Bf75d73ff6711cD0b29De85",
+   "name": "Uniswap Universal Router 2.1.2",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v4/deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
+   "name": "Uniswap SwapRouter02",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+   "name": "Uniswap V3 SwapRouter",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0xC36442b4a4522E871399CD717aBDD847Ab11FE88",
+   "name": "Uniswap V3 NonfungiblePositionManager",
+   "why": "liquidity positions",
+   "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+   "name": "Uniswap V2 Router02",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v2/deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x000000000004444c5dc75cB358380D2e3dE08A90",
+   "name": "Uniswap V4 PoolManager",
+   "why": "pool manager",
+   "source": "https://developers.uniswap.org/docs/protocols/v4/deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e",
+   "name": "Uniswap V4 PositionManager",
+   "why": "liquidity positions",
+   "source": "https://developers.uniswap.org/docs/protocols/v4/deployments (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+   "name": "Aave V3 Pool",
+   "why": "lending pool: supply / borrow / repay",
+   "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Ethereum.ts (POOL) (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0xd01607c3C5eCABa394D8be377a08590149325722",
+   "name": "Aave V3 WrappedTokenGateway",
+   "why": "deposit of native ETH into Aave",
+   "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Ethereum.ts (WETH_GATEWAY) (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+   "name": "Lido stETH",
+   "why": "liquid staking: submit ETH",
+   "source": "https://docs.lido.fi/deployed-contracts/ (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+   "name": "Lido wstETH",
+   "why": "wrapped staked ETH",
+   "source": "https://docs.lido.fi/deployed-contracts/ (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1",
+   "name": "Lido Withdrawal Queue",
+   "why": "withdrawal requests",
+   "source": "https://docs.lido.fi/deployed-contracts/ (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  },
+  {
+   "address": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d",
+   "name": "Circle CCTP TokenMessengerV2",
+   "why": "USDC bridge (burn and mint)",
+   "source": "https://developers.circle.com/cctp/evm-smart-contracts (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  }
+ ],
+ "43113": [
+  {
+   "address": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA",
+   "name": "Circle CCTP TokenMessengerV2 (Fuji)",
+   "why": "USDC bridge on the testnet",
+   "source": "https://developers.circle.com/cctp/evm-smart-contracts"
+  }
+ ],
+ "43114": [
+  {
+   "address": "0x794a61358D6845594F94dc1DB02A252b5b4814aD",
+   "name": "Aave V3 Pool",
+   "why": "lending pool: supply / borrow / repay",
+   "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Avalanche.ts (POOL) (lu le 2026-10-11)"
+  },
+  {
+   "address": "0x2825cE5921538d17cc15Ae00a8B24fF759C6CDaE",
+   "name": "Aave V3 WrappedTokenGateway",
+   "why": "deposit of native AVAX into Aave",
+   "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Avalanche.ts (WETH_GATEWAY) (lu le 2026-10-11)"
+  },
+  {
+   "address": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE",
+   "name": "BENQI sAVAX",
+   "why": "liquid staking: submit AVAX, receive sAVAX",
+   "source": "https://docs.benqi.fi/resources/contracts/benqi-liquid-staking (lu le 2026-10-11)"
+  },
+  {
+   "address": "0x94b75331ae8d42c1b61065089b7d48fe14aa73b7",
+   "name": "Uniswap UniversalRouter",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments (lu le 2026-10-11)"
+  },
+  {
+   "address": "0xbb00FF08d01D300023C629E8fFfFcb65A5a578cE",
+   "name": "Uniswap SwapRouter02",
+   "why": "swap router",
+   "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments (lu le 2026-10-11)"
+  },
+  {
+   "address": "0x655C406EBFa14EE2006250925e54ec43AD184f8B",
+   "name": "Uniswap V3 NonfungiblePositionManager",
+   "why": "liquidity positions",
+   "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments (lu le 2026-10-11)"
+  },
+  {
+   "address": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d",
+   "name": "Circle CCTP TokenMessengerV2",
+   "why": "USDC bridge (burn and mint)",
+   "source": "https://developers.circle.com/cctp/evm-smart-contracts (lu le 2026-10-11) ; eth_getCode lu le 2026-10-11 : du code présent"
+  },
+  {
+   "address": "0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106",
+   "name": "Pangolin Router",
+   "why": "swap router",
+   "source": "https://docs.pangolin.exchange/llms-full.txt (page Avalanche V2, table Contract Addresses) (lu le 2026-10-11 ; eth_getCode lu le 2026-10-11 : du code présent)"
+  }
+ ],
+ "_about": "Public reference data: contracts a wallet may call 'known' on each chain. Every address was read on the primary source given in `source` on 2026-10-11 (not from memory, not from the measurement sets), and for the Ethereum entries, Pangolin and CCTP on Avalanche, eth_getCode (read only) returned code on 2026-10-11. Loaded by pipeline/evaluate_plus.mjs AFTER the server's own answer is computed: the list reaches the chain and the detectors only (fewer false alarms from detectors), it never lowers the level below the server alone. The 5 cross-chain canonical contracts already known to server.mjs are not repeated. NOT included because the primary source could not be read today: LFJ / Trader Joe routers (docs answered 403), GMX, Stargate, Avalanche Bridge, Benqi lending markets, Odos (530), 1inch (host unreachable). The local demo contracts are NOT loaded from research/demo_reelle/chain/addresses.local.json."
 }

@@ -157,7 +157,7 @@ export function verite(C, E) {
   const missing = [];
   const needAmt = !['login', 'nft', 'setAll'].includes(E.k);
   if (needAmt && C.amount === undefined) missing.push('montant');
-  const needTok = !['login', 'nft', 'setAll', 'native'].includes(E.k);
+  const needTok = !['login', 'nft', 'setAll'].includes(E.k);
   if (needTok && !C.token) missing.push('jeton');
   if ((E.k === 'transfer' || E.k === 'native' || E.k === 'nft') && E.to !== 'market' && !C.to) missing.push('destinataire');
   if ((C.act === 'approve' || C.act === 'list_nft' || C.act === 'buy_nft' || C.act === 'deposit') && !C.protocol) missing.push('protocole');

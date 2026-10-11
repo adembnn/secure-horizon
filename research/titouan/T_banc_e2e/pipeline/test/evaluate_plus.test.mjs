@@ -137,12 +137,13 @@ test('live facts are used : a spender proven to be a one-block-old contract is r
   assert.equal(after.context_live, true); assert.deepEqual(after.plus.facts.ageBlocks, { [sp]: 1 });
 });
 
-test('documented lower only : applied last, never against a critical raised by a detector', async () => {
+test('a detector lower correction is never applied : the level stays at the server alone, the correction is only reported', async () => {
   const lower = { id: 'fix', run: () => ({ lower: { to: 'ok', why: 'correction documentée' } }) };
   const crit = { id: 'crit', run: () => ({ flags: [{ code: 'lookalike_of_known', severity: 'critical', detail: 'destinataire imite un contact' }] }) };
   const pApprove = benchLevel(D.evaluate(approve, LOCAL));
+  assert.ok(RK[pApprove] > 0, 'le cas de test doit être au moins orange pour le serveur seul');
   const a = await makeEvaluatePlus({ ...D, DETECTORS: [lower] })(approve, LOCAL, { live: null });
-  if (RK[pApprove] > 0) { assert.equal(a.plus.loweredBy.length, 1); assert.equal(a.plus.loweredBy[0].why, 'correction documentée'); assert.equal(benchLevel(a), 'ok'); assert.notEqual(a.level, 'danger'); }
+  assert.equal(benchLevel(a), pApprove); assert.equal(a.plus.loweredBy.length, 0); assert.equal(a.plus.lowerIgnored.length, 1);
   const b = await makeEvaluatePlus({ ...D, DETECTORS: [lower, crit] })(plainSend, LOCAL, { live: null });
   assert.equal(benchLevel(b), 'critical'); assert.equal(b.plus.loweredBy.length, 0); assert.equal(b.fiche, 'F13');
 });
@@ -212,6 +213,6 @@ test('known_protocols.json : every entry has a primary source, and the list is g
   const pool = kp['43114'][0].address;
   const req = { method: 'eth_sendTransaction', params: [{ from: ME, to: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48A6E', data: '0x095ea7b3' + word(pool) + word('0x2faf080'), value: '0x0' }], origin: 'https://exemple.test', chainId: '0xa86a', from: ME };
   const withList = await evaluatePlus(req, LOCAL, { live: null }), without = await evaluatePlus(req, LOCAL, { live: null, knownProtocols: false });
-  assert.ok(RK[benchLevel(withList)] <= RK[benchLevel(without)]);
+  assert.equal(benchLevel(withList), benchLevel(without)); assert.equal(withList.plus.product, benchLevel(D.evaluate(req, LOCAL))); // the list never changes the floor
   assert.notEqual(benchLevel(withList), 'critical');
 });
