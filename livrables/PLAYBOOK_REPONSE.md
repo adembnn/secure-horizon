@@ -19,7 +19,8 @@ Durée de retenue après une alerte : sur l'écart « montant écrit contre droi
 ## 3. Ce qui reste humain
 
 - Annuler ou continuer. Le produit n'impose pas de décision définitive.
-- Demander la fiche d'incident : `node reponse/incident.mjs --journal <journal> --seq <n> --out <dossier>`. Elle liste ce qu'elle établit et ce qu'elle n'établit pas.
+- Trace documentée de la version livrée : panneau latéral, bouton « Exporter le journal (JSON) », puis `node extension/tools/verify_journal.mjs export.json` (sortie 0 cohérent, 1 rompu). Une ligne modifiée, retirée ou déplacée au milieu se voit.
+- Fiche d'incident (prototype pour le journal du serveur, pas encore dans l'extension) : `node reponse/incident.mjs --journal <journal> --seq <n> --out <dossier>`. Elle liste ce qu'elle établit et ce qu'elle n'établit pas.
 - Signer les retraits de droits après une signature dangereuse : `reponse/revoke.mjs` lit les droits actifs et construit les transactions (`approve 0`, `setApprovalForAll false`). Il ne signe pas et n'envoie rien.
 - Porter plainte, prévenir un assureur ou une plateforme : aucun envoi automatique.
 
@@ -29,7 +30,7 @@ La personne devant l'écran, et elle seule. Une plateforme qui intègre Hold up 
 
 ## 5. Après la décision
 
-**Annulé.** Rien n'est parti. Fiche d'incident sur demande, JSON et HTML. Le journal ne garde pas encore la phrase écrite ni les paramètres complets : non fait.
+**Annulé.** Rien n'est parti. Ligne du journal chaîné exportable et vérifiable ; fiche d'incident en prototype (journal du serveur). Le journal ne garde pas encore la phrase écrite ni les paramètres complets : non fait.
 **Signé.** Droit de dépense : retrait par `revoke.mjs`, testé sur chaîne locale (3 droits retirés, le vol échoue ensuite). Permit EIP-2612 : un permit sans effet (soi vers soi, montant 0) consomme le nonce ; c'est une course, si l'attaquant passe avant, c'est perdu. Envoi vers une mauvaise adresse : rien ne le défait. Permit2 et ordres Seaport : non fait.
 
 ## 6. Comment c'est documenté
