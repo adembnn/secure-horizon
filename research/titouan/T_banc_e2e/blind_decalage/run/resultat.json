@@ -1,0 +1,6914 @@
+{
+ "phrase": "aucun réglage après ouverture; chiffres publiés tels quels",
+ "meta": {
+  "date": "2026-10-11T07:10:52.843Z",
+  "sha256_cas": "ab3dcab945af0a75fab45f05138a8d608886dbcd4d945ab5a47d3c627ee79fd2",
+  "sha256_moteur": "a5b19d8375014f2859e0372b6b6f6f90ba677b74233ab2720aeb2cae16732dfe",
+  "sha256_lanceur": "901cb7c1a93a03a11cdb6c5d264d6466c9434152d0cba5cd26311c6f5310acf9",
+  "git_head": "74203dae38e08bcefab17b8fb6308893160a6c1c",
+  "git_sale": 3,
+  "essai": false
+ },
+ "criteres": {
+  "rappel_min": 0.8,
+  "fausse_alerte_rouge_max": 0.1
+ },
+ "complet": true,
+ "clef": {
+  "appels_reels": 151,
+  "cache": 99,
+  "erreurs": 0,
+  "quota": false
+ },
+ "global": {
+  "a": {
+   "n_mal": 150,
+   "n_ben": 100,
+   "signales": 131,
+   "rouges": 114,
+   "fa_rouge": 15,
+   "fa_warn_rouge": 30,
+   "non_mesures": 0,
+   "dec_ne_mal": 106,
+   "dec_inv_mal": 33,
+   "dec_ok_mal": 11,
+   "dec_ne_ben": 13,
+   "dec_inv_ben": 43,
+   "dec_ok_ben": 44
+  },
+  "b": {
+   "n_mal": 150,
+   "n_ben": 100,
+   "signales": 133,
+   "rouges": 117,
+   "fa_rouge": 16,
+   "fa_warn_rouge": 29,
+   "non_mesures": 0,
+   "dec_ne_mal": 93,
+   "dec_inv_mal": 46,
+   "dec_ok_mal": 11,
+   "dec_ne_ben": 3,
+   "dec_inv_ben": 39,
+   "dec_ok_ben": 58
+  },
+  "c": {
+   "n_mal": 150,
+   "n_ben": 100,
+   "signales": 97,
+   "rouges": 80,
+   "fa_rouge": 15,
+   "fa_warn_rouge": 27,
+   "non_mesures": 0
+  }
+ },
+ "par_famille": {
+  "swap_droit_illimite": {
+   "a": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 18,
+    "rouges": 5,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0,
+    "dec_ne_mal": 16,
+    "dec_inv_mal": 3,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 1,
+    "dec_inv_ben": 5,
+    "dec_ok_ben": 7
+   },
+   "b": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 18,
+    "rouges": 6,
+    "fa_rouge": 1,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0,
+    "dec_ne_mal": 16,
+    "dec_inv_mal": 3,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 1,
+    "dec_inv_ben": 4,
+    "dec_ok_ben": 8
+   },
+   "c": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 6,
+    "rouges": 5,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0
+   }
+  },
+  "jeton_different": {
+   "a": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 12,
+    "rouges": 12,
+    "fa_rouge": 1,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0,
+    "dec_ne_mal": 16,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 3,
+    "dec_ne_ben": 1,
+    "dec_inv_ben": 4,
+    "dec_ok_ben": 8
+   },
+   "b": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 14,
+    "rouges": 14,
+    "fa_rouge": 1,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0,
+    "dec_ne_mal": 16,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 3,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 3,
+    "dec_ok_ben": 10
+   },
+   "c": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 6,
+    "rouges": 4,
+    "fa_rouge": 1,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0
+   }
+  },
+  "destinataire_tiers": {
+   "a": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 19,
+    "rouges": 19,
+    "fa_rouge": 2,
+    "fa_warn_rouge": 3,
+    "non_mesures": 0,
+    "dec_ne_mal": 17,
+    "dec_inv_mal": 2,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 1,
+    "dec_inv_ben": 1,
+    "dec_ok_ben": 11
+   },
+   "b": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 19,
+    "rouges": 19,
+    "fa_rouge": 2,
+    "fa_warn_rouge": 3,
+    "non_mesures": 0,
+    "dec_ne_mal": 15,
+    "dec_inv_mal": 4,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 1,
+    "dec_inv_ben": 1,
+    "dec_ok_ben": 11
+   },
+   "c": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 19,
+    "rouges": 14,
+    "fa_rouge": 2,
+    "fa_warn_rouge": 3,
+    "non_mesures": 0
+   }
+  },
+  "airdrop_sortie_ou_droit": {
+   "a": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 19,
+    "rouges": 19,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 5,
+    "non_mesures": 0,
+    "dec_ne_mal": 14,
+    "dec_inv_mal": 5,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 13,
+    "dec_ok_ben": 0
+   },
+   "b": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 19,
+    "rouges": 19,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 5,
+    "non_mesures": 0,
+    "dec_ne_mal": 15,
+    "dec_inv_mal": 4,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 13,
+    "dec_ok_ben": 0
+   },
+   "c": {
+    "n_mal": 19,
+    "n_ben": 13,
+    "signales": 19,
+    "rouges": 14,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 5,
+    "non_mesures": 0
+   }
+  },
+  "login_signe_droit": {
+   "a": {
+    "n_mal": 19,
+    "n_ben": 12,
+    "signales": 14,
+    "rouges": 12,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 5,
+    "non_mesures": 0,
+    "dec_ne_mal": 8,
+    "dec_inv_mal": 9,
+    "dec_ok_mal": 2,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 11,
+    "dec_ok_ben": 1
+   },
+   "b": {
+    "n_mal": 19,
+    "n_ben": 12,
+    "signales": 14,
+    "rouges": 12,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 4,
+    "non_mesures": 0,
+    "dec_ne_mal": 8,
+    "dec_inv_mal": 9,
+    "dec_ok_mal": 2,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 9,
+    "dec_ok_ben": 3
+   },
+   "c": {
+    "n_mal": 19,
+    "n_ben": 12,
+    "signales": 14,
+    "rouges": 12,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 4,
+    "non_mesures": 0
+   }
+  },
+  "montant_plus_grand": {
+   "a": {
+    "n_mal": 19,
+    "n_ben": 12,
+    "signales": 19,
+    "rouges": 17,
+    "fa_rouge": 1,
+    "fa_warn_rouge": 2,
+    "non_mesures": 0,
+    "dec_ne_mal": 19,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 1,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 11
+   },
+   "b": {
+    "n_mal": 19,
+    "n_ben": 12,
+    "signales": 19,
+    "rouges": 17,
+    "fa_rouge": 1,
+    "fa_warn_rouge": 2,
+    "non_mesures": 0,
+    "dec_ne_mal": 19,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 1,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 11
+   },
+   "c": {
+    "n_mal": 19,
+    "n_ben": 12,
+    "signales": 3,
+    "rouges": 1,
+    "fa_rouge": 1,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0
+   }
+  },
+  "chaine_domaine_different": {
+   "a": {
+    "n_mal": 18,
+    "n_ben": 12,
+    "signales": 12,
+    "rouges": 12,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0,
+    "dec_ne_mal": 0,
+    "dec_inv_mal": 12,
+    "dec_ok_mal": 6,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 8,
+    "dec_ok_ben": 4
+   },
+   "b": {
+    "n_mal": 18,
+    "n_ben": 12,
+    "signales": 12,
+    "rouges": 12,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0,
+    "dec_ne_mal": 0,
+    "dec_inv_mal": 12,
+    "dec_ok_mal": 6,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 8,
+    "dec_ok_ben": 4
+   },
+   "c": {
+    "n_mal": 18,
+    "n_ben": 12,
+    "signales": 12,
+    "rouges": 12,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 1,
+    "non_mesures": 0
+   }
+  },
+  "seaport_prix_quasi_nul": {
+   "a": {
+    "n_mal": 18,
+    "n_ben": 12,
+    "signales": 18,
+    "rouges": 18,
+    "fa_rouge": 11,
+    "fa_warn_rouge": 12,
+    "non_mesures": 0,
+    "dec_ne_mal": 16,
+    "dec_inv_mal": 2,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 9,
+    "dec_inv_ben": 1,
+    "dec_ok_ben": 2
+   },
+   "b": {
+    "n_mal": 18,
+    "n_ben": 12,
+    "signales": 18,
+    "rouges": 18,
+    "fa_rouge": 11,
+    "fa_warn_rouge": 12,
+    "non_mesures": 0,
+    "dec_ne_mal": 4,
+    "dec_inv_mal": 14,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 1,
+    "dec_ok_ben": 11
+   },
+   "c": {
+    "n_mal": 18,
+    "n_ben": 12,
+    "signales": 18,
+    "rouges": 18,
+    "fa_rouge": 11,
+    "fa_warn_rouge": 12,
+    "non_mesures": 0
+   }
+  }
+ },
+ "monotonie": {
+  "a_sous_plancher": [],
+  "b_sous_plancher": []
+ },
+ "echecs": {
+  "a": {
+   "mal_non_signales": [
+    "BD-CH-M01",
+    "BD-CH-M04",
+    "BD-CH-M07",
+    "BD-CH-M09",
+    "BD-CH-M12",
+    "BD-CH-M17",
+    "BD-LG-M01",
+    "BD-LG-M09",
+    "BD-LG-M10",
+    "BD-LG-M18",
+    "BD-LG-M19",
+    "BD-SW-M07",
+    "BD-TK-M02",
+    "BD-TK-M05",
+    "BD-TK-M07",
+    "BD-TK-M08",
+    "BD-TK-M13",
+    "BD-TK-M15",
+    "BD-TK-M16"
+   ],
+   "mal_signales_pas_rouges": [
+    "BD-LG-M07",
+    "BD-LG-M16",
+    "BD-MT-M08",
+    "BD-MT-M16",
+    "BD-SW-M01",
+    "BD-SW-M02",
+    "BD-SW-M04",
+    "BD-SW-M05",
+    "BD-SW-M06",
+    "BD-SW-M09",
+    "BD-SW-M10",
+    "BD-SW-M11",
+    "BD-SW-M12",
+    "BD-SW-M13",
+    "BD-SW-M14",
+    "BD-SW-M17",
+    "BD-SW-M18"
+   ],
+   "ben_rouges": [
+    "BD-DT-B03",
+    "BD-DT-B09",
+    "BD-MT-B03",
+    "BD-SP-B01",
+    "BD-SP-B02",
+    "BD-SP-B03",
+    "BD-SP-B04",
+    "BD-SP-B05",
+    "BD-SP-B06",
+    "BD-SP-B08",
+    "BD-SP-B09",
+    "BD-SP-B10",
+    "BD-SP-B11",
+    "BD-SP-B12",
+    "BD-TK-B03"
+   ],
+   "ben_warn": [
+    "BD-AD-B02",
+    "BD-AD-B03",
+    "BD-AD-B07",
+    "BD-AD-B10",
+    "BD-AD-B11",
+    "BD-CH-B08",
+    "BD-DT-B06",
+    "BD-LG-B04",
+    "BD-LG-B05",
+    "BD-LG-B07",
+    "BD-LG-B08",
+    "BD-LG-B11",
+    "BD-MT-B08",
+    "BD-SP-B07",
+    "BD-SW-B05"
+   ]
+  },
+  "b": {
+   "mal_non_signales": [
+    "BD-CH-M01",
+    "BD-CH-M04",
+    "BD-CH-M07",
+    "BD-CH-M09",
+    "BD-CH-M12",
+    "BD-CH-M17",
+    "BD-LG-M01",
+    "BD-LG-M09",
+    "BD-LG-M10",
+    "BD-LG-M18",
+    "BD-LG-M19",
+    "BD-SW-M07",
+    "BD-TK-M02",
+    "BD-TK-M07",
+    "BD-TK-M08",
+    "BD-TK-M15",
+    "BD-TK-M16"
+   ],
+   "mal_signales_pas_rouges": [
+    "BD-LG-M07",
+    "BD-LG-M16",
+    "BD-MT-M08",
+    "BD-MT-M16",
+    "BD-SW-M01",
+    "BD-SW-M02",
+    "BD-SW-M04",
+    "BD-SW-M05",
+    "BD-SW-M06",
+    "BD-SW-M09",
+    "BD-SW-M10",
+    "BD-SW-M11",
+    "BD-SW-M12",
+    "BD-SW-M14",
+    "BD-SW-M17",
+    "BD-SW-M18"
+   ],
+   "ben_rouges": [
+    "BD-DT-B03",
+    "BD-DT-B09",
+    "BD-MT-B03",
+    "BD-SP-B01",
+    "BD-SP-B02",
+    "BD-SP-B03",
+    "BD-SP-B04",
+    "BD-SP-B05",
+    "BD-SP-B06",
+    "BD-SP-B08",
+    "BD-SP-B09",
+    "BD-SP-B10",
+    "BD-SP-B11",
+    "BD-SP-B12",
+    "BD-SW-B13",
+    "BD-TK-B03"
+   ],
+   "ben_warn": [
+    "BD-AD-B02",
+    "BD-AD-B03",
+    "BD-AD-B07",
+    "BD-AD-B10",
+    "BD-AD-B11",
+    "BD-CH-B08",
+    "BD-DT-B06",
+    "BD-LG-B04",
+    "BD-LG-B05",
+    "BD-LG-B07",
+    "BD-LG-B08",
+    "BD-MT-B08",
+    "BD-SP-B07"
+   ]
+  },
+  "c": {
+   "mal_non_signales": [
+    "BD-CH-M01",
+    "BD-CH-M04",
+    "BD-CH-M07",
+    "BD-CH-M09",
+    "BD-CH-M12",
+    "BD-CH-M17",
+    "BD-LG-M01",
+    "BD-LG-M09",
+    "BD-LG-M10",
+    "BD-LG-M18",
+    "BD-LG-M19",
+    "BD-MT-M01",
+    "BD-MT-M02",
+    "BD-MT-M05",
+    "BD-MT-M06",
+    "BD-MT-M07",
+    "BD-MT-M08",
+    "BD-MT-M09",
+    "BD-MT-M10",
+    "BD-MT-M11",
+    "BD-MT-M13",
+    "BD-MT-M14",
+    "BD-MT-M15",
+    "BD-MT-M16",
+    "BD-MT-M17",
+    "BD-MT-M18",
+    "BD-MT-M19",
+    "BD-SW-M01",
+    "BD-SW-M02",
+    "BD-SW-M04",
+    "BD-SW-M05",
+    "BD-SW-M06",
+    "BD-SW-M07",
+    "BD-SW-M09",
+    "BD-SW-M10",
+    "BD-SW-M12",
+    "BD-SW-M13",
+    "BD-SW-M14",
+    "BD-SW-M17",
+    "BD-SW-M18",
+    "BD-TK-M01",
+    "BD-TK-M02",
+    "BD-TK-M05",
+    "BD-TK-M07",
+    "BD-TK-M08",
+    "BD-TK-M10",
+    "BD-TK-M11",
+    "BD-TK-M13",
+    "BD-TK-M15",
+    "BD-TK-M16",
+    "BD-TK-M17",
+    "BD-TK-M18",
+    "BD-TK-M19"
+   ],
+   "mal_signales_pas_rouges": [
+    "BD-AD-M03",
+    "BD-AD-M04",
+    "BD-AD-M11",
+    "BD-AD-M12",
+    "BD-AD-M19",
+    "BD-DT-M04",
+    "BD-DT-M07",
+    "BD-DT-M08",
+    "BD-DT-M12",
+    "BD-DT-M16",
+    "BD-LG-M07",
+    "BD-LG-M16",
+    "BD-MT-M04",
+    "BD-MT-M12",
+    "BD-SW-M11",
+    "BD-TK-M06",
+    "BD-TK-M14"
+   ],
+   "ben_rouges": [
+    "BD-DT-B03",
+    "BD-DT-B09",
+    "BD-MT-B03",
+    "BD-SP-B01",
+    "BD-SP-B02",
+    "BD-SP-B03",
+    "BD-SP-B04",
+    "BD-SP-B05",
+    "BD-SP-B06",
+    "BD-SP-B08",
+    "BD-SP-B09",
+    "BD-SP-B10",
+    "BD-SP-B11",
+    "BD-SP-B12",
+    "BD-TK-B03"
+   ],
+   "ben_warn": [
+    "BD-AD-B02",
+    "BD-AD-B03",
+    "BD-AD-B07",
+    "BD-AD-B10",
+    "BD-AD-B11",
+    "BD-CH-B08",
+    "BD-DT-B06",
+    "BD-LG-B04",
+    "BD-LG-B05",
+    "BD-LG-B07",
+    "BD-LG-B08",
+    "BD-SP-B07"
+   ]
+  }
+ },
+ "verdicts": {
+  "a": "CRITÈRES NON ATTEINTS (rappel 87.3 % >= 80.0 % ; faux rouges 15.0 % > 10.0 %)",
+  "b": "CRITÈRES NON ATTEINTS (rappel 88.7 % >= 80.0 % ; faux rouges 16.0 % > 10.0 %)",
+  "c": "CRITÈRES NON ATTEINTS (rappel 64.7 % < 80.0 % ; faux rouges 15.0 % > 10.0 %)"
+ },
+ "non_pris_en_charge": [],
+ "erreurs": [],
+ "lignes": [
+  {
+   "id": "BD-AD-B01",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_approve_illimite",
+   "label": "benign",
+   "twin_of": "BD-AD-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-B02",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_setApprovalForAll",
+   "label": "benign",
+   "twin_of": "BD-AD-M02",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-B03",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_transfert_du_solde",
+   "label": "benign",
+   "twin_of": "BD-AD-M03",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-B04",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_avec_frais_a_payer",
+   "label": "benign",
+   "twin_of": "BD-AD-M04",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-B05",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "verifier_eligibilite_mais_permit",
+   "label": "benign",
+   "twin_of": "BD-AD-M05",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-B06",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "connexion_airdrop_mais_permit2",
+   "label": "benign",
+   "twin_of": "BD-AD-M06",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-B07",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "lot_reclamation_avec_approve",
+   "label": "benign",
+   "twin_of": "BD-AD-M07",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-B08",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "verification_portefeuille_envoi_solde",
+   "label": "benign",
+   "twin_of": "BD-AD-M08",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-B09",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_approve_illimite",
+   "label": "benign",
+   "twin_of": "BD-AD-M09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-B10",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_setApprovalForAll",
+   "label": "benign",
+   "twin_of": "BD-AD-M10",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-B11",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_transfert_du_solde",
+   "label": "benign",
+   "twin_of": "BD-AD-M11",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-B12",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_avec_frais_a_payer",
+   "label": "benign",
+   "twin_of": "BD-AD-M12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-B13",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "verifier_eligibilite_mais_permit",
+   "label": "benign",
+   "twin_of": "BD-AD-M13",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-AD-M01",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_approve_illimite",
+   "label": "malicious",
+   "twin_of": "BD-AD-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M02",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_setApprovalForAll",
+   "label": "malicious",
+   "twin_of": "BD-AD-B02",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « nft_all »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M03",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_transfert_du_solde",
+   "label": "malicious",
+   "twin_of": "BD-AD-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « transfer »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-M04",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_avec_frais_a_payer",
+   "label": "malicious",
+   "twin_of": "BD-AD-B04",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-M05",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "verifier_eligibilite_mais_permit",
+   "label": "malicious",
+   "twin_of": "BD-AD-B05",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M06",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "connexion_airdrop_mais_permit2",
+   "label": "malicious",
+   "twin_of": "BD-AD-B06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M07",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "lot_reclamation_avec_approve",
+   "label": "malicious",
+   "twin_of": "BD-AD-B07",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M08",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "verification_portefeuille_envoi_solde",
+   "label": "malicious",
+   "twin_of": "BD-AD-B08",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « native »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M09",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_approve_illimite",
+   "label": "malicious",
+   "twin_of": "BD-AD-B09",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M10",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_setApprovalForAll",
+   "label": "malicious",
+   "twin_of": "BD-AD-B10",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « nft_all »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M11",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_transfert_du_solde",
+   "label": "malicious",
+   "twin_of": "BD-AD-B11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « transfer »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-M12",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_avec_frais_a_payer",
+   "label": "malicious",
+   "twin_of": "BD-AD-B12",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-AD-M13",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "verifier_eligibilite_mais_permit",
+   "label": "malicious",
+   "twin_of": "BD-AD-B13",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M14",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "connexion_airdrop_mais_permit2",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M15",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "lot_reclamation_avec_approve",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M16",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "verification_portefeuille_envoi_solde",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "send_to_my_account"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « native »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M17",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_approve_illimite",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M18",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_setApprovalForAll",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « nft_all »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-AD-M19",
+   "family": "airdrop_sortie_ou_droit",
+   "sub": "reclamer_mais_transfert_du_solde",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « transfer »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-CH-B01",
+   "family": "chaine_domaine_different",
+   "sub": "transaction_sur_une_autre_chaine",
+   "label": "benign",
+   "twin_of": "BD-CH-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B02",
+   "family": "chaine_domaine_different",
+   "sub": "permit_domaine_autre_chaine",
+   "label": "benign",
+   "twin_of": "BD-CH-M02",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B03",
+   "family": "chaine_domaine_different",
+   "sub": "origine_differente_du_site_annonce",
+   "label": "benign",
+   "twin_of": "BD-CH-M03",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B04",
+   "family": "chaine_domaine_different",
+   "sub": "wallet_switchEthereumChain_autre_chaine",
+   "label": "benign",
+   "twin_of": "BD-CH-M04",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (below_threshold)",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B05",
+   "family": "chaine_domaine_different",
+   "sub": "wallet_addEthereumChain_identifiant_trompeur",
+   "label": "benign",
+   "twin_of": "BD-CH-M05",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B06",
+   "family": "chaine_domaine_different",
+   "sub": "permit2_verifyingContract_non_canonique",
+   "label": "benign",
+   "twin_of": "BD-CH-M06",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B07",
+   "family": "chaine_domaine_different",
+   "sub": "swap_sur_une_autre_chaine",
+   "label": "benign",
+   "twin_of": "BD-CH-M07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B08",
+   "family": "chaine_domaine_different",
+   "sub": "login_typed_data_domaine_etranger",
+   "label": "benign",
+   "twin_of": "BD-CH-M08",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-CH-B09",
+   "family": "chaine_domaine_different",
+   "sub": "transaction_sur_une_autre_chaine",
+   "label": "benign",
+   "twin_of": "BD-CH-M09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B10",
+   "family": "chaine_domaine_different",
+   "sub": "permit_domaine_autre_chaine",
+   "label": "benign",
+   "twin_of": "BD-CH-M10",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B11",
+   "family": "chaine_domaine_different",
+   "sub": "origine_differente_du_site_annonce",
+   "label": "benign",
+   "twin_of": "BD-CH-M11",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-B12",
+   "family": "chaine_domaine_different",
+   "sub": "wallet_switchEthereumChain_autre_chaine",
+   "label": "benign",
+   "twin_of": "BD-CH-M12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-M01",
+   "family": "chaine_domaine_different",
+   "sub": "transaction_sur_une_autre_chaine",
+   "label": "malicious",
+   "twin_of": "BD-CH-B01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-M02",
+   "family": "chaine_domaine_different",
+   "sub": "permit_domaine_autre_chaine",
+   "label": "malicious",
+   "twin_of": "BD-CH-B02",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M03",
+   "family": "chaine_domaine_different",
+   "sub": "origine_differente_du_site_annonce",
+   "label": "malicious",
+   "twin_of": "BD-CH-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M04",
+   "family": "chaine_domaine_different",
+   "sub": "wallet_switchEthereumChain_autre_chaine",
+   "label": "malicious",
+   "twin_of": "BD-CH-B04",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (below_threshold)",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-M05",
+   "family": "chaine_domaine_different",
+   "sub": "wallet_addEthereumChain_identifiant_trompeur",
+   "label": "malicious",
+   "twin_of": "BD-CH-B05",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M06",
+   "family": "chaine_domaine_different",
+   "sub": "permit2_verifyingContract_non_canonique",
+   "label": "malicious",
+   "twin_of": "BD-CH-B06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M07",
+   "family": "chaine_domaine_different",
+   "sub": "swap_sur_une_autre_chaine",
+   "label": "malicious",
+   "twin_of": "BD-CH-B07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-M08",
+   "family": "chaine_domaine_different",
+   "sub": "login_typed_data_domaine_etranger",
+   "label": "malicious",
+   "twin_of": "BD-CH-B08",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M09",
+   "family": "chaine_domaine_different",
+   "sub": "transaction_sur_une_autre_chaine",
+   "label": "malicious",
+   "twin_of": "BD-CH-B09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-M10",
+   "family": "chaine_domaine_different",
+   "sub": "permit_domaine_autre_chaine",
+   "label": "malicious",
+   "twin_of": "BD-CH-B10",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M11",
+   "family": "chaine_domaine_different",
+   "sub": "origine_differente_du_site_annonce",
+   "label": "malicious",
+   "twin_of": "BD-CH-B11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M12",
+   "family": "chaine_domaine_different",
+   "sub": "wallet_switchEthereumChain_autre_chaine",
+   "label": "malicious",
+   "twin_of": "BD-CH-B12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-M13",
+   "family": "chaine_domaine_different",
+   "sub": "wallet_addEthereumChain_identifiant_trompeur",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M14",
+   "family": "chaine_domaine_different",
+   "sub": "permit2_verifyingContract_non_canonique",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M15",
+   "family": "chaine_domaine_different",
+   "sub": "swap_sur_une_autre_chaine",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M16",
+   "family": "chaine_domaine_different",
+   "sub": "login_typed_data_domaine_etranger",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-CH-M17",
+   "family": "chaine_domaine_different",
+   "sub": "transaction_sur_une_autre_chaine",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-CH-M18",
+   "family": "chaine_domaine_different",
+   "sub": "permit_domaine_autre_chaine",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-B01",
+   "family": "destinataire_tiers",
+   "sub": "swapTokens_destinataire_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B02",
+   "family": "destinataire_tiers",
+   "sub": "swapExactETHForTokens_destinataire_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M02",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B03",
+   "family": "destinataire_tiers",
+   "sub": "transfer_vers_autre_adresse",
+   "label": "benign",
+   "twin_of": "BD-DT-M03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-B04",
+   "family": "destinataire_tiers",
+   "sub": "envoi_natif_destinataire_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M04",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B05",
+   "family": "destinataire_tiers",
+   "sub": "exactInputSingle_recipient_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M05",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B06",
+   "family": "destinataire_tiers",
+   "sub": "multicall_unwrap_destinataire_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M06",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-DT-B07",
+   "family": "destinataire_tiers",
+   "sub": "envoi_vers_mon_compte_autre_adresse",
+   "label": "benign",
+   "twin_of": "BD-DT-M07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "send_to_my_account"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B08",
+   "family": "destinataire_tiers",
+   "sub": "wallet_sendCalls_transfert_en_plus",
+   "label": "benign",
+   "twin_of": "BD-DT-M08",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B09",
+   "family": "destinataire_tiers",
+   "sub": "swapTokens_destinataire_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M09",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-B10",
+   "family": "destinataire_tiers",
+   "sub": "swapExactETHForTokens_destinataire_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M10",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B11",
+   "family": "destinataire_tiers",
+   "sub": "transfer_vers_autre_adresse",
+   "label": "benign",
+   "twin_of": "BD-DT-M11",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B12",
+   "family": "destinataire_tiers",
+   "sub": "envoi_natif_destinataire_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-B13",
+   "family": "destinataire_tiers",
+   "sub": "exactInputSingle_recipient_tiers",
+   "label": "benign",
+   "twin_of": "BD-DT-M13",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-DT-M01",
+   "family": "destinataire_tiers",
+   "sub": "swapTokens_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M02",
+   "family": "destinataire_tiers",
+   "sub": "swapExactETHForTokens_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B02",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M03",
+   "family": "destinataire_tiers",
+   "sub": "transfer_adresse_sosie_empoisonnee",
+   "label": "malicious",
+   "twin_of": "BD-DT-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M04",
+   "family": "destinataire_tiers",
+   "sub": "envoi_natif_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B04",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-DT-M05",
+   "family": "destinataire_tiers",
+   "sub": "exactInputSingle_recipient_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B05",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M06",
+   "family": "destinataire_tiers",
+   "sub": "multicall_unwrap_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M07",
+   "family": "destinataire_tiers",
+   "sub": "envoi_vers_mon_compte_autre_adresse",
+   "label": "malicious",
+   "twin_of": "BD-DT-B07",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "send_to_my_account"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-DT-M08",
+   "family": "destinataire_tiers",
+   "sub": "wallet_sendCalls_transfert_en_plus",
+   "label": "malicious",
+   "twin_of": "BD-DT-B08",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-DT-M09",
+   "family": "destinataire_tiers",
+   "sub": "swapTokens_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B09",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M10",
+   "family": "destinataire_tiers",
+   "sub": "swapExactETHForTokens_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B10",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M11",
+   "family": "destinataire_tiers",
+   "sub": "transfer_adresse_sosie_empoisonnee",
+   "label": "malicious",
+   "twin_of": "BD-DT-B11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M12",
+   "family": "destinataire_tiers",
+   "sub": "envoi_natif_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B12",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-DT-M13",
+   "family": "destinataire_tiers",
+   "sub": "exactInputSingle_recipient_tiers",
+   "label": "malicious",
+   "twin_of": "BD-DT-B13",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M14",
+   "family": "destinataire_tiers",
+   "sub": "multicall_unwrap_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M15",
+   "family": "destinataire_tiers",
+   "sub": "envoi_vers_mon_compte_autre_adresse",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "send_to_my_account"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "send_to_my_account"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M16",
+   "family": "destinataire_tiers",
+   "sub": "wallet_sendCalls_transfert_en_plus",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-DT-M17",
+   "family": "destinataire_tiers",
+   "sub": "swapTokens_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M18",
+   "family": "destinataire_tiers",
+   "sub": "swapExactETHForTokens_destinataire_tiers",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-DT-M19",
+   "family": "destinataire_tiers",
+   "sub": "transfer_adresse_sosie_empoisonnee",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-B01",
+   "family": "login_signe_droit",
+   "sub": "siwe_avec_calldata_cache",
+   "label": "benign",
+   "twin_of": "BD-LG-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-B02",
+   "family": "login_signe_droit",
+   "sub": "message_brut_qui_est_un_calldata",
+   "label": "benign",
+   "twin_of": "BD-LG-M02",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-B03",
+   "family": "login_signe_droit",
+   "sub": "eth_sign_aveugle",
+   "label": "benign",
+   "twin_of": "BD-LG-M03",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-B04",
+   "family": "login_signe_droit",
+   "sub": "typed_data_permit_au_lieu_de_login",
+   "label": "benign",
+   "twin_of": "BD-LG-M04",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-LG-B05",
+   "family": "login_signe_droit",
+   "sub": "typed_data_permit2_au_lieu_de_login",
+   "label": "benign",
+   "twin_of": "BD-LG-M05",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-LG-B06",
+   "family": "login_signe_droit",
+   "sub": "connexion_qui_est_setApprovalForAll",
+   "label": "benign",
+   "twin_of": "BD-LG-M06",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-B07",
+   "family": "login_signe_droit",
+   "sub": "permit2_signature_transfer_au_lieu_de_login",
+   "label": "benign",
+   "twin_of": "BD-LG-M07",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-LG-B08",
+   "family": "login_signe_droit",
+   "sub": "permit_dai_allowed_au_lieu_de_login",
+   "label": "benign",
+   "twin_of": "BD-LG-M08",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-LG-B09",
+   "family": "login_signe_droit",
+   "sub": "siwe_ressource_est_un_multicall",
+   "label": "benign",
+   "twin_of": "BD-LG-M09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-B10",
+   "family": "login_signe_droit",
+   "sub": "siwe_avec_calldata_cache",
+   "label": "benign",
+   "twin_of": "BD-LG-M10",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-B11",
+   "family": "login_signe_droit",
+   "sub": "message_brut_qui_est_un_calldata",
+   "label": "benign",
+   "twin_of": "BD-LG-M11",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "type deviné sans aucun indice dans la phrase",
+    "kind": "send_to_my_account"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-B12",
+   "family": "login_signe_droit",
+   "sub": "eth_sign_aveugle",
+   "label": "benign",
+   "twin_of": "BD-LG-M12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-M01",
+   "family": "login_signe_droit",
+   "sub": "siwe_avec_calldata_cache",
+   "label": "malicious",
+   "twin_of": "BD-LG-B01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-M02",
+   "family": "login_signe_droit",
+   "sub": "message_brut_qui_est_un_calldata",
+   "label": "malicious",
+   "twin_of": "BD-LG-B02",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M03",
+   "family": "login_signe_droit",
+   "sub": "eth_sign_aveugle",
+   "label": "malicious",
+   "twin_of": "BD-LG-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M04",
+   "family": "login_signe_droit",
+   "sub": "typed_data_permit_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": "BD-LG-B04",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M05",
+   "family": "login_signe_droit",
+   "sub": "typed_data_permit2_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": "BD-LG-B05",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M06",
+   "family": "login_signe_droit",
+   "sub": "connexion_qui_est_setApprovalForAll",
+   "label": "malicious",
+   "twin_of": "BD-LG-B06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « nft_all »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M07",
+   "family": "login_signe_droit",
+   "sub": "permit2_signature_transfer_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": "BD-LG-B07",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-LG-M08",
+   "family": "login_signe_droit",
+   "sub": "permit_dai_allowed_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": "BD-LG-B08",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M09",
+   "family": "login_signe_droit",
+   "sub": "siwe_ressource_est_un_multicall",
+   "label": "malicious",
+   "twin_of": "BD-LG-B09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-M10",
+   "family": "login_signe_droit",
+   "sub": "siwe_avec_calldata_cache",
+   "label": "malicious",
+   "twin_of": "BD-LG-B10",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-M11",
+   "family": "login_signe_droit",
+   "sub": "message_brut_qui_est_un_calldata",
+   "label": "malicious",
+   "twin_of": "BD-LG-B11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "send_to_my_account"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M12",
+   "family": "login_signe_droit",
+   "sub": "eth_sign_aveugle",
+   "label": "malicious",
+   "twin_of": "BD-LG-B12",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": null
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M13",
+   "family": "login_signe_droit",
+   "sub": "typed_data_permit_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M14",
+   "family": "login_signe_droit",
+   "sub": "typed_data_permit2_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M15",
+   "family": "login_signe_droit",
+   "sub": "connexion_qui_est_setApprovalForAll",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « nft_all »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M16",
+   "family": "login_signe_droit",
+   "sub": "permit2_signature_transfer_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-LG-M17",
+   "family": "login_signe_droit",
+   "sub": "permit_dai_allowed_au_lieu_de_login",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-LG-M18",
+   "family": "login_signe_droit",
+   "sub": "siwe_ressource_est_un_multicall",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-LG-M19",
+   "family": "login_signe_droit",
+   "sub": "siwe_avec_calldata_cache",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B01",
+   "family": "montant_plus_grand",
+   "sub": "transfer_montant_multiplie",
+   "label": "benign",
+   "twin_of": "BD-MT-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B02",
+   "family": "montant_plus_grand",
+   "sub": "confusion_de_decimales",
+   "label": "benign",
+   "twin_of": "BD-MT-M02",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B03",
+   "family": "montant_plus_grand",
+   "sub": "swap_montant_en_entree_plus_grand",
+   "label": "benign",
+   "twin_of": "BD-MT-M03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-MT-B04",
+   "family": "montant_plus_grand",
+   "sub": "envoi_natif_valeur_multipliee",
+   "label": "benign",
+   "twin_of": "BD-MT-M04",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B05",
+   "family": "montant_plus_grand",
+   "sub": "swapExactETH_valeur_plus_grande",
+   "label": "benign",
+   "twin_of": "BD-MT-M05",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B06",
+   "family": "montant_plus_grand",
+   "sub": "exactInputSingle_montant_plus_grand",
+   "label": "benign",
+   "twin_of": "BD-MT-M06",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B07",
+   "family": "montant_plus_grand",
+   "sub": "lot_dont_la_somme_depasse",
+   "label": "benign",
+   "twin_of": "BD-MT-M07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B08",
+   "family": "montant_plus_grand",
+   "sub": "permit_valeur_plus_grande",
+   "label": "benign",
+   "twin_of": "BD-MT-M08",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « pay_someone », demande de type « right »",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B09",
+   "family": "montant_plus_grand",
+   "sub": "transfer_montant_multiplie",
+   "label": "benign",
+   "twin_of": "BD-MT-M09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B10",
+   "family": "montant_plus_grand",
+   "sub": "confusion_de_decimales",
+   "label": "benign",
+   "twin_of": "BD-MT-M10",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B11",
+   "family": "montant_plus_grand",
+   "sub": "swap_montant_en_entree_plus_grand",
+   "label": "benign",
+   "twin_of": "BD-MT-M11",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-B12",
+   "family": "montant_plus_grand",
+   "sub": "envoi_natif_valeur_multipliee",
+   "label": "benign",
+   "twin_of": "BD-MT-M12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M01",
+   "family": "montant_plus_grand",
+   "sub": "transfer_montant_multiplie",
+   "label": "malicious",
+   "twin_of": "BD-MT-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M02",
+   "family": "montant_plus_grand",
+   "sub": "confusion_de_decimales",
+   "label": "malicious",
+   "twin_of": "BD-MT-B02",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M03",
+   "family": "montant_plus_grand",
+   "sub": "swap_montant_en_entree_plus_grand",
+   "label": "malicious",
+   "twin_of": "BD-MT-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-MT-M04",
+   "family": "montant_plus_grand",
+   "sub": "envoi_natif_valeur_multipliee",
+   "label": "malicious",
+   "twin_of": "BD-MT-B04",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-MT-M05",
+   "family": "montant_plus_grand",
+   "sub": "swapExactETH_valeur_plus_grande",
+   "label": "malicious",
+   "twin_of": "BD-MT-B05",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M06",
+   "family": "montant_plus_grand",
+   "sub": "exactInputSingle_montant_plus_grand",
+   "label": "malicious",
+   "twin_of": "BD-MT-B06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M07",
+   "family": "montant_plus_grand",
+   "sub": "lot_dont_la_somme_depasse",
+   "label": "malicious",
+   "twin_of": "BD-MT-B07",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M08",
+   "family": "montant_plus_grand",
+   "sub": "permit_valeur_plus_grande",
+   "label": "malicious",
+   "twin_of": "BD-MT-B08",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « pay_someone », demande de type « right »",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M09",
+   "family": "montant_plus_grand",
+   "sub": "transfer_montant_multiplie",
+   "label": "malicious",
+   "twin_of": "BD-MT-B09",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M10",
+   "family": "montant_plus_grand",
+   "sub": "confusion_de_decimales",
+   "label": "malicious",
+   "twin_of": "BD-MT-B10",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M11",
+   "family": "montant_plus_grand",
+   "sub": "swap_montant_en_entree_plus_grand",
+   "label": "malicious",
+   "twin_of": "BD-MT-B11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M12",
+   "family": "montant_plus_grand",
+   "sub": "envoi_natif_valeur_multipliee",
+   "label": "malicious",
+   "twin_of": "BD-MT-B12",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-MT-M13",
+   "family": "montant_plus_grand",
+   "sub": "swapExactETH_valeur_plus_grande",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M14",
+   "family": "montant_plus_grand",
+   "sub": "exactInputSingle_montant_plus_grand",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M15",
+   "family": "montant_plus_grand",
+   "sub": "lot_dont_la_somme_depasse",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M16",
+   "family": "montant_plus_grand",
+   "sub": "permit_valeur_plus_grande",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « pay_someone », demande de type « right »",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M17",
+   "family": "montant_plus_grand",
+   "sub": "transfer_montant_multiplie",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M18",
+   "family": "montant_plus_grand",
+   "sub": "confusion_de_decimales",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-MT-M19",
+   "family": "montant_plus_grand",
+   "sub": "swap_montant_en_entree_plus_grand",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SP-B01",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_offre_nft_contre_1_wei",
+   "label": "benign",
+   "twin_of": "BD-SP-M01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B02",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_collection_entiere_a_prix_derisoire",
+   "label": "benign",
+   "twin_of": "BD-SP-M02",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B03",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_trois_nft_contre_presque_rien",
+   "label": "benign",
+   "twin_of": "BD-SP-M03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B04",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_erc1155_a_prix_quasi_nul",
+   "label": "benign",
+   "twin_of": "BD-SP-M04",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B05",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "offre_d_achat_bien_au_dessus_du_prix_dit",
+   "label": "benign",
+   "twin_of": "BD-SP-M05",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B06",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "offre_d_achat_nft_livre_a_un_tiers",
+   "label": "benign",
+   "twin_of": "BD-SP-M06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B07",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "acheter_mais_setApprovalForAll",
+   "label": "benign",
+   "twin_of": "BD-SP-M07",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "illisible",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-SP-B08",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_nft_contre_un_micro_usdc",
+   "label": "benign",
+   "twin_of": "BD-SP-M08",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B09",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_offre_nft_contre_1_wei",
+   "label": "benign",
+   "twin_of": "BD-SP-M09",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B10",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_collection_entiere_a_prix_derisoire",
+   "label": "benign",
+   "twin_of": "BD-SP-M10",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B11",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_trois_nft_contre_presque_rien",
+   "label": "benign",
+   "twin_of": "BD-SP-M11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-B12",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_erc1155_a_prix_quasi_nul",
+   "label": "benign",
+   "twin_of": "BD-SP-M12",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M01",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_offre_nft_contre_1_wei",
+   "label": "malicious",
+   "twin_of": "BD-SP-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M02",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_collection_entiere_a_prix_derisoire",
+   "label": "malicious",
+   "twin_of": "BD-SP-B02",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M03",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_trois_nft_contre_presque_rien",
+   "label": "malicious",
+   "twin_of": "BD-SP-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M04",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_erc1155_a_prix_quasi_nul",
+   "label": "malicious",
+   "twin_of": "BD-SP-B04",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M05",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "offre_d_achat_bien_au_dessus_du_prix_dit",
+   "label": "malicious",
+   "twin_of": "BD-SP-B05",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M06",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "offre_d_achat_nft_livre_a_un_tiers",
+   "label": "malicious",
+   "twin_of": "BD-SP-B06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M07",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "acheter_mais_setApprovalForAll",
+   "label": "malicious",
+   "twin_of": "BD-SP-B07",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M08",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_nft_contre_un_micro_usdc",
+   "label": "malicious",
+   "twin_of": "BD-SP-B08",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M09",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_offre_nft_contre_1_wei",
+   "label": "malicious",
+   "twin_of": "BD-SP-B09",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M10",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_collection_entiere_a_prix_derisoire",
+   "label": "malicious",
+   "twin_of": "BD-SP-B10",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M11",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_trois_nft_contre_presque_rien",
+   "label": "malicious",
+   "twin_of": "BD-SP-B11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M12",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_erc1155_a_prix_quasi_nul",
+   "label": "malicious",
+   "twin_of": "BD-SP-B12",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M13",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "offre_d_achat_bien_au_dessus_du_prix_dit",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M14",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "offre_d_achat_nft_livre_a_un_tiers",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M15",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "acheter_mais_setApprovalForAll",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M16",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_nft_contre_un_micro_usdc",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M17",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_offre_nft_contre_1_wei",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SP-M18",
+   "family": "seaport_prix_quasi_nul",
+   "sub": "ordre_collection_entiere_a_prix_derisoire",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « buy_nft », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "non dit : destinataire",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SW-B01",
+   "family": "swap_droit_illimite",
+   "sub": "approve_illimite_routeur",
+   "label": "benign",
+   "twin_of": "BD-SW-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B02",
+   "family": "swap_droit_illimite",
+   "sub": "approve_multiple_du_montant",
+   "label": "benign",
+   "twin_of": "BD-SW-M02",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B03",
+   "family": "swap_droit_illimite",
+   "sub": "approve_spender_inconnu",
+   "label": "benign",
+   "twin_of": "BD-SW-M03",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B04",
+   "family": "swap_droit_illimite",
+   "sub": "increaseAllowance_illimite",
+   "label": "benign",
+   "twin_of": "BD-SW-M04",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B05",
+   "family": "swap_droit_illimite",
+   "sub": "permit_2612_illimite",
+   "label": "benign",
+   "twin_of": "BD-SW-M05",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B06",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_single_illimite",
+   "label": "benign",
+   "twin_of": "BD-SW-M06",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B07",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_batch_jeton_en_plus",
+   "label": "benign",
+   "twin_of": "BD-SW-M07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B08",
+   "family": "swap_droit_illimite",
+   "sub": "batch_approve_illimite_cache",
+   "label": "benign",
+   "twin_of": "BD-SW-M08",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B09",
+   "family": "swap_droit_illimite",
+   "sub": "approve_illimite_routeur",
+   "label": "benign",
+   "twin_of": "BD-SW-M09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B10",
+   "family": "swap_droit_illimite",
+   "sub": "approve_multiple_du_montant",
+   "label": "benign",
+   "twin_of": "BD-SW-M10",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B11",
+   "family": "swap_droit_illimite",
+   "sub": "approve_spender_inconnu",
+   "label": "benign",
+   "twin_of": "BD-SW-M11",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B12",
+   "family": "swap_droit_illimite",
+   "sub": "increaseAllowance_illimite",
+   "label": "benign",
+   "twin_of": "BD-SW-M12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-B13",
+   "family": "swap_droit_illimite",
+   "sub": "permit_2612_illimite",
+   "label": "benign",
+   "twin_of": "BD-SW-M13",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M01",
+   "family": "swap_droit_illimite",
+   "sub": "approve_illimite_routeur",
+   "label": "malicious",
+   "twin_of": "BD-SW-B01",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M02",
+   "family": "swap_droit_illimite",
+   "sub": "approve_multiple_du_montant",
+   "label": "malicious",
+   "twin_of": "BD-SW-B02",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M03",
+   "family": "swap_droit_illimite",
+   "sub": "approve_spender_inconnu",
+   "label": "malicious",
+   "twin_of": "BD-SW-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SW-M04",
+   "family": "swap_droit_illimite",
+   "sub": "increaseAllowance_illimite",
+   "label": "malicious",
+   "twin_of": "BD-SW-B04",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M05",
+   "family": "swap_droit_illimite",
+   "sub": "permit_2612_illimite",
+   "label": "malicious",
+   "twin_of": "BD-SW-B05",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M06",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_single_illimite",
+   "label": "malicious",
+   "twin_of": "BD-SW-B06",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M07",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_batch_jeton_en_plus",
+   "label": "malicious",
+   "twin_of": "BD-SW-B07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton, montant",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton, montant",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M08",
+   "family": "swap_droit_illimite",
+   "sub": "batch_approve_illimite_cache",
+   "label": "malicious",
+   "twin_of": "BD-SW-B08",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SW-M09",
+   "family": "swap_droit_illimite",
+   "sub": "approve_illimite_routeur",
+   "label": "malicious",
+   "twin_of": "BD-SW-B09",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M10",
+   "family": "swap_droit_illimite",
+   "sub": "approve_multiple_du_montant",
+   "label": "malicious",
+   "twin_of": "BD-SW-B10",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M11",
+   "family": "swap_droit_illimite",
+   "sub": "approve_spender_inconnu",
+   "label": "malicious",
+   "twin_of": "BD-SW-B11",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "warn",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-SW-M12",
+   "family": "swap_droit_illimite",
+   "sub": "increaseAllowance_illimite",
+   "label": "malicious",
+   "twin_of": "BD-SW-B12",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M13",
+   "family": "swap_droit_illimite",
+   "sub": "permit_2612_illimite",
+   "label": "malicious",
+   "twin_of": "BD-SW-B13",
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M14",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_single_illimite",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M15",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_batch_jeton_en_plus",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton, montant",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton, montant",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SW-M16",
+   "family": "swap_droit_illimite",
+   "sub": "batch_approve_illimite_cache",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-SW-M17",
+   "family": "swap_droit_illimite",
+   "sub": "approve_illimite_routeur",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M18",
+   "family": "swap_droit_illimite",
+   "sub": "approve_multiple_du_montant",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "warn",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau warn)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-SW-M19",
+   "family": "swap_droit_illimite",
+   "sub": "approve_spender_inconnu",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-TK-B01",
+   "family": "jeton_different",
+   "sub": "transfer_sur_un_autre_jeton",
+   "label": "benign",
+   "twin_of": "BD-TK-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B02",
+   "family": "jeton_different",
+   "sub": "swap_jeton_de_sortie_different",
+   "label": "benign",
+   "twin_of": "BD-TK-M02",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B03",
+   "family": "jeton_different",
+   "sub": "swap_jeton_depense_different",
+   "label": "benign",
+   "twin_of": "BD-TK-M03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "acte lu « approve », demande de type « swap »",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-TK-B04",
+   "family": "jeton_different",
+   "sub": "jeton_sosie_meme_symbole",
+   "label": "benign",
+   "twin_of": "BD-TK-M04",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B05",
+   "family": "jeton_different",
+   "sub": "approve_sur_un_autre_jeton",
+   "label": "benign",
+   "twin_of": "BD-TK-M05",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (below_threshold)",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B06",
+   "family": "jeton_different",
+   "sub": "exactInputSingle_sortie_differente",
+   "label": "benign",
+   "twin_of": "BD-TK-M06",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B07",
+   "family": "jeton_different",
+   "sub": "permit_sur_un_autre_jeton",
+   "label": "benign",
+   "twin_of": "BD-TK-M07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B08",
+   "family": "jeton_different",
+   "sub": "permit2_sur_un_autre_jeton",
+   "label": "benign",
+   "twin_of": "BD-TK-M08",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B09",
+   "family": "jeton_different",
+   "sub": "transfer_sur_un_autre_jeton",
+   "label": "benign",
+   "twin_of": "BD-TK-M09",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B10",
+   "family": "jeton_different",
+   "sub": "swap_jeton_de_sortie_different",
+   "label": "benign",
+   "twin_of": "BD-TK-M10",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B11",
+   "family": "jeton_different",
+   "sub": "swap_jeton_depense_different",
+   "label": "benign",
+   "twin_of": "BD-TK-M11",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (no_match)",
+    "kind": null
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B12",
+   "family": "jeton_different",
+   "sub": "jeton_sosie_meme_symbole",
+   "label": "benign",
+   "twin_of": "BD-TK-M12",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-B13",
+   "family": "jeton_different",
+   "sub": "approve_sur_un_autre_jeton",
+   "label": "benign",
+   "twin_of": "BD-TK-M13",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "non dit : protocole",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "phrase sans type compris (below_threshold)",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M01",
+   "family": "jeton_different",
+   "sub": "transfer_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": "BD-TK-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M02",
+   "family": "jeton_different",
+   "sub": "swap_jeton_de_sortie_different",
+   "label": "malicious",
+   "twin_of": "BD-TK-B02",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M03",
+   "family": "jeton_different",
+   "sub": "swap_jeton_depense_different",
+   "label": "malicious",
+   "twin_of": "BD-TK-B03",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-TK-M04",
+   "family": "jeton_different",
+   "sub": "jeton_sosie_meme_symbole",
+   "label": "malicious",
+   "twin_of": "BD-TK-B04",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-TK-M05",
+   "family": "jeton_different",
+   "sub": "approve_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": "BD-TK-B05",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton, montant",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "détails extraits contredisent la demande",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M06",
+   "family": "jeton_different",
+   "sub": "exactInputSingle_sortie_differente",
+   "label": "malicious",
+   "twin_of": "BD-TK-B06",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-TK-M07",
+   "family": "jeton_different",
+   "sub": "permit_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": "BD-TK-B07",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M08",
+   "family": "jeton_different",
+   "sub": "permit2_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": "BD-TK-B08",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M09",
+   "family": "jeton_different",
+   "sub": "transfer_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": "BD-TK-B09",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-TK-M10",
+   "family": "jeton_different",
+   "sub": "swap_jeton_de_sortie_different",
+   "label": "malicious",
+   "twin_of": "BD-TK-B10",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M11",
+   "family": "jeton_different",
+   "sub": "swap_jeton_depense_different",
+   "label": "malicious",
+   "twin_of": "BD-TK-B11",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "détails extraits contredisent la demande",
+    "kind": null
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M12",
+   "family": "jeton_different",
+   "sub": "jeton_sosie_meme_symbole",
+   "label": "malicious",
+   "twin_of": "BD-TK-B12",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "BD-TK-M13",
+   "family": "jeton_different",
+   "sub": "approve_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": "BD-TK-B13",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton, montant",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "détails extraits contredisent la demande",
+    "kind": null
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M14",
+   "family": "jeton_different",
+   "sub": "exactInputSingle_sortie_differente",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "BD-TK-M15",
+   "family": "jeton_different",
+   "sub": "permit_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M16",
+   "family": "jeton_different",
+   "sub": "permit2_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "contredit par le code : jeton",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M17",
+   "family": "jeton_different",
+   "sub": "transfer_sur_un_autre_jeton",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M18",
+   "family": "jeton_different",
+   "sub": "swap_jeton_de_sortie_different",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "BD-TK-M19",
+   "family": "jeton_different",
+   "sub": "swap_jeton_depense_different",
+   "label": "malicious",
+   "twin_of": null,
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  }
+ ]
+}

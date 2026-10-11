@@ -1,0 +1,9 @@
+{
+ "ouvert": "2026-10-11T07:10:52.843Z",
+ "pid": 20016,
+ "essai": false,
+ "sha256_cas": "ab3dcab945af0a75fab45f05138a8d608886dbcd4d945ab5a47d3c627ee79fd2",
+ "sha256_moteur": "a5b19d8375014f2859e0372b6b6f6f90ba677b74233ab2720aeb2cae16732dfe",
+ "sha256_lanceur": "901cb7c1a93a03a11cdb6c5d264d6466c9434152d0cba5cd26311c6f5310acf9",
+ "git_head": "74203dae38e08bcefab17b8fb6308893160a6c1c"
+}
