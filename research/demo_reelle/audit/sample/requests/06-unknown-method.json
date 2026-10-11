@@ -1,0 +1,7 @@
+{
+  "origin": "https://remboursement-avax-support.example",
+  "chainId": "0xa869",
+  "from": "0x8bcea1b8558ac307b50ad720045c35783c9efb6c",
+  "method": "wallet_foo",
+  "params": []
+}

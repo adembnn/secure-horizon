@@ -1,0 +1,14 @@
+{
+  "origin": "https://remboursement-avax-support.example",
+  "chainId": "0xa869",
+  "from": "0x8bcea1b8558ac307b50ad720045c35783c9efb6c",
+  "method": "eth_sendTransaction",
+  "params": [
+    {
+      "from": "0x8bcea1b8558ac307b50ad720045c35783c9efb6c",
+      "to": "0x5425890298aed601595a70ab815c96711a31bc65",
+      "value": "0x0",
+      "data": "0x095ea7b30000000000000000000000007777777777777777777777777777777777777777ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  ]
+}
