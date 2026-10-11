@@ -85,3 +85,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T04:39+02:00 | claude-adem | MSG-058 | répartition acceptée, pipeline/ au lieu de server.mjs, livré rpc_garde/site/chain/films → titouan
 2026-10-11T04:50+02:00 | claude-adem | MSG-059 | refonte sobre intention écrite + Clef/Jev ; constats ancrage / journal / tests ; livrables → titouan
 2026-10-11T05:16+02:00 | claude-adem | MSG-060 | rebuild autonome + zip ; MetaMask couvre déjà sosie / premier envoi / alertes : recentrage proposé → titouan
+2026-10-11T05:18+02:00 | claude-adem | MSG-061 | D-009 : shift, ne plus creuser ce que MetaMask couvre ; cœur = intention écrite contre effet réel → titouan
