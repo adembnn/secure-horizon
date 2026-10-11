@@ -1,8 +1,10 @@
 // build_standalone.mjs - assemble extension_standalone/extension/ de facon reproductible (aucune date, aucun hasard : memes entrees => memes octets).
-// Entrees (LECTURE SEULE) : ../extension (bridge.js, inject.js), ../engine/src/*.mjs, ../engine/vendor/compare.ts, ../run/policy.mjs, ../../U_textes_utilisateur.json
-// Entrees propres : src/ (background.js, sentinelle_core.js, manifest.json, options.*)
+// Entrees (LECTURE SEULE) : ../extension (bridge.js, inject.js, gatekeeper.js, hold_core.js, window.*, options.js), ../ui_holdup/verdict.*, ../engine/src/*.mjs, ../engine/vendor/compare.ts, ../run/policy.mjs, ../../U_textes_utilisateur.json
+// Entrees propres : src/ (background.js, sentinelle_core.js, manifest.json, options.html)
 // Sortie : extension/ (le dossier a charger dans chrome://extensions) + extension/BUILD_INFO.json (hachages)
 // Usage : node build_standalone.mjs        Node >= 23.2 (module.stripTypeScriptTypes). Aucun paquet, aucun reseau.
+//         node build_standalone.mjs --test-hook   ecrit extension_test/ (JAMAIS le dossier livre) : meme code + un crochet de reponse automatique
+//         pour le banc de test, lu dans le service worker seulement (globalThis.__holdupTestHook), qu'aucune page ni aucun reglage ne peut poser.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { stripTypeScriptTypes } from 'node:module';
@@ -11,7 +13,8 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');                 // T_banc_e2e
-const OUT = join(HERE, 'extension');
+const TEST_HOOK = process.argv.includes('--test-hook');
+const OUT = join(HERE, TEST_HOOK ? 'extension_test' : 'extension');
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const rd = (p) => readFileSync(p);
 const written = [];
@@ -34,12 +37,19 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
-for (const f of ['bridge.js', 'inject.js']) put(f, src(join(ROOT, 'extension', f)));
+for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
+// 1 bis) surface de verdict R3 (ui_holdup), copiee telle quelle : contrat dans ui_holdup/UI_CONTRAT.md
+for (const f of ['verdict.html', 'verdict.css', 'verdict.js']) put('ui/' + f, src(join(ROOT, 'ui_holdup', f)));
 // 2) fichiers propres a la version autonome
 put('manifest.json', src(join(HERE, 'src', 'manifest.json')));
-put('background.js', src(join(HERE, 'src', 'background.js')));
+{
+  // Le crochet de test n'existe que dans le build --test-hook. Dans le build livre le marqueur est retire : createGatekeeper ne recoit que le moteur.
+  const MARK = '/*@TEST_HOOK@*/';
+  const bg = src(join(HERE, 'src', 'background.js')).toString('utf8');
+  if (bg.split(MARK).length !== 2) throw new Error('marqueur de crochet de test attendu une seule fois dans src/background.js');
+  put('background.js', bg.replace(MARK, TEST_HOOK ? ', testHook: (h) => { if (typeof globalThis.__holdupTestHook === "function") globalThis.__holdupTestHook(h); }' : ''));
+}
 put('options.html', src(join(HERE, 'src', 'options.html')));
-put('options.js', src(join(HERE, 'src', 'options.js')));
 put('engine/sentinelle_core.js', src(join(HERE, 'src', 'sentinelle_core.js')));
 
 // 3) moteur d'effets (JavaScript pur). rpc.mjs (reseau) et audit_selectors.mjs (outil Node) sont EXCLUS.
@@ -71,6 +81,6 @@ put('engine/policy.js', rewriteImports(src(join(ROOT, 'run', 'policy.mjs')).toSt
 // 7) trace du build (sans date : reproductible)
 written.sort((a, b) => a.file.localeCompare(b.file));
 const total = written.reduce((n, f) => n + f.bytes, 0);
-const info = { build: 'sentinelle-standalone', sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
+const info = { build: TEST_HOOK ? 'holdup-standalone-TEST-HOOK (ne pas livrer)' : 'holdup-standalone', sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
 writeFileSync(join(OUT, 'BUILD_INFO.json'), JSON.stringify(info, null, 1));
-console.log(`extension_standalone/extension : ${written.length} fichiers, ${total} octets, arbre ${info.tree_sha256.slice(0, 16)}`);
+console.log(`extension_standalone/${TEST_HOOK ? 'extension_test' : 'extension'} : ${written.length} fichiers, ${total} octets, arbre ${info.tree_sha256.slice(0, 16)}`);

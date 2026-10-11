@@ -99,19 +99,19 @@
   },
   "sans_intention": {
    "counts": {
-    "attrape_critical": 187,
-    "attrape_warn": 59,
+    "attrape_critical": 191,
+    "attrape_warn": 55,
     "rate": 6,
     "inconnu": 0,
     "fa_critical": 0,
     "fa_warn_exces": 5,
     "fa_warn_toleree": 5,
     "ok": 80,
-    "ambigu_ok": 6,
-    "ambigu_warn": 11,
+    "ambigu_ok": 3,
+    "ambigu_warn": 14,
     "ambigu_critical": 2,
-    "fraude_conforme_passe": 11,
-    "fraude_conforme_alerte": 13,
+    "fraude_conforme_passe": 14,
+    "fraude_conforme_alerte": 10,
     "n_malveillant": 252,
     "n_benin": 90,
     "n_ambigu": 19,
@@ -132,11 +132,11 @@
      "hi": 0.989
     },
     "rappel_critical": {
-     "k": 187,
+     "k": 191,
      "n": 252,
-     "rate": 0.7421,
-     "lo": 0.6847,
-     "hi": 0.7922
+     "rate": 0.7579,
+     "lo": 0.7014,
+     "hi": 0.8067
     },
     "rappel_hors_inconnu": {
      "k": 246,
@@ -174,30 +174,30 @@
      "hi": 0.1235
     },
     "fraude_conforme_alerte": {
-     "k": 13,
+     "k": 10,
      "n": 24,
-     "rate": 0.5417,
-     "lo": 0.3507,
-     "hi": 0.7211
+     "rate": 0.4167,
+     "lo": 0.2447,
+     "hi": 0.6117
     },
     "fraude_conforme_passe": {
-     "k": 11,
+     "k": 14,
      "n": 24,
-     "rate": 0.4583,
-     "lo": 0.2789,
-     "hi": 0.6493
+     "rate": 0.5833,
+     "lo": 0.3883,
+     "hi": 0.7553
     },
     "ambigu_distribution": {
-     "ok": 6,
-     "warn": 11,
+     "ok": 3,
+     "warn": 14,
      "critical": 2
     }
    }
   },
   "intention_honnete": {
    "counts": {
-    "attrape_critical": 187,
-    "attrape_warn": 62,
+    "attrape_critical": 191,
+    "attrape_warn": 58,
     "rate": 3,
     "inconnu": 0,
     "fa_critical": 0,
@@ -207,8 +207,8 @@
     "ambigu_ok": 3,
     "ambigu_warn": 14,
     "ambigu_critical": 2,
-    "fraude_conforme_passe": 3,
-    "fraude_conforme_alerte": 21,
+    "fraude_conforme_passe": 6,
+    "fraude_conforme_alerte": 18,
     "n_malveillant": 252,
     "n_benin": 90,
     "n_ambigu": 19,
@@ -229,11 +229,11 @@
      "hi": 0.9959
     },
     "rappel_critical": {
-     "k": 187,
+     "k": 191,
      "n": 252,
-     "rate": 0.7421,
-     "lo": 0.6847,
-     "hi": 0.7922
+     "rate": 0.7579,
+     "lo": 0.7014,
+     "hi": 0.8067
     },
     "rappel_hors_inconnu": {
      "k": 249,
@@ -271,18 +271,18 @@
      "hi": 0.1235
     },
     "fraude_conforme_alerte": {
-     "k": 21,
+     "k": 18,
      "n": 24,
-     "rate": 0.875,
-     "lo": 0.69,
-     "hi": 0.9566
+     "rate": 0.75,
+     "lo": 0.551,
+     "hi": 0.88
     },
     "fraude_conforme_passe": {
-     "k": 3,
+     "k": 6,
      "n": 24,
-     "rate": 0.125,
-     "lo": 0.0434,
-     "hi": 0.31
+     "rate": 0.25,
+     "lo": 0.12,
+     "hi": 0.449
     },
     "ambigu_distribution": {
      "ok": 3,
@@ -304,8 +304,8 @@
     "ambigu_ok": 3,
     "ambigu_warn": 14,
     "ambigu_critical": 2,
-    "fraude_conforme_passe": 3,
-    "fraude_conforme_alerte": 21,
+    "fraude_conforme_passe": 6,
+    "fraude_conforme_alerte": 18,
     "n_malveillant": 252,
     "n_benin": 90,
     "n_ambigu": 19,
@@ -368,18 +368,18 @@
      "hi": 0.1235
     },
     "fraude_conforme_alerte": {
-     "k": 21,
+     "k": 18,
      "n": 24,
-     "rate": 0.875,
-     "lo": 0.69,
-     "hi": 0.9566
+     "rate": 0.75,
+     "lo": 0.551,
+     "hi": 0.88
     },
     "fraude_conforme_passe": {
-     "k": 3,
+     "k": 6,
      "n": 24,
-     "rate": 0.125,
-     "lo": 0.0434,
-     "hi": 0.31
+     "rate": 0.25,
+     "lo": 0.12,
+     "hi": 0.449
     },
     "ambigu_distribution": {
      "ok": 3,
@@ -774,12 +774,14 @@
    "category": "6_contrepartie",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "ok",
+    "sans_intention": "warn",
     "intention_honnete": "warn",
     "intention_mensongere": "warn",
     "_adem_catalogue": "warn"
    },
-   "floorCodes": [],
+   "floorCodes": [
+    "lookalike_weak"
+   ],
    "ademCodes": [
     "new_contract"
    ],
@@ -795,12 +797,14 @@
    "category": "6_contrepartie",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "ok",
+    "sans_intention": "warn",
     "intention_honnete": "warn",
     "intention_mensongere": "warn",
     "_adem_catalogue": "warn"
    },
-   "floorCodes": [],
+   "floorCodes": [
+    "lookalike_weak"
+   ],
    "ademCodes": [
     "new_contract"
    ],
@@ -816,12 +820,14 @@
    "category": "6_contrepartie",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "ok",
+    "sans_intention": "warn",
     "intention_honnete": "warn",
     "intention_mensongere": "warn",
     "_adem_catalogue": "warn"
    },
-   "floorCodes": [],
+   "floorCodes": [
+    "lookalike_weak"
+   ],
    "ademCodes": [
     "new_contract"
    ],
@@ -2395,7 +2401,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F16:droit_illimite_protocole_connu"
+   ]
   },
   {
    "id": "cow_uniswapx-010",
@@ -2416,7 +2424,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F16:droit_illimite_protocole_connu"
+   ]
   },
   {
    "id": "cow_uniswapx-011",
@@ -2437,7 +2447,9 @@
    ],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F16:droit_illimite_protocole_connu"
+   ]
   },
   {
    "id": "cow_uniswapx-013",
@@ -2532,7 +2544,9 @@
    "floorCodes": [],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F16:droit_illimite_protocole_connu"
+   ]
   },
   {
    "id": "cow_uniswapx-018",
@@ -2551,7 +2565,9 @@
    "floorCodes": [],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F16:droit_illimite_protocole_connu"
+   ]
   },
   {
    "id": "cow_uniswapx-019",
@@ -2570,7 +2586,9 @@
    "floorCodes": [],
    "ademCodes": [],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F16:droit_illimite_protocole_connu"
+   ]
   },
   {
    "id": "dai_permit-001",
@@ -6871,9 +6889,9 @@
    "category": "11_parcours_conformes",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
     "_adem_catalogue": "warn"
    },
    "floorCodes": [
@@ -6883,7 +6901,10 @@
     "high_balance_share"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F15:destination_routiniere",
+    "F15:destination_routiniere"
+   ]
   },
   {
    "id": "pig_butchering-006",
@@ -6894,9 +6915,9 @@
    "category": "11_parcours_conformes",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
     "_adem_catalogue": "warn"
    },
    "floorCodes": [
@@ -6906,7 +6927,10 @@
     "high_balance_share"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F15:destination_routiniere",
+    "F15:destination_routiniere"
+   ]
   },
   {
    "id": "pig_butchering-007",
@@ -6957,9 +6981,9 @@
    "category": "11_parcours_conformes",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
     "_adem_catalogue": "warn"
    },
    "floorCodes": [
@@ -6969,7 +6993,10 @@
     "high_balance_share"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F15:destination_routiniere",
+    "F15:destination_routiniere"
+   ]
   },
   {
    "id": "presse_papiers-002",
@@ -7490,12 +7517,13 @@
    "category": "2_signatures_hors_chaine",
    "levels": {
     "reference_simulation": "ok",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
    "floorCodes": [
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [
@@ -7520,6 +7548,7 @@
    },
    "floorCodes": [
     "seaport_zero_consideration",
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [
@@ -7537,12 +7566,13 @@
    "category": "2_signatures_hors_chaine",
    "levels": {
     "reference_simulation": "ok",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
    "floorCodes": [
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [
@@ -7567,6 +7597,7 @@
    },
    "floorCodes": [
     "seaport_zero_consideration",
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [
@@ -7584,12 +7615,13 @@
    "category": "2_signatures_hors_chaine",
    "levels": {
     "reference_simulation": "ok",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
    "floorCodes": [
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [
@@ -7614,6 +7646,7 @@
    },
    "floorCodes": [
     "seaport_zero_consideration",
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [
@@ -7631,12 +7664,13 @@
    "category": "2_signatures_hors_chaine",
    "levels": {
     "reference_simulation": "ok",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
    "floorCodes": [
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [
@@ -7661,6 +7695,7 @@
    },
    "floorCodes": [
     "seaport_zero_consideration",
+    "order_proceeds_negligible",
     "far_expiry"
    ],
    "ademCodes": [

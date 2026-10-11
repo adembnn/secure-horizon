@@ -3,6 +3,7 @@ import { isOn } from './fixes.js';
 import { parseSig, decodeParams } from './abi.js';
 import { lc } from './util.js';
 import { decodeLibraryCall } from './protocols_extra.js';
+import { matchLens } from './rules.js';
 import { OPACITY_CODES } from './engine.js';
 
 const lvl = (fl) => (fl.some((f) => f.severity === 'critical') ? 'critical' : fl.some((f) => f.severity === 'warn') ? 'warn' : 'ok');
@@ -184,6 +185,107 @@ function libraryCalls(eff, request, ctx, flags) {
   recompute(eff);
 }
 
+// ---- F18 : envoi natif nu (sans calldata) vers un jeton du registre de référence : dépôt dans un jeton enveloppé (receive/fallback), le jeton de reçu est crédité à l'expéditeur.
+// Le comparateur déduirait « rien reçu en échange » alors que le contrat crédite un solde que la transaction ne montre pas.
+function wrapDeposit(eff, request, ctx, flags) {
+  if (request.method !== 'eth_sendTransaction') return;
+  const tx = request.params && request.params[0]; if (!tx || !tx.to) return;
+  const data = String(tx.data ?? tx.input ?? '0x'); if (data !== '0x' && data !== '') return;
+  if (eff.opaque || eff.approvals.length || (eff.controlChange || []).length || eff.delegation || eff.service) return;
+  if (!registryAddrs(ctx).includes(lc(tx.to))) return;
+  eff.service = { name: 'wrap_deposit', trusted: true };
+  flags.push({ code: 'service_call_decoded', severity: 'info', detail: 'envoi natif à un jeton du registre : dépôt, reçu crédité à l expéditeur' });
+}
+
+// ---- Adresse sosie (USENIX Sec. 2025 : préfixe >= 3 ET suffixe >= 4 caractères hexa communs avec une adresse connue de l'utilisateur, sans être identique).
+// Le comparateur du dépôt n'appelle jamais sa fonction 4+4 ; le moteur de base a déjà la règle 3+4, ce bloc la complète :
+//  F21 : le fournisseur de contexte (surveillance du presse-papiers, indexeur) PEUT signaler qu'une contrepartie ressemble à une adresse connue (counterparty_facts[a].lookalikeOf) : critical.
+//  F22 : le sosie est celui qui n'est PAS la vraie. Si la destination a déjà été payée par l'utilisateur (sortie dans l'historique) et que l'adresse « dont elle serait le sosie » n'a jamais
+//        reçu de paiement (poussière entrante seulement), c'est la destination qui est la vraie ; l'alerte est retirée (elle vise le sosie qui traîne dans l'historique, pas la destination).
+//  F23 : score continu : préfixe >= 2 ET suffixe >= 3 (sans atteindre 3+4) avec une adresse déjà payée ou un contact, pour une destination jamais payée : warn (critical reste réservé à 3+4).
+const isAddrS = (a) => typeof a === 'string' && /^0x[0-9a-fA-F]{40}$/.test(a);
+const outHist = (ctx) => new Set((ctx.history || []).filter((h) => h.direction === 'out').map((h) => lc(h.address)));
+function lookalikeRules(eff, ctx, flags) {
+  const paid = outHist(ctx);
+  const self = lc(ctx.from);
+  const contacts = new Set((ctx.contacts || []).map((c) => lc(c.address)));
+  for (const cp of eff.counterparties || []) {
+    const D = cp.address;
+    if (isOn('F21')) {
+      const la = ctx._facts && ctx._facts[D] && ctx._facts[D].lookalikeOf;
+      if (isAddrS(la) && lc(la) !== D) { if (!cp.lookalikeOf) cp.lookalikeOf = lc(la); flags.push({ code: 'lookalike_reported', severity: 'critical', detail: `${D} est signalée comme sosie de ${lc(la)} par le fournisseur de contexte`, address: D, lookalikeOf: lc(la) }); }
+    }
+    if (isOn('F22') && cp.lookalikeOf && paid.has(D) && !paid.has(lc(cp.lookalikeOf)) && lc(cp.lookalikeOf) !== self) {
+      eff.risk_flags = eff.risk_flags.filter((f) => !((f.code === 'address_poisoning' || f.code === 'lookalike_address') && f.address === D));
+      delete cp.lookalikeOf; cp.realAddress = true;
+    }
+    if (isOn('F23') && !cp.lookalikeOf && !paid.has(D) && !contacts.has(D) && D !== self && !(ctx.knownSpenders || []).includes(D)) {
+      for (const A of new Set([...paid, ...contacts, self])) {
+        if (!A || A === D) continue;
+        const m = matchLens(D, A);
+        if (m.prefix >= 2 && m.suffix >= 3) { flags.push({ code: 'lookalike_weak', severity: 'warn', detail: `${D} partage ${m.prefix} caractères de début et ${m.suffix} de fin avec ${A}`, address: D }); break; }
+      }
+    }
+  }
+}
+
+// ---- Signatures lues par FORME et non par nom (un attaquant renomme le primaryType ; le moteur de base ne reconnaît que les noms canoniques).
+// F24 : un message typé que le moteur n'a pas su classer (kind inconnu) mais qui contient un dépensier (spender / operator / usr) et un montant (value / amount / wad / allowed / details[] / permitted[]) accorde un
+//       droit de dépense : si le dépensier n'est pas un protocole connu et que le montant est « plus que quiconque ne possède » (>= 2^128 ou >= 1e9 unités entières) => critical ; un retrait (permitted[]) illimité => critical
+//       quel que soit le dépensier. Le propriétaire déclaré n'est pas pris en compte (une page qui demande un droit au nom d'un autre reste une demande de droit).
+// F25 : personal_sign d'une charge binaire (non lisible) qui a la FORME d'un appel de contrat (jusqu'à 8 octets de préfixe, un sélecteur de 4 octets, puis un premier argument adresse aligné sur 32 octets)
+//       n'est pas un message mais une transaction déguisée => critical. Aucune liste de sélecteurs : la forme seule.
+// F26 : personal_sign d'un texte lisible (hors connexion SIWE) qui dit accorder / autoriser / transférer / migrer des actifs => critical (repli par mots-clés, sans modèle de langue ; limites assumées).
+const TWO128 = 1n << 128n;
+const bigS = (v) => { try { return BigInt(v); } catch { return undefined; } };
+function effUnlimited(ctx, token, amount) {
+  const a = bigS(amount); if (a === undefined) return false;
+  return a >= TWO128 || a >= 10n ** BigInt(9 + decOf(ctx, token));
+}
+function shapeGrants(td) {
+  const m = td && td.message; if (!m || typeof m !== 'object') return [];
+  const spender = [m.spender, m.operator, m.usr].find((x) => isAddrS(x)); if (!spender) return [];
+  const dom = td.domain && td.domain.verifyingContract;
+  const list = (x) => (Array.isArray(x) ? x : x && typeof x === 'object' ? [x] : []);
+  const out = [];
+  for (const d of list(m.details)) out.push({ mode: 'allowance', token: d.token, amount: d.amount, spender });
+  for (const d of list(m.permitted)) out.push({ mode: 'transfer', token: d.token, amount: d.amount, spender });
+  if (!out.length) {
+    if (m.allowed === true || m.allowed === 'true') out.push({ mode: 'allowance', token: dom, amount: (1n << 256n) - 1n, spender });
+    else for (const k of ['value', 'amount', 'wad']) if (m[k] !== undefined && typeof m[k] !== 'object') { out.push({ mode: 'allowance', token: dom, amount: m[k], spender }); break; }
+  }
+  return out;
+}
+function signatureShapes(eff, request, ctx, flags) {
+  if (request.method === 'eth_signTypedData_v4' && isOn('F24')) {
+    if (!(eff.signature && eff.signature.kind === 'unknown')) return;
+    let td; try { td = typeof request.params[1] === 'string' ? JSON.parse(request.params[1]) : request.params[1]; } catch { return; }
+    for (const g of shapeGrants(td)) {
+      const unl = effUnlimited(ctx, g.token, g.amount); const known = (ctx.knownSpenders || []).includes(lc(g.spender));
+      if (g.mode === 'transfer' && unl) { flags.push({ code: 'signed_transfer_unlimited', severity: 'critical', detail: `signature de retrait illimité de ${lc(g.token)} par ${lc(g.spender)} (type renommé : lu par sa forme)` }); return; }
+      if (!known && isOn('F27')) eff.shapeGrant = { spender: lc(g.spender), token: g.token ? lc(g.token) : undefined, unlimited: unl };
+      if (!known && unl) { flags.push({ code: 'signed_right_unlimited_unknown', severity: 'critical', detail: `droit de dépense illimité sur ${lc(g.token)} pour ${lc(g.spender)} hors protocoles connus (type renommé : lu par sa forme)` }); return; }
+    }
+  } else if (request.method === 'personal_sign') {
+    const hex = request.params && request.params[0];
+    if (typeof hex !== 'string' || !/^0x([0-9a-fA-F]{2})*$/.test(hex)) return;
+    const b = Buffer.from(hex.slice(2), 'hex'); if (!b.length) return;
+    const txt = b.toString('utf8');
+    const readable = !txt.includes('�') && !/[ --]/.test(txt);
+    if (!readable && isOn('F25')) {
+      for (let o = 0; o <= 8; o++) {
+        if (b.length < o + 4 + 32 + 20) break;
+        if (!b.subarray(o + 4, o + 16).every((x) => x === 0)) continue;
+        if (b.subarray(o + 16, o + 36).filter((x) => x !== 0).length >= 12) { flags.push({ code: 'signed_calldata', severity: 'critical', detail: 'le « message » à signer a la forme d un appel de contrat (sélecteur + adresse alignée), pas d un texte' }); return; }
+      }
+    } else if (readable && isOn('F26')) {
+      const GRANT = /(authori[sz]w*|grantw*|approvw*|permissionw*|alloww*|migratw*|transferw*|autorisw*|approuvw*|accordw*|transf[eè]rw*)/i;
+      const ASSET = /(tokens?|nfts?|assets?|balances?|funds?|spending|jetons?|soldes?|fonds|avoirs?|d[ée]pense)/i;
+      if (!/sign in with your ethereum account/i.test(txt) && GRANT.test(txt) && ASSET.test(txt)) flags.push({ code: 'signed_text_grants_assets', severity: 'critical', detail: 'le texte à signer dit accorder ou déplacer des actifs (repli par mots-clés)' });
+    }
+  }
+}
+
 export function applyExtraRules(eff, request, ctx) {
   const flags = [];
   if (isOn('F11')) marketOrderProceeds(request, ctx, flags);
@@ -193,7 +295,11 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F7')) signedOrder(request, ctx, flags);
   if (isOn('F5')) serviceCall(eff, request, ctx);
   if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
+  if (isOn('F18')) wrapDeposit(eff, request, ctx, flags);
+  signatureShapes(eff, request, ctx, flags);
+  if (isOn('F21') || isOn('F22') || isOn('F23')) lookalikeRules(eff, ctx, flags);
   addFlags(eff, flags);
+  if (isOn('F22')) recompute(eff);
   return eff;
 }
 

@@ -8,10 +8,10 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "4fe67532b56df830"
+   "detail": "84b55ed92942d270"
   },
   {
-   "name": "le service worker enregistre son ecouteur onMessage",
+   "name": "le service worker enregistre son ecouteur onMessage (demande inconnue => unknown, lu comme un refus)",
    "pass": true,
    "detail": ""
   },
@@ -26,14 +26,24 @@
    "detail": ""
   },
   {
-   "name": "chaque requete surveillee ouvre la fenetre et n est jamais transmise sans geste",
+   "name": "friction par niveau : attention = lire, danger et non verifie = phrase a retaper + delai, manipulation = retenue",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "confirmation explicite => transmis",
+   "name": "chaque requete surveillee ouvre la fenetre Hold up separee (popup au premier plan) et n est jamais transmise sans geste",
    "pass": true,
    "detail": ""
+  },
+  {
+   "name": "danger : phrase retapee mais delai non ecoule => pas encore transmis",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "confirmation explicite apres la friction => transmis",
+   "pass": true,
+   "detail": "[\"danger\",\"attente\",{\"type\":\"wait\",\"seconds\":29},\"allow\",null]"
   },
   {
    "name": "annulation => refuse",
@@ -41,7 +51,12 @@
    "detail": ""
   },
   {
-   "name": "fenetre indisponible => refuse (mode ferme)",
+   "name": "fenetre fermee => refuse",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fenetre impossible => repli dans la page, journalise, toujours retenu (mode ferme)",
    "pass": true,
    "detail": ""
   },
@@ -76,6 +91,41 @@
    "detail": "critical"
   },
   {
+   "name": "chaine 31337 : envoi natif juge et libelle en AVAX",
+   "pass": true,
+   "detail": "J'envoie à l'adresse que j'ai choisie. Cette opération envoie 1 AVAX à 0xb2b2…b2b2, une adresse nouvelle. Un envoi vers une mauvaise adresse ne peut pas être ré"
+  },
+  {
+   "name": "chaine 31337 : approve illimite vers un inconnu => critical",
+   "pass": true,
+   "detail": "critical"
+  },
+  {
+   "name": "chaine 43114 : envoi natif juge et libelle en AVAX",
+   "pass": true,
+   "detail": "J'envoie à l'adresse que j'ai choisie. Cette opération envoie 1 AVAX à 0xb2b2…b2b2, une adresse nouvelle. Un envoi vers une mauvaise adresse ne peut pas être ré"
+  },
+  {
+   "name": "chaine 43114 : approve illimite vers un inconnu => critical",
+   "pass": true,
+   "detail": "critical"
+  },
+  {
+   "name": "chaine 43113 : envoi natif juge et libelle en AVAX",
+   "pass": true,
+   "detail": "J'envoie à l'adresse que j'ai choisie. Cette opération envoie 1 AVAX à 0xb2b2…b2b2, une adresse nouvelle. Un envoi vers une mauvaise adresse ne peut pas être ré"
+  },
+  {
+   "name": "chaine 43113 : approve illimite vers un inconnu => critical",
+   "pass": true,
+   "detail": "critical"
+  },
+  {
+   "name": "jetons : ceux du contexte local sont nommes sur leur chaine seulement (31337), entrees invalides ecartees",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "voie de reference run_loop.mjs --dry executee",
    "pass": true,
    "detail": ""
@@ -86,12 +136,27 @@
    "detail": ""
   },
   {
-   "name": "EQUIVALENCE PUBLIC (executables) : 402/402 verdicts identiques (100 %) sur 134 cas x 3 bras",
+   "name": "bloc PRESENTATION identique octet pour octet dans server.mjs et src/sentinelle_core.js",
+   "pass": true,
+   "detail": "17918 / 17918 caracteres"
+  },
+  {
+   "name": "server/server.mjs se charge (moteur de reference)",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "E) sans contexte reseau : aucun 'ok' sur 519 cas reels du banc (DEV + PUBLIC)",
+   "name": "EQUIVALENCE SERVEUR/AUTONOME requetes types : 132/132 verdicts complets identiques (33 requetes x 4 variantes)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "EQUIVALENCE SERVEUR/AUTONOME DEV : 1540/1540 verdicts complets identiques (385 requetes x 4 variantes)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "E) sans contexte reseau : aucun 'ok' sur 385 cas reels du banc (DEV + PUBLIC)",
    "pass": true,
    "detail": "0"
   },
@@ -101,219 +166,286 @@
    "detail": "0"
   },
   {
-   "name": "E) 4 lignes de texte clair non vides sur 519 verdicts",
+   "name": "E) 4 lignes de texte clair non vides sur 385 verdicts",
    "pass": true,
    "detail": "0"
+  },
+  {
+   "name": "tests unitaires rejoues sur le dossier construit : 41 reussis, 0 en echec",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "surface de verdict identique a ui_holdup dans les deux extensions",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "le crochet de test n existe que dans le build --test-hook (dossier extension_test), le dossier livre est inchange",
+   "pass": true,
+   "detail": ""
   }
  ],
  "notes": [
-  "Attentes de detection non satisfaites parmi les 35 requetes types : aucune"
+  "Attentes de detection non satisfaites parmi les 35 requetes types : aucune",
+  "attacks_public/PUBLIC.jsonl absent : equivalence PUBLIC non executee"
  ],
- "tree_sha256": "4fe67532b56df830042d175adcb4782573103e2e33d2d701d14efc9d8438765c",
+ "tree_sha256": "84b55ed92942d270f5480ba2b983619823941ccac62e77fbc4763bbc438b3d29",
  "requests": [
   {
    "name": "approve illimite USDC vers un inconnu",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 6.08,
+   "ms": 2.14,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "approve limite 100 USDC vers un inconnu",
    "niveau": "warn",
    "level": "attention",
    "fiche": "F01",
-   "ms": 0.99,
+   "ms": 0.42,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "approve illimite vers Permit2 (protocole connu)",
-   "niveau": "warn",
+   "niveau": "info",
    "level": "attention",
    "fiche": "F01",
-   "ms": 1.2,
+   "ms": 0.45,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "permit EIP-2612 illimite",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 15.84,
+   "ms": 4.26,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "Permit2 PermitSingle illimite",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 6.85,
+   "ms": 2.77,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "envoi simple 0.5 ETH vers un inconnu",
    "niveau": "info",
    "level": "attention",
-   "fiche": "F26",
-   "ms": 0.74,
+   "fiche": "F31",
+   "ms": 0.28,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "attention",
+   "friction": "none",
+   "friction_conforme": true
   },
   {
    "name": "envoi simple 0.5 ETH vers un contact connu (contexte local)",
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.85,
+   "ms": 0.31,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "attention",
+   "friction": "none",
+   "friction_conforme": true
   },
   {
    "name": "transfer ERC-20 100 USDC",
    "niveau": "info",
    "level": "attention",
-   "fiche": "F26",
-   "ms": 0.54,
+   "fiche": "F31",
+   "ms": 0.2,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "attention",
+   "friction": "none",
+   "friction_conforme": true
   },
   {
    "name": "setApprovalForAll(true) vers un inconnu",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F03",
-   "ms": 0.59,
+   "ms": 0.28,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "changement de proprietaire (transferOwnership)",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F07",
-   "ms": 1.38,
+   "ms": 0.43,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "danger",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "sosie d adresse du carnet (empoisonnement)",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F13",
-   "ms": 1.33,
+   "ms": 0.23,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "danger",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "eth_sign aveugle",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 1.27,
+   "ms": 0.43,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "danger",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "personal_sign texte banal",
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 1.92,
+   "ms": 0.94,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "attention",
+   "friction": "none",
+   "friction_conforme": true
   },
   {
    "name": "personal_sign 32 octets (hash)",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.44,
+   "ms": 0.19,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "danger",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "wallet_sendCalls avec approve illimite",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 2.94,
+   "ms": 0.66,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "wallet_addEthereumChain avec RPC http",
    "niveau": "critical",
    "level": "danger",
-   "fiche": null,
-   "ms": 3.83,
+   "fiche": "F32",
+   "ms": 0.38,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "danger",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "wallet_switchEthereumChain",
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.58,
+   "ms": 0.1,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "attention",
+   "friction": "none",
+   "friction_conforme": true
   },
   {
    "name": "eth_sendRawTransaction illisible",
@@ -321,12 +453,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (RLP: liste tronquée)",
-   "ms": 7.62,
+   "ms": 0.47,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "MALFORMEE : pas de methode",
@@ -334,12 +469,14 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode absente",
-   "ms": 0.21,
+   "ms": 0.15,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "friction_conforme": true,
+   "refus_direct": "demande-invalide"
   },
   {
    "name": "MALFORMEE : params n est pas un tableau",
@@ -347,12 +484,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.08,
+   "ms": 0.05,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "MALFORMEE : transaction nulle",
@@ -360,12 +500,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.07,
+   "ms": 0.05,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "MALFORMEE : corps null",
@@ -373,7 +516,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.03,
+   "ms": 0.02,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -384,7 +527,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.05,
+   "ms": 0.03,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -395,12 +538,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (Cannot convert abc to a BigInt)",
-   "ms": 0.18,
+   "ms": 0.19,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "methode inconnue eth_foo",
@@ -408,12 +554,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode eth_foo non geree par le moteur d'effets",
-   "ms": 3.28,
+   "ms": 0.05,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "eth_signTypedData v1 (tableau)",
@@ -421,12 +570,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "eth_signTypedData (v1) non gere",
-   "ms": 0.19,
+   "ms": 0.06,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "TROP VOLUMINEUSE : 300 Ko de calldata",
@@ -434,12 +586,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete trop volumineuse (300229 octets, max 262144)",
-   "ms": 2.14,
+   "ms": 0.6,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "wallet_sendCalls 65 appels (borne)",
@@ -447,12 +602,15 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "lot de calls illisible",
-   "ms": 0.31,
+   "ms": 0.1,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "appel de contrat inconnu (selecteur inconnu)",
@@ -460,72 +618,90 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "effets non lisibles : unknown_selector",
-   "ms": 1.31,
+   "ms": 0.5,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "unknown",
+   "friction": "phrase",
+   "friction_conforme": true
   },
   {
    "name": "delegation EIP-7702 (liste d autorisations)",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F11",
-   "ms": 1.33,
+   "ms": 0.31,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "approve illimite + page de pression (faux support)",
    "niveau": "critical",
    "level": "manipulation",
    "fiche": "F01",
-   "ms": 1.31,
+   "ms": 3.95,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "approve illimite avec intention \"payer quelqu un\"",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 5.23,
+   "ms": 0.32,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "origine sosie punycode (xn--)",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F20",
-   "ms": 1.27,
+   "ms": 0.82,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "manipulation",
+   "friction": "wait",
+   "friction_conforme": true
   },
   {
    "name": "origine absente",
    "niveau": "info",
    "level": "attention",
-   "fiche": "F26",
-   "ms": 0.78,
+   "fiche": "F31",
+   "ms": 0.29,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "ecran": "attention",
+   "friction": "none",
+   "friction_conforme": true
   },
   {
    "name": "chainId en decimal et methode tres longue tronquee",
@@ -533,12 +709,14 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx non geree par le moteur d'effets",
-   "ms": 1.61,
+   "ms": 0.13,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
    "fenetre": true,
-   "transmis_sans_geste": false
+   "transmis_sans_geste": false,
+   "friction_conforme": true,
+   "refus_direct": "demande-invalide"
   }
  ],
  "equiv_dev": {
@@ -549,34 +727,47 @@
   "ecarts": 0,
   "pct_identite": 100,
   "diffs": [],
-  "latence_moyenne_ms_par_verdict": 3.13
+  "latence_moyenne_ms_par_verdict": 0.83
  },
  "equiv_public": {
-  "jeu": "PUBLIC (executables)",
-  "cas": 134,
-  "comparaisons": 402,
-  "identiques": 402,
-  "ecarts": 0,
-  "pct_identite": 100,
-  "diffs": [],
-  "latence_moyenne_ms_par_verdict": 2.54
+  "saute": "PUBLIC.jsonl absent"
  },
- "n_public_non_exec": 10,
+ "n_public_non_exec": 0,
+ "equiv_serveur": [
+  {
+   "jeu": "requetes types",
+   "requetes": 33,
+   "comparaisons": 132,
+   "identiques": 132,
+   "ecarts": 0,
+   "non_comparees_chaine_locale": 0,
+   "diffs": []
+  },
+  {
+   "jeu": "DEV",
+   "requetes": 385,
+   "comparaisons": 1540,
+   "identiques": 1540,
+   "ecarts": 0,
+   "non_comparees_chaine_locale": 0,
+   "diffs": []
+  }
+ ],
  "offline": {
-  "n": 519,
+  "n": 385,
   "distribution": {
-   "critical": 198,
-   "warn": 81,
-   "info": 183,
-   "unknown": 57
+   "critical": 159,
+   "warn": 54,
+   "info": 137,
+   "unknown": 35
   },
   "par_label": {
    "malveillant": {
-    "n": 317,
-    "critical": 184,
-    "warn": 38,
-    "info": 68,
-    "unknown": 27
+    "n": 252,
+    "critical": 152,
+    "warn": 30,
+    "info": 54,
+    "unknown": 16
    },
    "ambigu": {
     "n": 19,
@@ -586,33 +777,37 @@
     "unknown": 0
    },
    "benin": {
-    "n": 157,
-    "critical": 12,
-    "warn": 34,
-    "info": 81,
-    "unknown": 30
+    "n": 90,
+    "critical": 5,
+    "warn": 15,
+    "info": 51,
+    "unknown": 19
    },
    "fraude_conforme": {
-    "n": 26,
+    "n": 24,
     "critical": 0,
     "warn": 0,
-    "info": 26,
+    "info": 24,
     "unknown": 0
    }
   },
-  "latence_moyenne_ms": 2.37,
-  "latence_p95_ms": 10.01,
-  "latence_max_ms": 29.28
+  "latence_moyenne_ms": 0.75,
+  "latence_p95_ms": 3.2,
+  "latence_max_ms": 4.73
  },
  "taille": {
-  "fichiers": 26,
-  "octets": 297616,
-  "ko": 290.64
+  "fichiers": 35,
+  "octets": 432277,
+  "ko": 422.15
  },
  "latence_requetes_types_ms": {
-  "moyenne": 2.12,
-  "max": 15.84
+  "moyenne": 0.64,
+  "max": 4.26
+ },
+ "unit_sur_build": {
+  "pass": 41,
+  "fail": 0
  },
  "echecs": 0,
- "total_checks": 21
+ "total_checks": 37
 }

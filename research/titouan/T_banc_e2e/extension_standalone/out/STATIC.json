@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 26,
+ "fichiers_analyses": 35,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -14,9 +14,9 @@
    "detail": ""
   },
   {
-   "name": "permissions = [storage] seulement",
+   "name": "permissions = [storage, alarms] seulement",
    "pass": true,
-   "detail": "[\"storage\"]"
+   "detail": "[\"storage\",\"alarms\"]"
   },
   {
    "name": "aucun host_permissions",
@@ -40,6 +40,41 @@
   },
   {
    "name": "seuls bridge.js / inject.js en scripts de contenu, fichiers presents",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page options.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page ui/verdict.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page window.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun crochet de test dans le service worker livre",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun fichier ne pose le crochet de test ni un mode auto",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fenetre de verdict presente (window.html + ui/verdict.*)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "le moteur embarque se charge et repond (aucune erreur de syntaxe dans engine/)",
    "pass": true,
    "detail": ""
   }

@@ -70,6 +70,25 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     if (n) notes.push('F16:droit_illimite_protocole_connu');
   }
 
+  // ---- F19 : « tu voulais seulement envoyer/échanger » mais le lot contient un droit : si TOUS les droits vont à des protocoles de la liste connue (pont, routeur, pool), le droit est le
+  // préalable normal de l'opération (approve puis dépôt) ; l'écart d'intention reste à confirmer (warn) au lieu de critical. Un droit à un bénéficiaire inconnu ou sosie reste critical.
+  if (isOn('F19') && (eff.approvals || []).length && eff.approvals.every((a) => isKnownProtocol(ctx, a.spender)) && !(eff.counterparties || []).some((cp) => cp.lookalikeOf)) {
+    let hit = false;
+    reasons = reasons.map((r) => (r.code === 'unexpected_approval' ? ((hit = true), { ...r, sev: 'warn' }) : r));
+    if (hit) notes.push('F19:droit_prealable_protocole_connu');
+  }
+
+  // ---- F20 : « on me l'a demandé » + paiement à un destinataire que l'utilisateur a DÉJÀ payé (historique sortant) : la sollicitation vient d'un proche connu, pas d'un inconnu qui se présente.
+  // warn (à confirmer) au lieu de critical ; un destinataire jamais payé reste critical.
+  if (isOn('F20') && reasons.some((r) => r.code === 'asked_by_someone_outgoing') && !(eff.approvals || []).length && !eff.delegation && (eff.outgoing || []).length && !(eff.counterparties || []).some((cp) => cp.lookalikeOf)) {
+    const paid = (a) => (ctx.history || []).some((h) => h.direction === 'out' && String(h.address).toLowerCase() === String(a).toLowerCase());
+    if (eff.outgoing.every((o) => paid(o.to))) { reasons = reasons.map((r) => (r.code === 'asked_by_someone_outgoing' ? { ...r, sev: 'warn' } : r)); notes.push('F20:destinataire_deja_paye'); }
+  }
+
+  // ---- F27 : un message typé non classé par le moteur qui, lu par sa forme, accorde un droit de dépense à un dépensier hors protocoles connus (eff.shapeGrant) : si l'intention déclarée n'est pas
+  // un échange, la personne ne croit pas accorder un droit de dépense => critical (l'écart d'intention que le comparateur ne voit pas faute d'approbation décodée).
+  if (isOn('F27') && eff.shapeGrant && intent && intent.kind !== 'buy_or_swap') { reasons.push({ code: 'signed_right_not_intended', sev: 'critical', said: '', does: eff.shapeGrant.spender }); notes.push('F27:droit_signe_hors_intention'); }
+
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :
   // warn (à confirmer) au lieu de critical. chain_id = 0 (toutes chaînes) et cible inconnue restent critical.
   if (isOn('F4') && eff.delegation && isKnownProtocol(ctx, eff.delegation.to) && !(eff.delegations || []).some((d) => d.chainId === 0 && String(d.to) !== ZERO_ADDR)) {

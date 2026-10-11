@@ -1,21 +1,24 @@
-/* Hold up - pont (monde isole, document_start, toutes frames).
- * 1) recoit les demandes de inject.js par un MessageChannel prive et les envoie au service worker ;
- * 2) dans la frame 0, affiche la fenetre de confirmation dans un shadow DOM ferme (prototypes natifs de ce monde,
- *    donc non alteres par la page). Apparence : docs/design/modal/*.html. */
+/* Hold up - bridge (isolated world, document_start, all frames).
+ * 1) receives the requests of inject.js through a private MessageChannel and hands them to the service worker ;
+ * 2) waits for the decision BY REQUEST ID : the worker answers from chrome.storage.session, so the wait survives a worker
+ *    restart (a lost answer is simply asked again). No stored allow = refusal ;
+ * 3) the verdict itself is shown in a separate Hold up window. This page only gets a neutral, non-interactive banner
+ *    (closed shadow root, top frame). The in-page overlay below is the fallback when the window cannot be created. */
 (() => {
   'use strict';
-  // ================= canal vers inject.js =================
+  // ================= channel to inject.js =================
   let port = null;
   function onHello(ev) {
     const d = ev.data;
-    if (port || ev.source !== window || !d || d.__sentinelle !== 'hello' || !ev.ports || !ev.ports[0]) return;
-    ev.stopImmediatePropagation(); // la page ne voit jamais le port
+    if (ev.source !== window || !d || d.__sentinelle !== 'hello' || !ev.ports || !ev.ports[0]) return;
+    ev.stopImmediatePropagation(); // the page never sees a port, not even the ones of the retries that arrive after the connection
+    if (port) return;
     port = ev.ports[0];
     port.onmessage = onPortMsg;
     port.postMessage({ t: 'ready' });
   }
   window.addEventListener('message', onHello, true);
-  // document.open() (document.write dans une iframe about:blank) efface les ecouteurs de window: on les repose jusqu'a la connexion.
+  // document.open() (document.write in an about:blank iframe) removes the window listeners : put it back until connected.
   const rearm = setInterval(() => { if (port) clearInterval(rearm); else window.addEventListener('message', onHello, true); }, 20);
   setTimeout(() => clearInterval(rearm), 5000);
 
@@ -23,24 +26,63 @@
     try { const b = document.body; return b ? (b.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 4000) : ''; } catch (_) { return ''; }
   }
   function topOrigin() { try { return window.top.location.origin; } catch (_) { try { return document.referrer ? new URL(document.referrer).origin : null; } catch (__) { return null; } } }
-
-  function onPortMsg(ev) {
-    const m = ev.data; if (!m) return;
-    if (m.t === 'gate' || m.t === 'notify') {
-      if (m.t === 'gate') port.postMessage({ t: 'ack', id: m.id });
-      let sent;
-      try {
-        sent = chrome.runtime.sendMessage({ type: 'gate', payload: Object.assign({}, m.payload, { kind: m.t === 'notify' ? 'journal' : 'gate' }),
-          origin: location.origin === 'null' ? location.href.split('#')[0] : location.origin, url: location.href,
-          pageText: m.t === 'gate' ? pageText() : undefined, topOrigin: topOrigin() });
-      } catch (e) { if (m.t === 'gate') port.postMessage({ t: 'result', id: m.id, allow: false, reason: 'extension-indisponible' }); return; }
-      if (m.t === 'gate') sent.then((r) => port.postMessage({ t: 'result', id: m.id, allow: !!(r && r.allow), reason: (r && r.reason) || (r && r.allow ? '' : 'denied') }),
-        () => port.postMessage({ t: 'result', id: m.id, allow: false, reason: 'extension-indisponible' }));
-      else sent.catch(() => {});
-    }
+  const send = (msg) => { try { return chrome.runtime.sendMessage(msg); } catch (e) { return Promise.reject(e); } };
+  function newRid() {
+    try { return crypto.randomUUID(); } catch (_) {}
+    const a = new Uint8Array(16); crypto.getRandomValues(a);
+    return Array.from(a, (b) => b.toString(16).padStart(2, '0')).join('');
   }
 
-  // ================= fenetre (frame 0 uniquement) =================
+  const waits = new Map(); // rid -> { id (of inject.js), fails, timer, overlay }
+  function finish(rid, allow, reason) {
+    const w = waits.get(rid); if (!w) return;
+    waits.delete(rid); clearTimeout(w.timer);
+    if (w.overlay) w.overlay.abort();
+    try { port.postMessage({ t: 'result', id: w.id, allow: !!allow, reason: allow ? '' : (reason || 'denied') }); } catch (_) {}
+    send({ type: 'hu.ack', rid }).catch(() => {});
+  }
+  // Asks the worker for the state of the request. Works the same after a worker restart : the answer comes from the storage.
+  function poll(rid) {
+    const w = waits.get(rid); if (!w) return;
+    clearTimeout(w.timer);
+    const again = (ms) => { if (waits.has(rid)) w.timer = setTimeout(() => poll(rid), ms); };
+    send({ type: 'hu.poll', rid }).then((r) => {
+      if (!waits.has(rid)) return;
+      if (!r || typeof r.state !== 'string') { if (++w.fails > 20) return finish(rid, false, 'extension-indisponible'); return again(1000); }
+      w.fails = 0;
+      if (r.state === 'allow') return finish(rid, true);
+      if (r.state !== 'pending') return finish(rid, false, 'denied'); // deny, or unknown to the worker : fail closed
+      if (r.ui === 'overlay' && r.view) overlayShow(rid, r.view);
+      again(1000);
+    }, () => { if (!waits.has(rid)) return; if (++w.fails > 20) return finish(rid, false, 'extension-indisponible'); again(1000); });
+  }
+  function startGate(m) {
+    const rid = newRid();
+    const req = { type: 'gate', rid, payload: Object.assign({}, m.payload, { kind: 'gate' }),
+      origin: location.origin === 'null' ? location.href.split('#')[0] : location.origin, url: location.href, pageText: pageText(), topOrigin: topOrigin() };
+    waits.set(rid, { id: m.id, fails: 0, timer: null, overlay: null });
+    let tries = 0;
+    const attempt = () => send(req).then((r) => {
+      if (!waits.has(rid)) return;
+      if (r && r.done) return finish(rid, !!r.allow, r.reason);
+      if (r && r.pending) return poll(rid);
+      retry();
+    }, retry);
+    // The worker died before answering : the same request id is sent again (the worker is idempotent on it).
+    function retry() { if (!waits.has(rid)) return; if (++tries > 5) return finish(rid, false, 'extension-indisponible'); setTimeout(attempt, 300 * tries); }
+    attempt();
+  }
+  function onPortMsg(ev) {
+    const m = ev.data; if (!m) return;
+    if (m.t === 'gate') { port.postMessage({ t: 'ack', id: m.id }); startGate(m); }
+    else if (m.t === 'notify') {
+      send({ type: 'gate', payload: Object.assign({}, m.payload, { kind: 'journal' }), origin: location.origin, url: location.href }).catch(() => {});
+    }
+  }
+  // The page goes away : its pending requests are refused (their Hold up window closes).
+  window.addEventListener('pagehide', () => { for (const rid of waits.keys()) send({ type: 'hu.abandon', rid }).catch(() => {}); }, true);
+
+  // ================= fallback overlay (only when the separate window cannot be created) =================
   const CSS = `
 :host{all:initial}
 *{box-sizing:border-box}
@@ -127,12 +169,11 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
   function svgEl(markup) { const t = document.createElement('template'); t.innerHTML = markup; return t.content.firstChild; }
   const norm = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
   const fmtMs = (ms) => { const s = Math.ceil(ms / 1000); return s >= 60 ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : s + ' s'; };
-  const PHRASES = ['je donne à ce site le droit de prendre mon argent', 'je comprends que je ne reçois rien en échange', 'je sais que cette demande peut vider mon solde', 'je lis ce qui est écrit avant de continuer'];
   const LEVEL_UI = {
     danger: { cls: 'danger', icon: SVG.danger, tag: 'Danger', title: 'Stop. Ne signe pas.' },
-    manipulation: { cls: 'danger', icon: SVG.manip, tag: 'Pause', title: 'Fais une pause. On te met la pression.' },
+    manipulation: { cls: 'danger', icon: SVG.manip, tag: 'Pause', title: 'On te dicte quoi faire ? Raccroche.' },
     attention: { cls: 'warn', icon: SVG.warn, tag: 'Attention', title: 'Un point à vérifier' },
-    unknown: { cls: 'unk', icon: SVG.unk, tag: 'Non vérifié', title: "Ce n'est pas une confirmation." }
+    unknown: { cls: 'unk', icon: SVG.unk, tag: 'Non vérifié', title: 'Vérification impossible' }
   };
 
   function mountOverlay() {
@@ -173,7 +214,8 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
   }
 
   // ---------- ecran verdict ----------
-  function showVerdict(spec, cfg, ctx) {
+  // spec : { verdict, friction: { phrase, phraseText, leftMs } } from the worker. The worker checks the deadline again on its own clock.
+  function showVerdict(spec, ctx, reg) {
     return new Promise((resolve) => {
       const v = spec.verdict, lv = LEVEL_UI[v.level] || LEVEL_UI.unknown;
       const m = mountOverlay();
@@ -183,8 +225,8 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       win.append(h('div', { class: 'band ' + lv.cls }, svgEl(lv.icon), h('div', null, h('span', { class: 'tag', text: lv.tag }), h('h1', { id: 'h', text: lv.title }))));
       const main = h('main', { id: 'd' });
       const isRed = v.level === 'danger' || v.level === 'manipulation';
-      // "Non verifie" recoit la meme friction que "Danger" : sinon une demande rendue illisible expres (trop grosse, format non gere) evite l ecran rouge ET le delai.
-      const needFriction = (isRed || v.level === 'unknown') && cfg.arm !== 'A';
+      const fr = spec.friction || {};
+      const needFriction = !!(fr.phrase || fr.leftMs > 0);
       if (v.level === 'unknown') {
         main.append(h('p', { class: 'lead', text: "On n'a pas pu vérifier cette demande" + (v.why ? ' (' + v.why + ')' : '') + '. Ce n\'est ni un feu vert ni un feu rouge.' }));
         main.append(h('div', { class: 'unkbox', text: 'Demande : ' + ctx.method + '. Aucune vérification terminée : continue seulement si tu es sûr(e) de toi.' }));
@@ -207,21 +249,17 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       }
       main.append(h('p', { class: 'small muted', text: 'Demande : ' + ctx.method }));
 
-      // barriere de friction (bras B / C)
-      let needMs = 0, phrase = null, phraseOk = true;
-      if (needFriction) {
-        needMs = v.level === 'manipulation' ? cfg.manipulationHoldMs : (cfg.arm === 'B' ? cfg.frictionMs : 0);
-        if (cfg.arm === 'C') { phraseOk = false; if (v.level === 'manipulation') needMs = cfg.manipulationHoldMs; }
-        if (typeof spec.holdLeftMs === 'number') needMs = Math.max(0, spec.holdLeftMs); // echeance tenue par le service worker (survit a son arret)
-      }
-      const deferred = !!(needFriction && spec.holdDeferred); // retenue trop longue pour une seule demande : seulement "Annuler", on revient apres l heure
+      // friction : phrase to retype and / or time left before the absolute deadline held by the worker
+      const needMs = needFriction ? Math.max(0, Number(fr.leftMs) || 0) : 0;
+      let phrase = null, phraseOk = true;
       const gate = h('div', { class: 'gate' });
       let input = null;
-      if (needFriction && cfg.arm === 'C') {
-        phrase = v.address_diff ? v.address_diff.actual.slice(-4) : (v.phrase || PHRASES[Math.floor(Math.random() * PHRASES.length)]);
-        gate.append(h('label', { for: 'pin', text: v.address_diff ? "Pour continuer malgré tout, recopie les 4 derniers caractères de l'adresse demandée :" : 'Pour continuer malgré tout, recopie cette phrase :' }));
-        gate.append(h('p', { class: 'phrase', text: v.address_diff ? '(lis-les dans l\'adresse ci-dessus)' : phrase }));
+      if (fr.phrase) {
+        phraseOk = false; phrase = fr.phraseText || 'Je veux continuer malgré le danger';
+        gate.append(h('label', { for: 'pin', text: 'Pour continuer malgré tout, recopie cette phrase :' }));
+        gate.append(h('p', { class: 'phrase', text: phrase }));
         input = h('input', { type: 'text', id: 'pin', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' });
+        input.addEventListener('paste', (e) => e.preventDefault());
         gate.append(input);
       }
       let timerT = null, bar = null;
@@ -230,24 +268,24 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
         bar = h('i');
         gate.append(h('div', { class: 'timer' }, timerT, h('div', { class: 'bar' }, bar)));
       }
-      if (deferred) gate.append(h('p', { class: 'fact', text: "Cette demande est retenue jusqu'à " + new Date(Date.now() + needMs).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ". Annule maintenant, puis relance-la après cette heure : le délai continue de courir même si tu fermes cette page." }));
       const status = h('p', { class: 'vh', role: 'status', 'aria-live': 'polite' });
       gate.append(status);
       if (needFriction) main.append(gate);
       if (v.level === 'manipulation') {
-        const c = cfg.contact || {};
-        main.append(h('div', { class: 'contact' }, h('b', { text: 'Appeler un proche' }), h('span', { text: (c.name || 'Un proche de confiance') + (c.tel ? ' : ' + c.tel : '') }),
+        const c = spec.contact || {};
+        main.append(h('div', { class: 'contact' }, h('b', { text: 'Appelle un proche' }), h('span', { text: (c.name || 'Quelqu’un en qui tu as confiance') + (c.tel ? ' : ' + c.tel : '') }),
           h('span', { class: 'small', text: "Raccroche, puis rappelle toi-même. Aucun vrai support ne demande ça." })));
       }
       win.append(main);
 
       // pied : Annuler toujours visible, meme place, meme libelle
       const foot = h('footer');
-      const cancel = h('button', { class: 'btn cancel' + (isRed || v.level === 'unknown' ? '' : ' soft'), type: 'button', id: 'cancel', text: 'Annuler, rien ne sera envoyé' });
-      const go = h('button', { class: 'btn ' + (v.level === 'attention' ? 'go' : 'quiet' + (isRed ? ' danger' : '')), type: 'button', id: 'go' });
-      const goLabel = v.level === 'attention' ? "Oui, c'est bien ça, continuer" : v.level === 'unknown' ? 'Continuer sans vérification, à mes risques' : 'Continuer malgré le danger';
+      // Annuler is always the solid button ; Continuer is never the default nor the loudest, whatever the level.
+      const cancel = h('button', { class: 'btn cancel', type: 'button', id: 'cancel', text: 'Annuler, rien ne sera envoyé' });
+      const go = h('button', { class: 'btn quiet' + (isRed ? ' danger' : ''), type: 'button', id: 'go' });
+      const goLabel = v.level === 'unknown' ? 'Continuer sans vérification' : 'Continuer quand même';
       go.textContent = goLabel;
-      const lockedBy = () => deferred || (needMs > 0 && performance.now() - t0 < needMs) || (input && !phraseOk);
+      const lockedBy = () => (needMs > 0 && performance.now() - t0 < needMs) || (input && !phraseOk);
       const refresh = () => { go.disabled = !!lockedBy(); };
       refresh();
       if (v.level === 'unknown') {
@@ -255,54 +293,41 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
         retry.addEventListener('click', () => fin('retry'));
         foot.append(retry);
       }
-      foot.append(go, cancel, h('p', { class: 'reassure', text: 'Annuler ne coûte rien et tu peux recommencer plus tard.' }));
+      foot.append(cancel, go, h('p', { class: 'reassure', text: 'Annuler ne coûte rien et tu peux recommencer plus tard.' }));
       win.append(foot);
       m.ov.append(win);
 
-      let done = false, enabledAt = needMs > 0 ? null : (input ? null : 0), earlyBlocked = null;
+      let done = false;
       const fin = (decision) => {
         if (done) return; done = true; clearInterval(iv);
         const ttd = Math.round(performance.now() - t0);
         m.close();
-        resolve({ decision, time_to_decision_ms: ttd, friction_ms: needMs, continue_enabled_after_ms: enabledAt, early_click_blocked: earlyBlocked, cancel_visible: cancelVisible, phrase_required: !!input, ui_frame: window === window.top ? 'top' : 'child', viewport: innerWidth + 'x' + innerHeight });
+        resolve({ decision, time_to_decision_ms: ttd, phrase_ok: !!input && phraseOk });
       };
+      reg.abort = () => fin('aborted');
       if (input) input.addEventListener('input', () => {
         const ok = norm(input.value) === norm(phrase);
         if (ok !== phraseOk) { phraseOk = ok; status.textContent = ok ? (needMs > 0 ? 'Phrase correcte. Attends la fin du compte à rebours.' : 'Phrase correcte.') : 'La phrase ne correspond plus.'; }
-        refresh(); markEnabled();
+        refresh();
       });
-      const markEnabled = () => { if (enabledAt === null && !lockedBy()) enabledAt = Math.round(performance.now() - t0); };
       const iv = setInterval(() => {
         if (needMs > 0) {
           const left = Math.max(0, needMs - (performance.now() - t0));
           timerT.textContent = fmtMs(left); bar.style.transform = 'scaleX(' + (left / needMs) + ')';
           if (left > 0 && Math.round(left) % 60000 < 260) status.textContent = 'Il reste ' + fmtMs(left) + '.';
         }
-        refresh(); markEnabled();
+        refresh();
       }, 100);
       cancel.addEventListener('click', () => fin('cancel'));
       // "Continuer" n accepte qu un vrai geste (isTrusted), et pas dans les 600 premieres ms : une touche ou un clic deja en cours quand la fenetre surgit ne vaut pas accord.
-      go.addEventListener('click', (e) => { if (go.disabled) return; if (!cfg.auto && (!e.isTrusted || performance.now() - t0 < 600)) return; fin('confirm'); });
+      go.addEventListener('click', (e) => { if (go.disabled || !e.isTrusted || performance.now() - t0 < 600) return; fin('confirm'); });
       m.ov.addEventListener('keydown', (e) => { if (e.key === 'Escape') fin('cancel'); });
       cancel.focus(); // jamais de focus initial sur "Continuer" : Entree ou Espace tenue par la page annule, n approuve pas
-      const cancelVisible = inViewport(cancel) && !cancel.disabled;
-
-      // mode automatique (tests) : agit sur les vrais boutons
-      const A = cfg.auto;
-      if (A) setTimeout(async () => {
-        if (done) return;
-        if (go.disabled) { go.click(); earlyBlocked = !done && go.disabled; } else earlyBlocked = false;
-        if (A.decision === 'cancel') { cancel.click(); return; }
-        if (input && !phraseOk) { input.value = v.address_diff ? v.address_diff.actual.slice(-4) : phrase; input.dispatchEvent(new Event('input', { bubbles: true })); }
-        const limit = performance.now() + needMs + 8000;
-        while (!done && go.disabled && performance.now() < limit) await new Promise((r) => setTimeout(r, 40));
-        if (!done) go.click();
-      }, A.delayMs != null ? A.delayMs : 250);
     });
   }
 
   // ---------- ecran de questions (intention ou grilling) ----------
-  function showChoices(spec, cfg, ctx) {
+  function showChoices(spec, ctx, reg) {
     return new Promise((resolve) => {
       const m = mountOverlay(); const t0 = performance.now();
       const isIntent = spec.kind === 'intent';
@@ -327,38 +352,73 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       win.append(foot); m.ov.append(win);
       fs.addEventListener('change', () => { ok.disabled = !fs.querySelector('input:checked'); });
       let done = false;
-      const cancelVisible = inViewport(cancel);
-      const fin = (r) => { if (done) return; done = true; m.close(); resolve(Object.assign({ time_to_decision_ms: Math.round(performance.now() - t0), cancel_visible: cancelVisible }, r)); };
-      ok.addEventListener('click', (e) => { const c = fs.querySelector('input:checked'); if (!c || (!cfg.auto && !e.isTrusted)) return;
+      const fin = (r) => { if (done) return; done = true; m.close(); resolve(Object.assign({ time_to_decision_ms: Math.round(performance.now() - t0) }, r)); };
+      reg.abort = () => fin({ decision: 'aborted' });
+      ok.addEventListener('click', (e) => { const c = fs.querySelector('input:checked'); if (!c || !e.isTrusted) return;
         fin(isIntent ? { decision: 'continue', intent: { choice: c.value, message: ta ? ta.value : '' } } : { decision: 'answer', option: c.value }); });
       cancel.addEventListener('click', () => fin({ decision: 'cancel' }));
       m.ov.addEventListener('keydown', (e) => { if (e.key === 'Escape') fin({ decision: 'cancel' }); });
       cancel.focus();
-      const A = cfg.auto;
-      if (A) setTimeout(() => {
-        if (done) return;
-        if (A.decision === 'cancel' || (!isIntent && A.cancelOnQuestion === spec.index)) { cancel.click(); return; }
-        let pick;
-        if (isIntent) pick = A.intent || 'pay';
-        else {
-          const pol = A.grill || 'clean', truth = spec.truth || [];
-          if (pol === 'prefer_not') pick = 'prefer_not';
-          else if (pol === 'signal') pick = (truth.find((t) => t.s > 0) || truth[0]).id;
-          else pick = (truth.find((t) => t.s === 0) || truth[0]).id;
-          if (A.grillAnswers && A.grillAnswers[spec.qid]) pick = A.grillAnswers[spec.qid];
-        }
-        const inp = fs.querySelector('input[value="' + pick + '"]'); if (inp) { inp.checked = true; fs.dispatchEvent(new Event('change')); }
-        ok.click();
-      }, A.delayMs != null ? A.delayMs : 250);
     });
   }
 
-  if (window === window.top || true) {
-    chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-      if (!msg || msg.type !== 'ui') return false;
-      const p = msg.spec.kind === 'verdict' ? showVerdict(msg.spec, msg.cfg, msg.ctx) : showChoices(msg.spec, msg.cfg, msg.ctx);
-      p.then(sendResponse, () => sendResponse({ decision: 'cancel', error: 'ui-erreur' }));
-      return true;
+  // One overlay per request, redrawn when the worker moves to another screen (seq).
+  function overlayShow(rid, view) {
+    const w = waits.get(rid); if (!w) return;
+    if (w.overlay && w.overlay.seq === view.seq) return;
+    if (w.overlay) w.overlay.abort();
+    const reg = { seq: view.seq, abort() {} };
+    w.overlay = reg;
+    const ctx = { origin: view.site || location.host, method: view.method };
+    const p = view.stage === 'verdict' ? showVerdict({ verdict: view.verdict, friction: view.friction, contact: view.contact }, ctx, reg)
+      : showChoices(view.stage === 'intent' ? { kind: 'intent' } : Object.assign({ kind: 'grill' }, view.grill), ctx, reg);
+    p.then((r) => {
+      if (!waits.has(rid) || w.overlay !== reg || r.decision === 'aborted') return;
+      const msg = { type: 'hu.decision', rid, seq: view.seq, ttd: r.time_to_decision_ms };
+      if (r.decision === 'confirm') Object.assign(msg, { decision: 'continue', phraseOk: !!r.phrase_ok });
+      else if (r.decision === 'continue') Object.assign(msg, { decision: 'answer', value: r.intent.choice, message: r.intent.message });
+      else if (r.decision === 'answer') Object.assign(msg, { decision: 'answer', value: r.option });
+      else if (r.decision === 'retry') msg.decision = 'retry';
+      else msg.decision = 'cancel';
+      const post = (tries) => send(msg).then((a) => {
+        if (!waits.has(rid)) return;
+        if (a && a.view) { w.overlay = null; overlayShow(rid, a.view); }
+        else if (a && a.status === 'ignored') w.overlay = null; // stale screen : the next poll redraws the current one
+        poll(rid);
+      }, () => { if (msg.decision === 'cancel' && tries < 20) setTimeout(() => post(tries + 1), 250); else { w.overlay = null; poll(rid); } });
+      post(0);
     });
   }
+
+  // ================= neutral banner (top frame) : nothing security-relevant is drawn in the page =================
+  let banner = null, bannerTimer = null;
+  function bannerSet(on) {
+    if (on && !banner) {
+      const host = document.createElement('div');
+      const root = host.attachShadow({ mode: 'closed' });
+      host.style.cssText = 'all:initial!important;position:fixed!important;top:12px!important;left:0!important;right:0!important;z-index:2147483647!important;display:flex!important;justify-content:center!important;pointer-events:none!important';
+      const box = document.createElement('div');
+      box.setAttribute('role', 'status');
+      box.style.cssText = 'max-width:calc(100% - 24px);padding:12px 20px;border-radius:50px;background:#000;color:#fff;border:1px solid #767676;font:500 16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.25);pointer-events:none;user-select:none';
+      box.textContent = 'Hold up a retenu cette demande : regarde la fenêtre Hold up.';
+      root.append(box);
+      (document.documentElement || document).append(host);
+      banner = host;
+    } else if (!on && banner) { banner.remove(); banner = null; }
+  }
+  function bannerCheck() {
+    clearTimeout(bannerTimer);
+    send({ type: 'hu.banner?' }).then((r) => {
+      const n = !!(r && r.n > 0);
+      bannerSet(n);
+      if (n) { if (!banner.isConnected) (document.documentElement || document).append(banner); bannerTimer = setTimeout(bannerCheck, 3000); }
+    }, () => bannerSet(false));
+  }
+
+  chrome.runtime.onMessage.addListener((msg) => {
+    if (!msg) return false;
+    if (msg.type === 'hu.result' && waits.has(msg.rid)) poll(msg.rid);           // the decision is ready : fetch it now
+    else if (msg.type === 'hu.banner' && window === window.top) bannerCheck();
+    return false;
+  });
 })();

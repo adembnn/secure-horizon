@@ -60,13 +60,36 @@ const mcheck = [];
 const m = (name, cond, d = '') => mcheck.push({ name, pass: !!cond, detail: d });
 m('manifest_version 3', mf.manifest_version === 3);
 m('service worker de type module', mf.background && mf.background.type === 'module' && mf.background.service_worker === 'background.js');
-m('permissions = [storage] seulement', JSON.stringify(mf.permissions) === '["storage"]', JSON.stringify(mf.permissions));
+// storage : reglages, journal local et demandes retenues (storage.session) ; alarms : echeances de la retenue quand le service worker est arrete.
+// La fenetre de verdict (chrome.windows.create d'une page de l'extension) et les messages vers l'onglet demandeur ne demandent aucune permission.
+m('permissions = [storage, alarms] seulement', JSON.stringify(mf.permissions) === '["storage","alarms"]', JSON.stringify(mf.permissions));
 m('aucun host_permissions', !('host_permissions' in mf) && !('optional_host_permissions' in mf));
 m('aucune permission optionnelle', !('optional_permissions' in mf));
 m('pas de externally_connectable / web_accessible_resources / update_url', !('externally_connectable' in mf) && !('web_accessible_resources' in mf) && !('update_url' in mf));
 const csp = (mf.content_security_policy || {}).extension_pages || '';
 m('CSP : script-src self, connect-src none, aucun http dans la CSP', /script-src 'self'/.test(csp) && /connect-src 'none'/.test(csp) && !/https?:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp), csp);
 m('seuls bridge.js / inject.js en scripts de contenu, fichiers presents', (mf.content_scripts || []).every((c) => c.js.every((f) => files.some((p) => rel(p) === f))));
+
+// pages de l'extension : scripts locaux seulement, aucun script en ligne, aucun gestionnaire en attribut
+for (const p of files.filter((x) => x.endsWith('.html'))) {
+  const t = readFileSync(p, 'utf8');
+  const scripts = [...t.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
+  m('page ' + rel(p) + ' : scripts locaux, rien en ligne', scripts.every((s) => /\bsrc\s*=\s*"[\w./-]+\.js"/.test(s[1]) && !s[2].trim()) && !/\son[a-z]+\s*=/i.test(t));
+}
+// aucun mode test ni reponse automatique dans le dossier livre : le crochet n'existe que dans le build --test-hook (dossier extension_test/)
+const bgTxt = readFileSync(join(EXT, 'background.js'), 'utf8');
+m('aucun crochet de test dans le service worker livre', !/testHook|TEST_HOOK|__holdupTestHook/.test(bgTxt) && /createGatekeeper\(\{ check: localCheck\s*\}\)/.test(bgTxt));
+m('aucun fichier ne pose le crochet de test ni un mode auto', files.filter((p) => /\.(js|html|json)$/.test(p) && !/BUILD_INFO\.json$/.test(p)).every((p) => !/__holdupTestHook|testMode|cfg\.auto\b/.test(readFileSync(p, 'utf8'))));
+m('fenetre de verdict presente (window.html + ui/verdict.*)', ['window.html', 'window.js', 'window.css', 'ui/verdict.html', 'ui/verdict.js', 'ui/verdict.css', 'gatekeeper.js', 'hold_core.js'].every((f) => files.some((p) => rel(p) === f)));
+
+// chaque module du dossier livre doit se charger : une erreur de syntaxe dans une source du moteur rend le service worker inchargeable
+{
+  const { pathToFileURL } = await import('node:url');
+  let err = '';
+  try { const core = await import(pathToFileURL(join(EXT, 'engine', 'sentinelle_core.js')).href); const v = core.check({ origin: 'https://x.test', method: 'personal_sign', params: ['0x00', '0x' + '1'.repeat(40)] }); if (!v || v.level === 'ok') err = 'verdict invalide'; }
+  catch (e) { err = String(e && e.message || e).slice(0, 160); }
+  m('le moteur embarque se charge et repond (aucune erreur de syntaxe dans engine/)', !err, err);
+}
 
 const byKind = {}; for (const f of findings) (byKind[f.kind] = byKind[f.kind] || []).push(f);
 const kinds = ['secret', 'code_dynamique', 'code_distant', 'reseau', 'url_externe'];
