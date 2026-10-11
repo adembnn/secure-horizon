@@ -77,11 +77,20 @@ function getProvider() {
   return window.ethereum || null;
 }
 
-/* ===================== fichier d'adresses local =====================
-   Copie dans ce dossier par config.js. Le serveur statique ne sert que ce dossier. */
+/* ===================== fichier d'adresses =====================
+   Copie dans ce dossier par config.js. Le serveur statique ne sert que ce dossier.
+   Reseau choisi par l'URL, jamais par un reglage visible : ?reseau=fuji lit addresses.fuji.json
+   (Avalanche Fuji, chainId 43113) ; sans parametre, addresses.local.json (chaine locale). */
+var FUJI_CHAIN_ID = 43113;
+var FUJI_EXPLORER = "https://testnet.snowtrace.io";
+function isFuji(chainId) { return Number(chainId) === FUJI_CHAIN_ID; }
+function requestedNet() {
+  var q = (new URL(location.href).searchParams.get("reseau") || "").toLowerCase();
+  return q === "fuji" ? "fuji" : "local";
+}
 async function loadAddresses() {
   try {
-    var res = await fetch("./addresses.local.json", { cache: "no-store" });
+    var res = await fetch("./addresses." + requestedNet() + ".json", { cache: "no-store" });
     if (!res.ok) return { ok: false };
     var data = await res.json();
     if (!data || !data.chainId || !data.usdc || !data.wavax || !data.router || !data.drainer || !data.rpcUrl) return { ok: false };

@@ -108,6 +108,10 @@ de la répétition en cours ne sont pas touchés.
 
 ### Fuji (une seule fois, quand le déployeur est financé)
 
+**Tout en une commande : `cd blockchain && npm run fuji:all`** (contrôle seul : `npm run fuji:check`). Marche à suivre,
+robinets, AVAX nécessaires et répétition sur une copie locale de Fuji : `blockchain/FUJI.md`. Les commandes ci-dessous
+restent valables une par une.
+
 ```bash
 cd blockchain
 # FUJI_PRIVATE_KEY dans .env (jamais commité). Financer le déployeur : https://build.avax.network/console/primary-network/faucet
