@@ -8,7 +8,7 @@ import { ENGINE_CHOICE, KINDS, MAX_TEXT, MODEL_MIN, NO_MATCH, cleanText, interpr
 import { TEXT, answerOf, networkName, siteName } from './outcome.js';
 import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
 import { measure, readToken } from './effect_sim.js';
-import { chainAppend, rulesTag, sha256 } from './journal_chain.js';
+import { RULES_FINGERPRINT, chainAppend, rulesTag, sha256 } from './journal_chain.js'; // fingerprint : written by tools/gen_rules_fingerprint.mjs, no fetch
 import { revocationFor } from './revoke.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
@@ -244,8 +244,9 @@ const hostOf = (origin) => { try { return new URL(origin).host || String(origin)
 
 // `classify(text)` (optional) asks the relay (Clef / Jev) ; without it, or when it fails, the embedded keyword parser answers.
 // `closeMs` : how long a decided window keeps its last message before the worker removes it (0 : at once).
-// `rulesFingerprint` : 12 hex given by the build (fingerprint of the embedded rule files), written in every chained line with the version.
-export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS, rulesFingerprint = null } = {}) {
+// `rulesFingerprint` : 12 hex, fingerprint of the embedded rule files (RULES_FINGERPRINT of journal_chain.js), written in every chained line with the
+// version. Anything else than 12 lower-case hex : the version alone.
+export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS, rulesFingerprint = RULES_FINGERPRINT } = {}) {
   const selfUrl = chrome.runtime.getURL('');
   const windowUrl = chrome.runtime.getURL('window.html');
   const mem = new Map(); // only if chrome.storage.session is missing : the hold then does not survive the worker (journalled)

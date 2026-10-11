@@ -32,6 +32,9 @@ const str = (x, max) => (typeof x === 'string' ? x.slice(0, max) : '');
  *           révocation, ou verdict où Hold up a limité le droit).
  *   limited 'USDC:50' quand Hold up a limité un droit au montant écrit (Q17), sinon absent. Jamais d'adresse, jamais la phrase.
  *   rules   version du build, suivie de '+' et d'une empreinte courte (12 hex) des règles quand le build la fournit. */
+// Empreinte des fichiers de règles embarqués : ligne réécrite par tools/gen_rules_fingerprint.mjs (à lancer avant chaque build final).
+// Ici et non dans un module à part : journal_chain.js est déjà copié par les deux builds, aucun changement de build n'est nécessaire.
+export const RULES_FINGERPRINT = '730eb9de305f'; export const RULES_FILES = 26; // @RULES_FINGERPRINT@
 export const BY = ['humain', 'auto', 'holdup'];
 const HUMAN_BY = new Set(['human', 'window-closed', 'tab-closed']);
 export function byOf(e) {

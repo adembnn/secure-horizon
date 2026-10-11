@@ -4,9 +4,9 @@
 import { test, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { writeFileSync, mkdtempSync } from 'node:fs';
+import { writeFileSync, mkdtempSync, mkdirSync, copyFileSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { makeChrome, fakeClock, load } from './fake_chrome.mjs';
 
@@ -150,7 +150,7 @@ test('gatekeeper : the window going on by itself is "auto", a click is "humain",
   assert.equal(r.status, 1); assert.match(r.stdout, /modifiée/);
 });
 test('gatekeeper : the second request of an operation already covered is "auto" ; no fingerprint = rules is the version', async () => {
-  worker();
+  worker({ rulesFingerprint: null });
   const a = await gate(approve(50n * U)); await a.write(SAID); await a.go(true);
   clock.advance(3000);
   await gate(approve(50n * U));
@@ -158,4 +158,34 @@ test('gatekeeper : the second request of an operation already covered is "auto" 
   assert.equal(same.length, 1); assert.equal(same[0].by, 'auto');
   assert.ok(chain().entries.every((e) => e.rules === '9.9.9'));
   assert.equal((await C.verifyChain(chain())).ok, true);
+});
+test('gatekeeper : by default, rules = build version + the RULES_FINGERPRINT embedded in journal_chain.js', async () => {
+  assert.match(C.RULES_FINGERPRINT, /^[0-9a-f]{12}$/); assert.ok(C.RULES_FILES > 10);
+  worker();
+  const a = await gate(approve(50n * U)); await a.write(SAID); await a.cancel();
+  assert.ok(chain().entries.length >= 2 && chain().entries.every((e) => e.rules === '9.9.9+' + C.RULES_FINGERPRINT));
+});
+
+// ---------------------------------------------------------------------------------------------- the fingerprint generator
+test('gen_rules_fingerprint : stable when nothing changes, changes when a rule file changes (temporary copy), line endings ignored', async () => {
+  const G = await import(new URL('../../tools/gen_rules_fingerprint.mjs', import.meta.url).href);
+  const here = fileURLToPath(new URL('../../..', import.meta.url)); // T_banc_e2e
+  const files = G.rulesFiles(here);
+  for (const f of ['engine/src/engine.mjs', 'run/policy.mjs', 'extension/written_check.js', 'extension/intent_text.js']) assert.ok(files.includes(f), f);
+  assert.ok(!files.includes('engine/src/rpc.mjs') && !files.includes('extension/journal_chain.js'));
+  assert.equal(G.computeFingerprint(here).fingerprint, C.RULES_FINGERPRINT, 'the embedded value is up to date : run node extension/tools/gen_rules_fingerprint.mjs');
+  const tmp = mkdtempSync(join(tmpdir(), 'holdup-rules-'));
+  for (const f of files.concat(['extension/journal_chain.js'])) { mkdirSync(dirname(join(tmp, f)), { recursive: true }); copyFileSync(join(here, f), join(tmp, f)); }
+  const r0 = G.computeFingerprint(tmp);
+  assert.equal(r0.fingerprint, C.RULES_FINGERPRINT); assert.equal(G.computeFingerprint(tmp).fingerprint, r0.fingerprint, 'stable');
+  const crlf = join(tmp, 'run/policy.mjs'); const lf = readFileSync(crlf, 'utf8').replace(/\r\n/g, '\n');
+  writeFileSync(crlf, lf.replace(/\n/g, '\r\n')); assert.equal(G.computeFingerprint(tmp).fingerprint, r0.fingerprint, 'CRLF or LF : same fingerprint');
+  writeFileSync(crlf, lf + '\n// une règle changée\n');
+  const r1 = G.computeFingerprint(tmp); assert.notEqual(r1.fingerprint, r0.fingerprint); assert.match(r1.fingerprint, /^[0-9a-f]{12}$/);
+  // the generator rewrites only the marked line of journal_chain.js in the copy, and the copy then exports the new value
+  G.writeFingerprint(tmp);
+  const text = readFileSync(join(tmp, 'extension/journal_chain.js'), 'utf8');
+  assert.ok(text.includes("export const RULES_FINGERPRINT = '" + r1.fingerprint + "'"));
+  assert.equal(text.replace(r1.fingerprint, C.RULES_FINGERPRINT), readFileSync(join(here, 'extension/journal_chain.js'), 'utf8'), 'nothing else changed');
+  assert.equal(G.computeFingerprint(tmp).fingerprint, r1.fingerprint, 'fixed point : journal_chain.js is not a rule file');
 });
