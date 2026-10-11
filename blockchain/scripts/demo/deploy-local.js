@@ -3,7 +3,8 @@
  *
  *   DEMO_VICTIM=0xYourWalletAddress npm run demo:deploy -- --network localhost
  *
- * - DemoUSDC, DemoWAVAX, DemoNFT, DemoRouter (seeded), then FreshDrainer LAST (brand-new contract)
+ * - DemoUSDC, DemoWAVAX, DemoNFT, DemoRouter (seeded), VulnerableRouter (seeded, honest-but-flawed
+ *   router used by the ?mode=habituel scene), then FreshDrainer LAST (brand-new contract)
  *   whose collector is a dedicated "attacker" account (Hardhat account #1).
  * - Mints 2 480 DemoUSDC to DEMO_VICTIM and gives it 100 local test AVAX (hardhat_setBalance).
  * - Fork mode: also gives the victim 2 480 REAL-code USDC (storage write, local only) -> realUsdc.
@@ -63,6 +64,16 @@ async function main() {
   await (await wavax.approve(await router.getAddress(), W)).wait();
   await (await router.addLiquidity(U, W)).wait();
 
+  // Honest-but-flawed router for the ?mode=habituel scene: users grant it an UNLIMITED right,
+  // it swaps normally, and its unprotected execute() lets a third party drain those rights once
+  // the service is "compromised". Seeded with the same liquidity as the legitimate router.
+  const vulnRouter = await deploy("VulnerableRouter", await usdc.getAddress(), await wavax.getAddress());
+  await (await usdc.mint(deployer.address, U)).wait();
+  await (await wavax.mint(deployer.address, W)).wait();
+  await (await usdc.approve(await vulnRouter.getAddress(), U)).wait();
+  await (await wavax.approve(await vulnRouter.getAddress(), W)).wait();
+  await (await vulnRouter.addLiquidity(U, W)).wait();
+
   // Brand-new drainer, deployed last, collector = dedicated attacker account.
   const drainer = await deploy("FreshDrainer", attacker.address);
 
@@ -76,6 +87,7 @@ async function main() {
     usdc: await usdc.getAddress(),
     wavax: await wavax.getAddress(),
     router: await router.getAddress(),
+    vulnRouter: await vulnRouter.getAddress(),
     nft: await nft.getAddress(),
     drainer: await drainer.getAddress(),
     collector: attacker.address,

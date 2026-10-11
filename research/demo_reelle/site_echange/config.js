@@ -14,7 +14,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const KEEP = ["chainId", "rpcUrl", "usdc", "wavax", "router", "drainer", "collector"];
+const KEEP = ["chainId", "rpcUrl", "usdc", "wavax", "router", "vulnRouter", "drainer", "collector"];
 const KINDS = ["local", "fuji"]; // fuji : lu par la page avec ?reseau=fuji
 
 function syncOne(kind) {

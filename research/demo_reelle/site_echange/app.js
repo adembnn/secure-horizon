@@ -2,6 +2,7 @@
 //
 // Un seul formulaire, un seul bouton. Deux versions du MEME site, choisies par ?mode= :
 //   ?mode=honnete           -> approve de 50 DUSDC EXACTEMENT au routeur, puis l'echange
+//   ?mode=habituel          -> approve ILLIMITE a SON PROPRE routeur (usage courant d'un site honnete), puis l'echange
 //   ?mode=piege             -> approve ILLIMITE vers un contrat qui n'est pas le routeur
 //   ?mode=piege&via=permit  -> signature Permit illimitee vers ce meme contrat
 // Les deux demandes ont l'air normales pour un portefeuille : seule l'intention ecrite revele l'ecart.
@@ -18,7 +19,7 @@
 
   var params = new URL(location.href).searchParams;
   var MODE = (params.get("mode") || "honnete").toLowerCase();
-  if (MODE !== "piege") MODE = "honnete";
+  if (MODE !== "piege" && MODE !== "habituel") MODE = "honnete";
   var VIA = (params.get("via") || "").toLowerCase();
 
   function setState(text, cls) {
@@ -79,6 +80,17 @@
     setState("Échange effectué. Vous avez reçu de l'AVAX.", "ok");
   }
 
+  async function doHabituel(p) {
+    // Site honnete : droit illimite a son propre routeur (usage par defaut de nombreux services),
+    // puis l'echange de 50. Rien de malveillant a cette etape.
+    if (!addresses.vulnRouter) { setState("Service momentanément indisponible. Merci de réessayer plus tard.", "bad"); return; }
+    setState("Confirmez l'autorisation pour échanger.", "");
+    await p.request({ method: "eth_sendTransaction", params: [txApproveVulnUnlimited(addresses, account)] });
+    setState("Confirmez l'échange.", "");
+    await p.request({ method: "eth_sendTransaction", params: [txSwapVuln(addresses, account, AMOUNT_USDC)] });
+    setState("Échange effectué. Vous avez reçu de l'AVAX.", "ok");
+  }
+
   async function doTrapApprove(p) {
     setState("Confirmez l'autorisation pour finaliser l'échange.", "");
     await p.request({ method: "eth_sendTransaction", params: [txApproveUnlimited(addresses, account)] });
@@ -95,6 +107,7 @@
 
   function run(p) {
     if (MODE === "piege") return VIA === "permit" ? doTrapPermit(p) : doTrapApprove(p);
+    if (MODE === "habituel") return doHabituel(p);
     return doHonest(p);
   }
 
