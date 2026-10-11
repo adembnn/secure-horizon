@@ -105,7 +105,7 @@
   },
   {
    "file": "extension/gatekeeper.js",
-   "sha256": "8d54d89e317c0365951f2dd05a32b7a4b62c3747168dd7dc99f4bdb40d9c54e4"
+   "sha256": "293d00a860f6cbbac4cc915c71b7cd302364ed9cc460eb8558840c64b4a60ddb"
   },
   {
    "file": "extension/hold_core.js",
@@ -137,7 +137,7 @@
   },
   {
    "file": "extension/journal_chain.js",
-   "sha256": "eb078187af202f6f09f8e6da2a2f58bf194b961571eaa4fe4b0920720581bcf9"
+   "sha256": "c4e76bc53294452e7be17989f8ba4560148bfc07fec2ca0cb8e5ac7b937039df"
   },
   {
    "file": "extension/keyword_intent.js",
@@ -328,8 +328,8 @@
   },
   {
    "file": "gatekeeper.js",
-   "bytes": 84883,
-   "sha256": "8d54d89e317c0365951f2dd05a32b7a4b62c3747168dd7dc99f4bdb40d9c54e4"
+   "bytes": 85549,
+   "sha256": "293d00a860f6cbbac4cc915c71b7cd302364ed9cc460eb8558840c64b4a60ddb"
   },
   {
    "file": "hold_core.js",
@@ -368,8 +368,8 @@
   },
   {
    "file": "journal_chain.js",
-   "bytes": 5740,
-   "sha256": "eb078187af202f6f09f8e6da2a2f58bf194b961571eaa4fe4b0920720581bcf9"
+   "bytes": 8670,
+   "sha256": "c4e76bc53294452e7be17989f8ba4560148bfc07fec2ca0cb8e5ac7b937039df"
   },
   {
    "file": "keyword_intent.js",
@@ -447,6 +447,6 @@
    "sha256": "b0e722b37619b1f8a288dc4dfb2ded7a382da77a9905b0e079cc73508adacfc5"
   }
  ],
- "total_bytes": 728439,
- "tree_sha256": "5ce5908d185559715fe6a43d53caa1c5de77af5dc17611cd4685ee98fd5971fd"
+ "total_bytes": 732035,
+ "tree_sha256": "27ad838fc615986a0f076a3835f89f161c19a52d67aa2583bd6135581a48c460"
 }
