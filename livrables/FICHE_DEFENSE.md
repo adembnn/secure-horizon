@@ -1,25 +1,29 @@
-# Fiche de défense : Hold up (Track 1, Fintech Security)
+# Fiche de défense : Hold up (Track 1, Guardians of Value)
 
-**Menace.** Tout service peut être compromis : site, contrat, interface détournée. Camille veut échanger 50 USDC ; on lui demande un droit de dépense illimité, ou une signature « de connexion » qui accorde un droit. Son portefeuille affiche la demande sans alerte propre si l'adresse n'est pas listée comme malveillante (code public de MetaMask, non observé à l'écran).
-**Réponse.** Hold up est une couche indépendante, pensée pour se poser devant le portefeuille existant. Étage un : Camille écrit ce qu'elle veut faire, du code lit montant, jeton et adresse dans la demande, et répond « Ça correspond » (le portefeuille s'ouvre seul après une seconde), « Ça ne correspond pas » (alerte, Annuler visible) ou « Je n'ai pas pu vérifier ». Étage deux : un plancher de règles qui ne dépend pas de sa phrase.
+**Promesse.** Cesser de donner plus que nécessaire, car on s'expose en le faisant.
+**Menace.** Tout service peut être compromis. Camille veut échanger 50 USDC ; le site demande un droit illimité, ou une signature « de connexion » qui accorde un droit. Pour une adresse non listée comme malveillante, MetaMask affiche « illimité » sans alerte et ne sait ni combien elle voulait donner ni à qui (code public de MetaMask, non observé à l'écran).
+**Réponse.** Extension Chrome devant le portefeuille existant, sans clé, sans signature. Camille écrit ce qu'elle veut faire ; du code lit montant, jeton et adresse et répond « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. », « Ça ne correspond pas » (alerte, Annuler visible) ou « Je n'ai pas pu vérifier ». Règles de base indépendantes de la phrase. Sur une transaction, le droit trop large est ramené au montant écrit. **Après l'alerte** : révoquer le droit en un clic (le portefeuille signe, jamais Hold up), fiche d'incident, cahier rejouable : démo web, portefeuille simulé, pas encore dans l'extension.
+**Démo.** Deux fenêtres, le même site Neve, l'un piraté : sans Hold up, 100 USDC tombent à 0 (script qui lit la chaîne) ; avec Hold up, « Ça ne correspond pas » et droit ramené à 50. Vrai Chromium, portefeuille simulé, copie locale d'Avalanche (`livrables/pitch_v7/DEMO_DEROULE.md`).
 
-**NIST CSF 2.0.** Detect : DE.AE-02, DE.AE-07, DE.CM-09. Respond : RS.MI-01, au sens large. Trace : PR.PS-04, RS.AN-06. Secondaire : PR.AA-05 (moindre privilège). **ATT&CK.** T1657, T1566, T1204, T1684.001, T1070. Détail : `livrables/MAPPING_REFERENTIELS.md`.
-
-**Métriques** (source unique : `livrables/CHIFFRES.md`).
+**Métriques** (source unique : `livrables/CHIFFRES.md`). La preuve citée en premier est le jeu aveugle.
 
 | Mesure | Jeu | Valeur |
 |---|---|---|
-| Écarts « j'ai écrit X, la demande donne Y » | 410 cas écrits par nous | 228 sur 228 signalés ; 0 fausse alerte rouge sur 166 jumeaux. Test de couverture |
-| Phrase contre demande, code seul | Contrôle scellé de 1 079 paires, même auteur que les règles | 86,6 % attrapés [83,1 ; 89,4] ; 7,7 % de fausses alertes |
-| Idem, un modèle classe et le code compare | idem | 86,6 % ; 1,3 % ; modèle seul juge : 64,4 % |
-| Conditions produit | 3 254 arnaques, 2 136 honnêtes (synthétiques) | rappel rouge 71,3 % ; honnêtes en rouge 13,9 % ; avec au moins un avertissement 54,2 % |
-| Trafic réel Avalanche | 6 325 transactions, légitime présumé | 19 rouges (0,30 %) ; 76,84 % d'avertissements, 95,8 % d'opacité |
-| Temps de verdict local | 400 requêtes, sans réseau | médiane 32,31 ms, p95 47,33 ms (varie) |
+| **Jeu aveugle (A6)**, code seul | 150 arnaques, 100 jumeaux, autre auteur, ouvert une fois, moteur figé | Rappel **87,3 %** [81,1 ; 91,7] ; rouge seul 76,0 % ; faux rouges **15,0 %** [9,3 ; 23,3] ; faux avertissement ou rouge 30 % |
+| Idem, Clef classe puis le code compare | idem | 88,7 % ; rouge 78,0 % ; faux rouges 16,0 % |
+| Idem, plancher sans phrase | idem | 64,7 % ; rouge 53,3 % ; faux rouges 15,0 %. Gain de la phrase : +34 à +36 arnaques signalées |
+| Critères publiés avant | | Rappel au moins 80 % : **atteint**. Faux rouges au plus 10 % : **non atteint** |
+| Grille de contrôle (A11, A12) | 1 079 paires écrites par nous | 86,6 % ; 7,7 % (code) ou 1,3 % (avec Clef). Pas une garantie |
+| Trafic réel Avalanche (B11) | 6 325 transactions, légitime présumé | 0,30 % de rouges ; 76,84 % d'avertissements |
+| Verdict local (A16) | 400 requêtes, sans réseau | médiane sous 50 ms |
 
-**Réponse et temps.** L'alerte s'affiche avant le portefeuille. Appel à Clef-flash (relais seulement) : p50 369 ms, p95 1 083 ms. Temps de décision de personnes réelles : à mesurer. Aucun verdict vert.
+**Limites du jeu aveugle.** Auteur : une IA de la même famille que celle qui nous a aidés. Cas synthétiques. Mesuré en Node, pas dans Chrome. 3 fichiers non commités au moment de l'ouverture (notés au journal). Points faibles : achat NFT à prix quasi nul (11 des 15 faux rouges), jeton différent (63 %), chaîne ou domaine différent (67 %, souvent invérifiables).
 
-**Où va la phrase.** Build autonome : nulle part, aucun accès réseau, lecture par mots-clés. Avec le relais Clef branché : vers un modèle hébergé ; minimisation et durée de conservation non rédigées. Montants et adresses sont lus par du code.
+**Où va la phrase.** Build livré : la phrase seule part vers le modèle Clef par un relais local qui garde la clé, jamais les montants ni les adresses ; base légale et conservation non rédigées. Option sans réseau : lecture par mots-clés. Le modèle ne peut pas baisser une alerte du code.
 
-**À mesurer.** Jeu aveugle de 250 cas (autre auteur, hash publié) ; contrôle par un autre auteur que le nôtre ; essai avec un vrai portefeuille ; détection sur Fuji ; compréhension par des personnes.
+**Trace.** Cahier chaîné par hachage, y compris dans le build autonome : ligne modifiée, retirée ou déplacée au milieu détectée. Réécriture complète non détectée sans ancrage externe, non fait. Deux inexactitudes relevées par l'audit (passage automatique noté comme confirmation humaine ; limitation à 50 non notée) : à corriger.
 
-**Limites.** Fraude voulue, intention vague, contrat qui change à l'exécution, Ledger direct : hors périmètre. Une signature ne peut pas être limitée, on le dit. Fausses alertes élevées : limite principale. Cas et règles écrits par nous. Jamais essayé avec un vrai portefeuille ; démo sur chaîne locale, Fuji non déployé. Une revue de sécurité interne a trouvé des contournements possibles dont un critique : corrections en cours, nous ne disons pas « sécurisé ». Journal : la version autonome garde 500 lignes locales non chaînées ; le journal chaîné par hachage (ligne modifiée ou retirée détectée, pas une réécriture complète sans ancrage) est celui de la version serveur. Hold up alerte et laisse décider ; aucune conformité déclarée (`livrables/SLIDE_CONFORMITE.md`).
+**Ce qu'on ne couvre pas.** Sur 58 paires d'essai, 18 contrôlées : pas encore le sens d'un échange, la contrepartie, la durée d'un droit, ni à qui il est donné (la perte est bornée, pas évitée). Fraude voulue, phrase dictée exacte, Ledger direct, téléphone. Permit et Permit2 signés : pas de révocation en un clic. Jamais essayé avec un vrai MetaMask ; démonstration sur une copie locale d'Avalanche, déploiement Fuji préparé et répété, non exécuté ; revue de sécurité corrigée en Node, non vérifiée dans Chrome : nous ne disons pas « sécurisé ». Aucune conformité déclarée (`livrables/SLIDE_CONFORMITE.md`).
+
+**Référentiels.** NIST CSF 2.0 : DE.AE-02, DE.AE-07, DE.CM-09, RS.MI-01, PR.PS-04, RS.AN-06 ; limiter un droit relève aussi de PR.AA-05 (Protect). ATT&CK : T1657, T1566, T1204. Détail : `livrables/MAPPING_REFERENTIELS.md`.
+**Modèle économique** (`research/titouan/BM2/BM_MODELE.md`). Gratuit pour la personne. Paient ceux qui portent la perte : API « verdict avant retrait » pour exchanges et fintechs (premier revenu visé), licence SDK pour portefeuilles (premier pilote), mandats pour agents qui dépensent (pari à 2 ans). Pilotes B2B recherchés maintenant. Prix envisagés : hypothèses, aucun client.

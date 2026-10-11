@@ -1,23 +1,20 @@
 # Script de la vidéo de démo : un seul fichier, 2 min 40
 
-Base : `research/titouan/PITCH_V3_TITOUAN.md` corrigé (voir `livrables/PITCH_5MIN.md`). Format : 1280x720, 30 images par seconde, fenêtre de navigateur de bureau, lisible sans son. Chaque plan porte une légende en bas de l'image (22 px minimum, fond uni). La voix off est facultative et reprend la légende mot pour mot.
-Règle de vérité : la vidéo montre ce qui tourne réellement, sur la chaîne locale, avec l'extension autonome chargée. Pas de Fuji, pas de portefeuille simulé sans le dire, pas de montage qui change un verdict. Chaque plan est une prise continue.
-Ancien matériel : les trois clips de `livrables/video/` montrent l'ancien produit (leurre, RPC de garde, sosie d'adresse). Ils ne servent plus. Aucun plan de la vidéo finale n'en vient.
-Enregistrement : script de rejeu `research/demo_reelle/site_echange/test/film_scene.mjs` (arguments : dossier playwright-core, chrome.exe, dossier de sortie, racine du dépôt, mode `honnete|piege|permit`, phrase). Non lancé à la rédaction : le garde-fou de la session refuse un Chromium avec débogage. À jouer à la main sur la machine d'Adem ou de Titouan.
+Base : `research/titouan/PITCH_V7_TITOUAN.md` et la scène d'Adem (`livrables/pitch_v7/DEMO_DEROULE.md`, qui fait foi pour les gestes et leur état). Format : 1280x720, 30 images par seconde, lisible sans son. Chaque plan porte une légende en bas de l'image (22 px minimum, fond uni). La voix off est facultative et reprend la légende.
+Règle de vérité : vrai Chromium avec l'extension, portefeuille simulé, copie locale d'Avalanche, jetons de démo déclarés. Le terminal « 100 vers 0 » est un script qui lit la chaîne : sa légende le dit. La révocation vient de la démo web, portefeuille simulé : sa légende le dit. Pas de Fuji, pas de montage qui change un verdict. Chaque plan est une prise continue.
+Ancien matériel : les clips de `livrables/video/` montrent l'ancien produit. Aucun plan n'en vient.
+Enregistrement : `research/demo_reelle/site_echange/test/film_scene.mjs` pour Neve ; capture manuelle pour la démo web.
 
 | # | Durée | Source à enregistrer | Légende à l'image (et voix) |
 |---|---|---|---|
-| 1 | 0:00 à 0:12 | Titre fixe : « Hold up. Une couche indépendante devant ton portefeuille. » Sous-titre : « Tout service peut être compromis. Ce jour-là, tu perds ce que tu lui as laissé le droit de prendre. » Mention « chaîne locale, argent fictif » en petit | Idem |
-| 2 | 0:12 à 0:27 | Site Neve, mode piège. Le champ « Que veux-tu faire sur Neve ? » : on tape « échanger 50 USDC contre AVAX » | « J'écris ce que je veux faire, avant de voir la demande. » |
-| 3 | 0:27 à 0:57 | Le site envoie la demande. Fenêtre Hold up : « Ça ne correspond pas à ce que tu as écrit. » et la ligne sur le droit illimité. Le portefeuille ne s'ouvre pas | « Le site demande un droit sur tout l'USDC. Tu avais écrit 50. Ça ne correspond pas. » |
-| 4 | 0:57 à 1:10 | Même plan, bouton Annuler. Contrôle de la chaîne : le droit n'existe pas | « Annuler : rien n'est accordé. La personne décide toujours. » |
-| 5 | 1:10 à 1:30 | Neve, mode honnête, même phrase. « Ça correspond à ce que tu as écrit. » puis le portefeuille s'ouvre seul après une seconde | « Même phrase, site honnête : 50 USDC, pas plus. Ça correspond. Rien à cliquer. » |
-| 6 | 1:30 à 1:45 | Neve, mode piège par signature (`via=permit`) : « Ça ne correspond pas », avec la ligne « cette signature ne peut pas être limitée » | « Une signature accorde un droit sans transaction. Elle ne peut pas être limitée. On le dit. » |
-| 7 | 1:45 à 2:00 | Glacier Rewards : phrase « me connecter », la page demande un droit de dépense : « Ça ne correspond pas » | « Tu voulais te connecter. La page demande un droit de dépense. » |
-| 8 | 2:00 à 2:15 | Rejeu du moteur sur le coffre à signatures multiples (`demo_typologie/safe_signataire.mjs`) : virement de 20 USDC écrit, appel délégué reçu. Écran « danger », y compris sans phrase | « Scène synthétique, adresses factices, inspirée du cas Bybit. Danger même sans phrase : c'est le plancher de règles. » |
-| 9 | 2:15 à 2:40 | Slide des mesures, puis slide « ce qu'on ne couvre pas » | « Contrôle scellé, mêmes auteurs phrases et règles : le code seul attrape 86,6 %, avec 7,7 % de fausses alertes ; avec un modèle qui classe, 1,3 %. Produit, banc synthétique : 13,9 % de rouges sur des honnêtes. Avalanche réel : 0,30 % de rouges, 76,84 % d'avertissements. Jeu aveugle pas passé. Hors périmètre : fraude voulue, Ledger direct. » |
+| 1 | 0:00 à 0:10 | Deux fenêtres Neve côte à côte. Mention « copie locale d'Avalanche, argent fictif » | « Le même site. L'un des deux a été piraté. À l'œil, impossible à dire. » |
+| 2 | 0:10 à 0:35 | Gauche (`?mode=honnete`) : on tape `échanger 50 USDC contre AVAX`, « Ça correspond » | « J'écris ce que je veux faire. Le site demande 50 USDC. Ça correspond, d'après ce que Hold up sait lire. Pas une garantie. » |
+| 3 | 0:35 à 0:55 | Terminal `preuve.mjs`, mode piège : « solde de la victime vide : 100.0 vers 0.0 » | « Site piraté, sans Hold up : un droit sur tout l'USDC. Cent USDC, zéro. Lecture de la chaîne, compte de test. » |
+| 4 | 0:55 à 1:25 | Droite (`?mode=piege`), même phrase : « Ça ne correspond pas », « Droit limité à 50 USDC », Annuler | « Avec Hold up : ça ne correspond pas. Tu as écrit 50, la demande donne tout. Annuler : rien ne part. Sinon, le droit est ramené à 50. » |
+| 5 | 1:25 à 1:50 | Démo web : scène qui accorde un droit, « tu as continué par erreur », « Révoquer ce droit », faux portefeuille qui signe | « Après l'alerte : un clic pour révoquer. Le portefeuille signe, Hold up jamais. Démo web, portefeuille simulé. » |
+| 6 | 1:50 à 2:05 | Démo web : fiche d'incident, « rejouer une ligne », puis « retoucher une ligne » : la chaîne se casse | « Une fiche d'incident. Chaque ligne du cahier se rejoue. Une ligne changée se voit. » |
+| 7 | 2:05 à 2:40 | Carton du jeu aveugle, puis carton « Contrôlé aujourd'hui, pas encore » | « Jeu aveugle, autre auteur, ouvert une fois : 87 % des arnaques signalées, 65 % sans la phrase. 15 % des honnêtes en rouge, au-dessus de notre seuil. Auteur : une IA de la même famille. Pas encore : le sens d'un échange, la fraude voulue, un vrai MetaMask. » |
 
-Total : 2 min 40. Si le plan 8 ne se rejoue pas : le couper, la vidéo tombe à 2 min 25 et reste valable (consigne : 2 à 3 minutes).
-Le plan 9 est dense : si la légende est illisible à 22 px en moins de 25 secondes, ne garder à l'écran que « 86,6 % / 7,7 % », « 13,9 % » et « 0,30 % / 76,84 % », le reste va en voix.
-Montage : coupes sèches, ni musique ni transition. Légendes écrites après avoir vu l'écran. Si la fenêtre affiche une autre phrase que celles de `extension/outcome.js`, la légende reprend la phrase affichée.
-Avant chaque prise : chaîne locale lancée, site Neve servi sur 8793, extension autonome chargée, trois modes rejoués une fois sans enregistrer.
+Total : 2 min 40. Si le plan 6 ne se rejoue pas : le couper, la vidéo tombe à 2 min 25 et reste valable (consigne : 2 à 3 minutes).
+Plan 7 : à l'écran, seulement « 87 % / 65 % / 15 % » et la ligne « auteur de la même famille de modèles, seuil de 10 % manqué ».
+Montage : coupes sèches, ni musique ni transition. Si la fenêtre affiche une autre phrase que celles écrites ici, la légende reprend la phrase affichée.

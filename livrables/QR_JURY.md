@@ -1,73 +1,107 @@
 # Les questions les plus dures, réponses vraies en deux ou trois phrases
 
-Produit : une couche indépendante devant le portefeuille. Étage un : la personne écrit ce qu'elle veut faire, du code compare avec l'effet de la demande, alerte sinon. Étage deux : un plancher de règles qui ne dépend pas de la phrase. Chiffres : `livrables/CHIFFRES.md` seulement. Sources des positions : `research/demo_reelle/RECHERCHE_metamask_couverture.md` (MM), `RECHERCHE_concurrents_particuliers.md` (CP), `RECHERCHE_these_moindre_privilege.md` (MP), `RECHERCHE_chiffres_douleur.md` (CD), `research/titouan/Y_typologie_demos.md` (Y), `X_scenarios_hors_metamask.md` (X), `research/titouan/T_banc_e2e/security_review2/REVUE.md` (REVUE).
-Une mention « à mesurer » est voulue : si un chiffre arrive avant 12h00, le reprendre tel quel, bon ou mauvais.
+Base : `research/titouan/PITCH_V7_TITOUAN.md` (fusion avec le pitch d'Adem). Les réponses d'Adem (`livrables/pitch_v7/QR.md`) restent valables ; en cas d'écart de chiffre, `livrables/CHIFFRES.md` tranche. Produit : une extension devant le portefeuille. Étage un : la personne écrit ce qu'elle veut faire, du code compare avec l'effet de la demande. Étage deux : des règles de base qui ne dépendent pas de la phrase. Après l'alerte : révoquer en un clic, fiche d'incident, cahier rejouable. Chiffres : `livrables/CHIFFRES.md` seulement. Sources : `research/demo_reelle/RECHERCHE_metamask_couverture.md` (MM), `RECHERCHE_concurrents_particuliers.md` (CP), `RECHERCHE_these_moindre_privilege.md` (MP), `research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md` (AVEUGLE), `webdemo/RAPPORT_REVOQUER.md` (REVOQUER), `extension/RAPPORT_SECURITE_CORRECTIFS.md` (CORRECTIFS), `security_review2/REVUE.md` (REVUE).
 
-## Les questions du pitch V3 (à savoir par coeur)
+## La preuve (à savoir par coeur)
 
-**1. C'est un MetaMask avec des fonctions en plus ?**
-Non. Hold up ne remplace pas le portefeuille, ne tient aucune clé et ne signe rien. C'est une couche qui se place devant celui que la personne a déjà. Elle ajoute deux choses que, d'après le code public de MetaMask, un portefeuille n'a pas aujourd'hui : ce que la personne voulait faire, écrit avant de voir la demande, et un plancher de règles qui ne dépend pas de cette phrase. Les portefeuilles font déjà une partie du travail (listes, simulations, Added Protection) et Hold up ne les remplace pas. Nous ne l'avons jamais essayée avec un vrai MetaMask.
+**1. Votre preuve est-elle indépendante ?**
+Plus qu'avant, pas complètement. Le jeu aveugle (150 arnaques, 100 jumeaux honnêtes) a été écrit sans lire nos règles, scellé par une empreinte publiée, ouvert une seule fois, moteur figé (commit 74203da, avec trois fichiers modifiés non commités, notés au journal d'ouverture). Mais l'auteur est une IA de la même famille que celle qui nous a aidés, et les cas sont synthétiques. Il manque un jeu écrit par des personnes.
 
-**2. Et si tout est compromis demain ?**
-C'est le point de départ : tout service peut l'être, y compris le nôtre. D'où le principe du moindre privilège : Hold up ne tient ni clé ni fonds, donc compromis il ne peut rien signer ; le pire est qu'il se taise, affiche un faux écran ou modifie la demande avant le portefeuille (il réécrit déjà un droit trop large), et le portefeuille affiche alors la demande telle qu'elle lui arrive et demande toujours son geste. Mais ne pas dire « sécurisé » : notre revue interne a trouvé des contournements, dont un critique (une page peut remplacer des fonctions natives du navigateur et laisser passer une demande sans fenêtre Hold up). Les corrections sont en cours, non vérifiées dans un vrai navigateur. Le build autonome n'a aucun réseau, donc aucun service distant à compromettre ; avec le relais Clef, il y en a un.
+**2. Quels étaient vos critères, et sont-ils atteints ?**
+Publiés avant l'ouverture : au moins 80 % d'arnaques signalées, au plus 10 % de rouges sur les honnêtes. Le premier est atteint : 87,3 % [81,1 ; 91,7]. Le second non : 15,0 % [9,3 ; 23,3]. Rien n'a été réglé après l'ouverture (AVEUGLE).
 
-**3. Pourquoi une extension et pas un portefeuille ?**
-Parce que la personne garde son portefeuille, ses clés et ses habitudes, et que nous n'avons rien à garder : pas de garde de fonds, pas de clés à protéger. C'est aussi le prix : une extension ne voit que ce qui passe par `window.ethereum`, ni un Ledger branché en direct, ni le mobile, et une page hostile peut essayer de la contourner (REVUE S1, S6). Un portefeuille ferait mieux ; si MetaMask intègre l'idée, tant mieux.
+**3. D'où viennent les 15 % de faux rouges ?**
+11 des 15 viennent d'une seule famille : un achat de NFT honnête à prix quasi nul, que nos règles lisent comme une vente bradée. Nous ne retirons pas cette famille du calcul pour afficher un meilleur taux. Avec les avertissements, 30 % des honnêtes reçoivent une alerte : c'est notre limite principale.
 
-**4. Où va la phrase ?**
-Dans le build autonome (`dist\hold-up-standalone.zip`) : nulle part. Il n'a aucun accès réseau (aucune permission d'hôte, `connect-src 'none'`) et lit la phrase par mots-clés dans le navigateur. Si on branche le relais Clef, la phrase part vers un modèle hébergé, via un relais local qui garde la clé. Minimisation et durée de conservation chez le fournisseur ne sont pas rédigées. Les montants, jetons et adresses sont lus localement par du code. À traiter avant tout service hébergé.
+**4. Où ratez-vous ?**
+Jeton différent de celui écrit : 63,2 % signalés. Chaîne ou domaine différent : 66,7 %, et 12 cas sur 18 restent invérifiables. Connexion qui signe un droit : 73,7 %. Les arnaques signalées seulement en avertissement (17) sont surtout des droits illimités vers un routeur.
 
-**5. Les fausses alertes ?**
-Trop hautes, et nous le disons en premier. Banc synthétique en conditions produit : 13,9 % des honnêtes reçoivent un écran rouge, 54,2 % au moins un avertissement. Trafic réel Avalanche : 19 rouges sur 6 325 (0,30 %), mais 76,84 % d'avertissements, surtout parce que le moteur ne sait pas lire 74,5 % des appels ; sur les 19 rouges relus, 2 sont de fausses alertes confirmées, 2 de vraies, 15 indéterminées. Sur Ethereum, 13 des 20 rouges relus sont de fausses alertes. Sur la grille phrase contre demande (contrôle scellé), le code seul fait 7,7 % de fausses alertes, dues à une tournure mal lue (« donner à X le droit ») ; avec un modèle qui classe, 1,3 %. Le mode honnête de Neve montre un cas qui ne sonne pas.
+**5. La phrase écrite sert-elle vraiment ?**
+Sur le jeu aveugle, oui : le plancher sans phrase signale 64,7 %, le code avec la phrase 87,3 %, soit 34 arnaques de plus sur 150, sans aucun cas sous le plancher. Les faux rouges restent à 15 % dans les deux cas : la phrase ajoute des détections, pas de fausses alertes rouges.
 
-## Les deux réponses préparées
+**6. Et votre 1,3 % de fausses alertes ?**
+Il vient de notre grille de contrôle de 1 079 paires, écrite par nous : nous ne le citons plus comme garantie. Sur le jeu aveugle, le modèle qui classe donne 16,0 % de faux rouges.
 
-**6. Et si MetaMask élargit son questionnaire ?**
-Il a déjà l'écran, les questions et un délai de 10 secondes : un « Security check » de trois questions fermées, ouvert seulement quand Blockaid a classé un envoi malveillant ou que le site est sur une liste (MM, lu dans le code public). Élargir le déclencheur est un changement de réglage, nous le disons. Aujourd'hui, ses réponses sont des choix fermés qui ne sont jamais rapprochés du montant, du destinataire ou de l'appel. Notre apport tient à trois choses vérifiables aujourd'hui, pas à une barrière durable : une phrase libre, écrite avant de voir la demande, sur toute demande qui déplace de la valeur ou accorde un droit, et une comparaison avec l'effet réel. Si MetaMask le fait, la personne est mieux protégée, et c'est tant mieux ; notre intégration passerait alors par eux.
+## Le produit
 
-**7. Qui est responsable si le modèle se trompe ?**
-Le modèle ne lit que la phrase de la personne, et seulement si le relais Clef est branché. Les montants, jetons et adresses sont extraits par du code, et le comparateur est du code. Mesure de la grille (contrôle scellé, même auteur que les règles) : quand Clef juge seul, 64,4 % des écarts attrapés et 64 invérifiables pris pour « correspond » ; quand il classe et que le code compare, 86,6 % attrapés, 4 ratés sur 461. Deux erreurs possibles : une fausse alerte coûte un clic ; une alerte manquée laisse la personne dans la situation où elle serait sans l'outil. La personne garde le dernier geste, Annuler est visible, et quand le modèle hésite la réponse est « je n'ai pas pu vérifier », jamais « correspond » par défaut. La responsabilité du contenu des règles et du choix du modèle est celle de l'éditeur ; celle des réglages et du déploiement revient à la plateforme qui nous intègre ; la décision de signer reste à la personne. Une règle tenue : une phrase ne baisse jamais un plancher objectif. Mesuré : 0 violation sur 1 079 paires (bras code) et aucun cas sous le serveur seul sur 10 437 cas du pipeline strict ; non vérifié dans l'extension elle-même, et la revue note qu'un modèle abusé peut alléger certains faits (REVUE S14).
+**7. C'est un MetaMask avec des fonctions en plus ?**
+Non. Hold up ne tient aucune clé et ne signe rien. Il ajoute ce que la personne voulait faire, écrit avant de voir la demande, et des règles qui ne dépendent pas de cette phrase. Les portefeuilles font déjà une partie du travail (listes, simulations) et Hold up ne les remplace pas. Nous ne l'avons jamais essayé avec un vrai MetaMask.
+
+**8. « Ça correspond », c'est un feu vert ?**
+Non. L'écran dit : « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. » Le portefeuille s'ouvre et demande toujours son geste.
+
+**9. Que se passe-t-il après l'alerte ?**
+La personne annule ou continue. Si elle a continué par erreur, un bouton « Révoquer ce droit » prépare la demande de retrait ; le portefeuille la signe, jamais Hold up. Une fiche d'incident dit ce qui a été demandé, montré et décidé, et chaque ligne citée se rejoue. Dans la démo web, le portefeuille est simulé ; 25 tests du module et 135 vérifications de la démo (REVOQUER). Le branchement dans l'extension reste à faire.
+
+**10. Tout se révoque en un clic ?**
+Non. Un clic seulement si une transaction suffit : approve, increaseAllowance, setApprovalForAll, Permit2.approve. Un Permit EIP-2612 ou DAI, ou un Permit2 signé, demande plusieurs étapes ou l'échéance : pas de bouton, nous l'expliquons.
+
+**11. Où va la phrase ?**
+Dans le build livré (décision D-015), la phrase seule part vers le modèle Clef, par un relais sur la machine qui garde la clé ; jamais les montants, les jetons ni les adresses, lus par du code sur place. Base légale et durée de conservation chez le fournisseur ne sont pas rédigées : à faire avant tout service hébergé. Une option sans réseau lit la phrase par mots-clés et comprend moins de tournures.
+
+**12. Qui est responsable si le modèle se trompe ?**
+Le modèle ne décide ni du montant ni de l'adresse : du code les lit et compare. Il ne peut pas baisser une alerte du code. Une erreur de sens peut manquer une alerte de comparaison ; une fausse alerte coûte un clic. La personne garde le dernier geste, le cahier dit ce qui lui a été montré. Pour l'AI Act : une décision, une ligne, l'humain tranche, sans qualification juridique établie. Les obligations des plateformes régulées restent à la plateforme qui déploie : nous ne revendiquons aucune conformité.
+
+**13. À quoi sert le modèle, alors ?**
+À comprendre un français familier. Sur le jeu aveugle, il n'apporte pas de gain net mesurable (88,7 % contre 87,3 %, 16 % contre 15 % de faux rouges). Il est optionnel ; ce qui compte, c'est la phrase et le code qui compare.
+
+**14. Le cahier peut-il être réécrit ?**
+Il est chaîné par hachage, aussi dans le build autonome : une ligne changée, retirée ou déplacée au milieu se voit (7 tests). La suppression des dernières lignes ou une réécriture complète ne se voit pas sans ancrage externe ; l'ancrage sur Fuji n'est pas déployé. Le cahier ne garde ni la phrase ni une adresse. L'audit a relevé deux inexactitudes : le passage automatique de la deuxième demande est noté comme une confirmation humaine, et la limitation à 50 USDC n'y figure pas. À corriger avant de parler d'auditeur.
+
+**15. C'est sécurisé ?**
+Nous ne le disons pas. Une revue interne a trouvé des contournements, dont un critique (une page qui remplace des fonctions natives). Les correctifs sont écrits et testés en Node (CORRECTIFS), pas vérifiés dans un vrai Chrome. Compromis, Hold up ne peut rien signer : le pire est qu'il se taise ou affiche un faux écran.
 
 ## Les autres
 
-**8. Vos mesures sont-elles indépendantes ?**
-Non. Les cas et les règles sont écrits par nous. Le 228 sur 228 est un test de couverture. Le contrôle scellé de la grille (1 079 paires, sha256 publié avant la mesure, une seule mesure par bras) est plus honnête que le réglage (99,1 % contre 86,6 %), mais même auteur pour les phrases et pour les règles, un seul modèle (Clef-flash), un seul contexte par famille. Le jeu aveugle de 250 cas, d'un autre auteur, hash publié, reste à passer, une seule fois.
+**16. Avez-vous essayé avec un vrai MetaMask ?**
+Non. Le protocole et la grille de résultats existent, vides. La démo tourne avec un portefeuille simulé sur une copie locale d'Avalanche, que l'API d'alertes de MetaMask ne sert pas : son silence là ne prouve rien. Notre phrase sur l'illimité vient de son code public. Fuji : déploiement préparé et répété, non exécuté (D-016).
 
-**9. L'intention écrite apporte-t-elle vraiment quelque chose ?**
-Sur les arnaques vertes sans intention (298), la phrase libre n'en arrête aucune : les textes se réduisent à « virement ». Il manque un jeu d'arnaques construit pour la thèse. Ce que la grille mesure, c'est la comparaison phrase contre demande, pas l'apport sur de vraies arnaques. Là où la phrase contient un montant, l'écart est mesurable.
+**17. Et si MetaMask élargit son questionnaire ?**
+Il a déjà l'écran et un « Security check » de questions fermées, ouvert quand un envoi est classé malveillant (MM). Élargir le déclencheur est un réglage. Notre avance tient à une phrase libre, sur toute demande, comparée à l'effet. Ce n'est pas une barrière durable ; si MetaMask le fait, tant mieux.
 
-**10. Avez-vous essayé avec un vrai MetaMask ?**
-Non, pas de résultat consigné. Notre démo tourne sur une chaîne locale, que l'API d'alertes de MetaMask ne sert pas : son silence là ne prouve rien. Notre affirmation sur l'illimité vient de son code public, lu le 11 oct. Un essai sur Sepolia est à faire.
+**18. Un escroc au téléphone dicte la phrase.**
+Si la phrase est exacte, la comparaison ne voit rien. Les règles de base voient encore un droit illimité vers une adresse inconnue. Un envoi consenti vers une adresse neuve n'est pas couvert.
 
-**11. MetaMask permet déjà de modifier le plafond.**
-Oui, et Talisman plafonne au solde, Matcha et LI.FI sont au montant fini par défaut (MP). Le principe n'est pas de nous. Ce que nous ajoutons est étroit : le montant de référence vient de la phrase que la personne vient d'écrire, sur tout site, y compris ceux qui demandent l'illimité. Que les gens gardent le plafond n'est pas mesuré.
+**19. Et la fraude que la personne veut faire ?**
+Hors périmètre. La fraude à l'investissement pèse 7,2 Md$ de plaintes en 2025 (IC3) : nous ne la traitons pas.
 
-**12. Pocket Universe, Rabby, Revoke ou Vitalik font déjà ça ?**
-Vitalik a décrit le principe le 22 février 2026 (CP, relais de presse), IntentGuard compare des résultats attendus saisis après coup, des projets de hackathon le font pour des agents. Nous n'avons trouvé aucun outil grand public qui fasse écrire la phrase libre avant la demande puis la compare à l'effet (« non trouvé dans les docs lues »). Notre apport est l'assemblage et le geste, pas le principe.
+**20. Et sur Avalanche ?**
+Sur 6 325 transactions réelles : 0,30 % de rouges, mais 76,84 % d'avertissements, surtout des appels que le moteur ne sait pas lire. Démonstration sur une copie locale d'Avalanche ; déploiement Fuji préparé et répété, non exécuté.
 
-**13. Et la fraude que la personne veut faire ?**
-Hors périmètre. Si elle écrit « envoyer 5 000 USDC à cette adresse » sous la dictée d'un escroc, la demande correspond. La fraude à l'investissement pèse 7,2 Md$ de plaintes en 2025 (IC3), nous ne la traitons pas.
+**21. Un Ledger branché directement ?**
+Une extension ne voit que ce qui passe par le navigateur. Si la page parle au matériel en direct, nous ne voyons rien.
 
-**14. Un escroc au téléphone dicte la phrase.**
-Alors elle décrira la demande piégée sans écart, ou restera vague. Nous disons « je n'ai pas pu vérifier » pour le vague (sur la grille, 133 phrases vagues, hors sujet ou injection : jamais prises pour « correspond » par le code). Pour une phrase dictée et exacte, rien ne l'arrête : limite assumée. Le plancher de règles, lui, ne dépend pas de la phrase.
+**22. Pour une banque ou un exchange ?**
+Le même moteur pourrait répondre avant un retrait, via une API de verdict sans état. Non construit.
 
-**15. Un contrat qui change à l'exécution ?**
-MetaMask traite mieux ce cas avec Added Protection (revert si l'effet diffère de l'aperçu, MM). Nous ne le revendiquons pas.
+**23. MetaMask permet déjà de modifier le plafond.**
+Oui, et d'autres outils sont au montant fini par défaut (MP). Notre ajout est étroit : le montant de référence vient de la phrase que la personne vient d'écrire, sur tout site.
 
-**16. Une signature Permit peut-elle être réécrite ? Hold up modifie-t-il ma transaction ?**
-Une signature, non : le site construit le message, un changement invaliderait la signature. Nous alertons et le disons. Pour une transaction (approve, increaseAllowance), Hold up peut remplacer lui-même le droit trop large par le montant écrit avant le portefeuille, seulement si la phrase contient une seule somme lisible, que le jeton est connu et que rien d'autre ne sort (ligne affichée : « Droit limité à 50 USDC »). Prouvé en Node, pas dans un vrai Chrome. La revue relève qu'un faux jeton qui annonce le symbole USDC peut rassurer à tort (REVUE S15) ; le montant, lui, ne monte jamais.
+**24. Quelqu'un fait déjà ça ?**
+Le principe « dire d'abord, valider après » a été décrit publiquement en février 2026 (CP). Nous n'avons trouvé aucun outil grand public qui fasse écrire la phrase libre avant la demande puis la compare à l'effet, dans les documents lus. Notre apport est l'assemblage, pas le principe.
 
-**17. Pourquoi un modèle ?**
-Pour comprendre un français familier et des fautes, là où les mots-clés échouent. Mesure de la grille, contrôle scellé : mêmes 86,6 % attrapés avec ou sans modèle, mais 1,3 % de fausses alertes contre 7,7 % et 97,2 % d'invérifiables reconnus contre 91,6 %. Les mots-clés ne généralisent pas : 33,6 % avant correction sur le réglage, 99,1 % après, 86,6 % sur le contrôle ; les ratés viennent de verbes jamais listés (« lend », « stake », « acquérir »). Clef-flash lit aussi le genre de l'intention (67,5 % contre 48,0 % sur le jeu de réglage, mesuré par Adem). Le modèle est absent du build autonome.
+**25. Votre modèle économique ? Qui paie ?**
+Pas le particulier : c'est gratuit pour lui. Paient ceux qui portent la perte : exchanges et fintechs, avec une API « verdict avant retrait » (premier revenu visé) ; portefeuilles et plateformes, avec une licence SDK (premier pilote, peut-être non payé) ; plus tard, plateformes d'agents, avec des mandats écrits. Nous cherchons des pilotes B2B maintenant. Aucun client, aucun prix de marché comparable : nos prix sont des hypothèses (`research/titouan/BM2/BM_MODELE.md`). Repère : MetaMask vend une couverture à 9,99 $ par mois (B15).
 
-**18. Un Ledger branché directement ?**
-Une extension ne voit que ce qui passe par `window.ethereum`. Si la page parle au matériel en direct, nous ne voyons rien. Les analyses publiques du cas Bybit ne disent pas ce qu'affichait l'écran du matériel : nous ne l'affirmons pas.
+**25 bis. Pourquoi ne pas finir comme Harpie ou Wallet Guard ?**
+Harpie était payée après le vol. Nous visons un service continu, avant la signature, vendu à des plateformes. L'issue probable du secteur est l'intégration ou le rachat : nous le savons.
 
-**19. Pourquoi une chaîne de blocs ?**
-Le moteur n'en a pas besoin. Le journal de la version autonome est une liste locale de 500 lignes, non chaînée. Celui de la version serveur est chaîné par hachage : une ligne modifiée ou retirée au milieu se détecte. L'ancrage sert à détecter une réécriture complète ; il n'est pas déployé sur Fuji. La revue note aussi qu'une page qui boucle sur demande et annulation peut repousser d'anciennes lignes hors du journal (REVUE S19).
+**26. Latence ?**
+Verdict local en médiane sous 50 millisecondes, sans le modèle.
 
-**20. La douleur est-elle réelle ?**
-En 2025, 83,85 M$ perdus par 106 106 victimes en signant sur un site de phishing, perte moyenne 790 $ (ScamSniffer, éditeur, EVM, borne basse). Parmi les 11 vols de plus d'un million, un Permit ou Permit2 pèse 38 % du montant. Aucune source ne mesure combien de victimes avaient une alerte et ont signé quand même.
+## La scène d'Adem (deux fenêtres)
 
-**21. Votre modèle économique ?**
-Gratuit pour les personnes, des partenaires ensuite. Pas de prix, pas de client, pas de taille de marché sourcée. Harpie et Wallet Guard ont fermé en mars 2025 : le modèle reste une question ouverte.
+**27. Dans votre scène, les 50 USDC partent chez le pirate.**
+Oui. La perte est bornée, pas évitée : Hold up ne contrôle pas encore à qui le droit est donné. Nous ne disons jamais « le pirate ne prend rien ». Le cas LI.FI montre le mécanisme dans la vraie vie : les droits limités n'ont rien perdu, selon le rapport de LI.FI.
+
+**28. « Cent, zéro », c'est dans le navigateur ?**
+Non. C'est un script qui envoie sur la chaîne locale les mêmes demandes que la page, sur un compte de test neuf, et lit les soldes. La légende le dit à l'écran.
+
+**29. Votre vérification couvre-t-elle tout ?**
+Non. Sur 58 paires d'essai, 18 sont contrôlées, 7 en partie, 20 non, 13 non distinguées. Contrôlé : le montant d'un droit, un paiement (montant, jeton, destinataire), un second droit glissé dans un lot, une prise de contrôle du compte. Pas encore : le sens d'un échange, la contrepartie, le minimum reçu, la durée d'un droit, la deuxième demande d'une même phrase. Dans la scène, « ça correspond » porte sur le droit de 50 USDC, pas sur l'échange.
+
+**30. 87 %, c'est en rouge ?**
+Non, rouge ou avertissement. En rouge seul : 76,0 %. Sur la famille de la scène (droit illimité sur un échange) : 18 sur 19 signalés, 5 sur 19 en rouge, 6 sur 19 sans la phrase ; 0 faux rouge sur 13 honnêtes.
+
+**31. Aerodrome, le NIST, l'IA d'Anthropic ?**
+Retirés du texte dit, gardés en réserve dans `livrables/pitch_v7/QR.md` avec leurs réserves : Aerodrome (81 minutes, mesure de Blockaid sur lui-même), NIST SP 800-207 (posture d'entreprise, pas les portefeuilles, référence absente du dépôt), essai d'Anthropic (207 contrats sur 405, simulation, aucun vol réel attribué à une IA).
