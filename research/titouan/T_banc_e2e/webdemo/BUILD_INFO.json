@@ -44,6 +44,10 @@
    "sha256": "5c3b9570cfe39ca8ff76f0a807e39b96c42d5ccc2b8b66e22accc6aa0cc6cf7c"
   },
   {
+   "file": "engine/src/protocols_extra.mjs",
+   "sha256": "889a3f78630f71b8dfc22d30e016384811a66697e19c6bc1c25f3addcc5f89b8"
+  },
+  {
    "file": "engine/src/registry.mjs",
    "sha256": "e93b80f646cda08ac40678cb6bd75d5eb96e690c8312c44251eff83f4bb07ca2"
   },
@@ -53,7 +57,7 @@
   },
   {
    "file": "engine/src/rules_extra.mjs",
-   "sha256": "5267934bfe087f79fad2b1c415b269e3090a46975c7d1c21fc79cd06c75deb51"
+   "sha256": "a8b6cc23a1f080b3d72db097192334230bc0b254488218dd76c8f63f9514615a"
   },
   {
    "file": "engine/src/rules.mjs",
@@ -85,7 +89,7 @@
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "ce761745beb16815d6071af6357cdb0c547ebd6e1a98727ce581be7a70587b90"
+   "sha256": "28c1126442fc4864318136a2d626553162596871dcbcc4b8dfe6e75560516082"
   },
   {
    "file": "server/server.mjs",
@@ -95,8 +99,8 @@
  "outputs": [
   {
    "file": "engine/policy.js",
-   "bytes": 7183,
-   "sha256": "e356b4f4ef2c2b7c4e3f74d71f22f7953bc82373020cbc5621a63d152e5ba16c"
+   "bytes": 7257,
+   "sha256": "b440387f9a042c67b30d39d4382e6945ad7ce5421824c0f958ae995101c61062"
   },
   {
    "file": "engine/sentinelle_core.js",
@@ -139,6 +143,11 @@
    "sha256": "5c3b9570cfe39ca8ff76f0a807e39b96c42d5ccc2b8b66e22accc6aa0cc6cf7c"
   },
   {
+   "file": "engine/src/protocols_extra.js",
+   "bytes": 11441,
+   "sha256": "6b5c49d7e995938cc29b14e593e10d105095ec50676c5448b47ac1523cd20f54"
+  },
+  {
    "file": "engine/src/registry.js",
    "bytes": 11238,
    "sha256": "a600d72c4a2e41621d52af00a0a07024766b4837335495684b18cb1c7169f561"
@@ -150,8 +159,8 @@
   },
   {
    "file": "engine/src/rules_extra.js",
-   "bytes": 16285,
-   "sha256": "ebe578c535201c3af4a2ff6523364322d33866682bc2b5edd75652f66fc3b334"
+   "bytes": 19359,
+   "sha256": "c93140986e0c239831f8f4c6b6163e47b576dda697e930319df13fb7aded7054"
   },
   {
    "file": "engine/src/rules.js",
@@ -189,6 +198,6 @@
    "sha256": "287ca2780020efc9727937b6ee27d8c5bfbe832c2677664cfc9c3392719141a5"
   }
  ],
- "total_bytes": 207020,
- "tree_sha256": "073771ec7c7e1a1ad4b28c882ffd3fa0a47d4dc1435f77f10a6568ffe0b1733b"
+ "total_bytes": 221609,
+ "tree_sha256": "6ad14ce9fb88d02e7469e5a4d8c0de444c4eaff91a31641d033ad864bc094b9f"
 }

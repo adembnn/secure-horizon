@@ -24,7 +24,7 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
   // ---- F1 : un appel dont on ne connaît pas les effets reçus ne prouve pas l'absence d'entrée : pas de no_incoming critical déduit.
   // Réserve : seulement si la cible est un protocole de la liste connue ; un contrat inconnu ET opaque ET payé garde la sévérité critical du comparateur.
   // (le plancher garde le warn d'opacité : le cas n'est jamais 'ok')
-  if (isOn('F1') && (incomplete || (isOn('F5') && eff.service)) && isKnownProtocol(ctx, eff.raw && eff.raw.to)) drop('no_incoming', 'F1:no_incoming_ignore_effets_incomplets');
+  if (isOn('F1') && (incomplete || ((isOn('F5') || isOn('F14')) && eff.service)) && (isKnownProtocol(ctx, eff.raw && eff.raw.to) || (isOn('F14') && eff.service && eff.service.trusted))) drop('no_incoming', 'F1:no_incoming_ignore_effets_incomplets');
 
   // ---- F2 : « première fois vu » n'a pas de sens pour un protocole/contrat de la liste connue (pont, routeur, collection) : c'est le point de passage, pas le bénéficiaire final.
   if (isOn('F2') && reasons.some((r) => r.code === 'first_seen_recipient')) {

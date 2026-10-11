@@ -1,0 +1,407 @@
+{
+ "avertissement": "Liste CIRCULAIRE : les 100 destinataires les plus fréquents de l'échantillon lui-même. Ce n'est pas une liste publique indépendante ; elle mesure un plafond (tout le trafic concentré est 'connu'), pas la couverture réelle d'un catalogue.",
+ "n_tx_echantillon": 6325,
+ "part_du_trafic_pct": 70.9,
+ "top": [
+  {
+   "to": "0x278d858f05b94576c1e6f73285886876ff6ef8d2",
+   "n": 477
+  },
+  {
+   "to": "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7",
+   "n": 315
+  },
+  {
+   "to": "0xcce9174424bdd18ef444846bdaccecd8ebbad550",
+   "n": 275
+  },
+  {
+   "to": "0xe844701934d9c6085b292e428f41b911cc0b3872",
+   "n": 153
+  },
+  {
+   "to": "0xa5b94d5c7b0c267b86ffc7b7af16b7cbf879721f",
+   "n": 145
+  },
+  {
+   "to": "0xf9b0c8ee13ae2fc0665764ecbdb417685dea8081",
+   "n": 137
+  },
+  {
+   "to": "0x0ac011eb02a44d3fd7ad2e837a9f5a330913af13",
+   "n": 124
+  },
+  {
+   "to": "0xeb9757a248f07472bd0fa02d700fb49c78e2067c",
+   "n": 105
+  },
+  {
+   "to": "0xb2971578b207923a7ae74ebc48b435c9c0b2815d",
+   "n": 103
+  },
+  {
+   "to": "0xc005a9bb11f162329f3efccc35f69f9bb635eec6",
+   "n": 101
+  },
+  {
+   "to": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+   "n": 98
+  },
+  {
+   "to": "0x5eba459213546091e74e1fb6d2e7ae05fb65ec0f",
+   "n": 92
+  },
+  {
+   "to": "0x2f81e039964f637a7874d756464924f25e280ba5",
+   "n": 88
+  },
+  {
+   "to": "0x6203c968ae2c15a562c53e0258fcb62e8139bd3e",
+   "n": 88
+  },
+  {
+   "to": "0x5bbb435ec20154f016ee96041c3fdfe46354603a",
+   "n": 82
+  },
+  {
+   "to": "0xd1f6ca075b345c3532ee3957f0a32a0a0c881449",
+   "n": 75
+  },
+  {
+   "to": "0x6f58058ec15bacf583a7d10aaa11672c92f1c7f9",
+   "n": 70
+  },
+  {
+   "to": "0xbb00ff08d01d300023c629e8ffffcb65a5a578ce",
+   "n": 70
+  },
+  {
+   "to": "0xabfc48e8bed7b26762745f3139555f320119709d",
+   "n": 65
+  },
+  {
+   "to": "0x9daea9462ff3dd535643e07be587517a9790acc5",
+   "n": 64
+  },
+  {
+   "to": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+   "n": 63
+  },
+  {
+   "to": "0x0000000000001ff3684f28c67538d4d072c22734",
+   "n": 60
+  },
+  {
+   "to": "0x757121c9a8259c4d6b6956c283355b2902a6baa2",
+   "n": 52
+  },
+  {
+   "to": "0xff2befc4ff86cb0f3e8d3d9d6200b7a05bf5d93d",
+   "n": 51
+  },
+  {
+   "to": "0x087befdbcf63c7d0d5d96499e66daa8d43da9790",
+   "n": 48
+  },
+  {
+   "to": "0x0b4478e810d48b5882d4019d435a2f864bab4f39",
+   "n": 47
+  },
+  {
+   "to": "0x000000003304cc6fd1e5bbf851762ed988736af3",
+   "n": 45
+  },
+  {
+   "to": "0x1ad5d102e269f2f52be892c6296027d5d36e5442",
+   "n": 44
+  },
+  {
+   "to": "0xde5c314a604b3445349222156c6ec9d83880270f",
+   "n": 44
+  },
+  {
+   "to": "0x777e0fc6d730cc42b853dc66e9fa1d8700000000",
+   "n": 42
+  },
+  {
+   "to": "0xafcba3f353b68b8f24d53ce4d6dcf6b667cdfff9",
+   "n": 42
+  },
+  {
+   "to": "0x9759fa90eb87b915dabcc312d6a59ecff8067334",
+   "n": 41
+  },
+  {
+   "to": "0x99658a82e8d4f3142c673ab809a3f87a8e8861b8",
+   "n": 39
+  },
+  {
+   "to": "0x5e0e90e268bc247cc850c789a0db0d5c7621fb59",
+   "n": 38
+  },
+  {
+   "to": "0x27f6358aaa8b0f400ef09135f9bdf267c7b2fc28",
+   "n": 37
+  },
+  {
+   "to": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
+   "n": 37
+  },
+  {
+   "to": "0x51c72848c68a965f66fa7a88855f9f7784502a7f",
+   "n": 35
+  },
+  {
+   "to": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+   "n": 32
+  },
+  {
+   "to": "0x0000000071727de22e5e9d8baf0edac6f37da032",
+   "n": 27
+  },
+  {
+   "to": "0x350945b3823e0d410c44bdac9627ddfcd9b026f9",
+   "n": 27
+  },
+  {
+   "to": "0x30f7d00aa7c3b45b78bb8b844150d8d5892de161",
+   "n": 26
+  },
+  {
+   "to": "0x65b4c56afa5dce101c4ae7dd323bd56b37eea804",
+   "n": 26
+  },
+  {
+   "to": "0xa981222220eb92c9bf03f261d9a6b6594cb66447",
+   "n": 22
+  },
+  {
+   "to": "0x55c748c33cd7edf15e6d444d26053246702c66fa",
+   "n": 21
+  },
+  {
+   "to": "0x9904ffeb660611faf51392dc8bac34c4a448d599",
+   "n": 21
+  },
+  {
+   "to": "0xbc043aa4b4020f5530df6d9e4aa6898b2de84e1f",
+   "n": 21
+  },
+  {
+   "to": "0x253b2784c75e510dd0ff1da844684a1ac0aa5fcf",
+   "n": 20
+  },
+  {
+   "to": "0x2e6fcbb9d4e17ec4cf67eddfa7d32eabc4cdcfc6",
+   "n": 19
+  },
+  {
+   "to": "0xb0204e0943e72ccdf5cf1089cd402c9b3e11a01d",
+   "n": 19
+  },
+  {
+   "to": "0x0000000000000068f116a894984e2db1123eb395",
+   "n": 18
+  },
+  {
+   "to": "0x09fc9b7545020f6a51d113e495e0a451597969d3",
+   "n": 18
+  },
+  {
+   "to": "0x3640ca3e4fd098095c5bbebdf42c3d6d7a1154ce",
+   "n": 18
+  },
+  {
+   "to": "0x7a28ebfaa5722ac02685a094b64938da0334492c",
+   "n": 18
+  },
+  {
+   "to": "0x7d1300102431eb8d8a4dc21d7dffbc94179d22e4",
+   "n": 18
+  },
+  {
+   "to": "0xab96dcfa7a7d669d9bf5918fab8641479973dd0a",
+   "n": 18
+  },
+  {
+   "to": "0xc40da05d24e09a2906fbea2147e6a670aa659939",
+   "n": 18
+  },
+  {
+   "to": "0xe72d25add538e8ef9cef85622ea8912a6cb98be6",
+   "n": 18
+  },
+  {
+   "to": "0x77f1fee925fc8e529d9c941cf21069b5ff1b3450",
+   "n": 17
+  },
+  {
+   "to": "0x21dbfdce7b59ab7691abd67cd55aa6e771681b8e",
+   "n": 16
+  },
+  {
+   "to": "0x3c8a03f5c520d6d97a06ffa8cd6f5363090c6d0d",
+   "n": 16
+  },
+  {
+   "to": "0x8729438eb15e2c8b576fcc6aecda6a148776c0f5",
+   "n": 16
+  },
+  {
+   "to": "0xb991390a77b447eef607a8b90c6f1a6ec2da9a75",
+   "n": 16
+  },
+  {
+   "to": "0xc7f765f5b0e75935c50cc210872a740800308474",
+   "n": 16
+  },
+  {
+   "to": "0xc8b8fcbdb5c019d7802ffb0b39603395d7d3915c",
+   "n": 16
+  },
+  {
+   "to": "0x10ac9b7eb034fab1f3bc446e81479d7dc089be83",
+   "n": 15
+  },
+  {
+   "to": "0x1ed586d0edd8eedfdf59fcb6e18cf46487107f17",
+   "n": 15
+  },
+  {
+   "to": "0x9f8c163cba728e99993abe7495f06c0a3c8ac8b9",
+   "n": 15
+  },
+  {
+   "to": "0xa87090d3beca81ad8d0593afa0b1472581ff46a0",
+   "n": 15
+  },
+  {
+   "to": "0xd524fae55b280fad6bed8e38a605d461dc6cb0e0",
+   "n": 15
+  },
+  {
+   "to": "0xf0f791901854fab16adebd60f0639b960b6ea0cf",
+   "n": 15
+  },
+  {
+   "to": "0x4bef02f3dac22707fcb0aa054962fd4d2041726d",
+   "n": 14
+  },
+  {
+   "to": "0x98068b47a7d4b19a6382622f1c488eb53cc682a5",
+   "n": 14
+  },
+  {
+   "to": "0xd2294059c0131b225686946c048907a8b38233d0",
+   "n": 14
+  },
+  {
+   "to": "0xf739bd12e31e9c61040c3d7a1f69065b6cdd4699",
+   "n": 14
+  },
+  {
+   "to": "0x1abd2df7fba1ac9161a000965e7477a6e8140cf0",
+   "n": 13
+  },
+  {
+   "to": "0x435272ceff93a1e657e8abfdf0a13e95900a3a56",
+   "n": 13
+  },
+  {
+   "to": "0x9784fc61c8bb79e0b3136441578b6fae2aac7f33",
+   "n": 13
+  },
+  {
+   "to": "0xccc88a9d1b4ed6b0eaba998850414b24f1c315be",
+   "n": 13
+  },
+  {
+   "to": "0xfa14371d0d71a5e2a03f754e1f7c91ae4ea56211",
+   "n": 13
+  },
+  {
+   "to": "0x138ce0008f7febdcffdf27c0ad156584eca7d5b6",
+   "n": 12
+  },
+  {
+   "to": "0x1a36fa0ac940902f1490e5237dbfeddd5663121a",
+   "n": 12
+  },
+  {
+   "to": "0x23e23958d220b774680f91c2c91a6f2b2f610d7e",
+   "n": 12
+  },
+  {
+   "to": "0x3238963663a7cba9b42d46ba9064a6a2e55c31b7",
+   "n": 12
+  },
+  {
+   "to": "0x5ff137d4b0fdcd49dca30c7cf57e578a026d2789",
+   "n": 12
+  },
+  {
+   "to": "0x62da82cef45eb8c5f3618bd1ee3808e2fa249227",
+   "n": 12
+  },
+  {
+   "to": "0x6a1d43fbbf1bed3b75441f16dbd0d68b42d05647",
+   "n": 12
+  },
+  {
+   "to": "0x76c9cf548b4179f8901cda1f8623568b58215e62",
+   "n": 12
+  },
+  {
+   "to": "0x82d2bf9603b91ff6e120b6e44d7d10418a148bf3",
+   "n": 12
+  },
+  {
+   "to": "0x936385b7aaaf73e089360c571f11e3d39561372f",
+   "n": 12
+  },
+  {
+   "to": "0x9ecf396b3c321d4c6aa84d9720789320cc83468b",
+   "n": 12
+  },
+  {
+   "to": "0xb5caca56dbb4801f351871c75887c9a8361c7073",
+   "n": 12
+  },
+  {
+   "to": "0xc9cd8ef429ee6ed1450e65a92069feb1ffdc2b6f",
+   "n": 12
+  },
+  {
+   "to": "0x1a1ec25dc08e98e5e93f1104b5e5cdd298707d31",
+   "n": 11
+  },
+  {
+   "to": "0x33d7f4adbb4dca1bf1f96469c4246411293387f3",
+   "n": 11
+  },
+  {
+   "to": "0x354bd1da1c7d0fdb6fedb0b7e36994c14343d722",
+   "n": 11
+  },
+  {
+   "to": "0x6f50a2b19cb994f8e33def05b85152c358913d6b",
+   "n": 11
+  },
+  {
+   "to": "0x978778077f7b7737937dafd912ec2fc8341d011b",
+   "n": 11
+  },
+  {
+   "to": "0xeed3c159f3a96ab8d41c8b9ca49ee1e5071a7cdd",
+   "n": 11
+  },
+  {
+   "to": "0x492a3b90a0fa219b14e42a2f3bafdb47c683f701",
+   "n": 10
+  },
+  {
+   "to": "0x6c14c1898c843ff66ca51e87244690bbc28df215",
+   "n": 10
+  }
+ ]
+}

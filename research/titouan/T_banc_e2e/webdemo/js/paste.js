@@ -14,10 +14,16 @@ export function parsePasted(text, { origin, intent } = {}) {
     body = { method: j.method, params: Array.isArray(j.params) ? j.params : [] };
     for (const k of ['origin', 'pageText', 'chainId', 'from']) if (j[k] !== undefined) body[k] = j[k];
   } else if (j.types && j.primaryType && j.message) {
-    body = { method: 'eth_signTypedData_v4', params: ['0x' + '00'.repeat(20), JSON.stringify(j)] };
+    const m = j.message || {}; const signer = [m.owner, m.from, m.maker, m.offerer, m.signer].find((x) => typeof x === 'string' && /^0x[0-9a-fA-F]{40}$/.test(x)) || '0x' + '00'.repeat(20); // signataire probable (le message seul ne le dit pas)
+    body = { method: 'eth_signTypedData_v4', params: [signer, JSON.stringify(j)] };
   } else if (typeof j.to === 'string' || typeof j.data === 'string' || j.value !== undefined) {
     body = { method: 'eth_sendTransaction', params: [j] };
   } else return { error: 'Forme non reconnue : donne une requête { "method": …, "params": […] } ou une transaction { "to": …, "data": … }.' };
+  // Le portefeuille connait le compte qui signe : on le reprend de la requete (adresse en 1er parametre d'une signature) pour que le moteur sache QUI donne le droit.
+  const HEX20 = /^0x[0-9a-fA-F]{40}$/;
+  if (body.from === undefined && /^(eth_signTypedData|personal_sign|eth_sign)/.test(body.method) && typeof body.params[0] === 'string' && HEX20.test(body.params[0])) body.from = body.params[0];
+  if (body.from === undefined && body.method === 'personal_sign' && typeof body.params[1] === 'string' && HEX20.test(body.params[1])) body.from = body.params[1];
+  if (body.chainId === undefined && /^eth_signTypedData/.test(body.method)) { try { const td = typeof body.params[1] === 'string' ? JSON.parse(body.params[1]) : body.params[1]; if (td && td.domain && td.domain.chainId !== undefined) body.chainId = td.domain.chainId; } catch (_) { /* rien */ } }
   if (origin && String(origin).trim()) body.origin = String(origin).trim();
   if (intent && intent !== 'none') body.intent = intent;
   return { body };

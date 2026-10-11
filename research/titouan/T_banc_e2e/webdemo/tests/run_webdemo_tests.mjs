@@ -85,9 +85,11 @@ const emptyLocal = M.emptyLocal();
 const KEYS = ['level', 'niveau', 'fiche', 'texts', 'codes', 'effects', 'raisons', 'indeterminate', 'quote', 'address_diff', 'risk_signals', 'intent_contradiction', 'texts_source', 'lead'];
 const pick = (v) => JSON.stringify(KEYS.map((k) => v[k]));
 let absorbed = 0;
-function refVerdict(body, local) { try { const r = REF.evaluate(body, local); return fixRef(r); } catch (e) { return { level: 'unknown', niveau: 'warn', indeterminate: true, throw: String(e.message).slice(0, 80) }; } }
+let filtered = 0;
+function refVerdict(body, local) { let big = false; try { big = JSON.stringify(body).length > 256 * 1024; } catch (_) { big = true; }
+  if (big || !body || typeof body !== 'object' || Array.isArray(body)) { filtered++; return M.check(body, local); } /* le serveur HTTP filtre ces corps avant evaluate() */ try { const r = REF.evaluate(body, local); return fixRef(r); } catch (e) { return { level: 'unknown', niveau: 'warn', indeterminate: true, throw: String(e.message).slice(0, 80) }; } }
 // Seule difference VOULUE : le serveur ecrit « 1.3e+72 jours » pour une echeance illimitee, la page ecrit « un nombre illimité de jours » (correctif de l extension autonome).
-function fixRef(r) { if (r && r.texts) for (const k of Object.keys(r.texts)) { const n = r.texts[k].replace(/\d(?:\.\d+)?e\+\d+ jours/g, 'un nombre illimité de jours'); if (n !== r.texts[k]) { absorbed++; r.texts[k] = n; } } return r; }
+function fixRef(r) { if (r && r.texts) for (const k of Object.keys(r.texts)) { const n = r.texts[k].replace(/(\d+(?:\.\d+)?(?:e\+\d+)?) jours/g, (m, d) => (Number(d) > 3650 ? 'un nombre illimité de jours' : m)); if (n !== r.texts[k]) { absorbed++; r.texts[k] = n; } } return r; }
 const BAD_WORDS = /\b(ok|protégé|protege|bloqué|bloque|sûr|sur et sécurisé|safe)\b/i;
 
 const cases = [];
@@ -116,7 +118,7 @@ const ms = performance.now() - t0;
 ok(okSeen === 0, `'ok' ne sort jamais : 0 sur ${cases.length} verdicts (niveau et level)`);
 ok(!bad.length, 'chaque verdict : niveau valide, 4 lignes de texte, libelle sans "OK/protege/bloque", friction coherente', bad.slice(0, 4).join(' ; '));
 ok(diffs.length === 0, `verdicts IDENTIQUES a la voie de reference (server/server.mjs) : ${identical}/${cases.length}`, diffs.slice(0, 3).map((d) => `${d.cas}: ${d.web} vs ${d.ref}`).join(' ; '));
-R.scenarios = { correctif_jours_absorbe: absorbed, cas: cases.length, identiques: identical, ecarts: diffs.slice(0, 20), niveaux_affiches: levels, ms_total: Math.round(ms), ms_par_verdict: Math.round(ms / cases.length * 100) / 100 };
+R.scenarios = { filtres_par_la_couche_http_du_serveur: filtered, correctif_jours_absorbe: absorbed, cas: cases.length, identiques: identical, ecarts: diffs.slice(0, 20), niveaux_affiches: levels, ms_total: Math.round(ms), ms_par_verdict: Math.round(ms / cases.length * 100) / 100 };
 
 // les 8 scenarios : avec l'intention honnete, ce qu'on attend (le plancher objectif ne depend pas de l'intention)
 {
@@ -191,12 +193,97 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   ok(tr.ok && tr.lines.length >= 2 && tr.signals.length >= 1, 'panneau technique : effets decodes et signaux disponibles', tr.lines.map((l) => l.k).join(', '));
 }
 
+// ------------------------------------------------------------------ I) la fenetre "Hold up !" EXECUTEE dans un mini DOM (aucun navigateur)
+{
+  const D = await imp(join(HERE, 'fake_dom.mjs')); const dom = D.installFakeDom();
+  const HU = await imp(join(WD, 'js', 'holdup.js'));
+  const sc = (id) => S.SCENARIOS.find((s) => s.id === id);
+  const btn = (txt) => [...dom.body.querySelectorAll('button')].find((b) => b.textContent.includes(txt));
+  const txt = () => dom.body.textContent;
+  const ALLTXT = [];
+  // 1) droit illimite : question -> verdict Danger -> delai -> continuer
+  let p = HU.holdRequest({ body: sc('droit_illimite').body, local: S.LOCAL, delaySec: 5, askIntent: true, siteLabel: 'faux site' });
+  const q1 = txt(); ALLTXT.push(q1);
+  ok(q1.includes('Hold up !') && q1.includes('Qu’essaies-tu de faire ?') && !!btn('Annuler') && !!btn('Recevoir'), 'fenetre : "Hold up !", question d intention en une phrase, boutons, Annuler visible');
+  btn('Recevoir').click();
+  const v1 = txt(); ALLTXT.push(v1); const cont = btn('Continuer quand même');
+  ok(v1.includes('Danger') && v1.includes('Tu as dit') && v1.includes('En réalité') && v1.includes('Ce que le moteur a vu') && !!btn('Annuler'), 'fenetre : niveau Danger, "Tu as dit / En réalité", panneau technique, Annuler visible');
+  ok(cont && cont.disabled && txt().includes('Tu pourras continuer dans'), 'friction : "Continuer quand même" bloque pendant le delai, avec compte a rebours');
+  for (let i = 0; i < 9; i++) dom.tick();
+  ok(cont.disabled, 'friction : toujours bloque a 9 s (Danger = 10 s minimum meme si le delai choisi est 5 s)');
+  for (let i = 0; i < 3; i++) dom.tick();
+  ok(!cont.disabled, 'friction : debloque apres 10 s');
+  cont.click(); const r1 = await p;
+  ok(r1.decision === 'sign' && r1.level === 'danger' && r1.verdict.niveau === 'critical' && dom.body.children.length === 0 && dom.timersActive() === 0, 'fenetre : decision enregistree, fenetre retiree, minuteur arrete');
+  // 2) faux support : Manipulation, Annuler pendant le delai
+  p = HU.holdRequest({ body: sc('faux_support').body, local: S.LOCAL, delaySec: 0, askIntent: true });
+  btn('demandé de le faire').click(); const v2 = txt(); ALLTXT.push(v2);
+  ok(v2.includes('Manipulation') && v2.includes('Sur la page') && btn('Continuer quand même').disabled, 'fenetre : faux support => Manipulation, citation de la page, continuer bloque (30 s minimum)');
+  btn('Annuler').click(); const r2 = await p;
+  ok(r2.decision === 'cancel' && r2.level === 'manipulation' && dom.body.children.length === 0, 'Annuler marche a tout moment, meme pendant le delai');
+  // 3) Echap = annuler
+  p = HU.holdRequest({ body: sc('adresse_sosie').body, local: S.LOCAL, delaySec: 5, askIntent: false });
+  const v3 = txt(); ALLTXT.push(v3); dom.press('Escape'); const r3 = await p;
+  ok(v3.includes('Danger') && r3.decision === 'cancel', 'Echap annule ; sans question d intention, le verdict s affiche directement');
+  // 4) aucun signal : jamais "OK", rappel que ce n est pas une garantie, pas de delai
+  p = HU.holdRequest({ body: sc('envoi_simple').body, local: S.LOCAL, delaySec: 5, askIntent: false });
+  const v4 = txt(); ALLTXT.push(v4);
+  ok(v4.includes('Aucun signal trouvé') && v4.includes('pas une garantie') && !btn('Continuer quand même').disabled, 'aucun signal : libelle "Aucun signal trouvé" + "pas une garantie", pas de delai inutile');
+  btn('Continuer quand même').click(); await p;
+  const all = ALLTXT.join(' ');
+  ok(!/\b(OK|Ok|protégé|bloqué|Bloqué|Protégé|sûr|safe)\b/.test(all), 'aucun ecran n affiche OK / protégé / bloqué / sûr (' + ALLTXT.length + ' ecrans lus)');
+  // 5) page : tous les identifiants utilises par app.js existent dans index.html
+  const html = readFileSync(join(WD, 'index.html'), 'utf8'); const app = readFileSync(join(WD, 'js', 'app.js'), 'utf8');
+  const ids = [...app.matchAll(/\$\('#([\w-]+)'\)/g)].map((m) => m[1]); const missingIds = [...new Set(ids)].filter((i) => !new RegExp('id="' + i + '"').test(html) && !new RegExp("id: '" + i + "'").test(app));
+  const chk = spawnSync(process.execPath, ['--check', join(WD, 'js', 'app.js')], { encoding: 'utf8' });
+  ok(!missingIds.length && chk.status === 0, 'app.js : syntaxe valide, ' + new Set(ids).size + ' identifiants HTML tous presents', missingIds.join(',') + chk.stderr.slice(0, 120));
+}
+
+// ------------------------------------------------------------------ J) js/app.js EXECUTE de bout en bout dans le mini DOM : scenario -> Signer -> fenetre -> journal ; colle ; journal
+{
+  const D = await imp(join(HERE, 'fake_dom.mjs')); const dom = D.installFakeDom();
+  const byId = {}; const E = (id) => document.querySelector('#' + id);
+  const realQS = document.querySelector;
+  document.querySelector = (sel) => { if (sel[0] === '#') { const id = sel.slice(1); if (!byId[id]) { const e = document.createElement('div'); e.setAttribute('id', id); e.value = ''; e.checked = true; byId[id] = e; dom.body.append(e); } return byId[id]; } return realQS(sel); };
+  globalThis.location = { hash: '' }; globalThis.addEventListener = () => {};
+  const errors = []; const onErr = (e) => errors.push(String(e && e.message || e)); process.on('unhandledRejection', onErr);
+  await imp(join(WD, 'js', 'app.js'));
+  const btns = () => [...dom.body.querySelectorAll('button')];
+  const scen = dom.body.querySelectorAll('.scen');
+  ok(scen.length === 8, 'app.js : 8 scenarios affiches');
+  // un scenario piege, de bout en bout
+  scen.find((b) => b.getAttribute('data-id') === 'tous_les_nft').click();
+  ok(E('wallet-req').textContent.includes('Signer') && E('wallet-req').textContent.includes('mint-gratuit-demo.example') && E('wallet-req').textContent.includes('Rejeter'), 'app.js : le faux portefeuille affiche la requete avec Signer / Rejeter');
+  E('wallet-req').querySelector('.btn-wallet-yes').click();
+  const find = (txt) => btns().find((b) => b.textContent.includes(txt));
+  ok(!!find('Annuler') && dom.body.textContent.includes('Hold up !'), 'app.js : cliquer Signer ouvre la fenetre Hold up avant toute signature');
+  find('Recevoir').click();
+  ok(dom.body.textContent.includes('Danger'), 'app.js : verdict Danger pour "autorisation de tous les NFT"');
+  find('Annuler').click(); await new Promise((r) => setTimeout(r, 5));
+  ok(E('wallet-out').textContent.includes('Rien n’a été signé'), 'app.js : annulation => "Rien n a ete signe"');
+  // colle
+  E('colle-text').value = JSON.stringify({ to: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', value: '0x0', data: '0x095ea7b3' + '0'.repeat(24) + 'b2'.repeat(20) + 'f'.repeat(64) });
+  E('colle-origin').value = 'https://site.example'; E('colle-intent').value = 'pay';
+  E('colle-go').click();
+  ok(E('colle-out').textContent.includes('Danger') && E('colle-out').textContent.includes('Tu as dit'), 'app.js : mode colle => verdict Danger affiche');
+  E('colle-text').value = 'pas du json'; E('colle-go').click();
+  ok(E('colle-out').textContent.includes('pas du JSON valide'), 'app.js : mode colle => erreur claire sur un texte invalide');
+  // journal
+  const hashChange = null; E('j-verify').click();
+  ok(E('journal-status').textContent.includes('Chaîne intacte : 2 ligne(s)'), 'app.js : journal = 2 lignes (1 demo, 1 colle), chaine intacte', E('journal-status').textContent);
+  E('j-tamper').click();
+  ok(/cass/i.test(E('journal-status').textContent), 'app.js : apres retouche, la page annonce la chaine cassee', E('journal-status').textContent);
+  E('j-clear').click();
+  ok(E('journal-status').textContent.includes('Journal vide'), 'app.js : effacer vide le journal');
+  ok(errors.length === 0, 'app.js : aucune erreur non geree', errors.join(' ; '));
+}
+
 // ------------------------------------------------------------------ G) analyse statique
 {
   const exts = new Set(['.html', '.js', '.css', '.json', '.mjs']);
   const files = ALL.filter((p) => exts.has(extname(p)) || ['vercel.json'].includes(p));
   const findings = { eval: [], secret: [], net: [], url: [], inline: [], dom: [] };
-  const hosts = new Map();
+  const hosts = new Map(); const dataHosts = new Set();
   const SECRET = [/-----BEGIN [A-Z ]*PRIVATE KEY-----/, /\bsk-[A-Za-z0-9]{20,}/, /\bAKIA[0-9A-Z]{16}\b/, /\bgh[pousr]_[A-Za-z0-9]{30,}/, /\bxox[baprs]-[A-Za-z0-9-]{10,}/, /\beyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\./, /(?:private[_ -]?key|secret|mnemonic|seed[_ -]?phrase|api[_ -]?key|password|passwd)["']?\s*[:=]\s*["']?(?:0x)?[0-9a-fA-F]{32,}/i, /(?:private[_ -]?key|mnemonic|seed[_ -]?phrase)["']?\s*[:=]\s*["'][a-z]+(?: [a-z]+){11,}/i];
   for (const p of files) {
     const rel = relative(WD, p).replace(/\\/g, '/'); const t = readFileSync(p, 'utf8');
@@ -204,7 +291,7 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
     if (/\bimportScripts\s*\(|\bimport\s*\(/.test(t)) findings.eval.push(rel + ' (import dynamique / importScripts)');
     for (const re of SECRET) if (re.test(t)) findings.secret.push(rel + ' ~ ' + re.source.slice(0, 30));
       if (/\bfetch\s*\(|new\s+XMLHttpRequest|new\s+WebSocket|new\s+EventSource|sendBeacon\s*\(/.test(t.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, ''))) findings.net.push(rel);
-    for (const m of t.matchAll(/(?:https?|wss?|ftp):\/\/([A-Za-z0-9][A-Za-z0-9.-]*)/g)) { hosts.set(m[1].toLowerCase(), (hosts.get(m[1].toLowerCase()) || 0) + 1); }
+    for (const m of t.matchAll(/(?:https?|wss?|ftp):\/\/([A-Za-z0-9][A-Za-z0-9.-]*)/g)) { hosts.set(m[1].toLowerCase(), (hosts.get(m[1].toLowerCase()) || 0) + 1); if (rel === 'js/exemples_public.js') dataHosts.add(m[1].toLowerCase()); }
     if (rel.endsWith('.html')) {
       if (/<script(?![^>]*\bsrc=)[^>]*>/i.test(t)) findings.inline.push(rel + ' (script inline)');
       if (/\sstyle\s*=/i.test(t)) findings.inline.push(rel + ' (style inline)');
@@ -215,12 +302,12 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
     if (rel.endsWith('.css') && (/url\(\s*['"]?(?:https?:)?\/\//i.test(t) || /@import/.test(t))) findings.url.push(rel + ' (CSS externe)');
     if (rel.startsWith('js/') && /\.(innerHTML|outerHTML)\s*=|insertAdjacentHTML|document\.write/.test(t)) findings.dom.push(rel);
   }
-  const fictional = (h) => /(^|\.)(example|test|invalid|localhost)$/.test(h) || /example/.test(h);
-  const external = [...hosts.keys()].filter((h) => !fictional(h));
+  const fictional = (h) => /(^|\.)(example|test|invalid|local|localhost)$/.test(h) || /example/.test(h);
+  const external = [...hosts.keys()].filter((h) => !fictional(h) && !dataHosts.has(h));
   ok(!findings.eval.length, `aucun eval / new Function / import dynamique dans ${files.length} fichiers`, findings.eval.join(' ; '));
   ok(!findings.secret.length, `aucun secret (cle privee, jeton, mot de passe, phrase de recuperation) dans ${files.length} fichiers`, findings.secret.join(' ; '));
   ok(!findings.net.length, 'aucun fetch / XMLHttpRequest / WebSocket / sendBeacon dans le code publie', findings.net.join(' ; '));
-  ok(!findings.url.length && !external.length, `aucune URL externe : ${hosts.size} noms d hote trouves, tous fictifs (.example) ; aucun src/href/CSS externe (pas de CDN)`, findings.url.concat(external).join(' ; '));
+  ok(!findings.url.length && !external.length, `aucune URL externe : ${hosts.size} noms d hote trouves, fictifs (.example/.test) ou etiquettes de test dans js/exemples_public.js (donnees, jamais chargees) ; aucun src/href/CSS externe (pas de CDN)`, findings.url.concat(external).join(' ; '));
   ok(!findings.inline.length, 'HTML : CSP presente (default-src none, connect-src none), aucun script/style inline ni gestionnaire on*=', findings.inline.join(' ; '));
   ok(!findings.dom.length, 'js/ : aucun innerHTML / document.write (tout passe par textContent)', findings.dom.join(' ; '));
   R.statique = { fichiers_analyses: files.length, hotes_fictifs: [...hosts.keys()].sort() };

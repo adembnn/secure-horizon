@@ -2,6 +2,8 @@
 import { isOn } from './fixes.mjs';
 import { parseSig, decodeParams } from './abi.mjs';
 import { lc } from './util.mjs';
+import { decodeLibraryCall } from './protocols_extra.mjs';
+import { OPACITY_CODES } from './engine.mjs';
 
 const lvl = (fl) => (fl.some((f) => f.severity === 'critical') ? 'critical' : fl.some((f) => f.severity === 'warn') ? 'warn' : 'ok');
 const sevRank = { info: 0, warn: 1, critical: 2 };
@@ -144,6 +146,44 @@ function marketOrderProceeds(request, ctx, flags) {
   }
 }
 
+// ---- F14 : bibliothèque d'ABI publiques (protocols_extra.mjs). Pour chaque appel dont la cible est de confiance (protocole de la liste connue ou jeton du registre de référence)
+// et dont la fonction est décodable : l'opacité est levée et on VÉRIFIE que le produit (to / onBehalfOf / dstReceiver / mintRecipient...) revient à l'utilisateur, à un contact ou à un protocole connu.
+// Produit redirigé vers un tiers : critical pour les opérations dont le produit est une sortie de valeur (échange, retrait, emprunt, pont, retrait de liquidité), warn pour les autres.
+const callsOf = (request) => {
+  const p = request.params && request.params[0];
+  if (request.method === 'eth_sendTransaction' && p) return [p];
+  if (request.method === 'wallet_sendCalls' && p && Array.isArray(p.calls)) return p.calls;
+  return [];
+};
+const registryAddrs = (ctx) => ((ctx._k && ctx._k.token_registry) || []).map((t) => lc(t.address));
+const isTrustedTarget = (ctx, to) => !!to && ((ctx.knownSpenders || []).includes(lc(to)) || registryAddrs(ctx).includes(lc(to)));
+function recompute(eff) {
+  eff.risk_flags.sort((a, b) => sevRank[b.severity] - sevRank[a.severity]);
+  eff.level = lvl(eff.risk_flags); eff.levelEvidence = lvl(eff.risk_flags.filter((f) => !OPACITY_CODES.has(f.code)));
+}
+function libraryCalls(eff, request, ctx, flags) {
+  if (!eff.opaque) return;
+  const calls = callsOf(request); const covered = new Set(); const decoded = [];
+  for (const c of calls) {
+    if (!c.to || !isTrustedTarget(ctx, c.to)) continue;
+    const r = decodeLibraryCall(c, ctx); if (!r) continue;
+    covered.add(String(c.data ?? c.input).slice(0, 10).toLowerCase()); decoded.push(r);
+  }
+  if (!decoded.length) return;
+  eff.risk_flags = eff.risk_flags.filter((f) => !(f.code === 'unknown_selector' && covered.has((/0x[0-9a-f]{8}/.exec(f.detail) || [''])[0])));
+  if (!eff.risk_flags.some((f) => f.code !== 'opaque' && OPACITY_CODES.has(f.code))) {
+    eff.risk_flags = eff.risk_flags.filter((f) => f.code !== 'opaque'); eff.opaque = false; eff.opaqueReasons = [];
+  }
+  eff.service = eff.service || { name: decoded[0].name, trusted: true };
+  const self = lc(ctx.from); const okAddr = (a) => a === self || (ctx.contacts || []).some((c) => lc(c.address) === a) || (ctx.knownSpenders || []).includes(a);
+  for (const r of decoded) {
+    flags.push({ code: 'service_call_decoded', severity: 'info', detail: `${r.name} (${r.kind}) vers un protocole de confiance` });
+    for (const b of r.beneficiaries) if (!okAddr(b)) flags.push({ code: r.severe ? 'service_recipient_not_self' : 'service_beneficiary_not_self', severity: r.severe ? 'critical' : 'warn', detail: `le produit de ${r.name} va à ${b}, ni vous ni un contact ni un protocole connu` });
+    if (r.minOutZero) flags.push({ code: 'slippage_unbounded', severity: 'warn', detail: `${r.name} : minimum reçu = 0 : aucun garde-fou de prix` });
+  }
+  recompute(eff);
+}
+
 export function applyExtraRules(eff, request, ctx) {
   const flags = [];
   if (isOn('F11')) marketOrderProceeds(request, ctx, flags);
@@ -152,6 +192,7 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F8')) tokenChecks(request, ctx, flags);
   if (isOn('F7')) signedOrder(request, ctx, flags);
   if (isOn('F5')) serviceCall(eff, request, ctx);
+  if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
   addFlags(eff, flags);
   return eff;
 }

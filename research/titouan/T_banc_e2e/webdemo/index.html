@@ -57,8 +57,9 @@
         <button class="btn" type="button" id="colle-ex-typed">Exemple : signature de permit</button>
         <select id="colle-ex" aria-label="Exemples du jeu public"></select>
       </div>
+      <p class="muted small">Les exemples du jeu public sont synthétiques : les noms de sites sont de simples étiquettes de test, jamais contactées.</p>
       <div class="field"><label for="colle-text">Requête (JSON)</label><textarea id="colle-text" spellcheck="false" autocomplete="off" placeholder='{ "method": "eth_sendTransaction", "params": [ { "to": "0x…", "data": "0x…", "value": "0x0" } ] }'></textarea></div>
-      <div class="field"><label for="colle-origin">Site qui demande (facultatif)</label><input type="text" id="colle-origin" placeholder="https://exemple.org" autocomplete="off"></div>
+      <div class="field"><label for="colle-origin">Site qui demande (facultatif)</label><input type="text" id="colle-origin" placeholder="https://site.example" autocomplete="off"></div>
       <div class="field"><label for="colle-intent">Qu’essaies-tu de faire ?</label><select id="colle-intent"></select></div>
       <button class="btn btn-main" type="button" id="colle-go">Vérifier</button>
     </div>
