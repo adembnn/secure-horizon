@@ -1,7 +1,9 @@
 # Pitch Hold up V6.2 (11/10/2026) : la trame d'Adem + l'idée « les droits sont ouverts en grand » + nos preuves
 
+> **ARCHIVE, ne pas dire (11 oct., MSG-080).** Les chiffres d'autres chaînes ont été remplacés dans cette version : nous adressons Avalanche seulement (34 %, une autorisation sur trois, notre mesure sur un échantillon de blocs). Version à dire : `livrables/PITCH_5MIN.md`, `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md`.
+
 Base : livrables/pitch_v7/PITCH_ADEM.md (postulat, constat, LI.FI, démo avant/après, fin) + jeu aveugle + après l'alerte + modèle économique.
-Réserve de sourcing : « la plupart des portefeuilles » n'est pas dans nos mesures. Nos chiffres : 47,6 % des droits sont illimités sur Ethereum et 34,2 % sur Avalanche (près d'un droit sur deux). La seule mesure par adresse est une étude de 2021 (arXiv 2207.01790, lue) : 60,3 % des adresses avaient au moins un droit illimité. On la cite avec sa date.
+Réserve de sourcing : « la plupart des portefeuilles » n'est pas dans nos mesures. Notre chiffre : 34,2 % des autorisations sont illimitées sur Avalanche (une sur trois). La seule mesure par adresse est une étude de 2021 (arXiv 2207.01790, lue) : 60,3 % des adresses avaient au moins un droit illimité. On la cite avec sa date.
 
 ## 1. Le postulat (30 s)
 « En novembre 2025, le site d'Aerodrome est détourné. Il faut 81 minutes pour que quelqu'un le signale. Pendant 81 minutes, le site est piégé et personne ne le sait.
@@ -9,7 +11,7 @@ Alors on part d'un postulat : tout service en ligne finira par être compromis. 
 
 ## 2. Le constat (50 s)
 « Quand tu utilises un site, tu signes un contrat qui dit ce qu'il a le droit de prendre dans ton portefeuille. Presque personne ne le lit.
-Et la porte est grande ouverte. Sur Ethereum, 47,6 % des droits accordés sont illimités. Sur Avalanche, 34,2 %. Une étude de 2021 trouvait que six adresses sur dix avaient déjà donné au moins un accès illimité. Tu veux échanger 50 dollars, tu signes un accès à tout, sans date de fin.
+Et la porte est grande ouverte. 34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs. Une étude de 2021 trouvait que six adresses sur dix avaient déjà donné au moins un accès illimité. Tu veux échanger 50 dollars, tu signes un accès à tout, sans date de fin.
 Ce droit reste. Juillet 2024, LI.FI : 11,6 millions de dollars, 153 portefeuilles vidés. Tous avaient laissé un droit illimité. Ceux qui l'avaient limité n'ont rien perdu. »
 
 ## 3. Hold up (35 s)
@@ -35,5 +37,5 @@ Nous ne couvrons ni la fraude que vous voulez vraiment faire, ni un Ledger branc
 ## À vérifier avant de le dire
 - Aerodrome 81 minutes : chiffre publié par Blockaid sur son propre délai, source intéressée : à dire si on nous le demande.
 - LI.FI : 153 portefeuilles, 11,6 M$ : post-mortem officiel (RECHERCHE_douleurs_secondaires.md).
-- Étude de 2021 : données de 2021 sur Ethereum, définition large de « illimité » : toujours citer la date.
+- Étude de 2021 : données de 2021 d'une autre chaîne, définition large de « illimité » : toujours citer la date.
 - La démo « deux portefeuilles, sans et avec Hold up » doit exister avant de la promettre (DEMO_DEROULE d'Adem). La démo web de Titouan a la scène « Après l'alerte » en simulation.

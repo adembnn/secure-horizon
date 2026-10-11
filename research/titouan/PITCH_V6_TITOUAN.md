@@ -1,5 +1,7 @@
 # Pitch Hold up V6 (11/10/2026) : issu du round 3 sur V5 (Team1 68, AWS 71, KPMG 75, Kryptosphère 77, Utopia 79, moyenne 74,0)
 
+> **ARCHIVE, ne pas dire (11 oct., MSG-080).** Les chiffres d'autres chaînes ont été remplacés dans cette version : nous adressons Avalanche seulement (34 %, une autorisation sur trois, notre mesure sur un échantillon de blocs). Version à dire : `livrables/PITCH_5MIN.md`, `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md`.
+
 Progression de la moyenne : 57,8 (V3) puis 68,4 (V4) puis 74,0 (V5). Le texte seul s'essouffle : les points qui restent demandent des preuves (essai réel MetaMask, jeu aveugle, révocation en un clic, démo sur Avalanche).
 Corrections V6 : « tout va bien » reformulé ; journal expliqué en mots simples ; bloc de chiffres réduit ; extension MV3 nommée ; chemin montré en démo précisé ; précision du modèle avouée ; AI Act ; objectif sous 10 % posé comme objectif, pas comme résultat.
 
@@ -9,7 +11,7 @@ D'après le code public de MetaMask, il affiche ce plafond sans alerte propre à
 
 ## 0:25 à 1:00. La douleur et le constat
 « En 2025, les signatures piégées ont coûté 84 millions de dollars à plus de 100 000 victimes. Tout service peut être compromis un jour, comme l'interface de Bybit, environ 1,5 milliard. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre.
-Or 48 % des droits que nous avons mesurés sur Ethereum, 34 % sur Avalanche, sont illimités. C'est donner un double de toutes les clés de la maison au plombier. »
+Or 34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs. C'est donner un double de toutes les clés de la maison au plombier. »
 
 ## 1:00 à 1:45. La solution
 « Hold up est une extension Chrome, posée devant le portefeuille que vous avez déjà : MetaMask, Core, Rabby. Elle lit la demande de signature avant qu'elle n'arrive au portefeuille. Elle ne tient pas vos clés.

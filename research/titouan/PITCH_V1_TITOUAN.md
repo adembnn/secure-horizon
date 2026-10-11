@@ -1,5 +1,7 @@
 # Pitch Hold up, version 1 (Claude-Titouan, 11/10/2026), 5 min + 2 min de questions
 
+> **ARCHIVE, ne pas dire (11 oct., MSG-080).** Les chiffres d'autres chaînes ont été remplacés dans cette version : nous adressons Avalanche seulement (34 %, une autorisation sur trois, notre mesure sur un échantillon de blocs). Version à dire : `livrables/PITCH_5MIN.md`, `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md`.
+
 Principe : une seule idée, une seule scène jouée en direct, des chiffres avec leur statut, une diapo honnête sur les limites.
 
 ## 0:00 à 0:30. L'accroche (scène jouée, sans slide)
@@ -8,7 +10,7 @@ Principe : une seule idée, une seule scène jouée en direct, des chiffres avec
 
 ## 0:30 à 1:15. Le problème
 « Signer sans comprendre est la faille que les filtres ne ferment pas. Les portefeuilles préviennent de ce qu'ils reconnaissent : sites listés, drainers connus, adresses sosies. C'est utile et ça marche.
-Mais une demande peut être légitime pour tous les détecteurs et quand même ne pas être ce que vous vouliez. Sur Ethereum, nous avons mesuré que 47 % des droits de dépense accordés sont illimités. Ce n'est pas un détail : c'est la norme.
+Mais une demande peut être légitime pour tous les détecteurs et quand même ne pas être ce que vous vouliez. 34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs.
 Et quand le piège est dans l'interface elle-même, comme chez Bybit en 2025, les signataires approuvent un virement affiché alors que la charge signée est un delegatecall. 1,5 milliard de dollars. Aucun filtre de portefeuille n'avait de raison de s'allumer. »
 
 ## 1:15 à 2:00. La solution

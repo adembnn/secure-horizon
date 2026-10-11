@@ -1,5 +1,7 @@
 # Vidéo Hold up, 3 minutes : script en images (V9, 11/10/2026)
 
+> **Copie figée de la V9. Version à jour : `livrables/VIDEO_SCRIPT.md` (11 oct., MSG-080)** : écran clé de l'extension livrée, panneau « Retirer l'autorisation », 87 % toujours avec 15 %, voix Gradium.
+
 Principe : l'image montre, le texte confirme, la voix soutient. Environ 150 mots de voix pour 3 minutes (une voix tous les 15 secondes en moyenne). Voix générée avec Gradient. Tout le texte à l'écran tient en 6 mots ou moins, en grand, sous-titré pour la lecture sans le son.
 
 ## Règles de réalisation
@@ -38,7 +40,7 @@ Total de voix : environ 130 mots, soit 65 secondes de parole sur 180 secondes. L
 8. Carte finale.
 
 ## Honnêteté (ne pas retirer)
-- Seule la chaîne Avalanche est citée (34,2 % des autorisations illimitées sur la C-Chain, notre mesure, un échantillon de blocs). Aucune mention d'Ethereum.
+- Seule la chaîne Avalanche est citée (34,2 % des autorisations illimitées sur la C-Chain, notre mesure, un échantillon de blocs). Aucune autre chaîne citée.
 - Le piratage est une scène de démonstration sur une copie locale d'Avalanche : le dire en petit.
 - La révocation est simulée dans la démo web : « portefeuille simulé » reste affiché.
 - LI.FI est cité comme un fait public (rapport de LI.FI) : 11,6 M$ et 153 portefeuilles, sans plus.

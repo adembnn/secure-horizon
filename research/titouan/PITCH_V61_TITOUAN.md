@@ -1,12 +1,14 @@
 # Pitch Hold up V6.1 (11/10/2026) : V6 + jeu aveugle + après l'alerte + business model
 
+> **ARCHIVE, ne pas dire (11 oct., MSG-080).** Les chiffres d'autres chaînes ont été remplacés dans cette version : nous adressons Avalanche seulement (34 %, une autorisation sur trois, notre mesure sur un échantillon de blocs). Version à dire : `livrables/PITCH_5MIN.md`, `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md`.
+
 ## 0:00 à 0:25. L'accroche (scène jouée)
 « Je veux échanger 50 USDC. Le site me demande de lui laisser dépenser tout mon USDC, pour toujours. Pas 50. Tout.
 D'après le code public de MetaMask, il affiche ce plafond sans alerte propre à ce montant. Si le droit va à une adresse neuve que personne n'a signalée, il n'a aucune raison de s'alarmer. Il ne sait pas ce que j'ai voulu faire. »
 
 ## 0:25 à 1:00. La douleur et le constat
 « En 2025, les signatures piégées ont coûté 84 millions de dollars à plus de 100 000 victimes. Tout service peut être compromis un jour, comme l'interface de Bybit, environ 1,5 milliard. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre.
-Or 48 % des droits que nous avons mesurés sur Ethereum, 34 % sur Avalanche, sont illimités. C'est donner un double de toutes les clés de la maison au plombier. Notre promesse : cesser de donner plus que nécessaire, car on s'expose en le faisant. »
+Or 34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs. C'est donner un double de toutes les clés de la maison au plombier. Notre promesse : cesser de donner plus que nécessaire, car on s'expose en le faisant. »
 
 ## 1:00 à 1:40. La solution
 « Hold up est une extension Chrome, posée devant le portefeuille que vous avez déjà : MetaMask, Core, Rabby. Elle lit la demande avant qu'elle n'arrive au portefeuille. Elle ne tient pas vos clés.

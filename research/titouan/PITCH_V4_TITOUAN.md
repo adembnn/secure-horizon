@@ -1,6 +1,8 @@
 # Pitch Hold up V4 (11/10/2026) : issu du round 1 des jurés (Team1 57, AWS 57, Utopia 56, KPMG 56, Kryptosphère 63, moyenne 57,8)
 
-Corrections appliquées : jargon traduit ; "38 %" remplacé par "3 des 11 vols de plus d'un million" ; "18 ms" remplacé par "moins de 50 ms" ; 0,30 % toujours cité avec 77 % d'avertissements ; "ne laisse passer" supprimé ; 48 % Ethereum toujours cité avec 34 % Avalanche ; données envoyées, panne, injection, responsabilité, conformité et intégration ajoutées ; fausses alertes avec leur meilleur cas mesuré.
+> **ARCHIVE, ne pas dire (11 oct., MSG-080).** Les chiffres d'autres chaînes ont été remplacés dans cette version : nous adressons Avalanche seulement (34 %, une autorisation sur trois, notre mesure sur un échantillon de blocs). Version à dire : `livrables/PITCH_5MIN.md`, `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md`.
+
+Corrections appliquées : jargon traduit ; "38 %" remplacé par "3 des 11 vols de plus d'un million" ; "18 ms" remplacé par "moins de 50 ms" ; 0,30 % toujours cité avec 77 % d'avertissements ; "ne laisse passer" supprimé ; 34 % Avalanche seul (MSG-080) ; données envoyées, panne, injection, responsabilité, conformité et intégration ajoutées ; fausses alertes avec leur meilleur cas mesuré.
 Cible : environ 650 mots dits (5 minutes).
 
 ## 0:00 à 0:30. L'accroche (scène jouée)
@@ -10,7 +12,7 @@ D'après le code public de MetaMask, il affiche ce plafond sans alerte propre à
 ## 0:30 à 1:15. La douleur et le constat
 « En 2025, les arnaques par signature ont coûté 84 millions de dollars à plus de 100 000 victimes. Trois des onze vols de plus d'un million de dollars sont passés par une signature qui donne le droit de dépenser.
 Tout service peut être compromis un jour : un contrat exploité, une interface détournée comme chez Bybit, environ 1,5 milliard. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre.
-Dans nos mesures, 48 % des droits accordés sur Ethereum sont illimités, 34 % sur Avalanche. Échantillons non représentatifs. C'est donner un double de toutes les clés de la maison au plombier. On ne lui laisse que la clé dont il a besoin. »
+34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs. C'est donner un double de toutes les clés de la maison au plombier. On ne lui laisse que la clé dont il a besoin. »
 
 ## 1:15 à 2:00. La solution
 « Hold up est une extension de navigateur, posée devant le portefeuille que vous avez déjà : MetaMask, Core, Rabby. Elle ne tient pas vos clés.

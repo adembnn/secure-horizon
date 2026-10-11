@@ -1,5 +1,7 @@
 # Pitch Hold up V5 (11/10/2026) : issu du round 2 (Kryptosphère 73, AWS 66, Team1 66, KPMG 67 ; Utopia en attente)
 
+> **ARCHIVE, ne pas dire (11 oct., MSG-080).** Les chiffres d'autres chaînes ont été remplacés dans cette version : nous adressons Avalanche seulement (34 %, une autorisation sur trois, notre mesure sur un échantillon de blocs). Version à dire : `livrables/PITCH_5MIN.md`, `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md`.
+
 Corrections : texte coupé à environ 560 mots dits ; faux conseiller dans la solution ; relais désactivé par défaut et base légale à rédiger ; délai de 2 s puis règles locales ; responsabilité avec la mesure de monotonie ; phrase d'intégration ; NIST remplacé par « qui est alerté » ; « jamais de vert » remplacé par « aucun écran ne dit tout va bien » ; conclusion alignée sur la limite de la fraude consentie.
 
 ## 0:00 à 0:25. L'accroche (scène jouée)
@@ -8,7 +10,7 @@ D'après le code public de MetaMask, il affiche ce plafond sans alerte propre à
 
 ## 0:25 à 1:00. La douleur et le constat
 « En 2025, les signatures piégées ont coûté 84 millions de dollars à plus de 100 000 victimes. Tout service peut être compromis un jour, comme l'interface de Bybit, environ 1,5 milliard. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre.
-Or 48 % des droits que nous avons mesurés sur Ethereum, 34 % sur Avalanche, sont illimités. C'est donner un double de toutes les clés de la maison au plombier. »
+Or 34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs. C'est donner un double de toutes les clés de la maison au plombier. »
 
 ## 1:00 à 1:40. La solution
 « Hold up est une extension posée devant le portefeuille que vous avez déjà : MetaMask, Core, Rabby. Elle ne tient pas vos clés.

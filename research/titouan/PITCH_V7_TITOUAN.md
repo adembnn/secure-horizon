@@ -1,10 +1,12 @@
 # Pitch Hold up V7 (11/10/2026) : fusion de V6, des notes du round 3, du pitch d'Adem et du jeu aveugle
 
+> **Mis à jour le 11 oct. vers 11h20 (MSG-080).** Version à dire : `livrables/PITCH_5MIN.md` et `livrables/PITCH_3MIN.md`. Chiffres : `METRIQUES.md` fait foi. Avalanche seulement : aucun chiffre d'une autre chaîne dans le discours. Le carton « la phrase, le code, le cahier » n'existe plus dans le deck. Écran de l'extension livrée : « Ça ne correspond pas à ce que tu as écrit. », le gant, « Limiter à 50 USDC et envoyer » ; panneau « Retirer l'autorisation ». Les réponses ci-dessous gardent leur date : en cas d'écart, `livrables/QR_JURY.md` et `METRIQUES.md` l'emportent.
+
 Sources : `PITCH_V6_TITOUAN.md` (base Titouan) ; `pitch_loop/round3/` (Team1 68, AWS 71, KPMG 75, Kryptosphère 77, Utopia 79, moyenne 74,0 sur V5) ; `livrables/pitch_v7/` (pitch d'Adem, commits a09be1d et f1ca0ec, lu sans modification) ; `T_banc_e2e/blind_decalage/run/RESULTAT.md` (jeu aveugle) ; `research/titouan/BM2/BM_MODELE.md` (modèle économique). Chiffres : `livrables/CHIFFRES.md` seulement.
 
 Ce que la fusion prend à chacun :
 - **D'Adem** : la structure guidée par la démo (deux fenêtres, le même site, l'un piraté), le contraste « Cent USDC. Zéro. » contre « droit ramené à 50 », la main levée, le cas LI.FI dit sans chiffre, la liste « contrôlé aujourd'hui, pas encore », la phrase de fin « On ne sait pas quel site sera piraté. On décide de ce qu'on lui laisse. »
-- **De V6 et des jurés** : quatre chiffres seulement à l'oral (48 %, 87 %, 65 %, 15 %) ; « ça correspond, d'après ce que Hold up sait lire, ce n'est pas une garantie » à la place de « jamais de vert » ; la limite du jeu aveugle dite (auteur de la même famille de modèles, seuil de faux rouges manqué) ; une scène « après l'alerte » (révoquer) ; ce qu'on ne couvre pas ; la phrase sur MetaMask, réservée à une adresse non listée ; la promesse « cesser de donner plus que nécessaire, car on s'expose en le faisant ».
+- **De V6 et des jurés** : quatre chiffres seulement à l'oral (34 %, 87 %, 65 %, 15 %) ; « ça correspond, d'après ce que Hold up sait lire, ce n'est pas une garantie » à la place de « jamais de vert » ; la limite du jeu aveugle dite (auteur de la même famille de modèles, seuil de faux rouges manqué) ; une scène « après l'alerte » (révoquer) ; ce qu'on ne couvre pas ; la phrase sur MetaMask, réservée à une adresse non listée ; la promesse « cesser de donner plus que nécessaire, car on s'expose en le faisant ».
 - **De BM2** : en 30 secondes, le particulier ne paie pas ; API « verdict avant retrait », licence pour portefeuilles, mandats pour agents ; pilotes B2B tout de suite.
 - **Retiré du texte dit** : Aerodrome et ses 81 minutes, NIST SP 800-207 (absent du dépôt), l'essai d'Anthropic (207 sur 405, trop proche de « l'ère de l'IA »), 83,85 M$ et 106 106, 153 portefeuilles et 11,6 M$, Vitalik Buterin, Detect et Respond, le 1,3 %. Tout reste disponible en questions.
 - **Jamais dit** : « bloque », « premier », « sécurisé », « rien ne quitte la machine », « à l'ère de l'IA », « jamais de vert », DORA ou MiCA comme conformité, chiffres retirés, « sur Fuji » (D-016 : démonstration sur une copie locale d'Avalanche ; déploiement Fuji préparé et répété, non exécuté).
@@ -17,7 +19,7 @@ Temps de parole : 560 mots dits (comptage en fin de fichier), 4 min 18 s à 130 
 « Deux fenêtres, le même site. Même adresse, même bouton. L'un des deux a été piraté cette nuit. Lequel ? À l'œil, impossible à dire. Alors on a arrêté de deviner. »
 
 ## 0:15 à 0:35. Le postulat (Adem)
-« Tout service peut être compromis un jour. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre. Or, sur Ethereum, 48 % des droits de dépense que nous avons lus sont illimités. C'est donner un double de toutes les clés de la maison au plombier. »
+« Tout service peut être compromis un jour. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre. Or, 34 % des autorisations lues sur Avalanche sont illimitées, une sur trois : notre mesure, sur un échantillon de blocs. C'est donner un double de toutes les clés de la maison au plombier. »
 
 ## 0:35 à 1:05. Le site honnête (Adem, fenêtre de gauche)
 « Hold up est une extension posée devant le portefeuille que vous avez déjà. Elle ne tient pas vos clés. Avant chaque signature, une question : que veux-tu faire ? J'écris : échanger 50 USDC contre AVAX. Le site demande le droit de prendre 50 USDC. Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. La demande part vers le portefeuille. »
@@ -26,10 +28,10 @@ Temps de parole : 560 mots dits (comptage en fin de fichier), 4 min 18 s à 130 
 « Maintenant, je pirate ce site. Même page. Seul change ce que le bouton envoie : un droit sur tout mon USDC, pour le pirate. MetaMask affiche "illimité" sans alerte si l'adresse n'est sur aucune liste. Il ne sait ni combien je voulais donner, ni à qui. Je signe. Cent USDC. Zéro. »
 
 ## 1:30 à 2:00. Avec Hold up (Adem)
-« Avec Hold up, la même phrase. Ça ne correspond pas : tu as écrit 50 USDC, la demande donne accès à tout ton USDC. Hold up lève la main. J'annule, rien ne part. Si je continue quand même, le droit est ramené à 50 : le pirate ne peut prendre que ce que j'avais écrit. »
+« Avec Hold up, la même phrase. Ça ne correspond pas : tu as écrit 50 USDC, la demande donne accès à tout ton USDC. Hold up lève la main. J'annule, rien ne part. Ou je clique sur Limiter à 50 USDC et envoyer : rien ne part tout seul. Le pirate ne peut prendre que ce que j'avais écrit. »
 
 ## 2:00 à 2:20. Après l'alerte (Adem, démo web)
-« Et un droit trop large déjà donné ? Un bouton : révoquer ce droit. Hold up prépare le retrait, le portefeuille le signe. Une fiche d'incident garde ce qui s'est passé. Ici, portefeuille simulé, pas encore dans l'extension. »
+« Et une autorisation trop large déjà donnée ? Dans le panneau : Retirer l'autorisation. Hold up prépare le retrait, le portefeuille le signe. Chaque décision est notée dans un journal chaîné. Branché, testé sans navigateur, pas encore devant un vrai portefeuille. »
 
 ## 2:20 à 2:35. Le fait (Titouan)
 « C'est déjà arrivé. LI.FI, juillet 2024 : une faille chez un service honnête. Les droits illimités ont été vidés. Les droits limités n'ont rien perdu, selon son rapport. »
@@ -38,7 +40,7 @@ Temps de parole : 560 mots dits (comptage en fin de fichier), 4 min 18 s à 130 
 « Notre preuve : notre moteur de comparaison, sur un jeu aveugle de 250 cas, ouvert une seule fois. Des arnaques et leurs jumeaux honnêtes, écrits par un autre auteur qui n'avait jamais vu nos règles. Moteur figé, critères publiés avant. Résultat : 87 % des arnaques signalées. Sans la phrase écrite, le même code tombe à 65 %. Mais 15 % des opérations honnêtes reçoivent un rouge, au-dessus de notre seuil, surtout des achats de NFT à prix presque nul. Et l'auteur est une IA de la même famille que celle qui nous a aidés : pas encore un test humain. »
 
 ## 3:25 à 3:50. Données et trace (Titouan)
-« La phrase seule part vers un modèle hébergé, par un relais sur votre machine, jamais les montants ni les adresses. Le modèle ne peut pas baisser une alerte du code. Chaque décision est notée dans un cahier numéroté : une page changée ou arrachée se voit. La personne garde le dernier geste. »
+« La phrase écrite part vers un modèle hébergé, par un relais sur votre machine ; jamais la demande du site, ni votre adresse. Chaque décision est notée dans un cahier numéroté : une page changée ou arrachée se voit. La personne garde le dernier geste. »
 
 ## 3:50 à 4:15. Ce qu'on ne couvre pas (Titouan)
 « Hold up contrôle le montant d'un droit, un paiement, une prise de contrôle du compte. Pas encore le sens d'un échange. Ni la fraude que vous voulez vraiment faire, ni un Ledger branché en direct, ni le téléphone. Jamais essayé devant un vrai MetaMask : ici, une copie locale d'Avalanche. »
@@ -77,4 +79,4 @@ Notre promesse : cesser de donner plus que nécessaire, car on s'expose en le fa
 
 Comptage par script Node (découpe sur les espaces, mots contenant au moins une lettre ou un chiffre), de « ## 0:00 » à « ## Questions probables », sans les titres ni le contenu entre crochets : **560 mots**, soit 4 min 18 s à 130 mots par minute.
 
-Chiffres dits (4) : 48 % (B1, 47,6 % arrondi), 87 % (A6 bras a, 87,3 %), 65 % (A6 bras c, 64,7 %), 15 % (A6 bras a, 15,0 %). Les montants 50 et 100 USDC sont ceux de la scène, pas des mesures.
+Chiffres dits (4) : 34 % (METRIQUES.md, Avalanche, 34,2 %), 87 % (A6 bras a, 87,3 %), 65 % (A6 bras c, 64,7 %), 15 % (A6 bras a, 15,0 %). Les montants 50 et 100 USDC sont ceux de la scène, pas des mesures.
