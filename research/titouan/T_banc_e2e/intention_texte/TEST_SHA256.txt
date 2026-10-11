@@ -1,0 +1,2 @@
+SHA-256 de phrases_test_scelle.jsonl (150 phrases, scellé, ouvert une seule fois à la fin par measure_final.mjs) :
+7f9e3a1852ca6c656d7277285cd3d786cfdba31fe19123daed8b81c3e6079018

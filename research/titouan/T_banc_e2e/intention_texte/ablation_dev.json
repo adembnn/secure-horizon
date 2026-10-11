@@ -1,0 +1,328 @@
+{
+ "jeu": "DEV",
+ "n": 250,
+ "repli_actuel": {
+  "type_correct": 182,
+  "type_faux": 13,
+  "type_faux_grave": 9,
+  "type_manquant": 55,
+  "montant_ok": 72,
+  "jeton_ok": 74,
+  "dest_ok": 0,
+  "bonnes_decisions": 328,
+  "mauvaises_extractions": 15
+ },
+ "ensemble": {
+  "type_correct": 233,
+  "type_faux": 2,
+  "type_faux_grave": 1,
+  "type_manquant": 15,
+  "montant_ok": 112,
+  "jeton_ok": 135,
+  "dest_ok": 58,
+  "bonnes_decisions": 538,
+  "mauvaises_extractions": 4
+ },
+ "correctifs": [
+  {
+   "correctif": "tokens",
+   "seul": {
+    "type_correct": 182,
+    "type_faux": 13,
+    "type_faux_grave": 9,
+    "type_manquant": 55,
+    "montant_ok": 72,
+    "jeton_ok": 135,
+    "dest_ok": 0,
+    "bonnes_decisions": 389,
+    "mauvaises_extractions": 16
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 233,
+    "type_faux": 2,
+    "type_faux_grave": 1,
+    "type_manquant": 15,
+    "montant_ok": 112,
+    "jeton_ok": 74,
+    "dest_ok": 58,
+    "bonnes_decisions": 477,
+    "mauvaises_extractions": 3
+   },
+   "gain_seul": 61,
+   "perte_si_retire": 61,
+   "faux_type_evites_seul": 0,
+   "faux_type_evites_ensemble": 0,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "recipient",
+   "seul": {
+    "type_correct": 182,
+    "type_faux": 13,
+    "type_faux_grave": 9,
+    "type_manquant": 55,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 58,
+    "bonnes_decisions": 386,
+    "mauvaises_extractions": 20
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 233,
+    "type_faux": 2,
+    "type_faux_grave": 1,
+    "type_manquant": 15,
+    "montant_ok": 112,
+    "jeton_ok": 135,
+    "dest_ok": 0,
+    "bonnes_decisions": 480,
+    "mauvaises_extractions": 3
+   },
+   "gain_seul": 58,
+   "perte_si_retire": 58,
+   "faux_type_evites_seul": 0,
+   "faux_type_evites_ensemble": 0,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "amounts",
+   "seul": {
+    "type_correct": 182,
+    "type_faux": 13,
+    "type_faux_grave": 9,
+    "type_manquant": 55,
+    "montant_ok": 111,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 367,
+    "mauvaises_extractions": 13
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 233,
+    "type_faux": 2,
+    "type_faux_grave": 1,
+    "type_manquant": 15,
+    "montant_ok": 72,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 498,
+    "mauvaises_extractions": 6
+   },
+   "gain_seul": 39,
+   "perte_si_retire": 40,
+   "faux_type_evites_seul": 0,
+   "faux_type_evites_ensemble": 0,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "own_dest",
+   "seul": {
+    "type_correct": 194,
+    "type_faux": 10,
+    "type_faux_grave": 9,
+    "type_manquant": 46,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 340,
+    "mauvaises_extractions": 12
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 221,
+    "type_faux": 5,
+    "type_faux_grave": 1,
+    "type_manquant": 24,
+    "montant_ok": 111,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 525,
+    "mauvaises_extractions": 7
+   },
+   "gain_seul": 12,
+   "perte_si_retire": 13,
+   "faux_type_evites_seul": 3,
+   "faux_type_evites_ensemble": 3,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "swap_verbs",
+   "seul": {
+    "type_correct": 192,
+    "type_faux": 13,
+    "type_faux_grave": 9,
+    "type_manquant": 45,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 338,
+    "mauvaises_extractions": 15
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 222,
+    "type_faux": 1,
+    "type_faux_grave": 1,
+    "type_manquant": 27,
+    "montant_ok": 112,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 527,
+    "mauvaises_extractions": 3
+   },
+   "gain_seul": 10,
+   "perte_si_retire": 11,
+   "faux_type_evites_seul": 0,
+   "faux_type_evites_ensemble": -1,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "connect_verbs",
+   "seul": {
+    "type_correct": 192,
+    "type_faux": 13,
+    "type_faux_grave": 9,
+    "type_manquant": 45,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 338,
+    "mauvaises_extractions": 15
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 223,
+    "type_faux": 2,
+    "type_faux_grave": 1,
+    "type_manquant": 25,
+    "montant_ok": 112,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 528,
+    "mauvaises_extractions": 7
+   },
+   "gain_seul": 10,
+   "perte_si_retire": 10,
+   "faux_type_evites_seul": 0,
+   "faux_type_evites_ensemble": 0,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "pay_verbs",
+   "seul": {
+    "type_correct": 191,
+    "type_faux": 13,
+    "type_faux_grave": 9,
+    "type_manquant": 46,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 337,
+    "mauvaises_extractions": 15
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 224,
+    "type_faux": 2,
+    "type_faux_grave": 1,
+    "type_manquant": 24,
+    "montant_ok": 112,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 529,
+    "mauvaises_extractions": 4
+   },
+   "gain_seul": 9,
+   "perte_si_retire": 9,
+   "faux_type_evites_seul": 0,
+   "faux_type_evites_ensemble": 0,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "connect_guard",
+   "seul": {
+    "type_correct": 188,
+    "type_faux": 5,
+    "type_faux_grave": 1,
+    "type_manquant": 57,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 334,
+    "mauvaises_extractions": 7
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 227,
+    "type_faux": 9,
+    "type_faux_grave": 9,
+    "type_manquant": 14,
+    "montant_ok": 112,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 532,
+    "mauvaises_extractions": 11
+   },
+   "gain_seul": 6,
+   "perte_si_retire": 6,
+   "faux_type_evites_seul": 8,
+   "faux_type_evites_ensemble": 7,
+   "graves_evites_ensemble": 8
+  },
+  {
+   "correctif": "asked_fr",
+   "seul": {
+    "type_correct": 185,
+    "type_faux": 13,
+    "type_faux_grave": 9,
+    "type_manquant": 52,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 331,
+    "mauvaises_extractions": 15
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 230,
+    "type_faux": 2,
+    "type_faux_grave": 1,
+    "type_manquant": 18,
+    "montant_ok": 112,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 535,
+    "mauvaises_extractions": 4
+   },
+   "gain_seul": 3,
+   "perte_si_retire": 3,
+   "faux_type_evites_seul": 0,
+   "faux_type_evites_ensemble": 0,
+   "graves_evites_ensemble": 0
+  },
+  {
+   "correctif": "inject",
+   "seul": {
+    "type_correct": 182,
+    "type_faux": 12,
+    "type_faux_grave": 9,
+    "type_manquant": 56,
+    "montant_ok": 72,
+    "jeton_ok": 74,
+    "dest_ok": 0,
+    "bonnes_decisions": 328,
+    "mauvaises_extractions": 14
+   },
+   "retire_de_l_ensemble": {
+    "type_correct": 232,
+    "type_faux": 3,
+    "type_faux_grave": 1,
+    "type_manquant": 15,
+    "montant_ok": 112,
+    "jeton_ok": 135,
+    "dest_ok": 58,
+    "bonnes_decisions": 537,
+    "mauvaises_extractions": 6
+   },
+   "gain_seul": 0,
+   "perte_si_retire": 1,
+   "faux_type_evites_seul": 1,
+   "faux_type_evites_ensemble": 1,
+   "graves_evites_ensemble": 0
+  }
+ ]
+}

@@ -1,0 +1,805 @@
+{
+ "n": 300,
+ "modes": {
+  "moteur_politique": {
+   "n_arnaques": 150,
+   "n_benins": 120,
+   "stats": {
+    "sans_intention": {
+     "arnaques_attrapees": {
+      "p": 0.74,
+      "lo": 0.6644342013432283,
+      "hi": 0.8035796518668268,
+      "k": 111,
+      "n": 150
+     },
+     "arnaques_ratees": 39,
+     "fausses_alertes": {
+      "p": 0,
+      "lo": 0,
+      "hi": 0.031020271055929517,
+      "k": 0,
+      "n": 120
+     }
+    },
+    "etiquetee": {
+     "arnaques_attrapees": {
+      "p": 0.86,
+      "lo": 0.7954465685598426,
+      "hi": 0.9065742112552398,
+      "k": 129,
+      "n": 150
+     },
+     "arnaques_ratees": 21,
+     "fausses_alertes": {
+      "p": 0.016666666666666666,
+      "lo": 0.0045824685411513955,
+      "hi": 0.0587371268129138,
+      "k": 2,
+      "n": 120
+     }
+    },
+    "etiquetee+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.86,
+      "lo": 0.7954465685598426,
+      "hi": 0.9065742112552398,
+      "k": 129,
+      "n": 150
+     },
+     "arnaques_ratees": 21,
+     "fausses_alertes": {
+      "p": 0.016666666666666666,
+      "lo": 0.0045824685411513955,
+      "hi": 0.0587371268129138,
+      "k": 2,
+      "n": 120
+     }
+    },
+    "extraite_actuel_gen": {
+     "arnaques_attrapees": {
+      "p": 0.8333333333333334,
+      "lo": 0.7655327510904788,
+      "hi": 0.8844864894790422,
+      "k": 125,
+      "n": 150
+     },
+     "arnaques_ratees": 25,
+     "fausses_alertes": {
+      "p": 0.041666666666666664,
+      "lo": 0.017926452505837815,
+      "hi": 0.09384212929543091,
+      "k": 5,
+      "n": 120
+     }
+    },
+    "extraite_actuel_gen+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.8333333333333334,
+      "lo": 0.7655327510904788,
+      "hi": 0.8844864894790422,
+      "k": 125,
+      "n": 150
+     },
+     "arnaques_ratees": 25,
+     "fausses_alertes": {
+      "p": 0.041666666666666664,
+      "lo": 0.017926452505837815,
+      "hi": 0.09384212929543091,
+      "k": 5,
+      "n": 120
+     }
+    },
+    "extraite_actuel_orig": {
+     "arnaques_attrapees": {
+      "p": 0.8,
+      "lo": 0.7288572445686362,
+      "hi": 0.8561600719439326,
+      "k": 120,
+      "n": 150
+     },
+     "arnaques_ratees": 30,
+     "fausses_alertes": {
+      "p": 0.03333333333333333,
+      "lo": 0.01303734016692058,
+      "hi": 0.0825815794852803,
+      "k": 4,
+      "n": 120
+     }
+    },
+    "extraite_actuel_orig+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.8,
+      "lo": 0.7288572445686362,
+      "hi": 0.8561600719439326,
+      "k": 120,
+      "n": 150
+     },
+     "arnaques_ratees": 30,
+     "fausses_alertes": {
+      "p": 0.03333333333333333,
+      "lo": 0.01303734016692058,
+      "hi": 0.0825815794852803,
+      "k": 4,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_gen": {
+     "arnaques_attrapees": {
+      "p": 0.86,
+      "lo": 0.7954465685598426,
+      "hi": 0.9065742112552398,
+      "k": 129,
+      "n": 150
+     },
+     "arnaques_ratees": 21,
+     "fausses_alertes": {
+      "p": 0.016666666666666666,
+      "lo": 0.0045824685411513955,
+      "hi": 0.0587371268129138,
+      "k": 2,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_gen+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.86,
+      "lo": 0.7954465685598426,
+      "hi": 0.9065742112552398,
+      "k": 129,
+      "n": 150
+     },
+     "arnaques_ratees": 21,
+     "fausses_alertes": {
+      "p": 0.016666666666666666,
+      "lo": 0.0045824685411513955,
+      "hi": 0.0587371268129138,
+      "k": 2,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_orig": {
+     "arnaques_attrapees": {
+      "p": 0.8066666666666666,
+      "lo": 0.7361357242542107,
+      "hi": 0.8618819770697485,
+      "k": 121,
+      "n": 150
+     },
+     "arnaques_ratees": 29,
+     "fausses_alertes": {
+      "p": 0.06666666666666667,
+      "lo": 0.03416489747129059,
+      "hi": 0.12605267077718166,
+      "k": 8,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_orig+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.8066666666666666,
+      "lo": 0.7361357242542107,
+      "hi": 0.8618819770697485,
+      "k": 121,
+      "n": 150
+     },
+     "arnaques_ratees": 29,
+     "fausses_alertes": {
+      "p": 0.06666666666666667,
+      "lo": 0.03416489747129059,
+      "hi": 0.12605267077718166,
+      "k": 8,
+      "n": 120
+     }
+    }
+   },
+   "vs_etiquetee": {
+    "extraite_actuel_gen": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A03-B2",
+      "P-A11-B2",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 5,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 3,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 3,
+      "type non compris (aucune intention)": 2
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2D4-M1",
+      "V2-ONCHAIN-00598",
+      "V2-ONCHAIN-01219"
+     ]
+    },
+    "extraite_actuel_gen+stricter": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A03-B2",
+      "P-A11-B2",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 5,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 3,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 3,
+      "type non compris (aucune intention)": 2
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2D4-M1",
+      "V2-ONCHAIN-00598",
+      "V2-ONCHAIN-01219"
+     ]
+    },
+    "extraite_actuel_orig": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A15-B4",
+      "P-T2D4-B1"
+     ],
+     "perdues_vs_etiquetee": 9,
+     "gagnees_vs_etiquetee": 0,
+     "fausses_alertes_en_plus": 4,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2,
+      "type non compris (aucune intention)": 7
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2A5-M2",
+      "V2-ONCHAIN-00004",
+      "V2-ONCHAIN-00598",
+      "V2-SIG-00066",
+      "V2-ONCHAIN-01219",
+      "V2-ONCHAIN-00332",
+      "V2-ONCHAIN-00368"
+     ]
+    },
+    "extraite_actuel_orig+stricter": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A15-B4",
+      "P-T2D4-B1"
+     ],
+     "perdues_vs_etiquetee": 9,
+     "gagnees_vs_etiquetee": 0,
+     "fausses_alertes_en_plus": 4,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2,
+      "type non compris (aucune intention)": 7
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2A5-M2",
+      "V2-ONCHAIN-00004",
+      "V2-ONCHAIN-00598",
+      "V2-SIG-00066",
+      "V2-ONCHAIN-01219",
+      "V2-ONCHAIN-00332",
+      "V2-ONCHAIN-00368"
+     ]
+    },
+    "extraite_amelioree_gen": {
+     "ids_fausses_alertes_en_plus": [],
+     "perdues_vs_etiquetee": 0,
+     "gagnees_vs_etiquetee": 0,
+     "fausses_alertes_en_plus": 0,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {},
+     "ids_perdues": []
+    },
+    "extraite_amelioree_gen+stricter": {
+     "ids_fausses_alertes_en_plus": [],
+     "perdues_vs_etiquetee": 0,
+     "gagnees_vs_etiquetee": 0,
+     "fausses_alertes_en_plus": 0,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {},
+     "ids_perdues": []
+    },
+    "extraite_amelioree_orig": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A09-B1",
+      "P-A15-B4",
+      "P-T2B4-B1",
+      "P-T2D4-B1",
+      "V2-BENIGN_EVERYDAY-00564",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 9,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 8,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2,
+      "type non compris (aucune intention)": 7
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2A5-M2",
+      "V2-ONCHAIN-00004",
+      "V2-ONCHAIN-00598",
+      "V2-SIG-00066",
+      "V2-ONCHAIN-01219",
+      "V2-ONCHAIN-00332",
+      "V2-ONCHAIN-00368"
+     ]
+    },
+    "extraite_amelioree_orig+stricter": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A09-B1",
+      "P-A15-B4",
+      "P-T2B4-B1",
+      "P-T2D4-B1",
+      "V2-BENIGN_EVERYDAY-00564",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 9,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 8,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2,
+      "type non compris (aucune intention)": 7
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2A5-M2",
+      "V2-ONCHAIN-00004",
+      "V2-ONCHAIN-00598",
+      "V2-SIG-00066",
+      "V2-ONCHAIN-01219",
+      "V2-ONCHAIN-00332",
+      "V2-ONCHAIN-00368"
+     ]
+    }
+   },
+   "vs_sans_intention": {
+    "etiquetee": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 18
+    },
+    "etiquetee+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 18
+    },
+    "extraite_actuel_gen": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 14
+    },
+    "extraite_actuel_gen+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 14
+    },
+    "extraite_actuel_orig": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 9
+    },
+    "extraite_actuel_orig+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 9
+    },
+    "extraite_amelioree_gen": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 18
+    },
+    "extraite_amelioree_gen+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 18
+    },
+    "extraite_amelioree_orig": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 10
+    },
+    "extraite_amelioree_orig+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 10
+    }
+   }
+  },
+  "complet": {
+   "n_arnaques": 150,
+   "n_benins": 120,
+   "stats": {
+    "sans_intention": {
+     "arnaques_attrapees": {
+      "p": 0.74,
+      "lo": 0.6644342013432283,
+      "hi": 0.8035796518668268,
+      "k": 111,
+      "n": 150
+     },
+     "arnaques_ratees": 39,
+     "fausses_alertes": {
+      "p": 0,
+      "lo": 0,
+      "hi": 0.031020271055929517,
+      "k": 0,
+      "n": 120
+     }
+    },
+    "etiquetee": {
+     "arnaques_attrapees": {
+      "p": 0.88,
+      "lo": 0.8182903386460475,
+      "hi": 0.9227315956032063,
+      "k": 132,
+      "n": 150
+     },
+     "arnaques_ratees": 18,
+     "fausses_alertes": {
+      "p": 0.03333333333333333,
+      "lo": 0.01303734016692058,
+      "hi": 0.0825815794852803,
+      "k": 4,
+      "n": 120
+     }
+    },
+    "etiquetee+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.88,
+      "lo": 0.8182903386460475,
+      "hi": 0.9227315956032063,
+      "k": 132,
+      "n": 150
+     },
+     "arnaques_ratees": 18,
+     "fausses_alertes": {
+      "p": 0.03333333333333333,
+      "lo": 0.01303734016692058,
+      "hi": 0.0825815794852803,
+      "k": 4,
+      "n": 120
+     }
+    },
+    "extraite_actuel_gen": {
+     "arnaques_attrapees": {
+      "p": 0.88,
+      "lo": 0.8182903386460475,
+      "hi": 0.9227315956032063,
+      "k": 132,
+      "n": 150
+     },
+     "arnaques_ratees": 18,
+     "fausses_alertes": {
+      "p": 0.08333333333333333,
+      "lo": 0.045893154816730314,
+      "hi": 0.14662373772987763,
+      "k": 10,
+      "n": 120
+     }
+    },
+    "extraite_actuel_gen+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.88,
+      "lo": 0.8182903386460475,
+      "hi": 0.9227315956032063,
+      "k": 132,
+      "n": 150
+     },
+     "arnaques_ratees": 18,
+     "fausses_alertes": {
+      "p": 0.08333333333333333,
+      "lo": 0.045893154816730314,
+      "hi": 0.14662373772987763,
+      "k": 10,
+      "n": 120
+     }
+    },
+    "extraite_actuel_orig": {
+     "arnaques_attrapees": {
+      "p": 0.8733333333333333,
+      "lo": 0.8106321928453123,
+      "hi": 0.9173893565925509,
+      "k": 131,
+      "n": 150
+     },
+     "arnaques_ratees": 19,
+     "fausses_alertes": {
+      "p": 0.058333333333333334,
+      "lo": 0.028540646631372926,
+      "hi": 0.1155272594680315,
+      "k": 7,
+      "n": 120
+     }
+    },
+    "extraite_actuel_orig+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.8733333333333333,
+      "lo": 0.8106321928453123,
+      "hi": 0.9173893565925509,
+      "k": 131,
+      "n": 150
+     },
+     "arnaques_ratees": 19,
+     "fausses_alertes": {
+      "p": 0.058333333333333334,
+      "lo": 0.028540646631372926,
+      "hi": 0.1155272594680315,
+      "k": 7,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_gen": {
+     "arnaques_attrapees": {
+      "p": 0.88,
+      "lo": 0.8182903386460475,
+      "hi": 0.9227315956032063,
+      "k": 132,
+      "n": 150
+     },
+     "arnaques_ratees": 18,
+     "fausses_alertes": {
+      "p": 0.03333333333333333,
+      "lo": 0.01303734016692058,
+      "hi": 0.0825815794852803,
+      "k": 4,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_gen+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.88,
+      "lo": 0.8182903386460475,
+      "hi": 0.9227315956032063,
+      "k": 132,
+      "n": 150
+     },
+     "arnaques_ratees": 18,
+     "fausses_alertes": {
+      "p": 0.03333333333333333,
+      "lo": 0.01303734016692058,
+      "hi": 0.0825815794852803,
+      "k": 4,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_orig": {
+     "arnaques_attrapees": {
+      "p": 0.8733333333333333,
+      "lo": 0.8106321928453123,
+      "hi": 0.9173893565925509,
+      "k": 131,
+      "n": 150
+     },
+     "arnaques_ratees": 19,
+     "fausses_alertes": {
+      "p": 0.08333333333333333,
+      "lo": 0.045893154816730314,
+      "hi": 0.14662373772987763,
+      "k": 10,
+      "n": 120
+     }
+    },
+    "extraite_amelioree_orig+stricter": {
+     "arnaques_attrapees": {
+      "p": 0.8733333333333333,
+      "lo": 0.8106321928453123,
+      "hi": 0.9173893565925509,
+      "k": 131,
+      "n": 150
+     },
+     "arnaques_ratees": 19,
+     "fausses_alertes": {
+      "p": 0.08333333333333333,
+      "lo": 0.045893154816730314,
+      "hi": 0.14662373772987763,
+      "k": 10,
+      "n": 120
+     }
+    }
+   },
+   "vs_etiquetee": {
+    "extraite_actuel_gen": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A03-B2",
+      "P-A11-B1",
+      "P-A11-B2",
+      "P-A12-B1",
+      "V2-BENIGN_EVERYDAY-00564",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 3,
+     "gagnees_vs_etiquetee": 3,
+     "fausses_alertes_en_plus": 6,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 3
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2D4-M1"
+     ]
+    },
+    "extraite_actuel_gen+stricter": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A03-B2",
+      "P-A11-B1",
+      "P-A11-B2",
+      "P-A12-B1",
+      "V2-BENIGN_EVERYDAY-00564",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 3,
+     "gagnees_vs_etiquetee": 3,
+     "fausses_alertes_en_plus": 6,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 3
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2",
+      "P-T2D4-M1"
+     ]
+    },
+    "extraite_actuel_orig": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A15-B4",
+      "P-T2D4-B1",
+      "V2-BENIGN_EVERYDAY-00564"
+     ],
+     "perdues_vs_etiquetee": 2,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 5,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2"
+     ]
+    },
+    "extraite_actuel_orig+stricter": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A15-B4",
+      "P-T2D4-B1",
+      "V2-BENIGN_EVERYDAY-00564"
+     ],
+     "perdues_vs_etiquetee": 2,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 5,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2"
+     ]
+    },
+    "extraite_amelioree_gen": {
+     "ids_fausses_alertes_en_plus": [],
+     "perdues_vs_etiquetee": 0,
+     "gagnees_vs_etiquetee": 0,
+     "fausses_alertes_en_plus": 0,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {},
+     "ids_perdues": []
+    },
+    "extraite_amelioree_gen+stricter": {
+     "ids_fausses_alertes_en_plus": [],
+     "perdues_vs_etiquetee": 0,
+     "gagnees_vs_etiquetee": 0,
+     "fausses_alertes_en_plus": 0,
+     "fausses_alertes_en_moins": 0,
+     "causes_des_pertes": {},
+     "ids_perdues": []
+    },
+    "extraite_amelioree_orig": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A09-B1",
+      "P-A15-B4",
+      "P-T2B4-B1",
+      "P-T2D4-B1",
+      "V2-BENIGN_EVERYDAY-00564",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 2,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 8,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2"
+     ]
+    },
+    "extraite_amelioree_orig+stricter": {
+     "ids_fausses_alertes_en_plus": [
+      "P-A01-B2",
+      "P-A03-B2",
+      "P-A09-B1",
+      "P-A15-B4",
+      "P-T2B4-B1",
+      "P-T2D4-B1",
+      "V2-BENIGN_EVERYDAY-00564",
+      "V2-BENIGN_EVERYDAY-01399"
+     ],
+     "perdues_vs_etiquetee": 2,
+     "gagnees_vs_etiquetee": 1,
+     "fausses_alertes_en_plus": 8,
+     "fausses_alertes_en_moins": 2,
+     "causes_des_pertes": {
+      "type juste, champ manquant (montant/jeton/destinataire)": 2
+     },
+     "ids_perdues": [
+      "P-A13-M1",
+      "P-A13-M2"
+     ]
+    }
+   },
+   "vs_sans_intention": {
+    "etiquetee": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 21
+    },
+    "etiquetee+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 21
+    },
+    "extraite_actuel_gen": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 21
+    },
+    "extraite_actuel_gen+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 21
+    },
+    "extraite_actuel_orig": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 20
+    },
+    "extraite_actuel_orig+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 20
+    },
+    "extraite_amelioree_gen": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 21
+    },
+    "extraite_amelioree_gen+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 21
+    },
+    "extraite_amelioree_orig": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 20
+    },
+    "extraite_amelioree_orig+stricter": {
+     "arnaques_perdues_vs_sans_intention": 0,
+     "arnaques_gagnees_vs_sans_intention": 20
+    }
+   }
+  }
+ }
+}
