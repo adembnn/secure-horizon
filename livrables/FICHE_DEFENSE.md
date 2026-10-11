@@ -31,7 +31,6 @@ Un jeu aveugle de 250 cas : 150 arnaques, 100 demandes honnêtes jumelles. Auteu
 Sur l'extension elle-même, lecture par mots-clés sans modèle : réserve scellée de 2 673 paires jamais vues, ouverte une seule fois.
 
 - Demandes piégées (1 789) : **74,6 %** arrêtées, **0** validée, 25,4 % pas traitées.
-- Demandes honnêtes (515) : 40,8 % validées, 13,8 % de fausses alertes, 45,4 % pas traitées.
 
 « Pas traité » : Hold up affiche « Je n'ai pas pu vérifier », impose 30 s d'attente, et la personne décide.
 
