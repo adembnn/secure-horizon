@@ -183,7 +183,8 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       win.append(h('div', { class: 'band ' + lv.cls }, svgEl(lv.icon), h('div', null, h('span', { class: 'tag', text: lv.tag }), h('h1', { id: 'h', text: lv.title }))));
       const main = h('main', { id: 'd' });
       const isRed = v.level === 'danger' || v.level === 'manipulation';
-      const needFriction = isRed && cfg.arm !== 'A';
+      // "Non verifie" recoit la meme friction que "Danger" : sinon une demande rendue illisible expres (trop grosse, format non gere) evite l ecran rouge ET le delai.
+      const needFriction = (isRed || v.level === 'unknown') && cfg.arm !== 'A';
       if (v.level === 'unknown') {
         main.append(h('p', { class: 'lead', text: "On n'a pas pu vérifier cette demande" + (v.why ? ' (' + v.why + ')' : '') + '. Ce n\'est ni un feu vert ni un feu rouge.' }));
         main.append(h('div', { class: 'unkbox', text: 'Demande : ' + ctx.method + '. Aucune vérification terminée : continue seulement si tu es sûr(e) de toi.' }));
