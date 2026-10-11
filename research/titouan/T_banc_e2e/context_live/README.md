@@ -51,7 +51,7 @@ Avec le cache chaud, le p50 passe sous 1 ms. Sans l'explorateur, le RPC public r
 
 ## Point d'intégration
 
-`server_integration.diff` est prêt et n'est pas appliqué. Il s'applique à `server/server.mjs` dans son état du 11 octobre à 04h45 :
+`server_integration.diff` est prêt et n'est pas appliqué. Il s'applique à `server/server.mjs` dans son état du 11 octobre à 05h00 (commit `816fbfb`) :
 
 ```
 git apply --directory=research/titouan/T_banc_e2e research/titouan/T_banc_e2e/context_live/server_integration.diff

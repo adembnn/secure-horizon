@@ -105,7 +105,6 @@ function parseChain(v) {
 }
 function hostOf(origin) { try { return new URL(origin).hostname; } catch { return ''; } }
 
-const REG_MODE = () => (typeof process !== "undefined" && process.env.HOLDUP_REG) || "live";
 export function makeEvaluatePlus(D) {
   // D : { evaluate, E, compare, applyExtraRules, analyzeChainRequest, applyPolicy, mergeEffects, present, scenarioFiche, findPressure, buildTexts, buildSecours,
   //       fiches: { id -> fiche }, SECOURS_TITRE, TITRE_NON_VERIFIE, DETECTORS, DEFAULT_TOKENS?, domainToUnicode?, provider?: async () => module, env?: () => object }
@@ -131,8 +130,9 @@ export function makeEvaluatePlus(D) {
     for (const [a, v] of Object.entries(facts)) if (v && Number.isFinite(v.ageBlocks) && ageBlocks[a] === undefined) ageBlocks[a] = v.ageBlocks;
     for (const [a, v] of Object.entries(tokenInfo)) if (Number.isFinite(v.ageBlocks) && ageBlocks[a] === undefined) ageBlocks[a] = v.ageBlocks;
     for (const [a, v] of Object.entries(tokenInfo)) if (!tokenMeta[a] && v.symbol !== undefined && !fromChain) tokenMeta[a] = { symbol: v.symbol, decimals: Number.isFinite(v.decimals) ? v.decimals : 18 };
+    // reference table of the engine, exposed when the live context is on (as context_live/server_integration.diff does)
     const registry = Array.isArray(X.token_registry) ? X.token_registry
-      : (REG_MODE() !== "never" && (fromChain || REG_MODE() === "always") && D.DEFAULT_TOKENS && [1, 43114].includes(chainId) ? Object.entries(D.DEFAULT_TOKENS).filter(([a]) => HEX20.test(a)).map(([address, t]) => ({ address, symbol: t.symbol, decimals: t.decimals })) : []);
+      : (fromChain && D.DEFAULT_TOKENS && [1, 43114].includes(chainId) ? Object.entries(D.DEFAULT_TOKENS).filter(([a]) => HEX20.test(a)).map(([address, t]) => ({ address, symbol: t.symbol, decimals: t.decimals })) : []);
     const codeSet = new Set([...known, ...Object.keys(tokenMeta), ...Object.keys(tokenInfo), ...registry.map((t) => lc(t.address))]);
     const h = hostOf(body.origin);
     const unicodeHost = (() => { try { return (D.domainToUnicode && D.domainToUnicode(h)) || h; } catch { return h; } })();

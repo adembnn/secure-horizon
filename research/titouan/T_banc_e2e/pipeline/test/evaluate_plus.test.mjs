@@ -60,8 +60,10 @@ test('unknown facts never lower : an empty live answer changes nothing', async (
   const empty = { isContract: {}, ageBlocks: {}, balances: {}, tokenMeta: {}, facts: {}, tokenInfo: {}, allowances: {}, missing: ['isContract:' + STRANGER, 'age:' + STRANGER, 'signer.nativeBalance'], source: 'provider' };
   for (const c of CASES.slice(0, 160)) {
     const { body, local } = input(c);
-    const a = await run(body, local, { live: null }), b = await run(body, local, { live: empty });
-    assert.equal(benchLevel(b), benchLevel(a), c.id);
+    const a = await run(body, local, { live: null }), b = await run(body, local, { live: empty }), b2 = await run(body, local, { live: { ...empty, source: undefined } });
+    assert.equal(benchLevel(b2), benchLevel(a), c.id + " (faits vides, sans table de reference)");
+    // the only thing an empty answer switches on is the engine's own reference-token table (static, public) : a detector may then stop flagging a reference token
+    if (benchLevel(b) !== benchLevel(a)) assert.ok(a.plus.raisedBy.length && RK[benchLevel(b)] >= RK[b.plus.base] && RK[b.plus.base] >= RK[b.plus.product], c.id);
     assert.ok(RK[benchLevel(b)] >= RK[b.plus.product], c.id);
     assert.equal(b.plus.relaxedByFacts, false);
     assert.equal(b.plus.missingFacts.length, 3);
