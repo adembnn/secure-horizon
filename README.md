@@ -149,7 +149,7 @@ NIST CSF 2.0 : DE.AE-02, DE.AE-07, DE.CM-09 (Detect), RS.MI-01 au sens large (Re
 | Chemin | Contenu |
 |---|---|
 | `scripts/demo.mjs`, `scripts/verifier_installation.mjs` | lancer la démo locale ; contrôler l'installation et les tests rapides |
-| `livrables/` | rendu : [CHIFFRES](livrables/CHIFFRES.md), pitchs V7, vidéo, fiche de défense, slide de conformité, playbook, questions du jury, deck de 8 slides ([PDF](livrables/deck/holdup.pdf), [PPTX](livrables/deck/holdup.pptx)) et 2 slides playbook et conformité ([PPTX](livrables/deck/holdup_playbook_conformite.pptx)), mapping, installation ; `pitch_v7/` : pitch, démo et Q&R d'Adem ; `RAPPORT_V7.md` : comparaison des deux V7 et version recommandée |
+| `livrables/` | rendu : [CHIFFRES](livrables/CHIFFRES.md), pitchs V7, vidéo, fiche de défense, slide de conformité, playbook, questions du jury, deck de 7 slides ([PDF](livrables/deck/holdup.pdf), [PPTX](livrables/deck/holdup.pptx)) et 2 slides playbook et conformité ([PPTX](livrables/deck/holdup_playbook_conformite.pptx)), mapping, installation ; `pitch_v7/` : pitch, démo et Q&R d'Adem ; `RAPPORT_V7.md` : comparaison des deux V7 et version recommandée |
 | `pitch/DEMO_SCENES.md` | scènes de démo du produit |
 | `research/titouan/T_banc_e2e/extension_standalone/` | extension Chrome/Edge MV3 livrée : sources, dossier `extension/` à charger, variante `extension_sans_reseau/`, `BUILD_INFO.json` (empreintes du build), tests |
 | `research/titouan/T_banc_e2e/dist/` | paquets zip du build (leur contenu se contrôle avec `BUILD_INFO.json`) |

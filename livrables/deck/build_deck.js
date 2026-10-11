@@ -93,16 +93,31 @@ function bar(s, label, value, pct, y, color) {
   s.addImage({ path: path.join(CAP, 'pan-ouvert_sombre.png'), x: 6.6, y: 0.4, w: 2.39, h: 4.5 });
 }
 
-// 6 Jeu aveugle
+// 6 Les deux mesures
 {
-  const s = slide('Jeu aveugle : 250 cas, moteur de comparaison', 'research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md, preuves/ECARTS_LIVRABLES.md',
-    "250 cas (150 arnaques, 100 jumeaux honnêtes), écrits sans lire nos règles, sha256 publié, ouverts une fois le 11 oct. 2026, moteur figé. Signalé = avertissement ou rouge. Code seul : 87,3 % [81,1 ; 91,7], faux rouges 15,0 % [9,3 ; 23,3]. Sans phrase : 64,7 %. Critères publiés avant : rappel au moins 80 % atteint, faux rouges au plus 10 % non atteint. 11 des 15 faux rouges : achat NFT à prix quasi nul. Ces chiffres mesurent le moteur de comparaison côté serveur (blind_decalage/run/chaine/), en Node, pas l'extension livrée : ne jamais dire « l'extension attrape 87 % ». Ne pas citer A11 ni A12 de CHIFFRES.md comme mesure du produit (rejoué sur le build réel : 38,2 % et 9,1 %, preuves/ECARTS_LIVRABLES.md). Limite : auteur de la même famille de modèles que ceux qui nous ont aidés ; cas synthétiques. Ne plus citer le 1,3 %.");
-  txt(s, 'Arnaques signalées', 0.5, 1.3, 9, 0.35, { fontSize: 14, color: INK2 });
-  bar(s, 'Sans la phrase', '65 %', 0.647, 1.7, INK3);
-  bar(s, 'Avec la phrase', '87 %', 0.873, 2.25, INK);
-  txt(s, 'Opérations honnêtes arrêtées à tort', 0.5, 3.05, 9, 0.35, { fontSize: 14, color: INK2 });
-  bar(s, 'Seuil fixé avant', '10 %', 0.10, 3.45, INK3);
-  bar(s, 'Mesuré : seuil manqué', '15 %', 0.15, 4.0, INK);
+  const s = slide('Mesuré : l’extension, et le moteur de comparaison', 'preuves/RESULTAT_RESERVE_MOTS.md, research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md',
+    "Deux mesures différentes, ne pas les mélanger. (1) Extension, réserve scellée (preuves/RESULTAT_RESERVE_MOTS.md, commit 61dbe40) : preuves/panel/RESERVE.jsonl, 2 673 paires, ouverte une fois le 11 oct. 2026. Demandes non conformes : 1 789, dont 1 334 attrapées (74,6 %), 0 laissée passer sans alerte, 455 en « je n'ai pas pu vérifier » (25,4 %). Demandes conformes : 515, dont 190 « ça correspond », 71 fausses alertes (13,8 % des conformes, 27,2 % des conformes vérifiées), 254 en « pas pu vérifier ». Réserves : lecture de la phrase par mots-clés seulement, le bras avec Clef n'a pas été terminé ; build 6b9de2f, d'avant le nouvel habillage ; un fichier du code de décision était modifié hors commit au lancement ; la réserve est consommée. (2) Moteur de comparaison côté serveur, jeu aveugle de 250 cas (150 arnaques, 100 jumeaux honnêtes) : 87,3 % signalées avec la phrase, 64,7 % sans, faux rouges 15,0 % pour un seuil fixé avant à 10 %, manqué ; auteur des cas : une IA de la même famille que celle qui nous a aidés. Ne jamais dire « l'extension attrape 87 % ». Ne pas citer A11 ni A12 de CHIFFRES.md.", { fs: 10 });
+  const rows = (x, list, y0) => list.forEach((r, i) => {
+    const y = y0 + i * 0.58;
+    txt(s, r[0], x, y, 1.25, 0.5, big({ fontSize: 26, valign: 'middle' }));
+    txt(s, r[1], x + 1.3, y, 2.95, 0.5, { fontSize: 13, color: INK2, valign: 'middle' });
+  });
+  txt(s, 'L’extension', 0.5, 1.2, 4.2, 0.35, big({ fontSize: 18 }));
+  txt(s, 'Réserve scellée, 2 673 paires, ouverte une fois.', 0.5, 1.58, 4.2, 0.3, { fontSize: 13, color: INK2 });
+  rows(0.5, [
+    ['75 %', 'des demandes non conformes attrapées (1 334 sur 1 789)'],
+    ['0', 'laissée passer sans alerte'],
+    ['25 %', '« Je n’ai pas pu vérifier »'],
+    ['14 %', 'de fausses alertes (71 sur 515 demandes conformes)'],
+  ], 2.0);
+  txt(s, 'Le moteur de comparaison', 5.3, 1.2, 4.2, 0.35, big({ fontSize: 18 }));
+  txt(s, 'Jeu aveugle de 250 cas, écrits sans voir nos règles.', 5.3, 1.58, 4.2, 0.3, { fontSize: 13, color: INK2 });
+  rows(5.3, [
+    ['87 %', 'des arnaques signalées avec la phrase'],
+    ['65 %', 'sans la phrase'],
+    ['15 %', 'd’opérations honnêtes arrêtées à tort (seuil fixé avant : 10 %)'],
+  ], 2.0);
+  txt(s, 'Extension mesurée sans modèle (mots-clés seuls), sur le build 6b9de2f d’avant le nouvel habillage, avec un fichier de décision modifié hors commit.', 0.5, 4.42, 9, 0.5, { fontSize: 12, color: INK2 });
 }
 
 // 7 Ce qui ne marche pas encore
