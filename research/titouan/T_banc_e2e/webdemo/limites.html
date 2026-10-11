@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Hold up — limites</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/holdup.css">
+</head>
+<body>
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="index.html#demo">Hold up</a>
+  <nav aria-label="Principal"><ul>
+    <li><a href="index.html#demo">Démo</a></li>
+    <li><a href="index.html#colle">Colle une transaction</a></li>
+    <li><a href="index.html#journal">Journal</a></li>
+    <li><a href="limites.html" aria-current="page">Limites</a></li>
+  </ul></nav>
+</div></header>
+<main class="wrap prose">
+  <h1>Ce que Hold up ne fait pas</h1>
+  <p class="lede">Hold up avertit, ralentit et explique. Il ne garantit rien. Voici, sans détour, ce qu’il ne couvre pas.</p>
+
+  <h2>Cette démo n’est pas l’extension</h2>
+  <ul>
+    <li>Ici, un faux site parle à un faux portefeuille que nous avons écrit dans la page. Dans la vraie vie, l’extension doit s’interposer entre un vrai site et un vrai portefeuille. Cette démo prouve que le moteur donne le bon verdict dans un navigateur. Elle ne prouve pas que l’extension intercepte toutes les demandes.</li>
+    <li>Le moteur tourne ici sans réseau, sans contexte vérifié en ligne (âge d’un contrat, réputation d’un jeton). Il connaît seulement quelques adresses publiques (Permit2, Multicall3, CoW, Seaport, Safe) et ce que le scénario lui donne (un contact fictif, un envoi passé). Des signaux qui demandent le réseau sont donc absents.</li>
+  </ul>
+
+  <h2>Les envois faits depuis l’interface du portefeuille ne sont pas couverts</h2>
+  <ul>
+    <li>Si tu tapes une adresse et un montant directement dans le bouton « Envoyer » de ton portefeuille, aucun site n’est impliqué : Hold up ne voit rien. Il retient seulement les demandes faites par un site.</li>
+    <li>Un sosie d’adresse que tu colles toi-même dans ton portefeuille passe inaperçu.</li>
+  </ul>
+
+  <h2>Mobile</h2>
+  <ul>
+    <li>Les extensions de navigateur n’existent pas sur la plupart des téléphones, et les portefeuilles mobiles ouvrent leurs propres écrans. Sur téléphone, la page « Colle une transaction » permet de lire un verdict avant de signer, mais c’est toi qui dois penser à copier la demande : rien ne s’interpose tout seul.</li>
+  </ul>
+
+  <h2>La fraude « conforme » est invisible</h2>
+  <ul>
+    <li>Si la demande est techniquement normale (un envoi simple de 50 ETH vers une adresse neuve, mais que tu fais parce qu’un faux conseiller te l’a demandé), le moteur ne peut pas la distinguer d’un vrai paiement. Seule ta réponse à la question d’intention (« On m’a demandé de le faire ») ou une pression visible sur la page peut alors changer le verdict. Si tu réponds « Payer quelqu’un », l’envoi est vu comme un paiement ordinaire.</li>
+    <li>Tes réponses ne peuvent que relever le niveau d’alerte, jamais l’abaisser.</li>
+  </ul>
+
+  <h2>Il avertit et ralentit, rien de plus</h2>
+  <ul>
+    <li>« Aucun signal trouvé » ne veut jamais dire « sûr ». Il n’y a pas de vert, pas de mot « protégé », pas de « bloqué ».</li>
+    <li>Tu peux toujours continuer après le délai. Hold up ne décide pas à ta place.</li>
+    <li>Les textes viennent de fiches rédigées d’avance. Certaines phrases sont approximatives (par exemple un montant en ETH natif affiché comme « NATIVE », ou « ton contact » pour une adresse que le moteur ne connaît pas).</li>
+    <li>La question « Échanger une crypto » et « Autre » ne sont pas traduites en intention pour le comparateur : le verdict repose alors seulement sur le moteur d’effets.</li>
+    <li>Le délai de 10 min du produit pour le niveau Manipulation est raccourci à 30 s dans la démo.</li>
+    <li>Aucune mesure d’efficacité sur de vraies personnes n’a été faite : les chiffres disponibles viennent de jeux de cas synthétiques.</li>
+  </ul>
+
+  <p><a href="index.html#demo">Retour à la démo</a></p>
+</main>
+<footer><div class="wrap">Hold up · démo statique · aucune donnée envoyée.</div></footer>
+</body>
+</html>

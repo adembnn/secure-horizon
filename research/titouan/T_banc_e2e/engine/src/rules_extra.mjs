@@ -118,8 +118,35 @@ function foreignApproval(eff, ctx, flags) {
   }
 }
 
+// ---- F11 : ordre de marché signé (Seaport, y compris BulkOrder en arbre) dont le produit pour le signataire est négligeable (< 1e-6 unité) face à ce qu'il donne.
+// Raison générale : une vente à prix quasi nul n'est pas une vente mais un don ; le moteur de base ne traite que le cas exactement nul.
+// Seuil en unités humaines (décimales du jeton lues dans le contexte, 18 par défaut), indépendant de toute adresse.
+const NEGLIGIBLE_HUMAN = 1e-6;
+const human = (ctx, token, rawAmt) => { try { const d = token && lc(token) !== ZERO ? decOf(ctx, token) : 18; return Number(BigInt(rawAmt)) / 10 ** d; } catch { return NaN; } };
+function collectOrders(node, out, depth = 0) {
+  if (!node || typeof node !== 'object' || depth > 6) return;
+  if (Array.isArray(node)) { for (const x of node) collectOrders(x, out, depth + 1); return; }
+  if (Array.isArray(node.offer) && Array.isArray(node.consideration) && node.offerer) { out.push(node); return; }
+  for (const v of Object.values(node)) collectOrders(v, out, depth + 1);
+}
+function marketOrderProceeds(request, ctx, flags) {
+  if (request.method !== 'eth_signTypedData_v4') return;
+  let td; try { td = typeof request.params[1] === 'string' ? JSON.parse(request.params[1]) : request.params[1]; } catch { return; }
+  const orders = []; collectOrders(td && td.message, orders);
+  for (const o of orders) {
+    if (!o.offer.length) continue;
+    const mine = o.consideration.filter((c) => lc(c.recipient) === lc(o.offerer));
+    if (mine.some((c) => Number(c.itemType) >= 2)) continue;              // il reçoit un NFT en échange : échange, pas un don
+    const fung = mine.filter((c) => Number(c.itemType) <= 1);
+    if (fung.length === 0) continue;                                       // cas « rien du tout » : déjà couvert par le moteur de base
+    const total = fung.map((c) => human(ctx, c.token, c.endAmount ?? c.startAmount)).filter((x) => Number.isFinite(x));
+    if (total.length && total.every((x) => x < NEGLIGIBLE_HUMAN)) { flags.push({ code: 'order_proceeds_negligible', severity: 'critical', detail: `l'ordre signé donne ${o.offer.length} élément(s) pour un produit négligeable (< ${NEGLIGIBLE_HUMAN})` }); return; }
+  }
+}
+
 export function applyExtraRules(eff, request, ctx) {
   const flags = [];
+  if (isOn('F11')) marketOrderProceeds(request, ctx, flags);
   if (isOn('F10')) foreignApproval(eff, ctx, flags);
   if (isOn('F9')) identityChecks(ctx, flags);
   if (isOn('F8')) tokenChecks(request, ctx, flags);

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Hold up — démo</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/holdup.css">
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="#demo">Hold up</a>
+  <nav aria-label="Principal"><ul>
+    <li><a id="nav-demo" href="#demo">Démo</a></li>
+    <li><a id="nav-colle" href="#colle">Colle une transaction</a></li>
+    <li><a id="nav-journal" href="#journal">Journal</a></li>
+    <li><a href="limites.html">Limites</a></li>
+  </ul></nav>
+</div></header>
+<div class="notice"><div class="wrap"><p>Démo : tout est fictif (site, portefeuille, adresses). Le moteur tourne dans cette page, aucune donnée n’est envoyée à un serveur. Ce n’est pas l’extension.</p></div></div>
+
+<main class="wrap">
+  <section id="view-demo" aria-labelledby="h-demo">
+    <h1 id="h-demo">Une signature piégée, retenue avant d’arriver au portefeuille</h1>
+    <p class="lede">Choisis un scénario. Le faux site demande une signature au faux portefeuille. Quand tu cliques sur « Signer », Hold up retient la demande et te dit ce qu’elle fait vraiment.</p>
+    <div class="cols">
+      <div>
+        <h2>1. Le faux site propose</h2>
+        <ol id="scen-list"></ol>
+        <div class="cfg">
+          <label>Délai avant « Continuer quand même » :
+            <select id="cfg-delay">
+              <option value="0">aucun</option><option value="5" selected>5 secondes</option><option value="10">10 secondes</option><option value="30">30 secondes</option>
+            </select></label>
+          <label><input type="checkbox" id="cfg-ask" checked> Poser d’abord la question d’intention</label>
+          <p class="muted small">Danger : au moins 10 s. Manipulation : au moins 30 s (le produit retient 10 min, la démo raccourcit). Annuler n’attend jamais.</p>
+        </div>
+      </div>
+      <div class="card wallet">
+        <h2>2. Le faux portefeuille reçoit</h2>
+        <p id="wallet-id"></p>
+        <div id="wallet-req"></div>
+        <p id="wallet-out" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-colle" hidden aria-labelledby="h-colle">
+    <h1 id="h-colle">Colle une transaction</h1>
+    <p class="lede">Colle la requête JSON d’un portefeuille (<code>eth_sendTransaction</code> ou <code>eth_signTypedData_v4</code>) et lis le verdict. Marche sur téléphone, sans rien installer : c’est la version « application compagnon ». Rien n’est envoyé nulle part.</p>
+    <div class="card">
+      <div class="row">
+        <button class="btn" type="button" id="colle-ex-tx">Exemple : droit illimité</button>
+        <button class="btn" type="button" id="colle-ex-typed">Exemple : signature de permit</button>
+        <select id="colle-ex" aria-label="Exemples du jeu public"></select>
+      </div>
+      <div class="field"><label for="colle-text">Requête (JSON)</label><textarea id="colle-text" spellcheck="false" autocomplete="off" placeholder='{ "method": "eth_sendTransaction", "params": [ { "to": "0x…", "data": "0x…", "value": "0x0" } ] }'></textarea></div>
+      <div class="field"><label for="colle-origin">Site qui demande (facultatif)</label><input type="text" id="colle-origin" placeholder="https://exemple.org" autocomplete="off"></div>
+      <div class="field"><label for="colle-intent">Qu’essaies-tu de faire ?</label><select id="colle-intent"></select></div>
+      <button class="btn btn-main" type="button" id="colle-go">Vérifier</button>
+    </div>
+    <div id="colle-out" class="card" hidden aria-live="polite"></div>
+  </section>
+
+  <section id="view-journal" hidden aria-labelledby="h-journal">
+    <h1 id="h-journal">Journal local</h1>
+    <p class="lede">Chaque décision est notée ici, dans ton navigateur, avec une empreinte qui dépend de la ligne précédente. Si quelqu’un retouche une ligne, la chaîne se casse. Aucune adresse, aucune requête complète n’y est écrite.</p>
+    <p id="journal-store" class="muted"></p>
+    <div class="row">
+      <button class="btn" type="button" id="j-verify">Vérifier la chaîne</button>
+      <button class="btn" type="button" id="j-tamper">Retoucher une ligne (test)</button>
+      <button class="btn" type="button" id="j-export">Exporter (JSON)</button>
+      <button class="btn" type="button" id="j-clear">Effacer</button>
+    </div>
+    <p id="journal-status" class="status" role="status" aria-live="polite"></p>
+    <div id="journal-list" class="scroll"></div>
+  </section>
+</main>
+<footer><div class="wrap">Hold up avertit et ralentit. Il ne bloque rien et ne garantit rien. <a href="limites.html">Ce qu’il ne couvre pas.</a></div></footer>
+</body>
+</html>

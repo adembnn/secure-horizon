@@ -33,6 +33,13 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     for (const cp of unknownFirstSeen) reasons.push({ code: 'first_seen_recipient', said: '', does: cp.address });
   }
 
+  // ---- F12 : un ordre signé hors chaîne (marché, solveur) est un ÉCHANGE conditionnel : ce que le signataire donne est lié à un minimum reçu.
+  // Si ce minimum n'est pas négligeable (>= 1e-6 unité, ou un NFT), « tu enverrais X » n'est pas un effet inattendu d'une signature de vente ; un produit négligeable reste attrapé par le plancher (F11).
+  if (isOn('F12') && eff.kind === 'signature' && reasons.some((r) => r.code === 'unexpected_outgoing')) {
+    const exchange = (eff.incoming || []).some((i) => i.bound === 'min' && (i.std === 'erc721' || i.std === 'erc1155' || Number(i.amount) >= 1e-6));
+    if (exchange) drop('unexpected_outgoing', 'F12:echange_conditionnel_signe');
+  }
+
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :
   // warn (à confirmer) au lieu de critical. chain_id = 0 (toutes chaînes) et cible inconnue restent critical.
   if (isOn('F4') && eff.delegation && isKnownProtocol(ctx, eff.delegation.to) && !(eff.delegations || []).some((d) => d.chainId === 0 && String(d.to) !== ZERO_ADDR)) {
