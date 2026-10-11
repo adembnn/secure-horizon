@@ -1,0 +1,14 @@
+{
+  "origin": "https://wallet-demo.example",
+  "chainId": "0xa869",
+  "from": "0x8bcea1b8558ac307b50ad720045c35783c9efb6c",
+  "method": "eth_sendTransaction",
+  "params": [
+    {
+      "from": "0x8bcea1b8558ac307b50ad720045c35783c9efb6c",
+      "to": "0x1234567890abcdef1234567890abcdef12345678",
+      "value": "0x16345785d8a0000",
+      "data": "0x"
+    }
+  ]
+}

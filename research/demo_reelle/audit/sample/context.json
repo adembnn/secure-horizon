@@ -1,0 +1,16 @@
+{
+  "contacts": [
+    {
+      "label": "Paul",
+      "address": "0x1234567890abcdef1234567890abcdef12345678"
+    }
+  ],
+  "history": [
+    {
+      "address": "0x1234567890abcdef1234567890abcdef12345678",
+      "direction": "sortie",
+      "amount": "0.1",
+      "minutes_ago": 5000
+    }
+  ]
+}
