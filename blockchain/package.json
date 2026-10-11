@@ -10,7 +10,9 @@
     "demo:deploy": "hardhat run scripts/demo/deploy-local.js",
     "demo:fuji": "node scripts/demo/deploy-fuji.js --network fuji",
     "anchor:local": "hardhat --config hardhat.anchor.config.js run scripts/demo/anchor.js --network localhost",
-    "anchor:fuji": "hardhat --config hardhat.anchor.config.js run scripts/demo/anchor.js --network fuji"
+    "anchor:fuji": "hardhat --config hardhat.anchor.config.js run scripts/demo/anchor.js --network fuji",
+    "fuji:check": "node scripts/demo/fuji-all.js --check",
+    "fuji:all": "node scripts/demo/fuji-all.js"
   },
   "keywords": [],
   "author": "",

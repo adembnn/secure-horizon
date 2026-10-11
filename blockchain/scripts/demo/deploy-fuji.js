@@ -48,7 +48,8 @@ async function main() {
   const hre = require("hardhat");
   const { ethers } = hre;
   const lib = await import(pathToFileURL(path.join(__dirname, "..", "..", "..", "research", "demo_reelle", "chain", "lib.mjs")).href);
-  lib.assertSafeRpc(hre.network.config.url);
+  // rehearsal = network fuji pointed at a local fork of Fuji (FUJI_RPC_URL=http://127.0.0.1:<port>)
+  const rehearsal = !equivalent && lib.assertRehearsalOutDir(hre.network.config.url);
   await hre.run("compile", { quiet: true });
 
   if (!equivalent) {
@@ -79,7 +80,8 @@ async function main() {
   // ---- state of the previous deployment ------------------------------------------------------
   const prev = lib.tryReadAddresses("fuji");
   const hasCode = async (a) => !!a && (await ethers.provider.getCode(a)) !== "0x";
-  const reusable = !args.fresh && prev && Number(prev.chainId) === chainId && !!prev.fujiEquivalent === equivalent;
+  const sameKind = (p) => Number(p.chainId) === chainId && !!p.fujiEquivalent === equivalent && !!p.fujiRehearsal === rehearsal;
+  const reusable = !args.fresh && prev && sameKind(prev);
   let baseOk = false;
   let drainerOk = false;
   if (reusable) {
@@ -96,7 +98,7 @@ async function main() {
   );
 
   // collector: a separate fresh address with NO key (kept when the drainer alone is redeployed)
-  let collector = !args.fresh && prev && prev.collector && prev.collector.toLowerCase() !== deployer.address.toLowerCase() ? prev.collector : null;
+  let collector = reusable && prev.collector && prev.collector.toLowerCase() !== deployer.address.toLowerCase() ? prev.collector : null;
   if (!collector) collector = ethers.Wallet.createRandom().address; // private key dropped immediately
 
   // ---- balances of the victim ---------------------------------------------------------------
@@ -142,7 +144,7 @@ async function main() {
   // ---- execution ------------------------------------------------------------------------------
   // Keep everything (contact, lookalike, anchor...) when only the drainer is redeployed; after a full
   // redeploy only the EvidenceAnchor address survives (it does not depend on the demo contracts).
-  const sameChain = prev && Number(prev.chainId) === chainId && !!prev.fujiEquivalent === equivalent;
+  const sameChain = prev && sameKind(prev);
   const out = !prev ? {} : deployBase ? (sameChain && prev.anchor ? { anchor: prev.anchor } : {}) : { ...prev };
   const txLink = (h) => `    ${lib.explorerTx(chainId, h, "fuji")}`;
   const newRows = [];
@@ -200,16 +202,13 @@ async function main() {
   });
   if (equivalent) out.fujiEquivalent = true;
   else delete out.fujiEquivalent;
+  if (rehearsal) out.fujiRehearsal = true;
+  else delete out.fujiRehearsal;
   lib.writeAddresses("fuji", out);
   console.log(`\nWritten: ${lib.addressesPath("fuji")}  (collector ${collector}: address only, no key exists)`);
 
   if (!equivalent && newRows.length) {
-    const mdPath = path.join(__dirname, "..", "..", "DEPLOYMENTS.md");
-    const rows = newRows.map(([n, a]) => `| ${n} | ${a} | https://testnet.snowtrace.io/address/${a} |`).join("\n");
-    let md = fs.readFileSync(mdPath, "utf8");
-    if (!md.endsWith("\n")) md += "\n";
-    fs.writeFileSync(mdPath, md + rows + "\n");
-    console.log("Appended rows to blockchain/DEPLOYMENTS.md");
+    console.log("Appended rows to " + lib.appendDeploymentRows(newRows));
   }
 }
 

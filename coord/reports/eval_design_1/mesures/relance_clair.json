@@ -1,0 +1,105 @@
+{
+ "name": "relance_clair",
+ "mode": "honnete",
+ "scheme": "light",
+ "extId": "jkphkfibfjkebldikfpfmoacdichhkpk",
+ "steps": [
+  "fenêtre 1 géométrie: {\"iw\":422,\"ih\":493,\"ow\":440,\"oh\":540,\"dpr\":1,\"sx\":180,\"sy\":60,\"scrollH\":493,\"mainScroll\":[385,385],\"active\":\"TEXTAREA\"}",
+  "fenêtre 1 question: Que veux-tu faire sur ce site ? Annuler Vérifier",
+  "fenêtre 1 textes vus: [\"Que veux-tu faire, et pour combien ? Annuler Vérifier\"]",
+  "fenêtre 1 fermée après (ms): null",
+  "fenêtre 1 relance: Que veux-tu faire, et pour combien ? Annuler Vérifier",
+  "fenêtre 1 après relance: Je n’ai pas pu vérifier cette demande. Nous n’avons trouvé aucun signal dangereux dans cette demande. intention classée sans modèle Continuer sera possible dans 29 s. Annuler Continuer",
+  "fenêtre 1 réponse qui reste: {\"boutons\":[{\"t\":\"Annuler\",\"dis\":null,\"disabled\":false,\"cls\":\"hu-btn is-primary\"},{\"t\":\"Continuer\",\"dis\":\"true\",\"disabled\":false,\"cls\":\"hu-btn\"}],\"actif\":\"Annuler\",\"wait\":\"Continuer sera possible dans 29 s.\"}",
+  "fenêtre 1 ordre de tabulation: BUTTON:Continuer[inactif] > BUTTON:Annuler > BUTTON:Continuer[inactif] > BUTTON:Annuler > BUTTON:Continuer[inactif] > BUTTON:Annuler",
+  "fenêtre 1 clic sur Continuer inactif -> Je n’ai pas pu vérifier cette demande. Nous n’avons trouvé aucun signal dangereux dans cette demande. intention classée sans modèle Continuer sera possible dans 25 s. Annuler Continuer",
+  "fenêtre 1 Échap -> « Je n’ai pas pu vérifier cette demande. Nous n’avons trouvé aucun signal dangereux dans cette demande. intention classée sans modèle Continuer sera possible dans 25 s. Annuler Continuer », fermée après 43 ms",
+  "site à la fin: Opération annulée.",
+  "nombre de fenêtres ouvertes au total: 1"
+ ],
+ "measures": {
+  "ouverture_1": {
+   "paint": [
+    {
+     "n": "first-paint",
+     "t": 144
+    },
+    {
+     "n": "first-contentful-paint",
+     "t": 152
+    }
+   ],
+   "premieres_mutations": [
+    {
+     "t": 142,
+     "txt": "Que veux-tu faire sur ce site ? Annuler Vérifier [...] Que veux-tu faire sur ce site ? Annuler Vérifier"
+    }
+   ],
+   "ls": [],
+   "longtasks": [
+    {
+     "t": 79,
+     "d": 62
+    }
+   ],
+   "frames_0_1000": {
+    "images": 129,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 7,
+    "plus_longue_image_ms": 55.5,
+    "duree_ms": 1000
+   }
+  },
+  "verdict_1": {
+   "entree_t": 1624,
+   "mutations": [
+    {
+     "t": 1630,
+     "txt": "Que veux-tu faire sur ce site ? Je compare ta phrase à la de [...] sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…"
+    },
+    {
+     "t": 1640,
+     "txt": "Que veux-tu faire, et pour combien ? Annuler Vérifier [...] Que veux-tu faire, et pour combien ? Annuler Vérifier"
+    }
+   ],
+   "ls": [],
+   "longtasks": [],
+   "frames_entree_a_fin": {
+    "images": 720,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 0,
+    "plus_longue_image_ms": 7.7,
+    "duree_ms": 4998
+   }
+  },
+  "compte_a_rebours_1": {
+   "frames_3200ms": {
+    "images": 461,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 0,
+    "plus_longue_image_ms": 7.3,
+    "duree_ms": 3200
+   },
+   "mutations": [
+    {
+     "t": 9192,
+     "txt": "Je n’ai pas pu vérifier cette demande. Nous n’avons trouvé a [...] assée sans modèle Continuer sera possible dans 28 s. Annuler Continuer"
+    },
+    {
+     "t": 10192,
+     "txt": "Je n’ai pas pu vérifier cette demande. Nous n’avons trouvé a [...] assée sans modèle Continuer sera possible dans 27 s. Annuler Continuer"
+    },
+    {
+     "t": 11190,
+     "txt": "Je n’ai pas pu vérifier cette demande. Nous n’avons trouvé a [...] assée sans modèle Continuer sera possible dans 26 s. Annuler Continuer"
+    }
+   ],
+   "ls": [],
+   "longtasks": []
+  }
+ },
+ "wallet": [],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

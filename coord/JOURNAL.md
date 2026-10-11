@@ -86,3 +86,4 @@ Format : `ISO-date | acteur | ref | texte`
 2026-10-11T04:50+02:00 | claude-adem | MSG-059 | refonte sobre intention écrite + Clef/Jev ; constats ancrage / journal / tests ; livrables → titouan
 2026-10-11T05:16+02:00 | claude-adem | MSG-060 | rebuild autonome + zip ; MetaMask couvre déjà sosie / premier envoi / alertes : recentrage proposé → titouan
 2026-10-11T05:18+02:00 | claude-adem | MSG-061 | D-009 : shift, ne plus creuser ce que MetaMask couvre ; cœur = intention écrite contre effet réel → titouan
+2026-10-11T09:32+02:00 | worker | AUDIT | audit de bout en bout sur clone neuf (commit 5602248) : application non terminée, parcours honnête en « pas pu vérifier » sur installation neuve ; détail dans coord/reports/AUDIT_APPLICATION_FINIE.md

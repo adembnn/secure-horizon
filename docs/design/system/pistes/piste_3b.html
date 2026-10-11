@@ -1,0 +1,330 @@
+<title>Hold up Le gant B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Libre+Franklin:wght@400;500;700&display=swap">
+<style>
+/* Piste 3B, « Le carton ». Monde : le celluloïd et le carton-titre d'un dessin animé des années 1930.
+   Un seul trait d'encre (3 px, bouts ronds), deux couleurs, aucune couleur d'alerte.
+   Titres : Caprasimo (OFL). Texte : Libre Franklin (OFL). La fenêtre est toujours noire. */
+:root{
+  --page:#ffffff; --ink:#000000; --ink-2:#555555; --wash:#ececec; --edge:#000000;
+  --k:#000000; --k-ink:#ffffff; --k-2:#b3b3b3; --k-wash:#222222;
+  --title:"Caprasimo","Cooper Black",Georgia,serif;
+  --text:"Libre Franklin","Franklin Gothic Medium","Segoe UI",system-ui,sans-serif;
+  --trait:3px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#000000; --ink:#ffffff; --ink-2:#b3b3b3; --wash:#222222; --edge:#5a5a5a; }
+}
+:root[data-theme="dark"]{ --page:#000000; --ink:#ffffff; --ink-2:#b3b3b3; --wash:#222222; --edge:#5a5a5a; }
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:400 15px/22px var(--text);-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul,ol,dl,dd,figure{margin:0;padding:0}
+ul,ol{list-style:none}
+button,textarea,input{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+::selection{background:var(--ink);color:var(--page)}
+:focus-visible{outline:var(--trait) solid currentColor;outline-offset:3px}
+
+/* ---- la planche */
+.sheet{padding:32px;max-width:1500px;margin:0 auto}
+.sheet h1{font:400 30px/34px var(--title)}
+.why{margin-top:12px;max-width:74ch}
+.why li{padding:3px 0}
+.shots{display:flex;flex-wrap:wrap;gap:36px 32px;align-items:flex-start;margin-top:36px}
+.shot{max-width:100%}
+.shot figcaption{margin-bottom:8px;font-size:13px;line-height:18px;color:var(--ink-2)}
+.box{width:fit-content;max-width:100%;overflow:auto;border:1px solid var(--edge)}
+.box>*{flex:none}
+@media (max-width:520px){.sheet{padding:16px}}
+
+/* ---- la fenêtre : le carré noir du logo, 424 × 501 */
+.win{position:relative;width:424px;height:501px;overflow:hidden;display:flex;flex-direction:column;padding:24px;background:var(--k);color:var(--k-ink)}
+.from{color:var(--k-2)}
+.from b{font-weight:500;color:var(--k-ink)}
+.say{margin-top:14px;font:400 34px/38px var(--title)}
+.sub{margin-top:4px;font-size:17px;line-height:24px}
+.mid{margin:auto 0}
+
+/* ta phrase : une bulle tracée d'un seul trait */
+.bulle{position:relative;margin-top:18px}
+.bulle textarea{display:block;width:100%;height:92px;padding:13px 16px;resize:none;font-size:18px;line-height:26px;color:var(--k-ink);caret-color:var(--k-ink);background:var(--k);border:var(--trait) solid var(--k-ink);border-radius:22px}
+.bulle textarea::placeholder{color:var(--k-2);opacity:1}
+.bulle textarea:focus-visible{outline:none;box-shadow:0 0 0 3px var(--k),0 0 0 5px var(--k-ink)}
+.bulle::after{content:"";position:absolute;left:30px;bottom:-9px;width:18px;height:18px;background:var(--k);border:solid var(--k-ink);border-width:0 var(--trait) var(--trait) 0;border-radius:0 0 6px 0;transform:skewX(28deg) rotate(45deg)}
+.bulle.short textarea{height:56px}
+.bulle.err textarea{border-width:6px;padding:10px 13px}
+.errmsg{margin-top:16px;font-weight:700}
+/* ta phrase, redite */
+.dit{display:inline-block;max-width:100%;padding:8px 14px;border-radius:16px;background:var(--k-wash);font-size:15px;line-height:22px}
+
+/* ce que j'ai compris : trois emplacements fixes, la hauteur ne bouge jamais */
+.got{margin-top:26px;display:grid;grid-template-columns:auto 1fr;column-gap:16px}
+.got-t{grid-column:1/-1;color:var(--k-2)}
+.got dt{color:var(--k-2)}
+.got dt.got-t{margin-bottom:2px}
+.got dd{font-weight:500}
+.got dd.no{font-weight:400;color:var(--k-2)}
+.got .off{visibility:hidden}
+
+/* les gestes : le revers du gant est le bouton, l'autre geste est un mot souligné */
+.dock{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.cuff{min-width:160px;height:50px;padding:0 28px;border:0;border-radius:19px;background:var(--k-ink);color:var(--k);font:400 20px/24px var(--title);cursor:pointer}
+.cuff:hover,.cuff.is-hover{background:#dcdcdc}
+.cuff:active,.cuff.is-press{transform:translateY(2px)}
+.cuff[aria-disabled=true]{background:var(--k-wash);color:var(--k-2);cursor:default}
+.mot{padding:8px 0;border:0;background:none;font-size:16px;line-height:24px;font-weight:500;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;cursor:pointer}
+.mot:hover,.mot.is-hover{text-decoration-thickness:4px}
+.mot[aria-disabled=true]{color:var(--k-2);text-decoration:none;cursor:default}
+.win :focus-visible{outline-color:var(--k-ink)}
+
+/* les réponses */
+.verdict{font:400 28px/32px var(--title)}
+.verdict.calm{font-size:24px;line-height:28px}
+.fact{margin-top:14px;font-size:17px;line-height:24px}
+.fact+.fact{margin-top:2px}
+.fact.heavy{font-weight:700}
+.fixed{margin-top:18px}
+.fixed b{display:block;font:400 20px/24px var(--title)}
+.fixed span{color:var(--k-2)}
+.leaves{color:var(--k-2)}
+.num{font-variant-numeric:tabular-nums}
+/* le gant : une seule fois, grand, il entre par le bas et occupe la place du geste « Continuer » */
+.gant{display:block;color:var(--k-ink)}
+.win .gant.stop{position:absolute;left:-12px;bottom:-66px;width:284px;height:284px}
+.stopdock{margin-top:auto;position:relative;align-self:flex-end;text-align:right}
+.stopdock p{margin-bottom:14px;color:var(--k-2)}
+
+/* ---- popup et panneau : surfaces de tous les jours, texte courant, le gras est rare */
+.pop{width:320px;padding:20px;background:var(--page);color:var(--ink)}
+.name{font:400 18px/24px var(--title)}
+.pop-top{display:flex;align-items:center;justify-content:space-between}
+.state{margin-top:22px;font:400 24px/28px var(--title)}
+.state+p{margin-top:6px}
+.last{margin-top:20px;display:grid;grid-template-columns:26px 1fr;column-gap:10px;align-items:start}
+.last .gant{width:32px;height:32px;margin:-5px 0 0 -6px;color:var(--ink)}
+.links{margin-top:22px;display:flex;gap:24px}
+.lien{padding:0;border:0;background:none;font-weight:500;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer}
+.lien:hover{text-decoration-thickness:4px}
+/* l'interrupteur : une piste ronde, un bouton rond, et le mot à côté */
+.sw{display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+.sw input{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:52px;height:30px;margin:0;border:var(--trait) solid var(--ink);border-radius:15px;background:var(--page);cursor:pointer}
+.sw input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--ink);transition:transform 160ms cubic-bezier(.2,0,0,1)}
+.sw input:checked{background:var(--ink)}
+.sw input:checked::after{background:var(--page);transform:translateX(22px)}
+.sw input:disabled{border-color:var(--ink-2);cursor:default}
+.sw input:disabled::after{background:var(--ink-2)}
+.sw .on,.sw .off{font-weight:500}
+.sw input:checked~.off,.sw input:not(:checked)~.on{display:none}
+
+.panel{width:360px;height:680px;overflow:hidden;padding:20px 20px 0;background:var(--page);color:var(--ink)}
+.panel-top{display:flex;align-items:baseline;justify-content:space-between}
+.day{margin-top:26px;font:400 17px/22px var(--title)}
+.log li{position:relative;display:grid;grid-template-columns:48px 1fr;margin-top:12px}
+.log time{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.log .site{display:block;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.log .what{display:block;color:var(--ink-2)}
+.log .what span{display:block}
+.log .stopped .what{color:var(--ink);font-weight:700}
+.log .stopped .gant{position:absolute;right:-2px;top:6px;width:32px;height:32px;color:var(--ink)}
+.log .stopped .site,.log .stopped .what{padding-right:44px}
+.open li{margin-top:12px;display:grid;grid-template-columns:1fr auto;column-gap:12px;align-items:center}
+.open b{font-weight:500}
+.petit{height:34px;padding:0 14px;border:2px solid var(--ink);border-radius:13px;background:none;font-weight:500;cursor:pointer}
+.petit:hover{background:var(--wash)}
+.aside{margin-top:12px;color:var(--ink-2)}
+
+/* ---- bienvenue : la page montre le geste une fois, à sa vraie taille */
+.welcome{display:grid;grid-template-columns:minmax(0,1fr) 472px;width:1120px;height:620px;overflow:hidden;background:var(--page);color:var(--ink)}
+.w-text{align-self:center;padding:0 48px 24px 64px}
+.w-text h2{font:400 46px/50px var(--title);white-space:nowrap}
+.w-text p{margin-top:20px;max-width:30em;font-size:19px;line-height:29px}
+.w-go{margin-top:36px;display:flex;align-items:center;gap:28px}
+.w-go .cuff{background:var(--ink);color:var(--page)}
+.w-go .lien{font-size:16px}
+.w-demo{position:relative;overflow:hidden;padding:48px 40px;background:var(--k);color:var(--k-ink)}
+.w-demo .verdict{margin-top:22px}
+.w-demo .gant{position:absolute;right:-60px;bottom:-116px;width:400px;height:400px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .w-demo{border-left:1px solid var(--edge)}}
+:root[data-theme="dark"] .w-demo{border-left:1px solid var(--edge)}
+
+/* ---- pièces détachées */
+.kit{width:1120px;background:var(--page);color:var(--ink)}
+.kit-k{display:grid;grid-template-columns:372px 1fr;gap:36px 56px;padding:32px;background:var(--k);color:var(--k-ink)}
+.kit-k .bulle{margin-top:0}
+.kit-k .bulle+.bulle,.kit-k .bulle+.errmsg+.bulle{margin-top:28px}
+.kit h3{margin-bottom:12px;font:400 13px/18px var(--text);color:var(--k-2)}
+.kit-p h3{color:var(--ink-2)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.row+.row{margin-top:18px}
+.asks{display:flex;flex-wrap:wrap;gap:8px 40px;font:400 26px/30px var(--title)}
+.gots{display:grid;grid-template-columns:repeat(5,auto);justify-content:space-between;gap:16px}
+.gots .got{margin-top:0}
+.kit-p{display:flex;flex-wrap:wrap;gap:32px 64px;padding:32px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<!-- Le gant, copié de docs/design/system/logo/logo_mono_blanc.svg (main seule, pli du pouce percé). -->
+<mask id="pli-b" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="600"><rect width="512" height="600" fill="#fff"/><path d="M170 322Q206 334 214 378" fill="none" stroke="#000" stroke-width="16" stroke-linecap="round"/></mask>
+<symbol id="gant-b" viewBox="0 0 512 512"><g transform="translate(11 -56) rotate(8 256 256)" fill="currentColor" stroke-linecap="round" mask="url(#pli-b)"><path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/><path d="M214 388Q122 374 86 282" fill="none" stroke="currentColor" stroke-width="70"/><rect x="172" y="440" width="196" height="62" rx="24"/></g></symbol>
+<!-- Version simplifiée (logo_small.svg) pour 32 px et moins. -->
+<symbol id="main-b" viewBox="0 0 16 16"><g fill="currentColor"><path d="M4 3.5A1.5 1.5 0 0 1 7 3.5V7.5A.5 .5 0 0 0 8 7.5V2.5A1.5 1.5 0 0 1 11 2.5V7.5A.5 .5 0 0 0 12 7.5V4A1.5 1.5 0 0 1 15 4V9A3 3 0 0 1 12 12H7A3 3 0 0 1 4 9Z"/><path d="M5.6 9.6Q3.4 9.4 2.3 7.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><rect x="6" y="13" width="7" height="2" rx="1"/></g></symbol>
+</svg>
+
+<div class="sheet">
+<header>
+<h1>Le gant, reprise B : le carton</h1>
+<ul class="why">
+<li>Plus de rouge. « Ça ne correspond pas » se dit par le gant, qui entre en grand par le bas et prend la place du geste « Continuer ».</li>
+<li>Plus de Segoe gras. Les titres sont peints en Caprasimo (lettre de carton-titre), le texte courant est en Libre Franklin, maigre.</li>
+<li>Plus de boîtes à angles droits ni de boutons jumeaux : un seul trait d’encre rond, ta phrase dans une bulle, le revers du gant pour bouton, l’autre geste en un mot souligné.</li>
+</ul>
+</header>
+
+<main class="shots">
+
+<figure class="shot"><figcaption>La question. 424 × 501, sous la barre de titre du système qui porte déjà le nom.</figcaption><div class="box">
+<div class="win">
+<p class="from"><b>app.neve.exchange</b> demande une signature.</p>
+<h2 class="say" id="qb">Que veux-tu faire ?</h2>
+<p class="sub">Dis quoi, combien, et à qui.</p>
+<div class="bulle"><textarea aria-labelledby="qb" placeholder="échanger 50 USDC contre AVAX&#10;envoyer 20 USDC à 0x12ab…89ef">échanger 50 USDC</textarea></div>
+<dl class="got"><dt class="got-t">Ce que j’ai compris</dt><dt>Quoi</dt><dd>échanger</dd><dt>Combien</dt><dd>50 USDC</dd><dt>Contre quoi</dt><dd class="no">non précisé</dd></dl>
+<div class="dock"><button type="button" class="mot">Annuler</button><button type="button" class="cuff">Vérifier</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>La relance, une seule fois : elle demande ce qui manque.</figcaption><div class="box">
+<div class="win">
+<p class="from">Tu as écrit</p>
+<p style="margin-top:8px"><span class="dit">échanger des USDC contre AVAX</span></p>
+<h2 class="say" id="rb" style="margin-top:26px">Combien ?</h2>
+<div class="bulle short"><textarea aria-labelledby="rb" placeholder="50 USDC"></textarea></div>
+<dl class="got"><dt class="got-t">Ce que j’ai compris</dt><dt>Quoi</dt><dd>échanger</dd><dt>Combien</dt><dd class="no">non précisé</dd><dt>Contre quoi</dt><dd>AVAX</dd></dl>
+<div class="dock"><button type="button" class="mot">Annuler</button><button type="button" class="cuff" aria-disabled="true">Vérifier</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Ça correspond, droit limité. Pas de bouton : la demande part seule après une seconde.</figcaption><div class="box">
+<div class="win">
+<p class="from"><b>app.neve.exchange</b></p>
+<div class="mid">
+<h2 class="verdict calm">Ça correspond à ce que tu as écrit.</h2>
+<p class="fact">La demande échange 50 USDC contre AVAX.</p>
+<p class="fixed"><b>Droit limité à 50 USDC</b><span>Le site demandait tout ton USDC.</span></p>
+</div>
+<div class="dock"><button type="button" class="mot">Annuler</button><p class="leaves">Ça part vers ton portefeuille.</p></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Ça ne correspond pas. Le seul écran où le gant paraît.</figcaption><div class="box">
+<div class="win">
+<h2 class="verdict">Ça ne correspond pas à ce que tu as écrit.</h2>
+<p class="fact">Tu as écrit 50 USDC.</p>
+<p class="fact heavy">La demande donne accès à tout ton USDC.</p>
+<svg class="gant stop" aria-hidden="true"><use href="#gant-b"/></svg>
+<div class="stopdock"><p><button type="button" class="mot" aria-disabled="true">Continuer</button> dans <span class="num">24</span> s</p><button type="button" class="cuff">Annuler</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Pas pu vérifier.</figcaption><div class="box">
+<div class="win">
+<p class="from"><b>app.neve.exchange</b></p>
+<div class="mid">
+<h2 class="verdict">Je n’ai pas pu vérifier cette demande.</h2>
+<p class="fact">La vérification n’a pas répondu.</p>
+<p class="fact">Annule, puis relance depuis le site.</p>
+</div>
+<div class="dock"><p class="leaves"><button type="button" class="mot" aria-disabled="true">Continuer</button> dans <span class="num">8</span> s</p><button type="button" class="cuff">Annuler</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Popup de la barre d’outils, 320 de large.</figcaption><div class="box">
+<div class="pop">
+<div class="pop-top"><span class="name">Hold up</span><label class="sw"><input type="checkbox" role="switch" checked aria-label="Vérifier ce site"><span class="on">Actif</span><span class="off">En pause</span></label></div>
+<p class="state">Je vérifie ce site.</p>
+<p>app.neve.exchange</p>
+<div class="last"><svg class="gant" aria-hidden="true"><use href="#main-b"/></svg><p>À 14:32, ça ne correspondait pas. Tu as annulé.</p></div>
+<div class="links"><button type="button" class="lien">Journal</button><button type="button" class="lien">Réglages</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Popup, en pause.</figcaption><div class="box">
+<div class="pop">
+<div class="pop-top"><span class="name">Hold up</span><label class="sw"><input type="checkbox" role="switch" aria-label="Vérifier ce site"><span class="on">Actif</span><span class="off">En pause</span></label></div>
+<p class="state">En pause sur ce site.</p>
+<p>Ce que demande app.neve.exchange va droit à ton portefeuille.</p>
+<div class="links"><button type="button" class="lien">Journal</button><button type="button" class="lien">Réglages</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Panneau latéral, 360 × 680.</figcaption><div class="box">
+<div class="panel">
+<div class="panel-top"><span class="name">Hold up</span><span>Actif</span></div>
+<h3 class="day">Aujourd’hui</h3>
+<ol class="log">
+<li class="stopped"><time>14:32</time><div><span class="site">app.neve.exchange</span><span class="what">Ça ne correspondait pas.<span>Tu as annulé.</span></span></div><svg class="gant" aria-hidden="true"><use href="#main-b"/></svg></li>
+<li><time>14:30</time><div><span class="site">app.neve.exchange</span><span class="what">Ça correspondait.</span></div></li>
+<li class="stopped"><time>11:07</time><div><span class="site">glacier-rewards.example</span><span class="what">Ça ne correspondait pas.<span>Tu as annulé.</span></span></div><svg class="gant" aria-hidden="true"><use href="#main-b"/></svg></li>
+</ol>
+<h3 class="day">Hier</h3>
+<ol class="log">
+<li><time>18:44</time><div><span class="site">app.neve.exchange</span><span class="what">Pas pu vérifier. Tu as annulé.</span></div></li>
+</ol>
+<h3 class="day">Ce que tu as laissé ouvert</h3>
+<ul class="open">
+<li><p><b>app.neve.exchange</b> peut dépenser 50 USDC.</p><button type="button" class="petit">Révoquer</button></li>
+<li><p><b>old-farm.example</b> peut dépenser tout ton USDC.</p><button type="button" class="petit">Révoquer</button></li>
+</ul>
+<p class="aside">C’est ton portefeuille qui signe le retrait.</p>
+<div class="links"><button type="button" class="lien">Effacer le journal</button><button type="button" class="lien">Réglages</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Bienvenue, plein onglet (ici 1120 × 620). À droite, le geste montré une fois.</figcaption><div class="box">
+<div class="welcome">
+<div class="w-text">
+<h2>Hold up est en place.</h2>
+<p>Avant de signer, tu écris ce que tu veux faire. Je compare avec ce que le site demande vraiment. Si ça ne colle pas, je lève la main.</p>
+<p>Je ne signe rien. Ton portefeuille te demande toujours de confirmer.</p>
+<div class="w-go"><button type="button" class="cuff">Essayer sur une page de test</button><button type="button" class="lien">Réglages</button></div>
+</div>
+<div class="w-demo">
+<p class="from">Tu as écrit</p>
+<p style="margin-top:8px"><span class="dit">échanger 50 USDC contre AVAX</span></p>
+<p class="verdict">Ça ne correspond pas à ce que tu as écrit.</p>
+<p class="fact heavy">La demande donne accès à tout ton USDC.</p>
+<svg class="gant" aria-hidden="true"><use href="#gant-b"/></svg>
+</div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Pièces détachées.</figcaption><div class="box">
+<div class="kit">
+<div class="kit-k">
+<div>
+<h3>La bulle : vide, puis sans rien d’écrit au moment de vérifier</h3>
+<div class="bulle"><textarea aria-label="Bulle vide" placeholder="échanger 50 USDC contre AVAX&#10;envoyer 20 USDC à 0x12ab…89ef"></textarea></div>
+<p class="errmsg" style="margin-top:28px;margin-bottom:10px">Écris d’abord ce que tu veux faire.</p>
+<div class="bulle short err"><textarea aria-label="Bulle en erreur" aria-invalid="true"></textarea></div>
+</div>
+<div>
+<h3>Les gestes : repos, survol, appui, pas encore possible, en cours</h3>
+<div class="row"><button type="button" class="cuff">Vérifier</button><button type="button" class="cuff is-hover">Vérifier</button><button type="button" class="cuff is-press">Vérifier</button></div>
+<div class="row"><button type="button" class="cuff" aria-disabled="true">Vérifier</button><button type="button" class="cuff" aria-disabled="true">Je compare…</button><button type="button" class="mot">Annuler</button><button type="button" class="mot is-hover">Annuler</button><button type="button" class="mot" aria-disabled="true">Continuer</button></div>
+<h3 style="margin-top:36px">La relance demande ce qui manque</h3>
+<div class="asks"><span>Combien ?</span><span>À quelle adresse ?</span><span>Quel jeton ?</span></div>
+</div>
+<div style="grid-column:1/-1">
+<h3>Ce que j’ai compris : rien, en partie, tout, un envoi, une connexion (l’emplacement inutile disparaît, les autres ne bougent pas)</h3>
+<div class="gots">
+<dl class="got"><dt>Quoi</dt><dd class="no">non précisé</dd><dt>Combien</dt><dd class="no">non précisé</dd><dt>À qui</dt><dd class="no">non précisé</dd></dl>
+<dl class="got"><dt>Quoi</dt><dd>échanger</dd><dt>Combien</dt><dd>50 USDC</dd><dt>Contre quoi</dt><dd class="no">non précisé</dd></dl>
+<dl class="got"><dt>Quoi</dt><dd>échanger</dd><dt>Combien</dt><dd>50 USDC</dd><dt>Contre quoi</dt><dd>AVAX</dd></dl>
+<dl class="got"><dt>Quoi</dt><dd>envoyer</dd><dt>Combien</dt><dd>20 USDC</dd><dt>À qui</dt><dd>0x12ab…89ef</dd></dl>
+<dl class="got"><dt>Quoi</dt><dd>te connecter</dd><dt class="off">Combien</dt><dd class="off">rien</dd><dt class="off">À qui</dt><dd class="off">rien</dd></dl>
+</div>
+</div>
+</div>
+<div class="kit-p">
+<div><h3>Interrupteur : actif, en pause, indisponible</h3><div class="row"><label class="sw"><input type="checkbox" role="switch" checked aria-label="Exemple actif"><span class="on">Actif</span><span class="off">En pause</span></label><label class="sw"><input type="checkbox" role="switch" aria-label="Exemple en pause"><span class="on">Actif</span><span class="off">En pause</span></label><label class="sw"><input type="checkbox" role="switch" disabled aria-label="Exemple indisponible"><span class="off">Rien à vérifier ici</span></label></div></div>
+<div><h3>Petit geste et lien</h3><div class="row"><button type="button" class="petit">Révoquer</button><button type="button" class="lien">Réglages</button></div></div>
+<div style="width:320px"><h3>Journal : une ligne arrêtée, une ligne passée</h3><ol class="log"><li class="stopped" style="margin-top:0"><time>14:32</time><div><span class="site">app.neve.exchange</span><span class="what">Ça ne correspondait pas.<span>Tu as annulé.</span></span></div><svg class="gant" aria-hidden="true"><use href="#main-b"/></svg></li><li><time>14:30</time><div><span class="site">app.neve.exchange</span><span class="what">Ça correspondait.</span></div></li></ol></div>
+</div>
+</div></div></figure>
+
+</main>
+</div>

@@ -16,6 +16,7 @@ async function main() {
   const kind = name === "fuji" ? "fuji" : "local";
   const lib = await import(pathToFileURL(path.join(__dirname, "..", "..", "..", "research", "demo_reelle", "chain", "lib.mjs")).href);
   lib.assertSafeRpc(hre.network.config.url);
+  if (kind === "fuji") lib.assertRehearsalOutDir(hre.network.config.url); // local fork of Fuji: throwaway output only
   if (kind === "fuji" && (!hre.network.config.accounts || hre.network.config.accounts.length === 0)) {
     console.log("No usable Fuji key found (set FUJI_PRIVATE_KEY in .env). Faucet: " + lib.FUJI_FAUCET);
     return;
@@ -42,11 +43,7 @@ async function main() {
   console.log(`Recorded as "anchor" in ${lib.addressesPath(kind)}`);
 
   if (kind === "fuji") {
-    const mdPath = path.join(__dirname, "..", "..", "DEPLOYMENTS.md");
-    let md = fs.readFileSync(mdPath, "utf8");
-    if (!md.endsWith("\n")) md += "\n";
-    fs.writeFileSync(mdPath, md + `| EvidenceAnchor | ${addr} | https://testnet.snowtrace.io/address/${addr} |\n`);
-    console.log("Appended a row to blockchain/DEPLOYMENTS.md");
+    console.log("Appended a row to " + lib.appendDeploymentRows([["EvidenceAnchor", addr]]));
   }
 }
 

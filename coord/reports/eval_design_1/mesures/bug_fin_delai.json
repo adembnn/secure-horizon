@@ -1,0 +1,25 @@
+{
+ "cas": "fin_delai",
+ "steps": [
+  "réponse: Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée. intention classée sans modèle Continuer sera possible dans 5 s. Annuler Continuer",
+  "mutations: [{\"t\":113,\"txt\":\"Que veux-tu faire sur ce site ? Annuler Vérifier [...] Que veux-tu faire sur ce site ? Annuler Vérifier\"},{\"t\":1426,\"txt\":\"Que veux-tu faire sur ce site ? Je compare ta phrase à la de [...] sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…\"},{\"t\":1448,\"txt\":\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 US [...] lassée sans modèle Continuer sera possible dans 5 s. Annuler Continuer\"},{\"t\":2451,\"txt\":\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 US [...] lassée sans modèle Continuer sera possible dans 4 s. Annuler Continuer\"},{\"t\":3444,\"txt\":\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 US [...] lassée sans modèle Continuer sera possible dans 3 s. Annuler Continuer\"},{\"t\":4448,\"txt\":\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 US [...] lassée sans modèle Continuer sera possible dans 2 s. Annuler Continuer\"},{\"t\":5450,\"txt\":\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 US [...] lassée sans modèle Continuer sera possible dans 1 s. Annuler Continuer\"},{\"t\":6445,\"txt\":\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 US [...] ée. intention classée sans modèle Tu peux continuer. Annuler Continuer\"}]",
+  "après le délai: {\"focus\":\"Annuler\",\"wait\":\"\",\"boutons\":[\"Annuler hu-btn is-primary\",\"Continuer hu-btn\"]}",
+  "Continuer -> textes vus: [\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 USDC. Cette signature donne accès à tout ton USDC et ne peut pas être limitée. intention classée sans modèle Tu peux continuer. Annuler Continuer\"] ; fenêtre fermée après 29 ms",
+  "site: Échange en cours de finalisation. | bouton: Échanger | inactif: true"
+ ],
+ "fin_delai": {
+  "t": 6445,
+  "images_autour": {
+   "images": 86,
+   "intervalle_median_ms": 6.9,
+   "images_perdues": 0,
+   "plus_longue_image_ms": 7.5,
+   "duree_ms": 600
+  },
+  "ls": [],
+  "longtasks": []
+ },
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

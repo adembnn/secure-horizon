@@ -93,6 +93,35 @@ export function readAddresses(kind = "local") {
 export function writeAddresses(kind, data) {
   writeJson(addressesPath(kind), data);
 }
+/**
+ * Where the Fuji deployment table is written. Default: blockchain/DEPLOYMENTS.md. With
+ * HOLDUP_CHAIN_OUT_DIR (tests, rehearsal on a local fork) it goes to that folder instead, so a
+ * rehearsal never writes fake addresses into the real file.
+ */
+export function deploymentsMdPath() {
+  return process.env.HOLDUP_CHAIN_OUT_DIR ? path.join(outDir(), "DEPLOYMENTS.md") : path.join(blockchainDir, "DEPLOYMENTS.md");
+}
+export function appendDeploymentRows(rows) {
+  const p = deploymentsMdPath();
+  const NL = String.fromCharCode(10);
+  let md = fs.existsSync(p) ? fs.readFileSync(p, "utf8") : ["# Fuji deployments", "", "| Contract | Address | Snowtrace |", "|---|---|---|", ""].join(NL);
+  if (!md.endsWith(NL)) md += NL;
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, md + rows.map(([n, a]) => `| ${n} | ${a} | ${FUJI_EXPLORER}/address/${a} |`).join(NL) + NL);
+  return p;
+}
+/**
+ * Network "fuji" pointed at 127.0.0.1 (FUJI_RPC_URL=http://127.0.0.1:<port>, a local FORK of Fuji):
+ * a rehearsal with the real deployer key and no real transaction. It must write into a throwaway
+ * folder, never into the tracked addresses.fuji.json / DEPLOYMENTS.md.
+ */
+export function assertRehearsalOutDir(rpcUrl) {
+  const { local } = assertSafeRpc(rpcUrl);
+  if (local && !process.env.HOLDUP_CHAIN_OUT_DIR) {
+    throw new Error("Network fuji points at 127.0.0.1 (rehearsal on a local fork): set HOLDUP_CHAIN_OUT_DIR=<throwaway dir> so the real addresses.fuji.json and DEPLOYMENTS.md are never overwritten.");
+  }
+  return local;
+}
 export function tryReadAddresses(kind = "local") {
   const p = addressesPath(kind);
   return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : null;
@@ -119,14 +148,18 @@ export function assertSafeRpc(rpcUrl) {
  * safety checks. Behaviour follows `kind`, not the RPC host: kind "local" = local node (impersonation
  * allowed), kind "fuji" = Fuji rules (deployer key, no impersonation). A fuji file pointing at 127.0.0.1
  * is only accepted when it carries fujiEquivalent:true (written by `demo:fuji --network localhost`,
- * used to rehearse the Fuji code paths on a local node). `equivalent` = that case.
+ * used to rehearse the Fuji code paths on a local node; `equivalent` = that case) or fujiRehearsal:true
+ * (written when FUJI_RPC_URL points at a local fork of Fuji: real key, Fuji rules).
  */
 export async function makeContext(kind = "local") {
   if (kind !== "local" && kind !== "fuji") throw new Error(`Refused: unknown network "${kind}" (local or fuji only).`);
   const addresses = readAddresses(kind);
   const { local } = assertSafeRpc(addresses.rpcUrl);
   if (kind === "local" && !local) throw new Error("Refused: addresses.local.json must point at 127.0.0.1.");
-  const equivalent = kind === "fuji" && local;
+  // fujiEquivalent: plain local node, unlocked accounts. fujiRehearsal: local FORK of Fuji (chain id 43113)
+  // deployed with the real deployer key, so the real Fuji code paths (key, no impersonation) apply.
+  const rehearsal = kind === "fuji" && local && addresses.fujiRehearsal === true;
+  const equivalent = kind === "fuji" && local && !rehearsal;
   if (equivalent && addresses.fujiEquivalent !== true) {
     throw new Error("Refused: addresses.fuji.json points at 127.0.0.1 but is not a Fuji-equivalent test file.");
   }
@@ -158,7 +191,11 @@ export async function deployerSigner(ctx) {
   if (ctx.addresses.deployer && w.address.toLowerCase() !== ctx.addresses.deployer.toLowerCase()) {
     throw new Error(`FUJI_PRIVATE_KEY is ${w.address}, but the contracts were deployed by ${ctx.addresses.deployer}. Use the same key or redeploy with --fresh.`);
   }
-  return w;
+  // One nonce counter per context: several transactions sent in a row must not depend on the node's
+  // (possibly cached or load-balanced, hence stale) transaction count. Without it reset/lookalike failed
+  // with "nonce has already been used" on their second transaction.
+  if (!ctx._deployerSigner) ctx._deployerSigner = new ethers.NonceManager(w);
+  return ctx._deployerSigner;
 }
 
 /** Attacker side: unlocked collector account locally; on Fuji the deployer key plays the relayer. */

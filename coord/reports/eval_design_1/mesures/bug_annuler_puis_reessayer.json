@@ -1,0 +1,12 @@
+{
+ "cas": "annuler_puis_reessayer",
+ "steps": [
+  "Annuler à la question -> site: Opération annulée. | bouton: Échanger | inactif: false",
+  "nouvel essai -> Que veux-tu faire sur ce site ? Annuler Vérifier | champ: «  » | focus: TEXTAREA",
+  "clic sur le site pendant la question -> fenêtre ouverte, visible=visible focus=true",
+  "nouveau clic sur le site -> fenêtres ouvertes: 1 | site: Confirmez l'autorisation de 50 DUSDC. | bouton: Échanger | inactif: true"
+ ],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

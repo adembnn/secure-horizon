@@ -34,8 +34,27 @@ if (MODE === "fork") {
   hardhat.chainId = Number(process.env.HOLDUP_CHAIN_ID);
 }
 
+// Source verification on Fuji (npx hardhat verify --network fuji <address> [constructor args]).
+// Routescan (the service behind testnet.snowtrace.io) needs NO API key: any non-empty string works.
+// No secret here. SNOWTRACE_API_KEY is optional (higher rate limits only).
+const etherscan = {
+  apiKey: { avalancheFujiTestnet: process.env.SNOWTRACE_API_KEY || "holdup" },
+  customChains: [
+    {
+      network: "avalancheFujiTestnet",
+      chainId: 43113,
+      urls: {
+        apiURL: "https://api.routescan.io/v2/network/testnet/evm/43113/etherscan/api",
+        browserURL: "https://testnet.snowtrace.io",
+      },
+    },
+  ],
+};
+
 module.exports = {
   solidity: "0.8.24",
+  etherscan,
+  sourcify: { enabled: false },
   networks: {
     hardhat,
     localhost: { url: `http://127.0.0.1:${process.env.HOLDUP_PORT || 8545}` },

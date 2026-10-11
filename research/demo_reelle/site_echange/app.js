@@ -53,9 +53,9 @@
         await p.request({
           method: "wallet_addEthereumChain",
           params: [{
-            chainId: hex, chainName: "Chaîne locale de démo",
+            chainId: hex, chainName: isFuji(addresses.chainId) ? "Avalanche Fuji (testnet)" : "Chaîne locale de démo",
             nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
-            rpcUrls: [addresses.rpcUrl], blockExplorerUrls: [],
+            rpcUrls: [addresses.rpcUrl], blockExplorerUrls: isFuji(addresses.chainId) ? [FUJI_EXPLORER] : [],
           }],
         });
         return true;

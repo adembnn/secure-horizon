@@ -1,0 +1,327 @@
+<title>Hold up Le gant C</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bowlby+One&display=swap">
+<style>
+/* Piste 3C, « L'affiche ». Monde : l'affiche en caractères de bois et la coupe d'un film muet, années 1930.
+   Aucun trait, aucun contour : des aplats noirs et blancs. Aucune couleur.
+   « Ça ne correspond pas » : toute la fenêtre passe du noir au blanc et le gant paraît, en noir.
+   Titres : Bowlby One (OFL). Texte : Atkinson Hyperlegible (OFL). */
+:root{
+  --page:#ffffff; --ink:#000000; --ink-2:#555555; --wash:#e6e6e6; --edge:#000000;
+  --k:#000000; --k-ink:#ffffff; --k-2:#b3b3b3; --k-wash:#262626;
+  --p:#ffffff; --p-ink:#000000; --p-2:#555555;
+  --title:"Bowlby One","Arial Black",Impact,sans-serif;
+  --text:"Atkinson Hyperlegible",Verdana,"Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#000000; --ink:#ffffff; --ink-2:#b3b3b3; --wash:#262626; --edge:#5a5a5a; }
+}
+:root[data-theme="dark"]{ --page:#000000; --ink:#ffffff; --ink-2:#b3b3b3; --wash:#262626; --edge:#5a5a5a; }
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:400 16px/24px var(--text);-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul,ol,dl,dd,figure{margin:0;padding:0}
+ul,ol{list-style:none}
+button,textarea,input{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+::selection{background:var(--ink);color:var(--page)}
+:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+
+/* ---- la planche */
+.sheet{padding:32px;max-width:1500px;margin:0 auto}
+.sheet h1{font:400 28px/34px var(--title)}
+.why{margin-top:12px;max-width:74ch}
+.why li{padding:3px 0}
+.shots{display:flex;flex-wrap:wrap;gap:36px 32px;align-items:flex-start;margin-top:36px}
+.shot{max-width:100%}
+.shot figcaption{margin-bottom:8px;font-size:14px;line-height:20px;color:var(--ink-2)}
+.box{width:fit-content;max-width:100%;overflow:auto;border:1px solid var(--edge)}
+@media (max-width:520px){.sheet{padding:16px}}
+
+/* ---- la fenêtre, 424 × 501. Noire. Blanche une seule fois. */
+.win{position:relative;width:424px;height:501px;overflow:hidden;display:flex;flex-direction:column;background:var(--k);color:var(--k-ink)}
+.top{padding:22px 24px 20px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;color:var(--k-2)}
+.head b{font-weight:400;color:var(--k-ink)}
+.say{margin-top:14px;font:400 30px/34px var(--title)}
+.sub{margin-top:6px;font-size:18px;line-height:24px}
+.body{flex:1;display:flex;flex-direction:column;padding:22px 24px 24px}
+.mid{margin:auto 0}
+/* le mot souligné : le geste qui n'est pas celui que je te conseille */
+.mot{padding:0;border:0;background:none;color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer}
+.mot:hover,.mot.is-hover{text-decoration-thickness:4px}
+.mot[aria-disabled=true]{text-decoration:none;cursor:default}
+/* le bloc : le geste que je te conseille, toujours en bas à droite */
+.bloc{min-width:152px;height:50px;padding:0 24px;border:0;background:var(--k-ink);color:var(--k);font:400 18px/22px var(--title);cursor:pointer}
+.bloc:hover,.bloc.is-hover{background:#d9d9d9}
+.bloc:active,.bloc.is-press{transform:translateY(2px)}
+.bloc[aria-disabled=true]{background:var(--k-wash);color:var(--k-2);cursor:default}
+.foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.foot>.mot{font-weight:700}
+.foot p{color:var(--k-2)}
+.num{font-variant-numeric:tabular-nums}
+
+/* le papier : là où tu écris. Plein bord, pas de cadre. */
+.paper{flex:1;display:flex;flex-direction:column;padding:0 24px 24px;background:var(--p);color:var(--p-ink)}
+.paper textarea{display:block;flex:1;width:calc(100% + 48px);min-height:0;margin:0 -24px;padding:18px 24px 8px;resize:none;border:0;background:transparent;font-size:20px;line-height:28px;color:var(--p-ink);caret-color:var(--p-ink)}
+.paper textarea::placeholder{color:var(--p-2);opacity:1}
+.paper textarea:focus-visible{outline:none}
+.paper.err textarea::placeholder{color:var(--p-ink);font-weight:700}
+.paper .foot p{color:var(--p-2)}
+.paper .bloc{background:var(--p-ink);color:var(--p)}
+.paper .bloc:hover,.paper .bloc.is-hover{background:#333}
+.paper .bloc[aria-disabled=true]{background:#dcdcdc;color:var(--p-2)}
+.paper :focus-visible{outline-color:var(--p-ink)}
+/* ce que j'ai compris : trois places fixes, sur le papier, sous ta phrase */
+.got{display:grid;grid-template-columns:repeat(3,1fr);column-gap:12px;margin-bottom:22px}
+.got-t{margin-bottom:6px;font-weight:700}
+.got dt{font-size:14px;line-height:18px;color:var(--p-2)}
+.got dd{font-weight:700;line-height:22px;white-space:nowrap}
+.got dd.no{font-weight:400;color:var(--p-2)}
+.got .off{visibility:hidden}
+
+/* les réponses */
+.verdict{font:400 27px/35px var(--title)}
+.verdict.calm{font-size:23px;line-height:28px}
+.fact{margin-top:14px;font-size:18px;line-height:26px}
+.fact+.fact{margin-top:0}
+.fact.heavy{font-weight:700}
+.fixed{margin-top:18px}
+.fixed b{display:block;font:400 18px/24px var(--title)}
+.fixed span{color:var(--k-2)}
+/* la coupe : fenêtre blanche, gant noir */
+.win.cut{background:var(--p);color:var(--p-ink)}
+.win.cut .body{padding-top:10px}
+.win.cut .foot p{color:var(--p-2)}
+.win.cut .bloc{background:var(--p-ink);color:var(--p)}
+.win.cut :focus-visible{outline-color:var(--p-ink)}
+.gant{display:block}
+.win.cut .gant{width:176px;height:176px;margin:0 0 2px -24px}
+
+/* ---- popup et panneau */
+.pop{width:320px;background:var(--page);color:var(--ink)}
+.square{padding:18px 20px 20px;background:var(--k);color:var(--k-ink)}
+.name{font:400 15px/20px var(--title)}
+.state{margin-top:26px;font:400 23px/28px var(--title)}
+.state+p{margin-top:4px;color:var(--k-2)}
+.pad{padding:20px}
+/* l'interrupteur dit ses deux états en toutes lettres ; l'état en cours est en aplat */
+.sw{position:relative;display:grid;grid-template-columns:1fr 1fr;cursor:pointer}
+.sw input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.sw span{padding:10px 0;text-align:center;background:var(--wash);color:var(--ink-2)}
+.sw input:checked~.on,.sw input:not(:checked)~.off{background:var(--ink);color:var(--page);font-weight:700}
+.sw input:focus-visible~.on{outline:3px solid var(--ink);outline-offset:3px}
+.sw input:disabled~span{background:var(--wash);color:var(--ink-2);font-weight:400}
+.sw:has(input:disabled){cursor:default}
+.band{display:grid;grid-template-columns:52px 1fr;padding:10px 20px;background:var(--ink);color:var(--page)}
+.band b{display:block}
+.pop .band{margin-top:20px}
+.links{display:flex;gap:24px}
+.pop .links{padding:18px 20px 20px}
+.lien{padding:0;border:0;background:none;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer}
+.lien:hover{text-decoration-thickness:4px}
+
+.panel{width:360px;height:680px;overflow:hidden;background:var(--page);color:var(--ink)}
+.panel .square{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px}
+.day{margin:22px 20px 6px;font:400 15px/20px var(--title)}
+.log time{font-variant-numeric:tabular-nums}
+.log li{display:grid;grid-template-columns:52px 1fr;padding:8px 20px}
+.log li:not(.band) time,.log li:not(.band) span{color:var(--ink-2)}
+.log b,.log i{display:block;font-weight:400;font-style:normal}
+.log .band b{font-weight:700}
+.log .band{padding:10px 20px}
+.open{padding:0 20px}
+.open li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:6px 0}
+.open .lien{flex:none}
+.aside{margin:8px 20px 0;color:var(--ink-2)}
+.panel .links{margin:22px 20px 0}
+
+/* ---- bienvenue : une affiche */
+.welcome{position:relative;width:1120px;height:620px;overflow:hidden;padding:64px 64px 0;background:var(--page);color:var(--ink)}
+.welcome h2{max-width:700px;font:400 46px/52px var(--title)}
+.welcome p{margin-top:24px;max-width:27em;font-size:20px;line-height:30px}
+.w-go{margin-top:36px;display:flex;align-items:center;gap:28px}
+.w-go .bloc{background:var(--ink);color:var(--page)}
+.welcome .gant{position:absolute;right:20px;bottom:-16px;width:440px;height:440px;color:var(--ink)}
+
+/* ---- pièces détachées */
+.kit{width:1120px;background:var(--page);color:var(--ink)}
+.kit h3{margin-bottom:10px;font:400 14px/20px var(--text);color:var(--k-2)}
+.kit-k{display:grid;grid-template-columns:376px 1fr;gap:32px 56px;padding:32px;background:var(--k);color:var(--k-ink)}
+.kit-k .paper{flex:none;height:150px;padding-bottom:0}
+.kit-k .paper+.paper{margin-top:16px;height:96px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.row+.row{margin-top:16px}
+.asks{display:flex;flex-wrap:wrap;gap:8px 36px;font:400 24px/30px var(--title)}
+.gots{display:grid;grid-template-columns:1fr 1fr;gap:0 2px;background:var(--p);color:var(--p-ink)}
+.gots .got{margin:0;padding:14px 24px}
+.kit-p{display:flex;flex-wrap:wrap;gap:32px 56px;padding:32px}
+.kit-p h3{color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<!-- Le gant, copié de docs/design/system/logo/logo_mono_noir.svg (main seule, pli du pouce percé). -->
+<mask id="pli-c" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="600"><rect width="512" height="600" fill="#fff"/><path d="M170 322Q206 334 214 378" fill="none" stroke="#000" stroke-width="16" stroke-linecap="round"/></mask>
+<symbol id="gant-c" viewBox="0 0 512 512"><g transform="translate(11 -56) rotate(8 256 256)" fill="currentColor" stroke-linecap="round" mask="url(#pli-c)"><path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/><path d="M214 388Q122 374 86 282" fill="none" stroke="currentColor" stroke-width="70"/><rect x="172" y="440" width="196" height="62" rx="24"/></g></symbol>
+</svg>
+
+<div class="sheet">
+<header>
+<h1>Le gant, reprise C : l’affiche</h1>
+<ul class="why">
+<li>Plus de rouge, plus aucune couleur. « Ça ne correspond pas » se dit par une coupe : la fenêtre noire devient blanche, le gant paraît en noir. Dans le journal, la même inversion marque la ligne.</li>
+<li>Plus de Segoe gras. Les titres sont en Bowlby One (caractère d’affiche), le texte courant en Atkinson Hyperlegible, où un 0 ne se confond pas avec un O dans une adresse.</li>
+<li>Plus de cadres, de filets ni de boutons jumeaux : des aplats. Tu écris sur le papier blanc, le geste conseillé est un bloc en bas à droite, l’autre un mot souligné.</li>
+</ul>
+</header>
+
+<main class="shots">
+
+<figure class="shot"><figcaption>La question. 424 × 501, sous la barre de titre du système qui porte déjà le nom.</figcaption><div class="box">
+<div class="win">
+<div class="top">
+<p class="head"><span><b>app.neve.exchange</b> demande une signature.</span></p>
+<h2 class="say" id="qc">Que veux-tu faire ?</h2>
+<p class="sub">Dis quoi, combien, et à qui.</p>
+</div>
+<div class="paper">
+<textarea aria-labelledby="qc" placeholder="échanger 50 USDC contre AVAX&#10;envoyer 20 USDC à 0x12ab…89ef">échanger 50 USDC</textarea>
+<p class="got-t" id="gc1">Ce que j’ai compris</p>
+<dl class="got" aria-labelledby="gc1"><div><dt>Quoi</dt><dd>échanger</dd></div><div><dt>Combien</dt><dd>50 USDC</dd></div><div><dt>Contre quoi</dt><dd class="no">non précisé</dd></div></dl>
+<div class="foot"><button type="button" class="mot">Annuler</button><button type="button" class="bloc">Vérifier</button></div>
+</div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>La relance, une seule fois : elle demande ce qui manque.</figcaption><div class="box">
+<div class="win">
+<div class="top">
+<p class="head"><span>Tu as écrit <b>« échanger des USDC contre AVAX »</b></span></p>
+<h2 class="say" id="rc">Combien ?</h2>
+</div>
+<div class="paper">
+<textarea aria-labelledby="rc" placeholder="50 USDC"></textarea>
+<p class="got-t" id="gc2">Ce que j’ai compris</p>
+<dl class="got" aria-labelledby="gc2"><div><dt>Quoi</dt><dd>échanger</dd></div><div><dt>Combien</dt><dd class="no">non précisé</dd></div><div><dt>Contre quoi</dt><dd>AVAX</dd></div></dl>
+<div class="foot"><button type="button" class="mot">Annuler</button><button type="button" class="bloc" aria-disabled="true">Vérifier</button></div>
+</div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Ça correspond, droit limité. Pas de bloc : la demande part seule après une seconde.</figcaption><div class="box">
+<div class="win">
+<div class="top"><p class="head"><span><b>app.neve.exchange</b></span></p></div>
+<div class="body">
+<div class="mid">
+<h2 class="verdict calm">Ça correspond à ce que tu as écrit.</h2>
+<p class="fact">La demande échange 50 USDC contre AVAX.</p>
+<p class="fixed"><b>Droit limité à 50 USDC</b><span>Le site demandait tout ton USDC.</span></p>
+</div>
+<div class="foot"><button type="button" class="mot">Annuler</button><p>Ça part vers ton portefeuille.</p></div>
+</div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Ça ne correspond pas. La coupe : la fenêtre passe au blanc, le gant paraît.</figcaption><div class="box">
+<div class="win cut">
+<div class="body">
+<svg class="gant" aria-hidden="true"><use href="#gant-c"/></svg>
+<h2 class="verdict">Ça ne correspond pas à ce que tu as écrit.</h2>
+<p class="fact">Tu as écrit 50 USDC.</p>
+<p class="fact heavy">La demande donne accès à tout ton USDC.</p>
+<div class="foot"><p><button type="button" class="mot" aria-disabled="true">Continuer</button> dans <span class="num">24</span> s</p><button type="button" class="bloc">Annuler</button></div>
+</div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Pas pu vérifier.</figcaption><div class="box">
+<div class="win">
+<div class="top"><p class="head"><span><b>app.neve.exchange</b></span></p></div>
+<div class="body">
+<div class="mid">
+<h2 class="verdict">Je n’ai pas pu vérifier cette demande.</h2>
+<p class="fact">La vérification n’a pas répondu.</p>
+<p class="fact">Annule, puis relance depuis le site.</p>
+</div>
+<div class="foot"><p><button type="button" class="mot" aria-disabled="true">Continuer</button> dans <span class="num">8</span> s</p><button type="button" class="bloc">Annuler</button></div>
+</div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Popup de la barre d’outils, 320 de large.</figcaption><div class="box">
+<div class="pop">
+<div class="square"><p class="name">Hold up</p><p class="state">Je vérifie ce site.</p><p>app.neve.exchange</p></div>
+<label class="sw"><input type="checkbox" role="switch" checked aria-label="Vérifier ce site"><span class="on">Actif</span><span class="off">En pause</span></label>
+<p class="band"><time>14:32</time><span><b>Ça ne correspondait pas.</b>Tu as annulé.</span></p>
+<div class="links"><button type="button" class="lien">Journal</button><button type="button" class="lien">Réglages</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Popup, en pause.</figcaption><div class="box">
+<div class="pop">
+<div class="square"><p class="name">Hold up</p><p class="state">En pause sur ce site.</p><p>Ce que demande app.neve.exchange va droit à ton portefeuille.</p></div>
+<label class="sw"><input type="checkbox" role="switch" aria-label="Vérifier ce site"><span class="on">Actif</span><span class="off">En pause</span></label>
+<div class="links"><button type="button" class="lien">Journal</button><button type="button" class="lien">Réglages</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Panneau latéral, 360 × 680.</figcaption><div class="box">
+<div class="panel">
+<div class="square"><span class="name">Hold up</span><span>Actif</span></div>
+<h3 class="day">Aujourd’hui</h3>
+<ol class="log">
+<li class="band"><time>14:32</time><span><b>app.neve.exchange</b>Ça ne correspondait pas.<i>Tu as annulé.</i></span></li>
+<li><time>14:30</time><span><b>app.neve.exchange</b>Ça correspondait.</span></li>
+<li class="band"><time>11:07</time><span><b>glacier-rewards.example</b>Ça ne correspondait pas.<i>Tu as annulé.</i></span></li>
+</ol>
+<h3 class="day">Hier</h3>
+<ol class="log">
+<li><time>18:44</time><span><b>app.neve.exchange</b>Pas pu vérifier. Tu as annulé.</span></li>
+</ol>
+<h3 class="day">Ce que tu as laissé ouvert</h3>
+<ul class="open">
+<li><p>app.neve.exchange peut dépenser 50 USDC.</p><button type="button" class="lien">Révoquer</button></li>
+<li><p>old-farm.example peut dépenser tout ton USDC.</p><button type="button" class="lien">Révoquer</button></li>
+</ul>
+<p class="aside">C’est ton portefeuille qui signe le retrait.</p>
+<div class="links"><button type="button" class="lien">Effacer le journal</button><button type="button" class="lien">Réglages</button></div>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Bienvenue, plein onglet (ici 1120 × 620).</figcaption><div class="box">
+<div class="welcome">
+<h2>Écris ce que tu veux faire. Je vérifie que le site demande la même chose.</h2>
+<p>Hold up est en place. Si ça ne colle pas, je lève la main. Je ne signe rien : ton portefeuille te demande toujours de confirmer.</p>
+<div class="w-go"><button type="button" class="bloc">Essayer sur une page de test</button><button type="button" class="lien">Réglages</button></div>
+<svg class="gant" aria-hidden="true"><use href="#gant-c"/></svg>
+</div></div></figure>
+
+<figure class="shot"><figcaption>Pièces détachées.</figcaption><div class="box">
+<div class="kit">
+<div class="kit-k">
+<div>
+<h3>Le papier : vide, puis sans rien d’écrit au moment de vérifier</h3>
+<div class="paper"><textarea aria-label="Papier vide" placeholder="échanger 50 USDC contre AVAX&#10;envoyer 20 USDC à 0x12ab…89ef"></textarea></div>
+<div class="paper err"><textarea aria-label="Papier en erreur" aria-invalid="true" placeholder="Écris d’abord ce que tu veux faire."></textarea></div>
+</div>
+<div>
+<h3>Le bloc : repos, survol, appui, pas encore possible, en cours. Le mot : repos, survol, pas encore possible</h3>
+<div class="row"><button type="button" class="bloc">Vérifier</button><button type="button" class="bloc is-hover">Vérifier</button><button type="button" class="bloc is-press">Vérifier</button><button type="button" class="bloc" aria-disabled="true">Vérifier</button><button type="button" class="bloc" aria-disabled="true">Je compare…</button></div>
+<div class="row"><button type="button" class="mot">Annuler</button><button type="button" class="mot is-hover">Annuler</button><span style="color:var(--k-2)"><button type="button" class="mot" aria-disabled="true">Continuer</button> dans 24 s</span></div>
+<h3 style="margin-top:32px">La relance demande ce qui manque</h3>
+<div class="asks"><span>Combien ?</span><span>À quelle adresse ?</span><span>Quel jeton ?</span></div>
+</div>
+<div style="grid-column:1/-1">
+<h3>Ce que j’ai compris : rien, en partie, tout, un envoi, une connexion (la place inutile disparaît, les autres ne bougent pas)</h3>
+<div class="gots">
+<dl class="got"><div><dt>Quoi</dt><dd class="no">non précisé</dd></div><div><dt>Combien</dt><dd class="no">non précisé</dd></div><div><dt>À qui</dt><dd class="no">non précisé</dd></div></dl>
+<dl class="got"><div><dt>Quoi</dt><dd>échanger</dd></div><div><dt>Combien</dt><dd>50 USDC</dd></div><div><dt>Contre quoi</dt><dd class="no">non précisé</dd></div></dl>
+<dl class="got"><div><dt>Quoi</dt><dd>échanger</dd></div><div><dt>Combien</dt><dd>50 USDC</dd></div><div><dt>Contre quoi</dt><dd>AVAX</dd></div></dl>
+<dl class="got"><div><dt>Quoi</dt><dd>envoyer</dd></div><div><dt>Combien</dt><dd>20 USDC</dd></div><div><dt>À qui</dt><dd>0x12ab…89ef</dd></div></dl>
+<dl class="got"><div><dt>Quoi</dt><dd>te connecter</dd></div><div class="off"><dt>Combien</dt><dd>rien</dd></div><div class="off"><dt>À qui</dt><dd>rien</dd></div></dl>
+</div>
+</div>
+</div>
+<div class="kit-p">
+<div style="width:280px"><h3>Interrupteur : actif, en pause, indisponible</h3><label class="sw"><input type="checkbox" role="switch" checked aria-label="Exemple actif"><span class="on">Actif</span><span class="off">En pause</span></label><label class="sw" style="margin-top:12px"><input type="checkbox" role="switch" aria-label="Exemple en pause"><span class="on">Actif</span><span class="off">En pause</span></label><label class="sw" style="margin-top:12px"><input type="checkbox" role="switch" disabled aria-label="Exemple indisponible"><span class="on">Actif</span><span class="off">En pause</span></label></div>
+<div style="width:360px"><h3>Journal : une ligne arrêtée, une ligne passée</h3><ol class="log" style="margin:0 -20px"><li class="band"><time>14:32</time><span><b>app.neve.exchange</b>Ça ne correspondait pas.<i>Tu as annulé.</i></span></li><li><time>14:30</time><span><b>app.neve.exchange</b>Ça correspondait.</span></li></ol></div>
+<div><h3>Lien</h3><button type="button" class="lien">Révoquer</button></div>
+</div>
+</div></div></figure>
+
+</main>
+</div>

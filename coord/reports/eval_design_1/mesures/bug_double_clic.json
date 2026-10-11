@@ -1,0 +1,12 @@
+{
+ "cas": "double_clic",
+ "steps": [
+  "clics répétés sur le bouton du site -> fenêtres ouvertes: 1 | site: Confirmez l'autorisation pour finaliser l'échange. | bouton: Échanger | inactif: true",
+  "positions: [[180,60,440,540]]",
+  "deux onglets demandent en même temps -> fenêtres Hold up ouvertes: 1",
+  "positions et titres: [[180,60,\"Hold up\"]]"
+ ],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

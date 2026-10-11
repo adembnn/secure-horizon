@@ -1,0 +1,10 @@
+{
+ "cas": "rechargement",
+ "steps": [
+  "site rechargé pendant la question -> fenêtre fermée | fenêtres ouvertes: 0",
+  "après rechargement et nouveau clic -> fenêtres ouvertes: 0 (créées au total: 1) | site: Prêt à échanger 50 DUSDC contre de l'AVAX. | bouton: Échanger | inactif: false"
+ ],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

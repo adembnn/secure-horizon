@@ -1,0 +1,108 @@
+{
+ "name": "honnete_clair",
+ "mode": "honnete",
+ "scheme": "light",
+ "extId": "jkphkfibfjkebldikfpfmoacdichhkpk",
+ "steps": [
+  "fenêtre 1 géométrie: {\"iw\":1262,\"ih\":713,\"ow\":1280,\"oh\":760,\"dpr\":1,\"sx\":360,\"sy\":60,\"scrollH\":713,\"mainScroll\":[605,605],\"active\":\"TEXTAREA\"}",
+  "fenêtre 1 question: Que veux-tu faire sur ce site ? Annuler Vérifier",
+  "fenêtre 1 textes vus: [\"Que veux-tu faire sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…\",\"Ça correspond à ce que tu as écrit. La demande donne accès à 50 USDC, pas plus. intention classée sans modèle Annuler\"]",
+  "fenêtre 1 fermée après (ms): 1036",
+  "fenêtre 2 géométrie: {\"iw\":1262,\"ih\":713,\"ow\":1280,\"oh\":760,\"dpr\":1,\"sx\":360,\"sy\":60,\"scrollH\":713,\"mainScroll\":[605,605],\"active\":\"H1\"}",
+  "fenêtre 2 question: Ça correspond à ce que tu as écrit. D’après la simulation, 50 USDC sortent de ton compte et 0,5 WAVAX y entre. intention classée sans modèle Annuler",
+  "pas de champ",
+  "fenêtre 3: aucune",
+  "site à la fin: Échange effectué. Vous avez reçu de l'AVAX.",
+  "nombre de fenêtres ouvertes au total: 2"
+ ],
+ "measures": {
+  "ouverture_1": {
+   "paint": [
+    {
+     "n": "first-paint",
+     "t": 92
+    },
+    {
+     "n": "first-contentful-paint",
+     "t": 176
+    }
+   ],
+   "premieres_mutations": [
+    {
+     "t": 160,
+     "txt": "Que veux-tu faire sur ce site ? Annuler Vérifier [...] Que veux-tu faire sur ce site ? Annuler Vérifier"
+    }
+   ],
+   "ls": [],
+   "longtasks": [
+    {
+     "t": 99,
+     "d": 61
+    }
+   ],
+   "frames_0_1000": {
+    "images": 125,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 8,
+    "plus_longue_image_ms": 62.5,
+    "duree_ms": 1000
+   }
+  },
+  "verdict_1": {
+   "entree_t": 2038,
+   "mutations": [
+    {
+     "t": 2042,
+     "txt": "Que veux-tu faire sur ce site ? Je compare ta phrase à la de [...] sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…"
+    },
+    {
+     "t": 2062,
+     "txt": "Ça correspond à ce que tu as écrit. La demande donne accès à [...] donne accès à 50 USDC, pas plus. intention classée sans modèle Annuler"
+    }
+   ],
+   "ls": [],
+   "longtasks": [],
+   "frames_entree_a_fin": {
+    "images": 143,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 0,
+    "plus_longue_image_ms": 7.2,
+    "duree_ms": 991
+   }
+  },
+  "ouverture_2": {
+   "paint": [
+    {
+     "n": "first-paint",
+     "t": 60
+    },
+    {
+     "n": "first-contentful-paint",
+     "t": 68
+    }
+   ],
+   "premieres_mutations": [
+    {
+     "t": 58,
+     "txt": "Ça correspond à ce que tu as écrit. D’après la simulation, 5 [...] ton compte et 0,5 WAVAX y entre. intention classée sans modèle Annuler"
+    }
+   ],
+   "ls": [],
+   "longtasks": [],
+   "frames_0_1000": {
+    "images": 139,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 0,
+    "plus_longue_image_ms": 7.1,
+    "duree_ms": 1000
+   }
+  }
+ },
+ "wallet": [
+  "transaction vers 0x7c07edcB223c16d4b2fB373C476030c41f8027ae",
+  "transaction vers 0xF6987b595D4196A40db287ef77eEf181BB045272"
+ ],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

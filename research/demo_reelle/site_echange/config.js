@@ -14,13 +14,14 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const src = join(here, "..", "chain", "addresses.local.json");
-const dst = join(here, "addresses.local.json");
 const KEEP = ["chainId", "rpcUrl", "usdc", "wavax", "router", "drainer", "collector"];
+const KINDS = ["local", "fuji"]; // fuji : lu par la page avec ?reseau=fuji
 
-function syncOnce() {
+function syncOne(kind) {
+  const src = join(here, "..", "chain", `addresses.${kind}.json`);
+  const dst = join(here, `addresses.${kind}.json`);
   if (!existsSync(src)) {
-    console.log("[config] addresses.local.json absent dans chain/ — rien a copier. Deploie d'abord la chaine de demo.");
+    console.log(`[config] addresses.${kind}.json absent dans chain/ — rien a copier.${kind === "local" ? " Deploie d'abord la chaine de demo." : ""}`);
     return false;
   }
   const full = JSON.parse(readFileSync(src, "utf8"));
@@ -28,13 +29,18 @@ function syncOnce() {
   for (const k of KEEP) if (full[k] !== undefined) slim[k] = full[k];
   for (const need of ["usdc", "wavax", "router", "drainer", "rpcUrl", "chainId"]) {
     if (slim[need] === undefined) {
-      console.log(`[config] champ manquant dans la source : ${need}. Copie ignoree.`);
+      console.log(`[config] addresses.${kind}.json : champ manquant dans la source : ${need}. Copie ignoree.`);
       return false;
     }
   }
   writeFileSync(dst, JSON.stringify(slim, null, 2) + "\n");
-  console.log("[config] addresses.local.json copie depuis chain/ (champs du site uniquement).");
+  console.log(`[config] addresses.${kind}.json copie depuis chain/ (champs du site uniquement).`);
   return true;
+}
+function syncOnce() {
+  let any = false;
+  for (const kind of KINDS) any = syncOne(kind) || any;
+  return any;
 }
 
 syncOnce();

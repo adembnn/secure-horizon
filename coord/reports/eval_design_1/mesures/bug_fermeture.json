@@ -1,0 +1,10 @@
+{
+ "cas": "fermeture",
+ "steps": [
+  "fenêtre fermée par la croix -> site: Opération annulée. | bouton: Échanger | inactif: false",
+  "nouvel essai -> fenêtre 2: Que veux-tu faire sur ce site ? Annuler Vérifier | site: Confirmez l'autorisation pour finaliser l'échange. | bouton: Échanger | inactif: true"
+ ],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}
