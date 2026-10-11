@@ -91,4 +91,4 @@ Le nombre de portefeuilles étudiés est cité 16, 14 puis 9 selon la section. N
 
 
 ## Décision de Titouan (11/10)
-Chiffre retenu: 47  0'approbations illimitées sur Ethereum (47,6 % [46,9 ; 48,3], voir onchain/Z4). Avalanche C-Chain: 34,2 %. Le nombre de tests nest pas indicatif (le périmètre des tests a changé). Fuji: décision reportée.
+Chiffre retenu : 47 % d'approbations illimitées sur Ethereum (47,6 % [46,9 ; 48,3], voir onchain/Z4). Avalanche C-Chain : 34,2 %. Le nombre de tests n'est pas indicatif (le périmètre des tests a changé). Fuji : décision reportée.
