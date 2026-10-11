@@ -206,7 +206,7 @@ function buildTexts(fid, eff, host, S, extras) {
   return { croit: fill(f.croit, v), reel: fill(f.reel, v), danger: fill(f.danger, v), action: fill(f.action, v) };
 }
 
-const PRESSURE = /(support|conseiller|urgent|vite|ne (le )?dis (rien|à personne|a personne)|anydesk|teamviewer|d[ée]place(r)? (tes|vos) fonds|remboursement|rembours|dernier avertissement|compte (sera )?(bloqu|suspendu)|act(?:ion)? imm[ée]diate|do not tell|don'?t tell anyone|urgent|refund|customer support)/i;
+const PRESSURE = /(?<![a-zà-ÿ])(support|conseiller|urgent|vite(?![a-zà-ÿ])|ne (le )?dis (rien|à personne|a personne)|anydesk|teamviewer|d[ée]place(r)? (tes|vos) fonds|remboursement|rembours|dernier avertissement|compte (sera )?(bloqu|suspendu)|act(?:ion)? imm[ée]diate|do not tell|don'?t tell anyone|urgent|refund|customer support)/i;
 
 // ------------------------------------------------------------------ evaluation
 export function evaluate(body, local = loadLocalContext()) {
@@ -357,6 +357,10 @@ export function createSentinelleServer({ port = 8787, journalFile, journalEnable
     const url = (req.url || '').split('?')[0];
     if (req.method === 'OPTIONS') { res.writeHead(origin !== undefined ? 204 : 403, cors); return res.end(); }
     if (req.method === 'GET' && url === '/health') return reply(200, { status: 'up', service: 'sentinelle', version: 1, journal: journal.enabled }, cors);
+    if (req.method === 'GET' && (url === '/test_page/' || url === '/test_page/index.html' || url === '/test_page')) {
+      try { const html = readFileSync(join(ROOT, 'test_page', 'index.html')); res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' }); return res.end(html); }
+      catch { return reply(404, { error: 'page d essai absente' }, cors); }
+    }
     if (req.method !== 'POST' || (url !== '/check' && url !== '/log')) return reply(404, { error: 'introuvable' }, cors);
     // 3) corps borne
     const chunks = []; let size = 0, tooBig = false;

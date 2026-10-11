@@ -76,6 +76,8 @@ rr = await raw({ path: '/check', method: 'POST', headers: { host: 'localhost:' +
 check('22 en-tete Host different de 127.0.0.1 (DNS rebinding) -> 403', rr.status === 403, 'HTTP ' + rr.status);
 rr = await raw({ path: '/health', method: 'GET' });
 check('23 GET /health -> 200', rr.status === 200 && JSON.parse(rr.body).status === 'up', 'HTTP ' + rr.status);
+rr = await raw({ path: '/test_page/', method: 'GET' });
+check('23b page d essai servie en local (/test_page/)', rr.status === 200 && rr.body.includes('Page d'), 'HTTP ' + rr.status);
 rr = await raw({ path: '/autre', method: 'GET' });
 check('24 route inconnue -> 404', rr.status === 404);
 check('25 le serveur ecoute sur 127.0.0.1 uniquement', s.srv.address().address === '127.0.0.1', JSON.stringify(s.srv.address()));

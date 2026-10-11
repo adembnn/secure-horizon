@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page d'essai Sentinelle</title>
+<!-- FAUX portefeuille, defini par la page elle-meme AVANT tout le reste (comme le ferait MetaMask). Aucune cle, aucun argent, aucun reseau. -->
+<script>
+(function () {
+  var ME = '0x8bcea1b8558ac307b50ad720045c35783c9efb6c';
+  var fake = {
+    isFakeWallet: true,
+    selectedAddress: ME,
+    chainId: '0x1',
+    request: function (args) {
+      var m = args && args.method;
+      if (typeof window.__log === 'function') window.__log('Le faux portefeuille a reçu la demande : ' + m, 'ok');
+      if (m === 'eth_requestAccounts' || m === 'eth_accounts') return Promise.resolve([ME]);
+      if (m === 'eth_chainId') return Promise.resolve('0x1');
+      if (m === 'eth_sendTransaction') return Promise.resolve('0x' + 'ab'.repeat(32));
+      if (String(m).indexOf('eth_signTypedData') === 0 || m === 'personal_sign' || m === 'eth_sign') return Promise.resolve('0x' + 'cd'.repeat(65));
+      return Promise.resolve(null);
+    },
+    on: function () {}, removeListener: function () {}
+  };
+  window.ethereum = fake;
+})();
+</script>
+<style>
+  :root { color-scheme: light dark; --bg:#fff; --fg:#1b1f24; --muted:#59636e; --card:#f4f6f8; --line:#d0d7de; --brand:#0b57d0; --warn:#b3261e; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14181d; --fg:#e8ecf0; --muted:#9aa5b1; --card:#1d242c; --line:#33404d; --brand:#8ab4f8; --warn:#ff8a80; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 26px; line-height: 1.25; margin: 0 0 8px; }
+  p { margin: 8px 0; }
+  .muted { color: var(--muted); }
+  .banner { background: var(--card); border: 2px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 16px 0; }
+  .banner strong { color: var(--warn); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 16px 0; }
+  .card h2 { font-size: 19px; margin: 0 0 4px; }
+  button { font: inherit; font-weight: 700; min-height: 48px; padding: 8px 18px; border-radius: 10px; border: 2px solid var(--brand); background: var(--brand); color: #fff; cursor: pointer; margin-top: 8px; }
+  @media (prefers-color-scheme: dark) { button { color: #0b1220; } }
+  button:focus-visible { outline: 4px solid #f9ab00; outline-offset: 3px; }
+  #journal { white-space: pre-wrap; font: 15px/1.5 ui-monospace, Consolas, monospace; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; min-height: 96px; }
+  .bad { color: var(--warn); font-weight: 700; } .good { font-weight: 700; }
+  #srv { font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Page d'essai de Sentinelle</h1>
+  <p>Ce faux site te permet de vérifier que Sentinelle fonctionne. Il ne contient <strong>aucun vrai portefeuille</strong> : le portefeuille est un faux, créé par cette page. Rien ne peut être envoyé ni perdu.</p>
+  <div class="banner"><strong>Attendu :</strong> en cliquant sur un bouton ci-dessous, une fenêtre Sentinelle doit s'afficher <em>avant</em> que le faux portefeuille reçoive la demande. Si le faux portefeuille répond sans fenêtre, l'extension n'est pas active sur cette page.</div>
+  <p>Serveur Sentinelle : <span id="srv">vérification…</span></p>
+
+  <section class="card"><h2>1. Approve illimité</h2><p class="muted">Le site demande le droit de dépenser tous tes jetons USDC, sans limite. Attendu : fenêtre rouge.</p><button type="button" id="b-approve">Approve illimité</button></section>
+  <section class="card"><h2>2. Signer un permit piège</h2><p class="muted">Une signature gratuite qui vaut procuration sur tes jetons. Attendu : fenêtre rouge.</p><button type="button" id="b-permit">Signer un permit piège</button></section>
+  <section class="card"><h2>3. Envoi simple</h2><p class="muted">Un envoi de 0,01 ETH vers une adresse quelconque. Attendu : fenêtre d'information (jamais « tout est bon »).</p><button type="button" id="b-send">Envoi simple</button></section>
+  <section class="card"><h2>4. Donner accès à tous mes objets (NFT)</h2><p class="muted">Attendu : fenêtre rouge.</p><button type="button" id="b-all">Accès à tous mes NFT</button></section>
+
+  <h2>Résultat</h2>
+  <div id="journal" role="log" aria-live="polite">Aucune demande pour l'instant.</div>
+</main>
+<script>
+(function () {
+  var ME = '0x8bcea1b8558ac307b50ad720045c35783c9efb6c';
+  var USDC = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', SPENDER = '0x7777777777777777777777777777777777777777', NFT = '0xd27d9f9d0ee60dc6f8f304147cafe5284e64c4c8';
+  var j = document.getElementById('journal'), first = true;
+  var pad = function (h) { return h.replace(/^0x/, '').padStart(64, '0'); };
+  window.__log = function (txt, cls) {
+    if (first) { j.textContent = ''; first = false; }
+    var d = document.createElement('div'); if (cls === 'bad') d.className = 'bad'; if (cls === 'ok') d.className = 'good';
+    d.textContent = new Date().toLocaleTimeString() + '  ' + txt; j.appendChild(d);
+  };
+  function go(label, args) {
+    window.__log('Demande envoyée au portefeuille : ' + label);
+    window.ethereum.request(args).then(
+      function () { window.__log("Résultat : la demande est allée jusqu'au faux portefeuille (tu as choisi de continuer, ou Sentinelle n'est pas active).", 'ok'); },
+      function (e) { window.__log('Résultat : demande refusée (code ' + (e && e.code) + '). ' + ((e && e.code === 4001) ? "Tu as annulé : rien n'a été envoyé au portefeuille." : ((e && e.code === 4900) ? "Sentinelle n'a pas pu vérifier et a bloqué par prudence." : (e && e.message) || '')), 'bad'); });
+  }
+  document.getElementById('b-approve').onclick = function () {
+    go('approve illimité', { method: 'eth_sendTransaction', params: [{ from: ME, to: USDC, value: '0x0', data: '0x095ea7b3' + pad(SPENDER) + 'f'.repeat(64), chainId: '0x1' }] });
+  };
+  document.getElementById('b-permit').onclick = function () {
+    var td = { types: { EIP712Domain: [{ name: 'name', type: 'string' }, { name: 'version', type: 'string' }, { name: 'chainId', type: 'uint256' }, { name: 'verifyingContract', type: 'address' }],
+        Permit: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }, { name: 'value', type: 'uint256' }, { name: 'nonce', type: 'uint256' }, { name: 'deadline', type: 'uint256' }] },
+      primaryType: 'Permit', domain: { name: 'USD Coin', version: '2', chainId: 1, verifyingContract: USDC },
+      message: { owner: ME, spender: SPENDER, value: '115792089237316195423570985008687907853269984665640564039457584007913129639935', nonce: '0', deadline: '4102444800' } };
+    go('permit piège (signature)', { method: 'eth_signTypedData_v4', params: [ME, JSON.stringify(td)] });
+  };
+  document.getElementById('b-send').onclick = function () {
+    go('envoi simple de 0,01 ETH', { method: 'eth_sendTransaction', params: [{ from: ME, to: '0x1234567890abcdef1234567890abcdef12345678', value: '0x2386f26fc10000', data: '0x', chainId: '0x1' }] });
+  };
+  document.getElementById('b-all').onclick = function () {
+    go('accès à tous les NFT', { method: 'eth_sendTransaction', params: [{ from: ME, to: NFT, value: '0x0', data: '0xa22cb465' + pad(SPENDER) + pad('0x1'), chainId: '0x1' }] });
+  };
+  var srv = document.getElementById('srv');
+  fetch('/health').then(function (r) { return r.json(); }).then(function () { srv.textContent = 'en marche'; srv.className = 'good'; }, function () { srv.textContent = 'non joignable depuis cette page (normal si tu as ouvert le fichier directement)'; srv.className = 'bad'; });
+})();
+</script>
+</body>
+</html>
