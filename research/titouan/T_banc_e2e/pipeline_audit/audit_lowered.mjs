@@ -27,6 +27,6 @@ for (const file of files) {
     lines.push(rec);
   }
 }
-const f = join(outDir, `cases_${modes.join('_').replace(/[^\w+]/g, '')}.jsonl`);
+const f = join(outDir, opt('file', `cases_${modes.join('_').replace(/[^\w+]/g, '')}.jsonl`));
 writeFileSync(f, lines.map((x) => JSON.stringify(x)).join('\n') + '\n');
 console.log('ecrit', lines.length, 'enregistrements dans', f);

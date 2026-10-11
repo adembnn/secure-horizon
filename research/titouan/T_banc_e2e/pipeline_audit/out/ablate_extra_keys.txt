@@ -1,0 +1,2 @@
+familles {"benign_defi/bridge_core_avax_to_eth":17,"benign_defi/gov_delegate":36,"jury_fp:jury_fp/core_bridge_unwrap_wethe":1,"jury_fp:jury_fp/core_bridge_unwrap_btcb":1,"jury_social:?/?":1}
+clé retirée -> cas remontés au niveau produit {"token_registry":55,"origin":1}

@@ -1,0 +1,21 @@
+filtre (tous) bénins 2785
+
+[detectors] critical produit=432 critical plus=548 warn plus=1068 | relevés=328 (->critical 116, ->warn 212, sans signal détecteur 0)
+ par détecteur : W intent_guard=212 ; C spend_rights=66 ; C sig_rights=46 ; C indirect_pull=4
+ par code      : W intent_guard:kind_missing_unvouched_recipient=212 ; C spend_rights:swap_no_min_unknown_router=66 ; C sig_rights:signed_right_not_intended=46 ; C indirect_pull:pull_via_existing_allowance=4
+ par famille   : W benign_everyday/first_payment_in_person=59 ; C benign_defi/swap_uniswap_ur=36 ; W benign_everyday/donation=32 ; C benign_defi/swap_uniswap_eth_direct=30 ; C benign_defi/permit2_signature=20 ; W benign_defi/bridge_core_eth_to_avax=18 ; W jury_fuzz_fp:swap/wrap_deposit=18 ; C benign_defi/permit_eip2612_router=15 ; W jury_fuzz_fp:bridge/avax_bridge_eth_side_transfer=14 ; W jury_fuzz_address:?/?=8
+
+[live] critical produit=432 critical plus=702 warn plus=951 | relevés=492 (->critical 270, ->warn 222, sans signal détecteur 65)
+ par détecteur : W intent_guard=157 ; C intent_guard=135 ; C spend_rights=106 ; C sig_rights=46 ; C indirect_pull=4
+ par code      : W intent_guard:kind_missing_unvouched_recipient=157 ; C intent_guard:new_recipient_large_share=135 ; C spend_rights:swap_no_min_unknown_router=66 ; C spend_rights:right_to_unvouched_spender=46 ; C sig_rights:signed_right_not_intended=46 ; C indirect_pull:pull_via_existing_allowance=4
+ par famille   : W benign_everyday/first_payment_in_person=59 ; C benign_defi/swap_uniswap_ur=36 ; W benign_everyday/donation=32 ; C benign_defi/swap_uniswap_eth_direct=31 ; C benign_everyday/nft_purchase_seaport=27 ; C benign_defi/permit2_signature=20 ; W benign_defi/bridge_core_eth_to_avax=17 ; W benign_everyday/self_transfer_large=17 ; C benign_defi/permit_eip2612_router=15 ; W benign_everyday/p2p_contact_prefix_twin=14
+
+[detectors+known+intent+premise] critical produit=233 critical plus=236 warn plus=636 | relevés=167 (->critical 3, ->warn 164, sans signal détecteur 0)
+ par détecteur : W intent_guard=164 ; C indirect_pull=3
+ par code      : W intent_guard:kind_missing_unvouched_recipient=164 ; C indirect_pull:pull_via_existing_allowance=3
+ par famille   : W benign_everyday/first_payment_in_person=59 ; W benign_everyday/donation=32 ; W jury_fuzz_fp:swap/wrap_deposit=16 ; W jury_fuzz_fp:bridge/avax_bridge_eth_side_transfer=13 ; W jury_fuzz_address:?/?=8 ; W benign_defi/wrap_deposit=7 ; W jury_fuzz_fp:pay/donation=4 ; W benign_defi/wrap_withdraw=3 ; W jury_fuzz_fp:pay/p2p_qr_unknown_no_book=3 ; C safe_execution/benin_transfert_op0=3
+
+[live+known+intent+premise] critical produit=233 critical plus=307 warn plus=614 | relevés=269 (->critical 74, ->warn 195, sans signal détecteur 76)
+ par détecteur : W intent_guard=119 ; C intent_guard=71 ; C indirect_pull=3
+ par code      : W intent_guard:kind_missing_unvouched_recipient=119 ; C intent_guard:new_recipient_large_share=71 ; C indirect_pull:pull_via_existing_allowance=3
+ par famille   : W benign_everyday/first_payment_in_person=59 ; W benign_everyday/donation=32 ; W benign_everyday/self_transfer_large=17 ; W benign_everyday/p2p_contact_prefix_twin=14 ; W jury_fuzz_fp:swap/wrap_deposit=14 ; W benign_everyday/payroll_sendcalls_batch=12 ; W jury_fuzz_address:?/?=11 ; C jury_fuzz_fp:swap/v2_native_to_token=8 ; C jury_fuzz_fp:swap/lb_native_to_token=8 ; C jury_fuzz_fp:staking/lido_submit=8

@@ -1,0 +1,68 @@
+
+## 1a. dust_guard : paiement au contact réel alors qu'un sosie a envoyé de la poussière (cas légitime), intention "pay"
+  serveur seul=critical (address_poisoning,lookalike_address)  |  evaluatePlus=ok chemin=plus produit interne=critical relaxé=false
+  loweredBy=[{"par":"dust_guard","de":"critical","vers":"ok"}] signaux=(aucun)
+
+## 1b. dust_guard + un autre détecteur qui lève un WARN (ordre : factice puis dust_guard)
+  serveur seul=critical (address_poisoning,lookalike_address)  |  evaluatePlus=ok chemin=plus produit interne=critical relaxé=false
+  loweredBy=[{"par":"dust_guard","de":"critical","vers":"ok"}] signaux=autre_detecteur_factice:avertissement_factice:warn
+
+## 1c. dust_guard : destinataire déjà payé une fois (donc "connu") + sosie poussière : baisse sur 1 AVAX vers une adresse de l'attaquant
+  serveur seul=ok ()  |  evaluatePlus=ok chemin=plus produit interne=ok relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 2a. intent_guard : intention OBJET {pay_someone, montant "1,000"}, la demande envoie 1000 AVAX (mille fois le montant tapé à la française)
+  serveur seul=ok ()  |  evaluatePlus=warn chemin=plus produit interne=ok relaxé=false
+  loweredBy=[{"par":"intent_guard","de":"critical","vers":"warn"}] signaux=(aucun)
+
+## 2b. même chose avec l'intention telle que le serveur la construit (chaîne "pay", sans montant)
+  serveur seul=ok ()  |  evaluatePlus=ok chemin=plus produit interne=ok relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 3a. nft_orders : listing d'UN NFT pour 1 AVAX, intention "vendre" montant 1 (cas honnête)
+  serveur seul=warn (far_expiry)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 3b. nft_orders : le MÊME ordre mais 10 NFT de 10 collections différentes dans l'offre, toujours 1 AVAX
+  serveur seul=warn (far_expiry)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 3c. référence : le même ordre à 10 NFT sans intention de vente
+  serveur seul=warn (far_expiry)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 4a. Aave Pool.supply(USDC, 5000, onBehalfOf=ATTAQUANT, 0) : le dépôt est crédité à l'attaquant
+  serveur seul=warn (unknown_selector,opaque)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 4b. Aave Pool.withdraw(USDC, max, to=ATTAQUANT) : retrait envoyé à l'attaquant
+  serveur seul=warn (unknown_selector,opaque)  |  evaluatePlus=critical chemin=plus produit interne=critical relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 4c. WrappedTokenGateway.depositETH(pool, onBehalfOf=ATTAQUANT, 0) avec 100 AVAX
+  serveur seul=warn (unknown_selector,opaque)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 4d. référence : même appel 4a vers un contrat INCONNU
+  serveur seul=warn (unknown_selector,opaque)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 5a. sAVAX (protocole connu) avec un sélecteur inconnu 0xdeadbeef et 100 AVAX
+  serveur seul=warn (unknown_selector,opaque)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 5b. sAVAX.submit() avec 100 AVAX
+  serveur seul=warn (unknown_selector,opaque)  |  evaluatePlus=ok chemin=plus produit interne=ok relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 5c. USDC.approve(UniversalRouter connu, illimité)
+  serveur seul=critical (unlimited_allowance,external_spender)  |  evaluatePlus=ok chemin=plus produit interne=ok relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 5d. référence : USDC.approve(ATTAQUANT, illimité)
+  serveur seul=critical (unlimited_allowance,external_spender)  |  evaluatePlus=critical chemin=plus produit interne=critical relaxé=false
+  loweredBy=[] signaux=(aucun)
+
+## 5e. sélecteur inconnu 0xdeadbeef + 100 AVAX vers un contrat INCONNU
+  serveur seul=warn (unknown_selector,opaque)  |  evaluatePlus=warn chemin=plus produit interne=warn relaxé=false
+  loweredBy=[] signaux=intent_guard:kind_missing_unvouched_recipient:warn

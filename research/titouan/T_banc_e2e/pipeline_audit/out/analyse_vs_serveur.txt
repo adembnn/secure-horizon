@@ -1,0 +1,34 @@
+
+=== detectors : niveau_plus < verdict server.evaluate seul
+arnaque: n=6443 baisses=0
+benin: n=2785 baisses=165
+    warn->ok (produit interne ok) benign_defi/savax_submit 18 V2_DEV#V2-BENIGN_DEFI-00953 V2_DEV#V2-BENIGN_DEFI-00955 V2_DEV#V2-BENIGN_DEFI-00956 V2_DEV#V2-BENIGN_DEFI-00958 V2_DEV#V2-BENIGN_DEFI-00959
+    warn->ok (produit interne ok) jury_fuzz_fp:staking/savax_submit 18 jury_fuzz_fp#FZFP-016984 jury_fuzz_fp#FZFP-016985 jury_fuzz_fp#FZFP-016986 jury_fuzz_fp#FZFP-016987 jury_fuzz_fp#FZFP-016988
+    warn->ok (produit interne ok) benign_defi/aave_borrow 15 V2_DEV#V2-BENIGN_DEFI-00712 V2_DEV#V2-BENIGN_DEFI-00753 V2_DEV#V2-BENIGN_DEFI-00757 V2_DEV#V2-BENIGN_DEFI-00767 V2_DEV#V2-BENIGN_DEFI-00769
+    warn->ok (produit interne ok) benign_defi/aave_batch_approve_supply 12 V2_DEV#V2-BENIGN_DEFI-00723 V2_DEV#V2-BENIGN_DEFI-00736 V2_DEV#V2-BENIGN_DEFI-00739 V2_DEV#V2-BENIGN_DEFI-00750 V2_DEV#V2-BENIGN_DEFI-00762
+    warn->ok (produit interne ok) benign_defi/savax_request_unlock 11 V2_DEV#V2-BENIGN_DEFI-00951 V2_DEV#V2-BENIGN_DEFI-00954 V2_DEV#V2-BENIGN_DEFI-00964 V2_DEV#V2-BENIGN_DEFI-00970 V2_DEV#V2-BENIGN_DEFI-00971
+    warn->ok (produit interne ok) benign_defi/aave_withdraw 10 V2_DEV#V2-BENIGN_DEFI-00711 V2_DEV#V2-BENIGN_DEFI-00721 V2_DEV#V2-BENIGN_DEFI-00726 V2_DEV#V2-BENIGN_DEFI-00738 V2_DEV#V2-BENIGN_DEFI-00761
+    warn->ok (produit interne ok) benign_defi/aave_repay_max 10 V2_DEV#V2-BENIGN_DEFI-00732 V2_DEV#V2-BENIGN_DEFI-00745 V2_DEV#V2-BENIGN_DEFI-00758 V2_DEV#V2-BENIGN_DEFI-00781 V2_DEV#V2-BENIGN_DEFI-00804
+    warn->ok (produit interne ok) benign_defi/aave_supply 9 V2_DEV#V2-BENIGN_DEFI-00744 V2_DEV#V2-BENIGN_DEFI-00759 V2_DEV#V2-BENIGN_DEFI-00766 V2_DEV#V2-BENIGN_DEFI-00787 V2_DEV#V2-BENIGN_DEFI-00806
+    warn->ok (produit interne ok) benign_defi/aave_withdraw_max 8 V2_DEV#V2-BENIGN_DEFI-00743 V2_DEV#V2-BENIGN_DEFI-00768 V2_DEV#V2-BENIGN_DEFI-00780 V2_DEV#V2-BENIGN_DEFI-00796 V2_DEV#V2-BENIGN_DEFI-00816
+    warn->ok (produit interne ok) benign_defi/permit_eip2612_router 6 V2_DEV#V2-BENIGN_DEFI-00599 V2_DEV#V2-BENIGN_DEFI-00601 V2_DEV#V2-BENIGN_DEFI-00609 V2_DEV#V2-BENIGN_DEFI-00610 V2_DEV#V2-BENIGN_DEFI-00612
+    warn->ok (produit interne ok) benign_defi/aave_repay 6 V2_DEV#V2-BENIGN_DEFI-00722 V2_DEV#V2-BENIGN_DEFI-00730 V2_DEV#V2-BENIGN_DEFI-00735 V2_DEV#V2-BENIGN_DEFI-00771 V2_DEV#V2-BENIGN_DEFI-00776
+    warn->ok (produit interne ok) benign_defi/aave_collateral_toggle 5 V2_DEV#V2-BENIGN_DEFI-00713 V2_DEV#V2-BENIGN_DEFI-00773 V2_DEV#V2-BENIGN_DEFI-00807 V2_DEV#V2-BENIGN_DEFI-00824 V2_DEV#V2-BENIGN_DEFI-00831
+autre: n=1065 baisses=0
+
+=== live : niveau_plus < verdict server.evaluate seul
+arnaque: n=6443 baisses=0
+benin: n=2785 baisses=165
+    warn->ok (produit interne ok) benign_defi/savax_submit 18 V2_DEV#V2-BENIGN_DEFI-00953 V2_DEV#V2-BENIGN_DEFI-00955 V2_DEV#V2-BENIGN_DEFI-00956 V2_DEV#V2-BENIGN_DEFI-00958 V2_DEV#V2-BENIGN_DEFI-00959
+    warn->ok (produit interne ok) jury_fuzz_fp:staking/savax_submit 18 jury_fuzz_fp#FZFP-016984 jury_fuzz_fp#FZFP-016985 jury_fuzz_fp#FZFP-016986 jury_fuzz_fp#FZFP-016987 jury_fuzz_fp#FZFP-016988
+    warn->ok (produit interne ok) benign_defi/aave_borrow 15 V2_DEV#V2-BENIGN_DEFI-00712 V2_DEV#V2-BENIGN_DEFI-00753 V2_DEV#V2-BENIGN_DEFI-00757 V2_DEV#V2-BENIGN_DEFI-00767 V2_DEV#V2-BENIGN_DEFI-00769
+    warn->ok (produit interne ok) benign_defi/aave_batch_approve_supply 12 V2_DEV#V2-BENIGN_DEFI-00723 V2_DEV#V2-BENIGN_DEFI-00736 V2_DEV#V2-BENIGN_DEFI-00739 V2_DEV#V2-BENIGN_DEFI-00750 V2_DEV#V2-BENIGN_DEFI-00762
+    warn->ok (produit interne ok) benign_defi/savax_request_unlock 11 V2_DEV#V2-BENIGN_DEFI-00951 V2_DEV#V2-BENIGN_DEFI-00954 V2_DEV#V2-BENIGN_DEFI-00964 V2_DEV#V2-BENIGN_DEFI-00970 V2_DEV#V2-BENIGN_DEFI-00971
+    warn->ok (produit interne ok) benign_defi/aave_withdraw 10 V2_DEV#V2-BENIGN_DEFI-00711 V2_DEV#V2-BENIGN_DEFI-00721 V2_DEV#V2-BENIGN_DEFI-00726 V2_DEV#V2-BENIGN_DEFI-00738 V2_DEV#V2-BENIGN_DEFI-00761
+    warn->ok (produit interne ok) benign_defi/aave_repay_max 10 V2_DEV#V2-BENIGN_DEFI-00732 V2_DEV#V2-BENIGN_DEFI-00745 V2_DEV#V2-BENIGN_DEFI-00758 V2_DEV#V2-BENIGN_DEFI-00781 V2_DEV#V2-BENIGN_DEFI-00804
+    warn->ok (produit interne ok) benign_defi/aave_supply 9 V2_DEV#V2-BENIGN_DEFI-00744 V2_DEV#V2-BENIGN_DEFI-00759 V2_DEV#V2-BENIGN_DEFI-00766 V2_DEV#V2-BENIGN_DEFI-00787 V2_DEV#V2-BENIGN_DEFI-00806
+    warn->ok (produit interne ok) benign_defi/aave_withdraw_max 8 V2_DEV#V2-BENIGN_DEFI-00743 V2_DEV#V2-BENIGN_DEFI-00768 V2_DEV#V2-BENIGN_DEFI-00780 V2_DEV#V2-BENIGN_DEFI-00796 V2_DEV#V2-BENIGN_DEFI-00816
+    warn->ok (produit interne ok) benign_defi/permit_eip2612_router 6 V2_DEV#V2-BENIGN_DEFI-00599 V2_DEV#V2-BENIGN_DEFI-00601 V2_DEV#V2-BENIGN_DEFI-00609 V2_DEV#V2-BENIGN_DEFI-00610 V2_DEV#V2-BENIGN_DEFI-00612
+    warn->ok (produit interne ok) benign_defi/aave_repay 6 V2_DEV#V2-BENIGN_DEFI-00722 V2_DEV#V2-BENIGN_DEFI-00730 V2_DEV#V2-BENIGN_DEFI-00735 V2_DEV#V2-BENIGN_DEFI-00771 V2_DEV#V2-BENIGN_DEFI-00776
+    warn->ok (produit interne ok) benign_defi/aave_collateral_toggle 5 V2_DEV#V2-BENIGN_DEFI-00713 V2_DEV#V2-BENIGN_DEFI-00773 V2_DEV#V2-BENIGN_DEFI-00807 V2_DEV#V2-BENIGN_DEFI-00824 V2_DEV#V2-BENIGN_DEFI-00831
+autre: n=1065 baisses=0

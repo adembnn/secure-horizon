@@ -1,0 +1,3 @@
+cas en baisse (full): 56
+cas ramenés au niveau produit en retirant le morceau : {"sans_origin_extra":{"arnaque":1,"benin":0,"autre":0},"sans_extra":{"arnaque":1,"benin":55,"autre":0},"sans_facts_contreparties":{"arnaque":0,"benin":0,"autre":0},"sans_tokenInfo":{"arnaque":0,"benin":0,"autre":0},"sans_tokenMeta":{"arnaque":0,"benin":0,"autre":0},"sans_sharePct":{"arnaque":0,"benin":0,"autre":0},"sans_intention_riche":{"arnaque":0,"benin":0,"autre":0}}
+arnaques : [["J-57",{"label":"arnaque","produit":"critical","complet":"ok","sans_origin_extra":"critical","sans_extra":"critical","sans_facts_contreparties":"ok","sans_tokenInfo":"ok","sans_tokenMeta":"ok","sans_sharePct":"ok","sans_intention_riche":"ok"}]]

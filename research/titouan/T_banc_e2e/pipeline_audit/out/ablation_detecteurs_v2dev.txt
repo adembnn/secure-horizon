@@ -1,0 +1,12 @@
+skip=intent_guard
+ detectors | 5927 | 2930 | 543 | 1976 | 361 | 587 
+ live | 5927 | 2930 | 375 | 1976 | 373 | 629 
+skip=spend_rights
+ detectors | 5927 | 2930 | 597 | 1976 | 295 | 782 
+ live | 5927 | 2930 | 288 | 1976 | 344 | 773 
+skip=sig_rights
+ detectors | 5927 | 2930 | 775 | 1976 | 326 | 751 
+ live | 5927 | 2930 | 213 | 1976 | 393 | 724 
+skip=indirect_pull
+ detectors | 5927 | 2930 | 554 | 1976 | 361 | 716 
+ live | 5927 | 2930 | 211 | 1976 | 418 | 699 

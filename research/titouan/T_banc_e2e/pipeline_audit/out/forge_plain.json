@@ -6,7 +6,7 @@
   "honnete": {
    "benin": {
     "n": 2785,
-    "critical": 1165,
+    "critical": 702,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -14,7 +14,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 732,
+    "critical": 296,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -22,7 +22,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5837,
+    "critical": 5442,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -32,25 +32,25 @@
   "aucun_fait": {
    "benin": {
     "n": 2785,
-    "critical": 1166,
-    "sous_honnete": 82,
-    "sous_honnete_critique": 27,
+    "critical": 548,
+    "sous_honnete": 209,
+    "sous_honnete_critique": 154,
     "sous_produit": 0,
     "vers_ok": 55
    },
    "autre": {
     "n": 1065,
-    "critical": 728,
-    "sous_honnete": 14,
-    "sous_honnete_critique": 4,
+    "critical": 22,
+    "sous_honnete": 284,
+    "sous_honnete_critique": 274,
     "sous_produit": 0,
     "vers_ok": 10
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5702,
-    "sous_honnete": 256,
-    "sous_honnete_critique": 138,
+    "critical": 4929,
+    "sous_honnete": 631,
+    "sous_honnete_critique": 513,
     "sous_produit": 0,
     "vers_ok": 126
    }
@@ -58,7 +58,7 @@
   "tout_est_contrat_ancien": {
    "benin": {
     "n": 2785,
-    "critical": 1165,
+    "critical": 702,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -66,7 +66,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 732,
+    "critical": 296,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -74,7 +74,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5831,
+    "critical": 5436,
     "sous_honnete": 6,
     "sous_honnete_critique": 6,
     "sous_produit": 0,
@@ -84,7 +84,7 @@
   "tout_est_eoa": {
    "benin": {
     "n": 2785,
-    "critical": 1258,
+    "critical": 780,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -92,7 +92,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 737,
+    "critical": 301,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -100,7 +100,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5840,
+    "critical": 5445,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -110,25 +110,25 @@
   "solde_enorme": {
    "benin": {
     "n": 2785,
-    "critical": 1165,
-    "sous_honnete": 65,
-    "sous_honnete_critique": 0,
+    "critical": 571,
+    "sous_honnete": 196,
+    "sous_honnete_critique": 131,
     "sous_produit": 0,
     "vers_ok": 65
    },
    "autre": {
     "n": 1065,
-    "critical": 732,
-    "sous_honnete": 10,
-    "sous_honnete_critique": 0,
+    "critical": 26,
+    "sous_honnete": 280,
+    "sous_honnete_critique": 270,
     "sous_produit": 0,
     "vers_ok": 10
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5837,
-    "sous_honnete": 121,
-    "sous_honnete_critique": 0,
+    "critical": 5117,
+    "sous_honnete": 446,
+    "sous_honnete_critique": 325,
     "sous_produit": 0,
     "vers_ok": 121
    }
@@ -136,7 +136,7 @@
   "decimales_trafiquees_0": {
    "benin": {
     "n": 2785,
-    "critical": 1165,
+    "critical": 702,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -144,7 +144,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 732,
+    "critical": 296,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -152,7 +152,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5837,
+    "critical": 5442,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -162,7 +162,7 @@
   "decimales_trafiquees_36": {
    "benin": {
     "n": 2785,
-    "critical": 1165,
+    "critical": 702,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -170,7 +170,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 732,
+    "critical": 296,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -178,7 +178,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5837,
+    "critical": 5442,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -188,7 +188,7 @@
   "symbole_usdc": {
    "benin": {
     "n": 2785,
-    "critical": 1232,
+    "critical": 774,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -196,7 +196,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 770,
+    "critical": 367,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -204,7 +204,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5839,
+    "critical": 5450,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -214,7 +214,7 @@
   "jeton_ancien_et_connu": {
    "benin": {
     "n": 2785,
-    "critical": 1165,
+    "critical": 702,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -222,7 +222,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 732,
+    "critical": 296,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -230,7 +230,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5837,
+    "critical": 5442,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -240,7 +240,7 @@
   "droits_zero": {
    "benin": {
     "n": 2785,
-    "critical": 1165,
+    "critical": 702,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -248,7 +248,7 @@
    },
    "autre": {
     "n": 1065,
-    "critical": 732,
+    "critical": 296,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -256,7 +256,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5837,
+    "critical": 5442,
     "sous_honnete": 0,
     "sous_honnete_critique": 0,
     "sous_produit": 0,
@@ -266,15 +266,15 @@
   "firstseen_faux": {
    "benin": {
     "n": 2785,
-    "critical": 1138,
-    "sous_honnete": 27,
-    "sous_honnete_critique": 27,
+    "critical": 679,
+    "sous_honnete": 23,
+    "sous_honnete_critique": 23,
     "sous_produit": 0,
     "vers_ok": 0
    },
    "autre": {
     "n": 1065,
-    "critical": 728,
+    "critical": 292,
     "sous_honnete": 4,
     "sous_honnete_critique": 4,
     "sous_produit": 0,
@@ -282,7 +282,7 @@
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5824,
+    "critical": 5429,
     "sous_honnete": 13,
     "sous_honnete_critique": 13,
     "sous_produit": 0,
@@ -292,25 +292,25 @@
   "tout_ensemble": {
    "benin": {
     "n": 2785,
-    "critical": 1138,
-    "sous_honnete": 92,
-    "sous_honnete_critique": 27,
+    "critical": 548,
+    "sous_honnete": 219,
+    "sous_honnete_critique": 154,
     "sous_produit": 0,
     "vers_ok": 65
    },
    "autre": {
     "n": 1065,
-    "critical": 728,
-    "sous_honnete": 14,
-    "sous_honnete_critique": 4,
+    "critical": 22,
+    "sous_honnete": 284,
+    "sous_honnete_critique": 274,
     "sous_produit": 0,
     "vers_ok": 10
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5707,
-    "sous_honnete": 251,
-    "sous_honnete_critique": 130,
+    "critical": 4987,
+    "sous_honnete": 576,
+    "sous_honnete_critique": 455,
     "sous_produit": 0,
     "vers_ok": 121
    }
@@ -318,25 +318,25 @@
   "tout_ensemble_eoa": {
    "benin": {
     "n": 2785,
-    "critical": 1258,
-    "sous_honnete": 65,
-    "sous_honnete_critique": 0,
+    "critical": 649,
+    "sous_honnete": 196,
+    "sous_honnete_critique": 131,
     "sous_produit": 0,
     "vers_ok": 65
    },
    "autre": {
     "n": 1065,
-    "critical": 737,
-    "sous_honnete": 10,
-    "sous_honnete_critique": 0,
+    "critical": 31,
+    "sous_honnete": 280,
+    "sous_honnete_critique": 270,
     "sous_produit": 0,
     "vers_ok": 10
    },
    "arnaque": {
     "n": 6443,
-    "critical": 5840,
-    "sous_honnete": 121,
-    "sous_honnete_critique": 0,
+    "critical": 5120,
+    "sous_honnete": 446,
+    "sous_honnete_critique": 325,
     "sous_produit": 0,
     "vers_ok": 121
    }
@@ -344,54 +344,114 @@
  },
  "exemples": {
   "aucun_fait|benin": [
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00440:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00492:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00510:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00723:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00725:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00853:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00855:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00872:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00880:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00888:critical->warn"
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00001:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00017:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00042:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00051:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00119:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00125:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00127:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00132:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00145:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00148:critical->warn"
+  ],
+  "solde_enorme|benin": [
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00001:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00017:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00042:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00051:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00119:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00125:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00127:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00132:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00145:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00148:critical->warn"
+  ],
+  "tout_ensemble|benin": [
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00001:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00017:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00042:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00051:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00119:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00125:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00127:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00132:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00145:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00148:critical->warn"
+  ],
+  "tout_ensemble_eoa|benin": [
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00001:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00017:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00042:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00051:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00119:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00125:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00127:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00132:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00145:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00148:critical->warn"
   ],
   "firstseen_faux|benin": [
    "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00440:critical->warn",
    "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00492:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00510:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00723:critical->warn",
    "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00725:critical->warn",
    "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00853:critical->warn",
    "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00855:critical->warn",
    "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00872:critical->warn",
    "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00880:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00888:critical->warn"
-  ],
-  "tout_ensemble|benin": [
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00440:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00492:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00510:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00723:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00725:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00853:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00855:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00872:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00880:critical->warn",
-   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00888:critical->warn"
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-00888:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-01182:critical->warn",
+   "V2_DEV_norm.jsonl#V2-BENIGN_DEFI-01185:critical->warn"
   ],
   "aucun_fait|autre": [
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00886:critical->warn",
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00929:critical->warn",
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00932:critical->warn",
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00935:critical->warn"
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00181:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00185:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00188:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00191:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00194:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00196:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00197:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00198:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00199:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00200:critical->warn"
   ],
-  "firstseen_faux|autre": [
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00886:critical->warn",
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00929:critical->warn",
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00932:critical->warn",
-   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00935:critical->warn"
+  "solde_enorme|autre": [
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00181:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00185:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00188:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00191:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00194:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00196:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00197:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00198:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00199:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00200:critical->warn"
   ],
   "tout_ensemble|autre": [
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00181:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00185:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00188:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00191:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00194:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00196:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00197:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00198:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00199:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00200:critical->warn"
+  ],
+  "tout_ensemble_eoa|autre": [
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00181:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00185:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00188:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00191:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00194:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00196:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00197:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00198:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00199:critical->warn",
+   "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00200:critical->warn"
+  ],
+  "firstseen_faux|autre": [
    "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00886:critical->warn",
    "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00929:critical->warn",
    "V2_DEV_norm.jsonl#V2-FRAUDAMBIG-00932:critical->warn",
@@ -432,6 +492,30 @@
    "V2_DEV_norm.jsonl#V2-ONCHAIN-00029:critical->warn",
    "V2_DEV_norm.jsonl#V2-ONCHAIN-00030:critical->warn",
    "V2_DEV_norm.jsonl#V2-ONCHAIN-00034:critical->warn"
+  ],
+  "solde_enorme|arnaque": [
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00512:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00516:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00517:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00521:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00522:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00528:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00532:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00534:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00540:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00541:critical->warn"
+  ],
+  "tout_ensemble_eoa|arnaque": [
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00512:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00516:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00517:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00521:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00522:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00528:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00532:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00534:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00540:critical->warn",
+   "V2_DEV_norm.jsonl#V2-ONCHAIN-00541:critical->warn"
   ],
   "tout_est_contrat_ancien|arnaque": [
    "V2_DEV_norm.jsonl#V2-POISON-00725:critical->warn",

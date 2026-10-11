@@ -1,0 +1,40 @@
+
+## V2-ONCHAIN-00512 [plain] falsification=solde_enorme
+  cas: onchain/transferFrom_direct eth_sendTransaction to=0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7 note=transferFrom deplace directement 100.0 USDT de la victime vers une adresse inconnue, sans aucune contrepartie recue. intent={"kind":"connect_or_accept_offer","token":"USDT"} share=80
+  produit=ok  honnête=critical signaux: intent_guard:new_recipient_large_share:critical
+  falsifié=warn signaux: intent_guard:kind_missing_unvouched_recipient:warn
+
+## V2-ONCHAIN-01079 [known+intent] falsification=solde_enorme
+  cas: onchain/multicall_depth1_transferFrom eth_sendTransaction to=0x7E0dB94445807E8Dc2b27A853E07586472C59384 note=Un multicall a 1 niveau(x) cache un transferFrom de USDC vers une adresse inconnue. La personne croit faire un echange. intent={"kind":"buy_or_swap"} share=100
+  produit=ok  honnête=critical signaux: intent_guard:new_recipient_large_share:critical
+  falsifié=warn signaux: intent_guard:kind_missing_unvouched_recipient:warn
+
+## V2-POISON-00641 [known+intent] falsification=tout_est_contrat_ancien
+  cas: poison_sites_tokens/fake_site_lookalike_domain eth_signTypedData_v4 to= note=Site sosie metamask.click (tld_exotique) imitant metamask.io ; demande permit2_transfer au profit de 0x6749A71CE908DB49e2C4ce7a5ed1e49D4895B intent={"kind":"send_to_my_account"} share=74
+  produit=warn  honnête=critical signaux: spend_rights:right_to_unvouched_spender:critical, sig_rights:signed_right_not_intended:warn
+  falsifié=warn signaux: sig_rights:signed_right_not_intended:warn
+
+## V2-POISON-00725 [plain] falsification=tout_est_contrat_ancien
+  cas: poison_sites_tokens/fake_site_lookalike_domain eth_sendTransaction to=0x5425890298aed601595a70AB815c96711a31Bc65 note=Site sosie pharaoh-event.exchange (tiret) imitant pharaoh.exchange ; demande approve_unlimited au profit de 0xD386ed28FC7996029D3794156EafC1 intent={"kind":"send_to_my_account","amount":"24055","token":"USDC"} share=56
+  produit=warn  honnête=critical signaux: spend_rights:right_to_unvouched_spender:critical
+  falsifié=warn signaux: (aucun)
+
+## fuzzsig-01664 [known+intent] falsification=decimales_36
+  cas: sig_fuzz/p2witness eth_signTypedData_v4 to= note= intent={} share=undefined
+  produit=ok  honnête=critical signaux: sig_rights:signed_transfer_unlimited:critical
+  falsifié=ok signaux: (aucun)
+
+## fuzzsig-00626 [known+intent] falsification=decimales_36
+  cas: sig_fuzz/p2tf eth_signTypedData_v4 to= note= intent={} share=undefined
+  produit=warn  honnête=critical signaux: sig_rights:signed_transfer_unlimited:critical
+  falsifié=warn signaux: (aucun)
+
+## V2-ONCHAIN-00140 [known+intent] falsification=firstseen_faux
+  cas: onchain/approve_drainer eth_sendTransaction to=0x347B130DAc7e9141c578f60DB6Dc5Ab818acbD7A note=La personne croit echanger, mais la transaction donne un droit de depense 50.0 de SNOWK a un contrat drainer. intent={"kind":"buy_or_swap"} share=2
+  produit=warn  honnête=critical signaux: spend_rights:right_to_unvouched_spender:critical
+  falsifié=warn signaux: (aucun)
+
+## V2-SIG-00145 [known+intent] falsification=firstseen_faux
+  cas: sig/permit_eip2612 eth_signTypedData_v4 to= note=Permit EIP-2612 sur USDC : accorde a une adresse inconnue le droit de depenser gros (51045), deadline 1h, sans transaction ni gas : vidage d intent={} share=15
+  produit=warn  honnête=critical signaux: spend_rights:right_to_unvouched_spender:critical, sig_rights:signed_right_not_intended:warn
+  falsifié=warn signaux: sig_rights:signed_right_not_intended:warn

@@ -1,0 +1,21 @@
+filtre V2_DEV_norm.jsonl bénins 1976
+
+[detectors] critical produit=260 critical plus=361 warn plus=716 | relevés=230 (->critical 101, ->warn 129, sans signal détecteur 0)
+ par détecteur : W intent_guard=129 ; C spend_rights=66 ; C sig_rights=35
+ par code      : W intent_guard:kind_missing_unvouched_recipient=129 ; C spend_rights:swap_no_min_unknown_router=66 ; C sig_rights:signed_right_not_intended=35
+ par famille   : W benign_everyday/first_payment_in_person=59 ; C benign_defi/swap_uniswap_ur=36 ; W benign_everyday/donation=32 ; C benign_defi/swap_uniswap_eth_direct=30 ; C benign_defi/permit2_signature=20 ; W benign_defi/bridge_core_eth_to_avax=18 ; C benign_defi/permit_eip2612_router=15 ; W benign_defi/wrap_deposit=7 ; W benign_defi/swap_uniswap_eth_direct=6 ; W benign_defi/wrap_withdraw=3
+
+[live] critical produit=260 critical plus=418 warn plus=699 | relevés=325 (->critical 158, ->warn 167, sans signal détecteur 52)
+ par détecteur : W intent_guard=115 ; C spend_rights=88 ; C intent_guard=49 ; C sig_rights=35
+ par code      : W intent_guard:kind_missing_unvouched_recipient=115 ; C spend_rights:swap_no_min_unknown_router=66 ; C intent_guard:new_recipient_large_share=49 ; C sig_rights:signed_right_not_intended=35 ; C spend_rights:right_to_unvouched_spender=28
+ par famille   : W benign_everyday/first_payment_in_person=59 ; C benign_defi/swap_uniswap_ur=36 ; W benign_everyday/donation=32 ; C benign_defi/swap_uniswap_eth_direct=31 ; C benign_everyday/nft_purchase_seaport=27 ; C benign_defi/permit2_signature=20 ; W benign_defi/bridge_core_eth_to_avax=17 ; W benign_everyday/self_transfer_large=17 ; C benign_defi/permit_eip2612_router=15 ; W benign_everyday/p2p_contact_prefix_twin=14
+
+[detectors+known+intent+premise] critical produit=20 critical plus=20 warn plus=386 | relevés=103 (->critical 0, ->warn 103, sans signal détecteur 0)
+ par détecteur : W intent_guard=103
+ par code      : W intent_guard:kind_missing_unvouched_recipient=103
+ par famille   : W benign_everyday/first_payment_in_person=59 ; W benign_everyday/donation=32 ; W benign_defi/wrap_deposit=7 ; W benign_defi/wrap_withdraw=3 ; W benign_defi/wrap_deposit_plain_transfer=2
+
+[live+known+intent+premise] critical produit=20 critical plus=20 warn plus=426 | relevés=143 (->critical 0, ->warn 143, sans signal détecteur 52)
+ par détecteur : W intent_guard=91
+ par code      : W intent_guard:kind_missing_unvouched_recipient=91
+ par famille   : W benign_everyday/first_payment_in_person=59 ; W benign_everyday/donation=32 ; W benign_everyday/self_transfer_large=17 ; W benign_everyday/p2p_contact_prefix_twin=14 ; W benign_everyday/payroll_sendcalls_batch=12 ; W benign_everyday/p2p_contact=6 ; W benign_everyday/payroll_single=2 ; W benign_defi/wrap_deposit=1
