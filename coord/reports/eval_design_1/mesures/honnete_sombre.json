@@ -1,0 +1,79 @@
+{
+ "name": "honnete_sombre",
+ "mode": "honnete",
+ "scheme": "dark",
+ "extId": "jkphkfibfjkebldikfpfmoacdichhkpk",
+ "steps": [
+  "fenêtre 1 géométrie: {\"iw\":422,\"ih\":493,\"ow\":440,\"oh\":540,\"dpr\":1,\"sx\":180,\"sy\":60,\"scrollH\":493,\"mainScroll\":[385,385],\"active\":\"TEXTAREA\"}",
+  "fenêtre 1 question: Que veux-tu faire sur ce site ? Annuler Vérifier",
+  "fenêtre 1 textes vus: [\"Que veux-tu faire sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…\",\"Ça correspond à ce que tu as écrit. La demande donne accès à 50 USDC, pas plus. intention classée sans modèle Annuler\"]",
+  "fenêtre 1 fermée après (ms): 1036",
+  "fenêtre 2 géométrie: {\"iw\":422,\"ih\":493,\"ow\":440,\"oh\":540,\"dpr\":1,\"sx\":180,\"sy\":60,\"scrollH\":493,\"mainScroll\":[385,385],\"active\":\"H1\"}",
+  "fenêtre 2 question: Ça correspond à ce que tu as écrit. D’après la simulation, 50 USDC sortent de ton compte et 0,5 WAVAX y entre. intention classée sans modèle Annuler",
+  "capture ratée 2_1_question",
+  "ERREUR locator.count: Target page, context or browser has been closed"
+ ],
+ "measures": {
+  "ouverture_1": {
+   "paint": [
+    {
+     "n": "first-paint",
+     "t": 132
+    },
+    {
+     "n": "first-contentful-paint",
+     "t": 144
+    }
+   ],
+   "premieres_mutations": [
+    {
+     "t": 128,
+     "txt": "Que veux-tu faire sur ce site ? Annuler Vérifier [...] Que veux-tu faire sur ce site ? Annuler Vérifier"
+    }
+   ],
+   "ls": [],
+   "longtasks": [
+    {
+     "t": 71,
+     "d": 57
+    }
+   ],
+   "frames_0_1000": {
+    "images": 130,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 7,
+    "plus_longue_image_ms": 48.5,
+    "duree_ms": 1000
+   }
+  },
+  "verdict_1": {
+   "entree_t": 2143,
+   "mutations": [
+    {
+     "t": 2148,
+     "txt": "Que veux-tu faire sur ce site ? Je compare ta phrase à la de [...] sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…"
+    },
+    {
+     "t": 2163,
+     "txt": "Ça correspond à ce que tu as écrit. La demande donne accès à [...] donne accès à 50 USDC, pas plus. intention classée sans modèle Annuler"
+    }
+   ],
+   "ls": [],
+   "longtasks": [],
+   "frames_entree_a_fin": {
+    "images": 144,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 0,
+    "plus_longue_image_ms": 7.5,
+    "duree_ms": 994
+   }
+  }
+ },
+ "wallet": [
+  "transaction vers 0x7c07edcB223c16d4b2fB373C476030c41f8027ae",
+  "transaction vers 0xF6987b595D4196A40db287ef77eEf181BB045272"
+ ],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

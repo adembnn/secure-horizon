@@ -1,0 +1,91 @@
+{
+ "name": "piege_clair",
+ "mode": "piege",
+ "scheme": "light",
+ "extId": "jkphkfibfjkebldikfpfmoacdichhkpk",
+ "steps": [
+  "fenêtre 1 géométrie: {\"iw\":422,\"ih\":493,\"ow\":440,\"oh\":540,\"dpr\":1,\"sx\":180,\"sy\":60,\"scrollH\":493,\"mainScroll\":[385,385],\"active\":\"TEXTAREA\"}",
+  "fenêtre 1 question: Que veux-tu faire sur ce site ? Annuler Vérifier",
+  "fenêtre 1 textes vus: [\"Que veux-tu faire sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…\",\"Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. Droit limité à 50 USDC intention classée sans modèle Annuler Continuer\"]",
+  "fenêtre 1 fermée après (ms): null",
+  "fenêtre 1 réponse qui reste: {\"boutons\":[{\"t\":\"Annuler\",\"dis\":null,\"disabled\":false,\"cls\":\"hu-btn is-primary\"},{\"t\":\"Continuer\",\"dis\":null,\"disabled\":false,\"cls\":\"hu-btn\"}],\"actif\":\"Annuler\",\"wait\":\"\"}",
+  "fenêtre 1 ordre de tabulation: BUTTON:Continuer > BUTTON:Annuler > BUTTON:Continuer > BUTTON:Annuler > BUTTON:Continuer > BUTTON:Annuler",
+  "fenêtre 1 clic sur Continuer inactif -> fermée",
+  "site à la fin: Échange en cours de finalisation.",
+  "nombre de fenêtres ouvertes au total: 1"
+ ],
+ "measures": {
+  "ouverture_1": {
+   "paint": [
+    {
+     "n": "first-paint",
+     "t": 148
+    },
+    {
+     "n": "first-contentful-paint",
+     "t": 164
+    }
+   ],
+   "premieres_mutations": [
+    {
+     "t": 144,
+     "txt": "Que veux-tu faire sur ce site ? Annuler Vérifier [...] Que veux-tu faire sur ce site ? Annuler Vérifier"
+    }
+   ],
+   "ls": [],
+   "longtasks": [
+    {
+     "t": 84,
+     "d": 60
+    }
+   ],
+   "frames_0_1000": {
+    "images": 128,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 7,
+    "plus_longue_image_ms": 55.5,
+    "duree_ms": 1000
+   }
+  },
+  "verdict_1": {
+   "entree_t": 2197,
+   "mutations": [
+    {
+     "t": 2200,
+     "txt": "Que veux-tu faire sur ce site ? Je compare ta phrase à la de [...] sur ce site ? Je compare ta phrase à la demande. Annuler Vérification…"
+    },
+    {
+     "t": 2220,
+     "txt": "Ça ne correspond pas à ce que tu as écrit. Tu as écrit 50 US [...] Droit limité à 50 USDC intention classée sans modèle Annuler Continuer"
+    }
+   ],
+   "ls": [],
+   "longtasks": [],
+   "frames_entree_a_fin": {
+    "images": 715,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 0,
+    "plus_longue_image_ms": 7.6,
+    "duree_ms": 4963
+   }
+  },
+  "compte_a_rebours_1": {
+   "frames_3200ms": {
+    "images": 461,
+    "intervalle_median_ms": 6.9,
+    "images_perdues": 0,
+    "plus_longue_image_ms": 7.9,
+    "duree_ms": 3200
+   },
+   "mutations": [],
+   "ls": [],
+   "longtasks": []
+  }
+ },
+ "wallet": [
+  "transaction vers 0x7c07edcB223c16d4b2fB373C476030c41f8027ae"
+ ],
+ "console": [
+  "[site] error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}
