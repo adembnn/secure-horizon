@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hold up v5 : 4. Correspond</title>
+<style>/* Hold up - the window's surface. System : docs/design/v5/DESIGN.md.
+ * Two moments (question, answer), one column, near-monochrome, ONE signal colour used once per screen
+ * (the sentence "Ça ne correspond pas…"). No shadow, no gradient, no icon, no card. System fonts only.
+ * Everything hangs under .hu so the same sheet draws the real window and the reference boards.
+ *
+ * Contrast (WCAG 2.x)  light : ink #171717 on #fff 17.9:1 · ink-2 #5c5c5c 6.7:1 · signal #c9281c 5.6:1 · edge #8c8c8c 3.4:1 (control border)
+ *                      dark  : ink #ededed on #131313 15.6:1 · ink-2 #a3a3a3 7.3:1 · signal #ff7061 7.1:1 · edge #7a7a7a 4.2:1 */
+.hu {
+  --hu-bg: #ffffff;
+  --hu-ink: #171717;
+  --hu-ink-2: #5c5c5c;
+  --hu-line: #e5e5e5;
+  --hu-edge: #8c8c8c;
+  --hu-hover: #f5f5f5;
+  --hu-signal: #c9281c;
+  --hu-on-ink: #ffffff;
+  --hu-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
+  --hu-display: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
+  --hu-mono: "Cascadia Mono", "SF Mono", ui-monospace, Consolas, "Roboto Mono", monospace;
+  --hu-r: 8px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  .hu:not([data-theme="light"]) {
+    --hu-bg: #131313; --hu-ink: #ededed; --hu-ink-2: #a3a3a3; --hu-line: #2b2b2b; --hu-edge: #7a7a7a; --hu-hover: #1f1f1f;
+    --hu-signal: #ff7061; --hu-on-ink: #131313; color-scheme: dark;
+  }
+}
+.hu[data-theme="dark"] {
+  --hu-bg: #131313; --hu-ink: #ededed; --hu-ink-2: #a3a3a3; --hu-line: #2b2b2b; --hu-edge: #7a7a7a; --hu-hover: #1f1f1f;
+  --hu-signal: #ff7061; --hu-on-ink: #131313; color-scheme: dark;
+}
+
+.hu, .hu *, .hu *::before, .hu *::after { box-sizing: border-box; }
+.hu {
+  display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0; container-type: size;
+  background: var(--hu-bg); color: var(--hu-ink);
+  font-family: var(--hu-sans); font-size: 17px; line-height: 1.5; font-weight: 400;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+.hu ::selection { background: var(--hu-ink); color: var(--hu-bg); }
+.hu [hidden] { display: none !important; }
+
+/* ---- the column */
+.hu-main { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 48px 32px 8px; text-align: center; }
+.hu-col { max-width: 360px; margin: 0 auto; }
+.hu-title {
+  margin: 0; font-family: var(--hu-display); font-size: 27px; line-height: 1.22; font-weight: 400; letter-spacing: -0.015em;
+  text-wrap: balance; overflow-wrap: anywhere;
+}
+.hu-title:focus { outline: none; }
+.hu[data-outcome="mismatch"] .hu-title { color: var(--hu-signal); }
+.hu-line { margin: 16px 0 0; text-wrap: pretty; overflow-wrap: anywhere; }
+.hu-quiet { margin: 12px 0 0; font-size: 15px; line-height: 1.45; color: var(--hu-ink-2); }
+.hu-note { margin: 20px 0 0; font-size: 13px; line-height: 1.4; color: var(--hu-ink-2); }
+.hu-end { margin: auto; padding: 32px; max-width: 360px; text-align: center; text-wrap: balance; }
+
+/* ---- the question field */
+.hu-field {
+  display: block; width: 100%; margin: 24px 0 0; padding: 12px 14px; min-height: 104px; resize: none;
+  font: inherit; line-height: 1.45; color: var(--hu-ink); caret-color: var(--hu-ink); text-align: left;
+  background: var(--hu-bg); border: 1px solid var(--hu-edge); border-radius: var(--hu-r);
+  transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
+}
+.hu-field::placeholder { color: var(--hu-ink-2); opacity: 1; }
+.hu-field:hover { border-color: var(--hu-ink); }
+.hu-field:focus { outline: none; border-color: var(--hu-ink); box-shadow: 0 0 0 1px var(--hu-ink); }
+.hu-field[readonly] { color: var(--hu-ink-2); border-color: var(--hu-line); box-shadow: none; }
+
+/* ---- two addresses, 2 rows of 5 groups of 4 */
+.hu-addr { margin: 24px 0 0; text-align: left; }
+.hu-addr + .hu-addr { margin-top: 16px; }
+.hu-addr-label { margin: 0 0 4px; font-size: 13px; line-height: 1.4; color: var(--hu-ink-2); }
+.hu-addr-grid {
+  display: grid; grid-template-columns: repeat(5, auto); justify-content: space-between; row-gap: 2px; margin: 0;
+  font-family: var(--hu-mono); font-size: 16px; line-height: 1.5; font-variant-numeric: tabular-nums slashed-zero; color: var(--hu-ink-2);
+}
+/* what differs is set in ink and heavier ; what is identical (the part a look-alike copies) stays quiet. Weight carries it, not colour alone. */
+.hu-addr-grid b { font-weight: 700; color: var(--hu-ink); }
+.hu-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* ---- the dock : Annuler always left, the forward action always right ; only the weight moves */
+.hu-dock { flex: none; padding: 12px 24px 24px; }
+.hu-wait { min-height: 22px; max-width: 392px; margin: 0 auto 12px; font-size: 15px; line-height: 22px; text-align: center; color: var(--hu-ink-2); font-variant-numeric: tabular-nums; }
+.hu-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 392px; margin: 0 auto; }
+.hu-btn {
+  min-height: 48px; padding: 0 16px; font: inherit; font-size: 16px; font-weight: 500; line-height: 1.2; cursor: pointer;
+  color: var(--hu-ink); background: transparent; border: 1px solid var(--hu-edge); border-radius: var(--hu-r);
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+.hu-btn:hover { background: var(--hu-hover); border-color: var(--hu-ink); }
+.hu-btn:focus-visible { outline: 2px solid var(--hu-ink); outline-offset: 2px; }
+.hu-btn.is-primary { color: var(--hu-on-ink); background: var(--hu-ink); border-color: var(--hu-ink); }
+.hu-btn.is-primary:hover { background: color-mix(in srgb, var(--hu-ink) 86%, var(--hu-bg)); border-color: transparent; }
+.hu-btn[aria-disabled="true"] { cursor: default; color: var(--hu-ink-2); background: transparent; border-color: var(--hu-line); }
+.hu-btn.is-primary[aria-disabled="true"] { color: var(--hu-ink-2); background: var(--hu-hover); border-color: var(--hu-hover); }
+
+/* ---- small windows (container queries : the boards draw several sizes on one page) */
+@container (max-width: 400px) {
+  .hu-main { padding: 32px 20px 8px; }
+  .hu-title { font-size: 24px; }
+  .hu-dock { padding: 12px 16px 16px; }
+  .hu-addr-grid { font-size: 15px; }
+}
+@container (max-height: 460px) {
+  .hu-main { padding-top: 24px; }
+  .hu-title { font-size: 23px; }
+  .hu-field { min-height: 80px; margin-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .hu * { transition: none !important; } }
+
+html,body{margin:0;height:100%;background:#e9e9e9}body{display:grid;place-items:center}.frame{background:#fff;outline:1px solid #cfcfcf}</style></head>
+<body><div class="frame" style="width:424px;height:501px"><div id="b-4_correspond" class="hu"></div></div><script>/* Hold up - draws the window's two moments inside a .hu element. Classic script, no dependency, no network, no innerHTML.
+ *   HoldupScreen.mount(root, { onSubmit(text), onCancel(via), onContinue() }) -> { show(screen, key), end(text) }
+ * `screen` comes from the service worker (gatekeeper.js viewOf -> view.screen) :
+ *   { kind: 'question', title, placeholder }
+ *   { kind: 'answer', outcome: 'match' | 'mismatch' | 'unverifiable', headline, line, addresses, labels, leftMs, noModel }
+ * The worker stays the judge : this file only disables "Continuer" while the delay runs, the worker refuses it anyway. */
+(function (global) {
+  'use strict';
+  var T = { cancel: 'Annuler', check: 'Vérifier', checking: 'Vérification…', go: 'Continuer', comparing: 'Je compare ta phrase à la demande.',
+    noModel: 'intention classée sans modèle', ready: 'Tu peux continuer.' };
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  // "Continuer sera possible dans 24 s." : one quiet line, no clock face.
+  function waitLine(leftMs) {
+    var s = Math.max(0, Math.ceil(leftMs / 1000)); if (s <= 0) return '';
+    var m = Math.floor(s / 60), r = s % 60;
+    return 'Continuer sera possible dans ' + (m ? m + ' min' + (r ? ' ' + r + ' s' : '') : r + ' s') + '.';
+  }
+  function addressBlock(label, groups, full) {
+    var box = el('div', 'hu-addr');
+    box.appendChild(el('p', 'hu-addr-label', label));
+    var grid = el('p', 'hu-addr-grid'); grid.setAttribute('aria-hidden', 'true');
+    groups.forEach(function (g) { var span = el('span'); g.forEach(function (c) { span.appendChild(el(c.diff ? 'b' : 'span', '', c.c)); }); grid.appendChild(span); });
+    box.appendChild(grid);
+    box.appendChild(el('span', 'hu-sr', full));
+    return box;
+  }
+
+  function mount(root, on) {
+    var timer = null, current = null, busy = false;
+    root.classList.add('hu');
+    function clear() { if (timer) { clearInterval(timer); timer = null; } while (root.firstChild) root.removeChild(root.firstChild); root.removeAttribute('data-outcome'); busy = false; }
+    function button(label, primary) { var b = el('button', 'hu-btn' + (primary ? ' is-primary' : ''), label); b.type = 'button'; return b; }
+    function enabled(b) { return b.getAttribute('aria-disabled') !== 'true'; }
+    function setEnabled(b, yes) { if (yes) b.removeAttribute('aria-disabled'); else b.setAttribute('aria-disabled', 'true'); }
+    function frame() {
+      var main = el('main', 'hu-main'), col = el('div', 'hu-col'), dock = el('div', 'hu-dock'), wait = el('p', 'hu-wait'), actions = el('div', 'hu-actions');
+      main.appendChild(col); dock.appendChild(wait); dock.appendChild(actions);
+      root.appendChild(main); root.appendChild(dock);
+      return { col: col, wait: wait, actions: actions };
+    }
+    function cancelButton(primary) { var b = button(T.cancel, primary); b.addEventListener('click', function () { on.onCancel('button'); }); return b; }
+
+    function question(s) {
+      var f = frame();
+      var title = el('h1', 'hu-title', s.title); title.id = 'hu-q';
+      var field = el('textarea', 'hu-field'); field.rows = 3; field.maxLength = 500; field.placeholder = s.placeholder || ''; field.setAttribute('aria-labelledby', 'hu-q');
+      field.spellcheck = false; field.autocapitalize = 'off';
+      var status = el('p', 'hu-quiet'); status.setAttribute('role', 'status'); status.hidden = true;
+      f.col.appendChild(title); f.col.appendChild(field); f.col.appendChild(status);
+      var cancel = cancelButton(false), go = button(T.check, true);
+      setEnabled(go, false);
+      f.actions.appendChild(cancel); f.actions.appendChild(go);
+      function lock() { busy = true; field.readOnly = true; setEnabled(go, false); go.textContent = T.checking; status.textContent = T.comparing; status.hidden = false; }
+      function submit() {
+        var text = field.value.replace(/\s+/g, ' ').trim();
+        if (busy) return;
+        if (!text) { field.focus(); return; }
+        lock(); on.onSubmit(text);
+      }
+      field.addEventListener('input', function () { if (!busy) setEnabled(go, !!field.value.trim()); });
+      field.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); submit(); } });
+      go.addEventListener('click', submit);
+      if (typeof s.value === 'string') { field.value = s.value; setEnabled(go, !!s.value.trim()); }
+      if (s.checking) lock();
+      try { field.focus({ preventScroll: true }); } catch (_) {}
+      current.unlock = function () { busy = false; field.readOnly = false; go.textContent = T.check; status.hidden = true; setEnabled(go, !!field.value.trim()); };
+    }
+
+    function answer(s) {
+      var f = frame();
+      root.setAttribute('data-outcome', s.outcome);
+      var title = el('h1', 'hu-title', s.headline); title.tabIndex = -1;
+      f.col.appendChild(title);
+      f.col.appendChild(el('p', 'hu-line', s.line));
+      if (s.addresses) {
+        f.col.appendChild(addressBlock(s.labels.expected, s.addresses.expected, s.addresses.expectedFull));
+        f.col.appendChild(addressBlock(s.labels.actual, s.addresses.actual, s.addresses.actualFull));
+      }
+      if (s.noModel) f.col.appendChild(el('p', 'hu-note', T.noModel));
+      var live = el('span', 'hu-sr'); live.setAttribute('role', 'status'); f.col.appendChild(live);
+      var match = s.outcome === 'match';
+      var cancel = cancelButton(!match), go = button(T.go, match);
+      f.actions.appendChild(cancel); f.actions.appendChild(go);
+      var until = Date.now() + Math.max(0, s.leftMs || 0);
+      function tick(first) {
+        var left = until - Date.now(), open = left <= 0;
+        f.wait.textContent = waitLine(left);
+        if (open !== enabled(go)) { setEnabled(go, open); if (open && first !== true) live.textContent = T.ready; }
+        if (open && timer) { clearInterval(timer); timer = null; }
+      }
+      setEnabled(go, false); tick(true);
+      if (until > Date.now()) timer = setInterval(tick, 250);
+      go.addEventListener('click', function () { if (busy || !enabled(go)) return; busy = true; on.onContinue(); });
+      try { (match && enabled(go) ? go : cancel).focus({ preventScroll: true }); } catch (_) {}
+      current.sync = function (leftMs) { until = Date.now() + Math.max(0, leftMs || 0); busy = false; if (!timer && leftMs > 0) timer = setInterval(tick, 250); tick(true); };
+    }
+
+    root.addEventListener('keydown', function (e) { if (e.key === 'Escape' && current && current.kind !== 'end') { e.preventDefault(); on.onCancel('escape'); } });
+    return {
+      // `key` identifies the screen (the request's screen number) : the same key only re-syncs, it never redraws or moves the focus.
+      show: function (s, key) {
+        if (!s || (s.kind !== 'question' && s.kind !== 'answer')) return false;
+        if (current && current.key === key && current.kind === s.kind) {
+          if (s.kind === 'answer' && current.sync) current.sync(s.leftMs);
+          if (s.kind === 'question' && current.unlock) current.unlock();
+          return true;
+        }
+        clear(); current = { kind: s.kind, key: key, sync: null, unlock: null };
+        if (s.kind === 'question') question(s); else answer(s);
+        return true;
+      },
+      end: function (text) { clear(); current = { kind: 'end' }; var p = el('p', 'hu-end', text); p.setAttribute('role', 'status'); root.appendChild(p); }
+    };
+  }
+  global.HoldupScreen = { mount: mount, waitLine: waitLine };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>(function(){var B=[{"id":"4_correspond","name":"4. Correspond","w":424,"h":501,"screen":{"kind":"answer","leftMs":0,"outcome":"match","headline":"Ça correspond à ce que tu as écrit.","line":"Cette opération envoie 20 USDC à Paul.","addresses":null,"labels":{"expected":"Adresse que tu connais","actual":"Adresse de cette demande"},"noModel":false}}];var real=Date.now;var t0=real.call(Date);Date.now=function(){return t0;};
+B.forEach(function(b){var root=document.getElementById('b-'+b.id);if(b.theme)root.setAttribute('data-theme',b.theme);
+var ui=HoldupScreen.mount(root,{onSubmit:function(){},onCancel:function(){},onContinue:function(){}});ui.show(b.screen,'board');});
+if(document.activeElement&&B.length>1)document.activeElement.blur();})();</script></body></html>

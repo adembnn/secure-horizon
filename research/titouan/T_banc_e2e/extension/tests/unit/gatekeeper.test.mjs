@@ -11,7 +11,10 @@ const verdict = (level, extra = {}) => Object.assign({ level, niveau: level === 
   effects: { grants_right: false, funds_out: false }, risk_signals: [] }, extra);
 
 let F, clock, seen, n = 0;
-beforeEach(() => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; seen = []; });
+// The product default asks the written intent first (askIntent 'always'). The tests below are about the hold itself : they start
+// on the answer screen (askIntent 'never') unless they say otherwise. The written-intent flow has its own file (flow.test.mjs).
+const NO_Q = { askIntent: 'never' };
+beforeEach(async () => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; seen = []; await F.chrome.storage.local.set({ cfg: NO_Q }); });
 afterEach(() => { clock.restore(); delete globalThis.chrome; });
 
 // A worker life. `engine` : level, verdict object or function(body).
@@ -61,7 +64,7 @@ test('(e) the origin is the one the browser reports, never the one in the messag
 });
 
 test('(g) an engine that answers "ok" never opens the door : attention screen, human decision required', async () => {
-  await F.chrome.storage.local.set({ cfg: { testMode: true, auto: true, arm: 'A' } }); // former settings : ignored
+  await F.chrome.storage.local.set({ cfg: { testMode: true, auto: true, arm: 'A', askIntent: 'never' } }); // former settings : ignored
   worker(() => ({ level: 'ok' }));
   const g = await gate();
   assert.deepEqual(g.r, { pending: true });
@@ -200,7 +203,7 @@ test('the 10-minute hold completes across service worker restarts (storage + ala
 });
 
 test('demo durations come from the settings ; the window says so ; floors hold', async () => {
-  await F.chrome.storage.local.set({ cfg: { dangerWaitMs: 10000, manipulationHoldMs: 1 } });
+  await F.chrome.storage.local.set({ cfg: { dangerWaitMs: 10000, manipulationHoldMs: 1, askIntent: 'never' } });
   worker((b) => verdict(b.origin === EVIL ? 'danger' : 'manipulation'));
   const d = await gate(7, EVIL), m = await gate(8, 'https://support.example');
   assert.equal(F.state.session['hu:req:' + d.rid].friction.waitMs, 10000);
@@ -222,7 +225,8 @@ test('a worker that died between the record and its window : the next poll opens
   assert.ok(winOf(rid), 'window opened by the poll');
 });
 
-test('intent question : asked only when the operation grants a right or moves funds (default), in the same window', async () => {
+test('intent question : with the setting "rights_or_funds", asked only when the operation grants a right or moves funds, in the same window', async () => {
+  await F.chrome.storage.local.set({ cfg: { askIntent: 'rights_or_funds' } });
   worker((b) => verdict(b.intent === 'receive' ? 'danger' : 'attention', { effects: { grants_right: b.origin === EVIL, funds_out: false } }));
   const a = await gate(7, EVIL), b = await gate(8, 'https://calm.example');
   let va = await view(a);
@@ -241,6 +245,7 @@ test('intent question : asked only when the operation grants a right or moves fu
 });
 
 test('a declared intent can only make the verdict stricter', async () => {
+  await F.chrome.storage.local.set({ cfg: {} }); // product default : the question comes first
   worker((b) => verdict(b.intent ? 'attention' : 'danger', { effects: { grants_right: true, funds_out: false } }));
   const g = await gate(); clock.advance(1000);
   const r = await decide(g, { seq: 1, decision: 'answer', value: 'pay' });
@@ -275,7 +280,7 @@ test('expired or unknown requests are refused ; a notification is never a gate',
 
 test('without chrome.storage.session or chrome.alarms the gate still fails closed', async () => {
   clock.restore(); clock = fakeClock();
-  F = makeChrome({ session: false, alarms: false }); globalThis.chrome = F.chrome;
+  F = makeChrome({ session: false, alarms: false }); globalThis.chrome = F.chrome; await F.chrome.storage.local.set({ cfg: NO_Q });
   worker('attention');
   const g = await gate();
   assert.equal((await poll(g)).state, 'pending');

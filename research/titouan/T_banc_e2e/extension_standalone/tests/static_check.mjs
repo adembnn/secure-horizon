@@ -41,16 +41,20 @@ const RULES = [
 const URL_RE = /\b(?:https?|wss?|ftp):\/\/[A-Za-z0-9[][^\s'"`<>)\\]*/g;
 const HEX64 = /\b0x[0-9a-fA-F]{64}\b/g;
 let hex64 = 0;
+// Seule exception reseau : la phrase ecrite par la personne part vers le relais local de classification (boucle locale), depuis classifier_client.js.
+const RELAY_URL = 'http://127.0.0.1:8789', RELAY_FILE = 'classifier_client.js';
+let relayFetch = 0;
 
 for (const p of files) {
   if (/\.(png|jpg|ico|zip)$/.test(p)) continue;
   const txt = readFileSync(p, 'utf8');
   txt.split('\n').forEach((ln, i) => {
     for (const [k, re] of RULES) if (re.test(ln)) {
+      if (k === 'reseau' && rel(p) === RELAY_FILE && /\bfetch\s*\(\s*RELAY \+ '\/classify'/.test(ln)) { relayFetch++; continue; } // le seul appel reseau admis
       // fetch( dans engine : uniquement s'il s'agit de l'API reseau ; aucune exception necessaire attendue.
       add(k, p, i + 1, ln);
     }
-    for (const m of ln.matchAll(URL_RE)) add('url_externe', p, i + 1, m[0]);
+    for (const m of ln.matchAll(URL_RE)) { if ((m[0] === RELAY_URL && rel(p) === RELAY_FILE) || (rel(p) === 'manifest.json' && (m[0] === RELAY_URL || m[0] === RELAY_URL + '/*'))) continue; add('url_externe', p, i + 1, m[0]); }
     hex64 += (ln.match(HEX64) || []).length;
   });
 }
@@ -63,11 +67,12 @@ m('service worker de type module', mf.background && mf.background.type === 'modu
 // storage : reglages, journal local et demandes retenues (storage.session) ; alarms : echeances de la retenue quand le service worker est arrete.
 // La fenetre de verdict (chrome.windows.create d'une page de l'extension) et les messages vers l'onglet demandeur ne demandent aucune permission.
 m('permissions = [storage, alarms] seulement', JSON.stringify(mf.permissions) === '["storage","alarms"]', JSON.stringify(mf.permissions));
-m('aucun host_permissions', !('host_permissions' in mf) && !('optional_host_permissions' in mf));
+m('host_permissions = le relais local 127.0.0.1:8789 et rien d autre', JSON.stringify(mf.host_permissions) === '["http://127.0.0.1:8789/*"]' && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
+m('un seul appel reseau dans tout le dossier livre : fetch vers le relais local, dans classifier_client.js', relayFetch === 1, String(relayFetch));
 m('aucune permission optionnelle', !('optional_permissions' in mf));
 m('pas de externally_connectable / web_accessible_resources / update_url', !('externally_connectable' in mf) && !('web_accessible_resources' in mf) && !('update_url' in mf));
 const csp = (mf.content_security_policy || {}).extension_pages || '';
-m('CSP : script-src self, connect-src none, aucun http dans la CSP', /script-src 'self'/.test(csp) && /connect-src 'none'/.test(csp) && !/https?:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp), csp);
+m('CSP : script-src self, connect-src = le relais local seulement', /script-src 'self'/.test(csp) && /connect-src http:\/\/127\.0\.0\.1:8789(;|$)/.test(csp) && !/https:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp) && (csp.match(/http:/g) || []).length === 1, csp);
 m('seuls bridge.js / inject.js en scripts de contenu, fichiers presents', (mf.content_scripts || []).every((c) => c.js.every((f) => files.some((p) => rel(p) === f))));
 
 // pages de l'extension : scripts locaux seulement, aucun script en ligne, aucun gestionnaire en attribut
@@ -78,9 +83,9 @@ for (const p of files.filter((x) => x.endsWith('.html'))) {
 }
 // aucun mode test ni reponse automatique dans le dossier livre : le crochet n'existe que dans le build --test-hook (dossier extension_test/)
 const bgTxt = readFileSync(join(EXT, 'background.js'), 'utf8');
-m('aucun crochet de test dans le service worker livre', !/testHook|TEST_HOOK|__holdupTestHook/.test(bgTxt) && /createGatekeeper\(\{ check: localCheck\s*\}\)/.test(bgTxt));
+m('aucun crochet de test dans le service worker livre', !/testHook|TEST_HOOK|__holdupTestHook/.test(bgTxt) && /createGatekeeper\(\{ check: localCheck, classify: classifyViaRelay\s*\}\)/.test(bgTxt));
 m('aucun fichier ne pose le crochet de test ni un mode auto', files.filter((p) => /\.(js|html|json)$/.test(p) && !/BUILD_INFO\.json$/.test(p)).every((p) => !/__holdupTestHook|testMode|cfg\.auto\b/.test(readFileSync(p, 'utf8'))));
-m('fenetre de verdict presente (window.html + ui/verdict.*)', ['window.html', 'window.js', 'window.css', 'ui/verdict.html', 'ui/verdict.js', 'ui/verdict.css', 'gatekeeper.js', 'hold_core.js'].every((f) => files.some((p) => rel(p) === f)));
+m('fenetre presente (window.html + ui/screen.*)', ['window.html', 'window.js', 'window.css', 'ui/screen.js', 'ui/screen.css', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'outcome.js'].every((f) => files.some((p) => rel(p) === f)));
 
 // chaque module du dossier livre doit se charger : une erreur de syntaxe dans une source du moteur rend le service worker inchargeable
 {

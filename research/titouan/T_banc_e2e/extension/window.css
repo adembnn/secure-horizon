@@ -1,14 +1,5 @@
-/* Hold up - frame of the verdict window. Same tokens as ui/verdict.css (R3) : plain, centred, no green anywhere. */
-:root { --bg: #ffffff; --ink: #000000; --muted: #595959; --line: #e2e2e2; color-scheme: light; }
-@media (prefers-color-scheme: dark) { :root { --bg: #000000; --ink: #ffffff; --muted: #a6a6a6; --line: #2a2a2a; color-scheme: dark; } }
-* { box-sizing: border-box; }
+/* Hold up - the window page only hosts the surface (ui/screen.css draws everything, tokens in docs/design/v5/DESIGN.md). */
 html, body { height: 100%; margin: 0; }
-body { display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; line-height: 1.4; }
-#bar { flex: none; display: flex; align-items: baseline; gap: 12px; padding: 10px 20px; border-bottom: 1px solid var(--line); }
-#bar b { font-weight: 500; }
-#site { margin-left: auto; min-width: 0; overflow-wrap: anywhere; text-align: right; color: var(--muted); font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace; font-size: 13px; }
-#note, #contact { flex: none; margin: 0; padding: 8px 20px; text-align: center; color: var(--muted); border-bottom: 1px solid var(--line); }
-#contact { color: var(--ink); font-weight: 500; }
-#surface { flex: 1 1 auto; width: 100%; min-height: 0; border: 0; background: var(--bg); }
-#end { margin: auto; padding: 24px; text-align: center; font-size: 20px; }
-[hidden] { display: none !important; }
+body { background: #ffffff; }
+@media (prefers-color-scheme: dark) { body { background: #131313; } }
+#hu { height: 100%; }

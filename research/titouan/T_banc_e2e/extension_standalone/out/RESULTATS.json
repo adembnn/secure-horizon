@@ -8,7 +8,7 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "84b55ed92942d270"
+   "detail": "6fba8a235edc3b71"
   },
   {
    "name": "le service worker enregistre son ecouteur onMessage (demande inconnue => unknown, lu comme un refus)",
@@ -137,8 +137,8 @@
   },
   {
    "name": "bloc PRESENTATION identique octet pour octet dans server.mjs et src/sentinelle_core.js",
-   "pass": true,
-   "detail": "17918 / 17918 caracteres"
+   "pass": false,
+   "detail": "18187 / 17918 caracteres"
   },
   {
    "name": "server/server.mjs se charge (moteur de reference)",
@@ -171,12 +171,12 @@
    "detail": "0"
   },
   {
-   "name": "tests unitaires rejoues sur le dossier construit : 41 reussis, 0 en echec",
+   "name": "tests unitaires rejoues sur le dossier construit : 54 reussis, 0 en echec",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "surface de verdict identique a ui_holdup dans les deux extensions",
+   "name": "surface de la fenetre : ui/screen.* (plus de cadre ui_holdup ni d iframe)",
    "pass": true,
    "detail": ""
   },
@@ -190,21 +190,21 @@
   "Attentes de detection non satisfaites parmi les 35 requetes types : aucune",
   "attacks_public/PUBLIC.jsonl absent : equivalence PUBLIC non executee"
  ],
- "tree_sha256": "84b55ed92942d270f5480ba2b983619823941ccac62e77fbc4763bbc438b3d29",
+ "tree_sha256": "6fba8a235edc3b71d0a24c56bdb449deeac4a182b057b8ec57a0efd02a0d3b86",
  "requests": [
   {
    "name": "approve illimite USDC vers un inconnu",
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 2.14,
+   "ms": 1.56,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -218,8 +218,8 @@
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -227,14 +227,14 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F01",
-   "ms": 0.45,
+   "ms": 0.34,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "attention",
+   "friction": "none",
    "friction_conforme": true
   },
   {
@@ -242,14 +242,14 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 4.26,
+   "ms": 3.44,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -257,14 +257,14 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 2.77,
+   "ms": 2.06,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -272,7 +272,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.28,
+   "ms": 0.23,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -287,7 +287,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.31,
+   "ms": 0.28,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -302,7 +302,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.2,
+   "ms": 0.18,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -317,14 +317,14 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F03",
-   "ms": 0.28,
+   "ms": 0.19,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -332,7 +332,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F07",
-   "ms": 0.43,
+   "ms": 0.31,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -347,7 +347,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F13",
-   "ms": 0.23,
+   "ms": 0.22,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -362,7 +362,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.43,
+   "ms": 0.38,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -377,7 +377,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.94,
+   "ms": 0.8,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -392,7 +392,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.19,
+   "ms": 0.17,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -407,14 +407,14 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 0.66,
+   "ms": 0.58,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -422,7 +422,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F32",
-   "ms": 0.38,
+   "ms": 0.36,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -437,7 +437,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.1,
+   "ms": 0.07,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -453,7 +453,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (RLP: liste tronquée)",
-   "ms": 0.47,
+   "ms": 0.37,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -469,7 +469,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode absente",
-   "ms": 0.15,
+   "ms": 0.1,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -484,7 +484,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.05,
+   "ms": 0.04,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -527,7 +527,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.03,
+   "ms": 0.01,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -538,7 +538,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (Cannot convert abc to a BigInt)",
-   "ms": 0.19,
+   "ms": 0.1,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -570,7 +570,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "eth_signTypedData (v1) non gere",
-   "ms": 0.06,
+   "ms": 0.09,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -586,7 +586,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete trop volumineuse (300229 octets, max 262144)",
-   "ms": 0.6,
+   "ms": 0.76,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -602,7 +602,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "lot de calls illisible",
-   "ms": 0.1,
+   "ms": 0.08,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -618,7 +618,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "effets non lisibles : unknown_selector",
-   "ms": 0.5,
+   "ms": 0.38,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -633,14 +633,14 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F11",
-   "ms": 0.31,
+   "ms": 0.28,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -648,7 +648,7 @@
    "niveau": "critical",
    "level": "manipulation",
    "fiche": "F01",
-   "ms": 3.95,
+   "ms": 3.29,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -663,14 +663,14 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 0.32,
+   "ms": 0.17,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -678,14 +678,14 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F20",
-   "ms": 0.82,
+   "ms": 0.37,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
    "fenetre": true,
    "transmis_sans_geste": false,
-   "ecran": "manipulation",
-   "friction": "wait",
+   "ecran": "danger",
+   "friction": "phrase",
    "friction_conforme": true
   },
   {
@@ -693,7 +693,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.29,
+   "ms": 0.18,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -709,7 +709,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx non geree par le moteur d'effets",
-   "ms": 0.13,
+   "ms": 0.07,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -727,7 +727,7 @@
   "ecarts": 0,
   "pct_identite": 100,
   "diffs": [],
-  "latence_moyenne_ms_par_verdict": 0.83
+  "latence_moyenne_ms_par_verdict": 0.74
  },
  "equiv_public": {
   "saute": "PUBLIC.jsonl absent"
@@ -791,23 +791,23 @@
     "unknown": 0
    }
   },
-  "latence_moyenne_ms": 0.75,
-  "latence_p95_ms": 3.2,
-  "latence_max_ms": 4.73
+  "latence_moyenne_ms": 0.69,
+  "latence_p95_ms": 3.07,
+  "latence_max_ms": 4.4
  },
  "taille": {
-  "fichiers": 35,
-  "octets": 432277,
-  "ko": 422.15
+  "fichiers": 38,
+  "octets": 449348,
+  "ko": 438.82
  },
  "latence_requetes_types_ms": {
-  "moyenne": 0.64,
-  "max": 4.26
+  "moyenne": 0.51,
+  "max": 3.44
  },
  "unit_sur_build": {
-  "pass": 41,
+  "pass": 54,
   "fail": 0
  },
- "echecs": 0,
+ "echecs": 1,
  "total_checks": 37
 }

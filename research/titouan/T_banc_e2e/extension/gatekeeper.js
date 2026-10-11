@@ -4,6 +4,8 @@
  * the page side from the storage. Nothing here keeps a decision in memory : the worker can die at any time.
  * Fallback : if the window cannot be created, the in-page overlay of bridge.js is used and the journal says so. */
 import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_core.js';
+import { ENGINE_CHOICE, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
+import { TEXT, answerOf, siteName } from './outcome.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const RANK = { attention: 1, unknown: 2, danger: 3, manipulation: 4 };
@@ -11,7 +13,7 @@ const DEFAULT_CFG = {
   dangerWaitMs: 30000,          // Danger : phrase to retype + this delay (floor 5 s)
   manipulationHoldMs: 600000,   // Manipulation : hold (floor 30 s)
   timeoutMs: 3000,
-  askIntent: 'rights_or_funds', // 'never' | 'rights_or_funds' | 'always' : intent question before the verdict
+  askIntent: 'always',          // 'never' | 'rights_or_funds' | 'always' : intent question before the verdict
   verdictWindow: true,          // false = always the in-page overlay (trial only)
   grill: { enabled: true, shuffle: true, maxQuestions: 4 },
   contact: { name: '', tel: '' }
@@ -24,7 +26,7 @@ const INTENT_CHOICES = [
   { value: 'login', label: 'Me connecter' }, { value: 'demande', label: 'On me l’a demandé' }];
 const INTENT_ENGINE = { receive: 'receive', pay: 'pay', login: 'login', demande: 'asked', asked: 'asked', swap: null, other: null };
 const MAX_KEPT_BODY = 200000;   // above, the request body is not kept in the session storage : no intent question, no retry
-const WIN = { width: 464, height: 720 };
+const WIN = { width: 440, height: 540 };
 
 // --- social questions (escalation only : an answer can raise the level, never lower it) ---
 const SOCIAL_Q = {
@@ -101,7 +103,8 @@ function applyPlan(rec, plan, cfg, now) {
 
 const hostOf = (origin) => { try { return new URL(origin).host || String(origin); } catch (_) { return String(origin || ''); } };
 
-export function createGatekeeper({ check, onJournal = null, testHook = null } = {}) {
+// `classify(text)` (optional) asks the relay (Clef / Jev) ; without it, or when it fails, the embedded keyword parser answers.
+export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null } = {}) {
   const selfUrl = chrome.runtime.getURL('');
   const windowUrl = chrome.runtime.getURL('window.html');
   const mem = new Map(); // only if chrome.storage.session is missing : the hold then does not survive the worker (journalled)
@@ -122,6 +125,7 @@ export function createGatekeeper({ check, onJournal = null, testHook = null } = 
     cfg = cfg && typeof cfg === 'object' ? cfg : {};
     const c = Object.assign({}, DEFAULT_CFG, cfg);
     c.grill = Object.assign({}, DEFAULT_CFG.grill, cfg.grill || {});
+    c.grill.enabled = false; // the extra questions are retired : the person writes one sentence, the window answers once
     c.contact = Object.assign({}, DEFAULT_CFG.contact, cfg.contact || {});
     if (cfg.dangerWaitMs == null && cfg.frictionMs != null) c.dangerWaitMs = cfg.frictionMs; // former name
     if (c.askIntent === true) c.askIntent = 'always'; else if (c.askIntent === false) c.askIntent = 'never';
@@ -148,6 +152,27 @@ export function createGatekeeper({ check, onJournal = null, testHook = null } = 
     try { v = await check(body, cfg); } catch (e) { v = null; }
     if (!v || typeof v !== 'object' || !(v.level in RANK || v.level === 'ok')) v = { level: 'unknown', indeterminate: true, why: 'moteur indisponible', reasons: [], effects: { grants_right: false, funds_out: false }, risk_signals: [] };
     if (v.level === 'ok') v.level = 'attention';
+    return v;
+  }
+
+  // The written intent -> { clear, kind, facts, source, model, text }. Never throws ; an unusable answer falls back to the keywords.
+  async function understand(text) {
+    let raw = null;
+    if (classify) { try { raw = await classify(text); } catch (_) { raw = null; } }
+    if (!raw || typeof raw !== 'object') raw = await keywordClassify(text);
+    return Object.assign(interpret(raw, text), { text });
+  }
+  // Runs the engine with what was understood and keeps the strictest verdict (strict-only : a sentence never lowers a level).
+  async function judgeWithIntent(rec, intent, cfg) {
+    let v = rec.verdict;
+    const eff = v.effects || {};
+    if (!rec.body) return v;
+    const ask = (choice, kind) => safeCheck(Object.assign({}, rec.body, { intent: choice || undefined, intent_kind: kind, intent_text: intent.text,
+      intent_amount: intent.amount, intent_symbol: intent.symbol }), cfg);
+    if (intent.clear) v = stricter(v, await ask(ENGINE_CHOICE[intent.kind], intent.kind));
+    if (intent.facts.receive && intent.kind !== 'asked_by_someone') v = stricter(v, await ask('receive', 'connect_or_accept_offer'));
+    // Nothing understood while a right is granted or funds leave : it cannot be said to match. At least "not verified" (same delay as Danger).
+    if (!intent.clear && (eff.grants_right || eff.funds_out) && RANK.unknown > (RANK[v.level] || 0)) v = Object.assign({}, v, { level: 'unknown' });
     return v;
   }
 
@@ -186,6 +211,10 @@ export function createGatekeeper({ check, onJournal = null, testHook = null } = 
       if (rec.called) view.contact = { name: cfg.contact.name || 'Un proche de confiance', tel: cfg.contact.tel || '' };
     }
     view.message = message;
+    // What the Hold up window draws (ui/screen.js). Two moments : the question, then the answer.
+    const site = siteName(rec.site);
+    if (rec.stage === 'intent') view.screen = { kind: 'question', title: TEXT.question(site), placeholder: TEXT.placeholder };
+    else if (rec.stage === 'verdict') view.screen = Object.assign({ kind: 'answer', leftMs: Math.max(0, rec.friction.deadline - now) }, answerOf(rec.verdict, rec.intent));
     return view;
   }
 
@@ -289,7 +318,16 @@ export function createGatekeeper({ check, onJournal = null, testHook = null } = 
     }
     if (rec.status !== 'pending' || seq !== rec.seq) return { status: 'ignored' };
     let r = null;
-    if (rec.stage === 'intent' && d === 'answer') {
+    if (rec.stage === 'intent' && d === 'answer' && typeof msg.text === 'string') {
+      // the person WROTE what they want : classify, compare, go straight to the answer (no further question)
+      const text = cleanText(msg.text);
+      if (!text) return { status: 'ignored' };
+      const intent = await understand(text);
+      intent.choice = intent.clear ? (ENGINE_CHOICE[intent.kind] || 'other') : 'other';
+      const v = await judgeWithIntent(rec, intent, cfg);
+      await journal({ type: 'decision', stage: 'intent', decision: 'answer', intent: intent.kind || 'unclear', classifier: intent.source, facts: intent.facts, origin: rec.origin, method: rec.method, time_to_decision_ms: ttd, ui: rec.ui });
+      r = await store.advance(rid, seq, (x, now) => { x.intent = intent; enterVerdict(x, v, cfg, now); });
+    } else if (rec.stage === 'intent' && d === 'answer') {
       const choice = msg.value in INTENT_ENGINE ? (msg.value === 'demande' ? 'asked' : msg.value) : 'other';
       const intent = { choice, message: typeof msg.message === 'string' ? msg.message.slice(0, 2000) : '' };
       let v = rec.verdict;

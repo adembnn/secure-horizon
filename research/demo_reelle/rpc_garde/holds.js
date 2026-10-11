@@ -2,7 +2,6 @@
 (function () {
   'use strict';
   var list = document.getElementById('list'), noteEl = document.getElementById('note'), newest = document.getElementById('newest'), auto = document.getElementById('auto');
-  var TAG = { danger: 'Danger', manipulation: 'Manipulation', attention: 'Attention', unknown: 'Non vérifié' };
   var STATUS = { pending: 'en attente', sent: 'envoyée', cancelled: 'annulée', expired: 'expirée' };
   var known = null; /* ids seen at the first load : only holds that arrive later are opened automatically */
 
@@ -18,9 +17,7 @@
     holds.forEach(function (h) {
       var li = list.appendChild(el('li'));
       var top = li.appendChild(el('div', 'top'));
-      var level = h.niveau === 'info' ? 'Information' : (TAG[h.level] || 'Attention');
-      top.appendChild(el('span', 'tag' + (h.level === 'danger' || h.level === 'manipulation' ? ' red' : ''), level));
-      top.appendChild(el('span', '', clock(h.created_at) + ', ' + (STATUS[h.status] || h.status)));
+      top.textContent = clock(h.created_at) + ', ' + (STATUS[h.status] || h.status); /* no level name shown to the person (v5) */
       li.appendChild(el('p', 'line', h.line));
       if (h.status === 'pending') { var a = li.appendChild(el('a', '', 'Ouvrir cette demande')); a.setAttribute('href', h.url); }
     });

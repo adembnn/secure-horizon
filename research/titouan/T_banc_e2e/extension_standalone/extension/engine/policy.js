@@ -2,6 +2,7 @@
 // selon les RAISONS du comparateur et l'OPACITÉ / la complétude des effets décodés. Aucune lecture de label, d'id de cas ou d'adresse littérale.
 // Chaque correctif est un interrupteur (engine/src/fixes.mjs) pour la mesure A/B.
 import { isOn } from './src/fixes.js';
+import { OPACITY_CODES } from '../engine/src/engine.js';
 
 const RANK = { info: -1, ok: 0, warn: 1, critical: 2 };
 const worst = (a, b) => (RANK[a] >= RANK[b] ? a : b);
@@ -25,6 +26,19 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
   // Réserve : seulement si la cible est un protocole de la liste connue ; un contrat inconnu ET opaque ET payé garde la sévérité critical du comparateur.
   // (le plancher garde le warn d'opacité : le cas n'est jamais 'ok')
   if (isOn('F1') && (incomplete || ((isOn('F5') || isOn('F14')) && eff.service)) && (isKnownProtocol(ctx, eff.raw && eff.raw.to) || (isOn('F14') && eff.service && eff.service.trusted))) drop('no_incoming', 'F1:no_incoming_ignore_effets_incomplets');
+
+  // ---- F28 : variante élargie de F1 : pour un appel OPAQUE vers une cible inconnue, l'absence d'entrée visible n'est pas une preuve de perte (on ne voit pas ce que le contrat crédite) :
+  // no_incoming passe de critical à warn (l'opacité reste warn au plancher, jamais ok). Les contrats très récents et les cibles signalées autrement gardent leur sévérité.
+  if (isOn('F28') && incomplete && reasons.some((r) => r.code === 'no_incoming') && !(eff.counterparties || []).some((cp) => cp.lookalikeOf || (cp.ageBlocks !== undefined && cp.ageBlocks < 50))) {
+    reasons = reasons.map((r) => (r.code === 'no_incoming' ? { ...r, sev: 'warn' } : r)); notes.push('F28:no_incoming_opaque_inconnu');
+  }
+
+  // ---- F29 : le comparateur lit le montant déclaré avec parseFloat : « 10,5 » (virgule décimale, usage français) devient 10 et fait croire à un dépassement. Montant déclaré normalisé
+  // (virgule -> point, espaces fines retirées) ; si tous les montants sortants décodés sont <= au montant déclaré (+1 %), le motif amount_exceeded est un artefact de format et disparaît.
+  if (isOn('F29') && intent && typeof intent.amount === 'string' && /[,\s]/.test(intent.amount) && reasons.some((r) => r.code === 'amount_exceeded')) {
+    const declared = parseFloat(intent.amount.replace(/[\s\u202f\u00a0]/g, '').replace(',', '.'));
+    if (Number.isFinite(declared) && (eff.outgoing || []).every((o) => { const a = parseFloat(o.amount); return Number.isFinite(a) && a <= declared * 1.01; })) drop('amount_exceeded', 'F29:montant_virgule_decimale');
+  }
 
   // ---- F2 : « première fois vu » n'a pas de sens pour un protocole/contrat de la liste connue (pont, routeur, collection) : c'est le point de passage, pas le bénéficiaire final.
   if (isOn('F2') && reasons.some((r) => r.code === 'first_seen_recipient')) {
@@ -126,5 +140,9 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
   if (adem) level = worst(floor, notIdentity ? ademLevel(reasons) : adem.level);
   // invariant (règle 6) : un cas opaque ou en panne n'est jamais 'ok'
   if ((eff.opaque || eff.unsupported) && level === 'ok') { level = 'warn'; notes.push('invariant_opaque'); }
-  return { level, floorLevel: floor, reasons, notes };
+  // opacity_only : le SEUL motif d'alerte est l'opacité (on n'a pas su décoder), sans aucune preuve d'effet ni écart d'intention. L'interface peut l'afficher discrètement ; le niveau reste warn (jamais ok).
+  const evidence = flags.filter((f) => f.severity !== 'info' && !OPACITY_CODES.has(f.code));
+  const reasonAlerts = reasons.filter((r) => (r.sev || sevOfReason(r.code)) !== 'info');
+  const opacity_only = level === 'warn' && flags.some((f) => f.severity === 'warn' && OPACITY_CODES.has(f.code)) && evidence.length === 0 && reasonAlerts.length === 0;
+  return { level, floorLevel: floor, reasons, notes, opacity_only };
 }

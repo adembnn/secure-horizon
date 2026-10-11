@@ -2,11 +2,14 @@
   "manifest_version": 3,
   "name": "Hold up (autonome)",
   "version": "0.3.0",
-  "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles et explique en clair. Moteur embarque, aucun serveur, aucun acces reseau.",
+  "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles et explique en clair. Moteur embarque. Seul appel reseau possible : le relais local de classification (127.0.0.1:8789).",
   "minimum_chrome_version": "111",
   "permissions": [
     "storage",
     "alarms"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8789/*"
   ],
   "background": {
     "service_worker": "background.js",
@@ -14,7 +17,7 @@
   },
   "options_page": "options.html",
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'none'"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789"
   },
   "content_scripts": [
     {

@@ -168,10 +168,22 @@ export function analyze(request, ctx, intent) {
 }
 
 // ------------------------------------------------------------------ intention (choix de l'extension -> Intent d'Adem)
-function toIntent(body) {
+// intent_kind / intent_amount / intent_symbol : what the classifier understood from the sentence the person wrote (extension/intent_text.js).
+const TEXT_KINDS = new Set(['pay_someone', 'send_to_my_account', 'buy_or_swap', 'connect_or_accept_offer', 'asked_by_someone']);
+function toIntent(body, local) {
   const c = body.intent;
   const text = typeof body.intent_text === 'string' ? body.intent_text.slice(0, 500) : undefined;
   const base = { declaredAt: Date.now(), ...(text ? { freeText: text } : {}) };
+  if (TEXT_KINDS.has(body.intent_kind)) {
+    let kind = body.intent_kind;
+    // "to my own account" is judged against the addresses the person already used : without any history every address would look new
+    if (kind === 'send_to_my_account' && !(local && (local.contacts.length || local.history.length))) kind = 'pay_someone';
+    const it = { ...base, kind };
+    if (kind === 'asked_by_someone') it.askedBy = 'other';
+    if (/^\d{1,12}(\.\d{1,8})?$/.test(String(body.intent_amount || ''))) it.amount = String(body.intent_amount);
+    if (/^[A-Z]{2,8}$/.test(String(body.intent_symbol || ''))) it.token = String(body.intent_symbol);
+    return it;
+  }
   if (c === 'pay') return { ...base, kind: 'pay_someone' };
   if (c === 'receive' || c === 'login') return { ...base, kind: 'connect_or_accept_offer' };
   if (c === 'asked') return { ...base, kind: 'asked_by_someone', askedBy: 'other' };
@@ -422,7 +434,7 @@ export function evaluate(body, local = emptyLocal()) {
   try {
     const ctx = buildCtx(body, local, from, chainId);
     if (!method) throw new Unverifiable('methode absente');
-    intent = toIntent(body);
+    intent = toIntent(body, local);
     ({ eff, adem, pol } = analyze({ method, params }, ctx, intent));
   } catch (e) {
     failure = e instanceof Unverifiable ? e.message : 'analyse impossible (' + String(e && e.message || e).slice(0, 120) + ')';
@@ -479,7 +491,7 @@ export function evaluate(body, local = emptyLocal()) {
     out.risk_signals.push('lookalike');
   }
   if ((local.contacts.length || local.history.length) && (eff.counterparties || []).some((c) => c.firstSeenByUser && !c.lookalikeOf && (eff.outgoing || []).some((o) => lc(o.to) === c.address))) out.risk_signals.push('new_recipient');
-  if (body.intent && adem && adem.reasons.some((r) => /^unexpected_|^wrong_recipient|^amount_exceeded|^asked_by/.test(r.code))) out.intent_contradiction = true;
+  if ((body.intent || body.intent_kind) && adem && adem.reasons.some((r) => /^unexpected_|^wrong_recipient|^amount_exceeded|^asked_by/.test(r.code))) out.intent_contradiction = true;
   // indice de manipulation : texte de la page + droit ou sortie d'argent (jamais seul)
   if (press && niveau !== 'info') { out.level = 'manipulation'; out.quote = press.quote; out.reasons.unshift('Un vrai support ne te demandera jamais ça.'); out.niveau = 'critical'; out.niveau_note = 'pression repérée sur la page'; }
   out.latency_engine_ms = ms();

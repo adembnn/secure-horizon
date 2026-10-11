@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 35,
+ "fichiers_analyses": 38,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -19,9 +19,14 @@
    "detail": "[\"storage\",\"alarms\"]"
   },
   {
-   "name": "aucun host_permissions",
+   "name": "host_permissions = le relais local 127.0.0.1:8789 et rien d autre",
    "pass": true,
-   "detail": ""
+   "detail": "[\"http://127.0.0.1:8789/*\"]"
+  },
+  {
+   "name": "un seul appel reseau dans tout le dossier livre : fetch vers le relais local, dans classifier_client.js",
+   "pass": true,
+   "detail": "1"
   },
   {
    "name": "aucune permission optionnelle",
@@ -34,9 +39,9 @@
    "detail": ""
   },
   {
-   "name": "CSP : script-src self, connect-src none, aucun http dans la CSP",
+   "name": "CSP : script-src self, connect-src = le relais local seulement",
    "pass": true,
-   "detail": "script-src 'self'; object-src 'self'; connect-src 'none'"
+   "detail": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789"
   },
   {
    "name": "seuls bridge.js / inject.js en scripts de contenu, fichiers presents",
@@ -45,11 +50,6 @@
   },
   {
    "name": "page options.html : scripts locaux, rien en ligne",
-   "pass": true,
-   "detail": ""
-  },
-  {
-   "name": "page ui/verdict.html : scripts locaux, rien en ligne",
    "pass": true,
    "detail": ""
   },
@@ -69,7 +69,7 @@
    "detail": ""
   },
   {
-   "name": "fenetre de verdict presente (window.html + ui/verdict.*)",
+   "name": "fenetre presente (window.html + ui/screen.*)",
    "pass": true,
    "detail": ""
   },

@@ -4,22 +4,17 @@ const PRODUCT = { dangerWaitMs: 30000, manipulationHoldMs: 600000 };
 const DEMO = { dangerWaitMs: 10000, manipulationHoldMs: 60000 };
 const num = (id, lo, hi, dflt) => { const n = Math.round(Number($(id).value) * 1000); return Number.isFinite(n) ? Math.min(hi, Math.max(lo, n)) : dflt; };
 function fill(cfg) {
-  $('askIntent').value = cfg.askIntent === true ? 'always' : cfg.askIntent === false ? 'never' : ['never', 'rights_or_funds', 'always'].includes(cfg.askIntent) ? cfg.askIntent : 'rights_or_funds';
+  $('askIntent').value = cfg.askIntent === true ? 'always' : cfg.askIntent === false ? 'never' : ['never', 'rights_or_funds', 'always'].includes(cfg.askIntent) ? cfg.askIntent : 'always';
   $('dangerWait').value = Math.round((cfg.dangerWaitMs ?? cfg.frictionMs ?? PRODUCT.dangerWaitMs) / 1000);
   $('manipHold').value = Math.round((cfg.manipulationHoldMs ?? PRODUCT.manipulationHoldMs) / 1000);
-  $('grill').checked = !cfg.grill || cfg.grill.enabled !== false;
   $('window').checked = cfg.verdictWindow !== false;
-  $('cname').value = (cfg.contact && cfg.contact.name) || '';
-  $('ctel').value = (cfg.contact && cfg.contact.tel) || '';
 }
 function read() {
   return {
     askIntent: $('askIntent').value,
     dangerWaitMs: num('dangerWait', 5000, 600000, PRODUCT.dangerWaitMs),
     manipulationHoldMs: num('manipHold', 30000, 3600000, PRODUCT.manipulationHoldMs),
-    grill: { enabled: $('grill').checked, shuffle: true, maxQuestions: 4 },
-    verdictWindow: $('window').checked,
-    contact: { name: $('cname').value.trim().slice(0, 60), tel: $('ctel').value.trim().slice(0, 30) }
+    verdictWindow: $('window').checked
   };
 }
 async function load() {

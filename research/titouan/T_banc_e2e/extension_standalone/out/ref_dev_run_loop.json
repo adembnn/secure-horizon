@@ -2997,7 +2997,9 @@
     "no_incoming"
    ],
    "opaque": true,
-   "polNotes": []
+   "polNotes": [
+    "F28:no_incoming_opaque_inconnu"
+   ]
   },
   {
    "id": "domaine_sosie-005",
@@ -3075,7 +3077,9 @@
     "no_incoming"
    ],
    "opaque": true,
-   "polNotes": []
+   "polNotes": [
+    "F28:no_incoming_opaque_inconnu"
+   ]
   },
   {
    "id": "domaine_sosie-009",
@@ -3154,7 +3158,9 @@
     "no_incoming"
    ],
    "opaque": true,
-   "polNotes": []
+   "polNotes": [
+    "F28:no_incoming_opaque_inconnu"
+   ]
   },
   {
    "id": "ens_sosie-001",

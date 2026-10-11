@@ -1,6 +1,7 @@
 /* Hold up - service worker (server mode, ES module) : asks the local engine over HTTP ; the hold, the verdict window and the
    journal are in gatekeeper.js (shared with the standalone build). There is no test or automatic mode in this file. */
 import { createGatekeeper } from './gatekeeper.js';
+import { classifyViaRelay } from './classifier_client.js';
 const API = 'http://127.0.0.1:8787';
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation', 'unknown'];
 
@@ -27,5 +28,6 @@ async function callCheck(body, cfg) {
 
 createGatekeeper({
   check: callCheck,
+  classify: classifyViaRelay,
   onJournal: (entry) => { try { fetch(API + '/log', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(entry) }).catch(() => {}); } catch (_) {} }
 });
