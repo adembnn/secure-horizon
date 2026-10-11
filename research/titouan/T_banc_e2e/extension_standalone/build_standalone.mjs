@@ -47,7 +47,7 @@ try { rmSync(OUT, { recursive: true, force: true }); } catch (_) { for (const f 
 mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
-for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'journal_chain.js', 'revoke.js', 'window.html', 'window.css', 'window.js', 'options.html', 'options.js', 'popup.html', 'popup.js', 'welcome.html', 'welcome.js']) put(f, src(join(ROOT, 'extension', f)));
+for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'chain_facts.js', 'journal_chain.js', 'revoke.js', 'window.html', 'window.css', 'window.js', 'options.html', 'options.js', 'popup.html', 'popup.js', 'welcome.html', 'welcome.js']) put(f, src(join(ROOT, 'extension', f)));
 // Default build : the relay client is shipped as is (its only call : the written sentence, to the loopback relay).
 // --no-network : it is replaced by a stub that never calls anything (the keyword parser answers), and the manifest grants no host
 // and sets connect-src 'none'. The source file ../extension/classifier_client.js is then hashed but not shipped.
@@ -63,18 +63,22 @@ let extensionId = null;
   // src/manifest.json est le manifeste du build par defaut. --no-network en retire exactement trois choses (chaque motif doit exister une fois).
   let mf = src(join(HERE, 'src', 'manifest.json')).toString('utf8');
   const RELAY = 'http://127.0.0.1:8789';
+  // chain_facts.js : the service worker reads Avalanche C-Chain and Fuji directly, on their public RPC (read-only calls).
+  const CHAIN_ORIGINS = ['https://api.avax.network', 'https://api.avax-test.network'];
+  const HOSTS = [RELAY + '/*', ...CHAIN_ORIGINS.map((o) => o + '/ext/bc/C/rpc')];
+  const CONNECT = [RELAY, ...CHAIN_ORIGINS].join(' ');
   if (NO_NETWORK) {
     const NL = mf.includes(String.fromCharCode(13, 10)) ? String.fromCharCode(13, 10) : String.fromCharCode(10);
     const cut = (from, to) => { if (mf.split(from).length !== 2) throw new Error('manifeste : motif attendu une seule fois : ' + from); mf = mf.split(from).join(to); };
     cut(NL + '  "key": "' + JSON.parse(mf).key + '",', '');
-    cut(NL + '  "host_permissions": [' + NL + '    "' + RELAY + '/*"' + NL + '  ],', '');
-    cut('connect-src ' + RELAY + '"', 'connect-src ' + "'none'" + '"');
+    cut(NL + '  "host_permissions": [' + NL + HOSTS.map((h) => '    "' + h + '"').join(',' + NL) + NL + '  ],', '');
+    cut('connect-src ' + CONNECT + '"', 'connect-src ' + "'none'" + '"');
     // le nom et la description sont les memes dans les deux variantes : « Hold up »
   }
   const j = JSON.parse(mf);
   const csp = j.content_security_policy.extension_pages;
   if (NO_NETWORK ? (mf.includes('http') || 'host_permissions' in j || 'key' in j || !/connect-src 'none'$/.test(csp))
-    : (JSON.stringify(j.host_permissions) !== JSON.stringify([RELAY + '/*']) || !csp.endsWith('; connect-src ' + RELAY) || (csp.match(/https?:/g) || []).length !== 1)) throw new Error('manifeste inattendu pour ce build');
+    : (JSON.stringify(j.host_permissions) !== JSON.stringify(HOSTS) || !csp.endsWith('; connect-src ' + CONNECT) || (csp.match(/https?:/g) || []).length !== 1 + CHAIN_ORIGINS.length)) throw new Error('manifeste inattendu pour ce build');
   // Identifiant de l'extension : derive de la cle PUBLIQUE du manifeste (32 premiers demi-octets du SHA-256, ecrits de a a p). Aucune cle privee
   // n'existe dans le depot : elle n'a servi qu'a tirer cette cle publique et n'a jamais ete ecrite. Le relais peut epingler cet identifiant.
   if (j.key) extensionId = [...createHash('sha256').update(Buffer.from(j.key, 'base64')).digest('hex').slice(0, 32)].map((h) => String.fromCharCode(97 + parseInt(h, 16))).join('');
@@ -85,7 +89,12 @@ let extensionId = null;
   const MARK = '/*@TEST_HOOK@*/';
   const bg = src(join(HERE, 'src', 'background.js')).toString('utf8');
   if (bg.split(MARK).length !== 2) throw new Error('marqueur de crochet de test attendu une seule fois dans src/background.js');
-  put('background.js', bg.replace(MARK, TEST_HOOK ? ', testHook: (h) => { if (typeof globalThis.__holdupTestHook === "function") globalThis.__holdupTestHook(h); }' : ''));
+  // Lecture directe de la chaine (chain_facts.js) : presente dans le build livre seulement. Dans le build sans reseau la ligne marquee devient
+  // « const readChain = null; » : aucun fetch dans le dossier, et le garde-barriere ne dit alors rien de la chaine.
+  const CHAIN = /^\/\*@CHAIN_READ@\*\/ (const readChain = .*)$/m;
+  if (!CHAIN.test(bg)) throw new Error('ligne marquee @CHAIN_READ@ attendue dans src/background.js');
+  const bg2 = bg.replace(CHAIN, NO_NETWORK ? 'const readChain = null;' : '$1');
+  put('background.js', bg2.replace(MARK, TEST_HOOK ? ', testHook: (h) => { if (typeof globalThis.__holdupTestHook === "function") globalThis.__holdupTestHook(h); }' : ''));
 }
 put('engine/sentinelle_core.js', src(join(HERE, 'src', 'sentinelle_core.js')));
 
@@ -118,6 +127,6 @@ put('engine/policy.js', rewriteImports(src(join(ROOT, 'run', 'policy.mjs')).toSt
 // 7) trace du build (sans date : reproductible)
 written.sort((a, b) => a.file.localeCompare(b.file));
 const total = written.reduce((n, f) => n + f.bytes, 0);
-const info = { build: TEST_HOOK ? 'holdup-standalone-TEST-HOOK (ne pas livrer)' : NO_NETWORK ? 'holdup-sans-reseau' : 'holdup-standalone', network: NO_NETWORK ? 'none' : 'relais local 127.0.0.1:8789, phrase ecrite seulement', extension_id: extensionId, sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
+const info = { build: TEST_HOOK ? 'holdup-standalone-TEST-HOOK (ne pas livrer)' : NO_NETWORK ? 'holdup-sans-reseau' : 'holdup-standalone', network: NO_NETWORK ? 'none' : 'relais local 127.0.0.1:8789 (phrase ecrite seulement) ; lecture seule du RPC public Avalanche et Fuji (api.avax.network, api.avax-test.network : la demande du site)', extension_id: extensionId, sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
 writeFileSync(join(OUT, 'BUILD_INFO.json'), JSON.stringify(info, null, 1));
 console.log(`extension_standalone/${OUT_NAME} : ${written.length} fichiers, ${total} octets, arbre ${info.tree_sha256.slice(0, 16)}${extensionId ? ', identifiant ' + extensionId : ''}`);

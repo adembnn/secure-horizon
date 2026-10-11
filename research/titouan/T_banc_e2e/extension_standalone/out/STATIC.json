@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 56,
+ "fichiers_analyses": 57,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -19,14 +19,19 @@
    "detail": "[\"storage\",\"alarms\",\"sidePanel\",\"activeTab\"]"
   },
   {
-   "name": "une seule host_permission : le relais local",
+   "name": "trois host_permissions, pas une de plus : le relais local et le RPC public d Avalanche et de Fuji (chemin exact)",
    "pass": true,
-   "detail": "[\"http://127.0.0.1:8789/*\"]"
+   "detail": "[\"http://127.0.0.1:8789/*\",\"https://api.avax.network/ext/bc/C/rpc\",\"https://api.avax-test.network/ext/bc/C/rpc\"]"
   },
   {
-   "name": "un seul appel reseau dans le dossier livre : fetch(RELAY + /classify) dans classifier_client.js",
+   "name": "deux appels reseau dans le dossier livre : fetch(RELAY + /classify) dans classifier_client.js et la lecture de chaine passee par background.js",
    "pass": true,
-   "detail": "1"
+   "detail": "1 / 1"
+  },
+  {
+   "name": "la lecture de chaine est en lecture seule (eth_getCode, eth_getBalance, eth_call), sans cookie ni en-tete d autorisation, et n envoie jamais la phrase ecrite",
+   "pass": true,
+   "detail": ""
   },
   {
    "name": "le client du relais n envoie que { text } : ni en-tete d autorisation, ni cookie, ni cle",
@@ -49,9 +54,9 @@
    "detail": ""
   },
   {
-   "name": "CSP : script-src self, connect-src http://127.0.0.1:8789 et rien d autre",
+   "name": "CSP : script-src self, connect-src http://127.0.0.1:8789 et les deux RPC publics, rien d autre",
    "pass": true,
-   "detail": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789"
+   "detail": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789 https://api.avax.network https://api.avax-test.network"
   },
   {
    "name": "seuls bridge.js / inject.js en scripts de contenu, fichiers presents",

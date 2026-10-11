@@ -8,6 +8,8 @@
 // Scene 2, site honnete    : Neve ?mode=habituel (droit ILLIMITE a son propre routeur) puis la regie « on pirate le site ».
 //
 // Rien ne touche la chaine partagee 8545 ni les sites 8791 / 8793. Seul le relais du classifieur (8789) est commun.
+// Chaine locale numero 31337, expres : Hold up lit directement Avalanche (43114) et Fuji (43113) ; une chaine locale qui porterait
+// l'un de ces numeros serait comparee a la vraie chaine, ou ses contrats de demo n'existent pas.
 // Aucune cle : le portefeuille de test fait signer les comptes deverrouilles du noeud local (comptes Hardhat, publics).
 // Relancer la commande remet tout a zero (chaine neuve). Ctrl+C ou fermer le navigateur arrete tout.
 //
@@ -76,7 +78,7 @@ const cfg = join(D, 'hardhat.config.cjs');
 writeFileSync(cfg, [
   `const bc = ${JSON.stringify(BLOCKCHAIN)};`,
   `require(bc + '/node_modules/@nomicfoundation/hardhat-toolbox');`,
-  `module.exports = { solidity: '0.8.24', paths: { root: bc }, networks: { hardhat: { chainId: ${process.env.HOLDUP_DEMO_CHAINID || 43114} }, localhost: { url: '${RPC}' } } };`
+  `module.exports = { solidity: '0.8.24', paths: { root: bc }, networks: { hardhat: { chainId: ${process.env.HOLDUP_DEMO_CHAINID || 31337} }, localhost: { url: '${RPC}' } } };`
 ].join('\n'));
 const bootstrap = join(BLOCKCHAIN, 'node_modules', 'hardhat', 'internal', 'cli', 'bootstrap.js');
 if (!existsSync(bootstrap)) { say('blockchain/node_modules est absent. Lance une fois : cd blockchain && npm install'); process.exit(1); }
@@ -166,6 +168,7 @@ const ext = join(D, 'extension');
 const extSource = (process.argv.find((x) => x.startsWith('--extension=')) || '').slice(12) || EXTENSION; // --extension=<dossier> : un autre build
 if (avecHoldUp) cpSync(extSource, ext, { recursive: true });
 const args = ['--no-first-run', '--no-default-browser-check', '--start-maximized'];
+if (verifier) args.push('--headless=new'); // le rejeu par script ne prend pas l'ecran
 if (avecHoldUp) args.push(`--disable-extensions-except=${ext}`, `--load-extension=${ext}`);
 ctx = await chromium.launchPersistentContext(join(D, 'profil'), { executablePath: CHROME_EXE, headless: false, viewport: null, locale: 'fr-FR', args, ignoreDefaultArgs: ['--enable-automation'] });
 // Le portefeuille de test : il repond tout de suite, sans fenetre de confirmation, et fait signer le compte par le noeud local.

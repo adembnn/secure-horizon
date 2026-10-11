@@ -503,7 +503,9 @@ export function evaluate(body, local = emptyLocal()) {
   const opaque = !!(eff.opaque || (eff.opaqueReasons || []).length);
   const contact = (() => { const o = (eff.outgoing || [])[0]; return (o && local.contacts.find((c) => c.address === lc(o.to))) || null; })(); // destinataire présent dans le carnet
   const lookalike = (eff.counterparties || []).find((c) => c.lookalikeOf);
-  const pt = typeof body.pageText === 'string' ? body.pageText.slice(0, 4000) : '';
+  // The words of the page are NOT evidence (founder's decision, 11 Oct.) : a real exchange site that shows a "Support" link was read as a
+  // fake-support scam. The verdict comes from the request itself and from what the chain says about it (chain_facts.js). body.pageText is ignored.
+  const pt = '';
   const press = (funds || grants) && pt ? findPressure(pt) : null;
   const pres = present({ eff, S, niveau, method, host, chainId: chainId ?? eff.chainId, contact, intentText: body.intent_text, funds, opaque });
   let { fid, texts, source } = pres;

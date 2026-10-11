@@ -35,8 +35,15 @@ function check(label, cond, detail) {
   if (!cond) failures++;
 }
 
+// Comptes de test DÉTERMINISTES (clé dérivée d'un libellé public, chaîne locale seulement, jamais un vrai réseau).
+// Pourquoi : un compte tiré au hasard à chaque lancement oblige la copie locale d'Avalanche à interroger le nœud
+// public pour une adresse jamais vue, à chaque fois ; à force, le nœud public répond 429. Avec des adresses fixes,
+// la copie locale ne les demande qu'une fois, puis plus rien ne sort. L'état est remis à zéro par evm_revert.
+let userSeq = 0;
+const testWallet = (label) => new ethers.Wallet(ethers.id(label + ":" + (userSeq++)));
+
 async function newUser(ctx) {
-  const w = ethers.Wallet.createRandom().connect(ctx.provider);
+  const w = testWallet("holdup-preuve").connect(ctx.provider);
   await setLocalBalance(ctx.provider, w.address, 10n); // gaz uniquement
   const usdc = new ethers.Contract(ctx.addresses.usdc, ERC20_ABI, w);
   await (await usdc.mint(w.address, START)).wait(); // mint libre de DemoUSDC

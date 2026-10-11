@@ -1,0 +1,12 @@
+{
+ "note": "voix = graphie pour la synthese ; st = sous-titre a l'ecran (texte du fondateur, mot pour mot) ; pause = silence apres la phrase (s).",
+ "lignes": [
+  {"id": "v01", "voix": "Juillet deux mille vingt-quatre.", "st": "Juillet 2024.", "pause": 0.55},
+  {"id": "v02", "voix": "Lifi, une plateforme connue, est piratée.", "st": "LI.FI, une plateforme connue, est piratée.", "pause": 1.15},
+  {"id": "v03", "voix": "Onze millions six cent mille dollars partent de cent cinquante-trois portefeuilles.", "st": "Onze millions six cent mille dollars partent de cent cinquante-trois portefeuilles.", "pause": 1.0},
+  {"id": "v04", "voix": "Tous avaient laissé à la plateforme une autorisation illimitée.", "st": "Tous avaient laissé à la plateforme une autorisation illimitée.", "pause": 0.9},
+  {"id": "v05", "voix": "Ceux qui l'avaient limitée n'ont rien perdu.", "st": "Ceux qui l'avaient limitée n'ont rien perdu.", "pause": 1.6},
+  {"id": "v06", "voix": "Voilà le postulat : toute plateforme sera piratée un jour.", "st": "Voilà le postulat : toute plateforme sera piratée un jour.", "pause": 0.7},
+  {"id": "v07", "voix": "La vraie question, c'est : qu'est-ce que je lui ai laissé le droit de prendre ?", "st": "La vraie question, c'est : qu'est-ce que je lui ai laissé le droit de prendre ?", "pause": 1.4}
+ ]
+}

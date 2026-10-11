@@ -83,6 +83,12 @@ function namedService(text, chain) {
   for (const s of SERVICES) if (s.word.test(t) && chain != null && s.by[chain]) return { name: s.name, addresses: s.by[chain].concat(BUILTIN_SPENDERS.any) };
   return null;
 }
+// The public name of a called contract, when the list above has it on this network (null otherwise : an address proves no name).
+export function knownService(address, chain) {
+  const a = String(address || '').toLowerCase();
+  for (const s of SERVICES) if (chain != null && s.by[chain] && s.by[chain].includes(a)) return s.name;
+  return null;
+}
 // The known spenders travel with the token map (tokensOf) under a symbol key : copied by Object.assign, invisible to Object.keys and JSON.
 const SPENDERS = Symbol.for('holdup.knownSpenders');
 // Defaults of the written intent ("nothing lasts after this operation") : beyond these, the request no longer matches.

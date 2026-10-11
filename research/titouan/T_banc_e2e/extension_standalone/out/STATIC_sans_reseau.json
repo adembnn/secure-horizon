@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 56,
+ "fichiers_analyses": 57,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -24,9 +24,9 @@
    "detail": ""
   },
   {
-   "name": "aucun appel reseau dans le dossier (le client du relais est un stub)",
+   "name": "aucun appel reseau dans le dossier (le client du relais est un stub, la chaine n est pas lue)",
    "pass": true,
-   "detail": "0"
+   "detail": "0 / 0"
   },
   {
    "name": "aucune cle d identifiant dans le manifeste",

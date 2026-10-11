@@ -47,17 +47,28 @@ let hex64 = 0;
 // Seule exception reseau : la phrase ecrite par la personne part vers le relais local de classification (boucle locale), depuis classifier_client.js.
 const RELAY_URL = 'http://127.0.0.1:8789', RELAY_FILE = 'classifier_client.js';
 let relayFetch = 0;
+// Seconde sortie admise, dans le build livre seulement : la lecture directe de la chaine (chain_facts.js), Avalanche C-Chain et Fuji, en lecture seule.
+// Les deux adresses sont des constantes de chain_facts.js ; le seul fetch correspondant est la ligne de background.js qui lui passe le fetch du service worker.
+const CHAIN_URLS = ['https://api.avax.network/ext/bc/C/rpc', 'https://api.avax-test.network/ext/bc/C/rpc'], CHAIN_ORIGINS = ['https://api.avax.network', 'https://api.avax-test.network'];
+const CHAIN_FILE = 'chain_facts.js', CHAIN_CALLER = 'background.js';
+let chainFetch = 0;
 
 for (const p of files) {
   if (/\.(png|jpg|ico|zip)$/.test(p)) continue;
   const txt = readFileSync(p, 'utf8');
   txt.split('\n').forEach((ln, i) => {
     for (const [k, re] of RULES) if (re.test(ln)) {
-      if (k === 'reseau' && rel(p) === RELAY_FILE && /\bfetch\s*\(\s*RELAY \+ '\/classify'/.test(ln)) { relayFetch++; continue; } // le seul appel reseau admis
+      if (k === 'reseau' && rel(p) === RELAY_FILE && /\bfetch\s*\(\s*RELAY \+ '\/classify'/.test(ln)) { relayFetch++; continue; } // appel admis : la phrase, vers le relais local
+      if (k === 'reseau' && !NO_NETWORK && rel(p) === CHAIN_CALLER && /^const readChain = \(body\) => chainFacts\(body, \{ fetchImpl: \(url, init\) => fetch\(url, init\) \}\);$/.test(ln.trim())) { chainFetch++; continue; } // appel admis : lecture de la chaine
       // fetch( dans engine : uniquement s'il s'agit de l'API reseau ; aucune exception necessaire attendue.
       add(k, p, i + 1, ln);
     }
-    for (const m of ln.matchAll(URL_RE)) { if ((m[0] === RELAY_URL && rel(p) === RELAY_FILE) || (rel(p) === 'manifest.json' && (m[0] === RELAY_URL || m[0] === RELAY_URL + '/*'))) continue; add('url_externe', p, i + 1, m[0]); }
+    for (const m of ln.matchAll(URL_RE)) {
+      if ((m[0] === RELAY_URL && rel(p) === RELAY_FILE) || (rel(p) === 'manifest.json' && (m[0] === RELAY_URL || m[0] === RELAY_URL + '/*'))) continue;
+      if (CHAIN_URLS.includes(m[0]) && rel(p) === CHAIN_FILE) continue; // constantes du module de lecture (present dans les deux builds, appele dans le build livre seulement)
+      if (!NO_NETWORK && rel(p) === 'manifest.json' && (CHAIN_URLS.includes(m[0]) || CHAIN_ORIGINS.includes(m[0]))) continue;
+      add('url_externe', p, i + 1, m[0]);
+    }
     hex64 += (ln.match(HEX64) || []).length;
   });
 }
@@ -73,11 +84,15 @@ m('service worker de type module', mf.background && mf.background.type === 'modu
 m('permissions = [storage, alarms, sidePanel, activeTab] seulement (ni "tabs", ni acces permanent a un site)', JSON.stringify(mf.permissions) === '["storage","alarms","sidePanel","activeTab"]', JSON.stringify(mf.permissions));
 if (NO_NETWORK) {
   m('aucune host_permission', !('host_permissions' in mf) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
-  m('aucun appel reseau dans le dossier (le client du relais est un stub)', relayFetch === 0, String(relayFetch));
+  m('aucun appel reseau dans le dossier (le client du relais est un stub, la chaine n est pas lue)', relayFetch === 0 && chainFetch === 0, relayFetch + ' / ' + chainFetch);
   m('aucune cle d identifiant dans le manifeste', !('key' in mf));
 } else {
-  m('une seule host_permission : le relais local', JSON.stringify(mf.host_permissions) === JSON.stringify([RELAY_URL + '/*']) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
-  m('un seul appel reseau dans le dossier livre : fetch(RELAY + /classify) dans ' + RELAY_FILE, relayFetch === 1, String(relayFetch));
+  m('trois host_permissions, pas une de plus : le relais local et le RPC public d Avalanche et de Fuji (chemin exact)', JSON.stringify(mf.host_permissions) === JSON.stringify([RELAY_URL + '/*', ...CHAIN_URLS]) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
+  m('deux appels reseau dans le dossier livre : fetch(RELAY + /classify) dans ' + RELAY_FILE + ' et la lecture de chaine passee par ' + CHAIN_CALLER, relayFetch === 1 && chainFetch === 1, relayFetch + ' / ' + chainFetch);
+  const chainSrc = readFileSync(join(EXT, CHAIN_FILE), 'utf8');
+  m('la lecture de chaine est en lecture seule (eth_getCode, eth_getBalance, eth_call), sans cookie ni en-tete d autorisation, et n envoie jamais la phrase ecrite',
+    ['eth_getCode', 'eth_getBalance', 'eth_call'].every((x) => chainSrc.includes("'" + x + "'")) && !/eth_send|eth_sign|personal_sign|wallet_/.test(chainSrc.replace(/body\.method !== 'eth_sendTransaction'/, ''))
+    && chainSrc.includes("credentials: 'omit'") && !/authorization|bearer|api[_-]?key|cookie|intent\.text|intent_text/i.test(chainSrc));
   const client = readFileSync(join(EXT, RELAY_FILE), 'utf8');
   m('le client du relais n envoie que { text } : ni en-tete d autorisation, ni cookie, ni cle', client.includes('body: JSON.stringify({ text: cleanText(text) })') && client.includes("credentials: 'omit'") && client.includes("redirect: 'error'") && !/authorization|bearer|api[_-]?key|cookie/i.test(client));
   m('cle du manifeste : cle PUBLIQUE seulement (SubjectPublicKeyInfo RSA), aucune cle privee dans le dossier', typeof mf.key === 'string' && /^MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A[A-Za-z0-9+/]+=*$/.test(mf.key) && mf.key.length < 400);
@@ -86,7 +101,7 @@ m('aucune permission optionnelle', !('optional_permissions' in mf));
 m('pas de externally_connectable / web_accessible_resources / update_url', !('externally_connectable' in mf) && !('web_accessible_resources' in mf) && !('update_url' in mf));
 const csp = (mf.content_security_policy || {}).extension_pages || '';
 if (NO_NETWORK) m("CSP : script-src self, connect-src 'none'", /script-src 'self'/.test(csp) && /connect-src 'none'(;|$)/.test(csp) && !/https?:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp), csp);
-else m('CSP : script-src self, connect-src ' + RELAY_URL + ' et rien d autre', csp === "script-src 'self'; object-src 'self'; connect-src " + RELAY_URL, csp);
+else m('CSP : script-src self, connect-src ' + RELAY_URL + ' et les deux RPC publics, rien d autre', csp === "script-src 'self'; object-src 'self'; connect-src " + [RELAY_URL, ...CHAIN_ORIGINS].join(' '), csp);
 m('seuls bridge.js / inject.js en scripts de contenu, fichiers presents', (mf.content_scripts || []).every((c) => c.js.every((f) => files.some((p) => rel(p) === f))));
 
 // pages de l'extension : scripts locaux seulement, aucun script en ligne, aucun gestionnaire en attribut
@@ -97,7 +112,7 @@ for (const p of files.filter((x) => x.endsWith('.html'))) {
 }
 // aucun mode test ni reponse automatique dans le dossier livre : le crochet n'existe que dans le build --test-hook (dossier extension_test/)
 const bgTxt = readFileSync(join(EXT, 'background.js'), 'utf8');
-m('aucun crochet de test dans le service worker livre', !/testHook|TEST_HOOK|__holdupTestHook/.test(bgTxt) && /createGatekeeper\(\{ check: localCheck, classify: classifyViaRelay\s*\}\)/.test(bgTxt));
+m('aucun crochet de test dans le service worker livre', !/testHook|TEST_HOOK|__holdupTestHook/.test(bgTxt) && /createGatekeeper\(\{ check: localCheck, classify: classifyViaRelay, chain: readChain\s*\}\)/.test(bgTxt));
 m('aucun fichier ne pose le crochet de test ni un mode auto', files.filter((p) => /\.(js|html|json)$/.test(p) && !/BUILD_INFO\.json$/.test(p)).every((p) => !/__holdupTestHook|testMode|cfg\.auto\b/.test(readFileSync(p, 'utf8'))));
 m('fenetre presente (window.html + ui/screen.js + feuilles du systeme)', ['window.html', 'window.js', 'window.css', 'ui/screen.js', 'ui/tokens.css', 'ui/components.css', 'ui/motion.css', 'popup.html', 'welcome.html', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'outcome.js'].every((f) => files.some((p) => rel(p) === f)));
 

@@ -28,10 +28,17 @@ function check(label, cond, detail) {
   if (!cond) failures++;
 }
 
+// Comptes de test DÉTERMINISTES (clé dérivée d'un libellé public, chaîne locale seulement, jamais un vrai réseau).
+// Pourquoi : un compte tiré au hasard à chaque lancement oblige la copie locale d'Avalanche à interroger le nœud
+// public pour une adresse jamais vue, à chaque fois ; à force, le nœud public répond 429. Avec des adresses fixes,
+// la copie locale ne les demande qu'une fois, puis plus rien ne sort. L'état est remis à zéro par evm_revert.
+let userSeq = 0;
+const testWallet = (label) => new ethers.Wallet(ethers.id(label + ":" + (userSeq++)));
+
 async function newUser(ctx) {
   // NonceManager : le nœud local, en automine, renvoie parfois un nonce périmé entre deux
   // transactions envoyées à la suite (cf. lib.mjs). Le gestionnaire de nonce l'évite.
-  const base = ethers.Wallet.createRandom().connect(ctx.provider);
+  const base = testWallet("holdup-preuve-piratage").connect(ctx.provider);
   const w = new ethers.NonceManager(base);
   w.address = base.address;
   await setLocalBalance(ctx.provider, base.address, 10n);

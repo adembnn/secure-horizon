@@ -15,7 +15,9 @@
   "action": { "default_title": "Hold up", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }, "default_popup": "popup.html" },
   "side_panel": { "default_path": "ui/sidepanel.html" },
   "host_permissions": [
-    "http://127.0.0.1:8789/*"
+    "http://127.0.0.1:8789/*",
+    "https://api.avax.network/ext/bc/C/rpc",
+    "https://api.avax-test.network/ext/bc/C/rpc"
   ],
   "background": {
     "service_worker": "background.js",
@@ -23,7 +25,7 @@
   },
   "options_page": "options.html",
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789 https://api.avax.network https://api.avax-test.network"
   },
   "content_scripts": [
     {

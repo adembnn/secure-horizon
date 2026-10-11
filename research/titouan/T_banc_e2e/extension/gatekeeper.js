@@ -6,7 +6,8 @@
 import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_core.js';
 import { ENGINE_CHOICE, KINDS, MAX_TEXT, MODEL_MIN, NO_MATCH, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
 import { TEXT, answerOf, networkName, siteName } from './outcome.js';
-import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
+import { canCorrect, effectCheck, knownService, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
+import { withChainFacts } from './chain_facts.js';
 import { measure, readToken } from './effect_sim.js';
 import { RULES_FINGERPRINT, chainAppend, rulesTag, sha256 } from './journal_chain.js'; // fingerprint : written by tools/gen_rules_fingerprint.mjs, no fetch
 import { revocationFor } from './revoke.js';
@@ -260,7 +261,7 @@ export function askOf(intent, text, again) {
 // `closeMs` : how long a decided window keeps its last message before the worker removes it (0 : at once).
 // `rulesFingerprint` : 12 hex, fingerprint of the embedded rule files (RULES_FINGERPRINT of journal_chain.js), written in every chained line with the
 // version. Anything else than 12 lower-case hex : the version alone.
-export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS, rulesFingerprint = RULES_FINGERPRINT } = {}) {
+export function createGatekeeper({ check, classify = null, chain = null, onJournal = null, testHook = null, closeMs = CLOSE_MS, rulesFingerprint = RULES_FINGERPRINT } = {}) {
   const selfUrl = chrome.runtime.getURL('');
   const windowUrl = chrome.runtime.getURL('window.html');
   const mem = new Map(); // only if chrome.storage.session is missing : the hold then does not survive the worker (journalled)
@@ -369,6 +370,9 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   async function judgeWithIntent(rec, intent, cfg, op = null) {
     let v = rec.verdict;
     if (!rec.body) return { v, used: null, rewrite: null, erc20: {} };
+    // What the network itself says about this request (chain_facts.js) : read directly on the chain, never through the page. Started now,
+    // read at the end : it never delays the comparison, and without an answer nothing is said about the chain.
+    const chainRead = chain && rec.body.method === 'eth_sendTransaction' ? Promise.resolve().then(() => chain(rec.body)).catch(() => null) : null;
     const ask = (choice, kind) => safeCheck(Object.assign({}, rec.body, { intent: choice || undefined, intent_kind: kind, intent_text: intent.text,
       intent_amount: intent.amount, intent_symbol: intent.symbol }), cfg);
     if (intent.clear) v = stricter(v, await ask(ENGINE_CHOICE[intent.kind], intent.kind));
@@ -459,6 +463,17 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         if (text !== reel) v = Object.assign({}, v, { texts: Object.assign({}, v.texts, { reel: text }) });
       }
     } catch (_) {}
+    // The facts read on the chain complete what was compared : the name of the called contract when the public list has it, a balance too
+    // small, a call that fails. One of them is an answer by itself : an exchange written, and the request calls an address without code.
+    const seen = chainRead ? await chainRead : null;
+    if (seen && !(rewrite && plan)) {
+      const before = v.written || null;
+      const after = withChainFacts(before, seen, intent, { service: knownService(seen.target, seen.chain) });
+      if (after && after !== before) {
+        v = Object.assign({}, v, { written: after });
+        if (after.outcome === 'mismatch' && (!before || before.outcome !== 'mismatch')) { v.indeterminate = false; if (RANK.danger > (RANK[v.level] || 0)) v.level = 'danger'; }
+      }
+    }
     return { v, used, rewrite, erc20 };
   }
 
