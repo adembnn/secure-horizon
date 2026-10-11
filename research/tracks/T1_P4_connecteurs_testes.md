@@ -1,4 +1,4 @@
-# Sentinelle Fuji : connecteurs testés en direct (10 oct. 2026)
+# Hold up : connecteurs testés en direct (10 oct. 2026)
 
 Tous les tests sont en **lecture seule** : aucune clé, aucun compte, aucune transaction signée, aucun déploiement sur Fuji. Les données utilisées sont publiques ou synthétiques. Les résultats viennent de 9 sondes (RPC, Data API, Safe, Chainlink, ICM, OpenZeppelin, registres réglementaires, alerting, custodians). Les scripts de test sont dans le dossier de brouillon de la session, pas dans le repo.
 
@@ -42,7 +42,7 @@ Heures = effort d'intégration estimé. Verdicts : fonctionne, partiel, bloqué 
 | ICM / Teleporter (C-Chain Fuji) | `eth_getLogs` Send/Receive sur 1 M de blocs | fonctionne (668 Send, 715 Receive en un mois) | Surveillance des messages entre chaînes | 2 à 3 | https://build.avax.network/docs/cross-chain/icm-contracts/addresses |
 | ICM côté Echo / Dispatch | `getLogs` paginé par 2048 blocs, appariement par `messageID` | fonctionne (relayeur Fuji vers Echo arrêté) | Alertes « Receive sans Send » et « Send sans Receive » | 3 à 4 | https://build.avax.network/docs/cross-chain/avalanche-warp-messaging/deep-dive |
 | ICTT (transferts de tokens entre chaînes) | `eth_getCode` d'un contrat cité par une doc tierce | partiel (existence prouvée seulement) | Mouvements de valeur entre chaînes | 4 à 6 | https://build.avax.network/docs/cross-chain/interchain-token-transfer/overview |
-| OpenZeppelin 5.6.1 + Hardhat 2.29.1 | Contrat `TreasuryVault`, 4 tests verts, abonnement WebSocket | fonctionne (en local) | Le vrai « niveau or » : plafond, file d'attente, rôle Sentinelle qui ne fait que resserrer | 3 à 4 | https://docs.openzeppelin.com/contracts/5.x/access-control |
+| OpenZeppelin 5.6.1 + Hardhat 2.29.1 | Contrat `TreasuryVault`, 4 tests verts, abonnement WebSocket | fonctionne (en local) | Le vrai « niveau or » : plafond, file d'attente, rôle Hold up qui ne fait que resserrer | 3 à 4 | https://docs.openzeppelin.com/contracts/5.x/access-control |
 | Foundry | `forge` | absent de la machine | Tests d'invariants (alternative : boucles Hardhat) | 1 | https://book.getfoundry.sh/ |
 | GLEIF (LEI) | 10 recherches, 364 LEI du registre ESMA recoupés | fonctionne, sans clé | Champs DORA 1.3a, 1.6, 1.14, validation des prestataires | 3 | https://www.gleif.org/en/lei-data/gleif-lei-look-up-api |
 | Registre MiCA ESMA (CSV) | Téléchargement + comptage | fonctionne (pas d'API) | Annuaire des clients cibles | 2 | https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica |
@@ -75,7 +75,7 @@ Heures = effort d'intégration estimé. Verdicts : fonctionne, partiel, bloqué 
 - **Safe** : les 6 contrats 1.4.1 existent ; le protocol-kit prédit l'adresse `0xC788...E555` et la simulation de création réussit.
 - **Prix** : AVAX/USD à 10,4776 sur Fuji contre 10,4733 sur le mainnet. Âge 291 s pour un heartbeat de 600 s.
 - **ICM** : 668 envois et 715 réceptions en un mois sur la C-Chain Fuji ; 5 paires Fuji vers Echo retrouvées par `messageID` avec 3 à 6 s de délai.
-- **Contrat de plafond** : `TreasuryVault` compile et passe 4 tests (plafond, file d'attente, Sentinelle qui ne fait que resserrer, timelock) ; abonnement WebSocket aux événements en 355 ms en local.
+- **Contrat de plafond** : `TreasuryVault` compile et passe 4 tests (plafond, file d'attente, Hold up qui ne fait que resserrer, timelock) ; abonnement WebSocket aux événements en 355 ms en local.
 - **Données réglementaires** : GLEIF répond en 0,2 à 0,5 s ; le registre ESMA se télécharge ; le gabarit XLSX de l'AMF se charge.
 - **Alertes** : une sortie OCSF validée par le validateur officiel (0 erreur) ; un webhook signé HMAC testé en local.
 - **Custodian** : un handler de type Fireblocks décide en 3 à 24 ms, contre 30 s de budget.
@@ -130,7 +130,7 @@ flowchart LR
     DAPI["Data API"]
     RS["Routescan"]
   end
-  subgraph Sentinelle["Sentinelle"]
+  subgraph HoldUp["Hold up"]
     POOL["RpcPool et comparaison de hash"]
     DET["Detection et paliers"]
     VAULT["TreasuryVault plafond et file"]
@@ -180,7 +180,7 @@ Choix clés : (1) le plafond vit dans un contrat que nous contrôlons, donc il t
 | Test 20 min Chainlink + finalité (P1) | Rounds toutes les 600 s : un test de 20 min ne voit qu'une ou deux mises à jour ; max observé 629 s | Tester sur 40 rounds d'historique plus un suivi plus long ; seuil suspect 700 s, périmé 900 s. |
 | Safe Guard, callback custodian : « non construit » (l. 50) | Safe Guard est réalisable et testé par le code (3 à 4 h) ; callback Fireblocks testé en local | Les promouvoir en « simulés localement ». |
 | Safe visible dans l'interface officielle (supposé dans `T1_P4_integration_ecosysteme.md`) | Le Transaction Service et Safe{Wallet} n'existent pas pour Fuji | Signatures locales avec le protocol-kit. |
-| Roles Modifier (Zodiac) pour limiter la Sentinelle à `limit()` et `pause()` | Absent sur Fuji | Rôle OpenZeppelin dans `TreasuryVault` (déjà testé). |
+| Roles Modifier (Zodiac) pour limiter Hold up à `limit()` et `pause()` | Absent sur Fuji | Rôle OpenZeppelin dans `TreasuryVault` (déjà testé). |
 | Webhook AvaCloud avec un seul type `address_activity` | Trois types existent (`address_activity`, `primary_network_address_activity`, `validator_activity`) | Corriger. |
 | Exemple OCSF §7.1 (`observables.name`, sans `type_id`) | Invalide : 4 erreurs au validateur | Utiliser le payload corrigé (profil `security_control`, `type_id` 99). |
 | Teams « en retraite » | Connecteur Office 365 arrêté en mai 2026 ; seul Workflows reste | Mettre à jour. |

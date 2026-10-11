@@ -1,5 +1,5 @@
 /**
- * Sentinelle Intent Barrier - Core Types
+ * Hold up Intent Barrier - Core Types
  * Based on docs/intent-barrier.md specification
  */
 

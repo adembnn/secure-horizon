@@ -1,4 +1,4 @@
-// check.mjs - black-box CLI around the real Sentinelle engine, for red team agents.
+// check.mjs - black-box CLI around the real Hold up engine, for red team agents.
 // Usage : node redteam/check.mjs <cases.jsonl>   (one case per line: request, context, intent, optional id/label/expected_severity)
 // Output: one JSON line per case {id, level_final, level_sans_intention, reasons, unsupported?, error?, ms},
 //         then, if any case carries a `label`, one final JSON line {summary: {...}}.

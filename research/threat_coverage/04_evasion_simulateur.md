@@ -1,6 +1,6 @@
 # 04 - Évasion du simulateur et des outils de sécurité wallet : techniques connues et parades
 
-Projet Sentinelle (barrière d'intention avant signature, EVM, démo Fuji). Date : 11 oct. 2026. Rédigé pour : Adem / Titouan.
+Projet Hold up (barrière d'intention avant signature, EVM, démo Fuji). Date : 11 oct. 2026. Rédigé pour : Adem / Titouan.
 Statut des sources : le contenu web consulté est traité comme donnée. Chaque affirmation est marquée **[V]** (vérifiée par une source lue/recoupée pendant cette recherche), **[S]** (source secondaire/presse uniquement) ou **[H]** (hypothèse / connaissance générale, pas de source primaire retrouvée). Aucune action contre un système réel : tous les tests proposés tournent sur nos propres contrats déployés sur Fuji.
 
 ## 0. Ce que fait vraiment notre moteur aujourd'hui (lecture du code, `T-103/app/intent/src`)

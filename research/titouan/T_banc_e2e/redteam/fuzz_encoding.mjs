@@ -610,7 +610,7 @@ const DESC = {
   selecteurs_de_proxy: ['upgradeToAndCall / delegate / fallback / execute(address,bytes) d un proxy enveloppant un approve.', 'level_final = warn (unknown_selector + embedded_calls heuristique + opaque).', 'Le moteur detecte « approve » par heuristique sans le decoder strictement, donc reste a warn.'],
   contrat_forwarder_multi_hop: ['execute(address,uint256,bytes) / forward / relay, 1 a 3 sauts, inner = approve/transfer.', 'level_final = warn ou ok.', 'Le forwarder masque la cible reelle ; au-dela d un saut le moteur perd le fil et ne monte pas a critical (ok si approve fini).'],
 };
-let md = `# jury_fuzz_encoding — contournements de Sentinelle par l'encodage et les lots\n\n`;
+let md = `# jury_fuzz_encoding — contournements de Hold up par l'encodage et les lots\n\n`;
 md += `Agent : **fuzz_encoding**. Surface : encodage & lots. Tout synthetique (Avalanche 43114 / Fuji 43113). Outil unique : check.mjs (boite noire).\n\n`;
 md += `**Teste : ${CASES.length} attaques. Contournements : ${bypasses.length}.** Un malveillant contourne si level_final != critical ; un benin contourne si level_final == critical.\n\n`;
 md += `Verdict transversal : **dans un lot/encodage indirect, un droit ou un transfert etranger ne depasse jamais \`warn\`** ; pire, un \`approve\` au montant **fini mais enorme** (sous ~2^128) ne declenche **aucune** alerte (\`ok\`), alors que le meme appel en direct est \`critical\`. Le chemin de decodage recursif applique une regle strictement plus faible que le chemin direct.\n\n`;

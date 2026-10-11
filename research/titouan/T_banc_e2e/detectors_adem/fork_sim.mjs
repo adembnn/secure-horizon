@@ -1,9 +1,9 @@
 // Fork simulation helpers (no key, no secret). Two modes, always labelled in the verdict:
 //  - mode 'fork'    : a JSON-RPC endpoint of a LOCAL fork/dev node (Hardhat `npx hardhat node [--fork <url>]`, or anvil)
-//                     given by env SENTINELLE_FORK_RPC (e.g. http://127.0.0.1:8545). The request is executed for real on
+//                     given by env HOLDUP_FORK_RPC (ancien nom SENTINELLE_FORK_RPC, e.g. http://127.0.0.1:8545). The request is executed for real on
 //                     the fork as the victim (account impersonation, no signature), its logs are read, then the fork
 //                     is reverted to its snapshot. Sell simulation also runs there.
-//  - mode 'eth_call': any RPC given by env SENTINELLE_RPC : `eth_call` with a state override (geth-style 3rd param)
+//  - mode 'eth_call': any RPC given by env HOLDUP_SIM_RPC (ancien nom SENTINELLE_RPC) : `eth_call` with a state override (geth-style 3rd param)
 //                     that credits the victim's token balance, then calls token.transfer(pool, amount) as the victim :
 //                     a revert means "cannot sell". No tax measure in this mode.
 //  - mode 'context' : no RPC : the detectors read the simulation result already present in the case context

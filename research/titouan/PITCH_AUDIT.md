@@ -91,7 +91,7 @@ Légende : VRAIE, FAUSSE, NON SOURCÉE, VRAIE MAIS À CORRIGER (vraie en substan
 | Tendances en hausse | Non. « La norme » n'est pas une tendance mais est fausse (n° 9) |
 | « premier » | Non |
 | « bloque » | OUI : « On ne bloque pas » (n° 17) |
-| « Sentinelle » | Non |
+| « Hold up » | Non |
 | Chiffres retirés (R3 80,4, filet 81,9, preuve sociale 99, nonce, 100 % et 0 % sur DEV) | Non. Attention : le « 100 % » du pitch est le A5 (cas de décalage), pas le 100 % DEV retiré, mais il sonne pareil. Le préciser « 228 sur 228, test de couverture » |
 | « Clef classe l'intention » sans mesure | Non cité. Mais le modèle est invoqué sans réserve de mesure (n° 43) |
 | Sosie d'adresse ou RPC de garde comme apport | Sosies cités comme couverture du portefeuille (acceptable). RPC cité dans une réponse (n° 44) : à retirer |

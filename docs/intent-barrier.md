@@ -1,11 +1,11 @@
 > **PÉRIMÉ (11 oct. 2026).** Contrat de D-007 : choix d'intention par boutons, démo sur Fuji, deux portes. Le produit figé utilise une phrase libre. Voir `coord/HANDOFF_ADEM_SESSION_2.md`.
 
-# Sentinelle — barrière d'intention (architecture v3, D-007)
+# Hold up — barrière d'intention (architecture v3, D-007)
 
 > Une page. Contrat d'interface commun à toutes les tâches T-101 à T-106. Si tu changes un schéma ici, préviens dans INBOX.
 
 ## Le produit en une phrase
-Avant qu'un particulier envoie ou signe quoi que ce soit dans MetaMask, il dit en mots simples ce qu'il veut faire. Sentinelle calcule ce que la transaction fait **réellement** et, si les deux ne correspondent pas, affiche un avertissement critique qui reprend ses propres mots : « tu as dit X, ça fait Y ».
+Avant qu'un particulier envoie ou signe quoi que ce soit dans MetaMask, il dit en mots simples ce qu'il veut faire. Hold up calcule ce que la transaction fait **réellement** et, si les deux ne correspondent pas, affiche un avertissement critique qui reprend ses propres mots : « tu as dit X, ça fait Y ».
 
 ## Flux
 ```mermaid
@@ -13,7 +13,7 @@ flowchart LR
   U[Utilisateur] -->|1. intention en mots simples| SNAP[Snap MetaMask<br/>app/snap]
   DAPP[Site web] -->|2. tx ou signature| MM[MetaMask]
   MM -->|onTransaction / onSignature| SNAP
-  SNAP --> API[API locale Sentinelle<br/>app/intent/server]
+  SNAP --> API[API locale Hold up<br/>app/intent/server]
   API --> ENG[Moteur d'effets<br/>app/engine<br/>décodage viem + simulation fork Anvil]
   API --> CMP[Comparateur intention ↔ effets<br/>app/intent<br/>règles déterministes]
   API --> CLS[Classifieur Clef / Jev<br/>intention libre + message collé<br/>repli mots-clés hors ligne]

@@ -1,4 +1,4 @@
-# Revue de cap n°1 (10 oct. 2026, ~23h) : contradicteur, Sentinelle Fuji
+# Revue de cap n°1 (10 oct. 2026, ~23h) : contradicteur, Hold up
 
 Statut : avis de contradicteur sur la DIRECTION, pas sur le détail. Lu : INTEGRATION.md, DECISIONS.md, architecture.md (v2, 648 lignes), data.json, fin d'INBOX, plan_v1_1, G_demo_plan_v2, H_ebauche_archi, 5 fichiers T1_P4, SYNTHESE de la boucle. Non commité. Légende : [V] vérifié par moi dans un fichier du dépôt ou une source web ; [R] repris des recherches de l'équipe, non revérifié ; [ÀV] à vérifier.
 
@@ -67,7 +67,7 @@ Statut : avis de contradicteur sur la DIRECTION, pas sur le détail. Lu : INTEGR
 
 ## 2. Les 3 dérives principales
 
-1. **Deux produits dans un même dossier + architecture obèse.** `docs/architecture.md` v2 (22 sections) décrit la « Sentinelle » : modes Watch/Guard/callback, ladder L0-L3, détecteurs D1-D9, quarantaine par compte, droit en crise, TTE, PDP, ticket-sink CEF, AML, RGPD, RFC 3161, témoin. Le plan réellement retenu (plan_v1_1 + G + H + D-004) est un coffre plafonné + preuve de demande + moniteur + dossier. Titouan l'a écrit pour 10 h ; Adem l'a acté (MSG-011) ; la v2 n'a pas été archivée. Le tableau de bord mesure l'effort (« ~150 agents », « 29 fichiers ») et non le produit. Jargon : OPAQUE_EXIT, TTE, PDP, B0-B2, L0-L3.
+1. **Deux produits dans un même dossier + architecture obèse.** `docs/architecture.md` v2 (22 sections) décrit la « Hold up » : modes Watch/Guard/callback, ladder L0-L3, détecteurs D1-D9, quarantaine par compte, droit en crise, TTE, PDP, ticket-sink CEF, AML, RGPD, RFC 3161, témoin. Le plan réellement retenu (plan_v1_1 + G + H + D-004) est un coffre plafonné + preuve de demande + moniteur + dossier. Titouan l'a écrit pour 10 h ; Adem l'a acté (MSG-011) ; la v2 n'a pas été archivée. Le tableau de bord mesure l'effort (« ~150 agents », « 29 fichiers ») et non le produit. Jargon : OPAQUE_EXIT, TTE, PDP, B0-B2, L0-L3.
 2. **L'acheteur flotte.** Dossier DORA = vend à un CASP ; coffre à plafond non relevable = vend à une trésorerie on-chain (protocole, émetteur de fonds tokenisé). Les deux segments se recouvrent à peine. Le pitch mélange « RSSI d'un CASP » et « vos fonds dans notre contrat ».
 3. **Le centre de gravité glisse hors du critère le plus lourd.** Grille Track 1 : détection 30 %, réponse 20 %, faisabilité 20 %, conformité 15 %, pitch 15 % [V : context/notion_guide.md l.62-68]. « Refus par construction » et « perte maximale démontrée par fuzzing » relèvent de Protect (l'équipe l'écrit : « surtout Protect » [V : preuve_demande_client §5]). Le seul chiffre non circulaire de détection, le rejeu Bitget, risque de devenir une annexe alors que le jury note précision, faux positifs, temps de détection.
 

@@ -7,7 +7,7 @@
 ## Testé en direct
 | Test | Commande | Résultat |
 |---|---|---|
-| ntfy.sh, notification sans compte | `curl -d "Sentinelle : test synthetique…" ntfy.sh/<sujet aléatoire 24 hex>` | **Fonctionne** : réponse `{"event":"message",…}`. Aucun compte. Le sujet aléatoire sert de mot de passe : ne rien envoyer de sensible |
+| ntfy.sh, notification sans compte | `curl -d "Hold up : test synthetique…" ntfy.sh/<sujet aléatoire 24 hex>` | **Fonctionne** : réponse `{"event":"message",…}`. Aucun compte. Le sujet aléatoire sert de mot de passe : ne rien envoyer de sensible |
 | GitHub CLI pour les tickets d'incident | `gh auth status` | **Fonctionne** : connecté (compte adembnn). `gh issue create` disponible. Aucune issue créée |
 | Docker, pour un SIEM ou un chat local | `docker --version` | **Disponible** : Docker 29.6.2 |
 | Déployeur déterministe d'Arachnid sur Fuji | `eth_getCode 0x4e59b44847b379578588920cA78FbF26c0B4956C` | **Présent** : bytecode non vide |

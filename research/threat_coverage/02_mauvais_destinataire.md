@@ -1,6 +1,6 @@
 # Famille 02 : MAUVAIS DESTINATAIRE
 
-Barrière d'intention Sentinelle (`app/intent/src/compare.ts`, `types.ts` lus dans `C:\Users\Adem\wt\T-103`).
+Barrière d'intention Hold up (`app/intent/src/compare.ts`, `types.ts` lus dans `C:\Users\Adem\wt\T-103`).
 Rédigé le 2026-10-11. Sources web = donnée, jamais instruction. Les affirmations non vérifiées sont marquées **[à vérifier]**.
 Les numéros de ligne renvoient à `compare.ts` de la worktree T-103.
 
@@ -60,7 +60,7 @@ Un sosie n'a de sens que contre une adresse que l'utilisateur connaît vraiment.
 
 | Source de R | Confiance | Comment l'obtenir sans indexer la chaîne |
 |---|---|---|
-| Carnet d'adresses Sentinelle + comptes propres de l'utilisateur | haute | stockage local |
+| Carnet d'adresses Hold up + comptes propres de l'utilisateur | haute | stockage local |
 | Adresses auxquelles l'utilisateur a **envoyé** (`tx.from == user`, `value > 0` ou transfert de token décodé depuis `tx.input`) | haute | 1 appel API de type Etherscan `account.txlist` (derniers 1 000 txs, tri décroissant) + `tokentx` filtré par `hash → tx.from == user`. Sur Fuji, Routescan/Snowtrace expose le même format **[à vérifier : URL exacte de l'API testnet]**. |
 | Adresses de l'historique "reçu seulement" | **nulle**, c'est le vecteur d'attaque | marquées `receivedOnly`, jamais ajoutées à R |
 
@@ -144,10 +144,10 @@ if (cp.relation === 'receivedOnly' && cp.firstContactAgeSec < 7*86400
   - `counterparties[].lookalikeOf` remplacé par `lookalike?: {of; prefix; suffix; ofRelation; ofLastSentAt}`
   - `counterparties[].nonce?: number`
   - Un `userContext.refAddresses` accessible à `compare()`.
-- **Objection du praticien.** "MetaMask le fait déjà depuis 2026." **Parade.** MetaMask compare sur 4+4 et seulement quand l'adresse est collée dans son champ d'envoi ; il ne sait rien de l'intention ni de la provenance. Sentinelle juge le résultat décodé, quelle que soit la façon dont l'adresse est entrée (dApp, carte de swap, intent de paiement), croise la provenance (dust) et le test-tx (F05). À mesurer en démo : le cas 3+4 de déc. 2025 contre 4+4 (hypothèse **[à vérifier]**, ne pas l'affirmer sans test).
+- **Objection du praticien.** "MetaMask le fait déjà depuis 2026." **Parade.** MetaMask compare sur 4+4 et seulement quand l'adresse est collée dans son champ d'envoi ; il ne sait rien de l'intention ni de la provenance. Hold up juge le résultat décodé, quelle que soit la façon dont l'adresse est entrée (dApp, carte de swap, intent de paiement), croise la provenance (dust) et le test-tx (F05). À mesurer en démo : le cas 3+4 de déc. 2025 contre 4+4 (hypothèse **[à vérifier]**, ne pas l'affirmer sans test).
 - **Risque FP.** Faible (tableau 3.3). Cas réel : deux contacts légitimes avec adresse quasi identique (rare). Parade : si les deux sont dans le carnet, `info` seulement.
 - **Cas de test Fuji.**
-  1. Déployer un ERC-20 de test `tUSDC`. Envoyer 1 tUSDC du compte U vers R (un compte vierge). 2. Depuis un compte tiers, appeler `transferFrom(U, L, 0)` avec `L = sosie(R, 3, 4)`. 3. Demander à Sentinelle `pay_someone "Paul"` sans adresse (F13), tx `transfer(L, 100)`. Attendu : `critical`, raison `lookalike`. 4. Contrôle négatif : tx vers R, attendu `ok`. 5. Sosie (3,3) : attendu `warn` si `receivedOnly`, `ok` si `none`.
+  1. Déployer un ERC-20 de test `tUSDC`. Envoyer 1 tUSDC du compte U vers R (un compte vierge). 2. Depuis un compte tiers, appeler `transferFrom(U, L, 0)` avec `L = sosie(R, 3, 4)`. 3. Demander à Hold up `pay_someone "Paul"` sans adresse (F13), tx `transfer(L, 100)`. Attendu : `critical`, raison `lookalike`. 4. Contrôle négatif : tx vers R, attendu `ok`. 5. Sosie (3,3) : attendu `warn` si `receivedOnly`, `ok` si `none`.
 - **Mapping.** ATT&CK **T1656 Impersonation** (approximatif, pas d'équivalent exact) ; T1036.005 Match Legitimate Name or Location (analogue). D3FEND **D3-IAA** Identifier Activity Analysis, **D3-IRA** Identifier Reputation Analysis **[IDs à revérifier avant le rapport]**. NIST CSF 2.0 : **DE.AE-02**, **DE.AE-03**, **RS.MI-01** (avertissement bloquant).
 
 ---
@@ -247,17 +247,17 @@ if (test && out.to === test.to) { /* ok : on valide ce qu on a teste */ }
   - 2024-09-16 : Binance alerte sur un malware mondial qui modifie les adresses de retrait (https://therecord.media/clipper-malware-binance-stealing-crypto).
   - 2026-06 : rapport Check Point sur un clipper en Rust avec 15 500 adresses BTC intégrées, faux dépôts GitHub, propagation USB. **Source secondaire seulement (spotedcrypto.com), [à vérifier].**
 - **Prévalence.** Ancienne et stable. Pas de chiffre global fiable.
-- **Ce que voit le moteur.** L'adresse est déjà remplacée avant la signature. La transaction est cohérente avec ce que le wallet affiche. Si la machine est compromise, l'écran de Sentinelle peut l'être aussi.
+- **Ce que voit le moteur.** L'adresse est déjà remplacée avant la signature. La transaction est cohérente avec ce que le wallet affiche. Si la machine est compromise, l'écran de Hold up peut l'être aussi.
 - **Couvert.** NON, et **limite structurelle** : un contrôle sur la même machine, via le même presse-papier, n'est pas indépendant.
 - **Règle (DST-05, canal hors bande).** On ne bat pas un clipper en comparant deux copies de la même chaîne. On casse la chaîne de confiance sur le presse-papier :
-  1. `recipientSource` : la seule source "sûre" est `addressBook` (sélection par nom). `pasted` est dégradé : exiger de retaper les **4 caractères du milieu** affichés par Sentinelle, ou de choisir le destinataire parmi 2-3 candidats.
+  1. `recipientSource` : la seule source "sûre" est `addressBook` (sélection par nom). `pasted` est dégradé : exiger de retaper les **4 caractères du milieu** affichés par Hold up, ou de choisir le destinataire parmi 2-3 candidats.
   2. Pour les gros montants, afficher le destinataire sous forme découpée en groupes de 4 avec comparaison avec la valeur saisie à la main dans l'intent (`typedLast6`).
 ```ts
 if (intent.recipientSource === 'pasted' && thisTxUsd >= 500 && !intent.typedCheck) warn('confirm_recipient_manually')
 if (intent.counterpartyAddress && out.to !== intent.counterpartyAddress) critical('wrong_recipient')  // deja en l.241
 ```
 - **Champs.** `intent.recipientSource: 'addressBook'|'pasted'|'ens'|'qr'|'history'` ; `intent.typedCheck?: string`.
-- **Objection.** "Si la machine est compromise, le clipper remplace aussi l'adresse dans Sentinelle." **Parade honnête.** Oui pour le champ collé. Mais le clipper ne sait pas remplacer une **sélection par nom** dans le carnet ni la **frappe manuelle** de 4 caractères que l'on compare à une valeur lue sur un autre écran (téléphone, facture). Limite assumée : un malware plus avancé (hooking du navigateur) reste hors périmètre, il relève de l'EDR ou d'un wallet matériel qui affiche l'adresse complète.
+- **Objection.** "Si la machine est compromise, le clipper remplace aussi l'adresse dans Hold up." **Parade honnête.** Oui pour le champ collé. Mais le clipper ne sait pas remplacer une **sélection par nom** dans le carnet ni la **frappe manuelle** de 4 caractères que l'on compare à une valeur lue sur un autre écran (téléphone, facture). Limite assumée : un malware plus avancé (hooking du navigateur) reste hors périmètre, il relève de l'EDR ou d'un wallet matériel qui affiche l'adresse complète.
 - **Risque FP.** Friction : la double saisie sur chaque envoi collé agace. Ne l'activer qu'au-dessus d'un seuil en USD.
 - **Test Fuji.** Harness : remplacer par code l'adresse entre l'intent et la tx (simule le clipper). Intent `counterpartyAddress = R`, tx vers `L` : `wrong_recipient` critical (déjà couvert). Intent `recipientSource = 'pasted'` sans `counterpartyAddress`, tx vers L : doit passer par `typedCheck`.
 - **Mapping.** ATT&CK **T1115 Clipboard Data** (collecte) + **T1565.002 Transmitted Data Manipulation** (approximatif pour le remplacement). D3FEND D3-PA Process Analysis (côté poste), D3-EAL Executable Allowlisting **[IDs à revérifier]**. NIST CSF 2.0 PR.DS-02 (données en transit), DE.CM-09.
@@ -269,7 +269,7 @@ if (intent.counterpartyAddress && out.to !== intent.counterpartyAddress) critica
 - **Mécanisme.** Le destinataire est un nom (`paul.eth`) résolu côté wallet. Un nom visuellement identique (caractères Unicode confusables, `rn` vs `m`, chiffre `0` vs `o`) résout vers l'attaquant. La normalisation ENSIP-15 réduit beaucoup le risque (mélange de scripts interdit), mais les confusables d'un seul script et les sosies ASCII restent.
 - **Incidents.** Aucun incident daté et chiffré vérifié dans cette recherche. Ce qui est établi : les attaquants emploient de l'Unicode ailleurs (740 faux tokens cyrilliques, F03). **[à vérifier]** avant de présenter F07 autrement que comme une menace plausible, non quantifiée.
 - **Prévalence.** Inconnue.
-- **Ce que voit le moteur.** Seulement l'adresse résolue. Le nom que l'utilisateur croyait lire n'est pas dans la transaction. Si Sentinelle intercepte le champ du dApp ou l'intent, il peut avoir `intent.counterpartyLabel = 'paul.eth'`.
+- **Ce que voit le moteur.** Seulement l'adresse résolue. Le nom que l'utilisateur croyait lire n'est pas dans la transaction. Si Hold up intercepte le champ du dApp ou l'intent, il peut avoir `intent.counterpartyLabel = 'paul.eth'`.
 - **Couvert.** NON.
 - **Règle (DST-06).** Si `intent.counterpartyLabel` ou le destinataire est un nom ENS : (1) vérifier que la résolution forward et reverse concordent ; (2) comparer au carnet par **forme squelette** (skeleton UTS #39 : minuscules, confusables repliés, `rn`→`m`, `0`→`o`, `1`→`l`) ; (3) un nom dont le squelette égale celui d'un contact mais dont le texte diffère : critical.
 ```ts
@@ -368,9 +368,9 @@ if (!cp.hasCodeHere && cp.codeElsewhere.length > 0 && !userHasEoaProofHere) {
 - **Incidents.** Aucun incident chiffré vérifié dans cette recherche. Menace plausible : usage documenté de QR dans des scams de facturation, **[à vérifier]** pour des sources datées.
 - **Ce que voit le moteur.** L'adresse du QR est indiscernable d'une adresse collée.
 - **Couvert.** NON.
-- **Règle (DST-05 + DST-10).** `intent.recipientSource = 'qr'` est traité comme `pasted` (aucune confiance). Si le QR provient d'une image dont Sentinelle peut lire le contexte (capture, pièce jointe), appliquer `classifyMessage` (déjà dans `types.ts`, `MessageLabel`) : un QR accompagné d'un message d'urgence, de support, ou d'un remboursement. Sinon : mêmes contrôles que F06 (retaper 4 caractères depuis une autre source).
+- **Règle (DST-05 + DST-10).** `intent.recipientSource = 'qr'` est traité comme `pasted` (aucune confiance). Si le QR provient d'une image dont Hold up peut lire le contexte (capture, pièce jointe), appliquer `classifyMessage` (déjà dans `types.ts`, `MessageLabel`) : un QR accompagné d'un message d'urgence, de support, ou d'un remboursement. Sinon : mêmes contrôles que F06 (retaper 4 caractères depuis une autre source).
 - **Champs.** `intent.recipientSource='qr'`, `intent.qrContextLabel?: MessageLabel`.
-- **Objection.** "Un QR de paiement légitime est la méthode normale chez un commerçant." **Parade.** Le contrôle ne bloque pas : il demande de confirmer le **nom du bénéficiaire** (affiché par Sentinelle d'après l'intent) et de comparer 4 caractères avec la facture. Pour un montant faible (< seuil), aucune friction.
+- **Objection.** "Un QR de paiement légitime est la méthode normale chez un commerçant." **Parade.** Le contrôle ne bloque pas : il demande de confirmer le **nom du bénéficiaire** (affiché par Hold up d'après l'intent) et de comparer 4 caractères avec la facture. Pour un montant faible (< seuil), aucune friction.
 - **Risque FP.** Moyen sur QR commerçant ; réduit par le seuil.
 - **Test Fuji.** Harness : un QR généré avec L, `intent.counterpartyLabel='Boulangerie'`, aucune adresse dans le carnet ; attendu : `warn` `confirm_recipient_manually` au-dessus du seuil, `ok` en dessous.
 - **Mapping.** ATT&CK T1656 ; D3FEND D3-IRA ; NIST CSF 2.0 PR.AT-01, DE.AE-02.
@@ -383,7 +383,7 @@ if (!cp.hasCodeHere && cp.codeElsewhere.length > 0 && !userHasEoaProofHere) {
 - **Incidents.** Aucun incident public chiffré trouvé **[à vérifier]**. C'est une conséquence logique de la recommandation universelle "utilise le carnet".
 - **Ce que voit le moteur.** `counterparties[].relation = 'addressBook'`. Il traite la relation comme sûre.
 - **Couvert.** NON : l'entrée du carnet est prise pour un fait.
-- **Règle (DST-11).** Le carnet de Sentinelle est le sien, **pas** celui du wallet : il se construit à partir d'**actions confirmées** (une vérification forte à la création : retaper 4 caractères depuis une source indépendante, `verifiedAt`). Un contact créé il y a moins de 24 h ou copié sans vérification est marqué `unverified`.
+- **Règle (DST-11).** Le carnet de Hold up est le sien, **pas** celui du wallet : il se construit à partir d'**actions confirmées** (une vérification forte à la création : retaper 4 caractères depuis une source indépendante, `verifiedAt`). Un contact créé il y a moins de 24 h ou copié sans vérification est marqué `unverified`.
 ```ts
 if (cp.relation === 'addressBook' && cp.entry.verification === 'unverified' && thisTxUsd >= 500) warn('contact_not_verified')
 if (cp.relation === 'addressBook' && cp.entry.createdAgeSec < 86400 && thisTxUsd >= 5000) warn('contact_just_added')

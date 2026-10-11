@@ -1,6 +1,6 @@
 > **PÉRIMÉ le 11/10/2026 : voir livrables\**
 
-# Règles de design des avertissements Sentinelle (preuves publiées)
+# Règles de design des avertissements Hold up (preuves publiées)
 
 Date : 11 oct. 2026. Auteur : chercheur UX sécurité (agent). Contexte : `docs/BRIEF_direction.md`.
 

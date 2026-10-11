@@ -1,4 +1,4 @@
-# Registre d'intégration des recherches — Sentinelle Fuji
+# Registre d'intégration des recherches — Hold up
 
 > Rôle : chaque recherche produite par un agent doit finir **dans le produit**, ou être écartée avec une raison. Ce fichier est tenu par la session d'orchestration (Claude-Adem). Une ligne par sortie d'agent.
 > Statut : `à intégrer` → `intégré` (avec l'endroit) ou `écarté` (avec la raison).
@@ -7,7 +7,7 @@
 ## Décisions qui pilotent l'intégration
 | Réf | Décision |
 |---|---|
-| D-003 | Track 1, sous-track 4 (DeFi + DORA), projet Sentinelle Fuji |
+| D-003 | Track 1, sous-track 4 (DeFi + DORA), projet Hold up |
 | D-004 | Cœur = détournement du circuit qui approuve les sorties de fonds (Bitget, KelpDAO, Drift). Limite de sortie indépendante du circuit, surveillant hors-bande. DORA = sortie de la chaîne |
 | Grilling Q3 | La machine ne fait que freiner (plafond, file d'attente). Jamais de gel total ni de réouverture automatique. Reprise par 2 humains sur 3 |
 | Grilling Q4 | L'outil propose la classification DORA. Un humain nommé décide et dépose. Un « non majeur » exige une 2e signature |

@@ -2,7 +2,7 @@
   "name": "@sentinelle/intent",
   "version": "0.1.0",
   "type": "module",
-  "description": "Intent comparison and classification engine for Sentinelle",
+  "description": "Intent comparison and classification engine for Hold up",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {

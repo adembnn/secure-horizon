@@ -13,7 +13,7 @@
 2. **Le trou réel, c'est la couche après l'alerte** : qualifier l'incident en critères DORA, tenir les délais, prouver chaque champ, et connaître ses dépendances tierces. Chiffres frais : 3 383 incidents majeurs DORA déclarés dans l'UE en 2025, **29 % venant de tiers** (ESAs, 3 juin 2026) ; en France, **plus de 80 % des 33 incidents majeurs viennent de prestataires** et l'ACPR constate que **les délais sont « rarement respectés »** [V].
 3. **Les pertes 2026 viennent surtout des opérations et des tiers, pas du code** : Q3 2026 = 1,26 Md$ sur 247 incidents (CertiK), Bitget (zero-day sur appliances tierces) et Liquid (invariant de réserve) en tête ; Tectonic/Cronos (manipulation de prix, 75 à 120 M$) a même été traité par **un arrêt et un rollback de la chaîne** [V].
 4. **Trois mécanismes que les produits existants n'ont pas** : (a) un **leurre on-chain** à zéro faux positif (HoneyVault, aucune implémentation défensive vivante trouvée) ; (b) une **classification DORA où chaque champ pointe vers une preuve horodatée** et où la **pause elle-même fait évoluer la classification** (indisponibilité > 2 h) ; (c) un **registre de tiers vivant** alimenté par l'état on-chain (rôles, oracles, config DVN, RPC).
-5. **Recommandation inchangée dans l'esprit mais affinée** : « Sentinelle Fuji » = HoneyVault + invariants + échelle de réponse graduée + DORA Autopilot + **scorecard de rejeu de hacks réels** (nouveau, donne les métriques que le jury note à 30 %). Note estimée **87/100** pour le combo, 83 pour HoneyVault seul. Réponse à « qui est responsable » : voir §6.
+5. **Recommandation inchangée dans l'esprit mais affinée** : « Hold up » = HoneyVault + invariants + échelle de réponse graduée + DORA Autopilot + **scorecard de rejeu de hacks réels** (nouveau, donne les métriques que le jury note à 30 %). Note estimée **87/100** pour le combo, 83 pour HoneyVault seul. Réponse à « qui est responsable » : voir §6.
 
 ---
 
@@ -338,7 +338,7 @@ Mapping : NIST CSF 2.0 (identifiants à contrôler sur le référentiel officiel
 | S19 Halt de L1 | 4 | 7 | 3 | 6 | 7 | 52 |
 | S14 eERC auditeur | 4 | 3 | 5 | 8 | 7 | 51 |
 | S16 Assurance paramétrique | 3 | 4 | 4 | 6 | 6 | 43 |
-| **Combo « Sentinelle Fuji » = S1 + S4 + S5 + S6/S7 léger + S18** | 9 | 9 | 7 | 10 | 9 | **87,5** |
+| **Combo « Hold up » = S1 + S4 + S5 + S6/S7 léger + S18** | 9 | 9 | 7 | 10 | 9 | **87,5** |
 
 ---
 

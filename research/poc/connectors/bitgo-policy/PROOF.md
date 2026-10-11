@@ -7,7 +7,7 @@ BitGo documente publiquement le mecanisme (https://developers.bitgo.com/docs/pol
 - Reponse HTTP 200 = la transaction continue. Tout autre statut = l'action de la regle (refus ou approbation manuelle). Le corps de reponse n'est pas specifie.
 - Mode signe (active sur demande a support@bitgo.com) : BitGo envoie un JWT (JWKS publique https://app.bitgo.com/.well-known/jwks.json, kid + iss verifies). Nous repondons par un JWT signe `{evaluationId, statusCode}`.
 
-Implementation : `server.mjs`, Node pur (module crypto, zero dependance). Logique Sentinelle : refus si `spendAmount` > plafond (MAX_SPEND), ou si une sortie n'est ni dans la liste blanche (ALLOWLIST) ni un retour de monnaie vers le meme wallet. Erreur ou corps invalide : non-200 (fail closed). Rejeu avec meme `evaluationId` : meme reponse (idempotent).
+Implementation : `server.mjs`, Node pur (module crypto, zero dependance). Logique Hold up : refus si `spendAmount` > plafond (MAX_SPEND), ou si une sortie n'est ni dans la liste blanche (ALLOWLIST) ni un retour de monnaie vers le meme wallet. Erreur ou corps invalide : non-200 (fail closed). Rejeu avec meme `evaluationId` : meme reponse (idempotent).
 
 Le payload `fixtures/approve.json` est l'exemple verbatim de la doc BitGo. Les deux refus sont des variantes synthetiques du meme format.
 

@@ -1,4 +1,4 @@
-# 09 - Tokens et DeFi : menaces « j'achète / je swap / je dépose » que Sentinelle rate
+# 09 - Tokens et DeFi : menaces « j'achète / je swap / je dépose » que Hold up rate
 
 Périmètre : intent `buy_or_swap` (et ses voisins : dépôt, staking, LP, bridge qui, aujourd'hui, retombent dans `buy_or_swap`). Cible : MetaMask, EVM, démo Avalanche Fuji (43113) / C-Chain (43114).
 Code lu : `C:\Users\Adem\wt\T-103\app\intent\src\compare.ts` (surtout `checkBuyOrSwap`, l. 319-378) et `types.ts`.
@@ -418,7 +418,7 @@ Principe directeur : **« inconnu » n'est pas « ok »**. Si `usdSource` vaut `
 
 ### M15 (hors liste, ajouté) - Frontend légitime compromis ou DNS détourné
 
-- **Mécanisme.** Le site officiel d'un DEX est modifié (JS injecté, DNS détourné, dépendance compromise) pour remplacer la calldata du swap par un drain, ou pour demander un `approve` supplémentaire. L'utilisateur voit l'interface normale ; seul l'effet réel de la tx diffère. C'est l'argument central de Sentinelle (« ce que tu veux ≠ ce que tu signes »).
+- **Mécanisme.** Le site officiel d'un DEX est modifié (JS injecté, DNS détourné, dépendance compromise) pour remplacer la calldata du swap par un drain, ou pour demander un `approve` supplémentaire. L'utilisateur voit l'interface normale ; seul l'effet réel de la tx diffère. C'est l'argument central de Hold up (« ce que tu veux ≠ ce que tu signes »).
 - **Incidents.** Ledger Connect Kit (déc. 2023) [M] ; Bybit/Safe UI (fév. 2025, ~1,5 Md$) [M] ; détournements DNS via registrar : plusieurs en 2024 (ex. Compound.finance, Celer, juillet 2024, via le registrar/Squarespace) [M, à vérifier].
 - **Couvert aujourd'hui ?** Oui **en principe** : le moteur simule la tx réelle, donc un drain apparaît dans `outgoing`/`approvals`. Mais :
   - le drain passe `ok` s'il laisse un petit `incoming` (pas de comparaison de valeur) ;
@@ -445,7 +445,7 @@ Principe directeur : **« inconnu » n'est pas « ok »**. Si `usdSource` vaut `
 1. **Inconnu -> warn, jamais ok** : champ `dataGaps` obligatoire.
 2. **Critical** réservé aux situations où la simulation ou une denylist/allowlist donne une preuve (revente impossible, token ≠ demandé, spender exploité, destinataire tiers).
 3. **Warn** pour les scores statiques (âge, LP, concentration), pour les prix non vérifiables, pour les illimités vers routeurs officiels.
-4. Le message dit toujours *ce qu'on n'a pas pu vérifier*. Sentinelle ne dit jamais « ce token est sûr ».
+4. Le message dit toujours *ce qu'on n'a pas pu vérifier*. Hold up ne dit jamais « ce token est sûr ».
 5. Métriques à mesurer pour la fiche de défense : taux de détection par menace sur un jeu étiqueté (tokens GoPlus + nos contrats Fuji), taux de faux positifs sur 50 swaps témoins Trader Joe/Uniswap, latence par règle (simulation de revente ~ centaines de ms à secondes).
 
 ---

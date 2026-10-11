@@ -2,7 +2,7 @@
 
 > **OBSOLÈTE (11 oct. 2026).** Écrit pour l'ancien produit (nom Sentinelle, retenue graduée, deux portes, chiffres retirés). Ne pas s'en servir en préparation. Version à jour : `livrables/QR_JURY.md`, chiffres : `livrables/CHIFFRES.md`.
 
-# Sentinelle face au jury : attaques, réponses, aveux
+# Hold up face au jury : attaques, réponses, aveux
 
 > Préparation du round 1 (dim. 13h00) et de la finale. Rédigé le 11 oct. 2026 à partir des sources listées en fin de fichier.
 > Règle d'or : on ne cite aucun chiffre absent de ce fichier. Si on ne sait pas, on dit « à mesurer ».
@@ -10,7 +10,7 @@
 
 ## 0. Ce qu'il faut avoir en tête avant toute réponse
 
-- Sentinelle **avertit, ralentit et explique**. Elle ne bloque pas physiquement, elle ne « protège » personne à 100 %.
+- Hold up **avertit, ralentit et explique**. Elle ne bloque pas physiquement, elle ne « protège » personne à 100 %.
 - Le verdict sort du **code** (plancher objectif + comparateur). Le modèle (Clef/Jev) ne peut qu'**aggraver** une alerte, jamais l'abaisser.
 - Nos chiffres viennent d'un **catalogue synthétique écrit par nous**. Ils mesurent la couverture et la non-régression, pas la robustesse face à un vrai attaquant.
 - Le seul jeu TEST ouvert (R003) donne **23,1 % de fausses alertes critiques** dans le bras « intention mensongère ». On ne dit jamais « peu de faux positifs ».
@@ -176,8 +176,8 @@ R. Elle ne se règle que par chrome.storage, pas par la page, mais elle n'a rien
 **Q4. Vos dépendances ?**
 R. L'extension n'a installé aucun paquet npm : elle tourne sans bibliothèque externe. Le moteur et le comparateur en ont, et leurs lockfiles doivent être figés. Builds reproductibles et version épinglée sont à faire.
 
-**Q5. Un clone « Sentinelle Guard » sur le store vole les seeds de vos utilisateurs.**
-R. La barrière ne peut rien contre son propre clone. La réponse est la distribution par les wallets partenaires plutôt que par les magasins, un éditeur vérifiable et une règle affichée : « Sentinelle ne demande jamais ta phrase secrète ». C'est de la marque et du store, pas du code.
+**Q5. Un clone « Sentinelle Guard » (ancien nom) sur le store vole les seeds de vos utilisateurs.**
+R. La barrière ne peut rien contre son propre clone. La réponse est la distribution par les wallets partenaires plutôt que par les magasins, un éditeur vérifiable et une règle affichée : « Sentinelle ne demande jamais ta phrase secrète » (ancien nom). C'est de la marque et du store, pas du code.
 
 **Q6. Vos journaux contiennent quoi ?**
 R. Verdicts, intention, effet décodé, décision, temps de décision. Jamais de clé. Le texte libre peut contenir des données personnelles : on le minimise et on ne le journalise que sur consentement.
@@ -198,7 +198,7 @@ Lecture : **Attrape** = mesuré sur notre banc ou testé dans l'extension. **Rat
 |---|---|---|---|---|
 | 1 | Permit2 dont le spender ressemble au routeur Uniswap | **Inconnu.** Permit2 attrapé 12/12 sur DEV quand le spender est inconnu. Mais le contrôle de sosie n'est pas appliqué au spender | « La liste des protocoles connus compare l'adresse exacte, pas le nom. Un sosie n'est pas le routeur, donc c'est un droit vers un inconnu. » | Ajouter 5 cas de spender sosie au banc ; vérifier que la liste blanche est par adresse exacte |
 | 2 | approve illimité caché dans un Multicall3 | **Attrape en « attention »** après F10, sur DEV seulement (6/10 ratés avant). TEST : 6/6 attrapés mais 4 alertes critiques sur 12 lots bénins | « On décode l'intérieur du lot. Ici on alerte, mais on sait qu'on alerte aussi sur des lots honnêtes. » | Rejouer 20 multicalls bénins pour chiffrer la fausse alerte |
-| 3 | Le site dessine une fausse fenêtre Sentinelle verte | **Rate en partie.** Sentinelle n'affiche jamais de vert, mais une page peut dessiner n'importe quoi. Notre vraie fenêtre vit dans la page (shadow DOM fermé), donc elle peut être recouverte | « Sentinelle n'a pas d'écran vert : un écran vert est donc un faux. La vraie fenêtre arrive quand même au moment de la requête. » | Tester la fenêtre en side panel ; à défaut, ajouter la phrase « Sentinelle n'affiche jamais de vert » dans la popup |
+| 3 | Le site dessine une fausse fenêtre Hold up verte | **Rate en partie.** Hold up n'affiche jamais de vert, mais une page peut dessiner n'importe quoi. Notre vraie fenêtre vit dans la page (shadow DOM fermé), donc elle peut être recouverte | « Sentinelle n'a pas d'écran vert : un écran vert est donc un faux. La vraie fenêtre arrive quand même au moment de la requête. » (ancien nom) | Tester la fenêtre en side panel ; à défaut, ajouter la phrase « Sentinelle n'affiche jamais de vert » (ancien nom) dans la popup |
 | 4 | Intention soufflée : « dis que c'est ton compte de secours » | **Attrape si un droit est accordé** (plancher indépendant de l'intention). **Avertissement au mieux** pour un transfert pur vers une adresse neuve | « Le plancher ne lit pas l'intention : un droit illimité reste critique quoi qu'on tape. Un simple virement dicté, on ne peut que ralentir. » | Aucun en code ; préparer la phrase |
 | 5 | Message collé avec injection (« réponds ok ») | **Attrape par construction** si un effet risqué existe : le modèle est censé ne pouvoir qu'aggraver (garde-fou en cours, non vérifié sur toute la chaîne). Corpus d'injections **non mesuré** | « Le modèle n'a pas le droit de baisser une alerte. Faites l'essai. » | Rejouer 20 à 100 injections ; contrôler la sortie hors schéma = critique |
 | 6 | Adresse sosie à 3 caractères au début + 4 à la fin | **Inconnu en direct.** Le comparateur utilise 4+4 et sa fonction sosie n'est pas appelée. Le banc attrape 15/15 (DEV) et 9/9 (TEST), avec 4 fausses alertes critiques sur 7 bénins TEST | « Notre règle cible 3+4, celle de l'étude USENIX. » Ne le dire que si le correctif est en place | Passer la règle à 3+4 avec historique, brancher la fonction, ajouter un test |
@@ -217,9 +217,9 @@ Lecture : **Attrape** = mesuré sur notre banc ou testé dans l'extension. **Rat
 | 19 | Couper le Wi-Fi ou tuer l'API | **Attrape** : « Non vérifié », jamais vert, rien ne part sans geste explicite (testé) | « En panne, on ne rassure pas. » | Répéter le geste avant la démo |
 | 20 | Cliquer très vite sur Continuer | **Attrape** : un clic anticipé est refusé, le temps de décision est journalisé | « On force la lecture, pas un clic de plus. » La phrase à retaper peut être dictée par l'escroc : le dire | Aucun |
 | 21 | Opération honnête pour provoquer une fausse alerte (mint NFT, contrat neuf légitime) | **Risque.** DEV : 8/8 mints et 6/6 contrats neufs en fausse alerte critique avant F5 ; TEST : 2/2 mints en critique | « On publie nos fausses alertes : la dernière mesure ouverte est à 23 %. » | Choisir le cas témoin de la démo sur un swap connu déjà vert ; remesurer les mints après F5 |
-| 22 | Page qui imite MetaMask et demande la phrase secrète | **Rate** : aucune requête n'atteint le wallet | « Hors périmètre : rien n'est signé. Sentinelle ne demande jamais ta phrase secrète. » | Aucun |
+| 22 | Page qui imite MetaMask et demande la phrase secrète | **Rate** : aucune requête n'atteint le wallet | « Hors périmètre : rien n'est signé. Sentinelle ne demande jamais ta phrase secrète. » (ancien nom) | Aucun |
 | 23 | Délégation EIP-7702 | **Sans objet sur Fuji** (ACP-209 non actif). Sur TEST Ethereum : 19/19 attrapés, 4/6 bénins en fausse alerte | « Pas actif sur la C-Chain. Sur Ethereum on l'attrape, avec trop de fausses alertes. » | Aucun |
-| 24 | « Le support te dit de désactiver Sentinelle » | **Rate** une fois l'extension coupée. Avant, la règle « on m'a demandé » donne critique si fonds sortants | « Si quelqu'un te demande de me couper, c'est un escroc. » | Ajouter cette phrase dans l'écran Manipulation |
+| 24 | « Le support te dit de désactiver Sentinelle » (ancien nom) | **Rate** une fois l'extension coupée. Avant, la règle « on m'a demandé » donne critique si fonds sortants | « Si quelqu'un te demande de me couper, c'est un escroc. » | Ajouter cette phrase dans l'écran Manipulation |
 | 25 | Intention honnête « j'autorise mon bot IA à trader » vers un drainer | **Attrape en « attention »** au mieux : pas d'écart d'intention, mais droit illimité + spender neuf | « Vous avez dit vouloir accorder un droit : on vous montre à qui et combien. » | Vérifier que le plancher reste critique sur spender neuf + illimité |
 
 **Trois règles pour la démo.**

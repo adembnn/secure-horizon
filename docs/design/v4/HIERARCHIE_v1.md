@@ -7,7 +7,7 @@ Règle d'Adem : l'interface ne montre QUE ce qui compte pour la personne. Test a
 ## Principes (resserrés)
 1. Premier regard, trois choses maximum : **l'écart ou la consigne**, **Annuler**, rien d'autre. Le verdict tient en une ligne.
 2. Tout le reste est derrière « Pourquoi ? » (dépliable, fermé par défaut).
-3. Zéro texte sur Sentinelle, zéro icône sans information, zéro compteur.
+3. Zéro texte sur Hold up, zéro icône sans information, zéro compteur.
 4. Un seul accent de couleur, posé sur l'écart. L'accent n'est jamais seul : gras + soulignement ou symbole aussi (daltoniens).
 5. Les plus grandes données : montants et adresses. Sur Manipulation, la consigne « raccroche » est plus grande que le verdict.
 6. Le focus clavier et lecteur d'écran démarre sur **Annuler**. Entrée ne déclenche jamais « Continuer quand même ».
@@ -62,7 +62,7 @@ Ordre de lecture et taille :
 3. (grand, plein) **Vérifier** (grisé tant que rien n'est choisi, état annoncé)
 4. Annuler (texte, cible 44 px)
 
-Changements : le lien « Coller le message reçu » disparaît de l'écran. Le champ apparaît seulement si la personne choisit « On me l'a demandé ». Rien sur Sentinelle ni sur la rigueur de la vérification (aide).
+Changements : le lien « Coller le message reçu » disparaît de l'écran. Le champ apparaît seulement si la personne choisit « On me l'a demandé ». Rien sur Hold up ni sur la rigueur de la vérification (aide).
 
 ## Pièges à traiter en conception
 | Piège | Où | Réponse |

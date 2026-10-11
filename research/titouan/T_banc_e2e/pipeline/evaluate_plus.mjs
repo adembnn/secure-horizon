@@ -232,7 +232,7 @@ export function makeEvaluatePlus(D) {
       if (src === true) { if (!D.provider) return done(null, ['live_context_absent']); src = await D.provider(); }
       const params = Array.isArray(body.params) ? body.params : [];
       const hasLocal = (local.contacts || []).length || (local.history || []).length;
-      const input = { chainId, from, request: { method: String(body.method || ''), params }, rpcUrl: o.rpcUrl || env().SENTINELLE_RPC_URL || env().HOLDUP_RPC_URL || undefined,
+      const input = { chainId, from, request: { method: String(body.method || ''), params }, rpcUrl: o.rpcUrl || env().HOLDUP_RPC_URL || env().SENTINELLE_RPC_URL || undefined,
         seen: hasLocal ? [...(local.contacts || []).map((c) => c.address), ...(local.history || []).filter((x) => x.direction === 'sortie').map((x) => lc(x.address))] : undefined,
         options: { budgetMs: o.budgetMs } };
       let call = null;

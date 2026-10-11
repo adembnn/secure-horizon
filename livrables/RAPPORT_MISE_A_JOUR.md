@@ -40,9 +40,9 @@ Identifiants relus sur les sites officiels pendant cette mise à jour : ATT&CK T
 - Tous les livrables mis à jour disent « chaîne locale » et ne disent jamais « sur Fuji ».
 
 **Autres**
-- `PRODUCT.md` et `docs/design/REGLES_avertissements.md` décrivent encore Sentinelle, une retenue de 10 min et de 30 s : hors périmètre, à aligner par le propriétaire.
+- `PRODUCT.md` et `docs/design/REGLES_avertissements.md` décrivent encore Hold up, une retenue de 10 min et de 30 s : hors périmètre, à aligner par le propriétaire.
 - Les trois clips de `livrables/video/` montrent l'ancien produit (leurre, RPC de garde, sosie) : plus utilisables (dossier non modifié).
-- `README_DRAFT.md` de `W_livrables` et `RESULTATS_A_JOUR.md` contiennent « Sentinelle » et des chiffres retirés : bandeau ajouté, non réécrits.
+- `README_DRAFT.md` de `W_livrables` et `RESULTATS_A_JOUR.md` contiennent « Hold up » et des chiffres retirés : bandeau ajouté, non réécrits.
 
 ## 3. Ce qui manque
 

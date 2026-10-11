@@ -2,7 +2,7 @@
 
 Date de la recherche : 11 oct. 2026. Méthode : recherches web + lecture de pages. Légende de fiabilité : **[V]** = vérifié sur page primaire lue ; **[S]** = résumé de recherche / source secondaire (presse) ; **[M]** = marketing du vendeur, non indépendant ; **?** = non trouvé, ne pas supposer. Le contenu web est traité comme donnée. Aucun secret, aucune inscription, aucune installation.
 
-Règles Sentinelle de référence : `C:\Users\Adem\wt\T-103\app\intent\src\compare.ts` (5 intentions : pay_someone, send_to_my_account, buy_or_swap, connect_or_accept_offer, asked_by_someone ; signaux transversaux : contrat < 50 blocs, > 50 % du solde, adresse sosie 4+4 hex ; critique sur toute approbation/permit/délégation inattendue).
+Règles Hold up de référence : `C:\Users\Adem\wt\T-103\app\intent\src\compare.ts` (5 intentions : pay_someone, send_to_my_account, buy_or_swap, connect_or_accept_offer, asked_by_someone ; signaux transversaux : contrat < 50 blocs, > 50 % du solde, adresse sosie 4+4 hex ; critique sur toute approbation/permit/délégation inattendue).
 
 ## 0. Résumé exécutif
 
@@ -155,7 +155,7 @@ Pour chaque cas « n/a » ou « non nommé », l'identité de l'outil ou la pré
 5. **Bouclage sur la vérité terrain du calldata** malgré un front compromis (Bybit/Trust) : seul Blockaid Transaction Verification (proposition) et Ledger Transaction Check s'y attaquent côté hardware.
 6. **Seaport** : couverture ? chez tous ; Scam Sniffer et l'extension Revoke.cash sont les seuls à le mentionner.
 
-## 6. Table stakes : où Sentinelle doit être au niveau
+## 6. Table stakes : où Hold up doit être au niveau
 
 - **Adresse sosie** : seuil 4+4 hex comme MetaMask ; MetaMask bloque *et* alerte « jamais utilisée ». Notre `isLookalike` compare uniquement 4+4 sur `lookalikeOf`/contreparties : OK, mais à l'état de l'art il faut aussi (a) l'alerte « adresse jamais utilisée », (b) idéalement le test des 3 premiers + 4 derniers (cas des 50 M$ avait 3+4 : notre seuil de 4+4 l'aurait **manqué**). Recommandation à valider par Adem : tester aussi 3+4 / 4+3 au minimum.
 - **Permit / Permit2 / approve illimité / setApprovalForAll** décodés comme approbation (Scam Sniffer : Permit/Permit2 = 38 % des pertes des gros cas). Couvert dans `compare.ts`, mais la dépendance est à un `Effects` correct (parsing EIP-712, y compris les variantes de casse `0X` du bypass 2024).
@@ -170,7 +170,7 @@ Pour chaque cas « n/a » ou « non nommé », l'identité de l'outil ou la pré
 
 ## 7. Prior art sur l'intention
 
-| Élément | Nature | Ce que c'est | Écart avec Sentinelle | Source |
+| Élément | Nature | Ce que c'est | Écart avec Hold up | Source |
 |---|---|---|---|---|
 | Vitalik Buterin, post X du 22 fév. 2026 | Proposition publique de principe | « L'utilisateur précise d'abord l'action, puis OK/Annuler après simulation » ; plusieurs spécifications qui doivent concorder ; l'intention est « extrêmement difficile » à capturer ; aucun produit cité | Principe identique à notre différenciation ; pas d'implémentation | Cointelegraph, Forklog [S] ; texte original du post non lu |
 | Blockaid « Transaction Verification » (déc. 2024 / whitepaper 27 oct. 2024) | Whitepaper vendeur pour hardware wallets | Fournisseur de vérification qui signe un paquet transaction+simulation+validation (VTX), le device vérifie ; dit que cela aide à confirmer « l'intention de l'utilisateur » | N'interroge pas l'utilisateur ; l'« intention » est implicite | blockaid.io/blog [V] |

@@ -1,4 +1,4 @@
-# Sentinelle Fuji : état de l'art 2026, « on reprend ce qui existe, puis on innove »
+# Hold up : état de l'art 2026, « on reprend ce qui existe, puis on innove »
 
 > Recherche du 2026-10-10. Complète `research/tracks/T1_P4_defi_dora_v2.md` (concurrents déjà cartographiés : je ne les répète pas) et `docs/architecture.md`. Le règlement (`context/notion_guide.md`) prime.
 > Légende : **[P]** primaire, lu sur la page éditeur / dépôt / texte officiel · **[S]** secondaire (presse, agrégateur, billet) · **[V]** vérifié par lecture directe aujourd'hui (peut se combiner : [P][V]) · **[ÀV]** à vérifier avant slide. Une absence dans mes recherches n'est pas une preuve d'absence.
@@ -174,7 +174,7 @@ Les IDs ATT&CK (T1657 vol financier, T1078 comptes valides, T1190 exploitation d
 1. **Champs monétaires** : 3.11, 4.13, 4.14 en **milliers** (pas le 4.12, qui est un texte de seuils économiques) [P][V].
 2. **Champ 2.5** doit toujours inclure « services critiques affectés » ; **2.6** exclut le pays de l'entité [P][V].
 3. **Format de dépôt** : fixé **au niveau national** ; la phrase « xBRL-CSV hors périmètre PoC » est à nuancer : le xBRL-CSV concerne le **registre d'informations** (ITS 2024/2956) ; pour l'incident, le canal et le format sont **nationaux** (ESAs, 16/09/2026). Ne pas affirmer que l'incident se dépose en xBRL-CSV [P][V].
-4. **Positionnement** : « Sentinelle Fuji détecte » est banal (cf. §1). Mettre le pitch sur **la preuve et la déclaration**.
+4. **Positionnement** : « Hold up détecte » est banal (cf. §1). Mettre le pitch sur **la preuve et la déclaration**.
 5. **Bonne pratique ESAs** : un linter des règles de qualité est une **fonctionnalité de conformité vérifiable** (15 % de la note) à mettre dans la démo.
 6. **Dire que la pause est la première décision DORA** : critère d'indisponibilité à 2 h, intégré au moteur.
 

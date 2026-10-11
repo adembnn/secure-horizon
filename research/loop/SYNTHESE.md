@@ -1,4 +1,4 @@
-# Synthèse de la boucle jury ↔ solveurs — Sentinelle Fuji
+# Synthèse de la boucle jury ↔ solveurs — Hold up
 
 Date : samedi 10 oct. 2026, soir. Sources : `docs/architecture.md` (v2, version finale), `research/loop/round-1.md`, `research/loop/round-2.md`. Le tour 3 n'a pas de fichier : la boucle s'est arrêtée sur la note (voir §2).
 
@@ -8,9 +8,9 @@ Date : samedi 10 oct. 2026, soir. Sources : `docs/architecture.md` (v2, version 
 
 **Le problème** : une nuit, des fonds sortent en quelques minutes vers des adresses jamais vues. La loi impose une première notification dans les 4 h après qualification, et au plus tard 24 h après la prise de connaissance. Les équipes reconstituent tout à la main, et le gel arrive trop tard.
 
-**Ce que fait l'outil** : une « Sentinelle » surveille les sorties de valeur de vos adresses, donne l'alerte et prépare le dossier de déclaration. Elle a trois sorties :
+**Ce que fait l'outil** : une « Hold up » surveille les sorties de valeur de vos adresses, donne l'alerte et prépare le dossier de déclaration. Elle a trois sorties :
 - **Watch** : on surveille n'importe quelle adresse sans rien migrer. On alerte et on prépare le dossier, mais on ne retient rien.
-- **Guard** (optionnel) : un coffre protégé dont le contrat borne la perte lui-même. La Sentinelle ne peut que resserrer, jamais desserrer.
+- **Guard** (optionnel) : un coffre protégé dont le contrat borne la perte lui-même. Hold up ne peut que resserrer, jamais desserrer.
 - **Dossier** : horloges DORA avec provenance de chaque champ, trace AML, journal dont l'intégrité est ancrée sur Avalanche. Un auditeur le vérifie sans nous.
 
 **La scène de démo** : deux coffres jumeaux reçoivent la même attaque. L'un se vide jusqu'à zéro, l'autre s'arrête. On casse ensuite le journal, le sceau de preuve passe au rouge, et la carte « déclaration prête » s'affiche.
@@ -36,10 +36,10 @@ Lecture honnête :
 1. **Le produit passe d'un coffre maison à trois sorties (Watch / Guard / Dossier).** Pourquoi : cinq critiques sur sept disaient qu'un client n'allait pas migrer ses fonds dans notre coffre. Watch ne demande aucune migration.
 2. **La détection porte sur les sorties de valeur, plus sur un événement `Withdraw`.** Pourquoi : un vol d'infrastructure ressemble à des retraits valides. Ce qui trahit le vol, ce sont les destinataires, la cadence et la part du solde.
 3. **Plus de pause globale qui expire seule.** Elle est remplacée par une voie rapide / voie lente, une quarantaine par compte et un goutte-à-goutte. Pourquoi : la pause globale était un déni de service. Trois provocations bon marché gelaient toute la clientèle.
-4. **Le contrat vérifie `restrict()` (règle, palier, fenêtre), un seul modèle de pouvoirs.** Pourquoi : avec une clé Sentinelle volée, l'attaquant fabriquait un motif de gel. Maintenant le pire cas est une gêne bornée.
+4. **Le contrat vérifie `restrict()` (règle, palier, fenêtre), un seul modèle de pouvoirs.** Pourquoi : avec une clé Hold up volée, l'attaquant fabriquait un motif de gel. Maintenant le pire cas est une gêne bornée.
 5. **Les faux positifs se mesurent en alertes par adresse-semaine, sur des trésoreries publiques du mainnet en lecture seule.** Pourquoi : « un faux positif par jour » était invérifiable et mesuré sur la mauvaise population.
 6. **Seuils appris par adresse (quantile de son propre historique), procédure gelée, état APPRENTISSAGE.** Pourquoi : l'énoncé officiel de la track dit que les règles fixes font trop de faux positifs. C'est notre réponse directe.
-7. **Banc pré-enregistré, par famille d'attaque, avec trois baselines dont « plafond seul ».** Pourquoi : le banc était circulaire (7 critiques sur 7). Il faut montrer ce que la Sentinelle apporte en plus du plafond du contrat, et publier le résultat même défavorable.
+7. **Banc pré-enregistré, par famille d'attaque, avec trois baselines dont « plafond seul ».** Pourquoi : le banc était circulaire (7 critiques sur 7). Il faut montrer ce que Hold up apporte en plus du plafond du contrat, et publier le résultat même défavorable.
 8. **Le chiffre « 54 % » est supprimé, remplacé par un tableau de 20 incidents classés.** Pourquoi : Tectonic (une seule transaction) relève de la prévention. Le vrai plafond observable est 41,3 % (Bitget seul), et il se retournait contre nous.
 9. **Conformité refondue : un signal machine ne fait jamais partir d'horloge, la prise de connaissance est déclarée par un humain.** S'y ajoutent la matrice sur les bons articles DORA, l'effacement soumis à un contrôle de conservation, l'AML scindé en dossier interne et externe, et le RGPD « partiel ». Pourquoi : l'auditeur y voyait un horodatage opposable créé par erreur et un risque de destruction de preuves.
 10. **Preuve liée à l'action avec racine de confiance externe, écran en deux vues (Scène / Audit), budget P0 recalé à 36 h sur 40.** La preuve : le hash de la décision est dans la transaction, l'adresse de l'ancre est épinglée hors bande, un témoin co-signe. L'écran : 4 éléments pour le jury, le détail dans Audit. Le budget : la v1 demandait 42,5 h, avec des coupes écrites d'avance. Pourquoi : la preuve était réécrivable par l'opérateur, l'écran échouait au test des 30 s, et le plan dépassait la capacité avant tout aléa.
@@ -51,7 +51,7 @@ Source unique : `limits.md` (à créer ; la section 21 de l'architecture en est 
 | Limite | Formulation à donner au jury |
 |---|---|
 | Watch ne retient rien, on perd contre un balayage de 2 min | « Aucun humain n'agit en 128 secondes. Watch vise les sorties plus longues et les changements de pouvoir. Borner la perte demande Guard. Nous ne disons jamais perte évitée là où nous n'avions pas la main. » |
-| Scénario écrit par nous, sur nos contrats Fuji | « Une attaque jouée par notre équipe sur nos contrats, fonds sans valeur, transactions vérifiables. Nous mesurons ce que la Sentinelle fait contre ce que nous avons modélisé, pas contre le monde réel. » |
+| Scénario écrit par nous, sur nos contrats Fuji | « Une attaque jouée par notre équipe sur nos contrats, fonds sans valeur, transactions vérifiables. Nous mesurons ce que Hold up fait contre ce que nous avons modélisé, pas contre le monde réel. » |
 | Aucun incident C-Chain rejouable | « Nous n'avons pas trouvé d'incident vérifiable à sortie étalée sur C-Chain et nous n'en nommons aucun sans hash. Le mot rejoué est interdit. Nous transposons des formes publiques. » |
 | Faux positifs : un proxy, pas votre trafic | « Alertes par adresse-semaine sur des trésoreries publiques, borne indicative. Chez vous, la phase d'apprentissage fixe votre budget d'alertes et le fit-check dit ce qui n'est pas couvert. » |
 | Cible calibrée : trésorerie à destinataires récurrents | « Sur un hot wallet de retraits clients, D1 est désactivé. Il reste D2, D3 et le plafond. Nous le disons à l'écran. » |
@@ -70,10 +70,10 @@ Source unique : `limits.md` (à créer ; la section 21 de l'architecture en est 
 3. **Citez un incident Avalanche que vous auriez détecté.** Nous n'en avons pas de vérifiable à sortie étalée, et nous ne nommons rien sans hash ni bloc. La précision est mesurée sur des trésoreries C-Chain réelles en lecture seule, la détection sur des formes publiques transposées et des attaques synthétiques.
 4. **Combien de faux positifs ?** Nous mesurons en alertes par adresse-semaine sur des trésoreries publiques, le chiffre vient du run et non d'une saisie. C'est un proxy : chez vous, la phase d'apprentissage fixe votre budget d'alertes.
 5. **En quoi battez-vous « alerte si transfert > X » ?** Nous publions la baseline réglée au mieux sur les mêmes jeux, même quand elle gagne. Le plus : seuil appris par adresse, destination effective, plafond du contrat, preuve et dossier.
-6. **Si je garde le plafond du contrat et je supprime la Sentinelle ?** Deux lignes à l'écran : « sauvé par le plafond seul » et « sauvé en plus par la Sentinelle ». Si le plafond suffit sur ce lot, c'est affiché.
+6. **Si je garde le plafond du contrat et je supprime Hold up ?** Deux lignes à l'écran : « sauvé par le plafond seul » et « sauvé en plus par Hold up ». Si le plafond suffit sur ce lot, c'est affiché.
 7. **L'attaquant envoie tout au pont officiel, ou rend ses adresses « connues » une heure avant.** Un pont ou routeur illisible est `OPAQUE_EXIT`, traité comme 100 % inédit. Une adresse n'a que la capacité de ce qu'elle a déjà fait transiter : envoyer 1 $ donne 1 $ de capacité.
 8. **Votre RPC public n'a pas de traces.** Nous l'avons mesuré (`rpc_probe.json`). Sans traces, une baisse de solde inexpliquée est traitée comme sortie vers un destinataire inconnu, et l'écran affiche « traces : non ».
-9. **Si je vole la clé Sentinelle ?** Le contrat refuse une règle inconnue et plafonne l'effet des règles attestées à L2. Au pire, un resserrement borné, jamais une preuve fabriquée. Les gardiens humains restent une cible : limite écrite.
+9. **Si je vole la clé Hold up ?** Le contrat refuse une règle inconnue et plafonne l'effet des règles attestées à L2. Au pire, un resserrement borné, jamais une preuve fabriquée. Les gardiens humains restent une cible : limite écrite.
 10. **Votre tag « RÉEL », « fonds sauvés » : par rapport à quoi ?** Il n'y a plus de tag RÉEL. « Perte évitée sur ce scénario » est la différence de deux soldes on-chain, coffre témoin moins coffre protégé, face au même script dans les mêmes blocs. L'auditeur refait la soustraction.
 11. **Votre signal L1 à 2 h du matin fait-il partir les 24 h ?** Non. Un signal machine ne fait jamais partir d'horloge : la connaissance est déclarée par un humain, motivée. L'échéance affichée est la variante prudente, et l'écart est marqué « à justifier ».
 12. **Que fait votre produit de plus qu'un moniteur gratuit et un tableur ?** Cinq choses démontrées : preuve vérifiable sans nous, perte bornée par le contrat, horloges DORA avec provenance, charte en trois chiffres, refus d'effacement sous gel légal. Notre IA rédige, un vérificateur déterministe la contrôle, un humain valide.
@@ -92,7 +92,7 @@ Autres questions préparées dans §20 de l'architecture : Sepolia vs Avalanche,
 |---|---|---|---|---|
 | 1 | Schémas, clés, cibles autorisées, génération des tâches (Adem) | `schemas/*.json`, `keys.ts`, `deployments/fuji.json`, `assertTargetAllowed()`, `plan/p0.yaml`, `scripts/mk-tasks.mjs` | 1,5 | n.d. |
 | 2 | `GuardedVault` : plafond agrégé, voie rapide / lente, NORMAL / RESTREINT, `guardsEnabled`, `restrict()` avec 3 reverts, tests Hardhat | contrats + tests Hardhat | 5 | 1 seul revert, jumeau par script |
-| 3 | Détection : `probe-rpc` (20 min, tout premier), `ChainSource` T1, `OutflowLedger` (capacité, `OPAQUE_EXIT`, fail-closed), D1 D2 D7, `calibrate.ts`, échelle, `config.frozen.json` | modules Sentinelle, `results/rpc_probe.json` | 5 | seuils globaux gelés, D7 événements seuls |
+| 3 | Détection : `probe-rpc` (20 min, tout premier), `ChainSource` T1, `OutflowLedger` (capacité, `OPAQUE_EXIT`, fail-closed), D1 D2 D7, `calibrate.ts`, échelle, `config.frozen.json` | modules Hold up, `results/rpc_probe.json` | 5 | seuils globaux gelés, D7 événements seuls |
 | 4 | Journal (décision en clair, `client_ref` haché) + `EvidenceAnchor` + `verify` + `--pinned` + 2 scènes rouges | journal, contrat d'ancre | 3,5 | 1 seule scène rouge |
 | 5 | Moteur DORA : `its_initial_fields`, `classify.ts` (3 critères), horloges, prise de connaissance déclarée, 6 cas | moteur DORA | 3 | gabarit ancien avec bandeau |
 | 6 | Banc : sources G et W, critère par famille, baselines B0 B1 B2, ancre, table de décision | banc, `results/benchmark.json` | 3 | intervalles larges, W en bonus |

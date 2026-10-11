@@ -1,5 +1,5 @@
 /**
- * Sentinelle Intent Barrier
+ * Hold up Intent Barrier
  * Core decision engine for intent-vs-effects comparison
  *
  * @module @sentinelle/intent

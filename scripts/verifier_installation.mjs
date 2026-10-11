@@ -132,14 +132,71 @@ function courir(commande, cargs, cwd, timeoutMs = 600000) {
 }
 const nombre = (out, cle) => { const m = out.match(new RegExp('^ℹ ' + cle + ' (\\d+)', 'm')); return m ? Number(m[1]) : null; };
 
+// ------------------------------------------------------------ remise en état du clone après chaque suite
+// Plusieurs suites réécrivent des fichiers suivis par git : sorties du moteur (engine/out), résultats du serveur,
+// build autonome complet (run_tests.mjs reconstruit extension/ et extension_sans_reseau/), copie web (webdemo).
+// Règle : avant la suite, on note l'état git de ses zones. Après, on remet par `git checkout --` uniquement les
+// fichiers suivis qui étaient PROPRES avant et que la suite a salis. Un fichier déjà modifié avant n'est jamais
+// touché (ce peut être le travail en cours de quelqu'un) : le script l'annonce en [attention].
+const B = 'research/titouan/T_banc_e2e/';
+const ZONES = {
+  moteur: [B + 'engine/out/'],
+  serveur: [B + 'server/test/results.json', B + 'journal/'],
+  statique: [B + 'extension_standalone/out/'],
+  build: [B + 'extension_standalone/extension/', B + 'extension_standalone/extension_sans_reseau/', B + 'extension_standalone/extension_test/', B + 'extension_standalone/out/'],
+  webdemo: [B + 'webdemo/BUILD_INFO.json', B + 'webdemo/engine/', B + 'webdemo/js/', B + 'webdemo/out/'],
+};
+const git = (gargs) => spawnSync('git', ['-C', ROOT, ...gargs], { encoding: 'utf8', windowsHide: true, maxBuffer: 64 * 1024 * 1024 });
+const GIT_OK = (() => { try { const r = git(['rev-parse', '--show-toplevel']); return r.status === 0 && resolve(r.stdout.trim()).toLowerCase() === ROOT.toLowerCase(); } catch { return false; } })();
+const attention = (s) => say(`  [attention] ${s}`);
+// état git des zones : Map chemin -> code XY (« ?? » = non suivi). Un fichier absent de la carte est propre.
+function etatGit(zones) {
+  const r = git(['status', '--porcelain=v1', '-z', '--untracked-files=all', '--', ...zones]);
+  const m = new Map();
+  if (r.status !== 0) return m;
+  const parts = r.stdout.split('\0');
+  for (let i = 0; i < parts.length; i++) {
+    const e = parts[i]; if (e.length < 4) continue;
+    const xy = e.slice(0, 2); m.set(e.slice(3), xy);
+    if (xy[0] === 'R' || xy[0] === 'C') i++; // renommage : le chemin d'origine suit, on l'ignore
+  }
+  return m;
+}
+function avantSuite(s) {
+  if (!s.zones) return null;
+  if (!GIT_OK) { attention(`${s.nom} : git introuvable ou pas un clone, ce que la suite réécrit ne pourra pas être remis (${s.zones.join(', ')})`); return null; }
+  const avant = etatGit(s.zones);
+  const sales = [...avant].filter(([, xy]) => xy !== '??').map(([p]) => p);
+  if (sales.length) attention(`${s.nom} : ${sales.length} fichier(s) suivi(s) déjà modifié(s) avant la suite, ils seront réécrits et NE seront PAS remis : ${sales.slice(0, 4).join(', ')}${sales.length > 4 ? ' …' : ''}`);
+  return avant;
+}
+function apresSuite(s, avant) {
+  if (!avant) return;
+  const apres = etatGit(s.zones);
+  const aRemettre = [], nouveaux = [];
+  for (const [p, xy] of apres) {
+    if (avant.has(p)) continue;              // déjà sale ou déjà non suivi avant : on ne touche pas
+    if (xy === '??') nouveaux.push(p); else aRemettre.push(p);
+  }
+  for (let i = 0; i < aRemettre.length; i += 50) {
+    const r = git(['checkout', '--', ...aRemettre.slice(i, i + 50)]);
+    if (r.status !== 0) attention(`${s.nom} : git checkout a échoué (${(r.stderr || '').trim().slice(0, 150)})`);
+  }
+  const reste = [...etatGit(s.zones)].filter(([p, xy]) => !avant.has(p) && xy !== '??').map(([p]) => p);
+  if (aRemettre.length) info(`${s.nom} : ${aRemettre.length - reste.length} fichier(s) suivi(s) réécrit(s) par la suite, remis à l'état de git`);
+  if (reste.length) attention(`${s.nom} : ${reste.length} fichier(s) n'ont pas pu être remis : ${reste.slice(0, 4).join(', ')}`);
+  if (nouveaux.length) attention(`${s.nom} : ${nouveaux.length} fichier(s) non suivi(s) créé(s), laissés en place : ${nouveaux.slice(0, 4).join(', ')}${nouveaux.length > 4 ? ' …' : ''}`);
+}
+
 const SUITES = [
-  { nom: 'moteur d\'effets', cmd: 'npm run test:engine', run: () => courir(process.execPath, ['--test', 'research/titouan/T_banc_e2e/engine/test/*.test.mjs'], ROOT), lire: lireNodeTest, restaure: [join(BANC, 'engine', 'out', 'real_results.json')] },
-  { nom: 'extension (avec serveur) : tests unitaires', cmd: 'npm run test:extension', run: () => courir(process.execPath, ['--test', 'research/titouan/T_banc_e2e/extension/tests/unit/*.test.mjs'], ROOT), lire: lireNodeTest },
-  { nom: 'serveur de vérification et journal chaîné', cmd: 'npm run test:server', run: () => courir(process.execPath, [join(BANC, 'server', 'test', 'server.test.mjs')], ROOT), lire: (r) => { const m = r.out.match(/RESUME\s+(\{.*?"total":\d+)/); if (!m) return null; const p = Number((r.out.match(/"passed":(\d+)/) || [])[1]); const t = Number((r.out.match(/"total":(\d+)/) || [])[1]); return { pass: p, total: t, fail: t - p }; }, restaure: [join(BANC, 'server', 'test', 'results.json')] },
+  { nom: 'moteur d\'effets', cmd: 'npm run test:engine', run: () => courir(process.execPath, ['--test', 'research/titouan/T_banc_e2e/engine/test/*.test.mjs'], ROOT), lire: lireNodeTest, zones: ZONES.moteur },
+  { nom: 'extension (avec serveur) : tests unitaires', cmd: 'npm run test:extension', run: () => courir(process.execPath, ['--test', 'research/titouan/T_banc_e2e/extension/tests/unit/*.test.mjs'], ROOT), lire: lireNodeTest, zones: ZONES.serveur },
+  { nom: 'serveur de vérification et journal chaîné', cmd: 'npm run test:server', run: () => courir(process.execPath, [join(BANC, 'server', 'test', 'server.test.mjs')], ROOT), lire: (r) => { const m = r.out.match(/RESUME\s+(\{.*?"total":\d+)/); if (!m) return null; const p = Number((r.out.match(/"passed":(\d+)/) || [])[1]); const t = Number((r.out.match(/"total":(\d+)/) || [])[1]); return { pass: p, total: t, fail: t - p }; }, zones: ZONES.serveur },
   { nom: 'RPC de garde', cmd: 'npm run test:rpc', run: () => courir(process.execPath, ['--test', 'research/demo_reelle/rpc_garde/test/*.test.mjs'], ROOT), lire: lireNodeTest },
   { nom: 'relais du classifieur (modèle simulé)', cmd: 'node --test research/demo_reelle/classifieur/relay.test.mjs', run: () => courir(process.execPath, ['--test', 'research/demo_reelle/classifieur/relay.test.mjs'], ROOT), lire: lireNodeTest },
-  { nom: 'build autonome : contrôle statique', cmd: 'node research/titouan/T_banc_e2e/extension_standalone/tests/static_check.mjs', run: () => courir(process.execPath, [join(BANC, 'extension_standalone', 'tests', 'static_check.mjs')], ROOT), lire: lireLignes },
-  { nom: 'build autonome : suite complète', cmd: 'node --no-warnings research/titouan/T_banc_e2e/extension_standalone/tests/run_tests.mjs', run: () => courir(process.execPath, ['--no-warnings', join(BANC, 'extension_standalone', 'tests', 'run_tests.mjs')], ROOT), lire: lireLignes, restaure: [join(BANC, 'extension_standalone', 'out', 'RESULTATS.json'), join(BANC, 'extension_standalone', 'out', 'RESULTATS.md')] },
+  { nom: 'build autonome : contrôle statique', cmd: 'node research/titouan/T_banc_e2e/extension_standalone/tests/static_check.mjs', run: () => courir(process.execPath, [join(BANC, 'extension_standalone', 'tests', 'static_check.mjs')], ROOT), lire: lireLignes, zones: ZONES.statique },
+  { nom: 'build autonome : suite complète', cmd: 'node --no-warnings research/titouan/T_banc_e2e/extension_standalone/tests/run_tests.mjs', run: () => courir(process.execPath, ['--no-warnings', join(BANC, 'extension_standalone', 'tests', 'run_tests.mjs')], ROOT), lire: lireLignes, zones: ZONES.build },
+  { nom: 'démo web (webdemo)', cmd: 'node research/titouan/T_banc_e2e/webdemo/tests/run_webdemo_tests.mjs', run: () => courir(process.execPath, ['--no-warnings', join(BANC, 'webdemo', 'tests', 'run_webdemo_tests.mjs')], ROOT), lire: lireLignes, zones: ZONES.webdemo },
 ];
 if (flag('--complet')) {
   const cli = join(ROOT, 'blockchain', 'node_modules', 'hardhat', 'internal', 'cli', 'bootstrap.js');
@@ -160,10 +217,10 @@ async function etapeTests() {
   const rows = [];
   for (const s of SUITES) {
     if (s.manque) { saute(`${s.nom} : ${s.manque}`); continue; }
-    const avant = (s.restaure || []).map((f) => (existsSync(f) ? readFileSync(f) : null));
+    const avant = avantSuite(s);
     const r = await s.run();
-    // Un test qui réécrit un fichier suivi par git salirait le clone : on remet le fichier comme il était.
-    (s.restaure || []).forEach((f, i) => { if (avant[i] !== null) { try { writeFileSync(f, avant[i]); } catch { /* lecture seule */ } } });
+    // Un test qui réécrit un fichier suivi par git salirait le clone : on remet ce qui était propre avant.
+    apresSuite(s, avant);
     const n = s.lire(r);
     const detail = n ? `${n.pass} réussis sur ${n.total}${n.fail ? `, ${n.fail} en échec` : ''}${n.saute ? `, ${n.saute} sautés` : ''}` : 'résultat non lisible dans la sortie';
     if (r.code === 0 && n && !n.fail) ok(`${s.nom} : ${detail} (${r.s} s)`);

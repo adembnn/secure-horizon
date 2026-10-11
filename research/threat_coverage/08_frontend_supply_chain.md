@@ -245,9 +245,9 @@ Champ d'intention à ajouter pour ce segment : `kind: 'treasury_admin'` n'existe
 
 ---
 
-### F9 — Snap malveillant ou Snap Sentinelle lui-même compromis
+### F9 — Snap malveillant ou Snap Hold up lui-même compromis
 
-**Mécanisme.** Un Snap tiers demande des permissions larges (transaction-insight, network-access, ethereum-provider) et ment dans ses « insights » (affiche « sûr ») ; ou un build de Sentinelle est empoisonné (dépendances npm : F4).
+**Mécanisme.** Un Snap tiers demande des permissions larges (transaction-insight, network-access, ethereum-provider) et ment dans ses « insights » (affiche « sûr ») ; ou un build de Hold up est empoisonné (dépendances npm : F4).
 
 **Incidents.** Aucun incident majeur public établi à ma connaissance **[M]** ; risque structurel (permissions Snap, mises à jour automatiques). Notre propre surface d'attaque : un Snap est lui-même un paquet npm.
 
