@@ -142,11 +142,19 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
     try { const sh = new CSSStyleSheet(); sh.replaceSync(CSS); root.adoptedStyleSheets = [sh]; } catch (_) { const st = document.createElement('style'); st.textContent = CSS; root.append(st); }
     const ov = h('div', { class: 'ov' });
     root.append(ov);
+    // Le support vit dans le DOM de la page : son style est force en ligne (!important en ligne > toute regle de la page) et repose s il est modifie.
+    host.style.cssText = 'all:initial!important;position:fixed!important;inset:0!important;z-index:2147483647!important;display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important;pointer-events:auto!important';
+    const wantStyle = host.style.cssText;
     const attach = () => (document.documentElement || document).append(host);
     attach();
     let rearm = 0;
-    const mo = new MutationObserver(() => { if (!host.isConnected && rearm++ < 100) attach(); });
+    const mo = new MutationObserver(() => {
+      if ((!host.isConnected || host.parentNode !== document.documentElement) && rearm++ < 100) attach();
+      if (host.style.cssText !== wantStyle) host.style.cssText = wantStyle;
+      for (const a of ['hidden', 'inert', 'class', 'popover']) if (host.hasAttribute(a)) host.removeAttribute(a);
+    });
     mo.observe(document, { childList: true, subtree: true });
+    mo.observe(host, { attributes: true });
     ov.addEventListener('keydown', (e) => e.stopPropagation(), true);
     ov.addEventListener('keyup', (e) => e.stopPropagation(), true);
     return { host, root, ov, close() { mo.disconnect(); host.remove(); } };
@@ -272,9 +280,10 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
         refresh(); markEnabled();
       }, 100);
       cancel.addEventListener('click', () => fin('cancel'));
-      go.addEventListener('click', () => { if (!go.disabled) fin('confirm'); });
+      // "Continuer" n accepte qu un vrai geste (isTrusted), et pas dans les 600 premieres ms : une touche ou un clic deja en cours quand la fenetre surgit ne vaut pas accord.
+      go.addEventListener('click', (e) => { if (go.disabled) return; if (!cfg.auto && (!e.isTrusted || performance.now() - t0 < 600)) return; fin('confirm'); });
       m.ov.addEventListener('keydown', (e) => { if (e.key === 'Escape') fin('cancel'); });
-      if (isRed || v.level === 'unknown') cancel.focus(); else go.focus();
+      cancel.focus(); // jamais de focus initial sur "Continuer" : Entree ou Espace tenue par la page annule, n approuve pas
       const cancelVisible = inViewport(cancel) && !cancel.disabled;
 
       // mode automatique (tests) : agit sur les vrais boutons
@@ -319,7 +328,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       let done = false;
       const cancelVisible = inViewport(cancel);
       const fin = (r) => { if (done) return; done = true; m.close(); resolve(Object.assign({ time_to_decision_ms: Math.round(performance.now() - t0), cancel_visible: cancelVisible }, r)); };
-      ok.addEventListener('click', () => { const c = fs.querySelector('input:checked'); if (!c) return;
+      ok.addEventListener('click', (e) => { const c = fs.querySelector('input:checked'); if (!c || (!cfg.auto && !e.isTrusted)) return;
         fin(isIntent ? { decision: 'continue', intent: { choice: c.value, message: ta ? ta.value : '' } } : { decision: 'answer', option: c.value }); });
       cancel.addEventListener('click', () => fin({ decision: 'cancel' }));
       m.ov.addEventListener('keydown', (e) => { if (e.key === 'Escape') fin({ decision: 'cancel' }); });
