@@ -34,3 +34,5 @@ Rendu vérifié par export PowerPoint en images, les huit slides relues.
 `holdup.pdf` est fait des images exportées par PowerPoint : le texte y est dessiné dans la police du système de design, quel que soit le lecteur.
 
 Slide ajoutée à 11h46 à la demande d'Adem, avant la phrase de fin : le modèle économique de Titouan (commit bf06f8b). « Gratuit pour les personnes. La plateforme paie. », « Vérifié par Hold up », critères publics, pas de classement payé ; hypothèse à valider, aucun revenu aujourd'hui. Sources : `README.md`, `livrables/PITCH_5MIN.md`, `research/titouan/BM2/BM_LABEL.md`. Le deck compte 8 slides.
+
+Slide 7 réécrite à 11h48 (Adem : « ça veut rien dire ») : « Qui paie ? » ; « Pour toi : gratuit » ; « Pour les sites : payant », un site qui ne demande que le nécessaire peut afficher « Vérifié par Hold up » et paie pour l'afficher ; critères publics, le label ne s'achète pas, aucun client aujourd'hui. Même modèle, mêmes sources.

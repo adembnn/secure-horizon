@@ -118,12 +118,15 @@ function bar(s, label, value, pct, y, color) {
 
 // Le modèle économique (formulation de Titouan, commit bf06f8b)
 {
-  const s = slide('Gratuit pour les personnes. La plateforme paie.', 'README.md, livrables/PITCH_5MIN.md, research/titouan/BM2/BM_LABEL.md',
+  const s = slide('Qui paie ?', 'README.md, livrables/PITCH_5MIN.md, research/titouan/BM2/BM_LABEL.md',
     "Modèle économique de Titouan (commit bf06f8b, repris dans README.md, PRODUCT.md, FICHE_DEFENSE.md, PITCH_5MIN.md, PITCH_3MIN.md, QR_JURY.md), à dire tel quel : « Gratuit pour les personnes. Plus tard, une plateforme qui demande l'autorisation exacte (50 USDC pour un échange de 50, pas tout, pour toujours) pourra afficher Vérifié par Hold up. C'est elle qui paie. Critères publics, mesurés sur ses vraies demandes, pas de classement payé. » Hypothèse à valider avec des pilotes : aucun client, aucun revenu aujourd'hui, jamais présentée comme un revenu existant. Ne pas dire « certification » (étude : research/titouan/BM2/BM_LABEL.md).");
-  txt(s, '« Vérifié par Hold up »', 0.5, 1.45, 9, 1.1, big({ fontSize: 54 }));
-  txt(s, 'Une plateforme qui demande l’autorisation exacte, 50 USDC pour un échange de 50, pourra l’afficher. C’est elle qui paie.', 0.5, 2.85, 8.2, 0.8, { fontSize: 18 });
-  txt(s, 'Critères publics, mesurés sur ses vraies demandes. Pas de classement payé.', 0.5, 3.75, 8.2, 0.4, { color: INK2 });
-  txt(s, 'Hypothèse à valider avec des pilotes. Aucun revenu aujourd’hui.', 0.5, 4.3, 8.2, 0.4, { fontSize: 14, color: INK2 });
+  txt(s, 'Pour toi', 0.5, 1.4, 4.2, 0.4, { color: INK2 });
+  txt(s, 'gratuit', 0.5, 1.8, 4.3, 1.2, big({ fontSize: 66 }));
+  txt(s, 'L’extension ne coûte rien aux personnes.', 0.5, 3.15, 4.0, 0.8, { color: INK2 });
+  txt(s, 'Pour les sites', 5.3, 1.4, 4.2, 0.4, { color: INK2 });
+  txt(s, 'payant', 5.3, 1.8, 4.3, 1.2, big({ fontSize: 66 }));
+  txt(s, 'Un site qui ne te demande que le nécessaire peut afficher « Vérifié par Hold up ». Il paie pour l’afficher.', 5.3, 3.15, 4.2, 1.0, { color: INK2 });
+  txt(s, 'Les critères sont publics, le label ne s’achète pas. Aucun client aujourd’hui.', 0.5, 4.4, 9, 0.4, { fontSize: 14, color: INK2 });
 }
 
 // 8 La fin
