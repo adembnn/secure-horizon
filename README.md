@@ -12,7 +12,9 @@ Un particulier qui signe dans son portefeuille voit des octets, pas des conséqu
 
 Les chiffres sur le problème sont tous dans [livrables/CHIFFRES.md](livrables/CHIFFRES.md), avec leur source et leur date. Ce n'est pas la majorité des droits qui sont illimités, et nous ne disons pas que ça empire : la parade, ne laisser que ce qu'il faut (le moindre privilège), est connue.
 
-## Ce que fait le prototype
+## Architecture : ce que fait le prototype
+
+Une extension de navigateur (MV3) se place entre la page et le portefeuille. Elle contient son moteur de décodage et de comparaison. Un relais local (port 8789) garde la clé du modèle Clef et ne reçoit que la phrase. Un journal local chaîné garde chaque décision. Schémas : [livrables/ARCHITECTURE.md](livrables/ARCHITECTURE.md) (à relire : il décrit encore l'ancienne version à deux portes).
 
 1. **Demander.** Avant de montrer la demande, une fenêtre d'extension pose une question : « Que veux-tu faire sur ce site ? ». Champ de texte libre, aucun bouton, aucun pré-remplissage. Seules les demandes qui déplacent de la valeur ou accordent un droit ouvrent la fenêtre.
 2. **Lire.** Le montant, le jeton et l'adresse écrits sont extraits par du code. Le type d'action est classé par le modèle Clef, à travers un relais local (décision D-015). Si le relais est arrêté, lent ou sans clé, des mots-clés prennent le relais et l'écran le dit. Phrase trop vague : « Je n'ai pas pu vérifier cette demande ».
@@ -35,11 +37,20 @@ node scripts/verifier_installation.mjs
 node scripts/demo.mjs
 ```
 
-1. `node scripts/verifier_installation.mjs` contrôle les versions, les fichiers nécessaires, les ports, et lance les tests rapides. Les chiffres sont ceux de la commande, à l'instant où tu la lances.
-2. `node scripts/demo.mjs` (ou `npm run demo`) lance, dans l'ordre : la chaîne locale (port 8545), les contrats de démo, la copie de leurs adresses vers le site Neve, le site Neve (8793), le relais du classifieur (8789), la console d'attaque simulée (8792) et le site « Glacier Rewards » (8791). Ce qui tourne déjà n'est ni relancé ni arrêté. Ctrl+C arrête seulement ce que le script a lancé. À la fin, il affiche les adresses à ouvrir et le dossier de l'extension.
+1. `node scripts/verifier_installation.mjs` (ou `npm run verifier`) contrôle les versions, les fichiers nécessaires, les ports, et lance les tests rapides. Les chiffres sont ceux de la commande, à l'instant où tu la lances. Sur un clone neuf, elle sort en code 1 pour deux raisons connues : `blockchain/node_modules` est absent (la commande suivante l'installe) et 2 tests du moteur lisent un fichier de données ignoré par git (voir Tests). Cela ne bloque pas la démo.
+2. `node scripts/demo.mjs` (ou `npm run demo`) lance `npm install` dans `blockchain/` s'il manque (Internet nécessaire), puis, dans l'ordre : la chaîne locale (port 8545), les contrats de démo, la copie de leurs adresses vers le site Neve, le site Neve (8793), le relais du classifieur (8789), la console d'attaque simulée (8792) et le site « Glacier Rewards » (8791). Ce qui tourne déjà n'est ni relancé ni arrêté. Ctrl+C arrête seulement ce que le script a lancé. À la fin, il affiche les adresses à ouvrir et le dossier de l'extension.
 3. Charge l'extension : `chrome://extensions`, Mode développeur, Charger l'extension non empaquetée, dossier `research/titouan/T_banc_e2e/extension_standalone/extension`.
 
 Puis ouvre `http://localhost:8793/?mode=honnete` (parcours honnête) ou `http://localhost:8793/?mode=piege` (piège). Pas à pas complet, portefeuille de test et dépannage : [livrables/INSTALLATION.md](livrables/INSTALLATION.md).
+
+**Rejouer la preuve de la scène « site honnête piraté plus tard ».** Suite vérifiée le 11 oct. 2026 sur une copie propre du dépôt (Windows 11, Node 25.6), en mode par défaut puis avec `--fork` :
+
+```
+node scripts/demo.mjs --fork
+node research/demo_reelle/site_echange/test/preuve_piratage.mjs
+```
+
+La première commande reste ouverte : lance la seconde dans un autre terminal, depuis la racine. `demo.mjs` installe les dépendances de `blockchain/`, lance la chaîne, déploie les contrats (dont le routeur vulnérable) et écrit leurs adresses dans `research/demo_reelle/chain/addresses.local.json`, que la preuve lit. Avec `--fork`, la chaîne est une copie locale d'Avalanche (chainId 43114, Internet nécessaire) ; sans, une chaîne vide hors ligne (chainId 31337). Sortie réelle dans les deux cas : 13 lignes `PASS`, puis `TOUT VERT`. Sans Hold up : « le compte passe à 0 -> 50.0 -> 0.0 ». Avec le droit ramené à 50 : « le pirate ne prend RIEN -> +0.0 DUSDC ». Le script rejoue le geste de l'extension (le même `approve`, montant limité) ; il ne pilote pas l'extension. Il restaure l'état de la chaîne à la fin. Si le port 8545 est pris par autre chose : `HOLDUP_PORT=8646 node scripts/demo.mjs` (PowerShell : `$env:HOLDUP_PORT="8646"`).
 
 **Le modèle et le relais.** Le build livré classe la phrase avec le modèle Clef (Cloudflare Workers AI), à travers un relais local qui détient seul les clés. Les clés vivent dans un fichier `.env` à la racine (ignoré par git ; modèle : `.env.example`, variables `CF_ACCOUNT_ID` et `CF_API_TOKEN`). `node scripts/demo.mjs` lance le relais avec ce fichier s'il existe. Sans fichier ou sans clé, le script le dit : la phrase est alors classée sans modèle, par mots-clés, et l'écran de l'extension l'affiche aussi. Le relais à la main : `node --env-file=.env research/demo_reelle/classifieur/relay.mjs`.
 
@@ -73,7 +84,7 @@ Puis ouvre `http://localhost:8793/?mode=honnete` (parcours honnête) ou `http://
 | `node research/titouan/T_banc_e2e/webdemo/tests/run_webdemo_tests.mjs` | démo web (reconstruit `webdemo/engine/` : réécrit des fichiers suivis) |
 | `npm run test:contracts` (ou `node scripts/verifier_installation.mjs --complet`) | contrats de démo (Hardhat, environ 2 minutes) |
 
-Aucun nombre n'est recopié ici : ils changent à chaque version, lance la commande. Ces tests valident le code, ils ne mesurent pas la détection. Les tests de la revue de sécurité (`research/titouan/T_banc_e2e/security_review2/tests/`, `node <fichier>`) sortent en code 1 tant que leur faille est ouverte. Le 11 oct. 2026 : r01, r02, r03 et r05 passent ; r04 échoue encore (dans le moteur du build livré, un `transfer` qui joint 1 ETH reste « attention »). r04 accepte aussi « pas pu vérifier » comme correctif : un passage ne voudra pas dire que l'ETH joint est vu. r01 et r03 tournent en Node, pas dans un vrai Chrome. Détail : `security_review2/REVUE.md`.
+Aucun nombre n'est recopié ici : ils changent à chaque version, lance la commande. À remplir après la fusion : N tests, 0 échec (`npm run verifier`). Ces tests valident le code, ils ne mesurent pas la détection. La détection se mesure avec `node --no-warnings preuves/banc.mjs --bras=mots` (voir « Comment nous avons mesuré »). Les tests de la revue de sécurité (`research/titouan/T_banc_e2e/security_review2/tests/`, `node <fichier>`) sortent en code 1 tant que leur faille est ouverte. Le 11 oct. 2026 : r01, r02, r03 et r05 passent ; r04 échoue encore (dans le moteur du build livré, un `transfer` qui joint 1 ETH reste « attention »). r04 accepte aussi « pas pu vérifier » comme correctif : un passage ne voudra pas dire que l'ETH joint est vu. r01 et r03 tournent en Node, pas dans un vrai Chrome. Détail : `security_review2/REVUE.md`.
 
 Fichiers ignorés par git mais lus par des tests (un clone neuf ne les a pas) :
 - `research/titouan/T_banc_e2e/redteam/V2_DEV_norm.jsonl` (21 Mo), lu par `engine/test/monotonie.test.mjs`, `pipeline/test/evaluate_plus.test.mjs`, `pipeline/test/monotone_pipeline.test.mjs` et `run/mesure_monotonie.mjs`. Sans lui, ces tests plantent. Pour le créer : `node scripts/verifier_installation.mjs --donnees` depuis la racine (aussi lancé par `npm run test:engine`), ou à la main depuis `research/titouan/T_banc_e2e` : `node redteam/normalize_v2.mjs blind_adem/v2/V2_DEV.jsonl redteam/V2_DEV_norm.jsonl`.
@@ -82,25 +93,40 @@ Fichiers ignorés par git mais lus par des tests (un clone neuf ne les a pas) :
 
 ## Chiffres
 
-Un seul tableau fait foi : [livrables/CHIFFRES.md](livrables/CHIFFRES.md), avec les colonnes synthétique, contrôle scellé et données réelles, la source et la date de chaque ligne. Il donne le rappel, les fausses alertes, le trafic réel et les limites de chaque mesure. Deux avertissements qui valent pour tout le dépôt :
+Le document de référence est [METRIQUES.md](METRIQUES.md) : chaque chiffre y est donné avec son dénominateur, son intervalle, ce qu'il mesure, la commande et le fichier de preuve. Les chiffres sur le problème (données du monde) restent dans [livrables/CHIFFRES.md](livrables/CHIFFRES.md). Quatre chiffres à retenir, avec leur qualification :
 
-- La preuve citée en premier est le jeu aveugle (ligne A6) : 250 cas écrits sans lire nos règles, ouverts une seule fois, moteur figé, mesurés par notre moteur de comparaison (chaîne de banc), pas par l'extension livrée. 87,3 % des arnaques signalées (64,7 % sans la phrase), mais 15,0 % de faux rouges, au-dessus du seuil de 10 % publié avant. L'auteur est une IA de la même famille que celle qui nous a aidés : pas un test humain.
-- L'extension livrée, mesurée elle-même par le banc d'Adem (`preuves/`), fait moins bien sur une autre grille : 38,2 % attrapé, 9,1 % de fausses alertes, sur un build en partie en panne. Voir la section « Mesure sur l'extension livrée » de CHIFFRES.md.
-- Les fausses alertes restent la limite principale de l'approche (fatigue d'alerte).
-- Un test qui passe n'est pas une mesure de détection. Seul CHIFFRES.md mesure, et seulement sur les jeux qu'il nomme.
+- **34 %** des autorisations de dépense non nulles sont illimitées sur Avalanche C-Chain : 7 103 sur 20 753 = 34,2 % [33,6 ; 34,9]. Notre mesure, sur un échantillon de blocs (40 fenêtres de 500 blocs, lecture seule d'un RPC public). Elle compte des événements, pas des personnes.
+- **87 %** des écarts signalés avec la phrase : 131/150 = 87,3 % [81,1 ; 91,7]. Moteur de comparaison, jeu aveugle de 250 cas d'un autre auteur, ouvert une fois. Ce n'est pas l'extension livrée.
+- **65 %** sans la phrase, même mesure : 97/150 = 64,7 % [56,7 ; 71,9]. C'est le plancher de règles seul.
+- **15 %** d'alertes rouges à tort, même mesure : 15/100 = 15,0 % [9,3 ; 23,3]. L'objectif de 10 % publié avant l'ouverture est manqué.
+
+À savoir avant de citer ces chiffres :
+
+- **L'extension livrée** a été mesurée à part, sur un contrôle scellé de 2 662 paires, avec un build qui plantait sur 19,5 % des demandes : 49,4 % d'écarts attrapés, 2,7 % ratés, 31,2 % laissés « pas pu vérifier », 16,7 % en panne ; 8,2 % de fausses alertes. La panne est corrigée depuis (commit `b42792d`). La mesure du code corrigé sur la réserve scellée (2 673 paires) n'est pas faite.
+- **Temps de détection** (code de l'extension sous Node, sans fenêtre) : p50 2,0 ms, p95 13,0 ms en local ; p50 387 ms, p95 1 436 ms avec l'appel au modèle. Le temps de bout en bout dans un vrai navigateur n'est pas mesuré de façon reproductible.
+
+Un test qui passe n'est pas une mesure de détection.
+
+## Comment nous avons mesuré
+
+Une unité : une phrase et une demande de site. Trois réponses possibles, plus la panne, comptée à part. La vérité vient de la construction des cas (panel) ou de l'étiquette d'un autre auteur (jeu aveugle). Le panel est coupé en trois : réglage, contrôle, réserve. Contrôle et réserve sont scellés par empreinte et ouverts une seule fois. Chaque résultat porte le commit et l'empreinte du code mesuré. Le contrôle a été ouvert sur un build en panne : le résultat est publié tel quel. Protocole complet et menaces sur la validité : [preuves/PROTOCOLE.md](preuves/PROTOCOLE.md). Ce qui échoue, cas par cas : [preuves/CE_QUI_NE_MARCHE_PAS.md](preuves/CE_QUI_NE_MARCHE_PAS.md).
 
 ## Limites connues
 
-- **Jamais essayé avec un vrai portefeuille.** Aucun résultat dans `research/titouan/T_banc_e2e/essai_reel/ESSAI_REEL_RESULTATS.csv`. La démo tourne sur une chaîne locale, que l'API d'alertes de MetaMask ne sert pas (Fuji non plus) : son silence là ne prouve rien.
+- **Jamais essayé avec un vrai portefeuille, rien sur un réseau public.** Aucun résultat dans `research/titouan/T_banc_e2e/essai_reel/ESSAI_REEL_RESULTATS.csv`. La démo tourne sur une chaîne locale, que l'API d'alertes de MetaMask ne sert pas (Fuji non plus) : son silence là ne prouve rien.
 - **Revue de sécurité.** Contournements trouvés, dont un critique (une page qui remplace des fonctions natives). Corrections non toutes vérifiées dans un navigateur. Nous ne disons pas « sécurisé ».
 - **Rien n'est déployé sur Fuji.** Le déploiement est préparé et répété sur une copie locale, mais il n'est pas exécuté (D-016) : `blockchain/DEPLOYMENTS.md` ne contient que son en-tête : tant qu'il est vide, la démo se joue sur la chaîne locale. Sans ancrage, le journal détecte une ligne modifiée ou retirée au milieu, pas une réécriture complète.
 - **Hors périmètre.** Fraude consentie (la personne veut vraiment faire ce paiement), intention vague, contrat qui change à l'exécution (MetaMask le traite mieux avec Added Protection), Ledger branché directement, mobile, envois lancés depuis le bouton Envoyer du portefeuille.
 - **Une signature ne se limite pas.** Un droit donné par Permit n'a pas de plafond modifiable : Hold up alerte et le dit. Pas de révocation en un clic non plus.
-- **Révocation peu éprouvée.** Le bouton « Révoquer » existe dans la démo web (portefeuille simulé) et, depuis le 11 oct., dans le panneau latéral de l'extension. Côté extension : 13 tests en Node, aucun essai dans un vrai Chrome.
-- **Couverture partielle.** Sur 58 paires d'essai, 18 sont contrôlées : pas encore le sens d'un échange, la contrepartie, la durée d'un droit, ni à qui il est donné. Dans la démo, le droit ramené à 50 part quand même chez le pirate : la perte est bornée, pas évitée.
-- **Fausses alertes élevées.** 15 % de faux rouges sur le jeu aveugle (notre moteur de comparaison), surtout des achats de NFT à prix quasi nul. La fatigue d'alerte est la limite principale.
+- **Révocation peu éprouvée.** Le bouton « Révoquer » existe dans la démo web (portefeuille simulé) et, depuis le 11 oct., dans le panneau latéral de l'extension. Côté extension : des tests en Node, aucun essai dans un vrai Chrome.
+- **Vérification non exhaustive.** Hold up ne reconnaît pas un contrat malveillant : il borne ce qu'on lui laisse. Ne sont pas comparés à la phrase : la durée d'un droit, le bénéficiaire d'un droit, le minimum reçu d'un échange, les opérations récurrentes, les frais. Sur le contrôle, un droit sans échéance reçoit « ça correspond » dans 21 cas sur 43. Détail : `preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md`, `preuves/CE_QUI_NE_MARCHE_PAS.md`. Sur 58 paires d'essai, 18 sont contrôlées. Dans la démo, le droit ramené à 50 part quand même chez le pirate : la perte est bornée, pas évitée.
+- **Fausses alertes élevées.** 15 % de faux rouges sur le jeu aveugle (moteur de comparaison), surtout des achats de NFT à prix quasi nul. La fatigue d'alerte est la limite principale.
+- **Beaucoup de « pas pu vérifier ».** Sur le contrôle, l'extension laisse 36,5 % des demandes conformes sans réponse (sans modèle), avec 30 secondes d'attente.
+- **L'extension corrigée n'est pas mesurée sur un jeu scellé.** Le seul chiffre scellé de l'extension vient d'un build en panne. La réserve attend.
+- **Jeux de test faits maison.** Phrases écrites par des agents, pas par de vrais utilisateurs. Jeux conçus par la même équipe que le produit ; l'auteur du jeu aveugle est une IA de la même famille que celle qui nous a aidés.
+- **Lignes requalifiées.** Les lignes A5, A11 et A12 de `livrables/CHIFFRES.md` ne valent pas pour l'extension (`preuves/ECARTS_LIVRABLES.md`).
 - **Où va la phrase.** Du navigateur au relais local, puis au modèle hébergé si le relais a une clé. Minimisation et durée de conservation non rédigées. Tant que le relais n'est pas épinglé sur l'identifiant de l'extension (`HOLDUP_EXTENSION_ID`, voir INSTALLATION.md), toute extension installée sur la machine peut l'appeler.
-- **Aucun test avec des personnes.**
+- **Aucun test avec des personnes.** Le temps de décision d'une personne n'est pas mesuré.
 - **Principe non nouveau.** Le moindre privilège pour les approbations existe (Matcha, LI.FI, Talisman, Permit2), et le principe « dire d'abord, valider après simulation » a été décrit publiquement en février 2026. Notre apport est l'assemblage : phrase libre avant la demande, sur toute demande, comparée à l'effet, avec un plancher de règles.
 
 ## Référentiels
