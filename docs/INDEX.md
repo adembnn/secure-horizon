@@ -55,7 +55,7 @@ Sources de la douleur et de la thèse : `research/demo_reelle/RECHERCHE_chiffres
 | Chemin | Pourquoi |
 |---|---|
 | `research/titouan/PITCH_V1_TITOUAN.md` à `PITCH_V5_TITOUAN.md` | Versions antérieures du pitch, remplacées par V6 |
-| `livrables/video/1_sans_holdup_le_vol.mp4`, `2_avec_holdup_les_alertes.mp4`, `3_envoi_depuis_le_portefeuille_rpc.mp4` | Ancien produit (leurre, RPC de garde, adresse sosie) |
+| `livrables/video/archives_ancien_produit/1_sans_holdup_le_vol.mp4`, `2_avec_holdup_les_alertes.mp4`, `3_envoi_depuis_le_portefeuille_rpc.mp4` | Ancien produit (leurre, RPC de garde, adresse sosie) |
 | `livrables/RAPPORT_MISE_A_JOUR.md`, `livrables/RAPPORT_MISE_A_JOUR_2.md` | Journaux de mise à jour, utiles pour l'historique seulement |
 | `pitch/JURY_ATTAQUES.md` | Remplacé par `livrables/QR_JURY.md` |
 | `pitch/comprendre_piste4.md`, `pitch/track1_4_pitches.md`, `pitch/track1_chiffres_sources.md` | Piste DeFi et DORA abandonnée (D-007) |
