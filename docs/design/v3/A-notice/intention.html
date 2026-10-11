@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle, question d'intention (notice)</title>
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@500;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=new URLSearchParams(location.search).get('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<!--
+CONTRAT DE DIRECTION, A « La notice de pharmacie »
+THESIS: l'avertissement se lit comme une notice de médicament : rubriques dans l'ordre de lecture, une seule grille, aucune alarme rouge d'antivirus.
+OWN-WORLD: papier blanc #FFF, encre #1E2A32, vert #0B6E4F réservé au geste Annuler, rouge #C8102E réservé au pictogramme et aux cases barrées, gris #E9EEF0 pour les champs ; Atkinson Hyperlegible ; filets fins, angles droits, ni carte ni dégradé.
+STORY: en 3 s la personne pense « stop, ce n'est pas ce que je croyais » ; elle lit « Tu as dit », puis « Ce qui va se passer », puis annule sans honte.
+FIRST VIEWPORT: fenêtre blanche de 400 px ; colonne gauche de 76 px (pictogramme, puis intitulés des rubriques), colonne droite (titre, citation, montant à 44 px) ; Annuler en vert sur toute la largeur, en bas ; Continuer quand même isolé, discret, loin au-dessus.
+FORM: la notice pharmaceutique, imposée par Adem (1re de la liste) ; seed d4a5df83 (transcrit aussi d445df83).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+<div class="frame">
+<div class="site" aria-hidden="true"><div class="site__bar"><b>NovaRemb</b><span>Accueil</span><span>Aide</span><span>Mon dossier</span></div><div class="site__hero"><h2>Récupérez votre remboursement</h2><p>Connectez votre portefeuille pour recevoir le montant qui vous est dû.</p><span class="site__cta">Réclamer mon remboursement</span></div><div class="site__grid"><i></i><i></i><i></i></div></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+<div class="win__scroll">
+<header class="head">
+<svg class="pict pict--ask" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle class="st" cx="24" cy="24" r="20"/><path class="st" d="M17.5 19.5a6.5 6.5 0 1 1 9.6 5.7c-2 1.2-3.1 2.4-3.1 4.8"/><circle class="fl" cx="24" cy="36" r="2.4"/></svg>
+<h1 class="title" id="t"><span class="sr-only">Question : </span>Avant de continuer : qu'essaies-tu de faire&nbsp;?</h1>
+</header>
+<section class="row" aria-labelledby="h-site"><h2 class="row__h" id="h-site">Le site</h2><div class="row__b"><p class="body" id="d"><b>rembourse-nova.example</b> demande une signature.</p></div></section>
+<section class="row" aria-labelledby="h-choix"><h2 class="row__h" id="h-choix">Ton choix</h2><div class="row__b"><div class="opts" role="radiogroup" aria-labelledby="h-choix">
+<label class="opt"><input type="radio" name="intent" checked><span>Recevoir de l'argent (remboursement, cadeau)</span></label>
+<label class="opt"><input type="radio" name="intent"><span>Payer quelqu'un</span></label>
+<label class="opt"><input type="radio" name="intent"><span>Échanger une crypto</span></label>
+<label class="opt"><input type="radio" name="intent"><span>Me connecter au site</span></label>
+<label class="opt"><input type="radio" name="intent"><span>Quelqu'un m'a demandé de le faire</span></label>
+</div></div></section>
+<section class="row" aria-labelledby="h-msg"><h2 class="row__h" id="h-msg">Message</h2><div class="row__b"><label class="lab" for="msg">Colle ici le message qui t'a poussé à le faire</label><textarea class="field" id="msg" rows="3"></textarea><p class="note">Ta réponse ne peut que rendre la vérification plus stricte.</p><button class="btn btn--ink" type="button">Vérifier</button></div></section>
+</div>
+<div class="win__foot">
+<button class="btn btn--cancel" type="button" id="cancel">Annuler, rien ne sera envoyé</button>
+</div>
+</div>
+</div>
+</main>
+<script>document.getElementById('cancel')?.focus({preventScroll:true})</script>
+</body>
+</html>

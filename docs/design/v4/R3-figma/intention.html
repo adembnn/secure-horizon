@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question d'intention</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=new URLSearchParams(location.search).get("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<div class="stage">
+<div class="site" aria-hidden="true"><i class="nav"></i><i class="logo"></i><i class="h1"></i><i class="h2"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="box"></i></div>
+<section class="win" role="alertdialog" aria-modal="true" aria-labelledby="q">
+  <form id="f" onsubmit="return false">
+    <fieldset class="choices">
+      <legend><h1 class="question" id="q">Qu'essaies-tu de faire&nbsp;?</h1></legend>
+      <label class="choice"><input type="radio" name="i" value="recevoir"><span>Recevoir de l'argent</span></label>
+      <label class="choice"><input type="radio" name="i" value="payer"><span>Payer quelqu'un</span></label>
+      <label class="choice"><input type="radio" name="i" value="echanger"><span>Échanger une crypto</span></label>
+      <label class="choice"><input type="radio" name="i" value="connexion"><span>Me connecter</span></label>
+      <label class="choice"><input type="radio" name="i" value="demande"><span>On me l'a demandé</span></label>
+    </fieldset>
+    <div id="paste" hidden>
+      <label for="msg" class="quiet inline" style="display:block;min-height:0;text-decoration:none;color:var(--ink);font-weight:500">Colle le message reçu</label>
+      <textarea id="msg" class="paste" rows="3"></textarea>
+    </div>
+    <div class="actions" style="margin-top:20px">
+      <button class="btn-primary" id="go" type="submit" aria-disabled="true">Vérifier</button>
+    </div>
+    <button class="quiet" type="button">Annuler</button>
+  </form>
+</section>
+<script>
+(function(){var f=document.getElementById("f"),go=document.getElementById("go"),p=document.getElementById("paste");
+f.addEventListener("change",function(e){go.removeAttribute("aria-disabled");p.hidden=e.target.value!=="demande"});
+go.addEventListener("click",function(e){if(go.getAttribute("aria-disabled")==="true")e.preventDefault()});})();
+</script>
+</div>
+</body>
+</html>

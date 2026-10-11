@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adresse sosie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="frame">
+<div class="site" aria-hidden="true"><i class="bar"></i><i class="h"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="img"></i></div>
+<div class="ext" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+  <h1 id="t">Cette adresse n'est pas la tienne.</h1>
+  <p class="sr" id="d">Les 4 premiers et les 4 derniers caractères sont identiques, le milieu diffère. Les groupes différents sont en gras et soulignés.</p>
+  <ul class="addr">
+    <li><span>Ton adresse</span><code>
+      <span><i>0x7a3F</i><i>9c21</i><b>B04e</b><i>5D8a</i><b>1f6C</b></span>
+      <span><i>2E90</i><b>aB47</b><i>33dE</i><b>8c15</b><i>E2b9</i></span></code></li>
+    <li><span>Collée</span><code>
+      <span><i>0x7a3F</i><i>9c21</i><b>Ce02</b><i>5D8a</i><b>0b3D</b></span>
+      <span><i>2E90</i><b>F6c2</b><i>33dE</i><b>4d19</b><i>E2b9</i></span></code></li>
+  </ul>
+  <div class="actions">
+    <button class="btn btn-ink" autofocus>Utiliser mon adresse</button>
+    <button class="btn">Annuler</button>
+  </div>
+  <details>
+    <summary>Pourquoi ?</summary>
+    <div class="more"><p>Elle ressemble à la tienne. Quelqu'un t'a envoyé 0 USDC pour qu'elle apparaisse dans ton historique.</p></div>
+  </details>
+  <button class="quiet" type="button">Continuer quand même</button>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Sentinelle, danger : signature</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: un chèque ne vaut rien si le montant en lettres contredit celui en chiffres. Ici « Tu as dit » et « En réalité » sont les deux lignes qui doivent concorder ; l'écart est cerclé à la main. Refuse la carte d'alerte rouge, le bouclier, le néon.
+OWN-WORLD: papier de sécurité #F7F8F6 (nuit #0F1829), encre bleu-noir #1C2B4A, acier #5B6B7A, rouge #B42318 réservé à l'écart. Guillochage SVG en bandeau, lignes de saisie, cases à croix, talon pointillé. Source Sans 3, B612 Mono, Caveat. Angles droits, aucune carte.
+STORY: la personne lit deux lignes, voit l'écart cerclé, comprend que le site ne fait pas ce qu'elle a dit, annule. Continuer exige de recopier à la main puis d'attendre.
+FIRST VIEWPORT: fenêtre 400 px : bandeau guilloché (nom, mention Danger), titre, « Tu as dit » sur « En réalité » avec « tous tes USDC (2 480 USDC) » cerclé en rouge, « Annuler » pleine largeur en encre ; sous le talon pointillé, « lu et compris » et « Continuer quand même » isolé.
+FORM: chèque français, direction imposée (rang 1, tirage non joué), clé d445df83.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+  <div class="site" aria-hidden="true">
+    <div class="nav"><span class="logo"></span><i></i><i></i><i></i></div>
+    <h2>Votre remboursement vous attend</h2>
+    <p>Signez pour recevoir vos fonds.</p>
+    <span class="fake-btn">Réclamer</span>
+    <div class="rows"><i></i><i></i><i></i></div>
+  </div>
+  <div class="scrim"></div>
+  <div class="window" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d" tabindex="-1">
+    <div class="band"><span class="wordmark">Sentinelle</span><span class="level">Danger</span></div>
+    <div class="body">
+      <h1 id="t">Ce n'est pas ce que tu as demandé.</h1>
+      <div class="cheque" id="d">
+        <div class="line"><span class="lab">Tu as dit</span><p class="val">Recevoir un remboursement de 50 USDC</p></div>
+        <div class="line"><span class="lab">En réalité</span><p class="val">Ce site obtiendrait le droit de prendre <span class="ecart">tous tes USDC (2 480 USDC)<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path d="M12 6 C35 -1 80 0 94 12 C104 24 82 38 48 37 C16 36 -2 26 5 14 C9 8 20 4 38 2"/></svg></span>, maintenant et plus tard, sans te redemander.</p></div>
+      </div>
+      <p class="detail soft">Le contrat qui recevrait ce droit a été créé il y a 3 minutes. Il n'est connu de personne.</p>
+      <button class="btn" type="button">Annuler, rien ne sera envoyé</button>
+      <div class="stub">
+        <p>Pour continuer quand même, recopie :</p>
+        <span class="phrase" id="phrase">je donne l'accès à tous mes USDC</span>
+        <div class="inscribe">
+          <span class="mention" aria-hidden="true">lu et compris</span>
+          <input class="field" id="copy" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Recopie la phrase pour continuer quand même" aria-describedby="phrase">
+        </div>
+        <div class="go">
+          <button class="btn ghost" id="go" type="button" disabled>Continuer quand même</button>
+          <span class="count" id="count" role="timer" aria-live="off">puis 30 s</span>
+        </div>
+        <span class="sr" id="live" role="status"></span>
+      </div>
+      <script>
+(function(){
+  var norm=function(s){return s.trim().toLowerCase().replace(/\u2019/g,"'");};
+  var p=norm(document.getElementById('phrase').textContent),
+      i=document.getElementById('copy'),g=document.getElementById('go'),
+      c=document.getElementById('count'),l=document.getElementById('live'),t=null,n=30;
+  i.addEventListener('input',function(){
+    if(norm(i.value)===p&&t===null){t=setInterval(function(){n--;c.textContent=n>0?n+' s':'';
+      if(n===15)l.textContent='15 secondes restantes';
+      if(n<=0){clearInterval(t);g.disabled=false;l.textContent='Tu peux continuer quand même.';}},1000);}
+  });
+})();
+</script>
+    </div>
+  </div>
+</main>
+</body>
+</html>

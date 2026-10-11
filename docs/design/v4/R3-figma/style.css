@@ -1,0 +1,315 @@
+/*
+  R3 Figma : white gallery wall, one accent.
+  Tokens from docs/design/v4/REFERENCES.md. Only the red of the gap is saturated.
+
+  Contrast (WCAG 2.x, computed from sRGB relative luminance)
+  Light  ink #000000 on #ffffff ........ 21.00 : 1  (AAA)
+  Light  muted #595959 on #ffffff ....... 7.00 : 1  (AAA)
+  Light  red #d92d20 on #ffffff ......... 4.83 : 1  (AA body text, passes)
+  Light  white on red #d92d20 ........... 4.83 : 1  (not used for text; red is text on white)
+  Light  line #e2e2e2 on #ffffff ........ 1.30 : 1  (decorative rules only, never carries meaning)
+  Light  control ring #767676 on #fff ... 4.54 : 1  (radio ring, >= 3:1 required for UI components)
+  Dark   ink #ffffff on #000000 ......... 21.00 : 1  (AAA)
+  Dark   muted #a6a6a6 on #000000 ....... 8.63 : 1  (AAA)
+  Dark   red #ff6b5e on #000000 ......... 7.52 : 1  (AAA)
+  Dark   control ring #808080 on #000 ... 5.32 : 1  (>= 3:1)
+  Dark   black on white pill ............ 21.00 : 1
+  The gap is never signalled by colour alone: the red text also carries the
+  words "Tu crois" / "En vrai", a heavier weight and an underline; differing
+  address characters are bold, underlined and red.
+  Weight 320 is used only from 32 px up (large text). Body text is 20 px minimum.
+*/
+
+:root {
+  --bg: #ffffff;
+  --ink: #000000;
+  --muted: #595959;
+  --line: #e2e2e2;
+  --ring: #767676;
+  --red: #d92d20;
+  --on-ink: #ffffff;
+  --site-bg: #f5f5f5;
+  --site-bar: #e8e8e8;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --sans: "Hanken Grotesk", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --r-detail: 2px;
+  --r-field: 8px;
+  --r-card: 16px;
+  --r-pill: 50px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000;
+    --ink: #ffffff;
+    --muted: #a6a6a6;
+    --line: #2a2a2a;
+    --ring: #808080;
+    --red: #ff6b5e;
+    --on-ink: #000000;
+    --site-bg: #0c0c0c;
+    --site-bar: #161616;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #000000;
+  --ink: #ffffff;
+  --muted: #a6a6a6;
+  --line: #2a2a2a;
+  --ring: #808080;
+  --red: #ff6b5e;
+  --on-ink: #000000;
+  --site-bg: #0c0c0c;
+  --site-bar: #161616;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  background: var(--site-bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* ---------- frame 1280x800 with a neutral, faded fake site ---------- */
+
+.stage {
+  position: relative;
+  width: 1280px;
+  height: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--site-bg);
+}
+
+.site { position: absolute; inset: 0; opacity: 0.55; }
+.site i { position: absolute; display: block; background: var(--site-bar); border-radius: var(--r-detail); }
+.site .nav { left: 0; right: 0; top: 0; height: 64px; border-radius: 0; }
+.site .logo { left: 48px; top: 22px; width: 96px; height: 20px; background: var(--line); }
+.site .h1 { left: 48px; top: 148px; width: 520px; height: 44px; }
+.site .h2 { left: 48px; top: 208px; width: 380px; height: 44px; }
+.site .p1 { left: 48px; top: 288px; width: 460px; height: 12px; }
+.site .p2 { left: 48px; top: 312px; width: 420px; height: 12px; }
+.site .btn { left: 48px; top: 368px; width: 160px; height: 44px; border-radius: var(--r-pill); }
+.site .box { left: 48px; top: 480px; width: 1184px; height: 240px; border-radius: var(--r-card); }
+
+/* ---------- extension window ---------- */
+
+.win {
+  position: absolute;
+  top: 16px;
+  right: 80px;
+  width: 400px;
+  padding: 28px 32px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+}
+
+.win > * + * { margin-top: 0; }
+
+h1.verdict {
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* ---------- the gap ---------- */
+
+.gap { margin: 0 0 28px; padding: 0; }
+.gap div { padding: 14px 0; border-top: 1px solid var(--line); }
+.gap div:last-child { border-bottom: 1px solid var(--line); }
+.gap dt { margin: 0 0 4px; font-size: 20px; color: var(--muted); }
+.gap dd { margin: 0; font-size: 32px; line-height: 1.12; font-weight: 400; letter-spacing: -0.025em; }
+.gap .real dd {
+  font-weight: 500;
+  color: var(--red);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+.gap .real dt { color: var(--ink); font-weight: 500; }
+
+/* ---------- addresses ---------- */
+
+.addr { margin: 0 0 28px; }
+.addr div { padding: 14px 0; border-top: 1px solid var(--line); }
+.addr div:last-child { border-bottom: 1px solid var(--line); }
+.addr dt { margin: 0 0 6px; font-size: 20px; color: var(--muted); }
+.addr .real dt { color: var(--ink); font-weight: 500; }
+.addr dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+.addr .g { white-space: nowrap; }
+.addr mark {
+  background: none;
+  color: var(--red);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ---------- timer ---------- */
+
+.instruction { margin: 0 0 28px; font-size: 36px; line-height: 1.1; font-weight: 320; letter-spacing: -0.03em; text-wrap: balance; }
+.reassure { margin: 0 0 28px; font-size: 22px; line-height: 1.3; font-weight: 500; }
+.timer { margin: 0 0 16px; padding: 12px 0; }
+.timer .t {
+  display: block;
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 320;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.timer .s { display: block; margin-top: 6px; color: var(--muted); font-size: 20px; }
+
+/* ---------- intention ---------- */
+
+fieldset.choices { margin: 0 0 20px; padding: 0; border: 0; min-width: 0; }
+fieldset.choices legend { padding: 0; margin: 0 0 20px; }
+h1.question {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.08;
+  font-weight: 320;
+  letter-spacing: -0.03em;
+}
+.choice { position: relative; display: block; }
+.choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.choice span {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 52px;
+  padding: 0 4px;
+  border-top: 1px solid var(--line);
+  font-size: 22px;
+  font-weight: 400;
+}
+.choice:last-child span { border-bottom: 1px solid var(--line); }
+.choice span::before {
+  content: "";
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--ring);
+  border-radius: 50%;
+}
+.choice input:checked + span { font-weight: 500; }
+.choice input:checked + span::before { border-color: var(--ink); background: radial-gradient(circle, var(--ink) 0 5px, transparent 5.5px); }
+.choice input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: var(--r-field); }
+.choice:hover span { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+
+/* ---------- actions ---------- */
+
+.actions { display: grid; gap: 12px; margin: 0 0 8px; }
+.btn-primary, .btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 24px;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary { background: var(--ink); color: var(--on-ink); border: 1.5px solid var(--ink); }
+.btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.btn-primary:hover { background: color-mix(in srgb, var(--ink) 82%, var(--bg)); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+.btn-primary:active, .btn-secondary:active { transform: translateY(1px); }
+
+/* ---------- quiet controls ---------- */
+
+details { margin: 0; }
+summary {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  list-style: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+  border-top: 1px solid var(--line);
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; margin-left: auto; font-weight: 400; font-size: 22px; color: var(--muted); }
+details[open] summary::after { content: "\2212"; }
+details p { margin: 0 0 16px; color: var(--muted); font-size: 20px; line-height: 1.5; max-width: 65ch; }
+details .quote { margin: 0 0 8px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-field); color: var(--ink); font-size: 20px; }
+details .tag { margin: 0 0 12px; color: var(--ink); font-weight: 500; font-size: 20px; }
+
+.quiet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.quiet:hover { color: var(--ink); }
+.quiet.inline { justify-content: flex-start; width: auto; margin-bottom: 12px; }
+
+:is(a, button, summary, input):focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: var(--r-field); }
+.btn-primary:focus-visible, .btn-secondary:focus-visible { border-radius: var(--r-pill); }
+
+/* ---------- 360 px and narrower ---------- */
+
+@media (max-width: 720px) {
+  .stage { width: 100%; height: auto; min-height: 100vh; }
+  .site { display: none; }
+  .win { position: static; width: 100%; min-height: 100vh; padding: 28px 20px 12px; border: 0; border-radius: 0; box-shadow: none; }
+  h1.question { font-size: 36px; }
+  .instruction { font-size: 32px; }
+  .gap dd { font-size: 28px; }
+  .addr dd { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+.paste { display: block; width: 100%; min-height: 96px; margin: 12px 0 0; padding: 12px 14px; font: inherit; font-size: 20px; color: var(--ink); background: transparent; border: 1.5px solid var(--ring); border-radius: var(--r-field); resize: vertical; }
+.paste::placeholder { color: var(--muted); }
+.btn-primary[aria-disabled="true"] { background: transparent; color: var(--muted); border-color: var(--ring); cursor: not-allowed; }

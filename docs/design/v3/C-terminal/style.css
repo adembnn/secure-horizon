@@ -1,0 +1,163 @@
+/* Direction C : le panneau de terminal d'aeroport. Fira Sans (humaniste de signaletique), casse de phrase.
+   Jaune #FFD200 reserve au seul bandeau d'orientation. Angles droits partout. */
+
+:root {
+  --paper: #ffffff;
+  --ink: #111111;
+  --mute: #4a4a4a;
+  --line: #c9c9c4;
+  --alert-text: #c8102e;
+  --alert-fill: #c8102e;
+  --bench: #d9d9d4;
+  --veil: rgba(255, 255, 255, 0.62);
+  --signal: #ffd200;
+  --signal-ink: #111111;
+  --font: "Fira Sans", "Segoe UI", "Frutiger", "Helvetica Neue", sans-serif;
+  --font-data: "Fira Mono", "Consolas", monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111111; --ink: #ffffff; --mute: #c4c4c0; --line: #4a4a47;
+    --alert-text: #ff6b7b; --bench: #000000; --veil: rgba(0, 0, 0, 0.66);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111111; --ink: #ffffff; --mute: #c4c4c0; --line: #4a4a47;
+  --alert-text: #ff6b7b; --bench: #000000; --veil: rgba(0, 0, 0, 0.66);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bench); color: var(--ink);
+  font: 400 17px/1.4 var(--font); font-variant-numeric: tabular-nums;
+  scrollbar-color: var(--ink) var(--paper);
+}
+::selection { background: var(--ink); color: var(--paper); }
+button, input, textarea { font: inherit; color: inherit; caret-color: var(--ink); accent-color: var(--ink); }
+p { margin: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- cadre de presentation 1280x800 et faux site ---------- */
+.stage { position: relative; width: min(1280px, 100%); height: 800px; margin: 0 auto; overflow: hidden; background: var(--paper); }
+.site { position: absolute; inset: 0; filter: blur(3px) grayscale(0.6); opacity: 0.7; pointer-events: none; }
+.site::after { content: ""; position: absolute; inset: 0; background: var(--veil); }
+.site-bar { display: flex; align-items: center; gap: 32px; height: 72px; padding: 0 56px; border-bottom: 2px solid var(--line); }
+.site-logo { width: 120px; height: 28px; background: var(--ink); }
+.site-nav { width: 70px; height: 12px; background: var(--line); }
+.site-main { padding: 72px 56px; width: 660px; }
+.site-h { font: 800 52px/1.05 var(--font); }
+.site-p { margin-top: 20px; font-size: 20px; max-width: 480px; color: var(--mute); }
+.site-cta { display: inline-block; margin-top: 32px; padding: 18px 28px; background: var(--ink); color: var(--paper); font-weight: 700; font-size: 20px; }
+.site-lines { margin-top: 56px; display: grid; gap: 14px; }
+.site-lines i { display: block; height: 14px; background: var(--line); }
+.site-lines i:nth-child(2) { width: 80%; } .site-lines i:nth-child(3) { width: 60%; }
+
+/* ---------- la fenetre de 400 px ---------- */
+.win {
+  position: absolute; top: 8px; right: 48px; width: 400px; max-height: 784px; overflow-y: auto;
+  background: var(--paper); border: 3px solid var(--ink);
+}
+
+/* ---------- le bandeau d'orientation : seule surface jaune ---------- */
+.band { background: var(--signal); color: var(--signal-ink); padding: 12px 16px 14px; }
+.band-top { display: flex; align-items: center; gap: 12px; }
+.picto { flex: none; width: 44px; height: 44px; background: #111111; display: grid; place-items: center; }
+.picto svg { width: 36px; height: 36px; fill: none; stroke: #ffffff; stroke-width: 3; stroke-linecap: square; stroke-linejoin: miter; }
+.level { font-size: 24px; font-weight: 800; line-height: 1.1; }
+.level b { display: block; font-weight: 800; font-size: 17px; line-height: 1.2; }
+.level span { display: block; font-size: 15px; font-weight: 500; }
+.title { margin: 10px 0 0; font-size: 26px; font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; }
+
+/* ---------- la decision ---------- */
+.body { padding: 12px 16px 14px; }
+.rows { margin: 0; }
+.row { display: grid; grid-template-columns: 92px 1fr; border: 3px solid var(--ink); margin-top: -3px; }
+.rows .row:first-child { margin-top: 0; }
+.row dt { background: var(--ink); color: var(--paper); padding: 8px 10px; font-weight: 700; font-size: 16px; line-height: 1.2; }
+.row dt.is-real { background: var(--alert-fill); color: #ffffff; }
+.row dd { margin: 0; padding: 8px 12px; font-size: 17px; font-weight: 500; line-height: 1.3; }
+.row dd .sub { display: block; margin-bottom: 4px; font-size: 15px; font-weight: 400; color: var(--mute); }
+.gate { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; color: var(--alert-text); }
+.gate b { font-size: 64px; line-height: 0.95; font-weight: 800; letter-spacing: -0.02em; }
+.gate span { font-size: 22px; font-weight: 800; }
+.note { margin-top: 10px; font-size: 15px; line-height: 1.35; }
+.note + .note { margin-top: 8px; }
+.note.mute { color: var(--mute); font-size: 15px; }
+
+/* adresses : cases fixes */
+.row--wide { display: block; }
+.row--wide > .cap { display: block; background: var(--ink); color: var(--paper); font-weight: 700; font-size: 16px; padding: 6px 10px; }
+.row--wide > .cap.is-real { background: var(--alert-fill); color: #fff; }
+.addr { display: grid; grid-template-columns: repeat(5, 1fr); font-family: var(--font-data); font-size: 16px; font-weight: 500; }
+.addr > span { padding: 5px 0; text-align: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); white-space: nowrap; }
+.addr > span:nth-child(5n) { border-right: 0; }
+.addr > span:nth-child(n+6) { border-bottom: 0; }
+.addr .d { font-weight: 700; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.addr--new .d { background: var(--alert-fill); color: #ffffff; text-decoration: none; padding: 1px 0; }
+
+/* ---------- compte a rebours ---------- */
+.clock { display: flex; align-items: center; gap: 14px; margin-top: 10px; padding: 6px 14px; background: var(--ink); color: var(--paper); border: 3px solid var(--ink); }
+.clock output { display: block; font-size: 84px; font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; }
+.clock p { font-size: 17px; font-weight: 700; line-height: 1.25; }
+
+/* ---------- champs et choix ---------- */
+.choices { margin: 14px 0 0; padding: 0; border: 3px solid var(--ink); }
+.choice { position: relative; display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 12px; font-size: 18px; font-weight: 500; line-height: 1.2; cursor: pointer; border-top: 1px solid var(--line); }
+.choice:first-child { border-top: 0; }
+.choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.mark { flex: none; width: 24px; height: 24px; border: 3px solid currentColor; }
+.choice:has(input:checked) { background: var(--ink); color: var(--paper); font-weight: 700; }
+.choice input:checked + .mark { box-shadow: inset 0 0 0 4px var(--ink); background: var(--paper); }
+.choice input:focus-visible + .mark { outline: 4px solid var(--ink); outline-offset: 4px; }
+.choice:has(input:checked) input:focus-visible + .mark { outline-color: var(--paper); }
+.field { display: block; margin-top: 14px; font-weight: 700; font-size: 16px; line-height: 1.3; }
+.field em { font-style: normal; font-weight: 400; color: var(--mute); }
+textarea, .text { display: block; width: 100%; margin-top: 6px; padding: 8px 10px; background: var(--paper); border: 3px solid var(--ink); border-radius: 0; font-size: 17px; font-weight: 400; }
+textarea { min-height: 64px; resize: vertical; }
+::placeholder { color: var(--mute); opacity: 1; }
+
+/* ---------- actions ---------- */
+.actions { margin-top: 12px; display: grid; gap: 8px; }
+.btn { display: flex; align-items: stretch; width: 100%; min-height: 48px; padding: 0; border: 3px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink); font-size: 18px; font-weight: 700; text-align: left; line-height: 1.2; cursor: pointer; transition: background-color 160ms ease-out, color 160ms ease-out; }
+.btn > span { align-self: center; padding: 8px 14px; }
+.btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.btn:focus-visible, .text:focus-visible, textarea:focus-visible { outline: 4px solid var(--ink); outline-offset: 3px; }
+.btn--main { background: var(--ink); color: var(--paper); min-height: 56px; font-size: 20px; font-weight: 800; }
+.btn--main:hover:not(:disabled) { background: var(--paper); color: var(--ink); }
+.btn--main .sign { flex: none; width: 54px; display: grid; place-items: center; background: var(--paper); color: var(--ink); border-right: 3px solid var(--ink); padding: 0; align-self: stretch; }
+.btn--main:hover .sign { background: var(--ink); color: var(--paper); }
+.sign svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: square; stroke-linejoin: miter; }
+.btn:disabled { color: var(--mute); border-style: dashed; border-color: var(--mute); cursor: not-allowed; }
+
+/* zone isolee : continuer quand meme */
+.isolated { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); }
+.isolated .lead { font-size: 15px; line-height: 1.35; }
+.isolated .lead strong { display: block; margin-top: 4px; font-size: 17px; font-weight: 800; }
+.barrier { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.barrier .text { margin-top: 0; flex: 1; min-width: 0; }
+.count { flex: none; min-width: 74px; text-align: right; font-size: 30px; font-weight: 800; line-height: 1; }
+.isolated .btn { min-height: 48px; font-size: 16px; font-weight: 500; }
+.isolated .btn-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.isolated .btn-row .btn { flex: 1; }
+
+/* ---------- tient en 360 ---------- */
+@media (max-width: 440px) {
+  .stage { height: auto; overflow: visible; }
+  .site { display: none; }
+  .win { position: static; width: 100%; max-height: none; border-width: 0 0 3px; }
+  .title { font-size: 25px; }
+  .gate b { font-size: 56px; }
+  .clock output { font-size: 84px; }
+  .addr { font-size: 15px; }
+}
+@media (max-width: 399px) {
+  .row { grid-template-columns: 1fr; }
+  .row dt { padding: 6px 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+.row--wide dd { padding: 0; }
+.cap .plain { font-weight: 400; }

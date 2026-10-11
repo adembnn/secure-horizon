@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signature à vérifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=new URLSearchParams(location.search).get("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<div class="stage">
+<div class="site" aria-hidden="true"><i class="nav"></i><i class="logo"></i><i class="h1"></i><i class="h2"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="box"></i></div>
+<section class="win" role="alertdialog" aria-modal="true" aria-labelledby="v" aria-describedby="g">
+  <h1 class="verdict" id="v">Ce n'est pas ce que tu as demandé.</h1>
+  <dl class="gap" id="g">
+    <div><dt>Tu crois</dt><dd>recevoir 50&nbsp;USDC</dd></div>
+    <div class="real"><dt>En réalité</dt><dd>ce site pourra prendre tes 2&nbsp;480&nbsp;USDC</dd></div>
+  </dl>
+  <div class="actions"><button class="btn-primary" autofocus>Annuler</button></div>
+  <details>
+    <summary>Pourquoi ?</summary>
+    <p>Il pourra les prendre maintenant et plus tard, sans te redemander. Ce contrat a 3 minutes d'existence.</p>
+  </details>
+  <button class="quiet" type="button">Continuer quand même</button>
+</section>
+</div>
+</body>
+</html>

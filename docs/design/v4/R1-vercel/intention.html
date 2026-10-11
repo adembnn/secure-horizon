@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question d'intention</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500&family=Geist+Mono:wght@400;450;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>var t=new URLSearchParams(location.search).get('theme');if(t)document.documentElement.dataset.theme=t;</script>
+</head>
+<body>
+<main class="stage">
+  <div class="site" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="veil" aria-hidden="true"></div>
+  <section class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+    <fieldset id="d" aria-labelledby="t">
+      <legend id="t">Qu'essaies-tu de faire ?</legend>
+      <label class="opt"><input type="radio" name="i" value="0">Recevoir de l'argent</label>
+      <label class="opt"><input type="radio" name="i" value="1">Payer quelqu'un</label>
+      <label class="opt"><input type="radio" name="i" value="2">Échanger une crypto</label>
+      <label class="opt"><input type="radio" name="i" value="3">Me connecter</label>
+      <label class="opt"><input type="radio" name="i" value="4">On me l'a demandé</label>
+    </fieldset>
+    <div class="paste" id="paste" hidden><label for="msg" class="calm" style="display:block;margin:0 0 8px">Colle le message reçu</label><textarea id="msg"></textarea></div>
+    <div class="actions"><button class="btn" id="go" type="button" disabled>Vérifier</button><button class="link" type="button">Annuler</button></div>
+  </section>
+</main>
+<script>
+document.querySelectorAll('.why').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var r = document.getElementById(b.getAttribute('aria-controls'));
+    var o = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!o)); r.hidden = o;
+  });
+});
+document.querySelectorAll('input[name=i]').forEach(function (r) {
+  r.addEventListener('change', function () {
+    document.getElementById('go').disabled = false;
+    document.getElementById('paste').hidden = r.value !== '4';
+  });
+});
+</script>
+</body>
+</html>

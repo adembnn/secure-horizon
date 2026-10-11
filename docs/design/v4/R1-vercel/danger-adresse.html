@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adresse sosie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500&family=Geist+Mono:wght@400;450;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>var t=new URLSearchParams(location.search).get('theme');if(t)document.documentElement.dataset.theme=t;</script>
+</head>
+<body>
+<main class="stage">
+  <div class="site" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="veil" aria-hidden="true"></div>
+  <section class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+    <h1 id="t">Cette adresse n'est pas la tienne.</h1>
+    <dl class="gap" id="d">
+      <div><dt>Ton adresse</dt><dd class="addr"><span class="l">0x7a3F <mark>9c21</mark> <mark>B04e</mark> <mark>5D8a</mark> <mark>1f6C</mark></span><span class="l"><mark>2E90</mark> <mark>aB47</mark> <mark>33dE</mark> <mark>8c15</mark> E2b9</span></dd></div>
+      <div class="real"><dt>Collée</dt><dd class="addr real-line"><span class="l">0x7a3F <mark>1d88</mark> <mark>Ce02</mark> <mark>77aF</mark> <mark>0b3D</mark></span><span class="l"><mark>9a41</mark> <mark>F6c2</mark> <mark>0e5B</mark> <mark>4d19</mark> E2b9</span></dd></div>
+    </dl>
+    <div class="actions"><button class="btn" type="button" autofocus>Utiliser mon adresse</button><button class="btn sec" type="button">Annuler</button></div>
+    <button class="why" type="button" aria-expanded="false" aria-controls="r">Pourquoi ?</button>
+    <div class="reason" id="r" hidden><p>Elle ressemble à la tienne. Quelqu'un t'a envoyé 0 USDC pour qu'elle apparaisse dans ton historique.</p></div>
+    <button class="link last" type="button">Continuer quand même</button>
+  </section>
+</main>
+<script>
+document.querySelectorAll('.why').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var r = document.getElementById(b.getAttribute('aria-controls'));
+    var o = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!o)); r.hidden = o;
+  });
+});
+
+</script>
+</body>
+</html>

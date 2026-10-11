@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle, trois directions</title>
+<style>
+:root{--bg:#ffffff;--fg:#171717;--muted:#666;--line:#e6e6e6;--sel:#171717}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0a0a0a;--fg:#ededed;--muted:#a1a1a1;--line:#2a2a2a;--sel:#ededed}}
+:root[data-theme="dark"]{--bg:#0a0a0a;--fg:#ededed;--muted:#a1a1a1;--line:#2a2a2a;--sel:#ededed}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1440px;margin:0 auto;padding:40px 16px 64px}
+h1{font-size:28px;font-weight:500;letter-spacing:-.02em;margin:0 0 6px}
+p.lede{color:var(--muted);margin:0 0 28px;max-width:70ch}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+nav button{font:inherit;background:none;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer;min-height:44px}
+nav button[aria-pressed="true"]{border-color:var(--sel);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.col h2{font-size:18px;font-weight:600;margin:0 0 4px}
+.col p{color:var(--muted);font-size:14px;margin:0 0 12px}
+.frame{position:relative;width:100%;aspect-ratio:1280/800;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff}
+.frame iframe{position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform-origin:0 0}
+.col a{color:var(--fg);font-size:14px;display:inline-block;margin-top:8px}
+</style>
+</head>
+<body>
+<main>
+<h1>Sentinelle : trois directions sobres</h1>
+<p class="lede">Même contenu et même hiérarchie (seulement ce qui compte : le verdict, l'écart, Annuler), construits d'après trois références de styles.refero.design. Choisis un écran pour comparer les trois.</p>
+<nav aria-label="Écran">
+  <button data-s="danger-signature" aria-pressed="true">Signature piégée</button>
+  <button data-s="danger-adresse" aria-pressed="false">Adresse sosie</button>
+  <button data-s="manipulation" aria-pressed="false">Manipulation</button>
+  <button data-s="intention" aria-pressed="false">Question d'intention</button>
+</nav>
+<div class="grid">
+  <section class="col"><h2>A · Vercel</h2><p>Monochrome strict, un seul rouge pour l'écart.</p><div class="frame"><iframe data-d="R1-vercel" title="Direction Vercel"></iframe></div><a data-d="R1-vercel" target="_blank" rel="noopener">Ouvrir en grand</a></section>
+  <section class="col"><h2>B · Brex</h2><p>Blanc, une seule couleur orange pour l'écart, Annuler noir.</p><div class="frame"><iframe data-d="R2-brex" title="Direction Brex"></iframe></div><a data-d="R2-brex" target="_blank" rel="noopener">Ouvrir en grand</a></section>
+  <section class="col"><h2>C · Figma</h2><p>Blanc, grand titre fin, Annuler en pilule noire.</p><div class="frame"><iframe data-d="R3-figma" title="Direction Figma"></iframe></div><a data-d="R3-figma" target="_blank" rel="noopener">Ouvrir en grand</a></section>
+</div>
+</main>
+<script>
+const fit=()=>document.querySelectorAll('.frame').forEach(f=>{f.querySelector('iframe').style.transform='scale('+(f.clientWidth/1280)+')'});
+const show=s=>{document.querySelectorAll('iframe[data-d]').forEach(i=>i.src=i.dataset.d+'/'+s+'.html?theme=light');document.querySelectorAll('a[data-d]').forEach(a=>a.href=a.dataset.d+'/'+s+'.html');document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===s))};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
+addEventListener('resize',fit);show('danger-signature');fit();
+</script>
+</body>
+</html>

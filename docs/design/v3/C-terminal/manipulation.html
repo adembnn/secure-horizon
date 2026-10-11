@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinelle : manipulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500;700&family=Fira+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: un panneau de terminal d'aéroport. Une information par ligne, la prochaine action sans ambiguïté. Refuse la carte SaaS, le néon crypto, le bouclier antivirus, le formulaire froid.
+OWN-WORLD: blanc #FFF, noir #111, un seul bandeau jaune #FFD200 (jamais ailleurs), rouge #C8102E pour l'écart. Angles droits, pictogramme blanc dans carré noir, lignes à étiquette noire, flèche calée au bord. Fira Sans en casse de phrase, Fira Mono pour les adresses.
+STORY: la personne lit « Tu as dit » puis « En réalité », voit l'écart, comprend que le seul geste évident est Annuler.
+FIRST VIEWPORT: fenêtre 400 px. Bandeau jaune (pictogramme 44 px, niveau, phrase-titre 28 px), deux lignes de panneau, montant 64 px en numéro de porte, Annuler noir plein avec flèche au bord, Continuer quand même isolé, pointillé, discret.
+FORM: signalétique aéroportuaire, direction imposée par Adem (position 1, pinned), clé de tirage d445df83.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<main class="stage">
+  <div class="site" aria-hidden="true">
+  <div class="site-bar"><span class="site-logo"></span><span class="site-nav"></span><span class="site-nav"></span><span class="site-nav"></span></div>
+  <div class="site-main">
+    <p class="site-h">Ton remboursement Nova est prêt</p>
+    <p class="site-p">Connecte ton portefeuille pour recevoir les fonds en quelques secondes.</p>
+    <span class="site-cta">Recevoir mon remboursement</span>
+    <div class="site-lines"><i></i><i></i><i></i></div>
+  </div>
+</div>
+  <section class="win" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d">
+    <header class="band">
+      <div class="band-top"><span class="picto"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M24 13 V25 L32 29"/></svg></span><p class="level">Manipulation</p></div>
+      <h1 class="title" id="t">Personne de sérieux ne te demande de déplacer tes fonds.</h1>
+    </header>
+    <div class="body" id="d">
+      <dl class="rows">
+        <div class="row"><dt>Tu as choisi</dt><dd>Quelqu'un m'a demandé de le faire</dd></div>
+        <div class="row"><dt class="is-real">Message collé</dt><dd><span class="sub">classé « faux support »</span>« Bonjour, ici le support NovaWallet, votre compte est compromis, transférez vos fonds vers le coffre sécurisé avant 15h. »</dd></div>
+      </dl>
+      <div class="clock"><output id="clock" role="timer" aria-live="off">9:41</output><p>Cette demande reste en attente 10 minutes</p></div>
+      <span class="sr" id="clock-sr" aria-live="polite"></span>
+      <p class="note">Aucun vrai support, banque ou plateforme ne demande de déplacer ton argent. Si tu es au téléphone avec cette personne, raccroche.</p>
+      <div class="actions">
+        <button class="btn btn--main" type="button" autofocus><span class="sign" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M40 24 H8"/><path d="M19 13 L8 24 L19 35"/></svg></span><span>Annuler</span></button>
+        <button class="btn" type="button"><span>Appeler un proche</span></button>
+        <button class="btn" type="button"><span>Raccrocher et me laisser un moment</span></button>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  var s = 9 * 60 + 41, el = document.getElementById('clock'), sr = document.getElementById('clock-sr');
+  var fmt = function (v) { return Math.floor(v / 60) + ':' + String(v % 60).padStart(2, '0'); };
+  setInterval(function () {
+    if (s > 0) s--; el.textContent = fmt(s);
+    if (s % 60 === 0) sr.textContent = 'Il reste ' + Math.ceil(s / 60) + ' minutes';
+  }, 1000);
+</script>
+</body>
+</html>

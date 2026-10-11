@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adresse à vérifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=new URLSearchParams(location.search).get("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<div class="stage">
+<div class="site" aria-hidden="true"><i class="nav"></i><i class="logo"></i><i class="h1"></i><i class="h2"></i><i class="p1"></i><i class="p2"></i><i class="btn"></i><i class="box"></i></div>
+<section class="win" role="alertdialog" aria-modal="true" aria-labelledby="v" aria-describedby="g">
+  <h1 class="verdict" id="v">Cette adresse n'est pas la tienne.</h1>
+  <dl class="addr" id="g">
+    <div><dt>Ton adresse</dt><dd>0x <span class="g">7a3F</span> <span class="g"><mark>9c21</mark></span> <span class="g"><mark>B04e</mark></span> <span class="g"><mark>5D8a</mark></span> <span class="g"><mark>1f6C</mark></span> <span class="g"><mark>2E90</mark></span> <span class="g"><mark>aB47</mark></span> <span class="g"><mark>33dE</mark></span> <span class="g"><mark>8c15</mark></span> <span class="g">E2b9</span></dd></div>
+    <div class="real"><dt>Collée</dt><dd>0x <span class="g">7a3F</span> <span class="g"><mark>1d88</mark></span> <span class="g"><mark>Ce02</mark></span> <span class="g"><mark>77aF</mark></span> <span class="g"><mark>0b3D</mark></span> <span class="g"><mark>9a41</mark></span> <span class="g"><mark>F6c2</mark></span> <span class="g"><mark>0e5B</mark></span> <span class="g"><mark>4d19</mark></span> <span class="g">E2b9</span></dd></div>
+  </dl>
+  <div class="actions">
+    <button class="btn-primary" autofocus>Utiliser mon adresse</button>
+    <button class="btn-secondary">Annuler</button>
+  </div>
+  <details>
+    <summary>Pourquoi ?</summary>
+    <p>Elle ressemble à la tienne. Quelqu'un t'a envoyé 0&nbsp;USDC pour qu'elle apparaisse dans ton historique.</p>
+  </details>
+  <button class="quiet" type="button">Continuer quand même</button>
+</section>
+</div>
+</body>
+</html>
