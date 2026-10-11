@@ -84,6 +84,11 @@ async function engine() {
 
 const WARN_CODES = new Set(['new_contract', 'high_balance_share', 'unlimited_approval_swap', 'low_confidence']);
 
+// Rule (5) severity. Measured 2026-10-11 on V2_DEV + jury files (pipeline/RESULTATS_INTEGRATION.md) : at `critical` this single flag is the first source of
+// false alarms of the shipped pipeline (every first payment to a new address turns red) and it disappears as soon as a kind is declared, so a
+// declared kind LOWERED the verdict (479 cases). Default `warn`, raised for a missing kind AND for a bare kind alike. HOLDUP_IG_KM=critical restores
+// the former behaviour, =off removes the rule ; HOLDUP_IG_BARE=0 restores the former condition (missing kind only).
+const KM = () => (typeof process !== 'undefined' && process.env.HOLDUP_IG_KM) || 'warn';
 export const intentGuard = {
   id: 'intent_guard',
   async run({ ctx, eff, request, intent, level, policy }) {
@@ -140,10 +145,15 @@ export const intentGuard = {
     // (4) / (5) recipient the user never paid
     const share = eff.shareOfBalancePct ?? ctx._sharePct;
     const strangers = outs.filter((o) => !vouched(ctx, o.to));
-    if (strangers.length && (kc === 'pay_someone' || !kc)) {
+    const bare = !!kc && !(typeof process !== 'undefined' && process.env.HOLDUP_IG_BARE === '0') && !(isAddr(intent.counterpartyAddress) && strangers.some((o) => lc(o.to) === lc(intent.counterpartyAddress))); // the user did not name THIS recipient (an amount or a token says nothing about who is paid)
+    if (strangers.length && (kc === 'pay_someone' || !kc || (bare && kc !== 'buy_or_swap'))) {
       const o = strangers[0];
       if (Number.isFinite(share) && share > 50) flags.push({ code: 'new_recipient_large_share', severity: 'critical', detail: `${lc(o.to)} n'est ni dans votre carnet, ni un destinataire déjà payé, et la demande déplace ${Number(share).toFixed(0)} % du solde` });
-      else if (!kc) flags.push({ code: 'kind_missing_unvouched_recipient', severity: 'critical', detail: `aucune intention exploitable (type « ${String(raw)} ») et ${lc(o.to)} n'a jamais été payé par vous` });
+      else if (KM() === 'off') { /* rule (5) disabled */ }
+      else if (!kc) flags.push({ code: 'kind_missing_unvouched_recipient', severity: KM(), detail: `aucune intention exploitable (type « ${String(raw)} ») et ${lc(o.to)} n'a jamais été payé par vous` });
+      // a kind WITHOUT the recipient (the one-click answer of the extension, or a form where only the amount is typed) says nothing about who is paid : it must not make the verdict
+      // weaker than no answer at all (invariant : adding intent information never lowers the level). Same rule, same code.
+      else if (bare) flags.push({ code: 'kind_missing_unvouched_recipient', severity: KM(), detail: `vous n'avez pas dit qui vous payez, et ${lc(o.to)} n'a jamais été payé par vous` });
     }
 
     // false-positive repair : the comparator's only critical is amount_exceeded and the amount typed ("1,000", "1k") covers what is sent
