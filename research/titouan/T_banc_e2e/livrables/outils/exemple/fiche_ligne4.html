@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'none'; script-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fiche de traçabilité</title>
+<style>@page{size:A4;margin:12mm}*{box-sizing:border-box}body{font:10.5px/1.4 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#111;background:#fff;margin:0 auto;max-width:190mm;padding:8px}
+h1{font-size:16px;margin:0 0 2px}h2{font-size:12px;margin:10px 0 4px;border-bottom:1px solid #999;text-transform:uppercase;letter-spacing:.04em}
+.meta{color:#444;font-size:10px}.state{font-weight:700;padding:2px 6px;border:2px solid #111}.broken{color:#b00;border-color:#b00}
+dl{display:grid;grid-template-columns:34mm 1fr;gap:2px 8px;margin:0}dt{font-weight:600;color:#333}dd{margin:0;overflow-wrap:anywhere}
+code{font:9.5px ui-monospace,Consolas,monospace;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;font-size:9.5px}th,td{border:1px solid #bbb;padding:2px 4px;text-align:left;vertical-align:top}
+th{background:#eee}ul{margin:2px 0 0 16px;padding:0}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.note{color:#555;font-size:9.5px}.absent{color:#777;font-style:italic}
+@media print{body{padding:0}}</style></head><body>
+<h1>Hold up : fiche technique de traçabilité</h1>
+<div class="meta">Une ligne du journal ; fiche produite le 2026-10-11T10:00:00.000Z ; holdup.fiche_tracabilite/1</div>
+<h2>Preuve</h2>
+<dl><dt>Chaîne</dt><dd><span class="state">COHÉRENTE</span> 7 ligne(s) vérifiée(s)</dd>
+
+<dt>Algorithme</dt><dd>SHA-256(prev + contenu canonique), verifyChain de extension/journal_chain.js</dd>
+<dt>Ancrage</dt><dd>départ de la chaîne (aucune ligne retirée par la borne)</dd>
+<dt>Dernier hachage</dt><dd><code>c4e92edbf5111d97c6dc31e1b98c5b94fd8695cf945ae6bb368a0e5ddf4f3316</code> <span class="note">à garder ailleurs pour ancrer</span></dd>
+<dt>Empreinte de la fiche</dt><dd><code>043250d8337a8e61ef145b88fb1c6f5c05ad7373f7182d9a7b09a05033c314af</code> <span class="note">SHA-256 du JSON canonique de la fiche</span></dd></dl>
+<p class="note">Limite : sans ancrage externe (une copie du dernier hachage gardée ailleurs), une réécriture complète de la chaîne ou la suppression des dernières lignes ne se détecte pas.</p>
+<h2>Qui a fait quoi</h2>
+<dl><dt>Qui</dt><dd>Hold up (analyse automatique, aucune décision)<br><span class="note">action : analyse ; source : type de ligne « verdict »</span></dd><dt>D’où</dt><dd>app.uniswap.org.claim-rewar…evil.example<br><span class="note">onglet : <span class="absent">non enregistré dans cette version</span> ; frame : <span class="absent">non enregistré dans cette version</span></span></dd><dt>Quand</dt><dd>2026-10-11 09:01:01 UTC</dd><dt>Quoi</dt><dd>Signature de données <code>eth_signTypedData_v4</code><br>niveau danger : la demande ne correspondait pas à la phrase<br>décision : <code>aucune</code></dd><dt>Raisons (codes)</dt><dd><ul><li>unlimited_allowance : droit illimité sur un jeton</li><li>external_spender : bénéficiaire hors liste connue</li><li>no_expiry : droit sans expiration</li></ul></dd><dt>Règles</dt><dd>version du build <code>0.3.0</code></dd><dt>Qui (champ by)</dt><dd><span class="absent">non enregistré dans cette version</span></dd><dt>Limitation appliquée (champ limited)</dt><dd><span class="absent">non enregistré dans cette version</span></dd><dt>Empreinte des règles (champ rules)</dt><dd><span class="absent">non enregistré dans cette version</span></dd><dt>Position</dt><dd>ligne n° 4, position 4 sur 7</dd><dt>Hachage</dt><dd><code>ad7ba105999ee6e0fe6bbb3e2380bb9a14969cca8f43f6b243d5e6bae64a18b7</code></dd><dt>Précédent</dt><dd><code>51d322505f9e5c8a36fd49a9d4b2f5feb43c065b54b4c5c60b2d6d8a921188d6</code></dd></dl>
+<div class="two"><div><h2>Ce que la fiche établit</h2><ul><li>Si la chaîne est cohérente : aucune ligne n’a été changée, retirée au milieu ou déplacée depuis son écriture.</li><li>Le contenu de chaque ligne (site coupé, heure, type de demande, niveau, codes, décision, version) est celui qui a été haché à l’écriture.</li><li>Qui a agi, tel que la ligne l’enregistre, et seulement cela.</li></ul></div>
+<div><h2>Ce qu’elle n’établit pas</h2><ul><li>Une réécriture complète de la chaîne ou la suppression des dernières lignes ne se détecte pas sans ancrage externe (une copie du dernier hachage gardée ailleurs).</li><li>Les champs marqués « hors du hachage » ne sont pas protégés par la chaîne.</li><li>Le contenu exact de la demande, la phrase écrite et les adresses : le journal ne les garde pas.</li><li>Que la demande était sans risque : Hold up ne le dit jamais. Cette fiche ne promet rien.</li></ul></div></div>
+<p class="note">Sans phrase écrite ni adresse : le journal ne les garde pas. Sites coupés au milieu, domaine final toujours visible.</p>
+</body></html>

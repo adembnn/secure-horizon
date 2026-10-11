@@ -1,0 +1,109 @@
+{
+ "format": "holdup-journal",
+ "version": 1,
+ "anchor": null,
+ "entries": [
+  {
+   "n": 1,
+   "t": 1791709200000,
+   "o": "shop.example",
+   "type": "verdict",
+   "m": "eth_sendTransaction",
+   "l": "attention",
+   "c": [
+    "external_spender"
+   ],
+   "d": "",
+   "v": "0.3.0",
+   "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+   "hash": "ee1ca769aaee7c628bde347f3d0ca26281ffe4b94da6198b3c64a0d6aa92e140"
+  },
+  {
+   "n": 2,
+   "t": 1791709209000,
+   "o": "shop.example",
+   "type": "decision",
+   "m": "eth_sendTransaction",
+   "l": "attention",
+   "c": [
+    "geste"
+   ],
+   "d": "confirm",
+   "v": "0.3.0",
+   "prev": "ee1ca769aaee7c628bde347f3d0ca26281ffe4b94da6198b3c64a0d6aa92e140",
+   "hash": "f48f40177e7730e34473c2c9fac83ea61b0298f82fd4c351edfeff9e14ac6fe3"
+  },
+  {
+   "n": 3,
+   "t": 1791709260000,
+   "o": "app.uniswap.org.claim-rewar…evil.example",
+   "type": "decision",
+   "m": "eth_signTypedData_v4",
+   "l": "",
+   "c": [],
+   "d": "answer",
+   "v": "0.3.0",
+   "prev": "f48f40177e7730e34473c2c9fac83ea61b0298f82fd4c351edfeff9e14ac6fe3",
+   "hash": "51d322505f9e5c8a36fd49a9d4b2f5feb43c065b54b4c5c60b2d6d8a921188d6"
+  },
+  {
+   "n": 4,
+   "t": 1791709261000,
+   "o": "app.uniswap.org.claim-rewar…evil.example",
+   "type": "verdict",
+   "m": "eth_signTypedData_v4",
+   "l": "danger",
+   "c": [
+    "unlimited_allowance",
+    "external_spender",
+    "no_expiry"
+   ],
+   "d": "",
+   "v": "0.3.0",
+   "prev": "51d322505f9e5c8a36fd49a9d4b2f5feb43c065b54b4c5c60b2d6d8a921188d6",
+   "hash": "ad7ba105999ee6e0fe6bbb3e2380bb9a14969cca8f43f6b243d5e6bae64a18b7"
+  },
+  {
+   "n": 5,
+   "t": 1791709275000,
+   "o": "app.uniswap.org.claim-rewar…evil.example",
+   "type": "decision",
+   "m": "eth_signTypedData_v4",
+   "l": "danger",
+   "c": [],
+   "d": "cancel",
+   "v": "0.3.0",
+   "prev": "ad7ba105999ee6e0fe6bbb3e2380bb9a14969cca8f43f6b243d5e6bae64a18b7",
+   "hash": "525107c5040f1a544f05148b8a1ce2cd48600f1cdae090ff0debac304b36e06c"
+  },
+  {
+   "n": 6,
+   "t": 1791709320000,
+   "o": "dex.example",
+   "type": "decision",
+   "m": "eth_sendTransaction",
+   "l": "attention",
+   "c": [
+    "envoi_automatique",
+    "droit_limite"
+   ],
+   "d": "confirm",
+   "v": "0.3.0",
+   "prev": "525107c5040f1a544f05148b8a1ce2cd48600f1cdae090ff0debac304b36e06c",
+   "hash": "6f0d44d1dba766865425698b5c631dc90f396bcc14c3a1eabab8c7fa2348be17"
+  },
+  {
+   "n": 7,
+   "t": 1791709380000,
+   "o": "dex.example",
+   "type": "revocation",
+   "m": "erc20_approve",
+   "l": "",
+   "c": [],
+   "d": "submitted",
+   "v": "0.3.0",
+   "prev": "6f0d44d1dba766865425698b5c631dc90f396bcc14c3a1eabab8c7fa2348be17",
+   "hash": "c4e92edbf5111d97c6dc31e1b98c5b94fd8695cf945ae6bb368a0e5ddf4f3316"
+  }
+ ]
+}
