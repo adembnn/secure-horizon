@@ -40,6 +40,14 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     if (exchange) drop('unexpected_outgoing', 'F12:echange_conditionnel_signe');
   }
 
+  // ---- F13 : l'opérateur NFT (setApprovalForAll) accordé à un protocole de la liste connue est le mécanisme normal d'une mise en vente ou d'un échange de NFT :
+  // l'écart d'intention « tu voulais juste te connecter » est à confirmer (warn), pas une arnaque (critical). Le plancher garde son warn (opérateur sur toute la collection).
+  if (isOn('F13') && (eff.approvals || []).length && eff.approvals.every((a) => a.via === 'setApprovalForAll' && isKnownProtocol(ctx, a.spender))) {
+    let hit = false;
+    reasons = reasons.map((r) => (r.code === 'unexpected_approval_connect' || r.code === 'unexpected_approval' ? ((hit = true), { ...r, sev: 'warn' }) : r));
+    if (hit) notes.push('F13:operateur_nft_protocole_connu');
+  }
+
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :
   // warn (à confirmer) au lieu de critical. chain_id = 0 (toutes chaînes) et cible inconnue restent critical.
   if (isOn('F4') && eff.delegation && isKnownProtocol(ctx, eff.delegation.to) && !(eff.delegations || []).some((d) => d.chainId === 0 && String(d.to) !== ZERO_ADDR)) {

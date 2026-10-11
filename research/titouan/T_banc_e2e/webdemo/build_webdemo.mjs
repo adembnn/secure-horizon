@@ -2,7 +2,7 @@
 // Methode identique a extension_standalone/build_standalone.mjs : moteur d'effets copie tel quel (seuls les suffixes d'import changent),
 // comparateur d'Adem TypeScript -> JavaScript par module.stripTypeScriptTypes, politique et textes clairs copies.
 // Entrees (LECTURE SEULE) : ../engine/src/*.mjs, ../engine/vendor/compare.ts, ../run/policy.mjs, ../../U_textes_utilisateur.json,
-//                           ../extension_standalone/src/sentinelle_core.js (colle moteur->verdict deja valide), ../attacks_public/PUBLIC.jsonl (exemples)
+//                           ../server/server.mjs (colle moteur->verdict a jour : on en extrait la partie sans reseau ni fichier), ../extension_standalone/src/sentinelle_core.js (seulement le decodeur punycode), ../attacks_public/PUBLIC.jsonl (exemples)
 // Sortie : engine/ + js/exemples_public.js + BUILD_INFO.json (hachages).      Usage : node build_webdemo.mjs      Node >= 23.2. Aucun paquet, aucun reseau.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -20,7 +20,7 @@ function put(rel, data) {
   const buf = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
   writeFileSync(p, buf); written.push({ file: rel.replace(/\\/g, '/'), bytes: buf.length, sha256: sha(buf) });
 }
-const sources = [];
+const sources = []; const R_PATCHES = [];
 const src = (p) => { const b = readFileSync(p); sources.push({ file: relative(ROOT, p).replace(/\\/g, '/'), sha256: sha(b) }); return b; };
 
 // Reecrit les specificateurs relatifs .mjs / .ts -> .js.
@@ -54,8 +54,47 @@ put('engine/policy.js', rewriteImports(src(join(ROOT, 'run', 'policy.mjs')).toSt
   const j = JSON.parse(src(join(ROOT, '..', 'U_textes_utilisateur.json')).toString('utf8'));
   put('engine/textes.js', '// Genere par build_webdemo.mjs depuis U_textes_utilisateur.json (memes donnees).\nexport default ' + JSON.stringify(j) + ';\n');
 }
-// 5) colle moteur -> verdict (la meme que celle de l'extension autonome, copiee telle quelle)
-put('engine/sentinelle_core.js', src(join(ROOT, 'extension_standalone', 'src', 'sentinelle_core.js')));
+// 5) colle moteur -> verdict. Source = server/server.mjs (la version la plus a jour de la chaine moteur -> comparateur -> politique -> textes).
+//    On en extrait la partie "contexte hors ligne ... evaluate" par marqueurs, SANS la lecture de fichier ni le serveur HTTP, avec des remplacements textuels exacts et listes (patches[]).
+{
+  const srv = src(join(ROOT, 'server', 'server.mjs')).toString('utf8').replace(/\r\n/g, '\n');
+  const i0 = srv.indexOf('const lc = (a) =>'), i1 = srv.indexOf('// ------------------------------------------------------------------ journal chaine par hachage');
+  if (i0 < 0 || i1 < i0) throw new Error('marqueurs de server.mjs introuvables');
+  let body = srv.slice(i0, i1);
+  const patches = [];
+  // a) loadLocalContext lit un fichier (Node) : retiree ; evaluate() prend un contexte vide par defaut
+  const L0 = body.indexOf('// Contexte local OPTIONNEL'), L1 = body.indexOf('function parseChain');
+  if (L0 < 0 || L1 < L0) throw new Error('loadLocalContext introuvable');
+  body = body.slice(0, L0) + body.slice(L1); patches.push('loadLocalContext (lecture de fichier Node) retiree');
+  if (!body.includes('local = loadLocalContext()')) throw new Error('motif evaluate() introuvable');
+  body = body.replace('local = loadLocalContext()', 'local = emptyLocal()'); patches.push('evaluate(): contexte local vide par defaut');
+  // b) url.domainToUnicode (Node) -> decodeur punycode du navigateur, copie de extension_standalone/src/sentinelle_core.js
+  const core = src(join(ROOT, 'extension_standalone', 'src', 'sentinelle_core.js')).toString('utf8').replace(/\r\n/g, '\n');
+  const P0 = core.indexOf('function punyDecode'), P1 = core.indexOf('function hostOf');
+  if (P0 < 0 || P1 < P0) throw new Error('punycode introuvable');
+  const puny = core.slice(P0, P1); patches.push('domainToUnicode: decodeur punycode JS pur (Node n\'est pas disponible dans une page)');
+  // c) echeance "infinie" (uint max) : le serveur ecrivait "1.3e+72 jours"; la version autonome l'a corrige, on garde la correction (patch optionnel)
+  const OLD = "if (ap && ap.expiry) v.jours = String(Math.max(1, Math.round((ap.expiry - Math.floor(Date.now() / 1000)) / 86400)));";
+  if (body.includes(OLD)) {
+    body = body.replace(OLD, "if (ap && ap.expiry) { const days = Math.round((Number(ap.expiry) - Math.floor(Date.now() / 1000)) / 86400); v.jours = Number.isFinite(days) && days <= 3650 ? String(Math.max(1, days)) : 'un nombre illimité de'; }");
+    patches.push('texte "jours": echeance illimitee => "un nombre illimité de jours" au lieu de "1.3e+72 jours"');
+  }
+  const header = [
+    '// GENERE par build_webdemo.mjs a partir de server/server.mjs (partie sans reseau ni fichier). Ne pas editer a la main.',
+    '// Patches appliques : ' + patches.join(' ; ') + '.',
+    "import * as E from './src/engine.js';",
+    "import { compare } from './vendor/compare.js';",
+    "import { applyExtraRules, analyzeChainRequest } from './src/rules_extra.js';",
+    "import { applyPolicy } from './policy.js';",
+    "import TEXTS from './textes.js';",
+    'export const MAX_BODY = 256 * 1024;',
+    'export const FICHES = Object.fromEntries(TEXTS.fiches.map((f) => [f.id, f]));',
+    '',
+  ].join('\n');
+  const footer = '\nexport const emptyLocal = () => ({ contacts: [], history: [], protected: [], knownSpenders: [] });\nexport { buildCtx, decode, Unverifiable, applyExtraRules, fill, parseChain };\n';
+  put('engine/sentinelle_core.js', header + puny + body + footer);
+  R_PATCHES.push(...patches);
+}
 
 // 6) exemples du jeu PUBLIC (synthetiques) pour le mode "colle une transaction" : le premier cas de chaque famille (max 16). Jamais TEST.
 {
@@ -74,6 +113,6 @@ put('engine/sentinelle_core.js', src(join(ROOT, 'extension_standalone', 'src', '
 // 7) trace du build (sans date : reproductible)
 written.sort((a, b) => a.file.localeCompare(b.file));
 const total = written.reduce((n, f) => n + f.bytes, 0);
-const info = { build: 'holdup-webdemo', sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
+const info = { build: 'holdup-webdemo', patches_sentinelle_core: R_PATCHES, sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
 writeFileSync(join(HERE, 'BUILD_INFO.json'), JSON.stringify(info, null, 1));
 console.log(`webdemo : ${written.length} fichiers generes, ${total} octets, arbre ${info.tree_sha256.slice(0, 16)}`);

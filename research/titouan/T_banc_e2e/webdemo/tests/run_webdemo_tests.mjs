@@ -38,7 +38,10 @@ const treeOf = () => JSON.parse(readFileSync(join(WD, 'BUILD_INFO.json'), 'utf8'
   ok(diffs === 0 && n >= 14, `engine/src copie fidele (${n} fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)`);
   const pol = readFileSync(join(ROOT, 'run', 'policy.mjs'), 'utf8').replace("'../engine/src/fixes.mjs'", "'./src/fixes.js'");
   ok(pol === readFileSync(join(WD, 'engine', 'policy.js'), 'utf8'), 'policy.js = run/policy.mjs (un seul chemin d import change)');
-  ok(readFileSync(join(WD, 'engine', 'sentinelle_core.js'), 'utf8') === readFileSync(join(ROOT, 'extension_standalone', 'src', 'sentinelle_core.js'), 'utf8'), 'sentinelle_core.js = celui de l extension autonome, octet pour octet');
+  { const gen = readFileSync(join(WD, 'engine', 'sentinelle_core.js'), 'utf8'); const srv = readFileSync(join(ROOT, 'server', 'server.mjs'), 'utf8').replace(/\r\n/g, '\n');
+    const i0 = srv.indexOf('function buildCtx'), i1 = srv.indexOf('function decode'); const bc = srv.slice(i0, i1).trim();
+    const patches = JSON.parse(readFileSync(join(WD, 'BUILD_INFO.json'), 'utf8')).patches_sentinelle_core;
+    ok(gen.includes(bc) && gen.includes('function pickFiche') && gen.includes('seaport_zero_price') && patches.length >= 3, `sentinelle_core.js genere depuis server/server.mjs (buildCtx identique, regles Seaport presentes), ${patches.length} patchs documentes`); }
 }
 
 // ------------------------------------------------------------------ B) graphe d'imports de la page
@@ -81,7 +84,10 @@ const webLocal = M.sanitizeLocalContext(S.LOCAL);
 const emptyLocal = M.emptyLocal();
 const KEYS = ['level', 'niveau', 'fiche', 'texts', 'codes', 'effects', 'raisons', 'indeterminate', 'quote', 'address_diff', 'risk_signals', 'intent_contradiction', 'texts_source', 'lead'];
 const pick = (v) => JSON.stringify(KEYS.map((k) => v[k]));
-function refVerdict(body, local) { try { return REF.evaluate(body, local); } catch (e) { return { level: 'unknown', niveau: 'warn', indeterminate: true, throw: String(e.message).slice(0, 80) }; } }
+let absorbed = 0;
+function refVerdict(body, local) { try { const r = REF.evaluate(body, local); return fixRef(r); } catch (e) { return { level: 'unknown', niveau: 'warn', indeterminate: true, throw: String(e.message).slice(0, 80) }; } }
+// Seule difference VOULUE : le serveur ecrit « 1.3e+72 jours » pour une echeance illimitee, la page ecrit « un nombre illimité de jours » (correctif de l extension autonome).
+function fixRef(r) { if (r && r.texts) for (const k of Object.keys(r.texts)) { const n = r.texts[k].replace(/\d(?:\.\d+)?e\+\d+ jours/g, 'un nombre illimité de jours'); if (n !== r.texts[k]) { absorbed++; r.texts[k] = n; } } return r; }
 const BAD_WORDS = /\b(ok|protégé|protege|bloqué|bloque|sûr|sur et sécurisé|safe)\b/i;
 
 const cases = [];
@@ -110,7 +116,7 @@ const ms = performance.now() - t0;
 ok(okSeen === 0, `'ok' ne sort jamais : 0 sur ${cases.length} verdicts (niveau et level)`);
 ok(!bad.length, 'chaque verdict : niveau valide, 4 lignes de texte, libelle sans "OK/protege/bloque", friction coherente', bad.slice(0, 4).join(' ; '));
 ok(diffs.length === 0, `verdicts IDENTIQUES a la voie de reference (server/server.mjs) : ${identical}/${cases.length}`, diffs.slice(0, 3).map((d) => `${d.cas}: ${d.web} vs ${d.ref}`).join(' ; '));
-R.scenarios = { cas: cases.length, identiques: identical, ecarts: diffs.slice(0, 20), niveaux_affiches: levels, ms_total: Math.round(ms), ms_par_verdict: Math.round(ms / cases.length * 100) / 100 };
+R.scenarios = { correctif_jours_absorbe: absorbed, cas: cases.length, identiques: identical, ecarts: diffs.slice(0, 20), niveaux_affiches: levels, ms_total: Math.round(ms), ms_par_verdict: Math.round(ms / cases.length * 100) / 100 };
 
 // les 8 scenarios : avec l'intention honnete, ce qu'on attend (le plancher objectif ne depend pas de l'intention)
 {

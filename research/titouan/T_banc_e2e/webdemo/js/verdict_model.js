@@ -1,5 +1,5 @@
 // Modele du verdict (sans DOM : charge aussi par les tests Node). Rien ici ne produit jamais de message "OK" ou "protege".
-import { check, analyze, buildCtx, sanitizeLocalContext, emptyLocal, Unverifiable } from '../engine/sentinelle_core.js';
+import { check, analyzeEffects, sanitizeLocalContext, emptyLocal, Unverifiable } from './engine_api.js';
 export { check, sanitizeLocalContext, emptyLocal };
 
 // Niveau affiche. Le plus bas n'est PAS vert : "aucun signal trouve" + rappel que ce n'est pas une garantie.
@@ -20,18 +20,12 @@ export function frictionSeconds(key, cfg) {
 }
 export const withIntent = (body, intentKey) => (intentKey && intentKey !== 'none' ? { ...body, intent: intentKey } : { ...body });
 
-const parseChain = (v) => { if (v === null || v === undefined || v === '') return undefined; try { const n = typeof v === 'number' ? v : (/^0x/i.test(String(v)) ? Number(BigInt(v)) : Number(v)); return Number.isFinite(n) && n >= 0 ? n : undefined; } catch (_) { return undefined; } };
-const HEX20 = /^0x[0-9a-fA-F]{40}$/;
 const sh = (a) => (typeof a === 'string' && a.length > 12 ? a.slice(0, 6) + '…' + a.slice(-4) : String(a));
 // Ce que le moteur d'effets a decode (pour le panneau technique). Meme chaine que le verdict, sans l'intention. Ne leve jamais.
 export function explain(body, localRaw) {
   try {
     const local = sanitizeLocalContext(localRaw);
-    const params = Array.isArray(body.params) ? body.params : [];
-    const a0 = params[0] && typeof params[0] === 'object' ? params[0] : {};
-    const from = HEX20.test(String(body.from || '')) ? String(body.from).toLowerCase() : (HEX20.test(String(a0.from || '')) ? String(a0.from).toLowerCase() : undefined);
-    const ctx = buildCtx(body, local, from, parseChain(body.chainId) ?? parseChain(a0.chainId));
-    const { eff, pol } = analyze({ method: body.method, params }, ctx, null);
+    const { eff, pol } = analyzeEffects(body, local);
     const lines = [];
     for (const o of eff.outgoing || []) lines.push({ k: 'Sortie d’argent', v: `${o.amount} ${o.symbol} → ${sh(o.to)}` });
     for (const i of eff.incoming || []) lines.push({ k: 'Reçu', v: `${i.amount} ${i.symbol}` });

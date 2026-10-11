@@ -1,5 +1,11 @@
 {
  "build": "holdup-webdemo",
+ "patches_sentinelle_core": [
+  "loadLocalContext (lecture de fichier Node) retiree",
+  "evaluate(): contexte local vide par defaut",
+  "domainToUnicode: decodeur punycode JS pur (Node n'est pas disponible dans une page)",
+  "texte \"jours\": echeance illimitee => \"un nombre illimité de jours\" au lieu de \"1.3e+72 jours\""
+ ],
  "sources": [
   {
    "file": "../U_textes_utilisateur.json",
@@ -79,19 +85,23 @@
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "ea0866e0a1ae3297e23258d3b5935e718c40abb1ebdcc3577f37cd4b21f1bbe4"
+   "sha256": "ce761745beb16815d6071af6357cdb0c547ebd6e1a98727ce581be7a70587b90"
+  },
+  {
+   "file": "server/server.mjs",
+   "sha256": "ee180e824e1c91f0b8198b22bf179d0b1e046cedebecc7792667ba84bdc56bf8"
   }
  ],
  "outputs": [
   {
    "file": "engine/policy.js",
-   "bytes": 6440,
-   "sha256": "8af309b9fd4a78fe64d6a75609d24c25ce744310cb3198056b7f1221379cb2bf"
+   "bytes": 7183,
+   "sha256": "e356b4f4ef2c2b7c4e3f74d71f22f7953bc82373020cbc5621a63d152e5ba16c"
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 22306,
-   "sha256": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b"
+   "bytes": 21203,
+   "sha256": "588682f21e89717260073aec022db7960b4e7b1e8f921ce64a2e51c702541b05"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -179,6 +189,6 @@
    "sha256": "287ca2780020efc9727937b6ee27d8c5bfbe832c2677664cfc9c3392719141a5"
   }
  ],
- "total_bytes": 207380,
- "tree_sha256": "c0c576b26e8e48d29fc115067c115234d788214f4627810effa84d1360b69a58"
+ "total_bytes": 207020,
+ "tree_sha256": "073771ec7c7e1a1ad4b28c882ffd3fa0a47d4dc1435f77f10a6568ffe0b1733b"
 }
