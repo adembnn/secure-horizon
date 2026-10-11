@@ -71,7 +71,9 @@
   const GATED = new Set(['eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign',
     'eth_signTypedData', 'eth_signTypedData_v1', 'eth_signTypedData_v3', 'eth_signTypedData_v4',
     'wallet_sendCalls', 'wallet_addEthereumChain', 'wallet_switchEthereumChain',
-    'wallet_requestPermissions', 'eth_sendRawTransaction']);
+    'wallet_requestPermissions', 'eth_sendRawTransaction',
+    // droits durables et dechiffrement : non decodes par le moteur, donc ecran "Non verifie" plutot que passage silencieux
+    'wallet_grantPermissions', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
   const JOURNAL = new Set(['eth_requestAccounts']);
   const HEX20 = /^0x[0-9a-fA-F]{40}$/;
 
