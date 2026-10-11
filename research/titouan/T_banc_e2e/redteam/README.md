@@ -13,3 +13,10 @@ Exemple (`redteam/exemple.jsonl` : approve illimité de USDC alors que la victim
 → `{"id":"rt-1","level_final":"critical","level_sans_intention":"critical","reasons":["[critical] unlimited_allowance : droit illimité sur 0xa0b8… pour 0x2222…", "[warn] external_spender : …", "[intention] unexpected_approval : …"],"ms":4}` puis `{"summary":{...}}`.
 Fidélité : chaîne copiée de `run/run_loop.mjs` (lignes citées en en-tête de check.mjs) ; verdicts identiques à `run_loop.mjs --dry` sur 385/385 cas de `attacks/DEV.jsonl` et 1397/1397 cas décodables de `blind_adem/v2/V2_DEV.jsonl`.
 Écart volontaire : `context` ou `intent` absent ou `null` est remplacé par `{}` au lieu de faire planter le processus (run_loop plante).
+
+## Fichier généré : `redteam/V2_DEV_norm.jsonl`
+
+Ce fichier (21 Mo) est ignoré par git (`*.jsonl`). Un clone neuf ne l'a pas. Il est lu par `engine/test/monotonie.test.mjs`, `pipeline/test/evaluate_plus.test.mjs`, `pipeline/test/monotone_pipeline.test.mjs` et `run/mesure_monotonie.mjs` : sans lui, ces tests plantent au chargement.
+Pour le créer, depuis `research/titouan/T_banc_e2e` :
+`node redteam/normalize_v2.mjs blind_adem/v2/V2_DEV.jsonl redteam/V2_DEV_norm.jsonl`
+Ou, depuis la racine du dépôt : `node scripts/verifier_installation.mjs --donnees` (aussi lancé par `npm run test:engine`). Jamais sur `V2_TEST.jsonl`.

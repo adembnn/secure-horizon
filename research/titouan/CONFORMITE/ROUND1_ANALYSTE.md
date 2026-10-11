@@ -39,15 +39,13 @@ Risque concret si on l'abandonne sans nettoyer : elle est promise dans `FICHE_DE
 - Sans fiche, mentions retirées : 8 à 10.
 - Sans fiche, mentions laissées : 6 à 8.
 
-Hypothèses : trois experts, 5 minutes de pitch, ils jugent la slide et un moment de démo. Écart dû à la fiche : environ 1 point sur 15, soit 1 % de la note totale. Si le rejeu auditeur est montré en direct, l'écart tombe vers 0.
+Hypothèses : trois experts, 5 minutes, jugement sur la slide et un moment de démo. Écart dû à la fiche : environ 1 point sur 15 (1 % de la note totale). Si le rejeu auditeur est montré en direct, l'écart tombe vers 0.
 
 ## 5. Trois trous qui coûtent des points, fiche ou pas
 
 1. **Le rejeu ne porte pas sur le produit livré.** Il marche sur le journal du serveur. La chaîne de l'extension ne garde ni empreinte des paramètres, ni « qui a décidé » (`by`), ni la limitation à 50 USDC (`contentOf` les retire). D'où les deux inexactitudes déjà relevées par l'audit. De plus, `sample/journal.jsonl` est exclu par `.gitignore` : la commande de la slide échoue sur un clone (il faut lancer `make_sample_journal.mjs` d'abord).
 2. **La version des règles n'est pas dans le journal serveur.** Preuve que c'est réel : EXPLICABILITE cite l'empreinte `f30cf33c…` sur 20 fichiers. Aujourd'hui le script calcule `43da74f0…` sur 21 fichiers. Le code a bougé ; une ligne d'hier ne dit pas quelles règles l'ont jugée. L'extension ne garde que la version du build (`v`).
-3. **Documents contradictoires et journal non ancré.** PLAYBOOK §2, §6, §8, MAPPING l.17 et PRODUCT l.53 disent le build autonome non chaîné. SLIDE, FICHE_DEFENSE et QR disent chaîné. Le code donne raison aux seconds. Un auditeur qui lit deux pièces voit une contradiction : c'est l'inverse de « défendable ». Ancrage Fuji : non fait.
-
-Le mapping de référentiels n'a pas été revérifié dans ce round.
+3. **Documents contradictoires et journal non ancré.** PLAYBOOK §2, §6, §8, MAPPING l.17 et PRODUCT l.53 disent le build autonome non chaîné. SLIDE, FICHE_DEFENSE et QR disent chaîné. Le code donne raison aux seconds. Deux pièces qui se contredisent : l'inverse de « défendable ». Ancrage Fuji : non fait.
 
 ## 6. Recommandation
 

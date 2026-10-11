@@ -29,11 +29,11 @@ Les fichiers de `extension/` ont bougé pendant la revue (d'autres agents corrig
 
 Autres trouvailles (gravité plus basse, détaillées plus bas) : S11 changement de réseau pendant la retenue, S12 `wallet_addEthereumChain` et `wallet_switchEthereumChain` non retenus, S13 déni de service par fenêtres, S14 consigne injectée dans le classifieur, S15 faux jeton "USDC" lu sur la chaîne par Q17, S16 `chrome.storage.local` lisible par les scripts de contenu, S17 relais non épinglé à l'identifiant d'extension, S18 la phrase à retaper n'existe plus dans la fenêtre, S19 journal vidable par spam, S20 faux écran Hold up, S21 divers.
 
-Tests écrits (tous dans `security_review2/tests/`, lancement `node <fichier>`, code de sortie 1 = trouvaille encore ouverte) :
-- `r01_builtins_pollution.mjs` : S1. Échoue (3 cas sur 4 laissent passer la demande vers le portefeuille alors que le pont refuse tout).
-- `r02_written_check.mjs` : S2, S3, S8. Échoue (4 cas).
-- `r03_gatekeeper_flow.mjs` : S4, S3, S7 avec un faux chrome. Échoue sur 3 lignes ; les 2 lignes "RELIEF on m'a demandé / paiement" passent (corrigées entre-temps).
-- `r04_real_engine_value.mjs` : moteur embarqué réel : `transfer + 1 ETH` reste "attention". Échoue.
+Tests écrits (tous dans `security_review2/tests/`, lancement `node <fichier>` depuis `research/titouan/T_banc_e2e`, code de sortie 1 = trouvaille encore ouverte). Au moment de la revue, r01 à r04 échouaient. État relancé le 11 oct. 2026 vers 10 h 40 (Node 24.18.1), un test à la fois :
+- `r01_builtins_pollution.mjs` : S1. Passe aujourd'hui (code 0) : dans les 5 scénarios, aucune demande n'arrive au portefeuille. Le test charge `extension/inject.js` dans une fenêtre factice en Node, pas dans un vrai Chrome.
+- `r02_written_check.mjs` : S2, S3, S8. Passe aujourd'hui (code 0, 4 cas sur 4) sur `extension/written_check.js`.
+- `r03_gatekeeper_flow.mjs` : S4, S3, S7 avec un faux chrome. Passe aujourd'hui (code 0, 5 lignes sur 5). Le rembourrage de plus de 200 Ko donne maintenant « pas pu vérifier ».
+- `r04_real_engine_value.mjs` : moteur embarqué du build livré (`extension_standalone/extension/engine/sentinelle_core.js`). **Échoue aujourd'hui (code 1)** : `transfer + 1 ETH` reste « attention », comme `transfer` sans valeur (`funds_out` vrai dans les deux cas, aucun code de plus). Attention à la lecture : le test accepte « danger » ou « unknown » (« pas pu vérifier ») comme correctif. Un passage par « unknown » ne voudra pas dire que l'ETH joint est vu. Le résultat dépend du build committé, qui peut être en retard sur `engine/src`. Le contrôle écrit (r02, r03) attrape ce cas plus tôt : « ne correspond pas ».
 - `r05_engine_dos.mjs` : résultat négatif, passe (le moteur répond en moins de 20 ms sur 4 entrées hostiles).
 
 ---

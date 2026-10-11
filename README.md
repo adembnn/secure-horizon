@@ -72,7 +72,12 @@ Puis ouvre `http://localhost:8793/?mode=honnete` (parcours honnête) ou `http://
 | `node --no-warnings research/titouan/T_banc_e2e/extension_standalone/tests/run_tests.mjs` | suite du build autonome |
 | `npm run test:contracts` (ou `node scripts/verifier_installation.mjs --complet`) | contrats de démo (Hardhat, environ 2 minutes) |
 
-Aucun nombre n'est recopié ici : ils changent à chaque version, lance la commande. Ces tests valident le code, ils ne mesurent pas la détection. Les tests de la revue de sécurité (`security_review2/tests/`) échouent tant que leurs failles ne sont pas corrigées. Sur un clone neuf, un test du moteur lit un échantillon de trafic réel de la C-Chain (`research/titouan/bench/data/cchain_sample.jsonl`, ignoré par git, recréable avec Internet) : sans lui, ce test échoue. Cela n'a aucun effet sur la démo.
+Aucun nombre n'est recopié ici : ils changent à chaque version, lance la commande. Ces tests valident le code, ils ne mesurent pas la détection. Les tests de la revue de sécurité (`research/titouan/T_banc_e2e/security_review2/tests/`, `node <fichier>`) sortent en code 1 tant que leur faille est ouverte. Le 11 oct. 2026 : r01, r02, r03 et r05 passent ; r04 échoue encore (dans le moteur du build livré, un `transfer` qui joint 1 ETH reste « attention »). r04 accepte aussi « pas pu vérifier » comme correctif : un passage ne voudra pas dire que l'ETH joint est vu. r01 et r03 tournent en Node, pas dans un vrai Chrome. Détail : `security_review2/REVUE.md`.
+
+Fichiers ignorés par git mais lus par des tests (un clone neuf ne les a pas) :
+- `research/titouan/T_banc_e2e/redteam/V2_DEV_norm.jsonl` (21 Mo), lu par `engine/test/monotonie.test.mjs`, `pipeline/test/evaluate_plus.test.mjs`, `pipeline/test/monotone_pipeline.test.mjs` et `run/mesure_monotonie.mjs`. Sans lui, ces tests plantent. Pour le créer : `node scripts/verifier_installation.mjs --donnees` depuis la racine (aussi lancé par `npm run test:engine`), ou à la main depuis `research/titouan/T_banc_e2e` : `node redteam/normalize_v2.mjs blind_adem/v2/V2_DEV.jsonl redteam/V2_DEV_norm.jsonl`.
+- `research/titouan/T_banc_e2e/attacks_public/PUBLIC.jsonl` : recréé par la même commande `--donnees`, avec sa graine fixe.
+- `research/titouan/bench/data/cchain_sample.jsonl` : échantillon de trafic réel de la C-Chain, recréable seulement avec Internet (`bench/sample_cchain.mjs`). Sans lui, un test du moteur échoue. Cela n'a aucun effet sur la démo.
 
 ## Chiffres
 
