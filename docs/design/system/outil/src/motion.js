@@ -9,9 +9,9 @@
   const fill = (slot, v) => { $('.hu-slot-v', slot).textContent = v; slot.classList.add('is-filled'); slot.classList.remove('is-missing'); };
 
   const demos = {
-    glove: { rest: 'n-montant', run: async ({ put, wait }) => { put('n-montant').classList.add('hu-is-entering'); await wait(460); } },
-    open: { rest: 'q-vide', run: async ({ put, wait }) => { put('q-vide').classList.add('hu-is-opening'); await wait(220); } },
-    question: { rest: 'q-vide', run: async ({ put, wait }) => { put('q-vide').classList.add('hu-is-entering'); await wait(320); } },
+    glove: { rest: 'n-montant', run: async ({ put, wait }) => { put('n-montant').classList.add('is-entering'); await wait(460); } },
+    open: { rest: 'q-vide', run: async ({ put, wait }) => { put('q-vide').classList.add('is-opening'); await wait(220); } },
+    question: { rest: 'q-vide', run: async ({ put, wait }) => { put('q-vide').classList.add('is-entering'); await wait(320); } },
     slots: {
       rest: 'q-complet',
       run: async ({ put, wait }) => {
@@ -37,18 +37,18 @@
         cuff.classList.add('is-press'); await wait(90); cuff.classList.remove('is-press');
         cuff.setAttribute('aria-disabled', 'true'); field.readOnly = true;
         await wait(150);                       // rien ne change avant 150 ms
-        w.classList.add('hu-is-busy'); cuff.textContent = 'Je compare…';
+        w.setAttribute('data-state', 'checking'); cuff.textContent = 'Je compare…';
         await wait(450);                       // une fois montré, l'état reste au moins 400 ms
-        w.classList.add('hu-is-leaving'); await wait(80);
-        put('c-simple').classList.add('hu-is-entering'); await wait(320);
+        w.classList.add('is-leaving'); await wait(80);
+        put('c-simple').classList.add('is-entering'); await wait(320);
       }
     },
     match: {
       rest: 'c-simple',
       run: async ({ put, wait, clear }) => {
-        const w = put('c-simple'); w.classList.add('hu-is-entering', 'hu-is-departing');
+        const w = put('c-simple'); w.classList.add('is-entering');
         await wait(1000);
-        w.classList.remove('hu-is-entering'); w.classList.add('hu-is-closing'); await wait(130);
+        w.classList.remove('is-entering'); w.classList.add('is-closing'); await wait(130);
         clear(); await wait(700);
       }
     },
@@ -60,8 +60,8 @@
         const from = $('.hu-got-from', w); if (from) from.remove();
         await wait(500);
         cuff.classList.add('is-press'); await wait(90); cuff.classList.remove('is-press');
-        w.classList.add('hu-is-leaving'); await wait(80);
-        put('r-combien').classList.add('hu-is-entering'); await wait(320);
+        w.classList.add('is-leaving'); await wait(80);
+        put('r-combien').classList.add('is-entering'); await wait(320);
       }
     },
     count: {
@@ -69,16 +69,16 @@
       run: async ({ put, wait }) => {
         const w = put('n-montant'), num = $('.hu-num', w), word = $('.hu-wait .hu-word', w);
         for (let n = 5; n > 0; n--) { num.textContent = String(n); await wait(1000); }
-        num.textContent = '0'; w.classList.add('hu-is-ready'); word.removeAttribute('aria-disabled');
+        num.textContent = '0'; w.classList.add('is-ready'); word.removeAttribute('aria-disabled');
         await wait(400);
       }
     },
     next: {
       rest: 'c-etape2',
       run: async ({ put, wait }) => {
-        const w = put('c-etape1'); w.classList.add('hu-is-departing'); await wait(1000);
-        w.classList.add('hu-is-leaving'); await wait(80);
-        put('c-etape2').classList.add('hu-is-next'); await wait(320);
+        const w = put('c-etape1'); await wait(1000);
+        w.classList.add('is-leaving'); await wait(80);
+        put('c-etape2').classList.add('is-entering', 'is-next'); await wait(320);
       }
     },
     cancel: {
@@ -87,9 +87,9 @@
         const w = put('n-montant'), cuff = $('.hu-cuff', w);
         await wait(500);
         cuff.classList.add('is-press'); await wait(90); cuff.classList.remove('is-press');
-        w.classList.add('hu-is-leaving'); await wait(80);
-        const e = put('end-cancel'); e.classList.add('hu-is-entering'); await wait(800);
-        e.classList.remove('hu-is-entering'); e.classList.add('hu-is-closing'); await wait(130);
+        w.classList.add('is-leaving'); await wait(80);
+        const e = put('end-cancel'); e.classList.add('is-entering'); await wait(800);
+        e.classList.remove('is-entering'); e.classList.add('is-closing'); await wait(130);
         clear(); await wait(700);
       }
     },
@@ -111,8 +111,8 @@
         await wait(400);
       }
     },
-    popup: { rest: 'pop-actif', run: async ({ put, wait }) => { put('pop-actif').classList.add('hu-is-opening'); await wait(220); } },
-    panel: { rest: 'pan-journal', run: async ({ put, wait }) => { put('pan-journal').classList.add('hu-is-opening'); await wait(220); } },
+    popup: { rest: 'pop-actif', run: async ({ put, wait }) => { put('pop-actif').classList.add('is-opening'); await wait(220); } },
+    panel: { rest: 'pan-journal', run: async ({ put, wait }) => { put('pan-journal').classList.add('is-opening'); await wait(220); } },
     entry: {
       rest: 'pan-journal',
       run: async ({ put, wait }) => {
