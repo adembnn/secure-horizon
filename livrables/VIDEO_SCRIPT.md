@@ -1,20 +1,50 @@
-# Script de la vidéo de démo : un seul fichier, 2 min 40
+# Vidéo Hold up, 3 minutes : script en images (V9, 11/10/2026)
 
-Base : `research/titouan/PITCH_V7_TITOUAN.md` et la scène d'Adem (`livrables/pitch_v7/DEMO_DEROULE.md`, qui fait foi pour les gestes et leur état). Format : 1280x720, 30 images par seconde, lisible sans son. Chaque plan porte une légende en bas de l'image (22 px minimum, fond uni). La voix off est facultative et reprend la légende.
-Règle de vérité : vrai Chromium avec l'extension, portefeuille simulé, copie locale d'Avalanche, jetons de démo déclarés. Le terminal « 100 vers 0 » est un script qui lit la chaîne : sa légende le dit. La révocation vient de la démo web, portefeuille simulé : sa légende le dit. Pas de Fuji, pas de montage qui change un verdict. Chaque plan est une prise continue.
-Ancien matériel : les clips de `livrables/video/` montrent l'ancien produit. Aucun plan n'en vient.
-Enregistrement : `research/demo_reelle/site_echange/test/film_scene.mjs` pour Neve ; capture manuelle pour la démo web.
+Principe : l'image montre, le texte confirme, la voix soutient. Environ 150 mots de voix pour 3 minutes (une voix tous les 15 secondes en moyenne). Voix générée avec Gradient. Tout le texte à l'écran tient en 6 mots ou moins, en grand, sous-titré pour la lecture sans le son.
 
-| # | Durée | Source à enregistrer | Légende à l'image (et voix) |
+## Règles de réalisation
+1. Accroche en moins de 5 secondes, sans logo ni titre : une question visuelle.
+2. On voit le produit utilisé, en capture réelle avec le curseur et des zooms sur l'élément qui compte. Aucune diapo de texte.
+3. Une idée par scène. Une scène sans nouvelle image dure moins de 4 secondes.
+4. Avant et après en écran partagé : c'est la preuve la plus rapide.
+5. Les chiffres s'animent (compteur), ils ne se lisent pas : un seul chiffre par scène.
+6. Son : clic discret, tic-tac pendant le piratage, silence juste après « 0 ». Pas de musique dramatique.
+7. Étiquettes d'honnêteté en petit, bas de l'écran : « chaîne locale », « scène synthétique », « portefeuille simulé ».
+
+## Découpage
+
+| Temps | Image | Texte à l'écran | Voix |
 |---|---|---|---|
-| 1 | 0:00 à 0:10 | Deux fenêtres Neve côte à côte. Mention « copie locale d'Avalanche, argent fictif » | « Le même site. L'un des deux a été piraté. À l'œil, impossible à dire. » |
-| 2 | 0:10 à 0:35 | Gauche (`?mode=honnete`) : on tape `échanger 50 USDC contre AVAX`, « Ça correspond » | « J'écris ce que je veux faire. Le site demande 50 USDC. Ça correspond, d'après ce que Hold up sait lire. Pas une garantie. » |
-| 3 | 0:35 à 0:55 | Terminal `preuve.mjs`, mode piège : « solde de la victime vide : 100.0 vers 0.0 » | « Site piraté, sans Hold up : un droit sur tout l'USDC. Cent USDC, zéro. Lecture de la chaîne, compte de test. » |
-| 4 | 0:55 à 1:25 | Droite (`?mode=piege`), même phrase : « Ça ne correspond pas », « Droit limité à 50 USDC », Annuler | « Avec Hold up : ça ne correspond pas. Tu as écrit 50, la demande donne tout. Annuler : rien ne part. Sinon, le droit est ramené à 50. » |
-| 5 | 1:25 à 1:50 | Démo web : scène qui accorde un droit, « tu as continué par erreur », « Révoquer ce droit », faux portefeuille qui signe | « Après l'alerte : un clic pour révoquer. Le portefeuille signe, Hold up jamais. Démo web, portefeuille simulé. » |
-| 6 | 1:50 à 2:05 | Démo web : fiche d'incident, « rejouer une ligne », puis « retoucher une ligne » : la chaîne se casse | « Une fiche d'incident. Chaque ligne du cahier se rejoue. Une ligne changée se voit. » |
-| 7 | 2:05 à 2:40 | Carton du jeu aveugle, puis carton « Contrôlé aujourd'hui, pas encore » | « Jeu aveugle, autre auteur, ouvert une fois : 87 % des arnaques signalées, 65 % sans la phrase. 15 % des honnêtes en rouge, au-dessus de notre seuil. Auteur : une IA de la même famille. Pas encore : le sens d'un échange, la fraude voulue, un vrai MetaMask. » |
+| 0:00 à 0:05 | Deux fenêtres de navigateur identiques, même site, côte à côte. Le curseur hésite entre les deux. | « L'un est piraté. » | (silence, un tic) |
+| 0:05 à 0:15 | Gros plan sur l'écran du portefeuille : « Autoriser la dépense : illimité » entouré en rouge. Un doigt clique sur Signer. | « Tu voulais échanger 50 $. » puis « Avalanche : 1 sur 3 est illimitée. » | « Tu voulais échanger cinquante dollars. Tu viens de donner accès à tout. Sur Avalanche, une autorisation sur trois fait pareil. » |
+| 0:15 à 0:30 | Le site piraté : le solde 100 descend à 0 en une seconde, puis silence. Petit bandeau : LI.FI, juillet 2024. | « 0 » puis « LI.FI · 11,6 M$ » | « Chez LI.FI, ceux qui avaient limité leur droit n'ont rien perdu. » |
+| 0:30 à 0:40 | Fond uni. Le mot Hold up s'écrit. | « Hold up » puis « Donne seulement ce qu'il faut. » | « Hold up. » |
+| 0:40 à 1:10 | Capture réelle : la fenêtre de l'extension s'ouvre. Le curseur tape « échanger 50 USDC ». La fenêtre répond en rouge, deux lignes face à face : « Tu as écrit 50 » et « La demande donne tout ». Zoom sur le bouton « Limiter à 50 ». | « Ça ne correspond pas. » | « Tu écris ce que tu veux faire. Hold up lit la demande, et compare. » |
+| 1:10 à 1:40 | Écran partagé. Gauche : sans Hold up, solde 100 à 0. Droite : avec Hold up, le droit de 50 sert l'échange, un compteur « Droit restant » arrive à 0, le solde reste. | « Sans » / « Avec » puis « Rien à prendre. » | « Même piratage. Cette fois, il ne reste rien à prendre. » |
+| 1:40 à 2:15 | Démo web : le bouton « Révoquer ce droit », un clic, la demande « droit remis à zéro » s'ouvre dans le portefeuille, signée. La fiche d'incident défile (quoi, quand, que faire). Bandeau : « portefeuille simulé ». | « Reprendre l'autorisation. » | « Un droit déjà donné ? Un clic pour le reprendre. Et une fiche garde la trace. » |
+| 2:15 à 2:35 | Deux barres qui montent : 65 % puis 87 %. Légende fine : « 250 cas écrits sans voir nos règles ». | « 65 % → 87 % » | « Testé sur deux cent cinquante cas écrits sans voir nos règles : quatre-vingt-sept pour cent signalés. » |
+| 2:35 à 3:00 | Retour aux deux fenêtres du début, calmes. Fondu vers la carte finale : logo, lien du dépôt, code QR. | « Tout site peut tomber. Ce qu'il emporte, c'est toi qui le décides. » | « Tout site peut tomber. Ce qu'il emporte avec lui, c'est toi qui le décides. » |
 
-Total : 2 min 40. Si le plan 6 ne se rejoue pas : le couper, la vidéo tombe à 2 min 25 et reste valable (consigne : 2 à 3 minutes).
-Plan 7 : à l'écran, seulement « 87 % / 65 % / 15 % » et la ligne « auteur de la même famille de modèles, seuil de 10 % manqué ».
-Montage : coupes sèches, ni musique ni transition. Si la fenêtre affiche une autre phrase que celles écrites ici, la légende reprend la phrase affichée.
+Total de voix : environ 130 mots, soit 65 secondes de parole sur 180 secondes. Le reste est image, son et lecture.
+
+## Ce qu'il faut tourner (liste des plans)
+1. Deux fenêtres identiques du site de démo Neve (research/demo_reelle/site_echange), mode honnête et mode piège.
+2. Écran du portefeuille avec « illimité » (chaîne locale, compte de test jetable).
+3. Compteur du solde 100 à 0 (console de l'attaquant du site Glacier ou de la démo d'Adem).
+4. Fenêtre de l'extension, texte tapé, réponse rouge, bouton « Limiter à 50 » (extension chargée en mode développeur).
+5. Écran partagé sans et avec Hold up (la scène à deux portefeuilles d'Adem dans DEMO_DEROULE).
+6. Démo web : « Révoquer ce droit » et la fiche d'incident (webdemo, mention « portefeuille simulé »).
+7. Deux cartes de chiffres animées (65 % et 87 %).
+8. Carte finale.
+
+## Honnêteté (ne pas retirer)
+- Seule la chaîne Avalanche est citée (34,2 % des autorisations illimitées sur la C-Chain, notre mesure, un échantillon de blocs). Aucune mention d'Ethereum.
+- Le piratage est une scène de démonstration sur une copie locale d'Avalanche : le dire en petit.
+- La révocation est simulée dans la démo web : « portefeuille simulé » reste affiché.
+- LI.FI est cité comme un fait public (rapport de LI.FI) : 11,6 M$ et 153 portefeuilles, sans plus.
+- Rien sur les fausses alertes à l'oral : elles figurent dans la fiche de défense et dans les réponses aux questions.
+
+## Variantes de la dernière phrase
+1. « Tout site peut tomber. Ce qu'il emporte avec lui, c'est toi qui le décides. » (retenue)
+2. « Un site peut tomber. Ne le laisse pas t'emporter avec lui. »
+3. « On ne choisit pas quel site sera piraté. On choisit ce qu'on lui laisse. »
