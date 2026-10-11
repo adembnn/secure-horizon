@@ -133,7 +133,7 @@
   },
   {
    "file": "extension/inject.js",
-   "sha256": "2a1820e7e9c43f934040641565f5cfea4c62b36fa59097f79f62022585d0a074"
+   "sha256": "f496792b2f52768c873ffb41bafad49af6448ebd05de08809aeb0331dcb15c31"
   },
   {
    "file": "extension/intent_text.js",
@@ -391,8 +391,8 @@
   },
   {
    "file": "inject.js",
-   "bytes": 50124,
-   "sha256": "2a1820e7e9c43f934040641565f5cfea4c62b36fa59097f79f62022585d0a074"
+   "bytes": 51136,
+   "sha256": "f496792b2f52768c873ffb41bafad49af6448ebd05de08809aeb0331dcb15c31"
   },
   {
    "file": "intent_text.js",
@@ -510,6 +510,6 @@
    "sha256": "557949a90c09071ef2fd1ff6c938de2269b21b3e52f0bfa3be7eadec167b4ac7"
   }
  ],
- "total_bytes": 826713,
- "tree_sha256": "bad4e157864ed99985531693c69cdc9fa391244139e8bbec8ed0aee85d4dca6d"
+ "total_bytes": 827725,
+ "tree_sha256": "88e6c81236deb73b332275bd95bc72f93c9da9812cd5ff68a0ddb378aaa9d231"
 }

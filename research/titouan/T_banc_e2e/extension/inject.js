@@ -265,35 +265,54 @@
   // again by the page while the wallet popup is open carries other objects : it is gated again. A pass is honoured only
   // while our own forwarding call is on the stack (synchronous delegation) : an object the page managed to capture later is worthless.
   // A wallet that delegates asynchronously to another wrapped method is simply asked twice (fail closed).
-  const passes = new WM(); // provider -> WeakMap(forwarded object -> key)
   // The same pass, whatever the provider object the wallet uses inside. A real wallet reaches its own methods through more than one
   // object (a Proxy in front of the instance, a method bound to the instance) : the inner wrapped method then runs with another `this`
   // than the one the page called, and the request we had just forwarded was asked a second time (seen with MetaMask, 11 Oct.).
   // Nothing else is relaxed : still the very object we forwarded, still the same content and chain, still once, and still only
   // while our own forwarding call is on the stack.
-  const passesAny = new WM(); // forwarded object -> { k : key, m : the map of the provider it was granted for }
+  // ONE pass per approval, shared by every object forwarded with it : the first inner call that uses it kills it for the other objects too
+  // (a page that steals one of them through a repainted native cannot obtain a second execution without a question).
+  const passesAny = new WM(); // forwarded object -> pass { k : key, c : chain part of the key, e : inner engine of the provider it was granted for, live }
+  const innerOf = new WM();   // inner engine wrapped by wrapProvider -> the FIRST provider that showed it (the wallet, wrapped before any page script)
   const NOPROV = {};
   let forwarding = 0;
   const provKey = (prov) => (isObj(prov) ? prov : NOPROV);
-  const chainTag = (prov) => { try { const c = prov && prov.chainId; return c == null ? '' : Str(c); } catch (_) { return ''; } };
+  // The chain an object names itself. A chainId planted on Object.prototype by the page names nothing : when there is one, only a
+  // property found on the object or its own prototype chain counts.
+  const chainTag = (prov) => {
+    try {
+      if (!isObj(prov)) return '';
+      if (hasOwnU(O.prototype, 'chainId')) {
+        let named = false, d = 0;
+        for (let o = prov; o && o !== O.prototype && d < 32; o = getProto(o), d++) { if (hasOwnU(o, 'chainId')) { named = true; break; } }
+        if (!named) return '';
+      }
+      const c = prov.chainId; return c == null ? '' : Str(c);
+    } catch (_) { return ''; }
+  };
   const keyOf = (prov, m, p) => { try { return chainTag(prov) + '|' + m + '|' + ser(p); } catch (_) { return null; } };
   function grant(prov, k, objs) {
     if (k === null) return () => {};
-    const o = provKey(prov); let m = wmGet(passes, o); if (!m) { m = new WM(); wmSet(passes, o, m); }
-    const c = chainTag(prov); // the chain of the provider the pass is granted for
-    for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) { wmSet(m, x, k); wmSet(passesAny, x, { __proto__: null, k, m, c }); } }
-    return () => { for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) { if (wmGet(m, x) === k) wmDel(m, x); const y = wmGet(passesAny, x); if (y && y.k === k && y.m === m) wmDel(passesAny, x); } } };
+    let e = null; try { const x = isObj(prov) ? prov._rpcEngine : null; if (isObj(x)) e = x; } catch (_) {}
+    const pass = { __proto__: null, k, c: chainTag(prov), e, live: true };
+    for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) wmSet(passesAny, x, pass); }
+    return () => { pass.live = false; for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x) && wmGet(passesAny, x) === pass) wmDel(passesAny, x); } };
+  }
+  // Key without the chain part : ONLY the inner engine of the very provider the pass was granted for (MetaMask : provider._rpcEngine,
+  // which exposes no chainId), and only when the wallet that showed this engine first names the chain the pass was granted on.
+  // Any other object without a chain (another wallet, its engine, a `this` chosen by the page) is asked again (fail closed).
+  function innerOk(prov, pass) {
+    if (!isObj(prov) || pass.e !== prov || chainTag(prov) !== '') return false;
+    const owner = wmGet(innerOf, prov);
+    return isObj(owner) && chainTag(owner) === pass.c;
   }
   function takePass(prov, obj, k) {
     if (forwarding <= 0 || !isObj(obj) || k === null) return false;
-    const m = wmGet(passes, provKey(prov));
-    const any = wmGet(passesAny, obj);
-    if (m && wmGet(m, obj) === k) { wmDel(m, obj); if (any && any.m === m) wmDel(passesAny, obj); return true; }
-    // An inner object of the wallet that exposes no chain at all (MetaMask : provider._rpcEngine, whose handle() is wrapped too) gives
-    // a key without the chain part : the pass then holds on the same content, with the chain of the provider it was granted for.
-    // An inner object that names ANOTHER chain is still asked again (fail closed).
-    if (!any || (any.k !== k && !(chainTag(prov) === '' && any.k === any.c + k))) return false; // another `this` inside the wallet : the forwarded object itself is the proof
-    wmDel(passesAny, obj); if (wmGet(any.m, obj) === k) wmDel(any.m, obj); // one pass, whichever object of the wallet uses it
+    const pass = wmGet(passesAny, obj);
+    if (!pass || !pass.live) return false;
+    // same key : the provider itself, or another `this` of the wallet naming the same chain (Proxy / instance / bound method)
+    if (pass.k !== k && !(pass.k === pass.c + k && innerOk(prov, pass))) return false;
+    pass.live = false; wmDel(passesAny, obj); // one pass, whichever forwarded object and whichever object of the wallet uses it
     return true;
   }
   // Forwards with a pass that dies as soon as the wallet has answered (or thrown).
@@ -653,7 +672,7 @@
       if (!ownerOk && name !== '_rpcRequest' && name !== 'sendTransaction' && name !== 'signTransaction') ok = false;
     }
     // inner JSON-RPC engine of MetaMask-like wallets (best effort : a failure here does not change how the provider is exposed)
-    try { const eng = p._rpcEngine; if (isObj(eng) && typeof eng.handle === 'function') patchMethod(eng, 'handle'); } catch (_) {}
+    try { const eng = p._rpcEngine; if (isObj(eng) && typeof eng.handle === 'function') { patchMethod(eng, 'handle'); if (!wmHas(innerOf, eng)) wmSet(innerOf, eng, p); } } catch (_) {}
     const result = ok ? p : fallbackProxy(p);
     wmSet(patched, p, result);
     try { if (isArr(p.providers)) wrapProviders(p.providers); } catch (_) {}
