@@ -1,28 +1,28 @@
 [
  {
-  "A": "0xb4d26dffd7eed8cfcf72694f87f8738ff4bc508e",
-  "B": "0xd443e754a731f3c536ae1bd5a5979bb753ce70d0",
-  "S": "0xd44348c3f68f8a42a19ce0450ffdddaed8dc70d0",
-  "p": 4,
+  "A": "0x7a710cfcf208577eb889bf84a8d95409d8574c14",
+  "B": "0xb88b7cb3a37d3305b2191d3551234e49fd546a00",
+  "S": "0xb888ea0929721dc48334b9bc1b7202f7603f6a00",
+  "p": 3,
   "s": 4,
-  "realBlock": 96946405,
-  "realUSD": 1000.14202,
-  "realTok": "USDT",
+  "realBlock": 97078204,
+  "realUSD": 20,
+  "realTok": "USDC",
   "events": [
    {
-    "b": 96946530,
+    "b": 97078333,
     "kind": "in_dust",
     "v": 0.000016,
-    "tx": "0x8cca2f917d5b1f9d26fe4334ef31ed4683d84cf2c9e98b8473a54020d5f857e0",
-    "li": 0,
-    "tok": "USDT"
+    "tx": "0x0d6efc94b1d4089d72c71b5e5736caf2170db6dfd9a540c26765539061d7903a",
+    "li": 15,
+    "tok": "USDC"
    }
   ],
   "kinds": [
    "in_dust"
   ],
-  "delayBlocksMin": 125,
-  "delaySecEst": 133,
+  "delayBlocksMin": 129,
+  "delaySecEst": 137,
   "batchSize": 1,
   "sentUSD": 0.000016,
   "victimSentToSosie": false,
@@ -35,146 +35,386 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 140
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 125
  },
  {
-  "A": "0x5682f88774d2e28513a97ee867a4af7f0d722a59",
-  "B": "0x4f2ed1b38ca29ed64306cd14a4867e3caea3b617",
-  "S": "0x4f2e403181f86e07c4527002decd8045e2e9b617",
+  "A": "0x282b19b488c318423e14553c9782967a6d992674",
+  "B": "0xd921b061e38574d1c1227192b8e9e3c8cc68a428",
+  "S": "0xd921ce6a37bbd686c7f302965ccacc00bfc6a428",
   "p": 4,
   "s": 4,
-  "realBlock": 96993874,
-  "realUSD": 2511,
+  "realBlock": 97010742,
+  "realUSD": 99999,
   "realTok": "USDT",
   "events": [
    {
-    "b": 96994187,
+    "b": 97011102,
     "kind": "out_zero",
     "v": 0,
-    "tx": "0x9327ffd6c8ad16ed71ac4e94f44bb0d64954a8186e6b30761a83546a2d3244cd",
-    "li": 71,
+    "tx": "0xd585cbc8bc501e1bcb93e13f4d1abbbf00d6363a933988667b0de987b5535f83",
+    "li": 3,
     "tok": "USDT"
    }
   ],
   "kinds": [
    "out_zero"
   ],
-  "delayBlocksMin": 313,
-  "delaySecEst": 332,
+  "delayBlocksMin": 360,
+  "delaySecEst": 382,
   "batchSize": 2,
   "sentUSD": 0,
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
   "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 341
- },
- {
-  "A": "0x36fbb4374ce6f798662d8da5e04b445e30125ff3",
-  "B": "0x8029e8f971348492a1d81e60b748426e2905c761",
-  "S": "0x8029129dd5f95b5b722c4a78e74ecebc7b70c761",
-  "p": 4,
-  "s": 4,
-  "realBlock": 96971709,
-  "realUSD": 356,
-  "realTok": "USDC",
-  "events": [
-   {
-    "b": 96971740,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x058dacf4649b85fe960a34f13d0b610a84cfe8c4bb9e30c6687574c18a430c8e",
-    "li": 8,
-    "tok": "USDC"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 31,
-  "delaySecEst": 33,
-  "batchSize": 2,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 31
- },
- {
-  "A": "0x5d4c5b649fdbc54027e0b5cd51c44d9b80da94bd",
-  "B": "0x199b754f6eea6b06e8ce0a06ae76d7b8259a0a25",
-  "S": "0x199b1200dee359bd405c76c2d516c37e58b70a25",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97000753,
-  "realUSD": 870.00676,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97001070,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x3ea678cf99a089318ce06d3c721ac3898da9b5e6d2047b686a054b70f6958203",
-    "li": 15,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 317,
-  "delaySecEst": 336,
-  "batchSize": 1,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 2,
   "auto": "empoisonnement_probable",
   "isContract": {
    "A": false,
    "B": false,
    "S": false
   },
-  "delaySecExact": 358
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 368
  },
  {
-  "A": "0x253c1b1747ec0c2e05e4b21f0bd1e4000a328357",
-  "B": "0xae61a56accb4966f501d08968547310a9a833309",
-  "S": "0xae61410285c6d4eed66b7f6c53a46ad78c9e3309",
+  "A": "0x7c931b61d98a0176202a2e650e7aaef32f423980",
+  "B": "0x76e2951857a3c682b07c6fdf10743f3f442fb221",
+  "S": "0x76e2a3ec919be3cec9f3ebac470633e547cdb221",
   "p": 4,
   "s": 4,
-  "realBlock": 97035343,
-  "realUSD": 1000,
+  "realBlock": 97120210,
+  "realUSD": 3500,
   "realTok": "USDT",
   "events": [
    {
-    "b": 97035430,
+    "b": 97120255,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x982609dfb14ad3b303cc934ad8d64e761c846c6a7bdd60fca0b2168574d505a3",
+    "li": 19,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 45,
+  "delaySecEst": 48,
+  "batchSize": 1,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 34,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 38
+ },
+ {
+  "A": "0xd30734162c2786adcaa5a6bce19175581f855365",
+  "B": "0x8c657189101236071c99dabb895854beeb9c1dbb",
+  "S": "0x8c6507b70f5b07cd01dcb93466728ff9da061dbb",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97121050,
+  "realUSD": 465.000016,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97121623,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x15cd98dac9b8655dbaa4c4278125cd3f622654d8cdb2cb29b1718e4403b519b7",
+    "li": 9,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 573,
+  "delaySecEst": 608,
+  "batchSize": 2,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 555
+ },
+ {
+  "A": "0x1f50c42538f1102c54a151de54d2bce886698d17",
+  "B": "0xa12bbdc56f6898803515a9481fc414d92fe13bdb",
+  "S": "0xa12b50692f4de68dd0dc3cd4e197a675e5f53bdb",
+  "p": 4,
+  "s": 4,
+  "realBlock": 96961615,
+  "realUSD": 96,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 96961658,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0xe760dc75173548c73053633786034333e1dbaa2eb39a6930a7738560a1262ceb",
+    "li": 9,
+    "tok": "USDT"
+   },
+   {
+    "b": 97181390,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x99dc0e0041e8b9a34ee1aa227f3b752af88e03c0f388ed44dfe4368512b075a3",
+    "li": 3,
+    "tok": "USDT"
+   },
+   {
+    "b": 97181622,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x355df8eeb5b7c3302bf8240a79482e860ada6050534cf91b2e09d7b8d433056a",
+    "li": 12,
+    "tok": "USDT"
+   },
+   {
+    "b": 97181840,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x04989e7275f75688d7c7e9c1643ac5c55248adf97268c369efd818461840e15d",
+    "li": 12,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 43,
+  "delaySecEst": 46,
+  "batchSize": 4,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 50
+ },
+ {
+  "A": "0x614548c9dd59b0b13a72ed25a55951bb15470722",
+  "B": "0xfdbaa39d0d662e7fa7aed5ff1566fab99042dc09",
+  "S": "0xfdbaf2b00f127bc9b0f500895573554b3d72dc09",
+  "p": 4,
+  "s": 5,
+  "realBlock": 97130711,
+  "realUSD": 1.000794,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97131776,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x907d12f928b68e027faca15743df791b2382d2d0073b5f37b036176dd4a8e5a1",
+    "li": 5,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 1065,
+  "delaySecEst": 1130,
+  "batchSize": 5,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 1009
+ },
+ {
+  "A": "0x5691c3a3bc0a67694b8fea7000590c25ec6c93e5",
+  "B": "0x5302e9c2544885145f75df027f088af6c93cc496",
+  "S": "0x53024e4ccc442e266c359f33c9fcfbf0cab2c496",
+  "p": 4,
+  "s": 4,
+  "realBlock": 96979456,
+  "realUSD": 7201.479534,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 96980017,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x83d2f1f5bff5703c4469a3ee2fc1374e297e517057814def50c37357590828af",
+    "li": 3,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 561,
+  "delaySecEst": 595,
+  "batchSize": 1,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 579
+ },
+ {
+  "A": "0x282fb83344e36e7b906c4bfb615ad8f8351fb644",
+  "B": "0x22a484413bde246b2a49126755775ccdb608cd11",
+  "S": "0x22a4196395874cb2fc42630c72e57e7e2b58cd11",
+  "p": 4,
+  "s": 5,
+  "realBlock": 96986896,
+  "realUSD": 29.626239,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 96986934,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x8c6ffe90b525e97c22a8c10d812b5e9584ac6244a43656824f16ccc8b23db868",
+    "li": 10,
+    "tok": "USDC"
+   },
+   {
+    "b": 97002013,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x0b52cde565aa778f04dd7d33169e8d618755a01c8c90b18dbf0d996db9d64498",
+    "li": 5,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 38,
+  "delaySecEst": 40,
+  "batchSize": 2,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 39
+ },
+ {
+  "A": "0xfe4473baeea1ad6fbc931a96f6d95c017ec4b87f",
+  "B": "0x64e0ef429f8b5085921ebe9c09e1d47ce87f9e72",
+  "S": "0x64e035ff72db882707e885ba9881c316e75a9e72",
+  "p": 4,
+  "s": 4,
+  "realBlock": 96969582,
+  "realUSD": 578.587398,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 96969945,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x83869b3b221891336ba43ea7bf0b4515b058635f2fafbe2c96024fbdbb5b033b",
+    "li": 5,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 363,
+  "delaySecEst": 385,
+  "batchSize": 4,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 371
+ },
+ {
+  "A": "0x43c37e5f66ba10e75b99090044c738fd96c08fc5",
+  "B": "0x34d8d4dd4e54457beffc4155908fa016b8961f12",
+  "S": "0x34d64f11940daa33bd298cad90fcd90a427f1f12",
+  "p": 3,
+  "s": 4,
+  "realBlock": 97039627,
+  "realUSD": 5,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97039722,
     "kind": "in_dust",
     "v": 0.000016,
-    "tx": "0x85ceb9ac36339ded65278361accdba66b016193c78cf544c8cbb09d136a9251c",
-    "li": 0,
-    "tok": "USDT"
+    "tx": "0x43076990e6c0b8e498ebc23820e0fd8f3604572ae3c8ee88403d84a2bca34f94",
+    "li": 5,
+    "tok": "USDC"
    }
   ],
   "kinds": [
    "in_dust"
   ],
-  "delayBlocksMin": 87,
-  "delaySecEst": 92,
+  "delayBlocksMin": 95,
+  "delaySecEst": 101,
   "batchSize": 1,
   "sentUSD": 0.000016,
   "victimSentToSosie": false,
@@ -187,40 +427,82 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 79
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 88
  },
  {
-  "A": "0x352fdc63ef73c4d7a414fefd8f394e6ecace0fd8",
-  "B": "0x05f5cc3704d888506e3cc9c873cc7bea033706fe",
-  "S": "0x05f00867cc4e3be46f8ed706757ece498fc206fe",
+  "A": "0x36fbb4374ce6f798662d8da5e04b445e30125ff3",
+  "B": "0x8029e8f971348492a1d81e60b748426e2905c761",
+  "S": "0x80266592724e825e6f7c88584812b3106cdbc761",
   "p": 3,
   "s": 4,
-  "realBlock": 97037819,
-  "realUSD": 100,
+  "realBlock": 96971709,
+  "realUSD": 356,
   "realTok": "USDC",
   "events": [
    {
-    "b": 97037936,
+    "b": 96971827,
     "kind": "in_dust",
     "v": 0.000016,
-    "tx": "0xd257441f7c63a701d15bb31dd33817045a9f5e4ae633e6c0943b080700dc3f9f",
-    "li": 6,
-    "tok": "USDC"
-   },
-   {
-    "b": 97038454,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0x0f073f3889531886f6a4156a841234cd0e4447ab33a4ea9c6ac2dc78a8fb3e23",
-    "li": 4,
+    "tx": "0x71e9c96955459f84eb217f1b4986ba75b84be25706acf5e8ab4a36e0a12c6c1d",
+    "li": 2,
     "tok": "USDC"
    }
   ],
   "kinds": [
    "in_dust"
   ],
-  "delayBlocksMin": 117,
-  "delaySecEst": 124,
+  "delayBlocksMin": 118,
+  "delaySecEst": 125,
+  "batchSize": 1,
+  "sentUSD": 0.000016,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "indetermine",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 115
+ },
+ {
+  "A": "0xd0bc6ccd91f41f62076bda185b68fed6f4ab40d7",
+  "B": "0x4a16001b9724c72a8366d5d7545f026455d5d147",
+  "S": "0x4a132714de79da77f22d3c1ab96db40ffac1d147",
+  "p": 3,
+  "s": 4,
+  "realBlock": 97044794,
+  "realUSD": 13.964875,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97044904,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x5b34ed8c8c132c03e6dd725180905fa807a0a083e1d611502c0ae97b3256946c",
+    "li": 1,
+    "tok": "USDC"
+   },
+   {
+    "b": 97123318,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0xafc761fe9fab7929b70d4f413e9ade051c3d382a1cd4e1c46178f97c533fd4a8",
+    "li": 0,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 110,
+  "delaySecEst": 117,
   "batchSize": 1,
   "sentUSD": 0.000032,
   "victimSentToSosie": false,
@@ -233,795 +515,9 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 124
- },
- {
-  "A": "0xb1e133009cb004ccbcb724afa07f79bc6486c20c",
-  "B": "0x572e7d505baa884a93cf91eccd7166a55ec77c7b",
-  "S": "0x572ecd88d5623e1e73f703371931caf6a99a7c7b",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97168403,
-  "realUSD": 10,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97168469,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0x51ca902cf038cad4d015677184bc07a5b38fb1f999d642ebbc142bec92e91682",
-    "li": 4,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 66,
-  "delaySecEst": 70,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 81
- },
- {
-  "A": "0xf3bf37535523b95a23f9a8818f6c9fccf12d0d8d",
-  "B": "0x659a20d7ebeeac59ec84d8eaf77faf1a4496c704",
-  "S": "0x659a1378a83c417bdec5a27a6c2861a65095c704",
-  "p": 4,
-  "s": 4,
-  "realBlock": 96949003,
-  "realUSD": 24737.25,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 96949495,
-    "kind": "in_dust",
-    "v": 0.000247,
-    "tx": "0x4db6f73520178cf683027a3fc3bd3895ec96ab1ba24a2df667981336e65163a4",
-    "li": 21,
-    "tok": "USDT"
-   },
-   {
-    "b": 97004947,
-    "kind": "in_dust",
-    "v": 0.000245,
-    "tx": "0x625e9d43e9cf82f327602fa2cc9bd0ea78b0762cf9b4978d20739d4ad261fceb",
-    "li": 1,
-    "tok": "USDT"
-   },
-   {
-    "b": 97098133,
-    "kind": "in_dust",
-    "v": 0.000245,
-    "tx": "0xefbdf88676d7dd9c556ccc977b21b58dd8bf085d991b5f523310aba3294450a7",
-    "li": 0,
-    "tok": "USDT"
-   },
-   {
-    "b": 97180689,
-    "kind": "in_dust",
-    "v": 0.000245,
-    "tx": "0x410a91ecdd458ef91b07aa504ab7ab9eef34486103aa91e99939c14125ea5422",
-    "li": 0,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 492,
-  "delaySecEst": 522,
-  "batchSize": 1,
-  "sentUSD": 0.000982,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 543
- },
- {
-  "A": "0x21f88091662cf46edb377b07e94f199e96ca9de1",
-  "B": "0xdb3d9a8b9fd46c67f72c5fbe340b5ee088d501f1",
-  "S": "0xdb3dbab9524af66f172a83acdb8c9f2d056401f1",
-  "p": 4,
-  "s": 4,
-  "realBlock": 96947520,
-  "realUSD": 900,
-  "realTok": "USDC",
-  "events": [
-   {
-    "b": 96948139,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x5608265b7f7e8e4cf9e56ed4cc09a127a411b8d0c3808622ae968bc35a6a3ffa",
-    "li": 15,
-    "tok": "USDC"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 619,
-  "delaySecEst": 657,
-  "batchSize": 3,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 674
- },
- {
-  "A": "0x700de597dc5247a549ac196ce886a9bacc87e298",
-  "B": "0x110800483c8dc25440c1ed14265a8f085262ed28",
-  "S": "0x1108479f2d4b4a01cdaaaa91123223e2f5e4ed28",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97000779,
-  "realUSD": 36.4,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97000864,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0x64b58bada3dcd5ba5491c1d594c2a5368423f8943df08a907d68fb3cd94ffb1c",
-    "li": 0,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 85,
-  "delaySecEst": 90,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 97
- },
- {
-  "A": "0xc7132005148078bfae961cfc9f6d2bf79631a5c8",
-  "B": "0x9127a7e5af5bcca7b935cab5c0701898206f9f96",
-  "S": "0x912770064648c243ce86b070855c2c5e4f709f96",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97212521,
-  "realUSD": 3001.057218,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97213104,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x3ca16b0eac8c267cb3f74652d0b64cbed71b649ba715b0d0a4121c08d59690d3",
-    "li": 0,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 583,
-  "delaySecEst": 619,
-  "batchSize": 2,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 2,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 593
- },
- {
-  "A": "0x7971f7f66add5c8e59186a9d26312d059f64cd24",
-  "B": "0xa654166b3ee9dc4733772113af52039dbe72f242",
-  "S": "0xa654089157351e2441eb11864d5ad9a587d4f242",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97059131,
-  "realUSD": 23069.76,
-  "realTok": "USDC",
-  "events": [
-   {
-    "b": 97059569,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x200f6e6169a2eceb11a075a49eaa951be86ea620d7832dc1be398f6392f6b01c",
-    "li": 23,
-    "tok": "USDC"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 438,
-  "delaySecEst": 465,
-  "batchSize": 4,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 408
- },
- {
-  "A": "0x051c2ae95d5a91169a4cf628fec1b46c0000166a",
-  "B": "0x700b7e377880b5bc0a95cb85929ff71dd4b8f2e0",
-  "S": "0x700bceac49c4272890ad70957dc119e386b6f2e0",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97204085,
-  "realUSD": 41.574512,
-  "realTok": "USDC",
-  "events": [
-   {
-    "b": 97204120,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x776aa9b37477cbde7e57fd3cefce0490e405b026beb840f808318f2744c9c9bc",
-    "li": 35,
-    "tok": "USDC"
-   },
-   {
-    "b": 97204310,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x792bf1e3c4a09ac2d06ad2324aa6c9e847d7ed0b7c59c8cc334fd69d92f96ed6",
-    "li": 8,
-    "tok": "USDC"
-   },
-   {
-    "b": 97204517,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x579b2b152ff5ba59e1bd6e9e54420bdea3ff657669785641d5287a0bdf945a70",
-    "li": 0,
-    "tok": "USDC"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 35,
-  "delaySecEst": 37,
-  "batchSize": 2,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 37
- },
- {
-  "A": "0x69c576addcf1134d42b14f6188a511cbbd4db187",
-  "B": "0x19ec8b099d86e9efc55fe1eb0ef89590d2244ae9",
-  "S": "0x19ec6b9ce971a048f54f9ad6493677197b434ae9",
-  "p": 4,
-  "s": 4,
-  "realBlock": 96958383,
-  "realUSD": 1000,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 96958460,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0xd4d56fc7a9ab46067c27a8887f19b2464631a8377c6c7d544a1ae08420135b88",
-    "li": 11,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 77,
-  "delaySecEst": 82,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 78
- },
- {
-  "A": "0x99f2c22e07781dda94be97627ecaabbbe8f2b924",
-  "B": "0x864722faba5c05474bbc5d349f21e90aa91a42da",
-  "S": "0x86473fab9a3846446be20c371aff3ce6767d42da",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97175905,
-  "realUSD": 230,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97175945,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x6266641d79e35ee042d74bad0086f6f0df3f123a65dd82b119594214936bdb52",
-    "li": 7,
-    "tok": "USDT"
-   },
-   {
-    "b": 97176189,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x5ed9f5f3d6df9a80d221ba1412cb4967c27219097615cb68e53ecaa3dd63faf2",
-    "li": 2,
-    "tok": "USDT"
-   },
-   {
-    "b": 97176409,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x2474b4be7c2af89470227669b006bdcff680a04b4f7ddecb7c0a2596be1177de",
-    "li": 5,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 40,
-  "delaySecEst": 42,
-  "batchSize": 2,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 36
- },
- {
-  "A": "0xd31e7794eb3905c786dddcc9c2a7ab631b417b44",
-  "B": "0xa2272c782408e52c0d07746ac452b834853d18a6",
-  "S": "0xa22720a4033cdbbf6910cbd63a1848ab7f0418a6",
-  "p": 5,
-  "s": 4,
-  "realBlock": 97054732,
-  "realUSD": 8999.1,
-  "realTok": "USDC",
-  "events": [
-   {
-    "b": 97055392,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xdae7eefea0b833d41046bb350102559a4690bba84c40bf229ae699bd6b71073e",
-    "li": 29,
-    "tok": "USDC"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 660,
-  "delaySecEst": 700,
-  "batchSize": 2,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 589
- },
- {
-  "A": "0x13918fc897ee6f72837908af1edd7befe59ca842",
-  "B": "0xc94bb9b883ab642c1c3ed07af4e36523e7daf1fe",
-  "S": "0xc94bbfcc6f8523908a5675d86a7836a6c6f9f1fe",
-  "p": 5,
-  "s": 4,
-  "realBlock": 97200099,
-  "realUSD": 285.96,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97200180,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0xdd7a00eeee505efe1e1c89bf2da4d6b3464caae489d00098107146693b56be36",
-    "li": 1,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 81,
-  "delaySecEst": 86,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 6,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 106
- },
- {
-  "A": "0x4cad1efbfd5f0848e0c3c14fab23f92b2fa81f17",
-  "B": "0xed9ab5bc05a0152b9dc2f7902e8369af7bc18771",
-  "S": "0xed9a5d3ece71e7f2fede53e5d0f4e1fcb49e8771",
-  "p": 4,
-  "s": 4,
-  "realBlock": 96959425,
-  "realUSD": 500000,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 96959446,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x26c3b7df314dbf52a71d2d9b66b1d4d0417716c41f7b15be818fa16b14a9c1ec",
-    "li": 12,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 21,
-  "delaySecEst": 22,
-  "batchSize": 2,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 22,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 23
- },
- {
-  "A": "0x1d602864725a9dcb775e049bfff5159c62c4db78",
-  "B": "0xe3d9cbcdd10ea1e7ab9c23b344c81df02ad64763",
-  "S": "0xe3d9e0d99dbf2bb1bf8b2830751024739e9a4763",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97156443,
-  "realUSD": 25,
-  "realTok": "USDC",
-  "events": [
-   {
-    "b": 97156480,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x61e4ba21eb4c530a0a037a3bd6990fdb9d4fd7240af89593489b61f71574a7cd",
-    "li": 0,
-    "tok": "USDC"
-   },
-   {
-    "b": 97156645,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x407e2e8346b40d120228e68c2b36feb76881e8d9b462d3acad0a333366f9a5e6",
-    "li": 11,
-    "tok": "USDC"
-   },
-   {
-    "b": 97156769,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x7d8b8ba470d0d4f88db572c4338dabf71e25fcd1221f80648ed88bdde28629e1",
-    "li": 9,
-    "tok": "USDC"
-   },
-   {
-    "b": 97156893,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x7d140996bc4b2c4bf352af0c7b87044aea9cb3f1650ace38591410d048d16ce2",
-    "li": 6,
-    "tok": "USDC"
-   },
-   {
-    "b": 97157013,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x10625e401b30e4d2aa2bc8dedd8da1d5eb800f2aa09aff7245edadfa78e9ae81",
-    "li": 0,
-    "tok": "USDC"
-   },
-   {
-    "b": 97157235,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x815e6e89c57e1c0578198fa911aa64faeaefa18632fdb31a99f234e8c7f86daa",
-    "li": 0,
-    "tok": "USDC"
-   },
-   {
-    "b": 97157729,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x57e861666fd1c56d7f578daa26c08e2f0d1d09f254dd26aee083ede02051ebf3",
-    "li": 4,
-    "tok": "USDC"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 37,
-  "delaySecEst": 39,
-  "batchSize": 2,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 39
- },
- {
-  "A": "0x903de9e696aecfc8072debc9b69184d26cd651f3",
-  "B": "0x779e406e37c359b1171b72c70b6a2e3cb6f1817c",
-  "S": "0x77927f503d7a1b0a67a6201487b35977c9e7817c",
-  "p": 3,
-  "s": 4,
-  "realBlock": 97044759,
-  "realUSD": 160.8,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97044856,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0xa77a7d6dac2a6a5ea8c67a45b74de5d74fa7e7a73964e3ea895870a308d494a0",
-    "li": 32,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 97,
-  "delaySecEst": 103,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 103
- },
- {
-  "A": "0x28d789c73105c8f2c8f6bf1591f3a8626670f841",
-  "B": "0xd419ebf17bf28491784a2b0a1c69a42efeb8de94",
-  "S": "0xd41900823ac90215cc28f486119bb2f1afbede94",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97031120,
-  "realUSD": 1000,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97031196,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0xee89333e69e7aab7268a419a757394cedd16934f147f4a5573377b2a62c96184",
-    "li": 1,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 76,
-  "delaySecEst": 81,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 2,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 74
- },
- {
-  "A": "0x8fbf43e62cfc1d6775d4f0732c2ede4364a2f55a",
-  "B": "0x692cc89c2db3ee9e70f24d27fb215a26e5b4f4bf",
-  "S": "0x692c8472a0e44309a0881e896ce4b17c3182f4bf",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97109651,
-  "realUSD": 725.212472,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97110098,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xf613e7c5ac717ee3b1a2ab70e433cd8e36c7c9107fa6dab444ca5c1f9143289f",
-    "li": 8,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 447,
-  "delaySecEst": 474,
-  "batchSize": 5,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 2,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 437
- },
- {
-  "A": "0xa1186dfebc384b54da72dedcdfd0fcfe3de5ea32",
-  "B": "0xb806c4f31ca821268b2099fd57aa918b60d8b7bf",
-  "S": "0xb806644579e06dad4bafcb9eab39784cf2c3b7bf",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97218369,
-  "realUSD": 1300,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97219315,
-    "kind": "in_dust",
-    "v": 0.00013,
-    "tx": "0x0006f5cb62fec587d45f903b5755b7130d674ee97fcdef47b6935b98a8c970ff",
-    "li": 3,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 946,
-  "delaySecEst": 1004,
-  "batchSize": 1,
-  "sentUSD": 0.00013,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 1059
- },
- {
-  "A": "0xe433124558ffe87faa82545364d48292da8c2977",
-  "B": "0x980a2468466646d183c579118d74d5613a786dac",
-  "S": "0x980aa88565af17007d8001d08f5900afba996dac",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97049945,
-  "realUSD": 2000.00001,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97050327,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xc53d1320b5a32c6702d24470c9093e5ccf86b35465b0a5e0f0945e231f5c9c4c",
-    "li": 23,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 382,
-  "delaySecEst": 405,
-  "batchSize": 3,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 367
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 118
  },
  {
   "A": "0x5d4661e47c049ade74be7773bf79d44b4cc15880",
@@ -1053,38 +549,40 @@
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
   "distinctVictimsOfS": 1,
-  "auto": "indetermine",
+  "auto": "empoisonnement_probable",
   "isContract": {
    "A": false,
    "B": false,
    "S": false
   },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
   "delaySecExact": 878
  },
  {
-  "A": "0x2a1329ab7485b44847b6a20c2349cfa061c0ccc2",
-  "B": "0x4672d92989773ef80023955255025adee07b2662",
-  "S": "0x467fa1cfe35c9f79118721b73c10f3e9ab052662",
+  "A": "0xfb3b4b9822819005d2790d48031aee5621332168",
+  "B": "0xebfe8c5cac3e102266e7f82af3174a3d9433589c",
+  "S": "0xebf7436af0116241604cc0b5550e13a331db589c",
   "p": 3,
   "s": 4,
-  "realBlock": 97120286,
-  "realUSD": 74.5,
-  "realTok": "USDT",
+  "realBlock": 97110436,
+  "realUSD": 5,
+  "realTok": "USDC",
   "events": [
    {
-    "b": 97120367,
+    "b": 97110559,
     "kind": "in_dust",
     "v": 0.000016,
-    "tx": "0x66e09a6f2268fdda25bf479ce1ba836eefaadc86495f27a0f23c748c4e0c92f3",
+    "tx": "0xb119243f44bbf63c92e2b5843cc0a7c8bb4bede91b05eba5b7614d9f6dc6f237",
     "li": 0,
-    "tok": "USDT"
+    "tok": "USDC"
    }
   ],
   "kinds": [
    "in_dust"
   ],
-  "delayBlocksMin": 81,
-  "delaySecEst": 86,
+  "delayBlocksMin": 123,
+  "delaySecEst": 131,
   "batchSize": 1,
   "sentUSD": 0.000016,
   "victimSentToSosie": false,
@@ -1097,196 +595,44 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 78
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 125
  },
  {
-  "A": "0x269422ad12dc6f843ecf38721ff6ab48dd72a081",
-  "B": "0x5fdf614bdd5eaf9cc4bd4d0a93543a0c1eb68171",
-  "S": "0x5fdf81c0b188124e0a717e736d96c62422088171",
+  "A": "0x5b96ab1009dec2a09ef4e8fdff02f54857fb28b8",
+  "B": "0x23553210b2badc413149331fb42b8305c32fae03",
+  "S": "0x2355289d556fb0c48dd600ddf0cc9bbb90c6ae03",
   "p": 4,
   "s": 4,
-  "realBlock": 97068241,
-  "realUSD": 2826.43708,
-  "realTok": "USDT",
+  "realBlock": 96966831,
+  "realUSD": 1800,
+  "realTok": "USDC",
   "events": [
    {
-    "b": 97068302,
+    "b": 96966929,
     "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0x8f6f60f5d16a3c1e1475a13d363901dafd3ce32635ee0e610f03332a15cd5cb7",
-    "li": 3,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 61,
-  "delaySecEst": 65,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 65
- },
- {
-  "A": "0x3a91c97a8060be2580fc014d28c68e124c0d7cb1",
-  "B": "0xc51e9af67c16a7176e244d8803a32aaf1430cb08",
-  "S": "0xc51e5fac42f6b1bc289702686f6cee018e9acb08",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97210824,
-  "realUSD": 140,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97210828,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xb5c6b9c0a87bfb7aacf86ba2eb956f49ca80b04efe6337da9ab3892fc286bc39",
-    "li": 6,
-    "tok": "USDT"
+    "v": 0.001,
+    "tx": "0x8043b2c762d7f99815d850429db896ec1b5b1c493caee82d87fbf94afbb66f6f",
+    "li": 13,
+    "tok": "USDC"
    },
    {
-    "b": 97211121,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x089e096434e8b3bf7e32a5a4be2eda7782e3c89df035911155ad72dd4501df88",
-    "li": 9,
-    "tok": "USDT"
-   },
-   {
-    "b": 97211370,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x2a6eb0456e05c2c1afbdee996c479b7a0d6b65594c8232a8b8335b92d0c2e91b",
-    "li": 5,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 4,
-  "delaySecEst": 4,
-  "batchSize": 3,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 4,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 3
- },
- {
-  "A": "0xe9c2dd4c55d5eededd70704ad06bc22546fccab1",
-  "B": "0xef4b0d5e09fbba089671b08763e8aaec3512c365",
-  "S": "0xef4b96e40bc72abaa2d6583206b4de148cf6c365",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97053407,
-  "realUSD": 2000,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97053414,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x3088c0699aa2a2429cdf9deebb1c52e09da60a852b1068ae7307ce66fd922dd6",
-    "li": 0,
-    "tok": "USDT"
-   },
-   {
-    "b": 97053868,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xb8ed873bcf17cf259c74e9563c19032a6db55b6a4cd9bd069fc8e60744069961",
-    "li": 39,
-    "tok": "USDT"
-   },
-   {
-    "b": 97134244,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xdfb50db764868187658237c4a103d79f4454764b5be21a1285ae1c014ced408a",
-    "li": 31,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "out_zero"
-  ],
-  "delayBlocksMin": 7,
-  "delaySecEst": 7,
-  "batchSize": 7,
-  "sentUSD": 0,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 17,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 5
- },
- {
-  "A": "0xe628289d3424b4718840b18924222e28c72856db",
-  "B": "0x582ff0342714198d5062b15c9d0e0050d4fb9d30",
-  "S": "0x582f384d93f3012fd9b847b87a7824cba09a9d30",
-  "p": 4,
-  "s": 4,
-  "realBlock": 97202900,
-  "realUSD": 25,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97202930,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xa335a8f3fb3b04c60f75f73071f676a84ad612533272488813574d88173edfb6",
+    "b": 96967627,
+    "kind": "in_dust",
+    "v": 0.00018,
+    "tx": "0x1d76b496bc7bb3515ff1f0339b90598df3c90863f882a5a3eebcc288def5c617",
     "li": 4,
-    "tok": "USDT"
-   },
-   {
-    "b": 97203127,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x601870dd26111d2a981dde2cf189666fe2bd95682d7d992be13f2a6cef4881f6",
-    "li": 3,
-    "tok": "USDT"
-   },
-   {
-    "b": 97203350,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x0c64f831e87e65d44e4b663f90d057697a26a4d8b3501680de71572a98e43735",
-    "li": 115,
-    "tok": "USDT"
+    "tok": "USDC"
    }
   ],
   "kinds": [
-   "out_zero"
+   "in_dust"
   ],
-  "delayBlocksMin": 30,
-  "delaySecEst": 32,
-  "batchSize": 2,
-  "sentUSD": 0,
+  "delayBlocksMin": 98,
+  "delaySecEst": 104,
+  "batchSize": 1,
+  "sentUSD": 0.00118,
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
@@ -1297,7 +643,9 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 31
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 103
  },
  {
   "A": "0x2284a94883b12763498374e6b14e047ad096cc4c",
@@ -1351,50 +699,36 @@
    "B": false,
    "S": false
   },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
   "delaySecExact": 5
  },
  {
-  "A": "0x22eda06e7428acc254205955641c41b78b3ff55b",
-  "B": "0xcf1d23d0da11e2d842baf5a05e3602eaba1f0bd7",
-  "S": "0xcf1d1aad8ea6f9c1fb0befec0f0d3d503ba00bd7",
-  "p": 4,
+  "A": "0x700de597dc5247a549ac196ce886a9bacc87e298",
+  "B": "0xf0a2d7b10d3be42b6b7fc86ea4d3b2653ef0b401",
+  "S": "0xf0a4536d098dda496394bf737011bb8dbfa2b401",
+  "p": 3,
   "s": 4,
-  "realBlock": 97221183,
-  "realUSD": 6.722207,
+  "realBlock": 97092753,
+  "realUSD": 36.2,
   "realTok": "USDT",
   "events": [
    {
-    "b": 97221221,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x96b63a1f371613454c1aa58e53195829dbfdb0ce6c2a15700703ae131fc7b87e",
-    "li": 0,
-    "tok": "USDT"
-   },
-   {
-    "b": 97221422,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xed4b8a39b8c3ff281819bef027a6553ec31e9d18586712dd4721585da1f19332",
-    "li": 6,
-    "tok": "USDT"
-   },
-   {
-    "b": 97221625,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x2f93752050eeeabc3c492f8e815569f91c672ff645a04e05c50b2717e2a278a2",
-    "li": 5,
+    "b": 97092849,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x4cd6005143bcebb0ccfe1cb4fc2fe3b8b80b21ef4ad591992923a449a5399b48",
+    "li": 9,
     "tok": "USDT"
    }
   ],
   "kinds": [
-   "out_zero"
+   "in_dust"
   ],
-  "delayBlocksMin": 38,
-  "delaySecEst": 40,
-  "batchSize": 3,
-  "sentUSD": 0,
+  "delayBlocksMin": 96,
+  "delaySecEst": 102,
+  "batchSize": 1,
+  "sentUSD": 0.000016,
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
@@ -1405,39 +739,25 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 37
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 99
  },
  {
-  "A": "0x3577283a8ab7336a8955fe61254f73a4fc706c71",
-  "B": "0xb2b830821e1133a99baa653762cae6dd90a525dd",
-  "S": "0xb2b8bb700e9892a0dbc6549dd6c65aada20425dd",
+  "A": "0x736de3b05d45b3a821c61b6e654d5d820e2a4171",
+  "B": "0x5ba4891c76db1a21635824c968553badb8e6e769",
+  "S": "0x5ba44c3562466a22473704a13acf3e46db92e769",
   "p": 4,
   "s": 4,
-  "realBlock": 97156082,
-  "realUSD": 27,
+  "realBlock": 96969192,
+  "realUSD": 10.55,
   "realTok": "USDC",
   "events": [
    {
-    "b": 97156116,
+    "b": 96969235,
     "kind": "out_zero",
     "v": 0,
-    "tx": "0x1de472cdd8ed92c277cc22e2972f6193b00a5cbc7ddf33576d00d90c1f18d2d6",
-    "li": 0,
-    "tok": "USDC"
-   },
-   {
-    "b": 97156291,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x992648b237ef1b57f854bc60818e546c47ce6d5f3b58277b6ccee9f4303124c6",
-    "li": 17,
-    "tok": "USDC"
-   },
-   {
-    "b": 97156509,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0x0890b77edc3c927afd5adbcafd6f7a2f30a7c29afd8cf379f756a2eaddf08a13",
+    "tx": "0x9f1a36632a8466b5098daa1de1eee788b6ae98d90764fb5f5f0d1e52cba09931",
     "li": 0,
     "tok": "USDC"
    }
@@ -1445,10 +765,90 @@
   "kinds": [
    "out_zero"
   ],
-  "delayBlocksMin": 34,
-  "delaySecEst": 36,
+  "delayBlocksMin": 43,
+  "delaySecEst": 46,
   "batchSize": 1,
   "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 39
+ },
+ {
+  "A": "0x8fbf43e62cfc1d6775d4f0732c2ede4364a2f55a",
+  "B": "0x692cc89c2db3ee9e70f24d27fb215a26e5b4f4bf",
+  "S": "0x692c8472a0e44309a0881e896ce4b17c3182f4bf",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97109651,
+  "realUSD": 725.212472,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97110098,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0xf613e7c5ac717ee3b1a2ab70e433cd8e36c7c9107fa6dab444ca5c1f9143289f",
+    "li": 8,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 447,
+  "delaySecEst": 474,
+  "batchSize": 5,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 2,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 437
+ },
+ {
+  "A": "0xdd52b5d8270f96cd808912fda2b7c1be54464791",
+  "B": "0x44aadc09678f1152d8fde9ce875cec54439c15cc",
+  "S": "0x44a532a4b40ed6feafde757cf4cc8b830a1115cc",
+  "p": 3,
+  "s": 4,
+  "realBlock": 97065913,
+  "realUSD": 500,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97066055,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x7e41471282090ba1627bf60c89537adad9b4d9c401c99188ec942fbc5ab94ee9",
+    "li": 0,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 142,
+  "delaySecEst": 151,
+  "batchSize": 1,
+  "sentUSD": 0.000016,
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
@@ -1456,28 +856,150 @@
   "auto": "indetermine",
   "isContract": {
    "A": false,
-   "B": true,
+   "B": false,
    "S": false
   },
-  "delaySecExact": 40
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 131
  },
  {
-  "A": "0x70fa442feaf4fefad243dd23bad82f4c3ab9af41",
-  "B": "0x2fc617e933a52713247ce25730f6695920b3befe",
-  "S": "0x2fc66716532b9c632c8c523bc7ab4eaf3672befe",
+  "A": "0xfcf2b8781df341c156a9035aa6dee216bc0a9030",
+  "B": "0xb70120f71e6c9e7793f07ff900451d09372c6726",
+  "S": "0xb701723a47ce1d25d405e6ad69e09cd841d06726",
   "p": 4,
   "s": 4,
-  "realBlock": 96960354,
-  "realUSD": 268.710393,
+  "realBlock": 97090892,
+  "realUSD": 260,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97090897,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0xbb1f07e60e8393709034fe4d23005a51398ac7c00eb7fdb4d40d097ead64b651",
+    "li": 3,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 5,
+  "delaySecEst": 5,
+  "batchSize": 2,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 4
+ },
+ {
+  "A": "0xaf2568bb26421f9319a208b05ceaf03c2b07bdab",
+  "B": "0x04ee63c6054e0dbe58e3bbe202ffb143c0a027da",
+  "S": "0x04ee864fe3bbc0ad998967bd4f2a0cf939ff27da",
+  "p": 4,
+  "s": 4,
+  "realBlock": 96947692,
+  "realUSD": 10,
   "realTok": "USDC",
   "events": [
    {
-    "b": 96960386,
+    "b": 96947696,
     "kind": "out_zero",
     "v": 0,
-    "tx": "0x795693efbbb972411127d0db585e7e089ea12df6553436601e1067042878066d",
-    "li": 11,
+    "tx": "0x93e0925d904c88b2f91d9e155882d873342dd618b529a905b50ea797761fbcaa",
+    "li": 32,
     "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 4,
+  "delaySecEst": 4,
+  "batchSize": 2,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 3
+ },
+ {
+  "A": "0x1fe0d91dd3483eb32b6bab6fcf6740c2c1c18cf1",
+  "B": "0x1326772d961f849c5daf25655d057b64e2afabc5",
+  "S": "0x1326d3424327c2118e623a6a22534eddfecbabc5",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97090871,
+  "realUSD": 3000,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97090897,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0xbb1f07e60e8393709034fe4d23005a51398ac7c00eb7fdb4d40d097ead64b651",
+    "li": 0,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 26,
+  "delaySecEst": 28,
+  "batchSize": 2,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 28
+ },
+ {
+  "A": "0xb4d26dffd7eed8cfcf72694f87f8738ff4bc508e",
+  "B": "0xd443e754a731f3c536ae1bd5a5979bb753ce70d0",
+  "S": "0xd44326d7cacc8686d2a9db399114c5823d2b70d0",
+  "p": 4,
+  "s": 4,
+  "realBlock": 96946405,
+  "realUSD": 1000.14202,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 96946437,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0xde86b0d301c862e90eb7b55fb5b2618b20d96aef3954d4233a4e67e5eeb10030",
+    "li": 3,
+    "tok": "USDT"
    }
   ],
   "kinds": [
@@ -1490,6 +1012,86 @@
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 40
+ },
+ {
+  "A": "0x0c5efaea87e851620ea456a169cb3a676680a139",
+  "B": "0x79e8498a341c8d728f395b4c3ef5eb1d1d9a5f2f",
+  "S": "0x79e21b0648fdd21daf7e4f574e3ed79bd8175f2f",
+  "p": 3,
+  "s": 4,
+  "realBlock": 97052507,
+  "realUSD": 300,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97052621,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x71dc7bdf01bd931663a8c2e7a74dbc8bc06c0dc872b47ceaacc0041276e0f085",
+    "li": 2,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 114,
+  "delaySecEst": 121,
+  "batchSize": 1,
+  "sentUSD": 0.000016,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "indetermine",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 111
+ },
+ {
+  "A": "0x7adc0f4189cf71cff053b36dcffcca6580bf5aa0",
+  "B": "0x89c5151236de544d077fc69813a4db89224ee8a1",
+  "S": "0x89c56794930e7fe684de5bda48d1b2d74683e8a1",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97104257,
+  "realUSD": 500,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97104890,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x88731d0cbbc3b4dc00c99eac922d76b02346d7893804fc569c77f984df00f4cc",
+    "li": 43,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 633,
+  "delaySecEst": 672,
+  "batchSize": 5,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
   "distinctVictimsOfS": 3,
   "auto": "empoisonnement_probable",
   "isContract": {
@@ -1497,110 +1099,180 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 38
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 656
  },
  {
-  "A": "0x3b76ffba950f2a6d49d91180838289ca29c66ab9",
-  "B": "0x0e8b16965928999e297fef75881c16b6ff8b4985",
-  "S": "0x0e8089a29d7d6df708e1b08e0b4f84d940894985",
-  "p": 3,
-  "s": 4,
-  "realBlock": 96948516,
-  "realUSD": 800,
-  "realTok": "USDC",
-  "events": [
-   {
-    "b": 96948535,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0x8edba4208e13320d2ad2ae19fabde65b41ac273bc6accb7c9bee74993e94b6c6",
-    "li": 43,
-    "tok": "USDC"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 19,
-  "delaySecEst": 20,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 25
- },
- {
-  "A": "0xa9c08e29559c780b248b5384308efbeca74ce32b",
-  "B": "0x63ba380e11803488a86e4ae62db5ecc7fdde6d3d",
-  "S": "0x63b2bcb71af4e1f049eba1fd910a3d3df5746d3d",
-  "p": 3,
-  "s": 4,
-  "realBlock": 97022490,
-  "realUSD": 260.328,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97022591,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0x22f71bd30073661879add32aba3d12c14a784895ee7cb0ce598764d5330b0358",
-    "li": 7,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 101,
-  "delaySecEst": 107,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "indetermine",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 104
- },
- {
-  "A": "0x419be269b4d16462fc90d40cd67dee5213dadda6",
-  "B": "0x5f08342a68d7336919bfe7b8d50dda3ddae803cd",
-  "S": "0x5f08a198677bbe32e19d86e2ec04de4ae0ad03cd",
+  "A": "0x0e856d0dd8562929d5332d212dfc7805334a5292",
+  "B": "0x76e2951857a3c682b07c6fdf10743f3f442fb221",
+  "S": "0x76e2a3ec919be3cec9f3ebac470633e547cdb221",
   "p": 4,
   "s": 4,
-  "realBlock": 97102472,
-  "realUSD": 1092.086517,
+  "realBlock": 96960290,
+  "realUSD": 1600,
   "realTok": "USDT",
   "events": [
    {
-    "b": 97102512,
+    "b": 96960329,
     "kind": "out_zero",
     "v": 0,
-    "tx": "0x417ff5e5a0cb7f4bcc9de3990420ddd9803b9bc5344a1699d25d9f6f27ad2f30",
-    "li": 15,
+    "tx": "0xebdc04fd61a14cb866ed5a7d05bd3a59e7ff0208e7f3e68dd806356f066c8e1a",
+    "li": 4,
     "tok": "USDT"
    }
   ],
   "kinds": [
    "out_zero"
   ],
-  "delayBlocksMin": 40,
-  "delaySecEst": 42,
+  "delayBlocksMin": 39,
+  "delaySecEst": 41,
   "batchSize": 1,
   "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 34,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 36
+ },
+ {
+  "A": "0xae7b137a644ee8bb1e7b19638fd616f3f8877f08",
+  "B": "0xb334a61a6209f14b5fa5f1684a4ed7621f66e1ef",
+  "S": "0xb3342bd14515614b1f3910fc9bdfab195641e1ef",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97146716,
+  "realUSD": 691.76,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97146789,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x3448fd0796e71908d1aa3c45283a26960e52ffe5ee80e9ec9f558d0c32c06415",
+    "li": 24,
+    "tok": "USDT"
+   },
+   {
+    "b": 97147389,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x263c29f9b0785b4245c186b5ce5b5545aa08fd0ca8a9912c9b516f530aeb4a04",
+    "li": 0,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 73,
+  "delaySecEst": 77,
+  "batchSize": 1,
+  "sentUSD": 0.000032,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 15,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 86
+ },
+ {
+  "A": "0x0d921560bb69516ca24268e678137f0787f63b67",
+  "B": "0xb80d90fcf2ed0e4febe02d2a209109bf1f62df95",
+  "S": "0xb80da270b36f1f09be4974988316ef95bf94df95",
+  "p": 4,
+  "s": 4,
+  "realBlock": 96951521,
+  "realUSD": 11173,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 96951556,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x8d4c5db3db0a805c0b3a4e5068d7a72379de0b1caea593e5381e4952048892f6",
+    "li": 5,
+    "tok": "USDT"
+   },
+   {
+    "b": 96952302,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x745ef3a475c5e085c91f95b5989f1737c99b74b0355a1b58e881ff8f763c4c04",
+    "li": 1,
+    "tok": "USDT"
+   },
+   {
+    "b": 96953159,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0xc115ddad17a4d7ca15e5cca6e04246c05be30a29aca24362d1b6dd725528100f",
+    "li": 0,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 35,
+  "delaySecEst": 37,
+  "batchSize": 2,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 39
+ },
+ {
+  "A": "0x2cb31b18a1746defec51f3a1a3c22b1ca12b9f65",
+  "B": "0x002c8656f05c0629f00b9c931d2878159bc658c9",
+  "S": "0x002320082d3551f8528a85f2d5af827cbc1658c9",
+  "p": 3,
+  "s": 5,
+  "realBlock": 97006197,
+  "realUSD": 100,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97006313,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x1c9452c1c259208c03ed5e954899eac29a843e5889934e5b8e51bc6330812be4",
+    "li": 3,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 116,
+  "delaySecEst": 123,
+  "batchSize": 1,
+  "sentUSD": 0.000016,
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
@@ -1611,39 +1283,377 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 38
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 125
  },
  {
-  "A": "0xaaa2e0a37cba4c3ce2012b3227d160c2b787df7b",
-  "B": "0xcb3950e56598c6539e65690663aa0adafb844759",
-  "S": "0xcb3934e8ac294f428fe68f1acb2275472b5f4759",
+  "A": "0x3521f5e0efe136482b3842bd9d3fde46c0f61868",
+  "B": "0x771d9ce0ea2923e30619a951422ae6e969dc8ec9",
+  "S": "0x771d52678dd26ff011f9dced7bfa867b9b458ec9",
   "p": 4,
   "s": 4,
-  "realBlock": 97223296,
-  "realUSD": 3175,
+  "realBlock": 97048739,
+  "realUSD": 93915.921453,
   "realTok": "USDT",
   "events": [
    {
-    "b": 97223326,
+    "b": 97049114,
     "kind": "out_zero",
     "v": 0,
-    "tx": "0x9be5c66d650c0177aab90b83e26a9daae6d89ea328240d0d339dd555ed66367d",
-    "li": 0,
+    "tx": "0x1d85dd8bd7c89e85a8cd66c289a5370b7a231217b21c3d1156f8d52bf7c30475",
+    "li": 18,
     "tok": "USDT"
    },
    {
-    "b": 97223578,
+    "b": 97052607,
     "kind": "out_zero",
     "v": 0,
-    "tx": "0xa9d283ecc79db463ea5f74a8e3d32dc2450d769ea0ee87f11228697c49f3fd59",
-    "li": 0,
+    "tx": "0x71b931251e80fbd8b3f686b8170af8ad115ee64ca4710dfa8bee47f1f84c35e7",
+    "li": 7,
     "tok": "USDT"
    },
    {
-    "b": 97223787,
+    "b": 97168622,
     "kind": "out_zero",
     "v": 0,
-    "tx": "0xd0c0d738a1a4f7bcce2a4d30e53112469d10e5d30cde1172190c0249cec5ee5c",
+    "tx": "0xe53aa1c7805c820f76b60a803c4afb7797d3dbb749c71a0ec29b8b9f9ee8727f",
+    "li": 0,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 375,
+  "delaySecEst": 398,
+  "batchSize": 6,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 368
+ },
+ {
+  "A": "0x2e663bd6d1a0cb207eb37bdbcf57153c3222e062",
+  "B": "0x905d379831223bd3eb231c3c04698ae23b883644",
+  "S": "0x905dd5177b8205ffbe19f545af532c35272a3644",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97157722,
+  "realUSD": 1500.8,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97157963,
+    "kind": "in_dust",
+    "v": 0.00015,
+    "tx": "0x0efb30e8cd508c1984b06060a5c2fb5353d4743f556b993c0a51d9795769b30e",
+    "li": 0,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 241,
+  "delaySecEst": 256,
+  "batchSize": 1,
+  "sentUSD": 0.00015,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 310
+ },
+ {
+  "A": "0x8fca5f2874551d8039e0ea21f8a76ff5cf3d7a21",
+  "B": "0x015206f4f479868301ff424cecd9966af20f4604",
+  "S": "0x0152edbd7c98153035a513486dbc88f51ad04604",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97048173,
+  "realUSD": 40000,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97048924,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x4e953986f1f36abc39e84d53706ee7ea492a91e8010a12dbe79283e3e0ea8e80",
+    "li": 8,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 751,
+  "delaySecEst": 797,
+  "batchSize": 5,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 701
+ },
+ {
+  "A": "0x126d2788a80ccdb03617384656e2e8019618637d",
+  "B": "0xab396d6b29ff0f0ad625d8783c3bf3e328555111",
+  "S": "0xab31fb9d314b003a4cfcf4d8302c7df4cb755111",
+  "p": 3,
+  "s": 5,
+  "realBlock": 96948463,
+  "realUSD": 999,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 96948512,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x842b619d0c77d05c08254f73015781285c2b9e1a7ec986fb4ecd36eb5cbd050b",
+    "li": 7,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 49,
+  "delaySecEst": 52,
+  "batchSize": 1,
+  "sentUSD": 0.000016,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "indetermine",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 61
+ },
+ {
+  "A": "0xccd623cdd200cd0c0a510dc68f7851c0c66aabed",
+  "B": "0x797cd77dd626ea54069d9dae9827b923d4137fa4",
+  "S": "0x797c3fc4f9fea492208e71805b36ca8be7e37fa4",
+  "p": 4,
+  "s": 5,
+  "realBlock": 97150698,
+  "realUSD": 496.243475,
+  "realTok": "USDC",
+  "events": [
+   {
+    "b": 97150941,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x440c9dc1288ff5a703379c159a77eead7286f7748567f2eb01de6b246c0c851a",
+    "li": 15,
+    "tok": "USDC"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 243,
+  "delaySecEst": 258,
+  "batchSize": 1,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 305
+ },
+ {
+  "A": "0x5f4fe6efc5b47a3d6e25ed9bbdd3c1085f4ee3ed",
+  "B": "0xc921a967d3317d796e02ccad197302390f210938",
+  "S": "0xc92153442209ff51e3f9eb9230cc29146ba80938",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97158063,
+  "realUSD": 487.061395,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97158396,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x9f9e7c79a60f7a7b05bfe80f90e646ab4cf8ef3147b09b938a706a87e1579255",
+    "li": 0,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 333,
+  "delaySecEst": 353,
+  "batchSize": 1,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 443
+ },
+ {
+  "A": "0x3d0ea6cc0f05332d3e5c6e979e34998bfd76d2fc",
+  "B": "0x2b12a297c7ade4292fd51b5813390bc3fdecc3bc",
+  "S": "0x2b12f72c4ad9e30ea72a89b890a40fe0c223c3bc",
+  "p": 4,
+  "s": 4,
+  "realBlock": 97134641,
+  "realUSD": 700,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97135428,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x8cad9dd365e3861509069d4c617da45e01cff8ee7ff5348c3d84085e08f051d3",
+    "li": 12,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "out_zero"
+  ],
+  "delayBlocksMin": 787,
+  "delaySecEst": 835,
+  "batchSize": 1,
+  "sentUSD": 0,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 794
+ },
+ {
+  "A": "0x69c576addcf1134d42b14f6188a511cbbd4db187",
+  "B": "0x19ec8b099d86e9efc55fe1eb0ef89590d2244ae9",
+  "S": "0x19ec6b9ce971a048f54f9ad6493677197b434ae9",
+  "p": 4,
+  "s": 4,
+  "realBlock": 96958383,
+  "realUSD": 1000,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 96958460,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0xd4d56fc7a9ab46067c27a8887f19b2464631a8377c6c7d544a1ae08420135b88",
+    "li": 11,
+    "tok": "USDT"
+   }
+  ],
+  "kinds": [
+   "in_dust"
+  ],
+  "delayBlocksMin": 77,
+  "delaySecEst": 82,
+  "batchSize": 1,
+  "sentUSD": 0.000016,
+  "victimSentToSosie": false,
+  "victimSentToSosieUSD": 0,
+  "priorRelationSosie": 0,
+  "distinctVictimsOfS": 1,
+  "auto": "empoisonnement_probable",
+  "isContract": {
+   "A": false,
+   "B": false,
+   "S": false
+  },
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 78
+ },
+ {
+  "A": "0x1d7637b93084685de4a7899bdba71951713a3ec0",
+  "B": "0x5491b05a3f7972cb44529f0cc0cc0f51d0551b37",
+  "S": "0x549134e80a0ba3921c0bc1bbaed17f3332b51b37",
+  "p": 4,
+  "s": 5,
+  "realBlock": 97182297,
+  "realUSD": 39.766432,
+  "realTok": "USDT",
+  "events": [
+   {
+    "b": 97182333,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0xa1ee6a3c4921a9006336382a6248818ef7725dcf6918a7081933071753bfbe7a",
+    "li": 87,
+    "tok": "USDT"
+   },
+   {
+    "b": 97182582,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x55d4ab1462940a8f508e74a0b28456e7f5c7ba1ef6048d1ab4a8da37fa868102",
+    "li": 14,
+    "tok": "USDT"
+   },
+   {
+    "b": 97182789,
+    "kind": "out_zero",
+    "v": 0,
+    "tx": "0x5297b5c2554686df04566c0edc1e6454caa5360814d1e9d4094fe956e6838393",
     "li": 3,
     "tok": "USDT"
    }
@@ -1651,48 +1661,50 @@
   "kinds": [
    "out_zero"
   ],
-  "delayBlocksMin": 30,
-  "delaySecEst": 32,
-  "batchSize": 3,
+  "delayBlocksMin": 36,
+  "delaySecEst": 38,
+  "batchSize": 1,
   "sentUSD": 0,
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
-  "distinctVictimsOfS": 4,
+  "distinctVictimsOfS": 1,
   "auto": "empoisonnement_probable",
   "isContract": {
    "A": false,
    "B": false,
    "S": false
   },
-  "delaySecExact": 37
+  "txFromIsVictim": false,
+  "txFromIsSosie": false,
+  "delaySecExact": 39
  },
  {
-  "A": "0x3839207cdfca95c7fa19368b790925866632a65a",
-  "B": "0xfa4bb1b19a0e5ba35399109df303fe245a93610b",
-  "S": "0xfa4b5c00e88005cc2cd411fb5befc1691492610b",
-  "p": 4,
+  "A": "0x5ee69cd5f16aa3d8a58eeba58a4c30e5191e2348",
+  "B": "0x53afd1b23171680b4d86327d88a2306fca03493e",
+  "S": "0x53a0f02966e9e464fa09b3b45715319b5e8b493e",
+  "p": 3,
   "s": 4,
-  "realBlock": 97103975,
-  "realUSD": 50,
-  "realTok": "USDC",
+  "realBlock": 97026608,
+  "realUSD": 750,
+  "realTok": "USDT",
   "events": [
    {
-    "b": 97104016,
-    "kind": "out_zero",
-    "v": 0,
-    "tx": "0xeebfdd9706de3e43800d4949ff6fb4e42fd327fb40da3120039403a8764df9ca",
-    "li": 6,
-    "tok": "USDC"
+    "b": 97026647,
+    "kind": "in_dust",
+    "v": 0.000016,
+    "tx": "0x0b5c2dfaa2b28ba7e8107f4d1840d29e717c23fff4ff81aab9fd5ee58c4465bf",
+    "li": 15,
+    "tok": "USDT"
    }
   ],
   "kinds": [
-   "out_zero"
+   "in_dust"
   ],
-  "delayBlocksMin": 41,
-  "delaySecEst": 44,
+  "delayBlocksMin": 39,
+  "delaySecEst": 41,
   "batchSize": 1,
-  "sentUSD": 0,
+  "sentUSD": 0.000016,
   "victimSentToSosie": false,
   "victimSentToSosieUSD": 0,
   "priorRelationSosie": 0,
@@ -1703,44 +1715,8 @@
    "B": false,
    "S": false
   },
-  "delaySecExact": 39
- },
- {
-  "A": "0x5577beb9c9dae85bf5224aa1643f2b1a13af7333",
-  "B": "0x18631625626543006f8d40dbcb57273e7429d17e",
-  "S": "0x18615490a9410a63a053016ea8a4bc286e29d17e",
-  "p": 3,
-  "s": 6,
-  "realBlock": 97025062,
-  "realUSD": 200,
-  "realTok": "USDT",
-  "events": [
-   {
-    "b": 97025116,
-    "kind": "in_dust",
-    "v": 0.000016,
-    "tx": "0xe82a2e50e0aec644381ee40fafd0b7a79e0081120790326d264dbef859a16763",
-    "li": 1,
-    "tok": "USDT"
-   }
-  ],
-  "kinds": [
-   "in_dust"
-  ],
-  "delayBlocksMin": 54,
-  "delaySecEst": 57,
-  "batchSize": 1,
-  "sentUSD": 0.000016,
-  "victimSentToSosie": false,
-  "victimSentToSosieUSD": 0,
-  "priorRelationSosie": 0,
-  "distinctVictimsOfS": 1,
-  "auto": "empoisonnement_probable",
-  "isContract": {
-   "A": false,
-   "B": false,
-   "S": false
-  },
-  "delaySecExact": 55
+  "txFromIsVictim": false,
+  "txFromIsSosie": true,
+  "delaySecExact": 48
  }
 ]

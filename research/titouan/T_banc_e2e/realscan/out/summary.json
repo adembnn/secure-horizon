@@ -1,94 +1,94 @@
 {
  "params": {
-  "START": 96943598,
-  "END": 97243597,
+  "START": 96943894,
+  "END": 97243893,
   "blocks": 300000,
   "seed": 1,
   "chunk": 10000,
   "windowBlocks": 1131,
   "windowSec": 1200,
   "bps": 0.942,
-  "from": "2026-10-07T09:07:12.000Z",
-  "to": "2026-10-11T01:34:00.000Z"
+  "from": "2026-10-07T09:12:49.000Z",
+  "to": "2026-10-11T01:39:17.000Z"
  },
  "data": {
-  "transfers": 517487,
-  "usdc": 398168,
-  "usdt": 119319,
-  "realGE1USD": 445560,
-  "tinyLT1USD": 67361,
-  "tinyZero": 6580,
-  "pairsCheckedInWindow": 2374384
+  "transfers": 517285,
+  "usdc": 397991,
+  "usdt": 119294,
+  "realGE1USD": 445370,
+  "tinyLT1USD": 67350,
+  "tinyZero": 6583,
+  "pairsCheckedInWindow": 2373806
  },
- "candidates34": 2170,
+ "candidates34": 2169,
  "victimsDistinct": 1328,
- "sosiesDistinct": 1906,
+ "sosiesDistinct": 1905,
  "kindCount": {
+  "in_dust": 965,
   "out_zero": 1179,
-  "in_dust": 966,
   "in_dust+out_zero": 25
  },
  "byAuto": {
-  "indetermine": 1695,
-  "empoisonnement_probable": 475
+  "empoisonnement_probable": 1582,
+  "indetermine": 587
  },
  "candidates44": 1586,
- "missed44": 584,
+ "missed44": 583,
  "missed44pct": 26.9,
- "candidates33": 3027,
- "candidates23": 3027,
+ "candidates33": 3025,
+ "candidates23": 3025,
  "control": {
   "reps": 10,
   "shuffledMean": {
-   "3+4": 1,
-   "3+3": 2.1,
-   "2+3": 2.1
+   "3+4": 0,
+   "3+3": 0.5,
+   "2+3": 0.5
   },
   "shuffledRuns": {
    "3+4": [
     0,
-    2,
-    1,
-    3,
-    0,
-    3,
     0,
     0,
     0,
-    1
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "3+3": [
+    1,
     0,
-    5,
+    1,
     2,
-    3,
-    2,
-    4,
+    0,
+    0,
+    0,
     1,
-    1,
-    1,
-    2
+    0,
+    0
    ],
    "2+3": [
+    1,
     0,
-    5,
+    1,
     2,
-    3,
-    2,
-    4,
+    0,
+    0,
+    0,
     1,
-    1,
-    1,
-    2
+    0,
+    0
    ]
   },
   "analyticExpected34": 0.0078,
   "analyticExpected33": 0.124,
   "analyticExpected23": 1.99
  },
- "attackerDustUSD": 0.1085,
- "attackerDustEvents": 1503,
- "zeroEvents": 2073,
+ "attackerDustUSD": 0.1084,
+ "attackerDustEvents": 1502,
+ "zeroEvents": 2074,
  "victimSentToSosie": {
   "count": 0,
   "usd": 0
@@ -98,93 +98,143 @@
   "max": 1191
  },
  "campaigns": {
-  "txSampled": 150,
-  "poisonTxDistinct": 3233,
-  "distinctTxSenders": 65,
+  "txSampled": 600,
+  "poisonTxDistinct": 3234,
+  "distinctTxSenders": 221,
   "senders": [
    {
     "sender": "0x2b03..0bc3",
-    "txs": 35,
-    "tos": 1
+    "txs": 153,
+    "tos": 1,
+    "victims": 160
    },
    {
     "sender": "0x6353..0228",
-    "txs": 29,
-    "tos": 3
+    "txs": 96,
+    "tos": 3,
+    "victims": 114
    },
    {
     "sender": "0x7363..cdbe",
-    "txs": 17,
-    "tos": 1
+    "txs": 79,
+    "tos": 1,
+    "victims": 79
    },
    {
     "sender": "0xf89d..aa40",
-    "txs": 3,
-    "tos": 1
+    "txs": 12,
+    "tos": 1,
+    "victims": 3
    },
    {
     "sender": "0x54b5..d2a8",
-    "txs": 3,
-    "tos": 1
+    "txs": 10,
+    "tos": 1,
+    "victims": 2
    },
    {
-    "sender": "0x659a..c704",
-    "txs": 3,
-    "tos": 1
+    "sender": "0x4a4e..dfd2",
+    "txs": 5,
+    "tos": 1,
+    "victims": 4
    },
    {
-    "sender": "0xec28..b6ab",
+    "sender": "0x0a7e..cf39",
+    "txs": 4,
+    "tos": 1,
+    "victims": 2
+   },
+   {
+    "sender": "0xdff8..8ccc",
+    "txs": 4,
+    "tos": 1,
+    "victims": 1
+   },
+   {
+    "sender": "0x974c..8c48",
+    "txs": 3,
+    "tos": 1,
+    "victims": 2
+   },
+   {
+    "sender": "0xb334..e1ef",
+    "txs": 3,
+    "tos": 1,
+    "victims": 3
+   },
+   {
+    "sender": "0x5c92..dc6e",
+    "txs": 3,
+    "tos": 1,
+    "victims": 1
+   },
+   {
+    "sender": "0x1289..5f68",
+    "txs": 3,
+    "tos": 1,
+    "victims": 1
+   },
+   {
+    "sender": "0x2a48..b437",
+    "txs": 3,
+    "tos": 2,
+    "victims": 2
+   },
+   {
+    "sender": "0xed9d..8771",
     "txs": 2,
-    "tos": 1
+    "tos": 1,
+    "victims": 2
    },
    {
-    "sender": "0xa234..6a56",
-    "txs": 1,
-    "tos": 1
-   },
-   {
-    "sender": "0x9d46..1820",
-    "txs": 1,
-    "tos": 1
-   },
-   {
-    "sender": "0xcdee..6839",
-    "txs": 1,
-    "tos": 1
-   },
-   {
-    "sender": "0xa434..5d1e",
-    "txs": 1,
-    "tos": 1
-   },
-   {
-    "sender": "0x973a..3ca7",
-    "txs": 1,
-    "tos": 1
-   },
-   {
-    "sender": "0xa54d..e19e",
-    "txs": 1,
-    "tos": 1
-   },
-   {
-    "sender": "0x1983..0873",
-    "txs": 1,
-    "tos": 1
-   },
-   {
-    "sender": "0xeff0..8fee",
-    "txs": 1,
-    "tos": 1
+    "sender": "0x230f..3c00",
+    "txs": 2,
+    "tos": 1,
+    "victims": 1
    }
   ]
  },
  "scamsniffer": {
-  "sosiesDistinct": 1906,
+  "sosiesDistinct": 1905,
   "sosiesInList": 0,
-  "txSenderCampaigns": 65,
+  "txSenderCampaigns": 221,
   "txSendersInList": 0,
   "victimsInList": 0,
   "listSize": 2530
+ },
+ "dustValueTop": [
+  [
+   "0.000016",
+   1335
+  ],
+  [
+   "0.001",
+   44
+  ],
+  [
+   "0.0005",
+   14
+  ],
+  [
+   "0.00039",
+   8
+  ],
+  [
+   "0.0002",
+   6
+  ],
+  [
+   "0.00015",
+   5
+  ]
+ ],
+ "sampleChecks": {
+  "n": 40,
+  "txFromIsVictim": 0,
+  "outZeroInSample": 25,
+  "outZeroForged": 25,
+  "contractSosie": 0,
+  "contractB": 0,
+  "contractA": 0
  }
 }

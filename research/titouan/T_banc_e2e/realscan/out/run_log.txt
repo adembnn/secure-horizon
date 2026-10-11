@@ -1,35 +1,6 @@
-blocs 96943894-96953893: cumul 18865
-blocs 96953894-96963893: cumul 45470
-blocs 96963894-96973893: cumul 68665
-blocs 96973894-96983893: cumul 84945
-blocs 96983894-96993893: cumul 104786
-blocs 96993894-97003893: cumul 123869
-blocs 97003894-97013893: cumul 147643
-blocs 97013894-97023893: cumul 168878
-blocs 97023894-97033893: cumul 189160
-blocs 97033894-97043893: cumul 214952
-blocs 97043894-97053893: cumul 256369
-blocs 97053894-97063893: cumul 277502
-blocs 97063894-97073893: cumul 293680
-blocs 97073894-97083893: cumul 306339
-blocs 97083894-97093893: cumul 321154
-blocs 97093894-97103893: cumul 333875
-blocs 97103894-97113893: cumul 346543
-blocs 97113894-97123893: cumul 362917
-blocs 97123894-97133893: cumul 383723
-blocs 97133894-97143893: cumul 398465
-blocs 97143894-97153893: cumul 411235
-blocs 97153894-97163893: cumul 421152
-blocs 97163894-97173893: cumul 433344
-blocs 97173894-97183893: cumul 447030
-blocs 97183894-97193893: cumul 459289
-blocs 97193894-97203893: cumul 470243
-blocs 97203894-97213893: cumul 483904
-blocs 97213894-97223893: cumul 494569
-blocs 97223894-97233893: cumul 504982
-blocs 97233894-97243893: cumul 517285
+cache 517285
 {
-  head: 97243893,
+  head: 97248281,
   START: 96943894,
   END: 97243893,
   tStart: '2026-10-07T09:12:49.000Z',
@@ -37,3 +8,325 @@ blocs 97233894-97243893: cumul 517285
   bps: 0.942,
   W: 1131
 }
+{
+ "params": {
+  "START": 96943894,
+  "END": 97243893,
+  "blocks": 300000,
+  "seed": 1,
+  "chunk": 10000,
+  "windowBlocks": 1131,
+  "windowSec": 1200,
+  "bps": 0.942,
+  "from": "2026-10-07T09:12:49.000Z",
+  "to": "2026-10-11T01:39:17.000Z"
+ },
+ "data": {
+  "transfers": 517285,
+  "usdc": 397991,
+  "usdt": 119294,
+  "realGE1USD": 445370,
+  "tinyLT1USD": 67350,
+  "tinyZero": 6583,
+  "pairsCheckedInWindow": 2373806
+ },
+ "candidates34": 2169,
+ "victimsDistinct": 1328,
+ "sosiesDistinct": 1905,
+ "kindCount": {
+  "in_dust": 965,
+  "out_zero": 1179,
+  "in_dust+out_zero": 25
+ },
+ "byAuto": {
+  "empoisonnement_probable": 1582,
+  "indetermine": 587
+ },
+ "candidates44": 1586,
+ "missed44": 583,
+ "missed44pct": 26.9,
+ "candidates33": 3025,
+ "candidates23": 3025,
+ "control": {
+  "reps": 10,
+  "shuffledMean": {
+   "3+4": 0,
+   "3+3": 0.5,
+   "2+3": 0.5
+  },
+  "shuffledRuns": {
+   "3+4": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "3+3": [
+    1,
+    0,
+    1,
+    2,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   "2+3": [
+    1,
+    0,
+    1,
+    2,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+   ]
+  },
+  "analyticExpected34": 0.0078,
+  "analyticExpected33": 0.124,
+  "analyticExpected23": 1.99
+ },
+ "attackerDustUSD": 0.1084,
+ "attackerDustEvents": 1502,
+ "zeroEvents": 2074,
+ "victimSentToSosie": {
+  "count": 0,
+  "usd": 0
+ },
+ "delaySecEst": {
+  "median": 70,
+  "max": 1191
+ },
+ "campaigns": {
+  "txSampled": 600,
+  "poisonTxDistinct": 3234,
+  "distinctTxSenders": 221,
+  "senders": [
+   {
+    "sender": "0x2b03..0bc3",
+    "txs": 153,
+    "tos": 1,
+    "victims": 160
+   },
+   {
+    "sender": "0x6353..0228",
+    "txs": 96,
+    "tos": 3,
+    "victims": 114
+   },
+   {
+    "sender": "0x7363..cdbe",
+    "txs": 79,
+    "tos": 1,
+    "victims": 79
+   },
+   {
+    "sender": "0xf89d..aa40",
+    "txs": 12,
+    "tos": 1,
+    "victims": 3
+   },
+   {
+    "sender": "0x54b5..d2a8",
+    "txs": 10,
+    "tos": 1,
+    "victims": 2
+   },
+   {
+    "sender": "0x4a4e..dfd2",
+    "txs": 5,
+    "tos": 1,
+    "victims": 4
+   },
+   {
+    "sender": "0x0a7e..cf39",
+    "txs": 4,
+    "tos": 1,
+    "victims": 2
+   },
+   {
+    "sender": "0xdff8..8ccc",
+    "txs": 4,
+    "tos": 1,
+    "victims": 1
+   },
+   {
+    "sender": "0x974c..8c48",
+    "txs": 3,
+    "tos": 1,
+    "victims": 2
+   },
+   {
+    "sender": "0xb334..e1ef",
+    "txs": 3,
+    "tos": 1,
+    "victims": 3
+   },
+   {
+    "sender": "0x5c92..dc6e",
+    "txs": 3,
+    "tos": 1,
+    "victims": 1
+   },
+   {
+    "sender": "0x1289..5f68",
+    "txs": 3,
+    "tos": 1,
+    "victims": 1
+   },
+   {
+    "sender": "0x2a48..b437",
+    "txs": 3,
+    "tos": 2,
+    "victims": 2
+   },
+   {
+    "sender": "0xed9d..8771",
+    "txs": 2,
+    "tos": 1,
+    "victims": 2
+   },
+   {
+    "sender": "0x230f..3c00",
+    "txs": 2,
+    "tos": 1,
+    "victims": 1
+   }
+  ]
+ },
+ "scamsniffer": {
+  "sosiesDistinct": 1905,
+  "sosiesInList": 0,
+  "txSenderCampaigns": 221,
+  "txSendersInList": 0,
+  "victimsInList": 0,
+  "listSize": 2530
+ },
+ "dustValueTop": [
+  [
+   "0.000016",
+   1335
+  ],
+  [
+   "0.001",
+   44
+  ],
+  [
+   "0.0005",
+   14
+  ],
+  [
+   "0.00039",
+   8
+  ],
+  [
+   "0.0002",
+   6
+  ],
+  [
+   "0.00015",
+   5
+  ]
+ ],
+ "sampleChecks": {
+  "n": 40,
+  "txFromIsVictim": 0,
+  "outZeroInSample": 25,
+  "outZeroForged": 25,
+  "contractSosie": 0,
+  "contractB": 0,
+  "contractA": 0
+ }
+}
+
+=== echantillon ===
+A=0x7a710c..4c14 B  0xb88b7cb3a37d3305b2191d3551234e49fd546a00
+   S 0xb888ea0929721dc48334b9bc1b7202f7603f6a00  [3+4] in_dust ev=1 vals=0.000016 real=20.00USDC delay=125s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x282b19..2674 B  0xd921b061e38574d1c1227192b8e9e3c8cc68a428
+   S 0xd921ce6a37bbd686c7f302965ccacc00bfc6a428  [4+4] out_zero ev=1 vals=0 real=99999.00USDT delay=368s batch=2 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x7c931b..3980 B  0x76e2951857a3c682b07c6fdf10743f3f442fb221
+   S 0x76e2a3ec919be3cec9f3ebac470633e547cdb221  [4+4] out_zero ev=1 vals=0 real=3500.00USDT delay=38s batch=1 victimsOfS=34 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0xd30734..5365 B  0x8c657189101236071c99dabb895854beeb9c1dbb
+   S 0x8c6507b70f5b07cd01dcb93466728ff9da061dbb  [4+4] out_zero ev=1 vals=0 real=465.00USDT delay=555s batch=2 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x1f50c4..8d17 B  0xa12bbdc56f6898803515a9481fc414d92fe13bdb
+   S 0xa12b50692f4de68dd0dc3cd4e197a675e5f53bdb  [4+4] out_zero ev=4 vals=0/0/0 real=96.00USDT delay=50s batch=4 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x614548..0722 B  0xfdbaa39d0d662e7fa7aed5ff1566fab99042dc09
+   S 0xfdbaf2b00f127bc9b0f500895573554b3d72dc09  [4+5] out_zero ev=1 vals=0 real=1.00USDT delay=1009s batch=5 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x5691c3..93e5 B  0x5302e9c2544885145f75df027f088af6c93cc496
+   S 0x53024e4ccc442e266c359f33c9fcfbf0cab2c496  [4+4] out_zero ev=1 vals=0 real=7201.48USDC delay=579s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x282fb8..b644 B  0x22a484413bde246b2a49126755775ccdb608cd11
+   S 0x22a4196395874cb2fc42630c72e57e7e2b58cd11  [4+5] out_zero ev=2 vals=0/0 real=29.63USDC delay=39s batch=2 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0xfe4473..b87f B  0x64e0ef429f8b5085921ebe9c09e1d47ce87f9e72
+   S 0x64e035ff72db882707e885ba9881c316e75a9e72  [4+4] out_zero ev=1 vals=0 real=578.59USDT delay=371s batch=4 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x43c37e..8fc5 B  0x34d8d4dd4e54457beffc4155908fa016b8961f12
+   S 0x34d64f11940daa33bd298cad90fcd90a427f1f12  [3+4] in_dust ev=1 vals=0.000016 real=5.00USDC delay=88s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x36fbb4..5ff3 B  0x8029e8f971348492a1d81e60b748426e2905c761
+   S 0x80266592724e825e6f7c88584812b3106cdbc761  [3+4] in_dust ev=1 vals=0.000016 real=356.00USDC delay=115s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0xd0bc6c..40d7 B  0x4a16001b9724c72a8366d5d7545f026455d5d147
+   S 0x4a132714de79da77f22d3c1ab96db40ffac1d147  [3+4] in_dust ev=2 vals=0.000016/0.000016 real=13.96USDC delay=118s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x5d4661..5880 B  0x87795fcb9f8037b34796139e2ef04b7b62eb75f8
+   S 0x87790c08d8088a3867f1e6f88bb1074fa11975f8  [4+4] out_zero ev=1 vals=0 real=10000.00USDC delay=878s batch=4 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0xfb3b4b..2168 B  0xebfe8c5cac3e102266e7f82af3174a3d9433589c
+   S 0xebf7436af0116241604cc0b5550e13a331db589c  [3+4] in_dust ev=1 vals=0.000016 real=5.00USDC delay=125s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x5b96ab..28b8 B  0x23553210b2badc413149331fb42b8305c32fae03
+   S 0x2355289d556fb0c48dd600ddf0cc9bbb90c6ae03  [4+4] in_dust ev=2 vals=0.001/0.00018 real=1800.00USDC delay=103s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x2284a9..cc4c B  0xc94165a69bc97d7af3c38687859ef40a23b0a222
+   S 0xc9418ba7aa7544bd6aa6ca931966acd2a148a222  [4+4] out_zero ev=3 vals=0/0/0 real=100.00USDC delay=5s batch=5 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x700de5..e298 B  0xf0a2d7b10d3be42b6b7fc86ea4d3b2653ef0b401
+   S 0xf0a4536d098dda496394bf737011bb8dbfa2b401  [3+4] in_dust ev=1 vals=0.000016 real=36.20USDT delay=99s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x736de3..4171 B  0x5ba4891c76db1a21635824c968553badb8e6e769
+   S 0x5ba44c3562466a22473704a13acf3e46db92e769  [4+4] out_zero ev=1 vals=0 real=10.55USDC delay=39s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x8fbf43..f55a B  0x692cc89c2db3ee9e70f24d27fb215a26e5b4f4bf
+   S 0x692c8472a0e44309a0881e896ce4b17c3182f4bf  [4+4] out_zero ev=1 vals=0 real=725.21USDT delay=437s batch=5 victimsOfS=2 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0xdd52b5..4791 B  0x44aadc09678f1152d8fde9ce875cec54439c15cc
+   S 0x44a532a4b40ed6feafde757cf4cc8b830a1115cc  [3+4] in_dust ev=1 vals=0.000016 real=500.00USDC delay=131s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0xfcf2b8..9030 B  0xb70120f71e6c9e7793f07ff900451d09372c6726
+   S 0xb701723a47ce1d25d405e6ad69e09cd841d06726  [4+4] out_zero ev=1 vals=0 real=260.00USDT delay=4s batch=2 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0xaf2568..bdab B  0x04ee63c6054e0dbe58e3bbe202ffb143c0a027da
+   S 0x04ee864fe3bbc0ad998967bd4f2a0cf939ff27da  [4+4] out_zero ev=1 vals=0 real=10.00USDC delay=3s batch=2 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x1fe0d9..8cf1 B  0x1326772d961f849c5daf25655d057b64e2afabc5
+   S 0x1326d3424327c2118e623a6a22534eddfecbabc5  [4+4] out_zero ev=1 vals=0 real=3000.00USDT delay=28s batch=2 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0xb4d26d..508e B  0xd443e754a731f3c536ae1bd5a5979bb753ce70d0
+   S 0xd44326d7cacc8686d2a9db399114c5823d2b70d0  [4+4] out_zero ev=1 vals=0 real=1000.14USDT delay=40s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x0c5efa..a139 B  0x79e8498a341c8d728f395b4c3ef5eb1d1d9a5f2f
+   S 0x79e21b0648fdd21daf7e4f574e3ed79bd8175f2f  [3+4] in_dust ev=1 vals=0.000016 real=300.00USDC delay=111s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x7adc0f..5aa0 B  0x89c5151236de544d077fc69813a4db89224ee8a1
+   S 0x89c56794930e7fe684de5bda48d1b2d74683e8a1  [4+4] out_zero ev=1 vals=0 real=500.00USDT delay=656s batch=5 victimsOfS=3 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x0e856d..5292 B  0x76e2951857a3c682b07c6fdf10743f3f442fb221
+   S 0x76e2a3ec919be3cec9f3ebac470633e547cdb221  [4+4] out_zero ev=1 vals=0 real=1600.00USDT delay=36s batch=1 victimsOfS=34 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0xae7b13..7f08 B  0xb334a61a6209f14b5fa5f1684a4ed7621f66e1ef
+   S 0xb3342bd14515614b1f3910fc9bdfab195641e1ef  [4+4] in_dust ev=2 vals=0.000016/0.000016 real=691.76USDT delay=86s batch=1 victimsOfS=15 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x0d9215..3b67 B  0xb80d90fcf2ed0e4febe02d2a209109bf1f62df95
+   S 0xb80da270b36f1f09be4974988316ef95bf94df95  [4+4] out_zero ev=3 vals=0/0/0 real=11173.00USDT delay=39s batch=2 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x2cb31b..9f65 B  0x002c8656f05c0629f00b9c931d2878159bc658c9
+   S 0x002320082d3551f8528a85f2d5af827cbc1658c9  [3+5] in_dust ev=1 vals=0.000016 real=100.00USDC delay=125s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0x3521f5..1868 B  0x771d9ce0ea2923e30619a951422ae6e969dc8ec9
+   S 0x771d52678dd26ff011f9dced7bfa867b9b458ec9  [4+4] out_zero ev=3 vals=0/0/0 real=93915.92USDT delay=368s batch=6 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x2e663b..e062 B  0x905d379831223bd3eb231c3c04698ae23b883644
+   S 0x905dd5177b8205ffbe19f545af532c35272a3644  [4+4] in_dust ev=1 vals=0.00015 real=1500.80USDC delay=310s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x8fca5f..7a21 B  0x015206f4f479868301ff424cecd9966af20f4604
+   S 0x0152edbd7c98153035a513486dbc88f51ad04604  [4+4] out_zero ev=1 vals=0 real=40000.00USDC delay=701s batch=5 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x126d27..637d B  0xab396d6b29ff0f0ad625d8783c3bf3e328555111
+   S 0xab31fb9d314b003a4cfcf4d8302c7df4cb755111  [3+5] in_dust ev=1 vals=0.000016 real=999.00USDC delay=61s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
+A=0xccd623..abed B  0x797cd77dd626ea54069d9dae9827b923d4137fa4
+   S 0x797c3fc4f9fea492208e71805b36ca8be7e37fa4  [4+5] out_zero ev=1 vals=0 real=496.24USDC delay=305s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x5f4fe6..e3ed B  0xc921a967d3317d796e02ccad197302390f210938
+   S 0xc92153442209ff51e3f9eb9230cc29146ba80938  [4+4] out_zero ev=1 vals=0 real=487.06USDT delay=443s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x3d0ea6..d2fc B  0x2b12a297c7ade4292fd51b5813390bc3fdecc3bc
+   S 0x2b12f72c4ad9e30ea72a89b890a40fe0c223c3bc  [4+4] out_zero ev=1 vals=0 real=700.00USDT delay=794s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x69c576..b187 B  0x19ec8b099d86e9efc55fe1eb0ef89590d2244ae9
+   S 0x19ec6b9ce971a048f54f9ad6493677197b434ae9  [4+4] in_dust ev=1 vals=0.000016 real=1000.00USDT delay=78s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x1d7637..3ec0 B  0x5491b05a3f7972cb44529f0cc0cc0f51d0551b37
+   S 0x549134e80a0ba3921c0bc1bbaed17f3332b51b37  [4+5] out_zero ev=3 vals=0/0/0 real=39.77USDT delay=39s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=empoisonnement_probable
+A=0x5ee69c..2348 B  0x53afd1b23171680b4d86327d88a2306fca03493e
+   S 0x53a0f02966e9e464fa09b3b45715319b5e8b493e  [3+4] in_dust ev=1 vals=0.000016 real=750.00USDT delay=48s batch=1 victimsOfS=1 contract(A,B,S)=000 prior=0 lost=false auto=indetermine
