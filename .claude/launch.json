@@ -4,14 +4,32 @@
     {
       "name": "holdup-webdemo",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["docs/demo/serve_static.mjs", "research/titouan/T_banc_e2e/webdemo", "8790"],
+      "runtimeArgs": [
+        "docs/demo/serve_static.mjs",
+        "research/titouan/T_banc_e2e/webdemo",
+        "8790"
+      ],
       "port": 8790
     },
     {
       "name": "holdup-site-piege",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["docs/demo/serve_static.mjs", "research/demo_reelle/site", "8791"],
+      "runtimeArgs": [
+        "docs/demo/serve_static.mjs",
+        "research/demo_reelle/site",
+        "8791"
+      ],
       "port": 8791
+    },
+    {
+      "name": "holdup-lab",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "docs/demo/serve_static.mjs",
+        "research/demo_reelle/lab/ui",
+        "8801"
+      ],
+      "port": 8801
     }
   ]
 }
