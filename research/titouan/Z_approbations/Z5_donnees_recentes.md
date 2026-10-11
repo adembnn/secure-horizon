@@ -10,10 +10,10 @@ Limites : Reddit et X non consultés (non testés, hors périmètre des outils).
 |---|---|---|---|---|
 | 60 % (15,2 M sur 25,4 M approbations) ; 60 % des utilisateurs uniques ; 22 % à haut risque | Ethereum, transactions jusqu'au 31 juil. 2021, mesure académique (RAID 2022). Référence historique, pas récente | 2021 | arxiv.org/abs/2207.01790 (P) | NV (vu en résumé) |
 | 13,9 % des approbations ERC-20 "encore illimitées" | Aucune population, aucune fenêtre, aucune méthode, aucune source. Post KuCoin Square, daté seulement "il y a 4 semaines" | environ 2026, date exacte inconnue | kucoin.com/square/post/content_6aa7c48551e30d0007e12b85 (M, faible) | V |
-| ~45 % | Notre échantillon, 200 blocs Ethereum | interne | repo, dossier onchain | interne |
+| 47 % | Notre échantillon, échantillon de blocs Ethereum | interne | repo, dossier onchain | interne |
 | Étude récente (2024 à 2026) mesurant la part illimitée | introuvable | | | |
 
-Lecture : le seul chiffre indépendant et daté est celui de 2021. Le 13,9 % n'est pas citable. Notre 45 % est la seule mesure récente documentée, avec ses limites d'échantillon.
+Lecture : le seul chiffre indépendant et daté est celui de 2021. Le 13,9 % n'est pas citable. Notre 47 % est la seule mesure récente documentée, avec ses limites d'échantillon.
 
 ## (b) Permit2, EIP-2612, portefeuilles, IA
 
@@ -86,11 +86,11 @@ Lecture : le seul chiffre indépendant et daté est celui de 2021. Le 13,9 % n'e
 5. Blockaid (primaire vendeur, lu) : address poisoning x5,5 de nov. 2025 à janv. 2026, avec un cas à 50 M$. À citer comme "selon Blockaid".
 6. Le chiffre de 60 % de 2021 est historique : le citer avec sa date et comme point de comparaison.
 7. L'intégration Blockaid dans Core date de juin 2024 (annonce vendeur).
-8. Notre mesure de ~45 % est la seule récente et vérifiable : à citer avec sa méthode (200 blocs, Ethereum, dates).
+8. Notre mesure de 47 % est la seule récente et vérifiable : à citer avec sa méthode (échantillon de blocs, Ethereum, dates).
 
 ## À ne pas citer
 
-1. Le 13,9 % (KuCoin Square) : aucune population, fenêtre ni source. Ne pas l'opposer au 45 %.
+1. Le 13,9 % (KuCoin Square) : aucune population, fenêtre ni source. Ne pas l'opposer au 47 %.
 2. "Le Permit représente X % de toutes les pertes" : aucune source ne le donne.
 3. Les chiffres d'EIP-7702 de Wintermute et d'USENIX : lus seulement par relais. Ne citer que les 2,54 M$ de ScamSniffer.
 4. Le cumul Chainalysis de 2,7 Md$ pour l'approval phishing : daté et non relu.

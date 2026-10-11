@@ -8,7 +8,7 @@ Légende : [V] = page lue via WebFetch (sortie du lecteur, pas le PDF brut). [NV
 
 1. Seule étude académique trouvée avec une part mesurée : 59,8 % d'approbations illimitées sur Ethereum, données jusqu'au 31 juillet 2021.
 2. Un seul comptage récent trouvé : 13,9 % sur 1 heure en sept. 2026, sur 5 jetons. Source faible (média, texte assisté par IA).
-3. Notre mesure (~45 %, 957 sur ~2106, 200 blocs) tombe entre les deux. Les trois chiffres ne mesurent pas la même chose.
+3. Notre mesure (47 %, 21 866 droits non nuls, voir Z4, échantillon de blocs) tombe entre les deux. Les trois chiffres ne mesurent pas la même chose.
 4. Toutes les plateformes ne demandent pas l'illimité. Mais en 2021, 22 sur 22 DApps examinées proposaient l'illimité par défaut.
 5. Avalanche : aucun chiffre trouvé.
 6. Montant total exposé par les approbations anciennes : introuvable.
@@ -49,15 +49,15 @@ Légende : [V] = page lue via WebFetch (sortie du lecteur, pas le PDF brut). [NV
 
 ## Comparaison avec notre mesure
 
-Notre mesure : ~45 % (957 sur ~2106), 200 blocs Ethereum, trafic présumé légitime.
+Notre mesure : 47 % (21 866 droits non nuls, voir Z4), échantillon de blocs Ethereum, trafic présumé légitime.
 
 | Source | Part | Pourquoi ça diffère |
 |---|---|---|
 | Papier 2021 | 59,8 % | Période 2020-2021 (DeFi summer, DApps illimité par défaut). Compte toutes les transactions `approve`, y compris l'offre totale du jeton |
 | Cryptoticker 2026 | 13,9 % | 5 jetons seulement, 300 blocs, exclut Permit2. WETH 22 % mais USDC 8 % |
-| Notre mesure | ~45 % | Tous les jetons ou un échantillon différent, 200 blocs. Peut inclure ou exclure les zéros |
+| Notre mesure | 47 % | Tous les jetons ou un échantillon différent, échantillon de blocs. Peut inclure ou exclure les zéros |
 
-Lecture honnête : nous sommes à mi-chemin. Le 13,9 % porte sur 5 jetons majeurs, pas sur tous les jetons. L'écart avec nos 45 % vient plausiblement de la population (long tail de jetons et de DApps) mais ce n'est pas démontré. À vérifier : notre dénominateur inclut-il les approbations à zéro ? Notre seuil « illimité » est-il uint256 max seul, ou aussi les valeurs proches ?
+Lecture honnête : nous sommes à mi-chemin. Le 13,9 % porte sur 5 jetons majeurs, pas sur tous les jetons. L'écart avec nos 47 % vient plausiblement de la population (long tail de jetons et de DApps) mais ce n'est pas démontré. À vérifier : notre dénominateur inclut-il les approbations à zéro ? Notre seuil « illimité » est-il uint256 max seul, ou aussi les valeurs proches ?
 
 ## Toutes les plateformes demandent-elles l'illimité ?
 
@@ -71,7 +71,7 @@ Non, et c'est mesuré :
 
 1. « Une étude académique (RAID 2022) mesure 59,8 % d'approbations illimitées sur Ethereum, 15,2 M sur 25,4 M, jusqu'à juillet 2021 ; 60 % des adresses en ont fait au moins une. » Toujours donner la date.
 2. « Dans la même étude, 22 DApps sur 22 proposaient l'illimité par défaut, et 22 % des utilisateurs avaient des jetons exposés (allowance et solde positifs). »
-3. « Notre propre échantillon de 200 blocs donne ~45 % (957 sur ~2106). » Présenter comme mesure interne, trafic présumé légitime, non représentative.
+3. « Notre propre échantillon de échantillon de blocs donne 47 % (21 866 droits non nuls, voir Z4). » Présenter comme mesure interne, trafic présumé légitime, non représentative.
 4. « MetaMask documente qu'il invite toujours à saisir un plafond pour les DApps, mais son Swaps est illimité par défaut sur L1. » (doc officielle lue)
 5. « Les pertes de phishing par drainers ont été de ~84 M$ en 2025 selon ScamSniffer (titre du rapport), en baisse de 83 %. » (titre lu, sourcer le rapport)
 
@@ -88,3 +88,7 @@ Non, et c'est mesuré :
 ## Incohérences relevées dans le papier 2021
 
 Le nombre de portefeuilles étudiés est cité 16, 14 puis 9 selon la section. Ne pas citer « x % des portefeuilles » sans relire le PDF. Le PDF brut n'a pas pu être décodé par l'outil, les chiffres viennent de la version HTML ar5iv.
+
+
+## Décision de Titouan (11/10)
+Chiffre retenu: 47  0'approbations illimitées sur Ethereum (47,6 % [46,9 ; 48,3], voir onchain/Z4). Avalanche C-Chain: 34,2 %. Le nombre de tests nest pas indicatif (le périmètre des tests a changé). Fuji: décision reportée.

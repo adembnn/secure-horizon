@@ -27,7 +27,7 @@ Limite à dire : un journal chaîné prouve l'intégrité et l'ordre. Il ne prou
 
 ## Colonne 3 : AI Act (positionnement, à faire valider)
 
-- **Le modèle ne peut qu'aggraver.** Le comparateur final est du code. Un modèle, s'il est utilisé, peut monter le niveau, jamais le baisser (`research/titouan/O_barriere_intention.md`). Il ne décide pas seul.
+- **Le modèle est censé ne pouvoir qu'aggraver (garde-fou en cours, non vérifié sur toute la chaîne).** Le comparateur final est du code. Un modèle, s'il est utilisé, peut monter le niveau, jamais le baisser (`research/titouan/O_barriere_intention.md`). Il ne décide pas seul.
 - **Transparence.** L'utilisateur sait quand un message a été classé par un modèle et voit la raison de l'avertissement.
 - **Contrôle humain.** L'utilisateur garde la décision finale.
 - **Qualification juridique** (risque, obligations) : non établie par nous. Le guide du hackathon note un report des obligations haut risque à déc. 2027 (`context/notion_guide.md`).

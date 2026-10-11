@@ -77,7 +77,7 @@ Ces trois points sont décrits, pas tous mesurés. Voir « Ce qui n'est pas mesu
 ```
 
 Principes de conception :
-- Le comparateur final est du code. Un modèle (optionnel) comprend une phrase ou classe un message collé. Il ne peut qu'aggraver un verdict, jamais le baisser (`research/titouan/O_barriere_intention.md`, position 1).
+- Le comparateur final est du code. Un modèle (optionnel) comprend une phrase ou classe un message collé. Il est censé ne pouvoir qu'aggraver (garde-fou en cours, non vérifié sur toute la chaîne) un verdict, jamais le baisser (`research/titouan/O_barriere_intention.md`, position 1).
 - Un échec, un délai ou une API absente donne "Non vérifié", jamais un feu vert (`research/titouan/T_banc_e2e/extension/COMPAT.md`).
 - Le serveur écoute sur 127.0.0.1 uniquement. Pas de réseau sortant dans la version autonome prévue.
 

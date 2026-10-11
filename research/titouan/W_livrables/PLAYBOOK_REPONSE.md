@@ -57,6 +57,6 @@ On avertit et on ralentit. On ne retire pas le choix à l'utilisateur. La répon
 Détail :
 - Faux positif : coût en friction, pas en perte. L'éditeur doit pouvoir corriger la règle et le montrer dans le journal.
 - Faux négatif : une perte reste possible. Aucune promesse de résultat n'est faite. Les taux de non-détection sont publiés avec leur n (`RESULTATS_A_JOUR.md`). Le produit livré aujourd'hui rate 3 643 arnaques sur 6 191 (`redteam/PRODUIT_VS_BANC.md`).
-- Le modèle de langage, s'il est utilisé, ne peut qu'aggraver un verdict. Il ne peut donc pas valider seul une transaction dangereuse (`O_barriere_intention.md`, position 1).
+- Le modèle de langage, s'il est utilisé, est censé ne pouvoir qu'aggraver (garde-fou en cours, non vérifié sur toute la chaîne) un verdict. Il ne peut donc pas valider seul une transaction dangereuse (`O_barriere_intention.md`, position 1).
 - Si l'utilisateur passe outre un avertissement critique, le journal en garde la trace. C'est un élément de preuve, pas un transfert de faute automatique.
 - Question du jury "si votre modèle se trompe, qui est responsable ?" : l'éditeur pour la règle et le journal, l'utilisateur pour le geste final. Cette répartition est une position de produit, pas un avis juridique.
