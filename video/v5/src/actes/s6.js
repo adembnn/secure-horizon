@@ -9,7 +9,7 @@
 'use strict';
 (() => {
   const D = L.m1.debut, M2 = L.m2.debut, M3 = L.m3.debut;
-  const SX = 150, SY = 190, XB = 3200, XM = 1375, LIFT = 534, FIST_Y = -1780, GRIP_Y = -1570, EYE = { x: XM, y: -3400 };
+  const SX = 150, SY = 190, XB = 3200, XM = 1375, LIFT = 534, FIST_Y = -1700, GRIP_Y = -1490, EYE = { x: XM, y: -3400 };
   const sm = (x, a, b) => { const k = clamp((x - a) / (b - a)); return k * k * (3 - 2 * k); };
   const pulse = d => d < 0 || d > .3 ? 0 : (1 - d / .3) * (1 - d / .3);
 
@@ -28,11 +28,11 @@
 
   // ---------- les temps : chaque evenement arrive sur le mot, ou juste avant ----------
   const T250 = D + .02;                       // « Deux cent cinquante » : le nombre tombe
-  const TSPLIT = tMot('m1', 3) - .12;         // « cas. » : 250 = 150 + 100
+  const TLAB = tMot('m1', 2) - .1;            // « cinquante » : 150 sous le bras raye, puis 100 sous le bras nu
   const TBAND = tMot('m1', 5) - .06;          // « sans voir » : le bandeau
   const TMOT2 = tMot('m1', 8) - .08;          // « règles. »
-  const TW1 = M2 - .46;                       // le coup, en gros plan, avant le chiffre
-  const N87 = M2 + .05;
+  const TW1 = M2 - .38;                       // le coup, en gros plan, avant le chiffre
+  const N87 = M2 + .06;
   const TR2 = tMot('m2', 5) - .1, TR3 = tMot('m2', 6) - .06;      // « dangereuses », « signalées » : elles retentent, plus fort
   const TB = M2 + 2.96, N15 = TB + .17;       // les 100 honnetes, dans le silence qui suit
   const TRIP = tMot('m3', 2), TU = TRIP + .2, TS2 = TU + .3;      // « la phrase » : on l'arrache, le noeud se defait, la main plonge
@@ -50,8 +50,8 @@
   const m1 = far(FA.ps, H1), m2 = far(FA.ps, H2), mb = far(FB.ps, { x: XB, y: 0 });
   for (const p of FA.ps) {
     p.t1 = p === H1 || p === N1 ? TW1 : TW1 + .2 + Math.pow(Math.hypot(p.x - H1.x, p.y - H1.y) / m1, .85) * .62 + sh(p.k, 5) * .035;     // la vague part du gros plan
-    p.t2 = p === H2 ? TS2 : TS2 + .24 + Math.pow(Math.hypot(p.x - H2.x, p.y - H2.y) / m2, .85) * .55 + sh(p.k, 6) * .03;
-    p.tu = p === H2 ? TU : p.t2 - .26;
+    p.t2 = p.role !== 'phrase' ? 1e9 : p === H2 ? TS2 : TS2 + .24 + Math.pow(Math.hypot(p.x - H2.x, p.y - H2.y) / m2, .85) * .55 + sh(p.k, 6) * .03;
+    p.tu = p.role !== 'phrase' ? 1e9 : p === H2 ? TU : p.t2 - .26;
     p.essais = [p.t1, TR2 + sh(p.k, 7) * .03, TR3 + sh(p.k, 8) * .025];
     p.go = .42 + Math.hypot(p.x - FA.gx, p.y - FA.gy) / 4200;
   }
@@ -127,9 +127,9 @@
     F.ps.forEach((p, i) => { const [S, dy, vu] = cache[i]; if (!vu) return;
       if (!near) { loin(p, S, dy); return; }
       X.save(); X.translate(p.x, p.y + dy + S.jolt); X.scale(.8, .8);
-      pk(0, 0, 1.25, { ...S, jolt: 0, hand: S.tr === undefined, cordTo: [F.gx - p.x, F.gy - (p.y + dy + S.jolt)] }); X.restore();
+      pk(0, 0, 1.25, { ...S, jolt: 0, hand: S.tr === undefined, loot: S.loot && S.tr === undefined, cordTo: [F.gx - p.x, F.gy - (p.y + dy + S.jolt)] }); X.restore();
       const ky = p.y + dy + S.jolt + S.wy - 40;
-      if (S.ring > 0) { X.beginPath(); X.arc(p.x + 9, ky, 15 + 46 * (1 - S.ring), 0, 7); X.strokeStyle = INK; X.lineWidth = 3.2; X.globalAlpha = S.ring; X.stroke(); X.globalAlpha = 1; }
+      if (S.ring > 0) { X.beginPath(); X.arc(p.x + 9, ky, 13 + 26 * (1 - S.ring), 0, 7); X.strokeStyle = INK; X.lineWidth = 3; X.globalAlpha = S.ring; X.stroke(); X.globalAlpha = 1; }
       if (p.role === 'phrase' && t >= p.tu && t < p.tu + .3) {                                       // le noeud glisse et s'ouvre
         const d = (t - p.tu) / .3, k = E.arrive(d); X.lineCap = 'round'; X.strokeStyle = INK;
         X.beginPath(); X.ellipse(p.x + 9 + 16 * k, ky - 6 * k, 10 + 24 * k, 8 * (1 - k) + .6, -.5 * (1 - k), 0, 7); X.lineWidth = 4.2; X.stroke();
@@ -183,45 +183,43 @@
   const CAMK = [
     [T6, H1.x + 30, H1.y + 45, 2.3],
     [D - .44, H1.x + 60, H1.y + 38, 2.15, E.derive],
-    [T250 + .1, XM, -395, .327, bez(.55, 0, .25, 1)],           // recule : les 250, les deux poings
-    [TSPLIT + .25, XM, -395, .36, E.derive],
-    [TBAND - .22, EYE.x, EYE.y + 30, 1.08, E.glisse],            // monte jusqu'a l'oeil
-    [TMOT2 + .12, EYE.x + 14, EYE.y + 30, 1.25, E.derive],
-    [TW1 - .26, H1.x + 72, H1.y + 22, 2.7, bez(.75, 0, .15, 1)],  // plonge sur deux poches : une nouee, une libre
-    [TW1 + .2, H1.x + 78, H1.y + 28, 2.95, E.derive],
-    [N87 + .1, 0, 60, .56, bez(.55, 0, .25, 1)],                 // recule : la vague, le chiffre
-    [N87 + .95, 0, -166, .42, E.derive],                         // recule encore : tout le champ, ouvert par le chiffre
-    [TR2 - .2, -330, 290, 1.45, E.glisse],                       // descend dans les rangs, les longe
-    [TB - .37, 160, 290, 1.62, E.derive],
-    [TB, XB, 60, .56, bez(.75, 0, .15, 1)],                      // fouette vers les 100 honnetes
-    [M3 - .4, XB + 30, 50, .61, E.derive],
+    [T250 + .1, XM, -405, .327, bez(.55, 0, .25, 1)],            // recule : les 250, les deux poings
+    [D + 1.08, XM + 40, -372, .344, E.derive],
+    [TBAND - .2, EYE.x, EYE.y + 75, 1.08, E.glisse],             // monte jusqu'a l'oeil
+    [TW1 - .5, EYE.x + 14, EYE.y + 75, 1.25, E.derive],
+    [TW1 - .14, H1.x + 72, H1.y + 22, 2.7, bez(.75, 0, .15, 1)],  // plonge sur deux poches : une nouee, une libre
+    [TW1 + .22, H1.x + 78, H1.y + 28, 2.95, E.derive],
+    [N87 + .12, 0, 60, .56, bez(.55, 0, .25, 1)],                // recule : la vague, le chiffre tombe dans le champ
+    [N87 + .95, 0, 95, .63, E.derive],
+    [TR2 - .2, -200, 290, 1.45, E.glisse],                       // descend dans les rangs, les longe
+    [TB - .37, 120, 290, 1.6, E.derive],
+    [TB, XB, 160, .66, bez(.75, 0, .15, 1)],                     // fouette vers les 100 honnetes
+    [M3 - .4, XB + 20, 165, .7, E.derive],
     [M3 - .02, H2.x - 6, H2.y - 62, 3.0, bez(.75, 0, .15, 1)],    // revient : un noeud, la phrase qui le tient
     [TS2 + .2, H2.x + 8, H2.y - 28, 3.3, E.derive],
     [N65 - .1, 0, 60, .56, bez(.55, 0, .25, 1)],
-    [N65 + .55, 0, 40, .62, E.derive],
-    [N65 + 1.05, 1555, -180, .41, E.glisse],                     // les deux resultats ensemble
-    [T7, 1555, -180, .44, E.derive],
+    [N65 + .55, 0, 90, .62, E.derive],
+    [N65 + 1.05, 1540, -195, .385, E.glisse],                    // les deux resultats ensemble
+    [T7, 1540, -190, .4, E.derive],
   ];
   const ROLL = t => pose(t, [[T6, -.03], [T250, .012, E.glisse], [TBAND, -.02, E.glisse], [TW1, .03, E.glisse], [N87 + .2, -.012, E.glisse], [TR2, .022, E.glisse], [TB, -.015, E.glisse], [M3, .03, E.glisse], [N65, -.012, E.glisse], [T7, .012, E.glisse]]);
   const CAM = mkCam(CAMK, ROLL);
   const SECOUSSES = [[T250, 10], [TBAND + .14, 8], [TW1 + .04, 7], [N87, 18], [TR3 + .04, 7], [N15, 13], [N65, 18]];
 
   function textes(t) {
-    if (t >= T250 && t < TW1 - .3) {                    // 250, puis 150 dangereuses + 100 honnetes
-      if (t < TSPLIT) frappe('250', XM, -930, 1000, t, T250, { stroke: 64 });
-      else { const k = E.arrive(seg(t, TSPLIT, TSPLIT + .3));
-        for (const [str, x0, x1, lab] of [['150', XM - 380, 0, 'demandes dangereuses'], ['100', XM + 420, XB, 'demandes honnêtes']]) {
-          T(str, lerp(x0, x1, k), lerp(-930, -985, k), lerp(640, 330, k), { stroke: 44 }); frappe(lab, x1, -815, 132, t, TSPLIT + .24, { stroke: 36, de: 1.9 }); } }
+    if (t >= T250 && t < TW1 - .3) {                    // 250 = 150 dangereuses + 100 honnetes
+      frappe('250', XM, -930, 1000, t, T250, { stroke: 64 });
+      frappe('150 demandes dangereuses', 0, -812, 132, t, TLAB, { stroke: 38, de: 1.9 }); frappe('100 demandes honnêtes', XB, -812, 132, t, TLAB + .2, { stroke: 38, de: 1.9 });
     }
     if (t > TBAND - .9 && t < TW1) {                    // sous l'oeil
-      if (t < TMOT2) frappe('JEU AVEUGLE', EYE.x, EYE.y + 288, 150, t, TBAND + .1, { stroke: 22 }); else frappe('OUVERT UNE SEULE FOIS', EYE.x, EYE.y + 270, 88, t, TMOT2, { stroke: 18 });
+      frappe('JEU AVEUGLE', EYE.x, EYE.y + 262, 130, t, TBAND + .1, { stroke: 20 }); frappe('ouvert une seule fois', EYE.x, EYE.y + 352, 66, t, TMOT2 - .15, { stroke: 14, de: 1.9 });
     }
     if (t >= N87) {                                     // le chiffre vit : il suit le compte des mains arretees
       const n = compte(t);
       if (t < N65) frappe(t < TS2 ? '87 %' : Math.max(65, Math.round(n / 150 * 100)) + ' %', 0, -165, 560, t, N87, { stroke: 46 }); else frappe('65 %', 0, -165, 560, t, N65, { stroke: 46 });
       if (t < N65) frappe(n + ' sur 150', 0, -45, 96, t, N87 + .16, { stroke: 28, de: 1.8 }); else frappe('97 sur 150, sans la phrase', 0, -45, 92, t, N65 + .14, { stroke: 28, de: 1.8 });
     }
-    if (t >= N15) { frappe('15 %', XB, -215, 470, t, N15, { stroke: 42 }); frappe("d'alertes à tort", XB, -108, 96, t, N15 + .13, { stroke: 28, de: 1.8 }); frappe('objectif 10 % : manqué', XB, -20, 86, t, N15 + .24, { stroke: 26, de: 1.8 }); }
+    if (t >= N15) { frappe('15 %', XB, -223, 470, t, N15, { stroke: 42 }); frappe("d'alertes à tort", XB, -116, 96, t, N15 + .13, { stroke: 28, de: 1.8 }); frappe('objectif 10 % : manqué', XB, -20, 92, t, N15 + .24, { stroke: 26, de: 1.8 }); }
     if (t > M3 - .3 && t < TRIP + .5) {                 // la phrase de l'utilisateur tient le noeud ; on l'arrache
       const d = t - TRIP - .1, k = d > 0 ? E.pars(seg(d, 0, .3)) : 0, x = H2.x + 4 + 420 * k, y = H2.y - 132 - 260 * k, ky = H2.y + leve(H2, t) - 52;
       if (k < .05) { X.beginPath(); X.moveTo(H2.x + 9, ky); X.quadraticCurveTo(H2.x + 30 + wob(98, 1) * 2, ky - 34, H2.x + 6, y + 9); X.strokeStyle = INK; X.lineWidth = 2.6; X.lineCap = 'round'; X.stroke(); }
@@ -241,14 +239,14 @@
     if (v.y0 < FIST_Y + 600) { bras(FA, -1, true, t); bras(FB, 1, false, t); }
     textes(t);
     X.restore();
-    mention('Moteur de comparaison, jeu aveugle de 250 cas, ouvert une seule fois', .82);
+    T('Moteur de comparaison, jeu aveugle de 250 cas, ouvert une seule fois', 48, 1060, 34, { al: 'left', a: .85, stroke: 8 });      // la mention : meme place et meme corps que mention(), avec un contour pour rester lisible sur les poches
     X.restore();
     flash(t, T250, .3); flash(t, N87, .5); flash(t, N15, .32); flash(t, N65, .5);
   }, blur: t => enFouet(t, T6, T7) ? 6 : CAM.blur(t) });
 
   // ---------- reperes sonores de la scene ----------
   cue(T6, 'whoosh', { d: .35 }); cue(D - .44, 'souffle', { d: .55 }); cue(T250, 'impact', { g: 1.2 }); cue(T250 + .42, 'tension', { d: .4 });
-  cue(TSPLIT + .24, 'toc', { g: .8 }); cue(TSPLIT + .3, 'whoosh', { d: .45 }); cue(TBAND, 'rideau'); cue(TBAND + .13, 'impact', { g: .8 }); cue(TMOT2, 'toc', { g: .9 });
+  cue(TLAB, 'toc', { g: .8 }); cue(TLAB + .2, 'toc', { g: .7 }); cue(D + 1.08, 'whoosh', { d: .4 }); cue(TBAND, 'rideau'); cue(TBAND + .13, 'impact', { g: .8 }); cue(TMOT2 - .15, 'toc', { g: .9 });
   cue(TW1 - .5, 'plonge', { d: .3 }); cue(TW1 - .22, 'silence', { d: .2 }); cue(TW1 + .04, 'bute', { g: 1 }); cue(TW1 + .03, 'poignee', { g: 1, n: 0 });
   FA.ps.forEach((p, i) => { if (p === H1 || p === N1) return; if (p.role === 'passe') cue(p.t1 + .03, 'prise', { g: .7, pan: clamp(p.x / 1500, -1, 1) }); else if (i % 6 === 0) cue(p.t1 + .04, 'bute', { g: .3 }); });
   cue(N87 - .5, 'riser', { d: .5 }); cue(N87, 'impact', { g: 1.5 }); cue(N87 + .02, 'boum', { g: 1 }); cue(TR2 - .2, 'whoosh', { d: .35 }); cue(TR2 + .04, 'bute', { g: .8 }); cue(TR3 + .04, 'bute', { g: 1 });
@@ -257,5 +255,5 @@
   PHRASE.forEach(p => { if (p !== H2) cue(p.t2 + .03, 'prise', { g: .75, pan: clamp(p.x / 1500, -1, 1) }); });
   cue(N65 - .62, 'riser', { d: .6 }); cue(N65, 'impact', { g: 1.5 }); cue(N65 + .02, 'boum', { g: 1 }); cue(N65 + .58, 'souffle', { d: .5 }); cue(T7 - RACC, 'whoosh', { d: .35 });
   // ---------- images cles de la scene ----------
-  cle('mesure_250', TSPLIT + .7); cle('mesure_aveugle', TMOT2 - .15); cle('mesure_87', N87 + .6); cle('mesure_15', N15 + .55); cle('mesure_phrase', TRIP - .1); cle('mesure', N65 + .45); cle('mesure_bilan', T7 - .45);
+  cle('mesure_250', TLAB + .6); cle('mesure_aveugle', TMOT2 + .15); cle('mesure_87', N87 + .6); cle('mesure_15', N15 + .55); cle('mesure_phrase', TRIP - .1); cle('mesure', N65 + .45); cle('mesure_bilan', T7 - .45);
 })();

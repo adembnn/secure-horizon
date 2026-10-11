@@ -47,9 +47,9 @@
   // 34 poches libres sur 100 : la mienne, plus 33 tirees au sort (hash) ; les deux voisines du trio sont nouees
   Q.filter(q => !q.hero && !q.trio).sort((a, b) => hash(a.k, 77, 5) - hash(b.k, 77, 5)).forEach((q, i) => { q.free = i < 33; });
   if (Q.length !== 100 || Q.filter(q => q.free).length !== 34) console.error('s2b : compte faux, ' + Q.filter(q => q.free).length + ' libres sur ' + Q.length);
-  const ORIG = [[-1500, -1800], [0, -2000], [1500, -1800]];      // trois plateformes, hors champ en haut : les cordes en rayonnent
-  for (const q of Q) { let o = q.ax < -500 ? 0 : q.ax > 500 ? 2 : 1; if (!q.hero && hash(q.k, 41) < .28) o = clamp(o + (hash(q.k, 42) < .5 ? -1 : 1), 0, 2); q.o = o;
-    q.dN = Math.hypot(q.ax, q.ay + 62) / 13000; q.dI = (q.bx + 1750) / 3500 * .42; q.dW = Math.hypot(q.ax - HERO.ax, q.ay - HERO.ay) / 2600; q.sag0 = (40 + hash(q.k, 9) * 60) * (hash(q.k, 10) < .5 ? -1 : 1); }
+  const ORIG = [[-2900, -1700], [2900, -1700], [-2900, 1700], [2900, 1700]];      // quatre plateformes, hors champ aux quatre coins : les cordes en rayonnent et laissent le centre libre
+  for (const q of Q) { q.o = (q.bx < 0 ? 0 : 1) + (q.by + 62 < 0 ? 0 : 2);
+    q.dN = Math.hypot(q.ax, q.ay + 62) / 13000; q.dI = q.hero ? .08 : (q.bx + 1750) / 3500 * .4; q.dW = Math.hypot(q.ax - HERO.ax, q.ay - HERO.ay) / 2600; q.sag0 = 30 + hash(q.k, 9) * 50; }
   const ORDRE = [...Q].sort((a, b) => a.by - b.by || a.bx - b.bx);
   const KB = bez(.2, .7, .3, 1);
   function pos(q, t) { const s = T_BL + q.dN; if (t <= s) return [q.ax, q.ay]; const k = pose(t, [[s, 0], [s + .2, 1.06, KB], [s + .44, 1, E.doux]]); return [lerp(q.ax, q.bx, k), lerp(q.ay, q.by, k)]; }
@@ -72,19 +72,23 @@
     tape(S, t, T_BACK + .72 + q.dW, 1.4);   // une vague de tapotements part de ma poche pendant le recul
     const s = T_BL + q.dN;
     if (t < s) { const ins = E.doux(seg(t, T_N - .34, T_N - .04)); S.wy -= 9 * ins; S.curl = lerp(S.curl, 0, ins); S.jolt -= 3 * ins; return S; }   // toutes les mains se levent d'un cran : le souffle avant le chiffre
-    if (q.free) {                           // libre : jusqu'au fond, elle prend, elle tient
-      S.wy = pose(t, [[s, REST - 9], [s + .09, DEEP, E.pars], [s + .2, DEEP], [s + .5, REST - 20, E.arrive]]);
+    if (q.free) {                           // libre : rien n'arrete le bras
+      S.wy = pose(t, [[s, REST - 9], [s + .09, DEEP, E.pars], [s + .2, DEEP], [s + .5, REST - 18, E.arrive]]);            // 1. le chiffre tombe : jusqu'au fond, une premiere poignee
       S.curl = pose(t, [[s, 0], [s + .12, 0], [s + .19, 1, E.sec]]); S.loot = t > s + .19 ? 1 : 0;
-      S.lv = lerp(1, .62, E.pars(seg(t, s + .2, s + .46)));
+      S.lv = lerp(1, .7, E.pars(seg(t, s + .2, s + .46)));
       S.jolt = pose(t, [[s + .05, 0], [s + .1, 7, E.arrive], [s + .22, -4, E.doux], [s + .42, 1, E.doux], [s + .56, 0, E.doux]]);
       S.sq = pose(t, [[s + .05, 0], [s + .1, .8, E.arrive], [s + .28, -.15, E.doux], [s + .46, 0, E.doux]]);
-      const u = T_ILL + q.dI;               // « illimitees » : elle leve sa prise bien au-dessus de la poche
-      if (t > u) { S.wy = pose(t, [[u, REST - 20], [u + .1, REST - 10, E.arrive], [u + .27, -78, bez(.3, 0, .2, 1)], [u + .4, -60, E.doux], [u + .56, -64, E.doux]]);
-        S.jolt = pose(t, [[u + .1, 0], [u + .2, -6, E.arrive], [u + .46, 0, E.doux]]); const d = t - u - .27; if (d > 0) S.rot = .16 * Math.exp(-d * 4) * Math.sin(d * 14); }
-      if (q.hero && t > T_UNE - .16) { const a = T_UNE;      // « Une » : la mienne replonge, jusqu'au fond, et ressort plus chargee
-        S.wy = pose(t, [[a - .16, -64], [a - .04, -82, E.arrive], [a + .07, 84, E.pars], [a + .2, 84], [a + .52, -40, E.arrive], [a + .9, -54, E.doux], [T3, -70, E.derive]]);
-        S.curl = pose(t, [[a + .04, 1], [a + .09, 0, E.sec], [a + .13, 0], [a + .19, 1, E.sec]]); S.loot = t > a + .06 && t < a + .19 ? 0 : t < a + .1 ? 1 : 1.55;
-        S.lv = lerp(.62, .14, E.pars(seg(t, a + .19, a + .46)));
+      const u = T_ILL + q.dI;               // 2. « illimitees » : elle replonge et sort tout ce qu'elle peut tenir, bien au-dessus de la poche
+      if (t > u) { S.wy = pose(t, [[u, REST - 18], [u + .07, REST - 27, E.arrive], [u + .16, 80, E.pars], [u + .25, 80], [u + .48, -74, bez(.3, 0, .2, 1)], [u + .6, -58, E.doux], [u + .76, -62, E.doux]]);
+        S.curl = pose(t, [[u + .1, 1], [u + .16, 0, E.sec], [u + .2, 0], [u + .25, 1, E.sec]]); S.loot = t > u + .12 && t < u + .25 ? 0 : t < u + .2 ? 1 : 1.5;
+        S.lv = lerp(.7, .3, E.pars(seg(t, u + .25, u + .48)));
+        S.jolt = pose(t, [[u + .13, 0], [u + .18, 8, E.arrive], [u + .32, -6, E.doux], [u + .56, 0, E.doux]]);
+        S.sq = pose(t, [[u + .13, 0], [u + .18, .9, E.arrive], [u + .36, -.2, E.doux], [u + .54, 0, E.doux]]);
+        const d = t - u - .48; if (d > 0) S.rot = .16 * Math.exp(-d * 4) * Math.sin(d * 14); }
+      if (q.hero && t > T_UNE - .16) { const a = T_UNE;      // 3. « Une » : la mienne replonge une troisieme fois ; la poche est vide
+        S.wy = pose(t, [[a - .16, -62], [a - .04, -82, E.arrive], [a + .07, 84, E.pars], [a + .2, 84], [a + .52, -44, E.arrive], [a + .9, -56, E.doux], [T3, -72, E.derive]]);
+        S.curl = pose(t, [[a + .04, 1], [a + .09, 0, E.sec], [a + .13, 0], [a + .19, 1, E.sec]]); S.loot = t > a + .06 && t < a + .19 ? 0 : t < a + .1 ? 1.5 : 2;
+        S.lv = lerp(.3, 0, E.pars(seg(t, a + .19, a + .42)));
         S.jolt = pose(t, [[a + .04, 0], [a + .09, 11, E.arrive], [a + .24, -6, E.doux], [a + .44, 2, E.doux], [a + .6, 0, E.doux]]);
         S.sq = pose(t, [[a + .04, 0], [a + .09, 1.3, E.arrive], [a + .28, -.25, E.doux], [a + .46, 0, E.doux]]); S.rot = 0; }
     } else {                                // nouee : elle tire, le noeud l'arrete
@@ -99,8 +103,9 @@
   let VIEW = null, TT = 0;
   function cordePts(q) { const S = q.S, A = ORIG[q.o], P3 = [q.P[0], q.P[1] + S.jolt + Math.min(S.wy - 32, -6)];
     const dx = P3[0] - A[0], dy = P3[1] - A[1], d = Math.hypot(dx, dy), ux = dx / d, uy = dy / d;
-    const dt = TT - T_BL - q.dN, coup = dt > 0 && dt < .8 ? 70 * Math.exp(-dt * 5) * Math.sin(dt * 24) : 0;       // l'onde du chiffre remonte les cordes
-    const sw = q.sag0 + 16 * Math.sin(TT * 2.3 - d / 210 + q.k) + coup;
+    const dt = TT - T_BL - q.dN, coup = dt > 0 && dt < .8 ? 46 * Math.exp(-dt * 5) * Math.sin(dt * 24) : 0;       // l'onde du chiffre remonte les cordes
+    const out = (-uy * (A[0] + P3[0]) + ux * (A[1] + P3[1])) > 0 ? 1 : -1;      // l'arc tourne le dos au centre du champ
+    const sw = out * q.sag0 + 9 * Math.sin(TT * 2.3 - d / 210 + q.k) + coup;
     return cubic(A, [A[0] + ux * d * .45 - uy * sw, A[1] + uy * d * .45 + ux * sw], [P3[0] + S.bow * .5, P3[1] - Math.min(92, 40 + d * .1) - S.bow * .2], P3, Z > .95 ? 26 : 12); }
   function corde(q) { if (!q.S.hand) return; const A = ORIG[q.o]; if (!segInView(A[0], A[1], q.P[0], q.P[1], VIEW)) return;
     const pts = cordePts(q), k = clamp((Z - .6) / 1.2); if (Z > .95) smooth(jit(pts, q.seed, .45)); else trace(pts);
@@ -180,21 +185,21 @@
   const roulis = t => pose(t, [[T2, -.035], [T_SIG, .02, E.glisse], [T_DIVE + .2, -.035, E.glisse], [T_LIT, .028, E.glisse], [T_N - .4, -.014, E.glisse], [T_BL + .3, .012, E.glisse], [T_TRIO + .42, -.03, E.glisse], [T3, -.008, E.derive]]);
   const cam = mkCam([
     [T2, HA[0] + 34, HA[1] + 16, 3.0],
-    [T_ARR + .55, HA[0] + 46, HA[1] - 14, 3.25, E.derive],
+    [T_ARR + .55, HA[0] + 46, HA[1] - 14, 3.2, E.derive],
     [T_SIG - .02, cSig[0], cSig[1] + 8, 5.6, E.glisse],                 // pousse sur le papier tendu
-    [T_SIG + .46, cPlu[0], cPlu[1] + 7, 6.4, E.derive],                 // suit la plume
+    [T_SIG + .46, cPlu[0], cPlu[1] + 4, 5.95, E.derive],                // tient : la plume signe
     [T_DIVE + .2, HA[0] + 30, HA[1] + 36, 3.4, E.glisse],               // redescend avec la main qui plonge
-    [T_SCR - .34, HA[0] + 50, HA[1] + 46, 3.7, E.derive],
+    [T_SCR - .34, HA[0] + 46, HA[1] + 44, 3.55, E.derive],
     [T_SCR, cTop[0], cTop[1] + 9, 5.0, E.glisse],                       // sur le papier, le rouleau lache
     [T_LIT, cLit[0], cLit[1] + 9, 5.2, C_ROLL],                         // file avec le rouleau
-    [T_BACK, cMot[0] + 4, cMot[1] + 7, 6.3, E.derive],                  // pousse sur le mot qu'on entoure
+    [T_BACK, cMot[0] + 3, cMot[1] + 8, 5.7, E.derive],                  // tient sur le mot qu'on entoure
     [T_N - .42, 0, 60, .64, bez(.55, 0, .25, 1)],                       // recul : cent poches
-    [T_BL + .1, 0, 64, .665, E.derive],
+    [T_BL + .1, 0, 64, .655, E.derive],
     [T_BL + .36, 0, 86, .52, E.sec],                                    // le chiffre repousse la camera
-    [T_TRIO, 0, 90, .56, E.derive],
+    [T_TRIO, 0, 88, .532, E.derive],
     [T_TRIO + .42, HB[0], HB[1] + 28, 3.05, E.glisse],                  // plongee sur trois poches
-    [P4.fin + .1, HB[0] + 4, HB[1] + 20, 3.3, E.derive],
-    [T3, HB[0] + 10, HB[1] - 16, 3.5, E.derive],
+    [P4.fin + .1, HB[0] + 4, HB[1] + 22, 3.2, E.derive],
+    [T3, HB[0] + 10, HB[1] - 6, 3.35, E.derive],
   ], roulis);
   const wIn = t => (1 - E.arrive(seg(t, T2, T2 + .38))) * 6200, wOut = t => -E.pars(seg(t, T3 - RACC, T3)) * 2500;
   const SEC = [[T_DIVE + .08, 9], [T_LIT, 7], [T_BL, 20], [T_UNE + .08, 10]];

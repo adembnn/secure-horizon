@@ -11,7 +11,7 @@
 #   prise {g, pan}, retire, renonce, arrive {d}, etire {d}, rideau, tap, tension {d}, guette {n}, plonge {d}, silence {d}.
 # Une sorte inconnue ou un repere mal forme est ignore avec un avertissement, jamais une erreur.
 # Chaine : effets + fond -> silences (tout coupe sauf la voix) -> ecrasement lateral (les effets restent ECART dB sous la voix pendant les mots)
-#   -> + voix -> niveau (CIBLE LUFS) -> limiteur a anticipation (PLAFOND dBFS, crete mesuree sur-echantillonnee x4). Aucun ecretage.
+#   -> limiteur des effets -> + voix -> niveau (CIBLE LUFS) -> limiteur final a anticipation (PLAFOND dBFS, crete mesuree entre echantillons, x4). Aucun ecretage.
 import json, os, sys, numpy as np, soundfile as sf
 from scipy.signal import butter, sosfilt, lfilter, resample_poly, iirpeak, fftconvolve
 from scipy.ndimage import minimum_filter1d, maximum_filter1d, uniform_filter1d
@@ -83,7 +83,7 @@ def riser(d, r):                      # montee : bruit dont la bande grimpe de 1
 def whoosh(d, r, sens=1):             # passage : bande qui monte puis redescend (effet Doppler), volume en cloche, panoramique de gauche a droite (sens < 0 : droite a gauche)
     t = tt(d); n = len(t); k = t / d; env = np.sin(np.pi * k) ** 1.2 * np.exp(-.5 * ((k - .5) / .30) ** 2)
     x = balaie(n, 300 * 2 ** (3.1 * np.exp(-.5 * ((k - .46) / .2) ** 2)) * (1 - .3 * k), r, .7, s=False) * env
-    pan = (1 if sens >= 0 else -1) * np.clip((k - .5) * 3.4, -1, 1) * .95
+    pan = (1 if sens >= 0 else -1) * np.clip((k - .5) * 4.5, -1, 1) * .95
     return crete(st(x, pan) + st(nbp(n, r, 50, 180) * env ** 2 * .45, pan * .4))
 def souffle(d, r, sens=1):            # air : sens 1 = montee qui retombe vite ; sens -1 = retombee
     if sens > 0: t = tt(d + .3); k = np.clip(t / d, 0, 1); env = np.where(t < d, k ** 2.2, np.exp(-(t - d) / .07)); fc = 380 * 2 ** (2.4 * k)
@@ -221,42 +221,61 @@ for te in NETS:                        # la montee se coupe net : 45 ms de noir 
     if not any(te - .005 <= x <= te + .02 for x in AUD): q = int(.008 * SR); porte[j:j + q] = np.minimum(porte[j:j + q], np.linspace(0, 1, q)[:len(porte[j:j + q])])
 fx *= porte[:, None]
 
-# ---------- ecrasement lateral : pendant les mots, les effets restent ECART dB sous la voix (anticipation 45 ms, relachement 0,18 s) ----------
+# ---------- ecrasement lateral : la voix passe devant. Dans toute fenetre de 50 ms ou la voix parle, les effets restent ECART dB sous elle ----------
 def relache(x, tau):                  # descend tout de suite, remonte lentement ; ne depasse jamais x
     y = np.empty_like(x); a = 1 - np.exp(-1 / tau); z = x[0]
     for i, q in enumerate(x): z = q if q < z else z + (q - z) * a; y[i] = z
     return y
-if SANS_VOIX: gd = np.ones(N)
+def pms(x): p = (x ** 2).mean(1) if x.ndim == 2 else x ** 2; return np.pad(p, (0, NC * HOP - len(p))).reshape(-1, HOP).mean(1)      # puissance par pas de 1 ms
+def ecarts(pv_, pf_, seuil):          # rapport voix / effets (dB) dans chaque fenetre glissante de 50 ms ou la voix depasse le seuil, et l'instant de chaque fenetre
+    a = np.sqrt(np.maximum(uniform_filter1d(pv_, 50, mode='nearest'), 0)); b = np.sqrt(np.maximum(uniform_filter1d(pf_, 50, mode='nearest'), 0)); m = a > seuil
+    return 20 * np.log10(a[m] / np.maximum(b[m], 1e-9)), tc[m]
+db = lambda x: 20 * np.log10(max(float(x), 1e-12))
+if SANS_VOIX: gd = np.ones(N); gdc = np.ones(NC)
 else:
-    NIV = 20 * np.log10(np.median(ev[MOT])); ef = maximum_filter1d(env(fx), 41)        # NIV : niveau median de la voix pendant les mots
-    brut = np.where(MOT, np.clip(np.maximum(ev, 10 ** ((NIV - 21) / 20)) * 10 ** (-ECART / 20) / np.maximum(ef, 1e-9), 10 ** (-40 / 20), 1), 1.)
-    gdb = uniform_filter1d(minimum_filter1d(20 * np.log10(brut), 61, mode='nearest'), 31, mode='nearest'); gd = haut(10 ** (relache(gdb, 180.) / 20))
+    NIV = 20 * np.log10(np.median(ev[MOT])); PV, PF = pms(v), pms(fx)             # NIV : niveau median de la voix pendant les mots
+    Vw = np.sqrt(np.maximum(uniform_filter1d(PV, 50, mode='nearest'), 0)); fpk = np.sqrt(maximum_filter1d(uniform_filter1d(PF, 10, mode='nearest'), 11))
+    def ecrase(E):                    # plafond des effets : le niveau de la voix sur 50 ms, moins E dB, pris au plus bas des fenetres qui contiennent l'instant
+        plaf = minimum_filter1d(np.where(Vw > 10 ** ((NIV - 21) / 20), Vw, np.inf), 51, mode='nearest') * 10 ** (-E / 20)
+        brut = 20 * np.log10(np.clip(plaf / np.maximum(fpk, 1e-9), 1e-3, 1))
+        return 10 ** (relache(uniform_filter1d(minimum_filter1d(brut, 21, mode='nearest'), 11, mode='nearest'), 180.) / 20)
+    E = ECART
+    for _ in range(6):                # garantie : si une fenetre passe sous 9,5 dB, on creuse et on recommence
+        gdc = ecrase(E); e_, _t = ecarts(PV, PF * gdc ** 2, 10 ** ((NIV - 20) / 20))
+        if e_.min() >= 9.5: break
+        E += 9.8 - e_.min()
+    gd = haut(gdc)
 fxd = fx * gd[:, None]
 
-# ---------- niveau, limiteur a anticipation (crete vraie estimee x4), mesures ----------
+# ---------- niveau, limiteurs a anticipation (crete entre echantillons, x4), mesures ----------
 def lufs(x):                          # sonie integree BS.1770 (ponderation K, portes absolue -70 et relative -10)
     y = lfilter([1, -2, 1], [1, -1.99004745483398, .99007225036621], lfilter([1.53512485958697, -2.69169618940638, 1.19839281085285], [1, -1.69065929318241, .73248077421585], x, axis=0), axis=0)
     cs = np.concatenate([[0], np.cumsum((y ** 2).sum(1))]); i = np.arange(0, len(y) - 19200, 4800); z = (cs[i + 19200] - cs[i]) / 19200; l = -.691 + 10 * np.log10(np.maximum(z, 1e-12))
     z1 = z[l > -70]
     if not len(z1): return -99.
     return float(-.691 + 10 * np.log10(z[(l > -70) & (l > -.691 + 10 * np.log10(z1.mean()) - 10)].mean()))
-def crete4(x): return np.abs(resample_poly(x.astype(np.float32), 4, 1, axis=0)).max(1)       # crete entre echantillons
-def limite(x):
-    pk = crete4(x); pk = np.pad(pk, (0, NC * HOP * 4 - len(pk))).reshape(-1, HOP * 4).max(1); besoin = np.minimum(1, 10 ** (PLAFOND / 20) / np.maximum(pk, 1e-9))
-    g = haut(relache(uniform_filter1d(minimum_filter1d(besoin, 17, mode='nearest'), 11, mode='nearest'), 150.)); return g
-mix0 = fxd + v[:, None]; k = 1. if SANS_VOIX else 10 ** ((CIBLE - lufs(mix0)) / 20); gl = limite(mix0 * k)
+def crete4(x): return np.abs(resample_poly(x.astype(np.float32), 4, 1, axis=0)).max(1)       # crete entre echantillons, signal entier (controle final)
+def cretes(x):                        # crete par pas de 1 ms, mesuree entre echantillons (x4) partout ou le signal est a moins de 8 dB du plafond
+    a = np.abs(x).max(1); a = np.pad(a, (0, NC * HOP - len(a))).reshape(-1, HOP).max(1); d = np.diff(np.concatenate([[0], (maximum_filter1d(a, 9) > 10 ** ((PLAFOND - 8) / 20)).astype(np.int8), [0]]))
+    for i, j in zip(np.flatnonzero(d == 1), np.flatnonzero(d == -1)):
+        s0 = max(0, i * HOP - 480); up = np.abs(resample_poly(x[s0:j * HOP + 480], 4, 1, axis=0)).max(1)[(i * HOP - s0) * 4:]; m = min(j - i, len(up) // (HOP * 4))
+        a[i:i + m] = np.maximum(a[i:i + m], up[:m * HOP * 4].reshape(m, HOP * 4).max(1))
+    return a
+def limite(x): return relache(uniform_filter1d(minimum_filter1d(np.minimum(1, 10 ** (PLAFOND / 20) / np.maximum(cretes(x), 1e-9)), 17, mode='nearest'), 11, mode='nearest'), 150.)      # anticipation 8 ms, relachement 0,15 s
+def rendu(k):                         # les effets passent d'abord par leur propre limiteur : un coup tres fort ne fait jamais baisser la voix
+    glf = limite(fx * k); m = (fxd * haut(glf)[:, None] + v[:, None]) * k; return m, glf, limite(m)
+k = 1.; m0, glf, gl = rendu(k)
 if not SANS_VOIX:
-    for _ in range(2): k *= 10 ** ((CIBLE - lufs(mix0 * (k * gl)[:, None])) / 20); gl = limite(mix0 * k)
-gt = k * gl; gt[-1440:] *= np.linspace(1, 0, 1440); mix = mix0 * gt[:, None]; pv = (v * gt)[:, None] * np.ones(2); pf = fxd * gt[:, None]
+    for _ in range(3): k *= 10 ** ((CIBLE - lufs(m0 * haut(gl)[:, None])) / 20); m0, glf, gl = rendu(k)
+gs = haut(gl); gs[-1440:] *= np.linspace(1, 0, 1440); mix = m0 * gs[:, None]; pv = (v * k * gs)[:, None] * np.ones(2); pf = fxd * (haut(glf) * k * gs)[:, None]
 sf.write(MIX, mix, SR, subtype='PCM_24')
 if PISTES: sf.write(MIX[:-4] + '.voix.wav', pv, SR, subtype='PCM_24'); sf.write(MIX[:-4] + '.effets.wav', pf, SR, subtype='PCM_24')
-db = lambda x: 20 * np.log10(max(float(x), 1e-12))
-print(f'gain commun {db(k):+.1f} dB ; sonie integree {lufs(mix):.1f} LUFS ; crete vraie (x4) {db(crete4(mix).max()):.2f} dBTP ; crete echantillon {db(np.abs(mix).max()):.2f} dBFS ; limiteur : reduction max {-db(gl.min()):.1f} dB, actif {100 * (gl < .999).mean():.1f} % du temps')
+print(f'gain commun {db(k):+.1f} dB ; sonie integree {lufs(mix):.1f} LUFS ; crete vraie (x4, signal entier) {db(crete4(mix).max()):.2f} dBTP ; crete echantillon {db(np.abs(mix).max()):.2f} dBFS')
+print(f'limiteur des effets : reduction max {-db(glf.min()):.1f} dB a {tc[glf.argmin()]:.2f} s, actif {100 * (glf < .999).mean():.1f} % du temps ; limiteur final : reduction max {-db(gl.min()):.1f} dB a {tc[gl.argmin()]:.2f} s, actif {100 * (gl < .999).mean():.1f} % du temps')
 if not SANS_VOIX:
-    W = 2400; nb = N // W; rv = np.sqrt((v[:nb * W] ** 2).reshape(nb, W).mean(1)); rf = np.sqrt((fxd[:nb * W] ** 2).mean(1).reshape(nb, W).mean(1)); m = rv > 10 ** ((NIV - 20) / 20)
-    e = 20 * np.log10(rv[m] / np.maximum(rf[m], 1e-9))      # le gain commun (niveau, limiteur) ne change pas ce rapport
-    print(f'voix / effets pendant les mots (fenetres de 50 ms ou la voix est a moins de 20 dB de son niveau median, {m.sum()} fenetres) : minimum {e.min():.1f} dB, 5e centile {np.percentile(e, 5):.1f} dB, mediane {np.median(e):.1f} dB ; fenetres sous 9 dB : {(e < 9).sum()}')
-    print(f'ecrasement lateral : reduction max {-db(gd.min()):.1f} dB ; effets seuls hors des mots : crete {db(np.abs(pf).max()):.1f} dBFS')
+    e, te = ecarts(pms(pv[:, 0]), pms(pf), 10 ** ((NIV - 20) / 20) * k); i = int(e.argmin())
+    print(f'voix / effets pendant les mots (toute fenetre glissante de 50 ms ou la voix est a moins de 20 dB de son niveau median, soit {len(e) / 1000:.1f} s) : minimum {e.min():.1f} dB a {te[i]:.2f} s, 5e centile {np.percentile(e, 5):.1f} dB, mediane {np.median(e):.1f} dB ; fenetres sous 9 dB : {(e < 9).sum()}')
+    print(f'ecrasement lateral : ecart impose {E:.1f} dB, reduction max {-db(gdc.min()):.1f} dB a {tc[gdc.argmin()]:.2f} s, effets reduits de plus de 3 dB pendant {(gdc < .708).sum() / 1000:.1f} s')
 q = np.abs(mix).max(1) < 10 ** (-38 / 20); dq = np.diff(np.concatenate([[0], q.astype(np.int8), [0]])); S = [(a / SR, b / SR) for a, b in zip(np.flatnonzero(dq == 1), np.flatnonzero(dq == -1)) if b - a >= .8 * SR and b / SR > 40]
 voulu = lambda a, b: any(a < y and b > x for x, y in SILS)
 print(f'silences complets (< -38 dBFS) de plus de 0,8 s apres 40 s : {len(S)}' + ''.join(f' ; {a:.2f}-{b:.2f} s ({"silence voulu" if voulu(a, b) else "NON VOULU"})' for a, b in S))

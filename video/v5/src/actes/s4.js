@@ -14,8 +14,8 @@
   // ---------- le monde : en pixels de l'image au zoom 1 (la camera met son point de visee 30 px au-dessus du milieu de l'image) ----------
   const BX = 960, BY = 215, BS = 1.45, AS = 1.35, ROOF = -112;         // guichet (centre, echelle) ; bras raye (echelle, dans le repere du guichet)
   const K = 2.6, PY0 = 400, NIV = .5;                                   // poches (echelle, haut de l'ourlet) ; 50 DUSDC : la poche est a moitie pleine
-  const PG = { x: 380, cote: -1, seed: 71 }, PD = { x: 1540, cote: 1, seed: 72 };
-  const CGX = 820, CDX = 1100;                                          // colonnes de texte des deux gros plans
+  const PG = { x: 420, cote: -1, seed: 71 }, PD = { x: 1500, cote: 1, seed: 72 };
+  const CGX = 850, CDX = 1070;                                          // colonnes de texte des deux gros plans
   // ---------- les temps ----------
   const tHit = K1 + .55;                         // le coup tombe avant « pirate »
   const tTab = tHit + .95;                       // premier tableau : deux poches, 50 DUSDC chacune
@@ -31,26 +31,26 @@
   const roll = t => pose(t, [[T4, .03], [tHit - .1, -.014, E.glisse], [tTab, .012, E.glisse], [K2 - .2, -.024, E.glisse], [tZero + .28, -.008, E.derive], [tLump + .1, .03, E.glisse],
     [K3 - .2, .022, E.glisse], [LUN[1] - .2, .004, E.derive], [LUN[2], -.03, E.glisse], [tRien + .22, -.02, E.derive], [tOut + .4, .01, E.glisse], [T5, -.006, E.derive]]);
   const CAM = mkCam([
-    [T4, 960, 478, .98],
-    [T4 + .34, 960, 470, 1.04, E.derive],
-    [tHit - .14, 963, 165, 1.86, E.glisse],            // monte au toit avec le poing
-    [tHit + .1, 962, 172, 1.95, E.derive],
-    [tTab, 960, 470, 1, bez(.55, 0, .25, 1)],          // recule : la tension court le long des deux cordes
-    [K2 - .9, 960, 471, 1.045, E.derive],
-    [K2 - .2, 640, 530, 1.74, E.glisse],               // la poche de gauche, sans Hold up
-    [tGrab - .4, 650, 530, 1.86, E.derive],
-    [tZero + .28, 664, 530, 2.0, E.derive],
+    [T4, 960, 486, 1.08],
+    [T4 + .34, 960, 484, 1.13, E.derive],
+    [tHit - .14, 963, 125, 1.62, E.glisse],            // monte au toit avec le poing
+    [tHit + .1, 962, 136, 1.74, E.derive],
+    [tTab, 960, 478, 1.1, bez(.55, 0, .25, 1)],       // recule : la tension court le long des deux cordes
+    [K2 - .9, 960, 488, 1.19, E.derive],
+    [K2 - .2, 680, 530, 1.74, E.glisse],               // la poche de gauche, sans Hold up
+    [tGrab - .4, 690, 530, 1.86, E.derive],
+    [tZero + .28, 704, 530, 2.0, E.derive],
     [tLump + .1, 1040, 160, 1.8, E.glisse],            // suit la main et la prise le long de la corde, jusqu'au guichet
-    [K3 - .2, 1280, 530, 1.74, E.glisse],              // redescend la corde de droite, nouee
-    [t50 - .06, 1272, 530, 1.8, E.derive],
-    [t50 + .16, 1268, 530, 1.9, E.sec],                // le 50 claque : la camera encaisse
-    [tD0 - .05, 1264, 530, 1.94, E.derive],
-    [tD0 + .16, 1262, 530, 2.03, E.sec],
-    [LUN[1] - .2, 1260, 530, 2.07, E.derive],
-    [LUN[2], 1440, 541, 2.6, E.glisse],                // tres gros plan : la main bute a un cheveu des pieces
-    [tRien + .22, 1436, 541, 2.74, E.derive],
-    [tOut + .4, 960, 470, 1, bez(.55, 0, .25, 1)],     // recule : le tableau des deux fins
-    [T5, 960, 464, 1.075, E.derive],
+    [K3 - .2, 1240, 530, 1.74, E.glisse],              // redescend la corde de droite, nouee
+    [t50 - .06, 1232, 530, 1.8, E.derive],
+    [t50 + .16, 1228, 530, 1.9, E.sec],                // le 50 claque : la camera encaisse
+    [tD0 - .05, 1224, 530, 1.94, E.derive],
+    [tD0 + .16, 1222, 530, 2.03, E.sec],
+    [LUN[1] - .2, 1220, 530, 2.07, E.derive],
+    [LUN[2], 1388, 541, 2.6, E.glisse],                // tres gros plan : la main bute a un cheveu des pieces
+    [tRien + .22, 1384, 541, 2.74, E.derive],
+    [tOut + .4, 960, 480, 1.12, bez(.55, 0, .25, 1)],  // recule : le tableau des deux fins
+    [T5, 960, 487, 1.18, E.derive],
   ], roll);
   const secousse = t => { let x = 0, y = 0; for (const [t0, a] of [[tHit, 26], [tZero, 22], [t50, 9], [tD0, 11], [LUN[0] + .04, 7], [LUN[1] + .04, 10], [LUN[2] + .04, 15], [tRien, 18], [tBal, 7]]) { const s = shake(t, t0, a); x += s[0]; y += s[1]; } return [x, y]; };
 
@@ -62,7 +62,7 @@
     S.sag = lerp(52, 30, tt) * (1 - .82 * tend) + 6 * (1 - tend) * Math.sin(t * 2.3) + 26 * (t > tTend ? Math.exp(-(t - tTend) * 7) * Math.sin((t - tTend) * 30) : 0);
     S.vib = 1.5 * tend;
     const tap = T4 + .62; if (t > tap - .18 && t < tap + .3) { S.strain = pose(t, [[tap - .18, 0], [tap - .04, -5, E.arrive], [tap + .03, 1.5, E.pars], [tap + .2, 0, E.arrive]]); S.wy += pose(t, [[tap - .18, 0], [tap - .04, -2.5, E.arrive], [tap + .03, .8, E.pars], [tap + .2, 0, E.arrive]]); }
-    const s = tGrab, s0 = s - .46, deep = 74, top = -40;
+    const s = tGrab, s0 = s - .46, deep = 74, top = -28;
     if (t > s0) {
       S.wy = pose(t, [[s0, 2], [s0 + .13, -7, E.arrive], [s + .03, deep, bez(.45, 0, .55, 1)], [s + .14, deep + 1], [s + .34, top, E.pars], [s + .46, top + 7, E.arrive], [tGo, top + 4, E.doux]]);
       S.curl = pose(t, [[s0, .5], [s0 + .13, 0, E.arrive], [s - .02, 0], [s + .06, 1, E.sec]]);
@@ -71,6 +71,7 @@
       S.jolt = pose(t, [[s + .02, 0], [s + .07, 4, E.arrive], [s + .2, -7, E.doux], [s + .4, 2, E.doux], [s + .56, 0, E.doux]]);
       S.loot = t > s + .14; S.vib = t < s + .34 ? 2.4 : .6;
       if (t > s + .34) S.rot = .16 * Math.exp(-(t - s - .34) * 4) * Math.sin((t - s - .34) * 13);
+      S.jolt += pose(t, [[tZero, 0], [tZero + .05, 6, E.arrive], [tZero + .2, -3, E.doux], [tZero + .4, 0, E.doux]]);      // la poche vide encaisse le 0
     }
     if (t > tGo) S.travel = 1 - E.pars(seg(t, tGo, tGo + GO));
     return S;
@@ -131,7 +132,7 @@
   const ecrase = (t, t0) => { const d = t - t0; return d < 0 || d > .5 ? 0 : pose(d, [[0, 0], [.05, 1, E.arrive], [.26, -.12, E.doux], [.42, 0, E.doux]]); };
   function brasTip(t) {
     if (t < T4 + .1 || t > tOut + .45) return null;
-    const y = pose(t, [[T4 + .1, -1100], [K1 - .12, -318, E.arrive], [tHit - .22, -306, E.derive], [tHit - .1, -350, E.arrive], [tHit, ROOF + 30, bez(.7, 0, 1, .5)], [tOut - .14, ROOF + 30], [tOut, ROOF + 44, E.arrive], [tOut + .38, -2300, bez(.7, 0, .9, .4)]]);
+    const y = pose(t, [[T4 + .1, -1100], [K1 - .12, -272, E.arrive], [tHit - .22, -262, E.derive], [tHit - .1, -304, E.arrive], [tHit, ROOF + 30, bez(.7, 0, 1, .5)], [tOut - .14, ROOF + 30], [tOut, ROOF + 44, E.arrive], [tOut + .38, -2300, bez(.7, 0, .9, .4)]]);
     const curl = t > tOut ? pose(t, [[tOut, 1], [tOut + .16, .05, E.arrive]]) : pose(t, [[K1 - .2, 0], [tHit - .1, .3], [tHit - .02, 1, E.sec]]);
     return { x: 6, y, curl };
   }
@@ -153,7 +154,7 @@
     const tip = brasTip(t);
     if (tip) { X.save(); X.beginPath(); X.rect(-3000, -6000, 6000, 6000 + ROOF + (t >= tHit ? 15 * sq0 : 300)); X.clip();
       const pts = bras(tip, AS, t);
-      const u = seg(t, tLump, tLump + 1.5); if (u > 0 && u < 1) { const q = along(pts, 1 - .012 - Math.pow(u, 1.7)); X.save(); X.translate(q.x, q.y); X.rotate(q.a); X.beginPath(); X.ellipse(0, 0, 37 * AS, 30 * AS, 0, 0, 7); X.fillStyle = INK; X.fill(); X.strokeStyle = BLK; X.lineWidth = 3; X.stroke(); X.restore(); }     // la prise remonte le bras
+      const u = seg(t, tLump, tLump + 1.5); if (u > 0 && u < 1) { const q = along(pts, 1 - .03 - Math.pow(u, 1.7)); X.save(); X.translate(q.x, q.y); X.rotate(q.a); X.beginPath(); X.ellipse(0, 0, 34 * AS, 25 * AS, 0, 0, 7); X.fillStyle = INK; X.fill(); X.strokeStyle = BLK; X.lineWidth = 3; X.stroke(); X.restore(); }     // la prise remonte le bras
       if (t < tHit + .1 || t > tOut) hand(tip.x, tip.y - 6, 2.3 * AS, { curl: tip.curl, strain: 2 * (1 - tip.curl) }, 4242);      // il arrive le poing ferme ; il repart la main vide
       X.restore(); }
     X.translate(0, 108); X.scale(1 + .1 * sq, 1 - .13 * sq); X.translate(0, -108);
@@ -175,32 +176,36 @@
   // ---------- la typographie : dans le monde, elle bouge avec la camera ; elle arrive sur le mot, avec de la masse ----------
   const larg = (s, px) => { X.font = `700 ${px}px Montserrat`; return X.measureText(s).width; };
   const enLigne = (num, cx, sn, su) => { const wn = larg(num, sn), wu = larg('DUSDC', su), w = wn + sn * .2 + wu; return [cx - w / 2 + wn / 2, cx + w / 2 - wu / 2]; };     // « 50 DUSDC » centre : centres du nombre et de l'unite
-  const NB = 96, UN = 56, YB = 808;                 // soldes du tableau : corps du nombre, de l'unite, ligne de base
+  const NB = 96, UN = 56, YB = 800;                 // soldes du tableau : corps du nombre, de l'unite, ligne de base
   function textes(t) {
-    { const s = 1 - E.pars(seg(t, K2 - 1.02, K2 - .86)); if (s > .02) T("le site d'échange (fictif)", 800, 44, 34 * s, { al: 'right', a: .85 }); }
-    if (t >= tHit + .02 && t < K2 - .15) { X.save(); X.translate(BX, 318); X.rotate(-.07); frappe('PIRATÉ', 0, 0, 122, t, tHit + .02, { stroke: 12, de: 3.2 }); X.restore(); }
-    // le solde de gauche : pose sous la poche, il grossit avec le gros plan, tombe a 0, puis retourne sous la poche
-    if (t >= tTab - .1) { const [n50, u50] = enLigne('50', PG.x, NB, UN), [n0, u0] = enLigne('0', PG.x, NB, UN);
-      const k = t < tExG ? E.glisse(seg(t, K2 - .9, K2 - .25)) : 1 - E.glisse(seg(t, tExG, tExG + .45)), xa = t < tExG ? n50 : n0, ua = t < tExG ? u50 : u0;
-      const xn = lerp(xa, CGX, k), yn = lerp(YB, 650, k), pn = lerp(NB, 165, k), xu = lerp(ua, CGX, k), yu = lerp(YB, 704, k), pu = lerp(UN, 46, k);
-      if (t >= tZero) frappe('0', xn, yn, pn, t, tZero, { de: 2.3 });
-      else if (t > tGrab + .1) { const kr = E.pars(seg(t, tGrab + .1, tZero)), v = Math.max(1, Math.round(50 * (1 - kr))); T(String(v), xn + sh(v, 7, 2) * 5, yn + sh(v, 7, 1) * 10 + 26 * kr, pn * (1 + .2 * kr)); }      // le compte tombe
-      else frappe('50', xn, yn, pn, t, tTab - .1, { de: 2.3 });
-      frappe('DUSDC', xu, yu, pu, t, tTab - .04, { de: 2 }); }
+    const out = 1 - E.pars(seg(t, K2 - 1.02, K2 - .86));       // l'etiquette et le tampon sont chasses quand la camera part vers la poche de gauche
+    if (out > .02) T("le site d'échange (fictif)", 800, 200, 34 * out, { al: 'right', a: .85 });
+    // « PIRATÉ » : frappe en travers du guichet, puis tombe entre les deux poches pendant le recul
+    if (t >= tHit + .02 && out > .02) { const kd = E.pars(seg(t, tHit + .42, tHit + .74)), d = t - tHit - .74, reb = d > 0 && d < .4 ? pose(d, [[0, 0], [.04, 1, E.sec], [.16, -.3, E.doux], [.32, 0, E.doux]]) : 0;
+      X.save(); X.translate(BX, lerp(318, 610, kd)); X.rotate(lerp(-.07, -.035, kd)); X.scale(1 + .08 * reb, 1 - .14 * reb); frappe('PIRATÉ', 0, 0, lerp(122, 146, kd) * out, t, tHit + .02, { stroke: 12, de: 3.2 }); X.restore(); }
+    // le solde de gauche : pose sous la poche, il grossit avec le gros plan, tombe a 0, puis rentre dans la poche vide
+    const [n50, u50] = enLigne('50', PG.x, NB, UN), [n0, u0] = enLigne('0', PG.x, NB, UN);
+    if (t >= tTab - .1 && t < tExG + .32) { const k = E.glisse(seg(t, K2 - .9, K2 - .25)), ko = E.pars(seg(t, tExG, tExG + .3));
+      const xn = lerp(lerp(n50, CGX, k), PG.x, ko), yn = lerp(lerp(YB, 650, k), PY0 + 200, ko), pn = lerp(NB, 165, k) * (1 - ko), xu = lerp(lerp(u50, CGX, k), PG.x, ko), yu = lerp(lerp(YB, 704, k), PY0 + 222, ko), pu = lerp(UN, 46, k) * (1 - ko);
+      if (pn > 3) {
+        if (t >= tZero) frappe('0', xn, yn, pn, t, tZero, { de: 2.3 });
+        else if (t > tGrab + .1) { const kr = E.pars(seg(t, tGrab + .1, tZero)), v = Math.max(1, Math.round(50 * (1 - kr))); T(String(v), xn + sh(v, 7, 2) * 5, yn + sh(v, 7, 1) * 10 + 26 * kr, pn * (1 + .2 * kr)); }      // le compte tombe
+        else frappe('50', xn, yn, pn, t, tTab - .1, { de: 2.3 });
+        frappe('DUSDC', xu, yu, pu, t, tTab - .04, { de: 2 }); } }
     if (t >= tTab + .04 && t < K2 - .3) { const [dn, du] = enLigne('50', PD.x, NB, UN); frappe('50', dn, YB, NB, t, tTab + .04, { de: 2.3 }); frappe('DUSDC', du, YB, UN, t, tTab + .1, { de: 2 }); }
     // gros plan de gauche
-    if (t >= tSans && t < tExG + .2) { const s = 1 - E.pars(seg(t, tExG, tExG + .16)); if (s > .02) { frappe('SANS HOLD UP', CGX, 432, 56 * s, t, tSans, { de: 2.8 }); if (t >= tSans + .16) frappe('COMPTE', CGX, 500, 27 * s, t, tSans + .16, { a: .8 }); } }
+    if (t >= tSans && t < tExG + .2) { const s = 1 - E.pars(seg(t, tExG, tExG + .16)); if (s > .02) { frappe('SANS HOLD UP', CGX, 432, 56 * s, t, tSans, { de: 1.6 }); if (t >= tSans + .16) frappe('COMPTE', CGX, 500, 27 * s, t, tSans + .16, { a: .8 }); } }
     // gros plan de droite : le droit de 50 part a l'echange, il reste 0
     if (t >= tAvec && t < tExD + .3) { const dx = -1100 * E.pars(seg(t, tExD, tExD + .26));
-      frappe('AVEC HOLD UP', CDX + dx, 432, 56, t, tAvec, { de: 2.8 });
+      frappe('AVEC HOLD UP', CDX + dx, 432, 56, t, tAvec, { de: 1.6 });
       if (t >= tDroit) frappe('DROIT DE PRENDRE', CDX + dx, 500, 27, t, tDroit, { a: .8 });
       if (t >= t50) { frappe('DUSDC', CDX + dx, 704, 46, t, t50 + .06, { de: 2 });
         if (t < tUse) frappe('50', CDX, 650, 165, t, t50, { de: 2.5 });
         else if (t < tUse + .26) { const k = E.pars(seg(t, tUse, tUse + .26)); T('50', lerp(CDX, BX, k), lerp(650, BY + 20, k), lerp(165, 22, k)); }
         if (t >= tD0) frappe('0', CDX + dx, 650, 165, t, tD0, { de: 2.5 }); } }
     // la fin : rien pour le pirate ; le tableau des deux fins
-    if (t >= tRien) frappe('RIEN', 1240, 590, 112, t, tRien, { stroke: 10, de: 2.9 });
-    if (t > tRien + .1) { T('SANS HOLD UP', PG.x, 100, 56); T('AVEC HOLD UP', PD.x, 100, 56); }
+    if (t >= tRien) frappe('RIEN', 1205, 590, 112, t, tRien, { stroke: 10, de: 2.9 });
+    if (t > tRien + .1) { T('SANS HOLD UP', PG.x, 100, 56); T('AVEC HOLD UP', PD.x, 100, 56); T('0', n0, YB, NB); T('DUSDC', u0, YB, UN); }
     if (t >= tBal) { const [dn, du] = enLigne('50', PD.x, NB, UN); frappe('50', dn, YB, NB, t, tBal, { de: 2.5 }); frappe('DUSDC', du, YB, UN, t, tBal + .06, { de: 2 }); }
   }
 
