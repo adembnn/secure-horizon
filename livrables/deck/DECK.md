@@ -1,4 +1,4 @@
-# Deck Hold up : 7 slides (système de design Hold up)
+# Deck Hold up : 8 slides (système de design Hold up)
 
 Le fichier `holdup.pptx` est généré par `livrables/deck/build_deck.js` (`NODE_PATH=<dossier node_modules avec pptxgenjs> node livrables/deck/build_deck.js`). Régénéré le 11 oct. 2026 à 10h53, sans paquet ajouté au dépôt. Les notes orateur sont dans `build_deck.js`.
 
@@ -32,3 +32,5 @@ Rendu vérifié par export PowerPoint en images, les huit slides relues.
 Le deck compte 7 slides depuis 11h35 : LI.FI est passé en slide 1 à la demande d'Adem, l'ancienne slide « C'est déjà arrivé » faisait doublon et a été retirée. Les numéros 6, 7 et 8 du tableau ci-dessus sont maintenant les slides 5, 6 et 7.
 
 `holdup.pdf` est fait des images exportées par PowerPoint : le texte y est dessiné dans la police du système de design, quel que soit le lecteur.
+
+Slide ajoutée à 11h46 à la demande d'Adem, avant la phrase de fin : le modèle économique de Titouan (commit bf06f8b). « Gratuit pour les personnes. La plateforme paie. », « Vérifié par Hold up », critères publics, pas de classement payé ; hypothèse à valider, aucun revenu aujourd'hui. Sources : `README.md`, `livrables/PITCH_5MIN.md`, `research/titouan/BM2/BM_LABEL.md`. Le deck compte 8 slides.
