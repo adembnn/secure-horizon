@@ -58,17 +58,36 @@ const withPaul = { contacts: [{ address: PAUL, label: 'Paul' }], history: [], pr
   const u = S.evaluate(approve(MAXU), L0);
   const l = S.evaluate(approve((100_000_000).toString(16).padStart(64, '0')), L0);
   check('4a droit illimite : action sans montant vide', u.fiche === 'F01' && /ce qu'il faut pour cet échange/.test(u.texts.action) && !/seulement\s+jetons|seulement\s*,/.test(u.texts.action), u.texts.action);
-  check('4b droit limite : montant précis cité', l.fiche === 'F01' && /100/.test(l.texts.action), l.texts.action);
+  check('4b droit limite : fiche F34, montant cité, jamais "sans limite"', l.fiche === 'F34' && /100/.test(l.texts.reel) && !/sans limite/.test(all(l)), l.fiche + ' ' + l.texts.reel);
 }
 // ---- (5) permit sans echeance
 {
   const DOMAIN = [{ name: 'name', type: 'string' }, { name: 'version', type: 'string' }, { name: 'chainId', type: 'uint256' }, { name: 'verifyingContract', type: 'address' }];
-  const permit = (deadline) => req('eth_signTypedData_v4', [ME, JSON.stringify({ types: { EIP712Domain: DOMAIN, Permit: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }, { name: 'value', type: 'uint256' }, { name: 'nonce', type: 'uint256' }, { name: 'deadline', type: 'uint256' }] },
-    primaryType: 'Permit', domain: { name: 'USD Coin', version: '2', chainId: 1, verifyingContract: USDC }, message: { owner: ME, spender: SP, value: '1000', nonce: '0', deadline } })]);
-  const inf = S.evaluate(permit('115792089237316195423570985008687907853269984665640564039457584007913129639935'), L0);
-  const fin = S.evaluate(permit(String(Math.floor(Date.now() / 1000) + 30 * 86400)), L0);
-  check('5a deadline illimitee : "un nombre illimité de jours", jamais "e+"', inf.fiche === 'F02' && /illimité de jours/.test(inf.texts.reel) && !/e\+/.test(all(inf)), inf.texts.reel);
-  check('5b deadline dans 30 jours : "30 jours"', /30 jours/.test(fin.texts.reel), fin.texts.reel);
+  const permit = (deadline, value = '1000') => req('eth_signTypedData_v4', [ME, JSON.stringify({ types: { EIP712Domain: DOMAIN, Permit: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }, { name: 'value', type: 'uint256' }, { name: 'nonce', type: 'uint256' }, { name: 'deadline', type: 'uint256' }] },
+    primaryType: 'Permit', domain: { name: 'USD Coin', version: '2', chainId: 1, verifyingContract: USDC }, message: { owner: ME, spender: SP, value, nonce: '0', deadline } })]);
+  const MAXV = '115792089237316195423570985008687907853269984665640564039457584007913129639935';
+  const inf = S.evaluate(permit(MAXV, MAXV), L0);
+  const fin = S.evaluate(permit(String(Math.floor(Date.now() / 1000) + 30 * 86400), MAXV), L0);
+  const lim = S.evaluate(permit(MAXV), L0);
+  check('5a deadline illimitee : "sans date de fin", jamais "e+"', inf.fiche === 'F02' && /sans date de fin/.test(inf.texts.reel) && !/e\+/.test(all(inf)), inf.texts.reel);
+  check('5b deadline dans 30 jours : "pendant 30 jours"', /pendant 30 jours/.test(fin.texts.reel), fin.texts.reel);
+  check('5c signature à montant fini : F35, jamais "sans limite"', lim.fiche === 'F35' && !/sans limite/.test(all(lim)), lim.fiche + ' ' + lim.texts.reel);
+}
+// ---- (5 bis) niveau et fiches ajoutées (rapport RAPPORT_TEXTES.md)
+{
+  const unk = S.evaluate(send(OTHER, '0x16345785d8a0000'), L0);
+  check('5d F31 : level attention ET niveau warn (jamais info), niveau_moteur info', unk.fiche === 'F31' && unk.level === 'attention' && unk.niveau === 'warn' && unk.niveau_moteur === 'info', unk.level + '/' + unk.niveau);
+  const kn = S.evaluate(send(PAUL, '0x16345785d8a0000'), withPaul);
+  check('5e F26 (contact connu) reste niveau info', kn.fiche === 'F26' && kn.niveau === 'info' && kn.niveau_moteur === undefined);
+  const lk = S.evaluate(approve((50_000_000).toString(16).padStart(64, '0')), { ...L0, knownSpenders: [SP] });
+  check('5f droit limité à un programme connu : F34 décrit le droit (pas F26 "aucun signal")', lk.fiche === 'F34' && /50 USDC/.test(lk.texts.reel) && !/aucun signal/.test(all(lk)), lk.fiche + ' ' + lk.texts.reel);
+  const ul = S.evaluate(approve(MAXU), { ...L0, knownSpenders: [SP] });
+  check('5g droit sans limite à un programme connu (sans phrase) : F37, pas "aucun signal"', ul.fiche === 'F37' && !/aucun signal/.test(all(ul)), ul.fiche + ' ' + ul.niveau);
+  const fakeTok = '0x' + '5'.repeat(40);
+  const ut = S.evaluate(req('eth_sendTransaction', [{ from: ME, to: fakeTok, data: '0xa9059cbb' + w(PAUL) + w('64'), value: '0x0' }]), withPaul);
+  check('5h jeton non reconnu : F36 "je n’ai pas pu le vérifier"', ut.fiche === 'F36' && /pas pu/.test(all(ut)), ut.fiche + ' ' + ut.texts.reel);
+  check('5i fiches ajoutées dans la table', S.REASON_FICHE.lookalike_weak === 'F39' && S.REASON_FICHE.signed_calldata === 'F40' && S.REASON_FICHE.signed_text_grants_assets === 'F41');
+  check('5j chaque fiche F34 à F42 existe, jamais de "bloqu" ni de vert', ['F34', 'F35', 'F36', 'F37', 'F38', 'F39', 'F40', 'F41', 'F42'].every((i) => { const x = TEXTS.fiches.find((q) => q.id === i); return x && !/bloqu|vert|OK/i.test([x.menace, x.croit, x.reel, x.danger, x.action].join(' ')); }));
 }
 // ---- (6) thirdParty fusionne dans les lots
 {

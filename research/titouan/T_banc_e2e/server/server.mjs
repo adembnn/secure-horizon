@@ -208,8 +208,8 @@ export const REASON_FICHE = {
   amount_exceeded: '~montant_superieur', first_seen_recipient: 'F24', unlimited_approval_swap: 'F01', no_incoming: '~rien_en_retour', permit_new_contract: 'F01',
   unexpected_outgoing: '~inattendu_envoi', approval_exceeds_intent: 'F01', token_differs_from_intent: '~jeton_different',
   // codes ajoutes par la boucle V2 (rules_extra / fixes)
-  lookalike_reported: 'F13', lookalike_weak: 'F13', signed_transfer_unlimited: 'F01', signed_right_unlimited_unknown: 'F01',
-  signed_calldata: 'F05', signed_text_grants_assets: 'F05', offchain_signaling: null,
+  lookalike_reported: 'F13', lookalike_weak: 'F39', signed_transfer_unlimited: 'F01', signed_right_unlimited_unknown: 'F01',
+  signed_calldata: 'F40', signed_text_grants_assets: 'F41', offchain_signaling: null, effect_decoded_limited: null, // offchain_signaling (info) : fiche F42, choisie dans infoFiche()
   // droits de depense
   approval_for_all: 'F03', nft_all: 'F03', nft_one: null, unlimited_allowance: 'F01', approval_to_eoa: 'F01', external_spender: 'F01', far_expiry: 'F01', no_expiry: 'F01',
   dai_permit_no_amount: 'F01', recurring_spend_permission: 'F30', allowance_decrease: null, revocation: null, permit2_lockdown: null,
@@ -245,13 +245,39 @@ export const REASON_FICHE = {
   eip712_hash_error: 'F25', unknown_typed_data: 'F25', unknown_typed_data_addresses: 'F25', permit2_witness_opaque: 'F25',
 };
 // ordre = priorite (le plus precis / le plus grave d'abord). F07 = groupe "controle" (F07/F08/F10 selon le type), F01 = groupe "droits" (F01/F02 selon l'objet)
-const PRIORITY = ['F21', 'F11', 'F07', 'F08', 'F09', 'F14', 'F13', 'F20', 'F03', 'F04', 'F15', 'F16', 'F17', 'F18', 'F06', 'F12', 'F05', 'F30', 'F01', 'F19', 'F24', 'F29', 'F32', 'F33', 'F25'];
+const PRIORITY = ['F21', 'F11', 'F07', 'F08', 'F09', 'F14', 'F13', 'F39', 'F20', 'F03', 'F04', 'F15', 'F16', 'F17', 'F18', 'F06', 'F12', 'F40', 'F41', 'F05', 'F30', 'F01', 'F19', 'F24', 'F29', 'F32', 'F33', 'F25'];
 function ficheOfCode(code, eff, funds) {
   if (code === 'site_origin_mismatch' && eff.siwe) return 'F06';
   if (code === 'order_proceeds_negligible' && eff.seaport) return 'F04';
   if ((code === 'domain_chain_mismatch' || code === 'siwe_chain_mismatch') && !funds) return '~reseau_signature';
   return REASON_FICHE[code];
 }
+// ---- aides de lecture de l'effet (sans reseau, sans fichier)
+const KNOWN_SYMBOLS = { '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48': 'USDC', '0xdac17f958d2ee523a2206206994597c13d831ec7': 'USDT', '0x6b175474e89094c44da98b954eedeac495271d0f': 'DAI', '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2': 'WETH' };
+const approvalsOf = (eff) => (eff.approvals || []).filter((a) => a && a.std !== 'nft_all');
+const isFiniteAmount = (a) => a.amount !== 'unlimited' && a.amount !== undefined && a.amount !== null && a.amount !== '';
+// vrai si TOUS les droits de depense ont un montant fini (jamais pour un droit sur tous les NFT)
+export const limitedRight = (eff) => { const l = eff.approvals || []; return l.length > 0 && l.every((a) => a && a.std !== 'nft_all' && isFiniteAmount(a)); };
+const symbolOfApproval = (a) => (a && (a.symbol || KNOWN_SYMBOLS[lc(a.token)])) || undefined;
+// jeton qu'on ne sait pas nommer (ni dans l'effet, ni dans la table) : on le dit, on ne devine pas
+export function unknownToken(eff) {
+  const o = (eff.outgoing || [])[0];
+  if (o) return o.std === 'erc20' && !o.symbol;
+  const a = approvalsOf(eff)[0];
+  return !!a && a.std === 'erc20' && !symbolOfApproval(a);
+}
+// cas « rien a signaler » (niveau info) : la fiche qui DIT ce que fait la demande. Jamais « aucun signal » devant un droit ou un envoi.
+export function infoFiche(eff, funds, contact) {
+  const apps = approvalsOf(eff), sig = eff.kind === 'signature';
+  if (unknownToken(eff)) return 'F36';
+  if (apps.length) return limitedRight(eff) ? (sig ? 'F35' : 'F34') : 'F37';
+  if (funds && (eff.incoming || []).length) return 'F38'; // un echange : on donne un jeton, on en recoit un autre
+  if (funds) return contact ? 'F26' : 'F31'; // F26 dit "à ton contact" : réservé à un destinataire du carnet
+  if ((eff.risk_flags || []).some((f) => f.code === 'offchain_signaling')) return 'F42';
+  return null; // F26 partiel
+}
+// niveau AFFICHE : l'envoi vers une adresse nouvelle (F31) s'affiche en « attention » (jamais « aucun signal », jamais de vert)
+export const niveauAffiche = (fid, niveau) => (niveau === 'info' && fid === 'F31' ? 'warn' : niveau);
 // -> { fid, secours } ; fid = fiche precise ou null ; secours = cle de SECOURS ou null
 export function pickFiche(S, eff, method, o = {}) {
   const cands = new Set(), sec = [];
@@ -269,7 +295,10 @@ export function pickFiche(S, eff, method, o = {}) {
     const cc = (eff.controlChange || [])[0];
     if (cc && (/^safe\./.test(cc.type) || cc.type === 'erc7579.installModule')) fid = 'F08';
     else if (cc && (cc.type === 'upgrade' || cc.type === 'ens.setResolver')) fid = 'F10';
-  } else if (first === 'F01') fid = eff.kind === 'signature' ? 'F02' : 'F01';
+  } else if (first === 'F01') { // un droit dont le montant est fini ne se dit jamais « sans limite » (F34 / F35)
+    const sig = eff.kind === 'signature';
+    fid = limitedRight(eff) ? (sig ? 'F35' : 'F34') : (sig ? 'F02' : 'F01');
+  }
   else if (first === 'F21') fid = o.intentText && PROCHE.test(String(o.intentText).normalize('NFC')) ? 'F28' : 'F21';
   return { fid, secours: null };
 }
@@ -317,20 +346,25 @@ function varsOf(eff, host, extras) {
   const cc = (eff.controlChange || [])[0];
   const nat = nativeSymbol(extras.chainId ?? eff.chainId);
   const symOf = (s) => (s === 'NATIVE' || s === 'native' ? nat : s);
-  const sym = symOf((out0 && out0.symbol) || (ap && ap.symbol)) || undefined;
+  const sym = symOf((out0 && out0.symbol) || symbolOfApproval(ap)) || undefined;
+  const inc0 = (eff.incoming || [])[0];
+  const incSym = inc0 ? symOf(inc0.symbol) : undefined;
   const amt = out0 ? out0.amount : (ap && ap.amount && ap.amount !== 'unlimited' ? ap.amount : undefined);
   const v = {
     site: (eff.siwe && eff.siwe.domain) || host || 'ce site', site_reel: host || 'ce site',
-    jeton: sym || 'jetons', montant: amt || '', jours: 'plusieurs', nombre: 'plusieurs',
+    jeton: sym || 'jetons', montant: amt || '', jours: 'plusieurs', duree: '', nombre: 'plusieurs',
+    recu: inc0 ? `${inc0.bound === 'min' ? 'au moins ' : ''}${inc0.amount} ${incSym || 'jetons'}`.trim() : 'une autre valeur',
     prix_vente: eff.seaportPriceWei !== undefined && nat !== NATIVE_UNKNOWN ? (BigInt(eff.seaportPriceWei) < 10n ** 14n ? 'presque rien' : `moins de 0,001 ${nat}`) : 'presque rien',
     valeur_nft: 'bien plus', montant_recu: 'rien',
     contact: (extras.contact && extras.contact.label) || 'ton contact', reseau_demande: 'le réseau demandé', reseau_reel: 'un autre réseau',
     adresse: (cp && cp.address) || (cc && cc.subject) || (out0 && out0.to) || '',
   };
   v.somme = v.montant ? `${v.montant} ${v.jeton}` : `tes ${v.jeton}`;
-  if (ap && ap.expiry) { // une echeance "infinie" (uint max) donnait "1.3e+72 jours"
+  if (ap && ap.expiry) { // une echeance "infinie" (uint max) donnait "1.3e+72 jours" : on dit « sans date de fin »
     const days = Math.round((Number(ap.expiry) - Math.floor(Date.now() / 1000)) / 86400);
-    v.jours = Number.isFinite(days) && days <= 3650 ? String(Math.max(1, days)) : 'un nombre illimité de';
+    const ok = Number.isFinite(days) && days <= 3650;
+    v.jours = ok ? String(Math.max(1, days)) : 'plusieurs';
+    v.duree = ok ? `pendant ${Math.max(1, days)} jour${days > 1 ? 's' : ''}` : 'sans date de fin';
   }
   return v;
 }
@@ -356,15 +390,15 @@ export function present(I) {
   let texts, source = 'fiche';
   if (!fid) {
     if (niveau === 'info') {
-      if (!funds) { fid = 'F26'; texts = buildTexts(fid, eff, host, ex); texts.reel = REEL_AUCUN_SIGNAL; source = 'fiche+partiel'; }
-      else fid = contact ? 'F26' : 'F31'; // F26 dit "à ton contact" : réservé à un destinataire du carnet
+      fid = infoFiche(eff, funds, contact); // décrit le droit limité, l'échange, le jeton inconnu, l'envoi : « aucun signal » seulement quand il n'y a rien d'autre à dire
+      if (!fid) { fid = 'F26'; texts = buildTexts(fid, eff, host, ex); texts.reel = REEL_AUCUN_SIGNAL; source = 'fiche+partiel'; }
     } else if (opaque) fid = 'F25';
     else if (secours) { texts = buildSecours(secours, eff, host, ex); source = 'secours'; }
     else if (niveau === 'warn') fid = 'F25';
     else { texts = buildSecours('generique', eff, host, ex); source = 'secours'; secours = 'generique'; }
   }
   if (fid && !texts) texts = buildTexts(fid, eff, host, ex);
-  return { fid: fid || null, texts, source, secours: fid ? null : secours };
+  return { fid: fid || null, texts, source, secours: fid ? null : secours, niveau: niveauAffiche(fid, niveau) };
 }
 // Quand une pression est reperee sur la page : le scenario d'arnaque (faux remboursement, faux support) remplace une fiche generique.
 const GENERIQUES = new Set(['F01', 'F02', 'F05', 'F25', 'F26', 'F31', null]);
@@ -433,6 +467,9 @@ export function evaluate(body, local = loadLocalContext()) {
   // scénario d'arnaque repéré sur la page (faux remboursement, faux support, cadeau, recruteur) : remplace une fiche générique
   const scen = (funds || grants) && pt ? scenarioFiche({ fid, pressure: press, pageText: pt, funds, grants, niveau }) : null;
   if (scen) { fid = scen; texts = buildTexts(scen, eff, host, { chainId: chainId ?? eff.chainId, contact }); source = 'fiche'; }
+  // niveau affiché : l'envoi vers une adresse nouvelle (F31) et le jeton non reconnu (F36) passent de « info » à « warn » (attention). Le niveau du moteur reste dans niveau_moteur.
+  const nivMoteur = niveau;
+  if (niveau === 'info' && !scen) niveau = pres.niveau || niveau;
 
   // niveau d'affichage de l'extension : critical->danger, warn->attention (ou unknown si on n'a rien pu verifier), info->attention
   let level = niveau === 'critical' ? 'danger' : 'attention';
@@ -461,7 +498,8 @@ export function evaluate(body, local = loadLocalContext()) {
   if ((local.contacts.length || local.history.length) && (eff.counterparties || []).some((c) => c.firstSeenByUser && !c.lookalikeOf && (eff.outgoing || []).some((o) => lc(o.to) === c.address))) out.risk_signals.push('new_recipient');
   if (body.intent && adem && adem.reasons.some((r) => /^unexpected_|^wrong_recipient|^amount_exceeded|^asked_by/.test(r.code))) out.intent_contradiction = true;
   // indice de manipulation : texte de la page + droit ou sortie d'argent (jamais seul)
-  if (press && niveau !== 'info') { out.level = 'manipulation'; out.quote = press.quote; out.reasons.unshift('Un vrai support ne te demandera jamais ça.'); out.niveau = 'critical'; out.niveau_note = 'pression repérée sur la page'; }
+  if (nivMoteur !== niveau) out.niveau_moteur = nivMoteur;
+  if (press && nivMoteur !== 'info') { out.level = 'manipulation'; out.quote = press.quote; out.reasons.unshift('Un vrai support ne te demandera jamais ça.'); out.niveau = 'critical'; out.niveau_note = 'pression repérée sur la page'; }
   out.latency_engine_ms = ms();
   return out;
 }

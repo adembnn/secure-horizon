@@ -26,7 +26,9 @@
     "reseau_demande": "Ethereum",
     "reseau_reel": "Polygon",
     "prix_vente": "0,001 ETH",
-    "valeur_nft": "4 ETH"
+    "valeur_nft": "4 ETH",
+    "duree": "pendant 90 jours",
+    "recu": "au moins 310 USDC"
   },
   "fiches": [
     {
@@ -82,7 +84,7 @@
       "menace": "Une signature gratuite autorise un site à prendre tes jetons",
       "technique": "permit / Permit2 / DAI permit (signature hors chaîne)",
       "croit": "Je signe un simple message, sans payer de frais.",
-      "reel": "Cette signature gratuite laisse {site} prendre tes {montant} {jeton} pendant {jours} jours.",
+      "reel": "Cette signature gratuite laisse {site} prendre tes {montant} {jeton} {duree}.",
       "danger": "Signer ne coûte rien, mais ça vaut une procuration signée.",
       "action": "Ne signe pas, sauf si tu as demandé cette autorisation.",
       "questions": [
@@ -1226,7 +1228,7 @@
       "menace": "Un site pourra te prélever de l'argent régulièrement",
       "technique": "permission récurrente (prélèvements répétés)",
       "croit": "J'autorise un paiement unique pour cet abonnement.",
-      "reel": "{site} pourra prélever {montant} {jeton} tous les {jours} jours.",
+      "reel": "{site} pourra prélever {montant} {jeton} à répétition, {duree}.",
       "danger": "L'autorisation se répète seule, tant que tu ne l'annules pas.",
       "action": "Continue seulement si tu veux vraiment un abonnement avec ce site.",
       "questions": [
@@ -1264,7 +1266,7 @@
     {
       "id": "F31",
       "menace": "Envoi vers une adresse nouvelle pour toi",
-      "technique": "envoi à un destinataire absent du carnet, sans autre signal",
+      "technique": "envoi à un destinataire absent du carnet, sans autre signal (affiché en attention)",
       "croit": "J'envoie à l'adresse que j'ai choisie.",
       "reel": "Cette opération envoie {montant} {jeton} à {adresse_debut}…{adresse_fin}, une adresse nouvelle.",
       "danger": "Un envoi vers une mauvaise adresse ne peut pas être récupéré.",
@@ -1298,8 +1300,8 @@
           "reponse": "B"
         }
       ],
-      "gravite": "info",
-      "gravite_phrase": "Rien d’anormal repéré, mais cette adresse est nouvelle pour toi."
+      "gravite": "warn",
+      "gravite_phrase": "Cette adresse est nouvelle pour toi: vérifie-la avant d’envoyer."
     },
     {
       "id": "F32",
@@ -1380,6 +1382,366 @@
       ],
       "gravite": "warn",
       "gravite_phrase": "Rien n’est perdu encore: tu peux rester sur ton réseau."
+    },
+    {
+      "id": "F34",
+      "menace": "Un site peut dépenser un montant précis de tes jetons",
+      "technique": "droit de dépense limité (approve avec montant fini)",
+      "croit": "Je veux seulement faire mon échange sur {site}.",
+      "reel": "Tu donnes à {site} le droit de prendre {montant} {jeton}, pas plus.",
+      "danger": "Seuls {montant} {jeton} peuvent partir, pas le reste de ton solde.",
+      "action": "Vérifie que ce montant est bien celui que tu veux donner.",
+      "questions": [
+        {
+          "q": "Combien ce site peut-il prendre au plus ?",
+          "options": {
+            "A": "Tout ton solde",
+            "B": "Le montant écrit, pas plus",
+            "C": "Rien du tout"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Que dois-tu contrôler avant de signer ?",
+          "options": {
+            "A": "La couleur du bouton",
+            "B": "Que le montant correspond à ton échange",
+            "C": "Rien, c’est limité"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Le montant est plus grand que prévu. Que fais-tu ?",
+          "options": {
+            "A": "Je signe quand même",
+            "B": "Je refuse et je le corrige",
+            "C": "J’attends demain"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "info",
+      "gravite_phrase": "Droit limité à un montant précis: message discret, sans alerte rouge."
+    },
+    {
+      "id": "F35",
+      "menace": "Une signature donne le droit de dépenser un montant précis",
+      "technique": "signature de droit de dépense (Permit, Permit2) à montant fini",
+      "croit": "Je signe un simple message, sans payer de frais.",
+      "reel": "Cette signature laisse {site} prendre {montant} {jeton}, pas plus.",
+      "danger": "Signer ne coûte rien, mais ça vaut une autorisation de dépenser.",
+      "action": "Signe seulement si tu as demandé cette autorisation.",
+      "questions": [
+        {
+          "q": "Cette signature a-t-elle des conséquences ?",
+          "options": {
+            "A": "Non, c’est gratuit donc sans effet",
+            "B": "Oui, elle donne un droit de dépense",
+            "C": "Seulement si je paie"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Combien le site peut-il prendre au plus ?",
+          "options": {
+            "A": "Le montant écrit",
+            "B": "Tout ton solde",
+            "C": "Rien"
+          },
+          "reponse": "A"
+        },
+        {
+          "q": "Tu n’as rien demandé à ce site. Que fais-tu ?",
+          "options": {
+            "A": "Je signe",
+            "B": "Je ne signe pas",
+            "C": "Je signe plus tard"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "warn",
+      "gravite_phrase": "Une signature gratuite peut valoir une vraie autorisation de dépense."
+    },
+    {
+      "id": "F36",
+      "menace": "Jeton non reconnu : je n’ai pas pu le vérifier",
+      "technique": "jeton absent de la table connue (symbole non lisible), affiché en attention",
+      "croit": "J’utilise un jeton que je connais, comme d’habitude.",
+      "reel": "Ce jeton m’est inconnu: je n’ai pas pu le vérifier.",
+      "danger": "Un faux jeton peut copier le nom d’un vrai.",
+      "action": "Retrouve l’adresse officielle du jeton avant de signer.",
+      "questions": [
+        {
+          "q": "Un jeton inconnu est-il forcément sûr ?",
+          "options": {
+            "A": "Oui",
+            "B": "Non, il peut être faux",
+            "C": "Seulement s’il a un logo"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Qu’est-ce qui prouve qu’un jeton est vrai ?",
+          "options": {
+            "A": "Son nom",
+            "B": "Son adresse officielle",
+            "C": "Son logo"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Un site te presse d’accepter ce jeton. Que fais-tu ?",
+          "options": {
+            "A": "J’accepte",
+            "B": "Je vérifie son adresse officielle",
+            "C": "Je demande à un inconnu"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "warn",
+      "gravite_phrase": "Je ne sais pas ce que vaut ce jeton: reste prudent."
+    },
+    {
+      "id": "F37",
+      "menace": "Droit sans limite donné à un programme déjà connu",
+      "technique": "approve illimité vers un spender connu (plancher info)",
+      "croit": "Je veux seulement faire mon échange sur {site}.",
+      "reel": "Un programme connu pourra prendre tous tes {jeton}, sans limite de montant.",
+      "danger": "Le droit reste ouvert tant que tu ne le retires pas.",
+      "action": "Si tu peux, limite le droit au montant de ton échange.",
+      "questions": [
+        {
+          "q": "Ce droit a-t-il une limite de montant ?",
+          "options": {
+            "A": "Oui, celle de l’échange",
+            "B": "Non, il n’en a pas",
+            "C": "Oui, un petit montant"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Que peux-tu faire pour réduire le risque ?",
+          "options": {
+            "A": "Limiter le droit au montant utile",
+            "B": "Rien",
+            "C": "Signer plus vite"
+          },
+          "reponse": "A"
+        },
+        {
+          "q": "Quand ce droit s’arrête-t-il ?",
+          "options": {
+            "A": "Quand tu le retires",
+            "B": "Dès la fin de l’échange",
+            "C": "Au bout d’une heure"
+          },
+          "reponse": "A"
+        }
+      ],
+      "gravite": "info",
+      "gravite_phrase": "Droit sans limite, mais envers un programme connu: message discret."
+    },
+    {
+      "id": "F38",
+      "menace": "Un échange: tu donnes un jeton, tu en reçois un autre",
+      "technique": "échange lu : sortie du compte et entrée vers soi (ordre signé ou transaction)",
+      "croit": "J’échange mes jetons contre ceux que le site annonce.",
+      "reel": "Tu donnes {montant} {jeton} et tu reçois {recu}.",
+      "danger": "Notre vérification est limitée: elle peut rater un piège.",
+      "action": "Contrôle les deux montants avant de signer l’échange.",
+      "questions": [
+        {
+          "q": "Que donnes-tu dans cet échange ?",
+          "options": {
+            "A": "Rien",
+            "B": "Le montant affiché",
+            "C": "Tout ton solde"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "La vérification peut-elle rater un piège ?",
+          "options": {
+            "A": "Non, jamais",
+            "B": "Oui, elle est limitée",
+            "C": "Seulement la nuit"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Que contrôles-tu avant de signer ?",
+          "options": {
+            "A": "Les deux montants",
+            "B": "La couleur",
+            "C": "Rien"
+          },
+          "reponse": "A"
+        }
+      ],
+      "gravite": "info",
+      "gravite_phrase": "Échange lu sans signal repéré: message discret, sans promesse."
+    },
+    {
+      "id": "F39",
+      "menace": "Cette adresse ressemble un peu à une adresse connue",
+      "technique": "sosie faible (début et fin partagés, lookalike_weak)",
+      "croit": "J’envoie à une adresse que j’ai déjà utilisée.",
+      "reel": "Tes {montant} {jeton} partiraient vers {adresse_debut}…{adresse_fin}, qui ressemble à une adresse connue.",
+      "danger": "Le début et la fin sont proches, mais le milieu change.",
+      "action": "Compare l’adresse entière avec celle que tu connais.",
+      "questions": [
+        {
+          "q": "Que compares-tu pour une adresse ?",
+          "options": {
+            "A": "Seulement le début",
+            "B": "L’adresse en entier",
+            "C": "Seulement la fin"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Deux adresses se ressemblent. Sont-elles la même ?",
+          "options": {
+            "A": "Oui",
+            "B": "Non, pas forcément",
+            "C": "Toujours"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Tu hésites sur l’adresse. Que fais-tu ?",
+          "options": {
+            "A": "J’envoie quand même",
+            "B": "Je la demande à la source",
+            "C": "Je devine"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "warn",
+      "gravite_phrase": "Une adresse proche d’une autre peut cacher un faux."
+    },
+    {
+      "id": "F40",
+      "menace": "Le message à signer cache un ordre déguisé",
+      "technique": "signed_calldata : message personal_sign qui a la forme d’un appel de contrat",
+      "croit": "Je signe un message pour prouver que c’est moi.",
+      "reel": "Ce n’est pas un texte: c’est un ordre déguisé en message.",
+      "danger": "Il peut donner à un inconnu le droit de prendre tes {jeton}.",
+      "action": "Ne signe pas, et ferme la page.",
+      "questions": [
+        {
+          "q": "Ce message est-il un simple texte ?",
+          "options": {
+            "A": "Oui",
+            "B": "Non, c’est un ordre caché",
+            "C": "Parfois"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Que peut faire un ordre caché ?",
+          "options": {
+            "A": "Rien",
+            "B": "Donner un droit sur tes jetons",
+            "C": "Changer la couleur"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Que fais-tu face à cette alerte ?",
+          "options": {
+            "A": "Je signe",
+            "B": "Je ferme la page",
+            "C": "Je signe plus tard"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "critical",
+      "gravite_phrase": "Un message qui cache un ordre peut vider ton compte."
+    },
+    {
+      "id": "F41",
+      "menace": "Le texte que tu signes parle de donner tes fonds",
+      "technique": "signed_text_grants_assets : texte libre qui accorde ou déplace des actifs",
+      "croit": "Je signe un texte pour me connecter ou prouver qui je suis.",
+      "reel": "Ce texte dit que tu donnes ou déplaces des actifs.",
+      "danger": "Une signature vaut accord, même si le texte est long.",
+      "action": "Ne signe pas, sauf si tu veux vraiment ce transfert.",
+      "questions": [
+        {
+          "q": "Que vaut une signature sous un texte ?",
+          "options": {
+            "A": "Rien",
+            "B": "Un accord",
+            "C": "Un essai"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Le texte parle de déplacer tes actifs. Et alors ?",
+          "options": {
+            "A": "C’est sans importance",
+            "B": "Je ne signe que si je le veux",
+            "C": "Je signe vite"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Que fais-tu face à cette alerte ?",
+          "options": {
+            "A": "Je signe",
+            "B": "J’annule",
+            "C": "J’attends"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "critical",
+      "gravite_phrase": "Une signature sous un texte peut valoir un vrai transfert."
+    },
+    {
+      "id": "F42",
+      "menace": "Ce message ne contient ni montant ni destinataire",
+      "technique": "offchain_signaling : signalisation hors chaîne, aucun champ de valeur",
+      "croit": "Je signe un message pour utiliser ce site.",
+      "reel": "Ce message ne contient ni montant ni destinataire.",
+      "danger": "Notre vérification est limitée: elle peut rater un piège.",
+      "action": "Vérifie que le site est bien celui que tu attends.",
+      "questions": [
+        {
+          "q": "Ce message envoie-t-il de l’argent ?",
+          "options": {
+            "A": "Aucun montant n’a été repéré",
+            "B": "Il envoie tout",
+            "C": "Je ne sais pas lire"
+          },
+          "reponse": "A"
+        },
+        {
+          "q": "Notre vérification peut-elle rater un piège ?",
+          "options": {
+            "A": "Non, jamais",
+            "B": "Oui, elle est limitée",
+            "C": "Seulement ce mois"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Que contrôles-tu avant de signer ?",
+          "options": {
+            "A": "Le site",
+            "B": "Rien",
+            "C": "La météo"
+          },
+          "reponse": "A"
+        }
+      ],
+      "gravite": "info",
+      "gravite_phrase": "Rien repéré dans ce message: discret, sans promesse de sécurité."
     }
   ]
 }

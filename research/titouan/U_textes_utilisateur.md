@@ -2,9 +2,9 @@
 
 Date : 11/10/2026 (v2 après test de compréhension en aveugle; ancienne version : `U_textes_utilisateur_v1.json`). Source de vérité : `U_textes_utilisateur.json`. Contrôle : `node check_textes.mjs`.
 
-Règles : 12 mots maximum par ligne (une variable compte pour un mot), tutoiement, aucun jargon, jamais de message vert ni de « OK ». Périmètre : 30 fiches tirées de SYNTHESE.md (R1 à R5), du banc E2E (44 familles, non toutes couvertes une à une) et des scénarios d'escroc S1 à S7.
+Règles : 12 mots maximum par ligne (une variable compte pour un mot), tutoiement, aucun jargon, jamais de message vert ni de « OK ». Périmètre : 42 fiches (F31 à F42 ajoutées le 11/10/2026 : envoi vers une adresse nouvelle, droit limité, jeton non reconnu, échange, etc.), à l’origine 30 fiches tirées de SYNTHESE.md (R1 à R5), du banc E2E (44 familles, non toutes couvertes une à une) et des scénarios d'escroc S1 à S7.
 
-Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap.org), `{site_reel}` (ex. unlswap-app.com), `{adresse_debut}` (ex. 0x7a3F), `{adresse_fin}` (ex. c91E), `{jours}` (ex. 90), `{nombre}` (ex. 12), `{montant_recu}` (ex. 310 USDC), `{contact}` (ex. Paul), `{reseau_demande}` (ex. Ethereum), `{reseau_reel}` (ex. Polygon), `{prix_vente}` (ex. 0,001 ETH), `{valeur_nft}` (ex. 4 ETH).
+Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap.org), `{site_reel}` (ex. unlswap-app.com), `{adresse_debut}` (ex. 0x7a3F), `{adresse_fin}` (ex. c91E), `{jours}` (ex. 90), `{nombre}` (ex. 12), `{montant_recu}` (ex. 310 USDC), `{contact}` (ex. Paul), `{reseau_demande}` (ex. Ethereum), `{reseau_reel}` (ex. Polygon), `{prix_vente}` (ex. 0,001 ETH), `{valeur_nft}` (ex. 4 ETH), `{duree}` (ex. pendant 90 jours, ou sans date de fin), `{recu}` (ex. au moins 310 USDC).
 
 ## 1. Fiches
 
@@ -40,6 +40,18 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
 | F28 | Un faux proche te demande un envoi urgent | critical | Un proche me demande de l'aide pour un envoi urgent. | Tes `{montant}` `{jeton}` partiraient chez un inconnu, sans retour possible. | Un escroc peut écrire avec le nom et la photo d'un proche. | Appelle ton proche au numéro habituel avant d'envoyer quoi que ce soit. |
 | F29 | Tes fonds arrivent sur un autre réseau que celui demandé | critical | Je déplace mes jetons vers `{reseau_demande}`, comme prévu. | Tes `{montant}` `{jeton}` arriveraient sur `{reseau_reel}`, pas sur `{reseau_demande}`. | Chaque réseau est séparé: un envoi au mauvais endroit est souvent perdu. | Annule et vérifie le réseau et l'adresse d'arrivée avant de recommencer. |
 | F30 | Un site pourra te prélever de l'argent régulièrement | warn | J'autorise un paiement unique pour cet abonnement. | `{site}` pourra prélever `{montant}` `{jeton}` tous les `{jours}` jours. | L'autorisation se répète seule, tant que tu ne l'annules pas. | Continue seulement si tu veux vraiment un abonnement avec ce site. |
+| F31 | Envoi vers une adresse nouvelle pour toi | warn | J'envoie à l'adresse que j'ai choisie. | Cette opération envoie `{montant}` `{jeton}` à `{adresse_debut}`…`{adresse_fin}`, une adresse nouvelle. | Un envoi vers une mauvaise adresse ne peut pas être récupéré. | Vérifie l'adresse, lettre par lettre, avant de signer. |
+| F32 | Un site te fait ajouter un réseau qu'il contrôle | warn | Je change de réseau pour utiliser mon portefeuille. | Ce site te fait ajouter un réseau qu'il contrôle lui-même. | Il peut afficher de faux soldes et de fausses réponses. | Annule, sauf si tu connais ce réseau et ce site. |
+| F33 | Un site te fait passer sur un réseau inconnu | warn | Je change de réseau pour utiliser mon portefeuille. | Ce site te fait passer sur un réseau que personne n'a vérifié. | Un réseau inconnu peut afficher de faux soldes. | Reste sur ton réseau habituel, sauf si tu connais celui-ci. |
+| F34 | Un site peut dépenser un montant précis de tes jetons | info | Je veux seulement faire mon échange sur `{site}`. | Tu donnes à `{site}` le droit de prendre `{montant}` `{jeton}`, pas plus. | Seuls `{montant}` `{jeton}` peuvent partir, pas le reste de ton solde. | Vérifie que ce montant est bien celui que tu veux donner. |
+| F35 | Une signature donne le droit de dépenser un montant précis | warn | Je signe un simple message, sans payer de frais. | Cette signature laisse `{site}` prendre `{montant}` `{jeton}`, pas plus. | Signer ne coûte rien, mais ça vaut une autorisation de dépenser. | Signe seulement si tu as demandé cette autorisation. |
+| F36 | Jeton non reconnu : je n’ai pas pu le vérifier | warn | J’utilise un jeton que je connais, comme d’habitude. | Ce jeton m’est inconnu: je n’ai pas pu le vérifier. | Un faux jeton peut copier le nom d’un vrai. | Retrouve l’adresse officielle du jeton avant de signer. |
+| F37 | Droit sans limite donné à un programme déjà connu | info | Je veux seulement faire mon échange sur `{site}`. | Un programme connu pourra prendre tous tes `{jeton}`, sans limite de montant. | Le droit reste ouvert tant que tu ne le retires pas. | Si tu peux, limite le droit au montant de ton échange. |
+| F38 | Un échange: tu donnes un jeton, tu en reçois un autre | info | J’échange mes jetons contre ceux que le site annonce. | Tu donnes `{montant}` `{jeton}` et tu reçois `{recu}`. | Notre vérification est limitée: elle peut rater un piège. | Contrôle les deux montants avant de signer l’échange. |
+| F39 | Cette adresse ressemble un peu à une adresse connue | warn | J’envoie à une adresse que j’ai déjà utilisée. | Tes `{montant}` `{jeton}` partiraient vers `{adresse_debut}`…`{adresse_fin}`, qui ressemble à une adresse connue. | Le début et la fin sont proches, mais le milieu change. | Compare l’adresse entière avec celle que tu connais. |
+| F40 | Le message à signer cache un ordre déguisé | critical | Je signe un message pour prouver que c’est moi. | Ce n’est pas un texte: c’est un ordre déguisé en message. | Il peut donner à un inconnu le droit de prendre tes `{jeton}`. | Ne signe pas, et ferme la page. |
+| F41 | Le texte que tu signes parle de donner tes fonds | critical | Je signe un texte pour me connecter ou prouver qui je suis. | Ce texte dit que tu donnes ou déplaces des actifs. | Une signature vaut accord, même si le texte est long. | Ne signe pas, sauf si tu veux vraiment ce transfert. |
+| F42 | Ce message ne contient ni montant ni destinataire | info | Je signe un message pour utiliser ce site. | Ce message ne contient ni montant ni destinataire. | Notre vérification est limitée: elle peut rater un piège. | Vérifie que le site est bien celui que tu attends. |
 
 ## 2. Calibrage de la gravité
 
@@ -538,3 +550,183 @@ Pour un envoi ou un échange habituel vers un site connu, deux lignes discrètes
    - A) **Je refuse**
    - B) Je signe
    - C) J'attends sans rien faire
+
+### F31. Envoi vers une adresse nouvelle pour toi
+
+1. Peut-on récupérer un envoi fait à une mauvaise adresse ?
+   - A) Oui, toujours
+   - B) **Non, c'est presque toujours perdu**
+   - C) Oui, en appelant le site
+2. Comment vérifies-tu une adresse nouvelle ?
+   - A) Je regarde les premières lettres
+   - B) **Je la compare en entier avec la source**
+   - C) Je fais confiance au site
+3. Quelqu'un te presse d'envoyer. Que fais-tu ?
+   - A) J'envoie vite
+   - B) **Je m’arrête et je vérifie**
+   - C) Je demande un code
+
+### F32. Un site te fait ajouter un réseau qu'il contrôle
+
+1. Que peut faire un réseau contrôlé par un site ?
+   - A) **Afficher de faux soldes**
+   - B) Rien du tout
+   - C) Protéger tes fonds
+2. Quand acceptes-tu d'ajouter un réseau ?
+   - A) Quand le site insiste
+   - B) **Quand je le connais déjà**
+   - C) Toujours
+3. Le site te presse d'ajouter ce réseau. Que fais-tu ?
+   - A) J'ajoute vite
+   - B) **Je ferme et je vérifie**
+   - C) Je demande au site
+
+### F33. Un site te fait passer sur un réseau inconnu
+
+1. Un réseau inconnu peut-il mentir sur tes soldes ?
+   - A) **Oui, il le peut**
+   - B) Non, jamais
+   - C) Seulement la nuit
+2. Sur quel réseau restes-tu par défaut ?
+   - A) **Celui que je connais**
+   - B) Celui que le site choisit
+   - C) Le plus récent
+3. Le site te presse de changer. Que fais-tu ?
+   - A) Je change vite
+   - B) **Je ferme et je vérifie**
+   - C) Je demande au site
+
+### F34. Un site peut dépenser un montant précis de tes jetons
+
+1. Combien ce site peut-il prendre au plus ?
+   - A) Tout ton solde
+   - B) **Le montant écrit, pas plus**
+   - C) Rien du tout
+2. Que dois-tu contrôler avant de signer ?
+   - A) La couleur du bouton
+   - B) **Que le montant correspond à ton échange**
+   - C) Rien, c’est limité
+3. Le montant est plus grand que prévu. Que fais-tu ?
+   - A) Je signe quand même
+   - B) **Je refuse et je le corrige**
+   - C) J’attends demain
+
+### F35. Une signature donne le droit de dépenser un montant précis
+
+1. Cette signature a-t-elle des conséquences ?
+   - A) Non, c’est gratuit donc sans effet
+   - B) **Oui, elle donne un droit de dépense**
+   - C) Seulement si je paie
+2. Combien le site peut-il prendre au plus ?
+   - A) **Le montant écrit**
+   - B) Tout ton solde
+   - C) Rien
+3. Tu n’as rien demandé à ce site. Que fais-tu ?
+   - A) Je signe
+   - B) **Je ne signe pas**
+   - C) Je signe plus tard
+
+### F36. Jeton non reconnu : je n’ai pas pu le vérifier
+
+1. Un jeton inconnu est-il forcément sûr ?
+   - A) Oui
+   - B) **Non, il peut être faux**
+   - C) Seulement s’il a un logo
+2. Qu’est-ce qui prouve qu’un jeton est vrai ?
+   - A) Son nom
+   - B) **Son adresse officielle**
+   - C) Son logo
+3. Un site te presse d’accepter ce jeton. Que fais-tu ?
+   - A) J’accepte
+   - B) **Je vérifie son adresse officielle**
+   - C) Je demande à un inconnu
+
+### F37. Droit sans limite donné à un programme déjà connu
+
+1. Ce droit a-t-il une limite de montant ?
+   - A) Oui, celle de l’échange
+   - B) **Non, il n’en a pas**
+   - C) Oui, un petit montant
+2. Que peux-tu faire pour réduire le risque ?
+   - A) **Limiter le droit au montant utile**
+   - B) Rien
+   - C) Signer plus vite
+3. Quand ce droit s’arrête-t-il ?
+   - A) **Quand tu le retires**
+   - B) Dès la fin de l’échange
+   - C) Au bout d’une heure
+
+### F38. Un échange: tu donnes un jeton, tu en reçois un autre
+
+1. Que donnes-tu dans cet échange ?
+   - A) Rien
+   - B) **Le montant affiché**
+   - C) Tout ton solde
+2. La vérification peut-elle rater un piège ?
+   - A) Non, jamais
+   - B) **Oui, elle est limitée**
+   - C) Seulement la nuit
+3. Que contrôles-tu avant de signer ?
+   - A) **Les deux montants**
+   - B) La couleur
+   - C) Rien
+
+### F39. Cette adresse ressemble un peu à une adresse connue
+
+1. Que compares-tu pour une adresse ?
+   - A) Seulement le début
+   - B) **L’adresse en entier**
+   - C) Seulement la fin
+2. Deux adresses se ressemblent. Sont-elles la même ?
+   - A) Oui
+   - B) **Non, pas forcément**
+   - C) Toujours
+3. Tu hésites sur l’adresse. Que fais-tu ?
+   - A) J’envoie quand même
+   - B) **Je la demande à la source**
+   - C) Je devine
+
+### F40. Le message à signer cache un ordre déguisé
+
+1. Ce message est-il un simple texte ?
+   - A) Oui
+   - B) **Non, c’est un ordre caché**
+   - C) Parfois
+2. Que peut faire un ordre caché ?
+   - A) Rien
+   - B) **Donner un droit sur tes jetons**
+   - C) Changer la couleur
+3. Que fais-tu face à cette alerte ?
+   - A) Je signe
+   - B) **Je ferme la page**
+   - C) Je signe plus tard
+
+### F41. Le texte que tu signes parle de donner tes fonds
+
+1. Que vaut une signature sous un texte ?
+   - A) Rien
+   - B) **Un accord**
+   - C) Un essai
+2. Le texte parle de déplacer tes actifs. Et alors ?
+   - A) C’est sans importance
+   - B) **Je ne signe que si je le veux**
+   - C) Je signe vite
+3. Que fais-tu face à cette alerte ?
+   - A) Je signe
+   - B) **J’annule**
+   - C) J’attends
+
+### F42. Ce message ne contient ni montant ni destinataire
+
+1. Ce message envoie-t-il de l’argent ?
+   - A) **Aucun montant n’a été repéré**
+   - B) Il envoie tout
+   - C) Je ne sais pas lire
+2. Notre vérification peut-elle rater un piège ?
+   - A) Non, jamais
+   - B) **Oui, elle est limitée**
+   - C) Seulement ce mois
+3. Que contrôles-tu avant de signer ?
+   - A) **Le site**
+   - B) Rien
+   - C) La météo
