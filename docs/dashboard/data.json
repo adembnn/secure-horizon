@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-11T01:45",
-  "headline": "Inventaire de Titouan (R1-R8) : notre cible la mieux détectable, les signatures piégées, pèse ~84 M$/an ; les arnaques où la victime envoie elle-même pèsent ≥ 14 Md$. Le levier pour ce gros morceau : le niveau « Manipulation » (demande retenue 10 min). On cherche les preuves que ça marche.",
+  "updated": "2026-10-11T02:35",
+  "headline": "Titouan a corrigé ses chiffres : 1 186 « attaques » étaient des révocations. Rappel réel du filet : 24 sur 33 vraies approbations malveillantes (73 %, IC 56-85 %). Le banc de bout en bout tourne : moteur 447 tests, extension 64 tests OK sur Chrome et Edge. Interface : direction Figma sobre choisie.",
   "metrics": [
     {
       "label": "Fichiers de recherche",
@@ -23,12 +23,12 @@
       "value": "25"
     },
     {
-      "label": "FP filet C-Chain",
-      "value": "0,28 %"
+      "label": "Rappel filet (n=33)",
+      "value": "73 %"
     },
     {
-      "label": "Rappel drainers réels",
-      "value": "82 %"
+      "label": "Tests moteur",
+      "value": "447"
     }
   ],
   "stages": [
@@ -49,7 +49,7 @@
     },
     {
       "name": "Banc réel v0 (Titouan)",
-      "detail": "49 400 tx légitimes + 1 354 attaques réelles ; R3 fort mais contournable",
+      "detail": "Corrigé : rappel 73 % sur 33 vraies approbations (révocations exclues)",
       "status": "done"
     },
     {
@@ -229,6 +229,17 @@
         "Fausses victimes et faux escrocs, utilisateurs honnêtes pour les fausses alertes",
         "Boucle : tests → corrections → re-tests, livrable couverture à 07h00",
         "3 agents design ici : avertissements, bandeau, règles d'efficacité"
+      ]
+    },
+    {
+      "time": "02:35",
+      "title": "Correction des chiffres + banc E2E + design choisi",
+      "items": [
+        "Chiffres de rappel retirés : révocations comptées à tort ; rappel réel 24/33 (73 %)",
+        "Extension MV3 : 64 tests OK sur Chrome et Edge ; moteur de décodage : 447 tests",
+        "Règle adresse sosie : USENIX (3 premiers + 4 derniers caractères, fenêtre de 20 min)",
+        "Interface : direction Figma sobre et centrée, adresses en grille 2×5",
+        "À venir : textes utilisateur précis par menace, testés sur les fausses victimes"
       ]
     }
   ]
