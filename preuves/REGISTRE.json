@@ -1,5 +1,5 @@
 {
- "etabli_le": "2026-10-11T08:40:58.225Z",
+ "etabli_le": "2026-10-11T08:58:04.843Z",
  "commande": "node --no-warnings preuves/banc.mjs",
  "regle": "un jeu marqué lu_par_le_banc=false n'a pas de lecteur dans preuves/lib/jeux.mjs : seuls son chemin et son empreinte (flux d'octets) sont enregistrés",
  "jeux": [
@@ -15,7 +15,7 @@
    "generateur": "preuves/panel/gen_panel.mjs",
    "graine": "holdup-preuves-panel-A-2026-10-11",
    "auteur": "agent de la mission preuves (auteur différent des règles du produit)",
-   "date_fichier": "2026-10-11T07:35:19.652Z",
+   "date_fichier": "2026-10-11T08:57:56.613Z",
    "sha256_scelle": "5ff2096a97632981ad6fa29e9e2c043e044e5ab0c87d2457dd81686e5aec14a1",
    "scelle_respecte": true,
    "note": "moitié contrôle du grand panel, scellée par son empreinte, mesurée une fois par bras"
@@ -32,7 +32,7 @@
    "generateur": "preuves/panel/gen_panel.mjs",
    "graine": "holdup-preuves-panel-A-2026-10-11",
    "auteur": "agent de la mission preuves",
-   "date_fichier": "2026-10-11T07:35:19.639Z",
+   "date_fichier": "2026-10-11T08:57:56.604Z",
    "sha256_scelle": "b1a28271ed958ed3501c0de8cb7fdcf926b9f7a2a15912ed25c8df4ec27bc911",
    "scelle_respecte": true,
    "note": "moitié réglage du grand panel : librement consultable pour corriger le produit ; aucune correction faite dans cette mission"
@@ -49,7 +49,7 @@
    "generateur": "research/titouan/T_banc_e2e/pipeline/grille/gen_grille.mjs",
    "graine": 20261013,
    "auteur": "agent de la grille (même auteur que le repli lexical de la grille)",
-   "date_fichier": "2026-10-11T08:40:59.003Z",
+   "date_fichier": "2026-10-11T08:58:05.294Z",
    "note": "contrôle de la grille, régénéré à l'identique (empreinte publiée 3644a72c…). Ouvert le 11 oct. 06:15 UTC ; depuis, extension/intent_text.js a reçu la règle GIVE_RIGHT écrite d'après ses 23 fausses alertes : ce n'est plus un contrôle propre pour le produit actuel"
   },
   {
@@ -64,7 +64,7 @@
    "generateur": "research/titouan/T_banc_e2e/pipeline/grille/gen_grille.mjs",
    "graine": 20261013,
    "auteur": "agent de la grille",
-   "date_fichier": "2026-10-11T08:40:58.995Z",
+   "date_fichier": "2026-10-11T08:58:05.284Z",
    "note": "réglage de la grille, régénéré à l'identique"
   },
   {
@@ -79,7 +79,7 @@
    "generateur": "research/titouan/T_banc_e2e/attacks_decalage/gen_decalage.mjs",
    "graine": 20261011,
    "auteur": "équipe (cas et règles F31 à F33 écrits ensemble)",
-   "date_fichier": "2026-10-11T08:40:59.219Z",
+   "date_fichier": "2026-10-11T08:58:05.434Z",
    "note": "410 cas de décalage régénérés (ligne A5 des livrables)"
   },
   {
@@ -94,7 +94,7 @@
    "generateur": "écrit par un agent juré (pas de générateur dans le dépôt)",
    "graine": "non consignée",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:32:25.263Z",
+   "date_fichier": "2026-10-11T01:34:51.474Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -109,7 +109,7 @@
    "generateur": "research/titouan/T_banc_e2e/redteam/gen_jury_fp.mjs",
    "graine": "non consignée",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:26:52.696Z",
+   "date_fichier": "2026-10-11T01:29:43.248Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -124,7 +124,7 @@
    "generateur": "écrit par un agent juré (pas de générateur dans le dépôt)",
    "graine": "non consignée",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:27:38.186Z",
+   "date_fichier": "2026-10-11T01:29:43.250Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -139,7 +139,7 @@
    "generateur": "research/titouan/T_banc_e2e/redteam/fuzz_address_gen.mjs",
    "graine": "argument de ligne de commande (7 par défaut)",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:30:13.461Z",
+   "date_fichier": "2026-10-11T01:31:49.079Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -154,7 +154,7 @@
    "generateur": "research/titouan/T_banc_e2e/redteam/gen_fuzz_control.mjs",
    "graine": "non consignée",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:36:25.857Z",
+   "date_fichier": "2026-10-11T01:39:50.202Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -169,7 +169,7 @@
    "generateur": "research/titouan/T_banc_e2e/redteam/fuzz_encoding.mjs",
    "graine": "non consignée",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:33:47.996Z",
+   "date_fichier": "2026-10-11T01:34:58.831Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -184,7 +184,7 @@
    "generateur": "research/titouan/T_banc_e2e/redteam/fuzz_fp_gen.mjs",
    "graine": "non consignée",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:36:16.347Z",
+   "date_fichier": "2026-10-11T01:39:50.220Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -199,7 +199,7 @@
    "generateur": "écrit par un agent juré (pas de générateur dans le dépôt)",
    "graine": "non consignée",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:31:47.697Z",
+   "date_fichier": "2026-10-11T01:34:51.477Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -214,7 +214,7 @@
    "generateur": "research/titouan/T_banc_e2e/redteam/fuzz_sig.mjs",
    "graine": "argument de ligne de commande (1 par défaut)",
    "auteur": "red team interne",
-   "date_fichier": "2026-10-11T01:32:26.279Z",
+   "date_fichier": "2026-10-11T01:34:51.497Z",
    "note": "cas retenus PARCE QU'ILS contournaient le moteur d'alors : jeu de réglage, biaisé vers l'échec"
   },
   {
@@ -229,7 +229,7 @@
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/*/ (générateurs par famille) puis redteam/normalize_v2.mjs",
    "graine": "par famille, non consignée ici",
    "auteur": "agents d'Adem, sans lire le moteur",
-   "date_fichier": "2026-10-11T01:24:16.359Z",
+   "date_fichier": "2026-10-11T03:08:49.615Z",
    "note": "moitié DEV du jeu v2 (70 % par hachage de l'identifiant) ; les règles ont été écrites en la regardant"
   },
   {
@@ -244,23 +244,30 @@
    "generateur": "research/titouan/T_banc_e2e/attacks/gen.mjs",
    "graine": 20261011,
    "auteur": "équipe",
-   "date_fichier": "2026-10-11T01:32:25.206Z",
+   "date_fichier": "2026-10-11T06:51:33.392Z",
    "note": "catalogue d'attaques v1, moitié DEV"
   },
   {
    "nom": "fork_cases",
    "chemin": "research/titouan/T_banc_e2e/redteam/fork_cases.jsonl",
+   "absent": true
+  },
+  {
+   "nom": "panel_reserve",
+   "chemin": "preuves/panel/RESERVE.jsonl",
    "lu_par_le_banc": true,
-   "sha256": "a996068a14e40fff73572dff65f6b804f24e414b52191873136aee84d30d7e77",
-   "octets": 5798,
-   "cas": 5,
-   "role": "reglage",
-   "question": "etiquette",
-   "generateur": "écrit à la main",
-   "graine": "sans objet",
-   "auteur": "red team interne",
-   "date_fichier": "2026-10-11T03:36:27.581Z",
-   "note": "5 cas"
+   "sha256": "8531e6119af0d81c3d23eeb92e512ae820c165f4db7ac87ff3213beacb2a433f",
+   "octets": 4752841,
+   "cas": 2673,
+   "role": "reserve_scellee",
+   "question": "phrase_demande",
+   "generateur": "preuves/panel/gen_panel.mjs",
+   "graine": "holdup-preuves-panel-A-2026-10-11",
+   "auteur": "agent de la mission preuves",
+   "date_fichier": "2026-10-11T08:57:56.590Z",
+   "sha256_scelle": "8531e6119af0d81c3d23eeb92e512ae820c165f4db7ac87ff3213beacb2a433f",
+   "scelle_respecte": true,
+   "note": "tiers du panel jamais lu par une mesure : à ouvrir une fois, après correction du produit"
   },
   {
    "chemin": "preuves/panel/RESERVE.jsonl",
@@ -272,15 +279,23 @@
    "statut": "réserve scellée du grand panel : aucune mesure ne l'a lue. S'ouvre une fois par « node preuves/banc.mjs --ouvrir-reserve »",
    "generateur": "preuves/panel/gen_panel.mjs",
    "graine": "holdup-preuves-panel-A-2026-10-11",
-   "date_fichier": "2026-10-11T07:35:19.613Z",
+   "date_fichier": "2026-10-11T08:57:56.590Z",
    "sha256_publie": "8531e6119af0d81c3d23eeb92e512ae820c165f4db7ac87ff3213beacb2a433f",
    "conforme_au_publie": true
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_decalage/CASES.jsonl",
-   "absent": true,
+   "lu_par_le_banc": false,
+   "sha256": "ab3dcab945af0a75fab45f05138a8d608886dbcd4d945ab5a47d3c627ee79fd2",
+   "octets": 954701,
+   "cas": null,
    "role": "aveugle",
-   "statut": "INTERDIT. Jeu aveugle de 250 cas d'un autre auteur. Ouvert une seule fois le 2026-10-11T07:10:52Z par blind_decalage/run/ouvrir_une_fois.mjs (verrou OUVERT.lock) ; résultat publié dans blind_decalage/run/RESULTAT.md"
+   "statut": "INTERDIT. Jeu aveugle de 250 cas d'un autre auteur. Ouvert une seule fois le 2026-10-11T07:10:52Z par blind_decalage/run/ouvrir_une_fois.mjs (verrou OUVERT.lock) ; résultat publié dans blind_decalage/run/RESULTAT.md",
+   "generateur": "research/titouan/T_banc_e2e/blind_decalage/gen.mjs",
+   "graine": 20261012,
+   "date_fichier": "2026-10-11T03:58:42.002Z",
+   "sha256_publie": "ab3dcab945af0a75fab45f05138a8d608886dbcd4d945ab5a47d3c627ee79fd2",
+   "conforme_au_publie": true
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/V2_TEST.jsonl",
@@ -292,7 +307,7 @@
    "statut": "INTERDIT. Moitié TEST du jeu v2 (30 % par hachage de l'identifiant). Jamais passée d'après redteam/angles_morts/03_chiffres_et_methode.md",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/*/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:16:39.843Z",
+   "date_fichier": "2026-10-11T01:29:43.114Z",
    "sha256_publie": "ab2aa0b43e134ff9756842c6e9e3fb05ac8ef7c09c7138e08dd2b6ec41d0393c",
    "conforme_au_publie": true
   },
@@ -306,7 +321,7 @@
    "statut": "INTERDIT. Moitié TEST du catalogue v1. D'après livrables/CHIFFRES.md : ouverte avant des correctifs puis utilisée pour les orienter",
    "generateur": "research/titouan/T_banc_e2e/attacks/gen.mjs",
    "graine": 20261011,
-   "date_fichier": "2026-10-11T01:32:25.209Z",
+   "date_fichier": "2026-10-10T23:54:39.285Z",
    "sha256_publie": "829660aed1303f91c20af51c28e92f9d31d9caef313278608f73bb711ff369a8",
    "conforme_au_publie": true
   },
@@ -320,7 +335,7 @@
    "statut": "non lu : réunit DEV et TEST du catalogue v1",
    "generateur": "research/titouan/T_banc_e2e/attacks/gen.mjs",
    "graine": 20261011,
-   "date_fichier": "2026-10-11T01:32:25.216Z"
+   "date_fichier": "2026-10-10T23:54:39.277Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/benign_defi/cases.jsonl",
@@ -332,7 +347,7 @@
    "statut": "non lu : fichier par famille du jeu v2, contient les cas DEV et TEST mélangés (champ split)",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/benign_defi/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:16:04.150Z"
+   "date_fichier": "2026-10-11T01:29:43.126Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/benign_everyday/cases.jsonl",
@@ -344,7 +359,7 @@
    "statut": "non lu : fichier par famille du jeu v2, contient les cas DEV et TEST mélangés (champ split)",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/benign_everyday/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:13:00.295Z"
+   "date_fichier": "2026-10-11T01:29:43.141Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/fraud_ambig/cases.jsonl",
@@ -356,7 +371,7 @@
    "statut": "non lu : fichier par famille du jeu v2, contient les cas DEV et TEST mélangés (champ split)",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/fraud_ambig/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:14:12.946Z"
+   "date_fichier": "2026-10-11T01:29:43.160Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/onchain/cases.jsonl",
@@ -368,7 +383,7 @@
    "statut": "non lu : fichier par famille du jeu v2, contient les cas DEV et TEST mélangés (champ split)",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/onchain/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:13:32.638Z"
+   "date_fichier": "2026-10-11T01:29:43.176Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/poison_sites_tokens/cases.jsonl",
@@ -380,7 +395,7 @@
    "statut": "non lu : fichier par famille du jeu v2, contient les cas DEV et TEST mélangés (champ split)",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/poison_sites_tokens/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:12:30.539Z"
+   "date_fichier": "2026-10-11T01:29:43.201Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/sig/cases.jsonl",
@@ -392,7 +407,7 @@
    "statut": "non lu : fichier par famille du jeu v2, contient les cas DEV et TEST mélangés (champ split)",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/sig/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:14:15.301Z"
+   "date_fichier": "2026-10-11T01:29:43.227Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/BLIND_v1.jsonl",
@@ -404,7 +419,7 @@
    "statut": "non rejoué : jeu aveugle v1 de 150 cas, jamais passé d'après redteam/angles_morts/03. Écart de procédure de cette mission : pendant l'inventaire, un script a compté ses lignes, ses étiquettes et ses méthodes, et le début du premier cas a été affiché. Aucun détecteur n'a été lancé dessus",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/gen_*.mjs",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:07:01.183Z",
+   "date_fichier": "2026-10-11T01:29:43.013Z",
    "sha256_publie": "38ebd60c26445deb3d218343a3cfa7435ecda8300d083bf2facf1af52e7590aa",
    "conforme_au_publie": true
   },
@@ -418,7 +433,7 @@
    "statut": "non lu : composant du jeu aveugle v1",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/gen_malveillants.mjs",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:07:31.484Z"
+   "date_fichier": "2026-10-11T01:29:43.025Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/benins.jsonl",
@@ -430,7 +445,7 @@
    "statut": "non lu : composant du jeu aveugle v1",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/gen_benins.mjs",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:07:31.788Z"
+   "date_fichier": "2026-10-11T01:29:43.019Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/fraudes_ambigus.jsonl",
@@ -442,7 +457,7 @@
    "statut": "non lu : composant du jeu aveugle v1",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/gen_fraudes.mjs",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:07:32.031Z"
+   "date_fichier": "2026-10-11T01:29:43.021Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/blind_adem/v2/V2_DEV.jsonl",
@@ -454,55 +469,31 @@
    "statut": "non rejoué directement : source de redteam/V2_DEV_norm.jsonl, qui est le fichier rejoué",
    "generateur": "research/titouan/T_banc_e2e/blind_adem/v2/*/",
    "graine": "non consignée",
-   "date_fichier": "2026-10-11T01:16:39.806Z"
+   "date_fichier": "2026-10-11T01:29:43.086Z"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/redteam/probe.jsonl",
-   "lu_par_le_banc": false,
-   "sha256": "27a02fd003ea9f84f95ff2b7921be97745900306979357e730b4f926121973f3",
-   "octets": 6582,
-   "cas": null,
+   "absent": true,
    "role": "sonde",
-   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable",
-   "generateur": "écrit à la main",
-   "graine": "sans objet",
-   "date_fichier": "2026-10-11T01:31:00.582Z"
+   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/redteam/probe2.jsonl",
-   "lu_par_le_banc": false,
-   "sha256": "fc481443c4b7f3dfb030f1338ae4d453d1c6732ec35c7ed84efe693cfe794c21",
-   "octets": 10168,
-   "cas": null,
+   "absent": true,
    "role": "sonde",
-   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable",
-   "generateur": "écrit à la main",
-   "graine": "sans objet",
-   "date_fichier": "2026-10-11T01:31:38.249Z"
+   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/redteam/probe3.jsonl",
-   "lu_par_le_banc": false,
-   "sha256": "9fcd4fbd8251ab1e4781e94076dc83d886242ac2657414fc8999f706c01f524a",
-   "octets": 12219,
-   "cas": null,
+   "absent": true,
    "role": "sonde",
-   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable",
-   "generateur": "écrit à la main",
-   "graine": "sans objet",
-   "date_fichier": "2026-10-11T01:32:24.107Z"
+   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable"
   },
   {
    "chemin": "research/titouan/T_banc_e2e/redteam/exemple.jsonl",
-   "lu_par_le_banc": false,
-   "sha256": "0c9ec35d95d3a13132f9310ff3ffe6164d0ea28b47bfee5ed15eb08696f79f98",
-   "octets": 714,
-   "cas": null,
+   "absent": true,
    "role": "sonde",
-   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable",
-   "generateur": "écrit à la main",
-   "graine": "sans objet",
-   "date_fichier": "2026-10-11T01:20:43.018Z"
+   "statut": "non rejoué : quelques cas d'essai de la red team, sans étiquette exploitable"
   }
  ]
 }
