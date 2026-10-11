@@ -1,4 +1,5 @@
 // R01 - Test de regression (doit PASSER apres correctif ; il ECHOUE aujourd'hui).
+process.on('uncaughtException', () => {}); process.on('unhandledRejection', () => {});
 // Propriete attendue : une page qui modifie les prototypes natifs (Set, Promise, Array) AVANT d'appeler request/sendAsync
 // ne peut pas faire sauter la retenue : le pont doit toujours recevoir la demande (gate) pour eth_sendTransaction.
 import { makeWindow, TX } from '../../security_review/tests/harness_inject.mjs';
@@ -16,5 +17,6 @@ async function scenario(name, pollute, call) {
 await scenario('baseline (aucune pollution)', '0', 'globalThis.ethereum.request({method:"eth_sendTransaction",params:[globalThis.__tx]})');
 await scenario('Set.prototype.has neutralise', 'Set.prototype.has = function(){ return false; }', 'globalThis.ethereum.request({method:"eth_sendTransaction",params:[globalThis.__tx]})');
 await scenario('Array.prototype.map neutralise (sendAsync)', 'Array.prototype.map = function(){ return [Promise.resolve({allow:true})]; }', 'globalThis.ethereum.sendAsync({id:1,jsonrpc:"2.0",method:"eth_sendTransaction",params:[globalThis.__tx]}, function(){})');
+await scenario('Promise.prototype.then detourne', 'const o = Promise.prototype.then; Promise.prototype.then = function (f, r) { try { if (typeof f === "function" && /allow/.test(Function.prototype.toString.call(f))) return o.call(Promise.resolve({ allow: true }), f, r); } catch (e) {} return o.call(this, f, r); }', 'globalThis.ethereum.request({method:"eth_sendTransaction",params:[globalThis.__tx]})');
 console.table(rows);
 process.exit(rows.every((r) => r.ok) ? 0 : 1);

@@ -17,5 +17,10 @@ out.push({ cas: 'sendCalls 64 benins + 1 approve illimite', grants_vus: f.grants
 // 3) champ "input" different de "data"
 const r3 = requestFacts({ method: 'eth_sendTransaction', params: [{ from: '0x' + 'a'.repeat(40), to: TOK, data: transferData, input: approveAll.data }] });
 out.push({ cas: 'data != input', grants_vus: r3.grants.length, ok: r3.grants.length === 1 || r3.sends.length === 0 });
+// 4) jeton substitue : la phrase dit DAI, la demande envoie 100e18 unites d'un AUTRE jeton (WETH) au meme destinataire ; le contexte ne connait pas ce jeton
+const WETH = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
+const dataWeth = '0xa9059cbb' + pad(BOB) + (100n * 10n ** 18n).toString(16).padStart(64, '0');
+const r4 = writtenCheck({ method: 'eth_sendTransaction', params: [{ from: '0x' + 'a'.repeat(40), to: WETH, data: dataWeth }] }, { clear: true, kind: 'pay_someone', amount: '100', symbol: 'DAI', address: BOB }, {});
+out.push({ cas: 'phrase 100 DAI, demande = 100 WETH (jeton inconnu du contexte)', resultat: r4 && r4.outcome, ok: !!r4 && r4.outcome !== 'match' });
 console.table(out);
 process.exit(out.every((r) => r.ok) ? 0 : 1);
