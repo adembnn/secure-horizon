@@ -1,73 +1,73 @@
 {
  "n_blocs": 200,
- "pin": 26164183,
- "n_tx": 43075,
- "droits": 2278,
+ "pin": 26164546,
+ "n_tx": 44159,
+ "droits": 2213,
  "contamine_par_liste": 0,
  "par_type": {
-  "native_transfer": 15582,
-  "other": 14851,
-  "transfer": 9901,
-  "approve": 2138,
-  "transferFrom": 463,
-  "setApprovalForAll": 116,
-  "permit": 11,
-  "permit2_approve": 12,
+  "other": 14216,
+  "transfer": 10534,
+  "native_transfer": 16735,
+  "approve": 2081,
+  "transferFrom": 461,
+  "setApprovalForAll": 111,
+  "permit": 14,
+  "permit2_approve": 6,
   "increaseAllowance": 1
  },
  "regles": {
   "R1_droit_illimite": {
-   "k": 979,
-   "pct": 2.273,
+   "k": 957,
+   "pct": 2.167,
    "wilson95": [
-    2.136,
-    2.418
+    2.035,
+    2.307
    ]
   },
   "R2_setApprovalForAll_true": {
-   "k": 94,
-   "pct": 0.218,
+   "k": 87,
+   "pct": 0.197,
    "wilson95": [
-    0.178,
-    0.267
+    0.16,
+    0.243
    ]
   },
   "R3_droit_vers_compte_externe": {
-   "k": 98,
-   "pct": 0.228,
+   "k": 121,
+   "pct": 0.274,
    "wilson95": [
-    0.187,
-    0.277
+    0.229,
+    0.327
    ]
   },
   "R4_permit_hors_chaine_ou_permit2": {
-   "k": 23,
-   "pct": 0.053,
+   "k": 20,
+   "pct": 0.045,
    "wilson95": [
-    0.036,
-    0.08
+    0.029,
+    0.07
    ]
   },
   "R5_delegation_7702": {
-   "k": 242,
-   "pct": 0.562,
+   "k": 231,
+   "pct": 0.523,
    "wilson95": [
-    0.495,
-    0.637
+    0.46,
+    0.595
    ]
   }
  },
  "au_moins_une": {
-  "k": 1355,
-  "pct": 3.146,
+  "k": 1316,
+  "pct": 2.98,
   "wilson95": [
-   2.985,
-   3.315
+   2.826,
+   3.143
   ]
  },
  "sur_les_seules_transactions_donnant_un_droit": {
-  "n": 2278,
-  "flaggees": 1113,
-  "pct": 48.9
+  "n": 2213,
+  "flaggees": 1085,
+  "pct": 49
  }
 }

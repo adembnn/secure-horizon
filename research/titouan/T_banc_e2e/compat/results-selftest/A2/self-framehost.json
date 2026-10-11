@@ -1,0 +1,164 @@
+{
+ "siteId": "self-framehost",
+ "url": "http://127.0.0.1:8777/framehost",
+ "arm": "control",
+ "started": "2026-10-11T00:10:06.135Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "http://127.0.0.1:8777/framehost"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "http://localhost:8777/framed"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "http://localhost:8777/framed"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": false,
+   "f": "http://localhost:8777/framed"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "http://127.0.0.1:8777/framehost"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "http://127.0.0.1:8777/framehost"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "BC4C81B4F3176DF99F1217EC47B560C1",
+   "status": 200,
+   "url": "http://127.0.0.1:8777/framehost",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  },
+  {
+   "frameId": "06BBAF447AE5F08D0D53A3137E8888A7",
+   "status": 200,
+   "url": "http://localhost:8777/framed",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "BC4C81B4F3176DF99F1217EC47B560C1",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "http://127.0.0.1:8777/framehost",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": null
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "/framehost",
+  "bodyLen": 6,
+  "nodes": 7,
+  "readyState": "complete",
+  "head": "iframe"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "/framehost",
+  "bodyLen": 6,
+  "nodes": 7,
+  "readyState": "complete",
+  "head": "iframe"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "http://127.0.0.1:8777/framehost",
+ "ms": 4924
+}

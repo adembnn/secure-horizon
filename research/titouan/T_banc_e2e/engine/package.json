@@ -1,0 +1,1 @@
+{ "name": "sentinelle-effects-engine", "private": true, "type": "module", "scripts": { "test": "node --test test/*.test.mjs" } }

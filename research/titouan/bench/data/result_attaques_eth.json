@@ -1,4 +1,16 @@
 {
+ "correction": "approve(0) = révocation, exclu des droits (11/10 01h50)",
+ "n_droits_directs_reels": 33,
+ "rappel_filet_sur_droits_directs_reels": {
+  "k": 24,
+  "n": 33,
+  "pct": 72.7,
+  "wilson95": [
+   55.8,
+   84.9
+  ]
+ },
+ "n_approve_zero": 1186,
  "n_tx_attaque": 1354,
  "vus_par_decodeur_direct": 1219,
  "par_type": {
@@ -7,21 +19,21 @@
   "other": 36
  },
  "rappel_filet_sur_tout": {
-  "k": 1109,
+  "k": 45,
   "n": 1354,
-  "pct": 81.9,
+  "pct": 3.3,
   "wilson95": [
-   79.8,
-   83.9
+   2.5,
+   4.4
   ]
  },
  "rappel_filet_sur_approbations_directes": {
-  "k": 1088,
+  "k": 24,
   "n": 1219,
-  "pct": 89.3,
+  "pct": 2,
   "wilson95": [
-   87.4,
-   90.9
+   1.3,
+   2.9
   ]
  },
  "par_regle": {
@@ -34,8 +46,8 @@
    "pct_sur_tout": 0
   },
   "R3_droit_vers_compte_externe": {
-   "k": 1088,
-   "pct_sur_tout": 80.4
+   "k": 24,
+   "pct_sur_tout": 1.8
   },
   "R4_permit_hors_chaine_ou_permit2": {
    "k": 0,

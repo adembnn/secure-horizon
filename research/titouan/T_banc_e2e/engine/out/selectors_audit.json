@@ -1,0 +1,417 @@
+{
+ "summary": {
+  "total_mentions": 44,
+  "distinct": 42,
+  "by_status": {
+   "OK": 30,
+   "OK_BY_NAME": 8,
+   "OK_BY_SELECTOR": 4
+  }
+ },
+ "constants": [
+  {
+   "what": "EIP-1967 implementation slot",
+   "cited": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+   "computed": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+   "status": "OK"
+  },
+  {
+   "what": "EIP-1967 admin slot",
+   "cited": "0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103",
+   "computed": "0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103",
+   "status": "OK"
+  },
+  {
+   "what": "EIP-1967 beacon slot",
+   "cited": "0xa3f0ad74e5423aebfd80d3ef4346578335a9a72aeaee59ff6cb3582b35133d50",
+   "computed": "0xa3f0ad74e5423aebfd80d3ef4346578335a9a72aeaee59ff6cb3582b35133d50",
+   "status": "OK"
+  },
+  {
+   "what": "isValidSignature magic (ERC-1271)",
+   "cited": "0x1626ba7e",
+   "computed": "0x1626ba7e",
+   "status": "OK"
+  }
+ ],
+ "results": [
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 17,
+   "name": "transferOwnership",
+   "cited": "0xf2fde38b",
+   "sig": "transferOwnership(address)",
+   "computed": "0xf2fde38b",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 18,
+   "name": "acceptOwnership",
+   "cited": "0x79ba5097",
+   "sig": "acceptOwnership()",
+   "computed": "0x79ba5097",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 19,
+   "name": "renounceOwnership",
+   "cited": "0x715018a6",
+   "sig": "renounceOwnership()",
+   "computed": "0x715018a6",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 20,
+   "name": "grantRole",
+   "cited": "0x2f2ff15d",
+   "sig": "grantRole(bytes32,address)",
+   "computed": "0x2f2ff15d",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 20,
+   "name": "revokeRole",
+   "cited": "0xd547741f",
+   "sig": "revokeRole(bytes32,address)",
+   "computed": "0xd547741f",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 20,
+   "name": "renounceRole",
+   "cited": "0x36568abe",
+   "sig": "renounceRole(bytes32,address)",
+   "computed": "0x36568abe",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 21,
+   "name": "addOwnerWithThreshold",
+   "cited": "0x0d582f13",
+   "sig": "addOwnerWithThreshold(address,uint256)",
+   "computed": "0x0d582f13",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 21,
+   "name": "execTransaction",
+   "cited": "0x6a761202",
+   "sig": "execTransaction(address,uint256,bytes,uint8,uint256,uint256,uint256,address,address,bytes)",
+   "computed": "0x6a761202",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 22,
+   "name": "removeOwner",
+   "cited": "0xf8dc5dd9",
+   "sig": "removeOwner(address,address,uint256)",
+   "computed": "0xf8dc5dd9",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 22,
+   "name": "swapOwner",
+   "cited": "0xe318b52b",
+   "sig": "swapOwner(address,address,address)",
+   "computed": "0xe318b52b",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 22,
+   "name": "changeThreshold",
+   "cited": "0x694e80c3",
+   "sig": "changeThreshold(uint256)",
+   "computed": "0x694e80c3",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 23,
+   "name": "enableModule",
+   "cited": "0x610b5925",
+   "sig": "enableModule(address)",
+   "computed": "0x610b5925",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 23,
+   "name": "disableModule",
+   "cited": "0xe009cfde",
+   "sig": "disableModule(address,address)",
+   "computed": "0xe009cfde",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 23,
+   "name": "setGuard",
+   "cited": "0xe19a9dd9",
+   "sig": "setGuard(address)",
+   "computed": "0xe19a9dd9",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 23,
+   "name": "setFallbackHandler",
+   "cited": "0xf08a0323",
+   "sig": "setFallbackHandler(address)",
+   "computed": "0xf08a0323",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 23,
+   "name": "execTransactionFromModule",
+   "cited": "0x468721a7",
+   "sig": "execTransactionFromModule(address,uint256,bytes,uint8)",
+   "computed": "0x468721a7",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 25,
+   "name": "multiSend",
+   "cited": "0x8d80ff0a",
+   "sig": "multiSend(bytes)",
+   "computed": "0x8d80ff0a",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 26,
+   "name": "upgrade",
+   "cited": "0x99a88ec4",
+   "sig": "upgrade(address,address)",
+   "computed": "0x99a88ec4",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 26,
+   "name": "upgradeAndCall",
+   "cited": "0x9623609d",
+   "sig": "upgradeAndCall(address,address,bytes)",
+   "computed": "0x9623609d",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 26,
+   "name": "changeAdmin",
+   "cited": "0x8f283970",
+   "sig": "changeAdmin(address)",
+   "computed": "0x8f283970",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 27,
+   "name": "upgradeTo",
+   "cited": "0x3659cfe6",
+   "sig": "upgradeTo(address)",
+   "computed": "0x3659cfe6",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 27,
+   "name": "upgradeToAndCall",
+   "cited": "0x4f1ef286",
+   "sig": "upgradeToAndCall(address,bytes)",
+   "computed": "0x4f1ef286",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 30,
+   "name": "setOwner",
+   "cited": "0x13af4035",
+   "sig": "setOwner(address)",
+   "computed": "0x13af4035",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 30,
+   "name": "setAuthority",
+   "cited": "0x7a9e5e4b",
+   "sig": "setAuthority(address)",
+   "computed": "0x7a9e5e4b",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 30,
+   "name": "setOwner",
+   "cited": "0x13af4035",
+   "sig": "setOwner(address)",
+   "computed": "0x13af4035",
+   "status": "OK_BY_SELECTOR"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 31,
+   "name": "installModule",
+   "cited": "0x9517e29f",
+   "sig": "installModule(uint256,address,bytes)",
+   "computed": "0x9517e29f",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 34,
+   "name": "setApprovalForAll",
+   "cited": "0xa22cb465",
+   "sig": "setApprovalForAll(address,bool)",
+   "computed": "0xa22cb465",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 35,
+   "name": "approve",
+   "cited": "0x095ea7b3",
+   "sig": "approve(address,uint256)",
+   "computed": "0x095ea7b3",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 35,
+   "name": "increaseAllowance",
+   "cited": "0x39509351",
+   "sig": "increaseAllowance(address,uint256)",
+   "computed": "0x39509351",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 35,
+   "name": "permit",
+   "cited": "0xd505accf",
+   "sig": "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+   "computed": "0xd505accf",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 37,
+   "name": "setOwner",
+   "cited": "0x5b0fc9c3",
+   "sig": "setOwner(bytes32,address)",
+   "computed": "0x5b0fc9c3",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 37,
+   "name": "setSubnodeOwner",
+   "cited": "0x06ab5923",
+   "sig": "setSubnodeOwner(bytes32,bytes32,address)",
+   "computed": "0x06ab5923",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 37,
+   "name": "transferFrom",
+   "cited": "0x23b872dd",
+   "sig": "transferFrom(address,address,uint256)",
+   "computed": "0x23b872dd",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 37,
+   "name": "safeTransferFrom",
+   "cited": "0x42842e0e",
+   "sig": "safeTransferFrom(address,address,uint256)",
+   "computed": "0x42842e0e",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 37,
+   "name": "reclaim",
+   "cited": "0x28ed4f6c",
+   "sig": "reclaim(uint256,address)",
+   "computed": "0x28ed4f6c",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 38,
+   "name": "setResolver",
+   "cited": "0x1896f70a",
+   "sig": "setResolver(bytes32,address)",
+   "computed": "0x1896f70a",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 38,
+   "name": "setRecord",
+   "cited": "0xcf408823",
+   "sig": "setRecord(bytes32,address,address,uint64)",
+   "computed": "0xcf408823",
+   "status": "OK"
+  },
+  {
+   "file": "R1_controle_et_roles.md",
+   "line": 38,
+   "name": "setAddr",
+   "cited": "0xd5fa2b00",
+   "sig": "setAddr(bytes32,address)",
+   "computed": "0xd5fa2b00",
+   "status": "OK"
+  },
+  {
+   "file": "R2_droits_et_signatures.md",
+   "line": 64,
+   "name": "approve",
+   "cited": "0x095ea7b3",
+   "sig": "approve(address,uint256)",
+   "computed": "0x095ea7b3",
+   "status": "OK_BY_SELECTOR"
+  },
+  {
+   "file": "R2_droits_et_signatures.md",
+   "line": 64,
+   "name": "increaseAllowance",
+   "cited": "0x39509351",
+   "sig": "increaseAllowance(address,uint256)",
+   "computed": "0x39509351",
+   "status": "OK_BY_SELECTOR"
+  },
+  {
+   "file": "R2_droits_et_signatures.md",
+   "line": 108,
+   "name": "setApprovalForAll",
+   "cited": "0xa22cb465",
+   "sig": "setApprovalForAll(address,bool)",
+   "computed": "0xa22cb465",
+   "status": "OK_BY_NAME"
+  },
+  {
+   "file": "R2_droits_et_signatures.md",
+   "line": 161,
+   "name": "isValidSignature",
+   "cited": "0x1626ba7e",
+   "sig": "isValidSignature(bytes32,bytes)",
+   "computed": "0x1626ba7e",
+   "status": "OK_BY_SELECTOR"
+  }
+ ]
+}

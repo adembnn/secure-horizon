@@ -1,0 +1,21 @@
+{
+  "seed": 20261011,
+  "n_cases": 589,
+  "sha256": {
+    "cases.jsonl": "da8dd39115cc761585cf3097ecb188eea712168f8cab2ef9985aae6f2a9b48cf",
+    "DEV.jsonl": "282cf318394d7c9143190c15a604f879dfa1eb901d75393829614a0542be67e3",
+    "TEST.jsonl": "829660aed1303f91c20af51c28e92f9d31d9caef313278608f73bb711ff369a8"
+  },
+  "generator_sources": {
+    "lib.mjs": "8a349a704cabbbf16b53416a465cb0af4988d870dac8a78edf4422ddb84e5c02",
+    "core.mjs": "7eb2664ff2e4d0ba875ab883c2bd26b55a052041f3665fff7475aeca7c649b67",
+    "fam1.mjs": "9dc006386bd487c33bf180fd2f83cad57bcd98ec9c799f12f28b86e17437db07",
+    "fam2.mjs": "ae893ff7b1e9647543b15d784f0368ecdd2a2852c12ac37384811565cc5cfb85",
+    "fam3.mjs": "caf8d63ec4377557015ba42f9f19720822e8aa8f4e201128de2bad12dce188cf",
+    "fam4.mjs": "cea518159b8caaeb2998777401591436a9f1880ad4dfa54b857e960cd281bfb1",
+    "fam5.mjs": "d9907a7033b7e582b6521966e74ab2164c03849eeb6b5c9417ec563782a8a7d1",
+    "fam6.mjs": "0132b7eb350a6a8675158ca2090079f5891f3a0ffeb6ec3e7d9391c19e1c19c1",
+    "scenarios.mjs": "f38aaacbcc9900a77d86a6fb904eece0b48271128ee62ec7d773936501acd54f",
+    "gen.mjs": "adaa4e231c79ce56963c0a577ecf3bcf3021c6c73ba43f699a387567dacb78d1"
+  }
+}

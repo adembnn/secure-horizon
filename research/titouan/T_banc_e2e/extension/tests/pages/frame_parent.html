@@ -1,0 +1,22 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Parent iframe</title></head>
+<body><h1>Parent</h1><div id="txt"></div><div id="host"></div>
+<script>
+(function () {
+  var qs = new URLSearchParams(location.search), kind = qs.get('kind') || 'srcdoc', w = qs.get('w') || 'assign';
+  var host = document.getElementById('host'), f = document.createElement('iframe'); f.id = 'f'; f.style.cssText = 'width:300px;height:120px';
+  var pend = {}, nid = 1;
+  window.addEventListener('message', function (ev) { var d = ev.data; if (d && d.rpc === 'done' && pend[d.id]) { pend[d.id](d.r); delete pend[d.id]; } });
+  if (kind === 'srcdoc') {
+    f.srcdoc = '<!doctype html><body><script src="' + location.origin + '/lib/fake_wallet.js" data-w="' + w + '"><\/script><script src="' + location.origin + '/lib/dapp.js"><\/script></body>';
+    host.appendChild(f);
+  } else if (kind === 'blank') {
+    host.appendChild(f);
+    var d = f.contentDocument; d.open(); d.write('<!doctype html><body><script src="' + location.origin + '/lib/fake_wallet.js" data-w="' + w + '"><\/script><script src="' + location.origin + '/lib/dapp.js"><\/script></body>'); d.close();
+  } else { f.src = qs.get('child') + '?w=' + w; host.appendChild(f); }
+  window.__frameCall = function (fn, args) {
+    if (kind !== 'cross') return Promise.resolve(f.contentWindow.__t[fn].apply(f.contentWindow.__t, args || []));
+    return new Promise(function (res) { var id = nid++; pend[id] = res; f.contentWindow.postMessage({ rpc: 'run', id: id, fn: fn, args: args || [] }, '*'); });
+  };
+  window.__frameReady = function () { try { return kind === 'cross' ? true : !!(f.contentWindow.__t); } catch (e) { return false; } };
+})();
+</script></body></html>

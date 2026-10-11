@@ -1,0 +1,300 @@
+{
+ "updated_at": "2026-10-10T23:36:52.008Z",
+ "author": "Claude-Titouan",
+ "banc": {
+  "legit_ethereum": {
+   "n_blocs": 200,
+   "pin": 26164183,
+   "n_tx": 43075,
+   "droits": 2278,
+   "contamine_par_liste": 0,
+   "par_type": {
+    "native_transfer": 15582,
+    "other": 14851,
+    "transfer": 9901,
+    "approve": 2138,
+    "transferFrom": 463,
+    "setApprovalForAll": 116,
+    "permit": 11,
+    "permit2_approve": 12,
+    "increaseAllowance": 1
+   },
+   "regles": {
+    "R1_droit_illimite": {
+     "k": 979,
+     "pct": 2.273,
+     "wilson95": [
+      2.136,
+      2.418
+     ]
+    },
+    "R2_setApprovalForAll_true": {
+     "k": 94,
+     "pct": 0.218,
+     "wilson95": [
+      0.178,
+      0.267
+     ]
+    },
+    "R3_droit_vers_compte_externe": {
+     "k": 98,
+     "pct": 0.228,
+     "wilson95": [
+      0.187,
+      0.277
+     ]
+    },
+    "R4_permit_hors_chaine_ou_permit2": {
+     "k": 23,
+     "pct": 0.053,
+     "wilson95": [
+      0.036,
+      0.08
+     ]
+    },
+    "R5_delegation_7702": {
+     "k": 242,
+     "pct": 0.562,
+     "wilson95": [
+      0.495,
+      0.637
+     ]
+    }
+   },
+   "au_moins_une": {
+    "k": 1355,
+    "pct": 3.146,
+    "wilson95": [
+     2.985,
+     3.315
+    ]
+   },
+   "sur_les_seules_transactions_donnant_un_droit": {
+    "n": 2278,
+    "flaggees": 1113,
+    "pct": 48.9
+   }
+  },
+  "legit_cchain": {
+   "n_tx": 6325,
+   "par_type": {
+    "other": 4858,
+    "transfer": 465,
+    "native_transfer": 853,
+    "approve": 130,
+    "setApprovalForAll": 2,
+    "transferFrom": 14,
+    "permit": 3
+   },
+   "regles": {
+    "R1_droit_illimite": {
+     "k": 15,
+     "taux_pct": 0.24,
+     "wilson95_pct": [
+      0.14,
+      0.39
+     ],
+     "parmi_droits_pct": 11.1
+    },
+    "R2_setApprovalForAll_true": {
+     "k": 0,
+     "taux_pct": 0,
+     "wilson95_pct": [
+      0,
+      0.06
+     ],
+     "parmi_droits_pct": 0
+    },
+    "R3_droit_vers_compte_externe": {
+     "k": 5,
+     "taux_pct": 0.08,
+     "wilson95_pct": [
+      0.03,
+      0.18
+     ],
+     "parmi_droits_pct": 3.7
+    },
+    "R4_permit_hors_chaine_ou_permit2": {
+     "k": 3,
+     "taux_pct": 0.05,
+     "wilson95_pct": [
+      0.02,
+      0.14
+     ],
+     "parmi_droits_pct": 2.2
+    },
+    "R5_delegation_7702": {
+     "k": 0,
+     "taux_pct": 0,
+     "wilson95_pct": [
+      0,
+      0.06
+     ],
+     "parmi_droits_pct": 0
+    }
+   },
+   "droits": 135,
+   "au_moins_une_regle": {
+    "k": 18,
+    "taux_pct": 0.28,
+    "wilson95_pct": [
+     0.18,
+     0.45
+    ]
+   }
+  },
+  "attaques_ethereum": {
+   "n_tx_attaque": 1354,
+   "vus_par_decodeur_direct": 1219,
+   "par_type": {
+    "approve": 1219,
+    "transferFrom": 99,
+    "other": 36
+   },
+   "rappel_filet_sur_tout": {
+    "k": 1109,
+    "n": 1354,
+    "pct": 81.9,
+    "wilson95": [
+     79.8,
+     83.9
+    ]
+   },
+   "rappel_filet_sur_approbations_directes": {
+    "k": 1088,
+    "n": 1219,
+    "pct": 89.3,
+    "wilson95": [
+     87.4,
+     90.9
+    ]
+   },
+   "par_regle": {
+    "R1_droit_illimite": {
+     "k": 14,
+     "pct_sur_tout": 1
+    },
+    "R2_setApprovalForAll_true": {
+     "k": 0,
+     "pct_sur_tout": 0
+    },
+    "R3_droit_vers_compte_externe": {
+     "k": 1088,
+     "pct_sur_tout": 80.4
+    },
+    "R4_permit_hors_chaine_ou_permit2": {
+     "k": 0,
+     "pct_sur_tout": 0
+    },
+    "R5_delegation_7702": {
+     "k": 21,
+     "pct_sur_tout": 1.6
+    }
+   },
+   "spender_est_contrat": {
+    "contrat": 40,
+    "externe": 130
+   }
+  },
+  "age_contrat": {
+   "seuil_blocs": 50400,
+   "regle": "droit donné à un contrat créé depuis moins de 7 jours (à la date de l'approbation)",
+   "attaques": {
+    "tx_vers_contrat": 162,
+    "spenders_contrat": 40,
+    "tx_jeunes": 2,
+    "pct_tx_jeunes_parmi_contrats": 1.2,
+    "wilson95": [
+     0.3,
+     4.4
+    ],
+    "spenders_jeunes": 2,
+    "age_blocs_p10_p50_p90": [
+     4318650,
+     6712350,
+     9308383
+    ]
+   },
+   "legitime": {
+    "n_tx_total": 45436,
+    "droits_vers_contrat": 2304,
+    "tx_jeunes": 53,
+    "fp_pct_du_trafic_total": 0.1166,
+    "wilson95_pct": [
+     0.0892,
+     0.1525
+    ],
+    "pct_des_droits_vers_contrat": 2.3,
+    "age_blocs_p10_p50_p90": [
+     730215,
+     5463742,
+     12614552
+    ]
+   },
+   "creation_non_resolue": 18,
+   "combine_EOA_ou_contrat_jeune": {
+    "rappel_pct_tx": 88.2,
+    "fp_pct_du_trafic": 0.392
+   }
+  },
+  "nonce_devtest": {
+   "q_attaques": [
+    39,
+    203,
+    1087
+   ],
+   "q_legit": [
+    0,
+    1474,
+    987568
+   ],
+   "seuil_choisi_sur_DEV_nonce_max": 1000,
+   "TEST": {
+    "attaques_EOA": 71,
+    "detectees": 62,
+    "rappel_spender_pct": 87.3,
+    "wilson95": [
+     77.6,
+     93.2
+    ],
+    "legit_EOA": 32,
+    "faux_positifs": 14,
+    "fpr_spender_pct": 43.8
+   }
+  },
+  "attaques_cchain": null,
+  "indices_spenders": null
+ },
+ "notes_jures": {
+  "tour1_moyenne": 59.8,
+  "tour2_moyenne": 59.3,
+  "remarque": "jugements simules, pas des mesures ; plafonnes tant qu aucun test reel n est execute"
+ },
+ "rapports": [
+  "A_spec_moteur_dora.md",
+  "B_menaces_et_voie_lente_v1.md",
+  "C_banc_essai_evasions_v1.md",
+  "D_innovation_carte_v1.md",
+  "E_evolution_des_regles_innovation_v1.md",
+  "F_avis_preuve_demande_client_v1.md",
+  "G_demo_plan_v2.md",
+  "H_ebauche_archi.md",
+  "I_incidents",
+  "J_recherche",
+  "J_wallets_perso",
+  "K_delais_drainers.md",
+  "K_drainers",
+  "L_harpie",
+  "L_harpie_postmortem.md",
+  "M_innovation_clef_jev.md",
+  "M_seuils",
+  "N_clef_jev",
+  "O_barriere_intention",
+  "O_barriere_intention.md",
+  "P_signers_mirror_contexte.md",
+  "Q_boucle_auto_amelioration.md",
+  "R_cas_complexes",
+  "bench",
+  "loop_v3"
+ ]
+}

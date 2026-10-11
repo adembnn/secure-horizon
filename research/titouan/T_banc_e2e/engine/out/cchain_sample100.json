@@ -1,0 +1,21 @@
+{
+ "n": 100,
+ "native": 13,
+ "decoded_known": 19,
+ "opaque": 68,
+ "creation": 0,
+ "unknown_selector": 68,
+ "levels": {
+  "ok": 28,
+  "warn": 71,
+  "critical": 1
+ },
+ "levelsEv": {
+  "ok": 96,
+  "warn": 3,
+  "critical": 1
+ },
+ "schema_errors": 0,
+ "opaque_share_of_all_pct": 68,
+ "opaque_share_of_contract_calls_pct": 78.2
+}

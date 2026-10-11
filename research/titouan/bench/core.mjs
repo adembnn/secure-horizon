@@ -23,11 +23,13 @@ export function decode(t) {
   if (t.type === "0x4") e.delegation = true;
   return e;
 }
+// Un droit réel : montant > 0 (les approve(0) sont des révocations, pas des droits). CORRECTION du 11/10 01h50.
+export const isGrant = (e) => e.kind === "setApprovalForAll" ? e.unlimited === true : (e.amount !== undefined && e.amount > 0n);
 // ctx.isContract(addr) -> bool (résolu au préalable)
 export const RULES = {
-  R1_droit_illimite: (e) => e.unlimited && e.kind !== "setApprovalForAll",
+  R1_droit_illimite: (e) => e.unlimited && isGrant(e) && e.kind !== "setApprovalForAll",
   R2_setApprovalForAll_true: (e) => e.kind === "setApprovalForAll" && e.unlimited,
-  R3_droit_vers_compte_externe: (e, ctx) => !!e.spender && ctx.isContract[e.spender] === false,
+  R3_droit_vers_compte_externe: (e, ctx) => !!e.spender && isGrant(e) && ctx.isContract[e.spender] === false,
   R4_permit_hors_chaine_ou_permit2: (e) => ["permit", "permit2_approve", "permit2_permit"].includes(e.kind),
   R5_delegation_7702: (e) => e.delegation === true,
 };

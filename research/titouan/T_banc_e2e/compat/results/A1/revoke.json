@@ -1,0 +1,256 @@
+{
+ "siteId": "revoke",
+ "url": "https://revoke.cash/",
+ "arm": "control",
+ "started": "2026-10-11T00:14:48.485Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://revoke.cash/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://revoke.cash/address/0x1111111111111111111111111111111111111111"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://revoke.cash/address/0x1111111111111111111111111111111111111111"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://revoke.cash/address/0x1111111111111111111111111111111111111111"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://revoke.cash/address/0x1111111111111111111111111111111111111111"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "3FAB18FE05753A1E256466F4F18E3881",
+   "status": 200,
+   "url": "https://revoke.cash/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "3FAB18FE05753A1E256466F4F18E3881",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://revoke.cash/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Revoke Your Token Approvals on Over 80 Networks | Revoke.cash",
+  "bodyLen": 4416,
+  "nodes": 511,
+  "readyState": "complete",
+  "head": "Extension Exploits Learn Premium More Blog About Us Merchandise Connect Wallet Connect Connect Wallet Check Connected Address Take Back Control of Your Wallet. Inspect and revoke token approvals to protect your wallet fr"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 6,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1246.8984375,
+   "y": 40.9375,
+   "top": 22.9375
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "BUTTON",
+   "x": 683,
+   "y": 218,
+   "area": 27324
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Address 0x111111...111111's Approvals on Ethereum | Revoke.cash",
+  "bodyLen": 1725,
+  "nodes": 759,
+  "readyState": "complete",
+  "head": "Extension Exploits Learn Premium More Blog About Us Merchandise My Dashboard 0x1111...1111 My Dashboard Account Settings Disconnect 0x111...111 My Dashboard Account Settings Disconnect Check Connected Address 0x111111..."
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "wallet_getCapabilities"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 17,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://revoke.cash/address/0x1111111111111111111111111111111111111111?chainId=1",
+ "ms": 18773
+}

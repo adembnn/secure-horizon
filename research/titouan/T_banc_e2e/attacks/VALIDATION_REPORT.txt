@@ -1,0 +1,120 @@
+RAPPORT DE VALIDATION (SYNTHETIQUE)
+===================================
+Cas : 589  | DEV=385  TEST=204  | familles=44
+Benins durs : 75
+Reproductibilite (graine fixe) : OK (cases.jsonl et TEST.jsonl identiques octet pour octet)
+Sous-familles presentes a la fois dans DEV et TEST : 25 / 73 (sous-familles de TEST)
+Hash TEST : 829660aed1303f91c20af51c28e92f9d31d9caef313278608f73bb711ff369a8
+
+PAR ETIQUETTE
+  malveillant                        362
+  benin                              168
+  ambigu                             31
+  fraude_conforme                    28
+
+PAR GRAVITE ATTENDUE (expected_severity)
+  critical                           362
+  ok                                 148
+  warn                               79
+
+PAR GRAVITE IDEALE (ideal_severity)
+  critical                           390
+  ok                                 136
+  warn                               63
+
+PAR CATEGORIE DU CATALOGUE
+  benin                              168
+  2_signatures_hors_chaine           114
+  3_controle_et_roles                70
+  11_parcours_conformes              69
+  1_droits_depense_directs           46
+  6_contrepartie                     39
+  9_faux_frontend_et_sites           24
+  4_execution_indirecte              22
+  8_swaps_et_ponts                   20
+  7_tokens                           17
+
+PAR FAMILLE
+  adresse_empoisonnee          total= 34  malv= 24  ben=  7  amb= 3  fraude_conf= 0
+  approve_erc20                total= 53  malv= 22  ben= 25  amb= 6  fraude_conf= 0
+  blur                         total=  6  malv=  4  ben=  2  amb= 0  fraude_conf= 0
+  changement_reseau            total= 13  malv=  5  ben=  4  amb= 4  fraude_conf= 0
+  controle_admin               total= 17  malv= 14  ben=  3  amb= 0  fraude_conf= 0
+  cow_uniswapx                 total= 19  malv= 12  ben=  7  amb= 0  fraude_conf= 0
+  dai_permit                   total=  8  malv=  8  ben=  0  amb= 0  fraude_conf= 0
+  depot_exchange               total=  8  malv=  0  ben=  8  amb= 0  fraude_conf= 0
+  domaine_sosie                total= 15  malv= 12  ben=  3  amb= 0  fraude_conf= 0
+  eip7702                      total= 25  malv= 19  ben=  6  amb= 0  fraude_conf= 0
+  ens_sosie                    total=  4  malv=  4  ben=  0  amb= 0  fraude_conf= 0
+  envoi_contact                total= 14  malv=  0  ben= 14  amb= 0  fraude_conf= 0
+  erc4337_userop               total= 17  malv= 11  ben=  4  amb= 2  fraude_conf= 0
+  eth_sign_aveugle             total=  8  malv=  8  ben=  0  amb= 0  fraude_conf= 0
+  faux_airdrop                 total=  5  malv=  5  ben=  0  amb= 0  fraude_conf= 0
+  faux_concours                total=  8  malv=  5  ben=  0  amb= 0  fraude_conf= 3
+  faux_proche                  total=  8  malv=  5  ben=  0  amb= 0  fraude_conf= 3
+  faux_recruteur               total=  8  malv=  5  ben=  0  amb= 0  fraude_conf= 3
+  faux_remboursement           total=  8  malv=  5  ben=  0  amb= 0  fraude_conf= 3
+  faux_support                 total= 10  malv=  7  ben=  0  amb= 0  fraude_conf= 3
+  faux_token                   total=  9  malv=  9  ben=  0  amb= 0  fraude_conf= 0
+  honeypot                     total=  8  malv=  6  ben=  0  amb= 2  fraude_conf= 0
+  increase_allowance           total=  8  malv=  8  ben=  0  amb= 0  fraude_conf= 0
+  kit_drainer                  total= 12  malv= 12  ben=  0  amb= 0  fraude_conf= 0
+  mint_nft                     total= 10  malv=  0  ben= 10  amb= 0  fraude_conf= 0
+  multicall_cache              total= 28  malv= 16  ben= 12  amb= 0  fraude_conf= 0
+  multisend_delegatecall       total=  6  malv=  6  ben=  0  amb= 0  fraude_conf= 0
+  nouveau_contrat_legit        total= 10  malv=  0  ben= 10  amb= 0  fraude_conf= 0
+  permit2_allowance            total= 20  malv= 14  ben=  6  amb= 0  fraude_conf= 0
+  permit2_signature_transfer   total=  8  malv=  8  ben=  0  amb= 0  fraude_conf= 0
+  permit_2612                  total= 15  malv= 12  ben=  0  amb= 3  fraude_conf= 0
+  personal_sign_opaque         total= 15  malv=  5  ben=  7  amb= 3  fraude_conf= 0
+  pig_butchering               total= 12  malv=  2  ben=  0  amb= 0  fraude_conf=10
+  presse_papiers               total=  8  malv=  8  ben=  0  amb= 0  fraude_conf= 0
+  safe_execution               total= 11  malv=  6  ben=  5  amb= 0  fraude_conf= 0
+  safe_gouvernance             total= 20  malv= 18  ben=  2  amb= 0  fraude_conf= 0
+  seaport                      total= 18  malv= 14  ben=  4  amb= 0  fraude_conf= 0
+  set_approval_for_all         total= 10  malv= 10  ben=  0  amb= 0  fraude_conf= 0
+  siwe                         total= 16  malv=  8  ben=  8  amb= 0  fraude_conf= 0
+  slippage                     total= 12  malv=  0  ben=  4  amb= 8  fraude_conf= 0
+  swap_connu                   total= 14  malv=  0  ben= 14  amb= 0  fraude_conf= 0
+  swap_destinataire            total= 12  malv= 12  ben=  0  amb= 0  fraude_conf= 0
+  urgence_bancaire             total= 10  malv=  7  ben=  0  amb= 0  fraude_conf= 3
+  verifying_contract           total=  9  malv=  6  ben=  3  amb= 0  fraude_conf= 0
+
+TEST par etiquette : {"malveillant":110,"benin":78,"ambigu":12,"fraude_conforme":4}
+Selecteurs eth_sendTransaction : 362 requetes, 3 selecteurs hors table (attendus : kit_drainer opaque)
+  transfer(address,uint256)                                   98
+  approve(address,uint256)                                    63
+  swapExactTokensForTokens(uint256,uint256,address[],address,uint256)23
+  swapExactETHForTokens(uint256,address[],address,uint256)    21
+  setApprovalForAll(address,bool)                             16
+  mint(uint256)                                               10
+  aggregate3((address,bool,bytes)[])                          10
+  increaseAllowance(address,uint256)                          8
+  claim()                                                     7
+  exactInputSingle((address,address,uint24,address,uint256,uint256,uint160))7
+  transferOwnership(address)                                  6
+  execute((address,uint256,bytes)[])                          5
+  multicall(bytes[])                                          4
+  multicall(uint256,bytes[])                                  4
+  grantRole(bytes32,address)                                  3
+  upgradeTo(address)                                          3
+  upgradeToAndCall(address,bytes)                             3
+  Claim()                                                     3
+  INCONNU                                                     3
+  execTransaction(address,uint256,bytes,uint8,uint256,uint256,uint256,address,address,bytes)3
+  renounceOwnership()                                         2
+  deposit(uint256,address)                                    2
+  deposit()                                                   2
+  submit(address)                                             2
+  depositETHTo(address,uint32,bytes)                          2
+  register(string,address,uint256)                            2
+  SecurityUpdate()                                            1
+  claimRewards()                                              1
+  Airdrop()                                                   1
+  Connect()                                                   1
+  Verify(address)                                             1
+
+AVERTISSEMENTS : 0
+
+ERREURS : 0
+

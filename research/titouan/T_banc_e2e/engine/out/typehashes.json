@@ -1,0 +1,70 @@
+{
+ "EIP712Domain(name,version,chainId,verifyingContract)": {
+  "encodeType": "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)",
+  "typeHash": "0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f"
+ },
+ "EIP712Domain(chainId,verifyingContract) [Safe]": {
+  "encodeType": "EIP712Domain(uint256 chainId,address verifyingContract)",
+  "typeHash": "0x47e79534a245952e8b16893a336b85a3d9ea9fa8c573f3d803afb92a79469218"
+ },
+ "EIP-2612 Permit": {
+  "encodeType": "Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)",
+  "typeHash": "0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9"
+ },
+ "DAI Permit": {
+  "encodeType": "Permit(address holder,address spender,uint256 nonce,uint256 expiry,bool allowed)",
+  "typeHash": "0xea2aa0a1be11a07ed86d755c93467f4f82362b452371d1ba94d1715123511acb"
+ },
+ "Permit2 PermitDetails": {
+  "encodeType": "PermitDetails(address token,uint160 amount,uint48 expiration,uint48 nonce)",
+  "typeHash": "0x65626cad6cb96493bf6f5ebea28756c966f023ab9e8a83a7101849d5573b3678"
+ },
+ "Permit2 PermitSingle": {
+  "encodeType": "PermitSingle(PermitDetails details,address spender,uint256 sigDeadline)PermitDetails(address token,uint160 amount,uint48 expiration,uint48 nonce)",
+  "typeHash": "0xf3841cd1ff0085026a6327b620b67997ce40f282c88a8e905a7a5626e310f3d0"
+ },
+ "Permit2 PermitBatch": {
+  "encodeType": "PermitBatch(PermitDetails[] details,address spender,uint256 sigDeadline)PermitDetails(address token,uint160 amount,uint48 expiration,uint48 nonce)",
+  "typeHash": "0xaf1b0d30d2cab0380e68f0689007e3254993c596f2fdd0aaa7f4d04f79440863"
+ },
+ "Permit2 TokenPermissions": {
+  "encodeType": "TokenPermissions(address token,uint256 amount)",
+  "typeHash": "0x618358ac3db8dc274f0cd8829da7e234bd48cd73c4a740aede1adec9846d06a1"
+ },
+ "Permit2 PermitTransferFrom": {
+  "encodeType": "PermitTransferFrom(TokenPermissions permitted,address spender,uint256 nonce,uint256 deadline)TokenPermissions(address token,uint256 amount)",
+  "typeHash": "0x939c21a48a8dbe3a9a2404a1d46691e4d39f6583d6ec6b35714604c986d80106"
+ },
+ "Permit2 PermitBatchTransferFrom": {
+  "encodeType": "PermitBatchTransferFrom(TokenPermissions[] permitted,address spender,uint256 nonce,uint256 deadline)TokenPermissions(address token,uint256 amount)",
+  "typeHash": "0xfcf35f5ac6a2c28868dc44c302166470266239195f02b0ee408334829333b766"
+ },
+ "Seaport OfferItem": {
+  "encodeType": "OfferItem(uint8 itemType,address token,uint256 identifierOrCriteria,uint256 startAmount,uint256 endAmount)",
+  "typeHash": "0xa66999307ad1bb4fde44d13a5d710bd7718e0c87c1eef68a571629fbf5b93d02"
+ },
+ "Seaport ConsiderationItem": {
+  "encodeType": "ConsiderationItem(uint8 itemType,address token,uint256 identifierOrCriteria,uint256 startAmount,uint256 endAmount,address recipient)",
+  "typeHash": "0x42d81c6929ffdc4eb27a0808e40e82516ad42296c166065de7f812492304ff6e"
+ },
+ "Seaport OrderComponents": {
+  "encodeType": "OrderComponents(address offerer,address zone,OfferItem[] offer,ConsiderationItem[] consideration,uint8 orderType,uint256 startTime,uint256 endTime,bytes32 zoneHash,uint256 salt,bytes32 conduitKey,uint256 counter)ConsiderationItem(uint8 itemType,address token,uint256 identifierOrCriteria,uint256 startAmount,uint256 endAmount,address recipient)OfferItem(uint8 itemType,address token,uint256 identifierOrCriteria,uint256 startAmount,uint256 endAmount)",
+  "typeHash": "0xfa445660b7e21515a59617fcd68910b487aa5808b8abda3d78bc85df364b2c2f"
+ },
+ "CoW GPv2Order": {
+  "encodeType": "Order(address sellToken,address buyToken,address receiver,uint256 sellAmount,uint256 buyAmount,uint32 validTo,bytes32 appData,uint256 feeAmount,string kind,bool partiallyFillable,string sellTokenBalance,string buyTokenBalance)",
+  "typeHash": "0xd5a25ba2e97094ad7d83dc28a6572da797d6b3e7fc6663bd93efb789fc17e489"
+ },
+ "Safe SafeTx (>=1.0)": {
+  "encodeType": "SafeTx(address to,uint256 value,bytes data,uint8 operation,uint256 safeTxGas,uint256 baseGas,uint256 gasPrice,address gasToken,address refundReceiver,uint256 nonce)",
+  "typeHash": "0xbb8310d486368db6bd6f849402fdd73ad53d316b5a4b2644ad6efe0f941286d8"
+ },
+ "Coinbase SpendPermission": {
+  "encodeType": "SpendPermission(address account,address spender,address token,uint160 allowance,uint48 period,uint48 start,uint48 end,uint256 salt,bytes extraData)",
+  "typeHash": "0xc9fa0f0252014cf89ab0539e3bb3adcb76f93e6bb6494e8cc61c14e2761ee2e4"
+ },
+ "ERC-4337 v0.7 PackedUserOperation": {
+  "encodeType": "PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)",
+  "typeHash": "0x29a0bca4af4be3421398da00295e58e6d7de38cb492214754cb6a47507dd6f8e"
+ }
+}

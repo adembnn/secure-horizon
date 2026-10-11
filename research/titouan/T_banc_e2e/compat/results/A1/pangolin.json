@@ -1,0 +1,371 @@
+{
+ "siteId": "pangolin",
+ "url": "https://app.pangolin.exchange/",
+ "arm": "control",
+ "started": "2026-10-11T00:12:43.102Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.pangolin.exchange/swap"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 405 ()",
+   "url": "https://app.pangolin.exchange/graphql"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "D40E37C181AC3BC37359FFD2CD57E6D1",
+   "status": 200,
+   "url": "https://app.pangolin.exchange/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "D40E37C181AC3BC37359FFD2CD57E6D1",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.pangolin.exchange/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Pangolin",
+  "bodyLen": 3343,
+  "nodes": 1486,
+  "readyState": "complete",
+  "head": "97239408 Swap Perps New Pool Leaderboards New Airdrop New Stake Stats Toggle theme Connect Wallet USDt 0.00 % $1.00 USDC 0.00 % $1.00 WAVAX ↓ 0.13 % $10.35 PNG ↑ 0.84 % $0.0327 WETH.e ↑ 0.67 % $2.50k BTC.b ↑ 0.37 % $82.8"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 48,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1264.1484375,
+   "y": 36,
+   "top": 16
+  },
+  "all": [
+   "1:Connect Wallet",
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "Disclaimer Please do your own research and consult a financial advisor before making any investment decisions. DeFi investments have seven main risk categories: Software Risk Counterparty Risk Token Risk Regulatory Risk Impermanent Loss Gas Fees Risk of Outsmarting Yourself About stablecoins The act",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Pangolin",
+  "bodyLen": 4137,
+  "nodes": 1574,
+  "readyState": "complete",
+  "head": "97239414 Swap Perps New Pool Leaderboards New Airdrop New Stake Stats Toggle theme Connect Wallet USDt 0.00 % $1.00 USDC 0.00 % $1.00 WAVAX ↓ 0.13 % $10.35 PNG ↑ 0.84 % $0.0327 WETH.e ↑ 0.67 % $2.50k BTC.b ↑ 0.37 % $82.8"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 48,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 30,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.pangolin.exchange/swap",
+ "ms": 19456
+}

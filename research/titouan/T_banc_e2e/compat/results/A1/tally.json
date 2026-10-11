@@ -1,0 +1,137 @@
+{
+ "siteId": "tally",
+ "url": "https://www.tally.xyz/",
+ "arm": "control",
+ "started": "2026-10-11T00:14:28.722Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.tally.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://www.tally.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://www.tally.xyz/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "A282D58FB54D6C6FF89D792CB6B7A73D",
+   "status": 200,
+   "url": "https://www.tally.xyz/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "A282D58FB54D6C6FF89D792CB6B7A73D",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://www.tally.xyz/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Cactus - Explore DAOs",
+  "bodyLen": 674,
+  "nodes": 352,
+  "readyState": "complete",
+  "head": "Tally is now Cactus. New name, same platform. Read all about the change and follow @CactusHQxyz for what's next. Search ⌘ K Featured DAO Ethereum ENS Decentralised naming for wallets, websites, & more. Proposals 75 Voter"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Cactus - Explore DAOs",
+  "bodyLen": 674,
+  "nodes": 352,
+  "readyState": "complete",
+  "head": "Tally is now Cactus. New name, same platform. Read all about the change and follow @CactusHQxyz for what's next. Search ⌘ K Featured DAO Ethereum ENS Decentralised naming for wallets, websites, & more. Proposals 75 Voter"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://www.tally.xyz/",
+ "ms": 7986
+}

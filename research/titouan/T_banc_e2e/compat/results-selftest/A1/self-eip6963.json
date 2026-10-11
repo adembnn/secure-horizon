@@ -1,0 +1,169 @@
+{
+ "siteId": "self-eip6963",
+ "url": "http://127.0.0.1:8777/eip6963",
+ "arm": "control",
+ "started": "2026-10-11T00:07:58.222Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "http://127.0.0.1:8777/eip6963"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "http://127.0.0.1:8777/eip6963"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "http://127.0.0.1:8777/eip6963"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "http://127.0.0.1:8777/eip6963"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "902C63E22B54B8F12F040E8B8336B17E",
+   "status": 200,
+   "url": "http://127.0.0.1:8777/eip6963",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "902C63E22B54B8F12F040E8B8336B17E",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "http://127.0.0.1:8777/eip6963",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": null
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "/eip6963",
+  "bodyLen": 27,
+  "nodes": 10,
+  "readyState": "complete",
+  "head": "eip6963 only Connect Wallet"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 60.953125,
+   "y": 90.375,
+   "top": 79.875
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "BUTTON",
+   "x": 138.7421875,
+   "y": 110.5,
+   "area": 1627.171875
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "MetaMask",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": true,
+  "title": "/eip6963",
+  "bodyLen": 60,
+  "nodes": 11,
+  "readyState": "complete",
+  "head": "eip6963 only Connect Wallet MetaMask Connected 0x1111...1111"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_requestAccounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "http://127.0.0.1:8777/eip6963",
+ "ms": 10880
+}

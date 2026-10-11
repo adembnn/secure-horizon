@@ -1,0 +1,104 @@
+{
+ "n": 6325,
+ "native_transfer": 853,
+ "creation": 7,
+ "decoded": 759,
+ "opaque_unknown_selector": 4701,
+ "opaque_other": 5,
+ "by_type": {
+  "0x2": 4758,
+  "0x0": 1533,
+  "0x1": 34
+ },
+ "schema_errors": 0,
+ "exceptions": 0,
+ "embedded_hits": 24,
+ "embedded_critical": 1,
+ "contract_calls": 5472,
+ "undecoded_pct_of_all": 74.5,
+ "undecoded_pct_of_contract_calls": 86.1,
+ "decoded_pct_of_contract_calls": 13.9,
+ "levels": {
+  "ok": 1446,
+  "warn": 4860,
+  "critical": 19
+ },
+ "levels_evidence_only": {
+  "ok": 6120,
+  "warn": 186,
+  "critical": 19
+ },
+ "warn_evidence_pct_of_all": 2.94,
+ "flags": {
+  "unknown_selector": 4796,
+  "opaque": 4713,
+  "slippage_unbounded": 20,
+  "external_spender": 120,
+  "embedded_calls": 24,
+  "nested_approval": 1,
+  "delegatecall_official_multisend": 1,
+  "erc4337_handleOps": 39,
+  "aa_account_creation": 4,
+  "unlimited_allowance": 15,
+  "contract_creation": 7,
+  "revocation": 14,
+  "ur_command_opaque": 2,
+  "decode_error": 2,
+  "control_change": 3,
+  "short_calldata": 1
+ },
+ "ms_total": 617,
+ "us_per_tx": 98,
+ "top_unknown_selectors": [
+  [
+   "0xa00597a0",
+   337
+  ],
+  [
+   "0x9bad26a6",
+   306
+  ],
+  [
+   "0x35faa416",
+   200
+  ],
+  [
+   "0x00000000",
+   183
+  ],
+  [
+   "0x01000000",
+   173
+  ],
+  [
+   "0x8b04f947",
+   127
+  ],
+  [
+   "0x4a502f39",
+   121
+  ],
+  [
+   "0x2f139e4f",
+   120
+  ],
+  [
+   "0xd0295134",
+   110
+  ],
+  [
+   "0xcf1393d9",
+   103
+  ],
+  [
+   "0x9b62f8b4",
+   101
+  ],
+  [
+   "0x6fadcf72",
+   100
+  ]
+ ],
+ "critical_pct_of_all": 0.3,
+ "critical_pct_of_contract_calls": 0.35
+}

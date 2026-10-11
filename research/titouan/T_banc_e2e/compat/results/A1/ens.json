@@ -1,0 +1,235 @@
+{
+ "siteId": "ens",
+ "url": "https://app.ens.domains/",
+ "arm": "control",
+ "started": "2026-10-11T00:14:38.243Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://verify.walletconnect.com/9b14144d470af1e03ab9d88aaa127332"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": "https://app.ens.domains/"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": "https://app.ens.domains/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/flags/?v=2&config=true&ip=0&_=1791677685417&ver=1.276.0&compression=base64"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/array/phc_Fgf9Nr86STb590T6qQQ5XI3G63UQ4LQGyA1aKS5ROvS/config.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/array/phc_Fgf9Nr86STb590T6qQQ5XI3G63UQ4LQGyA1aKS5ROvS/config?ip=0&_=1791677688017&ver=1.276.0"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?ip=0&_=1791677687732&ver=1.276.0&compression=gzip-js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?retry_count=1&ip=0&_=1791677695110&ver=1.276.0"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": ""
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "2559B1059BAAFC1E2E07B41FC0C886FB",
+   "status": 200,
+   "url": "https://app.ens.domains/",
+   "mime": "text/html",
+   "csp": "worker-src 'self' blob: https://app.beta.usecapsule.com https://app.usecapsule.com; script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://app.intercom.io https://widget.intercom.io https://js.intercomcdn.com https://app.beta.usecapsule.com https://app.usecapsule.com 'wasm-unsafe-eval' 'sha256-UyYcl+sKCF/ROFZPHBlozJrndwfNiC5KT5ZZfup/pPc=' 'sha256-84jekTLuMPFFzbBxEFpoUhJbu81z5uBinvhIKKkAPxg='; frame-ancestors 'self' https://app.safe.global;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "CF2D534AB6D8E53F8D3768B0793EED2F",
+   "status": 200,
+   "url": "https://verify.walletconnect.com/9b14144d470af1e03ab9d88aaa127332",
+   "mime": "text/html",
+   "csp": "frame-ancestors https://*.app.ens.domains https://app.ens.domains https://localhost:* http://localhost:* https://*.localhost:* http://*.localhost:* https://127.0.0.1:* http://127.0.0.1:*",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "2559B1059BAAFC1E2E07B41FC0C886FB",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.ens.domains/",
+  "mime": "text/html",
+  "csp": "worker-src 'self' blob: https://app.beta.usecapsule.com https://app.usecapsule.com; script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://app.intercom.io https://widget.intercom.io https://js.intercomcdn.com https://app.beta.usecapsule.com https://app.usecapsule.com 'wasm-unsafe-eval' 'sha256-UyYcl+sKCF/ROFZPHBlozJrndwfNiC5KT5ZZfup/pPc=' 'sha256-84jekTLuMPFFzbBxEFpoUhJbu81z5uBinvhIKKkAPxg='; frame-ancestors 'self' https://app.safe.global;",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "ENS",
+  "bodyLen": 694,
+  "nodes": 342,
+  "readyState": "complete",
+  "head": "Connect Your web3 username Your identity across web3, one name for all your crypto addresses, and your decentralised website. Name search ENSv2 is coming! Updates to pricing, discounts and grace period Learn more ENS use"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 22,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect",
+   "tag": "BUTTON",
+   "x": 1244,
+   "y": 56,
+   "top": 32
+  },
+  "all": [
+   "1:Connect"
+  ]
+ },
+ "clicked1": "Connect",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "ENS",
+  "bodyLen": 694,
+  "nodes": 343,
+  "readyState": "complete",
+  "head": "Connect Your web3 username Your identity across web3, one name for all your crypto addresses, and your decentralised website. Name search ENSv2 is coming! Updates to pricing, discounts and grace period Learn more ENS use"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 22,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 8,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem",
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.ens.domains/",
+ "ms": 19412
+}

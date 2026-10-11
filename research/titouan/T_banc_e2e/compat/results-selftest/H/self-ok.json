@@ -1,0 +1,175 @@
+{
+ "siteId": "self-ok",
+ "url": "http://127.0.0.1:8777/ok",
+ "arm": "hardened",
+ "started": "2026-10-11T00:10:12.926Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "http://127.0.0.1:8777/ok"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "http://127.0.0.1:8777/ok"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "http://127.0.0.1:8777/ok"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "http://127.0.0.1:8777/ok"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "http://127.0.0.1:8777/ok"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "url": "http://127.0.0.1:8777/favicon.ico"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "27F178E25B8D50D38935D3966675E3FB",
+   "status": 200,
+   "url": "http://127.0.0.1:8777/ok",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "27F178E25B8D50D38935D3966675E3FB",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "http://127.0.0.1:8777/ok",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": null
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "/ok",
+  "bodyLen": 17,
+  "nodes": 9,
+  "readyState": "complete",
+  "head": "ok Connect Wallet"
+ },
+ "state0": {
+  "mode": "hardened",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 94.6953125,
+   "y": 104.375,
+   "top": 79.875
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "/ok",
+  "bodyLen": 41,
+  "nodes": 9,
+  "readyState": "complete",
+  "head": "ok Connect Wallet Connected 0x1111...1111"
+ },
+ "state1": {
+  "mode": "hardened",
+  "reads": 1,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [
+   "eth_requestAccounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 1,
+  "wreads": {
+   "request": 1
+  }
+ },
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "http://127.0.0.1:8777/ok",
+ "ms": 8165
+}

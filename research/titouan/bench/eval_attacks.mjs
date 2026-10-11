@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { rpc, wilson, pool } from "./lib.mjs";
-import { decode, RULES, flagged } from "./core.mjs";
+import { decode, RULES, flagged, isGrant } from "./core.mjs";
 const ETH = "https://gateway.tenderly.co/public/mainnet";
 const rows = JSON.parse(fs.readFileSync("data/attack_approval_logs.json", "utf8"));
 let done = 0;
@@ -14,7 +14,9 @@ for (let i = 0; i < rows.length; i++) { const t = txs[i]; if (!t) continue; cons
 // pour la règle R3, le spender pertinent est celui du log si le décodage direct ne le voit pas
 const n = res.length;
 const direct = res.filter(e => ["approve", "increaseAllowance", "permit", "setApprovalForAll", "permit2_approve"].includes(e.kind));
-const out = { n_tx_attaque: n, vus_par_decodeur_direct: direct.length, par_type: {} };
+const grants = direct.filter(isGrant); const grantsFlag = grants.filter(e => flagged(e, ctx).length > 0);
+const [lg1, hg1] = wilson(grantsFlag.length, grants.length);
+const out = { correction: "approve(0) = révocation, exclu des droits (11/10 01h50)", n_droits_directs_reels: grants.length, rappel_filet_sur_droits_directs_reels: { k: grantsFlag.length, n: grants.length, pct: +(100 * grantsFlag.length / grants.length).toFixed(1), wilson95: [+(100 * lg1).toFixed(1), +(100 * hg1).toFixed(1)] }, n_approve_zero: direct.length - grants.length, n_tx_attaque: n, vus_par_decodeur_direct: direct.length, par_type: {} };
 for (const e of res) out.par_type[e.kind] = (out.par_type[e.kind] || 0) + 1;
 const anyFlag = res.filter(e => flagged(e, ctx).length > 0);
 const anyFlagDirect = direct.filter(e => flagged(e, ctx).length > 0);

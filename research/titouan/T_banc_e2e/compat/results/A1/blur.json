@@ -1,0 +1,169 @@
+{
+ "siteId": "blur",
+ "url": "https://blur.io/",
+ "arm": "control",
+ "started": "2026-10-11T00:13:37.906Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://blur.io/"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://blur.io/collections?showModal=true"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://blur.io/collections?showModal=true"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://blur.io/collections?showModal=true"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "C43FBAD7D26ACFA8EE4309C7B79C6C7F",
+   "status": 200,
+   "url": "https://blur.io/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self';",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "Vercel"
+  },
+  {
+   "frameId": "C43FBAD7D26ACFA8EE4309C7B79C6C7F",
+   "status": 200,
+   "url": "https://blur.io/collections?showModal=true",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self';",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "C43FBAD7D26ACFA8EE4309C7B79C6C7F",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:CONNECT WALLET"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://blur.io/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self';",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Blur: NFT Marketplace for Pro Traders",
+  "bodyLen": 2142,
+  "nodes": 987,
+  "readyState": "complete",
+  "head": "Collections Portfolio Activity Airdrop K Connect Wallet Azuki BY Chiru Labs Floor Price 0.60 1D Volume 4.14 View Collection Azuki Kanpai Pandas Bored Ape Yacht Club Checks - VV Originals Pudgy Penguins Trending Top Colle"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "CONNECT WALLET",
+   "tag": "BUTTON",
+   "x": 1260.75,
+   "y": 31,
+   "top": 13
+  },
+  "all": [
+   "1:CONNECT WALLET"
+  ]
+ },
+ "clicked1": "CONNECT WALLET",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "All Collections | Blur",
+  "bodyLen": 204,
+  "nodes": 320,
+  "readyState": "complete",
+  "head": "Collections Portfolio Activity Airdrop K Connect Wallet collections trending favorites points Floor Price Floor Price Top Bid 1D Change 7D Change 15M Volume 1D Volume 7D Volume Owners Supply Collect Trade"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 3,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://blur.io/collections?showModal=true",
+ "ms": 19206
+}

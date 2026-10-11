@@ -1,0 +1,219 @@
+{
+ "siteId": "traderjoe",
+ "url": "https://lfj.gg/",
+ "arm": "control",
+ "started": "2026-10-11T00:12:43.175Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://lfj.gg/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://lfj.gg/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://lfj.gg/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lfj.gg/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://lfj.gg/swap"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cm6t8vnaj07qv426yk4ahtox7/embedded-wallets?caid=f5b21903-b976-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://bscrpc.com/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "D8FE2918C92F0B3F522105377590709B",
+   "status": 200,
+   "url": "https://lfj.gg/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self' https://app.safe.global https://dexscreener.com",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "C5D7937CCDED9B57144DD8AB3EF963E0",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cm6t8vnaj07qv426yk4ahtox7/embedded-wallets?caid=f5b21903-b976-4501-89ba-33570af480ea",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:3000 https://www.lfj.gg https://enable-privy-withdrawal.joe-interface-v2.pages.dev https://lfj.gg https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-YzRkZmIzZWQtNWQwZC00MzFkLWE1YzMtMTAwM2ViMDMyNmIz'; style-src 'self' 'nonce-YzRkZmIzZWQtNWQwZC00MzFkLWE1YzMtMTAwM2ViMDMyNmIz'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "D8FE2918C92F0B3F522105377590709B",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://lfj.gg/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self' https://app.safe.global https://dexscreener.com",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "LFJ | Crypto Trading Platform Built for Winners",
+  "bodyLen": 452,
+  "nodes": 308,
+  "readyState": "complete",
+  "head": "Swap Pool POE New Stake Bridge / Login Settings Theme Language English Show testnets RPC Endpoint Public Dedicated Swap Settings Slippage tolerance 0.1% 0.5% 1% % Transaction Deadline minutes Safe Mode Prevent high price"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 31,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 5,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 675.5,
+   "y": 496.375,
+   "top": 472.375
+  },
+  "all": [
+   "1:Connect Wallet",
+   "2:Login"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 1,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "P",
+   "x": 975.9765625,
+   "y": 208.78125,
+   "area": 1457.3505859375
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Connect New! LFJ 1-Click Trading Wallet Execute trades with the speed of a single click and never again miss an entry while waiting on wallet popups. MetaMask Detected Coinbase Wallet Binance Wallet WalletConnect By connecting your wallet, you agree to the Terms of Service and Privacy Policy . I rea",
+  "modalCount": 6,
+  "wc": true,
+  "connectedUI": false,
+  "mmListed": true,
+  "title": "LFJ | Crypto Trading Platform Built for Winners",
+  "bodyLen": 765,
+  "nodes": 367,
+  "readyState": "complete",
+  "head": "Swap Pool POE New Stake Bridge / Login Settings Theme Language English Show testnets RPC Endpoint Public Dedicated Swap Settings Slippage tolerance 0.1% 0.5% 1% % Transaction Deadline minutes Safe Mode Prevent high price"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 32,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 5,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 10,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://lfj.gg/swap",
+ "ms": 33111
+}

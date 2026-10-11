@@ -1,0 +1,32 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Detection du proxy</title></head>
+<body><h1>Detection</h1>
+<script src="/lib/fake_wallet.js"></script>
+<script src="/lib/dapp.js"></script>
+<script>
+window.__detect = function () {
+  var e = window.ethereum, R = {}, T = Function.prototype.toString;
+  R.toStringSameAsOriginal = String(e.request) === window.__expect.MetaMask;
+  R.toStringLooksNative = /\[native code\]/.test(T.call(e.request));
+  R.toStringOfToStringNative = /^function toString\(\) \{ \[native code\] \}$/.test(T.call(T));
+  R.defineProperty_native = /^function defineProperty\(\) \{ \[native code\] \}$/.test(T.call(Object.defineProperty));
+  R.nameLength = e.request.name === 'request' && e.request.length === 1;
+  R.ownPropsSame = Object.getOwnPropertyNames(e.request).join() === window.__expectProps.MetaMask;
+  R.identityStable = (e === window.ethereum) && (e.request === e.request) && (window.ethereum === window.__wallets.MetaMask);
+  var d = Object.getOwnPropertyDescriptor(e, 'request');
+  R.requestDescriptor = !!(d && typeof d.value === 'function' && d.writable && d.enumerable && d.configurable);
+  R.flagsKept = e.isMetaMask === true && typeof e.on === 'function' && typeof e.removeListener === 'function';
+  R.keysSame = Object.keys(e).join() === Object.keys(window.__wallets.MetaMask).join();
+  R.instanceofFn = e.request instanceof Function && typeof e.request.call === 'function';
+  var wd = Object.getOwnPropertyDescriptor(window, 'ethereum');
+  R.windowEthereumIsAccessor = !!(wd && (wd.get || wd.set));  // information: un accesseur est visible
+  var f = document.createElement('iframe'); document.body.appendChild(f);
+  var T2 = f.contentWindow.Function.prototype.toString;
+  var s2 = T2.call(e.request);
+  R.cleanRealmToString = s2 === window.__expect.MetaMask ? 'same' : s2;
+  R.cleanRealmDetected = s2 !== window.__expect.MetaMask;
+  var s3 = T2.call(Object.defineProperty);
+  R.cleanRealmDefinePropertyDetected = !/^function defineProperty\(\) \{ \[native code\] \}$/.test(s3);
+  f.remove();
+  return R;
+};
+</script></body></html>

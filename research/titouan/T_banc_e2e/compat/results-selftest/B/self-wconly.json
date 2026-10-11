@@ -1,0 +1,153 @@
+{
+ "siteId": "self-wconly",
+ "url": "http://127.0.0.1:8777/wconly",
+ "arm": "test",
+ "started": "2026-10-11T00:08:46.212Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "http://127.0.0.1:8777/wconly"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "http://127.0.0.1:8777/wconly"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "http://127.0.0.1:8777/wconly"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "1D92F57326841FD6F2C46C03A3B5C90D",
+   "status": 200,
+   "url": "http://127.0.0.1:8777/wconly",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "1D92F57326841FD6F2C46C03A3B5C90D",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "http://127.0.0.1:8777/wconly",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": null
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "/wconly",
+  "bodyLen": 83,
+  "nodes": 9,
+  "readyState": "complete",
+  "head": "walletconnect only Connect Wallet WalletConnect: scan this QR code with your wallet"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 60.953125,
+   "y": 90.375,
+   "top": 79.875
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "WalletConnect: scan this QR code with your wallet",
+  "modalCount": 1,
+  "wc": true,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "/wconly",
+  "bodyLen": 83,
+  "nodes": 9,
+  "readyState": "complete",
+  "head": "walletconnect only Connect Wallet WalletConnect: scan this QR code with your wallet"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "http://127.0.0.1:8777/wconly",
+ "ms": 8412
+}

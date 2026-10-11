@@ -1,0 +1,187 @@
+{
+ "siteId": "self-csp",
+ "url": "http://127.0.0.1:8777/csp",
+ "arm": "test",
+ "started": "2026-10-11T00:08:30.052Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "http://127.0.0.1:8777/csp"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "http://127.0.0.1:8777/csp"
+  },
+  {
+   "t": "wreq",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "http://127.0.0.1:8777/csp"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "http://127.0.0.1:8777/csp"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "http://127.0.0.1:8777/csp"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Applying inline style violates the following Content Security Policy directive 'default-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-4TCRAk7BGHGX0wV0wJfCvM2u4fXWTxn09wboH6vf9Y0='),",
+   "url": "http://127.0.0.1:8777/csp"
+  },
+  {
+   "source": "security",
+   "text": "Applying inline style violates the following Content Security Policy directive 'default-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-Yz31hP6jMYFERFmTt2B6tPrveUSa522cwgrSqiAJGKc='),",
+   "url": "http://127.0.0.1:8777/csp"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-m5lAjXB3objB6iPM4xK5c8pGjYTrocMTkj25TxNCzcw=')",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "4DBBBA37A734D9066CD50DBDF350921A",
+   "status": 200,
+   "url": "http://127.0.0.1:8777/csp",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self'",
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "4DBBBA37A734D9066CD50DBDF350921A",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "http://127.0.0.1:8777/csp",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self'",
+  "cspRO": null,
+  "xfo": null,
+  "server": null
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "/csp",
+  "bodyLen": 18,
+  "nodes": 9,
+  "readyState": "complete",
+  "head": "csp Connect Wallet"
+ },
+ "state0": {
+  "mode": "test",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 60.953125,
+   "y": 90.375,
+   "top": 79.875
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "/csp",
+  "bodyLen": 42,
+  "nodes": 9,
+  "readyState": "complete",
+  "head": "csp Connect Wallet Connected 0x1111...1111"
+ },
+ "state1": {
+  "mode": "test",
+  "reads": 1,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [
+   "eth_requestAccounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 1,
+  "wreads": {
+   "request": 1
+  }
+ },
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": true,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "http://127.0.0.1:8777/csp",
+ "ms": 7844
+}

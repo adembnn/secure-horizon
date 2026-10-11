@@ -1,0 +1,578 @@
+[
+ {
+  "id": "uniswap",
+  "name": "Uniswap",
+  "category": "DEX",
+  "url": "https://app.uniswap.org/"
+ },
+ {
+  "id": "pangolin",
+  "name": "Pangolin",
+  "category": "DEX",
+  "url": "https://app.pangolin.exchange/"
+ },
+ {
+  "id": "traderjoe",
+  "name": "Trader Joe / LFJ",
+  "category": "DEX",
+  "url": "https://lfj.gg/"
+ },
+ {
+  "id": "aave",
+  "name": "Aave",
+  "category": "Lending",
+  "url": "https://app.aave.com/"
+ },
+ {
+  "id": "benqi",
+  "name": "Benqi",
+  "category": "Lending",
+  "url": "https://app.benqi.fi/"
+ },
+ {
+  "id": "curve",
+  "name": "Curve",
+  "category": "DEX",
+  "url": "https://curve.finance/"
+ },
+ {
+  "id": "1inch",
+  "name": "1inch",
+  "category": "Agrégateur",
+  "url": "https://app.1inch.io/"
+ },
+ {
+  "id": "cow",
+  "name": "CoW Swap",
+  "category": "DEX",
+  "url": "https://swap.cow.fi/"
+ },
+ {
+  "id": "opensea",
+  "name": "OpenSea",
+  "category": "NFT",
+  "url": "https://opensea.io/"
+ },
+ {
+  "id": "blur",
+  "name": "Blur",
+  "category": "NFT",
+  "url": "https://blur.io/"
+ },
+ {
+  "id": "magiceden",
+  "name": "Magic Eden",
+  "category": "NFT",
+  "url": "https://magiceden.io/"
+ },
+ {
+  "id": "rarible",
+  "name": "Rarible",
+  "category": "NFT",
+  "url": "https://rarible.com/"
+ },
+ {
+  "id": "zora",
+  "name": "Zora",
+  "category": "NFT",
+  "url": "https://zora.co/"
+ },
+ {
+  "id": "galxe",
+  "name": "Galxe",
+  "category": "Quêtes",
+  "url": "https://app.galxe.com/"
+ },
+ {
+  "id": "layer3",
+  "name": "Layer3",
+  "category": "Quêtes",
+  "url": "https://layer3.xyz/"
+ },
+ {
+  "id": "snapshot",
+  "name": "Snapshot",
+  "category": "Gouvernance",
+  "url": "https://snapshot.org/"
+ },
+ {
+  "id": "tally",
+  "name": "Tally",
+  "category": "Gouvernance",
+  "url": "https://www.tally.xyz/"
+ },
+ {
+  "id": "ens",
+  "name": "ENS app",
+  "category": "Identité",
+  "url": "https://app.ens.domains/"
+ },
+ {
+  "id": "etherscan",
+  "name": "Etherscan",
+  "category": "Explorateur",
+  "url": "https://etherscan.io/"
+ },
+ {
+  "id": "snowtrace",
+  "name": "Snowtrace",
+  "category": "Explorateur",
+  "url": "https://snowtrace.io/"
+ },
+ {
+  "id": "revoke",
+  "name": "Revoke.cash",
+  "category": "Sécurité",
+  "url": "https://revoke.cash/"
+ },
+ {
+  "id": "rabby",
+  "name": "Rabby (site)",
+  "category": "Portefeuille",
+  "url": "https://rabby.io/"
+ },
+ {
+  "id": "core",
+  "name": "Core web",
+  "category": "Portefeuille",
+  "url": "https://core.app/"
+ },
+ {
+  "id": "zapper",
+  "name": "Zapper",
+  "category": "Portfolio",
+  "url": "https://zapper.xyz/"
+ },
+ {
+  "id": "debank",
+  "name": "DeBank",
+  "category": "Portfolio",
+  "url": "https://debank.com/"
+ },
+ {
+  "id": "jumper",
+  "name": "Jumper / LI.FI",
+  "category": "Bridge",
+  "url": "https://jumper.exchange/"
+ },
+ {
+  "id": "stargate",
+  "name": "Stargate",
+  "category": "Bridge",
+  "url": "https://stargate.finance/"
+ },
+ {
+  "id": "across",
+  "name": "Across",
+  "category": "Bridge",
+  "url": "https://app.across.to/"
+ },
+ {
+  "id": "hop",
+  "name": "Hop",
+  "category": "Bridge",
+  "url": "https://app.hop.exchange/"
+ },
+ {
+  "id": "synapse",
+  "name": "Synapse",
+  "category": "Bridge",
+  "url": "https://synapseprotocol.com/"
+ },
+ {
+  "id": "corebridge",
+  "name": "Core bridge",
+  "category": "Bridge",
+  "url": "https://core.app/bridge/"
+ },
+ {
+  "id": "lens",
+  "name": "Lens",
+  "category": "Social",
+  "url": "https://www.lens.xyz/"
+ },
+ {
+  "id": "farcaster",
+  "name": "Farcaster",
+  "category": "Social",
+  "url": "https://farcaster.xyz/"
+ },
+ {
+  "id": "safe",
+  "name": "Safe{Wallet}",
+  "category": "Multisig",
+  "url": "https://app.safe.global/"
+ },
+ {
+  "id": "gnosis",
+  "name": "Gnosis",
+  "category": "Multisig",
+  "url": "https://www.gnosis.io/"
+ },
+ {
+  "id": "lido",
+  "name": "Lido",
+  "category": "Staking",
+  "url": "https://stake.lido.fi/"
+ },
+ {
+  "id": "rocketpool",
+  "name": "Rocket Pool",
+  "category": "Staking",
+  "url": "https://stake.rocketpool.net/"
+ },
+ {
+  "id": "pendle",
+  "name": "Pendle",
+  "category": "Rendement",
+  "url": "https://app.pendle.finance/"
+ },
+ {
+  "id": "gmx",
+  "name": "GMX",
+  "category": "Perps",
+  "url": "https://app.gmx.io/"
+ },
+ {
+  "id": "dydx",
+  "name": "dYdX",
+  "category": "Perps",
+  "url": "https://dydx.trade/"
+ },
+ {
+  "id": "hyperliquid",
+  "name": "Hyperliquid",
+  "category": "Perps",
+  "url": "https://app.hyperliquid.xyz/"
+ },
+ {
+  "id": "phantom",
+  "name": "Phantom (EVM)",
+  "category": "Portefeuille",
+  "url": "https://phantom.com/"
+ },
+ {
+  "id": "coinbase",
+  "name": "Coinbase web",
+  "category": "CEX/Wallet",
+  "url": "https://www.coinbase.com/"
+ },
+ {
+  "id": "binanceweb3",
+  "name": "Binance Web3",
+  "category": "CEX/Wallet",
+  "url": "https://www.binance.com/en/web3wallet"
+ },
+ {
+  "id": "mmportfolio",
+  "name": "MetaMask Portfolio",
+  "category": "Portfolio",
+  "url": "https://portfolio.metamask.io/"
+ },
+ {
+  "id": "wcsample",
+  "name": "WalletConnect sample dApp",
+  "category": "Exemple SDK",
+  "url": "https://react-app.walletconnect.com/"
+ },
+ {
+  "id": "rainbowkit",
+  "name": "RainbowKit",
+  "category": "Exemple SDK",
+  "url": "https://www.rainbowkit.com/"
+ },
+ {
+  "id": "wagmi",
+  "name": "wagmi",
+  "category": "Exemple SDK",
+  "url": "https://wagmi.sh/"
+ },
+ {
+  "id": "web3modal",
+  "name": "Web3Modal lab",
+  "category": "Exemple SDK",
+  "url": "https://lab.web3modal.com/"
+ },
+ {
+  "id": "appkit",
+  "name": "Reown AppKit lab",
+  "category": "Exemple SDK",
+  "url": "https://appkit-lab.reown.com/"
+ },
+ {
+  "id": "balancer",
+  "name": "Balancer",
+  "category": "DEX",
+  "url": "https://balancer.fi/"
+ },
+ {
+  "id": "compound",
+  "name": "Compound",
+  "category": "Lending",
+  "url": "https://app.compound.finance/"
+ },
+ {
+  "id": "morpho",
+  "name": "Morpho",
+  "category": "Lending",
+  "url": "https://app.morpho.org/"
+ },
+ {
+  "id": "spark",
+  "name": "Spark",
+  "category": "Lending",
+  "url": "https://app.spark.fi/"
+ },
+ {
+  "id": "yearn",
+  "name": "Yearn",
+  "category": "Rendement",
+  "url": "https://yearn.fi/"
+ },
+ {
+  "id": "sushi",
+  "name": "Sushi",
+  "category": "DEX",
+  "url": "https://www.sushi.com/swap"
+ },
+ {
+  "id": "pancake",
+  "name": "PancakeSwap",
+  "category": "DEX",
+  "url": "https://pancakeswap.finance/"
+ },
+ {
+  "id": "kyber",
+  "name": "KyberSwap",
+  "category": "Agrégateur",
+  "url": "https://kyberswap.com/"
+ },
+ {
+  "id": "matcha",
+  "name": "Matcha",
+  "category": "Agrégateur",
+  "url": "https://matcha.xyz/"
+ },
+ {
+  "id": "velora",
+  "name": "Velora (ParaSwap)",
+  "category": "Agrégateur",
+  "url": "https://app.velora.xyz/"
+ },
+ {
+  "id": "odos",
+  "name": "Odos",
+  "category": "Agrégateur",
+  "url": "https://app.odos.xyz/"
+ },
+ {
+  "id": "ethena",
+  "name": "Ethena",
+  "category": "Rendement",
+  "url": "https://app.ethena.fi/"
+ },
+ {
+  "id": "eigenlayer",
+  "name": "EigenLayer",
+  "category": "Staking",
+  "url": "https://app.eigenlayer.xyz/"
+ },
+ {
+  "id": "etherfi",
+  "name": "ether.fi",
+  "category": "Staking",
+  "url": "https://app.ether.fi/"
+ },
+ {
+  "id": "sky",
+  "name": "Sky (Maker)",
+  "category": "Lending",
+  "url": "https://app.sky.money/"
+ },
+ {
+  "id": "superbridge",
+  "name": "Superbridge",
+  "category": "Bridge",
+  "url": "https://superbridge.app/"
+ },
+ {
+  "id": "arbbridge",
+  "name": "Arbitrum Bridge",
+  "category": "Bridge",
+  "url": "https://bridge.arbitrum.io/"
+ },
+ {
+  "id": "polygonportal",
+  "name": "Polygon Portal",
+  "category": "Bridge",
+  "url": "https://portal.polygon.technology/"
+ },
+ {
+  "id": "gnosisbridge",
+  "name": "Gnosis Chain bridge",
+  "category": "Bridge",
+  "url": "https://bridge.gnosischain.com/"
+ },
+ {
+  "id": "looksrare",
+  "name": "LooksRare",
+  "category": "NFT",
+  "url": "https://looksrare.org/"
+ },
+ {
+  "id": "foundation",
+  "name": "Foundation",
+  "category": "NFT",
+  "url": "https://foundation.app/"
+ },
+ {
+  "id": "superrare",
+  "name": "SuperRare",
+  "category": "NFT",
+  "url": "https://superrare.com/"
+ },
+ {
+  "id": "mintfun",
+  "name": "mint.fun",
+  "category": "NFT",
+  "url": "https://mint.fun/"
+ },
+ {
+  "id": "nouns",
+  "name": "Nouns",
+  "category": "DAO",
+  "url": "https://nouns.wtf/"
+ },
+ {
+  "id": "defillama",
+  "name": "DefiLlama",
+  "category": "Données",
+  "url": "https://defillama.com/"
+ },
+ {
+  "id": "dune",
+  "name": "Dune",
+  "category": "Données",
+  "url": "https://dune.com/"
+ },
+ {
+  "id": "zerion",
+  "name": "Zerion",
+  "category": "Portfolio",
+  "url": "https://app.zerion.io/"
+ },
+ {
+  "id": "gitcoinpassport",
+  "name": "Gitcoin Passport",
+  "category": "Identité",
+  "url": "https://passport.gitcoin.co/"
+ },
+ {
+  "id": "guild",
+  "name": "Guild.xyz",
+  "category": "Communauté",
+  "url": "https://guild.xyz/"
+ },
+ {
+  "id": "collabland",
+  "name": "Collab.Land",
+  "category": "Communauté",
+  "url": "https://www.collab.land/"
+ },
+ {
+  "id": "mirror",
+  "name": "Mirror",
+  "category": "Social",
+  "url": "https://mirror.xyz/"
+ },
+ {
+  "id": "paragraph",
+  "name": "Paragraph",
+  "category": "Social",
+  "url": "https://paragraph.com/"
+ },
+ {
+  "id": "poap",
+  "name": "POAP",
+  "category": "NFT",
+  "url": "https://poap.xyz/"
+ },
+ {
+  "id": "platypus",
+  "name": "Platypus",
+  "category": "DEX",
+  "url": "https://platypus.finance/"
+ },
+ {
+  "id": "yieldyak",
+  "name": "Yield Yak",
+  "category": "Rendement",
+  "url": "https://yieldyak.com/"
+ },
+ {
+  "id": "gains",
+  "name": "gTrade (Gains)",
+  "category": "Perps",
+  "url": "https://gains.trade/"
+ },
+ {
+  "id": "instadapp",
+  "name": "Instadapp",
+  "category": "Lending",
+  "url": "https://instadapp.io/"
+ },
+ {
+  "id": "thegraph",
+  "name": "The Graph",
+  "category": "Infra",
+  "url": "https://thegraph.com/"
+ },
+ {
+  "id": "unlock",
+  "name": "Unlock Protocol",
+  "category": "Infra",
+  "url": "https://app.unlock-protocol.com/"
+ },
+ {
+  "id": "rainbowwallet",
+  "name": "Rainbow",
+  "category": "Portefeuille",
+  "url": "https://rainbow.me/"
+ },
+ {
+  "id": "zksync",
+  "name": "zkSync Portal",
+  "category": "Bridge",
+  "url": "https://portal.zksync.io/"
+ },
+ {
+  "id": "basebridge",
+  "name": "Base bridge",
+  "category": "Bridge",
+  "url": "https://bridge.base.org/"
+ },
+ {
+  "id": "aerodrome",
+  "name": "Aerodrome",
+  "category": "DEX",
+  "url": "https://aerodrome.finance/"
+ },
+ {
+  "id": "jupiter",
+  "name": "Jupiter (Solana, non-EVM)",
+  "category": "Non-EVM",
+  "url": "https://jup.ag/"
+ },
+ {
+  "id": "tensor",
+  "name": "Tensor (Solana, non-EVM)",
+  "category": "Non-EVM",
+  "url": "https://www.tensor.trade/"
+ },
+ {
+  "id": "ethereumorg",
+  "name": "ethereum.org",
+  "category": "Contenu",
+  "url": "https://ethereum.org/"
+ }
+]

@@ -1,0 +1,8 @@
+id;categorie;verdict;charge_A1;charge_B;charge_A2;detecte_A1;detecte_B;req_A1;req_B;req_A2;ui_A1;ui_B;causes
+self-ok;Selftest;PASS;true;true;true;true;true;true;true;true;true;true;
+self-csp;Selftest;PASS;true;true;true;true;true;true;true;true;true;true;CSP (injection par <script> en ligne bloquee)
+self-antiproxy;Selftest;CASSE;true;true;true;true;true;true;false;true;true;false;perte: appel eth_requestAccounts / perte: UI affiche l'etat connecte / detection de proxy (hypothese: perte d'eth_requestAccounts sans erreur)
+self-wconly;Selftest;PASS;true;true;true;true;true;false;false;false;false;false;WalletConnect propose, pas d'appel eth_requestAccounts
+self-eip6963;Selftest;PASS;true;true;true;true;true;true;true;true;true;true;
+self-static;Selftest;PASS;true;true;true;true;true;false;false;false;false;false;
+self-framehost;Selftest;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre)

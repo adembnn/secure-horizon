@@ -1,0 +1,205 @@
+{
+ "siteId": "snowtrace",
+ "url": "https://snowtrace.io/",
+ "arm": "control",
+ "started": "2026-10-11T00:14:44.836Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://snowtrace.io/"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://snowtrace.io/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://snowtrace.io/auth/login"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://snowtrace.io/auth/login"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://snowtrace.io/auth/login"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "TypeError: Failed to register a ServiceWorker for scope ('https://snowtrace.io/~partytown/') with script ('https://snowtrace.io/~partytown/partytown-sw.js'): A bad HTTP response code (403) was received when fetching the script."
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "A bad HTTP response code (403) was received when fetching the script.",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "5C0C42CD548D605AF24FBDD5EF171890",
+   "status": 202,
+   "url": "https://snowtrace.io/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "CloudFront"
+  },
+  {
+   "frameId": "5C0C42CD548D605AF24FBDD5EF171890",
+   "status": 200,
+   "url": "https://snowtrace.io/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "nginx"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "5C0C42CD548D605AF24FBDD5EF171890",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Sign In"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://snowtrace.io/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "nginx"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Avalanche C-Chain (AVAX) Blockchain Explorer | Snowtrace",
+  "bodyLen": 3615,
+  "nodes": 1316,
+  "readyState": "complete",
+  "head": "AVAX Price: $10.36 ( + 0.12 %) Gas: 6.25 nAVAX TPS: 14.9 Testnet Home Blockchain Tokens NFTs Insights Developers More Sign In Snowtrace Multichain Explorer AVAX Price $10.36 @ 0.00012484 BTC ( + 0.12 %) Market Cap $4,594"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 2,
+   "text": "Sign In",
+   "tag": "A",
+   "x": 1274.84375,
+   "y": 104,
+   "top": 88
+  },
+  "all": [
+   "2:Sign In",
+   "2:Sign In"
+  ]
+ },
+ "clicked1": "Sign In",
+ "clickedTier": 2,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "find3": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Sign in",
+   "tag": "BUTTON",
+   "x": 990.34375,
+   "y": 480.75,
+   "top": 464.75
+  },
+  "all": [
+   "2:Sign in"
+  ]
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Avalanche C-Chain Login | Snowtrace",
+  "bodyLen": 493,
+  "nodes": 307,
+  "readyState": "complete",
+  "head": "Avalanche C-Chain Login | Snowtrace Cookie Policy We use cookies to improve your experience. Read our Cookie Policy. Accept all Reject all Manage preferences Open explorer Explore Avalanche, onchain. Create your API key "
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 38,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 4,
+  "calls": [
+   "eth_accounts"
+  ],
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 6,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://snowtrace.io/auth/login",
+ "ms": 10373
+}

@@ -1,0 +1,406 @@
+{
+  "browser": "Edg/155.0.4283.45",
+  "counts": {
+    "PASS": 64,
+    "FAIL": 0,
+    "LIMITE": 2
+  },
+  "results": [
+    {
+      "name": "A1 manifest MV3 conforme (world MAIN, document_start, all_frames, match_about_blank)",
+      "status": "PASS",
+      "detail": "{\"mv\":3,\"main\":{\"run_at\":\"document_start\",\"all_frames\":true,\"match_about_blank\":true,\"js\":[\"inject.js\"]}}",
+      "ms": 1
+    },
+    {
+      "name": "A2 permissions minimales et reseau sortant limite a 127.0.0.1:8787",
+      "status": "PASS",
+      "detail": "{\"permissions\":[\"storage\"],\"host_permissions\":[\"http://127.0.0.1:8787/*\"],\"csp\":\"script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8787\"}",
+      "ms": 1
+    },
+    {
+      "name": "A3 l'extension est chargee et l'accesseur window.ethereum est installe au document_start",
+      "status": "PASS",
+      "detail": "{\"accessor\":true,\"configurable\":true,\"hasEth\":\"undefined\"}",
+      "ms": 359
+    },
+    {
+      "name": "B eth_sendTransaction : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"eth_sendTransaction\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"eth_sendTransaction\",\"params_equal\":true}}",
+      "ms": 2452
+    },
+    {
+      "name": "B eth_signTransaction : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"eth_signTransaction\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"eth_signTransaction\",\"params_equal\":true}}",
+      "ms": 1562
+    },
+    {
+      "name": "B eth_sign : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"eth_sign\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"eth_sign\",\"params_equal\":true}}",
+      "ms": 1597
+    },
+    {
+      "name": "B personal_sign : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"personal_sign\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"personal_sign\",\"params_equal\":true}}",
+      "ms": 1508
+    },
+    {
+      "name": "B eth_signTypedData : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"eth_signTypedData\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"eth_signTypedData\",\"params_equal\":true}}",
+      "ms": 1458
+    },
+    {
+      "name": "B eth_signTypedData_v3 : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"eth_signTypedData_v3\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"eth_signTypedData_v3\",\"params_equal\":true}}",
+      "ms": 1545
+    },
+    {
+      "name": "B eth_signTypedData_v4 : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"eth_signTypedData_v4\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"eth_signTypedData_v4\",\"params_equal\":true}}",
+      "ms": 1400
+    },
+    {
+      "name": "B wallet_sendCalls : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"wallet_sendCalls\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"wallet_sendCalls\",\"params_equal\":true}}",
+      "ms": 1410
+    },
+    {
+      "name": "B wallet_addEthereumChain : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"wallet_addEthereumChain\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x89\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"wallet_addEthereumChain\",\"params_equal\":true}}",
+      "ms": 1452
+    },
+    {
+      "name": "B wallet_switchEthereumChain : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"wallet_switchEthereumChain\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x89\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"wallet_switchEthereumChain\",\"params_equal\":true}}",
+      "ms": 1430
+    },
+    {
+      "name": "B wallet_requestPermissions : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"wallet_requestPermissions\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"wallet_requestPermissions\",\"params_equal\":true}}",
+      "ms": 1444
+    },
+    {
+      "name": "B eth_sendRawTransaction : retenue, /check correct, annulation 4001, confirmation transmise",
+      "status": "PASS",
+      "detail": "{\"wallet_calls_while_pending\":0,\"cancel\":{\"code\":4001,\"ok\":false,\"wallet_calls_after\":0},\"check\":{\"method\":\"eth_sendRawTransaction\",\"params_equal\":true,\"origin\":\"http://a.localhost:8899\",\"url\":\"http://a.localhost:8899/dapp.html\",\"chainId\":\"0x1\",\"from\":\"0xa11ce00000000000000000000000000000000001\",\"n\":1},\"confirm\":{\"ok\":true,\"wallet_method\":\"eth_sendRawTransaction\",\"params_equal\":true}}",
+      "ms": 1392
+    },
+    {
+      "name": "B-bis eth_requestAccounts : journal seulement (aucun /check, aucune fenetre, transmis)",
+      "status": "PASS",
+      "detail": "{\"requestOk\":true,\"enableOk\":true,\"check_calls\":0,\"journal\":[\"eth_requestAccounts\",\"eth_requestAccounts\",\"eth_requestAccounts\"]}",
+      "ms": 625
+    },
+    {
+      "name": "B-ter methode non surveillee (eth_blockNumber, eth_accounts) : transmise sans /check",
+      "status": "PASS",
+      "detail": "{\"accounts\":[\"0xa11ce00000000000000000000000000000000001\"],\"check_calls\":0}",
+      "ms": 226
+    },
+    {
+      "name": "B-4 verdict OK du moteur : passe sans fenetre (contact connu, changement de reseau)",
+      "status": "PASS",
+      "detail": "{\"tx\":true,\"switch\":true,\"checks\":2,\"modals\":0}",
+      "ms": 291
+    },
+    {
+      "name": "C1 dApp ethers-like (BrowserProvider.send -> request) : annuler bloque, confirmer transmet",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":193}",
+      "ms": 2313
+    },
+    {
+      "name": "C2a dApp web3.js-like : sendAsync(payload, cb)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":190}",
+      "ms": 2260
+    },
+    {
+      "name": "C2b ancien send(payload, cb)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":191}",
+      "ms": 2277
+    },
+    {
+      "name": "C2c send(method, params) en Promise qui rappelle request() en interne : UNE seule verification et UNE seule fenetre",
+      "status": "PASS",
+      "detail": "{\"ok\":true,\"checks\":1,\"modals\":1,\"wallet_calls\":1}",
+      "ms": 451
+    },
+    {
+      "name": "C2d lot sendAsync([tx, eth_accounts]) : tx annulee seule, le reste transmis",
+      "status": "PASS",
+      "detail": "[{\"id\":1,\"jsonrpc\":\"2.0\",\"error\":{\"code\":4001,\"message\":\"User rejected the request.\"}},{\"id\":2,\"jsonrpc\":\"2.0\",\"result\":[\"0xa11ce00000000000000000000000000000000001\"]}]",
+      "ms": 457
+    },
+    {
+      "name": "C3 EIP-6963 (annonces + requestProvider) : deux fournisseurs, drapeaux conserves, annuler/confirmer",
+      "status": "PASS",
+      "detail": "{\"info\":[{\"name\":\"MetaMask\",\"isMetaMask\":true},{\"name\":\"Rabby\",\"isMetaMask\":true,\"isRabby\":true}],\"cancel\":4001,\"wallet_calls_cancel\":0,\"confirm_ok\":true,\"wallet\":\"MetaMask\"}",
+      "ms": 1000
+    },
+    {
+      "name": "C3b EIP-6963 avec detail gele (Object.freeze) et fournisseur patchable sur place",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":179}",
+      "ms": 2278
+    },
+    {
+      "name": "C4 fournisseur \"late\" (injection tardive / defineProperty / getter / verrouille / gele)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":179}",
+      "ms": 2435
+    },
+    {
+      "name": "C4 fournisseur \"late-define\" (injection tardive / defineProperty / getter / verrouille / gele)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":191}",
+      "ms": 2248
+    },
+    {
+      "name": "C4 fournisseur \"late-delete\" (injection tardive / defineProperty / getter / verrouille / gele)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":195}",
+      "ms": 2184
+    },
+    {
+      "name": "C4 fournisseur \"getter\" (injection tardive / defineProperty / getter / verrouille / gele)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":194}",
+      "ms": 2152
+    },
+    {
+      "name": "C4 fournisseur \"define\" (injection tardive / defineProperty / getter / verrouille / gele)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":176}",
+      "ms": 2180
+    },
+    {
+      "name": "C4 fournisseur \"define-locked\" (injection tardive / defineProperty / getter / verrouille / gele)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":218}",
+      "ms": 2210
+    },
+    {
+      "name": "C4 fournisseur \"frozen-provider\" (injection tardive / defineProperty / getter / verrouille / gele)",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":192}",
+      "ms": 2241
+    },
+    {
+      "name": "C5 providers multiples (multi) : window.ethereum et chaque element de providers[]",
+      "status": "PASS",
+      "detail": "{\"0\":{\"code\":4001,\"wallet_calls\":0},\"1\":{\"code\":4001,\"wallet_calls\":0},\"top\":{\"code\":4001,\"wallet_calls\":0,\"list\":[\"Coinbase\",\"MetaMask\"]}}",
+      "ms": 2239
+    },
+    {
+      "name": "C5 providers multiples (multi-sep) : window.ethereum et chaque element de providers[]",
+      "status": "PASS",
+      "detail": "{\"0\":{\"code\":4001,\"wallet_calls\":0},\"1\":{\"code\":4001,\"wallet_calls\":0},\"top\":{\"code\":4001,\"wallet_calls\":0,\"list\":[\"Rabby\",\"Coinbase\"]}}",
+      "ms": 2209
+    },
+    {
+      "name": "C6 iframe srcdoc (about:srcdoc) : gating dans l'iframe, fenetre dans la frame 0",
+      "status": "PASS",
+      "detail": "{\"cancel\":4001,\"wallet_cancel\":0,\"confirm_ok\":true,\"wallet_confirm\":1,\"frame\":\"child\",\"ui_frame\":\"top\",\"origin_in_check\":\"about:srcdoc\",\"topOrigin\":\"http://a.localhost:8899\"}",
+      "ms": 3327
+    },
+    {
+      "name": "C6 iframe about:blank + document.write : gating dans l'iframe, fenetre dans la frame 0",
+      "status": "PASS",
+      "detail": "{\"cancel\":4001,\"wallet_cancel\":0,\"confirm_ok\":true,\"wallet_confirm\":1,\"frame\":\"child\",\"ui_frame\":\"top\",\"origin_in_check\":\"http://a.localhost:8899\",\"topOrigin\":\"http://a.localhost:8899\"}",
+      "ms": 3404
+    },
+    {
+      "name": "C6 iframe inter-origines (b.localhost) : gating dans l'iframe, fenetre dans la frame 0",
+      "status": "PASS",
+      "detail": "{\"cancel\":4001,\"wallet_cancel\":0,\"confirm_ok\":true,\"wallet_confirm\":1,\"frame\":\"child\",\"ui_frame\":\"top\",\"origin_in_check\":\"http://b.localhost:8899\",\"topOrigin\":\"http://a.localhost:8899\"}",
+      "ms": 3352
+    },
+    {
+      "name": "C7 page avec CSP stricte (script-src self, style-src self, connect-src none) : gating + fenetre OK",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"wallet_calls\":1},\"ui_frame\":\"top\",\"frame\":\"top\",\"ttd\":240}",
+      "ms": 3978
+    },
+    {
+      "name": "C8 TOCTOU : la page modifie les parametres apres la demande, le portefeuille recoit la copie approuvee",
+      "status": "PASS",
+      "detail": "{\"wallet_to\":\"0x1234567890abcdef1234567890abcdef12345678\",\"check_to\":\"0x1234567890abcdef1234567890abcdef12345678\"}",
+      "ms": 1545
+    },
+    {
+      "name": "C9 la page ne peut pas lire, fermer ni casser la fenetre (shadow ferme, prototypes saccages, suppression en boucle)",
+      "status": "PASS",
+      "detail": "{\"decided\":\"confirm\",\"host_vu_par_la_page\":47,\"shadowRoot_lisible\":false,\"suppressions\":47}",
+      "ms": 1246
+    },
+    {
+      "name": "D1 API en retard (reponse apres 4 s) : delai de 3 s puis \"indetermine\", fenetre non verte",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"elapsed_ms\":3215,\"level\":\"unknown\",\"why\":\"delai depasse (3000 ms)\",\"indeterminate\":true,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"elapsed_ms\":3242,\"level\":\"unknown\",\"why\":\"delai depasse (3000 ms)\",\"indeterminate\":true,\"wallet_calls\":1}}",
+      "ms": 6843
+    },
+    {
+      "name": "D1b la limite de 3 s est respectee (mesure)",
+      "status": "PASS",
+      "detail": "{\"latency_check_ms\":3011,\"total_ms\":3222}",
+      "ms": 3466
+    },
+    {
+      "name": "D2 API qui repond HTTP 500",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"elapsed_ms\":225,\"level\":\"unknown\",\"why\":\"reponse HTTP 500\",\"indeterminate\":true,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"elapsed_ms\":236,\"level\":\"unknown\",\"why\":\"reponse HTTP 500\",\"indeterminate\":true,\"wallet_calls\":1}}",
+      "ms": 803
+    },
+    {
+      "name": "D3 API qui repond du JSON invalide",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"elapsed_ms\":251,\"level\":\"unknown\",\"why\":\"reponse invalide (JSON illisible)\",\"indeterminate\":true,\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"elapsed_ms\":249,\"level\":\"unknown\",\"why\":\"reponse invalide (JSON illisible)\",\"indeterminate\":true,\"wallet_calls\":1}}",
+      "ms": 874
+    },
+    {
+      "name": "D4 API arretee (connexion refusee) : indetermine rapidement, jamais vert",
+      "status": "PASS",
+      "detail": "{\"cancel\":{\"ok\":false,\"code\":4001,\"elapsed_ms\":226,\"level\":\"unknown\",\"why\":\"API indisponible\",\"wallet_calls\":0},\"confirm\":{\"ok\":true,\"elapsed_ms\":263,\"level\":\"unknown\",\"why\":\"API indisponible\",\"wallet_calls\":1}}",
+      "ms": 854
+    },
+    {
+      "name": "E1 bras A (sans delai) : Continuer actif tout de suite, time_to_decision_ms journalise",
+      "status": "PASS",
+      "detail": "{\"cancel_visible\":true,\"continue_enabled_after_ms\":0,\"decision\":\"confirm\",\"early_click_blocked\":false,\"frame\":\"top\",\"friction_arm\":\"A\",\"friction_ms\":0,\"grill\":null,\"indeterminate\":false,\"level\":\"danger\",\"method\":\"eth_sendTransaction\",\"origin\":\"http://phish.localhost:8899\",\"stage\":\"verdict\",\"time_to_decision_ms\":219,\"total_ms\":265,\"ts\":1791677407033,\"type\":\"decision\",\"ui_frame\":\"top\",\"viewport\":\"754x487\"}",
+      "ms": 549
+    },
+    {
+      "name": "E2 bras B (delai 1,5 s configure) : un clic anticipe est refuse, decision apres >= 1500 ms",
+      "status": "PASS",
+      "detail": "{\"cancel_visible\":true,\"continue_enabled_after_ms\":1509,\"decision\":\"confirm\",\"early_click_blocked\":true,\"frame\":\"top\",\"friction_arm\":\"B\",\"friction_ms\":1500,\"grill\":null,\"indeterminate\":false,\"level\":\"danger\",\"method\":\"eth_sendTransaction\",\"origin\":\"http://phish.localhost:8899\",\"stage\":\"verdict\",\"time_to_decision_ms\":1539,\"total_ms\":1572,\"ts\":1791677408817,\"type\":\"decision\",\"ui_frame\":\"top\",\"viewport\":\"754x487\"}",
+      "ms": 1781
+    },
+    {
+      "name": "E3 bras C (retaper une phrase) : clic anticipe refuse, phrase retapee, decision journalisee",
+      "status": "PASS",
+      "detail": "{\"cancel_visible\":true,\"continue_enabled_after_ms\":203,\"decision\":\"confirm\",\"early_click_blocked\":true,\"frame\":\"top\",\"friction_arm\":\"C\",\"friction_ms\":0,\"grill\":null,\"indeterminate\":false,\"level\":\"danger\",\"method\":\"eth_sendTransaction\",\"origin\":\"http://phish.localhost:8899\",\"stage\":\"verdict\",\"time_to_decision_ms\":203,\"total_ms\":227,\"ts\":1791677409202,\"type\":\"decision\",\"ui_frame\":\"top\",\"viewport\":\"754x487\"}",
+      "ms": 385
+    },
+    {
+      "name": "E4 niveau Manipulation : retenue configuree (2 s au lieu de 10 min) appliquee au bras B",
+      "status": "PASS",
+      "detail": "{\"cancel_visible\":true,\"continue_enabled_after_ms\":2013,\"decision\":\"confirm\",\"early_click_blocked\":true,\"frame\":\"top\",\"friction_arm\":\"B\",\"friction_ms\":2000,\"grill\":null,\"indeterminate\":false,\"level\":\"manipulation\",\"method\":\"eth_sendTransaction\",\"origin\":\"http://phish.localhost:8899\",\"stage\":\"verdict\",\"time_to_decision_ms\":2029,\"total_ms\":2053,\"ts\":1791677411419,\"type\":\"decision\",\"ui_frame\":\"top\",\"viewport\":\"754x487\"}",
+      "ms": 2219
+    },
+    {
+      "name": "E5 niveau Manipulation, bras A : pas de retenue (temoin)",
+      "status": "PASS",
+      "detail": "{\"cancel_visible\":true,\"continue_enabled_after_ms\":0,\"decision\":\"confirm\",\"early_click_blocked\":false,\"frame\":\"top\",\"friction_arm\":\"A\",\"friction_ms\":0,\"grill\":null,\"indeterminate\":false,\"level\":\"manipulation\",\"method\":\"eth_sendTransaction\",\"origin\":\"http://phish.localhost:8899\",\"stage\":\"verdict\",\"time_to_decision_ms\":197,\"total_ms\":219,\"ts\":1791677411788,\"type\":\"decision\",\"ui_frame\":\"top\",\"viewport\":\"754x487\"}",
+      "ms": 369
+    },
+    {
+      "name": "E6 Annuler toujours visible : danger+adresse, bras C, viewports 1280x720, 375x500, 320x360",
+      "status": "PASS",
+      "detail": "{\"1280x720\":{\"code\":4001,\"cancel_visible\":true,\"viewport\":\"1280x720\",\"level\":\"danger\"},\"375x500\":{\"code\":4001,\"cancel_visible\":true,\"viewport\":\"375x500\",\"level\":\"danger\"},\"320x360\":{\"code\":4001,\"cancel_visible\":true,\"viewport\":\"320x360\",\"level\":\"danger\"}}",
+      "ms": 1708
+    },
+    {
+      "name": "E7 pas de decision lente : annuler a tout moment pendant le delai du bras B",
+      "status": "PASS",
+      "detail": "{\"code\":4001,\"time_to_decision_ms\":359}",
+      "ms": 742
+    },
+    {
+      "name": "F1 question d'intention : le choix part dans /check (intent) ; Annuler a ce stade ne contacte pas le moteur",
+      "status": "PASS",
+      "detail": "{\"intent_in_check\":\"pay\",\"cancel_code\":4001,\"checks_after_cancel\":0}",
+      "ms": 784
+    },
+    {
+      "name": "F2 grilling declenche : intention \"on m'a demande\" + sortie vers adresse nouvelle ; 2 a 4 questions ; 2 signaux = niveau Manipulation",
+      "status": "PASS",
+      "detail": "{\"questions\":2,\"floor\":\"ok\",\"final\":\"manipulation\",\"state\":\"suspect\",\"answers\":[{\"option\":\"phone_msg\",\"qid\":\"origin\",\"signal\":1,\"time_to_decision_ms\":166},{\"option\":\"days\",\"qid\":\"familiarity\",\"signal\":1,\"time_to_decision_ms\":168}]}",
+      "ms": 905
+    },
+    {
+      "name": "F3 time_to_decision_ms journalise pour chaque question et pour la decision finale",
+      "status": "PASS",
+      "detail": "{\"per_question\":[164,167],\"final\":164}",
+      "ms": 956
+    },
+    {
+      "name": "F4 asymetrie : reponses \"propres\" ne descendent jamais sous le plancher objectif (approbation illimitee reste Danger)",
+      "status": "PASS",
+      "detail": "{\"floor\":\"danger\",\"final\":\"danger\"}",
+      "ms": 913
+    },
+    {
+      "name": "F5 reponses propres + intention \"suspecte\" sur sortie ordinaire : pas de montee, plancher OK conserve (passe sans fenetre)",
+      "status": "PASS",
+      "detail": "{\"final\":\"ok\",\"answers\":[\"self\",\"na\",\"alone\",\"no\"],\"wallet_calls\":1}",
+      "ms": 1107
+    },
+    {
+      "name": "F6 intention vague (\"Autre / je ne sais pas\") => UNKNOWN, attentes les plus strictes : monte au moins a Danger",
+      "status": "PASS",
+      "detail": "{\"state\":\"vague\",\"floor\":\"ok\",\"final\":\"danger\"}",
+      "ms": 1066
+    },
+    {
+      "name": "F7 \"je prefere ne pas repondre\" = +1 cran par question, jamais une baisse",
+      "status": "PASS",
+      "detail": "{\"final\":\"manipulation\",\"answers\":[\"prefer_not:1\",\"prefer_not:1\"]}",
+      "ms": 885
+    },
+    {
+      "name": "F8 contradiction verifiable (\"depuis longtemps\" face a un destinataire jamais vu) = +2 crans",
+      "status": "PASS",
+      "detail": "{\"answers\":[{\"option\":\"self\",\"qid\":\"origin\",\"signal\":0,\"time_to_decision_ms\":166},{\"option\":\"long\",\"qid\":\"familiarity\",\"signal\":2,\"time_to_decision_ms\":164},{\"option\":\"alone\",\"qid\":\"guidance\",\"signal\":0,\"time_to_decision_ms\":165},{\"option\":\"no\",\"qid\":\"pressure\",\"signal\":0,\"time_to_decision_ms\":155}],\"final\":\"danger\"}",
+      "ms": 1224
+    },
+    {
+      "name": "F9 pas de declenchement : intention claire + contact connu => aucune question",
+      "status": "PASS",
+      "detail": "{\"checks\":1}",
+      "ms": 386
+    },
+    {
+      "name": "F10 annuler en plein milieu du grilling : bloque, decision \"grill\" journalisee",
+      "status": "PASS",
+      "detail": "{\"code\":4001,\"entry\":{\"stage\":\"grill\",\"decision\":\"cancel\"}}",
+      "ms": 725
+    },
+    {
+      "name": "F11 bras de test : grilling desactive (grill.enabled=false) => aucune question",
+      "status": "PASS",
+      "detail": "{\"final\":\"ok\"}",
+      "ms": 367
+    },
+    {
+      "name": "G1 detection par la page (meme royaume) : toString, nom, longueur, identite, descripteurs, drapeaux",
+      "status": "PASS",
+      "detail": "{\"echecs\":[],\"toStringSameAsOriginal\":true,\"toStringLooksNative\":false,\"toStringOfToStringNative\":true,\"defineProperty_native\":true,\"nameLength\":true,\"ownPropsSame\":true,\"identityStable\":true,\"requestDescriptor\":true,\"flagsKept\":true,\"keysSame\":true,\"instanceofFn\":true,\"windowEthereumIsAccessor\":true,\"cleanRealmToString\":\"function () { [native code] }\",\"cleanRealmDetected\":true,\"cleanRealmDefinePropertyDetected\":true}",
+      "ms": 546
+    },
+    {
+      "name": "G2 detection depuis un royaume \"propre\" (iframe vide cree par la page)",
+      "status": "LIMITE",
+      "detail": "DETECTABLE : Function.prototype.toString d'un iframe vierge renvoie \"function () { [native code] }\" pour request ; defineProperty detecte: true",
+      "ms": 525
+    },
+    {
+      "name": "G3 window.ethereum visible comme accesseur (information)",
+      "status": "LIMITE",
+      "detail": "Object.getOwnPropertyDescriptor(window,'ethereum') montre un accesseur (get/set) la ou un portefeuille reel pose une valeur",
+      "ms": 459
+    }
+  ]
+}

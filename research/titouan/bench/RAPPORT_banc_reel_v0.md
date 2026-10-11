@@ -67,3 +67,13 @@ Non obtenu par cette voie. Les approbations d'attaque récoltées sont des appro
 Pas encore fait : demande 2 lecteurs humains pour 200 tx (étiquettes indépendantes). À planifier avec Titouan/Adem.
 ### Question « origine identifiable » 
 Non : les logs et transactions n'ont pas d'origine web. Le terme « affiché » ne se mesure donc pas sur l'historique ; il ne se mesure que sur une démo contrôlée (site de démo + Snap qui lit l'origine).
+
+## ⚠ CORRECTION MAJEURE (11/10, 01h50) : les 1 354 « attaques » étaient presque toutes des révocations
+Découverte par l'agent du moteur de décodage (engine), confirmée par mon recalcul. Sur les 1 354 transactions d'attaque, 1 186 sont des `approve(…, 0)` : une approbation de valeur ZÉRO, c'est-à-dire une REVOCATION (souvent la victime qui révoque après coup), pas un droit accordé. Je les avais comptées comme des droits. Les chiffres « rappel 80,4 % (R3) pour 0,23 % de FP » et « rappel du filet 81,9 % sur 1 354 attaques » ci-dessus sont donc FAUX en l'état.
+Après correction (un droit = montant > 0 ; core.mjs, fonction isGrant) :
+- Droits directs réels signés par la victime : n = 33 (pas 1 354). Rappel du filet sur ces 33 : 24/33 = 72,7 % (IC95 55,8 – 84,9). Tous les rappels annoncés plus haut doivent être lus avec n = 33.
+- Part restante des 151 vrais droits du fichier : 63 % sont des effets de bord d'un `transferFrom` lancé par l'attaquant (pas une signature de la victime).
+- Faux positifs corrigés sur trafic Ethereum présumé légitime (200 blocs) : R3 0,27 % (au lieu de 0,23 %), au moins une règle 2,98 % (au lieu de 3,15 %).
+- Le signal « preuve sociale » (approbateurs antérieurs) et la comparaison dev/test sur le nonce utilisaient aussi ce jeu : ils sont à REFAIRE sur les droits réels seulement et ne doivent pas être cités.
+- Les fichiers d'avant correction sont conservés (…_AVANT_correction_revocations.json).
+Leçon : toujours vérifier la nature de l'événement (montant) avant de compter une attaque ; nous avons été attrapés par un décodeur écrit par un tiers, ce qui montre l'intérêt de faire relire le banc.

@@ -1,0 +1,44 @@
+[
+ {
+  "id": "self-ok",
+  "name": "selftest ok",
+  "category": "Selftest",
+  "url": "http://127.0.0.1:8777/ok"
+ },
+ {
+  "id": "self-csp",
+  "name": "selftest csp",
+  "category": "Selftest",
+  "url": "http://127.0.0.1:8777/csp"
+ },
+ {
+  "id": "self-antiproxy",
+  "name": "selftest antiproxy",
+  "category": "Selftest",
+  "url": "http://127.0.0.1:8777/antiproxy"
+ },
+ {
+  "id": "self-wconly",
+  "name": "selftest wconly",
+  "category": "Selftest",
+  "url": "http://127.0.0.1:8777/wconly"
+ },
+ {
+  "id": "self-eip6963",
+  "name": "selftest eip6963",
+  "category": "Selftest",
+  "url": "http://127.0.0.1:8777/eip6963"
+ },
+ {
+  "id": "self-static",
+  "name": "selftest static",
+  "category": "Selftest",
+  "url": "http://127.0.0.1:8777/static"
+ },
+ {
+  "id": "self-framehost",
+  "name": "selftest framehost",
+  "category": "Selftest",
+  "url": "http://127.0.0.1:8777/framehost"
+ }
+]
