@@ -53,7 +53,7 @@
   --hu-d-3: 160ms;          /* interrupteur, valeur qui arrive */
   --hu-d-4: 200ms;          /* entrée d'un écran, ligne du journal */
   --hu-d-glove: 340ms;      /* le gant qui se lève */
-  --hu-d-leave: 1000ms;     /* « Ça correspond » : le trait qui se vide avant le départ */
+  --hu-d-leave: 1000ms;     /* « Ça correspond » : la phrase reste une seconde avant le départ */
   --hu-e: cubic-bezier(0.2, 0, 0, 1);         /* standard */
   --hu-e-in: cubic-bezier(0.16, 1, 0.3, 1);   /* arrivée */
   --hu-e-out: cubic-bezier(0.4, 0, 1, 1);     /* sortie */

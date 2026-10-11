@@ -56,7 +56,7 @@
   --hu-d-3: 160ms;          /* interrupteur, valeur qui arrive */
   --hu-d-4: 200ms;          /* entrée d'un écran, ligne du journal */
   --hu-d-glove: 340ms;      /* le gant qui se lève */
-  --hu-d-leave: 1000ms;     /* « Ça correspond » : le trait qui se vide avant le départ */
+  --hu-d-leave: 1000ms;     /* « Ça correspond » : la phrase reste une seconde avant le départ */
   --hu-e: cubic-bezier(0.2, 0, 0, 1);         /* standard */
   --hu-e-in: cubic-bezier(0.16, 1, 0.3, 1);   /* arrivée */
   --hu-e-out: cubic-bezier(0.4, 0, 1, 1);     /* sortie */
@@ -189,10 +189,8 @@
 .hu-wait { display: flex; align-items: baseline; gap: 0.3em; color: var(--hu-ink-2); white-space: nowrap; }
 .hu-is-ready .hu-wait-count { opacity: 0; }
 .hu-wait .hu-num { display: inline-block; min-width: 2ch; text-align: right; }
-/* « Ça correspond » : la phrase qui annonce le départ, et le trait qui se vide en une seconde */
+/* « Ça correspond » : la phrase qui annonce le départ */
 .hu-leave { color: var(--hu-ink-2); }
-.hu-dock { position: relative; }
-.hu-leave-bar { position: absolute; left: 0; right: 0; top: 0; height: 2px; border-radius: 1px; background: var(--hu-ink); transform-origin: 0 50%; }
 
 /* les réponses */
 .hu-verdict { font: var(--hu-strong) var(--hu-t-l) var(--hu-font); text-wrap: balance; }
@@ -409,7 +407,7 @@
  *   hu-is-leaving    l'écran en place s'efface avant d'être remplacé
  *   hu-is-next       demande suivante de la même opération, dans la même fenêtre
  *   hu-is-busy       la vérification dure depuis plus de 150 ms (classe d'état durable, pas une animation)
- *   hu-is-departing  « Ça correspond » : le trait se vide pendant une seconde
+ *   hu-is-departing  « Ça correspond » : la phrase reste une seconde avant le départ
  *   hu-is-ready      la retenue est finie (classe d'état durable)
  *   hu-is-closing    la fenêtre va se fermer
  * Les éléments qui bougent portent .hu-m ; --hu-i (0, 1, 2) les décale de 40 ms. */
@@ -419,7 +417,6 @@
 @keyframes hu-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes hu-side { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
 @keyframes hu-up-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-6px); } }
-@keyframes hu-drain { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 @keyframes hu-push { from { transform: translateY(var(--hu-dy, 0)); } to { transform: none; } }
 /* le gant : il se ramasse (41 ms), monte d'un trait (146 ms), s'arrête net avec un seul tassement (153 ms). Pas de rebond, pas de boucle. */
 @keyframes hu-glove {
@@ -443,8 +440,7 @@
 .hu-is-leaving .hu-m, .hu-is-leaving .hu-glove, .hu-is-leaving .hu-dock { animation: hu-out var(--hu-d-1) var(--hu-e-out) both; }
 
 /* « Ça correspond » puis départ */
-.hu-is-departing .hu-leave-bar { animation: hu-drain var(--hu-d-leave) linear both; }
-.hu-is-closing .hu-stage { animation: hu-up-out var(--hu-d-2) var(--hu-e-out) both; }
+.hu-is-departing .hu-is-closing .hu-stage { animation: hu-up-out var(--hu-d-2) var(--hu-e-out) both; }
 
 /* changements d'état sur place : des transitions, donc interruptibles */
 .hu-under > * { transition: opacity var(--hu-d-2) var(--hu-e); }
@@ -457,7 +453,7 @@
 .hu-entry.is-arriving { animation: hu-rise var(--hu-d-4) var(--hu-e-in) both; }
 .is-pushed { animation: hu-push var(--hu-d-4) var(--hu-e) both; }
 
-/* mouvement réduit : plus de déplacement, les fondus courts restent. Le trait qui se vide reste : il dit le temps. */
+/* mouvement réduit : plus de déplacement, les fondus courts restent. */
 @media (prefers-reduced-motion: reduce) {
   .hu-is-entering .hu-m, .hu-is-next .hu-m, .hu-entry.is-arriving { animation-name: hu-fade; animation-duration: var(--hu-d-2); animation-delay: 0s; }
   .hu-is-entering .hu-glove { animation: hu-fade var(--hu-d-2) var(--hu-e) both; will-change: auto; }
@@ -532,7 +528,7 @@ body { margin: 0; background: var(--hu-page); }
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
 </div>
-<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.<span class="hu-leave-bar"></span></p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
 </div></div></template>
 <template id="t-c-etape1"><div class="hu hu-k hu-win" data-outcome="match"><div class="hu-stage">
 <p class="hu-head"><b>app.neve.exchange</b>, demande 1 sur 2</p>
@@ -541,7 +537,7 @@ body { margin: 0; background: var(--hu-page); }
 <p class="hu-line hu-m" style="--hu-i:1">Cette demande laisse le site prendre 50 USDC, pas plus.</p>
 <p class="hu-next hu-m" style="--hu-i:2">Ensuite, l’échange contre AVAX.</p>
 </div>
-<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.<span class="hu-leave-bar"></span></p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
 </div></div></template>
 <template id="t-c-etape2"><div class="hu hu-k hu-win" data-outcome="match"><div class="hu-stage">
 <p class="hu-head"><b>app.neve.exchange</b>, demande 2 sur 2</p>
@@ -549,7 +545,7 @@ body { margin: 0; background: var(--hu-page); }
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
 </div>
-<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.<span class="hu-leave-bar"></span></p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
 </div></div></template>
 <template id="t-n-montant"><div class="hu hu-k hu-win" data-outcome="mismatch"><div class="hu-stage">
 <div class="hu-mid">
