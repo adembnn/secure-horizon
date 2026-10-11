@@ -35,7 +35,7 @@ Si ça correspond, ça passe. Si le site demande plus que ce que tu as écrit, H
 - Sans Hold up : le droit était illimité. Le jour où le site est piraté, le compte passe de 50 à zéro.
 - Avec Hold up : le droit a été ramené à 50, l’échange l’a entièrement utilisé. Le même piratage ne prend rien. Il reste 50.
 
-Chiffres lus sur la chaîne locale par . Prouvé dans un vrai navigateur avec l’extension : le parcours « avec Hold up ». Le parcours « sans Hold up » est prouvé sur la chaîne seulement. Seule exposition qui reste avec Hold up : les 50 du droit, entre l’accord du droit et l’échange qui le consomme. Déroulé geste par geste : .
+Chiffres lus sur la chaîne locale par `research/demo_reelle/site_echange/test/preuve_piratage.mjs`. Prouvé dans un vrai navigateur avec l’extension : le parcours « avec Hold up ». Le parcours « sans Hold up » est prouvé sur la chaîne seulement. Seule exposition qui reste avec Hold up : les 50 du droit, entre l’accord du droit et l’échange qui le consomme. Déroulé geste par geste : `DEMO_DEROULE.md`.
 
 ## 5. La preuve et les limites (30 s)
 
