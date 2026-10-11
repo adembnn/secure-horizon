@@ -14,7 +14,7 @@
 | Plancher sans phrase | Rappel 64,7 %. Gain de la phrase : +34 arnaques signalées |
 | Critères publiés avant | Rappel au moins 80 % : **atteint**. Faux rouges au plus 10 % : **non atteint** |
 | **Extension livrée, contrôle scellé de 2 662 paires**, sans modèle, build qui plantait sur 19,5 % des demandes | Attrapé **49,4 %** [47,1 ; 51,8] ; raté 2,7 % ; « pas pu vérifier » 31,2 % ; en panne 16,7 % ; fausses alertes **8,2 %** [6,1 ; 10,8] |
-| Extension, réserve scellée de 2 673 paires, ouverte une fois : sans modèle, build `6b9de2f` antérieur au build livré, un fichier de décision modifié hors commit | Attrapé **74,6 %** ; raté 0 ; « pas pu vérifier » 25,4 % ; fausses alertes **13,8 %** ; conformes « pas pu vérifier » 45,4 % (`preuves/RESULTAT_RESERVE_MOTS.md`) |
+| Extension, réserve scellée de 2 673 paires, ouverte une fois : sans modèle, build `6b9de2f` antérieur au build livré, un fichier de décision modifié hors commit | Attrapé **74,6 %** ; raté 0 ; « pas pu vérifier » 25,4 % ; fausses alertes **13,8 %** (71/515 ; 27,2 % des 261 vérifiées) ; conformes non vérifiées 49,3 % (254/515) (`preuves/RESULTAT_RESERVE_MOTS.md`) |
 | **Temps de détection** (code de l'extension sous Node, sans fenêtre) | Local : p50 2,0 ms, p95 13,0 ms (n = 2 662). Avec le modèle : p50 387 ms, p95 1 436 ms (n = 2 101). De la demande du site au verdict affiché, dans un navigateur : non mesuré de façon reproductible |
 | **Temps de réponse** | Automatique : celui du verdict. Humain (un geste : Annuler, Continuer ou « Limiter à 50 USDC et envoyer ») : non mesuré, aucun essai avec des personnes |
 
