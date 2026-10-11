@@ -38,9 +38,7 @@ Preuve rejouable, portefeuille simulé, chaîne locale : sans Hold up, un site p
 
 ## Limites connues
 
-- Pas d'essai réel avec un vrai MetaMask. Le bouton « Retirer l'autorisation » est testé hors navigateur, jamais dans un vrai Chrome.
 - Pas d'ancrage du journal sur une blockchain (décision D-017). Une réécriture complète du fichier ne se voit pas.
 - Fraude consentie non couverte : si la personne veut vraiment envoyer, Hold up ne l'arrête pas.
 - Le modèle de langage peut dégrader certains résultats. Dans l'extension, les ratés montent de 2,7 % à 3,7 %.
 - 15 % de fausses alertes rouges, au-dessus de notre objectif.
-- Ni le sens d'un échange, ni la durée, ni le destinataire d'un droit.
