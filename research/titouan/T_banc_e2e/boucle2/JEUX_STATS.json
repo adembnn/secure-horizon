@@ -1,0 +1,96 @@
+{
+ "reglage": {
+  "paires": 660,
+  "sha256": "a19199702a23ee7514c46deb224825abd89c155d90511c5691a84eb39ca4b3e0",
+  "verite": {
+   "conforme": 240,
+   "non_conforme": 414,
+   "indecidable": 6
+  },
+  "scenario": {
+   "droit_montant": 18,
+   "droit_signe_montant": 24,
+   "echange_montant": 24,
+   "jeton_donne": 24,
+   "jeton_sosie": 12,
+   "contrepartie": 18,
+   "sens": 12,
+   "nature": 18,
+   "destinataire_recu": 24,
+   "minimum_nul": 18,
+   "minimum_ecrit": 12,
+   "valeur_native": 24,
+   "lot": 24,
+   "duree": 42,
+   "beneficiaire_droit": 24,
+   "reseau": 30,
+   "controle": 24,
+   "autoriser": 24,
+   "paiement": 42,
+   "paiement_natif": 18,
+   "montant_monnaie": 54,
+   "montant_lettres": 18,
+   "montant_milliers": 18,
+   "montant_decimal": 12,
+   "nft_vente": 42,
+   "nft_achat": 30,
+   "connexion": 30
+  },
+  "langue": {
+   "fr": 439,
+   "en": 221
+  },
+  "routeur": {
+   "public": 335,
+   "declare": 325
+  },
+  "phrases_distinctes": 145
+ },
+ "controle": {
+  "paires": 660,
+  "sha256": "4576f4849cc8e74eed035f5aae6a42bdcdbb82e2ee13d3108e331608bb4178ec",
+  "verite": {
+   "conforme": 240,
+   "non_conforme": 414,
+   "indecidable": 6
+  },
+  "scenario": {
+   "droit_montant": 18,
+   "droit_signe_montant": 24,
+   "echange_montant": 24,
+   "jeton_donne": 24,
+   "jeton_sosie": 12,
+   "contrepartie": 18,
+   "sens": 12,
+   "nature": 18,
+   "destinataire_recu": 24,
+   "minimum_nul": 18,
+   "minimum_ecrit": 12,
+   "valeur_native": 24,
+   "lot": 24,
+   "duree": 42,
+   "beneficiaire_droit": 24,
+   "reseau": 30,
+   "controle": 24,
+   "autoriser": 24,
+   "paiement": 42,
+   "paiement_natif": 18,
+   "montant_monnaie": 54,
+   "montant_lettres": 18,
+   "montant_milliers": 18,
+   "montant_decimal": 12,
+   "nft_vente": 42,
+   "nft_achat": 30,
+   "connexion": 30
+  },
+  "langue": {
+   "en": 311,
+   "fr": 349
+  },
+  "routeur": {
+   "declare": 336,
+   "public": 324
+  },
+  "phrases_distinctes": 141
+ }
+}

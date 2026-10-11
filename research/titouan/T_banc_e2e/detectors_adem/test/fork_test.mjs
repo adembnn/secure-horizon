@@ -4,7 +4,7 @@
 // Deploys SYNTHETIC contracts (honeypot token, 99 % sell-tax token, clean token, Multicall3.aggregate3 clone, a "claim"
 // contract with an unregistered selector that pulls the caller's tokens), then:
 //   - sell simulation (mode fork) on the three tokens ;
-//   - writes redteam/fork_cases.jsonl (bench format) and runs check_plus on it with SENTINELLE_FORK_RPC set.
+//   - writes redteam/fork_cases.jsonl (bench format) and runs check_plus on it with HOLDUP_FORK_RPC set (ancien nom SENTINELLE_FORK_RPC).
 import { createRequire } from 'node:module';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -75,6 +75,6 @@ const casesFile = join(BANC, 'redteam', 'fork_cases.jsonl');
 writeFileSync(casesFile, cases.map((c) => JSON.stringify(c)).join('\n') + '\n');
 const run = (env) => execFileSync(process.execPath, [join(BANC, 'redteam', 'check_plus.mjs'), casesFile], { env: { ...process.env, ...env }, encoding: 'utf8' });
 console.log('--- check_plus WITHOUT fork (detectors fall back to context mode : nothing to read)');
-console.log(run({ SENTINELLE_FORK_RPC: '' }).split('\n').filter((l) => l.startsWith('{"id"')).map((l) => { const r = JSON.parse(l); return `${r.id} ${r.level_base} -> ${r.level_final}`; }).join('\n'));
-console.log('--- check_plus WITH SENTINELLE_FORK_RPC=' + URL_);
-console.log(run({ SENTINELLE_FORK_RPC: URL_ }).split('\n').filter((l) => l.startsWith('{"id"')).map((l) => { const r = JSON.parse(l); return `${r.id} ${r.level_base} -> ${r.level_final} | ${r.reasons.filter((x) => x.startsWith('[adem')).join(' ; ')}`; }).join('\n'));
+console.log(run({ HOLDUP_FORK_RPC: '', SENTINELLE_FORK_RPC: '' }).split('\n').filter((l) => l.startsWith('{"id"')).map((l) => { const r = JSON.parse(l); return `${r.id} ${r.level_base} -> ${r.level_final}`; }).join('\n'));
+console.log('--- check_plus WITH HOLDUP_FORK_RPC=' + URL_);
+console.log(run({ HOLDUP_FORK_RPC: URL_ }).split('\n').filter((l) => l.startsWith('{"id"')).map((l) => { const r = JSON.parse(l); return `${r.id} ${r.level_base} -> ${r.level_final} | ${r.reasons.filter((x) => x.startsWith('[adem')).join(' ; ')}`; }).join('\n'));

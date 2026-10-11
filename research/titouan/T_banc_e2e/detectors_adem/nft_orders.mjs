@@ -53,6 +53,11 @@ export const nftOrders = {
         const total = (o.consideration || []).filter((x) => !isNftType(x.itemType)).reduce((s, x) => s + nativeUnits(x.endAmount ?? x.startAmount), 0);
         const thirdNft = (o.consideration || []).some((x) => isNftType(x.itemType) && lc(x.recipient) !== v);
         const reference = ref.floor ?? ref.declared;
+        // offre d'ACHAT : la victime ne donne que du fongible (WETH, WAVAX...) et reçoit elle-même au moins un NFT. Ce n'est pas « céder contre rien » :
+        // le prix est en monnaie, la contrepartie est le NFT. (Un NFT livré à un tiers, ou rien reçu, reste attrapé ci-dessous.)
+        const victimGetsNft = (o.consideration || []).some((x) => isNftType(x.itemType) && lc(x.recipient) === v);
+        const fungibleOnlyOffer = (o.offer || []).length > 0 && (o.offer || []).every((x) => !isNftType(x.itemType));
+        if (victimOffers && fungibleOnlyOffer && victimGetsNft) { honest = false; continue; }
         if (victimOffers && (toVictim === 0 || (reference ? toVictim < reference * 0.01 : toVictim < 0.001))) {
           flags.push({ code: 'order_gives_assets_for_nothing', severity: 'critical', detail: `ordre signé : vous cédez ${(o.offer || []).length} actif(s) contre ${toVictim} (unité native) versé(s) à vous${reference ? ` (référence ${reference})` : ''}` });
           honest = false; break;

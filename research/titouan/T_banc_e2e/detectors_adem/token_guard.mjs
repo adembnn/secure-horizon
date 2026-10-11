@@ -3,7 +3,7 @@
 //      but whose address is not that family's contract on THIS chain (public registry official_tokens.mjs). Works even when the
 //      case's own reference list is missing or incomplete (the engine's F8 compares only against the case list).
 //  (2) honeypot / sell tax : sell simulation of every token the user would RECEIVE or BUY.
-//      mode 'fork' (SENTINELLE_FORK_RPC) or 'eth_call' (SENTINELLE_RPC) runs it for real ; otherwise mode 'context' reads
+//      mode 'fork' (HOLDUP_FORK_RPC) or 'eth_call' (HOLDUP_SIM_RPC) ; ancien nom en repli : SENTINELLE_FORK_RPC, SENTINELLE_RPC ; runs it for real ; otherwise mode 'context' reads
 //      token_info.sell_simulation / sell_tax_pct. The mode is written in the flag detail.
 // NIST CSF DE.AE-02, DE.CM-09, ID.RA ; MITRE ATT&CK T1036 (masquerading), T1657 ; D3FEND D3-DA (dynamic analysis : sell simulation on a fork).
 import { lc, isAddr, parseTyped } from './util.mjs';
@@ -52,7 +52,7 @@ export const tokenGuard = {
       if (!reg[fam].includes(t)) flags.push({ code: 'counterfeit_reference_token', severity: 'critical', detail: `le jeton ${t} se présente comme ${symbolOf(ctx, t)} mais n'est pas le contrat officiel ${fam} de la chaîne ${chain} (${reg[fam].join(', ')})` });
     }
     // sell simulation
-    const forkUrl = process.env.SENTINELLE_FORK_RPC, callUrl = process.env.SENTINELLE_RPC;
+    const forkUrl = process.env.HOLDUP_FORK_RPC || process.env.SENTINELLE_FORK_RPC, callUrl = process.env.HOLDUP_SIM_RPC || process.env.SENTINELLE_RPC; // SENTINELLE_* : ancien nom, repli
     for (const t of boughtTokens(eff, ctx, hay)) {
       if (reg && Object.values(reg).some((l) => l.includes(t))) continue; // reference tokens are sellable by definition
       let res = null;

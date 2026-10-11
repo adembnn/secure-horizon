@@ -4,7 +4,7 @@
 //  - Approval / ApprovalForAll whose owner is the victim and whose spender is not a known protocol -> critical ;
 //  - Transfer out of the victim to an address that is neither the victim nor a known protocol, while the simulation shows
 //    NO token coming back to the victim, and the user did not declare a payment -> critical.
-// Modes : 'fork' (SENTINELLE_FORK_RPC, local Hardhat/anvil fork, impersonation, revert) ; 'context' (logs already present
+// Modes : 'fork' (HOLDUP_FORK_RPC, ancien nom SENTINELLE_FORK_RPC, local Hardhat/anvil fork, impersonation, revert) ; 'context' (logs already present
 // in context.simulation.logs, e.g. produced by the wallet's own simulator). Without either, the detector is silent.
 // NIST CSF DE.CM-09, DE.AE-02 ; MITRE ATT&CK T1657 ; OWASP ASI02 ; D3FEND D3-DA (dynamic analysis).
 import { lc, isKnown, isSelf } from './util.mjs';
@@ -32,7 +32,7 @@ export const simEvents = {
   id: 'sim_events',
   async run({ c, ctx, request, intent }) {
     let mode = null, logs = null;
-    const forkUrl = process.env.SENTINELLE_FORK_RPC;
+    const forkUrl = process.env.HOLDUP_FORK_RPC || process.env.SENTINELLE_FORK_RPC; // SENTINELLE_* : ancien nom, repli
     if (forkUrl && request.method === 'eth_sendTransaction') {
       const tx = request.params[0];
       try { const r = await simulateTxFork(forkUrl, { ...tx, from: tx.from || ctx.from }); mode = 'fork'; logs = r.logs; } catch { /* fork unreachable : fall back */ }

@@ -1,0 +1,4683 @@
+{
+ "root": "C:\\Users\\detot\\AppData\\Local\\Temp\\claude\\C--Users-detot-Documents-Hack-Secure-Horizon\\68cfd279-59ab-44be-976f-254818b0c3cf\\scratchpad\\avant\\research\\titouan\\T_banc_e2e",
+ "file": "attacks_familles/CONTROLE.jsonl",
+ "rows": [
+  {
+   "id": "FAM-CON-nft_achat_seaport-001",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_natif_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-002",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_jeton_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-003",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_1155_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-004",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_produit_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-005",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_collection_entiere",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-006",
+   "family": "nft_achat_seaport",
+   "sub": "achat_nft_livre_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-007",
+   "family": "nft_achat_seaport",
+   "sub": "achat_prix_dix_fois_le_prix_dit",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-008",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_deux_nft_rien_a_soi",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-009",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_natif_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-010",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_jeton_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-011",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_1155_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-012",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_produit_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-013",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_collection_entiere",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-014",
+   "family": "nft_achat_seaport",
+   "sub": "achat_nft_livre_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-015",
+   "family": "nft_achat_seaport",
+   "sub": "achat_prix_dix_fois_le_prix_dit",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-016",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_deux_nft_rien_a_soi",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-017",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_natif_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-018",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_jeton_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-019",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_1155_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-020",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_produit_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-021",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_collection_entiere",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-022",
+   "family": "nft_achat_seaport",
+   "sub": "achat_nft_livre_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-023",
+   "family": "nft_achat_seaport",
+   "sub": "achat_prix_dix_fois_le_prix_dit",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-024",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_deux_nft_rien_a_soi",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-025",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_natif_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-026",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_nft_contre_jeton_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-027",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_1155_quasi_nul",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-028",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_produit_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-029",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_collection_entiere",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-030",
+   "family": "nft_achat_seaport",
+   "sub": "achat_nft_livre_a_un_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-031",
+   "family": "nft_achat_seaport",
+   "sub": "achat_prix_dix_fois_le_prix_dit",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-032",
+   "family": "nft_achat_seaport",
+   "sub": "vente_deguisee_deux_nft_rien_a_soi",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "no_incoming",
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-033",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_1155",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-034",
+   "family": "nft_achat_seaport",
+   "sub": "offre_collection_criteres",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-035",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-036",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_avec_commission_2_5",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-037",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_commission_et_redevance",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-038",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_1155",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-039",
+   "family": "nft_achat_seaport",
+   "sub": "offre_collection_criteres",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-040",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-041",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_avec_commission_2_5",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-042",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_commission_et_redevance",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-043",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_1155",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-044",
+   "family": "nft_achat_seaport",
+   "sub": "offre_collection_criteres",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-045",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-046",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_avec_commission_2_5",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-047",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_commission_et_redevance",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-048",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_1155",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-049",
+   "family": "nft_achat_seaport",
+   "sub": "offre_collection_criteres",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-050",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-051",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_avec_commission_2_5",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-052",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_commission_et_redevance",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-053",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_1155",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-054",
+   "family": "nft_achat_seaport",
+   "sub": "offre_collection_criteres",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-055",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-056",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_avec_commission_2_5",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-057",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_commission_et_redevance",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-058",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_1155",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-059",
+   "family": "nft_achat_seaport",
+   "sub": "offre_collection_criteres",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-nft_achat_seaport-060",
+   "family": "nft_achat_seaport",
+   "sub": "offre_achat_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-001",
+   "family": "jeton_different",
+   "sub": "paie_un_autre_jeton_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-002",
+   "family": "jeton_different",
+   "sub": "paie_un_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-003",
+   "family": "jeton_different",
+   "sub": "paie_en_natif_au_lieu_du_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-004",
+   "family": "jeton_different",
+   "sub": "echange_vend_le_jeton_enveloppe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-005",
+   "family": "jeton_different",
+   "sub": "droit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-006",
+   "family": "jeton_different",
+   "sub": "permit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-007",
+   "family": "jeton_different",
+   "sub": "permit2_sur_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-008",
+   "family": "jeton_different",
+   "sub": "natif_dit_jeton_vendu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-009",
+   "family": "jeton_different",
+   "sub": "paie_un_autre_jeton_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-010",
+   "family": "jeton_different",
+   "sub": "paie_un_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-011",
+   "family": "jeton_different",
+   "sub": "paie_en_natif_au_lieu_du_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-012",
+   "family": "jeton_different",
+   "sub": "echange_vend_le_jeton_enveloppe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-013",
+   "family": "jeton_different",
+   "sub": "droit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-014",
+   "family": "jeton_different",
+   "sub": "permit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-015",
+   "family": "jeton_different",
+   "sub": "permit2_sur_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-016",
+   "family": "jeton_different",
+   "sub": "natif_dit_jeton_vendu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-017",
+   "family": "jeton_different",
+   "sub": "paie_un_autre_jeton_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-018",
+   "family": "jeton_different",
+   "sub": "paie_un_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-019",
+   "family": "jeton_different",
+   "sub": "paie_en_natif_au_lieu_du_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-020",
+   "family": "jeton_different",
+   "sub": "echange_vend_le_jeton_enveloppe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-021",
+   "family": "jeton_different",
+   "sub": "droit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-022",
+   "family": "jeton_different",
+   "sub": "permit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-023",
+   "family": "jeton_different",
+   "sub": "permit2_sur_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-024",
+   "family": "jeton_different",
+   "sub": "natif_dit_jeton_vendu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-025",
+   "family": "jeton_different",
+   "sub": "paie_un_autre_jeton_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-026",
+   "family": "jeton_different",
+   "sub": "paie_un_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "amount_exceeded"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-027",
+   "family": "jeton_different",
+   "sub": "paie_en_natif_au_lieu_du_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-028",
+   "family": "jeton_different",
+   "sub": "echange_vend_le_jeton_enveloppe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-029",
+   "family": "jeton_different",
+   "sub": "droit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-030",
+   "family": "jeton_different",
+   "sub": "permit_sur_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-031",
+   "family": "jeton_different",
+   "sub": "permit2_sur_jeton_hors_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-032",
+   "family": "jeton_different",
+   "sub": "natif_dit_jeton_vendu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-033",
+   "family": "jeton_different",
+   "sub": "enveloppe_dit_natif_envoye_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-034",
+   "family": "jeton_different",
+   "sub": "permit_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-035",
+   "family": "jeton_different",
+   "sub": "permit2_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-036",
+   "family": "jeton_different",
+   "sub": "paie_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-037",
+   "family": "jeton_different",
+   "sub": "echange_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-038",
+   "family": "jeton_different",
+   "sub": "natif_dit_natif_paye",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-039",
+   "family": "jeton_different",
+   "sub": "natif_dit_enveloppe_vendu_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-040",
+   "family": "jeton_different",
+   "sub": "enveloppe_dit_natif_envoye_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-041",
+   "family": "jeton_different",
+   "sub": "permit_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-042",
+   "family": "jeton_different",
+   "sub": "permit2_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-043",
+   "family": "jeton_different",
+   "sub": "paie_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-044",
+   "family": "jeton_different",
+   "sub": "echange_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-045",
+   "family": "jeton_different",
+   "sub": "natif_dit_natif_paye",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-046",
+   "family": "jeton_different",
+   "sub": "natif_dit_enveloppe_vendu_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-047",
+   "family": "jeton_different",
+   "sub": "enveloppe_dit_natif_envoye_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-048",
+   "family": "jeton_different",
+   "sub": "permit_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-049",
+   "family": "jeton_different",
+   "sub": "permit2_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-050",
+   "family": "jeton_different",
+   "sub": "paie_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent",
+    "intent_guard/token_mismatch"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-051",
+   "family": "jeton_different",
+   "sub": "echange_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-052",
+   "family": "jeton_different",
+   "sub": "natif_dit_natif_paye",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-053",
+   "family": "jeton_different",
+   "sub": "natif_dit_enveloppe_vendu_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-054",
+   "family": "jeton_different",
+   "sub": "enveloppe_dit_natif_envoye_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-055",
+   "family": "jeton_different",
+   "sub": "permit_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-056",
+   "family": "jeton_different",
+   "sub": "permit2_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-057",
+   "family": "jeton_different",
+   "sub": "paie_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-058",
+   "family": "jeton_different",
+   "sub": "echange_le_meme_jeton",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "token_differs_from_intent"
+   ]
+  },
+  {
+   "id": "FAM-CON-jeton_different-059",
+   "family": "jeton_different",
+   "sub": "natif_dit_natif_paye",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-jeton_different-060",
+   "family": "jeton_different",
+   "sub": "natif_dit_enveloppe_vendu_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-001",
+   "family": "chaine_domaine",
+   "sub": "permit_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-002",
+   "family": "chaine_domaine",
+   "sub": "permit2_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-003",
+   "family": "chaine_domaine",
+   "sub": "siwe_pour_un_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-004",
+   "family": "chaine_domaine",
+   "sub": "siwe_uri_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-005",
+   "family": "chaine_domaine",
+   "sub": "siwe_autre_reseau",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-006",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_reseau_signature",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-007",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_site_siwe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-008",
+   "family": "chaine_domaine",
+   "sub": "seaport_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-009",
+   "family": "chaine_domaine",
+   "sub": "permit_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-010",
+   "family": "chaine_domaine",
+   "sub": "permit2_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-011",
+   "family": "chaine_domaine",
+   "sub": "siwe_pour_un_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-012",
+   "family": "chaine_domaine",
+   "sub": "siwe_uri_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-013",
+   "family": "chaine_domaine",
+   "sub": "siwe_autre_reseau",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-014",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_reseau_signature",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-015",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_site_siwe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-016",
+   "family": "chaine_domaine",
+   "sub": "seaport_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-017",
+   "family": "chaine_domaine",
+   "sub": "permit_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-018",
+   "family": "chaine_domaine",
+   "sub": "permit2_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-019",
+   "family": "chaine_domaine",
+   "sub": "siwe_pour_un_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-020",
+   "family": "chaine_domaine",
+   "sub": "siwe_uri_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-021",
+   "family": "chaine_domaine",
+   "sub": "siwe_autre_reseau",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-022",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_reseau_signature",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-023",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_site_siwe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-024",
+   "family": "chaine_domaine",
+   "sub": "seaport_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-025",
+   "family": "chaine_domaine",
+   "sub": "permit_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-026",
+   "family": "chaine_domaine",
+   "sub": "permit2_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-027",
+   "family": "chaine_domaine",
+   "sub": "siwe_pour_un_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-028",
+   "family": "chaine_domaine",
+   "sub": "siwe_uri_autre_site",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-029",
+   "family": "chaine_domaine",
+   "sub": "siwe_autre_reseau",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-030",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_reseau_signature",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-031",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_un_autre_site_siwe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-032",
+   "family": "chaine_domaine",
+   "sub": "seaport_signe_pour_un_autre_reseau",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-033",
+   "family": "chaine_domaine",
+   "sub": "siwe_meme_site",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-034",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-035",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_site_siwe_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-036",
+   "family": "chaine_domaine",
+   "sub": "seaport_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-037",
+   "family": "chaine_domaine",
+   "sub": "permit_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-038",
+   "family": "chaine_domaine",
+   "sub": "permit2_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-039",
+   "family": "chaine_domaine",
+   "sub": "siwe_meme_site",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-040",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-041",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_site_siwe_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-042",
+   "family": "chaine_domaine",
+   "sub": "seaport_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-043",
+   "family": "chaine_domaine",
+   "sub": "permit_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-044",
+   "family": "chaine_domaine",
+   "sub": "permit2_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-045",
+   "family": "chaine_domaine",
+   "sub": "siwe_meme_site",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-046",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-047",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_site_siwe_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-048",
+   "family": "chaine_domaine",
+   "sub": "seaport_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-049",
+   "family": "chaine_domaine",
+   "sub": "permit_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-050",
+   "family": "chaine_domaine",
+   "sub": "permit2_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-051",
+   "family": "chaine_domaine",
+   "sub": "siwe_meme_site",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-052",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-053",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_site_siwe_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-054",
+   "family": "chaine_domaine",
+   "sub": "seaport_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-055",
+   "family": "chaine_domaine",
+   "sub": "permit_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-056",
+   "family": "chaine_domaine",
+   "sub": "permit2_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-057",
+   "family": "chaine_domaine",
+   "sub": "siwe_meme_site",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-058",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-059",
+   "family": "chaine_domaine",
+   "sub": "intention_nomme_le_bon_site_siwe_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-chaine_domaine-060",
+   "family": "chaine_domaine",
+   "sub": "seaport_meme_reseau",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": [
+    "nft_orders/order_gives_assets_for_nothing"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-001",
+   "family": "connexion_droit",
+   "sub": "permit_canonique_illimite",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-002",
+   "family": "connexion_droit",
+   "sub": "permit_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": true,
+   "reasons": [
+    "signed_right_not_intended",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-003",
+   "family": "connexion_droit",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-004",
+   "family": "connexion_droit",
+   "sub": "permit2_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-005",
+   "family": "connexion_droit",
+   "sub": "permit2_transfert_signe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-006",
+   "family": "connexion_droit",
+   "sub": "permit2_batch",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-007",
+   "family": "connexion_droit",
+   "sub": "permit_borne_vers_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-008",
+   "family": "connexion_droit",
+   "sub": "permit2_batch",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-009",
+   "family": "connexion_droit",
+   "sub": "permit_canonique_illimite",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-010",
+   "family": "connexion_droit",
+   "sub": "permit_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": true,
+   "reasons": [
+    "signed_right_not_intended",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-011",
+   "family": "connexion_droit",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-012",
+   "family": "connexion_droit",
+   "sub": "permit2_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-013",
+   "family": "connexion_droit",
+   "sub": "permit2_transfert_signe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-014",
+   "family": "connexion_droit",
+   "sub": "permit_dai",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-015",
+   "family": "connexion_droit",
+   "sub": "permit_borne_vers_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-016",
+   "family": "connexion_droit",
+   "sub": "permit2_batch",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-017",
+   "family": "connexion_droit",
+   "sub": "permit_canonique_illimite",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-018",
+   "family": "connexion_droit",
+   "sub": "permit_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": true,
+   "reasons": [
+    "signed_right_not_intended",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-019",
+   "family": "connexion_droit",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-020",
+   "family": "connexion_droit",
+   "sub": "permit2_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-021",
+   "family": "connexion_droit",
+   "sub": "permit2_transfert_signe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-022",
+   "family": "connexion_droit",
+   "sub": "permit_dai",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-023",
+   "family": "connexion_droit",
+   "sub": "permit_borne_vers_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-024",
+   "family": "connexion_droit",
+   "sub": "permit2_batch",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-025",
+   "family": "connexion_droit",
+   "sub": "permit_canonique_illimite",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-026",
+   "family": "connexion_droit",
+   "sub": "permit_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": false,
+   "opaque": true,
+   "reasons": [
+    "signed_right_not_intended",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-027",
+   "family": "connexion_droit",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-028",
+   "family": "connexion_droit",
+   "sub": "permit2_type_renomme",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-029",
+   "family": "connexion_droit",
+   "sub": "permit2_transfert_signe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_not_intended"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-030",
+   "family": "connexion_droit",
+   "sub": "permit2_batch",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "spend_rights/right_to_unvouched_spender",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-031",
+   "family": "connexion_droit",
+   "sub": "permit_borne_vers_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-032",
+   "family": "connexion_droit",
+   "sub": "permit2_batch",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   },
+   "ecart": true,
+   "opaque": false,
+   "reasons": [
+    "unexpected_approval_connect",
+    "sig_rights/signed_right_unlimited_unknown"
+   ]
+  },
+  {
+   "id": "FAM-CON-connexion_droit-033",
+   "family": "connexion_droit",
+   "sub": "siwe_valide",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-034",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_avec_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-035",
+   "family": "connexion_droit",
+   "sub": "texte_de_connexion",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-036",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_sans_statement",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-037",
+   "family": "connexion_droit",
+   "sub": "siwe_valide",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-038",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_avec_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-039",
+   "family": "connexion_droit",
+   "sub": "texte_de_connexion",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-040",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_sans_statement",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-041",
+   "family": "connexion_droit",
+   "sub": "siwe_valide",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-042",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_avec_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-043",
+   "family": "connexion_droit",
+   "sub": "texte_de_connexion",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-044",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_sans_statement",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-045",
+   "family": "connexion_droit",
+   "sub": "siwe_valide",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-046",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_avec_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-047",
+   "family": "connexion_droit",
+   "sub": "texte_de_connexion",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-048",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_sans_statement",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-049",
+   "family": "connexion_droit",
+   "sub": "siwe_valide",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-050",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_avec_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-051",
+   "family": "connexion_droit",
+   "sub": "texte_de_connexion",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-052",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_sans_statement",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-053",
+   "family": "connexion_droit",
+   "sub": "siwe_valide",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-054",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_avec_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-055",
+   "family": "connexion_droit",
+   "sub": "texte_de_connexion",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-056",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_sans_statement",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-057",
+   "family": "connexion_droit",
+   "sub": "siwe_valide",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-058",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_avec_ressources",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-059",
+   "family": "connexion_droit",
+   "sub": "texte_de_connexion",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  },
+  {
+   "id": "FAM-CON-connexion_droit-060",
+   "family": "connexion_droit",
+   "sub": "siwe_valide_sans_statement",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   },
+   "ecart": false,
+   "opaque": false,
+   "reasons": []
+  }
+ ],
+ "tableau": {
+  "global": {
+   "plancher": {
+    "n": 128,
+    "signales": 84,
+    "ncrit": 120,
+    "rouges": 68,
+    "nb": 112,
+    "fa": 0,
+    "ob": 33
+   },
+   "sans": {
+    "n": 128,
+    "signales": 84,
+    "ncrit": 120,
+    "rouges": 74,
+    "nb": 112,
+    "fa": 33,
+    "ob": 0
+   },
+   "catalogue": {
+    "n": 128,
+    "signales": 88,
+    "ncrit": 120,
+    "rouges": 80,
+    "nb": 112,
+    "fa": 33,
+    "ob": 0
+   },
+   "honnete": {
+    "n": 128,
+    "signales": 104,
+    "ncrit": 120,
+    "rouges": 96,
+    "nb": 112,
+    "fa": 35,
+    "ob": 0
+   },
+   "honnete_noyau": {
+    "n": 128,
+    "signales": 104,
+    "ncrit": 120,
+    "rouges": 96,
+    "nb": 112,
+    "fa": 2,
+    "ob": 33
+   },
+   "ecart": {
+    "n": 128,
+    "k": 60,
+    "nb": 112,
+    "kb": 2
+   },
+   "ok_niveau": 101,
+   "illisibles": {
+    "k": 4,
+    "n": 128
+   }
+  },
+  "par_famille": {
+   "nft_achat_seaport": {
+    "plancher": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 32,
+     "rouges": 28,
+     "nb": 28,
+     "fa": 0,
+     "ob": 28
+    },
+    "sans": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 32,
+     "rouges": 32,
+     "nb": 28,
+     "fa": 28,
+     "ob": 0
+    },
+    "catalogue": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 32,
+     "rouges": 32,
+     "nb": 28,
+     "fa": 28,
+     "ob": 0
+    },
+    "honnete": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 32,
+     "rouges": 32,
+     "nb": 28,
+     "fa": 28,
+     "ob": 0
+    },
+    "honnete_noyau": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 32,
+     "rouges": 32,
+     "nb": 28,
+     "fa": 0,
+     "ob": 28
+    },
+    "ecart": {
+     "n": 32,
+     "k": 16,
+     "nb": 28,
+     "kb": 0
+    },
+    "ok_niveau": 0,
+    "illisibles": {
+     "k": 0,
+     "n": 32
+    }
+   },
+   "jeton_different": {
+    "plancher": {
+     "n": 32,
+     "signales": 0,
+     "ncrit": 32,
+     "rouges": 0,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "sans": {
+     "n": 32,
+     "signales": 0,
+     "ncrit": 32,
+     "rouges": 0,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "catalogue": {
+     "n": 32,
+     "signales": 0,
+     "ncrit": 32,
+     "rouges": 0,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "honnete": {
+     "n": 32,
+     "signales": 16,
+     "ncrit": 32,
+     "rouges": 16,
+     "nb": 28,
+     "fa": 2,
+     "ob": 0
+    },
+    "honnete_noyau": {
+     "n": 32,
+     "signales": 16,
+     "ncrit": 32,
+     "rouges": 16,
+     "nb": 28,
+     "fa": 2,
+     "ob": 0
+    },
+    "ecart": {
+     "n": 32,
+     "k": 16,
+     "nb": 28,
+     "kb": 2
+    },
+    "ok_niveau": 42,
+    "illisibles": {
+     "k": 0,
+     "n": 32
+    }
+   },
+   "chaine_domaine": {
+    "plancher": {
+     "n": 32,
+     "signales": 24,
+     "ncrit": 28,
+     "rouges": 20,
+     "nb": 28,
+     "fa": 0,
+     "ob": 5
+    },
+    "sans": {
+     "n": 32,
+     "signales": 24,
+     "ncrit": 28,
+     "rouges": 20,
+     "nb": 28,
+     "fa": 5,
+     "ob": 0
+    },
+    "catalogue": {
+     "n": 32,
+     "signales": 24,
+     "ncrit": 28,
+     "rouges": 20,
+     "nb": 28,
+     "fa": 5,
+     "ob": 0
+    },
+    "honnete": {
+     "n": 32,
+     "signales": 24,
+     "ncrit": 28,
+     "rouges": 20,
+     "nb": 28,
+     "fa": 5,
+     "ob": 0
+    },
+    "honnete_noyau": {
+     "n": 32,
+     "signales": 24,
+     "ncrit": 28,
+     "rouges": 20,
+     "nb": 28,
+     "fa": 0,
+     "ob": 5
+    },
+    "ecart": {
+     "n": 32,
+     "k": 0,
+     "nb": 28,
+     "kb": 0
+    },
+    "ok_niveau": 31,
+    "illisibles": {
+     "k": 0,
+     "n": 32
+    }
+   },
+   "connexion_droit": {
+    "plancher": {
+     "n": 32,
+     "signales": 28,
+     "ncrit": 28,
+     "rouges": 20,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "sans": {
+     "n": 32,
+     "signales": 28,
+     "ncrit": 28,
+     "rouges": 22,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "catalogue": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 28,
+     "rouges": 28,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "honnete": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 28,
+     "rouges": 28,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "honnete_noyau": {
+     "n": 32,
+     "signales": 32,
+     "ncrit": 28,
+     "rouges": 28,
+     "nb": 28,
+     "fa": 0,
+     "ob": 0
+    },
+    "ecart": {
+     "n": 32,
+     "k": 28,
+     "nb": 28,
+     "kb": 0
+    },
+    "ok_niveau": 28,
+    "illisibles": {
+     "k": 4,
+     "n": 32
+    }
+   }
+  }
+ }
+}

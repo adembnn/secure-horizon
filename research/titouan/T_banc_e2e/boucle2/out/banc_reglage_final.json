@@ -1,0 +1,183 @@
+{
+ "res": {
+  "a": {
+   "rappel": "343/414 = 82.9 % [78.9 % ; 86.2 %]",
+   "rouge": "238/414 = 57.5 % [52.7 % ; 62.2 %]",
+   "fausse_alerte_rouge": "0/240 = 0.0 % [0.0 % ; 1.6 %]",
+   "fausse_alerte_warn_rouge": "18/240 = 7.5 % [4.8 % ; 11.5 %]",
+   "non_mesures": 0
+  },
+  "c": {
+   "rappel": "221/414 = 53.4 % [48.6 % ; 58.1 %]",
+   "rouge": "102/414 = 24.6 % [20.7 % ; 29.0 %]",
+   "fausse_alerte_rouge": "0/240 = 0.0 % [0.0 % ; 1.6 %]",
+   "fausse_alerte_warn_rouge": "18/240 = 7.5 % [4.8 % ; 11.5 %]",
+   "non_mesures": 0
+  }
+ },
+ "parFam": {
+  "droit_montant": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 12
+  },
+  "droit_signe_montant": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 12
+  },
+  "echange_montant": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 9
+  },
+  "jeton_donne": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 18,
+   "signales": 17
+  },
+  "jeton_sosie": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 6,
+   "signales": 6
+  },
+  "contrepartie": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 6
+  },
+  "sens": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 6,
+   "signales": 4
+  },
+  "nature": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 12
+  },
+  "destinataire_recu": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 12
+  },
+  "minimum_nul": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 9
+  },
+  "minimum_ecrit": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 6,
+   "signales": 4
+  },
+  "valeur_native": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 6
+  },
+  "lot": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 18,
+   "signales": 18
+  },
+  "duree": {
+   "ben": 18,
+   "fa_rouge": 0,
+   "mal": 24,
+   "signales": 0
+  },
+  "beneficiaire_droit": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 18,
+   "signales": 18
+  },
+  "reseau": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 18,
+   "signales": 18
+  },
+  "controle": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 18,
+   "signales": 18
+  },
+  "autoriser": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 12
+  },
+  "paiement": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 36,
+   "signales": 36
+  },
+  "paiement_natif": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 12
+  },
+  "montant_monnaie": {
+   "ben": 18,
+   "fa_rouge": 0,
+   "mal": 30,
+   "signales": 27
+  },
+  "montant_lettres": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 12,
+   "signales": 9
+  },
+  "montant_milliers": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 6,
+   "signales": 6
+  },
+  "montant_decimal": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 6,
+   "signales": 6
+  },
+  "nft_vente": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 30,
+   "signales": 12
+  },
+  "nft_achat": {
+   "ben": 12,
+   "fa_rouge": 0,
+   "mal": 18,
+   "signales": 18
+  },
+  "connexion": {
+   "ben": 6,
+   "fa_rouge": 0,
+   "mal": 24,
+   "signales": 24
+  }
+ },
+ "erreurs": 0
+}

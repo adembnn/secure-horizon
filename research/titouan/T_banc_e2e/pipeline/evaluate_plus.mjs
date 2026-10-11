@@ -18,7 +18,7 @@
 //   knownProtocols : false = do not load pipeline/known_protocols.json (public per-chain list, each address with its primary source).
 //   budgetMs   : total budget for the live lookup (default 1500, the provider's own budget). A slow RPC never blocks longer : on timeout the
 //                verdict is given on what is known and `plus.missingFacts` says what was not verified.
-//   rpcUrl     : node to read (default : SENTINELLE_RPC_URL / HOLDUP_RPC_URL, else the provider's public RPC for the chain).
+//   rpcUrl     : node to read (default : HOLDUP_RPC_URL, ancien nom SENTINELLE_RPC_URL en repli, else the provider's public RPC for the chain).
 //
 // Result : the same object as `evaluate` (level, niveau, fiche, title, texts, reasons, raisons, codes, effects, said, real...) plus
 //   plus : { path, level, base, product, floor, raisedBy: [{ code, severity, detail }], loweredBy: [] (always empty), lowerIgnored, relaxedByFacts (always false),
@@ -232,7 +232,7 @@ export function makeEvaluatePlus(D) {
       if (src === true) { if (!D.provider) return done(null, ['live_context_absent']); src = await D.provider(); }
       const params = Array.isArray(body.params) ? body.params : [];
       const hasLocal = (local.contacts || []).length || (local.history || []).length;
-      const input = { chainId, from, request: { method: String(body.method || ''), params }, rpcUrl: o.rpcUrl || env().SENTINELLE_RPC_URL || env().HOLDUP_RPC_URL || undefined,
+      const input = { chainId, from, request: { method: String(body.method || ''), params }, rpcUrl: o.rpcUrl || env().HOLDUP_RPC_URL || env().SENTINELLE_RPC_URL || undefined,
         seen: hasLocal ? [...(local.contacts || []).map((c) => c.address), ...(local.history || []).filter((x) => x.direction === 'sortie').map((x) => lc(x.address))] : undefined,
         options: { budgetMs: o.budgetMs } };
       let call = null;
@@ -469,8 +469,9 @@ export async function loadNodeDeps(over = {}) {
     knownProtocols, provider: () => import(u('../context_live/provider.mjs')), env: () => process.env, loadLocalContext: S.loadLocalContext, ...over };
 }
 // Environment switches (read at call time) : HOLDUP_PLUS=0 -> product verdict only ; HOLDUP_DETECTORS=0 -> no detector ;
-// SENTINELLE_RPC_URL / HOLDUP_RPC_URL set (or SENTINELLE_LIVE=1) -> live context ON unless options.live says otherwise ; SENTINELLE_LIVE=0 -> OFF ;
-// SENTINELLE_LIVE_BUDGET_MS (default 1500) ; HOLDUP_CLASSIFIER (clef | clef-flash | keyword) -> pasted-message detector, off unless set.
+// HOLDUP_RPC_URL set (or HOLDUP_LIVE=1) -> live context ON unless options.live says otherwise ; HOLDUP_LIVE=0 -> OFF ;
+// HOLDUP_LIVE_BUDGET_MS (default 1500) ; HOLDUP_CLASSIFIER (clef | clef-flash | keyword) -> pasted-message detector, off unless set.
+// Ancien nom (repli, lu seulement si le HOLDUP_* correspondant est absent) : SENTINELLE_RPC_URL, SENTINELLE_LIVE, SENTINELLE_LIVE_BUDGET_MS.
 export async function evaluatePlus(body, local, opts = {}) {
   bound ??= await loadNodeDeps().then((D) => ({ D, run: makeEvaluatePlus(D) }));
   const env = process.env;
@@ -478,7 +479,8 @@ export async function evaluatePlus(body, local, opts = {}) {
   if (env.HOLDUP_PLUS === '0') { const v = bound.D.evaluate(body, local); v.plus = { path: 'off', level: benchLevel(v), product: benchLevel(v), raisedBy: [], loweredBy: [], facts: {}, missingFacts: ['live_context_absent'], errors: [], ms: {} }; return v; }
   const o = { ...opts };
   if (o.detectors === undefined) o.detectors = env.HOLDUP_DETECTORS !== '0';
-  if (o.live === undefined) o.live = env.SENTINELLE_LIVE !== '0' && (!!(env.SENTINELLE_RPC_URL || env.HOLDUP_RPC_URL) || env.SENTINELLE_LIVE === '1');
-  if (o.budgetMs === undefined && Number(env.SENTINELLE_LIVE_BUDGET_MS) > 0) o.budgetMs = Number(env.SENTINELLE_LIVE_BUDGET_MS);
+  const live = env.HOLDUP_LIVE ?? env.SENTINELLE_LIVE, budget = env.HOLDUP_LIVE_BUDGET_MS ?? env.SENTINELLE_LIVE_BUDGET_MS;
+  if (o.live === undefined) o.live = live !== '0' && (!!(env.HOLDUP_RPC_URL || env.SENTINELLE_RPC_URL) || live === '1');
+  if (o.budgetMs === undefined && Number(budget) > 0) o.budgetMs = Number(budget);
   return bound.run(body, local, o);
 }
