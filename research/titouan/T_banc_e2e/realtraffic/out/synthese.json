@@ -1,0 +1,176 @@
+{
+ "cchain": {
+  "critical": {
+   "n_revus": 19,
+   "fausse_alerte": 2,
+   "vraie_alerte_utile": 2,
+   "indetermine": 15,
+   "fausse_alerte_taux_borne_basse": {
+    "k": 2,
+    "n": 19,
+    "pct": 10.5,
+    "wilson95_pct": [
+     2.9,
+     31.4
+    ]
+   },
+   "fausse_ou_indetermine_borne_haute": {
+    "k": 17,
+    "n": 19,
+    "pct": 89.5,
+    "wilson95_pct": [
+     68.6,
+     97.1
+    ]
+   },
+   "utile_taux": {
+    "k": 2,
+    "n": 19,
+    "pct": 10.5,
+    "wilson95_pct": [
+     2.9,
+     31.4
+    ]
+   }
+  },
+  "warn": {
+   "n_revus": 31,
+   "fausse_alerte": 15,
+   "vraie_alerte_utile": 2,
+   "indetermine": 14,
+   "fausse_alerte_taux_borne_basse": {
+    "k": 15,
+    "n": 31,
+    "pct": 48.4,
+    "wilson95_pct": [
+     32,
+     65.2
+    ]
+   },
+   "fausse_ou_indetermine_borne_haute": {
+    "k": 29,
+    "n": 31,
+    "pct": 93.5,
+    "wilson95_pct": [
+     79.3,
+     98.2
+    ]
+   },
+   "utile_taux": {
+    "k": 2,
+    "n": 31,
+    "pct": 6.5,
+    "wilson95_pct": [
+     1.8,
+     20.7
+    ]
+   }
+  },
+  "part_alertes_uniquement_opacite": {
+   "k": 4674,
+   "n": 4879,
+   "pct": 95.8,
+   "wilson95_pct": [
+    95.2,
+    96.3
+   ]
+  },
+  "part_alertes_critical_dans_trafic": {
+   "k": 19,
+   "n": 6325,
+   "pct": 0.3,
+   "wilson95_pct": [
+    0.192,
+    0.469
+   ]
+  },
+  "critical_faux_confirmes_dans_trafic_borne_basse_estimee_pct": 0.032
+ },
+ "eth": {
+  "critical": {
+   "n_revus": 20,
+   "fausse_alerte": 13,
+   "vraie_alerte_utile": 2,
+   "indetermine": 5,
+   "fausse_alerte_taux_borne_basse": {
+    "k": 13,
+    "n": 20,
+    "pct": 65,
+    "wilson95_pct": [
+     43.3,
+     81.9
+    ]
+   },
+   "fausse_ou_indetermine_borne_haute": {
+    "k": 18,
+    "n": 20,
+    "pct": 90,
+    "wilson95_pct": [
+     69.9,
+     97.2
+    ]
+   },
+   "utile_taux": {
+    "k": 2,
+    "n": 20,
+    "pct": 10,
+    "wilson95_pct": [
+     2.8,
+     30.1
+    ]
+   }
+  },
+  "warn": {
+   "n_revus": 10,
+   "fausse_alerte": 4,
+   "vraie_alerte_utile": 2,
+   "indetermine": 4,
+   "fausse_alerte_taux_borne_basse": {
+    "k": 4,
+    "n": 10,
+    "pct": 40,
+    "wilson95_pct": [
+     16.8,
+     68.7
+    ]
+   },
+   "fausse_ou_indetermine_borne_haute": {
+    "k": 8,
+    "n": 10,
+    "pct": 80,
+    "wilson95_pct": [
+     49,
+     94.3
+    ]
+   },
+   "utile_taux": {
+    "k": 2,
+    "n": 10,
+    "pct": 20,
+    "wilson95_pct": [
+     5.7,
+     51
+    ]
+   }
+  },
+  "part_alertes_uniquement_opacite": {
+   "k": 1668,
+   "n": 2172,
+   "pct": 76.8,
+   "wilson95_pct": [
+    75,
+    78.5
+   ]
+  },
+  "part_alertes_critical_dans_trafic": {
+   "k": 200,
+   "n": 6000,
+   "pct": 3.333,
+   "wilson95_pct": [
+    2.908,
+    3.818
+   ]
+  },
+  "critical_faux_confirmes_dans_trafic_borne_basse_estimee_pct": 2.167
+ }
+}

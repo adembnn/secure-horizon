@@ -45,7 +45,7 @@
   },
   {
    "file": "engine/src/protocols_extra.mjs",
-   "sha256": "889a3f78630f71b8dfc22d30e016384811a66697e19c6bc1c25f3addcc5f89b8"
+   "sha256": "a1d1efd5532eb9d31ee03b07bcb9a512327b5a2383d4dc5d25ee317c0595f2c2"
   },
   {
    "file": "engine/src/registry.mjs",
@@ -89,7 +89,7 @@
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "28c1126442fc4864318136a2d626553162596871dcbcc4b8dfe6e75560516082"
+   "sha256": "6977cca8926e6c5da3d88c18a9b5c04c36e0f4767fe9b45b6ee83a1c600b68e2"
   },
   {
    "file": "server/server.mjs",
@@ -99,8 +99,8 @@
  "outputs": [
   {
    "file": "engine/policy.js",
-   "bytes": 7257,
-   "sha256": "b440387f9a042c67b30d39d4382e6945ad7ce5421824c0f958ae995101c61062"
+   "bytes": 8426,
+   "sha256": "6615c80b7809f289068a4e0c786c7debd80f0bee0539be14979afd00d1a0ed2a"
   },
   {
    "file": "engine/sentinelle_core.js",
@@ -144,8 +144,8 @@
   },
   {
    "file": "engine/src/protocols_extra.js",
-   "bytes": 11441,
-   "sha256": "6b5c49d7e995938cc29b14e593e10d105095ec50676c5448b47ac1523cd20f54"
+   "bytes": 11760,
+   "sha256": "49da73dc4949224dccfb86f10ea45fd192440f787e4e310236dd4e247ec9ffb6"
   },
   {
    "file": "engine/src/registry.js",
@@ -198,6 +198,6 @@
    "sha256": "287ca2780020efc9727937b6ee27d8c5bfbe832c2677664cfc9c3392719141a5"
   }
  ],
- "total_bytes": 221609,
- "tree_sha256": "6ad14ce9fb88d02e7469e5a4d8c0de444c4eaff91a31641d033ad864bc094b9f"
+ "total_bytes": 223097,
+ "tree_sha256": "61509e449e407aad4610af1857001cd861ec628c0444270bf7b9a0d9b19635d8"
 }

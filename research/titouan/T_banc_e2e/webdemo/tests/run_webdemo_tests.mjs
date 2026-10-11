@@ -265,7 +265,7 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   E('colle-text').value = JSON.stringify({ to: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', value: '0x0', data: '0x095ea7b3' + '0'.repeat(24) + 'b2'.repeat(20) + 'f'.repeat(64) });
   E('colle-origin').value = 'https://site.example'; E('colle-intent').value = 'pay';
   E('colle-go').click();
-  ok(E('colle-out').textContent.includes('Danger') && E('colle-out').textContent.includes('Tu as dit'), 'app.js : mode colle => verdict Danger affiche');
+  ok(E('colle-out').textContent.includes('Danger') && E('colle-out').textContent.includes('Tu as dit'), 'app.js : mode colle => verdict Danger affiche', E('colle-out').textContent.slice(0, 300));
   E('colle-text').value = 'pas du json'; E('colle-go').click();
   ok(E('colle-out').textContent.includes('pas du JSON valide'), 'app.js : mode colle => erreur claire sur un texte invalide');
   // journal
@@ -276,6 +276,22 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   E('j-clear').click();
   ok(E('journal-status').textContent.includes('Journal vide'), 'app.js : effacer vide le journal');
   ok(errors.length === 0, 'app.js : aucune erreur non geree', errors.join(' ; '));
+}
+
+// ------------------------------------------------------------------ K) service reel des fichiers par HTTP (meme processus, 127.0.0.1) : types MIME des modules, tous les fichiers references repondent 200
+{
+  const http = await import('node:http');
+  const { createStaticServer } = await imp(join(WD, 'serve_local.mjs'));
+  const srv = createStaticServer(WD); await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+  const port = srv.address().port;
+  const get = (path) => new Promise((res, rej) => http.get({ host: '127.0.0.1', port, path }, (rs) => { const ch = []; rs.on('data', (c) => ch.push(c)); rs.on('end', () => res({ status: rs.statusCode, type: rs.headers['content-type'], body: Buffer.concat(ch) })); }).on('error', rej));
+  const mods = ALL.filter((p) => /\.js$/.test(p)).map((p) => '/' + relative(WD, p).split(String.fromCharCode(92)).join('/'));
+  let badMime = [], bad = [];
+  for (const m of mods) { const r = await get(m); if (r.status !== 200) bad.push(m + ' ' + r.status); else if (!/javascript/.test(r.type)) badMime.push(m); }
+  const idx = await get('/index.html'), lim = await get('/limites.html'), css = await get('/css/holdup.css'), nf = await get('/nexiste/pas'), trav = await get('/..%2f..%2fserver%2fserver.mjs');
+  srv.close();
+  ok(!bad.length && !badMime.length && idx.status === 200 && lim.status === 200 && css.status === 200 && /css/.test(css.type), 'HTTP : ' + mods.length + ' modules JS + index + limites + CSS servis (200, bons types MIME)', bad.concat(badMime).join(','));
+  ok(nf.status === 404 && trav.status !== 200, 'HTTP : fichier absent => 404 ; sortie de dossier refusee');
 }
 
 // ------------------------------------------------------------------ G) analyse statique
@@ -291,7 +307,7 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
     if (/\bimportScripts\s*\(|\bimport\s*\(/.test(t)) findings.eval.push(rel + ' (import dynamique / importScripts)');
     for (const re of SECRET) if (re.test(t)) findings.secret.push(rel + ' ~ ' + re.source.slice(0, 30));
       if (/\bfetch\s*\(|new\s+XMLHttpRequest|new\s+WebSocket|new\s+EventSource|sendBeacon\s*\(/.test(t.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, ''))) findings.net.push(rel);
-    for (const m of t.matchAll(/(?:https?|wss?|ftp):\/\/([A-Za-z0-9][A-Za-z0-9.-]*)/g)) { hosts.set(m[1].toLowerCase(), (hosts.get(m[1].toLowerCase()) || 0) + 1); if (rel === 'js/exemples_public.js') dataHosts.add(m[1].toLowerCase()); }
+    if (rel !== 'serve_local.mjs') /* outil de dev local (127.0.0.1), non charge par la page */ for (const m of t.matchAll(/(?:https?|wss?|ftp):\/\/([A-Za-z0-9][A-Za-z0-9.-]*)/g)) { hosts.set(m[1].toLowerCase(), (hosts.get(m[1].toLowerCase()) || 0) + 1); if (rel === 'js/exemples_public.js') dataHosts.add(m[1].toLowerCase()); }
     if (rel.endsWith('.html')) {
       if (/<script(?![^>]*\bsrc=)[^>]*>/i.test(t)) findings.inline.push(rel + ' (script inline)');
       if (/\sstyle\s*=/i.test(t)) findings.inline.push(rel + ' (style inline)');

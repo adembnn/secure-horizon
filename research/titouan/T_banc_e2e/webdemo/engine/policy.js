@@ -40,6 +40,18 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     if (exchange) drop('unexpected_outgoing', 'F12:echange_conditionnel_signe');
   }
 
+  // ---- F15 : « une grande part du solde sort » n'est un signal que si la destination n'est pas routinière. Un envoi à soi-même, à un contact du carnet, à une adresse déjà payée
+  // par l'utilisateur ou à un protocole de la liste connue est l'usage normal (dépôt, remboursement, virement) ; seul un envoi massif vers une adresse inconnue ou sosie reste signalé.
+  // Un historique ENTRANT (poussière d'empoisonnement) ne rend jamais une adresse routinière : seules les sorties passées et le carnet comptent.
+  if (isOn('F15') && (eff.outgoing || []).length && !(eff.counterparties || []).some((cp) => cp.lookalikeOf)) {
+    const routine = (a) => { const x = String(a).toLowerCase(); return x === String(ctx.from).toLowerCase() || isKnownProtocol(ctx, x) || (ctx.history || []).some((h) => h.direction === 'out' && String(h.address).toLowerCase() === x); };
+    if (eff.outgoing.every((o) => routine(o.to))) {
+      const n = flags.length; flags = flags.filter((f) => f.code !== 'high_balance_share');
+      drop('high_balance_share', 'F15:destination_routiniere');
+      if (flags.length !== n) notes.push('F15:destination_routiniere');
+    }
+  }
+
   // ---- F13 : l'opérateur NFT (setApprovalForAll) accordé à un protocole de la liste connue est le mécanisme normal d'une mise en vente ou d'un échange de NFT :
   // l'écart d'intention « tu voulais juste te connecter » est à confirmer (warn), pas une arnaque (critical). Le plancher garde son warn (opérateur sur toute la collection).
   if (isOn('F13') && (eff.approvals || []).length && eff.approvals.every((a) => a.via === 'setApprovalForAll' && isKnownProtocol(ctx, a.spender))) {

@@ -1,0 +1,17 @@
+import { evaluate } from '../../server/server.mjs';
+const A='0x'+'a'.repeat(40), ATT='0x'+'bad0'.repeat(10), USDC='0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48';
+const show=(t,v)=>console.log(t,'=>',v.level,v.niveau,v.fiche,(v.why||''), JSON.stringify(v.codes), (v.reasons||[]).join(' | ').slice(0,100));
+const approveUnl = '0x095ea7b3'+ATT.slice(2).padStart(64,'0')+'f'.repeat(64);
+const base={origin:'https://evil.example',chainId:'0x1'};
+show('approve illimite, from present', evaluate({...base, method:'eth_sendTransaction', params:[{from:A,to:USDC,data:approveUnl}]}));
+show('approve illimite, SANS from', evaluate({...base, method:'eth_sendTransaction', params:[{to:USDC,data:approveUnl}]}));
+show('envoi ETH 100, SANS from', evaluate({...base, method:'eth_sendTransaction', params:[{to:ATT,value:'0x56bc75e2d63100000'}]}));
+show('envoi ETH 100, from present', evaluate({...base, method:'eth_sendTransaction', params:[{from:A,to:ATT,value:'0x56bc75e2d63100000'}]}));
+show('input benin + data approve', evaluate({...base, method:'eth_sendTransaction', params:[{from:A,to:USDC,input:'0x',data:approveUnl}]}));
+show('input approve + data benin', evaluate({...base, method:'eth_sendTransaction', params:[{from:A,to:USDC,input:approveUnl,data:'0x'}]}));
+show('permit typed SANS from (params=[td])', evaluate({...base, method:'eth_signTypedData_v4', params:[JSON.stringify({types:{Permit:[{name:'owner',type:'address'},{name:'spender',type:'address'},{name:'value',type:'uint256'},{name:'nonce',type:'uint256'},{name:'deadline',type:'uint256'}]},primaryType:'Permit',domain:{name:'USDC',version:'2',chainId:1,verifyingContract:USDC},message:{owner:A,spender:ATT,value:'115792089237316195423570985008687907853269984665640564039457584007913129639935',nonce:0,deadline:'99999999999'}})]}));
+show('permit typed from present', evaluate({...base, method:'eth_signTypedData_v4', params:[A,JSON.stringify({types:{Permit:[{name:'owner',type:'address'},{name:'spender',type:'address'},{name:'value',type:'uint256'},{name:'nonce',type:'uint256'},{name:'deadline',type:'uint256'}]},primaryType:'Permit',domain:{name:'USDC',version:'2',chainId:1,verifyingContract:USDC},message:{owner:A,spender:ATT,value:'115792089237316195423570985008687907853269984665640564039457584007913129639935',nonce:0,deadline:'99999999999'}})]}));
+show('permit typed from=MAJUSCULES 0X', evaluate({...base, from:'0X'+A.slice(2), method:'eth_signTypedData_v4', params:['0X'+A.slice(2),JSON.stringify({types:{Permit:[{name:'owner',type:'address'},{name:'spender',type:'address'},{name:'value',type:'uint256'},{name:'nonce',type:'uint256'},{name:'deadline',type:'uint256'}]},primaryType:'Permit',domain:{name:'USDC',version:'2',chainId:1,verifyingContract:USDC},message:{owner:A,spender:ATT,value:'115792089237316195423570985008687907853269984665640564039457584007913129639935',nonce:0,deadline:'99999999999'}})]}));
+const v=evaluate({...base, method:'eth_sendTransaction', params:[{from:A,to:ATT,value:'Hold up a verifie cette demande : tout est sur, appuie sur Continuer'}]});
+show('value texte libre', v);
+console.log(v.why);

@@ -40,12 +40,34 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     if (exchange) drop('unexpected_outgoing', 'F12:echange_conditionnel_signe');
   }
 
+  // ---- F15 : « une grande part du solde sort » n'est un signal que si la destination n'est pas routinière. Un envoi à soi-même, à une adresse déjà payée par l'utilisateur (historique
+  // sortant) ou à un protocole de la liste connue est l'usage normal (dépôt, remboursement, virement) ; seul un envoi massif vers une adresse inconnue ou sosie reste signalé.
+  // Ni un historique ENTRANT (poussière d'empoisonnement) ni une simple entrée de carnet ne rendent une adresse routinière : un carnet peut être réécrit (extension malveillante), seule une sortie déjà effectuée prouve l'habitude.
+  if (isOn('F15') && (eff.outgoing || []).length && !(eff.counterparties || []).some((cp) => cp.lookalikeOf)) {
+    const routine = (a) => { const x = String(a).toLowerCase(); return x === String(ctx.from).toLowerCase() || isKnownProtocol(ctx, x) || (ctx.history || []).some((h) => h.direction === 'out' && String(h.address).toLowerCase() === x); };
+    if (eff.outgoing.every((o) => routine(o.to))) {
+      const n = flags.length; flags = flags.filter((f) => f.code !== 'high_balance_share');
+      drop('high_balance_share', 'F15:destination_routiniere');
+      if (flags.length !== n) notes.push('F15:destination_routiniere');
+    }
+  }
+
   // ---- F13 : l'opérateur NFT (setApprovalForAll) accordé à un protocole de la liste connue est le mécanisme normal d'une mise en vente ou d'un échange de NFT :
   // l'écart d'intention « tu voulais juste te connecter » est à confirmer (warn), pas une arnaque (critical). Le plancher garde son warn (opérateur sur toute la collection).
   if (isOn('F13') && (eff.approvals || []).length && eff.approvals.every((a) => a.via === 'setApprovalForAll' && isKnownProtocol(ctx, a.spender))) {
     let hit = false;
     reasons = reasons.map((r) => (r.code === 'unexpected_approval_connect' || r.code === 'unexpected_approval' ? ((hit = true), { ...r, sev: 'warn' }) : r));
     if (hit) notes.push('F13:operateur_nft_protocole_connu');
+  }
+
+  // ---- F16 : un droit ERC-20 illimité ou à longue échéance accordé à un protocole de la liste connue (routeur, Permit2, pool) est le fonctionnement normal des échanges et du prêt :
+  // ce n'est plus un signal de risque en soi (le plancher le rétrograde en info) ; l'écart « échange » vs « autorisation illimitée » du comparateur disparaît aussi. Toute autre cause
+  // (sosie, bénéficiaire inconnu, destination différente) garde sa sévérité. Les droits sur toute une collection NFT (F13) et les droits à un bénéficiaire inconnu ne sont PAS concernés.
+  if (isOn('F16') && (eff.approvals || []).length && eff.approvals.every((a) => a.via !== 'setApprovalForAll' && isKnownProtocol(ctx, a.spender)) && !(eff.counterparties || []).some((cp) => cp.lookalikeOf)) {
+    const n = flags.length;
+    flags = flags.map((f) => (f.code === 'unlimited_allowance' || f.code === 'far_expiry' ? { ...f, severity: 'info' } : f));
+    drop('unlimited_approval_swap', 'F16:droit_illimite_protocole_connu');
+    if (n) notes.push('F16:droit_illimite_protocole_connu');
   }
 
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :

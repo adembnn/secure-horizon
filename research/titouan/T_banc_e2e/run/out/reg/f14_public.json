@@ -1,0 +1,6810 @@
+{
+ "mesure": "002",
+ "jeu": "REGRESSION_PUBLIQUE",
+ "ts": "2026-10-11T01:51:20.393Z",
+ "public_sha256": "79b13a3eebdbbe3d449736be12043efee92f3be6940e40bb19b6e77794f9cbb6",
+ "rules_hash": "f952f3fb298fc0dc9627e0129160d02621443fc2860d8d9b1a3e9e69373dba0e",
+ "code_hash": "ecca04e7b00d7ee4c47a70a302ecf9571c4a1adb894c26b63e8345096f6e53ff",
+ "n_cas": 144,
+ "n_executables": 134,
+ "n_non_executables": 10,
+ "non_executables": [
+  {
+   "id": "P-A08-B2",
+   "fiche": "A08",
+   "label": "benin",
+   "plateforme": "hors_perimetre_evm",
+   "raison": "nonce durable Solana (AdvanceNonceAccount) : hors perimetre EVM ; aucune requete EVM a decoder"
+  },
+  {
+   "id": "P-A08-M2",
+   "fiche": "A08",
+   "label": "malveillant",
+   "plateforme": "hors_perimetre_evm",
+   "raison": "nonce durable Solana (AdvanceNonceAccount) : hors perimetre EVM ; aucune requete EVM a decoder"
+  },
+  {
+   "id": "P-A10-M1",
+   "fiche": "A10",
+   "label": "malveillant",
+   "plateforme": "sans_requete_wallet",
+   "raison": "infrastructure : window.ethereum.request surchargee cote page, aucune requete wallet a decoder (domaine extension/Adem) ; consequence = ne pas dependre d'un seul point d'interception"
+  },
+  {
+   "id": "P-A17-B1",
+   "fiche": "A17",
+   "label": "benin",
+   "plateforme": "hors_perimetre_evm",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "id": "P-A17-B2",
+   "fiche": "A17",
+   "label": "benin",
+   "plateforme": "hors_perimetre_evm",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "id": "P-A17-M1",
+   "fiche": "A17",
+   "label": "malveillant",
+   "plateforme": "hors_perimetre_evm",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "id": "P-A17-M2",
+   "fiche": "A17",
+   "label": "malveillant",
+   "plateforme": "hors_perimetre_evm",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "id": "P-T2B1-M1",
+   "fiche": "T2B1",
+   "label": "malveillant",
+   "plateforme": "sans_requete_wallet",
+   "raison": "aucune requete wallet : la page 'claim-drop.test' dessine une fausse fenetre et demande la seed phrase (12 mots synthetiques) ; Sentinelle (onTransaction/onSignature) ne voit rien ; hors perimetre declare"
+  },
+  {
+   "id": "P-T2C3-M1",
+   "fiche": "T2C3",
+   "label": "malveillant",
+   "plateforme": "sans_requete_wallet",
+   "raison": "extension clone ('sentinelle-guard.test', host_permissions <all_urls>) : aucune requete wallet a analyser ; le clone REMPLACE la barriere (hors barriere)"
+  },
+  {
+   "id": "P-T2C4-M1",
+   "fiche": "T2C4",
+   "label": "malveillant",
+   "plateforme": "sans_requete_wallet",
+   "raison": "chaine d'approvisionnement (mise a jour piegee v2.68 exfiltrant vers collect.test) : aucune requete wallet"
+  }
+ ],
+ "arms": {
+  "sans_intention": "plancher objectif du moteur (apres politique)",
+  "intention_honnete": "max(plancher, Adem(intention derivee des effets))",
+  "intention_mensongere": "max(plancher, Adem(intention du catalogue / soufflee a la victime))"
+ },
+ "groups": {
+  "TOUT executable": {
+   "sans_intention": {
+    "counts": {
+     "attrape_critical": 45,
+     "attrape_warn": 12,
+     "rate": 6,
+     "inconnu": 4,
+     "fa_critical": 0,
+     "fa_warn_exces": 9,
+     "fa_warn_toleree": 15,
+     "ok": 41,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 134,
+     "n_mal": 65,
+     "n_ben": 67,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 48,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 134,
+     "n_mal": 65,
+     "n_ben": 67,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 57,
+      "n": 65,
+      "rate": 0.8769,
+      "lo": 0.7755,
+      "hi": 0.9363
+     },
+     "rappel_critical": {
+      "k": 45,
+      "n": 65,
+      "rate": 0.6923,
+      "lo": 0.572,
+      "hi": 0.7911
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 48,
+      "n": 65,
+      "rate": 0.7385,
+      "lo": 0.6205,
+      "hi": 0.8298
+     },
+     "rappel_hors_inconnu": {
+      "k": 57,
+      "n": 61,
+      "rate": 0.9344,
+      "lo": 0.8432,
+      "hi": 0.9742
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 65,
+      "rate": 0.0615,
+      "lo": 0.0242,
+      "hi": 0.1478
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 67,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.0542
+     },
+     "fa_warn_ou_critical": {
+      "k": 24,
+      "n": 67,
+      "rate": 0.3582,
+      "lo": 0.254,
+      "hi": 0.4778
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 9,
+      "n": 67,
+      "rate": 0.1343,
+      "lo": 0.0723,
+      "hi": 0.236
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   },
+   "intention_honnete": {
+    "counts": {
+     "attrape_critical": 45,
+     "attrape_warn": 17,
+     "rate": 1,
+     "inconnu": 4,
+     "fa_critical": 2,
+     "fa_warn_exces": 7,
+     "fa_warn_toleree": 15,
+     "ok": 41,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 134,
+     "n_mal": 65,
+     "n_ben": 67,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 48,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 134,
+     "n_mal": 65,
+     "n_ben": 67,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 62,
+      "n": 65,
+      "rate": 0.9538,
+      "lo": 0.8729,
+      "hi": 0.9842
+     },
+     "rappel_critical": {
+      "k": 45,
+      "n": 65,
+      "rate": 0.6923,
+      "lo": 0.572,
+      "hi": 0.7911
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 48,
+      "n": 65,
+      "rate": 0.7385,
+      "lo": 0.6205,
+      "hi": 0.8298
+     },
+     "rappel_hors_inconnu": {
+      "k": 62,
+      "n": 61,
+      "rate": 1.0164,
+      "lo": null,
+      "hi": null
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 65,
+      "rate": 0.0615,
+      "lo": 0.0242,
+      "hi": 0.1478
+     },
+     "fa_critical": {
+      "k": 2,
+      "n": 67,
+      "rate": 0.0299,
+      "lo": 0.0082,
+      "hi": 0.1025
+     },
+     "fa_warn_ou_critical": {
+      "k": 24,
+      "n": 67,
+      "rate": 0.3582,
+      "lo": 0.254,
+      "hi": 0.4778
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 9,
+      "n": 67,
+      "rate": 0.1343,
+      "lo": 0.0723,
+      "hi": 0.236
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   },
+   "intention_mensongere": {
+    "counts": {
+     "attrape_critical": 55,
+     "attrape_warn": 7,
+     "rate": 1,
+     "inconnu": 4,
+     "fa_critical": 3,
+     "fa_warn_exces": 7,
+     "fa_warn_toleree": 15,
+     "ok": 40,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 134,
+     "n_mal": 65,
+     "n_ben": 67,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 58,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 134,
+     "n_mal": 65,
+     "n_ben": 67,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 62,
+      "n": 65,
+      "rate": 0.9538,
+      "lo": 0.8729,
+      "hi": 0.9842
+     },
+     "rappel_critical": {
+      "k": 55,
+      "n": 65,
+      "rate": 0.8462,
+      "lo": 0.7394,
+      "hi": 0.9142
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 58,
+      "n": 65,
+      "rate": 0.8923,
+      "lo": 0.794,
+      "hi": 0.9468
+     },
+     "rappel_hors_inconnu": {
+      "k": 62,
+      "n": 61,
+      "rate": 1.0164,
+      "lo": null,
+      "hi": null
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 65,
+      "rate": 0.0615,
+      "lo": 0.0242,
+      "hi": 0.1478
+     },
+     "fa_critical": {
+      "k": 3,
+      "n": 67,
+      "rate": 0.0448,
+      "lo": 0.0153,
+      "hi": 0.1236
+     },
+     "fa_warn_ou_critical": {
+      "k": 25,
+      "n": 67,
+      "rate": 0.3731,
+      "lo": 0.2672,
+      "hi": 0.4928
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 10,
+      "n": 67,
+      "rate": 0.1493,
+      "lo": 0.0831,
+      "hi": 0.2534
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   }
+  },
+  "C-Chain applicable (hors ethereum_seulement)": {
+   "sans_intention": {
+    "counts": {
+     "attrape_critical": 36,
+     "attrape_warn": 12,
+     "rate": 6,
+     "inconnu": 4,
+     "fa_critical": 0,
+     "fa_warn_exces": 9,
+     "fa_warn_toleree": 11,
+     "ok": 36,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 116,
+     "n_mal": 56,
+     "n_ben": 58,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 39,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 116,
+     "n_mal": 56,
+     "n_ben": 58,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 48,
+      "n": 56,
+      "rate": 0.8571,
+      "lo": 0.7426,
+      "hi": 0.9258
+     },
+     "rappel_critical": {
+      "k": 36,
+      "n": 56,
+      "rate": 0.6429,
+      "lo": 0.5119,
+      "hi": 0.7554
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 39,
+      "n": 56,
+      "rate": 0.6964,
+      "lo": 0.5666,
+      "hi": 0.801
+     },
+     "rappel_hors_inconnu": {
+      "k": 48,
+      "n": 52,
+      "rate": 0.9231,
+      "lo": 0.8183,
+      "hi": 0.9697
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 56,
+      "rate": 0.0714,
+      "lo": 0.0281,
+      "hi": 0.1698
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 58,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.0621
+     },
+     "fa_warn_ou_critical": {
+      "k": 20,
+      "n": 58,
+      "rate": 0.3448,
+      "lo": 0.2356,
+      "hi": 0.4733
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 9,
+      "n": 58,
+      "rate": 0.1552,
+      "lo": 0.0838,
+      "hi": 0.2693
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   },
+   "intention_honnete": {
+    "counts": {
+     "attrape_critical": 36,
+     "attrape_warn": 17,
+     "rate": 1,
+     "inconnu": 4,
+     "fa_critical": 2,
+     "fa_warn_exces": 7,
+     "fa_warn_toleree": 11,
+     "ok": 36,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 116,
+     "n_mal": 56,
+     "n_ben": 58,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 39,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 116,
+     "n_mal": 56,
+     "n_ben": 58,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 53,
+      "n": 56,
+      "rate": 0.9464,
+      "lo": 0.8539,
+      "hi": 0.9816
+     },
+     "rappel_critical": {
+      "k": 36,
+      "n": 56,
+      "rate": 0.6429,
+      "lo": 0.5119,
+      "hi": 0.7554
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 39,
+      "n": 56,
+      "rate": 0.6964,
+      "lo": 0.5666,
+      "hi": 0.801
+     },
+     "rappel_hors_inconnu": {
+      "k": 53,
+      "n": 52,
+      "rate": 1.0192,
+      "lo": null,
+      "hi": null
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 56,
+      "rate": 0.0714,
+      "lo": 0.0281,
+      "hi": 0.1698
+     },
+     "fa_critical": {
+      "k": 2,
+      "n": 58,
+      "rate": 0.0345,
+      "lo": 0.0095,
+      "hi": 0.1173
+     },
+     "fa_warn_ou_critical": {
+      "k": 20,
+      "n": 58,
+      "rate": 0.3448,
+      "lo": 0.2356,
+      "hi": 0.4733
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 9,
+      "n": 58,
+      "rate": 0.1552,
+      "lo": 0.0838,
+      "hi": 0.2693
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   },
+   "intention_mensongere": {
+    "counts": {
+     "attrape_critical": 46,
+     "attrape_warn": 7,
+     "rate": 1,
+     "inconnu": 4,
+     "fa_critical": 3,
+     "fa_warn_exces": 7,
+     "fa_warn_toleree": 11,
+     "ok": 35,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 116,
+     "n_mal": 56,
+     "n_ben": 58,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 49,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 116,
+     "n_mal": 56,
+     "n_ben": 58,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 53,
+      "n": 56,
+      "rate": 0.9464,
+      "lo": 0.8539,
+      "hi": 0.9816
+     },
+     "rappel_critical": {
+      "k": 46,
+      "n": 56,
+      "rate": 0.8214,
+      "lo": 0.7016,
+      "hi": 0.9
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 49,
+      "n": 56,
+      "rate": 0.875,
+      "lo": 0.7637,
+      "hi": 0.9381
+     },
+     "rappel_hors_inconnu": {
+      "k": 53,
+      "n": 52,
+      "rate": 1.0192,
+      "lo": null,
+      "hi": null
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 56,
+      "rate": 0.0714,
+      "lo": 0.0281,
+      "hi": 0.1698
+     },
+     "fa_critical": {
+      "k": 3,
+      "n": 58,
+      "rate": 0.0517,
+      "lo": 0.0177,
+      "hi": 0.1414
+     },
+     "fa_warn_ou_critical": {
+      "k": 21,
+      "n": 58,
+      "rate": 0.3621,
+      "lo": 0.2505,
+      "hi": 0.4907
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 10,
+      "n": 58,
+      "rate": 0.1724,
+      "lo": 0.0964,
+      "hi": 0.2891
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   }
+  },
+  "ethereum seulement (7702)": {
+   "sans_intention": {
+    "counts": {
+     "attrape_critical": 9,
+     "attrape_warn": 0,
+     "rate": 0,
+     "inconnu": 0,
+     "fa_critical": 0,
+     "fa_warn_exces": 0,
+     "fa_warn_toleree": 4,
+     "ok": 5,
+     "fraude_conforme_passe": 0,
+     "fraude_conforme_alerte": 0,
+     "n": 18,
+     "n_mal": 9,
+     "n_ben": 9,
+     "n_fc": 0,
+     "mal_au_niveau_attendu": 9,
+     "inconnu_ben": 0
+    },
+    "metrics": {
+     "n": 18,
+     "n_mal": 9,
+     "n_ben": 9,
+     "n_fc": 0,
+     "rappel_alerte": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_critical": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_hors_inconnu": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "inconnu_mal": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fa_warn_ou_critical": {
+      "k": 4,
+      "n": 9,
+      "rate": 0.4444,
+      "lo": 0.1888,
+      "hi": 0.7334
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fraude_conforme_alerte": {
+      "k": 0,
+      "n": 0,
+      "rate": null,
+      "lo": null,
+      "hi": null
+     }
+    }
+   },
+   "intention_honnete": {
+    "counts": {
+     "attrape_critical": 9,
+     "attrape_warn": 0,
+     "rate": 0,
+     "inconnu": 0,
+     "fa_critical": 0,
+     "fa_warn_exces": 0,
+     "fa_warn_toleree": 4,
+     "ok": 5,
+     "fraude_conforme_passe": 0,
+     "fraude_conforme_alerte": 0,
+     "n": 18,
+     "n_mal": 9,
+     "n_ben": 9,
+     "n_fc": 0,
+     "mal_au_niveau_attendu": 9,
+     "inconnu_ben": 0
+    },
+    "metrics": {
+     "n": 18,
+     "n_mal": 9,
+     "n_ben": 9,
+     "n_fc": 0,
+     "rappel_alerte": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_critical": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_hors_inconnu": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "inconnu_mal": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fa_warn_ou_critical": {
+      "k": 4,
+      "n": 9,
+      "rate": 0.4444,
+      "lo": 0.1888,
+      "hi": 0.7334
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fraude_conforme_alerte": {
+      "k": 0,
+      "n": 0,
+      "rate": null,
+      "lo": null,
+      "hi": null
+     }
+    }
+   },
+   "intention_mensongere": {
+    "counts": {
+     "attrape_critical": 9,
+     "attrape_warn": 0,
+     "rate": 0,
+     "inconnu": 0,
+     "fa_critical": 0,
+     "fa_warn_exces": 0,
+     "fa_warn_toleree": 4,
+     "ok": 5,
+     "fraude_conforme_passe": 0,
+     "fraude_conforme_alerte": 0,
+     "n": 18,
+     "n_mal": 9,
+     "n_ben": 9,
+     "n_fc": 0,
+     "mal_au_niveau_attendu": 9,
+     "inconnu_ben": 0
+    },
+    "metrics": {
+     "n": 18,
+     "n_mal": 9,
+     "n_ben": 9,
+     "n_fc": 0,
+     "rappel_alerte": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_critical": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "rappel_hors_inconnu": {
+      "k": 9,
+      "n": 9,
+      "rate": 1,
+      "lo": 0.7008,
+      "hi": 1
+     },
+     "inconnu_mal": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fa_warn_ou_critical": {
+      "k": 4,
+      "n": 9,
+      "rate": 0.4444,
+      "lo": 0.1888,
+      "hi": 0.7334
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 0,
+      "n": 9,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.2992
+     },
+     "fraude_conforme_alerte": {
+      "k": 0,
+      "n": 0,
+      "rate": null,
+      "lo": null,
+      "hi": null
+     }
+    }
+   }
+  },
+  "domaine A (TI_001)": {
+   "sans_intention": {
+    "counts": {
+     "attrape_critical": 36,
+     "attrape_warn": 7,
+     "rate": 3,
+     "inconnu": 4,
+     "fa_critical": 0,
+     "fa_warn_exces": 6,
+     "fa_warn_toleree": 10,
+     "ok": 30,
+     "fraude_conforme_passe": 0,
+     "fraude_conforme_alerte": 0,
+     "n": 96,
+     "n_mal": 48,
+     "n_ben": 48,
+     "n_fc": 0,
+     "mal_au_niveau_attendu": 39,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 96,
+     "n_mal": 48,
+     "n_ben": 48,
+     "n_fc": 0,
+     "rappel_alerte": {
+      "k": 43,
+      "n": 48,
+      "rate": 0.8958,
+      "lo": 0.7783,
+      "hi": 0.9547
+     },
+     "rappel_critical": {
+      "k": 36,
+      "n": 48,
+      "rate": 0.75,
+      "lo": 0.6122,
+      "hi": 0.8508
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 39,
+      "n": 48,
+      "rate": 0.8125,
+      "lo": 0.6806,
+      "hi": 0.8981
+     },
+     "rappel_hors_inconnu": {
+      "k": 43,
+      "n": 44,
+      "rate": 0.9773,
+      "lo": 0.8819,
+      "hi": 0.996
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 48,
+      "rate": 0.0833,
+      "lo": 0.0329,
+      "hi": 0.1955
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 48,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.0741
+     },
+     "fa_warn_ou_critical": {
+      "k": 16,
+      "n": 48,
+      "rate": 0.3333,
+      "lo": 0.2168,
+      "hi": 0.4746
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 6,
+      "n": 48,
+      "rate": 0.125,
+      "lo": 0.0586,
+      "hi": 0.247
+     },
+     "fraude_conforme_alerte": {
+      "k": 0,
+      "n": 0,
+      "rate": null,
+      "lo": null,
+      "hi": null
+     }
+    }
+   },
+   "intention_honnete": {
+    "counts": {
+     "attrape_critical": 36,
+     "attrape_warn": 9,
+     "rate": 1,
+     "inconnu": 4,
+     "fa_critical": 2,
+     "fa_warn_exces": 4,
+     "fa_warn_toleree": 10,
+     "ok": 30,
+     "fraude_conforme_passe": 0,
+     "fraude_conforme_alerte": 0,
+     "n": 96,
+     "n_mal": 48,
+     "n_ben": 48,
+     "n_fc": 0,
+     "mal_au_niveau_attendu": 39,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 96,
+     "n_mal": 48,
+     "n_ben": 48,
+     "n_fc": 0,
+     "rappel_alerte": {
+      "k": 45,
+      "n": 48,
+      "rate": 0.9375,
+      "lo": 0.8316,
+      "hi": 0.9785
+     },
+     "rappel_critical": {
+      "k": 36,
+      "n": 48,
+      "rate": 0.75,
+      "lo": 0.6122,
+      "hi": 0.8508
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 39,
+      "n": 48,
+      "rate": 0.8125,
+      "lo": 0.6806,
+      "hi": 0.8981
+     },
+     "rappel_hors_inconnu": {
+      "k": 45,
+      "n": 44,
+      "rate": 1.0227,
+      "lo": null,
+      "hi": null
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 48,
+      "rate": 0.0833,
+      "lo": 0.0329,
+      "hi": 0.1955
+     },
+     "fa_critical": {
+      "k": 2,
+      "n": 48,
+      "rate": 0.0417,
+      "lo": 0.0115,
+      "hi": 0.1398
+     },
+     "fa_warn_ou_critical": {
+      "k": 16,
+      "n": 48,
+      "rate": 0.3333,
+      "lo": 0.2168,
+      "hi": 0.4746
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 6,
+      "n": 48,
+      "rate": 0.125,
+      "lo": 0.0586,
+      "hi": 0.247
+     },
+     "fraude_conforme_alerte": {
+      "k": 0,
+      "n": 0,
+      "rate": null,
+      "lo": null,
+      "hi": null
+     }
+    }
+   },
+   "intention_mensongere": {
+    "counts": {
+     "attrape_critical": 41,
+     "attrape_warn": 4,
+     "rate": 1,
+     "inconnu": 4,
+     "fa_critical": 2,
+     "fa_warn_exces": 4,
+     "fa_warn_toleree": 10,
+     "ok": 30,
+     "fraude_conforme_passe": 0,
+     "fraude_conforme_alerte": 0,
+     "n": 96,
+     "n_mal": 48,
+     "n_ben": 48,
+     "n_fc": 0,
+     "mal_au_niveau_attendu": 44,
+     "inconnu_ben": 2
+    },
+    "metrics": {
+     "n": 96,
+     "n_mal": 48,
+     "n_ben": 48,
+     "n_fc": 0,
+     "rappel_alerte": {
+      "k": 45,
+      "n": 48,
+      "rate": 0.9375,
+      "lo": 0.8316,
+      "hi": 0.9785
+     },
+     "rappel_critical": {
+      "k": 41,
+      "n": 48,
+      "rate": 0.8542,
+      "lo": 0.7283,
+      "hi": 0.9275
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 44,
+      "n": 48,
+      "rate": 0.9167,
+      "lo": 0.8045,
+      "hi": 0.9671
+     },
+     "rappel_hors_inconnu": {
+      "k": 45,
+      "n": 44,
+      "rate": 1.0227,
+      "lo": null,
+      "hi": null
+     },
+     "inconnu_mal": {
+      "k": 4,
+      "n": 48,
+      "rate": 0.0833,
+      "lo": 0.0329,
+      "hi": 0.1955
+     },
+     "fa_critical": {
+      "k": 2,
+      "n": 48,
+      "rate": 0.0417,
+      "lo": 0.0115,
+      "hi": 0.1398
+     },
+     "fa_warn_ou_critical": {
+      "k": 16,
+      "n": 48,
+      "rate": 0.3333,
+      "lo": 0.2168,
+      "hi": 0.4746
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 6,
+      "n": 48,
+      "rate": 0.125,
+      "lo": 0.0586,
+      "hi": 0.247
+     },
+     "fraude_conforme_alerte": {
+      "k": 0,
+      "n": 0,
+      "rate": null,
+      "lo": null,
+      "hi": null
+     }
+    }
+   }
+  },
+  "domaine B (TI_002)": {
+   "sans_intention": {
+    "counts": {
+     "attrape_critical": 9,
+     "attrape_warn": 5,
+     "rate": 3,
+     "inconnu": 0,
+     "fa_critical": 0,
+     "fa_warn_exces": 3,
+     "fa_warn_toleree": 5,
+     "ok": 11,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 38,
+     "n_mal": 17,
+     "n_ben": 19,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 9,
+     "inconnu_ben": 0
+    },
+    "metrics": {
+     "n": 38,
+     "n_mal": 17,
+     "n_ben": 19,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 14,
+      "n": 17,
+      "rate": 0.8235,
+      "lo": 0.5897,
+      "hi": 0.9381
+     },
+     "rappel_critical": {
+      "k": 9,
+      "n": 17,
+      "rate": 0.5294,
+      "lo": 0.3096,
+      "hi": 0.7384
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 9,
+      "n": 17,
+      "rate": 0.5294,
+      "lo": 0.3096,
+      "hi": 0.7384
+     },
+     "rappel_hors_inconnu": {
+      "k": 14,
+      "n": 17,
+      "rate": 0.8235,
+      "lo": 0.5897,
+      "hi": 0.9381
+     },
+     "inconnu_mal": {
+      "k": 0,
+      "n": 17,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.1843
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 19,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.1682
+     },
+     "fa_warn_ou_critical": {
+      "k": 8,
+      "n": 19,
+      "rate": 0.4211,
+      "lo": 0.2314,
+      "hi": 0.6372
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 3,
+      "n": 19,
+      "rate": 0.1579,
+      "lo": 0.0552,
+      "hi": 0.3757
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   },
+   "intention_honnete": {
+    "counts": {
+     "attrape_critical": 9,
+     "attrape_warn": 8,
+     "rate": 0,
+     "inconnu": 0,
+     "fa_critical": 0,
+     "fa_warn_exces": 3,
+     "fa_warn_toleree": 5,
+     "ok": 11,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 38,
+     "n_mal": 17,
+     "n_ben": 19,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 9,
+     "inconnu_ben": 0
+    },
+    "metrics": {
+     "n": 38,
+     "n_mal": 17,
+     "n_ben": 19,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 17,
+      "n": 17,
+      "rate": 1,
+      "lo": 0.8157,
+      "hi": 1
+     },
+     "rappel_critical": {
+      "k": 9,
+      "n": 17,
+      "rate": 0.5294,
+      "lo": 0.3096,
+      "hi": 0.7384
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 9,
+      "n": 17,
+      "rate": 0.5294,
+      "lo": 0.3096,
+      "hi": 0.7384
+     },
+     "rappel_hors_inconnu": {
+      "k": 17,
+      "n": 17,
+      "rate": 1,
+      "lo": 0.8157,
+      "hi": 1
+     },
+     "inconnu_mal": {
+      "k": 0,
+      "n": 17,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.1843
+     },
+     "fa_critical": {
+      "k": 0,
+      "n": 19,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.1682
+     },
+     "fa_warn_ou_critical": {
+      "k": 8,
+      "n": 19,
+      "rate": 0.4211,
+      "lo": 0.2314,
+      "hi": 0.6372
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 3,
+      "n": 19,
+      "rate": 0.1579,
+      "lo": 0.0552,
+      "hi": 0.3757
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   },
+   "intention_mensongere": {
+    "counts": {
+     "attrape_critical": 14,
+     "attrape_warn": 3,
+     "rate": 0,
+     "inconnu": 0,
+     "fa_critical": 1,
+     "fa_warn_exces": 3,
+     "fa_warn_toleree": 5,
+     "ok": 10,
+     "fraude_conforme_passe": 1,
+     "fraude_conforme_alerte": 1,
+     "n": 38,
+     "n_mal": 17,
+     "n_ben": 19,
+     "n_fc": 2,
+     "mal_au_niveau_attendu": 14,
+     "inconnu_ben": 0
+    },
+    "metrics": {
+     "n": 38,
+     "n_mal": 17,
+     "n_ben": 19,
+     "n_fc": 2,
+     "rappel_alerte": {
+      "k": 17,
+      "n": 17,
+      "rate": 1,
+      "lo": 0.8157,
+      "hi": 1
+     },
+     "rappel_critical": {
+      "k": 14,
+      "n": 17,
+      "rate": 0.8235,
+      "lo": 0.5897,
+      "hi": 0.9381
+     },
+     "rappel_au_niveau_attendu": {
+      "k": 14,
+      "n": 17,
+      "rate": 0.8235,
+      "lo": 0.5897,
+      "hi": 0.9381
+     },
+     "rappel_hors_inconnu": {
+      "k": 17,
+      "n": 17,
+      "rate": 1,
+      "lo": 0.8157,
+      "hi": 1
+     },
+     "inconnu_mal": {
+      "k": 0,
+      "n": 17,
+      "rate": 0,
+      "lo": 0,
+      "hi": 0.1843
+     },
+     "fa_critical": {
+      "k": 1,
+      "n": 19,
+      "rate": 0.0526,
+      "lo": 0.0094,
+      "hi": 0.2464
+     },
+     "fa_warn_ou_critical": {
+      "k": 9,
+      "n": 19,
+      "rate": 0.4737,
+      "lo": 0.2733,
+      "hi": 0.6829
+     },
+     "fa_warn_exces_ou_critical": {
+      "k": 4,
+      "n": 19,
+      "rate": 0.2105,
+      "lo": 0.0851,
+      "hi": 0.4333
+     },
+     "fraude_conforme_alerte": {
+      "k": 1,
+      "n": 2,
+      "rate": 0.5,
+      "lo": 0.0945,
+      "hi": 0.9055
+     }
+    }
+   }
+  }
+ },
+ "families": {
+  "A01|delegation_7702": {
+   "plateforme": "ethereum_seulement",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A02|batch_execute_7702": {
+   "plateforme": "ethereum_seulement",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 2,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 2,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 2,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A03|delegation_7702_chain0": {
+   "plateforme": "ethereum_seulement",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A04|signature_opaque_eth_sign": {
+   "plateforme": "ethereum_seulement",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A05|permit_2612": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A06|permit2_allowance": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A07|permit2_signature_transfer": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A08|signature_differee": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "A09|simulation_evasion": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 1,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 1,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 1,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "A11|empoisonnement_adresse": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 2,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 2,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A12|empoisonnement_safe_imbrique": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A13|clipper_remplacement": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 2,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 2,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A14|origine_legitime_charge_malveillante": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A15|faux_revoke": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 4,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 4,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 8,
+    "n_mal": 4,
+    "n_ben": 4,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 4,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 4,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 4,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 8,
+    "n_mal": 4,
+    "n_ben": 4,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 4,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 4,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 4,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 8,
+    "n_mal": 4,
+    "n_ben": 4,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 4,
+    "inconnu_ben": 0
+   }
+  },
+  "A16|chaine_neuve": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 2,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 2,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 2,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A18|siwe_detourne": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A19|nft_listing_zero": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A20|batch_massif_troncature": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   }
+  },
+  "A21|wallet_sendCalls_lot": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A22|permission_7715": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 4,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 2
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 4,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 2
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 4,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 2
+   }
+  },
+  "A23|module_compte": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 4,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 4,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 8,
+    "n_mal": 4,
+    "n_ben": 4,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 4,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 4,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 4,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 8,
+    "n_mal": 4,
+    "n_ben": 4,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 4,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 4,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 4,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 8,
+    "n_mal": 4,
+    "n_ben": 4,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 4,
+    "inconnu_ben": 0
+   }
+  },
+  "A24|faux_jeton_appat": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "A25|pont_destinataire": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 2,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 2,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 2,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "T2A1|faux_support_voix_clonee": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2A2|victime_coachee_fraude_conforme": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 1,
+    "n": 2,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 1,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 1,
+    "n": 2,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 1,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 1,
+    "n": 2,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 1,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   }
+  },
+  "T2A3|pig_butchering_fraude_conforme": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 1,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 1,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 1,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 1,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 1,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 1,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   }
+  },
+  "T2A4|faux_agent_trading_permit": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 2,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "T2A5|faux_bot_arbitrage": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 1,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 2,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 1,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2B2|bitb_relais_permit": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2B3|clickjacking_overlay": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2B4|faux_popup_cadeau": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 1,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "T2C1|cloaking_extension": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 2,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 2,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 4,
+    "n_mal": 2,
+    "n_ben": 2,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 2,
+    "inconnu_ben": 0
+   }
+  },
+  "T2C2|toctou_proxy": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   }
+  },
+  "T2C5|desactivation_sur_ordre": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2D1|injection_pastedMessage": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 1,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 1,
+    "n_mal": 1,
+    "n_ben": 0,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 1,
+    "n_mal": 1,
+    "n_ben": 0,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 1,
+    "n_mal": 1,
+    "n_ben": 0,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   }
+  },
+  "T2D2|injection_cachee_page": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2D3|paraphrase_llm_evasion_mots_cles": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 1,
+    "ok": 0,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2D4|injection_memoire_agent": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 1,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 1,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 1,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 2,
+    "n_mal": 1,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 1,
+    "inconnu_ben": 0
+   }
+  },
+  "T2D5|benin_dur_phrase_ressemblant_a_injection": {
+   "plateforme": "evm_toutes_chaines",
+   "sans_intention": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 1,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_honnete": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 1,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   },
+   "intention_mensongere": {
+    "attrape_critical": 0,
+    "attrape_warn": 0,
+    "rate": 0,
+    "inconnu": 0,
+    "fa_critical": 0,
+    "fa_warn_exces": 0,
+    "fa_warn_toleree": 0,
+    "ok": 1,
+    "fraude_conforme_passe": 0,
+    "fraude_conforme_alerte": 0,
+    "n": 1,
+    "n_mal": 0,
+    "n_ben": 1,
+    "n_fc": 0,
+    "mal_au_niveau_attendu": 0,
+    "inconnu_ben": 0
+   }
+  }
+ },
+ "rates": [
+  {
+   "id": "P-A09-M2",
+   "fiche": "A09",
+   "family": "simulation_evasion",
+   "subfamily": "bytecode_lit_ORIGIN_COINBASE_TIMESTAMP",
+   "plateforme": "evm_toutes_chaines",
+   "blind": true,
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": []
+  }
+ ],
+ "attrapes_sous_le_niveau_attendu": [
+  {
+   "id": "P-A20-M1",
+   "fiche": "A20",
+   "family": "batch_massif_troncature",
+   "subfamily": "aggregate3_257_appels_256_approve",
+   "attendu": "critical",
+   "plancher": "warn",
+   "honnete": "warn",
+   "catalogue": "warn",
+   "floorCodes": [
+    "batch_foreign_unlimited_approval"
+   ],
+   "ademCodes": []
+  },
+  {
+   "id": "P-T2A5-M1",
+   "fiche": "T2A5",
+   "family": "faux_bot_arbitrage",
+   "subfamily": "creation_contrat_bot",
+   "attendu": "critical",
+   "plancher": "warn",
+   "honnete": "warn",
+   "catalogue": "warn",
+   "floorCodes": [
+    "contract_creation",
+    "opaque"
+   ],
+   "ademCodes": []
+  },
+  {
+   "id": "P-T2C2-M1",
+   "fiche": "T2C2",
+   "family": "toctou_proxy",
+   "subfamily": "proxy_modifiable_apercu_50_usdc_paul",
+   "attendu": "critical",
+   "plancher": "warn",
+   "honnete": "warn",
+   "catalogue": "warn",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": []
+  },
+  {
+   "id": "P-T2D1-M1",
+   "fiche": "T2D1",
+   "family": "injection_pastedMessage",
+   "subfamily": "transfert_2000_usdc_message_colle_injecte",
+   "attendu": "critical",
+   "plancher": "ok",
+   "honnete": "warn",
+   "catalogue": "warn",
+   "floorCodes": [],
+   "ademCodes": [
+    "new_contract"
+   ]
+  }
+ ],
+ "unknown": [
+  {
+   "id": "P-A22-B1",
+   "fiche": "A22",
+   "label": "benin",
+   "method": "wallet_requestExecutionPermissions",
+   "why": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "id": "P-A22-B2",
+   "fiche": "A22",
+   "label": "benin",
+   "method": "wallet_requestExecutionPermissions",
+   "why": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "id": "P-A22-M1",
+   "fiche": "A22",
+   "label": "malveillant",
+   "method": "wallet_requestExecutionPermissions",
+   "why": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "id": "P-A22-M2",
+   "fiche": "A22",
+   "label": "malveillant",
+   "method": "wallet_requestExecutionPermissions",
+   "why": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  }
+ ],
+ "fausses_alertes_au_dela_du_tolere": [
+  {
+   "id": "P-A07-B1",
+   "fiche": "A07",
+   "family": "permit2_signature_transfer",
+   "subfamily": "permitTransferFrom_routeur_connu_borne",
+   "verdict": "warn",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "warn",
+   "floorCodes": [
+    "permit2_transfer_destination_chosen_by_spender"
+   ],
+   "ademCodes": []
+  },
+  {
+   "id": "P-A11-B1",
+   "fiche": "A11",
+   "family": "empoisonnement_adresse",
+   "subfamily": "bon_contact_malgre_dust_sosie_4_4",
+   "verdict": "critical",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "critical",
+   "floorCodes": [
+    "address_poisoning"
+   ],
+   "ademCodes": [
+    "lookalike_address"
+   ]
+  },
+  {
+   "id": "P-A11-B2",
+   "fiche": "A11",
+   "family": "empoisonnement_adresse",
+   "subfamily": "bon_contact_malgre_dust_sosie_5_5",
+   "verdict": "critical",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "critical",
+   "floorCodes": [
+    "address_poisoning"
+   ],
+   "ademCodes": [
+    "lookalike_address"
+   ]
+  },
+  {
+   "id": "P-A19-B1",
+   "fiche": "A19",
+   "family": "nft_listing_zero",
+   "subfamily": "listing_prix_juste_frais_marketplace",
+   "verdict": "warn",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "warn",
+   "floorCodes": [
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "unexpected_outgoing"
+   ]
+  },
+  {
+   "id": "P-A19-B2",
+   "fiche": "A19",
+   "family": "nft_listing_zero",
+   "subfamily": "listing_prix_juste_frais_marketplace",
+   "verdict": "warn",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "warn",
+   "floorCodes": [
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "unexpected_outgoing"
+   ]
+  },
+  {
+   "id": "P-A25-B1",
+   "fiche": "A25",
+   "family": "pont_destinataire",
+   "subfamily": "jumeau_benin_deposit_token_recipient_tiers",
+   "verdict": "warn",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "warn",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": []
+  },
+  {
+   "id": "P-T2A5-B2",
+   "fiche": "T2A5",
+   "family": "faux_bot_arbitrage",
+   "subfamily": "depot_0_5_eth_staking_connu",
+   "verdict": "critical",
+   "attendu": "ok",
+   "plancher": "ok",
+   "honnete": "ok",
+   "floorCodes": [],
+   "ademCodes": [
+    "no_incoming"
+   ]
+  },
+  {
+   "id": "P-T2B4-B2",
+   "fiche": "T2B4",
+   "family": "faux_popup_cadeau",
+   "subfamily": "claim_recompenses_coffre_connu",
+   "verdict": "warn",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "warn",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": []
+  },
+  {
+   "id": "P-T2C1-B1",
+   "fiche": "T2C1",
+   "family": "cloaking_extension",
+   "subfamily": "claim_officiel_protocole_connu",
+   "verdict": "warn",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "warn",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": []
+  },
+  {
+   "id": "P-T2C1-B2",
+   "fiche": "T2C1",
+   "family": "cloaking_extension",
+   "subfamily": "claim_officiel_protocole_connu_bis",
+   "verdict": "warn",
+   "attendu": "ok",
+   "plancher": "warn",
+   "honnete": "warn",
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": []
+  }
+ ],
+ "fraude_conforme": [
+  {
+   "id": "P-T2A2-F1",
+   "fiche": "T2A2",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   }
+  },
+  {
+   "id": "P-T2A3-F1",
+   "fiche": "T2A3",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   }
+  }
+ ],
+ "benins_non_ok_total": 25,
+ "cases": [
+  {
+   "id": "P-A01-B1",
+   "fiche": "A01",
+   "family": "delegation_7702",
+   "subfamily": "jumeau_benin_sweeper_reutilise_ancien",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ],
+   "ademCodes": [
+    "unexpected_delegation_connect"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F4:delegation_implementation_connue"
+   ]
+  },
+  {
+   "id": "P-A01-B2",
+   "fiche": "A01",
+   "family": "delegation_7702",
+   "subfamily": "revocation_delegation_adresse_zero",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A01-M1",
+   "fiche": "A01",
+   "family": "delegation_7702",
+   "subfamily": "sweeper_reutilise_ancien",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ],
+   "ademCodes": [
+    "unexpected_delegation_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A01-M2",
+   "fiche": "A01",
+   "family": "delegation_7702",
+   "subfamily": "sweeper_jeune",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_delegation_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A02-B1",
+   "fiche": "A02",
+   "family": "batch_execute_7702",
+   "subfamily": "jumeau_benin_delegation_connue_plus_execute_approvals",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "unknown_selector",
+    "embedded_calls",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": [
+    "F4:delegation_implementation_connue"
+   ]
+  },
+  {
+   "id": "P-A02-B2",
+   "fiche": "A02",
+   "family": "batch_execute_7702",
+   "subfamily": "jumeau_benin_compte_deja_delegue_execute_approvals",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "embedded_calls",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-A02-M1",
+   "fiche": "A02",
+   "family": "batch_execute_7702",
+   "subfamily": "delegation_connue_plus_execute_approvals",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "embedded_calls",
+    "delegation_7702",
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": [
+    "F4:delegation_implementation_connue"
+   ]
+  },
+  {
+   "id": "P-A02-M2",
+   "fiche": "A02",
+   "family": "batch_execute_7702",
+   "subfamily": "compte_deja_delegue_execute_approvals",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "embedded_calls",
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-A03-B1",
+   "fiche": "A03",
+   "family": "delegation_7702_chain0",
+   "subfamily": "delegation_une_chaine_implementation_connue",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ],
+   "ademCodes": [
+    "unexpected_delegation_connect"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F4:delegation_implementation_connue"
+   ]
+  },
+  {
+   "id": "P-A03-B2",
+   "fiche": "A03",
+   "family": "delegation_7702_chain0",
+   "subfamily": "revocation_une_chaine",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A03-M1",
+   "fiche": "A03",
+   "family": "delegation_7702_chain0",
+   "subfamily": "chain_id_0_delegue_contrat",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains"
+   ],
+   "ademCodes": [
+    "unexpected_delegation_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A03-M2",
+   "fiche": "A03",
+   "family": "delegation_7702_chain0",
+   "subfamily": "chain_id_0_delegue_connu",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702",
+    "delegation_7702_all_chains"
+   ],
+   "ademCodes": [
+    "unexpected_delegation_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A04-B1",
+   "fiche": "A04",
+   "family": "signature_opaque_eth_sign",
+   "subfamily": "personal_sign_message_texte_lisible",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A04-B2",
+   "fiche": "A04",
+   "family": "signature_opaque_eth_sign",
+   "subfamily": "siwe_valide_domaine_concordant",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A04-M1",
+   "fiche": "A04",
+   "family": "signature_opaque_eth_sign",
+   "subfamily": "eth_sign_hash_32_octets",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-A04-M2",
+   "fiche": "A04",
+   "family": "signature_opaque_eth_sign",
+   "subfamily": "personal_sign_hash_32_octets_message_de_verification",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "blind_signature",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-A05-B1",
+   "fiche": "A05",
+   "family": "permit_2612",
+   "subfamily": "jumeau_benin_valeur_max_deadline_lointaine",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A05-B2",
+   "fiche": "A05",
+   "family": "permit_2612",
+   "subfamily": "jumeau_benin_montant_exact_du_solde_contrat_ancien_de_quelques_semaines",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A05-M1",
+   "fiche": "A05",
+   "family": "permit_2612",
+   "subfamily": "valeur_max_deadline_lointaine",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A05-M2",
+   "fiche": "A05",
+   "family": "permit_2612",
+   "subfamily": "montant_exact_du_solde_contrat_ancien_de_quelques_semaines",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "high_balance_share",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A06-B1",
+   "fiche": "A06",
+   "family": "permit2_allowance",
+   "subfamily": "jumeau_benin_single_montant_max_expiration_max",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A06-B2",
+   "fiche": "A06",
+   "family": "permit2_allowance",
+   "subfamily": "batch_deux_tokens_routeur_connu_borne",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A06-M1",
+   "fiche": "A06",
+   "family": "permit2_allowance",
+   "subfamily": "single_montant_max_expiration_max",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unlimited_approval_swap",
+    "permit_new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A06-M2",
+   "fiche": "A06",
+   "family": "permit2_allowance",
+   "subfamily": "batch_trois_tokens_illimites",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "unlimited_allowance",
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A07-B1",
+   "fiche": "A07",
+   "family": "permit2_signature_transfer",
+   "subfamily": "permitTransferFrom_routeur_connu_borne",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "permit2_transfer_destination_chosen_by_spender"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A07-B2",
+   "fiche": "A07",
+   "family": "permit2_signature_transfer",
+   "subfamily": "witness_destinataire_soi_routeur_connu",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A07-M1",
+   "fiche": "A07",
+   "family": "permit2_signature_transfer",
+   "subfamily": "batch_witness_primaryType_non_reconnu",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "approval_to_eoa",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "high_balance_share",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A07-M2",
+   "fiche": "A07",
+   "family": "permit2_signature_transfer",
+   "subfamily": "permitTransferFrom_montant_solde",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "permit2_transfer_destination_chosen_by_spender",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "high_balance_share",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A08-B1",
+   "fiche": "A08",
+   "family": "signature_differee",
+   "subfamily": "jumeau_benin_evm_permit_deadline_2pow256",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A08-M1",
+   "fiche": "A08",
+   "family": "signature_differee",
+   "subfamily": "evm_permit_deadline_2pow256",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "approval_to_eoa",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A09-B1",
+   "fiche": "A09",
+   "family": "simulation_evasion",
+   "subfamily": "jumeau_benin_proxy_modifiable_jeune_mint_simple",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "no_incoming"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F1:no_incoming_ignore_effets_incomplets"
+   ]
+  },
+  {
+   "id": "P-A09-B2",
+   "fiche": "A09",
+   "family": "simulation_evasion",
+   "subfamily": "jumeau_benin_bytecode_lit_ORIGIN_COINBASE_TIMESTAMP",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A09-M1",
+   "fiche": "A09",
+   "family": "simulation_evasion",
+   "subfamily": "proxy_modifiable_jeune_mint_simple",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [
+    "no_incoming"
+   ],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-A09-M2",
+   "fiche": "A09",
+   "family": "simulation_evasion",
+   "subfamily": "bytecode_lit_ORIGIN_COINBASE_TIMESTAMP",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A11-B1",
+   "fiche": "A11",
+   "family": "empoisonnement_adresse",
+   "subfamily": "bon_contact_malgre_dust_sosie_4_4",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ],
+   "ademCodes": [
+    "lookalike_address"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A11-B2",
+   "fiche": "A11",
+   "family": "empoisonnement_adresse",
+   "subfamily": "bon_contact_malgre_dust_sosie_5_5",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ],
+   "ademCodes": [
+    "lookalike_address"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A11-M1",
+   "fiche": "A11",
+   "family": "empoisonnement_adresse",
+   "subfamily": "sosie_prefixe4_suffixe4_dust_32h",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "lookalike_address",
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-A11-M2",
+   "fiche": "A11",
+   "family": "empoisonnement_adresse",
+   "subfamily": "sosie_prefixe5_suffixe5_dust_32h",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "address_poisoning"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "lookalike_address",
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-A12-B1",
+   "fiche": "A12",
+   "family": "empoisonnement_safe_imbrique",
+   "subfamily": "usdc_vers_vrai_sous_compte",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A12-B2",
+   "fiche": "A12",
+   "family": "empoisonnement_safe_imbrique",
+   "subfamily": "eth_vers_vrai_sous_compte",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A12-M1",
+   "fiche": "A12",
+   "family": "empoisonnement_safe_imbrique",
+   "subfamily": "usdc_vers_safe_sosie",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "lookalike_address"
+   ],
+   "ademCodes": [
+    "lookalike_address",
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-A12-M2",
+   "fiche": "A12",
+   "family": "empoisonnement_safe_imbrique",
+   "subfamily": "eth_vers_safe_sosie",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "lookalike_address"
+   ],
+   "ademCodes": [
+    "lookalike_address",
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-A13-B1",
+   "fiche": "A13",
+   "family": "clipper_remplacement",
+   "subfamily": "paiement_adresse_voulue",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A13-B2",
+   "fiche": "A13",
+   "family": "clipper_remplacement",
+   "subfamily": "paiement_adresse_voulue",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A13-M1",
+   "fiche": "A13",
+   "family": "clipper_remplacement",
+   "subfamily": "adresse_remplacee_sosie_2_0_eth",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "new_contract",
+    "wrong_recipient"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A13-M2",
+   "fiche": "A13",
+   "family": "clipper_remplacement",
+   "subfamily": "adresse_remplacee_sosie_0_1_usdc",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "new_contract",
+    "wrong_recipient"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A14-B1",
+   "fiche": "A14",
+   "family": "origine_legitime_charge_malveillante",
+   "subfamily": "jumeau_benin_cowswap_domaine_detourne_approve_max",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A14-B2",
+   "fiche": "A14",
+   "family": "origine_legitime_charge_malveillante",
+   "subfamily": "jumeau_benin_xss_reflechi_permit2_sur_site_connu",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A14-M1",
+   "fiche": "A14",
+   "family": "origine_legitime_charge_malveillante",
+   "subfamily": "cowswap_domaine_detourne_approve_max",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unlimited_approval_swap"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A14-M2",
+   "fiche": "A14",
+   "family": "origine_legitime_charge_malveillante",
+   "subfamily": "xss_reflechi_permit2_sur_site_connu",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unlimited_approval_swap",
+    "permit_new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-B1",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "jumeau_benin_approve_max_presente_comme_revoke",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-B2",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "jumeau_benin_setApprovalForAll_true_presente_comme_revoke",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-B3",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "revoke_dai_approve_zero",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-B4",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "vrai_revoke_7702_adresse_zero",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-M1",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "approve_max_presente_comme_revoke",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-M2",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "setApprovalForAll_true_presente_comme_revoke",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "approval_for_all",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-M3",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "permit_signature_presentee_comme_revoke",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A15-M4",
+   "fiche": "A15",
+   "family": "faux_revoke",
+   "subfamily": "delegation_7702_vers_attaquant_presentee_comme_revoke",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "ethereum_seulement",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "delegation_7702"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_delegation_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A16-B1",
+   "fiche": "A16",
+   "family": "chaine_neuve",
+   "subfamily": "jumeau_benin_approve_max_chaine_neuve",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "external_spender"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A16-B2",
+   "fiche": "A16",
+   "family": "chaine_neuve",
+   "subfamily": "permit_borne_dex_chaine_neuve",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "external_spender"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A16-M1",
+   "fiche": "A16",
+   "family": "chaine_neuve",
+   "subfamily": "approve_max_chaine_neuve",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A16-M2",
+   "fiche": "A16",
+   "family": "chaine_neuve",
+   "subfamily": "permit_max_chaine_neuve",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A18-B1",
+   "fiche": "A18",
+   "family": "siwe_detourne",
+   "subfamily": "jumeau_benin_domaine_message_different_origine",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A18-B2",
+   "fiche": "A18",
+   "family": "siwe_detourne",
+   "subfamily": "siwe_resource_conditions_du_meme_site",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A18-M1",
+   "fiche": "A18",
+   "family": "siwe_detourne",
+   "subfamily": "domaine_message_different_origine",
+   "label": "malveillant",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "siwe_domain_mismatch",
+    "siwe_uri_mismatch"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A18-M2",
+   "fiche": "A18",
+   "family": "siwe_detourne",
+   "subfamily": "instruction_en_clair_et_resource_vers_contrat",
+   "label": "malveillant",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "siwe_statement_suspicious"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A19-B1",
+   "fiche": "A19",
+   "family": "nft_listing_zero",
+   "subfamily": "listing_prix_juste_frais_marketplace",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "unexpected_outgoing"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F12:echange_conditionnel_signe"
+   ]
+  },
+  {
+   "id": "P-A19-B2",
+   "fiche": "A19",
+   "family": "nft_listing_zero",
+   "subfamily": "listing_prix_juste_frais_marketplace",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "unexpected_outgoing"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F12:echange_conditionnel_signe"
+   ]
+  },
+  {
+   "id": "P-A19-M1",
+   "fiche": "A19",
+   "family": "nft_listing_zero",
+   "subfamily": "consideration_1_wei",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "order_proceeds_negligible",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "unexpected_outgoing"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A19-M2",
+   "fiche": "A19",
+   "family": "nft_listing_zero",
+   "subfamily": "consideration_quasi_nulle",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "order_proceeds_negligible",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "unexpected_outgoing"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A20-B1",
+   "fiche": "A20",
+   "family": "batch_massif_troncature",
+   "subfamily": "lot_legitime_12_ordres_routeur_connu",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A20-M1",
+   "fiche": "A20",
+   "family": "batch_massif_troncature",
+   "subfamily": "aggregate3_257_appels_256_approve",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "batch_foreign_unlimited_approval"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A21-B1",
+   "fiche": "A21",
+   "family": "wallet_sendCalls_lot",
+   "subfamily": "jumeau_benin_swap_au_milieu_approve_max_et_transfert_final",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A21-B2",
+   "fiche": "A21",
+   "family": "wallet_sendCalls_lot",
+   "subfamily": "lot_un_seul_swap_vers_soi",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A21-M1",
+   "fiche": "A21",
+   "family": "wallet_sendCalls_lot",
+   "subfamily": "swap_au_milieu_approve_max_et_transfert_final",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unlimited_approval_swap"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A21-M2",
+   "fiche": "A21",
+   "family": "wallet_sendCalls_lot",
+   "subfamily": "petit_transfert_anodin_puis_setApprovalForAll",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "approval_for_all",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unlimited_approval_swap",
+    "no_incoming"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A22-B1",
+   "fiche": "A22",
+   "family": "permission_7715",
+   "subfamily": "jumeau_benin_native_token_allowance_totale_expiration_2100",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "unknown",
+    "intention_honnete": "unknown",
+    "intention_mensongere": "unknown"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "polNotes": [],
+   "unsupported": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "id": "P-A22-B2",
+   "fiche": "A22",
+   "family": "permission_7715",
+   "subfamily": "erc20_allowance_20_usdc_24h",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "unknown",
+    "intention_honnete": "unknown",
+    "intention_mensongere": "unknown"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "polNotes": [],
+   "unsupported": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "id": "P-A22-M1",
+   "fiche": "A22",
+   "family": "permission_7715",
+   "subfamily": "native_token_allowance_totale_expiration_2100",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "unknown",
+    "intention_honnete": "unknown",
+    "intention_mensongere": "unknown"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "polNotes": [],
+   "unsupported": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "id": "P-A22-M2",
+   "fiche": "A22",
+   "family": "permission_7715",
+   "subfamily": "erc20_allowance_max_sans_cible_ni_contrainte",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "unknown",
+    "intention_honnete": "unknown",
+    "intention_mensongere": "unknown"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "polNotes": [],
+   "unsupported": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "id": "P-A23-B1",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "jumeau_benin_enableModule_appel_direct_au_compte",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": [
+    "F3:control_titulaire_connu"
+   ]
+  },
+  {
+   "id": "P-A23-B2",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "jumeau_benin_safetx_enableModule",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": [
+    "F3:control_titulaire_connu"
+   ]
+  },
+  {
+   "id": "P-A23-B3",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "jumeau_benin_erc7579_installModule_executor",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": [
+    "F3:control_titulaire_connu"
+   ]
+  },
+  {
+   "id": "P-A23-B4",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "jumeau_benin_safetx_setFallbackHandler",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": [
+    "F3:control_titulaire_connu"
+   ]
+  },
+  {
+   "id": "P-A23-M1",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "enableModule_appel_direct_au_compte",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [
+    "new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A23-M2",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "safetx_enableModule",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [
+    "new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A23-M3",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "erc7579_installModule_executor",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [
+    "new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A23-M4",
+   "fiche": "A23",
+   "family": "module_compte",
+   "subfamily": "safetx_setFallbackHandler",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "control_change"
+   ],
+   "ademCodes": [
+    "new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A24-B1",
+   "fiche": "A24",
+   "family": "faux_jeton_appat",
+   "subfamily": "jumeau_benin_approve_max_jeton_appat_vers_routeur_inconnu",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A24-B2",
+   "fiche": "A24",
+   "family": "faux_jeton_appat",
+   "subfamily": "vente_jeton_liquide_vendable",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A24-M1",
+   "fiche": "A24",
+   "family": "faux_jeton_appat",
+   "subfamily": "approve_max_jeton_appat_vers_routeur_inconnu",
+   "label": "malveillant",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "token_unsellable",
+    "token_sell_tax_extreme",
+    "external_spender"
+   ],
+   "ademCodes": [
+    "unlimited_approval_swap"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A24-M2",
+   "fiche": "A24",
+   "family": "faux_jeton_appat",
+   "subfamily": "vente_simulee_qui_revert",
+   "label": "malveillant",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "token_unsellable",
+    "token_sell_tax_extreme"
+   ],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-A25-B1",
+   "fiche": "A25",
+   "family": "pont_destinataire",
+   "subfamily": "jumeau_benin_deposit_token_recipient_tiers",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-A25-B2",
+   "fiche": "A25",
+   "family": "pont_destinataire",
+   "subfamily": "jumeau_benin_depositETHTo_recipient_tiers",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-A25-M1",
+   "fiche": "A25",
+   "family": "pont_destinataire",
+   "subfamily": "deposit_token_recipient_tiers",
+   "label": "malveillant",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-A25-M2",
+   "fiche": "A25",
+   "family": "pont_destinataire",
+   "subfamily": "depositETHTo_recipient_tiers",
+   "label": "malveillant",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "service_beneficiary_not_self"
+   ],
+   "ademCodes": [
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-T2A1-B1",
+   "fiche": "T2A1",
+   "family": "faux_support_voix_clonee",
+   "subfamily": "jumeau_benin_transfert_100pct_asked_by_support",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "high_balance_share"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A1-M1",
+   "fiche": "T2A1",
+   "family": "faux_support_voix_clonee",
+   "subfamily": "transfert_100pct_asked_by_support",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "asked_by_someone_outgoing",
+    "new_contract",
+    "high_balance_share"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A2-B1",
+   "fiche": "T2A2",
+   "family": "victime_coachee_fraude_conforme",
+   "subfamily": "meme_flux_adresse_du_carnet",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "high_balance_share"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A2-F1",
+   "fiche": "T2A2",
+   "family": "victime_coachee_fraude_conforme",
+   "subfamily": "transfert_100pct_intention_send_to_my_account",
+   "label": "fraude_conforme",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "high_balance_share",
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-T2A3-B1",
+   "fiche": "T2A3",
+   "family": "pig_butchering_fraude_conforme",
+   "subfamily": "depot_vers_mon_exchange",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A3-F1",
+   "fiche": "T2A3",
+   "family": "pig_butchering_fraude_conforme",
+   "subfamily": "depot_500_usdc_plateforme_factice",
+   "label": "fraude_conforme",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A4-B1",
+   "fiche": "T2A4",
+   "family": "faux_agent_trading_permit",
+   "subfamily": "jumeau_benin_permit2_illimite_30j_intention_connect",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A4-B2",
+   "fiche": "T2A4",
+   "family": "faux_agent_trading_permit",
+   "subfamily": "permit2_borne_coffre_connu",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A4-M1",
+   "fiche": "T2A4",
+   "family": "faux_agent_trading_permit",
+   "subfamily": "permit2_illimite_30j_intention_connect",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A4-M2",
+   "fiche": "T2A4",
+   "family": "faux_agent_trading_permit",
+   "subfamily": "variante_honnete_jautorise_mon_bot",
+   "label": "malveillant",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unlimited_approval_swap",
+    "permit_new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A5-B1",
+   "fiche": "T2A5",
+   "family": "faux_bot_arbitrage",
+   "subfamily": "jumeau_benin_creation_contrat_bot",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "contract_creation",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A5-B2",
+   "fiche": "T2A5",
+   "family": "faux_bot_arbitrage",
+   "subfamily": "depot_0_5_eth_staking_connu",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "no_incoming"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A5-M1",
+   "fiche": "T2A5",
+   "family": "faux_bot_arbitrage",
+   "subfamily": "creation_contrat_bot",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "contract_creation",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2A5-M2",
+   "fiche": "T2A5",
+   "family": "faux_bot_arbitrage",
+   "subfamily": "financement_0_5_eth_du_contrat_bot",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "new_contract",
+    "no_incoming"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2B2-B1",
+   "fiche": "T2B2",
+   "family": "bitb_relais_permit",
+   "subfamily": "connexion_siwe_domaine_concordant",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2B2-M1",
+   "fiche": "T2B2",
+   "family": "bitb_relais_permit",
+   "subfamily": "permit_usdc_drain_sous_habillage_connect",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2B3-B1",
+   "fiche": "T2B3",
+   "family": "clickjacking_overlay",
+   "subfamily": "jumeau_benin_approve_max_derriere_bandeau_cookies",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2B3-M1",
+   "fiche": "T2B3",
+   "family": "clickjacking_overlay",
+   "subfamily": "approve_max_derriere_bandeau_cookies",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2B4-B1",
+   "fiche": "T2B4",
+   "family": "faux_popup_cadeau",
+   "subfamily": "jumeau_benin_setApprovalForAll_apres_faux_popup",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "no_incoming"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F1:no_incoming_ignore_effets_incomplets"
+   ]
+  },
+  {
+   "id": "P-T2B4-B2",
+   "fiche": "T2B4",
+   "family": "faux_popup_cadeau",
+   "subfamily": "claim_recompenses_coffre_connu",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2B4-M1",
+   "fiche": "T2B4",
+   "family": "faux_popup_cadeau",
+   "subfamily": "setApprovalForAll_apres_faux_popup",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "approval_for_all",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2B4-M2",
+   "fiche": "T2B4",
+   "family": "faux_popup_cadeau",
+   "subfamily": "permit_apres_faux_popup",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C1-B1",
+   "fiche": "T2C1",
+   "family": "cloaking_extension",
+   "subfamily": "claim_officiel_protocole_connu",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C1-B2",
+   "fiche": "T2C1",
+   "family": "cloaking_extension",
+   "subfamily": "claim_officiel_protocole_connu_bis",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C1-M1",
+   "fiche": "T2C1",
+   "family": "cloaking_extension",
+   "subfamily": "permit_vers_contrat_jetable_non_marque",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender",
+    "far_expiry"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C1-M2",
+   "fiche": "T2C1",
+   "family": "cloaking_extension",
+   "subfamily": "approve_max_vers_contrat_jetable",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "external_spender"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C2-B1",
+   "fiche": "T2C2",
+   "family": "toctou_proxy",
+   "subfamily": "jumeau_benin_proxy_modifiable_apercu_50_usdc_paul",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C2-M1",
+   "fiche": "T2C2",
+   "family": "toctou_proxy",
+   "subfamily": "proxy_modifiable_apercu_50_usdc_paul",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "unknown_selector",
+    "opaque"
+   ],
+   "ademCodes": [],
+   "opaque": true,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C5-B1",
+   "fiche": "T2C5",
+   "family": "desactivation_sur_ordre",
+   "subfamily": "depot_100pct_vers_mon_exchange",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "high_balance_share"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2C5-M1",
+   "fiche": "T2C5",
+   "family": "desactivation_sur_ordre",
+   "subfamily": "transfert_100pct_support_demande_de_couper_la_protection",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "asked_by_someone_outgoing",
+    "new_contract",
+    "high_balance_share"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2D1-M1",
+   "fiche": "T2D1",
+   "family": "injection_pastedMessage",
+   "subfamily": "transfert_2000_usdc_message_colle_injecte",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "new_contract"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2D2-B1",
+   "fiche": "T2D2",
+   "family": "injection_cachee_page",
+   "subfamily": "approve_borne_dom_avec_texte_masque_accessibilite",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2D2-M1",
+   "fiche": "T2D2",
+   "family": "injection_cachee_page",
+   "subfamily": "approve_max_dom_avec_instruction_invisible",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "critical",
+    "intention_honnete": "critical",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "unlimited_allowance",
+    "approval_to_eoa"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "unexpected_approval_connect"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2D3-B1",
+   "fiche": "T2D3",
+   "family": "paraphrase_llm_evasion_mots_cles",
+   "subfamily": "depot_100pct_vers_mon_exchange",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "warn"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "high_balance_share"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2D3-M1",
+   "fiche": "T2D3",
+   "family": "paraphrase_llm_evasion_mots_cles",
+   "subfamily": "transfert_1500_usdc_message_paraphrase",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "warn",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [
+    "high_balance_share"
+   ],
+   "ademCodes": [
+    "new_contract",
+    "high_balance_share",
+    "first_seen_recipient"
+   ],
+   "opaque": false,
+   "polNotes": [
+    "F2:first_seen_protocole_connu"
+   ]
+  },
+  {
+   "id": "P-T2D4-B1",
+   "fiche": "T2D4",
+   "family": "injection_memoire_agent",
+   "subfamily": "paiement_1_eth_au_fournisseur_du_carnet",
+   "label": "benin",
+   "expected": "ok",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2D4-M1",
+   "fiche": "T2D4",
+   "family": "injection_memoire_agent",
+   "subfamily": "paiement_1_eth_adresse_de_memoire_corrompue",
+   "label": "malveillant",
+   "expected": "critical",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "warn",
+    "intention_mensongere": "critical"
+   },
+   "floorCodes": [],
+   "ademCodes": [
+    "new_contract",
+    "wrong_recipient"
+   ],
+   "opaque": false,
+   "polNotes": []
+  },
+  {
+   "id": "P-T2D5-B1",
+   "fiche": "T2D5",
+   "family": "benin_dur_phrase_ressemblant_a_injection",
+   "subfamily": "message_colle_de_paul_phrase_ordinaire_ignore_les_instructions",
+   "label": "benin",
+   "expected": "warn",
+   "plateforme": "evm_toutes_chaines",
+   "levels": {
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok"
+   },
+   "floorCodes": [],
+   "ademCodes": [],
+   "opaque": false,
+   "polNotes": []
+  }
+ ],
+ "duration_ms": 263
+}

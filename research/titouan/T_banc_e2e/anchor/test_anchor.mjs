@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import http from 'node:http';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, execFile } from 'node:child_process';
+const execA = (cmd, args) => new Promise((res) => execFile(cmd, args, (err, stdout) => res({ code: err ? err.code : 0, stdout: String(stdout) })));
 import { fileURLToPath } from 'node:url';
 import { Journal, hashEffect, newSalt, LEVELS, DECISIONS, ZERO_HASH } from './journal.mjs';
 import { merkleRoot, merkleProof, merkleTree, verifyProof } from './merkle.mjs';
@@ -207,11 +208,12 @@ function startFakeRpc(logs, latest, stats) {
   check('verificateur lecture seule : seules eth_blockNumber et eth_getLogs appelees', stats.calls.every((c) => c === 'eth_blockNumber' || c === 'eth_getLogs'), [...new Set(stats.calls)].join(','));
 
   // CLI de bout en bout contre le faux RPC
-  let cliOut = ''; try { cliOut = execFileSync(process.execPath, [path.join(HERE, 'verify_anchor.mjs'), '--contract', C, '--journal', f, '--rpc', url]).toString(); } catch (e) { cliOut = String(e.stdout); }
-  check('CLI verify_anchor : VERDICT identique (code 0)', /VERDICT : identique/.test(cliOut));
+  const V = path.join(HERE, 'verify_anchor.mjs');
+  const o1 = await execA(process.execPath, [V, '--contract', C, '--journal', f, '--rpc', url]);
+  check('CLI verify_anchor : VERDICT identique (code 0)', /VERDICT : identique/.test(o1.stdout) && o1.code === 0);
   const bad = [...orig]; bad[10] = bad[10].replace('"level":"', '"level":"x'); write(f, bad);
-  let code = 0; try { execFileSync(process.execPath, [path.join(HERE, 'verify_anchor.mjs'), '--contract', C, '--journal', f, '--rpc', url], { stdio: 'pipe' }); } catch (e) { code = e.status; }
-  check('CLI verify_anchor sur journal altere : code de sortie 1 (divergent)', code === 1);
+  const o2 = await execA(process.execPath, [V, '--contract', C, '--journal', f, '--rpc', url]);
+  check('CLI verify_anchor sur journal altere : code de sortie 1 (divergent)', o2.code === 1 && /VERDICT : divergent/.test(o2.stdout));
   write(f, orig);
   R.rejeu = { entrees: 300, ancrages: 3, modifSansRepar: `${mDet}/${mTot}`, modifAvecRehash: `${mhDet}/${mhTot}`, suppressionsTroncatures: `${dDet}/${dTot}`, reordonnancement: true, verdictIntact: base };
   srv.close();

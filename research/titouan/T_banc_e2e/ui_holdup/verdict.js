@@ -341,11 +341,33 @@
     }
 
     /* clavier : Échap = Annuler ; Tab reste dans la fenêtre ; focus initial sur Annuler (jamais sur Continuer) */
+    /* éléments atteignables au clavier, dans l'ordre du document ; un groupe de radios compte pour un seul arrêt */
+    function tabStops() {
+      var all = container.querySelectorAll('button, input, textarea, summary');
+      var out = [], radioDone = false;
+      for (var k = 0; k < all.length; k++) {
+        var n = all[k];
+        if (n.closest && n.closest('[hidden]')) continue;
+        if (n.getAttribute('type') === 'radio') {
+          var group = container.querySelectorAll('input[type=radio]');
+          var pick = null;
+          for (var g = 0; g < group.length; g++) if (group[g].checked) pick = group[g];
+          if (radioDone) continue;
+          radioDone = true;
+          n = pick || group[0];
+        }
+        out.push(n);
+      }
+      return out;
+    }
+
     function onKey(e) {
       if (decided) return;
       if (e.key === 'Escape') { if (e.preventDefault) e.preventDefault(); cancel('escape'); return; }
-      if (e.key === 'Tab' && !opts.inline && focusables.length) {
-        var first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.key === 'Tab' && !opts.inline) {
+        var list = tabStops();
+        if (!list.length) return;
+        var first = list[0], last = list[list.length - 1];
         var act = doc.activeElement;
         if (e.shiftKey && act === first) { if (e.preventDefault) e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && act === last) { if (e.preventDefault) e.preventDefault(); first.focus(); }

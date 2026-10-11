@@ -8,7 +8,7 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "32acab7b0f92b919"
+   "detail": "61509e449e407aad"
   },
   {
    "name": "engine/src copie fidele (15 fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)",
@@ -26,7 +26,7 @@
    "detail": ""
   },
   {
-   "name": "graphe d imports de js/app.js : 26 modules, tous presents, tous relatifs",
+   "name": "graphe d imports de js/app.js : 27 modules, tous presents, tous relatifs",
    "pass": true,
    "detail": ""
   },
@@ -191,12 +191,77 @@
    "detail": ""
   },
   {
-   "name": "aucun eval / new Function / import dynamique dans 35 fichiers",
+   "name": "app.js : 8 scenarios affiches",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "aucun secret (cle privee, jeton, mot de passe, phrase de recuperation) dans 35 fichiers",
+   "name": "app.js : le faux portefeuille affiche la requete avec Signer / Rejeter",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : cliquer Signer ouvre la fenetre Hold up avant toute signature",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : verdict Danger pour \"autorisation de tous les NFT\"",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : annulation => \"Rien n a ete signe\"",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : mode colle => verdict Danger affiche",
+   "pass": true,
+   "detail": "DangerCe n’est pas ce que tu as demandé.Tu as ditJe veux seulement faire mon échange sur site.example.Ton intention : Payer quelqu'unEn réalitéTu donnes à site.example le droit de prendre tes jetons sans limite.Ce droit dure tant que tu ne le retires pas toi-même.Refuse, ou autorise seulement jetons"
+  },
+  {
+   "name": "app.js : mode colle => erreur claire sur un texte invalide",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : journal = 2 lignes (1 demo, 1 colle), chaine intacte",
+   "pass": true,
+   "detail": "Chaîne intacte : 2 ligne(s) vérifiée(s)."
+  },
+  {
+   "name": "app.js : apres retouche, la page annonce la chaine cassee",
+   "pass": true,
+   "detail": "Ligne 2 retouchée à la main (sans recalculer son empreinte). Clique sur « Vérifier » : la chaîne doit se déclarer cassée. (vérification : chaîne cassée à la ligne 2)"
+  },
+  {
+   "name": "app.js : effacer vide le journal",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : aucune erreur non geree",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "HTTP : 29 modules JS + index + limites + CSS servis (200, bons types MIME)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "HTTP : fichier absent => 404 ; sortie de dossier refusee",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun eval / new Function / import dynamique dans 36 fichiers",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun secret (cle privee, jeton, mot de passe, phrase de recuperation) dans 36 fichiers",
    "pass": true,
    "detail": ""
   },
@@ -226,7 +291,7 @@
    "detail": ""
   },
   {
-   "name": "taille du site : 33 fichiers, 274 Ko (environ 93 Ko compresses)",
+   "name": "taille du site : 34 fichiers, 279 Ko (environ 94 Ko compresses)",
    "pass": true,
    "detail": ""
   }
@@ -234,8 +299,8 @@
  "notes": [
   "LIMITE CONSTATEE : faux_support avec la reponse \"Payer quelqu'un\" donne le niveau 'info' (la pression de la page n'est lue que si le moteur voit deja un signal)."
  ],
- "tree_sha256": "32acab7b0f92b91990a261b81cf3dc416e590048648ed62dc473a80874a6d26d",
- "modules_charges": 26,
+ "tree_sha256": "61509e449e407aad4610af1857001cd861ec628c0444270bf7b9a0d9b19635d8",
+ "modules_charges": 27,
  "scenarios": {
   "filtres_par_la_couche_http_du_serveur": 3,
   "correctif_jours_absorbe": 7,
@@ -249,8 +314,8 @@
    "attention": 2,
    "unknown": 13
   },
-  "ms_total": 296,
-  "ms_par_verdict": 3.57
+  "ms_total": 517,
+  "ms_par_verdict": 6.23
  },
  "niveaux_scenarios": {
   "envoi_simple": "info",
@@ -285,7 +350,7 @@
   }
  },
  "statique": {
-  "fichiers_analyses": 35,
+  "fichiers_analyses": 36,
   "hotes_fictifs": [
    "app.aave.com",
    "app.example-official.org",
@@ -310,9 +375,9 @@
   ]
  },
  "taille": {
-  "fichiers_publies": 33,
-  "octets_total": 280859,
-  "octets_gzip_estimes": 94783,
+  "fichiers_publies": 34,
+  "octets_total": 286075,
+  "octets_gzip_estimes": 96425,
   "plus_gros": [
    {
     "f": "engine/textes.js",
@@ -327,15 +392,15 @@
     "b": 21203
    },
    {
-    "f": "engine/src/typed.js",
-    "b": 18099
+    "f": "engine/src/rules_extra.js",
+    "b": 19359
    },
    {
-    "f": "engine/src/rules_extra.js",
-    "b": 16285
+    "f": "engine/src/typed.js",
+    "b": 18099
    }
   ]
  },
  "echecs": 0,
- "verifications": 46
+ "verifications": 59
 }

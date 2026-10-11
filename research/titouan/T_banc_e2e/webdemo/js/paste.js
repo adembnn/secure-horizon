@@ -24,9 +24,13 @@ export function parsePasted(text, { origin, intent } = {}) {
   if (body.from === undefined && /^(eth_signTypedData|personal_sign|eth_sign)/.test(body.method) && typeof body.params[0] === 'string' && HEX20.test(body.params[0])) body.from = body.params[0];
   if (body.from === undefined && body.method === 'personal_sign' && typeof body.params[1] === 'string' && HEX20.test(body.params[1])) body.from = body.params[1];
   if (body.chainId === undefined && /^eth_signTypedData/.test(body.method)) { try { const td = typeof body.params[1] === 'string' ? JSON.parse(body.params[1]) : body.params[1]; if (td && td.domain && td.domain.chainId !== undefined) body.chainId = td.domain.chainId; } catch (_) { /* rien */ } }
+  // Sans compte signataire dans la requete, le moteur prend un droit pour celui d'un tiers (verdict plus faible). On suppose alors que c'est toi, et la page le dit.
+  let assumedFrom = false;
+  const a0 = body.params[0] && typeof body.params[0] === 'object' ? body.params[0] : null;
+  if (body.from === undefined && a0 && /^eth_(send|sign)Transaction$/.test(body.method) && a0.from === undefined) { body.from = '0x' + '11'.repeat(20); assumedFrom = true; }
   if (origin && String(origin).trim()) body.origin = String(origin).trim();
   if (intent && intent !== 'none') body.intent = intent;
-  return { body };
+  return { body, assumedFrom };
 }
 const U = '0x' + 'a1'.repeat(20), SP = '0x' + 'b2'.repeat(20), USDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', MAXU = '115792089237316195423570985008687907853269984665640564039457584007913129639935';
 export const EXEMPLE_TX = { method: 'eth_sendTransaction', params: [{ from: U, to: USDC, value: '0x0', data: '0x095ea7b3' + '000000000000000000000000' + 'b2'.repeat(20) + 'f'.repeat(64), chainId: '0x1' }] };

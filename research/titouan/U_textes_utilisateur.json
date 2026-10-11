@@ -1260,6 +1260,126 @@
       ],
       "gravite": "warn",
       "gravite_phrase": "Dépenses répétées possibles: on te prévient, tu décides."
+    },
+    {
+      "id": "F31",
+      "menace": "Envoi vers une adresse nouvelle pour toi",
+      "technique": "envoi à un destinataire absent du carnet, sans autre signal",
+      "croit": "J'envoie à l'adresse que j'ai choisie.",
+      "reel": "Cette opération envoie {montant} {jeton} à {adresse_debut}…{adresse_fin}, une adresse nouvelle.",
+      "danger": "Un envoi vers une mauvaise adresse ne peut pas être récupéré.",
+      "action": "Vérifie l'adresse, lettre par lettre, avant de signer.",
+      "questions": [
+        {
+          "q": "Peut-on récupérer un envoi fait à une mauvaise adresse ?",
+          "options": {
+            "A": "Oui, toujours",
+            "B": "Non, c'est presque toujours perdu",
+            "C": "Oui, en appelant le site"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Comment vérifies-tu une adresse nouvelle ?",
+          "options": {
+            "A": "Je regarde les premières lettres",
+            "B": "Je la compare en entier avec la source",
+            "C": "Je fais confiance au site"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Quelqu'un te presse d'envoyer. Que fais-tu ?",
+          "options": {
+            "A": "J'envoie vite",
+            "B": "Je m’arrête et je vérifie",
+            "C": "Je demande un code"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "info",
+      "gravite_phrase": "Rien d’anormal repéré, mais cette adresse est nouvelle pour toi."
+    },
+    {
+      "id": "F32",
+      "menace": "Un site te fait ajouter un réseau qu'il contrôle",
+      "technique": "ajout de réseau (wallet_addEthereumChain) avec un serveur fourni par le site",
+      "croit": "Je change de réseau pour utiliser mon portefeuille.",
+      "reel": "Ce site te fait ajouter un réseau qu'il contrôle lui-même.",
+      "danger": "Il peut afficher de faux soldes et de fausses réponses.",
+      "action": "Annule, sauf si tu connais ce réseau et ce site.",
+      "questions": [
+        {
+          "q": "Que peut faire un réseau contrôlé par un site ?",
+          "options": {
+            "A": "Afficher de faux soldes",
+            "B": "Rien du tout",
+            "C": "Protéger tes fonds"
+          },
+          "reponse": "A"
+        },
+        {
+          "q": "Quand acceptes-tu d'ajouter un réseau ?",
+          "options": {
+            "A": "Quand le site insiste",
+            "B": "Quand je le connais déjà",
+            "C": "Toujours"
+          },
+          "reponse": "B"
+        },
+        {
+          "q": "Le site te presse d'ajouter ce réseau. Que fais-tu ?",
+          "options": {
+            "A": "J'ajoute vite",
+            "B": "Je ferme et je vérifie",
+            "C": "Je demande au site"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "warn",
+      "gravite_phrase": "Rien n’est perdu encore: tu peux refuser ce réseau."
+    },
+    {
+      "id": "F33",
+      "menace": "Un site te fait passer sur un réseau inconnu",
+      "technique": "changement de réseau (wallet_switchEthereumChain) vers une chaîne hors registre public",
+      "croit": "Je change de réseau pour utiliser mon portefeuille.",
+      "reel": "Ce site te fait passer sur un réseau que personne n'a vérifié.",
+      "danger": "Un réseau inconnu peut afficher de faux soldes.",
+      "action": "Reste sur ton réseau habituel, sauf si tu connais celui-ci.",
+      "questions": [
+        {
+          "q": "Un réseau inconnu peut-il mentir sur tes soldes ?",
+          "options": {
+            "A": "Oui, il le peut",
+            "B": "Non, jamais",
+            "C": "Seulement la nuit"
+          },
+          "reponse": "A"
+        },
+        {
+          "q": "Sur quel réseau restes-tu par défaut ?",
+          "options": {
+            "A": "Celui que je connais",
+            "B": "Celui que le site choisit",
+            "C": "Le plus récent"
+          },
+          "reponse": "A"
+        },
+        {
+          "q": "Le site te presse de changer. Que fais-tu ?",
+          "options": {
+            "A": "Je change vite",
+            "B": "Je ferme et je vérifie",
+            "C": "Je demande au site"
+          },
+          "reponse": "B"
+        }
+      ],
+      "gravite": "warn",
+      "gravite_phrase": "Rien n’est perdu encore: tu peux rester sur ton réseau."
     }
   ]
 }

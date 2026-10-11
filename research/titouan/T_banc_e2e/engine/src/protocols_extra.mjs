@@ -99,6 +99,9 @@ export function decodeLibraryCall(call, ctx, depth = 0) {
   for (const p of e.benBytes || []) { const v = get(args, p); if (typeof v !== 'string' || v.length !== 42) return null; beneficiaries.push(lc(v)); } // adresse de destination en bytes (20 octets) ; autre longueur : non décodé
   let minOutZero = false;
   if (e.minOut) { const v = get(args, e.minOut); if (typeof v === 'bigint') minOutZero = v === 0n; }
-  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries, minOutZero };
+  // constantes de routeur : 0x…01 = l'appelant (msg.sender), 0x…02 = le routeur lui-même (étape intermédiaire d'un lot)
+  const ONE = '0x' + '0'.repeat(39) + '1', TWO = '0x' + '0'.repeat(39) + '2';
+  const resolved = beneficiaries.map((b) => (b === ONE ? lc(ctx.from) : b === TWO ? lc(call.to) : b));
+  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries: resolved, minOutZero };
 }
 export const LIBRARY_SELECTORS = new Set([...BY_SEL.keys(), ...MC_BY_SEL.keys()]);

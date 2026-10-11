@@ -24,6 +24,8 @@ class Node_ {
   addEventListener(t, f) { (this.listeners[t] ||= []).push(f); }
   removeEventListener(t, f) { this.listeners[t] = (this.listeners[t] || []).filter((x) => x !== f); }
   focus() { this.ownerDocument.activeElement = this; }
+  // sous-ensemble : liste de balises ou input[type=radio]
+  querySelectorAll(sel) { const radio = /type=radio/.test(sel); const tags = sel.split(',').map((x) => x.trim().toUpperCase()); const o = []; const rec = (n) => { for (const c of n.children) { if (radio ? (c.tagName === 'INPUT' && c.attrs.type === 'radio') : tags.includes(c.tagName)) o.push(c); rec(c); } }; rec(this); return o; }
   fire(t, ev = {}) { const e = { type: t, key: ev.key, shiftKey: !!ev.shiftKey, target: this, preventDefault() { this.prevented = true; }, ...ev }; for (const f of this.listeners[t] || []) f(e); for (let p = this.parent; p && t === 'keydown'; p = p.parent) for (const f of p.listeners[t] || []) f(e); return e; }
 }
 function makeDoc() { const d = { activeElement: null, createElement: (t) => new Node_(t, d) }; return d; }
@@ -153,7 +155,7 @@ verifierEcran('intention/sans site', rendu({ type: 'holdup.verdict', version: 1,
 
 // ---------- 2. messages réels du moteur (forme server.mjs / sentinelle_core.js) ----------
 const moteur = [
-  { level: 'danger', niveau: 'critical', fiche: 'F01', texts: { croit: 'Je veux seulement faire mon échange.', reel: 'Tu donnes à ce site le droit de prendre tes jetons sans limite.', danger: 'Ce droit dure tant que tu ne le retires pas toi-même.', action: 'Refuse, ou autorise seulement le montant utile.' }, reasons: ['Ce droit dure tant que tu ne le retires pas toi-même.', 'Refuse, ou autorise seulement le montant utile.'] },
+  { level: 'danger', niveau: 'critical', fiche: 'F01', texts: { croit: 'Je veux seulement faire mon échange.', reel: 'Tu donnes à ce site le droit de prendre tes jetons.', danger: 'Ce droit dure tant que tu ne le retires pas toi-même.', action: 'Refuse, ou autorise seulement le montant utile.' }, reasons: ['Ce droit dure tant que tu ne le retires pas toi-même.', 'Refuse, ou autorise seulement le montant utile.'] },
   { level: 'danger', niveau: 'critical', fiche: 'F13', texts: { croit: 'J\'envoie à mon contact.', reel: 'Ton argent partirait vers une autre adresse.', danger: 'Un inconnu a glissé une adresse presque identique.', action: 'Annule, puis recopie l\'adresse lettre par lettre.' }, address_diff: { expected: '0x7a3F9c21B04e5D8a1f6C2E90aB4733dE8c15E2b9', actual: '0x7a3F1d88Ce0277aF0b3D9a41F6c20e5B4d19E2b9', expectedLabel: 'Paul (adresse déjà utilisée par toi)' }, risk_signals: ['lookalike'] },
   { level: 'manipulation', niveau: 'critical', fiche: 'F21', texts: { croit: 'Le support me guide.', reel: 'Tu envoies ton argent à un escroc.', danger: 'Un vrai support ne te demande jamais de signer.', action: 'Raccroche, puis rappelle toi-même le numéro officiel.' }, reasons: ['Un vrai support ne te demandera jamais ça.', 'Un vrai support ne te demande jamais de signer.', 'Raccroche, puis rappelle toi-même le numéro officiel.'], quote: 'Pour protéger vos fonds transférez-les maintenant vers le portefeuille sécurisé que je vous indique immédiatement et sans délai' },
   { level: 'attention', niveau: 'warn', fiche: 'F18', texts: { croit: 'Je change mes jetons.', reel: 'Tu recevrais moins que prévu.', danger: 'Le prix peut glisser pendant l\'échange.', action: 'Vérifie le montant reçu avant de signer.' } },
@@ -206,7 +208,7 @@ function t(ctx, cond, msg) { nbInteractions++; if (!cond) err(ctx, msg); }
   t('manipulation', !!find(r.root, (n) => n.attrs['data-action'] === 'call_trusted'), 'bouton Appeler un proche absent');
   t('manipulation', /Raccroche, puis rappelle toi-même le numéro officiel/.test(find(r.root, (n) => /\bgesture\b/.test(n.className)).textContent), 'geste qui rompt la ligne absent');
   clic(r, 'call_trusted'); t('manipulation', r.out[0]?.decision === 'call_trusted', 'décision call_trusted absente');
-  const tmr = find(rendu(Demo.fromFiche(f, vars, 'danger', { type: 'wait', seconds: 600 })).root, (n) => /\bt\b/.test(n.className));
+  const tmr = find(rendu(Demo.fromFiche(f, vars, 'danger', { type: 'wait', seconds: 600 })).root, (n) => n.className === 't');
   t('minuteur', tmr.textContent === '10:00', 'format du minuteur : ' + tmr.textContent);
   // Échap
   r = rendu(Demo.fromFiche(f, vars, 'danger', { type: 'wait', seconds: 30 }));

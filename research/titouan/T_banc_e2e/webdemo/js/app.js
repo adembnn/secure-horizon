@@ -99,7 +99,7 @@ function verifyPasted() {
   const v = check(sendBody, sanitizeLocalContext(ctxLocal));
   const box = h('div', { class: 'verdict' });
   renderVerdict(box, v, { body: sendBody, local: ctxLocal, intentKey: b.intent && b.intent !== 'none' ? b.intent : null });
-  out.append(box, h('p', { class: 'muted' }, 'Verdict calculé dans cette page, sans contacts ni historique. Rien n’a été envoyé nulle part.'));
+  out.append(box, h('p', { class: 'muted' }, 'Verdict calculé dans cette page, sans contacts ni historique. Rien n’a été envoyé nulle part.' + (r.assumedFrom ? ' La requête n’indique pas quel compte signe : Hold up suppose que c’est toi.' : '')));
   logEntry({ source: 'colle', method: String(b.method).slice(0, 40), intent: b.intent || 'none', level: displayLevel(v).key, niveau: v.niveau, fiche: v.fiche, decision: 'verdict_seul' });
 }
 

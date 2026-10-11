@@ -3,7 +3,7 @@
  "sources": [
   {
    "file": "../U_textes_utilisateur.json",
-   "sha256": "df179340f30d32893eedda1d3f8c6df17d4fd5e133310c8e10b96b08221cbc62"
+   "sha256": "9d927e1e036c7a83aa9e457d4c6ef050f9e802c7278a0e47a62e2ce93a479ad4"
   },
   {
    "file": "engine/src/abi_encode.mjs",
@@ -34,6 +34,10 @@
    "sha256": "5c3b9570cfe39ca8ff76f0a807e39b96c42d5ccc2b8b66e22accc6aa0cc6cf7c"
   },
   {
+   "file": "engine/src/protocols_extra.mjs",
+   "sha256": "a1d1efd5532eb9d31ee03b07bcb9a512327b5a2383d4dc5d25ee317c0595f2c2"
+  },
+  {
    "file": "engine/src/registry.mjs",
    "sha256": "e93b80f646cda08ac40678cb6bd75d5eb96e690c8312c44251eff83f4bb07ca2"
   },
@@ -43,7 +47,7 @@
   },
   {
    "file": "engine/src/rules_extra.mjs",
-   "sha256": "5267934bfe087f79fad2b1c415b269e3090a46975c7d1c21fc79cd06c75deb51"
+   "sha256": "a8b6cc23a1f080b3d72db097192334230bc0b254488218dd76c8f63f9514615a"
   },
   {
    "file": "engine/src/rules.mjs",
@@ -87,7 +91,7 @@
   },
   {
    "file": "extension_standalone/src/sentinelle_core.js",
-   "sha256": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b"
+   "sha256": "6041b2c2c6f2d2f1202d16fb501b9771eb4df0b19afd1ea2cb1c1718e2bf04fc"
   },
   {
    "file": "extension/bridge.js",
@@ -99,7 +103,7 @@
   },
   {
    "file": "run/policy.mjs",
-   "sha256": "ce761745beb16815d6071af6357cdb0c547ebd6e1a98727ce581be7a70587b90"
+   "sha256": "0c1306d0b5c042f2cc3024ec5648d1e65c8d7ea97f70707ee16400c3869d28cf"
   }
  ],
  "outputs": [
@@ -115,13 +119,13 @@
   },
   {
    "file": "engine/policy.js",
-   "bytes": 7183,
-   "sha256": "e356b4f4ef2c2b7c4e3f74d71f22f7953bc82373020cbc5621a63d152e5ba16c"
+   "bytes": 9599,
+   "sha256": "15f494e5cd746a76226004c2a10fa08144ab6e2c3612160eb31a08f732fd212f"
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 22306,
-   "sha256": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b"
+   "bytes": 35915,
+   "sha256": "6041b2c2c6f2d2f1202d16fb501b9771eb4df0b19afd1ea2cb1c1718e2bf04fc"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -159,6 +163,11 @@
    "sha256": "5c3b9570cfe39ca8ff76f0a807e39b96c42d5ccc2b8b66e22accc6aa0cc6cf7c"
   },
   {
+   "file": "engine/src/protocols_extra.js",
+   "bytes": 11760,
+   "sha256": "49da73dc4949224dccfb86f10ea45fd192440f787e4e310236dd4e247ec9ffb6"
+  },
+  {
    "file": "engine/src/registry.js",
    "bytes": 11238,
    "sha256": "a600d72c4a2e41621d52af00a0a07024766b4837335495684b18cb1c7169f561"
@@ -170,8 +179,8 @@
   },
   {
    "file": "engine/src/rules_extra.js",
-   "bytes": 16285,
-   "sha256": "ebe578c535201c3af4a2ff6523364322d33866682bc2b5edd75652f66fc3b334"
+   "bytes": 19359,
+   "sha256": "c93140986e0c239831f8f4c6b6163e47b576dda697e930319df13fb7aded7054"
   },
   {
    "file": "engine/src/rules.js",
@@ -195,13 +204,13 @@
   },
   {
    "file": "engine/textes.js",
-   "bytes": 31236,
-   "sha256": "c47c02a12f4aecbff09dc1830884e4879b721a2b38a3878e5981aa48db06e431"
+   "bytes": 34358,
+   "sha256": "7d68f8ad4f2e895112929600b8f826c8ea74dfe1f74c21c88e59b4075ea8637e"
   },
   {
    "file": "engine/textes.json",
-   "bytes": 31134,
-   "sha256": "930faf6d3db4d348a72cd2b4502c07b2a652cd2e00bd7b49ded76c8611a9836c"
+   "bytes": 34256,
+   "sha256": "3695c58e91508c9a11aaa922f1b801d3d49923cd66f17c8225194fee813ab022"
   },
   {
    "file": "engine/vendor/compare.js",
@@ -229,6 +238,6 @@
    "sha256": "91230999f37714fe131603b185bef05b0f20a30f329a6710179d91ff50c99736"
   }
  ],
- "total_bytes": 290709,
- "tree_sha256": "4fe67532b56df830042d175adcb4782573103e2e33d2d701d14efc9d8438765c"
+ "total_bytes": 327812,
+ "tree_sha256": "f32b2a31d6bdb4b40f420286ef6e1c3002f1754f0607e20afa81a88723cea31e"
 }
