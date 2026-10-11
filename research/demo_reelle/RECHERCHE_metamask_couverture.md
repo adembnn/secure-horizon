@@ -158,3 +158,14 @@ Objection d'un praticien, à donner nous-mêmes : « MetaMask a déjà l'écran 
 - Mode « Guard » du MetaMask Agent Wallet (limites de dépense, listes de protocoles), cité dans le rapport de juin 2026 : produit distinct de l'extension, non approfondi.
 - Dernier quart du fichier `messages.json` pour la recherche du mot « intent » : lu seulement pour d'autres clés.
 - Tout essai réel dans une extension publiée : aucun. Tout ce qui est [V-code] reste à confirmer à l'écran.
+
+## Ajout du 11 oct. 2026 : approbation illimitée, lecture du code public de MetaMask
+
+Source : dépôt `MetaMask/metamask-extension`, branche `main`, lu le 11 oct. 2026 (code, pas un test à l'écran ; une version publiée peut différer).
+
+- `app/_locales/en/messages.json` : l'écran d'approbation s'intitule « Approve $1 spending cap », décrit « This site wants permission to withdraw your tokens », affiche la valeur « Unlimited » quand le montant est illimité, et propose « Edit spending cap » (« Enter the amount that you feel comfortable being spent on your behalf. »).
+- Aucune chaîne d'avertissement ne mentionne « unlimited ».
+- `ui/pages/confirmations/hooks/alerts/transactions/` : la liste des alertes contient l'empoisonnement d'adresse, la première interaction, l'adresse de destruction, l'adresse qui n'est pas un contrat, le contrat de jeton comme destinataire, des alertes de gaz et de solde. Aucune alerte sur un montant d'approbation illimité (recherche du mot « unlimited » dans ce dossier : un seul résultat, un fichier de test des approbations multiples).
+- Seule alerte proche : `useMultipleApprovalsAlerts` (« You're giving someone else permission to withdraw your tokens, even though it's not necessary for this transaction. »), qui porte sur les transactions groupées contenant une approbation non utilisée par le lot.
+- Conclusion défendable : MetaMask AFFICHE « Unlimited » et permet de le modifier ; d'après son code, il n'émet pas d'alerte parce que le montant est illimité, et ne peut pas le rapprocher d'un montant voulu par l'utilisateur. Les alertes de menaces (Blockaid) restent indépendantes et signalent un destinataire déjà connu comme malveillant.
+- À ne pas dire : « MetaMask ne montre pas que c'est illimité ».
