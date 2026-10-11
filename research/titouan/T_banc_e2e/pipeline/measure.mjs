@@ -5,6 +5,8 @@
 //   live      : evaluatePlus(body, local, { live: <facts of the case> }) -> product + detectors + the facts context_live/provider.mjs would read.
 //   suffixes  : +premise (options.intentPremise = 'warn') ; +known (what-if : the case's known_protocols list is shipped as local.knownSpenders) ;
 //               +intent (the answer to the extension's question is replayed : pay / receive / asked / other + free text, never token / amount / counterparty)
+//               +nolist (pipeline/known_protocols.json is not loaded)
+//               +details (the case's whole Intent object is given : kind, token, amount, counterparty, free text)
 //   full      : evaluatePlus fed with EVERYTHING the bench gives check_plus.mjs (used by parity.mjs).
 // What the product receives is the convention of redteam/check_product.mjs : method, params, origin, chainId, from, address book and history.
 // NOT given outside `full` : known_protocols, the declared intent, clipboard, simulation, quote, nft, sell_pool.
@@ -103,10 +105,10 @@ export async function runCase(c, mode, { detectors = D.DETECTORS } = {}) {
   let v;
   const [base, ...fl] = mode.split('+'); const known = fl.includes('known');
   const withIntent = (body) => { if (fl.includes('intent') && c.intent && typeof c.intent === 'object') { body.intent = { pay_someone: 'pay', connect_or_accept_offer: 'receive', asked_by_someone: 'asked' }[c.intent.kind] || 'other'; if (typeof c.intent.freeText === 'string') body.intent_text = c.intent.freeText; } return body; };
-  const o = { intentPremise: fl.includes('premise') ? 'warn' : 'strict' };
+  const o = { intentPremise: fl.includes('premise') ? 'warn' : 'strict', knownProtocols: !fl.includes('nolist') };
   if (base === 'product') { const { body, local } = productInput(c, { known }); withIntent(body); v = await atCaseTime(c, () => D.evaluate(body, local)); }
   else if (base === 'full') { const { body, local } = productInput(c, { known: true }); v = await atCaseTime(c, () => runner(detectors)(body, local, { live: fullFacts(c), intent: c.intent || {} })); }
-  else { const { body, local } = productInput(c, { known }); withIntent(body); v = await atCaseTime(c, () => runner(detectors)(body, local, { ...o, live: base === 'live' ? liveLike(c, body, local) : null })); }
+  else { const { body, local } = productInput(c, { known }); withIntent(body); v = await atCaseTime(c, () => runner(detectors)(body, local, { ...o, live: base === 'live' ? liveLike(c, body, local) : null, ...(fl.includes('details') ? { intent: c.intent || {} } : {}) })); }
   return { level: benchLevel(v), v, ms: performance.now() - t0 };
 }
 export const pct = (a, p) => { if (!a.length) return 0; const s = [...a].sort((x, y) => x - y); return Math.round(s[Math.min(s.length - 1, Math.ceil((p / 100) * s.length) - 1)] * 100) / 100; };
@@ -131,7 +133,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
         s.n++; if (!c) { s.unknown++; continue; }
         let r; try { r = await runCase(c, mode, { detectors }); } catch (e) { r = { level: 'unknown', v: null, ms: 0 }; s.errors++; }
         lat.push(r.ms); if (r.level === 'unknown') s.unknown++;
-        if (r.v && r.v.plus) { if (r.v.plus.errors.length) s.errors++; if (mode.startsWith('detectors') && r.v.plus.base !== r.v.plus.product) s.drift++; }
+        if (r.v && r.v.plus) { if (r.v.plus.errors.length) s.errors++; if (mode.startsWith('detectors+nolist') && r.v.plus.base !== r.v.plus.product) s.drift++; }
         const bad = (c.label === 'malveillant' && r.level !== 'critical') ? 'arnaque_ratee' : (c.label === 'benin' && r.level === 'critical') ? 'fausse_alerte' : null;
         if (c.label === 'malveillant') { s.malveillant++; if (bad) s.ratees++; }
         else if (c.label === 'benin') { s.benin++; if (bad) s.fausses_alertes++; else if (r.level === 'warn') s.warn_benins++; }

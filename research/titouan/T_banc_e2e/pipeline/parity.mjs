@@ -5,12 +5,13 @@
 // A disagreement is a case whose final level differs (ok / warn / critical / unknown). Each one is classed by cause :
 //   product_floor   : the product's own answer is stricter and nothing lowered it (product-only rule : Seaport near-zero price, pressure on the page)
 //   canonical_known : the product always knows 5 public contracts (Permit2, Multicall3, CoW, Seaport 1.6, Safe MultiSend) ; the bench only knows the case list
+//   public_list     : the request names a contract of pipeline/known_protocols.json (public list, known to evaluatePlus, not to the bench case)
 //   decode_product  : the product decodes or refuses the request differently (eth_signTypedData_v3, swapped params, unsupported method, engine error)
 //   other           : not explained by the above : to be read one by one
 // Exit code 1 when a disagreement is classed `other`.
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
-import { ROOT, readCases, runCase, familyKey } from './measure.mjs';
+import { ROOT, readCases, runCase, familyKey, D } from './measure.mjs';
 import { CANONICAL } from './evaluate_plus.mjs';
 
 const args = process.argv.slice(2);
@@ -32,6 +33,7 @@ function cause(c, ref, v) {
   const hay = JSON.stringify(c.request || {}).toLowerCase();
   if (ref.error || ref.unsupported || (p.errors || []).some((e) => /^moteur/.test(e)) || p.base === 'unknown' || ref.level_base === 'unknown') return 'decode_product';
   if (CANONICAL.some((a) => hay.includes(a.slice(2)))) return 'canonical_known';
+  if (Object.values(D.knownProtocols || {}).flat().some((a) => hay.includes(a.slice(2)))) return 'public_list';
   return 'other';
 }
 

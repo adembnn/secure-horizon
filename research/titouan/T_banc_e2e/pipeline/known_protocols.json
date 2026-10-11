@@ -1,0 +1,16 @@
+{
+  "_about": "Public reference data: contracts a wallet may call 'known' on each chain. Every address was read on the primary source given in `source` on 2026-10-11 (not from memory, not from the measurement sets). Loaded by pipeline/evaluate_plus.mjs into knownSpenders (option knownProtocols: false turns it off). The 5 cross-chain canonical contracts already known to server.mjs (Permit2, Multicall3, CoW settlement, Seaport 1.6, Safe MultiSendCallOnly) are not repeated. NOT included because the primary source could not be read today: LFJ / Trader Joe routers (docs.lfj.gg answered 403), Pangolin, GMX, Stargate, Avalanche Bridge, Benqi lending markets. The local demo contracts are NOT loaded from research/demo_reelle/chain/addresses.local.json: that file also holds the attacker's contracts; the lab and the RPC door pass their own knownSpenders.",
+  "43114": [
+    { "address": "0x794a61358D6845594F94dc1DB02A252b5b4814aD", "name": "Aave V3 Pool", "why": "lending pool: supply / borrow / repay", "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Avalanche.ts (POOL)" },
+    { "address": "0x2825cE5921538d17cc15Ae00a8B24fF759C6CDaE", "name": "Aave V3 WrappedTokenGateway", "why": "deposit of native AVAX into Aave", "source": "https://github.com/bgd-labs/aave-address-book/blob/main/src/ts/AaveV3Avalanche.ts (WETH_GATEWAY)" },
+    { "address": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE", "name": "BENQI sAVAX", "why": "liquid staking: submit AVAX, receive sAVAX", "source": "https://docs.benqi.fi/resources/contracts/benqi-liquid-staking" },
+    { "address": "0x94b75331ae8d42c1b61065089b7d48fe14aa73b7", "name": "Uniswap UniversalRouter", "why": "swap router", "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments" },
+    { "address": "0xbb00FF08d01D300023C629E8fFfFcb65A5a578cE", "name": "Uniswap SwapRouter02", "why": "swap router", "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments" },
+    { "address": "0x655C406EBFa14EE2006250925e54ec43AD184f8B", "name": "Uniswap V3 NonfungiblePositionManager", "why": "liquidity positions", "source": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-avalanche-deployments" },
+    { "address": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d", "name": "Circle CCTP TokenMessengerV2", "why": "USDC bridge (burn and mint)", "source": "https://developers.circle.com/cctp/evm-smart-contracts" }
+  ],
+  "43113": [
+    { "address": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA", "name": "Circle CCTP TokenMessengerV2 (Fuji)", "why": "USDC bridge on the testnet", "source": "https://developers.circle.com/cctp/evm-smart-contracts" }
+  ],
+  "1": []
+}

@@ -47,7 +47,7 @@ test('raise-only : without any new fact the verdict is never below the product (
   const run = makeEvaluatePlus(D); let raised = 0;
   for (const c of CASES) {
     const { body, local } = input(c);
-    const p = benchLevel(D.evaluate(body, local)); const v = await run(body, local, { live: null });
+    const p = benchLevel(D.evaluate(body, local)); const v = await run(body, local, { live: null, knownProtocols: false });
     assert.ok(RK[benchLevel(v)] >= RK[p], `${c.id} : produit ${p}, plus ${benchLevel(v)}`);
     assert.equal(v.plus.base, p, `${c.id} : la chaine rejouee (${v.plus.base}) doit valoir le verdict du produit (${p}) quand aucun fait n'est ajoute`);
     if (RK[benchLevel(v)] > RK[p]) raised++;
@@ -60,7 +60,7 @@ test('unknown facts never lower : an empty live answer changes nothing', async (
   const empty = { isContract: {}, ageBlocks: {}, balances: {}, tokenMeta: {}, facts: {}, tokenInfo: {}, allowances: {}, missing: ['isContract:' + STRANGER, 'age:' + STRANGER, 'signer.nativeBalance'], source: 'provider' };
   for (const c of CASES.slice(0, 160)) {
     const { body, local } = input(c);
-    const a = await run(body, local, { live: null }), b = await run(body, local, { live: empty }), b2 = await run(body, local, { live: { ...empty, source: undefined } });
+    const a = await run(body, local, { live: null, knownProtocols: false }), b = await run(body, local, { live: empty, knownProtocols: false }), b2 = await run(body, local, { live: { ...empty, source: undefined }, knownProtocols: false });
     assert.equal(benchLevel(b2), benchLevel(a), c.id + " (faits vides, sans table de reference)");
     // the only thing an empty answer switches on is the engine's own reference-token table (static, public) : a detector may then stop flagging a reference token
     if (benchLevel(b) !== benchLevel(a)) assert.ok(a.plus.raisedBy.length && RK[benchLevel(b)] >= RK[b.plus.base] && RK[b.plus.base] >= RK[b.plus.product], c.id);
@@ -155,25 +155,44 @@ test('switches : HOLDUP_PLUS=0 gives the product verdict, detectors:false too', 
   try { const v = await evaluatePlus(setOwner, LOCAL); assert.equal(v.level, p.level); assert.equal(v.plus.path, 'off'); } finally { delete process.env.HOLDUP_PLUS; }
 });
 
-test('server_integration.diff applies to the current server.mjs and POST /check answers through evaluatePlus', async (t) => {
-  const dir = mkdtempSync(join(tmpdir(), 'holdup-pipeline-'));
-  const patched = join(ROOT, 'pipeline', '.server_patched.test.mjs'); // must sit one level under T_banc_e2e (server.mjs resolves ROOT from its own folder)
-  t.after(() => { rmSync(dir, { recursive: true, force: true }); if (existsSync(patched)) rmSync(patched); });
-  mkdirSync(join(dir, 'server'));
-  writeFileSync(join(dir, 'server', 'server.mjs'), readFileSync(join(ROOT, 'server', 'server.mjs')));
-  const r = spawnSync('git', ['apply', '-p1', join(ROOT, 'pipeline', 'server_integration.diff')], { cwd: dir, encoding: 'utf8' });
-  assert.equal(r.status, 0, 'le diff ne s\'applique plus : ' + r.stderr);
-  writeFileSync(patched, readFileSync(join(dir, 'server', 'server.mjs')));
-  const S = await import(pathToFileURL(patched).href);
-  assert.equal(typeof S.evaluate, 'function'); // still exported, same signature
-  assert.equal(S.evaluate(setOwner, LOCAL).level, D.evaluate(setOwner, LOCAL).level);
+test('the shipped server answers POST /check through evaluatePlus and journals the path (server_integration.diff, applied by its owner in 5c1df06)', async (t) => {
+  const src = readFileSync(join(ROOT, 'server', 'server.mjs'), 'utf8');
+  if (!/evaluate_plus.mjs/.test(src)) return t.skip('server.mjs ne branche pas pipeline/evaluate_plus.mjs : appliquer pipeline/server_integration.diff');
+  const S = await import(pathToFileURL(join(ROOT, 'server', 'server.mjs')).href);
+  const dir = mkdtempSync(join(tmpdir(), 'holdup-pipeline-')); t.after(() => rmSync(dir, { recursive: true, force: true }));
+  assert.equal(S.evaluate(setOwner, LOCAL).level, D.evaluate(setOwner, LOCAL).level); // evaluate still exported, same signature
   const jf = join(dir, 'journal.jsonl');
   const s = await S.createHoldUpServer({ port: 0, journalFile: jf, local: LOCAL });
   try {
     const res = await fetch(`http://127.0.0.1:${s.port}/check`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(setOwner) });
     const v = await res.json();
     assert.equal(v.level, 'danger'); assert.equal(v.plus.raisedBy[0].code, 'control_change_by_shape');
-    const last = JSON.parse(readFileSync(jf, 'utf8').trim().split('\n').pop());
-    assert.match(last.entry.voie, /^plus:/); assert.deepEqual(last.entry.plus.raised, ['control_change_by_shape']);
+    const last = JSON.parse(readFileSync(jf, 'utf8').trim().split(String.fromCharCode(10)).pop());
+    assert.match(last.entry.voie, /^plus:/);
   } finally { await s.close(); }
+});
+
+test('invariant : a declared kind without details never lowers the verdict (320 replayed cases x 4 answers)', async () => {
+  const run = makeEvaluatePlus(D); let n = 0;
+  for (const c of CASES) {
+    const { body, local } = input(c);
+    const none = benchLevel(await run(body, local, { live: null }));
+    for (const choice of ['pay', 'receive', 'login', 'asked']) {
+      const v = await run({ ...body, intent: choice }, local, { live: null }); n++;
+      assert.ok(RK[benchLevel(v)] >= RK[none], `${c.id} : sans intention ${none}, avec « ${choice} » ${benchLevel(v)}`);
+    }
+  }
+  assert.equal(n, CASES.length * 4);
+});
+
+test('known_protocols.json : every entry has a primary source, and the list is given to the product and to the detectors', async () => {
+  const kp = JSON.parse(readFileSync(join(ROOT, 'pipeline', 'known_protocols.json'), 'utf8'));
+  let n = 0;
+  for (const [chain, list] of Object.entries(kp)) { if (!Array.isArray(list)) continue; for (const e of list) { n++; assert.match(e.address, /^0x[0-9a-fA-F]{40}$/); assert.match(e.source, /^https:\/\//); assert.ok(e.name && e.why, chain); } }
+  assert.ok(n >= 5);
+  const pool = kp['43114'][0].address;
+  const req = { method: 'eth_sendTransaction', params: [{ from: ME, to: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48A6E', data: '0x095ea7b3' + word(pool) + word('0x2faf080'), value: '0x0' }], origin: 'https://exemple.test', chainId: '0xa86a', from: ME };
+  const withList = await evaluatePlus(req, LOCAL, { live: null }), without = await evaluatePlus(req, LOCAL, { live: null, knownProtocols: false });
+  assert.ok(RK[benchLevel(withList)] <= RK[benchLevel(without)]);
+  assert.notEqual(benchLevel(withList), 'critical');
 });

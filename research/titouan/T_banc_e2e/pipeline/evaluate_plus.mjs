@@ -15,6 +15,7 @@
 //   classifier : false = never run the pasted-message detector. Otherwise it follows HOLDUP_CLASSIFIER (off unless set), as on the bench.
 //   intent     : a full Intent object (kind, token, amount, counterpartyLabel, freeText...). Default : derived from body.intent / body.intent_text
 //                the way the server does (pay / receive / login / asked). body.intent may also be that object.
+//   knownProtocols : false = do not load pipeline/known_protocols.json (public per-chain list, each address with its primary source).
 //   budgetMs   : total budget for the live lookup (default 1500, the provider's own budget). A slow RPC never blocks longer : on timeout the
 //                verdict is given on what is known and `plus.missingFacts` says what was not verified.
 //   rpcUrl     : node to read (default : SENTINELLE_RPC_URL / HOLDUP_RPC_URL, else the provider's public RPC for the chain).
@@ -51,6 +52,7 @@ export const TOKENS = [['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 'USDC', 6]
 // detector flag code -> fiche of U_textes_utilisateur.json ('Fnn') or '~key' of the server's SECOURS texts. The detector id is never shown.
 export const DETECTOR_FICHE = {
   pull_via_existing_allowance: 'F12', batch_right_unvouched: 'F12', embedded_pull_unvouched: 'F12', embedded_right_unvouched: 'F12',
+  forwarded_value_lookalike: 'F13', forwarded_value_dust_only: 'F14', forwarded_value_single_stranger: 'F12', forwarded_value_hidden_recipient: 'F12',
   lookalike_of_known: 'F13', clipboard_substituted: 'F19', dust_only_recipient: 'F14',
   right_to_unvouched_spender: 'F01', sim_approval_by_victim: 'F01', swap_no_min_unknown_router: 'F18',
   counterfeit_reference_token: 'F15', token_cannot_be_sold: 'F16', token_sell_tax_confiscatory: 'F16', token_sell_tax_high: 'F16',
@@ -291,6 +293,12 @@ export function makeEvaluatePlus(D) {
     const T0 = nowMs();
     const o = { detectors: true, classifier: undefined, budgetMs: 1500, detectorTimeoutMs: 1500, ...opts };
     local = { contacts: [], history: [], protected: [], knownSpenders: [], ...(local || {}) };
+    // public per-chain list of known protocols (pipeline/known_protocols.json) : given to the product AND to the detectors, like an entry of context.local.json
+    if (o.knownProtocols !== false && D.knownProtocols && body && typeof body === 'object') {
+      const p0 = Array.isArray(body.params) && body.params[0] && typeof body.params[0] === 'object' ? body.params[0] : {};
+      const list = D.knownProtocols[String(parseChain(body.chainId) ?? parseChain(p0.chainId))];
+      if (list && list.length) local = { ...local, knownSpenders: [...new Set([...(local.knownSpenders || []), ...list])] };
+    }
     const ms = { product: 0, live: 0, chain: 0, detectors: 0, total: 0 };
     const errors = [];
     // ---- the product's own answer (always computed : it is the fallback and the floor)
@@ -414,10 +422,12 @@ export async function loadNodeDeps(over = {}) {
   const [S, E, C, R, Pol, U, Det, url, fs] = await Promise.all([import(u('../server/server.mjs')), import(u('../engine/src/engine.mjs')), import(u('../engine/vendor/compare.ts')),
     import(u('../engine/src/rules_extra.mjs')), import(u('../run/policy.mjs')), import(u('../engine/src/util.mjs')), import(u('../detectors_adem/index.mjs')), import('node:url'), import('node:fs')]);
   const texts = JSON.parse(fs.readFileSync(new URL('../../U_textes_utilisateur.json', import.meta.url), 'utf8'));
+  let knownProtocols = {};
+  try { const kp = JSON.parse(fs.readFileSync(new URL('./known_protocols.json', import.meta.url), 'utf8')); for (const [c, l] of Object.entries(kp)) if (Array.isArray(l)) knownProtocols[c] = l.filter((e) => e && HEX20.test(String(e.address))).map((e) => lc(e.address)); } catch { knownProtocols = {}; }
   return { evaluate: S.evaluate, E, compare: C.compare, applyExtraRules: R.applyExtraRules, analyzeChainRequest: R.analyzeChainRequest, applyPolicy: Pol.applyPolicy, mergeEffects: S.mergeEffects,
     present: S.present, scenarioFiche: S.scenarioFiche, findPressure: S.findPressure, buildTexts: S.buildTexts, buildSecours: S.buildSecours, SECOURS_TITRE: S.SECOURS_TITRE, TITRE_NON_VERIFIE: S.TITRE_NON_VERIFIE,
     fiches: Object.fromEntries(texts.fiches.map((f) => [f.id, f])), DETECTORS: Det.DETECTORS, DEFAULT_TOKENS: U.DEFAULT_TOKENS, domainToUnicode: url.domainToUnicode,
-    provider: () => import(u('../context_live/provider.mjs')), env: () => process.env, loadLocalContext: S.loadLocalContext, ...over };
+    knownProtocols, provider: () => import(u('../context_live/provider.mjs')), env: () => process.env, loadLocalContext: S.loadLocalContext, ...over };
 }
 // Environment switches (read at call time) : HOLDUP_PLUS=0 -> product verdict only ; HOLDUP_DETECTORS=0 -> no detector ;
 // SENTINELLE_RPC_URL / HOLDUP_RPC_URL set (or SENTINELLE_LIVE=1) -> live context ON unless options.live says otherwise ; SENTINELLE_LIVE=0 -> OFF ;
