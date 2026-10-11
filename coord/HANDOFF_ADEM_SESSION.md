@@ -2,6 +2,15 @@
 
 Adem n'a bientôt plus de crédit ; un autre agent prend le relais. Tout est sur `main`.
 
+## PRIORITÉ N°1 : BRANCHER JEV OU CLEF POUR DE VRAI (exigence d'Adem, le jury en a parlé)
+Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est présente dans l'environnement (CF_ACCOUNT_ID, CF_API_TOKEN, JEV_API_KEY sont absentes). De plus, la classification du message collé n'est pas branchée dans la chaîne du banc : le juré social montre qu'un faux support classique passe en `ok`.
+1. HUMAIN (Adem ou Titouan), environ 5 min, puisqu'un agent n'a pas le droit de créer de compte ni de saisir de clé :
+   - Clef : créer un compte Cloudflare gratuit, puis un token API avec la permission Workers AI, et mettre CF_ACCOUNT_ID et CF_API_TOKEN dans `.env` (gitignoré).
+   - Jev : créer un compte TypeSafe (docs.typesafe.ai) et mettre JEV_API_KEY dans `.env`.
+2. AGENT : utiliser le skill `typesafe-ai` (~/.claude/skills/typesafe-ai), qui renvoie vers les docs à jour (https://docs.typesafe.ai/llms.txt, puis api.md, primitives.md, confidence.md). Corriger l'adaptateur de `app/intent/src/providers/` d'après le contrat d'API réel, sans rien inventer de mémoire.
+3. AGENT : brancher `classifyMessage` (et `parseIntent` pour le texte libre) dans la chaîne (`redteam/check_plus.mjs`, puis la politique de Titouan). Un message classé fake_support, seed_phishing, fake_refund ou fake_job, ou un texte libre du type « le monsieur au téléphone m'a dit », fait MONTER le verdict au niveau Manipulation ; il ne peut jamais le faire baisser. Le texte collé est traité comme une DONNÉE délimitée (anti-injection). Sans clé, on passe sur le repli par mots-clés et on l'indique.
+4. MESURER : comparer Jev, Clef et mots-clés sur les 546 messages collés de `blind_adem/v2/fraud_ambig` et sur `redteam/jury_social.jsonl`, avec rappel, fausses alertes, latence et coût. Le modèle n'apparaît dans le pitch que s'il fait mieux que les mots-clés, avec le chiffre.
+
 ## Direction (figée)
 - D-007 : barrière d'intention pour les wallets grand public, sur Avalanche (Fuji pour la démo, C-Chain pour les mesures). Voir `docs/BRIEF_direction.md`, `docs/intent-barrier.md` et `PRODUCT.md`.
 - Grilling d'Adem :
