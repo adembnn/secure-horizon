@@ -8,7 +8,7 @@ import { ENGINE_CHOICE, KINDS, MAX_TEXT, MODEL_MIN, NO_MATCH, cleanText, interpr
 import { TEXT, answerOf, networkName, siteName } from './outcome.js';
 import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
 import { measure, readToken } from './effect_sim.js';
-import { chainAppend, sha256 } from './journal_chain.js';
+import { RULES_FINGERPRINT, chainAppend, rulesTag, sha256 } from './journal_chain.js'; // fingerprint : written by tools/gen_rules_fingerprint.mjs, no fetch
 import { revocationFor } from './revoke.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
@@ -61,6 +61,8 @@ function onlyTheGap(floor, v) {
   return true;
 }
 const WIN = { width: 440, height: 540 };
+const PAUSED_KEY = 'paused';     // origins the person paused from the toolbar popup : their requests go straight to the wallet, and the badge says so
+const BADGE = { paused: 'II', bg: '#ffffff', ink: '#000000' };
 const AUTO_MS = 1000;           // "Ça correspond" stays on screen this long, then the request goes to the wallet by itself
 // One written intent covers ONE operation : the requests that follow from the same tab, frame and origin (an approval, then the
 // exchange it prepares) are compared to the same sentence instead of asking again. It lasts 90 s after the last request it let
@@ -242,9 +244,23 @@ function applyPlan(rec, plan, cfg, now) {
 
 const hostOf = (origin) => { try { return new URL(origin).host || String(origin); } catch (_) { return String(origin || ''); } };
 
+// The ONE follow-up, about the one thing that is missing (whether to ask is decided by relance(), written_check.js ; this only
+// chooses the words). -> { title, missing: 'much' | 'other' | null, label }. No example for the field : it stays empty.
+export function askOf(intent, text, again) {
+  const A = TEXT.ask;
+  if (!intent || !intent.clear) return { title: A.what, missing: null };
+  // a number is there, without its currency ("échanger 50 contre AVAX") : the currency is what is missing
+  const bare = (String(text || '').replace(/0x[0-9a-fA-F]{6,}/g, ' ').match(/(?:^|[^\w.,])(\d{1,12}(?:[.,]\d{1,8})?)(?![\w.,]*\d)/) || [])[1];
+  if (!intent.amount) return bare ? { title: A.money, missing: 'much', label: bare.replace('.', ',') + ' de quoi' } : { title: A.much, missing: 'much' };
+  if (['pay_someone', 'send_to_my_account'].includes(intent.kind) && !intent.address) return { title: A.who, missing: 'other' };
+  if (intent.kind === 'buy_or_swap' && !intent.counter) return { title: A.against, missing: 'other' };
+  return { title: typeof again === 'string' && again ? again : A.what, missing: null };
+}
 // `classify(text)` (optional) asks the relay (Clef / Jev) ; without it, or when it fails, the embedded keyword parser answers.
 // `closeMs` : how long a decided window keeps its last message before the worker removes it (0 : at once).
-export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS } = {}) {
+// `rulesFingerprint` : 12 hex, fingerprint of the embedded rule files (RULES_FINGERPRINT of journal_chain.js), written in every chained line with the
+// version. Anything else than 12 lower-case hex : the version alone.
+export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS, rulesFingerprint = RULES_FINGERPRINT } = {}) {
   const selfUrl = chrome.runtime.getURL('');
   const windowUrl = chrome.runtime.getURL('window.html');
   const mem = new Map(); // only if chrome.storage.session is missing : the hold then does not survive the worker (journalled)
@@ -277,6 +293,18 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     return c;
   }
 
+  // ---------- pause per site, and the badge of the toolbar icon ----------
+  async function isPaused(origin) { try { const l = (await chrome.storage.local.get(PAUSED_KEY))[PAUSED_KEY]; return Array.isArray(l) && l.includes(origin); } catch (_) { return false; } }
+  const quiet = (fn) => { try { const p = fn(); if (p && p.catch) p.catch(() => {}); } catch (_) {} };
+  if (chrome.action && chrome.action.setBadgeBackgroundColor) { quiet(() => chrome.action.setBadgeBackgroundColor({ color: BADGE.bg })); if (chrome.action.setBadgeTextColor) quiet(() => chrome.action.setBadgeTextColor({ color: BADGE.ink })); }
+  // Nothing when all is well ; "II" when this site is paused ; the number of permissions left open on this tab otherwise.
+  async function badge(tabId, origin) {
+    if (!Number.isInteger(tabId) || !chrome.action || !chrome.action.setBadgeText) return;
+    let text = '';
+    try { if (await isPaused(origin)) text = BADGE.paused; else { const n = (await grantsOf(tabId)).length; text = n ? String(n) : ''; } } catch (_) {}
+    quiet(() => chrome.action.setBadgeText({ text, tabId }));
+    if (chrome.action.setTitle) quiet(() => chrome.action.setTitle({ tabId, title: text === BADGE.paused ? 'Hold up : en pause sur ce site' : 'Hold up' }));
+  }
   let journalChain = Promise.resolve();
   function journal(entry) { journalChain = journalChain.then(() => journalNow(entry), () => journalNow(entry)); return journalChain; }
   async function journalNow(entry) {
@@ -300,7 +328,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // hash-chained copy (journal_chain.js) : site, kind, level, codes, decision, build version. Never the sentence, never an address.
     if (entry.type === 'verdict' || entry.type === 'decision' || entry.type === 'partial' || entry.type === 'revocation') {
       let version = ''; try { version = chrome.runtime.getManifest().version; } catch (_) {}
-      await chainAppend(chrome.storage.local, entry, version);
+      await chainAppend(chrome.storage.local, entry, version, rulesTag(version, rulesFingerprint));
     }
     if (onJournal) { try { onJournal(entry); } catch (_) {} }
   }
@@ -319,7 +347,8 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   // The written intent -> { clear, kind, facts, source, model, text }. Never throws ; an unusable answer falls back to the keywords.
   async function understand(text) {
     let raw = null;
-    if (classify) { try { raw = await classify(text); } catch (_) { raw = null; } }
+    const t0 = Date.now(); let readMs = null;
+    if (classify) { try { raw = await classify(text); } catch (_) { raw = null; } readMs = Date.now() - t0; }
     if (!raw || typeof raw !== 'object') raw = await keywordClassify(text);
     let intent = interpret(raw, text);
     if (intent.model) {
@@ -332,7 +361,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       // the model alone never grants it, the words must say it too. The model can only make things stricter or more precise.
       else if (intent.facts.grant && !kw.facts.grant) intent.facts.grant = false;
     }
-    return Object.assign(intent, { text });
+    return Object.assign(intent, { text }, intent.model === true && readMs != null ? { readMs } : {});
   }
   // Runs the engine with what was understood and keeps the strictest verdict (strict-only : a sentence never lowers a level).
   // -> { v, used, rewrite } : `used` is what this request takes from the written amount (kept for the next requests of the same intent).
@@ -400,16 +429,19 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // it does not match, and the delay applies.
     if (rewrite && plan && canCorrect(intent) && v.written && v.written.outcome === 'mismatch' && v.written.fixable && ['attention', 'danger'].includes(v.level) && !v.indeterminate
       && !v.intent_contradiction && !v.address_diff && !(v.risk_signals || []).includes('lookalike') && onlyTheGap(rec.verdict, v)) {
-      const m = String(v.written.line || '').match(/La demande donne accès à (.+?)\. Réduis/);
-      const before = /donne accès à tout/.test(String(v.written.line || '')) ? 'sans limite' : m ? m[1] : '';
+      const lim = v.written.limit && typeof v.written.limit === 'object' ? v.written.limit : null;
+      const m = String(v.written.line || '').match(/La demande donne accès à (.+?)\.(?: Réduis|$)/);
+      const before = lim && typeof lim.requested === 'string' && lim.requested ? lim.requested : /donne accès à tout/.test(String(v.written.line || '')) ? 'sans limite' : m ? m[1] : '';
       const limited = { amount: plan.amount, symbol: plan.symbol, before: before || 'plus large' };
-      // The corrected request is read again, as the wallet will get it. It matches : said so. Something still cannot be verified in it
-      // (who gets the right, a token nobody knows) : the right stays limited, but it is "not verified", with the delay.
+      // The corrected request is read as the wallet would get it. It would match : the correction is OFFERED on the screen
+      // ("Limiter à 50 USDC et envoyer"). Nothing is limited without that gesture (founder's decision, 11 Oct.) : the answer stays
+      // "Ça ne correspond pas", `rewrite` waits in the record, and the request as the site wrote it cannot be sent from that screen.
+      // Something still cannot be verified in the corrected request (who gets it, a token nobody knows) : "not verified", with the delay ;
+      // the screen says the permission will be limited if the person sends it anyway.
       let after = null; try { after = writtenCheck(Object.assign({}, rec.body, { params: plan.params }), intent, all); } catch (_) { after = null; }
-      if (after && after.outcome === 'match') v = Object.assign({}, v, { relief: true, written: { outcome: 'match', corrected: true,
-        line: limitText(plan) + '. Le site demandait un accès ' + (before === 'sans limite' ? before : before ? 'à ' + before : 'plus large') + '.' + said, limited } });
+      if (after && after.outcome === 'match') v = Object.assign({}, v, { written: Object.assign({}, v.written, { offer: limited, after: typeof after.line === 'string' ? after.line : null }) });
       else if (after && after.outcome === 'unverifiable' && typeof after.line === 'string') v = Object.assign({}, v, RANK.unknown > (RANK[v.level] || 0) ? { level: 'unknown' } : {},
-        { written: { outcome: 'unverifiable', line: after.line + ' Si tu continues, le droit sera limité à ' + limitText(plan).replace(/^Droit limité à /, '') + '.', limited } });
+        { written: { outcome: 'unverifiable', line: after.line + ' Si tu continues, l’autorisation sera limitée à ' + limitText(plan).replace(/^\S+ limitée? à /, '') + '.', limited } });
       else rewrite = null;
     } else rewrite = null;
     const erc20 = {}; for (const a of Object.keys(all)) erc20[a] = { symbol: all[a].symbol, decimals: all[a].decimals };
@@ -524,6 +556,8 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       let tokens = {};
       try { tokens = tokensOf((await chrome.storage.local.get('contexte')).contexte, b.chainId); } catch (_) {}
       const optsFor = (to) => { const t = typeof to === 'string' ? tokens[to.toLowerCase()] || (rec.erc20 && rec.erc20[to.toLowerCase()]) || null : null; return t ? { tokenKind: 'erc20', tokenLabel: 'tes ' + t.symbol } : {}; }; // known by its address : a token with decimals. Otherwise nothing is guessed.
+      // what the site may still spend, in the words of the panel : "50 USDC", "tout ton USDC" ; null when the token is not known
+      const canOf = (req, to) => { try { const g = requestFacts(req).grants[0], t = typeof to === 'string' ? tokens[to.toLowerCase()] || (rec.erc20 && rec.erc20[to.toLowerCase()]) || null : null; if (!g || !t || !t.symbol) return null; if (g.unlimited) return 'tout ton ' + t.symbol; const u = units(g.raw, t.decimals); return u ? u + ' ' + t.symbol : null; } catch (_) { return null; } };
       const asked = [];
       if (b.method === 'wallet_sendCalls') {
         const c = params[0] && typeof params[0] === 'object' ? params[0] : {};
@@ -531,15 +565,15 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         for (const x of calls) if (x && typeof x === 'object') asked.push([{ method: 'eth_sendTransaction', chainId: c.chainId || b.chainId, from: c.from || b.from, params: [{ from: c.from || b.from, to: x.to, data: x.data || x.input, chainId: c.chainId || b.chainId }] }, x.to]);
       } else asked.push([{ method: b.method, params, chainId: b.chainId, from: b.from }, params[0] && params[0].to]);
       const found = [];
-      for (const [req, to] of asked) { const r = revocationFor(req, optsFor(to)); if (r && r.status !== 'not_a_grant') found.push(r); }
+      for (const [req, to] of asked) { const r = revocationFor(req, optsFor(to)); if (r && r.status !== 'not_a_grant') found.push([r, canOf(req, to)]); }
       if (!found.length) return;
       await store.lock(async () => {
         const list = await grantsOf(rec.tabId);
-        for (const result of found) list.push({ id: randHex(8), rid: rec.rid, frameId: rec.frameId, origin: rec.origin, at: Date.now(), result, wallet: null });
+        for (const [result, can] of found) list.push({ id: randHex(8), rid: rec.rid, frameId: rec.frameId, origin: rec.origin, at: Date.now(), result, can, wallet: null });
         while (list.length > MAX_GRANTS) list.shift();
         await session.set({ [grantKey(rec.tabId)]: list });
       });
-      try { const p = chrome.action && chrome.action.setBadgeText && chrome.action.setBadgeText({ text: '1', tabId: rec.tabId }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+      await badge(rec.tabId, rec.origin);
     } catch (_) { /* no revocation offered : nothing else changes */ }
   }
   async function grantFor(msg) {
@@ -583,7 +617,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       const list = await grantsOf(msg.tabId);
       if (!list.length) return { none: true };
       const last = list[list.length - 1];
-      return { result: last.result, origin: last.origin, at: last.at, id: last.id, wallet: last.wallet, grants: list.slice().reverse().map((g) => ({ id: g.id, result: g.result, origin: g.origin, at: g.at, wallet: g.wallet })) };
+      return { result: last.result, origin: last.origin, at: last.at, id: last.id, wallet: last.wallet, grants: list.slice().reverse().map((g) => ({ id: g.id, result: g.result, origin: g.origin, at: g.at, wallet: g.wallet, can: typeof g.can === 'string' ? g.can : null })) };
     },
     'hu.revoke.send': async (msg) => {
       const g = await grantFor(msg);
@@ -705,13 +739,24 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // What the Hold up window draws (ui/screen.js). Two moments : the question, then the answer.
     const site = siteName(rec.site);
     // The question shows the site name only (origin given by the browser) : nothing of the request before the person has written.
-    if (rec.stage === 'intent') view.screen = Object.assign({ kind: 'question', title: rec.ask || TEXT.question(site), placeholder: TEXT.placeholder, max: Math.max(20, MAX_TEXT - (rec.firstText ? rec.firstText.length + 1 : 0)) }, rec.asked && rec.firstText ? { first: rec.firstText } : {});
-    else if (rec.stage === 'verdict') {
-      view.screen = Object.assign({ kind: 'answer', leftMs: Math.max(0, rec.friction.deadline - now) }, answerOf(rec.verdict, rec.intent));
-      // It matches and no delay applies : no "Continuer", the window sends the request on after AUTO_MS (Annuler stays).
+    if (rec.stage === 'intent') {
+      const q = rec.asked && rec.askInfo && typeof rec.askInfo === 'object' ? rec.askInfo : null;
+      view.screen = Object.assign({ kind: 'question', site: site || TEXT.noSite, title: rec.ask || TEXT.question(site), placeholder: TEXT.placeholder, max: Math.max(20, MAX_TEXT - (rec.firstText ? rec.firstText.length + 1 : 0)) },
+        rec.asked && rec.firstText ? { first: rec.firstText } : {}, q && q.missing ? { missing: q.missing } : {}, q && q.label ? { missingLabel: q.label } : {});
+    } else if (rec.stage === 'verdict') {
+      view.screen = Object.assign({ kind: 'answer', site: site || TEXT.noSite, leftMs: Math.max(0, rec.friction.deadline - now) }, answerOf(rec.verdict, rec.intent));
+      // the limit is offered only when the limited request is really waiting in the record
+      if (view.screen.limit && !(rec.rewrite && Array.isArray(rec.rewrite.params))) delete view.screen.limit;
+      if (view.screen.retry && !(rec.level === 'unknown' && rec.body && (rec.retries || 0) < 3)) delete view.screen.retry;
+      // It matches and no delay applies : no gesture to send, the window sends the request on after AUTO_MS (Annuler stays).
       if (view.screen.outcome === 'match' && rec.friction.waitMs === 0 && !rec.friction.phrase) view.screen.autoMs = AUTO_MS;
       if (rec.step > 1) view.screen.step = rec.step; // a later request of the same sentence, shown in the same window
       const net = networkName(rec.body && rec.body.chainId); if (net) view.screen.network = net;
+      // One discreet line : how the sentence was read, with the time the relay really took (measured, never a fixed value).
+      const it = rec.intent;
+      if (it && it.text) view.screen.read = it.model === true && (it.source === 'clef' || it.source === 'jev') ? { by: it.source, ms: Number.isFinite(it.readMs) ? it.readMs : null } : { by: null, ms: null };
+      // time from the arrival of the site's request to this answer on screen (ms) : the detection time
+      if (Number.isFinite(rec.createdAt) && Number.isFinite(rec.shownAt)) view.screen.detectMs = Math.max(0, rec.shownAt - rec.createdAt);
     }
     return view;
   }
@@ -796,6 +841,13 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     if (typeof p.method !== 'string' || p.method.length > 80) return { done: true, allow: false, reason: 'demande-invalide' };
     if (!validRid(msg.rid)) return { done: true, allow: false, reason: 'demande-invalide' };
     const tabId = sender.tab.id, frameId = sender.frameId;
+    // The person paused Hold up on this site (toolbar popup) : the request goes straight to the wallet. Written in the journal
+    // (once per origin and method every 10 s), said by the badge and by the popup.
+    if (await isPaused(origin)) {
+      const jk = 'pause|' + origin + '|' + p.method.slice(0, 40), now = Date.now();
+      if (!(now - (lastNote.get(jk) || 0) < 10000)) { if (lastNote.size > 200) lastNote.clear(); lastNote.set(jk, now); await journal({ type: 'decision', stage: 'gate', decision: 'paused', by: 'pause', origin, method: p.method, frame: frameId === 0 ? 'top' : 'child' }); }
+      return { done: true, allow: true };
+    }
     // The revocation Hold up itself handed to the wallet came back through a wrapped method (a wallet that delegates later) :
     // with its valid token it goes on without a new question. Any other token, forged, reused, late, from another tab or for
     // another content, is ignored : the request is held and asked about like any other.
@@ -844,7 +896,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       keptWin = await keepTake(tabId, frameId, origin, op, msg.rid, Date.now());
       if (keptWin) { init.ui = 'window'; init.windowId = keptWin.windowId; init.step = (keptWin.step || 1) + 1; }
       enterVerdict(init, v2, cfg, Date.now());
-      await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });
+      await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', actor: 'auto', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });
     } else if (wantIntent) { init.stage = 'intent'; init.shownAt = Date.now(); }
     else applyPlan(init, planAfterIntent(floor, null, cfg), cfg, Date.now());
 
@@ -861,7 +913,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   async function journalStage(rec) {
     if (rec.stage !== 'verdict') return;
     const v = rec.verdict;
-    await journal({ type: 'verdict', origin: rec.origin, method: rec.method, level: v.level, codes: (Array.isArray(v.codes) ? v.codes.slice(0, 7) : []).concat(v.written && v.written.corrected ? ['droit_limite'] : []), indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
+    await journal({ type: 'verdict', limited: rec.rewrite && v.written && v.written.limited ? { symbol: v.written.limited.symbol, amount: v.written.limited.amount } : undefined, origin: rec.origin, method: rec.method, level: v.level, detect_ms: Number.isFinite(rec.createdAt) && Number.isFinite(rec.shownAt) ? Math.max(0, rec.shownAt - rec.createdAt) : undefined, read_ms: rec.intent && Number.isFinite(rec.intent.readMs) ? rec.intent.readMs : undefined, codes: (Array.isArray(v.codes) ? v.codes.slice(0, 7) : []).concat(v.written && v.written.corrected ? ['droit_limite'] : []), indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
       friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, grill: rec.grill ? { state: rec.grill.state, floor: rec.grill.floor, answers: rec.grill.answers } : null, intent: rec.intent ? rec.intent.choice : null });
   }
 
@@ -899,7 +951,8 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       if (again && !rec.asked) {
         // Too vague (nothing understood, or no amount, or nobody to pay) : ONE follow-up question, in the same window, never two.
         await journal({ type: 'decision', stage: 'intent', decision: 'relance', intent: intent.kind || 'unclear', classifier: intent.source, origin: rec.origin, method: rec.method, time_to_decision_ms: ttd, ui: rec.ui });
-        r = await store.advance(rid, seq, (x, now) => { x.asked = true; x.firstText = text; x.ask = again; x.shownAt = now; });
+        const q = askOf(intent, text, again); // the one thing that is missing
+        r = await store.advance(rid, seq, (x, now) => { x.asked = true; x.firstText = text; x.ask = q.title; x.askInfo = { missing: q.missing, label: q.label || null }; x.shownAt = now; });
         if (r.status !== 'next') return { status: 'ignored' };
         if (testHook) runHook(rid);
         return { status: 'next', view: viewOf(r.rec, cfg) };
@@ -943,22 +996,30 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     } else if (rec.stage === 'verdict' && d === 'retry' && rec.level === 'unknown' && rec.body && (rec.retries || 0) < 3) {
       const v = await safeCheck(rec.body, cfg);
       r = await store.advance(rid, seq, (x, now) => { x.retries = (x.retries || 0) + 1; x.rewrite = null; enterVerdict(x, v, cfg, now); });
+    } else if (rec.stage === 'verdict' && d === 'limit') {
+      // "Limiter à 50 USDC et envoyer" : the person's gesture makes the request conform. The limited request (already read again :
+      // it matches) replaces the one of the site, with no delay. Only when that offer is the one on screen.
+      const offer = rec.verdict && rec.verdict.written && rec.verdict.written.offer;
+      if (!offer || !(rec.rewrite && Array.isArray(rec.rewrite.params)) || shownOutcome(rec) !== 'mismatch') return { status: 'ignored' };
+      if (by !== 'human' && by !== 'auto-test') return { status: 'ignored' };
+      if (Date.now() - rec.shownAt < LIMITS.minShowMs) return { status: 'again', why: 'trop-tot', view: viewOf(rec, cfg) }; // a click already on its way is not a consent
+      const shown = rec.shownAt, said = TEXT.limited(String(offer.amount).replace('.', ','), offer.symbol);
+      const v2 = Object.assign({}, rec.verdict, { relief: true, written: { outcome: 'match', corrected: true, line: rec.verdict.written.after || said, limited: offer } });
+      const a = await store.advance(rid, seq, (x, now) => { enterVerdict(x, v2, cfg, now); x.shownAt = shown; });
+      if (!a || a.status !== 'next') return { status: 'ignored' };
+      await journalStage(a.rec); // the verdict of the limited request : written as such (chained copy : by 'holdup', limited 'USDC:50')
+      const s = await store.submit(rid, { seq: a.rec.seq, decision: 'continue', phraseOk: true, by, meta: { limit: true } });
+      if (s.status !== 'allow') return { status: 'ignored' };
+      const keep = await sent(s.rec, { by, auto: false, ttd, shown: 'mismatch' });
+      return { status: 'allow', more: keep, limited: said };
     } else if (rec.stage === 'verdict' && d === 'continue') {
+      // the screen that offers the limit has no "send it as it is" : the wider permission never leaves from there
+      if (rec.verdict && rec.verdict.written && rec.verdict.written.offer) return { status: 'ignored' };
       const s = await store.submit(rid, { seq, decision: 'continue', phraseOk: msg.phraseOk === true, by, meta: { screen: msg.screen } });
       if (s.status === 'allow') {
-        await opSpend(s.rec, Date.now());
-        // Who decided : the person (a gesture on "Continuer"), or the window by itself after "Ça correspond" (no gesture). And what
-        // really went to the wallet : the request as the site sent it, or the one Hold up limited (amounts only, never an address).
-        const lim = rec.rewrite && rec.verdict.written && rec.verdict.written.limited ? rec.verdict.written.limited : null;
-        const who = by === 'human' && msg.auto === true ? 'auto' : by;
-        await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by: who, gesture: who === 'human', origin: rec.origin, method: rec.method, level: rec.level, outcome: shownOutcome(rec), indeterminate: !!rec.verdict.indeterminate,
-          codes: [who === 'auto' ? 'envoi_automatique' : 'geste'].concat(lim ? ['droit_limite'] : []),
-          sent: lim ? { limited: true, asked: lim.before, sent: lim.amount + ' ' + lim.symbol } : { limited: false },
-          time_to_decision_ms: ttd, friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, ui: rec.ui, total_ms: Date.now() - rec.createdAt });
-        await keepGrant(s.rec);
-        const keep = await keepOpen(s.rec, Date.now());
-        await closeUi(s.rec, { keep, why: 'allow' });
-        return { status: 'allow', more: keep, line: lim && rec.verdict.written.line ? rec.verdict.written.line : null };
+        const lim = s.rec.rewrite && s.rec.verdict.written && s.rec.verdict.written.limited ? s.rec.verdict.written.limited : null;
+        const keep = await sent(s.rec, { by, auto: msg.auto === true, ttd });
+        return { status: 'allow', more: keep, limited: lim ? TEXT.limited(String(lim.amount).replace('.', ','), lim.symbol) : null, line: lim && rec.verdict.written.line ? rec.verdict.written.line : null };
       }
       if (s.status === 'again') { await journal({ type: 'early_continue', why: s.why, left_ms: s.leftMs, origin: rec.origin, method: rec.method, level: rec.level, ui: rec.ui }); return { status: 'again', why: s.why, view: viewOf(s.rec, cfg) }; }
       return { status: 'ignored' };
@@ -967,6 +1028,22 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     await journalStage(r.rec);
     if (testHook) runHook(rid);
     return { status: 'next', view: viewOf(r.rec, cfg) };
+  }
+  // A request goes to the wallet. Written in the journal : who decided (the person by a gesture, or the window by itself after
+  // "Ça correspond"), and what really went : the request as the site sent it, or the one limited (amounts only, never an address).
+  // -> true when the window stays for the next request of the operation.
+  async function sent(rec, { by, auto, ttd, shown }) {
+    await opSpend(rec, Date.now());
+    const lim = rec.rewrite && rec.verdict.written && rec.verdict.written.limited ? rec.verdict.written.limited : null;
+    const who = by === 'human' && auto ? 'auto' : by;
+    await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by: who, actor: who === 'human' ? 'humain' : 'auto', limited: lim ? { symbol: lim.symbol, amount: lim.amount } : undefined, gesture: who === 'human', origin: rec.origin, method: rec.method, level: rec.level, outcome: shown || shownOutcome(rec), indeterminate: !!rec.verdict.indeterminate,
+      codes: [who === 'auto' ? 'envoi_automatique' : 'geste'].concat(lim ? ['droit_limite'] : []),
+      sent: lim ? { limited: true, asked: lim.before, sent: lim.amount + ' ' + lim.symbol } : { limited: false },
+      time_to_decision_ms: ttd, friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, ui: rec.ui, total_ms: Date.now() - rec.createdAt });
+    await keepGrant(rec);
+    const keep = await keepOpen(rec, Date.now());
+    await closeUi(rec, { keep, why: 'allow' });
+    return keep;
   }
   function runHook(rid) {
     try { testHook({ rid, view: async () => { const rec = await store.get(rid); return rec ? viewOf(rec, await getCfg()) : null; }, decide: (m) => decide(rid, m, 'auto-test') }); } catch (_) {}
@@ -1014,8 +1091,14 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       if (!fromPage(sender)) return { ok: false };
       const k = opKey(sender.tab.id, sender.frameId), op = await opRead(k);
       if (op && op.origin !== originOf(sender)) { try { await session.remove(k); } catch (_) {} }
-      if (sender.frameId === 0) await opDrop(sender.tab.id, k);
+      if (sender.frameId === 0) { await opDrop(sender.tab.id, k); await badge(sender.tab.id, originOf(sender)); }
       for (const { k: kk, v } of await keepAll()) if (v.tabId === sender.tab.id && (v.frameId === sender.frameId ? v.origin !== originOf(sender) : sender.frameId === 0)) await keepEnd(kk, v, 'page-left');
+      return { ok: true };
+    },
+    // The toolbar popup changed the pause of a site : the badge of that tab follows. Extension pages only.
+    'hu.badge': async (msg, sender) => {
+      if (!fromExtensionPage(sender) || !Number.isInteger(msg.tabId) || typeof msg.origin !== 'string') return { ok: false };
+      await badge(msg.tabId, msg.origin.slice(0, 300));
       return { ok: true };
     },
     // top frame : should the neutral banner be shown ?
@@ -1089,6 +1172,8 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     Promise.resolve().then(() => session.remove(grantKey(tabId))).catch(() => {});
   });
   if (chrome.runtime.onStartup) chrome.runtime.onStartup.addListener(() => { sweep(); });
+  // First launch : the welcome page, once. An update or a browser update opens nothing.
+  if (chrome.runtime.onInstalled) chrome.runtime.onInstalled.addListener((d) => { if (d && d.reason === 'install' && chrome.tabs && chrome.tabs.create) quiet(() => chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') })); });
   if (!(chrome.storage && chrome.storage.session)) journal({ type: 'note', note: 'chrome.storage.session absent : la retenue ne survit pas a un arret du service worker' });
 
   return { store, getCfg, journal, decide, viewOf, sweep };

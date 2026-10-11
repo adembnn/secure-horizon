@@ -14,32 +14,36 @@ const sevOfReason = (code) => (WARN_CODES.has(code) ? 'warn' : 'critical');
 const ademLevel = (reasons) => reasons.reduce((m, r) => worst(m, r.sev || sevOfReason(r.code)), 'ok');
 
 // ---- lecture des détails d'intention (jeton, montant, jeton reçu) : ils servent seulement à AJOUTER des raisons, jamais à baisser un niveau (monotonie).
-const NATIVE_BY_CHAIN = { 1: 'ETH', 10: 'ETH', 8453: 'ETH', 42161: 'ETH', 59144: 'ETH', 534352: 'ETH', 324: 'ETH', 81457: 'ETH', 56: 'BNB', 137: 'POL', 43114: 'AVAX', 100: 'xDAI', 250: 'FTM', 42220: 'CELO', 5000: 'MNT' };
+const NATIVE_BY_CHAIN = { 1: 'ETH', 10: 'ETH', 8453: 'ETH', 42161: 'ETH', 59144: 'ETH', 534352: 'ETH', 324: 'ETH', 81457: 'ETH', 56: 'BNB', 137: 'POL', 43114: 'AVAX', 43113: 'AVAX', 11155111: 'ETH', 17000: 'ETH', 84532: 'ETH', 421614: 'ETH', 11155420: 'ETH', 97: 'BNB', 80002: 'POL', 100: 'xDAI', 250: 'FTM', 42220: 'CELO', 5000: 'MNT' };
 // famille d'un jeton : la casse, le préfixe $ et les suffixes .e/.b ne changent pas l'actif dit. Une monnaie native et SA version enveloppée sont le même actif
 // (WETH = ETH, WAVAX = AVAX...) : liste fermée, car un W initial ne veut pas toujours dire « enveloppé » (wstETH n'est pas stETH). MATIC et POL sont le même actif.
 const WRAPPED_NATIVE = { WETH: 'ETH', WAVAX: 'AVAX', WBNB: 'BNB', WMATIC: 'POL', WPOL: 'POL', MATIC: 'POL', WFTM: 'FTM', WXDAI: 'XDAI', WCELO: 'CELO', WMNT: 'MNT', WBTC: 'BTC' };
 const tokenFamily = (s) => { const x = String(s || '').trim().toUpperCase().replace(/^\$/, '').replace(/\.[EB]$/, ''); return WRAPPED_NATIVE[x] || x; };
 const isAddrStr = (a) => typeof a === 'string' && /^0x[0-9a-fA-F]{40}$/.test(a);
 const BUY_TEXT = /\b(achet\w*|achat|acqu[ée]rir|buy\w*|purchas\w*|copping)\b/i;
+const SWAP_TEXT = /\b(echang\w*|swap\w*|convert\w*|trade\w*|troqu\w*|vend\w*|sell\w*)\b/i;
 const SELL_TEXT = /\b(vend\w*|vente|sell\w*|sale|list\w*|lister|liste)\b/i;
 // texte sans accents ni casse (pour les mots de l'intention écrite)
 const foldTxt = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 // réseaux nommés explicitement dans le texte : « sur X », « on X », « réseau X », « X mainnet », « C-Chain ». Un nom seul (« ethereum » pour le jeton) ne compte pas.
-const CHAIN_WORDS = [[/ethereum/, 1], [/avalanche|c-chain/, 43114], [/base/, 8453], [/arbitrum/, 42161], [/optimism|op mainnet/, 10], [/polygon/, 137], [/bnb chain|bsc|binance smart chain/, 56], [/fuji/, 43113], [/sepolia/, 11155111]];
+// chaque nom désigne le réseau principal ET son réseau de test public (un réseau de test ne porte pas de valeur) ; « fuji », « sepolia » désignent le test seul
+const CHAIN_WORDS = [[/ethereum/, [1, 11155111, 17000]], [/avalanche|c-chain/, [43114, 43113]], [/base/, [8453, 84532]], [/arbitrum/, [42161, 421614]], [/optimism|op mainnet/, [10, 11155420]], [/polygon/, [137, 80002]], [/bnb chain|bsc|binance smart chain/, [56, 97]], [/fuji/, [43113]], [/sepolia/, [11155111]]];
 function chainsNamed(t) {
   const found = new Set();
   for (const [re, id] of CHAIN_WORDS) {
     const w = re.source;
     const pre = new RegExp('\\b(?:sur|on|via|reseau|network|chain|chaine|blockchain)\\s+(?:le\\s+reseau\\s+|la\\s+|l\')?(?:' + w + ')\\b');
     const post = new RegExp('\\b(?:' + w + ')\\s+(?:mainnet|network|reseau|chain|c-chain|one|pos)\\b');
-    if (pre.test(t) || post.test(t) || (id === 43114 && /\bc-chain\b/.test(t))) found.add(id);
+    if (pre.test(t) || post.test(t) || (id[0] === 43114 && /\bc-chain\b/.test(t))) found.add(id);
   }
   return [...found];
 }
 const hostOfUrl = (u) => { if (!u) return ''; try { return new URL(String(u).includes('://') ? String(u) : 'https://' + String(u)).hostname.toLowerCase(); } catch { return ''; } };
 const sameSite = (a, b) => a === b || a.endsWith('.' + b) || b.endsWith('.' + a);
 // sites nommés dans le texte : nom d'hôte avec un domaine de premier niveau en lettres (pas « 0,5 », pas « USDC.e »)
-const hostsNamed = (s) => [...new Set((String(s || '').toLowerCase().match(/\b(?:[a-z0-9-]+\.)+[a-z]{2,24}\b/g) || []).filter((h) => /[a-z]/.test(h.split('.')[0]) && !/^\d/.test(h)))];
+// (les noms de portefeuille ou d'espace, comme « aave.eth », ne sont pas des sites : exclus)
+const NOT_WEB_TLD = /\.(eth|sol|crypto|nft|lens|avax|arb|base|bnb|x|wallet|dao|blockchain|bitcoin|zil)$/;
+const hostsNamed = (s) => [...new Set((String(s || '').toLowerCase().match(/\b(?:[a-z0-9-]+\.)+[a-z]{2,24}\b/g) || []).filter((h) => /[a-z]/.test(h.split('.')[0]) && !/^\d/.test(h) && !NOT_WEB_TLD.test(h)))];
 // montants lisibles : « 1,5 », « 1.5 », « 1 000 », « 1,000 » (milliers ou décimale : on garde la lecture la plus large, jamais la plus stricte)
 function amountReadings(v) {
   if (typeof v === 'number') return Number.isFinite(v) ? [v] : [];
@@ -59,7 +63,11 @@ const DETAIL_KINDS = new Set(['buy_or_swap', 'pay_someone', 'send_to_my_account'
 const ZERO_ADDR ='0x' + '0'.repeat(40);
 const isKnownProtocol = (ctx, a) => !!a && (ctx.knownSpenders || []).includes(String(a).toLowerCase());
 
+// Une monnaie courante (« 25 $ », « 50 dollars » : jeton dit = USD) n'est pas un jeton : elle ne nomme ni le jeton donné ni un montant comparable à n'importe quel jeton.
+const MONEY_WORDS = new Set(['USD', 'DOLLAR', 'DOLLARS']);
 export function applyPolicy({ eff, adem, ctx, intent, request }) {
+  // Les règles de détail (F31, F32, F33) ne lisent pas une monnaie courante ; la comparaison à un jeton stable connu par son adresse est faite côté phrase (extension/written_check.js).
+  if (intent && typeof intent.token === 'string' && MONEY_WORDS.has(intent.token.trim().toUpperCase())) intent = { ...intent, token: undefined, amount: undefined };
   const notes = [];
   let flags = eff.risk_flags.map((f) => ({ ...f }));
   let reasons = adem ? adem.reasons.map((r) => ({ ...r })) : [];
@@ -214,16 +222,21 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
         if (!said) return true;
         const ks = knownSet(said);
         if (e.sym) { if (tokenFamily(e.sym) !== said) return false; return !(e.addr !== 'native' && ks.size && !ks.has(e.addr)); } // même symbole mais pas l'adresse connue de ce symbole sur ce réseau : sosie
+        if (e.addr === 'native') return null; // monnaie native d'un réseau inconnu : on ne sait pas
         return ks.size ? false : null;
       };
       const other = [];
       // « jeton dit » = le jeton donné pour un paiement, si le jeton reçu est annoncé à part, ou si un montant est dit sans verbe d'achat (« échanger 50 USDC » : on
       // donne les USDC). Avec un verbe d'achat et un seul jeton dit (« acheter 821 X avec Y »), il peut être le donné OU le reçu : on ne conclut que si aucun jeton
       // engagé ou reçu n'est le jeton dit et que chacun est identifié.
-      const strict = intent.kind !== 'buy_or_swap' || !!intent.receiveToken || (declared.length > 0 && !BUY_TEXT.test(foldTxt(intent.freeText)));
+      const strict = intent.kind !== 'buy_or_swap' || !!intent.receiveToken;
+      // échange dit avec un montant et un verbe d'échange ou de vente, sans verbe d'achat (« échanger 50 USDC contre... ») : le jeton dit est celui qu'on DONNE.
+      // On conclut alors seulement si AUCUN jeton engagé (sorti ou sur lequel un droit est donné) n'est le jeton dit (un lot peut contenir d'autres droits).
+      const givenSaid = !strict && declared.length > 0 && SWAP_TEXT.test(foldTxt(intent.freeText)) && !BUY_TEXT.test(foldTxt(intent.freeText));
       if (said || saidAddr) {
         const engaged = [...moneyOut.map((o) => idOf(o.token, o.symbol)), ...moneyApprovals.map((a) => idOf(a.token))];
         if (strict) { for (const e of engaged) if (matches(e) === false) other.push(e.sym || 'un jeton non identifié'); }
+        else if (givenSaid && engaged.length && engaged.map(matches).every((x) => x === false)) other.push(engaged[0].sym || 'un jeton non identifié');
         else {
           const all = [...engaged, ...(eff.incoming || []).filter((i) => i.std !== 'erc721' && i.std !== 'erc1155').map((i) => idOf(i.token, i.symbol))];
           const m = all.map(matches);
@@ -285,18 +298,23 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     const signedChain = Number.isFinite(Number(sig.domainChainId)) && sig.domainChainId !== null && sig.domainChainId !== undefined ? Number(sig.domainChainId) : siweChain;
     const value = (eff.outgoing || []).length > 0 || (eff.approvals || []).length > 0 || !!eff.delegation;
     const txt = foldTxt(intent.freeText);
+    // le réseau ou le site NOMMÉ dans le texte n'est comparé que pour une signature (le réseau ou le site pour lequel elle vaut) ou une connexion :
+    // « passer mes USDC sur Arbitrum » (pont) ou « virer vers Crypto.com » (dépôt) nomment une destination, pas le réseau ou le site de la demande.
+    const textScope = (eff.kind === 'signature' || intent.kind === 'connect_or_accept_offer') && intent.kind !== 'send_to_my_account';
     const named = chainsNamed(txt);
-    const target = signedChain !== undefined && Number.isFinite(signedChain) ? signedChain : reqChain;
+    // réseau visé : celui de la signature, sinon le réseau DEMANDÉ par une bascule ou un ajout de chaîne, sinon celui de la demande
+    const switchTo = eff.kind === 'chain' && eff.raw && Number.isFinite(Number(eff.raw.chainId)) ? Number(eff.raw.chainId) : undefined;
+    const target = signedChain !== undefined && Number.isFinite(signedChain) ? signedChain : switchTo !== undefined ? switchTo : reqChain;
     let chainWhy = null;
     if (signedChain !== undefined && Number.isFinite(signedChain) && Number.isFinite(reqChain) && reqChain > 0 && signedChain !== reqChain) chainWhy = `la signature vaut pour le réseau ${signedChain}, la demande est sur le réseau ${reqChain}`;
-    else if (named.length === 1 && Number.isFinite(target) && target > 0 && named[0] !== target) chainWhy = `tu as dit le réseau ${named[0]}, la demande vise le réseau ${target}`;
+    else if (textScope && named.length === 1 && Number.isFinite(target) && target > 0 && !named[0].includes(target)) chainWhy = `tu as dit le réseau ${named[0][0]}, la demande vise le réseau ${target}`;
     if (chainWhy) { reasons.push({ code: 'chain_differs_from_intent', sev: value ? 'critical' : 'warn', said: 'Tu veux agir sur ce réseau', does: `En réalité, ${chainWhy}.` }); notes.push('F43:reseau_different'); }
     const origin = hostOfUrl(ctx.origin);
     const siweHosts = eff.siwe ? [String(eff.siwe.domain || '').toLowerCase(), hostOfUrl(eff.siwe.fields && eff.siwe.fields.URI)].filter(Boolean) : [];
     const sitesSaid = hostsNamed(intent.freeText);
     let siteWhy = null;
     if (origin && siweHosts.some((h) => !sameSite(h, origin))) siteWhy = `le message de connexion est pour ${siweHosts.find((h) => !sameSite(h, origin))}, la page est ${origin}`;
-    else if (sitesSaid.length === 1 && [origin, ...siweHosts].filter(Boolean).some((h) => !sameSite(h, sitesSaid[0]))) siteWhy = `tu as dit ${sitesSaid[0]}, la demande vient de ${[origin, ...siweHosts].filter(Boolean).find((h) => !sameSite(h, sitesSaid[0]))}`;
+    else if (textScope && sitesSaid.length === 1 && [origin, ...siweHosts].filter(Boolean).some((h) => !sameSite(h, sitesSaid[0]))) siteWhy = `tu as dit ${sitesSaid[0]}, la demande vient de ${[origin, ...siweHosts].filter(Boolean).find((h) => !sameSite(h, sitesSaid[0]))}`;
     if (siteWhy) { reasons.push({ code: 'site_differs_from_intent', sev: 'critical', said: 'Tu veux agir sur ce site', does: `En réalité, ${siteWhy}.` }); notes.push('F43:site_different'); }
   }
 

@@ -32,7 +32,7 @@ const gatekeeper = createGatekeeper({ check: localCheck, classify: classifyViaRe
 // Engine warm-up (the first call is slower) ; harmless if it fails.
 try { check({ method: 'eth_sendTransaction', params: [{ from: '0x' + '1'.repeat(40), to: '0x' + '2'.repeat(40), value: '0x1', data: '0x' }], chainId: '0x1' }); } catch (_) {}
 
-// Un clic sur l'icône ouvre le panneau latéral (geste dans l'extension seulement : jamais sur une demande de page).
-try { const p = chrome.sidePanel && chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+// Un clic sur l'icône ouvre le popup (popup.html) ; son mot « Journal » ouvre le panneau latéral (chrome.sidePanel.open, Chrome 116).
+try { const p = chrome.sidePanel && chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: false }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
 
 export { localCheck, gatekeeper };

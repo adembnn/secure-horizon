@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 50,
+ "fichiers_analyses": 56,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -14,9 +14,9 @@
    "detail": ""
   },
   {
-   "name": "permissions = [storage, alarms, sidePanel] seulement (le panneau latéral ne demande aucun accès réseau ni aucun site)",
+   "name": "permissions = [storage, alarms, sidePanel, activeTab] seulement (ni \"tabs\", ni acces permanent a un site)",
    "pass": true,
-   "detail": "[\"storage\",\"alarms\",\"sidePanel\"]"
+   "detail": "[\"storage\",\"alarms\",\"sidePanel\",\"activeTab\"]"
   },
   {
    "name": "aucune host_permission",
@@ -59,7 +59,17 @@
    "detail": ""
   },
   {
+   "name": "page popup.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "page ui/sidepanel.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page welcome.html : scripts locaux, rien en ligne",
    "pass": true,
    "detail": ""
   },
@@ -79,7 +89,7 @@
    "detail": ""
   },
   {
-   "name": "fenetre presente (window.html + ui/screen.*)",
+   "name": "fenetre presente (window.html + ui/screen.js + feuilles du systeme)",
    "pass": true,
    "detail": ""
   },

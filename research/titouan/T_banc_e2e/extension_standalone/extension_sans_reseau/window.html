@@ -1,14 +1,19 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" style="background:#000">
 <head>
 <meta charset="utf-8">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <title>Hold up</title>
-<link rel="stylesheet" href="ui/screen.css">
 <link rel="stylesheet" href="window.css">
+<link rel="stylesheet" href="ui/tokens.css">
+<link rel="stylesheet" href="ui/components.css">
+<link rel="stylesheet" href="ui/motion.css">
 </head>
 <body>
-<div id="hu" class="hu"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hu-glove" viewBox="0 0 512 512"><g transform="translate(11 -56) rotate(8 256 256)" fill="currentColor" stroke-linecap="round"><path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/><path d="M214 388Q122 374 86 282" fill="none" stroke="currentColor" stroke-width="70"/><rect x="172" y="440" width="196" height="62" rx="24"/><path d="M170 322Q206 334 214 378" fill="none" stroke="var(--hu-page)" stroke-width="16"/></g></symbol></svg>
+<template id="hu-glove-use"><svg class="hu-glove" aria-hidden="true" focusable="false"><use href="#hu-glove"/></svg></template>
+<div id="hu" class="hu hu-k hu-win"></div>
+<script type="module" src="ui/fields.js"></script>
 <script src="ui/screen.js"></script>
 <script src="window.js"></script>
 </body>
