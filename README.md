@@ -4,7 +4,7 @@ Tout service peut être compromis. Ce jour-là, on perd ce qu'on lui a laissé l
 
 Pour qui : toute personne qui veut garder la main sur ce qu'elle autorise sur la blockchain.
 
-Modèle économique, hypothèse à valider avec des pilotes, aucun revenu aujourd'hui : Gratuit pour les personnes. Plus tard, les plateformes qui ne demandent que le nécessaire pourront être reconnues par Hold up : elles y gagnent la confiance de leurs clients, et ce sont elles qui nous financent. Critères publics, pas de classement payé.
+Modèle économique, hypothèse à valider avec des pilotes, aucun revenu aujourd'hui : Gratuit pour les personnes. Plus tard, une plateforme qui demande l'autorisation exacte (50 USDC pour un échange de 50, pas « tout, pour toujours ») pourra afficher « Vérifié par Hold up ». C'est elle qui paie. Critères publics, mesurés sur ses vraies demandes, pas de classement payé.
 
 Promesse : cesser de donner plus que nécessaire, car on s'expose en le faisant. On ne sait pas quel site sera piraté ; on décide de ce qu'on lui laisse.
 

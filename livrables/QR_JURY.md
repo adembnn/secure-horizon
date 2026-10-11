@@ -87,7 +87,7 @@ Oui, et d'autres outils sont au montant fini par défaut (MP). Notre ajout est �
 Le principe « dire d'abord, valider après » a été décrit publiquement en février 2026 (CP). Nous n'avons trouvé aucun outil grand public qui fasse écrire la phrase libre avant la demande puis la compare à l'effet, dans les documents lus. Notre apport est l'assemblage, pas le principe.
 
 **25. Votre modèle économique ? Qui paie ?**
-Gratuit pour les personnes. Plus tard, les plateformes qui ne demandent que le nécessaire pourront être reconnues par Hold up : elles y gagnent la confiance de leurs clients, et ce sont elles qui nous financent. Critères publics, pas de classement payé. C'est une hypothèse à valider avec des pilotes : aucun client, aucun revenu aujourd'hui. Repère : MetaMask vend une couverture à 9,99 $ par mois (B15).
+Gratuit pour les personnes. Plus tard, une plateforme qui demande l'autorisation exacte (50 USDC pour un échange de 50, pas « tout, pour toujours ») pourra afficher « Vérifié par Hold up ». C'est elle qui paie. Critères publics, mesurés sur ses vraies demandes, pas de classement payé. C'est une hypothèse à valider avec des pilotes : aucun client, aucun revenu aujourd'hui. Repère : MetaMask vend une couverture à 9,99 $ par mois (B15).
 
 **25 bis. Pourquoi ne pas finir comme Harpie ou Wallet Guard ?**
 Harpie était payée après le vol. Nous visons un service continu, avant la signature, vendu à des plateformes. L'issue probable du secteur est l'intégration ou le rachat : nous le savons.

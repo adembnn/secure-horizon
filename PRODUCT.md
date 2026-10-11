@@ -41,7 +41,7 @@ Phrase retenue : « MetaMask te prévient de ce qu'il reconnaît ; Hold up véri
 
 ## Modèle
 
-Gratuit pour les personnes. Plus tard, les plateformes qui ne demandent que le nécessaire pourront être reconnues par Hold up : elles y gagnent la confiance de leurs clients, et ce sont elles qui nous financent. Critères publics, pas de classement payé. Hypothèse à valider avec des pilotes, jamais présentée comme un revenu existant. Une seule phrase dans le pitch.
+Gratuit pour les personnes. Plus tard, une plateforme qui demande l'autorisation exacte (50 USDC pour un échange de 50, pas « tout, pour toujours ») pourra afficher « Vérifié par Hold up ». C'est elle qui paie. Critères publics, mesurés sur ses vraies demandes, pas de classement payé. Hypothèse à valider avec des pilotes, jamais présentée comme un revenu existant. Une seule phrase dans le pitch.
 
 ## Limites
 
