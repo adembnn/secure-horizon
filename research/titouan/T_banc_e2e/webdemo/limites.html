@@ -23,6 +23,29 @@
   <h1>Ce que Hold up ne fait pas</h1>
   <p class="lede">Hold up avertit, ralentit et explique. Il ne garantit rien. Voici, sans détour, ce qu’il ne couvre pas.</p>
 
+  <h2>Ce que MetaMask fait déjà</h2>
+  <ul>
+    <li>Selon sa page d’aide, MetaMask affiche des alertes de sécurité sur les transactions et sur les demandes de signature, avec le partenaire Blockaid. Elles sont actives par défaut, et Avalanche est dans la liste des réseaux couverts (support.metamask.io/configure/wallet/security-alerts/, page lue le 11 octobre 2026).</li>
+    <li>L’équipe a aussi constaté dans MetaMask une alerte d’empoisonnement d’adresse, un avertissement sur une adresse jamais vue et l’affichage lisible des Permit. Ces trois points ne figurent pas sur la page d’aide lue : ils restent à vérifier dans les notes de version.</li>
+    <li>Hold up ne refait pas ce travail et ne le présente pas comme son apport.</li>
+    <li>Avalanche Fuji et les chaînes locales ne sont pas dans la liste de cette page. Le silence de MetaMask sur cette démo ne prouve donc rien.</li>
+  </ul>
+
+  <h2>Ce que Hold up ajoute</h2>
+  <ul>
+    <li>La comparaison entre ce que tu as écrit vouloir faire et ce que la demande fait vraiment, avec une réponse « ça correspond » ou « ça ne correspond pas » et une ligne.</li>
+    <li>Un délai avant de pouvoir continuer.</li>
+    <li>Une trace rejouable : le journal est chaîné par hachage. Son ancrage sur chaîne est en cours, rien n’est déployé sur Fuji à ce jour.</li>
+  </ul>
+
+  <h2>Ce qui n’est pas mesuré</h2>
+  <ul>
+    <li>La démo propose des réponses à choix fermé. L’intention écrite en texte libre n’est pas mesurée : la précision de l’extraction du type, du montant, du jeton et du destinataire reste à établir.</li>
+    <li>Les modèles Clef et Jev n’ont jamais été appelés faute de clé. Le classement actuel se fait par mots-clés. Rien ne permet de dire qu’un modèle classe l’intention.</li>
+    <li>Aucune mesure sur de vraies personnes.</li>
+    <li>Hors des conditions de la démo, le produit livré rate une part importante des arnaques d’un jeu synthétique : 41,2 % de rappel sur 6 191 cas (redteam/PRODUIT_VS_BANC.md, photo du 11 octobre 2026). Sans le contexte du banc, le rappel passe de 99,2 % à 83,8 % et les fausses alertes critical de 0,9 % à 13,9 % (banc_realiste/BANC_REALISTE.md).</li>
+  </ul>
+
   <h2>Cette démo n’est pas l’extension</h2>
   <ul>
     <li>Ici, un faux site parle à un faux portefeuille que nous avons écrit dans la page. Dans la vraie vie, l’extension doit s’interposer entre un vrai site et un vrai portefeuille. Cette démo prouve que le moteur donne le bon verdict dans un navigateur. Elle ne prouve pas que l’extension intercepte toutes les demandes.</li>
@@ -32,7 +55,7 @@
   <h2>Les envois faits depuis l’interface du portefeuille ne sont pas couverts</h2>
   <ul>
     <li>Si tu tapes une adresse et un montant directement dans le bouton « Envoyer » de ton portefeuille, aucun site n’est impliqué : Hold up ne voit rien. Il retient seulement les demandes faites par un site.</li>
-    <li>Un sosie d’adresse que tu colles toi-même dans ton portefeuille passe inaperçu.</li>
+    <li>Une adresse que tu colles toi-même dans ton portefeuille n’est pas vue par Hold up. Ce cas relève des alertes du portefeuille.</li>
   </ul>
 
   <h2>Mobile</h2>
@@ -48,7 +71,7 @@
 
   <h2>Il avertit et ralentit, rien de plus</h2>
   <ul>
-    <li>« Aucun signal trouvé » ne veut jamais dire « sûr ». Il n’y a pas de vert, pas de mot « protégé », pas de « bloqué ».</li>
+    <li>« Aucun signal trouvé » ne veut jamais dire « sûr ». Il n’y a pas de vert et pas de mot « protégé ».</li>
     <li>Tu peux toujours continuer après le délai. Hold up ne décide pas à ta place.</li>
     <li>Les textes viennent de fiches rédigées d’avance. Certaines phrases sont approximatives (par exemple un montant en ETH natif affiché comme « NATIVE », ou « ton contact » pour une adresse que le moteur ne connaît pas).</li>
     <li>La question « Échanger une crypto » et « Autre » ne sont pas traduites en intention pour le comparateur : le verdict repose alors seulement sur le moteur d’effets.</li>

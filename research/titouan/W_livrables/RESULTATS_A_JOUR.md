@@ -2,6 +2,29 @@
 
 Mise à jour du 11 oct. 2026 (après la boucle V2, le trafic réel moteur actuel, le banc en conditions produit). Intervalles : Wilson 95 %, sauf mention. Chemins relatifs à `research/titouan/`. `T` = `T_banc_e2e/`. Le produit s'appelle Hold up. Les noms de fichiers du code gardent parfois l'ancien nom (`sentinelle_core.js`).
 
+## Positionnement (décision D-009)
+
+**MetaMask te prévient de ce qu'il reconnaît. Hold up vérifie ce que tu voulais faire.**
+
+### Ce que MetaMask fait déjà
+
+| Fait | Source |
+|---|---|
+| Alertes de sécurité sur transactions et demandes de signature (Blockaid et autres), niveaux Avertissement et Malveillant. Activées par défaut dans l'extension et sur mobile. Avalanche dans la liste des réseaux couverts. Avertissement sur une adresse récemment déployée | https://support.metamask.io/configure/wallet/security-alerts/ (page lue le 11 oct. 2026) |
+| Alerte d'empoisonnement d'adresse (depuis le 17 juin 2026), avertissement sur un envoi vers une adresse jamais vue, Permit en clair (depuis la v12.2) | Constat d'Adem dans son MetaMask, `coord/INBOX.md` MSG-060 et MSG-061. **Absents de la page d'aide lue** : à vérifier dans les notes de version avant de les citer en public |
+
+Fuji et les chaînes locales ne sont pas dans la liste des réseaux de la page (omis, pas déclarés exclus). Le silence de MetaMask sur notre démo ne prouve donc rien. On n'écrit jamais « MetaMask ne le voit pas » sans preuve.
+
+### Ce que Hold up ajoute
+
+1. La comparaison entre l'intention écrite et l'effet réel de la demande, avec une réponse « ça correspond » ou « ça ne correspond pas » et une ligne.
+2. Un délai proportionné à l'écart.
+3. Une preuve rejouable et ancrée (journal chaîné, version des règles, rejeu).
+
+Les chiffres ci-dessous mesurent le moteur et ses règles. Aucun ne mesure la comparaison sur de l'intention en texte libre (voir « Ce qui n'est pas mesuré »).
+
+---
+
 Statuts :
 - **RÉEL** : mesuré sur du trafic ou des sites réels.
 - **SYNTH** : mesuré sur des cas synthétiques (écrits par nous ou par des agents). Mesure la couverture et la non-régression, pas la robustesse face à un attaquant réel.
@@ -67,7 +90,7 @@ Le jeu TEST (R003) a été ouvert une fois, avant les correctifs F1 à F10. Il a
 
 ## S4. Banc en conditions produit : l'écart avec le banc complet
 
-Question : le banc donne aux règles un contexte (âge du contrat, solde, jetons, liste de protocoles) que le produit n'a pas. Que devient la mesure quand on retire ce contexte ? Source : `T/banc_realiste/out/TAB_TOTAUX_produit.md`, `EN_LIGNE_produit.md`, définition des niveaux dans `T/banc_realiste/CONTEXTE_PRODUIT.md`. Il n'y a pas de rapport rédigé `BANC_REALISTE.md`. Résultat provisoire : les fichiers du dossier ont été régénérés le 11 oct. à 04 h 54, à relire avant toute citation.
+Question : le banc donne aux règles un contexte (âge du contrat, solde, jetons, liste de protocoles) que le produit n'a pas. Que devient la mesure quand on retire ce contexte ? Source : `T/banc_realiste/out/TAB_TOTAUX_produit.md`, `EN_LIGNE_produit.md`, définition des niveaux dans `T/banc_realiste/CONTEXTE_PRODUIT.md`. Rapport rédigé : `T/banc_realiste/BANC_REALISTE.md` (réponse à MSG-056). Les chiffres de ce rapport sont repris dans le tableau « tous jeux » ci-dessous. Les passages précédents faits sans copie des sources ont été écartés par son auteur parce que le moteur changeait pendant la mesure.
 
 Bras "intention produit" (l'intention est réduite à ce que le produit sait exprimer). V2_DEV, jeu réglé :
 
@@ -77,6 +100,18 @@ Bras "intention produit" (l'intention est réduite à ce que le produit sait exp
 | Produit, réglage par défaut (B) | 84,0 % [82,6 ; 85,2] (2460/2930) | 14,4 % [12,9 ; 16,0] (285/1976) | 54,9 % (1084/1976) |
 | Avec carnet et historique saisis (C) | 92,4 % [91,3 ; 93,3] (2706/2930) | 14,4 % (285/1976) | 54,9 % |
 | Liste statique livrée (D), borne haute optimiste | 90,3 % [89,2 ; 91,4] (2647/2930) | 1,0 % (20/1976) | 17,1 % (337/1976) |
+
+Mesure « conditions produit », tous jeux (DEV, PUBLIC, V2_DEV), bras « intention produit », 3 254 malveillants et 2 136 bénins. Source : `T/banc_realiste/BANC_REALISTE.md`, section 2.
+
+| Niveau de contexte | Rappel | Rappel critical | Fausses alertes critical | Fausses alertes warn ou critical |
+|---|---|---|---|---|
+| Banc complet (FULL) | 99,2 % [98,8 ; 99,5] | 92,0 % [91,0 ; 92,9] | 0,9 % [0,6 ; 1,4] | 15,4 % [13,9 ; 17,0] |
+| Produit, réglage par défaut (B) | 83,8 % [82,5 ; 85,0] | 71,3 % [69,7 ; 72,9] | 13,9 % [12,5 ; 15,4] | 54,2 % [52,1 ; 56,3] |
+| Carnet et historique saisis (C) | 91,9 % [91,0 ; 92,8] | 79,5 % [78,1 ; 80,9] | 13,7 % [12,3 ; 15,2] | 54,2 % |
+| Aucun contexte (A) | 81,2 % [79,8 ; 82,5] | 67,9 % [66,3 ; 69,5] | 13,9 % | 55,7 % [53,6 ; 57,8] |
+| Liste statique livrée (D), borne haute | 90,1 % [89,1 ; 91,1] | 80,5 % [79,1 ; 81,8] | 0,9 % | 17,1 % [15,6 ; 18,7] |
+
+Le « warn » devient presque inutile au réglage produit : 54 % des requêtes bénignes en warn ou critical. Le contexte réseau n'est pas la première cause d'écart : c'est l'absence de liste de protocoles connus et de carnet. Avec l'intention du catalogue (plus riche que ce que le produit sait exprimer), les fausses alertes critical montent à 25,8 % au niveau B : c'est le bras du banc, pas celui du produit.
 
 Lecture :
 - Le chiffre de 1,0 % de fausses alertes critical n'est vrai que si le produit fournit le contexte du banc. Au réglage par défaut, il est de 14,4 % sur ce jeu.
@@ -98,6 +133,24 @@ Lecture :
 | Comparateur d'Adem seul contre avec plancher objectif | 21/30 contre 29/30 | `coord/INBOX.md` POINT-20MIN 02h23 | SYNTH, petit n, non rejoué ici |
 | Retenue de 10 minutes | testée avec 2 s ; retenue persistante (chrome.alarms, stockage) ajoutée par Adem (commit e0a89a7) | `T/extension/COMPAT.md` ; `coord/INBOX.md` MSG-056 | non rejoué ici |
 | Détection de la voie de réponse (côté Adem) | matrice graduée, fiche d'incident, retrait de droits, ancrage sur chaîne locale, 23 tests | `coord/reports/critere_reponse.md` | non rejoué ici |
+
+## S6. Produit livré contre banc
+
+Source : `T/redteam/PRODUIT_VS_BANC.md`. Mesure du 11 oct. 2026 à 05 h 00, commit `816fbfb`, sur `V2_DEV_norm.jsonl` et neuf fichiers `jury_*.jsonl` : 9 908 cas, dont 6 191 arnaques et 2 695 bénins. `V2_TEST` non lu. Le moteur, le serveur et les détecteurs changeaient pendant la mesure : photo, pas résultat figé. Une arnaque est ratée quand le produit n'affiche pas l'écran rouge. Une fausse alerte est un bénin en rouge.
+
+| | Produit aujourd'hui | Produit + contexte live | Produit + live + détecteurs | Banc |
+|---|---|---|---|---|
+| Arnaques ratées (sur 6 191) | 3 643 | 3 514 | 593 | 832 |
+| Rappel | 41,2 % | 43,2 % | 90,4 % | 86,6 % |
+| Fausses alertes (sur 2 695) | 440 | 440 | 1 127 | 329 |
+| Taux de fausses alertes | 16,3 % | 16,3 % | 41,8 % | 12,2 % |
+
+Lecture :
+- Le produit d'aujourd'hui rate 3 643 arnaques sur 6 191. L'essentiel de l'écart avec le banc vient des 13 détecteurs de `detectors_adem/`, qui tournent dans le banc et pas dans le produit (2 099 arnaques sur l'écart).
+- Le rappel de 90,4 % n'est pas un vrai résultat : sans liste de protocoles connus, tout bénéficiaire est inconnu et 42 % des bénins passent en rouge. Avec la liste et le contexte live (configuration cible) : 896 arnaques ratées et 458 fausses alertes.
+- Retirer au banc les détails de l'intention (jeton, montant, destinataire, message collé) : 931 arnaques ratées contre 832 (+99). L'extension ne demande aujourd'hui que le type d'intention.
+- Statut : SYNTH. Les faits « live » viennent du cas, pas d'un nœud. Le produit n'a pas de texte de page dans ces fichiers.
+- Non retrouvé dans ce rapport : le chiffre « 318 arnaques de plus quand on donne le type d'intention sans ses détails » cité dans `coord/INBOX.md` MSG-061. Ne pas le citer avant de l'avoir relié à sa source.
 
 ---
 
@@ -151,7 +204,9 @@ Source : `T/compat/COMPAT_REEL.md`.
 
 Réserve centrale : le bras test est un **Proxy de substitution** du banc, pas l'extension Hold up. Le fournisseur de portefeuille est simulé. Aucune connexion ni signature réelle. Échantillon de commodité. Un site peut être PASS parce que le bouton de connexion n'a pas été trouvé.
 
-## R4. Empoisonnement d'adresse sur la C-Chain
+## R4. Empoisonnement d'adresse sur la C-Chain (contexte : la menace existe)
+
+Décision D-009 : ces chiffres servent seulement à dire que la menace existe. Ils ne sont ni un différenciateur de Hold up ni une perte évitée, et MetaMask traite déjà ce cas. Aucun autre scan ne sera lancé.
 
 | Chiffre | Valeur | Source | Statut |
 |---|---|---|---|
@@ -173,6 +228,10 @@ Réserves : il n'y a pas de rapport rédigé (`REALSCAN_POISONING.md` n'existe p
 | Utilisateurs réels | Aucun test avec des personnes. Le test de compréhension (`U_comprehension/`) utilise des personas simulés : NON CONCLUANT, aucun taux n'est cité. Temps de décision : non mesuré |
 | Rappel sur un drainer neuf réel | Non mesuré. Les données réelles sont surtout des drainers déjà listés |
 | Fraude conforme (transfert valide sous guidance d'un escroc) | Mesure synthétique seulement. Invisible par construction quand rien ne distingue l'envoi |
+| Intention en texte libre | Non mesurée. Tous les chiffres de ce document utilisent des intentions à choix fermé. La précision de l'extraction du type, du montant, du jeton et du destinataire reste à mesurer, d'abord avec des mots-clés |
+| Clef et Jev | Jamais appelés faute de clé. Ne jamais écrire « Clef classe l'intention » sans mesure. Le classement actuel est par mots-clés |
+| Comparateur sur les cas revendiqués | Autorisation plus large que le montant voulu, jeton différent, destinataire tiers d'un échange, « recevoir » qui fait sortir des fonds, « me connecter » qui signe un droit : cas, règles et chiffres à produire |
+| Réaction de MetaMask sur Fuji et chaîne locale | Non mesurée. Ces réseaux ne sont pas dans la liste de sa page d'aide. Son silence ne prouve rien |
 | Latence avec simulation, fork, RPC de contexte | Non mesurée. Seule la latence locale hors ligne est mesurée |
 | Détection et réponse sur Fuji | Non mesurées |
 | Efficacité d'un avertissement sur des personnes réelles | Non mesurée. Les chiffres de la littérature (section D) ne sont pas les nôtres |

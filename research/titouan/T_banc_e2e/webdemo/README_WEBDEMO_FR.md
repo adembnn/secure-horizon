@@ -1,12 +1,14 @@
 # Hold up : démo web (sans installation)
 
+Positionnement (décision D-009) : MetaMask te prévient de ce qu'il reconnaît, Hold up vérifie ce que tu voulais faire. La démo montre la comparaison entre l'intention choisie et l'effet réel d'une demande. Elle ne montre pas, et ne prétend pas apporter, ce que MetaMask fait déjà (alertes de sécurité sur transactions et signatures, actives par défaut, Avalanche dans la liste des réseaux couverts : https://support.metamask.io/configure/wallet/security-alerts/, page lue le 11 oct. 2026). Fuji et les chaînes locales ne sont pas dans cette liste : le silence de MetaMask sur la démo ne prouve rien.
+
 Un lien, rien à installer. Le jury ouvre la page, choisit un scénario, clique « Signer » dans un **faux** portefeuille, et la fenêtre « Hold up ! » retient la demande. Le moteur d'effets tourne **dans la page** (JavaScript pur) : aucune donnée n'est envoyée à un serveur. La page déclare d'ailleurs une politique `connect-src 'none'` : le navigateur lui-même refuserait tout envoi.
 
 ## Ce qu'on y trouve
 
 | Page | Contenu |
 |---|---|
-| `index.html#demo` | Faux site + faux portefeuille, 8 scénarios en un clic (envoi simple, échange légitime, droit illimité vers un site piège, signature de permit piège, autorisation de tous les NFT, adresse sosie, changement de propriétaire du compte, faux support). Au clic sur « Signer » : question d'intention, puis « Tu as dit / En réalité » (4 lignes de texte clair), niveau, friction (délai réglable, Annuler toujours visible), panneau « Ce que le moteur a vu » pour le jury technique. |
+| `index.html#demo` | Faux site + faux portefeuille, 8 scénarios en un clic (envoi simple, échange légitime, droit illimité vers un site piège, signature de permit piège, autorisation de tous les NFT, changement de propriétaire du compte, faux support, et un envoi vers une adresse proche de celle d'un contact, gardé comme cas de test du moteur, pas comme apport de Hold up). Au clic sur « Signer » : question d'intention, puis « Tu as dit / En réalité » (4 lignes de texte clair), niveau, friction (délai réglable, Annuler toujours visible), panneau « Ce que le moteur a vu » pour le jury technique. |
 | `index.html#colle` | « Colle une transaction » : on colle une requête `eth_sendTransaction` ou `eth_signTypedData_v4` (ou une transaction / un message seul) et on lit le verdict. Marche sur téléphone : c'est la version « application compagnon » sans installation. 16 exemples synthétiques du jeu public. |
 | `index.html#journal` | Journal local dans le navigateur, chaîné par hachage (SHA-256 de la ligne précédente + celle-ci). Bouton « Retoucher une ligne » pour montrer que la chaîne se casse. |
 | `limites.html` | Page « Limites » honnête. |
@@ -64,7 +66,7 @@ Comment c'est fabriqué : `engine/src/*.mjs` est copié tel quel (seuls les suff
 ## Ce que cela prouve
 
 - Le **même moteur** d'effets, le même comparateur et la même politique que le banc donnent, dans un navigateur, les mêmes verdicts : 83 cas (les 8 scénarios sous 6 réponses, plus les requêtes types et malformées), les 144 cas du jeu PUBLIC et les 385 du jeu DEV sont identiques, champ par champ, à la voie de référence (`server/server.mjs`, modules d'origine).
-- « ok » ne sort jamais : le plus bas est « Aucun signal trouvé », avec la phrase « ce n'est pas une garantie ». Aucun écran n'affiche « OK », « protégé » ou « bloqué ».
+- « ok » ne sort jamais : le plus bas est « Aucun signal trouvé », avec la phrase « ce n'est pas une garantie ». Aucun écran n'affiche « OK » ni « protégé ».
 - La page n'a besoin d'aucun serveur ni d'aucune bibliothèque externe (aucune URL externe chargée, pas de CDN, pas de `eval`, pas de secret), et le calcul prend environ 4 ms par verdict.
 - Un jury peut juger la **présentation** (question d'intention, « Tu as dit / En réalité », friction, annulation) et le **texte clair** sans rien installer.
 
@@ -73,6 +75,8 @@ Comment c'est fabriqué : `engine/src/*.mjs` est copié tel quel (seuls les suff
 - **Ce n'est pas l'extension.** Ici un faux site parle à un faux portefeuille écrit dans la page. Rien ne prouve que l'extension retienne toutes les demandes d'un vrai site avant un vrai portefeuille (voir `extension_standalone/` et `extension/`).
 - Aucun vrai portefeuille, aucune vraie clé, aucune vraie signature. « Continuer quand même » ne signe rien.
 - Le moteur n'a ici **aucun contexte en ligne** (âge d'un contrat, réputation, solde) ; il ne connaît que 5 adresses publiques, 4 jetons et le contexte fictif du scénario. Les verdicts réels pourraient différer.
+- **Intention en texte libre non mesurée.** La démo propose des réponses à choix fermé. Clef et Jev n'ont jamais été appelés faute de clé : ne jamais écrire « Clef classe l'intention » sans mesure.
+- **Hors démo, le produit livré rate beaucoup.** 41,2 % de rappel sur 6 191 arnaques synthétiques (`redteam/PRODUIT_VS_BANC.md`, photo du 11 oct.). Sans le contexte du banc : rappel 99,2 % → 83,8 %, fausses alertes critical 0,9 % → 13,9 % (`banc_realiste/BANC_REALISTE.md`).
 - **Pas d'efficacité mesurée sur de vraies personnes** : les chiffres viennent de jeux de cas synthétiques écrits par l'équipe.
 - L'interface n'a pas été vérifiée à l'œil dans un vrai navigateur par l'auteur de cette page : la logique de la fenêtre et de la page est exécutée dans un mini-DOM de test sous Node, pas dans Chrome ni Safari. La mise en page (surtout sur téléphone) reste à regarder.
 

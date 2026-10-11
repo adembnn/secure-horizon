@@ -229,6 +229,84 @@ function lookalikeRules(eff, ctx, flags) {
   }
 }
 
+// ---- Signatures lues par FORME et non par nom (un attaquant renomme le primaryType ; le moteur de base ne reconnaît que les noms canoniques).
+// F24 : un message typé que le moteur n'a pas su classer (kind inconnu) mais qui contient un dépensier (spender / operator / usr) et un montant (value / amount / wad / allowed / details[] / permitted[]) accorde un
+//       droit de dépense : si le dépensier n'est pas un protocole connu et que le montant est « plus que quiconque ne possède » (>= 2^128 ou >= 1e9 unités entières) => critical ; un retrait (permitted[]) illimité => critical
+//       quel que soit le dépensier. Le propriétaire déclaré n'est pas pris en compte (une page qui demande un droit au nom d'un autre reste une demande de droit).
+// F25 : personal_sign d'une charge binaire (non lisible) qui a la FORME d'un appel de contrat (jusqu'à 8 octets de préfixe, un sélecteur de 4 octets, puis un premier argument adresse aligné sur 32 octets)
+//       n'est pas un message mais une transaction déguisée => critical. Aucune liste de sélecteurs : la forme seule.
+// F26 : personal_sign d'un texte lisible (hors connexion SIWE) qui dit accorder / autoriser / transférer / migrer des actifs => critical (repli par mots-clés, sans modèle de langue ; limites assumées).
+const TWO128 = 1n << 128n;
+const bigS = (v) => { try { return BigInt(v); } catch { return undefined; } };
+function effUnlimited(ctx, token, amount) {
+  const a = bigS(amount); if (a === undefined) return false;
+  return a >= TWO128 || a >= 10n ** BigInt(9 + decOf(ctx, token));
+}
+function shapeGrants(td) {
+  const m = td && td.message; if (!m || typeof m !== 'object') return [];
+  const spender = [m.spender, m.operator, m.usr].find((x) => isAddrS(x)); if (!spender) return [];
+  const dom = td.domain && td.domain.verifyingContract;
+  const list = (x) => (Array.isArray(x) ? x : x && typeof x === 'object' ? [x] : []);
+  const out = [];
+  for (const d of list(m.details)) out.push({ mode: 'allowance', token: d.token, amount: d.amount, spender });
+  for (const d of list(m.permitted)) out.push({ mode: 'transfer', token: d.token, amount: d.amount, spender });
+  if (!out.length) {
+    if (m.allowed === true || m.allowed === 'true') out.push({ mode: 'allowance', token: dom, amount: (1n << 256n) - 1n, spender });
+    else for (const k of ['value', 'amount', 'wad']) if (m[k] !== undefined && typeof m[k] !== 'object') { out.push({ mode: 'allowance', token: dom, amount: m[k], spender }); break; }
+  }
+  return out;
+}
+function signatureShapes(eff, request, ctx, flags) {
+  if (request.method === 'eth_signTypedData_v4' && isOn('F24')) {
+    if (!(eff.signature && eff.signature.kind === 'unknown')) return;
+    let td; try { td = typeof request.params[1] === 'string' ? JSON.parse(request.params[1]) : request.params[1]; } catch { return; }
+    for (const g of shapeGrants(td)) {
+      const unl = effUnlimited(ctx, g.token, g.amount); const known = (ctx.knownSpenders || []).includes(lc(g.spender));
+      if (g.mode === 'transfer' && unl) { flags.push({ code: 'signed_transfer_unlimited', severity: 'critical', detail: `signature de retrait illimité de ${lc(g.token)} par ${lc(g.spender)} (type renommé : lu par sa forme)` }); return; }
+      if (!known && isOn('F27')) eff.shapeGrant = { spender: lc(g.spender), token: g.token ? lc(g.token) : undefined, unlimited: unl };
+      if (!known && unl) { flags.push({ code: 'signed_right_unlimited_unknown', severity: 'critical', detail: `droit de dépense illimité sur ${lc(g.token)} pour ${lc(g.spender)} hors protocoles connus (type renommé : lu par sa forme)` }); return; }
+    }
+  } else if (request.method === 'personal_sign') {
+    const hex = request.params && request.params[0];
+    if (typeof hex !== 'string' || !/^0x([0-9a-fA-F]{2})*$/.test(hex)) return;
+    const b = Buffer.from(hex.slice(2), 'hex'); if (!b.length) return;
+    const txt = b.toString('utf8');
+    const readable = !txt.includes('\uFFFD') && !/[\x00-\x08\x0e-\x1f]/.test(txt);
+    if (!readable && isOn('F25')) {
+      for (let o = 0; o <= 8; o++) {
+        if (b.length < o + 4 + 32 + 20) break;
+        if (!b.subarray(o + 4, o + 16).every((x) => x === 0)) continue;
+        if (b.subarray(o + 16, o + 36).filter((x) => x !== 0).length >= 12) { flags.push({ code: 'signed_calldata', severity: 'critical', detail: 'le « message » à signer a la forme d un appel de contrat (sélecteur + adresse alignée), pas d un texte' }); return; }
+      }
+    } else if (readable && isOn('F26')) {
+      const GRANT = /\b(authori[sz]\w*|grant\w*|approv\w*|permission\w*|allow\w*|migrat\w*|transfer\w*|autoris\w*|approuv\w*|accord\w*|transf[eè]r\w*)\b/i;
+      const ASSET = /\b(tokens?|nfts?|assets?|balances?|funds?|spending|jetons?|soldes?|fonds|avoirs?|d[ée]pense)\b/i;
+      if (!/sign in with your ethereum account/i.test(txt) && GRANT.test(txt) && ASSET.test(txt)) flags.push({ code: 'signed_text_grants_assets', severity: 'critical', detail: 'le texte à signer dit accorder ou déplacer des actifs (repli par mots-clés)' });
+    }
+  }
+}
+
+// ---- F30 : message typé de pure signalisation hors chaîne (vote de gouvernance, abonnement, profil). Lu par sa FORME : domaine sans verifyingContract NI chainId (aucun contrat ne peut le
+// vérifier on-chain, aucun réseau n'est visé), le seul champ adresse est le signataire lui-même, et aucun champ ne désigne un dépensier, un destinataire ou un montant.
+// Dans ce cas, le moteur ne sait pas le nommer mais le message ne peut déplacer aucun actif : l'opacité est levée (info). Tout champ de type valeur/destinataire garde l'alerte.
+const MONEY_KEYS = /^(spender|operator|usr|to|recipient|receiver|beneficiary|amount|value|wad|allowed|sellAmount|buyAmount|token|tokens|permitted|details|offer|consideration|nonce|deadline|expiry|destination|target|data|calldata|call|calls|operations)$/i;
+function offchainSignaling(eff, request, ctx) {
+  if (request.method !== 'eth_signTypedData_v4' || !eff.opaque) return;
+  if (!(eff.signature && eff.signature.kind === 'unknown')) return;
+  let td; try { td = typeof request.params[1] === 'string' ? JSON.parse(request.params[1]) : request.params[1]; } catch { return; }
+  const d = td && td.domain; const m = td && td.message; if (!d || !m || typeof m !== 'object') return;
+  if (d.verifyingContract !== undefined || d.chainId !== undefined) return;
+  const self = lc(ctx.from); let ok = true;
+  const walk = (o, depth) => { if (!ok || depth > 4) { if (depth > 4) ok = false; return; } for (const [k, v] of Object.entries(o)) { if (MONEY_KEYS.test(k)) { ok = false; return; } if (typeof v === 'string' && isAddrS(v) && lc(v) !== self) { ok = false; return; } if (v && typeof v === 'object') walk(v, depth + 1); } };
+  walk(m, 0);
+  if (!ok) return;
+  const GONE = new Set(['unknown_typed_data', 'unknown_typed_data_addresses', 'opaque', 'domain_without_chainid']);
+  eff.risk_flags = eff.risk_flags.filter((f) => !GONE.has(f.code));
+  if (!eff.risk_flags.some((f) => f.code !== 'opaque' && OPACITY_CODES.has(f.code))) { eff.opaque = false; eff.opaqueReasons = []; }
+  eff.risk_flags.push({ code: 'offchain_signaling', severity: 'info', detail: 'message de signalisation hors chaîne (domaine sans contrat ni réseau, aucun champ de valeur ou de destinataire)' });
+  recompute(eff);
+}
+
 export function applyExtraRules(eff, request, ctx) {
   const flags = [];
   if (isOn('F11')) marketOrderProceeds(request, ctx, flags);
@@ -239,6 +317,8 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F5')) serviceCall(eff, request, ctx);
   if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
   if (isOn('F18')) wrapDeposit(eff, request, ctx, flags);
+  signatureShapes(eff, request, ctx, flags);
+  if (isOn('F30')) offchainSignaling(eff, request, ctx);
   if (isOn('F21') || isOn('F22') || isOn('F23')) lookalikeRules(eff, ctx, flags);
   addFlags(eff, flags);
   if (isOn('F22')) recompute(eff);

@@ -4,12 +4,14 @@ Titre proposé : **Une décision, une preuve, un rejeu.**
 
 Statut : brouillon du 11 oct. 2026. Aucune conformité n'est affirmée. Ce qui n'est pas livré est marqué.
 
+Phrase de cadrage (D-009) : **MetaMask te prévient de ce qu'il reconnaît. Hold up vérifie ce que tu voulais faire.** MetaMask fait déjà les alertes de sécurité sur transactions et signatures (https://support.metamask.io/configure/wallet/security-alerts/). Hold up ajoute la comparaison intention contre effet, un délai, et la preuve décrite ci-dessous. Cette slide porte sur la preuve : le troisième apport.
+
 ## Colonne 1 : comment un auditeur vérifie une décision
 
 1. **Journal chaîné par hachage.** Chaque verdict devient une ligne : horodatage, hachage de la ligne précédente, niveau, codes de règle, empreinte des paramètres. Une ligne modifiée ou supprimée casse la chaîne. Commande : `node server/server.mjs --verify-journal`. État : fait en local (`research/titouan/T_banc_e2e/server/server.mjs`).
 2. **Ancrage sur Fuji.** La racine du journal est écrite par lots sur la blockchain de test Avalanche Fuji, pour qu'une alerte montrée, son heure et le choix de l'utilisateur ne puissent pas être réécrits après coup. Un vérificateur en lecture seule recalcule les racines et les compare à celles enregistrées. État : code prêt, 42 vérifications locales OK (`research/titouan/T_banc_e2e/anchor/ANCHOR_README.md`). Le contrat est compilé et déployé sur un nœud local par Adem (`coord/INBOX.md` MSG-058), pas par nous. Rien n'est déployé sur Fuji : `blockchain/DEPLOYMENTS.md` est vide. Fuji est un réseau de test : cela démontre le mécanisme, pas une valeur légale.
 3. **Version des règles.** Les règles ont une empreinte (`f952f3fb298f`, `research/titouan/T_banc_e2e/COUVERTURE.md`). À faire : écrire cette empreinte et la version du modèle dans chaque ligne de journal (`coord/INBOX.md` MSG-051).
-4. **Rejeu.** Le banc rejoue les cas contre une empreinte de règles donnée, avec jeu gelé dont le hachage est publié avant ouverture (`research/titouan/T_banc_e2e/attacks/TEST_HASH.txt`, `blind_adem/v2/V2_TEST.sha256`). Chaque ouverture du jeu TEST est journalisée (`run/out/TEST_OUVERTURES.json`). Le jeu TEST ouvert une fois est contaminé. V2_TEST reste à ouvrir une seule fois ; V2_DEV (99,7 % attrapées, 1,0 % de fausses alertes critical) est synthétique et réglé, pas un test indépendant (`run/out/v2/MESURE_FINAL.md`).
+4. **Rejeu.** Le banc rejoue les cas contre une empreinte de règles donnée, avec jeu gelé dont le hachage est publié avant ouverture (`research/titouan/T_banc_e2e/attacks/TEST_HASH.txt`, `blind_adem/v2/V2_TEST.sha256`). Chaque ouverture du jeu TEST est journalisée (`run/out/TEST_OUVERTURES.json`). Le jeu TEST ouvert une fois est contaminé. V2_TEST reste à ouvrir une seule fois ; V2_DEV (99,7 % attrapées, 1,0 % de fausses alertes critical) est synthétique et réglé, pas un test indépendant (`run/out/v2/MESURE_FINAL.md`). Sans le contexte du banc, au réglage produit : 83,8 % attrapées et 13,9 % de fausses alertes critical, tous jeux (`banc_realiste/BANC_REALISTE.md`).
 5. **Explicabilité.** Chaque avertissement vient de code déterministe et cite ses raisons ("tu as dit X, ça fait Y"). Le verdict ne dépend pas d'un score opaque.
 
 Limite à dire : un journal chaîné prouve l'intégrité et l'ordre. Il ne prouve pas que les règles étaient bonnes.
@@ -31,6 +33,10 @@ Limite à dire : un journal chaîné prouve l'intégrité et l'ordre. Il ne prou
 ## Colonne 4 : DORA et MiCA
 
 Pertinent pour des clients prestataires (par exemple un prestataire de services sur crypto-actifs qui intégrerait l'outil). Hold up ne se déclare conforme à aucun de ces textes. Elle fournit des éléments de preuve (journal, version, rejeu) qu'un client prestataire pourrait verser à son propre dossier.
+
+## Ce qui n'est pas mesuré
+
+L'intention en texte libre. Clef et Jev, jamais appelés faute de clé : on ne dit pas « Clef classe l'intention ». L'effet d'un avertissement sur des personnes.
 
 ## À dire à l'oral en une phrase
 

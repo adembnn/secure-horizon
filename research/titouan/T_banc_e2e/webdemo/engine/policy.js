@@ -2,6 +2,7 @@
 // selon les RAISONS du comparateur et l'OPACITÉ / la complétude des effets décodés. Aucune lecture de label, d'id de cas ou d'adresse littérale.
 // Chaque correctif est un interrupteur (engine/src/fixes.mjs) pour la mesure A/B.
 import { isOn } from './src/fixes.js';
+import { OPACITY_CODES } from '../engine/src/engine.js';
 
 const RANK = { info: -1, ok: 0, warn: 1, critical: 2 };
 const worst = (a, b) => (RANK[a] >= RANK[b] ? a : b);
@@ -25,6 +26,19 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
   // Réserve : seulement si la cible est un protocole de la liste connue ; un contrat inconnu ET opaque ET payé garde la sévérité critical du comparateur.
   // (le plancher garde le warn d'opacité : le cas n'est jamais 'ok')
   if (isOn('F1') && (incomplete || ((isOn('F5') || isOn('F14')) && eff.service)) && (isKnownProtocol(ctx, eff.raw && eff.raw.to) || (isOn('F14') && eff.service && eff.service.trusted))) drop('no_incoming', 'F1:no_incoming_ignore_effets_incomplets');
+
+  // ---- F28 : variante élargie de F1 : pour un appel OPAQUE vers une cible inconnue, l'absence d'entrée visible n'est pas une preuve de perte (on ne voit pas ce que le contrat crédite) :
+  // no_incoming passe de critical à warn (l'opacité reste warn au plancher, jamais ok). Les contrats très récents et les cibles signalées autrement gardent leur sévérité.
+  if (isOn('F28') && incomplete && reasons.some((r) => r.code === 'no_incoming') && !(eff.counterparties || []).some((cp) => cp.lookalikeOf || (cp.ageBlocks !== undefined && cp.ageBlocks < 50))) {
+    reasons = reasons.map((r) => (r.code === 'no_incoming' ? { ...r, sev: 'warn' } : r)); notes.push('F28:no_incoming_opaque_inconnu');
+  }
+
+  // ---- F29 : le comparateur lit le montant déclaré avec parseFloat : « 10,5 » (virgule décimale, usage français) devient 10 et fait croire à un dépassement. Montant déclaré normalisé
+  // (virgule -> point, espaces fines retirées) ; si tous les montants sortants décodés sont <= au montant déclaré (+1 %), le motif amount_exceeded est un artefact de format et disparaît.
+  if (isOn('F29') && intent && typeof intent.amount === 'string' && /[,\s]/.test(intent.amount) && reasons.some((r) => r.code === 'amount_exceeded')) {
+    const declared = parseFloat(intent.amount.replace(/[\s\u202f\u00a0]/g, '').replace(',', '.'));
+    if (Number.isFinite(declared) && (eff.outgoing || []).every((o) => { const a = parseFloat(o.amount); return Number.isFinite(a) && a <= declared * 1.01; })) drop('amount_exceeded', 'F29:montant_virgule_decimale');
+  }
 
   // ---- F2 : « première fois vu » n'a pas de sens pour un protocole/contrat de la liste connue (pont, routeur, collection) : c'est le point de passage, pas le bénéficiaire final.
   if (isOn('F2') && reasons.some((r) => r.code === 'first_seen_recipient')) {
@@ -85,6 +99,10 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     if (eff.outgoing.every((o) => paid(o.to))) { reasons = reasons.map((r) => (r.code === 'asked_by_someone_outgoing' ? { ...r, sev: 'warn' } : r)); notes.push('F20:destinataire_deja_paye'); }
   }
 
+  // ---- F27 : un message typé non classé par le moteur qui, lu par sa forme, accorde un droit de dépense à un dépensier hors protocoles connus (eff.shapeGrant) : si l'intention déclarée n'est pas
+  // un échange, la personne ne croit pas accorder un droit de dépense => critical (l'écart d'intention que le comparateur ne voit pas faute d'approbation décodée).
+  if (isOn('F27') && eff.shapeGrant && intent && intent.kind !== 'buy_or_swap') { reasons.push({ code: 'signed_right_not_intended', sev: 'critical', said: '', does: eff.shapeGrant.spender }); notes.push('F27:droit_signe_hors_intention'); }
+
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :
   // warn (à confirmer) au lieu de critical. chain_id = 0 (toutes chaînes) et cible inconnue restent critical.
   if (isOn('F4') && eff.delegation && isKnownProtocol(ctx, eff.delegation.to) && !(eff.delegations || []).some((d) => d.chainId === 0 && String(d.to) !== ZERO_ADDR)) {
@@ -122,5 +140,20 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
   if (adem) level = worst(floor, notIdentity ? ademLevel(reasons) : adem.level);
   // invariant (règle 6) : un cas opaque ou en panne n'est jamais 'ok'
   if ((eff.opaque || eff.unsupported) && level === 'ok') { level = 'warn'; notes.push('invariant_opaque'); }
-  return { level, floorLevel: floor, reasons, notes };
+  // opacity_only : le SEUL motif d'alerte est l'opacité (on n'a pas su décoder), sans aucune preuve d'effet ni écart d'intention. L'interface peut l'afficher discrètement ; le niveau reste warn (jamais ok).
+  const evidence = flags.filter((f) => f.severity !== 'info' && !OPACITY_CODES.has(f.code));
+  const reasonAlerts = reasons.filter((r) => (r.sev || sevOfReason(r.code)) !== 'info');
+  const opacity_only = level === 'warn' && flags.some((f) => f.severity === 'warn' && OPACITY_CODES.has(f.code)) && evidence.length === 0 && reasonAlerts.length === 0;
+  return { level, floorLevel: floor, reasons, notes, opacity_only };
+}
+
+// ---- Garde de monotonie (D-009) : ajouter de l'information d'intention ne baisse JAMAIS un verdict.
+// `levelWithIntent` = niveau de la chaîne avec l'intention (type seul ou détaillée), `levelWithout` = niveau de la MÊME chaîne sans intention.
+// Le résultat n'est jamais sous le second. Le comparateur et la politique ne font que monter par construction ; les couches posées après
+// (détecteurs) lisent le type d'intention et peuvent, elles, rendre un cas moins sévère avec un type qu'avec rien : cette garde ferme ce trou.
+// 'unknown' reste 'unknown' (non vérifié, jamais ok). Aucun 'ok' n'est produit ici.
+export function monotoneGuard(levelWithIntent, levelWithout) {
+  const R = { unknown: 1, ok: 0, warn: 1, critical: 2 };
+  if (levelWithIntent === 'unknown' || levelWithout === 'unknown') return levelWithIntent === 'unknown' ? (R[levelWithout] > 1 ? levelWithout : 'unknown') : levelWithIntent;
+  return R[levelWithout] > R[levelWithIntent] ? levelWithout : levelWithIntent;
 }
