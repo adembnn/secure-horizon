@@ -1,0 +1,6124 @@
+{
+ "rows": [
+  {
+   "id": "DEC-swap_droit_illimite-001",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-002",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_compte_externe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-003",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-004",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-005",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-006",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_routeur_connu_plus_swap",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-007",
+   "family": "swap_droit_illimite",
+   "sub": "approve_dix_fois_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-008",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_inconnu_plus_swap",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-009",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-010",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_compte_externe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-011",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-012",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-013",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-014",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_routeur_connu_plus_swap",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-015",
+   "family": "swap_droit_illimite",
+   "sub": "approve_dix_fois_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-016",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_inconnu_plus_swap",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-017",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-018",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_compte_externe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-019",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-020",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-021",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-022",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_routeur_connu_plus_swap",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-023",
+   "family": "swap_droit_illimite",
+   "sub": "approve_dix_fois_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-024",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_inconnu_plus_swap",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-025",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-026",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_compte_externe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-027",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-028",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-029",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-030",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_routeur_connu_plus_swap",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-031",
+   "family": "swap_droit_illimite",
+   "sub": "approve_dix_fois_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-032",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_inconnu_plus_swap",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-033",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-034",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_compte_externe",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-035",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-036",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-037",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_max_spender_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-038",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_routeur_connu_plus_swap",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-039",
+   "family": "swap_droit_illimite",
+   "sub": "approve_dix_fois_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-040",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_max_inconnu_plus_swap",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-041",
+   "family": "swap_droit_illimite",
+   "sub": "approve_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-042",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_exact_plus_swap",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-043",
+   "family": "swap_droit_illimite",
+   "sub": "swap_direct_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-044",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-045",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-046",
+   "family": "swap_droit_illimite",
+   "sub": "swap_v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-047",
+   "family": "swap_droit_illimite",
+   "sub": "approve_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-048",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_exact_plus_swap",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-049",
+   "family": "swap_droit_illimite",
+   "sub": "swap_direct_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-050",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-051",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-052",
+   "family": "swap_droit_illimite",
+   "sub": "swap_v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-053",
+   "family": "swap_droit_illimite",
+   "sub": "approve_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-054",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_exact_plus_swap",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-055",
+   "family": "swap_droit_illimite",
+   "sub": "swap_direct_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-056",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-057",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-058",
+   "family": "swap_droit_illimite",
+   "sub": "swap_v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-059",
+   "family": "swap_droit_illimite",
+   "sub": "approve_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-060",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_exact_plus_swap",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-061",
+   "family": "swap_droit_illimite",
+   "sub": "swap_direct_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-062",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-063",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-064",
+   "family": "swap_droit_illimite",
+   "sub": "swap_v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-065",
+   "family": "swap_droit_illimite",
+   "sub": "approve_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-066",
+   "family": "swap_droit_illimite",
+   "sub": "lot_approve_exact_plus_swap",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-067",
+   "family": "swap_droit_illimite",
+   "sub": "swap_direct_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-068",
+   "family": "swap_droit_illimite",
+   "sub": "permit2_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-069",
+   "family": "swap_droit_illimite",
+   "sub": "permit2612_exact_routeur_connu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-070",
+   "family": "swap_droit_illimite",
+   "sub": "swap_v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-001",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-002",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-003",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-004",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-005",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-006",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-007",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-008",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-009",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-010",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-011",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-012",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-013",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-014",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-015",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-016",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-017",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-018",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-019",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-020",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-021",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-022",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-023",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-024",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-025",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-026",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-027",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-028",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-029",
+   "family": "swap_jeton_different",
+   "sub": "vend_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-030",
+   "family": "swap_jeton_different",
+   "sub": "recoit_un_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-031",
+   "family": "swap_jeton_different",
+   "sub": "approve_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-032",
+   "family": "swap_jeton_different",
+   "sub": "permit_autre_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-033",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-034",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-035",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-036",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-037",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-038",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-039",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-040",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-041",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-042",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-043",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-044",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-045",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-046",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-047",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-048",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-049",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-050",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-051",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-052",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-053",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-054",
+   "family": "swap_jeton_different",
+   "sub": "jetons_conformes",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-055",
+   "family": "swap_jeton_different",
+   "sub": "approve_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-056",
+   "family": "swap_jeton_different",
+   "sub": "permit_jeton_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-001",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-002",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-003",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-004",
+   "family": "swap_destinataire_tiers",
+   "sub": "lot_approve_exact_puis_swap_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-005",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-006",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-007",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-008",
+   "family": "swap_destinataire_tiers",
+   "sub": "lot_approve_exact_puis_swap_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-009",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-010",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-011",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-012",
+   "family": "swap_destinataire_tiers",
+   "sub": "lot_approve_exact_puis_swap_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-013",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-014",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-015",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-016",
+   "family": "swap_destinataire_tiers",
+   "sub": "lot_approve_exact_puis_swap_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-017",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-018",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-019",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-020",
+   "family": "swap_destinataire_tiers",
+   "sub": "lot_approve_exact_puis_swap_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-021",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-022",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-023",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-024",
+   "family": "swap_destinataire_tiers",
+   "sub": "lot_approve_exact_puis_swap_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-025",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-026",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-027",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-028",
+   "family": "swap_destinataire_tiers",
+   "sub": "lot_approve_exact_puis_swap_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-029",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-030",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-031",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-032",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-033",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-034",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-035",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-036",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-037",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-038",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-039",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-040",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-041",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-042",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-043",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-044",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-045",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-046",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-047",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-048",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-049",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-050",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-051",
+   "family": "swap_destinataire_tiers",
+   "sub": "v3_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-052",
+   "family": "swap_destinataire_tiers",
+   "sub": "v2_eth_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-001",
+   "family": "recevoir_sortie",
+   "sub": "transfert_jeton_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-002",
+   "family": "recevoir_sortie",
+   "sub": "envoi_natif_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-003",
+   "family": "recevoir_sortie",
+   "sub": "approve_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-004",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-005",
+   "family": "recevoir_sortie",
+   "sub": "permit_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-006",
+   "family": "recevoir_sortie",
+   "sub": "permit2_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-007",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-008",
+   "family": "recevoir_sortie",
+   "sub": "lot_transfert_sortant",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-009",
+   "family": "recevoir_sortie",
+   "sub": "transfert_jeton_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-010",
+   "family": "recevoir_sortie",
+   "sub": "envoi_natif_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-011",
+   "family": "recevoir_sortie",
+   "sub": "approve_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-012",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-013",
+   "family": "recevoir_sortie",
+   "sub": "permit_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-014",
+   "family": "recevoir_sortie",
+   "sub": "permit2_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-015",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-016",
+   "family": "recevoir_sortie",
+   "sub": "lot_transfert_sortant",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-017",
+   "family": "recevoir_sortie",
+   "sub": "transfert_jeton_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-018",
+   "family": "recevoir_sortie",
+   "sub": "envoi_natif_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-019",
+   "family": "recevoir_sortie",
+   "sub": "approve_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-020",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-021",
+   "family": "recevoir_sortie",
+   "sub": "permit_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-022",
+   "family": "recevoir_sortie",
+   "sub": "permit2_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-023",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-024",
+   "family": "recevoir_sortie",
+   "sub": "lot_transfert_sortant",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-025",
+   "family": "recevoir_sortie",
+   "sub": "transfert_jeton_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-026",
+   "family": "recevoir_sortie",
+   "sub": "envoi_natif_vers_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-027",
+   "family": "recevoir_sortie",
+   "sub": "approve_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-028",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-029",
+   "family": "recevoir_sortie",
+   "sub": "permit_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-030",
+   "family": "recevoir_sortie",
+   "sub": "permit2_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-031",
+   "family": "recevoir_sortie",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-032",
+   "family": "recevoir_sortie",
+   "sub": "lot_transfert_sortant",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "warn",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-033",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-034",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-035",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-036",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-037",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-038",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-039",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-040",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-041",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-042",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-043",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-044",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-045",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-046",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-047",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-048",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-049",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-050",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-051",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-052",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-053",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-054",
+   "family": "recevoir_sortie",
+   "sub": "signature_sans_effet",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-055",
+   "family": "recevoir_sortie",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-056",
+   "family": "recevoir_sortie",
+   "sub": "reclamation_appel_inconnu",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-001",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_max",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-002",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_borne",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-003",
+   "family": "connexion_droit_signe",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-004",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-005",
+   "family": "connexion_droit_signe",
+   "sub": "approve_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-006",
+   "family": "connexion_droit_signe",
+   "sub": "permit_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-007",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-008",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_max",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-009",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_borne",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-010",
+   "family": "connexion_droit_signe",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-011",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-012",
+   "family": "connexion_droit_signe",
+   "sub": "approve_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-013",
+   "family": "connexion_droit_signe",
+   "sub": "permit_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-014",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-015",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_max",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-016",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_borne",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-017",
+   "family": "connexion_droit_signe",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-018",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-019",
+   "family": "connexion_droit_signe",
+   "sub": "approve_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-020",
+   "family": "connexion_droit_signe",
+   "sub": "permit_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-021",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-022",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_max",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-023",
+   "family": "connexion_droit_signe",
+   "sub": "permit2612_borne",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-024",
+   "family": "connexion_droit_signe",
+   "sub": "permit2_single",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-025",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-026",
+   "family": "connexion_droit_signe",
+   "sub": "approve_tx",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-027",
+   "family": "connexion_droit_signe",
+   "sub": "permit_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-028",
+   "family": "connexion_droit_signe",
+   "sub": "setApprovalForAll_protocole_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-029",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-030",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-031",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-032",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-033",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-034",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-035",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-036",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-037",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-038",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-039",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-040",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-041",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-042",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-043",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-044",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-045",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-046",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-047",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-048",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-049",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-050",
+   "family": "connexion_droit_signe",
+   "sub": "siwe_domaine_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-051",
+   "family": "connexion_droit_signe",
+   "sub": "message_connexion_texte",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-052",
+   "family": "connexion_droit_signe",
+   "sub": "typed_login_sans_valeur",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "warn",
+    "sans": "warn",
+    "catalogue": "warn",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-001",
+   "family": "montant_plus_grand",
+   "sub": "transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-002",
+   "family": "montant_plus_grand",
+   "sub": "transfert_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-003",
+   "family": "montant_plus_grand",
+   "sub": "natif_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-004",
+   "family": "montant_plus_grand",
+   "sub": "swap_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-005",
+   "family": "montant_plus_grand",
+   "sub": "swap_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-006",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-007",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-008",
+   "family": "montant_plus_grand",
+   "sub": "swap_eth_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-009",
+   "family": "montant_plus_grand",
+   "sub": "transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-010",
+   "family": "montant_plus_grand",
+   "sub": "transfert_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-011",
+   "family": "montant_plus_grand",
+   "sub": "natif_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-012",
+   "family": "montant_plus_grand",
+   "sub": "swap_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-013",
+   "family": "montant_plus_grand",
+   "sub": "swap_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-014",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-015",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-016",
+   "family": "montant_plus_grand",
+   "sub": "swap_eth_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-017",
+   "family": "montant_plus_grand",
+   "sub": "transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-018",
+   "family": "montant_plus_grand",
+   "sub": "transfert_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-019",
+   "family": "montant_plus_grand",
+   "sub": "natif_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-020",
+   "family": "montant_plus_grand",
+   "sub": "swap_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-021",
+   "family": "montant_plus_grand",
+   "sub": "swap_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-022",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-023",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-024",
+   "family": "montant_plus_grand",
+   "sub": "swap_eth_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-025",
+   "family": "montant_plus_grand",
+   "sub": "transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-026",
+   "family": "montant_plus_grand",
+   "sub": "transfert_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-027",
+   "family": "montant_plus_grand",
+   "sub": "natif_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-028",
+   "family": "montant_plus_grand",
+   "sub": "swap_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-029",
+   "family": "montant_plus_grand",
+   "sub": "swap_juste_au_dessus_tolerance",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-030",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-031",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-032",
+   "family": "montant_plus_grand",
+   "sub": "swap_eth_k_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-033",
+   "family": "montant_plus_grand",
+   "sub": "transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-034",
+   "family": "montant_plus_grand",
+   "sub": "transfert_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-035",
+   "family": "montant_plus_grand",
+   "sub": "natif_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-036",
+   "family": "montant_plus_grand",
+   "sub": "swap_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-037",
+   "family": "montant_plus_grand",
+   "sub": "transfert_moins",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-038",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-039",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-040",
+   "family": "montant_plus_grand",
+   "sub": "transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-041",
+   "family": "montant_plus_grand",
+   "sub": "transfert_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-042",
+   "family": "montant_plus_grand",
+   "sub": "natif_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-043",
+   "family": "montant_plus_grand",
+   "sub": "swap_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-044",
+   "family": "montant_plus_grand",
+   "sub": "transfert_moins",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-045",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-046",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-047",
+   "family": "montant_plus_grand",
+   "sub": "transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-048",
+   "family": "montant_plus_grand",
+   "sub": "transfert_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-049",
+   "family": "montant_plus_grand",
+   "sub": "natif_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-050",
+   "family": "montant_plus_grand",
+   "sub": "swap_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-051",
+   "family": "montant_plus_grand",
+   "sub": "transfert_moins",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-052",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-053",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-054",
+   "family": "montant_plus_grand",
+   "sub": "transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-055",
+   "family": "montant_plus_grand",
+   "sub": "transfert_arrondi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-056",
+   "family": "montant_plus_grand",
+   "sub": "natif_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-057",
+   "family": "montant_plus_grand",
+   "sub": "swap_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-058",
+   "family": "montant_plus_grand",
+   "sub": "transfert_moins",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-059",
+   "family": "montant_plus_grand",
+   "sub": "lot_transfert_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-060",
+   "family": "montant_plus_grand",
+   "sub": "transfert_dai_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-071",
+   "family": "swap_droit_illimite",
+   "sub": "dur_approve_max_permit2_canonique",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-072",
+   "family": "swap_droit_illimite",
+   "sub": "dur_increaseAllowance_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-073",
+   "family": "swap_droit_illimite",
+   "sub": "dur_increaseAllowance_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-074",
+   "family": "swap_droit_illimite",
+   "sub": "dur_montant_ecrit_avec_espace",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-075",
+   "family": "swap_droit_illimite",
+   "sub": "dur_avalanche_approve_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-057",
+   "family": "swap_jeton_different",
+   "sub": "dur_natif_au_lieu_du_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-058",
+   "family": "swap_jeton_different",
+   "sub": "dur_avalanche_vend_wavax_au_lieu_usdc",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-053",
+   "family": "swap_destinataire_tiers",
+   "sub": "dur_sortie_exacte_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-061",
+   "family": "montant_plus_grand",
+   "sub": "dur_virgule_decimale_15_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-062",
+   "family": "montant_plus_grand",
+   "sub": "dur_milliers_avec_espace",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-057",
+   "family": "recevoir_sortie",
+   "sub": "dur_increaseAllowance_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-053",
+   "family": "connexion_droit_signe",
+   "sub": "dur_permit2_borne",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-076",
+   "family": "swap_droit_illimite",
+   "sub": "dur_approve_exact_permit2_canonique",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-077",
+   "family": "swap_droit_illimite",
+   "sub": "dur_lot_approve_exact_sortie_exacte_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-059",
+   "family": "swap_jeton_different",
+   "sub": "dur_avalanche_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-063",
+   "family": "montant_plus_grand",
+   "sub": "dur_virgule_decimale_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-078",
+   "family": "swap_droit_illimite",
+   "sub": "dur_approve_max_permit2_canonique",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-079",
+   "family": "swap_droit_illimite",
+   "sub": "dur_increaseAllowance_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-080",
+   "family": "swap_droit_illimite",
+   "sub": "dur_increaseAllowance_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-081",
+   "family": "swap_droit_illimite",
+   "sub": "dur_montant_ecrit_avec_espace",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-082",
+   "family": "swap_droit_illimite",
+   "sub": "dur_avalanche_approve_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-060",
+   "family": "swap_jeton_different",
+   "sub": "dur_natif_au_lieu_du_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-061",
+   "family": "swap_jeton_different",
+   "sub": "dur_avalanche_vend_wavax_au_lieu_usdc",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-054",
+   "family": "swap_destinataire_tiers",
+   "sub": "dur_sortie_exacte_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-064",
+   "family": "montant_plus_grand",
+   "sub": "dur_virgule_decimale_15_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-065",
+   "family": "montant_plus_grand",
+   "sub": "dur_milliers_avec_espace",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-058",
+   "family": "recevoir_sortie",
+   "sub": "dur_increaseAllowance_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-054",
+   "family": "connexion_droit_signe",
+   "sub": "dur_permit2_borne",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-083",
+   "family": "swap_droit_illimite",
+   "sub": "dur_approve_exact_permit2_canonique",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-084",
+   "family": "swap_droit_illimite",
+   "sub": "dur_lot_approve_exact_sortie_exacte_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-062",
+   "family": "swap_jeton_different",
+   "sub": "dur_avalanche_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-066",
+   "family": "montant_plus_grand",
+   "sub": "dur_virgule_decimale_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-085",
+   "family": "swap_droit_illimite",
+   "sub": "dur_approve_max_permit2_canonique",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-086",
+   "family": "swap_droit_illimite",
+   "sub": "dur_increaseAllowance_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-087",
+   "family": "swap_droit_illimite",
+   "sub": "dur_increaseAllowance_max_routeur_connu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-088",
+   "family": "swap_droit_illimite",
+   "sub": "dur_montant_ecrit_avec_espace",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "warn",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-089",
+   "family": "swap_droit_illimite",
+   "sub": "dur_avalanche_approve_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-063",
+   "family": "swap_jeton_different",
+   "sub": "dur_natif_au_lieu_du_jeton",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-064",
+   "family": "swap_jeton_different",
+   "sub": "dur_avalanche_vend_wavax_au_lieu_usdc",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_destinataire_tiers-055",
+   "family": "swap_destinataire_tiers",
+   "sub": "dur_sortie_exacte_vers_tiers",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-067",
+   "family": "montant_plus_grand",
+   "sub": "dur_virgule_decimale_15_fois",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-068",
+   "family": "montant_plus_grand",
+   "sub": "dur_milliers_avec_espace",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-recevoir_sortie-059",
+   "family": "recevoir_sortie",
+   "sub": "dur_increaseAllowance_max_inconnu",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "critical",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-connexion_droit_signe-055",
+   "family": "connexion_droit_signe",
+   "sub": "dur_permit2_borne",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-090",
+   "family": "swap_droit_illimite",
+   "sub": "dur_approve_exact_permit2_canonique",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_droit_illimite-091",
+   "family": "swap_droit_illimite",
+   "sub": "dur_lot_approve_exact_sortie_exacte_vers_soi",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-swap_jeton_different-065",
+   "family": "swap_jeton_different",
+   "sub": "dur_avalanche_conforme",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-montant_plus_grand-069",
+   "family": "montant_plus_grand",
+   "sub": "dur_virgule_decimale_exact",
+   "label": "benin",
+   "ideal": "ok",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-001",
+   "family": "limites_connues",
+   "sub": "jeton_recu_inconnu_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-002",
+   "family": "limites_connues",
+   "sub": "droit_exact_vers_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-003",
+   "family": "limites_connues",
+   "sub": "montant_ecrit_en_lettres",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-004",
+   "family": "limites_connues",
+   "sub": "droit_borne_juste_sous_tolerance",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-005",
+   "family": "limites_connues",
+   "sub": "jeton_recu_inconnu_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-006",
+   "family": "limites_connues",
+   "sub": "droit_exact_vers_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-007",
+   "family": "limites_connues",
+   "sub": "montant_ecrit_en_lettres",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-008",
+   "family": "limites_connues",
+   "sub": "droit_borne_juste_sous_tolerance",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-009",
+   "family": "limites_connues",
+   "sub": "jeton_recu_inconnu_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-010",
+   "family": "limites_connues",
+   "sub": "droit_exact_vers_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-011",
+   "family": "limites_connues",
+   "sub": "montant_ecrit_en_lettres",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-012",
+   "family": "limites_connues",
+   "sub": "droit_borne_juste_sous_tolerance",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-013",
+   "family": "limites_connues",
+   "sub": "jeton_recu_inconnu_du_registre",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "critical",
+    "honnete_noyau": "critical"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-014",
+   "family": "limites_connues",
+   "sub": "droit_exact_vers_contrat_inconnu",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "warn",
+    "sans": "critical",
+    "catalogue": "critical",
+    "honnete": "critical",
+    "honnete_noyau": "warn"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-015",
+   "family": "limites_connues",
+   "sub": "montant_ecrit_en_lettres",
+   "label": "malveillant",
+   "ideal": "critical",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  },
+  {
+   "id": "DEC-limites_connues-016",
+   "family": "limites_connues",
+   "sub": "droit_borne_juste_sous_tolerance",
+   "label": "malveillant",
+   "ideal": "warn",
+   "L": {
+    "plancher": "ok",
+    "sans": "ok",
+    "catalogue": "ok",
+    "honnete": "ok",
+    "honnete_noyau": "ok"
+   }
+  }
+ ],
+ "tableau": {
+  "par_famille": {
+   "swap_droit_illimite": {
+    "plancher": {
+     "n_decalage": 55,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 36,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "sans": {
+     "n_decalage": 55,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 36,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "catalogue": {
+     "n_decalage": 55,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 36,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete": {
+     "n_decalage": 55,
+     "signales": 55,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 36,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete_noyau": {
+     "n_decalage": 55,
+     "signales": 55,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 36,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    }
+   },
+   "swap_jeton_different": {
+    "plancher": {
+     "n_decalage": 38,
+     "signales": 0,
+     "n_idealcrit": 38,
+     "rouges": 0,
+     "n_benins": 27,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "sans": {
+     "n_decalage": 38,
+     "signales": 0,
+     "n_idealcrit": 38,
+     "rouges": 0,
+     "n_benins": 27,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "catalogue": {
+     "n_decalage": 38,
+     "signales": 0,
+     "n_idealcrit": 38,
+     "rouges": 0,
+     "n_benins": 27,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete": {
+     "n_decalage": 38,
+     "signales": 38,
+     "n_idealcrit": 38,
+     "rouges": 38,
+     "n_benins": 27,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete_noyau": {
+     "n_decalage": 38,
+     "signales": 38,
+     "n_idealcrit": 38,
+     "rouges": 38,
+     "n_benins": 27,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    }
+   },
+   "swap_destinataire_tiers": {
+    "plancher": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "sans": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "catalogue": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete_noyau": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    }
+   },
+   "recevoir_sortie": {
+    "plancher": {
+     "n_decalage": 35,
+     "signales": 23,
+     "n_idealcrit": 31,
+     "rouges": 19,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "sans": {
+     "n_decalage": 35,
+     "signales": 35,
+     "n_idealcrit": 31,
+     "rouges": 19,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "catalogue": {
+     "n_decalage": 35,
+     "signales": 35,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "honnete": {
+     "n_decalage": 35,
+     "signales": 35,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "honnete_noyau": {
+     "n_decalage": 35,
+     "signales": 35,
+     "n_idealcrit": 31,
+     "rouges": 31,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    }
+   },
+   "connexion_droit_signe": {
+    "plancher": {
+     "n_decalage": 31,
+     "signales": 27,
+     "n_idealcrit": 23,
+     "rouges": 16,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "sans": {
+     "n_decalage": 31,
+     "signales": 27,
+     "n_idealcrit": 23,
+     "rouges": 23,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "catalogue": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 23,
+     "rouges": 23,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "honnete": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 23,
+     "rouges": 23,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    },
+    "honnete_noyau": {
+     "n_decalage": 31,
+     "signales": 31,
+     "n_idealcrit": 23,
+     "rouges": 23,
+     "n_benins": 24,
+     "fausses_alertes": 0,
+     "oranges_benins": 8
+    }
+   },
+   "montant_plus_grand": {
+    "plancher": {
+     "n_decalage": 38,
+     "signales": 0,
+     "n_idealcrit": 38,
+     "rouges": 0,
+     "n_benins": 31,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "sans": {
+     "n_decalage": 38,
+     "signales": 0,
+     "n_idealcrit": 38,
+     "rouges": 0,
+     "n_benins": 31,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "catalogue": {
+     "n_decalage": 38,
+     "signales": 0,
+     "n_idealcrit": 38,
+     "rouges": 0,
+     "n_benins": 31,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete": {
+     "n_decalage": 38,
+     "signales": 38,
+     "n_idealcrit": 38,
+     "rouges": 38,
+     "n_benins": 31,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete_noyau": {
+     "n_decalage": 38,
+     "signales": 38,
+     "n_idealcrit": 38,
+     "rouges": 38,
+     "n_benins": 31,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    }
+   },
+   "limites_connues": {
+    "plancher": {
+     "n_decalage": 16,
+     "signales": 4,
+     "n_idealcrit": 8,
+     "rouges": 0,
+     "n_benins": 0,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "sans": {
+     "n_decalage": 16,
+     "signales": 4,
+     "n_idealcrit": 8,
+     "rouges": 0,
+     "n_benins": 0,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "catalogue": {
+     "n_decalage": 16,
+     "signales": 4,
+     "n_idealcrit": 8,
+     "rouges": 0,
+     "n_benins": 0,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete": {
+     "n_decalage": 16,
+     "signales": 8,
+     "n_idealcrit": 8,
+     "rouges": 4,
+     "n_benins": 0,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    },
+    "honnete_noyau": {
+     "n_decalage": 16,
+     "signales": 8,
+     "n_idealcrit": 8,
+     "rouges": 4,
+     "n_benins": 0,
+     "fausses_alertes": 0,
+     "oranges_benins": 0
+    }
+   }
+  },
+  "global": {
+   "plancher": {
+    "n_decalage": 228,
+    "signales": 112,
+    "n_idealcrit": 192,
+    "rouges": 97,
+    "n_benins": 166,
+    "fausses_alertes": 0,
+    "oranges_benins": 16
+   },
+   "sans": {
+    "n_decalage": 228,
+    "signales": 124,
+    "n_idealcrit": 192,
+    "rouges": 104,
+    "n_benins": 166,
+    "fausses_alertes": 0,
+    "oranges_benins": 16
+   },
+   "catalogue": {
+    "n_decalage": 228,
+    "signales": 128,
+    "n_idealcrit": 192,
+    "rouges": 116,
+    "n_benins": 166,
+    "fausses_alertes": 0,
+    "oranges_benins": 16
+   },
+   "honnete": {
+    "n_decalage": 228,
+    "signales": 228,
+    "n_idealcrit": 192,
+    "rouges": 192,
+    "n_benins": 166,
+    "fausses_alertes": 0,
+    "oranges_benins": 16
+   },
+   "honnete_noyau": {
+    "n_decalage": 228,
+    "signales": 228,
+    "n_idealcrit": 192,
+    "rouges": 192,
+    "n_benins": 166,
+    "fausses_alertes": 0,
+    "oranges_benins": 16
+   }
+  }
+ }
+}

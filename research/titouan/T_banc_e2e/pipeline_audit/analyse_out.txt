@@ -1,0 +1,53 @@
+cas 10293 autres labels {"autre:fraude_conforme":819,"autre:ambigu":246}
+
+=== mode detectors
+arnaque: n=6443 critical produit=2716 critical plus=5702 baisses=0 hausses=2986
+benin: n=2785 critical produit=440 critical plus=1166 baisses=0 hausses=726
+autre: n=1065 critical produit=2 critical plus=728 baisses=0 hausses=726
+cas avec loweredBy non vide: 0 dont arnaque 0
+
+=== mode live
+arnaque: n=6443 critical produit=2716 critical plus=5837 baisses=0 hausses=3242
+benin: n=2785 critical produit=440 critical plus=1165 baisses=0 hausses=790
+autre: n=1065 critical produit=2 critical plus=732 baisses=0 hausses=740
+cas avec loweredBy non vide: 0 dont arnaque 0
+
+=== mode full
+arnaque: n=6443 critical produit=2716 critical plus=5638 baisses=1 hausses=3136
+    critical->ok path=plus relaxed=true lowered=- 1 jury_social#J-57
+benin: n=2785 critical produit=440 critical plus=390 baisses=96 hausses=495
+    warn->ok path=plus relaxed=true lowered=- 96 V2_DEV#V2-BENIGN_DEFI-00951 V2_DEV#V2-BENIGN_DEFI-00953 V2_DEV#V2-BENIGN_DEFI-00954 V2_DEV#V2-BENIGN_DEFI-00955 V2_DEV#V2-BENIGN_DEFI-00956 V2_DEV#V2-BENIGN_DEFI-00958 V2_DEV#V2-BENIGN_DEFI-00959 V2_DEV#V2-BENIGN_DEFI-00960 V2_DEV#V2-BENIGN_DEFI-00961 V2_DEV#V2-BENIGN_DEFI-00962 V2_DEV#V2-BENIGN_DEFI-00963 V2_DEV#V2-BENIGN_DEFI-00964
+autre: n=1065 critical produit=2 critical plus=690 baisses=0 hausses=708
+cas avec loweredBy non vide: 0 dont arnaque 0
+
+=== mode detectors+known+intent+premise
+arnaque: n=6443 critical produit=2716 critical plus=4861 baisses=0 hausses=2022
+benin: n=2785 critical produit=440 critical plus=237 baisses=0 hausses=72
+autre: n=1065 critical produit=2 critical plus=390 baisses=0 hausses=117
+cas avec loweredBy non vide: 0 dont arnaque 0
+
+=== mode live+known+intent+premise
+arnaque: n=6443 critical produit=2716 critical plus=5276 baisses=0 hausses=2484
+benin: n=2785 critical produit=440 critical plus=319 baisses=0 hausses=187
+autre: n=1065 critical produit=2 critical plus=543 baisses=0 hausses=204
+cas avec loweredBy non vide: 0 dont arnaque 0
+
+=== bénins relevés, mode detectors: bénins=2785 critical produit=440 critical plus=1166 warn plus=621 relevés=726 (->critical 726, ->warn 0)
+ top critical: intent_guard:kind_missing_unvouched_recipient=633 ; spend_rights:swap_no_min_unknown_router=66 ; sig_rights:signed_right_not_intended=55 ; indirect_pull:pull_via_existing_allowance=4
+ top warn: 
+
+=== bénins relevés, mode live: bénins=2785 critical produit=440 critical plus=1165 warn plus=659 relevés=790 (->critical 725, ->warn 65)
+ top critical: intent_guard:kind_missing_unvouched_recipient=455 ; intent_guard:new_recipient_large_share=150 ; spend_rights:swap_no_min_unknown_router=66 ; sig_rights:signed_right_not_intended=55 ; spend_rights:right_to_unvouched_spender=53 ; indirect_pull:pull_via_existing_allowance=4
+ top warn: (sans signal plus)=65
+
+=== bénins relevés, mode full: bénins=2785 critical produit=440 critical plus=390 warn plus=581 relevés=495 (->critical 270, ->warn 225)
+ top critical: (sans signal plus)=205 ; spend_rights:right_to_unvouched_spender=36 ; intent_guard:recipient_not_label=8 ; intent_guard:amount_exceeded_robust=8 ; intent_guard:token_mismatch=7 ; indirect_pull:pull_via_existing_allowance=4 ; sig_rights:signed_right_not_intended=2 ; intent_guard:new_recipient_large_share=1
+ top warn: (sans signal plus)=225
+
+=== bénins relevés, mode detectors+known+intent+premise: bénins=2785 critical produit=440 critical plus=237 warn plus=594 relevés=72 (->critical 3, ->warn 69)
+ top critical: indirect_pull:pull_via_existing_allowance=3
+ top warn: intent_guard:kind_missing_unvouched_recipient=69
+
+=== bénins relevés, mode live+known+intent+premise: bénins=2785 critical produit=440 critical plus=319 warn plus=563 relevés=187 (->critical 85, ->warn 102)
+ top critical: intent_guard:new_recipient_large_share=82 ; indirect_pull:pull_via_existing_allowance=3
+ top warn: (sans signal plus)=76 ; intent_guard:kind_missing_unvouched_recipient=26

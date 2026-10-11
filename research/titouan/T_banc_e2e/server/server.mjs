@@ -137,7 +137,13 @@ export function mergeEffects(list) {
 function toIntent(body) {
   const c = body.intent;
   const text = typeof body.intent_text === 'string' ? body.intent_text.slice(0, 500) : undefined;
-  const base = { declaredAt: Date.now(), ...(text ? { freeText: text } : {}) };
+  // détails optionnels (D-009 : le comparateur est le coeur) : jeton dit, montant dit, jeton reçu. Absents = type seul, jamais un niveau plus bas (monotonie, engine/test/monotonie.test.mjs).
+  const d = body.intent_details && typeof body.intent_details === 'object' ? body.intent_details : {};
+  const str = (v, n = 40) => (typeof v === 'string' && v.trim() ? v.trim().slice(0, n) : typeof v === 'number' && Number.isFinite(v) ? String(v) : undefined);
+  const details = { ...(str(d.token) ? { token: str(d.token) } : {}), ...(str(d.amount) ? { amount: str(d.amount) } : {}), ...(str(d.receiveToken) ? { receiveToken: str(d.receiveToken) } : {}),
+    ...(str(d.counterpartyLabel, 80) ? { counterpartyLabel: str(d.counterpartyLabel, 80) } : {}), ...(typeof d.counterpartyAddress === 'string' && HEX20.test(d.counterpartyAddress) ? { counterpartyAddress: lc(d.counterpartyAddress) } : {}) };
+  const base = { declaredAt: Date.now(), ...(text ? { freeText: text } : {}), ...details };
+  if (c === 'swap') return { ...base, kind: 'buy_or_swap' };
   if (c === 'pay') return { ...base, kind: 'pay_someone' };
   if (c === 'receive' || c === 'login') return { ...base, kind: 'connect_or_accept_offer' };
   if (c === 'asked') return { ...base, kind: 'asked_by_someone', askedBy: 'other' };
@@ -200,7 +206,7 @@ export const REASON_FICHE = {
   asked_by_someone_outgoing: 'F21', new_contract: 'F24', high_balance_share: '~gros_solde', lookalike_address: 'F13', low_confidence: 'F25',
   unexpected_approval: 'F01', unexpected_approval_connect: 'F01', unexpected_delegation: 'F11', unexpected_delegation_connect: 'F11', wrong_recipient: 'F19',
   amount_exceeded: '~montant_superieur', first_seen_recipient: 'F24', unlimited_approval_swap: 'F01', no_incoming: '~rien_en_retour', permit_new_contract: 'F01',
-  unexpected_outgoing: '~inattendu_envoi',
+  unexpected_outgoing: '~inattendu_envoi', approval_exceeds_intent: 'F01', token_differs_from_intent: '~jeton_different',
   // codes ajoutes par la boucle V2 (rules_extra / fixes)
   lookalike_reported: 'F13', lookalike_weak: 'F13', signed_transfer_unlimited: 'F01', signed_right_unlimited_unknown: 'F01',
   signed_calldata: 'F05', signed_text_grants_assets: 'F05', offchain_signaling: null,
@@ -287,6 +293,8 @@ export const SECOURS = {
     danger: 'Quelqu’un pourrait la réutiliser ailleurs, sans te demander.', action: 'Annule, sauf si tu connais bien ce site et ce service.' },
   ordre: { croit: "Je signe un ordre d'achat ou de vente.", reel: 'Cet ordre contient des conditions inhabituelles qui peuvent te coûter cher.',
     danger: 'Un ordre signé reste valable même si tu fermes la page.', action: "Annule, sauf si tu comprends chaque condition de l'ordre." },
+  jeton_different: { croit: "J'utilise le jeton que j'ai annoncé.", reel: "Cette demande engage un autre jeton que celui que tu as dit.",
+    danger: "Ce n'est pas le jeton prévu: tu pourrais perdre autre chose.", action: "Annule et vérifie le jeton avant de recommencer." },
   ordre_vide: { croit: "J'échange mes jetons contre une valeur équivalente.", reel: 'Tu donnes {somme} et tu ne reçois presque rien.',
     danger: "L'ordre est écrit pour ne rien te rendre.", action: 'Annule: ne signe pas un échange où tu ne reçois rien.' },
   compte_creation: { croit: 'Je valide une simple opération sur mon compte.', reel: 'Cette opération crée ou change un compte sans que tu le saches.',
@@ -296,7 +304,7 @@ export const SECOURS = {
 };
 export const SECOURS_TITRE = { generique: 'Cette demande a des effets inattendus', inattendu_envoi: 'Cette demande fait partir de l’argent', rien_en_retour: 'Tu donnes sans rien recevoir',
   montant_superieur: 'Le montant envoyé est plus grand que prévu', gros_solde: 'Une grande part de ton solde sort', connexion: 'Ce message de connexion est suspect', signature_site: 'Cette signature ne correspond pas au site',
-  signature_rejouable: 'Cette signature peut servir sur d’autres réseaux', ordre: 'Cet ordre contient des conditions inhabituelles', ordre_vide: 'Tu ne recevrais presque rien en échange',
+  signature_rejouable: 'Cette signature peut servir sur d’autres réseaux', ordre: 'Cet ordre contient des conditions inhabituelles', ordre_vide: 'Tu ne recevrais presque rien en échange', jeton_different: 'Ce n’est pas le jeton que tu as dit',
   compte_creation: 'Cette opération crée ou change un compte', reseau_signature: 'Cette signature vise un autre réseau' };
 export const TITRE_NON_VERIFIE = 'Je n’ai pas pu vérifier cette opération';
 const ACTION_SANS_MONTANT = "Refuse, ou autorise seulement ce qu'il faut pour cet échange."; // F01 quand le droit est sans limite : pas de montant précis à citer
@@ -344,6 +352,7 @@ export function present(I) {
   const { eff, S, niveau, method, host, chainId, contact, intentText, funds, opaque } = I;
   const ex = { chainId, contact };
   let { fid, secours } = pickFiche(S, eff, method, { intentText, funds });
+  if (niveau === 'info') { fid = null; secours = null; } // rien à signaler : jamais le texte d'une alerte (un droit exact ne doit pas afficher « sans limite »)
   let texts, source = 'fiche';
   if (!fid) {
     if (niveau === 'info') {

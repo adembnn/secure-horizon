@@ -1,0 +1,1 @@
+redteam/V2_DEV_norm.jsonl redteam/jury_defi.jsonl redteam/jury_fp.jsonl redteam/jury_fuzz_address.jsonl redteam/jury_fuzz_control.jsonl redteam/jury_fuzz_encoding.jsonl redteam/jury_fuzz_fp.jsonl redteam/jury_fuzz_intent.jsonl redteam/jury_fuzz_sig.jsonl redteam/jury_social.jsonl attacks/DEV.jsonl
