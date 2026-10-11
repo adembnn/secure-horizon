@@ -2,7 +2,7 @@
 id: T-101
 title: Contrats de démo (token avec permit, drainer, routeur légitime) + déploiement Fuji
 lane: tech
-status: todo
+status: done
 owner: none
 agent: builder-backend
 branch: t/T-101

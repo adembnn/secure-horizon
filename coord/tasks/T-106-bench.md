@@ -2,8 +2,8 @@
 id: T-106
 title: Banc d'essai — faux positifs, faux négatifs, latence
 lane: tech
-status: todo
-owner: none
+status: doing
+owner: titouan
 agent: builder-backend
 branch: t/T-106
 depends_on: []

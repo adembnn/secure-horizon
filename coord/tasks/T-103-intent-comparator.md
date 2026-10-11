@@ -2,7 +2,7 @@
 id: T-103
 title: Intention + comparateur + classifieur Clef/Jev + API locale
 lane: tech
-status: todo
+status: done
 owner: none
 agent: builder-backend
 branch: t/T-103

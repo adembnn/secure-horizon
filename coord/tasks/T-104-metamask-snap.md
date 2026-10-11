@@ -2,8 +2,8 @@
 id: T-104
 title: Snap MetaMask — capter l'intention et afficher l'avertissement critique
 lane: tech
-status: todo
-owner: none
+status: doing
+owner: titouan
 agent: builder-frontend
 branch: t/T-104
 depends_on: []
