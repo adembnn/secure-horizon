@@ -1,6 +1,6 @@
 # Vidéo Hold up, 3 minutes : script en images (V9, 11/10/2026)
 
-Principe : l'image montre, le texte confirme, la voix soutient. Environ 140 mots de voix pour 3 minutes (une voix tous les 15 secondes en moyenne). Voix générée avec Gradient. Tout le texte à l'écran tient en 6 mots ou moins, en grand, sous-titré pour la lecture sans le son.
+Principe : l'image montre, le texte confirme, la voix soutient. Environ 150 mots de voix pour 3 minutes (une voix tous les 15 secondes en moyenne). Voix générée avec Gradient. Tout le texte à l'écran tient en 6 mots ou moins, en grand, sous-titré pour la lecture sans le son.
 
 ## Règles de réalisation
 1. Accroche en moins de 5 secondes, sans logo ni titre : une question visuelle.
@@ -16,7 +16,7 @@ Principe : l'image montre, le texte confirme, la voix soutient. Environ 140 mots
 | Temps | Image | Texte à l'écran | Voix |
 |---|---|---|---|
 | 0:00 à 0:05 | Deux fenêtres de navigateur identiques, même site, côte à côte. Le curseur hésite entre les deux. | « L'un est piraté. » | (silence, un tic) |
-| 0:05 à 0:15 | Gros plan sur l'écran du portefeuille : « Autoriser la dépense : illimité » entouré en rouge. Un doigt clique sur Signer. | « Tu voulais échanger 50 $. » | « Tu voulais échanger cinquante dollars. Tu viens de donner accès à tout. » |
+| 0:05 à 0:15 | Gros plan sur l'écran du portefeuille : « Autoriser la dépense : illimité » entouré en rouge. Un doigt clique sur Signer. | « Tu voulais échanger 50 $. » puis « Avalanche : 1 sur 3 est illimitée. » | « Tu voulais échanger cinquante dollars. Tu viens de donner accès à tout. Sur Avalanche, une autorisation sur trois fait pareil. » |
 | 0:15 à 0:30 | Le site piraté : le solde 100 descend à 0 en une seconde, puis silence. Petit bandeau : LI.FI, juillet 2024. | « 0 » puis « LI.FI · 11,6 M$ » | « Chez LI.FI, ceux qui avaient limité leur droit n'ont rien perdu. » |
 | 0:30 à 0:40 | Fond uni. Le mot Hold up s'écrit. | « Hold up » puis « Donne seulement ce qu'il faut. » | « Hold up. » |
 | 0:40 à 1:10 | Capture réelle : la fenêtre de l'extension s'ouvre. Le curseur tape « échanger 50 USDC ». La fenêtre répond en rouge, deux lignes face à face : « Tu as écrit 50 » et « La demande donne tout ». Zoom sur le bouton « Limiter à 50 ». | « Ça ne correspond pas. » | « Tu écris ce que tu veux faire. Hold up lit la demande, et compare. » |
@@ -26,7 +26,7 @@ Principe : l'image montre, le texte confirme, la voix soutient. Environ 140 mots
 | 2:25 à 2:40 | Trois mots qui apparaissent un à un sur fond uni : « Gratuit. » puis « Financé par les plateformes sobres. » | « Gratuit pour toi. » | « Gratuit pour toi. Financé, plus tard, par les plateformes qui ne demandent que le nécessaire. » |
 | 2:40 à 3:00 | Retour aux deux fenêtres du début, calmes. Fondu vers la carte finale : logo, lien du dépôt, code QR. | « Tout site peut tomber. Ce qu'il emporte, c'est toi qui le décides. » | « Tout site peut tomber. Ce qu'il emporte avec lui, c'est toi qui le décides. » |
 
-Total de voix : environ 140 mots, soit 65 secondes de parole sur 180 secondes. Le reste est image, son et lecture.
+Total de voix : environ 150 mots, soit 65 secondes de parole sur 180 secondes. Le reste est image, son et lecture.
 
 ## Ce qu'il faut tourner (liste des plans)
 1. Deux fenêtres identiques du site de démo Neve (research/demo_reelle/site_echange), mode honnête et mode piège.
@@ -39,6 +39,7 @@ Total de voix : environ 140 mots, soit 65 secondes de parole sur 180 secondes. L
 8. Carte finale.
 
 ## Honnêteté (ne pas retirer)
+- Seule la chaîne Avalanche est citée (34,2 % des autorisations illimitées sur la C-Chain, notre mesure, un échantillon de blocs). Aucune mention d'Ethereum.
 - Le piratage est une scène de démonstration sur une copie locale d'Avalanche : le dire en petit.
 - La révocation est simulée dans la démo web : « portefeuille simulé » reste affiché.
 - LI.FI est cité comme un fait public (rapport de LI.FI) : 11,6 M$ et 153 portefeuilles, sans plus.
