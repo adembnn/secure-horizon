@@ -5,3 +5,9 @@ cache/
 realscan/out/cache_*.json
 **/cache_*.json
 *.log
+boucle/work/
+boucle/cache/
+boucle/bench/
+boucle/R_cas_complexes/
+boucle/U_textes_utilisateur.json
+boucle/base/

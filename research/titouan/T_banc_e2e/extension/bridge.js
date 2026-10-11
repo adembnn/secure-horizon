@@ -8,14 +8,19 @@
   'use strict';
   // ================= channel to inject.js =================
   let port = null;
+  // Random 128-bit token given to inject.js in "ready" only (through the private port). Every message in both directions carries it :
+  // a message without it is ignored (a page that replaced a native method of its own world sees neither the token nor the port).
+  let token = '';
+  function newToken() { const a = new Uint8Array(16); crypto.getRandomValues(a); return Array.from(a, (b) => b.toString(16).padStart(2, '0')).join(''); }
   function onHello(ev) {
     const d = ev.data;
     if (ev.source !== window || !d || d.__sentinelle !== 'hello' || !ev.ports || !ev.ports[0]) return;
     ev.stopImmediatePropagation(); // the page never sees a port, not even the ones of the retries that arrive after the connection
     if (port) return;
     port = ev.ports[0];
+    token = newToken();
     port.onmessage = onPortMsg;
-    port.postMessage({ t: 'ready' });
+    port.postMessage({ t: 'ready', k: token });
   }
   window.addEventListener('message', onHello, true);
   // document.open() (document.write in an about:blank iframe) removes the window listeners : put it back until connected.
@@ -38,7 +43,7 @@
     const w = waits.get(rid); if (!w) return;
     waits.delete(rid); clearTimeout(w.timer);
     if (w.overlay) w.overlay.abort();
-    const out = { t: 'result', id: w.id, allow: !!allow, reason: allow ? '' : (reason || 'denied') };
+    const out = { t: 'result', id: w.id, k: token, allow: !!allow, reason: allow ? '' : (reason || 'denied') };
     if (allow && Array.isArray(params)) out.params = params; // request limited by Hold up (Q17)
     try { port.postMessage(out); } catch (_) {}
     send({ type: 'hu.ack', rid }).catch(() => {});
@@ -82,13 +87,13 @@
     const n = ++readN;
     const timer = setTimeout(() => { if (reads.delete(n)) sendResponse({ ok: false }); }, 9000);
     reads.set(n, (m) => { clearTimeout(timer); sendResponse(m.ok === true ? { ok: true, result: m.result } : { ok: false }); });
-    try { port.postMessage({ t: 'rpc', id: w.id, n, method: msg.method, params: msg.params }); } catch (_) { reads.delete(n); clearTimeout(timer); sendResponse({ ok: false }); return false; }
+    try { port.postMessage({ t: 'rpc', id: w.id, k: token, n, method: msg.method, params: msg.params }); } catch (_) { reads.delete(n); clearTimeout(timer); sendResponse({ ok: false }); return false; }
     return true; // answered later
   }
   function onPortMsg(ev) {
-    const m = ev.data; if (!m) return;
+    const m = ev.data; if (!m || m.k !== token) return;
     if (m.t === 'rpcResult') { const cb = reads.get(m.n); if (cb) { reads.delete(m.n); cb(m); } return; }
-    if (m.t === 'gate') { port.postMessage({ t: 'ack', id: m.id }); startGate(m); }
+    if (m.t === 'gate') { port.postMessage({ t: 'ack', id: m.id, k: token }); startGate(m); }
     else if (m.t === 'notify') {
       send({ type: 'gate', payload: Object.assign({}, m.payload, { kind: 'journal' }), origin: location.origin, url: location.href }).catch(() => {});
     }

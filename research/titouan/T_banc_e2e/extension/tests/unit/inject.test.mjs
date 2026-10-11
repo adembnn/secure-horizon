@@ -6,6 +6,7 @@ import vm from 'node:vm';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { DIR } from './fake_chrome.mjs';
+const TOKEN = '0123456789abcdef0123456789abcdef'; // token the real bridge.js gives in "ready" (S1/S5)
 
 const SRC = readFileSync(join(DIR, 'inject.js'), 'utf8');
 const cleanups = [];
@@ -33,12 +34,12 @@ function page({ decide = () => true, bridge = true, before = '' } = {}) {
         const m = ev.data;
         if (m.t === 'notify') { notes.push(m.payload); return; }
         if (m.t !== 'gate') return;
-        port.postMessage({ t: 'ack', id: m.id });
+        port.postMessage({ t: 'ack', id: m.id, k: TOKEN });
         gates.push(m.payload);
         let allow = false; try { allow = !!(await decide(m.payload)); } catch (_) {}
-        port.postMessage({ t: 'result', id: m.id, allow, reason: allow ? '' : 'denied' });
+        port.postMessage({ t: 'result', id: m.id, k: TOKEN, allow, reason: allow ? '' : 'denied' });
       };
-      port.postMessage({ t: 'ready' });
+      port.postMessage({ t: 'ready', k: TOKEN });
     }
   };
   sb.window = sb; sb.top = sb; sb.self = sb; sb.globalThis = sb;
@@ -254,7 +255,7 @@ test('(g) dry run : while a request is held, only read methods are relayed to th
   const read = (id, n, method, params) => new Promise((res) => {
     const port = P.ctx._port;
     const h = (ev) => { if (ev.data && ev.data.t === 'rpcResult' && ev.data.n === n) { port.removeEventListener('message', h); res(ev.data); } };
-    port.addEventListener('message', h); port.postMessage({ t: 'rpc', id, n, method, params });
+    port.addEventListener('message', h); port.postMessage({ t: 'rpc', id, n, k: TOKEN, method, params });
   });
   P = page({ decide: async () => {
     got.push(await read(1, 1, 'eth_call', [{ to: '0x' + 'b2'.repeat(20), data: '0x313ce567' }, 'latest']));

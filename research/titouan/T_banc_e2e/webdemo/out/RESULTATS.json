@@ -31,12 +31,12 @@
    "detail": ""
   },
   {
-   "name": "89 cas de test (>= 30) : 9 scenarios x 6 intentions + requetes types + malformees",
+   "name": "119 cas de test (>= 30) : 13 scenes x 6 intentions + requetes types + malformees",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "'ok' ne sort jamais : 0 sur 89 verdicts (niveau et level)",
+   "name": "'ok' ne sort jamais : 0 sur 119 verdicts (niveau et level)",
    "pass": true,
    "detail": ""
   },
@@ -46,14 +46,14 @@
    "detail": ""
   },
   {
-   "name": "verdicts IDENTIQUES a la voie de reference (server/server.mjs) : 89/89",
+   "name": "verdicts IDENTIQUES a la voie de reference (server/server.mjs) : 119/119",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "les 9 scenarios, reponse honnete : niveaux attendus (2 sans signal, 6 danger, 1 manipulation)",
-   "pass": true,
-   "detail": "{\"envoi_simple\":\"info\",\"echange_legitime\":\"info\",\"echange_droit_illimite\":\"danger\",\"droit_illimite\":\"danger\",\"permit_piege\":\"danger\",\"tous_les_nft\":\"danger\",\"adresse_sosie\":\"danger\",\"changement_proprietaire\":\"danger\",\"faux_support\":\"manipulation\"}"
+   "name": "les 13 scenarios, reponse honnete : niveaux attendus (4 sans signal, 1 attention, 7 danger, 1 manipulation)",
+   "pass": false,
+   "detail": "{\"echange_honnete\":\"info\",\"echange_routeur_connu\":\"attention\",\"echange_droit_illimite\":\"danger\",\"coffre_delegatecall\":\"danger\",\"coffre_conforme\":\"info\",\"permit_piege\":\"danger\",\"envoi_simple\":\"info\",\"echange_legitime\":\"info\",\"droit_illimite\":\"danger\",\"tous_les_nft\":\"danger\",\"adresse_sosie\":\"danger\",\"changement_proprietaire\":\"danger\",\"faux_support\":\"manipulation\"}"
   },
   {
    "name": "aucun appel reseau (fetch/XHR/WebSocket pieges) pendant les verdicts",
@@ -211,8 +211,8 @@
    "detail": ""
   },
   {
-   "name": "app.js : 9 scenarios affiches",
-   "pass": true,
+   "name": "app.js : 13 scenarios affiches",
+   "pass": false,
    "detail": ""
   },
   {
@@ -291,7 +291,7 @@
    "detail": ""
   },
   {
-   "name": "aucune URL externe : 21 noms d hote trouves, fictifs (.example/.test) ou etiquettes de test dans js/exemples_public.js (donnees, jamais chargees) ; aucun src/href/CSS externe (pas de CDN)",
+   "name": "aucune URL externe : 23 noms d hote trouves, fictifs (.example/.test) ou etiquettes de test dans js/exemples_public.js (donnees, jamais chargees) ; aucun src/href/CSS externe (pas de CDN)",
    "pass": true,
    "detail": ""
   },
@@ -311,7 +311,7 @@
    "detail": ""
   },
   {
-   "name": "taille du site : 34 fichiers, 341 Ko (environ 114 Ko compresses)",
+   "name": "taille du site : 35 fichiers, 357 Ko (environ 117 Ko compresses)",
    "pass": true,
    "detail": ""
   }
@@ -324,25 +324,29 @@
  "scenarios": {
   "filtres_par_la_couche_http_du_serveur": 3,
   "correctif_jours_absorbe": 0,
-  "cas": 89,
-  "identiques": 89,
+  "cas": 119,
+  "identiques": 119,
   "ecarts": [],
   "niveaux_affiches": {
-   "info": 19,
-   "danger": 52,
+   "info": 28,
+   "attention": 4,
+   "danger": 70,
    "manipulation": 4,
-   "attention": 1,
    "unknown": 13
   },
-  "ms_total": 267,
-  "ms_par_verdict": 3
+  "ms_total": 293,
+  "ms_par_verdict": 2.46
  },
  "niveaux_scenarios": {
+  "echange_honnete": "info",
+  "echange_routeur_connu": "attention",
+  "echange_droit_illimite": "danger",
+  "coffre_delegatecall": "danger",
+  "coffre_conforme": "info",
+  "permit_piege": "danger",
   "envoi_simple": "info",
   "echange_legitime": "info",
-  "echange_droit_illimite": "danger",
   "droit_illimite": "danger",
-  "permit_piege": "danger",
   "tous_les_nft": "danger",
   "adresse_sosie": "danger",
   "changement_proprietaire": "danger",
@@ -377,6 +381,7 @@
    "app.example-official.org",
    "app.safe.global",
    "app.uniswap.org",
+   "coffre-demo.example",
    "cowswap.exchange",
    "dex.newchain.test",
    "echange-demo.example",
@@ -386,6 +391,7 @@
    "mint-gratuit-demo.example",
    "opensea.io",
    "paiement-demo.example",
+   "recompenses-demo.example",
    "rembourse-demo.example",
    "revoke.example-official.org",
    "securite-compte-demo.example",
@@ -397,9 +403,9 @@
   ]
  },
  "taille": {
-  "fichiers_publies": 34,
-  "octets_total": 349069,
-  "octets_gzip_estimes": 116466,
+  "fichiers_publies": 35,
+  "octets_total": 365827,
+  "octets_gzip_estimes": 119940,
   "plus_gros": [
    {
     "f": "engine/sentinelle_core.js",
@@ -423,6 +429,6 @@
    }
   ]
  },
- "echecs": 0,
+ "echecs": 2,
  "verifications": 63
 }

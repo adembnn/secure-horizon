@@ -1,6 +1,6 @@
 // Hold up - demo web. Tout tourne dans cette page : aucun appel reseau, aucun serveur, aucun vrai portefeuille.
 import { h, $, clear, renderVerdict } from './ui.js';
-import { SCENARIOS, WALLET, LOCAL, INTENTS, intentLabel } from './scenarios.js';
+import { SCENARIOS, GROUPES, WALLET, LOCAL, INTENTS, intentLabel, localOf } from './scenarios.js';
 import { holdRequest } from './holdup.js';
 import { check, displayLevel, withIntent, sanitizeLocalContext } from './verdict_model.js';
 import { parsePasted, EXEMPLE_TX, EXEMPLE_TYPED } from './paste.js';
@@ -30,7 +30,12 @@ function rawRows(body) {
   const p = body.params[0];
   if (body.method === 'eth_sendTransaction') {
     const data = p.data || '0x';
-    return [['Réseau', 'Ethereum (fictif)'], ['À', p.to], ['Montant', ethOf(p.value)], ['Données', data === '0x' ? 'aucune' : data.slice(0, 10) + '… (' + Math.max(0, (data.length - 2) / 2) + ' octets)']];
+    const rows = [['Réseau', 'Ethereum (fictif)'], ['À', p.to], ['Montant', ethOf(p.value)], ['Données', data === '0x' ? 'aucune' : data.slice(0, 10) + '… (' + Math.max(0, (data.length - 2) / 2) + ' octets)']];
+    if (data.startsWith('0x095ea7b3') && data.length === 2 + 8 + 128) { // approve(spender, montant) : un portefeuille affiche le plafond demandé
+      const amt = BigInt('0x' + data.slice(34 + 40, 10 + 128));
+      rows.push(['Autorise', '0x' + data.slice(34, 74)], ['Plafond demandé', amt >= 2n ** 255n ? 'illimité' : (amt % 1000000n === 0n ? String(amt / 1000000n) : String(amt)) + (amt % 1000000n === 0n ? ' USDC' : ' (unité brute)')]);
+    }
+    return rows;
   }
   let td = {}; try { td = JSON.parse(body.params[1]); } catch (_) { /* rien */ }
   return [['Type', 'Message à signer (EIP-712)'], ['Application', (td.domain && td.domain.name) || '—'], ['Contrat', (td.domain && td.domain.verifyingContract) || '—'], ['Contenu', JSON.stringify(td.message || {}).slice(0, 140) + '…']];
@@ -38,9 +43,12 @@ function rawRows(body) {
 
 function buildDemo() {
   const list = $('#scen-list');
-  for (const s of SCENARIOS) {
-    list.append(h('li', {}, h('button', { class: 'scen', type: 'button', 'data-id': s.id, 'aria-pressed': 'false', onclick: () => select(s.id) },
-      h('span', { class: 'scen-t' }, s.titre), h('span', { class: 'scen-s' }, s.resume))));
+  for (const g of GROUPES) {
+    list.append(h('li', { class: 'grp' }, h('h3', {}, g)));
+    for (const s of SCENARIOS.filter((x) => x.groupe === g)) {
+      list.append(h('li', {}, h('button', { class: 'scen', type: 'button', 'data-id': s.id, 'aria-pressed': 'false', onclick: () => select(s.id) },
+        h('span', { class: 'scen-t' }, s.titre), s.synthetique ? h('span', { class: 'scen-syn' }, 'Scène synthétique, adresses factices') : null, h('span', { class: 'scen-s' }, s.resume))));
+    }
   }
   $('#cfg-delay').addEventListener('change', (e) => { cfg.delay = Number(e.target.value); });
   $('#cfg-ask').addEventListener('change', (e) => { cfg.ask = e.target.checked; });
@@ -55,24 +63,36 @@ function select(id) {
   const box = clear($('#wallet-req')); clear($('#wallet-out'));
   if (!selected) { box.append(h('p', { class: 'muted' }, 'Choisis un scénario à gauche : le faux site demande une signature à ce faux portefeuille.')); return; }
   const s = selected;
+  const rows = (list) => h('dl', { class: 'raw' }, list.map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, h('code', {}, v)))));
   box.append(
+    s.synthetique ? h('p', { class: 'syn' }, 'Scène synthétique, adresses factices. Elle montre le décodage, pas une attaque de bout en bout.') : null,
     h('p', { class: 'req-from' }, h('b', {}, s.site), ' · ', h('code', {}, s.origin)),
     h('p', { class: 'req-what' }, 'Ce que le site te dit : ' + s.resume),
-    h('dl', { class: 'raw' }, rawRows(s.body).map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, h('code', {}, v))))),
-    h('p', { class: 'muted hint' }, 'Réponse honnête à la question de Hold up : « ' + intentLabel(s.intentHonnete) + ' ». Essaie aussi une autre réponse : elle ne peut que relever l’alerte, jamais la baisser.'),
+    s.affiche ? h('div', { class: 'shown' }, h('h4', {}, 'Ce que l’écran du coffre affiche (fictif)'), rows(s.affiche), h('h4', {}, 'Ce que le portefeuille reçoit')) : null,
+    rows(s.brut || rawRows(s.body)),
+    h('p', { class: 'muted hint' }, hintOf(s)),
     h('div', { class: 'wallet-actions' },
       h('button', { class: 'btn btn-wallet-no', type: 'button', onclick: () => { $('#wallet-out').textContent = 'Tu as rejeté la demande dans le portefeuille. Rien n’a été signé.'; } }, 'Rejeter'),
       h('button', { class: 'btn btn-wallet-yes', type: 'button', id: 'sign-btn', onclick: () => sign(s) }, 'Signer')));
 }
+// Phrase d'aide sous la requête : la reponse honnete, et ce que la scene montre en plus.
+function hintOf(s) {
+  const base = 'Réponse honnête à la question de Hold up : « ' + intentLabel(s.intentHonnete) + ' ». Essaie aussi une autre réponse : elle ne peut que relever l’alerte, jamais la baisser.';
+  if (s.id === 'echange_routeur_connu') return base + ' Sans réponse, ce routeur connu passe sans alerte : c’est ta phrase qui fait voir l’écart.';
+  if (s.synthetique) return base + ' Le niveau ne dépend pas de ta phrase : décoche la question d’intention et le résultat ne change pas.';
+  return base;
+}
 async function sign(s) {
   const btn = $('#sign-btn'); btn.disabled = true;
   const out = clear($('#wallet-out'));
-  const r = await holdRequest({ body: s.body, local: LOCAL, delaySec: cfg.delay, askIntent: cfg.ask, siteLabel: s.site, intentDetails: s.intentDetails || null, ecrit: s.ecrit || '', honnete: s.intentHonnete });
+  const r = await holdRequest({ body: s.body, local: localOf(s), delaySec: cfg.delay, askIntent: cfg.ask, siteLabel: s.site, intentDetails: s.intentDetails || null, ecrit: s.ecrit || '', honnete: s.intentHonnete, corrige: s.corrige || null });
   btn.disabled = false;
-  logEntry({ source: 'demo', scenario: s.id, intent: r.intentKey, level: r.level, niveau: r.verdict && r.verdict.niveau, fiche: r.verdict && r.verdict.fiche, decision: r.decision, delay_s: r.delaySec ?? null, ms: r.ms });
+  logEntry({ source: 'demo', scenario: s.id, intent: r.intentKey, level: r.level, niveau: r.verdict && r.verdict.niveau, fiche: r.verdict && r.verdict.fiche, decision: r.decision === 'sign' && r.limited ? 'continuer_limite' : r.decision, delay_s: r.delaySec ?? null, ms: r.ms });
   out.textContent = r.decision === 'cancel'
     ? 'Annulé avec Hold up : la demande n’a pas atteint le portefeuille. Rien n’a été signé.'
-    : 'Tu as choisi de continuer. Dans cette démo rien n’est signé ni envoyé (faux portefeuille, aucune clé). Avec un vrai portefeuille, la signature serait partie ici.';
+    : r.limited
+      ? 'Tu as choisi de continuer avec ' + s.corrige.label.toLowerCase() + '. Dans cette démo rien n’est signé ni envoyé (faux portefeuille, aucune clé). Avec un vrai portefeuille, c’est la demande limitée qui serait partie ici.'
+      : 'Tu as choisi de continuer. Dans cette démo rien n’est signé ni envoyé (faux portefeuille, aucune clé). Avec un vrai portefeuille, la signature serait partie ici.';
 }
 
 // ------------------------------------------------------------------ 3) colle une transaction

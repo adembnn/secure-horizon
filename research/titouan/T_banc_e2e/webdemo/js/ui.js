@@ -16,6 +16,12 @@ export function h(tag, attrs, ...kids) {
 export const $ = (sel, root = document) => root.querySelector(sel);
 export const clear = (el) => { while (el.firstChild) el.removeChild(el.firstChild); return el; };
 
+// Les trois reponses de Hold up a « est-ce que ça correspond ? » (decision D-009). Jamais de vert, jamais « OK ».
+export const MATCH = {
+  yes: 'Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.',
+  no: 'Ça ne correspond pas.',
+  unknown: 'Je n’ai pas pu vérifier cette demande.',
+};
 const SEV = { critical: 'critique', warn: 'à vérifier', info: 'info' };
 const NBSP = ' ';
 
@@ -67,18 +73,30 @@ export function verdictParts(v, opts = {}) {
   const top = [];
   if (lv.key === 'manipulation') {
     top.push(h('h1', { class: 'instruction', ...idAttr }, fx(lv.sentence, o)), h('p', { class: 'reassure' }, 'Rien n’est parti.'));
-  } else {
-    const quietLv = lv.key === 'info' || lv.key === 'unknown'; // pas d'alerte : le titre nomme l'etat, la phrase rappelle que ce n'est pas une garantie
-    top.push(h('h1', { class: 'verdict', ...idAttr }, quietLv ? lv.label + '.' : fx(lv.sentence, o)));
-    if (quietLv) top.push(h('p', { class: 'reassure' }, fx(lv.sentence, o)));
-    if (opts.compare && lv.key !== 'unknown' && !v.address_diff) {
-      // intention ECRITE contre effet reel. Jamais de vert ni de "OK" : meme quand rien n'est vu, on dit que ce n'est pas une garantie.
-      const match = lv.key === 'info';
+  } else if (opts.compare && !v.address_diff) {
+    // Intention ECRITE contre effet reel. Trois reponses possibles, jamais de vert ni de "OK" : « Ça correspond » rappelle toujours que ce n'est pas une garantie.
+    const st = lv.key === 'unknown' ? 'unknown' : lv.key === 'info' ? 'yes' : 'no';
+    const sentence = MATCH[st];
+    top.push(h('h1', { class: 'verdict match match-' + st, ...idAttr }, sentence));
+    if (st === 'unknown') {
+      top.push(h('p', { class: 'levelline' }, 'Ce n’est pas un feu vert. Annule, ou vérifie par un autre moyen.'),
+        h('dl', { class: 'gap gap-unknown' }, h('div', { class: 'real' }, h('dt', {}, 'Ce que l’on sait'), h('dd', {}, fx(t.reel, o)))));
+    } else {
+      // une ligne de niveau (jamais seule : la phrase ci-dessus porte la reponse)
+      top.push(h('p', { class: 'levelline' }, st === 'yes' ? (lv.label + '. ' + (v.fiche === 'F26' && t.danger ? fx(t.danger, o) : '')).trim() : 'Niveau ' + lv.label + '. ' + fx(lv.sentence, o)));
       top.push(h('dl', { class: 'gap gap-' + lv.key },
         h('div', {}, h('dt', {}, 'Ce que tu voulais'), h('dd', {}, '« ' + opts.compare.voulu + ' »')),
-        h('div', { class: 'real' }, h('dt', {}, 'Ce que la demande fait'), h('dd', {}, fx(t.reel, o)))),
-      h('p', { class: 'match ' + (match ? 'match-yes' : 'match-no') }, match ? 'Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.' : 'Ça ne correspond pas.'));
-    } else if (v.address_diff) {
+        h('div', { class: 'real' }, h('dt', {}, 'Ce que la demande fait'), h('dd', {}, fx(t.reel, o)))));
+    }
+    if (opts.compare.fix) top.push(h('p', { class: 'fixline' }, opts.compare.fix));
+  } else {
+    const quietLv = lv.key === 'info' || lv.key === 'unknown'; // pas d'alerte : le titre nomme l'etat, la phrase rappelle que ce n'est pas une garantie
+    const noPhrase = !opts.intentKey || opts.intentKey === 'other' || opts.intentKey === 'none';
+    top.push(h('h1', { class: 'verdict' + (lv.key === 'unknown' ? ' match match-unknown' : ''), ...idAttr }, lv.key === 'unknown' ? MATCH.unknown : quietLv ? lv.label + '.' : fx(lv.sentence, o)));
+    if (quietLv) top.push(h('p', { class: 'reassure' }, fx(lv.sentence, o)));
+    if (v.niveau === 'info' && v.fiche === 'F26' && lv.key === 'info' && t.danger) top.push(h('p', { class: 'levelline' }, fx(t.danger, o)));
+    if (noPhrase && (lv.key === 'danger' || lv.key === 'attention') && !v.address_diff) top.push(h('p', { class: 'levelline' }, 'Tu n’as pas écrit ce que tu voulais faire. Hold up applique seulement ses règles de base.'));
+    if (v.address_diff) {
       const a = addrBlock(v.address_diff);
       top.push(a.node); if (a.count) top.push(h('p', { class: 'count' }, a.count));
     } else if (lv.key === 'unknown') {

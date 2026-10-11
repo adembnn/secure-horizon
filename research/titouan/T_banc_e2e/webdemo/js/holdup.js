@@ -8,7 +8,8 @@ const mmss = (s) => (s >= 60 ? Math.floor(s / 60) + ':' + String(s % 60).padStar
 
 // Retourne une promesse { decision: 'cancel' | 'sign', intentKey, verdict, level, delaySec, ms }
 // intentDetails (optionnel) : jeton, montant, jeton recu dits par la personne ; ecrit (optionnel) : l'intention en une phrase. Ils ne servent que si la reponse choisie est l'intention honnete du scenario (honnete).
-export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteLabel = '', intentDetails = null, ecrit = '', honnete = null }) {
+// corrige (optionnel) : { label, bouton, body } = la meme demande avec le droit limite au montant ecrit (Q17 de l'extension). Propose seulement pour une transaction, jamais pour une signature.
+export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteLabel = '', intentDetails = null, ecrit = '', honnete = null, corrige = null }) {
   return new Promise((resolve) => {
     const t0 = performance.now();
     const previous = document.activeElement;
@@ -23,7 +24,7 @@ export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteL
       document.removeEventListener('keydown', onKey, true);
       veil.remove();
       try { if (previous && previous.focus) previous.focus(); } catch (_) { /* rien */ }
-      resolve({ decision, intentKey: state.intentKey, verdict: state.verdict, level: state.verdict ? displayLevel(state.verdict).key : null, delaySec: state.delay, ms: Math.round(performance.now() - t0) });
+      resolve({ decision, intentKey: state.intentKey, verdict: state.verdict, level: state.verdict ? displayLevel(state.verdict).key : null, delaySec: state.delay, limited: !!state.fixed, ms: Math.round(performance.now() - t0) });
     };
     const onKey = (e) => {
       if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); finish('cancel'); return; }
@@ -61,16 +62,24 @@ export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteL
       ], [h('div', { class: 'actions' }, go), h('div', { class: 'foot' }, cancelBtn('quiet'))], 'input[name="intent"]');
     }
 
-    function stepVerdict() {
+    function stepVerdict(fixed = false) {
+      if (timer) { clearInterval(timer); timer = null; }
+      if (timer) { clearInterval(timer); timer = null; }
       // 'swap' est lu par le comparateur (toIntent) ; 'other' n'a pas de traduction : plancher objectif seul.
-      const useDetails = !!intentDetails && !!ecrit && state.intentKey === honnete;
-      const b0 = withIntent(body, state.intentKey === 'other' ? 'none' : state.intentKey);
+      // La phrase ecrite n'est montree que si la reponse choisie est l'intention honnete du scenario ; les details (jeton, montant) ne partent au comparateur qu'alors.
+      const showWritten = !!ecrit && state.intentKey === honnete;
+      const useDetails = showWritten && !!intentDetails;
+      const src = fixed && corrige ? corrige.body : body;
+      const b0 = withIntent(src, state.intentKey === 'other' ? 'none' : state.intentKey);
       const b = useDetails ? { ...b0, intent_details: intentDetails } : b0;
       const v = check(b, sanitizeLocalContext(local));
-      state.verdict = v;
+      state.verdict = v; state.fixed = fixed;
       const lv = displayLevel(v);
-      const delay = frictionSeconds(lv.key, delaySec); state.delay = delay;
-      const parts = verdictParts(v, { body: b, local, intentKey: askIntent ? state.intentKey : null, ids: true, compare: useDetails ? { voulu: ecrit } : null });
+      // Q16 : quand le seul ecart est « droit plus large que le montant ecrit » (transaction) et qu'une correction existe, pas d'attente : la correction suffit.
+      const canFix = !fixed && !!corrige && showWritten && lv.key === 'attention' && (v.raisons || []).some((r) => r.code === 'approval_exceeds_intent');
+      const delay = canFix ? 0 : frictionSeconds(lv.key, delaySec); state.delay = delay;
+      const compare = showWritten ? { voulu: ecrit, fix: fixed ? corrige.label + '.' : canFix ? 'Tu peux limiter le droit à ce que tu as écrit : ' + corrige.label.replace(/^Droit limité à /, '') + '.' : '' } : null;
+      const parts = verdictParts(v, { body: b, local, intentKey: askIntent ? state.intentKey : null, ids: true, compare });
       const bodyKids = [h('div', { id: 'hu-desc' }, parts.top)];
       let timerBig = null;
       if (lv.key === 'manipulation') {
@@ -83,9 +92,12 @@ export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteL
         ? h('button', { class: 'btn-primary', type: 'button', onclick: () => finish('sign') }, 'Continuer')
         : h('button', { class: 'quiet', type: 'button', disabled: delay > 0, onclick: () => finish('sign') }, 'Continuer quand même');
       const timerLine = h('p', { class: 'timer-line', 'aria-hidden': 'true' });
+      const fixBtn = canFix ? h('button', { class: 'btn-primary', type: 'button', 'data-autofocus': '1', onclick: () => stepVerdict(true) }, corrige.bouton) : null;
       const dock = calm
         ? [h('div', { class: 'actions' }, cont, cancelBtn('btn-secondary'))]
-        : [h('div', { class: 'actions' }, cancelBtn('btn-primary', { 'data-autofocus': '1' })), h('div', { class: 'foot' }, cont, timerLine)];
+        : canFix
+          ? [h('div', { class: 'actions' }, fixBtn, cancelBtn('btn-secondary')), h('div', { class: 'foot' }, cont, timerLine)]
+          : [h('div', { class: 'actions' }, cancelBtn('btn-primary', { 'data-autofocus': '1' })), h('div', { class: 'foot' }, cont, timerLine)];
       frame(bodyKids, dock, calm ? '.btn-primary' : '[data-autofocus]');
       if (delay > 0 && !calm) {
         let left = delay;

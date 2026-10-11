@@ -82,6 +82,9 @@ const { REQUESTS } = await imp(join(ROOT, 'extension_standalone', 'tests', 'requ
 const tmpCtx = join(tmpdir(), 'holdup_webdemo_ctx.json'); writeFileSync(tmpCtx, JSON.stringify(S.LOCAL));
 const refLocal = REF.loadLocalContext(tmpCtx);
 const webLocal = M.sanitizeLocalContext(S.LOCAL);
+// contexte propre a chaque scene (ex. le routeur connu de la scene 1) : meme contenu cote page et cote voie de reference (fichier lu par loadLocalContext)
+const webLocalOf = (s) => M.sanitizeLocalContext(S.localOf(s));
+const refLocalOf = (s) => { const f = join(tmpdir(), 'holdup_webdemo_ctx_' + s.id + '.json'); writeFileSync(f, JSON.stringify(S.localOf(s))); return REF.loadLocalContext(f); };
 const emptyLocal = M.emptyLocal();
 const KEYS = ['level', 'niveau', 'fiche', 'texts', 'codes', 'effects', 'raisons', 'indeterminate', 'quote', 'address_diff', 'risk_signals', 'intent_contradiction', 'texts_source', 'lead'];
 const pick = (v) => JSON.stringify(KEYS.map((k) => v[k]));
@@ -94,14 +97,14 @@ function fixRef(r) { if (r && r.texts) for (const k of Object.keys(r.texts)) { c
 const BAD_WORDS = /\b(ok|protégé|protege|bloqué|bloque|sûr|sur et sécurisé|safe)\b/i;
 
 const cases = [];
-for (const s of S.SCENARIOS) for (const i of [s.intentHonnete, 'pay', 'receive', 'asked', 'other', 'none']) cases.push({ name: `scenario ${s.id} / intention ${i}`, body: M.withIntent(s.body, i === 'other' ? 'none' : i, i === s.intentHonnete ? s.intentDetails : undefined), local: 'scen' });
+for (const s of S.SCENARIOS) for (const i of [s.intentHonnete, 'pay', 'receive', 'asked', 'other', 'none']) cases.push({ name: `scenario ${s.id} / intention ${i}`, body: M.withIntent(s.body, i === 'other' ? 'none' : i, i === s.intentHonnete ? s.intentDetails : undefined), local: 'scen', scen: s });
 for (const q of REQUESTS) { const b = q.body; const isObj = b && typeof b === 'object' && !Array.isArray(b); const raw = isObj ? (({ _local, ...r }) => r)(b) : b; cases.push({ name: 'type: ' + q.name, body: raw, local: isObj && b._local === 'contact' ? 'scen' : 'empty' }); }
-ok(cases.length >= 30, `${cases.length} cas de test (>= 30) : 9 scenarios x 6 intentions + requetes types + malformees`);
+ok(cases.length >= 30, `${cases.length} cas de test (>= 30) : 13 scenes x 6 intentions + requetes types + malformees`);
 
 let okSeen = 0, identical = 0, bad = []; const diffs = []; const levels = {};
 const t0 = performance.now();
 for (const c of cases) {
-  const wl = c.local === 'scen' ? webLocal : emptyLocal, rl = c.local === 'scen' ? refLocal : { contacts: [], history: [], protected: [], knownSpenders: [] };
+  const wl = c.scen ? webLocalOf(c.scen) : c.local === 'scen' ? webLocal : emptyLocal, rl = c.scen ? refLocalOf(c.scen) : c.local === 'scen' ? refLocal : { contacts: [], history: [], protected: [], knownSpenders: [] };
   const v = M.check(structuredCloneSafe(c.body), wl);
   const r = refVerdict(structuredCloneSafe(c.body), rl);
   const lv = M.displayLevel(v); levels[lv.key] = (levels[lv.key] || 0) + 1;
@@ -123,10 +126,11 @@ R.scenarios = { filtres_par_la_couche_http_du_serveur: filtered, correctif_jours
 
 // les 8 scenarios : avec l'intention honnete, ce qu'on attend (le plancher objectif ne depend pas de l'intention)
 {
-  const expect = { envoi_simple: 'info', echange_legitime: 'info', echange_droit_illimite: 'danger', droit_illimite: 'danger', permit_piege: 'danger', tous_les_nft: 'danger', adresse_sosie: 'danger', changement_proprietaire: 'danger', faux_support: 'manipulation' };
+  const expect = { echange_honnete: 'info', echange_routeur_connu: 'attention', echange_droit_illimite: 'danger', coffre_delegatecall: 'danger', coffre_conforme: 'info', permit_piege: 'danger',
+    envoi_simple: 'info', echange_legitime: 'info', droit_illimite: 'danger', tous_les_nft: 'danger', adresse_sosie: 'danger', changement_proprietaire: 'danger', faux_support: 'manipulation' };
   const got = {}; let all = true;
-  for (const s of S.SCENARIOS) { const k = M.displayLevel(M.check(M.withIntent(s.body, s.intentHonnete, s.intentDetails), webLocal)).key; got[s.id] = k; if (k !== expect[s.id]) all = false; }
-  ok(all, 'les 9 scenarios, reponse honnete : niveaux attendus (2 sans signal, 6 danger, 1 manipulation)', JSON.stringify(got));
+  for (const s of S.SCENARIOS) { const k = M.displayLevel(M.check(M.withIntent(s.body, s.intentHonnete, s.intentDetails), webLocalOf(s))).key; got[s.id] = k; if (k !== expect[s.id]) all = false; }
+  ok(all && Object.keys(expect).length === S.SCENARIOS.length, 'les 13 scenarios, reponse honnete : niveaux attendus (4 sans signal, 1 attention, 7 danger, 1 manipulation)', JSON.stringify(got));
   R.niveaux_scenarios = got;
   // une reponse fausse sur le faux support ne doit PAS faire baisser a tort : on constate honnetement ce qui se passe
   const fs = S.SCENARIOS.find((s) => s.id === 'faux_support');
@@ -190,7 +194,7 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   const ex = (await imp(join(WD, 'js', 'exemples_public.js'))).default;
   const exl = ex.map((e) => M.check({ origin: e.origin, method: e.request.method, params: e.request.params }, M.emptyLocal()));
   ok(ex.length >= 10 && exl.every((v) => v.niveau !== 'ok'), `colle : ${ex.length} exemples du jeu public chargeables, aucun 'ok'`, JSON.stringify(exl.reduce((a, v) => { const k = M.displayLevel(v).key; a[k] = (a[k] || 0) + 1; return a; }, {})));
-  const tr = M.explain(S.SCENARIOS[2].body, S.LOCAL);
+  const tr = M.explain(S.SCENARIOS.find((x) => x.id === 'echange_droit_illimite').body, S.LOCAL);
   ok(tr.ok && tr.lines.length >= 2 && tr.signals.length >= 1, 'panneau technique : effets decodes et signaux disponibles', tr.lines.map((l) => l.k).join(', '));
 }
 
@@ -272,7 +276,7 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   await imp(join(WD, 'js', 'app.js'));
   const btns = () => [...dom.body.querySelectorAll('button')];
   const scen = dom.body.querySelectorAll('.scen');
-  ok(scen.length === 9, 'app.js : 9 scenarios affiches');
+  ok(scen.length === 13, 'app.js : 13 scenarios affiches');
   // un scenario piege, de bout en bout
   scen.find((b) => b.getAttribute('data-id') === 'tous_les_nft').click();
   ok(E('wallet-req').textContent.includes('Signer') && E('wallet-req').textContent.includes('mint-gratuit-demo.example') && E('wallet-req').textContent.includes('Rejeter'), 'app.js : le faux portefeuille affiche la requete avec Signer / Rejeter');

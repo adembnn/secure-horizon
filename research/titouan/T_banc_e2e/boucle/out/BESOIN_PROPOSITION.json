@@ -1,0 +1,71 @@
+{
+ "iter": 2,
+ "cible": "GRILLE|connexion",
+ "perte": 1.467055322021416,
+ "classement": [
+  [
+   "GRILLE|connexion",
+   1.467055322021416
+  ],
+  [
+   "GRILLE|approbation",
+   1.387959866220736
+  ],
+  [
+   "DECALAGE|montant_plus_grand",
+   1.2682926829268295
+  ],
+  [
+   "DECALAGE|swap_droit_illimite",
+   1.248780487804878
+  ],
+  [
+   "GRILLE|depot",
+   1.2414715719063545
+  ],
+  [
+   "DECALAGE|swap_jeton_different",
+   1.0731707317073171
+  ],
+  [
+   "GRILLE|envoi_natif",
+   1.0253029977601178
+  ],
+  [
+   "GRILLE|permit",
+   0.9588628762541805
+  ],
+  [
+   "DECALAGE|connexion_droit_signe",
+   0.8736141906873616
+  ],
+  [
+   "DEV|safe_execution",
+   0.8225806451612903
+  ],
+  [
+   "PUBLIC|chaine_neuve",
+   0.8163265306122449
+  ],
+  [
+   "GRILLE|setApprovalForAll",
+   0.8157144610475288
+  ],
+  [
+   "GRILLE|envoi_jeton",
+   0.7755285201435977
+  ],
+  [
+   "DEV|erc4337_userop",
+   0.7735874877810361
+  ],
+  [
+   "PUBLIC|solana_tron_autorite",
+   0.732702837232454
+  ]
+ ],
+ "essais": {},
+ "deja": [
+  "P01"
+ ]
+}

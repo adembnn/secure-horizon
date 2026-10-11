@@ -84,7 +84,7 @@
   },
   {
    "file": "extension_standalone/src/sentinelle_core.js",
-   "sha256": "0e7c74b89f254105704bcb8b1ba55b3a5c23c38ffe5bdfc87ad54e5fd9fd3822"
+   "sha256": "d8211f26b013610ac0438e914894bb39dddbcda75a4822b17692d9ff2f538130"
   },
   {
    "file": "run/policy.mjs",

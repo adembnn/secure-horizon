@@ -1,0 +1,52 @@
+{
+ "choix": {
+  "id": "P01",
+  "cible": [
+   "^GRILLE[|]"
+  ],
+  "hypothese": "Un texte écrit par l'utilisateur mais non compris (hors sujet, vague, injection) ne prouve rien : verdict jamais plus bas que « non vérifié » (unknown), jamais vert ; le plancher sans intention est conservé s'il est plus haut.",
+  "edits": [
+   {
+    "file": "pipeline/intent_clef.mjs",
+    "find": "  if (!hasDetail) return { ...f, floorLevel: f.level, rawLevel: f.level, path: 'floor' };",
+    "replace": "  if (!hasDetail) {\n    // texte écrit mais non compris : invérifiable (orange), jamais vert ; le plancher plus haut est conservé\n    const written = cls && cls.reason && cls.reason !== 'empty' && !cls.classified;\n    if (written && rankOf(f.level) < rankOf('unknown')) return { ...f, level: 'unknown', floorLevel: f.level, rawLevel: f.level, path: 'not_understood' };\n    return { ...f, floorLevel: f.level, rawLevel: f.level, path: 'floor' };\n  }"
+   }
+  ]
+ },
+ "avant": {
+  "reg": 72.9798194951414,
+  "val": 73.66722042764854,
+  "jeuxReg": {
+   "DEV": 85.34,
+   "PUBLIC": 71.15,
+   "V2_DEV": 89.24,
+   "DECALAGE": 71.29,
+   "GRILLE": 47.88
+  },
+  "jeuxVal": {
+   "DEV": 88.46,
+   "PUBLIC": 71.25,
+   "V2_DEV": 89.79,
+   "DECALAGE": 70.81,
+   "GRILLE": 48.03
+  }
+ },
+ "apres": {
+  "reg": 73.72413541057817,
+  "val": 74.45908855951669,
+  "jeuxReg": {
+   "DEV": 85.34,
+   "PUBLIC": 71.15,
+   "V2_DEV": 89.24,
+   "DECALAGE": 71.29,
+   "GRILLE": 51.6
+  },
+  "jeuxVal": {
+   "DEV": 88.46,
+   "PUBLIC": 71.25,
+   "V2_DEV": 89.79,
+   "DECALAGE": 70.81,
+   "GRILLE": 51.99
+  }
+ }
+}

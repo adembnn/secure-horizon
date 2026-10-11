@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { makeChrome, fakeClock, load, DIR } from './fake_chrome.mjs';
+const TOKEN = '0123456789abcdef0123456789abcdef'; // token the real bridge.js gives in "ready" (S1/S5)
 
 const { createGatekeeper } = await load('gatekeeper.js');
 const W = await load('written_check.js');
@@ -82,8 +83,8 @@ test('decision 1 : a window only for what moves value or grants a right ; connec
     setTimeout: (f, ms, ...a) => { const t = setTimeout(f, ms, ...a); timers.add(t); return t; }, setInterval: (f, ms) => { const t = setInterval(f, ms); timers.add(t); return t; },
     MessageChannel: class { constructor() { const c = new MessageChannel(); ports.push(c.port1, c.port2); this.port1 = c.port1; this.port2 = c.port2; } } };
   sb.postMessage = (data, origin, transfer) => { if (!data || data.__sentinelle !== 'hello' || sb.port) return; sb.port = transfer[0];
-    sb.port.onmessage = (ev) => { const m = ev.data; if (m.t !== 'gate') return; sb.port.postMessage({ t: 'ack', id: m.id }); sb.gates.push(m.payload.method); sb.port.postMessage({ t: 'result', id: m.id, allow: false, reason: 'denied' }); };
-    sb.port.postMessage({ t: 'ready' }); };
+    sb.port.onmessage = (ev) => { const m = ev.data; if (m.t !== 'gate') return; sb.port.postMessage({ t: 'ack', id: m.id, k: TOKEN }); sb.gates.push(m.payload.method); sb.port.postMessage({ t: 'result', id: m.id, k: TOKEN, allow: false, reason: 'denied' }); };
+    sb.port.postMessage({ t: 'ready', k: TOKEN }); };
   sb.window = sb; sb.top = sb; sb.self = sb; sb.globalThis = sb;
   vm.createContext(sb);
   vm.runInContext('class CustomEvent { constructor(t, i) { this.type = t; this.detail = i && i.detail; } }; globalThis.CustomEvent = CustomEvent;'
@@ -366,8 +367,8 @@ test('Q17 : the page side forwards the limited params to the wallet ; a signatur
     MessageChannel: class { constructor() { const c = new MessageChannel(); ports.push(c.port1, c.port2); this.port1 = c.port1; this.port2 = c.port2; } } };
   const LIM = [{ from: ME, to: USDC, data: approve(50n * U).params[0].data }];
   sb.postMessage = (data, origin, transfer) => { if (!data || data.__sentinelle !== 'hello' || sb.port) return; sb.port = transfer[0];
-    sb.port.onmessage = (ev) => { const m = ev.data; if (m.t !== 'gate') return; sb.port.postMessage({ t: 'ack', id: m.id }); sb.port.postMessage({ t: 'result', id: m.id, allow: true, reason: '', params: LIM }); };
-    sb.port.postMessage({ t: 'ready' }); };
+    sb.port.onmessage = (ev) => { const m = ev.data; if (m.t !== 'gate') return; sb.port.postMessage({ t: 'ack', id: m.id, k: TOKEN }); sb.port.postMessage({ t: 'result', id: m.id, k: TOKEN, allow: true, reason: '', params: LIM }); };
+    sb.port.postMessage({ t: 'ready', k: TOKEN }); };
   sb.window = sb; sb.top = sb; sb.self = sb; sb.globalThis = sb;
   vm.createContext(sb);
   vm.runInContext('class CustomEvent { constructor(t, i) { this.type = t; this.detail = i && i.detail; } }; globalThis.CustomEvent = CustomEvent;'
