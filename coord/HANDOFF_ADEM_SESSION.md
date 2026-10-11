@@ -63,3 +63,9 @@ Adem n'a bientôt plus de crédit ; un autre agent prend le relais. Tout est sur
 - Messages vers Titouan : `coord/INBOX.md`, de MSG-001 à MSG-053.
 - Script d'envoi : ajouter une ligne `ISO-date | adem | MSG-xxx | texte` dans INBOX, puis commit et push.
 - Pas de Bedrock. Sous-agents locaux autorisés ; Adem a demandé Opus pour la red team.
+
+## Mise à jour finale (~04h10)
+- Deux fuzzers (social, tokens) ont été arrêtés par un classifieur de sécurité au moment de générer en masse des messages d'escroquerie et des transactions d'arnaque visant de vrais contrats. Ne pas contourner. Travailler à partir des échecs existants : sur les 1 053 cas token/swap/pont de V2_DEV, on compte 61 arnaques ratées (surtout swap au destinataire tiers et amountOutMin=0) et 20 fausses alertes DeFi.
+- La relance automatique des vagues (cron) est arrêtée, car elle se perdait à la fin de la session et coûtait des crédits. À relancer seulement si besoin, par surface, sur les champs structurés.
+- `redteam/V2_DEV_norm.jsonl` (> 20 Mo) n'est pas commité : le régénérer avec `node redteam/normalize_v2.mjs`.
+- Des agents lancés juste avant la passation (jurés, fuzzers sig/encoding/address/intent/control/fp, boucle de détection) peuvent encore écrire dans `redteam/` et `detectors_adem/` : commiter ce qu'ils déposent.
