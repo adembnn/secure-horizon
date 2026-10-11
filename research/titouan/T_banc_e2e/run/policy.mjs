@@ -85,6 +85,10 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
     if (eff.outgoing.every((o) => paid(o.to))) { reasons = reasons.map((r) => (r.code === 'asked_by_someone_outgoing' ? { ...r, sev: 'warn' } : r)); notes.push('F20:destinataire_deja_paye'); }
   }
 
+  // ---- F27 : un message typé non classé par le moteur qui, lu par sa forme, accorde un droit de dépense à un dépensier hors protocoles connus (eff.shapeGrant) : si l'intention déclarée n'est pas
+  // un échange, la personne ne croit pas accorder un droit de dépense => critical (l'écart d'intention que le comparateur ne voit pas faute d'approbation décodée).
+  if (isOn('F27') && eff.shapeGrant && intent && intent.kind !== 'buy_or_swap') { reasons.push({ code: 'signed_right_not_intended', sev: 'critical', said: '', does: eff.shapeGrant.spender }); notes.push('F27:droit_signe_hors_intention'); }
+
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :
   // warn (à confirmer) au lieu de critical. chain_id = 0 (toutes chaînes) et cible inconnue restent critical.
   if (isOn('F4') && eff.delegation && isKnownProtocol(ctx, eff.delegation.to) && !(eff.delegations || []).some((d) => d.chainId === 0 && String(d.to) !== ZERO_ADDR)) {

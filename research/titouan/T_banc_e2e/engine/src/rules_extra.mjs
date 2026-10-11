@@ -263,6 +263,7 @@ function signatureShapes(eff, request, ctx, flags) {
     for (const g of shapeGrants(td)) {
       const unl = effUnlimited(ctx, g.token, g.amount); const known = (ctx.knownSpenders || []).includes(lc(g.spender));
       if (g.mode === 'transfer' && unl) { flags.push({ code: 'signed_transfer_unlimited', severity: 'critical', detail: `signature de retrait illimité de ${lc(g.token)} par ${lc(g.spender)} (type renommé : lu par sa forme)` }); return; }
+      if (!known && isOn('F27')) eff.shapeGrant = { spender: lc(g.spender), token: g.token ? lc(g.token) : undefined, unlimited: unl };
       if (!known && unl) { flags.push({ code: 'signed_right_unlimited_unknown', severity: 'critical', detail: `droit de dépense illimité sur ${lc(g.token)} pour ${lc(g.spender)} hors protocoles connus (type renommé : lu par sa forme)` }); return; }
     }
   } else if (request.method === 'personal_sign') {
@@ -275,7 +276,7 @@ function signatureShapes(eff, request, ctx, flags) {
       for (let o = 0; o <= 8; o++) {
         if (b.length < o + 4 + 32 + 20) break;
         if (!b.subarray(o + 4, o + 16).every((x) => x === 0)) continue;
-        if (b.subarray(o + 16, o + 36).filter((x) => x !== 0).length >= 12) { flags.push({ code: 'signed_calldata', severity: 'critical', detail: 'le « message » à signer a la forme d'un appel de contrat (sélecteur + adresse alignée), pas d'un texte' }); return; }
+        if (b.subarray(o + 16, o + 36).filter((x) => x !== 0).length >= 12) { flags.push({ code: 'signed_calldata', severity: 'critical', detail: 'le « message » à signer a la forme d un appel de contrat (sélecteur + adresse alignée), pas d un texte' }); return; }
       }
     } else if (readable && isOn('F26')) {
       const GRANT = /(authori[sz]w*|grantw*|approvw*|permissionw*|alloww*|migratw*|transferw*|autorisw*|approuvw*|accordw*|transf[eè]rw*)/i;
