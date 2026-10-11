@@ -266,6 +266,12 @@
   // while our own forwarding call is on the stack (synchronous delegation) : an object the page managed to capture later is worthless.
   // A wallet that delegates asynchronously to another wrapped method is simply asked twice (fail closed).
   const passes = new WM(); // provider -> WeakMap(forwarded object -> key)
+  // The same pass, whatever the provider object the wallet uses inside. A real wallet reaches its own methods through more than one
+  // object (a Proxy in front of the instance, a method bound to the instance) : the inner wrapped method then runs with another `this`
+  // than the one the page called, and the request we had just forwarded was asked a second time (seen with MetaMask, 11 Oct.).
+  // Nothing else is relaxed : still the very object we forwarded, still the same content and chain, still once, and still only
+  // while our own forwarding call is on the stack.
+  const passesAny = new WM(); // forwarded object -> { k : key, m : the map of the provider it was granted for }
   const NOPROV = {};
   let forwarding = 0;
   const provKey = (prov) => (isObj(prov) ? prov : NOPROV);
@@ -274,14 +280,16 @@
   function grant(prov, k, objs) {
     if (k === null) return () => {};
     const o = provKey(prov); let m = wmGet(passes, o); if (!m) { m = new WM(); wmSet(passes, o, m); }
-    for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) wmSet(m, x, k); }
-    return () => { for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x) && wmGet(m, x) === k) wmDel(m, x); } };
+    for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) { wmSet(m, x, k); wmSet(passesAny, x, { __proto__: null, k, m }); } }
+    return () => { for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) { if (wmGet(m, x) === k) wmDel(m, x); const y = wmGet(passesAny, x); if (y && y.k === k && y.m === m) wmDel(passesAny, x); } } };
   }
   function takePass(prov, obj, k) {
     if (forwarding <= 0 || !isObj(obj) || k === null) return false;
     const m = wmGet(passes, provKey(prov));
-    if (!m || wmGet(m, obj) !== k) return false;
-    wmDel(m, obj);
+    const any = wmGet(passesAny, obj);
+    if (m && wmGet(m, obj) === k) { wmDel(m, obj); if (any && any.m === m) wmDel(passesAny, obj); return true; }
+    if (!any || any.k !== k) return false; // another `this` inside the wallet : the forwarded object itself is the proof
+    wmDel(passesAny, obj); if (wmGet(any.m, obj) === k) wmDel(any.m, obj); // one pass, whichever object of the wallet uses it
     return true;
   }
   // Forwards with a pass that dies as soon as the wallet has answered (or thrown).

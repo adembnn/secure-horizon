@@ -274,3 +274,29 @@ test('(g) dry run : while a request is held, only read methods are relayed to th
   assert.deepEqual(JSON.parse(P.run(`JSON.stringify(ethereum.calls.map((c) => c.method).filter((m) => m !== 'eth_chainId'))`)), ['eth_call', 'debug_traceCall'], 'the wallet saw the two reads and nothing else');
   assert.equal(await Promise.race([read(1, 6, 'eth_call', []), sleep(60).then(() => 'silence')]), 'silence', 'once decided, the request no longer opens the relay');
 });
+
+// A real wallet is reached through more than one object (a Proxy or a front object before the instance). The request Hold up has just
+// forwarded to the first then enters the wrapped method of the second, with another `this` : it must not be asked a second time.
+test('(f bis) a wallet reached through two objects : the request forwarded to the first is not asked again by the second', async () => {
+  const P = page({ decide: () => true });
+  P.run(WALLET + `; window.avalanche = new Wallet();
+    window.ethereum = { chainId: avalanche.chainId, seen: 0, request(a) { this.seen++; return avalanche.request(a); } };`);
+  await sleep(250); // both globals are wrapped
+  const r = await settle(P.run(`ethereum.request({ method: 'eth_sendTransaction', params: ${TXP} })`));
+  assert.equal(r.ok, true); assert.equal(r.value, 'result:eth_sendTransaction');
+  assert.equal(P.gates.length, 1, 'asked once');
+  assert.equal(P.run(`avalanche.calls.filter((c) => c.method === 'eth_sendTransaction').length`), 1, 'the instance received it once');
+  // the same content sent later by the page to the instance itself is a new request : asked again
+  await settle(P.run(`avalanche.request({ method: 'eth_sendTransaction', params: ${TXP} })`));
+  assert.equal(P.gates.length, 2, 'a replay by the page is gated');
+});
+
+test('(f ter) the pass follows the forwarded object only : a copy handed to the second object is asked again (fail closed)', async () => {
+  const P = page({ decide: () => true });
+  P.run(WALLET + `; window.avalanche = new Wallet();
+    window.ethereum = { chainId: avalanche.chainId, request(a) { return avalanche.request({ method: a.method, params: JSON.parse(JSON.stringify(a.params)) }); } };`);
+  await sleep(250);
+  const r = await settle(P.run(`ethereum.request({ method: 'eth_sendTransaction', params: ${TXP} })`));
+  assert.equal(r.ok, true);
+  assert.equal(P.gates.length, 2, 'the copy is another request');
+});
