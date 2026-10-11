@@ -22,7 +22,7 @@ async function getCfg() {
   const c = Object.assign({}, DEFAULT_CFG, cfg || {});
   c.grill = Object.assign({}, DEFAULT_CFG.grill, (cfg && cfg.grill) || {});
   c.contact = Object.assign({}, DEFAULT_CFG.contact, (cfg && cfg.contact) || {});
-  if (!c.testMode) c.auto = null; // le mode automatique n'existe que si testMode est vrai
+  c.testMode = false; c.auto = null; // build distribue : aucun mode automatique, quel que soit le contenu du stockage
   return c;
 }
 
