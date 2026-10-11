@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img" aria-label="Hold up">
+  <!-- Hold up, version simplifiée pour 16 et 32 px. Dessinée sur une grille de 16 : doigts de 3, fentes de 1, main droite (sans inclinaison), aucun trait intérieur. -->
+  <rect width="16" height="16" rx="2.25" fill="#000"/>
+  <g fill="#fff">
+    <path d="M4 3.5A1.5 1.5 0 0 1 7 3.5V7.5A.5 .5 0 0 0 8 7.5V2.5A1.5 1.5 0 0 1 11 2.5V7.5A.5 .5 0 0 0 12 7.5V4A1.5 1.5 0 0 1 15 4V9A3 3 0 0 1 12 12H7A3 3 0 0 1 4 9Z"/>
+    <path d="M5.6 9.6Q3.4 9.4 2.3 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+    <rect x="6" y="13" width="7" height="2" rx="1"/>
+  </g>
+</svg>

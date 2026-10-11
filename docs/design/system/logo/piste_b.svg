@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Hold up">
+  <!-- Hold up, version détaillée (48 px et plus). Deux couleurs, un seul poids de trait noir : 16. -->
+  <rect width="512" height="512" rx="72" fill="#000"/>
+  <g transform="translate(11 -56) rotate(8 256 256)" fill="#fff" stroke-linecap="round">
+    <!-- paume et trois doigts, fentes de 16 -->
+    <path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/>
+    <!-- pouce -->
+    <path d="M214 388Q122 374 86 282" fill="none" stroke="#fff" stroke-width="70"/>
+    <!-- revers du gant, séparé de la main par 16 -->
+    <rect x="172" y="440" width="196" height="62" rx="24"/>
+    <!-- pli du pouce -->
+    <path d="M170 322Q206 334 214 378" fill="none" stroke="#000" stroke-width="16"/>
+  </g>
+</svg>
