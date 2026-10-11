@@ -103,7 +103,6 @@ function bar(s, label, value, pct, y, color) {
   txt(s, 'Opérations honnêtes arrêtées à tort', 0.5, 3.05, 9, 0.35, { fontSize: 14, color: INK2 });
   bar(s, 'Seuil fixé avant', '10 %', 0.10, 3.45, INK3);
   bar(s, 'Mesuré : seuil manqué', '15 %', 0.15, 4.0, INK);
-  txt(s, 'Pas l’extension livrée. Cas écrits par une IA de la même famille que celle qui nous a aidés.', 0.5, 4.62, 9, 0.3, { fontSize: 12, color: INK2 });
 }
 
 // 7 Ce qui ne marche pas encore
@@ -111,8 +110,12 @@ function bar(s, label, value, pct, y, color) {
   const s = slide('Notre testeuse s’est fait\npiéger 4 fois', 'coord/reports/testeurs/3_prudente_clavier.md, preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md',
     "La testeuse est un agent qui joue une personne prudente, au clavier : 36 parcours, piégée 4 fois en appuyant sur Continuer, actif tout de suite sur « Ça ne correspond pas » (capture réelle de l'extension, coord/reports/testeurs/3_captures/s05_08_f1_continuer_actif.png). Corrigé dans le commit b42792d : le geste attend, la demande expire à 3 minutes. Tests unitaires de l'extension rejoués le 11 oct. à 10h49 sur l'arbre de travail : 225 tests, 213 réussis, 12 en échec ; ne pas citer « 217 tests » sans le rejouer. Sur 58 paires d'essai : 18 contrôlées, 7 en partie, 20 non, 13 non distinguées (EXHAUSTIVITE_INTENTION.md). Hors périmètre : fraude voulue, Ledger direct, téléphone. Jamais essayé avec un vrai MetaMask. Ne pas dire « sécurisé ».", { w: 5.6 });
   txt(s, 'Un agent qui joue une personne prudente, au clavier. « Continuer » était actif tout de suite. Corrigé depuis.', 0.5, 1.75, 5.2, 1.0, { color: INK2 });
-  txt(s, 'Pas encore', 0.5, 3.15, 5.2, 0.4, big({ fontSize: 18 }));
-  txt(s, 'Le sens d’un échange. Un vrai MetaMask. Un Ledger en direct. Le téléphone.', 0.5, 3.6, 5.2, 0.8, { color: INK2 });
+  txt(s, 'Ce que Hold up ne fait pas encore', 0.5, 2.95, 5.4, 0.4, big({ fontSize: 18 }));
+  txt(s, [
+    { text: 'Je ne vérifie pas ce que tu reçois en échange.', options: { breakLine: true } },
+    { text: 'Je n’ai jamais été essayé devant un vrai MetaMask.', options: { breakLine: true } },
+    { text: 'Je ne couvre ni un Ledger en direct, ni le téléphone.' },
+  ], 0.5, 3.45, 5.4, 1.5, { color: INK2, paraSpaceAfter: 8 });
   s.addImage({ path: path.join(ROOT, 'coord', 'reports', 'testeurs', '3_captures', 's05_08_f1_continuer_actif.png'), x: 6.3, y: 0.5, w: 3.2, h: 3.74 });
   txt(s, 'L’extension, pendant l’essai.', 6.3, 4.4, 3.2, 0.3, { fontSize: 12, color: INK2 });
 }

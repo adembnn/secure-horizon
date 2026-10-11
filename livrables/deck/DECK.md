@@ -14,7 +14,7 @@ Design : `docs/design/system/DESIGN.md`. Fond noir, texte blanc, deux gris, poli
 | 4 | « Une autorisation déjà donnée ? Tu la retires. » : capture du panneau | `research/titouan/T_banc_e2e/extension/revoke.js`, `tests/unit/revoke.test.mjs` |
 | 5 | LI.FI, juillet 2024 : illimitées vidées, limitées rien perdu | `livrables/CHIFFRES.md` B7, rapport de LI.FI |
 | 6 | Jeu aveugle, 250 cas, moteur de comparaison : 65 % et 87 % ; seuil 10 %, mesuré 15 % | `research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md`, `preuves/ECARTS_LIVRABLES.md` |
-| 7 | « Notre testeuse s'est fait piéger 4 fois » : capture réelle de l'extension pendant l'essai ; ce qui n'est pas encore contrôlé | `coord/reports/testeurs/3_prudente_clavier.md`, `preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md` |
+| 7 | « Notre testeuse s'est fait piéger 4 fois » : capture réelle de l'extension pendant l'essai ; « Ce que Hold up ne fait pas encore », en trois phrases | `coord/reports/testeurs/3_prudente_clavier.md`, `preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md` |
 | 8 | La phrase de fin d'Adem, seule (le modèle économique est en notes orateur) | `research/titouan/BM2/BM_MODELE.md`, `BM_LABEL.md` |
 
 Retiré parce que non vérifiable tel quel :
