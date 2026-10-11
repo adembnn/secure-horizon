@@ -169,6 +169,8 @@ async function handleGate(msg, sender) {
       if (g.answers.some((a) => a.signal > 0)) (verdict.reasons = verdict.reasons || []).push('Tes réponses montrent des signes de pression ou de guidage par un tiers.');
     }
   }
+  // Le vrai moteur ne renvoie jamais "ok" : hors banc de test (faux moteur), un "ok" recu sur le port local n ouvre jamais la porte sans fenetre.
+  if (verdict.level === 'ok' && !cfg.testMode) verdict.level = 'attention';
   await journal({ type: 'verdict', origin: msg.origin, method: p.method, level: verdict.level, indeterminate: !!verdict.indeterminate, why: verdict.why, latency_ms: verdict.latency_ms, grill: grillInfo, intent: intent ? intent.choice : null, frame: body.frame });
   if (verdict.level === 'ok') return { allow: true };
 
@@ -178,7 +180,7 @@ async function handleGate(msg, sender) {
       decision: r.decision, time_to_decision_ms: r.time_to_decision_ms, friction_arm: cfg.arm, friction_ms: r.friction_ms, continue_enabled_after_ms: r.continue_enabled_after_ms,
       early_click_blocked: r.early_click_blocked, cancel_visible: r.cancel_visible, ui_frame: r.ui_frame, viewport: r.viewport, total_ms: Date.now() - tStart, frame: body.frame, grill: grillInfo, ui_error: r.error };
     await journal(entry);
-    if (r.decision === 'retry') { verdict = await callCheck(body, cfg.timeoutMs); if (verdict.level === 'ok') return { allow: true }; continue; }
+    if (r.decision === 'retry') { verdict = await callCheck(body, cfg.timeoutMs); if (verdict.level === 'ok') { if (cfg.testMode) return { allow: true }; verdict.level = 'attention'; } continue; }
     return r.decision === 'confirm' ? { allow: true } : { allow: false, reason: 'denied' };
   }
   return { allow: false, reason: 'denied' };
