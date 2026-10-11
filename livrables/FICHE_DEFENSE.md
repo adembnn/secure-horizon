@@ -28,6 +28,13 @@ Un jeu aveugle de 250 cas : 150 arnaques, 100 demandes honnêtes jumelles. Auteu
 - **65 %** sans la phrase de Camille (97 sur 150). Statut : même mesure. La phrase ajoute 34 arnaques signalées.
 - **15 %** de fausses alertes rouges sur les demandes honnêtes. Statut : même mesure. Notre objectif était 10 % au plus : non atteint.
 
+Sur l'extension elle-même, lecture par mots-clés sans modèle : réserve scellée de 2 673 paires jamais vues, ouverte une seule fois.
+
+- Demandes piégées (1 789) : **74,6 %** arrêtées, **0** validée, 25,4 % pas traitées.
+- Demandes honnêtes (515) : 40,8 % validées, 13,8 % de fausses alertes, 45,4 % pas traitées.
+
+« Pas traité » : Hold up affiche « Je n'ai pas pu vérifier », impose 30 s d'attente, et la personne décide.
+
 Preuve rejouable, portefeuille simulé, chaîne locale : sans Hold up, un site piraté vide le compte de test (100 vers 0). Avec le droit limité à 50, le pirate prend 0.
 
 ## Limites connues
@@ -37,4 +44,5 @@ Preuve rejouable, portefeuille simulé, chaîne locale : sans Hold up, un site p
 - Fraude consentie non couverte : si la personne veut vraiment envoyer, Hold up ne l'arrête pas.
 - Le modèle de langage peut dégrader certains résultats. Dans l'extension, les ratés montent de 2,7 % à 3,7 %.
 - 15 % de fausses alertes rouges, au-dessus de notre objectif.
+- Sans modèle, 45 % des demandes honnêtes ne sont pas traitées : 30 s d'attente pour rien. La mesure avec le modèle n'est pas terminée.
 - Ni le sens d'un échange, ni la durée, ni le destinataire d'un droit.
