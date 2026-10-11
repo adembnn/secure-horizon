@@ -2,13 +2,14 @@
 // Run : node --test extension/tests/unit/revoke.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { load, DIR } from './fake_chrome.mjs';
 
 const R = await load('revoke.js');
-const ENGINE = (f) => import(pathToFileURL(join(DIR, '..', 'engine', 'src', f)).href);
+// the engine sits next to extension/ in the sources, and inside the folder (engine/src/*.js) in a built copy
+const ENGINE = (f) => { const built = join(DIR, 'engine', 'src', f.replace(/.mjs$/, '.js')); return import(pathToFileURL(existsSync(built) ? built : join(DIR, '..', 'engine', 'src', f)).href); };
 const { selectorOf } = await ENGINE('keccak.mjs');
 const { call } = await ENGINE('abi_encode.mjs');
 

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Hold up (autonome)",
+  "name": "Hold up",
   "version": "0.3.0",
-  "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles et explique en clair. Moteur embarque. Reseau : relais local seulement.",
+  "description": "Écris ce que tu veux faire. Hold up te dit si la demande de signature correspond.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3GFisqzyqjVsp4Ocsnih/E35W/GgeWtCk6NRfiFCImkdR031gN0Vad2oR0b9awzQtXoqEEmjPlyZeZpym2/IabdtIIkvPQL/GmUmN/vG9eI5kqvyFnRRgSSyhuuVoxNAVac3R3mpvic7IAcmzS7Q/hidT3nUl0DGeUu2aKySMtq8YI3Bz+auUgP7ZtwCxz1Ofmo5vvpc+jkkkvTEqD93/C8jWXKMW9Fdyt0ytTTwkx6VoaLChSptJXV9sV2SwmjrUIJbTukiZ/uKJD+nePfcT0ktn975dqm6FsDc10ThU5phRK0cPWgKZhekYAEn7wwOEyKwCRqiGLNjHrivAO6AwIDAQAB",
   "minimum_chrome_version": "114",
   "permissions": [

@@ -18,7 +18,13 @@ const PATCHES = [
   ["  if (scen) { fid = scen; texts = buildTexts(scen, eff, host, { chainId: chainId ?? eff.chainId, contact }); source = 'fiche'; }\n",
    "  if (scen) { fid = scen; texts = buildTexts(scen, eff, host, { chainId: chainId ?? eff.chainId, contact }); source = 'fiche'; }\n  // niveau affiché : l'envoi vers une adresse nouvelle (F31) passe de « info » à « warn » (attention). Le niveau du moteur reste dans niveau_moteur.\n  const nivMoteur = niveau;\n  if (niveau === 'info' && !scen) niveau = pres.niveau || niveau;\n"],
   ["  if (press && niveau !== 'info') { out.level = 'manipulation';", "  if (nivMoteur !== niveau) out.niveau_moteur = nivMoteur;\n  if (press && nivMoteur !== 'info') { out.level = 'manipulation';"],
+  // La 1re retouche REAFFECTE niveau : sa declaration doit etre `let` (comme dans server.mjs). Restee `const`, toute demande sans
+  // signal levait « Assignment to constant variable » dans le moteur embarque : verdict « pas pu verifier », sans question (11 oct.).
+  ["  const niveau = seaportCrit ? 'critical'", "  let niveau = seaportCrit ? 'critical'"],
 ];
+// Garde-fou : une variable declaree `const` puis reaffectee ne casse qu'a l'execution, jamais a l'import. Les retouches ci-dessus reaffectent
+// `niveau` : sa declaration ne doit pas etre `const`. Le controle complet (moteur execute) est dans extension_standalone/tests/static_check.mjs.
+const reassignedConst = (t) => (/^\s*const niveau = /m.test(t) && /\) niveau = /.test(t) ? ['niveau'] : []);
 let bad = 0;
 for (const rel of ['extension_standalone/src/sentinelle_core.js', 'webdemo/engine/sentinelle_core.js']) {
   const p = join(ROOT, rel); const raw = readFileSync(p, 'utf8'); const crlf = raw.includes('\r\n'); let t = norm(raw);
@@ -26,7 +32,8 @@ for (const rel of ['extension_standalone/src/sentinelle_core.js', 'webdemo/engin
   const msgs = [];
   if (t.slice(r[0], r[1]) !== block) { t = t.slice(0, r[0]) + block + t.slice(r[1]); msgs.push('bloc PRESENTATION a mettre a jour'); }
   for (const [a, b] of PATCHES) { if (t.includes(b)) continue; if (t.includes(a)) { t = t.replace(a, () => b); msgs.push('retouche evaluate() a appliquer'); } else { msgs.push('ANCRE INTROUVABLE pour une retouche evaluate() : voir PATCHES_A_FAIRE.md'); bad++; } }
+  const rc = reassignedConst(t); if (rc.length) { msgs.push('ERREUR : declare const puis reaffecte : ' + [...new Set(rc)].join(', ')); bad++; }
   console.log(rel + ' : ' + (msgs.length ? msgs.join(' ; ') : 'a jour'));
-  if (write && msgs.length) { writeFileSync(p, crlf ? t.replace(/\n/g, '\r\n') : t); console.log('  ecrit'); }
+  if (write && msgs.length && !rc.length) { writeFileSync(p, crlf ? t.replace(/\n/g, '\r\n') : t); console.log('  ecrit'); }
 }
 process.exit(bad ? 1 : 0);

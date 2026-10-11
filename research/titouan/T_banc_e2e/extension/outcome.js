@@ -12,6 +12,8 @@
  *   verdict.intent_contradiction (comparator : said X, does Y)            -> 'mismatch'
  *   the text was not understood (intent.clear === false)                  -> 'unverifiable'
  *   'attention' with an understood intent and no contradiction            -> 'match'
+ *   the only gap was a right wider than the written amount AND Hold up brought it back to that amount in the request itself
+ *   (verdict.written.corrected + verdict.relief, both set by the gatekeeper only)                      -> 'match'
  *
  *   (*) covers() : the person wrote that they want to give a permission, the request ONLY grants a right (no funds leave),
  *       nobody told them to do it, no look-alike address, no contradiction. The level and its delay do not change.
@@ -40,6 +42,8 @@ export function outcomeOf(verdict, intent) {
   if (!intent || !intent.text) return 'unverifiable';
   const w = verdict.written && verdict.written.outcome;
   if (w === 'mismatch' || verdict.level === 'manipulation') return 'mismatch';
+  // The request that goes to the wallet is the corrected one : it carries the written amount, nothing else was wrong with it.
+  if (w === 'match' && verdict.written.corrected === true && verdict.relief === true && !verdict.intent_contradiction && !verdict.address_diff) return intent.clear && !intent.vague ? 'match' : 'unverifiable';
   if (verdict.level === 'danger') return !intent.vague && w !== 'unverifiable' && covers(intent, verdict) ? 'match' : 'mismatch';
   if (verdict.intent_contradiction) return 'mismatch';
   if (!intent.clear || intent.vague || w === 'unverifiable') return 'unverifiable';
@@ -77,6 +81,14 @@ export function lineOf(verdict) {
   if (verdict && verdict.written && typeof verdict.written.line === 'string' && verdict.written.line) return verdict.written.line.slice(0, 240);
   const t = verdict && verdict.texts && typeof verdict.texts.reel === 'string' ? verdict.texts.reel : verdict && verdict.real && typeof verdict.real.amount === 'string' ? verdict.real.amount : '';
   return cleanLine(t) || TEXT.lineFallback;
+}
+
+// The network of the request, as a name a person knows. An unknown one is shown by its number : never hidden.
+const NETWORKS = { 1: 'Ethereum', 10: 'Optimism', 56: 'BNB Chain', 137: 'Polygon', 8453: 'Base', 42161: 'Arbitrum', 43113: 'Avalanche Fuji (test)', 43114: 'Avalanche', 11155111: 'Sepolia (test)', 31337: 'chaîne locale de test' };
+export function networkName(chainId) {
+  let n; try { n = chainId == null || chainId === '' ? null : BigInt(chainId); } catch (_) { n = null; }
+  if (n == null || n < 0n) return '';
+  return NETWORKS[n.toString()] || 'réseau n° ' + n.toString();
 }
 
 // Two addresses, each as 2 rows of 5 groups of 4 characters ; `diff` marks the characters that differ.

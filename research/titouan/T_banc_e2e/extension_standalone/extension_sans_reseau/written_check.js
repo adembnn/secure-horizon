@@ -40,6 +40,41 @@ export const BUILTIN_TOKENS = Object.freeze({
   '0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7': { symbol: 'USDT', decimals: 6 },
   '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7': { symbol: 'WAVAX', decimals: 18 }
 });
+// ---- what the written checks need to know about the world (public data, no case of any test set)
+// Everyday money ("50 dollars") can only be matched by a stable token known by its ADDRESS : the amount is compared, the token stays the request's.
+const STABLE = new Set(['USDC', 'USDT', 'DAI']);
+const MONEY = 'USD';
+const baseSym = (s) => String(s || '').toUpperCase().replace(/\.[EB]$/, '');
+// The network's own currency and its wrapped token are the same asset in an EXCHANGE ("contre AVAX" may arrive as WAVAX). Never for a payment.
+const WRAPPED = { WETH: 'ETH', WAVAX: 'AVAX', WBNB: 'BNB', WMATIC: 'MATIC', WPOL: 'POL' };
+const fam = (s) => { const b = baseSym(s); return WRAPPED[b] || b; };
+const NATIVE = { 1: 'ETH', 10: 'ETH', 8453: 'ETH', 42161: 'ETH', 59144: 'ETH', 56: 'BNB', 137: 'POL', 43114: 'AVAX', 43113: 'AVAX', 11155111: 'ETH' };
+// Contracts a right may be given to without a warning : public routers and pools read on their primary source (same entries as
+// pipeline/known_protocols.json, which carries the source of each), plus what the person declared in the settings (contexte.knownSpenders).
+// A right given to any other address can never "match" : the sentence cannot prove who that address is.
+export const BUILTIN_SPENDERS = Object.freeze({
+  any: ['0x000000000022d473030f116ddee9f6b43ac78ba3', '0x0000000000000068f116a894984e2db1123eb395'],
+  1: ['0x66a9893cc07d91d95644aedd05d03f95e1dba8af', '0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca', '0x23617e59a5925b2a4bf75d73ff6711cd0b29de85', '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+    '0xe592427a0aece92de3edee1f18e0157c05861564', '0x7a250d5630b4cf539739df2c5dacb4c659f2488d', '0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2', '0x28b5a0e9c621a5badaa536219b3a228c8168cf5d'],
+  43114: ['0x794a61358d6845594f94dc1db02a252b5b4814ad', '0x94b75331ae8d42c1b61065089b7d48fe14aa73b7', '0xbb00ff08d01d300023c629e8ffffcb65a5a578ce', '0xe54ca86531e17ef3616d22ca28b0d458b6c89106',
+    '0x28b5a0e9c621a5badaa536219b3a228c8168cf5d']
+});
+// The known spenders travel with the token map (tokensOf) under a symbol key : copied by Object.assign, invisible to Object.keys and JSON.
+const SPENDERS = Symbol.for('holdup.knownSpenders');
+// Defaults of the written intent ("nothing lasts after this operation") : beyond these, the request no longer matches.
+const SIGN_MAX_S = 24 * 3600;        // a signature (permit, Permit2) or an exchange stays usable at most one day
+const RIGHT_MAX_S = 31 * 24 * 3600;  // a Permit2 right expires within a month (the usual default of the public routers)
+const ORDER_MAX_S = 366 * 24 * 3600; // a sale order stays valid at most a year
+const FEE_MAX_WEI = 5n * 10n ** 17n;  // network fees : half a unit of the network's currency
+const nowS = () => Math.floor(Date.now() / 1000);
+function duration(seconds) {
+  if (seconds > 50 * 365 * 86400) return 'sans limite de durée';
+  if (seconds >= 2 * 365 * 86400) return 'pendant ' + Math.floor(seconds / (365 * 86400)) + ' ans';
+  if (seconds >= 60 * 86400) return 'pendant ' + Math.floor(seconds / (30 * 86400)) + ' mois';
+  if (seconds >= 2 * 86400) return 'pendant ' + Math.floor(seconds / 86400) + ' jours';
+  return 'pendant ' + Math.max(1, Math.floor(seconds / 3600)) + ' heures';
+}
+const shortA = (a) => String(a).slice(0, 6) + '…' + String(a).slice(-4);
 
 // ---------------------------------------------------------------- Sign-In with Ethereum (EIP-4361)
 function messageText(m) {
@@ -79,14 +114,85 @@ const big = (v) => { try { return typeof v === 'bigint' ? v : v == null || v ===
 const word = (data, i) => data.slice(10 + 64 * i, 74 + 64 * i);
 const addrOf = (w) => '0x' + w.slice(24);
 // Reads the data of ONE call into out ; true when it is a call this file knows how to read (approve, transfer, transferFrom...).
-function dataFacts(data, to, out) {
+// ---- exchanges : the public router functions, read from the call itself (no simulation needed). Selectors are those of the public
+// ABIs (Uniswap V2 family and its AVAX-named forks, Uniswap V3 SwapRouter and SwapRouter02, multicall, unwrapWETH9, sweepToken).
+const uintAt = (data, i) => { const w = word(data, i); if (w.length !== 64) return null; try { return BigInt('0x' + w); } catch (_) { return null; } };
+const addrAt = (data, i) => { const w = word(data, i); return w.length === 64 ? ('0x' + w.slice(24)).toLowerCase() : null; };
+const slotOf = (data, i, base = 0) => { const off = uintAt(data, i); return off == null || off % 32n !== 0n || off > 200000n ? null : base + Number(off / 32n); };
+function addrArrayAt(data, i) {
+  const k = slotOf(data, i); if (k == null) return null;
+  const n = uintAt(data, k); if (n == null || n < 2n || n > 8n) return null;
+  const list = []; for (let j = 0; j < Number(n); j++) { const a = addrAt(data, k + 1 + j); if (!a) return null; list.push(a); }
+  return list;
+}
+function bytesArrayAt(data, i) {
+  const k = slotOf(data, i); if (k == null) return null;
+  const n = uintAt(data, k); if (n == null || n > 32n) return null;
+  const list = [];
+  for (let j = 0; j < Number(n); j++) {
+    const s = slotOf(data, k + 1 + j, k + 1); if (s == null) return null;
+    const len = uintAt(data, s); if (len == null || len > 100000n) return null;
+    const from = 10 + 64 * (s + 1), hex = data.slice(from, from + 2 * Number(len)); if (hex.length !== 2 * Number(len)) return null;
+    list.push('0x' + hex);
+  }
+  return list;
+}
+// tokens-for-tokens 'tt', tokens-for-native 'tn', native-for-tokens 'nt' ; a capital letter : that side is the EXACT one (the other is a bound)
+const V2_SWAPS = { '0x38ed1739': 'tt', '0x5c11d795': 'tt', '0x18cbafe5': 'tn', '0x791ac947': 'tn', '0x676528d1': 'tn', '0x762b1562': 'tn', '0x7ff36ab5': 'nt', '0xb6f9de95': 'nt', '0xa2a1623d': 'nt', '0xc57559dd': 'nt',
+  '0x8803dbee': 'tT', '0x4a25d94a': 'tN', '0x7a42416a': 'tN', '0xfb3bdb41': 'nT', '0x8a657e67': 'nT' };
+// exactInputSingle / exactOutputSingle : [recipient slot, deadline slot or -1, first amount slot]
+const V3_SINGLE = { '0x414bf389': [3, 4, 5, false], '0x04e45aaf': [3, -1, 4, false], '0xdb3e2198': [3, 4, 5, true], '0x5023b4df': [3, -1, 4, true] };
+const ROUTER_SENDER = '0x0000000000000000000000000000000000000001', ROUTER_SELF = '0x0000000000000000000000000000000000000002'; // SwapRouter02 : "the caller", "the router itself"
+function swapFacts(sel, data, to, out, value) {
+  const v2 = V2_SWAPS[sel];
+  if (v2) {
+    const nativeIn = v2[0] === 'n', exactOut = v2[1] !== v2[1].toLowerCase(), h = nativeIn ? 1 : 2;
+    const path = addrArrayAt(data, h), rcpt = addrAt(data, h + 1), deadline = uintAt(data, h + 2), a0 = uintAt(data, 0), a1 = nativeIn ? null : uintAt(data, 1);
+    if (!path || !rcpt || deadline == null || a0 == null || (!nativeIn && a1 == null)) return false;
+    out.swaps.push({ router: to, tokenIn: nativeIn ? null : path[0], amountIn: nativeIn ? (value || 0n) : exactOut ? a1 : a0, tokenOut: v2[1].toLowerCase() === 'n' ? null : path[path.length - 1],
+      minOut: nativeIn ? a0 : exactOut ? a0 : a1, exactOut, to: rcpt, deadline, usesValue: nativeIn, via: path.slice(1, -1) });
+    return true;
+  }
+  const v3 = V3_SINGLE[sel];
+  if (v3) {
+    const [r, d, a, exactOut] = v3, x = uintAt(data, a), y = uintAt(data, a + 1), tin = addrAt(data, 0), tout = addrAt(data, 1), rcpt = addrAt(data, r);
+    if (x == null || y == null || !tin || !tout || !rcpt) return false;
+    out.swaps.push({ router: to, tokenIn: tin, amountIn: exactOut ? y : x, tokenOut: tout, minOut: exactOut ? x : y, exactOut, to: rcpt, deadline: d < 0 ? null : uintAt(data, d) });
+    return true;
+  }
+  if (sel === '0xc04b8d59' || sel === '0xb858183f') { // exactInput((bytes path, address recipient, [uint256 deadline], uint256 amountIn, uint256 amountOutMinimum))
+    const t = slotOf(data, 0), hasD = sel === '0xc04b8d59'; if (t == null) return false;
+    const p = slotOf(data, t, t), rcpt = addrAt(data, t + 1), amountIn = uintAt(data, t + (hasD ? 3 : 2)), minOut = uintAt(data, t + (hasD ? 4 : 3)); if (p == null || !rcpt || amountIn == null || minOut == null) return false;
+    const len = uintAt(data, p); if (len == null || len < 43n || len > 2000n) return false;
+    const from = 10 + 64 * (p + 1), hex = data.slice(from, from + 2 * Number(len)); if (hex.length !== 2 * Number(len)) return false;
+    out.swaps.push({ router: to, tokenIn: ('0x' + hex.slice(0, 40)).toLowerCase(), amountIn, tokenOut: ('0x' + hex.slice(-40)).toLowerCase(), minOut, exactOut: false, to: rcpt, deadline: hasD ? uintAt(data, t + 2) : null });
+    return true;
+  }
+  return false;
+}
+function dataFacts(data, to, out, value = 0n, depth = 0) {
   if (!/^0x[0-9a-fA-F]*$/.test(data) || data.length < 10) return false;
   const sel = data.slice(0, 10).toLowerCase(), args = (data.length - 10) / 64;
   const amount = (i) => { try { return BigInt('0x' + word(data, i)); } catch (_) { return null; } };
   if ((sel === '0x095ea7b3' || sel === '0x39509351') && args >= 2) { // approve(spender, amount), increaseAllowance(spender, added)
-    const raw = amount(1); if (raw != null && raw > 0n) out.grants.push({ token: to, spender: addrOf(word(data, 0)), raw, unlimited: raw >= UNLIMITED_FROM });
+    const raw = amount(1); if (raw != null && raw > 0n) out.grants.push({ token: to, spender: addrOf(word(data, 0)).toLowerCase(), raw, unlimited: raw >= UNLIMITED_FROM, adds: sel === '0x39509351' });
     return true;
   }
+  if (sel === '0xa22cb465' && args >= 2) { const on = amount(1); if (on != null && on !== 0n) out.nftAll.push({ collection: to, operator: addrOf(word(data, 0)).toLowerCase() }); return true; } // setApprovalForAll(operator, approved)
+  if (swapFacts(sel, data, to, out, value)) return true;
+  if (sel === '0xac9650d8' || sel === '0x5ae401dc' || sel === '0x1f0464d1') { // multicall(bytes[]), multicall(deadline, bytes[]), multicall(previousBlockhash, bytes[])
+    const inner = depth < 2 ? bytesArrayAt(data, sel === '0xac9650d8' ? 0 : 1) : null; if (!inner || !inner.length) return false;
+    const deadline = sel === '0x5ae401dc' ? uintAt(data, 0) : null, first = out.swaps.length;
+    let all = true; for (const d of inner) if (!dataFacts(d, to, out, value, depth + 1)) all = false;
+    if (deadline != null) for (let i = first; i < out.swaps.length; i++) if (out.swaps[i].deadline == null) out.swaps[i].deadline = deadline;
+    if (!all) out.unread++;
+    return true;
+  }
+  if (sel === '0x49404b7c' && args >= 2) { const min = uintAt(data, 0), rcpt = addrAt(data, 1); if (min == null || !rcpt) return false; out.collects.push({ token: null, min, to: rcpt, router: to }); return true; } // unwrapWETH9(min, recipient)
+  if (sel === '0x49616997' && args >= 1) { const min = uintAt(data, 0); if (min == null) return false; out.collects.push({ token: null, min, to: ROUTER_SENDER, router: to }); return true; } // unwrapWETH9(min) : to the caller
+  if (sel === '0xdf2ab5bb' && args >= 3) { const tk = addrAt(data, 0), min = uintAt(data, 1), rcpt = addrAt(data, 2); if (!tk || min == null || !rcpt) return false; out.collects.push({ token: tk, min, to: rcpt, router: to }); return true; } // sweepToken(token, min, recipient)
+  if (sel === '0xe90a182f' && args >= 2) { const tk = addrAt(data, 0), min = uintAt(data, 1); if (!tk || min == null) return false; out.collects.push({ token: tk, min, to: ROUTER_SENDER, router: to }); return true; }
+  if (sel === '0x12210e8a') return true; // refundETH() : what was not used comes back to the caller
   if (sel === '0xa9059cbb' && args >= 2) { const raw = amount(1); if (raw != null) out.sends.push({ token: to, to: addrOf(word(data, 0)), raw }); return true; } // transfer(to, amount)
   if (sel === '0x23b872dd' && args >= 3) { const raw = amount(2); if (raw != null) out.sends.push({ token: to, to: addrOf(word(data, 1)), raw }); return true; } // transferFrom(from, to, amount)
   return false;
@@ -104,30 +210,52 @@ function txFacts(tx, out) {
   if (d2 !== null && d2.length > 2 && (d1 === null || lc(d2) !== lc(d1))) payloads.push(d2);
   const value = big(tx.value);
   if (value == null && tx.value != null && tx.value !== '') out.ambiguous = true; // an amount nobody can read
+  // the network or the account the transaction names, when it names one : it must be the one the wallet is on
+  if (out.chain != null && tx.chainId != null && tx.chainId !== '') { const c = big(tx.chainId); if (c != null && Number(c) !== out.chain) out.otherChain = true; }
+  if (out.me && HEX20.test(String(tx.from || '')) && lc(tx.from) !== out.me) out.otherFrom = true;
+  // the most this transaction may cost in network fees, when the request sets both the gas and its price
+  { const gas = big(tx.gas != null ? tx.gas : tx.gasLimit), price = big(tx.maxFeePerGas != null ? tx.maxFeePerGas : tx.gasPrice); if (gas && price && gas > 0n && price > 0n && gas * price > out.fee) out.fee = gas * price; }
   if (!to) return;
   let readable = payloads.length === 0;
-  for (const p of payloads) { if (p.length < 10 && /^0x[0-9a-fA-F]*$/.test(p)) readable = true; else if (dataFacts(p, to, out)) readable = true; }
-  if (readable && value && value > 0n) out.sends.push({ token: null, to, raw: value });
+  const firstSwap = out.swaps.length;
+  for (const p of payloads) { if (p.length < 10 && /^0x[0-9a-fA-F]*$/.test(p)) readable = true; else if (dataFacts(p, to, out, value || 0n)) readable = true; else out.unread++; }
+  // The value joined to an exchange is the amount exchanged when the exchange takes the network's currency (or wraps exactly that amount) ;
+  // joined to anything else this file reads, it is one more thing that leaves.
+  let used = false;
+  if (value && value > 0n) for (let i = firstSwap; i < out.swaps.length; i++) { const s = out.swaps[i]; if (s.usesValue) used = true; else if (s.amountIn === value && !used) { s.nativeIn = true; used = true; } }
+  if (readable && value && value > 0n && !used) out.sends.push({ token: null, to, raw: value });
 }
 function typedFacts(params, out) {
   let td = params.find((p) => (p && typeof p === 'object' && !Array.isArray(p)) || (typeof p === 'string' && !HEX20.test(p)));
   if (typeof td === 'string') { try { td = JSON.parse(td); } catch (_) { return; } }
   if (!td || typeof td !== 'object') return;
   const m = td.message && typeof td.message === 'object' ? td.message : {}, d = td.domain && typeof td.domain === 'object' ? td.domain : {};
-  const grant = (token, spender, v) => {
+  // until : when the RIGHT itself ends (Permit2 expiration) ; sigUntil : until when the SIGNATURE can be used (deadline, sigDeadline, expiry)
+  const when = (v) => { const x = big(v); return x == null || v == null || v === '' ? null : x; };
+  const grant = (token, spender, v, until, sigUntil) => {
     const raw = big(v); if (raw == null || raw <= 0n || !HEX20.test(String(token || ''))) return;
-    out.grants.push({ token: lc(token), spender: HEX20.test(String(spender || '')) ? lc(spender) : null, raw, unlimited: raw >= UNLIMITED_FROM, signed: true });
+    out.grants.push({ token: lc(token), spender: HEX20.test(String(spender || '')) ? lc(spender) : null, raw, unlimited: raw >= UNLIMITED_FROM, signed: true, until: when(until), sigUntil: when(sigUntil) });
   };
   const each = (x) => (Array.isArray(x) ? x : x && typeof x === 'object' ? [x] : []);
+  if (out.chain != null && d.chainId != null && d.chainId !== '') { const c = big(d.chainId); if (c != null && Number(c) !== out.chain) out.otherChain = true; }
   if (td.primaryType === 'Permit') {
-    if (m.value != null) grant(d.verifyingContract, m.spender, m.value);
-    else if (m.allowed === true || m.allowed === 'true') grant(d.verifyingContract, m.spender, UNLIMITED_FROM); // DAI-style permit : all or nothing
-  } else if (td.primaryType === 'PermitSingle' || td.primaryType === 'PermitBatch') for (const x of each(m.details)) grant(x.token, m.spender, x.amount);
-  else if (/^Permit(Batch)?(Witness)?TransferFrom$/.test(String(td.primaryType))) for (const x of each(m.permitted)) grant(x.token, m.spender, x.amount);
+    if (m.value != null) grant(d.verifyingContract, m.spender, m.value, null, m.deadline);
+    else if (m.allowed === true || m.allowed === 'true') grant(d.verifyingContract, m.spender, UNLIMITED_FROM, null, m.expiry); // DAI-style permit : all or nothing
+  } else if (td.primaryType === 'PermitSingle' || td.primaryType === 'PermitBatch') for (const x of each(m.details)) grant(x.token, m.spender, x.amount, x.expiration, m.sigDeadline);
+  else if (/^Permit(Batch)?(Witness)?TransferFrom$/.test(String(td.primaryType))) for (const x of each(m.permitted)) grant(x.token, m.spender, x.amount, null, m.deadline);
+  // a market order (Seaport shape) : what I offer, what I get and who gets it, until when
+  else if (HEX20.test(String(m.offerer || '')) && Array.isArray(m.offer) && Array.isArray(m.consideration) && m.offer.length <= 64 && m.consideration.length <= 64) {
+    const item = (x) => { const amount = big(x && (x.endAmount != null ? x.endAmount : x.startAmount)), type = Number(x && x.itemType); return amount == null || !Number.isInteger(type) ? null : { type, token: HEX20.test(String(x.token || '')) ? lc(x.token) : null, id: String(x.identifierOrCriteria), amount, to: HEX20.test(String(x.recipient || '')) ? lc(x.recipient) : null }; };
+    const offer = m.offer.map(item), cons = m.consideration.map(item);
+    if (offer.every(Boolean) && cons.every(Boolean)) out.orders.push({ offerer: lc(m.offerer), offer, cons, end: when(m.endTime) }); else out.unread++;
+  }
 }
 export function requestFacts(body) {
-  const out = { grants: [], sends: [], tooBig: false, ambiguous: false };
+  const out = { grants: [], sends: [], swaps: [], collects: [], orders: [], nftAll: [], fee: 0n, unread: 0, tooBig: false, ambiguous: false, otherChain: false, otherFrom: false, me: null, chain: null };
   const method = body && typeof body.method === 'string' ? body.method : '', params = body && Array.isArray(body.params) ? body.params : [];
+  // the account and the network the wallet is on, as the page's provider reported them with the request
+  if (body && HEX20.test(String(body.from || ''))) out.me = lc(body.from);
+  if (body && body.chainId != null && body.chainId !== '') { const c = big(body.chainId); if (c != null && c >= 0n && c < 2n ** 48n) out.chain = Number(c); }
   try {
     if (method === 'eth_sendTransaction' || method === 'eth_signTransaction') txFacts(params[0], out);
     else if (method === 'wallet_sendCalls') { // S8 : every call is read, up to a high limit ; beyond it the request is "not verified", never "match"
@@ -163,61 +291,215 @@ export function tokensOf(contexte, chainId) {
     let own; try { own = t.chainId == null || t.chainId === '' ? undefined : Number(BigInt(t.chainId)); } catch (_) { own = undefined; }
     if (own === undefined || chain === undefined || own === chain) map[lc(t.address)] = { symbol: t.symbol, decimals: t.decimals };
   }
+  // who a right may be given to : the public list of this network, plus what the person declared (settings)
+  const spenders = new Set(BUILTIN_SPENDERS.any.concat(BUILTIN_SPENDERS[chain] || []));
+  const own = contexte && typeof contexte === 'object' && Array.isArray(contexte.knownSpenders) ? contexte.knownSpenders.slice(0, 5000) : [];
+  for (const a of own) if (HEX20.test(String(a || ''))) spenders.add(lc(a));
+  map[SPENDERS] = spenders;
   return map;
 }
+// null : the caller gave no list (a token map not built by tokensOf) -> the spender is not judged.
+const spendersOf = (tokens) => (tokens && tokens[SPENDERS] instanceof Set ? tokens[SPENDERS] : null);
 // The asset of the request, as the person can read it. A token nobody here knows by its address (built-in list, local context) is NOT read
 // with the symbol written : it is flagged `unknown`, and a request that carries one can never match (S2). Its amount is still compared,
 // with the usual decimals of the written symbol, so that a clear gap is still reported as a gap.
-function assetOf(token, written, tokens) {
-  if (token == null) return TOKEN_ONLY.has(written) ? { symbol: null, decimals: 18, other: true } : { symbol: written, decimals: 18 };
+// `chain` (optional) : the network's own currency is then named, and a written symbol that is not that currency is "another asset".
+// Everyday money ("50 dollars", written === MONEY) : only a stable token known by its address is that money ; the network's currency or any
+// other known token is another asset ; a token nobody knows cannot be verified.
+function assetOf(token, written, tokens, chain) {
+  const money = written === MONEY;
+  if (token == null) {
+    const nat = chain != null ? NATIVE[chain] : null;
+    if (money || TOKEN_ONLY.has(written)) return { symbol: nat || null, decimals: 18, other: true };
+    if (nat) return { symbol: nat, decimals: 18, other: nat !== written };
+    return { symbol: written, decimals: 18 };
+  }
   const known = tokens && tokens[token];
+  if (known && money) return known.declared ? { symbol: known.symbol, decimals: known.decimals, unknown: true } : { symbol: known.symbol, decimals: known.decimals, other: !STABLE.has(baseSym(known.symbol)) };
   if (known) return { symbol: known.symbol, decimals: known.decimals, other: known.symbol.toUpperCase() !== written };
-  return { symbol: written, decimals: SYMBOL_DECIMALS[written] != null ? SYMBOL_DECIMALS[written] : 18, unknown: true };
+  return { symbol: money ? 'd’un jeton inconnu' : written, decimals: SYMBOL_DECIMALS[written] != null ? SYMBOL_DECIMALS[written] : 18, unknown: true };
+}
+// One side of an EXCHANGE, as the request names it : { symbol, decimals, family } or { unknown } (token nobody here knows by its address).
+function legOf(token, tokens, chain) {
+  if (token == null) { const nat = chain != null ? NATIVE[chain] : null; return nat ? { symbol: nat, decimals: 18, family: fam(nat), native: true } : { symbol: null, decimals: 18, family: null, native: true }; }
+  const known = tokens && tokens[token];
+  if (known && !known.declared) return { symbol: known.symbol, decimals: known.decimals, family: fam(known.symbol) };
+  return { unknown: true, symbol: null, decimals: null, family: null };
 }
 
 // A request that cannot be read in full, or that carries a token nobody here knows, never matches : at most "not verified" (S2, S8).
 export function writtenCheck(body, intent, tokens = {}) {
   if (!intent || !intent.amount || !intent.symbol) return null;
-  const facts = requestFacts(body), flags = { unknown: false };
+  const facts = requestFacts(body), flags = { unknown: false, cannot: null };
   const r = writtenCore(facts, intent, tokens, flags);
   const why = facts.tooBig ? 'Cette demande contient trop d’appels pour que je les lise tous.' : facts.ambiguous ? 'Cette demande se lit de deux façons différentes : je ne peux pas la vérifier.' : null;
   if (r && r.outcome === 'match') {
     if (why) return { outcome: 'unverifiable', line: why };
-    if (flags.unknown) return { outcome: 'unverifiable', line: 'Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de ' + intent.symbol + '.' };
+    if (flags.unknown) return { outcome: 'unverifiable', line: intent.symbol === MONEY ? 'Je ne connais pas ce jeton : je ne peux pas vérifier qu’il vaut des dollars.' : 'Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de ' + intent.symbol + '.' };
+    if (flags.cannot) return { outcome: 'unverifiable', line: flags.cannot };
   }
-  if (!r && why && (facts.grants.length || facts.sends.length)) return { outcome: 'unverifiable', line: why };
+  if (!r && why && (facts.grants.length || facts.sends.length || facts.swaps.length)) return { outcome: 'unverifiable', line: why };
+  if (!r && flags.cannot) return { outcome: 'unverifiable', line: flags.cannot };
   return r;
 }
+// The written amount, read every way it can be read ("1,500" : 1500 or 1.5). A request exceeds it only when it exceeds every reading.
+function readings(intent, decimals) { return [intent.amount, intent.amountAlt].filter((a) => a != null && a !== '').map((a) => toRaw(a, decimals)).filter((x) => x != null); }
+const exceeds = (raw, intent, decimals) => { const w = readings(intent, decimals); return !w.length || w.every((x) => raw > x); };
+const isExactly = (raw, intent, decimals) => readings(intent, decimals).some((x) => raw === x);
+const tiny = (raw, decimals) => raw === 0n || (decimals != null && decimals >= 6 && raw * 1000000n <= 10n ** BigInt(decimals)); // nothing, or less than a millionth of a unit
+
 function writtenCore(facts, intent, tokens, flags) {
-  const said = 'Tu as écrit ' + fr(intent.amount) + ' ' + intent.symbol + '.';
-  const reduce = ' Réduis le plafond à ' + fr(intent.amount) + ' ' + intent.symbol + ' dans ton portefeuille.';
+  const money = intent.symbol === MONEY, chain = facts.chain, me = facts.me, now = nowS();
+  const said = 'Tu as écrit ' + fr(intent.amount) + ' ' + (money ? 'dollars' : intent.symbol) + '.';
+  const reduce = money ? '' : ' Réduis le plafond à ' + fr(intent.amount) + ' ' + intent.symbol + ' dans ton portefeuille.';
+  const pay = PAY_KINDS.has(intent.kind), get = intent.side === 'get';
+  const known = spendersOf(tokens);
+  const mine = (a) => !!a && (a === ROUTER_SENDER || (me != null && a === me));
   let line = null;
+  // 0) another network, or another account, than the one the wallet is on
+  if (facts.otherChain) return { outcome: 'mismatch', line: 'Cette demande vaut sur un autre réseau que celui où tu es.' };
+  if (facts.otherFrom) return { outcome: 'mismatch', line: 'Cette demande part d’un autre compte que celui que tu utilises.' };
+  // normal fees : a request that may cost half a unit of the network's currency or more in fees is not what anybody writes
+  // (only where one unit of that currency is worth a lot : ETH, AVAX, BNB ; elsewhere the threshold would mean nothing)
+  if (facts.fee >= FEE_MAX_WEI && chain != null && ['ETH', 'AVAX', 'BNB'].includes(NATIVE[chain])) return { outcome: 'mismatch', line: 'Cette demande peut te coûter jusqu’à ' + fromRaw(facts.fee, 18) + ' ' + ((chain != null && NATIVE[chain]) || 'unités du réseau') + ' de frais.' };
   // A wider right can be corrected (capped to the written amount) only when it comes from a transaction, nothing else leaves
   // in the same request, and no right of the request is a signature.
-  const fixable = facts.sends.length === 0 && facts.grants.every((x) => !x.signed);
+  const fixable = facts.sends.length === 0 && facts.swaps.length === 0 && facts.grants.every((x) => !x.signed);
   // 1) a spending right against the written amount
   for (const g of facts.grants) {
     const a = assetOf(g.token, intent.symbol, tokens), want = toRaw(intent.amount, a.decimals);
     if (a.unknown) flags.unknown = true;
     // A transaction's ceiling can be edited in the wallet before confirming ; a signature's cannot.
-    if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce), ...(g.signed ? {} : { fixable }) };
+    if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce), ...(g.signed || money ? {} : { fixable }) };
+    // the written amount is what I GET ("acheter 0,5 WETH") : what I give is not written, a right on it cannot be compared
+    if (get && !intent.nft) { flags.cannot = 'Tu n’as pas écrit combien tu donnes : je ne peux pas vérifier ce droit.'; continue; }
     if (a.other) return { outcome: 'mismatch', line: said + ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' };
-    if (want == null || g.raw > want) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' + reduce), ...(g.signed ? {} : { fixable }) };
+    if (want == null || exceeds(g.raw, intent, a.decimals)) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' + reduce), ...(g.signed || money || intent.amountAlt ? {} : { fixable }) };
+    // nothing lasts after this operation : a right or a signature that stays usable for long is not what was written
+    if (g.until != null && g.until > BigInt(now + RIGHT_MAX_S)) return { outcome: 'mismatch', line: 'Ce droit ne s’arrête pas après ton opération : il reste ouvert ' + duration(Number(g.until > 2n ** 40n ? 2n ** 40n : g.until) - now) + '.' };
+    if (g.sigUntil != null && g.sigUntil > BigInt(now + SIGN_MAX_S)) return { outcome: 'mismatch', line: 'Cette signature reste utilisable ' + duration(Number(g.sigUntil > 2n ** 40n ? 2n ** 40n : g.sigUntil) - now) + '.' };
+    // who gets the right : a contract of the public list or of the settings, or the very contract that does the exchange in the same request
+    if (known && g.spender && !known.has(g.spender)) {
+      const routers = facts.swaps.map((s) => s.router);
+      if (routers.length && !routers.includes(g.spender)) return { outcome: 'mismatch', line: 'Le droit est donné à ' + shortA(g.spender) + ', une autre adresse que celle qui fait l’échange.' };
+      if (!routers.length) flags.cannot = 'Tu donnes ce droit à ' + shortA(g.spender) + ', une adresse que je ne connais pas.';
+    }
+    // increaseAllowance adds to the right that already exists : the total is not in the request
+    if (g.adds && !flags.cannot) flags.cannot = 'Cette demande ajoute ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ' au droit déjà donné : je ne peux pas vérifier le total.';
     line = 'La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + ', pas plus.';
   }
+  const sendText = (s) => { const a = assetOf(s.token, intent.symbol, tokens, chain); return s.token == null ? (a.symbol ? fromRaw(s.raw, 18) + ' ' + a.symbol : 'de la monnaie du réseau') : a.unknown ? 'un jeton que je ne connais pas' : fromRaw(s.raw, a.decimals) + ' ' + a.symbol; };
   // 2) a payment : recipient and amount must be the ones written
-  if (PAY_KINDS.has(intent.kind)) {
-    if (!facts.sends.length) return facts.grants.length ? { outcome: 'match', line } : { outcome: 'unverifiable', line: 'Je ne retrouve pas ce paiement dans la demande.' };
+  const payment = () => {
     for (const s of facts.sends) {
-      const a = assetOf(s.token, intent.symbol, tokens), want = toRaw(intent.amount, a.decimals);
+      const a = assetOf(s.token, intent.symbol, tokens, chain);
       if (a.unknown) flags.unknown = true;
       if (a.other) return { outcome: 'mismatch', line: said + ' La demande envoie ' + (a.symbol ? fromRaw(s.raw, a.decimals) + ' ' + a.symbol : 'la monnaie du réseau') + '.' };
-      if (want == null || s.raw !== want) return { outcome: 'mismatch', line: said + ' La demande envoie ' + fromRaw(s.raw, a.decimals) + ' ' + a.symbol + '.' };
+      if (!isExactly(s.raw, intent, a.decimals)) return { outcome: 'mismatch', line: said + ' La demande envoie ' + fromRaw(s.raw, a.decimals) + ' ' + a.symbol + '.' };
       if (intent.address && lc(s.to) !== lc(intent.address)) return { outcome: 'mismatch', line: 'Le destinataire de la demande n’est pas l’adresse que tu as écrite.', address_diff: { expected: intent.address, actual: s.to } };
     }
     if (!intent.address) return { outcome: 'unverifiable', line: 'Tu n’as pas écrit d’adresse : je ne peux pas vérifier le destinataire.' };
     return { outcome: 'match', line: null };
+  };
+  if (pay) {
+    if (facts.swaps.length || facts.orders.length) return { outcome: 'mismatch', line: said + ' Cette demande n’est pas un paiement : c’est un échange.' };
+    if (!facts.sends.length) return facts.grants.length ? { outcome: 'match', line } : { outcome: 'unverifiable', line: 'Je ne retrouve pas ce paiement dans la demande.' };
+    return payment();
   }
+  // 3) anything that is not a payment : nothing else may leave. A transfer or a value sent next to a right or an exchange is one thing more ;
+  //    a request that only sends (transfer, bare value) is not the operation written, unless the sentence names who receives it.
+  const away = facts.sends.filter((s) => !mine(s.to));
+  if (away.length) {
+    if (facts.grants.length || facts.swaps.length || facts.orders.length) return { outcome: 'mismatch', line: said + ' La demande envoie aussi ' + sendText(away[0]) + ' à une autre adresse.' };
+    if (!facts.unread && intent.kind === 'buy_or_swap') { // only when the sentence was understood as an exchange, a purchase, a sale or a right
+      if (intent.nft && !get && known && away.every((s) => s.token == null && known.has(s.to))) return null; // buying an NFT pays a marketplace of the public list or of the settings : the engine's verdict stands
+      if (intent.address && !(intent.facts && intent.facts.grant)) return payment(); // a named recipient makes it a payment, unless the sentence gives a right
+      return { outcome: 'mismatch', line: said + ' Cette demande envoie ' + sendText(away[0]) + ' à une autre adresse, sans rien te rendre.' };
+    }
+  }
+  // a right on a whole NFT collection is never what a sentence with one amount says. Selling one NFT may need it for a marketplace of the
+  // public list or of the settings : even then it is wider than the sale, and it cannot be said to match.
+  for (const n of facts.nftAll) {
+    const sale = intent.nft && get && known && known.has(n.operator);
+    if (!sale) return { outcome: 'mismatch', line: said + ' Cette demande donne à ' + shortA(n.operator) + ' accès à tous tes NFT de cette collection.' };
+    flags.cannot = 'Cette demande donne accès à tous tes NFT de cette collection, pas seulement à celui que tu vends.';
+  }
+  // 4) an exchange read in the call : what I give, what I get, how much at least, on which account, until when
+  const wantOut = intent.counter || null; // "contre AVAX" (side give) or "avec des USDC" (side get) : the other side, when written
+  let swapLine = null;
+  for (const s of facts.swaps) {
+    const li = legOf(s.nativeIn ? null : s.tokenIn, tokens, chain);
+    // where the output really goes : straight to the recipient, or held by the router then unwrapped / swept
+    let outToken = s.tokenOut, rcpt = s.to, minOut = s.minOut;
+    if (rcpt === ROUTER_SELF || rcpt === s.router) {
+      const c = facts.collects.find((x) => x.router === s.router && (x.token == null || x.token === s.tokenOut));
+      if (!c) { flags.cannot = 'Je ne vois pas sur quel compte arrive ce que tu reçois.'; rcpt = null; }
+      else { rcpt = c.to; if (c.token == null) outToken = null; if (c.min > 0n && (minOut === 0n || c.token == null)) minOut = c.min; }
+    }
+    const lo = legOf(outToken, tokens, chain);
+    if ((s.via || []).some((t) => legOf(t, tokens, chain).unknown) && !flags.cannot) flags.cannot = 'Cet échange passe par un jeton que je ne connais pas.';
+    const inText = li.unknown ? 'un jeton que je ne connais pas' : fromRaw(s.amountIn, li.decimals) + ' ' + (li.symbol || 'de la monnaie du réseau');
+    const outText = lo.unknown ? 'un jeton que je ne connais pas' : fromRaw(minOut, lo.decimals) + ' ' + (lo.symbol || 'de la monnaie du réseau');
+    if (rcpt && !mine(rcpt)) return { outcome: 'mismatch', line: 'Ce que tu dois recevoir part sur un autre compte que le tien (' + shortA(rcpt) + ').' };
+    const given = get ? wantOut : (money ? null : intent.symbol), got = get ? intent.symbol : wantOut;
+    // what I give
+    if (money && !get) { if (li.unknown) flags.unknown = true; else if (!STABLE.has(baseSym(li.symbol))) return { outcome: 'mismatch', line: said + ' La demande échange ' + inText + '.' }; }
+    else if (given) { if (li.unknown) flags.unknown = true; else if (li.family && li.family !== fam(given)) return { outcome: 'mismatch', line: (get ? 'Tu as écrit payer en ' + given + '.' : said) + ' La demande échange ' + inText + '.' }; }
+    if (!get && !li.unknown && li.decimals != null && exceeds(s.amountIn, intent, li.decimals)) return { outcome: 'mismatch', line: said + ' La demande échange ' + inText + '.' };
+    // what I get
+    if (got) {
+      if (lo.unknown) { if (!flags.cannot) flags.cannot = 'Je ne connais pas le jeton que cette demande te rend : je ne peux pas vérifier que c’est du ' + got + '.'; }
+      else if (lo.family && lo.family !== fam(got)) return { outcome: 'mismatch', line: 'Tu as écrit ' + (get ? fr(intent.amount) + ' ' + got : 'contre ' + got) + '. La demande te rend du ' + lo.symbol + '.' };
+    }
+    if (get && !lo.unknown && lo.decimals != null) { const w = toRaw(intent.amount, lo.decimals); if (w == null || minOut * 10n < w * 8n) return { outcome: 'mismatch', line: said + ' La demande te garantit seulement ' + outText + '.' }; }
+    // how much at least
+    if (!s.exactOut && !lo.unknown && tiny(minOut, lo.decimals)) return { outcome: 'mismatch', line: 'La demande accepte que tu ne reçoives presque rien en échange (minimum garanti : ' + outText + ').' };
+    if (!s.exactOut && lo.unknown && minOut === 0n) return { outcome: 'mismatch', line: 'La demande accepte que tu ne reçoives rien en échange.' };
+    if (intent.min && !lo.unknown && lo.family === fam(intent.min.symbol)) { const w = toRaw(intent.min.amount, lo.decimals); if (w != null && minOut * 100n < w * 99n) return { outcome: 'mismatch', line: 'Tu as écrit au moins ' + fr(intent.min.amount) + ' ' + intent.min.symbol + '. La demande te garantit seulement ' + outText + '.' }; }
+    // two stable tokens are worth the same : a guaranteed minimum under half of what is given is not an exchange at a normal price
+    if (!s.exactOut && !li.unknown && !lo.unknown && STABLE.has(baseSym(li.symbol)) && STABLE.has(baseSym(lo.symbol)) && minOut * 10n ** BigInt(li.decimals) * 2n < s.amountIn * 10n ** BigInt(lo.decimals)) return { outcome: 'mismatch', line: 'La demande te garantit seulement ' + outText + ' pour ' + inText + '.' };
+    // until when
+    if (s.deadline != null && s.deadline > BigInt(now + SIGN_MAX_S)) return { outcome: 'mismatch', line: 'Cet échange reste exécutable ' + duration(Number(s.deadline > 2n ** 40n ? 2n ** 40n : s.deadline) - now) + ', pas seulement maintenant.' };
+    if (!lo.unknown && !li.unknown) swapLine = 'La demande échange ' + inText + ' contre au moins ' + outText + ', sur ton compte.';
+  }
+  // something collected by the router goes to another account (unwrap, sweep)
+  const stray = facts.collects.find((c) => !mine(c.to));
+  if (stray) return { outcome: 'mismatch', line: 'Ce que tu dois recevoir part sur un autre compte que le tien (' + shortA(stray.to) + ').' };
+  // 5) a market order about an NFT (sale, or purchase offer), when the sentence is about an NFT
+  let orderLine = null;
+  if (intent.nft) for (const o of facts.orders) {
+    const nftOut = o.offer.filter((x) => x.type >= 2), moneyOut = o.offer.filter((x) => x.type < 2), nftIn = o.cons.filter((x) => x.type >= 2), moneyIn = o.cons.filter((x) => x.type < 2);
+    const leg = (x) => legOf(x.type === 0 ? null : x.token, tokens, chain);
+    if (me && o.offerer !== me) return { outcome: 'mismatch', line: 'Cet ordre est signé au nom d’un autre compte que le tien.' };
+    if (o.end != null && o.end > BigInt(now + ORDER_MAX_S)) return { outcome: 'mismatch', line: 'Cet ordre reste utilisable ' + duration(Number(o.end > 2n ** 40n ? 2n ** 40n : o.end) - now) + '.' };
+    if (get) { // a sale : one NFT leaves, the written price comes to me
+      if (moneyOut.length) return { outcome: 'mismatch', line: 'Tu as écrit une vente. Cet ordre te fait aussi donner des jetons.' };
+      if (nftOut.some((x) => x.type >= 4)) return { outcome: 'mismatch', line: 'Cet ordre met en vente toute la collection, pas un seul NFT.' };
+      if (nftOut.length !== 1 || nftOut[0].amount !== 1n) return { outcome: 'mismatch', line: 'Cet ordre met en vente ' + (nftOut.length || 'aucun') + ' NFT, pas un seul.' };
+      if (intent.nftId && nftOut[0].id !== intent.nftId) return { outcome: 'mismatch', line: 'Cet ordre met en vente le NFT n° ' + nftOut[0].id.slice(0, 12) + ', pas le n° ' + intent.nftId + '.' };
+      let toMe = 0n, total = 0n, dec = null, sym = null, unknownLeg = false;
+      for (const x of moneyIn) { const l = leg(x); if (!l.unknown && l.family === fam(intent.symbol)) total += x.amount; if (!mine(x.to)) continue; if (l.unknown || !l.family) { unknownLeg = true; continue; } if (l.family !== fam(intent.symbol)) return { outcome: 'mismatch', line: said + ' Cet ordre te paie en ' + l.symbol + '.' }; toMe += x.amount; dec = l.decimals; sym = l.symbol; }
+      if (unknownLeg && toMe === 0n) { flags.unknown = true; orderLine = ''; continue; }
+      if (toMe === 0n) return { outcome: 'mismatch', line: moneyIn.length ? 'Le prix de cette vente est versé à une autre adresse que la tienne.' : 'Cet ordre donne ton NFT sans rien te verser.' };
+      const want = toRaw(intent.amount, dec);
+      if (want == null || total * 100n < want * 99n) return { outcome: 'mismatch', line: said + ' Cet ordre vend pour ' + fromRaw(total, dec) + ' ' + sym + '.' };
+      if (toMe * 10n < want * 9n) return { outcome: 'mismatch', line: said + ' Cet ordre te verse seulement ' + fromRaw(toMe, dec) + ' ' + sym + '.' };
+      orderLine = 'Cet ordre vend ton NFT n° ' + nftOut[0].id.slice(0, 12) + ' et te verse ' + fromRaw(toMe, dec) + ' ' + sym + '.';
+    } else { // a purchase offer : at most the written price leaves, the NFT comes to me
+      if (nftOut.length) return { outcome: 'mismatch', line: 'Tu as écrit un achat. Cet ordre met en vente un de tes NFT.' };
+      let offered = 0n, dec = null, sym = null;
+      for (const x of moneyOut) { const l = leg(x); if (l.unknown || !l.family) { flags.unknown = true; continue; } if (!money && l.family !== fam(intent.symbol)) return { outcome: 'mismatch', line: said + ' Cet ordre offre des ' + l.symbol + '.' }; if (money && !STABLE.has(baseSym(l.symbol))) return { outcome: 'mismatch', line: said + ' Cet ordre offre des ' + l.symbol + '.' }; offered += x.amount; dec = l.decimals; sym = l.symbol; }
+      if (dec != null && exceeds(offered, intent, dec)) return { outcome: 'mismatch', line: said + ' Cet ordre offre ' + fromRaw(offered, dec) + ' ' + sym + '.' };
+      const forMe = nftIn.filter((x) => mine(x.to));
+      if (!forMe.length) return { outcome: 'mismatch', line: nftIn.length ? 'Le NFT acheté irait sur un autre compte que le tien.' : 'Cet ordre ne te donne aucun NFT en échange.' };
+      if (intent.nftId && !forMe.some((x) => x.type >= 4 || x.id === intent.nftId)) return { outcome: 'mismatch', line: 'Cet ordre achète un autre NFT que le n° ' + intent.nftId + '.' };
+      if (dec != null) orderLine = 'Cet ordre offre ' + fromRaw(offered, dec) + ' ' + sym + ' pour un NFT livré sur ton compte.';
+    }
+  }
+  if (facts.unread && !facts.grants.length) return null; // part of the request is not read here : the engine's verdict stands
+  if (facts.swaps.length) return { outcome: 'match', line: swapLine || line };
+  if (facts.nftAll.length) return { outcome: 'match', line };
+  if (orderLine != null) return { outcome: 'match', line: orderLine || null };
   return facts.grants.length ? { outcome: 'match', line } : null;
 }
 

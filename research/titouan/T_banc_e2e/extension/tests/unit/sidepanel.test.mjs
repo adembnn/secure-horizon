@@ -34,11 +34,13 @@ test('state, version, offline line (standalone), counters, how it works, the two
   const tx = t.texts();
   assert.ok(tx.includes('Hold up est actif.'));
   assert.ok(tx.includes('Version 0.3.0 · Aucune connexion réseau'));
-  assert.deepEqual(t.D.all(t.root).filter((e) => e.tag === 'b').map((e) => e.textContent), ['2', '1'], 'verified today, cancelled today');
+  assert.ok(tx.includes('2 demandes vérifiées, 1 annulée.'), 'verified today, cancelled today, with the plural agreed');
+  assert.equal(t.P.plural(1, 'demande vérifiée', 'demandes vérifiées'), '1 demande vérifiée');
   assert.equal(tx.filter((x) => /^(Un site demande|Tu écris|Tu continues)/.test(x)).length, 3, 'three lines "Comment ça marche"');
-  assert.deepEqual(t.buttons().map((b) => b.textContent), ['Exporter le journal (JSON)', 'Ouvrir les réglages', 'Effacer l’historique']);
-  assert.ok(tx.includes('Transaction · Danger · Annulée · 15:29'));
-  assert.ok(tx.includes('Transaction · Attention · Continuée · 15:28'));
+  assert.deepEqual(t.buttons().map((b) => b.textContent), ['Exporter le journal', 'Ouvrir les réglages', 'Effacer l’historique']);
+  assert.ok(tx.includes('Transaction · Ne correspondait pas. Annulée. · 15:29'));
+  assert.ok(tx.includes('Transaction · Correspondait. Continuée. · 15:28'));
+  assert.ok(!tx.some((x) => /Danger|Manipulation|Attention|.mjs|JSON|fournisseur/.test(x)), 'no level name, no developer word : ' + tx.join(' | '));
   assert.ok(!tx.some((x) => /\bOK\b|sûr\b/.test(x.replace('que c’est sûr', ''))), 'never a green OK');
   t.buttons()[1].listeners.click[0](); assert.equal(t.chrome.opened, true);
 });
@@ -59,6 +61,9 @@ test('at most 20 requests, newest first ; the site is cut in the middle, never t
 test('"Effacer l’historique" removes the journal and the list is empty', async () => {
   const t = panel({ log: [dec(1), dec(2)] }); await t.p.render();
   assert.equal(t.D.all(t.root).filter((e) => e.className === 'site').length, 2);
+  await t.buttons()[2].listeners.click[0]();
+  assert.equal(t.F.state.local.log.length, 2, 'the first click only asks');
+  assert.equal(t.buttons()[2].textContent, 'Effacer pour de bon ?');
   await t.buttons()[2].listeners.click[0]();
   assert.equal(t.F.state.local.log, undefined);
   assert.ok(t.texts().includes('Aucune demande pour l’instant.'));

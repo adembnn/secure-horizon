@@ -4,11 +4,12 @@
  * the page side from the storage. Nothing here keeps a decision in memory : the worker can die at any time.
  * Fallback : if the window cannot be created, the in-page overlay of bridge.js is used and the journal says so. */
 import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_core.js';
-import { ENGINE_CHOICE, KINDS, MODEL_MIN, NO_MATCH, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
-import { TEXT, answerOf, siteName } from './outcome.js';
+import { ENGINE_CHOICE, KINDS, MAX_TEXT, MODEL_MIN, NO_MATCH, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
+import { TEXT, answerOf, networkName, siteName } from './outcome.js';
 import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
-import { measure } from './effect_sim.js';
-import { chainAppend } from './journal_chain.js';
+import { measure, readToken } from './effect_sim.js';
+import { chainAppend, sha256 } from './journal_chain.js';
+import { revocationFor } from './revoke.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const RANK = { attention: 1, unknown: 2, danger: 3, manipulation: 4 };
@@ -68,10 +69,103 @@ const AUTO_MS = 1000;           // "Ça correspond" stays on screen this long, t
 // sentence was written, whatever happens. Past that, the question is asked again.
 const OP = { idleMs: 90000, maxMs: 120000 };
 const OP_KEY = 'hu:op:';
+// ONE window per operation : after a request of an operation went to the wallet and the sentence is not fulfilled yet (a right was
+// given, nothing has left), the window stays open and shows the next request of the same operation. It waits this long, then closes.
+const KEEP_KEY = 'hu:keep:';
+const KEEP_MS = 60000;
+const CLOSE_MS = 1600;          // the window shows its last message and closes itself ; the worker removes it after this, in case it did not
+// Decimals everybody knows for these names : a contract that calls itself USDC with other decimals is not believed.
+const USUAL_DECIMALS = { USDC: 6, USDT: 6, DAI: 18, WETH: 18, WBTC: 8, WAVAX: 18 };
+const HEX20 = /^0x[0-9a-fA-F]{40}$/;
+const shortAddr = (a) => String(a).slice(0, 6) + '…' + String(a).slice(-4);
+// 50000000 with 6 decimals -> "50" ; never raw units on a screen.
+function units(raw, decimals) {
+  let n; try { n = BigInt(raw); } catch (_) { return null; }
+  if (!Number.isInteger(decimals) || decimals < 0 || decimals > 36) return null;
+  const base = 10n ** BigInt(decimals), int = n / base, frac = (n % base).toString().padStart(decimals, '0').slice(0, 6).replace(/0+$/, '');
+  return int.toString().replace(/\B(?=(\d{3})+$)/g, ' ') + (frac ? ',' + frac : '');
+}
+const LINES = {
+  noWindow: 'La fenêtre Hold up n’a pas pu s’ouvrir. Je n’ai pas pu te demander ce que tu veux faire.',
+  notCompared: 'Je n’ai pas pu comparer cette demande à ce que tu as écrit.',
+  tooLong: 'Ta phrase est trop longue pour que je la lise en entier. Je ne vérifie pas une phrase coupée.',
+  capabilities: 'Cette demande contient des réglages que je ne sais pas lire.',
+  permissions: 'Ce site demande un droit durable sur ton compte. Je ne sais pas en lire les limites.',
+  watchAsset: (name, addr) => 'Ce site veut ajouter un jeton à ton portefeuille' + (name ? ' sous le nom ' + name : '') + (addr ? ' (' + shortAddr(addr) + ')' : '') + '. Ce nom est choisi par le site.'
+};
+const PERMISSION_METHODS = new Set(['wallet_grantPermissions', 'wallet_requestExecutionPermissions']);
+// The network's own currencies : sending them is not a spending right, there is no ceiling to reduce in the wallet.
+const NATIVE = new Set(['AVAX', 'ETH', 'BNB', 'MATIC', 'POL', 'SOL', 'BTC']);
+// Every call of the request is approve(spender, amount) or increaseAllowance(spender, added), and nothing else.
+function onlyGrants(body) {
+  const p = body && Array.isArray(body.params) ? body.params : [];
+  const calls = body.method === 'eth_sendTransaction' ? [p[0]] : body.method === 'wallet_sendCalls' && p[0] && Array.isArray(p[0].calls) ? p[0].calls : [];
+  const sel = (c) => { const d = c && typeof c === 'object' ? (typeof c.data === 'string' && c.data.length > 2 ? c.data : typeof c.input === 'string' ? c.input : '') : ''; return d.slice(0, 10).toLowerCase(); };
+  return calls.length > 0 && calls.every((c) => sel(c) === '0x095ea7b3' || sel(c) === '0x39509351');
+}
+// What only this file may say about a request the engine does not read : -> a line, or null.
+function ownLine(method, params) {
+  try {
+    if (PERMISSION_METHODS.has(method)) return LINES.permissions;
+    if (method === 'wallet_watchAsset') {
+      const o = Array.isArray(params) ? params[0] : params, opt = o && typeof o === 'object' && o.options && typeof o.options === 'object' ? o.options : {};
+      return LINES.watchAsset(typeof opt.symbol === 'string' && /^[A-Za-z0-9.$_-]{1,12}$/.test(opt.symbol) ? opt.symbol : '', HEX20.test(String(opt.address || '')) ? opt.address : '');
+    }
+    if (method === 'wallet_sendCalls') {
+      const c = Array.isArray(params) && params[0] && typeof params[0] === 'object' ? params[0] : {};
+      const some = (x) => x != null && (typeof x !== 'object' || Object.keys(x).length > 0);
+      if (some(c.capabilities) || (Array.isArray(c.calls) && c.calls.some((x) => x && some(x.capabilities)))) return LINES.capabilities;
+    }
+  } catch (_) {}
+  return null;
+}
+const READ_MS = 2500;           // one read of a token's own name or decimals (eth_call) : short, the person is waiting for the answer
 const RPC_MS = 8000;            // one read relayed to the wallet's node (a trace of a few thousand steps takes 1 to 4 s on a local fork)
 // The engine could not READ the call (unknown function), and that is its only reason : the one case where a measured effect may
 // replace "not verified". An engine that failed, or any other finding, never qualifies.
 const unreadable = (v) => !!v && v.level === 'unknown' && v.indeterminate === true && v.opacity_only === true && Array.isArray(v.codes) && v.codes.length > 0;
+
+// ---- revocation (revoke.js, REVOKE_BRANCHEMENT.md) : the right a confirmed request granted is kept in storage.session only,
+// per tab, five at most. The side panel asks for it by tab id, never sends a request itself. Hold up never signs : the request
+// goes to the wallet of the page through inject.js, with a one-shot token so that it is not held and asked again.
+const GRANT_KEY = 'hu:grant:';
+const REVTOK_KEY = 'hu:revtok:';
+const MAX_GRANTS = 5;
+const REVOKE = { tokenMs: 8000, sendMs: 300000, readMs: 9000 };
+const REQUEST_FIELDS = ['request', 'requests', 'params', 'to', 'data', 'input', 'from', 'method', 'tx', 'value'];
+const carriesRequest = (msg) => REQUEST_FIELDS.some((k) => Object.prototype.hasOwnProperty.call(msg, k));
+// stable text of a JSON value (sorted keys) : the same request always gives the same fingerprint
+function stable(x) {
+  if (x === null || typeof x !== 'object') return JSON.stringify(x === undefined ? null : x);
+  if (Array.isArray(x)) return '[' + x.map(stable).join(',') + ']';
+  return '{' + Object.keys(x).sort().filter((k) => x[k] !== undefined).map((k) => JSON.stringify(k) + ':' + stable(x[k])).join(',') + '}';
+}
+export const requestHash = (method, params) => sha256(stable([String(method), params === undefined ? null : params]));
+const randHex = (n) => { const a = new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a, (b) => b.toString(16).padStart(2, '0')).join(''); };
+// Read used after the wallet answered : is the right at zero ? Selectors : allowance(address,address), isApprovedForAll(address,address),
+// getApproved(uint256), Permit2 allowance(address,address,address). Checked against keccak in tests/unit/revoke_branchement.test.mjs.
+export const READ_SEL = { allowance: '0xdd62ed3e', isApprovedForAll: '0xe985e9c5', getApproved: '0x081812fc', permit2Allowance: '0x927da105' };
+const word = (a) => String(a).toLowerCase().replace(/^0x/, '').padStart(64, '0');
+export function readCallOf(result) {
+  const g = result && result.grant; if (!g || typeof g !== 'object') return null;
+  const ok = (a) => typeof a === 'string' && /^0x[0-9a-f]{40}$/i.test(a);
+  switch (result.kind) {
+    case 'erc20_approve': case 'erc20_increaseAllowance': case 'erc20_permit_call':
+      return ok(g.token) && ok(g.owner) && ok(g.spender) ? { to: g.token, data: READ_SEL.allowance + word(g.owner) + word(g.spender), zero: 'uint' } : null;
+    case 'setApprovalForAll':
+      return ok(g.token) && ok(g.owner) && ok(g.spender) ? { to: g.token, data: READ_SEL.isApprovedForAll + word(g.owner) + word(g.spender), zero: 'uint' } : null;
+    case 'erc721_approve':
+      return ok(g.token) && /^[0-9]+$/.test(String(g.tokenId)) ? { to: g.token, data: READ_SEL.getApproved + BigInt(g.tokenId).toString(16).padStart(64, '0'), zero: 'uint' } : null;
+    case 'permit2_approve': case 'permit2_permit_call':
+      return ok(g.owner) && ok(g.token) && ok(g.spender) ? { to: '0x000000000022d473030f116ddee9f6b43ac78ba3', data: READ_SEL.permit2Allowance + word(g.owner) + word(g.token) + word(g.spender), zero: 'uint' } : null;
+    default: return null;
+  }
+}
+// first 32-byte word of an eth_call answer : 0 -> 'zero', anything else -> 'still_active', unreadable -> 'unknown'
+export function readState(hex) {
+  if (typeof hex !== 'string' || !/^0x[0-9a-fA-F]{64,}$/.test(hex)) return 'unknown';
+  try { return BigInt('0x' + hex.slice(2, 66)) === 0n ? 'zero' : 'still_active'; } catch (_) { return 'unknown'; }
+}
 
 // --- social questions (escalation only : an answer can raise the level, never lower it) ---
 const SOCIAL_Q = {
@@ -149,7 +243,8 @@ function applyPlan(rec, plan, cfg, now) {
 const hostOf = (origin) => { try { return new URL(origin).host || String(origin); } catch (_) { return String(origin || ''); } };
 
 // `classify(text)` (optional) asks the relay (Clef / Jev) ; without it, or when it fails, the embedded keyword parser answers.
-export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null } = {}) {
+// `closeMs` : how long a decided window keeps its last message before the worker removes it (0 : at once).
+export function createGatekeeper({ check, classify = null, onJournal = null, testHook = null, closeMs = CLOSE_MS } = {}) {
   const selfUrl = chrome.runtime.getURL('');
   const windowUrl = chrome.runtime.getURL('window.html');
   const mem = new Map(); // only if chrome.storage.session is missing : the hold then does not survive the worker (journalled)
@@ -203,7 +298,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       await chrome.storage.local.set({ log: arr });
     } catch (_) {}
     // hash-chained copy (journal_chain.js) : site, kind, level, codes, decision, build version. Never the sentence, never an address.
-    if (entry.type === 'verdict' || entry.type === 'decision' || entry.type === 'partial') {
+    if (entry.type === 'verdict' || entry.type === 'decision' || entry.type === 'partial' || entry.type === 'revocation') {
       let version = ''; try { version = chrome.runtime.getManifest().version; } catch (_) {}
       await chainAppend(chrome.storage.local, entry, version);
     }
@@ -244,7 +339,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   // `op` : the operation this request belongs to, when the sentence was written for an earlier request.
   async function judgeWithIntent(rec, intent, cfg, op = null) {
     let v = rec.verdict;
-    if (!rec.body) return { v, used: null, rewrite: null };
+    if (!rec.body) return { v, used: null, rewrite: null, erc20: {} };
     const ask = (choice, kind) => safeCheck(Object.assign({}, rec.body, { intent: choice || undefined, intent_kind: kind, intent_text: intent.text,
       intent_amount: intent.amount, intent_symbol: intent.symbol }), cfg);
     if (intent.clear) v = stricter(v, await ask(ENGINE_CHOICE[intent.kind], intent.kind));
@@ -252,6 +347,11 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // What was written against what the request carries (amount of a spending right, recipient and amount of a payment) : same rule in both builds.
     let tokens = {};
     try { tokens = tokensOf((await chrome.storage.local.get('contexte')).contexte, rec.body.chainId); } catch (_) {}
+    // A token nobody here knows by its address : its own contract is asked (read-only, through the wallet's provider). `tokens` stays
+    // "known by address" ; `all` adds what the contracts declare about themselves.
+    const declared = await declaredTokens(rec, intent, tokens);
+    const all = Object.assign({}, declared, tokens);
+    const said = Object.keys(declared).map((a) => ' Le jeton ' + shortAddr(a) + ' se présente comme ' + declared[a].declared + '.').join('');
     // A call the request itself does not let us read (no right, no transfer in its own data) : its effect is measured by a dry run
     // on the wallet's node. No measure = the checks below, as before.
     let effect = null;
@@ -259,23 +359,27 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       const f = requestFacts(rec.body);
       if (!f.grants.length && !f.sends.length) { try { effect = await measure(rec.body, rpcOf(rec.tabId, rec.frameId, rec.rid), tokens); } catch (_) { effect = null; } }
     }
-    let w = effect && effect.ok ? effectCheck(effect, intent) : writtenCheck(rec.body, intent, tokens);
+    let w = effect && effect.ok ? effectCheck(effect, intent) : writtenCheck(rec.body, intent, all);
     if (!w && effect && effect.failed) w = { outcome: 'unverifiable', line: 'La simulation échoue : le réseau refuserait cette demande telle quelle.' };
     // Q17 : a spending right wider than the written amount, in a transaction : Hold up writes the amount into the request itself,
     // only when that amount is certain. Otherwise the line keeps its advice (cap it in the wallet).
-    let rewrite = null;
+    // An advice is given only when it can be followed : "Réduis le plafond à 50 AVAX" means nothing (the amount written is the network's
+    // own currency, the right is on another asset).
+    if (w && typeof w.line === 'string' && / Réduis le plafond/.test(w.line) && NATIVE.has(intent.symbol)) { w = Object.assign({}, w, { line: w.line.replace(/ Réduis le plafond.*$/, '') }); delete w.fixable; }
+    let rewrite = null, plan = null;
     if (w && w.fixable && cfg.limitUnlimited !== false && !rec.slim) { // a slimmed body is never written back into the request
-      // S15 : the symbol is NOT read on the token contract (a contract can call itself USDC). Only a token known by its address
-      // (built-in list, local context) is ever rewritten ; any other gets the alert and the advice, no rewrite.
-      const plan = limitPlan(rec.body, intent, tokens, {});
-      if (plan) {
-        rewrite = { params: plan.params };
-        w = Object.assign({}, w, { line: w.line.replace(/ Réduis le plafond.*$/, ''), fix: limitText(plan), limited: { amount: plan.amount, symbol: plan.symbol } });
-      }
+      // The token is known by its address, or its own contract declares the written name with the usual decimals (declaredTokens).
+      // The rewrite only ever makes the right SMALLER (limitPlan) : what the wallet receives is never wider than what the site sent.
+      // Only when the whole request is that right and nothing else : a batch that also carries a call nobody reads is not corrected.
+      plan = onlyGrants(rec.body) ? limitPlan(rec.body, intent, all, {}) : null;
+      if (plan) rewrite = { params: plan.params };
     }
     const used = usedBy(rewrite ? Object.assign({}, rec.body, { params: rewrite.params }) : rec.body, effect);
-    let relief = !!(w && w.fixable) && !rec.slim;
-    if (op && !(w && w.outcome === 'mismatch')) { const over = operationCheck(await usedSoFar(op, rec), used, intent, tokens); if (over) { w = over; rewrite = null; relief = false; } }
+    // The requests of one sentence are one budget : a second right, another token, a sum above what was written no longer match,
+    // corrected or not.
+    if (op && (!(w && w.outcome === 'mismatch') || rewrite)) { const over = operationCheck(await usedSoFar(op, rec), used, intent, all); if (over) { w = over; rewrite = null; plan = null; } }
+    // What was read on a contract is said as such : the address is the identity, the name is what the contract claims.
+    if (w && w.outcome === 'match' && said && !w.measured) w = Object.assign({}, w, { line: ((w.line || '') + said).trim() });
     if (w) {
       // The engine already found worse on its own : its line stays, this check only adds its outcome.
       const worse = w.outcome !== 'mismatch' && ((RANK[v.level] || 0) > RANK.unknown || v.intent_contradiction);
@@ -290,20 +394,73 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // Nothing understood, or still too vague after the one follow-up : it cannot be said to match. At least "not verified" (same delay as Danger),
     // so a vague sentence never does better than no sentence at all.
     if ((!intent.clear || intent.vague) && RANK.unknown > (RANK[v.level] || 0)) v = Object.assign({}, v, { level: 'unknown' });
-    // Q16 : for this one gap there is no waiting time, only the correction. Not when anything else is wrong with the request.
-    if (relief && canCorrect(intent) && v.written && v.written.outcome === 'mismatch' && ['attention', 'danger'].includes(v.level) && !v.indeterminate
-      && !v.intent_contradiction && !v.address_diff && !(v.risk_signals || []).includes('lookalike') && onlyTheGap(rec.verdict, v)) v = Object.assign({}, v, { relief: true });
-    else rewrite = rewrite && v.written && v.written.limited ? rewrite : null;
-    return { v, used, rewrite };
+    // The ONLY gap is a right wider than the written amount, and Hold up brought it back to that amount in the request itself :
+    // it now matches what was written (founder's decision, 11 Oct.). The modified request is the one that goes to the wallet.
+    // Anything else wrong with the request, or no correction possible (a signature, the setting off, a token nobody can read) :
+    // it does not match, and the delay applies.
+    if (rewrite && plan && canCorrect(intent) && v.written && v.written.outcome === 'mismatch' && v.written.fixable && ['attention', 'danger'].includes(v.level) && !v.indeterminate
+      && !v.intent_contradiction && !v.address_diff && !(v.risk_signals || []).includes('lookalike') && onlyTheGap(rec.verdict, v)) {
+      const m = String(v.written.line || '').match(/La demande donne accès à (.+?)\. Réduis/);
+      const before = /donne accès à tout/.test(String(v.written.line || '')) ? 'sans limite' : m ? m[1] : '';
+      const limited = { amount: plan.amount, symbol: plan.symbol, before: before || 'plus large' };
+      // The corrected request is read again, as the wallet will get it. It matches : said so. Something still cannot be verified in it
+      // (who gets the right, a token nobody knows) : the right stays limited, but it is "not verified", with the delay.
+      let after = null; try { after = writtenCheck(Object.assign({}, rec.body, { params: plan.params }), intent, all); } catch (_) { after = null; }
+      if (after && after.outcome === 'match') v = Object.assign({}, v, { relief: true, written: { outcome: 'match', corrected: true,
+        line: limitText(plan) + '. Le site demandait un accès ' + (before === 'sans limite' ? before : before ? 'à ' + before : 'plus large') + '.' + said, limited } });
+      else if (after && after.outcome === 'unverifiable' && typeof after.line === 'string') v = Object.assign({}, v, RANK.unknown > (RANK[v.level] || 0) ? { level: 'unknown' } : {},
+        { written: { outcome: 'unverifiable', line: after.line + ' Si tu continues, le droit sera limité à ' + limitText(plan).replace(/^Droit limité à /, '') + '.', limited } });
+      else rewrite = null;
+    } else rewrite = null;
+    const erc20 = {}; for (const a of Object.keys(all)) erc20[a] = { symbol: all[a].symbol, decimals: all[a].decimals };
+    // Never raw units on the screen : when the engine's own line carries the raw amount of a token ("50000000 jetons"), it is written
+    // in readable units with the token's name, or with the token's shortened address when nobody knows its name.
+    try {
+      const reel = v.texts && typeof v.texts.reel === 'string' ? v.texts.reel : '';
+      if (/[0-9]{5,} jetons/.test(reel)) {
+        let text = reel; const facts = requestFacts(rec.body);
+        for (const x of facts.grants.concat(facts.sends)) {
+          if (!x.token || x.raw == null) continue;
+          const raw = x.raw.toString(), meta = all[x.token], u = meta ? units(raw, meta.decimals) : null;
+          text = text.split(raw + ' jetons').join(u ? u + ' ' + (declared[x.token] ? declared[x.token].declared : meta.symbol) : raw + ' unités du jeton ' + shortAddr(x.token));
+        }
+        if (text !== reel) v = Object.assign({}, v, { texts: Object.assign({}, v.texts, { reel: text }) });
+      }
+    } catch (_) {}
+    return { v, used, rewrite, erc20 };
+  }
+
+  // What a token's own contract says of itself (symbol, decimals), for the tokens of this request nobody here knows by their address.
+  // Read-only eth_call through the provider the request came from. A DECLARATION, not an identity : the address stays the identity,
+  // and the window says "se présente comme". Kept only when it is coherent with what was written :
+  //   - the declared name is the written one, or contains it ("USDC.e" for "USDC") : the entry carries the written symbol ;
+  //   - a contract that takes a well-known name with other decimals than that name's is not believed (the token stays unknown) ;
+  //   - another name : the entry carries that name, so the request reads as "another token".
+  // No answer, or a failing read : the token stays unknown and the request can never match (S2 unchanged).
+  async function declaredTokens(rec, intent, known) {
+    const out = {};
+    if (!rec.body || !intent || rec.tabId == null) return out;
+    let facts; try { facts = requestFacts(rec.body); } catch (_) { return out; }
+    const want = [...new Set(facts.grants.concat(facts.sends).map((x) => x.token).filter((t) => t && !known[t]))].slice(0, 4);
+    if (!want.length) return out;
+    const rpc = rpcOf(rec.tabId, rec.frameId, rec.rid, READ_MS);
+    await Promise.all(want.map(async (t) => {
+      let m = null; try { m = await readToken(rpc, t); } catch (_) { m = null; }
+      if (!m) return;
+      const s = m.symbol.toUpperCase(), w = intent.symbol || '', same = !!w && (s === w || (w.length >= 3 && s.includes(w)));
+      if (same && USUAL_DECIMALS[w] != null && USUAL_DECIMALS[w] !== m.decimals) return;
+      out[t] = { symbol: same ? w : m.symbol, decimals: m.decimals, declared: m.symbol };
+    }));
+    return out;
   }
 
   // ---------- reads relayed to the wallet's own node (bridge.js -> inject.js -> the provider the request came through) ----------
-  function rpcOf(tabId, frameId, rid) {
+  function rpcOf(tabId, frameId, rid, ms = RPC_MS, extra = null) {
     return (method, params) => new Promise((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error('delai')), RPC_MS);
+      const timer = setTimeout(() => reject(new Error('delai')), ms);
       const done = (fn, x) => { clearTimeout(timer); fn(x); };
       let p;
-      try { p = chrome.tabs.sendMessage(tabId, { type: 'hu.rpc', rid, method, params }, { frameId }); } catch (e) { return done(reject, e); }
+      try { p = chrome.tabs.sendMessage(tabId, Object.assign({ type: 'hu.rpc', rid, method, params }, extra || {}), { frameId }); } catch (e) { return done(reject, e); }
       Promise.resolve(p).then((r) => (r && r.ok === true ? done(resolve, r.result) : done(reject, new Error('lecture refusee'))), (e) => done(reject, e));
     });
   }
@@ -351,6 +508,165 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     return used;
   }
 
+  // ---------- revocation of a right granted by a confirmed request ----------
+  const grantKey = (tabId) => GRANT_KEY + tabId;
+  async function grantsOf(tabId) {
+    if (!Number.isInteger(tabId)) return [];
+    const v = await opRead(grantKey(tabId));
+    return Array.isArray(v) ? v : [];
+  }
+  // The request as it went to the wallet (the limited params when Hold up limited the right), turned into revocations.
+  async function keepGrant(rec) {
+    try {
+      const b = rec.body;
+      if (!b || typeof b.method !== 'string' || !Array.isArray(b.params)) return;
+      const params = rec.rewrite && Array.isArray(rec.rewrite.params) && rec.verdict && rec.verdict.written && rec.verdict.written.limited ? rec.rewrite.params : b.params;
+      let tokens = {};
+      try { tokens = tokensOf((await chrome.storage.local.get('contexte')).contexte, b.chainId); } catch (_) {}
+      const optsFor = (to) => { const t = typeof to === 'string' ? tokens[to.toLowerCase()] || (rec.erc20 && rec.erc20[to.toLowerCase()]) || null : null; return t ? { tokenKind: 'erc20', tokenLabel: 'tes ' + t.symbol } : {}; }; // known by its address : a token with decimals. Otherwise nothing is guessed.
+      const asked = [];
+      if (b.method === 'wallet_sendCalls') {
+        const c = params[0] && typeof params[0] === 'object' ? params[0] : {};
+        const calls = Array.isArray(c.calls) ? c.calls.slice(0, 16) : [];
+        for (const x of calls) if (x && typeof x === 'object') asked.push([{ method: 'eth_sendTransaction', chainId: c.chainId || b.chainId, from: c.from || b.from, params: [{ from: c.from || b.from, to: x.to, data: x.data || x.input, chainId: c.chainId || b.chainId }] }, x.to]);
+      } else asked.push([{ method: b.method, params, chainId: b.chainId, from: b.from }, params[0] && params[0].to]);
+      const found = [];
+      for (const [req, to] of asked) { const r = revocationFor(req, optsFor(to)); if (r && r.status !== 'not_a_grant') found.push(r); }
+      if (!found.length) return;
+      await store.lock(async () => {
+        const list = await grantsOf(rec.tabId);
+        for (const result of found) list.push({ id: randHex(8), rid: rec.rid, frameId: rec.frameId, origin: rec.origin, at: Date.now(), result, wallet: null });
+        while (list.length > MAX_GRANTS) list.shift();
+        await session.set({ [grantKey(rec.tabId)]: list });
+      });
+      try { const p = chrome.action && chrome.action.setBadgeText && chrome.action.setBadgeText({ text: '1', tabId: rec.tabId }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+    } catch (_) { /* no revocation offered : nothing else changes */ }
+  }
+  async function grantFor(msg) {
+    const list = await grantsOf(msg.tabId);
+    if (!list.length) return null;
+    if (msg.id == null) return list[list.length - 1];
+    return list.find((g) => g.id === msg.id) || null;
+  }
+  async function saveGrant(tabId, g) {
+    await store.lock(async () => {
+      const list = await grantsOf(tabId), i = list.findIndex((x) => x.id === g.id);
+      if (i >= 0) { list[i] = g; await session.set({ [grantKey(tabId)]: list }); }
+    });
+  }
+  // One message to the frame that made the request (bridge.js -> inject.js). Never throws : null when nobody answers in time.
+  function revokeRun(tabId, frameId, payload, ms) {
+    return new Promise((resolve) => {
+      const timer = setTimeout(() => resolve(null), ms);
+      const done = (x) => { clearTimeout(timer); resolve(x && typeof x === 'object' ? x : null); };
+      let p; try { p = chrome.tabs.sendMessage(tabId, payload, { frameId }); } catch (_) { return done(null); }
+      Promise.resolve(p).then(done, () => done(null));
+    });
+  }
+  // The mark of a revocation prepared by Hold up : a token made here, single use, a few seconds, bound to the tab, the frame and
+  // the exact content. Whatever a page writes in a request is never trusted : without this token in storage.session, the request
+  // is held and asked about like any other.
+  async function takeRevokeToken(tok, tabId, frameId, method, params) {
+    if (typeof tok !== 'string' || !/^[0-9a-f]{32}$/.test(tok)) return false;
+    let h; try { h = await requestHash(method, params); } catch (_) { return false; }
+    return store.lock(async () => {
+      const k = REVTOK_KEY + tok, t = await opRead(k);
+      if (!t) return false;
+      try { await session.remove(k); } catch (_) {} // single use, whatever the outcome
+      return t.tabId === tabId && t.frameId === frameId && Date.now() <= t.exp && t.hash === h;
+    });
+  }
+  // sender.url is set by the browser : a content script or a page never carries the URL of the extension's own panel
+  const fromPanel = (s) => typeof s.url === 'string' && s.url.split('#')[0].split('?')[0] === chrome.runtime.getURL('ui/sidepanel.html');
+  const REVOKE_HANDLERS = {
+    'hu.revoke.get': async (msg) => {
+      const list = await grantsOf(msg.tabId);
+      if (!list.length) return { none: true };
+      const last = list[list.length - 1];
+      return { result: last.result, origin: last.origin, at: last.at, id: last.id, wallet: last.wallet, grants: list.slice().reverse().map((g) => ({ id: g.id, result: g.result, origin: g.origin, at: g.at, wallet: g.wallet })) };
+    },
+    'hu.revoke.send': async (msg) => {
+      const g = await grantFor(msg);
+      if (!g) return { state: 'error', code: 'none' };
+      const index = msg.index == null ? 0 : msg.index;
+      const r = g.result;
+      // only what ONE transaction really removes is sent from here ; the rest is explained in the panel
+      if (!r || r.status !== 'revocable' || r.oneClick !== true || !Number.isInteger(index) || index < 0 || index >= r.requests.length) return { state: 'error', code: 'not_one_click' };
+      const q = r.requests[index];
+      if (!q || q.method !== 'eth_sendTransaction' || q.submitTo !== 'wallet' || !Array.isArray(q.params)) return { state: 'error', code: 'not_one_click' };
+      const tok = randHex(16), hash = await requestHash(q.method, q.params);
+      await store.lock(async () => { await session.set({ [REVTOK_KEY + tok]: { tabId: msg.tabId, frameId: g.frameId, hash, exp: Date.now() + REVOKE.tokenMs, gid: g.id } }); });
+      const a = await revokeRun(msg.tabId, g.frameId, { type: 'hu.revoke.run', op: 'send', tok, origin: g.origin, method: q.method, params: q.params }, REVOKE.sendMs);
+      try { await session.remove(REVTOK_KEY + tok); } catch (_) {}
+      const state = a && ['submitted', 'rejected', 'error'].includes(a.state) ? a.state : 'error';
+      const code = a ? (typeof a.code === 'string' || typeof a.code === 'number' ? a.code : undefined) : 'no_answer';
+      g.wallet = state; g.sentAt = Date.now(); await saveGrant(msg.tabId, g);
+      await journal({ type: 'revocation', origin: g.origin, method: r.kind, kind: r.kind, decision: state, wallet: state, request_sha256: hash });
+      return code === undefined ? { state } : { state, code };
+    },
+    'hu.revoke.check': async (msg) => {
+      const g = await grantFor(msg);
+      const c = g && readCallOf(g.result);
+      if (!c) return { state: 'unknown' };
+      const a = await revokeRun(msg.tabId, g.frameId, { type: 'hu.revoke.run', op: 'read', origin: g.origin, method: 'eth_call', params: [{ to: c.to, data: c.data }, 'latest'] }, REVOKE.readMs);
+      return { state: a && a.state === 'read' ? readState(a.result) : 'unknown' };
+    }
+  };
+  // ---------- one window per operation ----------
+  const keepKey = (tabId, frameId) => KEEP_KEY + tabId + ':' + frameId;
+  function tell(msg) { try { const p = chrome.runtime.sendMessage(msg); if (p && p.catch) p.catch(() => {}); } catch (_) {} }
+  // The window closes itself after its last message ; this is the safety net.
+  async function removeWindow(windowId) {
+    const go = async () => { try { await chrome.windows.remove(windowId); } catch (_) {} };
+    if (closeMs > 0) setTimeout(go, closeMs); else await go();
+  }
+  // The sentence is not fulfilled yet : a right was given for it and nothing has left. Another request is expected.
+  const moreExpected = (rec) => !!(rec.used && Array.isArray(rec.used.grants) && rec.used.grants.length && !(rec.used.out && rec.used.out.length)
+    && rec.intent && rec.intent.clear && !(rec.intent.facts && rec.intent.facts.grant) && ['buy_or_swap', 'pay_someone', 'send_to_my_account'].includes(rec.intent.kind));
+  async function keepOpen(rec, now) {
+    if (rec.ui !== 'window' || rec.windowId == null || rec.opAt == null || !moreExpected(rec)) return false;
+    const k = keepKey(rec.tabId, rec.frameId);
+    try { await session.set({ [k]: { windowId: rec.windowId, tabId: rec.tabId, frameId: rec.frameId, origin: rec.origin, opAt: rec.opAt, rid: rec.rid, next: null, until: now + KEEP_MS, step: rec.step || 1 } }); } catch (_) { return false; }
+    if (alarms) { try { alarms.create(k, now + KEEP_MS); } catch (_) {} }
+    return true;
+  }
+  async function keepAll() {
+    let all = {}; try { all = await session.get(null); } catch (_) {}
+    return Object.keys(all || {}).filter((k) => k.startsWith(KEEP_KEY) && all[k]).map((k) => ({ k, v: all[k] }));
+  }
+  // Ends a wait : the entry goes, and the window too unless a request is still shown in it.
+  async function keepEnd(k, kept, why) {
+    try { await session.remove(k); } catch (_) {}
+    if (alarms) { try { alarms.clear(k); } catch (_) {} }
+    if (!kept || kept.windowId == null) return;
+    let busy = false; try { busy = (await store.all()).some((r) => r.status === 'pending' && r.windowId === kept.windowId); } catch (_) {}
+    if (busy) return;
+    tell({ type: 'hu.closing', rid: kept.next || kept.rid, why });
+    await removeWindow(kept.windowId);
+  }
+  // The window kept open for this operation, if it is still there and free. The new request will be shown in it.
+  async function keepTake(tabId, frameId, origin, op, rid, now) {
+    const k = keepKey(tabId, frameId), kept = await opRead(k);
+    if (!kept) return null;
+    if (kept.next) return null; // another request of the operation is on screen in it : this one gets its own window
+    let alive = kept.origin === origin && kept.opAt === op.writtenAt && now <= kept.until;
+    if (alive) { try { await chrome.windows.get(kept.windowId); } catch (_) { alive = false; } }
+    if (!alive) { await keepEnd(k, kept, 'idle'); return null; }
+    kept.next = rid;
+    try { await session.set({ [k]: kept }); } catch (_) { return null; }
+    if (alarms) { try { alarms.clear(k); } catch (_) {} }
+    return kept;
+  }
+  async function keepDropWindow(windowId, alsoOp) {
+    for (const { k, v } of await keepAll()) if (v.windowId === windowId) {
+      try { await session.remove(k); } catch (_) {}
+      if (alarms) { try { alarms.clear(k); } catch (_) {} }
+      // The person closed the waiting window : the next request of that sentence is asked about again.
+      if (alsoOp && !v.next) { try { await session.remove(opKey(v.tabId, v.frameId)); } catch (_) {} }
+    }
+  }
+
+
   const fromExtensionPage = (s) => typeof s.url === 'string' && s.url.startsWith(selfUrl);
   const fromWindow = (s) => typeof s.url === 'string' && s.url.split('#')[0].split('?')[0] === windowUrl && s.tab && s.tab.windowId != null;
   const fromPage = (s) => !!(s.tab && s.tab.id != null && typeof s.frameId === 'number' && !fromExtensionPage(s));
@@ -389,11 +705,13 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // What the Hold up window draws (ui/screen.js). Two moments : the question, then the answer.
     const site = siteName(rec.site);
     // The question shows the site name only (origin given by the browser) : nothing of the request before the person has written.
-    if (rec.stage === 'intent') view.screen = { kind: 'question', title: rec.ask || TEXT.question(site), placeholder: TEXT.placeholder };
+    if (rec.stage === 'intent') view.screen = Object.assign({ kind: 'question', title: rec.ask || TEXT.question(site), placeholder: TEXT.placeholder, max: Math.max(20, MAX_TEXT - (rec.firstText ? rec.firstText.length + 1 : 0)) }, rec.asked && rec.firstText ? { first: rec.firstText } : {});
     else if (rec.stage === 'verdict') {
       view.screen = Object.assign({ kind: 'answer', leftMs: Math.max(0, rec.friction.deadline - now) }, answerOf(rec.verdict, rec.intent));
       // It matches and no delay applies : no "Continuer", the window sends the request on after AUTO_MS (Annuler stays).
       if (view.screen.outcome === 'match' && rec.friction.waitMs === 0 && !rec.friction.phrase) view.screen.autoMs = AUTO_MS;
+      if (rec.step > 1) view.screen.step = rec.step; // a later request of the same sentence, shown in the same window
+      const net = networkName(rec.body && rec.body.chainId); if (net) view.screen.network = net;
     }
     return view;
   }
@@ -418,7 +736,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // of a request nobody described : at least "not verified", with its delay.
     const r = await store.advance(rec.rid, null, (x, now) => {
       x.ui = ui; x.windowId = windowId;
-      if (ui === 'overlay' && x.stage === 'intent') enterVerdict(x, RANK.unknown > (RANK[x.verdict.level] || 0) ? Object.assign({}, x.verdict, { level: 'unknown' }) : x.verdict, cfg, now);
+      if (ui === 'overlay' && x.stage === 'intent') enterVerdict(x, Object.assign({}, x.verdict, RANK.unknown > (RANK[x.verdict.level] || 0) ? { level: 'unknown' } : {}, { written: { outcome: 'unverifiable', line: LINES.noWindow } }), cfg, now);
     });
     if (r.status === 'next' && ui === 'overlay' && rec.stage === 'intent') await journalStage(r.rec);
     if (r.status !== 'next' && windowId != null) { try { await chrome.windows.remove(windowId); } catch (_) {} } // decided meanwhile
@@ -433,14 +751,20 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     try { await openUi(rec, sender, cfg); } finally { opening.delete(rec.rid); }
   }
   function nudge(tabId, frameId, msg) { try { const p = chrome.tabs.sendMessage(tabId, msg, { frameId }); if (p && p.catch) p.catch(() => {}); } catch (_) {} }
-  async function closeUi(rec) {
-    if (rec.windowId != null) { try { await chrome.windows.remove(rec.windowId); } catch (_) {} }
+  // The page side gets its answer at once. The window is told why it ends : it shows its last message, then closes itself
+  // (the worker removes it after closeMs in case it did not). `keep` : the window stays for the next request of the operation.
+  async function closeUi(rec, { keep = false, why = '' } = {}) {
     nudge(rec.tabId, rec.frameId, { type: 'hu.result', rid: rec.rid });
     nudge(rec.tabId, 0, { type: 'hu.banner' });
+    if (rec.windowId == null || keep) return;
+    await keepDropWindow(rec.windowId, false);
+    tell({ type: 'hu.closing', rid: rec.rid, why: why || rec.decidedBy || '' });
+    await removeWindow(rec.windowId);
   }
+  const shownOutcome = (rec) => { try { return rec.stage === 'verdict' && rec.verdict ? answerOf(rec.verdict, rec.intent).outcome : null; } catch (_) { return null; } };
   async function refuse(rid, by) {
     const r = await store.cancel(rid, by);
-    if (r.status === 'deny') { await journal({ type: 'decision', stage: r.rec.stage, decision: 'cancel', by, origin: r.rec.origin, method: r.rec.method, level: r.rec.level || null, ui: r.rec.ui, total_ms: Date.now() - r.rec.createdAt }); await closeUi(r.rec); }
+    if (r.status === 'deny') { await journal({ type: 'decision', stage: r.rec.stage, decision: 'cancel', by, origin: r.rec.origin, method: r.rec.method, level: r.rec.level || null, outcome: shownOutcome(r.rec), ui: r.rec.ui, total_ms: Date.now() - r.rec.createdAt }); await closeUi(r.rec); }
     return r;
   }
 
@@ -472,6 +796,16 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     if (typeof p.method !== 'string' || p.method.length > 80) return { done: true, allow: false, reason: 'demande-invalide' };
     if (!validRid(msg.rid)) return { done: true, allow: false, reason: 'demande-invalide' };
     const tabId = sender.tab.id, frameId = sender.frameId;
+    // The revocation Hold up itself handed to the wallet came back through a wrapped method (a wallet that delegates later) :
+    // with its valid token it goes on without a new question. Any other token, forged, reused, late, from another tab or for
+    // another content, is ignored : the request is held and asked about like any other.
+    if (p.revokeToken !== undefined) {
+      if (await takeRevokeToken(p.revokeToken, tabId, frameId, p.method, p.params)) {
+        await journal({ type: 'journal', origin, method: p.method, note: 'retrait prepare par Hold up : transmis au portefeuille sans nouvelle question', frame: frameId === 0 ? 'top' : 'child' });
+        return { done: true, allow: true };
+      }
+      await journal({ type: 'journal', origin, method: p.method, note: 'marque de retrait refusee : demande retenue comme les autres', frame: frameId === 0 ? 'top' : 'child' });
+    }
     // A connection (Sign-In with Ethereum naming this very site, asked by the top frame) moves nothing and grants nothing : no window.
     if (frameId === 0 && signIn(p.method, p.params, origin)) { await journal({ type: 'journal', origin, method: p.method, note: 'connexion reconnue : aucune fenetre', frame: 'top' }); return { done: true, allow: true }; }
     const old = await store.get(msg.rid);
@@ -488,6 +822,9 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     } catch (_) { tooBig = true; }
     // Too big to be read even slimmed : fail closed. At least "not verified" (same delay as Danger), held, never a plain "attention" (S7).
     if (tooBig && RANK.unknown > (RANK[floor.level] || 0)) floor = Object.assign({}, floor, { level: 'unknown', indeterminate: true, why: 'demande trop grande', written: { outcome: 'unverifiable', line: TOO_BIG_LINE } });
+    // Requests the engine does not read at all (a durable permission, a token added to the wallet's list, hidden settings of a batch) :
+    // held, "not verified", with the one thing that can be said about them.
+    { const own = ownLine(p.method, p.params); if (own) floor = Object.assign({}, floor, RANK.unknown > (RANK[floor.level] || 0) ? { level: 'unknown', indeterminate: true } : {}, { written: { outcome: 'unverifiable', line: own } }); }
     const eff = floor.effects || {};
     // A transaction the engine cannot read is still asked about : its effect can be measured once the person has written.
     const askable = !!kept && INTENT_METHODS.has(p.method) && cfg.askIntent !== 'never' && (floor.level !== 'unknown' || (unreadable(floor) && p.method === 'eth_sendTransaction'));
@@ -496,10 +833,17 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // The person wrote what they want a moment ago, on this very tab, frame and origin : not asked again. This request is checked
     // on its own against the SAME sentence, and against what the earlier requests of that sentence already took.
     const op = kept && INTENT_METHODS.has(p.method) && cfg.askIntent !== 'never' ? await opGet(tabId, frameId, origin, Date.now()) : null;
+    let keptWin = null;
     if (op) {
       const j = await judgeWithIntent({ rid: msg.rid, tabId, frameId, body: kept, verdict: floor, slim }, op.intent, cfg, op);
-      init.intent = op.intent; init.opAt = op.writtenAt; init.used = j.used; init.rewrite = j.rewrite;
-      enterVerdict(init, j.v, cfg, Date.now());
+      init.intent = op.intent; init.opAt = op.writtenAt; init.used = j.used; init.rewrite = j.rewrite; init.erc20 = j.erc20;
+      // Nobody is asked again, so nothing goes by itself unless it was really compared to the sentence : a request that could not be
+      // compared (nothing readable, no measure) is "not verified", with its delay and a gesture.
+      let v2 = j.v;
+      if (!(v2.written && v2.written.outcome)) v2 = Object.assign({}, v2, RANK.unknown > (RANK[v2.level] || 0) ? { level: 'unknown' } : {}, { written: { outcome: 'unverifiable', line: LINES.notCompared } });
+      keptWin = await keepTake(tabId, frameId, origin, op, msg.rid, Date.now());
+      if (keptWin) { init.ui = 'window'; init.windowId = keptWin.windowId; init.step = (keptWin.step || 1) + 1; }
+      enterVerdict(init, v2, cfg, Date.now());
       await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });
     } else if (wantIntent) { init.stage = 'intent'; init.shownAt = Date.now(); }
     else applyPlan(init, planAfterIntent(floor, null, cfg), cfg, Date.now());
@@ -508,14 +852,16 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     if (o.error) { await journal({ type: 'decision', stage: 'gate', decision: 'cancel', by: o.error, origin, method: p.method }); return { done: true, allow: false, reason: o.error === 'trop-de-demandes' ? 'denied' : o.error }; }
     if (o.existed) return { pending: true };
     await journalStage(o.rec);
-    await openUiOnce(o.rec, sender, cfg);
+    // Same operation, same window : it shows this request now (pushed here, and the window also asks by itself : hu.wait).
+    if (keptWin && o.rec.windowId === keptWin.windowId) { tell({ type: 'hu.next', prev: keptWin.rid, rid: o.rec.rid }); nudge(tabId, 0, { type: 'hu.banner' }); }
+    else await openUiOnce(o.rec, sender, cfg);
     if (testHook) runHook(o.rec.rid);
     return { pending: true };
   }
   async function journalStage(rec) {
     if (rec.stage !== 'verdict') return;
     const v = rec.verdict;
-    await journal({ type: 'verdict', origin: rec.origin, method: rec.method, level: v.level, codes: Array.isArray(v.codes) ? v.codes.slice(0, 8) : [], indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
+    await journal({ type: 'verdict', origin: rec.origin, method: rec.method, level: v.level, codes: (Array.isArray(v.codes) ? v.codes.slice(0, 7) : []).concat(v.written && v.written.corrected ? ['droit_limite'] : []), indeterminate: !!v.indeterminate, why: v.why, latency_ms: v.latency_ms,
       friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, grill: rec.grill ? { state: rec.grill.state, floor: rec.grill.floor, answers: rec.grill.answers } : null, intent: rec.intent ? rec.intent.choice : null });
   }
 
@@ -528,7 +874,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     const ttd = Number.isFinite(msg.ttd) ? Math.round(msg.ttd) : undefined;
     if (d === 'cancel') {
       const r = await store.submit(rid, { decision: 'cancel', by, meta: { via: msg.via === 'escape' ? 'escape' : 'button' } });
-      if (r.status === 'deny') { await journal({ type: 'decision', stage: rec.stage, decision: 'cancel', by, origin: rec.origin, method: rec.method, level: rec.level || null, time_to_decision_ms: ttd, ui: rec.ui, total_ms: Date.now() - rec.createdAt }); await closeUi(r.rec); }
+      if (r.status === 'deny') { await journal({ type: 'decision', stage: rec.stage, decision: 'cancel', by, origin: rec.origin, method: rec.method, level: rec.level || null, outcome: shownOutcome(rec), time_to_decision_ms: ttd, ui: rec.ui, total_ms: Date.now() - rec.createdAt }); await closeUi(r.rec); }
       return { status: 'deny' };
     }
     if (rec.status !== 'pending' || seq !== rec.seq) return { status: 'ignored' };
@@ -536,6 +882,16 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     if (rec.stage === 'intent' && d === 'answer' && typeof msg.text === 'string') {
       // the person WROTE what they want : classify, compare, go straight to the answer (no further question)
       if (!cleanText(msg.text)) return { status: 'ignored' };
+      // Longer than what is read (the window refuses it before ; this is the rule itself) : never judged on a cut sentence.
+      if ((rec.firstText ? rec.firstText.length + 1 : 0) + String(msg.text).replace(/\s+/g, ' ').trim().length > MAX_TEXT) {
+        const long = { clear: false, vague: true, kind: null, facts: {}, source: 'keywords', model: false, choice: 'other', text: cleanText(msg.text) };
+        const vl = Object.assign({}, rec.verdict, RANK.unknown > (RANK[rec.verdict.level] || 0) ? { level: 'unknown' } : {}, { written: { outcome: 'unverifiable', line: LINES.tooLong } });
+        await journal({ type: 'decision', stage: 'intent', decision: 'answer', intent: 'too_long', origin: rec.origin, method: rec.method, time_to_decision_ms: ttd, ui: rec.ui });
+        r = await store.advance(rid, seq, (x, now) => { x.intent = long; x.rewrite = null; enterVerdict(x, vl, cfg, now); });
+        if (!r || r.status !== 'next') return { status: 'ignored' };
+        await journalStage(r.rec);
+        return { status: 'next', view: viewOf(r.rec, cfg) };
+      }
       const text = cleanText(rec.firstText ? rec.firstText + ' ' + msg.text : msg.text); // the answer to the follow-up completes the first sentence
       const intent = await understand(text);
       intent.choice = intent.clear ? (ENGINE_CHOICE[intent.kind] || 'other') : 'other';
@@ -549,10 +905,10 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         return { status: 'next', view: viewOf(r.rec, cfg) };
       }
       if (again) intent.vague = true;
-      const { v, used, rewrite } = await judgeWithIntent(rec, intent, cfg);
+      const { v, used, rewrite, erc20 } = await judgeWithIntent(rec, intent, cfg);
       await journal({ type: 'decision', stage: 'intent', decision: 'answer', intent: intent.kind || 'unclear', classifier: intent.source, facts: intent.facts, origin: rec.origin, method: rec.method, time_to_decision_ms: ttd, ui: rec.ui });
       const op = await opOpen(rec, intent, Date.now());
-      r = await store.advance(rid, seq, (x, now) => { x.intent = intent; x.used = used; x.rewrite = rewrite; x.opAt = op ? op.writtenAt : null; enterVerdict(x, v, cfg, now); });
+      r = await store.advance(rid, seq, (x, now) => { x.intent = intent; x.used = used; x.rewrite = rewrite; x.erc20 = erc20; x.opAt = op ? op.writtenAt : null; enterVerdict(x, v, cfg, now); });
     } else if (rec.stage === 'intent' && d === 'answer') {
       const choice = msg.value in INTENT_ENGINE ? (msg.value === 'demande' ? 'asked' : msg.value) : 'other';
       const intent = { choice, message: typeof msg.message === 'string' ? msg.message.slice(0, 2000) : '' };
@@ -591,10 +947,18 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       const s = await store.submit(rid, { seq, decision: 'continue', phraseOk: msg.phraseOk === true, by, meta: { screen: msg.screen } });
       if (s.status === 'allow') {
         await opSpend(s.rec, Date.now());
-        await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by, origin: rec.origin, method: rec.method, level: rec.level, indeterminate: !!rec.verdict.indeterminate,
+        // Who decided : the person (a gesture on "Continuer"), or the window by itself after "Ça correspond" (no gesture). And what
+        // really went to the wallet : the request as the site sent it, or the one Hold up limited (amounts only, never an address).
+        const lim = rec.rewrite && rec.verdict.written && rec.verdict.written.limited ? rec.verdict.written.limited : null;
+        const who = by === 'human' && msg.auto === true ? 'auto' : by;
+        await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by: who, gesture: who === 'human', origin: rec.origin, method: rec.method, level: rec.level, outcome: shownOutcome(rec), indeterminate: !!rec.verdict.indeterminate,
+          codes: [who === 'auto' ? 'envoi_automatique' : 'geste'].concat(lim ? ['droit_limite'] : []),
+          sent: lim ? { limited: true, asked: lim.before, sent: lim.amount + ' ' + lim.symbol } : { limited: false },
           time_to_decision_ms: ttd, friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, ui: rec.ui, total_ms: Date.now() - rec.createdAt });
-        await closeUi(s.rec);
-        return { status: 'allow' };
+        await keepGrant(s.rec);
+        const keep = await keepOpen(s.rec, Date.now());
+        await closeUi(s.rec, { keep, why: 'allow' });
+        return { status: 'allow', more: keep, line: lim && rec.verdict.written.line ? rec.verdict.written.line : null };
       }
       if (s.status === 'again') { await journal({ type: 'early_continue', why: s.why, left_ms: s.leftMs, origin: rec.origin, method: rec.method, level: rec.level, ui: rec.ui }); return { status: 'again', why: s.why, view: viewOf(s.rec, cfg) }; }
       return { status: 'ignored' };
@@ -651,12 +1015,24 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       const k = opKey(sender.tab.id, sender.frameId), op = await opRead(k);
       if (op && op.origin !== originOf(sender)) { try { await session.remove(k); } catch (_) {} }
       if (sender.frameId === 0) await opDrop(sender.tab.id, k);
+      for (const { k: kk, v } of await keepAll()) if (v.tabId === sender.tab.id && (v.frameId === sender.frameId ? v.origin !== originOf(sender) : sender.frameId === 0)) await keepEnd(kk, v, 'page-left');
       return { ok: true };
     },
     // top frame : should the neutral banner be shown ?
     'hu.banner?': async (msg, sender) => {
       if (!fromPage(sender)) return { n: 0 };
       return { n: (await store.all()).filter((r) => r.tabId === sender.tab.id && r.status === 'pending' && r.ui === 'window').length };
+    },
+    // The window kept open for an operation asks : "is the next request there ?"
+    'hu.wait': async (msg, sender) => {
+      if (!fromWindow(sender)) return { status: 'gone' };
+      for (const { k, v } of await keepAll()) {
+        if (v.windowId !== sender.tab.windowId || (v.rid !== msg.rid && v.next !== msg.rid)) continue;
+        if (v.next) return { status: 'next', rid: v.next };
+        if (Date.now() > v.until) { await keepEnd(k, v, 'idle'); return { status: 'gone' }; }
+        return { status: 'wait', leftMs: v.until - Date.now() };
+      }
+      return { status: 'gone' };
     },
     // Hold up window : "what do I show ?"
     'hu.view': async (msg, sender) => {
@@ -673,6 +1049,13 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       return decide(msg.rid, msg, 'human');
     }
   };
+  // Side panel only. A message that carries a request (to, data, from, params...) is refused : the worker reads it from storage.session.
+  for (const name of Object.keys(REVOKE_HANDLERS)) {
+    HANDLERS[name] = async (msg, sender) => {
+      if (!fromPanel(sender) || carriesRequest(msg) || !Number.isInteger(msg.tabId)) return { refused: true, state: 'error', code: 'refused' };
+      return REVOKE_HANDLERS[name](msg, sender);
+    };
+  }
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (!msg || typeof msg.type !== 'string' || !Object.prototype.hasOwnProperty.call(HANDLERS, msg.type) || !sender || sender.id !== chrome.runtime.id) return false;
     HANDLERS[msg.type](msg, sender).then(sendResponse, (e) => sendResponse({ done: true, allow: false, state: 'unknown', status: 'ignored', reason: 'erreur: ' + String(e && e.message || e).slice(0, 80) }));
@@ -688,16 +1071,22 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         // the hold deadline passed while nobody was looking : tell the window to re-read its state (the decision still needs a gesture)
         const rid = name.slice(8);
         store.get(rid).then((rec) => { if (rec && rec.status === 'pending') { try { const p = chrome.runtime.sendMessage({ type: 'hu.refresh', rid }); if (p && p.catch) p.catch(() => {}); } catch (_) {} journal({ type: 'hold_elapsed', origin: rec.origin, method: rec.method, level: rec.level, held_ms: Date.now() - rec.shownAt }); } });
+      } else if (name.startsWith(KEEP_KEY)) {
+        // nothing came after the request the window was kept for : it says so and closes
+        opRead(name).then((kept) => { if (kept && !kept.next) keepEnd(name, kept, 'idle'); });
       } else if (name.startsWith('hu:exp:') || name === 'hu:sweep') sweep();
     });
     try { chrome.alarms.create('hu:sweep', { periodInMinutes: 1 }); } catch (_) {}
   }
   if (chrome.windows && chrome.windows.onRemoved) chrome.windows.onRemoved.addListener((windowId) => {
     store.all().then((all) => { for (const r of all) if (r.windowId === windowId && r.status === 'pending') refuse(r.rid, 'window-closed'); });
+    keepDropWindow(windowId, true);
   });
   if (chrome.tabs && chrome.tabs.onRemoved) chrome.tabs.onRemoved.addListener((tabId) => {
     store.all().then((all) => { for (const r of all) if (r.tabId === tabId && r.status === 'pending') refuse(r.rid, 'tab-closed'); });
     opDrop(tabId, null);
+    keepAll().then((list) => { for (const { k, v } of list) if (v.tabId === tabId) keepEnd(k, v, 'tab-closed'); });
+    Promise.resolve().then(() => session.remove(grantKey(tabId))).catch(() => {});
   });
   if (chrome.runtime.onStartup) chrome.runtime.onStartup.addListener(() => { sweep(); });
   if (!(chrome.storage && chrome.storage.session)) journal({ type: 'note', note: 'chrome.storage.session absent : la retenue ne survit pas a un arret du service worker' });

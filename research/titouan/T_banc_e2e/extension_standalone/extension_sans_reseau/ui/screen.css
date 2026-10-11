@@ -42,22 +42,29 @@
 .hu [hidden] { display: none !important; }
 
 /* ---- the column */
-.hu-main { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 40px 32px 8px; text-align: center; }
+/* No state scrolls : window.js scales the surface to the viewport and grows the window (fit()). The themed bar below is the last resort. */
+.hu-main { position: relative; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: auto; padding: 40px 32px 8px; text-align: center; scrollbar-width: thin; scrollbar-color: var(--hu-edge) transparent; }
+.hu[data-addresses] .hu-main { padding-top: 24px; }
 .hu-col { max-width: 360px; margin: 0 auto; }
 .hu-title {
   margin: 0; font-family: var(--hu-display); font-size: 24px; line-height: 1.25; font-weight: 400; letter-spacing: -0.01em;
-  text-wrap: balance; overflow-wrap: anywhere;
+  text-wrap: balance; overflow-wrap: break-word;
 }
 .hu-title:focus { outline: none; }
 .hu[data-outcome="mismatch"] .hu-title { color: var(--hu-signal); }
 .hu-line { margin: 16px 0 0; text-wrap: pretty; overflow-wrap: anywhere; }
 .hu-fix { color: var(--hu-ink-2); }
 .hu-quiet { margin: 12px 0 0; font-size: 14px; line-height: 1.45; color: var(--hu-ink-2); }
-.hu-note { margin: 20px 0 0; font-size: 13px; line-height: 1.4; color: var(--hu-ink-2); }
+.hu-notes { margin: 16px 0 0; }
+.hu[data-addresses] .hu-notes { margin-top: 10px; }
+.hu-note { margin: 0; font-size: 12px; line-height: 1.4; color: var(--hu-ink-2); }
+.hu-error { margin: 8px 0 0; font-size: 14px; line-height: 1.45; font-weight: 600; text-align: left; color: var(--hu-ink); }
+.hu-col .hu-end { margin: 0; padding: 0; max-width: none; }
 .hu-end { margin: auto; padding: 32px; max-width: 360px; text-align: center; text-wrap: balance; }
 
 /* ---- the question field */
 .hu-field {
+  scrollbar-width: thin; scrollbar-color: var(--hu-edge) transparent;
   display: block; width: 100%; margin: 24px 0 0; padding: 10px 12px; min-height: 96px; resize: none;
   font: inherit; line-height: 1.45; color: var(--hu-ink); caret-color: var(--hu-ink); text-align: left;
   background: var(--hu-bg); border: 1px solid var(--hu-edge); border-radius: var(--hu-r);
@@ -66,13 +73,13 @@
 .hu-field::placeholder { color: var(--hu-ink-2); opacity: 1; }
 .hu-field:hover { border-color: var(--hu-ink); }
 .hu-field:focus { outline: none; border-color: var(--hu-ink); box-shadow: 0 0 0 1px var(--hu-ink); }
-.hu-field[aria-invalid="true"], .hu-field.is-error { border-color: var(--hu-signal); }
-.hu-field[aria-invalid="true"]:focus, .hu-field.is-error:focus { border-color: var(--hu-signal); box-shadow: 0 0 0 1px var(--hu-signal); }
+/* an empty field is said in words (.hu-error), in ink : the signal colour stays for the verdict */
+.hu-field[aria-invalid="true"], .hu-field.is-error { border-color: var(--hu-ink); box-shadow: 0 0 0 1px var(--hu-ink); }
 .hu-field[readonly] { color: var(--hu-ink-2); border-color: var(--hu-line); box-shadow: none; }
 
 /* ---- two addresses, 2 rows of 5 groups of 4 */
-.hu-addr { margin: 24px 0 0; text-align: left; }
-.hu-addr + .hu-addr { margin-top: 16px; }
+.hu-addr { margin: 16px 0 0; text-align: left; }
+.hu-addr + .hu-addr { margin-top: 12px; }
 .hu-addr-label { margin: 0 0 4px; font-size: 13px; line-height: 1.4; color: var(--hu-ink-2); }
 .hu-addr-grid {
   display: grid; grid-template-columns: repeat(5, auto); justify-content: space-between; row-gap: 2px; margin: 0;

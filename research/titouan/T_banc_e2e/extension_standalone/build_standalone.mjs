@@ -1,6 +1,6 @@
 // build_standalone.mjs - assemble extension_standalone/extension/ de facon reproductible (aucune date, aucun hasard : memes entrees => memes octets).
 // Entrees (LECTURE SEULE) : ../extension (bridge.js, inject.js, gatekeeper.js, hold_core.js, intent_text.js, keyword_intent.js, outcome.js, written_check.js, effect_sim.js, classifier_client.js, window.*, options.js, ui/screen.*), ../engine/src/*.mjs, ../engine/vendor/compare.ts, ../run/policy.mjs, ../../U_textes_utilisateur.json
-// Entrees propres : src/ (background.js, sentinelle_core.js, manifest.json, options.html)
+// Entrees propres : src/ (background.js, sentinelle_core.js, manifest.json). La page de reglages n'a qu'UNE source : ../extension/options.html + options.js.
 // Sortie : extension/ (le dossier a charger dans chrome://extensions) + extension/BUILD_INFO.json (hachages)
 // Usage : node build_standalone.mjs        Node >= 23.2 (module.stripTypeScriptTypes). Aucun paquet, aucun reseau.
 //         Build LIVRE PAR DEFAUT : la phrase ecrite part au relais local (classifier_client.js -> http://127.0.0.1:8789, qui detient seul les cles
@@ -43,7 +43,7 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
-for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'journal_chain.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
+for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'journal_chain.js', 'revoke.js', 'window.html', 'window.css', 'window.js', 'options.html', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
 // Default build : the relay client is shipped as is (its only call : the written sentence, to the loopback relay).
 // --no-network : it is replaced by a stub that never calls anything (the keyword parser answers), and the manifest grants no host
 // and sets connect-src 'none'. The source file ../extension/classifier_client.js is then hashed but not shipped.
@@ -65,8 +65,7 @@ let extensionId = null;
     cut(NL + '  "key": "' + JSON.parse(mf).key + '",', '');
     cut(NL + '  "host_permissions": [' + NL + '    "' + RELAY + '/*"' + NL + '  ],', '');
     cut('connect-src ' + RELAY + '"', 'connect-src ' + "'none'" + '"');
-    cut('"name": "Hold up (autonome)"', '"name": "Hold up (sans reseau)"');
-    cut('Reseau : relais local seulement.', 'Aucun acces reseau.');
+    // le nom et la description sont les memes dans les deux variantes : « Hold up »
   }
   const j = JSON.parse(mf);
   const csp = j.content_security_policy.extension_pages;
@@ -84,7 +83,6 @@ let extensionId = null;
   if (bg.split(MARK).length !== 2) throw new Error('marqueur de crochet de test attendu une seule fois dans src/background.js');
   put('background.js', bg.replace(MARK, TEST_HOOK ? ', testHook: (h) => { if (typeof globalThis.__holdupTestHook === "function") globalThis.__holdupTestHook(h); }' : ''));
 }
-put('options.html', src(join(HERE, 'src', 'options.html')));
 put('engine/sentinelle_core.js', src(join(HERE, 'src', 'sentinelle_core.js')));
 
 // 3) moteur d'effets (JavaScript pur). rpc.mjs (reseau) et audit_selectors.mjs (outil Node) sont EXCLUS.

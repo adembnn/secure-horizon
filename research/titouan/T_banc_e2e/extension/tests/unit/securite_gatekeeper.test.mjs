@@ -14,7 +14,7 @@ let n = 0;
 
 async function run({ engine, params, classify, text, pad = 0, known = true }) {
   const clock = fakeClock(); const F = makeChrome(); globalThis.chrome = F.chrome;
-  if (known) await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [{ address: TOKEN, symbol: 'USDC', decimals: 6 }] } });
+  if (known) await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [SPENDER], tokens: [{ address: TOKEN, symbol: 'USDC', decimals: 6 }] } });
   createGatekeeper({ check: async () => engine, classify });
   const rid = 'rid-sec-' + String(++n).padStart(4, '0'), page = F.page(7 + n, 'https://evil.example');
   const body = { method: 'eth_sendTransaction', params: pad ? [Object.assign({}, params[0], { junk: 'A'.repeat(pad) })] : params, chainId: '0x1', from: ME };
@@ -40,7 +40,7 @@ test('S4 : danger for another reason (flagged spender, any signal, unexplained d
 test('S4 : the plain gap (attention, or danger explained only by the unlimited right) keeps its relief : no delay, the correction', async () => {
   for (const eng of [verdict('attention'), verdict('danger', { codes: ['unlimited_allowance', 'external_spender'] })]) {
     const r = await run({ engine: eng, params: [{ from: ME, to: TOKEN, data: APPROVE_MAX }], classify: model('buy_or_swap', 0.95, { grant: 0.9 }), text: SWAP });
-    assert.equal(r.waitMs, 0); assert.equal(r.phrase, false); assert.equal(r.fix, 'Droit limité à 50 USDC');
+    assert.equal(r.waitMs, 0); assert.equal(r.phrase, false); assert.equal(r.outcome, 'match'); assert.equal(r.line, 'Droit limité à 50 USDC. Le site demandait un accès sans limite.');
   }
 });
 test('S3 through the gatekeeper : transfer + 1 ETH is not "match", no automatic send', async () => {

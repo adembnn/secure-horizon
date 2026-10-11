@@ -46,7 +46,7 @@ test('the window first asks one question with a free-text field, whatever the re
   const g = await gate('https://app.exemple.org');
   const v = await g.view();
   assert.equal(v.stage, 'intent');
-  assert.deepEqual(v.screen, { kind: 'question', title: 'Que veux-tu faire sur app.exemple.org ?', placeholder: 'Par exemple : échanger 50 USDC contre AVAX' });
+  assert.deepEqual(v.screen, { kind: 'question', title: 'Que veux-tu faire sur app.exemple.org ?', placeholder: 'Par exemple : échanger 50 USDC contre AVAX', max: 500 });
   assert.equal((await g.decide({ seq: 1, decision: 'continue', phraseOk: true })).status, 'ignored', 'no way forward without writing');
   assert.equal((await g.decide({ seq: 1, decision: 'answer', text: '   ' })).status, 'ignored', 'an empty sentence is not an answer');
   assert.equal((await g.poll()).state, 'pending');

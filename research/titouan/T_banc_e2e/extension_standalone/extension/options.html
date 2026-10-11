@@ -1,29 +1,87 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><title>Hold up : réglages</title>
-<style>body{font:16px/1.5 system-ui,sans-serif;max-width:680px;margin:24px auto;padding:0 16px;color:#000;background:#fff}h1,h2{font-weight:500}label{display:block;margin:12px 0 4px}input[type=number],input[type=text],select{font:inherit;padding:6px 10px;min-width:220px}textarea{width:100%;height:200px;font:13px ui-monospace,monospace}button{font:inherit;padding:8px 18px;border-radius:50px;border:1.5px solid #767676;background:#fff;cursor:pointer}#save{background:#000;color:#fff;border-color:#000}.hint{color:#595959;font-size:14px;margin:4px 0}.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}</style></head>
-<body><h1>Hold up : réglages</h1>
-<p>Version autonome : le moteur est dans l'extension. Le seul appel réseau possible va vers le relais local 127.0.0.1:8789, avec la phrase que tu écris.</p>
-<h2>Question d'intention</h2>
-<label for="askIntent">Demander « Que veux-tu faire ? » avant le verdict</label>
-<select id="askIntent">
+<html lang="fr"><head><meta charset="utf-8"><meta name="color-scheme" content="light dark"><title>Hold up : réglages</title>
+<style>
+/* Same tokens as ui/screen.css (docs/design/v5/DESIGN.md). Desktop tab, one column, no card, no shadow, no gradient. */
+:root{--bg:#fff;--ink:#171717;--ink2:#5c5c5c;--line:#e5e5e5;--edge:#8c8c8c;--hover:#f5f5f5;--signal:#c9281c;--on-ink:#fff;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#131313;--ink:#ededed;--ink2:#a3a3a3;--line:#2b2b2b;--edge:#7a7a7a;--hover:#1f1f1f;--signal:#ff7061;--on-ink:#131313;color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:48px 32px 64px;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:640px;margin:0 auto}
+h1{margin:0 0 8px;font:400 24px/1.25 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;letter-spacing:-.01em}
+h2{margin:40px 0 4px;font-size:16px;line-height:1.4;font-weight:600}
+p{margin:0 0 8px}
+.hint{margin:6px 0 0;font-size:13px;line-height:1.4;color:var(--ink2);max-width:60ch}
+label{display:block;margin:16px 0 6px}
+input[type=number],input[type=text],select{display:block;font:inherit;color:var(--ink);background:var(--bg);padding:8px 12px;min-width:240px;min-height:40px;border:1px solid var(--edge);border-radius:8px;transition:border-color 120ms ease-out}
+input[type=number]{min-width:0;width:120px}
+input:hover,select:hover,textarea:hover{border-color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+input:user-invalid,textarea:user-invalid,input[aria-invalid=true],textarea[aria-invalid=true]{border-color:var(--signal)}
+input:user-invalid:focus,input[aria-invalid=true]:focus{box-shadow:0 0 0 1px var(--signal)}
+input:disabled,select:disabled,textarea:disabled{color:var(--ink2);border-color:var(--line)}
+input[type=checkbox]{width:16px;height:16px;margin:0 8px 0 0;vertical-align:-2px;accent-color:var(--ink)}
+input[type=checkbox]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+label:has(input[type=checkbox]){display:flex;align-items:baseline}
+textarea{width:100%;height:200px;font:13px/1.45 "Cascadia Mono","SF Mono",ui-monospace,Consolas,monospace;color:var(--ink);background:var(--bg);border:1px solid var(--edge);border-radius:8px;padding:8px 12px}
+button{font:inherit;font-weight:500;min-height:40px;padding:0 16px;color:var(--ink);background:transparent;border:1px solid var(--edge);border-radius:8px;cursor:pointer;transition:background-color 120ms ease-out,border-color 120ms ease-out}
+button:hover{background:var(--hover);border-color:var(--ink)}
+button:active{background:var(--line)}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+button:disabled{cursor:default;color:var(--ink2);border-color:var(--line);background:transparent}
+#save{color:var(--on-ink);background:var(--ink);border-color:var(--ink)}
+#save:hover{background:color-mix(in srgb,var(--ink) 86%,var(--bg))}
+#save:active{background:color-mix(in srgb,var(--ink) 72%,var(--bg))}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:32px 0 0}
+.net p{margin:0 0 6px;max-width:60ch}
+.list{margin:12px 0 0;padding:0;list-style:none}
+.list li{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}
+.list li.hint{border:0;padding:0}
+.list .name{font-weight:600;min-width:120px}
+.list code{font:13px/1.45 "Cascadia Mono","SF Mono",ui-monospace,Consolas,monospace;overflow-wrap:anywhere;flex:1 1 240px}
+.add{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.add .grow{flex:1 1 320px}
+.add .grow input{width:100%}
+.add label{margin-top:12px}
+#msg.error{color:var(--ink);font-weight:600}
+#msg{color:var(--ink2);font-size:14px;margin-left:8px}
+#log{margin:8px 0 0;padding:12px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 "Cascadia Mono","SF Mono",ui-monospace,Consolas,monospace;color:var(--ink2);border:1px solid var(--line);border-radius:8px;max-height:320px;overflow:auto}
+::selection{background:var(--ink);color:var(--bg)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><main><h1>Hold up : réglages</h1>
+<div id="net" class="net"></div>
+<h2>Ta phrase</h2>
+<label for="askIntent">Demander « Que veux-tu faire ? »</label>
+<select id="askIntent" aria-describedby="askHint">
 <option value="always">Pour chaque signature ou transaction</option>
 <option value="rights_or_funds">Quand l'opération donne un droit ou sort de l'argent</option>
 <option value="never">Jamais</option>
 </select>
-<p class="hint">Tu écris ce que tu veux faire. Ta phrase peut seulement rendre la vérification plus stricte. Elle est classée par le relais local (127.0.0.1:8789) s'il tourne, sinon par mots-clés dans l'extension.</p>
+<p class="hint" id="askHint">Tu écris ce que tu veux faire. Ta phrase peut seulement rendre la vérification plus stricte.</p>
+<label><input type="checkbox" id="limitUnlimited"> Limiter le droit au montant que j'ai écrit, quand un site demande plus</label>
+<p class="hint">Hold up remplace alors le montant dans la demande, avant ton portefeuille. Sans cette option, la demande ne correspond pas et tu attends.</p>
 <h2>Délais</h2>
-<label for="dangerWait">La demande ne correspond pas : attente avant « Continuer » (secondes, 5 au minimum)</label>
+<label for="dangerWait">La demande ne correspond pas : attente avant « Continuer », en secondes (5 au minimum)</label>
 <input type="number" id="dangerWait" min="5" max="600" step="1">
-<label for="manipHold">Pression repérée sur la page : durée de la retenue (secondes, 30 au minimum)</label>
+<label for="manipHold">Pression repérée sur la page : durée de la retenue, en secondes (30 au minimum)</label>
 <input type="number" id="manipHold" min="30" max="3600" step="1">
-<div class="row"><button id="demo" type="button">Durées de démo (10 s et 60 s)</button> <button id="product" type="button">Durées du produit (30 s et 10 min)</button></div>
-<p class="hint">Le mécanisme est le même avec les durées de démo : échéance enregistrée, Annuler toujours disponible.</p>
-<h2>Affichage</h2>
-<label><input type="checkbox" id="window"> Afficher la question et la réponse dans une fenêtre Hold up séparée (recommandé)</label>
-<p class="hint">Sans cette option, elles s'affichent dans la page du site, qui peut alors le masquer.</p>
-<h2>Mon contexte (facultatif)</h2>
-<p class="hint">Carnet d'adresses et historique, pour repérer un destinataire nouveau ou un sosie d'adresse. Format : <code>{"contacts":[{"label":"Paul","address":"0x…"}],"history":[{"address":"0x…","direction":"sortie","minutes_ago":4000}],"protected":["0x…"],"knownSpenders":["0x…"],"tokens":[{"address":"0x…","symbol":"DemoUSDC","decimals":6,"chainId":31337}]}</code>. La liste <code>tokens</code> nomme les jetons de ta chaîne de test (nœud local, Fuji).</p>
-<textarea id="ctx" spellcheck="false"></textarea>
-<div class="row"><button id="save" type="button">Enregistrer</button> <button id="clearlog" type="button">Vider le journal</button> <span id="msg" role="status"></span></div>
-<h2>Journal (local)</h2><pre id="log" style="white-space:pre-wrap;font-size:12px"></pre>
+<h2>Carnet d'adresses</h2>
+<p class="hint">Les personnes que tu paies souvent. Hold up s'en sert pour repérer une adresse qui ressemble à l'une d'elles sans être la même.</p>
+<ul id="contacts" class="list"></ul>
+<div class="add"><div><label for="contactName">Nom</label><input type="text" id="contactName" maxlength="40" autocomplete="off"></div>
+<div class="grow"><label for="contactAddress">Adresse</label><input type="text" id="contactAddress" maxlength="42" spellcheck="false" autocomplete="off" placeholder="0x…"></div>
+<button id="addContact" type="button">Ajouter</button></div>
+<h2>Mes adresses</h2>
+<p class="hint">Tes autres comptes. Un envoi vers l'un d'eux n'est pas un envoi à un inconnu.</p>
+<ul id="mine" class="list"></ul>
+<div class="add"><div class="grow"><label for="mineAddress">Adresse</label><input type="text" id="mineAddress" maxlength="42" spellcheck="false" autocomplete="off" placeholder="0x…"></div>
+<button id="addMine" type="button">Ajouter</button></div>
+<h2>Contrats que j'utilise</h2>
+<p class="hint">Hold up connaît les contrats d'échange publics. Si tu en utilises un autre, ajoute son adresse : sinon, un droit donné à ce contrat reste « pas pu vérifier ».</p>
+<ul id="spenders" class="list"></ul>
+<div class="add"><div class="grow"><label for="spenderAddress">Adresse du contrat</label><input type="text" id="spenderAddress" maxlength="42" spellcheck="false" autocomplete="off" placeholder="0x…"></div>
+<button id="addSpender" type="button">Ajouter</button></div>
+<div class="row"><button id="save" type="button">Enregistrer</button> <span id="msg" role="status"></span></div>
+<p class="hint">Le journal des décisions est dans le panneau Hold up : clique sur l'icône de l'extension.</p>
+</main>
 <script src="options.js"></script></body></html>
