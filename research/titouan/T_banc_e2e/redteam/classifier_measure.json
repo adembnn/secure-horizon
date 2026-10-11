@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-11T01:56:17.009Z",
+  "n_textes_uniques": 3210,
+  "avec_message_colle": 1348,
+  "par_label": {
+    "benin": 1199,
+    "fraude_conforme": 504,
+    "ambigu": 115,
+    "malveillant": 1392
+  },
+  "fournisseurs": {
+    "keyword": {
+      "appels_reussis": 3210,
+      "replis_mots_cles": 0,
+      "erreurs": [],
+      "latence_ms": {
+        "p50": null,
+        "p95": null
+      },
+      "tokens_entree": 0,
+      "cout_usd": 0,
+      "seuils": {
+        "0.6": {
+          "rappel_malveillant_pct": 21.3,
+          "n_malveillant": 1392,
+          "fausses_alertes_benin_pct": 0,
+          "n_benin": 1199,
+          "autres_labels_signales": {
+            "fraude_conforme": "78/504",
+            "ambigu": "0/115"
+          }
+        }
+      }
+    },
+    "clef-flash": {
+      "ignore": "CF_ACCOUNT_ID / CF_API_TOKEN absents de l'environnement"
+    }
+  }
+}
