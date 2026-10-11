@@ -8,10 +8,10 @@
   {
    "name": "build reproductible (2 constructions => meme hachage d arbre)",
    "pass": true,
-   "detail": "1cdc3f7ce9fb931e"
+   "detail": "94eb719207b4597e"
   },
   {
-   "name": "engine/src copie fidele (15 fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)",
+   "name": "engine/src copie fidele (16 fichiers, seuls .mjs->.js et Buffer->TextEncoder changent)",
    "pass": true,
    "detail": ""
   },
@@ -26,7 +26,7 @@
    "detail": ""
   },
   {
-   "name": "graphe d imports de js/app.js : 27 modules, tous presents, tous relatifs",
+   "name": "graphe d imports de js/app.js : 31 modules, tous presents, tous relatifs",
    "pass": true,
    "detail": ""
   },
@@ -123,7 +123,7 @@
   {
    "name": "colle : 16 exemples du jeu public chargeables, aucun 'ok'",
    "pass": true,
-   "detail": "{\"danger\":4,\"info\":8,\"attention\":3,\"unknown\":1}"
+   "detail": "{\"danger\":4,\"info\":5,\"attention\":6,\"unknown\":1}"
   },
   {
    "name": "panneau technique : effets decodes et signaux disponibles",
@@ -286,7 +286,7 @@
    "detail": ""
   },
   {
-   "name": "app.js : syntaxe valide, 22 identifiants HTML tous presents",
+   "name": "app.js : syntaxe valide, 24 identifiants HTML tous presents",
    "pass": true,
    "detail": ""
   },
@@ -328,7 +328,7 @@
   {
    "name": "app.js : mode colle => verdict Danger affiche",
    "pass": true,
-   "detail": "Ce n’est pas ce que tu as demandé.Tu crois« Je veux seulement faire mon échange sur site.example. »En vraiTu donnes à site.example le droit de prendre tes jetons sans limite.Pourquoi ?Ce droit dure tant que tu ne le retires pas toi-même.Refuse, ou autorise seulement ce qu'il faut pour cet échange.Ni"
+   "detail": "Ce n’est pas ce que tu as demandé.Tu crois« Je veux seulement faire mon échange sur site.example. »En vraiTu donnes à site.example le droit de prendre tes USDC sans limite.Pourquoi ?Ce droit dure tant que tu ne le retires pas toi-même.Refuse, ou autorise seulement ce qu'il faut pour cet échange.Nive"
   },
   {
    "name": "app.js : mode colle => erreur claire sur un texte invalide",
@@ -351,12 +351,282 @@
    "detail": ""
   },
   {
+   "name": "apres : masqué tant qu aucun droit n a été accordé",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "apres : pas de raccourci pour un envoi simple (aucun droit accordé)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "apres : raccourci proposé pour la scène « adresse neuve » (droit illimité)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "apres : le droit existe, bouton « Révoquer ce droit » visible, « Hold up ne signe jamais »",
+   "pass": true,
+   "detail": "Tu as continué. Dans cette simulation, Échange décentralisé (fictif) peut maintenant dépenser tes USDC sans limite.Jeton0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48Adresse qui reçoit le droit0xd4d4d4d4d"
+  },
+  {
+   "name": "apres : rien n est montré au portefeuille avant le clic",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "apres : le faux portefeuille montre approve(spender, 0), non signée, relue par le moteur : aucun signal",
+   "pass": true,
+   "detail": "Tu as continué. Dans cette simulation, Échange décentralisé (fictif) peut maintenant dépenser tes USDC sans limite.Jeton0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48Adresse qui reçoit le droit0xd4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4MontantillimitéRévoquer ce dr"
+  },
+  {
+   "name": "apres : rejeter laisse le droit actif, et la personne peut encore signer",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "apres : signé dans le faux portefeuille, résultat marqué simulé, ligne de journal n° 3",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Fiche d’incident »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Ce qui s’est passé »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Ce que tu as fait »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Ce qui reste à faire »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Prévenir la plateforme »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Vérifier les autres droits »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Quoi »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Quand »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Site »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Droit »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Adresse qui reçoit le droit »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Niveau d’alerte »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Danger »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « echange-rapide-demo.example »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Ce qui ne peut pas être défait »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Démonstration : le portefeuille et le réseau sont simulés »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Ce que cette fiche établit »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : contient « Chaîne du journal : intacte, 3 lignes »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : aucun mot interdit (OK, bloque, sûr, protégé, garanti, remboursement), aucun tiret long",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : deux lignes de journal citées, telles quelles",
+   "pass": true,
+   "detail": "2"
+  },
+  {
+   "name": "fiche : chaque ligne citée se rejoue avec node:crypto (SHA-256 de précédente|numéro|heure|contenu)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : lignes citées = la décision (raccourci, n° 1) et le dernier retrait (n° 3)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : la ligne de retrait est marquée simulée et ne contient aucune adresse",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : « Rejouer le calcul » recalcule dans la page et dit « identique »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : « Rejouer toute la chaîne » dit intacte",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : 3 lignes (raccourci, retrait rejeté, retrait signé), chaîne intacte",
+   "pass": true,
+   "detail": "Chaîne intacte : 3 ligne(s) vérifiée(s)."
+  },
+  {
+   "name": "apres : changer de scène masque la section",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "app.js : aucune erreur non geree",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "HTTP : 29 modules JS + index + limites + CSS servis (200, bons types MIME)",
+   "name": "js/revoke.js = extension/revoke.js (copie octet pour octet, faite par build_webdemo.mjs)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "6 scènes sur 13 accordent un droit (le reste : aucun bouton de retrait)",
+   "pass": true,
+   "detail": "droit_illimite,echange_droit_illimite,echange_honnete,echange_routeur_connu,permit_piege,tous_les_nft"
+  },
+  {
+   "name": "retrait des 4 scènes « approve » : approve(spender, 0) sur le même jeton, depuis le compte, valeur 0, soumis au portefeuille",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "retrait de « tous les NFT » : setApprovalForAll(operator, false)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Permit hors chaîne : jamais présenté comme révocable en un clic ; échéance, course et deux étapes dites",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "équivalence moteur : la demande de retrait est lue pareil par la page et par server/server.mjs (5 demandes), aucun signal",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun appel reseau pendant la préparation des retraits",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : empreinte identique à recordHash d'incident.mjs (Adem) et rejouable par incident.js",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal de la page relu par readJournal d'incident.mjs : chaîne intacte, même tête",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : déterministe, identifiant = SHA-256(décision|retrait), même formule qu'incident.mjs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : mêmes blocs que le schéma d'Adem, retrait marqué simulé, « n'établit pas » dit que rien n'est réel",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : chronologie (alerte, décision, retrait), délai de retrait, prochaines étapes",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : retrait rejeté ou jamais demandé => le droit n'est jamais dit retiré, la première étape reste « Retirer le droit »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fiche : une ligne retouchée => chaîne dite cassée dans la fiche",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "journal : aucune adresse écrite",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "css « Après l'alerte » : ni dégradé, ni ombre, ni signal rouge, ni couleur en dur (jetons seulement)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun emoji dans apres.js, incident.js, index.html",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun « bloque », « remboursement » ni promesse dans les textes ajoutés",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun appel reseau pendant les retraits, la fiche et le journal",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "HTTP : 33 modules JS + index + limites + CSS servis (200, bons types MIME)",
    "pass": true,
    "detail": ""
   },
@@ -366,12 +636,12 @@
    "detail": ""
   },
   {
-   "name": "aucun eval / new Function / import dynamique dans 36 fichiers",
+   "name": "aucun eval / new Function / import dynamique dans 40 fichiers",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "aucun secret (cle privee, jeton, mot de passe, phrase de recuperation) dans 36 fichiers",
+   "name": "aucun secret (cle privee, jeton, mot de passe, phrase de recuperation) dans 40 fichiers",
    "pass": true,
    "detail": ""
   },
@@ -401,16 +671,16 @@
    "detail": ""
   },
   {
-   "name": "taille du site : 35 fichiers, 360 Ko (environ 118 Ko compresses)",
+   "name": "taille du site : 41 fichiers, 451 Ko (environ 143 Ko compresses)",
    "pass": true,
    "detail": ""
   }
  ],
  "notes": [
-  "LIMITE CONSTATEE : faux_support avec la reponse \"Payer quelqu'un\" donne le niveau 'info' (la pression de la page n'est lue que si le moteur voit deja un signal)."
+  "LIMITE CONSTATEE : faux_support avec la reponse \"Payer quelqu'un\" donne le niveau 'attention' (la pression de la page n'est lue que si le moteur voit deja un signal)."
  ],
- "tree_sha256": "1cdc3f7ce9fb931e6cc3252a915325f57c540973d3651a49b0cbc347fed542eb",
- "modules_charges": 27,
+ "tree_sha256": "94eb719207b4597e04cb5de21342618783e8af7da74d8b3957cd72221af1124d",
+ "modules_charges": 31,
  "scenarios": {
   "filtres_par_la_couche_http_du_serveur": 3,
   "correctif_jours_absorbe": 0,
@@ -418,14 +688,14 @@
   "identiques": 113,
   "ecarts": [],
   "niveaux_affiches": {
-   "info": 28,
-   "attention": 4,
+   "info": 22,
+   "attention": 10,
    "danger": 64,
    "manipulation": 4,
    "unknown": 13
   },
-  "ms_total": 314,
-  "ms_par_verdict": 2.78
+  "ms_total": 1802,
+  "ms_par_verdict": 15.94
  },
  "niveaux_scenarios": {
   "echange_honnete": "info",
@@ -448,9 +718,9 @@
   "ecarts": [],
   "niveaux_affiches": {
    "danger": 49,
-   "info": 42,
-   "attention": 26,
-   "unknown": 27
+   "info": 32,
+   "attention": 37,
+   "unknown": 26
   }
  },
  "equivalence_DEV": {
@@ -459,13 +729,13 @@
   "ecarts": [],
   "niveaux_affiches": {
    "danger": 170,
-   "attention": 62,
-   "info": 118,
+   "attention": 90,
+   "info": 90,
    "unknown": 35
   }
  },
  "statique": {
-  "fichiers_analyses": 36,
+  "fichiers_analyses": 40,
   "hotes_fictifs": [
    "app.aave.com",
    "app.example-official.org",
@@ -493,32 +763,32 @@
   ]
  },
  "taille": {
-  "fichiers_publies": 35,
-  "octets_total": 368888,
-  "octets_gzip_estimes": 120814,
+  "fichiers_publies": 41,
+  "octets_total": 462259,
+  "octets_gzip_estimes": 146452,
   "plus_gros": [
    {
-    "f": "engine/sentinelle_core.js",
-    "b": 36513
+    "f": "engine/textes.js",
+    "b": 43289
    },
    {
-    "f": "engine/textes.js",
-    "b": 34355
+    "f": "engine/sentinelle_core.js",
+    "b": 39752
    },
    {
     "f": "engine/src/rules_extra.js",
-    "b": 32002
+    "b": 34605
    },
    {
     "f": "engine/src/calldata.js",
     "b": 29327
    },
    {
-    "f": "engine/policy.js",
-    "b": 22958
+    "f": "js/revoke.js",
+    "b": 28194
    }
   ]
  },
  "echecs": 0,
- "verifications": 81
+ "verifications": 135
 }

@@ -8,7 +8,7 @@
  "sources": [
   {
    "file": "../U_textes_utilisateur.json",
-   "sha256": "9d927e1e036c7a83aa9e457d4c6ef050f9e802c7278a0e47a62e2ce93a479ad4"
+   "sha256": "7b7fb4c77b007a89e73319dbd79de475ac08355bb780edc79c5eeaeebcb48527"
   },
   {
    "file": "attacks_public/PUBLIC.jsonl",
@@ -27,6 +27,10 @@
    "sha256": "994b969530cd9fae0afa676a4320b0f9bf939a12bbafe8695742346ed4da266f"
   },
   {
+   "file": "engine/src/effects_abi.mjs",
+   "sha256": "ce0126ecbc6f8fa330178f5fe78b71093e728c85de276b439ff17693ded2c849"
+  },
+  {
    "file": "engine/src/eip712.mjs",
    "sha256": "33748da09cc26f6885f36f5d2167087e52c3fd4a332c5e5ea959fed4cb3ca3d3"
   },
@@ -36,7 +40,7 @@
   },
   {
    "file": "engine/src/fixes.mjs",
-   "sha256": "7ac324e0123fa6ca23722965394975e226ce44d7dcad3dd3f35205d2ac617ab1"
+   "sha256": "4821242c9d42616d1d65b250fdc4e479e8edc929f871d1635b884783d148b7d5"
   },
   {
    "file": "engine/src/keccak.mjs",
@@ -56,7 +60,7 @@
   },
   {
    "file": "engine/src/rules_extra.mjs",
-   "sha256": "9c10cdbf81af9958527536d7ee1daa38cf997f6c79ecb2cb5b0d0922fce1f890"
+   "sha256": "032e882b2bf09ee1415dde0c5e3f02776971dc6a974ee8fbb5cfc3ae6c75139d"
   },
   {
    "file": "engine/src/rules.mjs",
@@ -87,12 +91,16 @@
    "sha256": "d8211f26b013610ac0438e914894bb39dddbcda75a4822b17692d9ff2f538130"
   },
   {
+   "file": "extension/revoke.js",
+   "sha256": "41fbd413f61525f778310da56df1e4263b606f634b51411717004dca14d23845"
+  },
+  {
    "file": "run/policy.mjs",
    "sha256": "b5746d2070f8ba5ef5607e28779a0e58d80e8ba3268c1d43e2879a48689d69f0"
   },
   {
    "file": "server/server.mjs",
-   "sha256": "4413ce8452a7053bae5d688c88e2f3b3451d63f51401da0e977783d524478443"
+   "sha256": "111abeac7ae96a901474ca99de69c975c6b050f74922f30fd8821c53397ca546"
   }
  ],
  "outputs": [
@@ -103,8 +111,8 @@
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 36513,
-   "sha256": "b4947eb0f4ea158a6a488b81356a86a3931addd40429f684cd52080bf816ac6f"
+   "bytes": 39752,
+   "sha256": "4f03980a47c8bac052f54c1431126c5acaeee25bf2b76ae83af9271805d49c60"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -122,6 +130,11 @@
    "sha256": "04b3e4ad3ccaf1076d8dcf96a6ccd29dd9449ff6bf452e6b05eaa0778aec3719"
   },
   {
+   "file": "engine/src/effects_abi.js",
+   "bytes": 9584,
+   "sha256": "28fd1b44af7e0f063131a94485dd7bdc6413c7d980b85d111c6ea5c55dfbb02e"
+  },
+  {
    "file": "engine/src/eip712.js",
    "bytes": 3235,
    "sha256": "af92dca89035280ce88b232dd4ccb37b1a3cb3fc85d616dde461d2eb14244c95"
@@ -133,8 +146,8 @@
   },
   {
    "file": "engine/src/fixes.js",
-   "bytes": 825,
-   "sha256": "7ac324e0123fa6ca23722965394975e226ce44d7dcad3dd3f35205d2ac617ab1"
+   "bytes": 838,
+   "sha256": "4821242c9d42616d1d65b250fdc4e479e8edc929f871d1635b884783d148b7d5"
   },
   {
    "file": "engine/src/keccak.js",
@@ -158,8 +171,8 @@
   },
   {
    "file": "engine/src/rules_extra.js",
-   "bytes": 32002,
-   "sha256": "49a690b8c5524a1017084c1f80518fca5131037ca5338e0a8c89b94731974b39"
+   "bytes": 34605,
+   "sha256": "abb84c784351b69e0385d41f652e352a4ef62f1bf614f6060629d00e50372501"
   },
   {
    "file": "engine/src/rules.js",
@@ -183,8 +196,8 @@
   },
   {
    "file": "engine/textes.js",
-   "bytes": 34355,
-   "sha256": "a36ecbcca3f071d94b694264e12bfe91622cf2e4ef71a0b86379989215223be1"
+   "bytes": 43289,
+   "sha256": "a1caa2d5833abc10265c8bb6863884f6dd45f798198ce37e5debff7af9215c32"
   },
   {
    "file": "engine/vendor/compare.js",
@@ -195,8 +208,13 @@
    "file": "js/exemples_public.js",
    "bytes": 12133,
    "sha256": "287ca2780020efc9727937b6ee27d8c5bfbe832c2677664cfc9c3392719141a5"
+  },
+  {
+   "file": "js/revoke.js",
+   "bytes": 28194,
+   "sha256": "41fbd413f61525f778310da56df1e4263b606f634b51411717004dca14d23845"
   }
  ],
- "total_bytes": 268920,
- "tree_sha256": "1cdc3f7ce9fb931e6cc3252a915325f57c540973d3651a49b0cbc347fed542eb"
+ "total_bytes": 321487,
+ "tree_sha256": "94eb719207b4597e04cb5de21342618783e8af7da74d8b3957cd72221af1124d"
 }

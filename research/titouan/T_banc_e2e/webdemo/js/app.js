@@ -6,9 +6,11 @@ import { check, displayLevel, withIntent, sanitizeLocalContext } from './verdict
 import { parsePasted, EXEMPLE_TX, EXEMPLE_TYPED } from './paste.js';
 import EXEMPLES from './exemples_public.js';
 import * as J from './journal.js';
+import { mountApres, grants } from './apres.js';
 
 const { storage, persistent } = J.browserStorage();
-const logEntry = (e) => { try { J.append(storage, e); } catch (_) { /* le journal ne doit jamais bloquer la demo */ } };
+const logEntry = (e) => { try { return J.append(storage, e); } catch (_) { return null; /* le journal ne doit jamais bloquer la demo */ } };
+const apres = mountApres({ section: $('#apres'), box: $('#apres-box'), storage, log: logEntry, readRows: () => J.readAll(storage) });
 
 // ------------------------------------------------------------------ navigation
 const VIEWS = ['demo', 'colle', 'journal'];
@@ -60,7 +62,7 @@ function buildDemo() {
 function select(id) {
   selected = SCENARIOS.find((s) => s.id === id) || null;
   for (const b of document.querySelectorAll('.scen')) b.setAttribute('aria-pressed', String(b.dataset.id === id));
-  const box = clear($('#wallet-req')); clear($('#wallet-out'));
+  const box = clear($('#wallet-req')); clear($('#wallet-out')); apres.reset();
   if (!selected) { box.append(h('p', { class: 'muted' }, 'Choisis un scénario à gauche : le faux site demande une signature à ce faux portefeuille.')); return; }
   const s = selected;
   const rows = (list) => h('dl', { class: 'raw' }, list.map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, h('code', {}, v)))));
@@ -73,7 +75,8 @@ function select(id) {
     h('p', { class: 'muted hint' }, hintOf(s)),
     h('div', { class: 'wallet-actions' },
       h('button', { class: 'btn btn-wallet-no', type: 'button', onclick: () => { $('#wallet-out').textContent = 'Tu as rejeté la demande dans le portefeuille. Rien n’a été signé.'; } }, 'Rejeter'),
-      h('button', { class: 'btn btn-wallet-yes', type: 'button', id: 'sign-btn', onclick: () => sign(s) }, 'Signer'))));
+      h('button', { class: 'btn btn-wallet-yes', type: 'button', id: 'sign-btn', onclick: () => sign(s) }, 'Signer')),
+    grants(s) ? h('p', { class: 'muted small shortcut' }, 'Pour voir la suite sans attendre la fenêtre : ', h('button', { class: 'quiet', type: 'button', id: 'shortcut-btn', onclick: () => { $('#wallet-out').textContent = 'Raccourci de démonstration : on suppose que tu as continué malgré l’alerte. Rien n’est signé ni envoyé.'; apres.shortcut(s); } }, 'passer à « tu as continué par erreur »')) : null));
 }
 // Phrase d'aide sous la requête : la reponse honnete, et ce que la scene montre en plus.
 function hintOf(s) {
@@ -87,12 +90,13 @@ async function sign(s) {
   const out = clear($('#wallet-out'));
   const r = await holdRequest({ body: s.body, local: localOf(s), delaySec: cfg.delay, askIntent: cfg.ask, siteLabel: s.site, intentDetails: s.intentDetails || null, ecrit: s.ecrit || '', honnete: s.intentHonnete, corrige: s.corrige || null });
   btn.disabled = false;
-  logEntry({ source: 'demo', scenario: s.id, intent: r.intentKey, level: r.level, niveau: r.verdict && r.verdict.niveau, fiche: r.verdict && r.verdict.fiche, decision: r.decision === 'sign' && r.limited ? 'continuer_limite' : r.decision, delay_s: r.delaySec ?? null, ms: r.ms });
+  const decisionRow = logEntry({ source: 'demo', scenario: s.id, intent: r.intentKey, level: r.level, niveau: r.verdict && r.verdict.niveau, fiche: r.verdict && r.verdict.fiche, decision: r.decision === 'sign' && r.limited ? 'continuer_limite' : r.decision, delay_s: r.delaySec ?? null, ms: r.ms });
   out.textContent = r.decision === 'cancel'
     ? 'Annulé avec Hold up : la demande n’a pas atteint le portefeuille. Rien n’a été signé.'
     : r.limited
       ? 'Tu as choisi de continuer avec ' + s.corrige.label.toLowerCase() + '. Dans cette démo rien n’est signé ni envoyé (faux portefeuille, aucune clé). Avec un vrai portefeuille, c’est la demande limitée qui serait partie ici.'
       : 'Tu as choisi de continuer. Dans cette démo rien n’est signé ni envoyé (faux portefeuille, aucune clé). Avec un vrai portefeuille, la signature serait partie ici.';
+  if (r.decision === 'sign') apres.granted(s, !!r.limited, decisionRow); else apres.reset(); // un droit n'existe que si la personne a continue
 }
 
 // ------------------------------------------------------------------ 3) colle une transaction
@@ -137,7 +141,7 @@ function renderJournal() {
     h('tbody', {}, rows.slice().reverse().map((r) => {
       const e = r.entry || {};
       return h('tr', {}, h('td', {}, r.seq), h('td', {}, new Date(r.ts).toLocaleTimeString('fr-FR')), h('td', {}, e.source === 'demo' ? (SCENARIOS.find((s) => s.id === e.scenario) || { titre: e.scenario }).titre : (e.method || e.source || '')),
-        h('td', {}, e.level || '—'), h('td', {}, (e.decision || '') + (e.retouche ? ' (retouché)' : '')), h('td', {}, h('code', {}, short(r.prev) + ' → ' + short(r.hash))));
+        h('td', {}, e.level || '—'), h('td', {}, (e.decision || (e.type === 'revocation' ? 'retrait ' + (e.wallet === 'signed' ? 'signé (simulé)' : 'rejeté (simulé)') : '')) + (e.raccourci ? ' (raccourci)' : '') + (e.retouche ? ' (retouché)' : '')), h('td', {}, h('code', {}, short(r.prev) + ' → ' + short(r.hash))));
     })));
   box.append(table);
 }

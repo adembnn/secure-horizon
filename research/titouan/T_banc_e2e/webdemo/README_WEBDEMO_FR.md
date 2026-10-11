@@ -104,3 +104,7 @@ Comment c'est fabriqué : `engine/src/*.mjs` est copié tel quel (seuls les suff
 - La retenue du niveau Manipulation est de 10 min dans le produit ; la démo la raccourcit à 30 s.
 - Les noms de sites des 16 exemples du jeu public sont des étiquettes de test (certains ressemblent à de vraies marques) ; ils ne sont jamais contactés.
 - Si le stockage du navigateur est refusé (navigation privée), le journal reste en mémoire jusqu'à la fermeture de la page.
+
+## Après l'alerte (scène « révoquer le droit »)
+
+Quand la personne a continué malgré l'alerte (ou prend le raccourci « passer à tu as continué par erreur ») sur une scène qui accorde un droit, la section « 3. Après l'alerte » apparaît : bouton « Révoquer ce droit », demande de retrait (approve à 0) montrée dans le faux portefeuille (Rejeter / Signer), puis « Voir la fiche d'incident » (une page, générée par `js/incident.js` adapté d'`incident.mjs`) avec les lignes de journal citées et rejouables. Tout est simulé et dit comme tel. Les droits hors chaîne (Permit) ne montrent jamais « Révoquer ce droit ». `js/revoke.js` est la copie exacte de `extension/revoke.js`, faite par `build_webdemo.mjs`. Détail : `RAPPORT_REVOQUER.md`.

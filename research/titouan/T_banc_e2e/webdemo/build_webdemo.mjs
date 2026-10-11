@@ -3,7 +3,7 @@
 // comparateur d'Adem TypeScript -> JavaScript par module.stripTypeScriptTypes, politique et textes clairs copies.
 // Entrees (LECTURE SEULE) : ../engine/src/*.mjs, ../engine/vendor/compare.ts, ../run/policy.mjs, ../../U_textes_utilisateur.json,
 //                           ../server/server.mjs (colle moteur->verdict a jour : on en extrait la partie sans reseau ni fichier), ../extension_standalone/src/sentinelle_core.js (seulement le decodeur punycode), ../attacks_public/PUBLIC.jsonl (exemples)
-// Sortie : engine/ + js/exemples_public.js + BUILD_INFO.json (hachages).      Usage : node build_webdemo.mjs      Node >= 23.2. Aucun paquet, aucun reseau.
+// Sortie : engine/ + js/exemples_public.js + js/revoke.js (copie de extension/revoke.js) + BUILD_INFO.json (hachages).      Usage : node build_webdemo.mjs      Node >= 23.2. Aucun paquet, aucun reseau.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { stripTypeScriptTypes } from 'node:module';
@@ -109,6 +109,9 @@ put('engine/policy.js', rewriteImports(src(join(ROOT, 'run', 'policy.mjs')).toSt
   }
   put('js/exemples_public.js', '// Genere par build_webdemo.mjs depuis attacks_public/PUBLIC.jsonl (cas SYNTHETIQUES de regression publique, aucune donnee reelle).\nexport default ' + JSON.stringify(ex, null, 1) + ';\n');
 }
+
+// 6b) revoke.js : module PUR de l'extension (extension/revoke.js), copie octet pour octet dans la page (Vercel ne sert que webdemo/). Test : tests/run_webdemo_tests.mjs.
+put('js/revoke.js', src(join(ROOT, 'extension', 'revoke.js')));
 
 // 7) trace du build (sans date : reproductible)
 written.sort((a, b) => a.file.localeCompare(b.file));

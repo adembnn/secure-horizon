@@ -368,7 +368,108 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   ok(/cass/i.test(E('journal-status').textContent), 'app.js : apres retouche, la page annonce la chaine cassee', E('journal-status').textContent);
   E('j-clear').click();
   ok(E('journal-status').textContent.includes('Journal vide'), 'app.js : effacer vide le journal');
+  // ---- Après l'alerte, de bout en bout dans app.js (raccourci de démonstration) : retrait refusé puis signé, fiche, ligne de journal rejouable
+  {
+    const gid = (id) => btns().find((b) => b.getAttribute('id') === id);
+    const txtOf = (id) => E(id).textContent;
+    scen.find((b) => b.getAttribute('data-id') === 'echange_droit_illimite').click();
+    ok(E('apres').hidden === true && !txtOf('apres-box').includes('Révoquer'), 'apres : masqué tant qu aucun droit n a été accordé');
+    scen.find((b) => b.getAttribute('data-id') === 'envoi_simple').click();
+    ok(!gid('shortcut-btn'), 'apres : pas de raccourci pour un envoi simple (aucun droit accordé)');
+    scen.find((b) => b.getAttribute('data-id') === 'echange_droit_illimite').click();
+    ok(!!gid('shortcut-btn'), 'apres : raccourci proposé pour la scène « adresse neuve » (droit illimité)');
+    gid('shortcut-btn').click();
+    const t0 = txtOf('apres-box');
+    ok(E('apres').hidden === false && t0.includes('Tu as continué.') && t0.includes('sans limite') && !!gid('revoke-btn') && gid('revoke-btn').textContent === 'Révoquer ce droit' && t0.includes('Hold up ne signe jamais'), 'apres : le droit existe, bouton « Révoquer ce droit » visible, « Hold up ne signe jamais »', t0.slice(0, 200));
+    ok(!gid('revoke-sign'), 'apres : rien n est montré au portefeuille avant le clic');
+    gid('revoke-btn').click();
+    const w = txtOf('apres-box');
+    ok(w.includes('Le faux portefeuille reçoit la demande de retrait') && w.includes('approve') && w.includes('0 : le droit est retiré') && w.includes('0xd4d4d4d4') && w.includes('0x095ea7b3') && w.includes('non signée') && w.includes('aucun signal trouvé') && !!gid('revoke-sign') && !!gid('revoke-reject'), 'apres : le faux portefeuille montre approve(spender, 0), non signée, relue par le moteur : aucun signal', w.slice(0, 260));
+    gid('revoke-reject').click();
+    ok(txtOf('apres-box').includes('Rien n’a changé : le droit est toujours actif') && !gid('revoke-sign').disabled, 'apres : rejeter laisse le droit actif, et la personne peut encore signer');
+    gid('revoke-sign').click();
+    const sg = txtOf('apres-box');
+    ok(sg.includes('Retrait signé dans le faux portefeuille') && sg.includes('Simulation : aucune transaction n’a été envoyée') && sg.includes('plafond actuel 0 (valeur simulée)') && sg.includes('Ligne de journal n° 3') && gid('revoke-sign').disabled, 'apres : signé dans le faux portefeuille, résultat marqué simulé, ligne de journal n° 3');
+    gid('fiche-btn').click();
+    const ft = txtOf('apres-box');
+    for (const need of ['Fiche d’incident', 'Ce qui s’est passé', 'Ce que tu as fait', 'Ce qui reste à faire', 'Prévenir la plateforme', 'Vérifier les autres droits', 'Quoi', 'Quand', 'Site', 'Droit', 'Adresse qui reçoit le droit', 'Niveau d’alerte', 'Danger', 'echange-rapide-demo.example', 'Ce qui ne peut pas être défait', 'Démonstration : le portefeuille et le réseau sont simulés', 'Ce que cette fiche établit', 'Chaîne du journal : intacte, 3 lignes'])
+      ok(ft.includes(need), 'fiche : contient « ' + need + ' »');
+    ok(!/\b(OK|bloqu\w*|sûr|protégé|garanti\w*|rembours\w*)\b/.test(ft.replace(/Ce n’est pas une garantie/g, '')) && !/[—–]/.test(ft), 'fiche : aucun mot interdit (OK, bloque, sûr, protégé, garanti, remboursement), aucun tiret long');
+    const codes = document.querySelectorAll('code').map((c) => c.textContent).filter((t) => t.startsWith('{"seq":'));
+    ok(codes.length === 2, 'fiche : deux lignes de journal citées, telles quelles', String(codes.length));
+    const lines = codes.map((t) => JSON.parse(t));
+    ok(lines.every((r) => createHash('sha256').update(r.prev + '|' + r.seq + '|' + r.ts + '|' + JSON.stringify(r.entry)).digest('hex') === r.hash), 'fiche : chaque ligne citée se rejoue avec node:crypto (SHA-256 de précédente|numéro|heure|contenu)');
+    ok(lines[0].seq === 1 && lines[0].entry.raccourci === true && lines[1].seq === 3, 'fiche : lignes citées = la décision (raccourci, n° 1) et le dernier retrait (n° 3)');
+    ok(lines[1].entry.type === 'revocation' && lines[1].entry.wallet === 'signed' && lines[1].entry.simulated === true && !/0x[0-9a-fA-F]{40}/.test(JSON.stringify(lines)), 'journal : la ligne de retrait est marquée simulée et ne contient aucune adresse');
+    const replays = btns().filter((b) => b.textContent.startsWith('Rejouer le calcul'));
+    replays.forEach((b) => b.click());
+    ok(replays.length >= 3 && txtOf('apres-box').includes('l’empreinte est identique'), 'fiche : « Rejouer le calcul » recalcule dans la page et dit « identique »');
+    btns().find((b) => b.textContent === 'Rejouer toute la chaîne').click();
+    ok(txtOf('apres-box').includes('Elle est intacte.'), 'fiche : « Rejouer toute la chaîne » dit intacte');
+    E('j-verify').click();
+    ok(E('journal-status').textContent.includes('Chaîne intacte : 3 ligne(s)'), 'journal : 3 lignes (raccourci, retrait rejeté, retrait signé), chaîne intacte', E('journal-status').textContent);
+    scen.find((b) => b.getAttribute('data-id') === 'coffre_conforme').click();
+    ok(E('apres').hidden === true, 'apres : changer de scène masque la section');
+    E('j-clear').click();
+  }
   ok(errors.length === 0, 'app.js : aucune erreur non geree', errors.join(' ; '));
+}
+
+// ------------------------------------------------------------------ L) Après l'alerte : retrait du droit (revoke.js), fiche d'incident (incident.js adapté d'Adem), journal rejouable
+{
+  const A = await imp(join(WD, 'js', 'apres.js')); const RV = await imp(join(WD, 'js', 'revoke.js')); const INC = await imp(join(WD, 'js', 'incident.js')); const JJ = await imp(join(WD, 'js', 'journal.js'));
+  const { call } = await imp(join(ROOT, 'engine', 'src', 'abi_encode.mjs'));
+  ok(readFileSync(join(WD, 'js', 'revoke.js'), 'utf8') === readFileSync(join(ROOT, 'extension', 'revoke.js'), 'utf8'), 'js/revoke.js = extension/revoke.js (copie octet pour octet, faite par build_webdemo.mjs)');
+  const byId = Object.fromEntries(S.SCENARIOS.map((s) => [s.id, s]));
+  const status = Object.fromEntries(S.SCENARIOS.map((s) => [s.id, A.grantOf(s)]));
+  const grantsIds = S.SCENARIOS.filter((s) => A.grants(s)).map((s) => s.id).sort();
+  ok(JSON.stringify(grantsIds) === JSON.stringify(['droit_illimite', 'echange_droit_illimite', 'echange_honnete', 'echange_routeur_connu', 'permit_piege', 'tous_les_nft']), '6 scènes sur 13 accordent un droit (le reste : aucun bouton de retrait)', grantsIds.join(','));
+  // demande de retrait : octets recalculés avec l'encodeur ABI du moteur, jamais ceux de revoke.js
+  const ABI = ['droit_illimite', 'echange_droit_illimite', 'echange_honnete', 'echange_routeur_connu'];
+  let allOk = true; const notes = [];
+  for (const id of ABI) {
+    const r = status[id], g = r.grant; const want = call('approve(address,uint256)', [g.spender, 0n]);
+    const p = r.requests[0].params[0];
+    if (!(r.status === 'revocable' && r.oneClick && p.data === want && p.to === g.token && p.from === S.USER && p.value === '0x0' && r.signedByHoldUp === false && r.submitTo === 'wallet')) { allOk = false; notes.push(id); }
+  }
+  ok(allOk, 'retrait des 4 scènes « approve » : approve(spender, 0) sur le même jeton, depuis le compte, valeur 0, soumis au portefeuille', notes.join(','));
+  const nft = status.tous_les_nft; ok(nft.requests[0].params[0].data === call('setApprovalForAll(address,bool)', [nft.grant.spender, false]) && nft.oneClick, 'retrait de « tous les NFT » : setApprovalForAll(operator, false)');
+  { const pm = status.permit_piege; const text = [pm.says, ...pm.steps, ...pm.limits].join(' ');
+    ok(pm.status === 'two_steps' && pm.oneClick === false && RV.buttonLabel(pm) === 'Voir comment annuler ce droit' && text.includes('Un clic ne suffit pas') && text.includes('attendre l’échéance') && text.includes('course') && !/\bRévoquer ce droit\b/.test(text), 'Permit hors chaîne : jamais présenté comme révocable en un clic ; échéance, course et deux étapes dites'); }
+  // le moteur de Hold up relit la demande de retrait comme n'importe quelle demande, et la voie de reference dit pareil
+  { let same = true; const lv = new Set();
+    for (const id of ['droit_illimite', 'echange_droit_illimite', 'echange_honnete', 'echange_routeur_connu', 'tous_les_nft']) { const q = status[id].requests[0]; const body = { origin: 'hold-up', method: q.method, params: q.params, chainId: '0x1', from: q.params[0].from };
+      const v = M.check(structuredCloneSafe(body), webLocalOf(byId[id])), r = refVerdict(structuredCloneSafe(body), refLocalOf(byId[id])); lv.add(M.displayLevel(v).key); if (pick(v) !== pick(r)) same = false; }
+    ok(same && [...lv].join() === 'info', 'équivalence moteur : la demande de retrait est lue pareil par la page et par server/server.mjs (5 demandes), aucun signal');
+    ok(netCalls === 0, 'aucun appel reseau pendant la préparation des retraits'); }
+  // journal -> fiche : même formule que l'incident.mjs d'Adem (lecture seule), mêmes blocs
+  const IM = await imp(join(ROOT, '..', '..', 'demo_reelle', 'reponse', 'incident.mjs'));
+  const st = JJ.memoryStorage(); const sc = byId.echange_droit_illimite, result = status.echange_droit_illimite;
+  const d = JJ.append(st, { source: 'demo', scenario: sc.id, intent: 'swap', level: 'danger', niveau: 'critical', fiche: 'F01', decision: 'sign', delay_s: 10, ms: 13400 }, 1_800_000_000_000);
+  const rv = JJ.append(st, { source: 'demo', type: 'revocation', scenario: sc.id, kind: result.kind, request_sha256: 'ab'.repeat(32), wallet: 'signed', simulated: true, allowance_after: '0' }, 1_800_000_042_000);
+  const rows = JJ.readAll(st);
+  ok(rows.every((r) => IM.recordHash(r) === r.hash && INC.recordHash(r) === r.hash && INC.replayRecord(r).ok), 'journal : empreinte identique à recordHash d\'incident.mjs (Adem) et rejouable par incident.js');
+  { const f = join(tmpdir(), 'holdup_webdemo_journal.jsonl'); writeFileSync(f, rows.map((r) => JSON.stringify(r)).join('\n') + '\n'); const j = IM.readJournal(f);
+    ok(j.chain.ok && j.chain.n === 2 && j.chain.head === rows[1].hash, 'journal de la page relu par readJournal d\'incident.mjs : chaîne intacte, même tête'); }
+  const inc = INC.buildFiche(rows, { decisionSeq: d.seq, revocationSeq: rv.seq, scenario: sc, result, generatedAt: 1_800_000_100_000 });
+  const inc2 = INC.buildFiche(rows, { decisionSeq: d.seq, revocationSeq: rv.seq, scenario: sc, result, generatedAt: 1_800_000_100_000 });
+  ok(JSON.stringify(inc) === JSON.stringify(inc2) && inc.id === createHash('sha256').update(d.hash + '|' + rv.hash).digest('hex').slice(0, 16), 'fiche : déterministe, identifiant = SHA-256(décision|retrait), même formule qu\'incident.mjs');
+  ok(inc.schema === 'holdup.incident/1' && inc.demo === true && inc.revocation.simulated === true && inc.revocation.right_removed === true && inc.right.unlimited === true && inc.verdict.fiche.id === 'F01' && inc.verdict.fiche.threat.length > 5 && inc.evidence.chain.ok && inc.evidence.journal_records.length === 2 && inc.does_not_prove.some((x) => x.includes('simulés')), 'fiche : mêmes blocs que le schéma d\'Adem, retrait marqué simulé, « n\'établit pas » dit que rien n\'est réel');
+  ok(inc.metrics.time_to_revoke_ms === 42000 && inc.timeline.length === 3 && inc.timeline[0].what === 'alert_shown' && inc.next_steps.some((x) => x.includes('Prévenir la plateforme')) && inc.next_steps.some((x) => x.includes('autres droits')), 'fiche : chronologie (alerte, décision, retrait), délai de retrait, prochaines étapes');
+  // retrait non fait / rejeté : la fiche ne dit jamais « retiré »
+  { const st2 = JJ.memoryStorage(); const d2 = JJ.append(st2, { source: 'demo', scenario: sc.id, level: 'danger', niveau: 'critical', fiche: 'F01', decision: 'sign', delay_s: 10, ms: 1000 }); const r2 = JJ.append(st2, { source: 'demo', type: 'revocation', wallet: 'rejected', simulated: true, request_sha256: 'cd'.repeat(32) });
+    const i2 = INC.buildFiche(JJ.readAll(st2), { decisionSeq: d2.seq, revocationSeq: r2.seq, scenario: sc, result }), i3 = INC.buildFiche(JJ.readAll(st2), { decisionSeq: d2.seq, revocationSeq: null, scenario: sc, result });
+    ok(i2.revocation.right_removed === false && i2.revocation.right_after === null && i3.revocation.wallet_answer === null && i3.revocation.right_removed === false && i3.next_steps[0].startsWith('Retirer le droit'), 'fiche : retrait rejeté ou jamais demandé => le droit n\'est jamais dit retiré, la première étape reste « Retirer le droit »');
+    const bad = JJ.readAll(st2); bad[0].entry.decision = 'cancel'; const i4 = INC.buildFiche(bad, { decisionSeq: d2.seq, revocationSeq: r2.seq, scenario: sc, result });
+    ok(i4.evidence.chain.ok === false && i4.evidence.chain.broken_at === 1, 'fiche : une ligne retouchée => chaîne dite cassée dans la fiche'); }
+  ok(!/0x[0-9a-fA-F]{40}/.test(JSON.stringify(rows)), 'journal : aucune adresse écrite');
+  // style : encre seule, pas de dégradé, d'ombre, d'emoji ni de vert dans ce qui a été ajouté
+  { const css = readFileSync(join(WD, 'css', 'holdup.css'), 'utf8'); const add = css.slice(css.indexOf('Apres l\'alerte'));
+    ok(add.length > 500 && !/gradient|box-shadow|text-shadow|var\(--signal\)|green|#[0-9a-f]{3,8}\b/i.test(add), 'css « Après l\'alerte » : ni dégradé, ni ombre, ni signal rouge, ni couleur en dur (jetons seulement)');
+    const srcs = ['js/apres.js', 'js/incident.js', 'index.html'].map((f) => readFileSync(join(WD, f), 'utf8')).join('\n');
+    ok(!/\p{Extended_Pictographic}/u.test(srcs), 'aucun emoji dans apres.js, incident.js, index.html');
+    ok(!/\b(bloqu\w*|rembours\w*|garanti(?!e)\w*)\b/i.test(srcs.replace(/Ce n’est pas une garantie|Il ne garantit rien/g, '')), 'aucun « bloque », « remboursement » ni promesse dans les textes ajoutés'); }
+  ok(netCalls === 0, 'aucun appel reseau pendant les retraits, la fiche et le journal');
 }
 
 // ------------------------------------------------------------------ K) service reel des fichiers par HTTP (meme processus, 127.0.0.1) : types MIME des modules, tous les fichiers references repondent 200
