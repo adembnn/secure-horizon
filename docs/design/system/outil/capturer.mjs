@@ -16,7 +16,7 @@ const { chromium } = require(PW);
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'captures');
 mkdirSync(out, { recursive: true });
-const SCREENS = ['ecran_question', 'ecran_relance', 'ecran_correspond', 'ecran_ne_correspond_pas', 'ecran_non_verifie', 'repli_dans_la_page', 'popup', 'panneau_lateral', 'options', 'bienvenue'];
+const SCREENS = ['ecran_question', 'ecran_relance', 'ecran_correspond', 'ecran_ne_correspond_pas', 'ecran_non_verifie', 'ecran_fin', 'repli_dans_la_page', 'popup', 'panneau_lateral', 'options', 'bienvenue'];
 const args = process.argv.slice(2);
 const browser = await chromium.launch({ executablePath: EXE, headless: true });
 let bad = 0;
@@ -35,6 +35,7 @@ async function views(theme, zoom) {
         const box = f.getBoundingClientRect();
         for (const el of [f, ...f.querySelectorAll('*')]) {
           if (el.closest('.hu-scroll') && !el.classList.contains('hu-scroll')) continue;
+          if (el.tagName === 'TEXTAREA') continue; // une phrase longue défile dans son champ : c'est voulu
           const cs = getComputedStyle(el);
           const scrolls = /auto|scroll/.test(cs.overflowY) || /auto|scroll/.test(cs.overflowX) || el === f;
           if (scrolls && !el.classList.contains('hu-scroll') && (el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1)) over.push(`${el.className || el.tagName} défile (${el.scrollWidth}×${el.scrollHeight} dans ${el.clientWidth}×${el.clientHeight})`);

@@ -38,8 +38,8 @@ function expand(src) {
     .replace(/\[\[win([^\]]*)\]\]/g, (_, s) => {
       const f = s.trim().split(/\s+/).filter(Boolean);
       const out = f.find((x) => ['match', 'mismatch', 'unverifiable'].includes(x));
-      const cls = ['hu', 'hu-k', 'hu-win'].concat(f.includes('busy') ? ['hu-is-busy'] : [], f.includes('ready') ? ['hu-is-ready'] : []);
-      return `<div class="${cls.join(' ')}"${out ? ` data-outcome="${out}"` : ''}><div class="hu-stage">`;
+      const cls = ['hu', 'hu-k', 'hu-win'].concat(f.includes('ready') ? ['is-ready'] : []);
+      return `<div class="${cls.join(' ')}"${f.includes('busy') ? ' data-state="checking"' : ''}${out ? ` data-outcome="${out}"` : ''}><div class="hu-stage">`;
     })
     .replace(/\[\[\/win\]\]/g, '</div></div>')
     .replace(/\[\[slot ([^|\]]*)\|([^|\]]*)\|([^\]]*)\]\]/g, (_, q, v, st) => `<span class="hu-slot${st ? ' is-' + st : ''}"><span class="hu-slot-q">${q}</span><span class="hu-slot-v">${v}</span></span>`)

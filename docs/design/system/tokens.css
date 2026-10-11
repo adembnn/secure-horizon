@@ -5,7 +5,7 @@
  *
  * Contrastes WCAG 2.x, calculés (outil/contrastes.mjs)
  *   clair         : encre 21,00 · encre-2 #555 7,46 · encre-3 #767676 4,54 (bord de contrôle, 3:1 demandé)
- *   sombre, noir  : encre 21,00 · encre-2 #b3b3b3 9,96 · encre-3 #808080 5,32 */
+ *   sombre, noir  : encre 21,00 · encre-2 #b3b3b3 10,02 · encre-3 #808080 5,32 */
 :root {
   --hu-page: #ffffff;
   --hu-ink: #000000;

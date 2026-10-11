@@ -93,17 +93,23 @@
 /* ce que je suppose sans le demander ; la même place dit « Je compare… » pendant la vérification */
 .hu-under { display: grid; margin-top: var(--hu-3); }
 .hu-under > * { grid-area: 1 / 1; }
-.hu-assume, .hu-busy { color: var(--hu-ink-2); }
+.hu-assume, .hu-busy, .hu-count { color: var(--hu-ink-2); }
 .hu-busy { opacity: 0; }
-.hu-is-busy .hu-assume { opacity: 0; }
-.hu-is-busy .hu-busy { opacity: 1; }
+[data-state="checking"] .hu-assume { opacity: 0; }
+[data-state="checking"] .hu-busy { opacity: 1; }
 
 /* le bas : l'autre geste à gauche, le geste conseillé à droite */
 .hu-dock { display: flex; align-items: center; justify-content: space-between; gap: var(--hu-4); min-height: var(--hu-ctl); margin-top: auto; padding-top: var(--hu-4); text-align: left; }
 .hu-mid + .hu-dock { margin-top: 0; }
+.hu-dock--end { justify-content: flex-end; }
+/* fenêtre étroite (zoom) : les deux gestes d'un verdict ne tiennent plus côte à côte, ils s'empilent, le geste conseillé au-dessus */
+@container (max-width: 400px) {
+  .hu-dock:has(.hu-wait) { flex-direction: column-reverse; align-items: stretch; gap: var(--hu-2); }
+  .hu-dock:has(.hu-wait) .hu-wait { justify-content: center; }
+}
 /* la retenue : « Continuer » n'est pas encore un geste, le compte à rebours le dit. À la fin, le compte s'efface et le mot se souligne. */
 .hu-wait { display: flex; align-items: baseline; gap: 0.3em; color: var(--hu-ink-2); white-space: nowrap; }
-.hu-is-ready .hu-wait-count { opacity: 0; }
+.is-ready .hu-wait-count { opacity: 0; }
 .hu-wait .hu-num { display: inline-block; min-width: 2ch; text-align: right; }
 /* « Ça correspond » : la phrase qui annonce le départ */
 .hu-leave { color: var(--hu-ink-2); }
@@ -126,7 +132,7 @@
 .hu-addr-label { color: var(--hu-ink-2); }
 .hu-addr-grid { display: grid; grid-template-columns: repeat(5, auto); justify-content: center; column-gap: 10px; color: var(--hu-ink-2); }
 .hu-addr-grid span { display: flex; }
-.hu-addr-grid i, .hu-addr-grid b { display: block; width: 9px; text-align: center; font-style: normal; }
+.hu-addr-grid i, .hu-addr-grid b, .hu-addr-grid span > span { display: block; width: 9px; text-align: center; font-style: normal; }
 .hu-addr-grid b { color: var(--hu-ink); }
 
 /* fin de fenêtre : une phrase seule, 600 ms, puis la fenêtre se ferme */
@@ -164,9 +170,33 @@
   .hu-addr { margin-top: var(--hu-1); }
   .hu-addr + .hu-addr { margin-top: 2px; }
   .hu-addr-grid { column-gap: 6px; font-size: 13px; line-height: 18px; }
-  .hu-addr-grid i, .hu-addr-grid b { width: 8px; }
+  .hu-addr-grid i, .hu-addr-grid b, .hu-addr-grid span > span { width: 8px; }
   .hu-dock { padding-top: var(--hu-2); min-height: 32px; }
   .hu-cuff { height: 32px; min-width: 96px; padding: 0 var(--hu-4); }
+}
+
+/* 200 % donne 211 × 246 : le verdict, sa ligne et les deux gestes restent lisibles ; le site est dans la barre de titre, le gant s'efface */
+@container (max-height: 280px) {
+  .hu-stage { padding: var(--hu-2); }
+  .hu-head, .hu-glove, .hu-got-say, .hu-got-from, .hu-fix span, .hu-next { display: none; }
+  .hu-title, .hu-verdict { margin-top: 0; font-size: 15px; line-height: 20px; }
+  .hu-line, .hu-fix b, .hu-end, .hu-error, .hu-count { font-size: 13px; line-height: 17px; }
+  .hu-line { margin-top: 2px; }
+  .hu-fix { margin-top: var(--hu-1); }
+  .hu-field { flex-basis: 46px; min-height: 46px; margin-top: var(--hu-1); padding: 5px var(--hu-2); font-size: 13px; line-height: 17px; }
+  .hu-field--short { height: 30px; }
+  .hu-got { margin-top: var(--hu-1); column-gap: 2px; }
+  .hu-slot { height: 17px; font-size: 12px; line-height: 17px; }
+  .hu-under { margin-top: 2px; }
+  .hu-addr { margin-top: 2px; }
+  .hu-addr-label { font-size: 12px; line-height: 15px; }
+  .hu-addr-grid { column-gap: 4px; font-size: 12px; line-height: 15px; }
+  .hu-addr-grid i, .hu-addr-grid b, .hu-addr-grid span > span { width: 7px; }
+  .hu-dock { min-height: 0; padding-top: var(--hu-1); gap: var(--hu-1); }
+  .hu-dock:has(.hu-wait) { gap: 2px; }
+  .hu-cuff { height: 28px; min-width: 0; padding: 0 var(--hu-3); font-size: 13px; line-height: 16px; }
+  .hu-word, .hu-wait { font-size: 12px; line-height: 16px; }
+  .hu-word { padding: 2px 0; margin: 0; }
 }
 
 /* ------------------------------------------------------------------ repli dans la page (la fenêtre n'a pas pu s'ouvrir) */
@@ -226,11 +256,10 @@
 .hu-scroll { flex: 1 1 auto; min-height: 0; margin: 0 calc(-1 * var(--hu-5)); padding: 0 var(--hu-5) var(--hu-2); overflow-y: auto; }
 .hu-h { margin-top: var(--hu-6); font: var(--hu-strong) var(--hu-b-m) var(--hu-font); }
 .hu-h + * { margin-top: var(--hu-2); }
-.hu-right { display: flex; align-items: baseline; justify-content: space-between; gap: var(--hu-4); padding: 6px 0; }
-.hu-right p { min-width: 0; overflow-wrap: anywhere; }
-.hu-right .hu-word { flex: none; }
+.hu-right { padding: 6px 0; }
+.hu-right p { overflow-wrap: anywhere; }
 .hu-right.is-busy .hu-word, .hu-right.is-done .hu-word { display: none; }
-.hu-right-note { flex: none; min-width: 104px; text-align: right; color: var(--hu-ink-2); }
+.hu-right-note { color: var(--hu-ink-2); }
 .hu-note { margin-top: var(--hu-1); color: var(--hu-ink-2); }
 /* une ligne du journal */
 .hu-entry { display: grid; grid-template-columns: 48px minmax(0, 1fr); padding: 6px 0; }

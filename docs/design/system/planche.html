@@ -8,7 +8,7 @@
  *
  * Contrastes WCAG 2.x, calculés (outil/contrastes.mjs)
  *   clair         : encre 21,00 · encre-2 #555 7,46 · encre-3 #767676 4,54 (bord de contrôle, 3:1 demandé)
- *   sombre, noir  : encre 21,00 · encre-2 #b3b3b3 9,96 · encre-3 #808080 5,32 */
+ *   sombre, noir  : encre 21,00 · encre-2 #b3b3b3 10,02 · encre-3 #808080 5,32 */
 :root {
   --hu-page: #ffffff;
   --hu-ink: #000000;
@@ -177,17 +177,23 @@
 /* ce que je suppose sans le demander ; la même place dit « Je compare… » pendant la vérification */
 .hu-under { display: grid; margin-top: var(--hu-3); }
 .hu-under > * { grid-area: 1 / 1; }
-.hu-assume, .hu-busy { color: var(--hu-ink-2); }
+.hu-assume, .hu-busy, .hu-count { color: var(--hu-ink-2); }
 .hu-busy { opacity: 0; }
-.hu-is-busy .hu-assume { opacity: 0; }
-.hu-is-busy .hu-busy { opacity: 1; }
+[data-state="checking"] .hu-assume { opacity: 0; }
+[data-state="checking"] .hu-busy { opacity: 1; }
 
 /* le bas : l'autre geste à gauche, le geste conseillé à droite */
 .hu-dock { display: flex; align-items: center; justify-content: space-between; gap: var(--hu-4); min-height: var(--hu-ctl); margin-top: auto; padding-top: var(--hu-4); text-align: left; }
 .hu-mid + .hu-dock { margin-top: 0; }
+.hu-dock--end { justify-content: flex-end; }
+/* fenêtre étroite (zoom) : les deux gestes d'un verdict ne tiennent plus côte à côte, ils s'empilent, le geste conseillé au-dessus */
+@container (max-width: 400px) {
+  .hu-dock:has(.hu-wait) { flex-direction: column-reverse; align-items: stretch; gap: var(--hu-2); }
+  .hu-dock:has(.hu-wait) .hu-wait { justify-content: center; }
+}
 /* la retenue : « Continuer » n'est pas encore un geste, le compte à rebours le dit. À la fin, le compte s'efface et le mot se souligne. */
 .hu-wait { display: flex; align-items: baseline; gap: 0.3em; color: var(--hu-ink-2); white-space: nowrap; }
-.hu-is-ready .hu-wait-count { opacity: 0; }
+.is-ready .hu-wait-count { opacity: 0; }
 .hu-wait .hu-num { display: inline-block; min-width: 2ch; text-align: right; }
 /* « Ça correspond » : la phrase qui annonce le départ */
 .hu-leave { color: var(--hu-ink-2); }
@@ -210,7 +216,7 @@
 .hu-addr-label { color: var(--hu-ink-2); }
 .hu-addr-grid { display: grid; grid-template-columns: repeat(5, auto); justify-content: center; column-gap: 10px; color: var(--hu-ink-2); }
 .hu-addr-grid span { display: flex; }
-.hu-addr-grid i, .hu-addr-grid b { display: block; width: 9px; text-align: center; font-style: normal; }
+.hu-addr-grid i, .hu-addr-grid b, .hu-addr-grid span > span { display: block; width: 9px; text-align: center; font-style: normal; }
 .hu-addr-grid b { color: var(--hu-ink); }
 
 /* fin de fenêtre : une phrase seule, 600 ms, puis la fenêtre se ferme */
@@ -248,9 +254,33 @@
   .hu-addr { margin-top: var(--hu-1); }
   .hu-addr + .hu-addr { margin-top: 2px; }
   .hu-addr-grid { column-gap: 6px; font-size: 13px; line-height: 18px; }
-  .hu-addr-grid i, .hu-addr-grid b { width: 8px; }
+  .hu-addr-grid i, .hu-addr-grid b, .hu-addr-grid span > span { width: 8px; }
   .hu-dock { padding-top: var(--hu-2); min-height: 32px; }
   .hu-cuff { height: 32px; min-width: 96px; padding: 0 var(--hu-4); }
+}
+
+/* 200 % donne 211 × 246 : le verdict, sa ligne et les deux gestes restent lisibles ; le site est dans la barre de titre, le gant s'efface */
+@container (max-height: 280px) {
+  .hu-stage { padding: var(--hu-2); }
+  .hu-head, .hu-glove, .hu-got-say, .hu-got-from, .hu-fix span, .hu-next { display: none; }
+  .hu-title, .hu-verdict { margin-top: 0; font-size: 15px; line-height: 20px; }
+  .hu-line, .hu-fix b, .hu-end, .hu-error, .hu-count { font-size: 13px; line-height: 17px; }
+  .hu-line { margin-top: 2px; }
+  .hu-fix { margin-top: var(--hu-1); }
+  .hu-field { flex-basis: 46px; min-height: 46px; margin-top: var(--hu-1); padding: 5px var(--hu-2); font-size: 13px; line-height: 17px; }
+  .hu-field--short { height: 30px; }
+  .hu-got { margin-top: var(--hu-1); column-gap: 2px; }
+  .hu-slot { height: 17px; font-size: 12px; line-height: 17px; }
+  .hu-under { margin-top: 2px; }
+  .hu-addr { margin-top: 2px; }
+  .hu-addr-label { font-size: 12px; line-height: 15px; }
+  .hu-addr-grid { column-gap: 4px; font-size: 12px; line-height: 15px; }
+  .hu-addr-grid i, .hu-addr-grid b, .hu-addr-grid span > span { width: 7px; }
+  .hu-dock { min-height: 0; padding-top: var(--hu-1); gap: var(--hu-1); }
+  .hu-dock:has(.hu-wait) { gap: 2px; }
+  .hu-cuff { height: 28px; min-width: 0; padding: 0 var(--hu-3); font-size: 13px; line-height: 16px; }
+  .hu-word, .hu-wait { font-size: 12px; line-height: 16px; }
+  .hu-word { padding: 2px 0; margin: 0; }
 }
 
 /* ------------------------------------------------------------------ repli dans la page (la fenêtre n'a pas pu s'ouvrir) */
@@ -310,11 +340,10 @@
 .hu-scroll { flex: 1 1 auto; min-height: 0; margin: 0 calc(-1 * var(--hu-5)); padding: 0 var(--hu-5) var(--hu-2); overflow-y: auto; }
 .hu-h { margin-top: var(--hu-6); font: var(--hu-strong) var(--hu-b-m) var(--hu-font); }
 .hu-h + * { margin-top: var(--hu-2); }
-.hu-right { display: flex; align-items: baseline; justify-content: space-between; gap: var(--hu-4); padding: 6px 0; }
-.hu-right p { min-width: 0; overflow-wrap: anywhere; }
-.hu-right .hu-word { flex: none; }
+.hu-right { padding: 6px 0; }
+.hu-right p { overflow-wrap: anywhere; }
 .hu-right.is-busy .hu-word, .hu-right.is-done .hu-word { display: none; }
-.hu-right-note { flex: none; min-width: 104px; text-align: right; color: var(--hu-ink-2); }
+.hu-right-note { color: var(--hu-ink-2); }
 .hu-note { margin-top: var(--hu-1); color: var(--hu-ink-2); }
 /* une ligne du journal */
 .hu-entry { display: grid; grid-template-columns: 48px minmax(0, 1fr); padding: 6px 0; }
@@ -400,16 +429,19 @@
 
 /* ==== motion.css ==== */
 /* Hold up : mouvement (docs/design/system/MOTION.md). Dépend de tokens.css et de components.css.
- * Règles : seulement transform et opacity. Sans cette feuille, ou sans aucune classe d'état, tout est visible et à sa place.
- * Le code pose UNE classe d'état sur le conteneur (.hu-win, .hu-pop, .hu-panel) et la retire à la fin de l'animation :
- *   hu-is-opening    la surface vient de s'ouvrir (fenêtre, popup, panneau)
- *   hu-is-entering   un écran arrive (question, relance, verdict). Avec le gant s'il est là.
- *   hu-is-leaving    l'écran en place s'efface avant d'être remplacé
- *   hu-is-next       demande suivante de la même opération, dans la même fenêtre
- *   hu-is-busy       la vérification dure depuis plus de 150 ms (classe d'état durable, pas une animation)
- *   hu-is-departing  « Ça correspond » : la phrase reste une seconde avant le départ
- *   hu-is-ready      la retenue est finie (classe d'état durable)
- *   hu-is-closing    la fenêtre va se fermer
+ * Règles : seulement transform et opacity. Sans cette feuille, ou sans aucun état posé, tout est visible et à sa place.
+ * Aucun indicateur de progression : « Ça correspond » reste une seconde, puis la fenêtre se ferme.
+ *
+ * Les états sont ceux que ui/screen.js pose déjà sur le conteneur (.hu-win) :
+ *   .is-entering             un moment vient d'être dessiné (ses nœuds sont neufs : l'animation part là)
+ *   .is-leaving              posé 80 ms avant que le moment en place soit remplacé
+ *   data-state="checking"    la vérification dure depuis plus de 150 ms (état durable, pas une animation)
+ *   data-outcome             match | mismatch | unverifiable
+ * et quatre états à ajouter (INTEGRATION.md) :
+ *   .is-opening              la surface vient de s'ouvrir (fenêtre, popup, panneau)
+ *   .is-next                 avec .is-entering : demande suivante de la même opération, dans la même fenêtre
+ *   .is-ready                la retenue est finie (état durable)
+ *   .is-closing              la fenêtre va se fermer
  * Les éléments qui bougent portent .hu-m ; --hu-i (0, 1, 2) les décale de 40 ms. */
 
 @keyframes hu-fade { from { opacity: 0; } to { opacity: 1; } }
@@ -428,19 +460,19 @@
 }
 
 /* ouverture : le fond est déjà noir (ou déjà de la couleur de la page), seul le contenu arrive */
-.hu-is-opening > * { animation: hu-fade 140ms var(--hu-e) both; }
+.is-opening > * { animation: hu-fade 140ms var(--hu-e) both; }
 
-/* un écran arrive */
-.hu-is-entering .hu-m { animation: hu-rise var(--hu-d-4) var(--hu-e-in) both; animation-delay: calc(var(--hu-i, 0) * 40ms); }
-.hu-is-entering .hu-glove { animation: hu-glove var(--hu-d-glove) linear both; will-change: transform; }
-.hu-is-entering .hu-dock, .hu-is-next .hu-dock { animation: hu-fade var(--hu-d-2) var(--hu-e) both; }
-.hu-is-next .hu-m { animation: hu-side var(--hu-d-4) var(--hu-e-in) both; animation-delay: calc(var(--hu-i, 0) * 40ms); }
+/* un moment arrive */
+.is-entering .hu-m { animation: hu-rise var(--hu-d-4) var(--hu-e-in) both; animation-delay: calc(var(--hu-i, 0) * 40ms); }
+.is-entering .hu-glove { animation: hu-glove var(--hu-d-glove) linear both; will-change: transform; }
+.is-entering .hu-dock { animation: hu-fade var(--hu-d-2) var(--hu-e) both; }
+.is-entering.is-next .hu-m { animation-name: hu-side; }
 
-/* l'écran en place s'efface : plus court que l'arrivée */
-.hu-is-leaving .hu-m, .hu-is-leaving .hu-glove, .hu-is-leaving .hu-dock { animation: hu-out var(--hu-d-1) var(--hu-e-out) both; }
+/* le moment en place s'efface : plus court que l'arrivée. Écrit après .is-entering : les deux classes peuvent être là ensemble. */
+.is-leaving .hu-m, .is-leaving .hu-glove, .is-leaving .hu-dock { animation: hu-out var(--hu-d-1) var(--hu-e-out) both; animation-delay: 0s; }
 
-/* « Ça correspond » puis départ */
-.hu-is-departing .hu-is-closing .hu-stage { animation: hu-up-out var(--hu-d-2) var(--hu-e-out) both; }
+/* la fenêtre va se fermer */
+.is-closing .hu-stage { animation: hu-up-out var(--hu-d-2) var(--hu-e-out) both; }
 
 /* changements d'état sur place : des transitions, donc interruptibles */
 .hu-under > * { transition: opacity var(--hu-d-2) var(--hu-e); }
@@ -453,11 +485,12 @@
 .hu-entry.is-arriving { animation: hu-rise var(--hu-d-4) var(--hu-e-in) both; }
 .is-pushed { animation: hu-push var(--hu-d-4) var(--hu-e) both; }
 
-/* mouvement réduit : plus de déplacement, les fondus courts restent. */
+/* mouvement réduit : plus de déplacement, les fondus courts restent */
 @media (prefers-reduced-motion: reduce) {
-  .hu-is-entering .hu-m, .hu-is-next .hu-m, .hu-entry.is-arriving { animation-name: hu-fade; animation-duration: var(--hu-d-2); animation-delay: 0s; }
-  .hu-is-entering .hu-glove { animation: hu-fade var(--hu-d-2) var(--hu-e) both; will-change: auto; }
-  .hu-is-closing .hu-stage { animation-name: hu-out; }
+  .is-entering .hu-m, .is-entering.is-next .hu-m, .hu-entry.is-arriving { animation-name: hu-fade; animation-duration: var(--hu-d-2); animation-delay: 0s; }
+  .is-entering .hu-glove { animation: hu-fade var(--hu-d-2) var(--hu-e) both; will-change: auto; }
+  .is-leaving .hu-m, .is-leaving .hu-glove, .is-leaving .hu-dock { animation-name: hu-out; animation-duration: var(--hu-d-1); }
+  .is-closing .hu-stage { animation-name: hu-out; }
   .is-pushed { animation: none; }
   .hu-slot-v { transform: none; transition: opacity var(--hu-d-2) var(--hu-e); }
   .hu-cuff { transition: none; }
@@ -465,9 +498,10 @@
   .hu-switch input::before, .hu-switch input::after { transition: opacity var(--hu-d-2) var(--hu-e); }
 }
 /* la même chose, forcée par un attribut (motion.html, tests) */
-:root[data-motion="reduced"] .hu-is-entering .hu-m, :root[data-motion="reduced"] .hu-is-next .hu-m, :root[data-motion="reduced"] .hu-entry.is-arriving { animation-name: hu-fade; animation-duration: var(--hu-d-2); animation-delay: 0s; }
-:root[data-motion="reduced"] .hu-is-entering .hu-glove { animation: hu-fade var(--hu-d-2) var(--hu-e) both; will-change: auto; }
-:root[data-motion="reduced"] .hu-is-closing .hu-stage { animation-name: hu-out; }
+:root[data-motion="reduced"] .is-entering .hu-m, :root[data-motion="reduced"] .is-entering.is-next .hu-m, :root[data-motion="reduced"] .hu-entry.is-arriving { animation-name: hu-fade; animation-duration: var(--hu-d-2); animation-delay: 0s; }
+:root[data-motion="reduced"] .is-entering .hu-glove { animation: hu-fade var(--hu-d-2) var(--hu-e) both; will-change: auto; }
+:root[data-motion="reduced"] .is-leaving .hu-m, :root[data-motion="reduced"] .is-leaving .hu-glove, :root[data-motion="reduced"] .is-leaving .hu-dock { animation-name: hu-out; animation-duration: var(--hu-d-1); }
+:root[data-motion="reduced"] .is-closing .hu-stage { animation-name: hu-out; }
 :root[data-motion="reduced"] .is-pushed { animation: none; }
 :root[data-motion="reduced"] .hu-slot-v { transform: none; transition: opacity var(--hu-d-2) var(--hu-e); }
 :root[data-motion="reduced"] .hu-cuff { transition: none; }
@@ -490,7 +524,7 @@ body { margin: 0; background: var(--hu-page); }
 <div class="pl-views">
 <figure class="pl-view" id="v-q-vide" style="--w:424"><figcaption>La question, à l’ouverture. Le curseur est dans le champ.</figcaption><div class="pl-frame" style="--w:424;--h:501">
 <div class="hu hu-k hu-win"><div class="hu-stage">
-<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<p class="hu-head hu-m"><b>app.neve.exchange</b> veut utiliser ton portefeuille.</p>
 <h1 class="hu-title hu-m" id="q-vide-t">Que veux-tu faire ?</h1>
 <textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-vide-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500"></textarea>
 <div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot"><span class="hu-slot-q">quoi</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">combien</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">à qui</span><span class="hu-slot-v"></span></span></div>
@@ -500,7 +534,7 @@ body { margin: 0; background: var(--hu-page); }
 </div></figure>
 <figure class="pl-view" id="v-q-frappe" style="--w:424"><figcaption>Pendant la frappe. Deux valeurs sont arrivées, la troisième attend.</figcaption><div class="pl-frame" style="--w:424;--h:501">
 <div class="hu hu-k hu-win"><div class="hu-stage">
-<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<p class="hu-head hu-m"><b>app.neve.exchange</b> veut utiliser ton portefeuille.</p>
 <h1 class="hu-title hu-m" id="q-frappe-t">Que veux-tu faire ?</h1>
 <textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-frappe-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500">échanger 50 USDC</textarea>
 <div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">50 USDC</span></span><span class="hu-slot"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v"></span></span></div>
@@ -510,7 +544,7 @@ body { margin: 0; background: var(--hu-page); }
 </div></figure>
 <figure class="pl-view" id="v-q-complet" style="--w:424"><figcaption>Tout est compris. Le compte qui signe est rappelé sous les trois places.</figcaption><div class="pl-frame" style="--w:424;--h:501">
 <div class="hu hu-k hu-win"><div class="hu-stage">
-<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<p class="hu-head hu-m"><b>app.neve.exchange</b> veut utiliser ton portefeuille.</p>
 <h1 class="hu-title hu-m" id="q-complet-t">Que veux-tu faire ?</h1>
 <textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-complet-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500">échanger 50 USDC contre AVAX</textarea>
 <div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">50 USDC</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v">contre AVAX</span></span><span class="hu-got-from">depuis ton compte 0x71c4…9a3f</span></div>
@@ -520,7 +554,7 @@ body { margin: 0; background: var(--hu-page); }
 </div></figure>
 <figure class="pl-view" id="v-q-erreur" style="--w:424"><figcaption>Entrée sur un champ vide. La phrase d’erreur prend la place de la ligne grise, rien ne bouge.</figcaption><div class="pl-frame" style="--w:424;--h:501">
 <div class="hu hu-k hu-win"><div class="hu-stage">
-<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<p class="hu-head hu-m"><b>app.neve.exchange</b> veut utiliser ton portefeuille.</p>
 <h1 class="hu-title hu-m" id="q-erreur-t">Que veux-tu faire ?</h1>
 <textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-erreur-t" aria-invalid="true" aria-describedby="q-erreur-e" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500"></textarea>
 <div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot"><span class="hu-slot-q">quoi</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">combien</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">à qui</span><span class="hu-slot-v"></span></span></div>
@@ -529,13 +563,23 @@ body { margin: 0; background: var(--hu-page); }
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-q-compare" style="--w:424"><figcaption>La vérification dure plus de 150 ms : le champ se fige, le bouton le dit.</figcaption><div class="pl-frame" style="--w:424;--h:501">
-<div class="hu hu-k hu-win hu-is-busy"><div class="hu-stage">
-<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<div class="hu hu-k hu-win" data-state="checking"><div class="hu-stage">
+<p class="hu-head hu-m"><b>app.neve.exchange</b> veut utiliser ton portefeuille.</p>
 <h1 class="hu-title hu-m" id="q-compare-t">Que veux-tu faire ?</h1>
 <textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-compare-t" readonly spellcheck="false" maxlength="500">échanger 50 USDC contre AVAX</textarea>
 <div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">50 USDC</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v">contre AVAX</span></span></div>
 <div class="hu-under hu-m" style="--hu-i:1"><p class="hu-assume" aria-hidden="true">Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte.</p><p class="hu-busy">Je compare ta phrase à la demande.</p></div>
 <div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Je compare…</button></div>
+</div></div>
+</div></figure>
+<figure class="pl-view" id="v-q-limite" style="--w:424"><figcaption>Soixante signes avant la limite de 500, je préviens. Au-delà, je refuse de vérifier une phrase coupée.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win"><div class="hu-stage">
+<p class="hu-head hu-m"><b>app.neve.exchange</b> veut utiliser ton portefeuille.</p>
+<h1 class="hu-title hu-m" id="q-limite-t">Que veux-tu faire ?</h1>
+<textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="q-limite-t" aria-describedby="q-limite-c" spellcheck="false">Bonjour, je voudrais échanger 50 USDC contre de l’AVAX sur ce site, comme je le fais chaque mois depuis le printemps, sans rien donner d’autre à personne, et surtout sans que quelqu’un puisse se servir plus tard…</textarea>
+<div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">50 USDC</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v">contre AVAX</span></span></div>
+<div class="hu-under hu-m" style="--hu-i:1"><p class="hu-count" id="q-limite-c" role="status">Il reste 40 signes.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff">Vérifier</button></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-r-combien" style="--w:424"><figcaption>Relance « Combien ? ». Une seule relance par demande ; elle ne demande que ce qui manque.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -556,10 +600,10 @@ body { margin: 0; background: var(--hu-page); }
 <div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
 </div></div>
 </div></figure>
-<figure class="pl-view" id="v-r-jeton" style="--w:424"><figcaption>Relance « Quel jeton ? ».</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<figure class="pl-view" id="v-r-jeton" style="--w:424"><figcaption>Relance « Quelle monnaie ? ».</figcaption><div class="pl-frame" style="--w:424;--h:501">
 <div class="hu hu-k hu-win"><div class="hu-stage">
 <p class="hu-head hu-head--wrap hu-m">Tu as écrit <b>« échanger 50 contre AVAX »</b></p>
-<h1 class="hu-title hu-m" id="r-jeton-t">Quel jeton ?</h1>
+<h1 class="hu-title hu-m" id="r-jeton-t">Quelle monnaie ?</h1>
 <textarea class="hu-field hu-field--short hu-m" style="--hu-i:1" aria-labelledby="r-jeton-t" placeholder="USDC" spellcheck="false" maxlength="120"></textarea>
 <div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-missing"><span class="hu-slot-q">50 de quoi</span><span class="hu-slot-v"></span></span><span class="hu-slot is-filled"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v">contre AVAX</span></span></div>
 <div class="hu-dock"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button></div>
@@ -581,7 +625,7 @@ body { margin: 0; background: var(--hu-page); }
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
 </div>
-<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Ne rien envoyer</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-c-limite" style="--w:424"><figcaption>Ça correspond, et j’ai limité le droit que le site demandait.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -590,9 +634,9 @@ body { margin: 0; background: var(--hu-page); }
 <div class="hu-mid">
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
-<p class="hu-fix hu-m" style="--hu-i:2"><b>Droit limité à 50 USDC</b><span>Le site demandait tout ton USDC.</span></p>
+<p class="hu-fix hu-m" style="--hu-i:2"><b>J’ai limité l’autorisation à 50 USDC.</b><span>Le site demandait tout ton USDC.</span></p>
 </div>
-<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Ne rien envoyer</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-c-etape1" style="--w:424"><figcaption>Une opération en deux demandes : la première. La fenêtre reste ouverte pour la seconde.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -603,7 +647,7 @@ body { margin: 0; background: var(--hu-page); }
 <p class="hu-line hu-m" style="--hu-i:1">Cette demande laisse le site prendre 50 USDC, pas plus.</p>
 <p class="hu-next hu-m" style="--hu-i:2">Ensuite, l’échange contre AVAX.</p>
 </div>
-<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Ne rien envoyer</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-c-etape2" style="--w:424"><figcaption>La seconde demande, dans la même fenêtre. Je ne repose pas la question.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -613,10 +657,10 @@ body { margin: 0; background: var(--hu-page); }
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
 </div>
-<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+<div class="hu-dock"><button type="button" class="hu-word">Ne rien envoyer</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
 </div></div>
 </div></figure>
-<figure class="pl-view" id="v-n-montant" style="--w:424"><figcaption>Le montant. Le gant ne paraît qu’ici. Annuler est le geste conseillé, Continuer attend.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<figure class="pl-view" id="v-n-montant" style="--w:424"><figcaption>Le montant. Le gant ne paraît qu’ici. « Ne rien envoyer » est le geste conseillé, l’autre attend.</figcaption><div class="pl-frame" style="--w:424;--h:501">
 <div class="hu hu-k hu-win" data-outcome="mismatch"><div class="hu-stage">
 <div class="hu-mid">
 <svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
@@ -624,7 +668,7 @@ body { margin: 0; background: var(--hu-page); }
 <p class="hu-line hu-m" style="--hu-i:1">Tu as écrit 50 USDC.</p>
 <p class="hu-line hu-line--strong hu-m" style="--hu-i:1">La demande en prend 5 000.</p>
 </div>
-<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-n-destinataire" style="--w:424"><figcaption>Le destinataire. Les deux adresses, rang par rang : ce qui diffère est en blanc.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -636,7 +680,7 @@ body { margin: 0; background: var(--hu-page); }
 <div class="hu-addr hu-m" style="--hu-i:2"><p class="hu-addr-label">Adresse que tu as écrite</p><p class="hu-addr-grid hu-num" aria-hidden="true"><span><i>1</i><i>2</i><i>a</i><i>b</i></span><span><i>3</i><i>4</i><i>c</i><i>d</i></span><span><i>5</i><i>6</i><i>e</i><i>f</i></span><span><b>7</b><b>8</b><b>9</b><i>0</i></span><span><i>a</i><i>1</i><i>b</i><i>2</i></span><span><i>c</i><i>3</i><i>d</i><i>4</i></span><span><i>e</i><i>5</i><i>f</i><i>6</i></span><span><i>0</i><i>7</i><i>1</i><i>8</i></span><span><i>2</i><i>9</i><b>3</b><b>a</b></span><span><i>8</i><i>9</i><i>e</i><i>f</i></span></p><span class="hu-sr">0x12ab34cd56ef7890a1b2c3d4e5f60718293a89ef</span></div>
 <div class="hu-addr hu-m" style="--hu-i:2"><p class="hu-addr-label">Adresse de cette demande</p><p class="hu-addr-grid hu-num" aria-hidden="true"><span><i>1</i><i>2</i><i>a</i><i>b</i></span><span><i>3</i><i>4</i><i>c</i><i>d</i></span><span><i>5</i><i>6</i><i>e</i><i>f</i></span><span><b>0</b><b>0</b><b>0</b><i>0</i></span><span><i>a</i><i>1</i><i>b</i><i>2</i></span><span><i>c</i><i>3</i><i>d</i><i>4</i></span><span><i>e</i><i>5</i><i>f</i><i>6</i></span><span><i>0</i><i>7</i><i>1</i><i>8</i></span><span><i>2</i><i>9</i><b>b</b><b>b</b></span><span><i>8</i><i>9</i><i>e</i><i>f</i></span></p><span class="hu-sr">0x12ab34cd56ef0000a1b2c3d4e5f6071829bb89ef</span></div>
 </div>
-<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-n-nature" style="--w:424"><figcaption>La nature de l’opération.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -645,31 +689,31 @@ body { margin: 0; background: var(--hu-page); }
 <svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">Tu as écrit un échange.</p>
-<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">Cette demande envoie tes jetons sans rien te rendre.</p>
+<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">Cette demande envoie tes USDC sans rien te rendre.</p>
 </div>
-<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
 </div></div>
 </div></figure>
-<figure class="pl-view" id="v-n-duree" style="--w:424"><figcaption>Un droit sans date de fin.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<figure class="pl-view" id="v-n-duree" style="--w:424"><figcaption>Une autorisation sans date de fin.</figcaption><div class="pl-frame" style="--w:424;--h:501">
 <div class="hu hu-k hu-win" data-outcome="mismatch"><div class="hu-stage">
 <div class="hu-mid">
 <svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">Tu as écrit un échange de 50 USDC.</p>
-<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">Ce droit ne s’arrête pas après ton opération : il n’a pas de date de fin.</p>
+<p class="hu-line hu-line--strong hu-m" style="--hu-i:1">Cette autorisation ne s’arrête pas après ton échange : elle n’a pas de date de fin.</p>
 </div>
-<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
 </div></div>
 </div></figure>
-<figure class="pl-view" id="v-n-pret" style="--w:424"><figcaption>La retenue est finie : le compte s’efface, Continuer devient un geste. Annuler reste le geste conseillé.</figcaption><div class="pl-frame" style="--w:424;--h:501">
-<div class="hu hu-k hu-win hu-is-ready" data-outcome="mismatch"><div class="hu-stage">
+<figure class="pl-view" id="v-n-pret" style="--w:424"><figcaption>La retenue est finie : le compte s’efface, « Envoyer quand même » devient un geste. « Ne rien envoyer » reste le geste conseillé.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win is-ready" data-outcome="mismatch"><div class="hu-stage">
 <div class="hu-mid">
 <svg class="hu-glove" aria-hidden="true"><use href="#hu-glove"/></svg>
 <h1 class="hu-verdict hu-m" tabindex="-1">Ça ne correspond pas à ce que tu as écrit.</h1>
 <p class="hu-line hu-m" style="--hu-i:1">Tu as écrit 50 USDC.</p>
 <p class="hu-line hu-line--strong hu-m" style="--hu-i:1">La demande en prend 5 000.</p>
 </div>
-<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word">Continuer</button><span class="hu-wait-count" aria-hidden="true">dans <span class="hu-num">0</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word">Envoyer quand même</button><span class="hu-wait-count" aria-hidden="true">dans <span class="hu-num">0</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-u-moteur" style="--w:424"><figcaption>La vérification n’a pas répondu. Jamais de phrase rassurante ici, et un geste pour réessayer.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -677,10 +721,10 @@ body { margin: 0; background: var(--hu-page); }
 <p class="hu-head"><b>app.neve.exchange</b></p>
 <div class="hu-mid">
 <h1 class="hu-verdict hu-m" tabindex="-1">Je n’ai pas pu vérifier cette demande.</h1>
-<p class="hu-line hu-m" style="--hu-i:1">La vérification n’a pas répondu.</p>
+<p class="hu-line hu-m" style="--hu-i:1">La vérification n’a pas répondu. Le plus prudent est de ne rien envoyer.</p>
 <p class="hu-line hu-m" style="--hu-i:1"><button type="button" class="hu-word">Réessayer</button></p>
 </div>
-<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">8</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">8</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
 </div></div>
 </div></figure>
 <figure class="pl-view" id="v-u-phrase" style="--w:424"><figcaption>Je n’ai pas compris la phrase, même après la relance.</figcaption><div class="pl-frame" style="--w:424;--h:501">
@@ -688,10 +732,36 @@ body { margin: 0; background: var(--hu-page); }
 <p class="hu-head"><b>app.neve.exchange</b></p>
 <div class="hu-mid">
 <h1 class="hu-verdict hu-m" tabindex="-1">Je n’ai pas pu vérifier cette demande.</h1>
-<p class="hu-line hu-m" style="--hu-i:1">Je n’ai pas compris ta phrase.</p>
+<p class="hu-line hu-m" style="--hu-i:1">Je n’ai pas compris ta phrase. Le plus prudent est de ne rien envoyer.</p>
 <p class="hu-line hu-m" style="--hu-i:1"><button type="button" class="hu-word">Écrire autrement</button></p>
 </div>
-<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Continuer</button><span class="hu-wait-count">dans <span class="hu-num">8</span> s</span></p><button type="button" class="hu-cuff">Annuler</button></div>
+<div class="hu-dock"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">8</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
+</div></div>
+</div></figure>
+<figure class="pl-view" id="v-fin-expiree" style="--w:424"><figcaption>Une demande retenue expire après trois minutes sans geste. La fenêtre reste, pour que la personne le lise à son retour.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win"><div class="hu-stage">
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Demande expirée. Rien n’a été envoyé.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Elle a attendu trois minutes sans réponse.</p>
+<p class="hu-next hu-m" style="--hu-i:1">Tu peux la relancer depuis app.neve.exchange.</p>
+</div>
+<div class="hu-dock hu-dock--end"><button type="button" class="hu-cuff">Fermer</button></div>
+</div></div>
+</div></figure>
+<figure class="pl-view" id="v-fin-annulee" style="--w:424"><figcaption>Après « Ne rien envoyer » ou Échap : une phrase, 700 ms, puis la fenêtre se ferme seule.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win"><div class="hu-stage">
+<p class="hu-end hu-m" role="status">Demande annulée. Rien n’a été envoyé.</p>
+</div></div>
+</div></figure>
+<figure class="pl-view" id="v-fin-attente" style="--w:424"><figcaption>La première demande est partie, la suite n’est pas encore arrivée. La fenêtre attend, elle ne se ferme pas.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win"><div class="hu-stage">
+<p class="hu-head"><b>app.neve.exchange</b></p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">C’est parti vers ton portefeuille.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">J’attends la suite de ton échange.</p>
+<p class="hu-next hu-m" style="--hu-i:1">Rien d’autre ne partira sans vérification.</p>
+</div>
+<div class="hu-dock hu-dock--end"><button type="button" class="hu-word">Fermer</button></div>
 </div></div>
 </div></figure>
 </div>
@@ -700,7 +770,7 @@ body { margin: 0; background: var(--hu-page); }
 <figure class="pl-view" id="v-repli" style="--w:960"><figcaption>La même question, posée sur la page du site. Le minimum, rien d’autre.</figcaption><div class="pl-frame" style="--w:960;--h:600">
 <div class="pl-site"><div class="pl-site-in" aria-hidden="true"><p>app.neve.exchange</p><p>La page du site, derrière. Elle ne reçoit plus les clics tant que la question est là.</p></div>
 <div class="hu-over"><div class="hu-over-box"><div class="hu hu-k hu-win" role="dialog" aria-modal="true" aria-labelledby="repli-t"><div class="hu-stage">
-<p class="hu-head hu-m"><b>app.neve.exchange</b> demande une signature.</p>
+<p class="hu-head hu-m"><b>app.neve.exchange</b> veut utiliser ton portefeuille.</p>
 <h1 class="hu-title hu-m" id="repli-t">Que veux-tu faire ?</h1>
 <textarea class="hu-field hu-m" style="--hu-i:1" aria-labelledby="repli-t" placeholder="échanger 50 USDC contre AVAX" spellcheck="false" maxlength="500"></textarea>
 <div class="hu-got hu-m" style="--hu-i:1" role="status"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot"><span class="hu-slot-q">quoi</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">combien</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">à qui</span><span class="hu-slot-v"></span></span></div>
@@ -715,7 +785,7 @@ body { margin: 0; background: var(--hu-page); }
 <div class="hu hu-pop">
 <div class="hu-top"><span class="hu-name">Hold up</span><label class="hu-switch"><input type="checkbox" role="switch" checked aria-label="Vérifier ce site"><span class="hu-switch-on">Actif</span><span class="hu-switch-off">En pause</span></label></div>
 <p class="hu-state">Je vérifie ce site.</p><p>app.neve.exchange</p>
-<p class="hu-last">À 14:32, ça ne correspondait pas. Tu as annulé.</p>
+<p class="hu-last">À 14:32, ça ne correspondait pas. Tu n’as rien envoyé.</p>
 <div class="hu-links"><button type="button" class="hu-word">Journal</button><button type="button" class="hu-word">Réglages</button></div>
 </div>
 </div></figure>
@@ -729,7 +799,7 @@ body { margin: 0; background: var(--hu-page); }
 <figure class="pl-view" id="v-pop-rien" style="--w:320"><figcaption>Popup, sur une page où il n’y a rien à vérifier.</figcaption><div class="pl-frame pl-frame--auto" style="--w:320">
 <div class="hu hu-pop">
 <div class="hu-top"><span class="hu-name">Hold up</span><label class="hu-switch"><input type="checkbox" role="switch" disabled aria-label="Vérifier ce site"><span class="hu-switch-off">Rien à vérifier ici</span></label></div>
-<p class="hu-state">Je ne peux pas agir sur cette page.</p><p>C’est une page du navigateur. Aucun site ne peut y demander de signature.</p>
+<p class="hu-state">Je ne peux pas agir sur cette page.</p><p>C’est une page du navigateur. Aucun site ne peut s’y servir de ton portefeuille.</p>
 <div class="hu-links"><button type="button" class="hu-word">Journal</button><button type="button" class="hu-word">Réglages</button></div>
 </div>
 </div></figure>
@@ -739,39 +809,39 @@ body { margin: 0; background: var(--hu-page); }
 <div class="hu-scroll" tabindex="0" role="region" aria-label="Journal">
 <h2 class="hu-h">Ce que tu as laissé ouvert</h2>
 <ul>
-<li class="hu-right"><p>app.neve.exchange peut dépenser 50 USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
-<li class="hu-right"><p>old-farm.example peut dépenser tout ton USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+<li class="hu-right"><p>app.neve.exchange peut dépenser 50 USDC.</p><button type="button" class="hu-word">Retirer l’autorisation</button></li>
+<li class="hu-right"><p>old-farm.example peut dépenser tout ton USDC.</p><button type="button" class="hu-word">Retirer l’autorisation</button></li>
 </ul>
-<p class="hu-note">C’est ton portefeuille qui signe le retrait.</p>
+<p class="hu-note">Ton portefeuille te demandera de confirmer.</p>
 <h2 class="hu-h">Aujourd’hui</h2>
 <ol>
-<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as annulé.</span></p></li>
+<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu n’as rien envoyé.</span></p></li>
 <li class="hu-entry"><time>14:30</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
-<li class="hu-entry"><time>11:07</time><p><span class="hu-entry-site">glacier-rewards.example</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as annulé.</span></p></li>
+<li class="hu-entry"><time>11:07</time><p><span class="hu-entry-site">glacier-rewards.example</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu n’as rien envoyé.</span></p></li>
 </ol>
 <h2 class="hu-h">Hier</h2>
 <ol>
-<li class="hu-entry"><time>18:44</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Je n’ai pas pu vérifier. Tu as annulé.</span></p></li>
+<li class="hu-entry"><time>18:44</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Je n’ai pas pu vérifier. Tu n’as rien envoyé.</span></p></li>
 <li class="hu-entry"><time>09:12</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
 </ol>
 </div>
 <div class="hu-foot"><button type="button" class="hu-word">Effacer le journal</button><button type="button" class="hu-word">Réglages</button></div>
 </div>
 </div></figure>
-<figure class="pl-view" id="v-pan-ouvert" style="--w:360"><figcaption>« Ce que tu as laissé ouvert » pendant un retrait : un droit en cours, un droit retiré. Effacer demande un second clic.</figcaption><div class="pl-frame" style="--w:360;--h:680">
+<figure class="pl-view" id="v-pan-ouvert" style="--w:360"><figcaption>« Ce que tu as laissé ouvert » pendant un retrait : une autorisation en cours de retrait, une autre retirée. Effacer demande un second clic.</figcaption><div class="pl-frame" style="--w:360;--h:680">
 <div class="hu hu-panel">
 <div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
 <div class="hu-scroll" tabindex="0" role="region" aria-label="Journal">
 <h2 class="hu-h">Ce que tu as laissé ouvert</h2>
 <ul>
 <li class="hu-right is-busy"><p>app.neve.exchange peut dépenser 50 USDC.</p><span class="hu-right-note" role="status">En cours…</span></li>
-<li class="hu-right is-done"><p class="hu-2">old-farm.example ne peut plus rien dépenser.</p><span class="hu-right-note" role="status">Retiré</span></li>
-<li class="hu-right"><p>pool.glacier.example peut dépenser 1 200 USDC.</p><button type="button" class="hu-word">Retirer ce droit</button></li>
+<li class="hu-right is-done"><p class="hu-2">old-farm.example ne peut plus rien dépenser.</p><span class="hu-right-note" role="status">Retirée</span></li>
+<li class="hu-right"><p>pool.glacier.example peut dépenser 1 200 USDC.</p><button type="button" class="hu-word">Retirer l’autorisation</button></li>
 </ul>
-<p class="hu-note">C’est ton portefeuille qui signe le retrait.</p>
+<p class="hu-note">Ton portefeuille te demandera de confirmer.</p>
 <h2 class="hu-h">Aujourd’hui</h2>
 <ol>
-<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as continué.</span></p></li>
+<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as envoyé quand même.</span></p></li>
 <li class="hu-entry"><time>14:30</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
 </ol>
 </div>
@@ -783,7 +853,7 @@ body { margin: 0; background: var(--hu-page); }
 <div class="hu-top"><span class="hu-name">Hold up</span><span class="hu-2">Actif</span></div>
 <div class="hu-scroll">
 <p class="hu-state">Rien à raconter pour l’instant.</p>
-<p class="hu-empty">Dès qu’un site te demande une signature, je te demande ce que tu veux faire. Ce que je réponds s’écrit ici.</p>
+<p class="hu-empty">Dès qu’un site veut utiliser ton portefeuille, je te demande ce que tu veux faire. Ce que je réponds s’écrit ici.</p>
 <div class="hu-links"><button type="button" class="hu-word">Essayer sur une page de test</button></div>
 </div>
 <div class="hu-foot"><button type="button" class="hu-word">Réglages</button></div>
@@ -797,11 +867,11 @@ body { margin: 0; background: var(--hu-page); }
 <h1 class="hu-page-title">Réglages</h1>
 <p role="status">Enregistré.</p>
 <h2 class="hu-h">La question</h2>
-<div class="hu-set"><label for="o-ask">Je te demande ce que tu veux faire</label><span class="hu-set-ctl"><span class="hu-pick"><select class="hu-select" id="o-ask"><option>avant chaque signature</option><option>quand la demande donne un droit ou sort de l’argent</option><option>jamais</option></select><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></span></span></div>
+<div class="hu-set"><label for="o-ask">Je te demande ce que tu veux faire</label><span class="hu-set-ctl"><span class="hu-pick"><select class="hu-select" id="o-ask"><option>à chaque demande</option><option>quand un site veut une autorisation ou de l’argent</option><option>jamais</option></select><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></span></span></div>
 <div class="hu-set"><span id="o-win-l">Je pose la question dans une fenêtre à part<span class="hu-set-msg hu-2">Sinon elle s’affiche dans la page du site, qui peut la masquer.</span></span><label class="hu-switch hu-set-ctl"><input type="checkbox" role="switch" checked aria-labelledby="o-win-l"><span class="hu-switch-on">Oui</span><span class="hu-switch-off">Non</span></label></div>
-<div class="hu-set"><span id="o-lim-l">Je limite le droit au montant que tu as écrit</span><label class="hu-switch hu-set-ctl"><input type="checkbox" role="switch" checked aria-labelledby="o-lim-l"><span class="hu-switch-on">Oui</span><span class="hu-switch-off">Non</span></label></div>
+<div class="hu-set"><span id="o-lim-l">Je limite l’autorisation au montant que tu as écrit</span><label class="hu-switch hu-set-ctl"><input type="checkbox" role="switch" checked aria-labelledby="o-lim-l"><span class="hu-switch-on">Oui</span><span class="hu-switch-off">Non</span></label></div>
 <h2 class="hu-h">L’attente</h2>
-<div class="hu-set"><label for="o-wait">Quand ça ne correspond pas, tu attends avant de pouvoir continuer</label><span class="hu-set-ctl"><input class="hu-input" id="o-wait" type="number" min="5" max="600" value="30" inputmode="numeric"> secondes</span></div>
+<div class="hu-set"><label for="o-wait">Quand ça ne correspond pas, tu attends avant de pouvoir envoyer quand même</label><span class="hu-set-ctl"><input class="hu-input" id="o-wait" type="number" min="5" max="600" value="30" inputmode="numeric"> secondes</span></div>
 <div class="hu-set"><label for="o-hold">Quand quelqu’un te presse sur la page, je retiens la demande</label><span class="hu-set-ctl"><input class="hu-input" id="o-hold" type="number" min="1" max="60" value="10" inputmode="numeric"> minutes</span></div>
 <h2 class="hu-h">Le journal</h2>
 <p class="hu-2">Il reste sur cet ordinateur. Il ne contient ni ta phrase ni d’adresse.</p>
@@ -813,9 +883,133 @@ body { margin: 0; background: var(--hu-page); }
 <svg class="hu-mark" role="img" aria-label="Hold up"><use href="#hu-icon"/></svg>
 <h1 class="hu-welcome-title">Écris ce que tu veux faire. Je vérifie que le site demande la même chose.</h1>
 <p class="hu-welcome-text">Hold up est en place. Si ça ne colle pas, je lève la main.</p>
-<p class="hu-welcome-text">Je ne signe rien : ton portefeuille te demande toujours de confirmer.</p>
+<p class="hu-welcome-text">Je ne valide rien à ta place : ton portefeuille te demande toujours de confirmer.</p>
 <div class="hu-go"><button type="button" class="hu-cuff">Essayer sur une page de test</button><button type="button" class="hu-word">Réglages</button></div>
 </div></div></div>
 </div></figure>
+</div>
+<h2 class="pl-h">Les pièces, dans tous leurs états</h2>
+
+<p class="pl-intro">Sur noir : ce qui vit dans la fenêtre de vérification. Sur la page : le popup, le panneau, les réglages. Les états de survol, d’appui et de focus sont figés par une classe pour la revue.</p>
+<div class="pl-kit">
+
+<div class="pl-cell"><p>Là où tu écris : vide, survol, focus clavier, remplie</p><div class="hu hu-k pl-on-k">
+<textarea class="hu-field" style="margin-top:0" aria-label="Vide" placeholder="échanger 50 USDC contre AVAX"></textarea>
+<textarea class="hu-field hu-field--short is-hover" style="margin-top:12px" aria-label="Survol" placeholder="échanger 50 USDC contre AVAX"></textarea>
+<textarea class="hu-field hu-field--short is-focus" style="margin-top:12px" aria-label="Focus">échanger 50 USDC</textarea>
+</div></div>
+
+<div class="pl-cell"><p>Là où tu écris : erreur, en cours (lecture seule), désactivée, près de la limite, au-delà</p><div class="hu hu-k pl-on-k">
+<textarea class="hu-field hu-field--short" style="margin-top:0" aria-label="Erreur" aria-invalid="true" placeholder="échanger 50 USDC contre AVAX"></textarea>
+<p class="hu-error" style="margin-top:8px" role="alert">Écris d’abord ce que tu veux faire.</p>
+<textarea class="hu-field hu-field--short" style="margin-top:12px" aria-label="En cours" readonly>échanger 50 USDC contre AVAX</textarea>
+<p class="hu-busy" style="opacity:1;margin-top:8px">Je compare ta phrase à la demande.</p>
+<textarea class="hu-field hu-field--short" style="margin-top:12px" aria-label="Désactivée" disabled>échanger 50 USDC contre AVAX</textarea>
+<p class="hu-count" style="margin-top:12px">Il reste 40 signes.</p>
+<p class="hu-error" style="margin-top:4px">Ta phrase fait 512 signes. Le maximum est 500 : raccourcis-la, je ne vérifie pas une phrase coupée.</p>
+</div></div>
+
+<div class="pl-cell"><p>« Ce que j’ai compris » : rien, en partie, tout</p><div class="hu hu-k pl-on-k">
+<div class="hu-got" style="margin-top:0"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot"><span class="hu-slot-q">quoi</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">combien</span><span class="hu-slot-v"></span></span><span class="hu-slot"><span class="hu-slot-q">à qui</span><span class="hu-slot-v"></span></span></div>
+<div class="hu-got"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">50 USDC</span></span><span class="hu-slot"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v"></span></span></div>
+<div class="hu-got"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">50 USDC</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v">contre AVAX</span></span></div>
+</div></div>
+
+<div class="pl-cell"><p>« Ce que j’ai compris » : un envoi, une place inutile absente, le compte utilisé, ce qui manque après vérification</p><div class="hu hu-k pl-on-k">
+<div class="hu-got" style="margin-top:0"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">envoyer</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">20 USDC</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">à qui</span><span class="hu-slot-v">à 0x12ab…89ef</span></span></div>
+<div class="hu-got"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">te connecter</span></span><span class="hu-slot is-off"><span class="hu-slot-q">combien</span><span class="hu-slot-v"></span></span><span class="hu-slot is-off"><span class="hu-slot-q">à qui</span><span class="hu-slot-v"></span></span></div>
+<div class="hu-got"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">combien</span><span class="hu-slot-v">50 USDC</span></span><span class="hu-slot is-filled"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v">contre AVAX</span></span><span class="hu-got-from">depuis ton compte 0x71c4…9a3f</span></div>
+<div class="hu-got"><span class="hu-got-say">Ce que j’ai compris</span><span class="hu-slot is-filled"><span class="hu-slot-q">quoi</span><span class="hu-slot-v">échanger</span></span><span class="hu-slot is-missing"><span class="hu-slot-q">combien</span><span class="hu-slot-v"></span></span><span class="hu-slot is-filled"><span class="hu-slot-q">contre quoi</span><span class="hu-slot-v">contre AVAX</span></span></div>
+</div></div>
+
+<div class="pl-cell"><p>La ligne des suppositions, et les quatre relances</p><div class="hu hu-k pl-on-k">
+<p class="hu-assume">Le reste, je le suppose : rien de plus, rien de durable, tout revient sur ton compte.</p>
+<p class="hu-title" style="margin-top:20px">Combien ?</p>
+<p class="hu-title" style="margin-top:4px">À quelle adresse ?</p>
+<p class="hu-title" style="margin-top:4px">Quelle monnaie ?</p>
+<p class="hu-title" style="margin-top:4px">Contre quoi ?</p>
+</div></div>
+
+<div class="pl-cell"><p>Le bouton plein : repos, survol, appui, focus clavier, pas encore possible, en cours</p><div class="hu hu-k pl-on-k">
+<div class="pl-row"><button type="button" class="hu-cuff">Vérifier</button><button type="button" class="hu-cuff is-hover">Vérifier</button></div>
+<div class="pl-row"><button type="button" class="hu-cuff is-press is-hover">Vérifier</button><button type="button" class="hu-cuff is-focus">Vérifier</button></div>
+<div class="pl-row"><button type="button" class="hu-cuff" aria-disabled="true">Vérifier</button><button type="button" class="hu-cuff" aria-disabled="true">Je compare…</button></div>
+</div></div>
+
+<div class="pl-cell"><p>Le mot souligné : repos, survol, appui, focus clavier, pas encore possible</p><div class="hu hu-k pl-on-k">
+<div class="pl-row"><button type="button" class="hu-word">Annuler</button><button type="button" class="hu-word is-hover">Annuler</button><button type="button" class="hu-word is-press">Annuler</button><button type="button" class="hu-word is-focus">Annuler</button></div>
+<div class="pl-row"><span class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></span></div>
+</div></div>
+
+<div class="pl-cell"><p>Les trois réponses. Leurs mots ne changent jamais.</p><div class="hu hu-k pl-on-k">
+<p class="hu-verdict">Ça correspond à ce que tu as écrit.</p>
+<svg class="hu-glove" style="margin-top:24px" aria-hidden="true"><use href="#hu-glove"/></svg>
+<p class="hu-verdict">Ça ne correspond pas à ce que tu as écrit.</p>
+<p class="hu-verdict" style="margin-top:24px">Je n’ai pas pu vérifier cette demande.</p>
+</div></div>
+
+<div class="pl-cell"><p>La ligne d’explication : ce que tu as écrit, puis ce que fait la demande</p><div class="hu hu-k pl-on-k">
+<p class="hu-line" style="margin-top:0">Tu as écrit 50 USDC.</p>
+<p class="hu-line hu-line--strong">La demande en prend 5 000.</p>
+<p class="hu-line" style="margin-top:20px">La demande échange 50 USDC contre AVAX.</p>
+<p class="hu-fix"><b>J’ai limité l’autorisation à 50 USDC.</b><span>Le site demandait tout ton USDC.</span></p>
+</div></div>
+
+<div class="pl-cell"><p>La retenue : le compte tourne, puis c’est possible. Chiffres à chasse fixe.</p><div class="hu hu-k pl-on-k">
+<div class="hu-dock" style="margin-top:0;padding-top:0"><p class="hu-wait"><button type="button" class="hu-word" aria-disabled="true">Envoyer quand même</button><span class="hu-wait-count">dans <span class="hu-num">24</span> s</span></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
+<div class="hu-dock is-ready" style="margin-top:16px;padding-top:0"><p class="hu-wait"><button type="button" class="hu-word">Envoyer quand même</button></p><button type="button" class="hu-cuff">Ne rien envoyer</button></div>
+</div></div>
+
+<div class="pl-cell"><p>Une opération en deux demandes, dans la même fenêtre</p><div class="hu hu-k pl-on-k">
+<p class="hu-head"><b>app.neve.exchange</b>, demande 1 sur 2</p>
+<p class="hu-next">Ensuite, l’échange contre AVAX.</p>
+<p class="hu-head" style="margin-top:20px"><b>app.neve.exchange</b>, demande 2 sur 2</p>
+</div></div>
+
+<div class="pl-cell"><p>Fin d’une demande : annulée, expirée</p><div class="hu hu-k pl-on-k">
+<p class="hu-end">Demande annulée. Rien n’a été envoyé.</p>
+<p class="hu-verdict" style="margin-top:24px">Demande expirée. Rien n’a été envoyé.</p>
+</div></div>
+
+<div class="pl-cell"><p>Interrupteur : actif, en pause, survol, focus clavier, indisponible</p><div class="hu pl-on-p">
+<div class="pl-row"><label class="hu-switch"><input type="checkbox" role="switch" checked aria-label="Exemple actif"><span class="hu-switch-on">Actif</span><span class="hu-switch-off">En pause</span></label><label class="hu-switch"><input type="checkbox" role="switch" aria-label="Exemple en pause"><span class="hu-switch-on">Actif</span><span class="hu-switch-off">En pause</span></label><label class="hu-switch is-hover"><input type="checkbox" role="switch" checked aria-label="Exemple survolé"><span class="hu-switch-on">Actif</span><span class="hu-switch-off">En pause</span></label></div>
+<div class="pl-row"><label class="hu-switch"><input type="checkbox" role="switch" checked class="is-focus" aria-label="Exemple au focus"><span class="hu-switch-on">Actif</span><span class="hu-switch-off">En pause</span></label><label class="hu-switch"><input type="checkbox" role="switch" disabled aria-label="Exemple indisponible"><span class="hu-switch-off">Rien à vérifier ici</span></label></div>
+</div></div>
+
+<div class="pl-cell"><p>Champs de réglage : repos, survol, focus clavier, erreur, désactivé ; liste</p><div class="hu pl-on-p">
+<div class="pl-row"><input class="hu-input" type="number" value="30" aria-label="Repos"><input class="hu-input is-hover" type="number" value="30" aria-label="Survol"><input class="hu-input is-focus" type="number" value="30" aria-label="Focus"><input class="hu-input" type="number" value="30" disabled aria-label="Désactivé"></div>
+<div class="pl-row"><input class="hu-input" type="number" value="2" aria-invalid="true" aria-describedby="k-err" aria-label="Erreur"><span class="hu-error" id="k-err">Entre 5 et 600 secondes. J’ai gardé 30.</span></div>
+<div class="pl-row"><span class="hu-pick"><select class="hu-select" aria-label="Liste"><option>à chaque demande</option></select><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></span><span class="hu-saved" role="status">Enregistré.</span></div>
+</div></div>
+
+<div class="pl-cell"><p>Une ligne du journal : arrêtée, passée, non vérifiée, envoyée malgré tout</p><div class="hu pl-on-p">
+<ol>
+<li class="hu-entry"><time>14:32</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu n’as rien envoyé.</span></p></li>
+<li class="hu-entry"><time>14:30</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Ça correspondait.</span></p></li>
+<li class="hu-entry"><time>11:07</time><p><span class="hu-entry-site">app.neve.exchange</span><span class="hu-entry-what">Je n’ai pas pu vérifier. Tu n’as rien envoyé.</span></p></li>
+<li class="hu-entry"><time>09:12</time><p><span class="hu-entry-site">un-nom-de-site-vraiment-tres-long.glacier-rewards.example</span><span class="hu-entry-what"><strong>Ça ne correspondait pas.</strong> Tu as envoyé quand même.</span></p></li>
+</ol>
+</div></div>
+
+<div class="pl-cell"><p>Une autorisation laissée ouverte : à retirer, en cours, retirée</p><div class="hu pl-on-p">
+<ul>
+<li class="hu-right"><p>app.neve.exchange peut dépenser 50 USDC.</p><button type="button" class="hu-word">Retirer l’autorisation</button></li>
+<li class="hu-right is-busy"><p>old-farm.example peut dépenser tout ton USDC.</p><span class="hu-right-note" role="status">En cours…</span></li>
+<li class="hu-right is-done"><p class="hu-2">pool.glacier.example ne peut plus rien dépenser.</p><span class="hu-right-note" role="status">Retirée</span></li>
+</ul>
+</div></div>
+
+<div class="pl-cell"><p>État vide, et erreur d’une page</p><div class="hu pl-on-p">
+<p class="hu-state" style="margin-top:0">Rien à raconter pour l’instant.</p>
+<p class="hu-empty">Dès qu’un site veut utiliser ton portefeuille, je te demande ce que tu veux faire. Ce que je réponds s’écrit ici.</p>
+<p class="hu-error" style="margin-top:20px" role="alert">Sur app.neve.exchange, je n’ai pas pu me placer devant le portefeuille. Des demandes peuvent passer sans vérification.</p>
+</div></div>
+
+<div class="pl-cell"><p>Icône de la barre d’outils : actif, en pause, arrêté. La pastille est dessinée par le navigateur.</p><div class="hu pl-on-p">
+<div class="pl-row"><span class="hu-toolbar"><span class="hu-tb"><svg aria-hidden="true"><use href="#hu-icon"/></svg></span></span><span>Actif : l’icône seule</span></div>
+<div class="pl-row"><span class="hu-toolbar"><span class="hu-tb"><svg aria-hidden="true"><use href="#hu-icon"/></svg><span class="hu-badge">II</span></span></span><span>En pause sur ce site</span></div>
+<div class="pl-row"><span class="hu-toolbar"><span class="hu-tb is-off"><svg aria-hidden="true"><use href="#hu-icon"/></svg><span class="hu-badge">×</span></span></span><span>Arrêté, ou page où je ne peux pas agir</span></div>
+</div></div>
+
 </div>
 </div>
