@@ -2,7 +2,7 @@
  "siteId": "self-csp",
  "url": "http://127.0.0.1:8777/csp",
  "arm": "test",
- "started": "2026-10-11T00:08:30.052Z",
+ "started": "2026-10-11T01:13:49.792Z",
  "events": [
   {
    "t": "frame",
@@ -58,7 +58,7 @@
  ],
  "docs": [
   {
-   "frameId": "4DBBBA37A734D9066CD50DBDF350921A",
+   "frameId": "710E471D8271813353846F45CB2A4052",
    "status": 200,
    "url": "http://127.0.0.1:8777/csp",
    "mime": "text/html",
@@ -73,7 +73,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "4DBBBA37A734D9066CD50DBDF350921A",
+ "mainFrameId": "710E471D8271813353846F45CB2A4052",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -108,6 +108,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -154,12 +156,15 @@
   "calls": [
    "eth_requestAccounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 1,
   "wreads": {
    "request": 1
   }
  },
+ "evN": 5,
  "csp": {
   "inlineExecuted": false,
   "violations": [
@@ -183,5 +188,5 @@
   "overwritten": false
  },
  "finalUrl": "http://127.0.0.1:8777/csp",
- "ms": 7844
+ "ms": 7482
 }

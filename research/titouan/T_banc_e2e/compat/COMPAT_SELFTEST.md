@@ -1,6 +1,6 @@
 # Auto-test du harnais (pages locales a verite terrain connue)
 
-Genere le 2026-10-11T00:12:56.142Z par `report.mjs` a partir de `results-selftest/`. Donnees brutes: un JSON par site et par tour.
+Genere le 2026-10-11T01:18:04.710Z par `report.mjs` a partir de `results-selftest/`. Donnees brutes: un JSON par site et par tour.
 
 ## Methode (resume)
 
@@ -21,8 +21,8 @@ Genere le 2026-10-11T00:12:56.142Z par `report.mjs` a partir de `results-selftes
 | SITE INACCESSIBLE | 0 |
 | **Taux de casse** (CASSE / sites accessibles) | 1/7 = 14.3 % [IC95 Wilson 2.6 % ; 51.3 %] |
 | Taux de casse ou difference | 1/7 = 14.3 % [IC95 Wilson 2.6 % ; 51.3 %] |
-| Sites qui detectent un portefeuille (bras controle) | 7/7 = 100.0 % [IC95 Wilson 64.6 % ; 100.0 %] |
-| **Taux de casse parmi les sites sensibles au portefeuille** | 1/7 = 14.3 % [IC95 Wilson 2.6 % ; 51.3 %] |
+| Sites qui detectent un portefeuille (bras controle) | 5/7 = 71.4 % [IC95 Wilson 35.9 % ; 91.8 %] |
+| **Taux de casse parmi les sites sensibles au portefeuille** | 1/5 = 20.0 % [IC95 Wilson 3.6 % ; 62.4 %] |
 | Bruit A/A: sites avec >=1 erreur console de A2 absente de A1 | 0/7 = 0.0 % [IC95 Wilson 0.0 % ; 35.4 %] |
 | Bras test: sites avec >=1 erreur console absente de A1 et A2 | 0/7 = 0.0 % [IC95 Wilson 0.0 % ; 35.4 %] |
 
@@ -37,9 +37,9 @@ Colonnes: Charge / Detecte / Req = eth_requestAccounts / UI = etat connecte affi
 | selftest ok | Selftest | **PASS** | oui/oui/oui | oui/oui/oui | oui/oui/oui | oui/oui/oui | Connect Wallet |  |
 | selftest csp | Selftest | **PASS** | oui/oui/oui | oui/oui/oui | oui/oui/oui | oui/oui/oui | Connect Wallet | CSP (injection par <script> en ligne bloquee) |
 | selftest antiproxy | Selftest | **CASSE** | oui/oui/oui | oui/oui/oui | oui/non/oui | oui/non/oui | Connect Wallet | perte: appel eth_requestAccounts ; perte: UI affiche l'etat connecte ; detection de proxy (hypothese: perte d'eth_requestAccounts sans erreur) |
-| selftest wconly | Selftest | **PASS** | oui/oui/oui | oui/oui/oui | non/non/non | non/non/non | Connect Wallet | WalletConnect propose, pas d'appel eth_requestAccounts |
+| selftest wconly | Selftest | **PASS** | oui/oui/oui | non/non/non | non/non/non | non/non/non | Connect Wallet | WalletConnect uniquement |
 | selftest eip6963 | Selftest | **PASS** | oui/oui/oui | oui/oui/oui | oui/oui/oui | oui/oui/oui | Connect Wallet |  |
-| selftest static | Selftest | **PASS** | oui/oui/oui | oui/oui/oui | non/non/non | non/non/non | - |  |
+| selftest static | Selftest | **PASS** | oui/oui/oui | non/non/non | non/non/non | non/non/non | - | aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic; bouton de connexion non trouve) |
 | selftest framehost | Selftest | **PASS** | oui/oui/oui | oui/oui/oui | non/non/non | non/non/non | - | iframes (le fournisseur est lu dans un sous-cadre) |
 
 ## Classification des causes
@@ -48,7 +48,8 @@ Colonnes: Charge / Detecte / Req = eth_requestAccounts / UI = etat connecte affi
 |---|---|---|
 | CSP | 1 | self-csp |
 | detection de proxy | 1 | self-antiproxy |
-| WalletConnect propose, pas d'appel eth_requestAccounts | 1 | self-wconly |
+| WalletConnect uniquement | 1 | self-wconly |
+| aucun support d'injection observe | 1 | self-static |
 | iframes | 1 | self-framehost |
 
 Sites CASSE: self-antiproxy.
@@ -107,6 +108,8 @@ Tour optionnel, execute sur: self-ok, self-csp, self-antiproxy, self-wconly, sel
 
 ## Limites et ce qui n'a pas pu etre teste
 
+- **Le bras test est le Proxy maison de ce harnais (inject.template.js), PAS l'extension Sentinelle reelle** (extension/inject.js). La demande de la coordination etait de la charger via Extensions.loadUnpacked, ce qui exige `--enable-unsafe-extension-debugging` et `--disable-features=DisableLoadExtensionCommandLineSwitch`; le classificateur de securite de l'environnement a refuse cette commande (drapeaux de contournement de securite), et je n'ai pas cherche a la contourner. Les chiffres ci-dessus mesurent donc la classe "enveloppe Proxy transparente", pas Sentinelle. Pour mesurer Sentinelle: autoriser ces drapeaux (profil temporaire jetable) puis lancer un tour `B:ext` (branche a ajouter: lancement avec pipe + loadUnpacked, contexte de navigateur par defaut).
+- Un seul Chrome a la fois pour le tour A2 (consigne de charge); les tours A1 et B ont ete executes avec 3 instances en parallele. Une coupure reseau a interrompu une execution precedente; les resultats ont ete regeneres integralement (96 sites x 3 tours).
 - Fournisseur simule: il valide l'absence de casse due a l'ENVELOPPE, pas le comportement du vrai portefeuille ni de la chaine reelle (aucune lecture RPC reelle: eth_call renvoie 0x).
 - Aucune connexion reelle, aucune signature: les flux apres connexion (approbations, swaps, SIWE) ne sont pas testes.
 - Les boutons de connexion dans des iframes hors-processus ou dans des shadow DOM fermes ne sont pas atteints; les modales exigeant defilement/survol non plus. Un site peut etre "PASS" parce que le bouton n'a pas ete trouve; la colonne Bouton et la cause "bouton non trouve" le signalent.

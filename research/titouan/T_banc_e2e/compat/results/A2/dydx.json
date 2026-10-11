@@ -1,0 +1,570 @@
+{
+ "siteId": "dydx",
+ "url": "https://dydx.trade/",
+ "arm": "control",
+ "started": "2026-10-11T01:01:54.813Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://dydx.trade/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://dydx.trade/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://dydx.trade/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://q2cxvvqjclvs.statuspage.io/embed/frame"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.turnkey.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/clua5njf801bncvpa0woolzq4/embedded-wallets?caid=ce991f9f-cb1e-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "blob:https://dydx.trade/6f29494b-3023-4955-8f34-c76ffec75fec"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://accounts.google.com/gsi/button?type=standard&theme=outline&size=large&text=undefin"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://dydx.trade/trade/BTC-USD"
+  }
+ ],
+ "console": [],
+ "exceptions": [
+  {
+   "top": true,
+   "text": "TypeError: Cannot read properties of undefined (reading 'qs_jO0yjy3DP6hw')"
+  },
+  {
+   "top": true,
+   "text": "TypeError: Cannot read properties of undefined (reading 'qs_jO0yjy3DP6hw')"
+  }
+ ],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://chatterbox-api-mainnet.dydx.trade/connected-addresses' from origin 'https://dydx.trade' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present ",
+   "url": "https://dydx.trade/trade/BTC-USD"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://chatterbox-api-mainnet.dydx.trade/connected-addresses"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "AEE8F64427E6F4DFE0C52857C5B1B3E4",
+   "status": 200,
+   "url": "https://dydx.trade/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "D21E0CFA6F37CB14B460C1AB9485C649",
+   "status": 200,
+   "url": "https://q2cxvvqjclvs.statuspage.io/embed/frame",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "AtlassianEdge"
+  },
+  {
+   "frameId": "494E57DE105507F5E4F51CB551B210C7",
+   "status": 200,
+   "url": "https://auth.turnkey.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "0E902AA128AC087FAABBBB210D2E92A6",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/clua5njf801bncvpa0woolzq4/embedded-wallets?caid=ce991f9f-cb1e-4a07-a335-e061d0fc539d&client_id=client-WY2jY1XhCXytbdxXXTwDuDToiPtTiyKCMGsX7oj25hUcF",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-YjFmYmU5NDctM2IwNi00MTE1LWFhN2ItZmFhYmQ2ZGQ0YmEw'; style-src 'self' 'nonce-YjFmYmU5NDctM2IwNi00MTE1LWFhN2ItZmFhYmQ2ZGQ0YmEw'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "C27BFF32AEAC1AB6CC9B56DD83ED4628",
+   "status": 200,
+   "url": "blob:https://dydx.trade/6f29494b-3023-4955-8f34-c76ffec75fec",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  },
+  {
+   "frameId": "9951DD5082581CF3F60E50E54608A66E",
+   "status": 200,
+   "url": "https://accounts.google.com/gsi/button?type=standard&theme=outline&size=large&text=undefined&shape=undefined&logo_alignment=undefined&width=undefined&locale=undefined&click_listener=undefined&is_fedcm_supported=true&client_id=342435645208-sdakh3u70n9lpoocq1gbikm9h1ndl3pn.apps.googleusercontent.com&iframe_id=gsi_524579_37771&cas=A%2BJ3HFp0RVefn452r2npB9ge1mCwbYxxAT69XFqfmlE",
+   "mime": "text/html",
+   "csp": "require-trusted-types-for 'script';report-uri https://csp.withgoogle.com/csp/identity-sign-in-google-http\nscript-src 'report-sample' 'nonce-p3TUp1U0FPSqwpJTS9i2PQ' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';object-src 'none';base-uri 'self';report-uri https://csp.withgoogle.com/csp/identity-sign-in-google-http",
+   "cspRO": null,
+   "xfo": null,
+   "server": "ESF"
+  }
+ ],
+ "frames": 4,
+ "frameKinds": [
+  "iframe",
+  "iframe",
+  "iframe",
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "AEE8F64427E6F4DFE0C52857C5B1B3E4",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Sign in",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://dydx.trade/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "$82,879 BTC-USD · dYdX",
+  "bodyLen": 819,
+  "nodes": 560,
+  "readyState": "complete",
+  "head": "Mainnet Trade Markets Portfolio MegaVault Referrals DYDX More Sign in BTC-USD $ 82 , 879 Oracle Price $ 82 , 902 24h Change $ 406 0.49% 24h Volume $669,759 24h Trades 488 Open Interest 207.38 BTC 1h Funding 0.00000% Next"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 141,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 2,
+   "text": "Sign in",
+   "tag": "BUTTON",
+   "x": 1324.6484375,
+   "y": 22,
+   "top": 8
+  },
+  "all": [
+   "2:Sign in",
+   "2:Sign in"
+  ]
+ },
+ "clicked1": "Sign in",
+ "clickedTier": 2,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 523.953125,
+   "y": 469.890625,
+   "area": 1930.03125
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Sign message Signatures are used to verify your ownership and to confirm wallet compatibility. New users will receive two signature requests. Generate your dYdX Chain wallet Verify that you own this wallet. Signing is free and will not send a transaction. Send request",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "$82,863 BTC-USD · dYdX",
+  "bodyLen": 1084,
+  "nodes": 607,
+  "readyState": "complete",
+  "head": "Mainnet Trade Markets Portfolio MegaVault Referrals DYDX More BTC-USD $ 82 , 863 Oracle Price $ 82 , 857 24h Change $ 361 0.44% 24h Volume $669,767 24h Trades 489 Open Interest 207.38 BTC 1h Funding 0.00000% Next Funding"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 311,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_accounts",
+   "eth_requestAccounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 49,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://dydx.trade/trade/BTC-USD",
+ "ms": 16133
+}

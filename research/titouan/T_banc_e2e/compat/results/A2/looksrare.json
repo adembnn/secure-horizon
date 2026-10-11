@@ -1,0 +1,337 @@
+{
+ "siteId": "looksrare",
+ "url": "https://looksrare.org/",
+ "arm": "control",
+ "started": "2026-10-11T01:07:50.873Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://looksrare.org/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://looksrare.org/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://looksrare.org/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Refused to apply style from 'https://looksrare.org/_next/static/css/cf0b5dfc46497d8d.css' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabl",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/fonts/ttf/Oxanium-Variable.ttf"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/webpack-32396419f56101c5.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/webpack-32396419f56101c5.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/main-3d5536a9a6bd410b.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/main-3d5536a9a6bd410b.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/framework-4044ab86b589b7c3.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/framework-4044ab86b589b7c3.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/97f5a561-9b8a4f27171a2217.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/97f5a561-9b8a4f27171a2217.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/pages/_app-bd4bc1bfb61504cb.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/pages/_app-bd4bc1bfb61504cb.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enable",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/8321-cd48ee9ccac4c604.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/8321-cd48ee9ccac4c604.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/2131-ffbac552e3fae51b.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/2131-ffbac552e3fae51b.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/4363-16ba1087ee65fd9a.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/4363-16ba1087ee65fd9a.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/1677-0f90c05df2bb47ad.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/1677-0f90c05df2bb47ad.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/6930-1dfa23694e049f4b.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/6930-1dfa23694e049f4b.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/9135-77d820a078265acb.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/9135-77d820a078265acb.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/6804-27d8160d712a902c.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/6804-27d8160d712a902c.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/6151-0c6d2fd2ce9e8105.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/6151-0c6d2fd2ce9e8105.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/chunks/pages/index-45b59e639c9d6110.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/chunks/pages/index-45b59e639c9d6110.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabl",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/qYVquZej3od0C9G3NJ3bR/_ssgManifest.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/qYVquZej3od0C9G3NJ3bR/_ssgManifest.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enable",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/_next/static/qYVquZej3od0C9G3NJ3bR/_buildManifest.js"
+  },
+  {
+   "source": "security",
+   "text": "Refused to execute script from 'https://looksrare.org/_next/static/qYVquZej3od0C9G3NJ3bR/_buildManifest.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enab",
+   "url": "https://looksrare.org/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://looksrare.org/manifest.json"
+  },
+  {
+   "source": "other",
+   "text": "Manifest fetch from https://looksrare.org/manifest.json failed, code 403",
+   "url": "https://looksrare.org/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "3B25882E8A07D6425BB2709B871BCB28",
+   "status": 200,
+   "url": "https://looksrare.org/",
+   "mime": "text/html",
+   "csp": "default-src 'self' https://*.looksrare.org; connect-src 'self' data: https://* wss://* https://*.browser-intake-datadoghq.com https://*.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com https://*.analytics.google.co.uk https://*.analytics.google.ca https://*.analytics.google.com.sg https://*.analytics.google.de https://*.analytics.google.co.in https://*.analytics.google.com.hk https://*.analytics.google.com.au https://*.analytics.google.com.tr https://*.analytics.google.fr https://*.analytics.google.ru https://*.analytics.google.com.ng https://*.analytics.google.cn https://*.analytics.google.nl https://*.analytics.google.co.kr https://*.analytics.google.co.jp https://*.analytics.google.co.id https://*.analytics.google.com.tw https://*.analytics.google.it https://*.analytics.google.com.br https://*.analytics.google.cz https://*.analytics.google.com.ph https://*.analytics.google.com.pk https://*.analytics.google.co.th https://*.analytics.google.com.my https://*.analytics.google.es https://*.analytics.google.ch https://*.analytics.google.com.vn https://*.analytics.google.com.mx https://*.analytics.google.com.ua; script-src 'self' blob: 'unsafe-inline' https://cdn.jsdelivr.net/npm/search-insights@2.0.4 https://js.pusher.com/beams/service-worker.js https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://cdn.jsdelivr.net/npm/@widgetbot/crate@3 https://www.google.com https://www.google.co.uk https://www.google.ca https://www.google.com.sg https://www.google.de https://www.google.co.in https://www.google.com.hk https://www.google.com.au https://www.google.com.tr https://www.google.fr https://www.google.ru https://www.google.com.ng https://www.google.cn https://www.google.nl https://www.google.co.kr https://www.google.co.jp https://www.google.co.id https://www.google.com.tw https://www.google.it https://www.google.com.br https://www.google.cz https://www.google.com.ph https://www.google.com.pk https://www.google.co.th https://www.google.com.my https://www.google.es https://www.google.ch https://www.google.com.vn https://www.google.com.mx https://www.google.com.ua 'wasm-unsafe-eval'; img-src 'self' data: blob: https://explorer-api.walletconnect.com https://looksrare.mo.cloudinary.net https://images.ctfassets.net/q3i0z6mxyv6b/ https://assets.coingecko.com https://cdn.discordapp.com/avatars/ https://cdn.discordapp.com/guilds/ https://media.socket.tech https://*.google-analytics.com https://*.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.uk https://www.google.ca https://www.google.com.sg https://www.google.de https://www.google.co.in https://www.google.com.hk https://www.google.com.au https://www.google.com.tr https://www.google.fr https://www.google.ru https://www.google.com.ng https://www.google.cn https://www.google.nl https://www.google.co.kr https://www.google.co.jp https://www.google.co.id https://www.google.com.tw https://www.google.it https://www.google.com.br https://www.google.cz https://www.google.com.ph https://www.google.com.pk https://www.google.co.th https://www.google.com.my https://www.google.es https://www.google.ch https://www.google.com.vn https://www.google.com.mx https://www.google.com.ua; media-src 'self' https://looksrare.mo.cloudinary.net https://videos.ctfassets.net/q3i0z6mxyv6b/; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-ancestors 'self'; frame-src *",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "3B25882E8A07D6425BB2709B871BCB28",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://looksrare.org/",
+  "mime": "text/html",
+  "csp": "default-src 'self' https://*.looksrare.org; connect-src 'self' data: https://* wss://* https://*.browser-intake-datadoghq.com https://*.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com https://*.analytics.google.co.uk https://*.analytics.google.ca https://*.analytics.google.com.sg https://*.analytics.google.de https://*.analytics.google.co.in https://*.analytics.google.com.hk https://*.analytics.google.com.au https://*.analytics.google.com.tr https://*.analytics.google.fr https://*.analytics.google.ru https://*.analytics.google.com.ng https://*.analytics.google.cn https://*.analytics.google.nl https://*.analytics.google.co.kr https://*.analytics.google.co.jp https://*.analytics.google.co.id https://*.analytics.google.com.tw https://*.analytics.google.it https://*.analytics.google.com.br https://*.analytics.google.cz https://*.analytics.google.com.ph https://*.analytics.google.com.pk https://*.analytics.google.co.th https://*.analytics.google.com.my https://*.analytics.google.es https://*.analytics.google.ch https://*.analytics.google.com.vn https://*.analytics.google.com.mx https://*.analytics.google.com.ua; script-src 'self' blob: 'unsafe-inline' https://cdn.jsdelivr.net/npm/search-insights@2.0.4 https://js.pusher.com/beams/service-worker.js https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://cdn.jsdelivr.net/npm/@widgetbot/crate@3 https://www.google.com https://www.google.co.uk https://www.google.ca https://www.google.com.sg https://www.google.de https://www.google.co.in https://www.google.com.hk https://www.google.com.au https://www.google.com.tr https://www.google.fr https://www.google.ru https://www.google.com.ng https://www.google.cn https://www.google.nl https://www.google.co.kr https://www.google.co.jp https://www.google.co.id https://www.google.com.tw https://www.google.it https://www.google.com.br https://www.google.cz https://www.google.com.ph https://www.google.com.pk https://www.google.co.th https://www.google.com.my https://www.google.es https://www.google.ch https://www.google.com.vn https://www.google.com.mx https://www.google.com.ua 'wasm-unsafe-eval'; img-src 'self' data: blob: https://explorer-api.walletconnect.com https://looksrare.mo.cloudinary.net https://images.ctfassets.net/q3i0z6mxyv6b/ https://assets.coingecko.com https://cdn.discordapp.com/avatars/ https://cdn.discordapp.com/guilds/ https://media.socket.tech https://*.google-analytics.com https://*.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.uk https://www.google.ca https://www.google.com.sg https://www.google.de https://www.google.co.in https://www.google.com.hk https://www.google.com.au https://www.google.com.tr https://www.google.fr https://www.google.ru https://www.google.com.ng https://www.google.cn https://www.google.nl https://www.google.co.kr https://www.google.co.jp https://www.google.co.id https://www.google.com.tw https://www.google.it https://www.google.com.br https://www.google.cz https://www.google.com.ph https://www.google.com.pk https://www.google.co.th https://www.google.com.my https://www.google.es https://www.google.ch https://www.google.com.vn https://www.google.com.mx https://www.google.com.ua; media-src 'self' https://looksrare.mo.cloudinary.net https://videos.ctfassets.net/q3i0z6mxyv6b/; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-ancestors 'self'; frame-src *",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "NFT Marketplace - Buy, Sell & Collect NFTs | LooksRare",
+  "bodyLen": 2174,
+  "nodes": 1116,
+  "readyState": "complete",
+  "head": "Games NFTs Rewards Search / Earn $YOLO Shards! Stake LOOKS, earn $YOLO Shards. Convert them at the end of the Season to get $YOLO — the native Blast token of YOLO Games. Stake LOOKS, earn $YOLO Shards. Convert them at th"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "NFT Marketplace - Buy, Sell & Collect NFTs | LooksRare",
+  "bodyLen": 2174,
+  "nodes": 1116,
+  "readyState": "complete",
+  "head": "Games NFTs Rewards Search / Earn $YOLO Shards! Stake LOOKS, earn $YOLO Shards. Convert them at the end of the Season to get $YOLO — the native Blast token of YOLO Games. Stake LOOKS, earn $YOLO Shards. Convert them at th"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://looksrare.org/",
+ "ms": 6061
+}

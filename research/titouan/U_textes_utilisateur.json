@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "date": "2026-10-11",
   "regles": {
     "mots_max_par_ligne": 12,
@@ -22,33 +22,37 @@
     "jours": "90",
     "nombre": "12",
     "montant_recu": "310 USDC",
-    "contact": "Paul"
+    "contact": "Paul",
+    "reseau_demande": "Ethereum",
+    "reseau_reel": "Polygon",
+    "prix_vente": "0,001 ETH",
+    "valeur_nft": "4 ETH"
   },
   "fiches": [
     {
       "id": "F01",
       "menace": "Un site peut dépenser tous tes jetons sans limite",
       "technique": "approve illimité (ERC-20)",
-      "croit": "Je confirme mon échange sur {site}, comme d'habitude.",
-      "reel": "Si tu signes, {site} pourra retirer tes {montant} {jeton} quand il veut.",
-      "danger": "Ce site demande un droit sans limite, bien plus que nécessaire.",
+      "croit": "Je veux seulement faire mon échange sur {site}.",
+      "reel": "Tu donnes à {site} le droit de prendre tes {jeton} sans limite.",
+      "danger": "Ce droit dure tant que tu ne le retires pas toi-même.",
       "action": "Refuse, ou autorise seulement {montant} {jeton}, pas plus.",
       "questions": [
         {
           "q": "Que peut faire ce site si tu signes ?",
           "options": {
             "A": "Rien du tout",
-            "B": "Dépenser tes jetons quand il veut",
-            "C": "T'envoyer des jetons"
+            "B": "T'envoyer des jetons",
+            "C": "Dépenser tes jetons quand il veut"
           },
-          "reponse": "B"
+          "reponse": "C"
         },
         {
-          "q": "Ce droit s'arrête quand ?",
+          "q": "Combien de temps ce droit dure-t-il ?",
           "options": {
-            "A": "Après l'échange",
-            "B": "Après une heure",
-            "C": "Quand tu le retires toi-même"
+            "A": "Pendant une heure seulement",
+            "B": "Jusqu'à la fin de l'échange",
+            "C": "Jusqu'à ce que tu le retires toi-même"
           },
           "reponse": "C"
         },
@@ -63,7 +67,15 @@
         }
       ],
       "gravite": "critical",
-      "gravite_phrase": "Tu peux perdre tout ce jeton: on te retient et on explique."
+      "gravite_phrase": "Tu peux perdre tout ce jeton: on te retient et on explique.",
+      "variante_info": {
+        "cas": "site connu, droit déjà utilisé avant",
+        "gravite": "info",
+        "lignes": [
+          "Droit sans limite demandé à {site}, site que tu utilises déjà.",
+          "Tu peux le limiter à {montant} {jeton} avant de signer."
+        ]
+      }
     },
     {
       "id": "F02",
@@ -77,11 +89,11 @@
         {
           "q": "Pourquoi cette signature est-elle risquée, même gratuite ?",
           "options": {
-            "A": "Elle peut valoir un chèque signé",
+            "A": "Elle efface ton compte",
             "B": "Elle coûte très cher en frais",
-            "C": "Elle efface ton compte"
+            "C": "Elle peut valoir un chèque signé"
           },
-          "reponse": "A"
+          "reponse": "C"
         },
         {
           "q": "Pendant combien de temps ce site peut-il agir ?",
@@ -103,7 +115,15 @@
         }
       ],
       "gravite": "critical",
-      "gravite_phrase": "Gratuit en apparence, mais ton solde peut partir: on te retient."
+      "gravite_phrase": "Gratuit en apparence, mais ton solde peut partir: on te retient.",
+      "variante_info": {
+        "cas": "site connu, signature déjà utilisée avant",
+        "gravite": "info",
+        "lignes": [
+          "Signature gratuite: {site} pourra prendre tes {jeton} pendant {jours} jours.",
+          "Vérifie que tu l'as demandée toi-même."
+        ]
+      }
     },
     {
       "id": "F03",
@@ -126,11 +146,11 @@
         {
           "q": "Cela inclut-il les NFT reçus plus tard ?",
           "options": {
-            "A": "Oui",
+            "A": "Seulement la moitié",
             "B": "Non",
-            "C": "Seulement la moitié"
+            "C": "Oui"
           },
-          "reponse": "A"
+          "reponse": "C"
         },
         {
           "q": "Que fais-tu si tu veux juste regarder tes NFT ?",
@@ -143,34 +163,42 @@
         }
       ],
       "gravite": "critical",
-      "gravite_phrase": "Toute ta collection peut disparaître: on te retient."
+      "gravite_phrase": "Toute ta collection peut disparaître: on te retient.",
+      "variante_info": {
+        "cas": "site connu où tu vends déjà tes NFT",
+        "gravite": "info",
+        "lignes": [
+          "{site} pourra déplacer tous tes NFT de la collection.",
+          "Tu peux refuser si tu ne vends rien."
+        ]
+      }
     },
     {
       "id": "F04",
-      "menace": "Ton NFT part en vente à prix nul, à ton insu",
+      "menace": "Ton NFT part en vente presque gratuite, à ton insu",
       "technique": "offre Seaport à zéro (ordre de vente)",
       "croit": "Je mets mon NFT en vente au prix que j'ai choisi.",
-      "reel": "Ton NFT sera vendu pour {montant} {jeton}: n'importe qui pourra le prendre.",
-      "danger": "Le prix est glissé dans un message que presque personne ne lit.",
-      "action": "Annule, puis vérifie le prix de vente dans ton portefeuille.",
+      "reel": "Tu recevras seulement {prix_vente} pour ton NFT, qui vaut {valeur_nft}.",
+      "danger": "N'importe qui pourra l'acheter à ce prix dès que tu signes.",
+      "action": "Annule: ne signe pas une vente à un prix aussi bas.",
       "questions": [
         {
-          "q": "Combien reçois-tu pour ton NFT ?",
+          "q": "Que reçois-tu en échange de ton NFT si tu signes ?",
           "options": {
-            "A": "Presque rien",
-            "B": "Le prix du marché",
-            "C": "Le double"
+            "A": "Le double",
+            "B": "Sa valeur réelle",
+            "C": "Presque rien"
           },
-          "reponse": "A"
+          "reponse": "C"
         },
         {
           "q": "Qui peut acheter ton NFT à ce prix ?",
           "options": {
             "A": "Seulement toi",
-            "B": "N'importe qui",
-            "C": "Personne"
+            "B": "Personne",
+            "C": "N'importe qui"
           },
-          "reponse": "B"
+          "reponse": "C"
         },
         {
           "q": "Que fais-tu si le prix te paraît faux ?",
@@ -191,7 +219,7 @@
       "technique": "signature aveugle (eth_sign / message opaque)",
       "croit": "Je signe un message pour prouver que c'est bien moi.",
       "reel": "Ce texte illisible peut autoriser le retrait de tes {montant} {jeton}.",
-      "danger": "Personne ne peut lire ce message, pas même nous.",
+      "danger": "Même sur un site connu, un texte illisible peut cacher un piège.",
       "action": "Ne signe pas un texte que tu ne peux pas lire.",
       "questions": [
         {
@@ -213,13 +241,13 @@
           "reponse": "C"
         },
         {
-          "q": "Que fais-tu face à cette alerte ?",
+          "q": "Le site est connu, le texte est illisible. Que fais-tu ?",
           "options": {
-            "A": "Je signe si le site est connu",
-            "B": "Je refuse de signer",
-            "C": "Je signe deux fois"
+            "A": "Je refuse de signer",
+            "B": "Je signe, le site est connu",
+            "C": "Je signe en lisant en diagonale"
           },
-          "reponse": "B"
+          "reponse": "A"
         }
       ],
       "gravite": "critical",
@@ -231,7 +259,7 @@
       "technique": "connexion SIWE d'un autre domaine",
       "croit": "Je me connecte à {site} avec mon portefeuille.",
       "reel": "Ce message te connecte à {site_reel}, pas à {site}.",
-      "danger": "Un faux site imite {site} pour récupérer ta connexion.",
+      "danger": "Les deux adresses se ressemblent: {site_reel} copie {site} avec une lettre changée.",
       "action": "Ferme la page et ouvre {site} depuis tes favoris.",
       "questions": [
         {
@@ -246,11 +274,11 @@
         {
           "q": "À quel site es-tu vraiment connecté ?",
           "options": {
-            "A": "À {site}",
-            "B": "À {site_reel}",
-            "C": "À aucun"
+            "A": "À {site_reel}",
+            "B": "À {site}",
+            "C": "À aucun des deux"
           },
-          "reponse": "B"
+          "reponse": "A"
         },
         {
           "q": "Que fais-tu face à cette alerte ?",
@@ -387,28 +415,28 @@
     },
     {
       "id": "F10",
-      "menace": "Le programme d'un service que tu utilises est remplacé",
+      "menace": "Un service que tu utilises peut changer et te piéger",
       "technique": "mise à jour d'un contrat intermédiaire (upgrade de proxy)",
-      "croit": "Je valide une amélioration du service que j'utilise.",
-      "reel": "Si tu signes, le service sera remplacé: il pourra prendre tes {jeton}.",
-      "danger": "Le programme du service change, et le nouveau code est inconnu.",
-      "action": "Attends et vérifie l'annonce officielle du service avant de signer.",
+      "croit": "Le service m'invite à valider une mise à jour.",
+      "reel": "Après ta signature, le service pourra prendre tes {jeton}, sans te demander.",
+      "danger": "Personne ne peut lire ce nouveau fonctionnement avant ta signature.",
+      "action": "Prends le temps: cherche l'annonce officielle du service avant de signer.",
       "questions": [
         {
           "q": "Que change cette opération ?",
           "options": {
-            "A": "Ton mot de passe",
-            "B": "Le programme du service",
+            "A": "Le fonctionnement du service",
+            "B": "Ton mot de passe",
             "C": "Ton adresse"
           },
-          "reponse": "B"
+          "reponse": "A"
         },
         {
-          "q": "Peut-on lire le nouveau code ?",
+          "q": "Peux-tu lire ce que le service fera après ?",
           "options": {
-            "A": "Pas ici, il est inconnu",
-            "B": "Oui, facilement",
-            "C": "Oui, en entier"
+            "A": "Non, c'est caché pour l'instant",
+            "B": "Oui, c'est affiché ici",
+            "C": "Oui, en entier sur le site"
           },
           "reponse": "A"
         },
@@ -547,21 +575,21 @@
     },
     {
       "id": "F14",
-      "menace": "Un envoi de zéro pour glisser un faux contact dans ton historique",
+      "menace": "Un inconnu glisse son adresse dans ton historique avec un envoi nul",
       "technique": "empoisonnement par transfert de valeur nulle",
       "croit": "Cette ligne de mon historique vient de mon contact habituel.",
-      "reel": "Cet envoi de {montant} {jeton} vient d'un inconnu, pas de ton contact.",
-      "danger": "Un inconnu envoie zéro pour que son adresse apparaisse dans ton historique.",
-      "action": "Ne copie jamais d'adresse depuis ton historique; demande-la à ton contact.",
+      "reel": "Un inconnu t'a envoyé 0 {jeton} pour apparaître dans ton historique.",
+      "danger": "Il imite ton contact: ton prochain envoi risque d'aller chez lui.",
+      "action": "Ne copie pas cette adresse; demande-la à ton contact.",
       "questions": [
         {
-          "q": "Pourquoi un inconnu t'envoie-t-il zéro ?",
+          "q": "Pourquoi un inconnu t'envoie-t-il un montant de zéro ?",
           "options": {
-            "A": "Pour te faire un cadeau",
-            "B": "Pour se glisser dans ton historique",
+            "A": "Pour apparaître dans ton historique",
+            "B": "Pour te faire un cadeau",
             "C": "Par erreur"
           },
-          "reponse": "B"
+          "reponse": "A"
         },
         {
           "q": "Que perds-tu si tu envoies à cette adresse ?",
@@ -590,9 +618,9 @@
       "menace": "Un faux jeton qui porte le même nom que le vrai",
       "technique": "faux token (symbole usurpé)",
       "croit": "J'achète le vrai {jeton}, celui que tout le monde connaît.",
-      "reel": "Tu paierais {montant} {jeton} pour une copie sans valeur.",
-      "danger": "Un escroc a créé un jeton au même nom que le vrai.",
-      "action": "Annule et cherche le vrai jeton sur le site officiel.",
+      "reel": "Tu paierais {montant} {jeton} pour une copie qui ne vaut rien.",
+      "danger": "Le nom et le logo se copient: seule l'adresse officielle prouve.",
+      "action": "Annule et retrouve le vrai jeton depuis le site officiel du projet.",
       "questions": [
         {
           "q": "Ce jeton est-il le vrai ?",
@@ -606,11 +634,11 @@
         {
           "q": "Qu'est-ce qui prouve qu'un jeton est le vrai ?",
           "options": {
-            "A": "Son nom",
-            "B": "Son logo",
-            "C": "Son adresse officielle"
+            "A": "Son adresse sur le site officiel",
+            "B": "Son nom",
+            "C": "Son logo"
           },
-          "reponse": "C"
+          "reponse": "A"
         },
         {
           "q": "Que fais-tu face à cette alerte ?",
@@ -830,18 +858,18 @@
       "menace": "Un faux support te guide pas à pas pour déplacer tes fonds",
       "technique": "faux support (scénario S1, S5)",
       "croit": "Le support me guide pour protéger mes fonds.",
-      "reel": "Si tu envoies {montant} {jeton} comme demandé, tu les perds pour toujours.",
-      "danger": "Un vrai support ne te demande jamais de déplacer tes fonds.",
+      "reel": "Tu envoies {montant} {jeton} à un escroc: personne ne pourra les récupérer.",
+      "danger": "Un vrai support ne te demande jamais de signer ni d'envoyer.",
       "action": "Raccroche, puis rappelle toi-même le numéro officiel du service.",
       "questions": [
         {
-          "q": "Un vrai support te demande-t-il de déplacer tes fonds ?",
+          "q": "Un vrai support te demande-t-il de signer ou d'envoyer ?",
           "options": {
-            "A": "Parfois",
-            "B": "Jamais",
+            "A": "Jamais",
+            "B": "Parfois",
             "C": "Toujours"
           },
-          "reponse": "B"
+          "reponse": "A"
         },
         {
           "q": "Pourquoi cette personne te presse-t-elle ?",
@@ -870,8 +898,8 @@
       "menace": "Un faux remboursement te demande de payer des frais d'avance",
       "technique": "faux remboursement / recouvrement (scénario S2)",
       "croit": "Je paie de petits frais pour récupérer l'argent perdu.",
-      "reel": "Tu paies {montant} {jeton} de frais et le remboursement n'arrivera jamais.",
-      "danger": "Les escrocs ciblent ceux qui ont déjà perdu, puis demandent des frais.",
+      "reel": "Tu perds {montant} {jeton} de plus et ne récupères jamais rien.",
+      "danger": "Aucun vrai service ne te fait payer pour te rembourser.",
       "action": "Ne paie rien d'avance: un vrai remboursement n'est jamais payant.",
       "questions": [
         {
@@ -910,12 +938,12 @@
       "menace": "Un faux recruteur te fait signer avec ton portefeuille",
       "technique": "faux recruteur (scénario S3)",
       "croit": "Je valide mon embauche, comme me l'a dit le recruteur.",
-      "reel": "Tu autorises ce site à dépenser tes {montant} {jeton}, sans aucun salaire.",
-      "danger": "Ce recruteur inconnu te demande de signer avant de t'embaucher.",
+      "reel": "Tu donnes à ce site le droit de prendre tes {montant} {jeton}.",
+      "danger": "Un vrai employeur ne te demande jamais de signer pour t'embaucher.",
       "action": "Ne signe rien et vérifie l'entreprise sur son site officiel.",
       "questions": [
         {
-          "q": "Un vrai employeur te fait-il signer avec ton portefeuille ?",
+          "q": "Un vrai employeur te demande-t-il de signer pour t'embaucher ?",
           "options": {
             "A": "Jamais",
             "B": "Souvent",
@@ -951,8 +979,8 @@
       "technique": "pig butchering / parcours conforme (scénario S4)",
       "croit": "J'envoie de l'argent à quelqu'un en qui j'ai confiance.",
       "reel": "Tu envoies {montant} {jeton} à une adresse neuve, sans retour possible.",
-      "danger": "Tout semble correct, mais quelqu'un te guide et le montant est grand.",
-      "action": "Attends un jour et parle à un proche de confiance.",
+      "danger": "Des escrocs gagnent ta confiance en ligne, puis demandent un gros envoi.",
+      "action": "Tu décides: vérifie qui te demande cet envoi, et pourquoi.",
       "questions": [
         {
           "q": "Pourquoi cette alerte alors que rien n'est faux ?",
@@ -975,11 +1003,11 @@
         {
           "q": "Que fais-tu face à cette alerte ?",
           "options": {
-            "A": "J'envoie tout",
-            "B": "J'envoie la moitié",
-            "C": "J'attends et j'en parle à un proche"
+            "A": "Je vérifie qui me demande cet envoi, et pourquoi",
+            "B": "J'envoie tout",
+            "C": "J'envoie la moitié"
           },
-          "reponse": "C"
+          "reponse": "A"
         }
       ],
       "gravite": "warn",
@@ -989,10 +1017,10 @@
       "id": "F25",
       "menace": "Nous n'avons pas pu vérifier cette opération",
       "technique": "vérification impossible (jamais OK)",
-      "croit": "Je pense que cette opération est sûre, puisqu'aucune alerte n'apparaît.",
+      "croit": "Aucune alerte ne s'affiche, donc je peux signer sans crainte.",
       "reel": "Nous n'avons pas pu vérifier cette opération sur tes {montant} {jeton}.",
-      "danger": "Notre vérification n'a pas fini, donc nous ne pouvons rien affirmer.",
-      "action": "Réessaie dans un instant, ou demande l'avis d'un proche.",
+      "danger": "Elle peut être piégée comme elle peut être normale: nous l'ignorons.",
+      "action": "Réessaie dans un instant. Sans résultat, vérifie toi-même avant de signer.",
       "questions": [
         {
           "q": "Cette opération est-elle sûre ?",
@@ -1004,22 +1032,22 @@
           "reponse": "B"
         },
         {
-          "q": "Une absence de réponse veut-elle dire que tout va bien ?",
+          "q": "Aucune alerte affichée veut-il dire que tout va bien ?",
           "options": {
-            "A": "Oui",
-            "B": "Parfois",
-            "C": "Non"
+            "A": "Non",
+            "B": "Oui",
+            "C": "Parfois"
           },
-          "reponse": "C"
+          "reponse": "A"
         },
         {
           "q": "Que fais-tu face à cette alerte ?",
           "options": {
-            "A": "Je signe vite",
-            "B": "Je réessaie ou je demande à un proche",
+            "A": "Je réessaie, puis je vérifie moi-même",
+            "B": "Je signe vite",
             "C": "J'ignore le message"
           },
-          "reponse": "B"
+          "reponse": "A"
         }
       ],
       "gravite": "warn",
@@ -1027,21 +1055,21 @@
     },
     {
       "id": "F26",
-      "menace": "Aucun signal de danger trouvé",
+      "menace": "Aucun piège repéré, mais la vérification reste limitée",
       "technique": "cas bénin (aucun signal, jamais un feu vert)",
       "croit": "Je fais l'opération simple que j'ai demandée.",
       "reel": "Cette opération envoie {montant} {jeton} à {contact}, comme tu l'as dit.",
-      "danger": "Nous n'avons trouvé aucun signal; ce n'est pas une garantie.",
-      "action": "Vérifie une dernière fois le montant et le destinataire.",
+      "danger": "Notre vérification est limitée: elle peut rater un piège.",
+      "action": "Contrôle toi-même le montant et le destinataire avant de signer.",
       "questions": [
         {
-          "q": "Aucun signal trouvé veut-il dire sans risque ?",
+          "q": "Notre vérification peut-elle rater un piège ?",
           "options": {
-            "A": "Oui",
-            "B": "Non, ce n'est pas une garantie",
-            "C": "Toujours"
+            "A": "Oui, elle peut en rater",
+            "B": "Non, jamais",
+            "C": "Seulement le week-end"
           },
-          "reponse": "B"
+          "reponse": "A"
         },
         {
           "q": "Que vérifies-tu toi-même ?",
@@ -1063,7 +1091,15 @@
         }
       ],
       "gravite": "info",
-      "gravite_phrase": "Rien d'anormal repéré: message discret, sans promesse de sécurité."
+      "gravite_phrase": "Rien d'anormal repéré: message discret, sans promesse de sécurité.",
+      "variante_info": {
+        "cas": "envoi habituel vers un contact connu",
+        "gravite": "info",
+        "lignes": [
+          "Envoi de {montant} {jeton} à {contact}.",
+          "Vérification limitée: contrôle toi-même le destinataire."
+        ]
+      }
     },
     {
       "id": "F27",
@@ -1110,8 +1146,8 @@
       "menace": "Un faux proche te demande un envoi urgent",
       "technique": "faux proche (scénario S6)",
       "croit": "Un proche me demande de l'aide pour un envoi urgent.",
-      "reel": "Tes {montant} {jeton} iraient à {adresse_debut}…{adresse_fin}, une adresse inconnue.",
-      "danger": "Un escroc peut se faire passer pour ton proche par message.",
+      "reel": "Tes {montant} {jeton} partiraient chez un inconnu, sans retour possible.",
+      "danger": "Un escroc peut écrire avec le nom et la photo d'un proche.",
       "action": "Appelle ton proche au numéro habituel avant d'envoyer quoi que ce soit.",
       "questions": [
         {
@@ -1147,21 +1183,21 @@
     },
     {
       "id": "F29",
-      "menace": "Tes fonds partent sur un autre réseau ou chez un inconnu",
+      "menace": "Tes fonds arrivent sur un autre réseau que celui demandé",
       "technique": "pont inter-réseaux, destination inattendue",
-      "croit": "Je déplace mes jetons vers l'autre réseau, comme prévu.",
-      "reel": "Tes {montant} {jeton} arriveraient sur un autre réseau ou chez un inconnu.",
-      "danger": "L'arrivée choisie n'est pas celle que tu as demandée.",
-      "action": "Annule et vérifie le réseau d'arrivée avant de recommencer.",
+      "croit": "Je déplace mes jetons vers {reseau_demande}, comme prévu.",
+      "reel": "Tes {montant} {jeton} arriveraient sur {reseau_reel}, pas sur {reseau_demande}.",
+      "danger": "Chaque réseau est séparé: un envoi au mauvais endroit est souvent perdu.",
+      "action": "Annule et vérifie le réseau et l'adresse d'arrivée avant de recommencer.",
       "questions": [
         {
           "q": "Où risquent d'arriver tes jetons ?",
           "options": {
-            "A": "Chez toi",
-            "B": "Sur un autre réseau ou chez un inconnu",
+            "A": "Sur {reseau_reel}, pas où tu voulais",
+            "B": "Chez toi, sur {reseau_demande}",
             "C": "Dans ton portefeuille"
           },
-          "reponse": "B"
+          "reponse": "A"
         },
         {
           "q": "Peut-on les récupérer facilement ensuite ?",

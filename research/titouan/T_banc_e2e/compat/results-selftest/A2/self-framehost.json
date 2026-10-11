@@ -2,7 +2,7 @@
  "siteId": "self-framehost",
  "url": "http://127.0.0.1:8777/framehost",
  "arm": "control",
- "started": "2026-10-11T00:10:06.135Z",
+ "started": "2026-10-11T01:15:21.519Z",
  "events": [
   {
    "t": "frame",
@@ -46,7 +46,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "BC4C81B4F3176DF99F1217EC47B560C1",
+   "frameId": "067D3DE3BF82C71CD41C57BD7B31BFB0",
    "status": 200,
    "url": "http://127.0.0.1:8777/framehost",
    "mime": "text/html",
@@ -56,7 +56,7 @@
    "server": null
   },
   {
-   "frameId": "06BBAF447AE5F08D0D53A3137E8888A7",
+   "frameId": "2EA487A1FB4C31248789A641942F4B78",
    "status": 200,
    "url": "http://localhost:8777/framed",
    "mime": "text/html",
@@ -73,7 +73,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "BC4C81B4F3176DF99F1217EC47B560C1",
+ "mainFrameId": "067D3DE3BF82C71CD41C57BD7B31BFB0",
  "loadFired": true,
  "navError": null,
  "steps": [],
@@ -106,6 +106,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -135,10 +137,13 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
  },
+ "evN": 5,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -160,5 +165,5 @@
   "overwritten": false
  },
  "finalUrl": "http://127.0.0.1:8777/framehost",
- "ms": 4924
+ "ms": 4399
 }

@@ -1,0 +1,97 @@
+id;categorie;verdict;charge_A1;charge_B;charge_A2;detecte_A1;detecte_B;req_A1;req_B;req_A2;ui_A1;ui_B;causes
+uniswap;DEX;PASS;true;true;true;true;true;false;false;false;false;false;CSP (injection par <script> en ligne bloquee) / worker (1 worker(s): hors portee d'une injection)
+pangolin;DEX;PASS;true;true;true;true;true;false;false;false;false;false;
+traderjoe;DEX;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre) / WalletConnect propose, pas d'appel eth_requestAccounts
+aave;Lending;DIFFÉRENCE;true;true;true;true;true;true;true;true;false;false;difference: MetaMask liste dans la modale / iframes (le fournisseur est lu dans un sous-cadre)
+benqi;Lending;DIFFÉRENCE;true;true;true;true;true;true;true;true;false;false;1 erreur(s) console nouvelle(s) hors portefeuille (ex: network: Failed to load resource: the server responded with a status of # () o#.ingest.us.) / worker (1 worker(s): hors portee d'une injection)
+curve;DEX;PASS;true;true;true;true;true;true;true;true;true;true;iframes (le fournisseur est lu dans un sous-cadre)
+1inch;Agrégateur;PASS;false;true;true;false;true;false;false;true;false;false;iframes (le fournisseur est lu dans un sous-cadre) / worker (1 worker(s): hors portee d'une injection)
+cow;DEX;PASS;false;true;true;false;true;false;true;true;false;true;worker (1 worker(s): hors portee d'une injection)
+opensea;NFT;PASS;true;true;true;true;true;true;true;true;false;false;iframes (le fournisseur est lu dans un sous-cadre)
+blur;NFT;PASS;true;true;true;false;false;false;false;false;false;false;worker (2 worker(s): hors portee d'une injection) / aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic)
+magiceden;NFT;SITE INACCESSIBLE;true;true;true;true;false;false;false;false;false;false;mur anti-bot / challenge
+rarible;NFT;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre)
+zora;NFT;PASS;true;true;true;true;true;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection)
+galxe;Quêtes;PASS;true;true;true;true;true;true;true;true;false;false;
+layer3;Quêtes;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre) / worker (1 worker(s): hors portee d'une injection)
+snapshot;Gouvernance;PASS;true;true;true;true;true;true;true;true;false;false;
+tally;Gouvernance;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+ens;Identité;PASS;true;true;true;true;true;true;true;true;false;false;CSP (injection par <script> en ligne bloquee)
+etherscan;Explorateur;SITE INACCESSIBLE;true;true;true;true;true;false;false;false;false;false;mur anti-bot / challenge
+snowtrace;Explorateur;PASS;true;true;true;true;true;false;false;false;false;false;worker (2 worker(s): hors portee d'une injection)
+revoke;Sécurité;PASS;true;true;true;true;true;true;true;true;true;true;
+rabby;Portefeuille;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+core;Portefeuille;PASS;true;true;true;true;true;false;false;false;false;false;worker (2 worker(s): hors portee d'une injection)
+zapper;Portfolio;SITE INACCESSIBLE;true;true;true;true;true;false;false;false;false;false;mur anti-bot / challenge
+debank;Portfolio;PASS;true;true;true;true;true;true;true;true;true;true;CSP (injection par <script> en ligne bloquee)
+jumper;Bridge;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre) / worker (4 worker(s): hors portee d'une injection) / WalletConnect propose, pas d'appel eth_requestAccounts
+stargate;Bridge;PASS;true;true;true;true;true;true;true;true;false;false;CSP (injection par <script> en ligne bloquee)
+across;Bridge;PASS;true;true;true;true;true;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection)
+hop;Bridge;SITE INACCESSIBLE;true;true;true;false;false;false;false;false;false;false;HTTP 400
+synapse;Bridge;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+corebridge;Bridge;PASS;true;true;true;true;true;false;false;false;false;false;worker (2 worker(s): hors portee d'une injection)
+lens;Social;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre)
+farcaster;Social;PASS;true;true;true;true;true;false;false;false;false;false;
+safe;Multisig;PASS;true;true;true;true;true;true;true;true;true;true;worker (1 worker(s): hors portee d'une injection)
+gnosis;Multisig;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+lido;Staking;PASS;true;true;true;true;true;false;false;false;false;false;CSP (injection par <script> en ligne bloquee)
+rocketpool;Staking;PASS;true;true;true;true;true;false;false;false;false;false;
+pendle;Rendement;PASS;true;true;true;true;true;false;false;false;false;false;CSP (injection par <script> en ligne bloquee) / worker (1 worker(s): hors portee d'une injection) / WalletConnect propose, pas d'appel eth_requestAccounts
+gmx;Perps;PASS;true;true;true;true;true;false;false;true;false;false;iframes (le fournisseur est lu dans un sous-cadre) / worker (2 worker(s): hors portee d'une injection)
+dydx;Perps;DIFFÉRENCE;true;true;true;true;true;true;true;true;false;false;1 erreur(s) console nouvelle(s) hors portefeuille (ex: TypeError: Cannot read properties of undefined (reading 'qs_VuPvzzn7yCSn')) / iframes (le fournisseur est lu dans un sous-cadre)
+hyperliquid;Perps;PASS;true;true;true;true;true;true;true;true;true;true;iframes (le fournisseur est lu dans un sous-cadre)
+phantom;Portefeuille;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+coinbase;CEX/Wallet;PASS;true;true;true;true;true;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection)
+binanceweb3;CEX/Wallet;PASS;true;true;true;false;false;false;false;false;false;false;CSP (injection par <script> en ligne bloquee) / aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+mmportfolio;Portfolio;PASS;true;true;true;true;true;false;false;false;false;false;
+wcsample;Exemple SDK;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic)
+rainbowkit;Exemple SDK;PASS;true;true;true;true;true;true;true;true;true;true;
+wagmi;Exemple SDK;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+web3modal;Exemple SDK;DIFFÉRENCE;true;true;true;false;false;false;false;false;false;false;1 erreur(s) console nouvelle(s) hors portefeuille (ex: security: Executing inline script violates the following Content Security Policy directive) / aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+appkit;Exemple SDK;DIFFÉRENCE;true;true;true;false;false;false;false;false;false;false;1 erreur(s) console nouvelle(s) hors portefeuille (ex: security: Executing inline script violates the following Content Security Policy directive) / aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+balancer;DEX;PASS;true;true;true;true;true;false;false;false;false;false;WalletConnect propose, pas d'appel eth_requestAccounts
+compound;Lending;SITE INACCESSIBLE;true;true;true;false;false;false;false;false;false;false;mur anti-bot / challenge
+morpho;Lending;PASS;true;true;true;true;true;false;false;false;false;false;
+spark;Lending;PASS;true;true;true;true;true;true;true;true;true;true;
+yearn;Rendement;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+sushi;DEX;PASS;true;true;true;true;true;true;true;true;true;true;worker (1 worker(s): hors portee d'une injection)
+pancake;DEX;DIFFÉRENCE;true;true;true;true;true;false;false;false;false;false;difference: bouton de connexion trouve/clique / iframes (le fournisseur est lu dans un sous-cadre) / worker (4 worker(s): hors portee d'une injection)
+kyber;Agrégateur;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre) / WalletConnect propose, pas d'appel eth_requestAccounts
+matcha;Agrégateur;PASS;true;true;true;true;true;true;true;true;false;false;iframes (le fournisseur est lu dans un sous-cadre) / worker (7 worker(s): hors portee d'une injection)
+velora;Agrégateur;PASS;true;true;true;true;true;true;true;true;true;true;iframes (le fournisseur est lu dans un sous-cadre)
+odos;Agrégateur;PASS;true;true;true;true;true;false;false;false;false;false;
+ethena;Rendement;PASS;true;true;true;true;true;true;true;true;false;false;worker (1 worker(s): hors portee d'une injection)
+eigenlayer;Staking;SITE INACCESSIBLE;true;true;true;true;true;true;true;true;true;true;HTTP 500
+etherfi;Staking;PASS;true;true;true;true;true;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection)
+sky;Lending;PASS;true;true;true;true;true;false;false;false;false;false;CSP (injection par <script> en ligne bloquee) / WalletConnect propose, pas d'appel eth_requestAccounts
+superbridge;Bridge;PASS;true;true;true;true;true;false;false;false;false;false;worker (2 worker(s): hors portee d'une injection)
+arbbridge;Bridge;PASS;true;true;true;true;true;true;true;true;false;false;
+polygonportal;Bridge;PASS;true;true;true;true;true;false;false;false;false;false;
+gnosisbridge;Bridge;PASS;true;true;true;true;true;true;true;true;true;true;
+looksrare;NFT;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre)
+foundation;NFT;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+superrare;NFT;PASS;true;true;true;true;true;true;true;true;false;false;worker (1 worker(s): hors portee d'une injection)
+mintfun;NFT;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+nouns;DAO;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre)
+defillama;Données;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre)
+dune;Données;DIFFÉRENCE;true;true;true;true;true;false;false;false;false;false;2 erreur(s) console nouvelle(s) hors portefeuille (ex: security: Connecting to 'ad.doubleclick.net' violates the following Content Security Polic) / CSP (injection par <script> en ligne bloquee) / iframes (le fournisseur est lu dans un sous-cadre) / worker (2 worker(s): hors portee d'une injection)
+zerion;Portfolio;PASS;true;true;true;true;true;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection)
+gitcoinpassport;Identité;SITE INACCESSIBLE;false;false;false;false;false;false;false;false;false;false;net::ERR_NAME_NOT_RESOLVED
+guild;Communauté;PASS;true;true;true;true;true;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection)
+collabland;Communauté;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+mirror;Social;PASS;true;true;true;false;false;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection) / aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+paragraph;Social;PASS;true;true;true;false;false;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection) / aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+poap;NFT;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+platypus;DEX;PASS;true;true;true;false;false;false;false;false;false;false;worker (1 worker(s): hors portee d'une injection) / aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+yieldyak;Rendement;PASS;true;true;true;true;true;true;true;true;false;false;
+gains;Perps;DIFFÉRENCE;true;true;true;true;true;false;false;false;false;false;2 erreur(s) console nouvelle(s) hors portefeuille (ex: Error checking Cross-Origin-Opener-Policy: HTTP error! status: #) / iframes (le fournisseur est lu dans un sous-cadre) / worker (1 worker(s): hors portee d'une injection)
+instadapp;Lending;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+thegraph;Infra;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+unlock;Infra;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre) / worker (1 worker(s): hors portee d'une injection)
+rainbowwallet;Portefeuille;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+zksync;Bridge;PASS;true;true;true;true;true;false;false;false;false;false;
+basebridge;Bridge;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)
+aerodrome;DEX;PASS;true;true;true;true;true;false;false;false;false;false;CSP (injection par <script> en ligne bloquee) / worker (5 worker(s): hors portee d'une injection)
+jupiter;Non-EVM;PASS;true;true;true;true;true;false;false;false;false;false;
+tensor;Non-EVM;PASS;true;true;true;true;true;false;false;false;false;false;iframes (le fournisseur est lu dans un sous-cadre) / worker (4 worker(s): hors portee d'une injection)
+ethereumorg;Contenu;PASS;true;true;true;false;false;false;false;false;false;false;aucun support d'injection observe (ni window.ethereum ni EIP-6963 avant/apres clic, bouton de connexion non trouve)

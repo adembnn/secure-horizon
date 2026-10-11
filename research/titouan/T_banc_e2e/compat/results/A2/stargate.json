@@ -1,0 +1,284 @@
+{
+ "siteId": "stargate",
+ "url": "https://stargate.finance/",
+ "arm": "control",
+ "started": "2026-10-11T00:59:15.198Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://stargate.finance/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://stargate.finance/"
+  }
+ ],
+ "console": [],
+ "exceptions": [
+  {
+   "top": true,
+   "text": "Error: Safe needs to be loaded in an iframe"
+  }
+ ],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://arb-pokt.nodies.app/' from origin 'https://stargate.finance' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Co",
+   "url": "https://stargate.finance/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://arb-pokt.nodies.app/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://base-pokt.nodies.app/' from origin 'https://stargate.finance' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-C",
+   "url": "https://stargate.finance/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://base-pokt.nodies.app/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://binance.llamarpc.com/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://fantom-pokt.nodies.app/' from origin 'https://stargate.finance' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access",
+   "url": "https://stargate.finance/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://fantom-pokt.nodies.app/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://bsc-pokt.nodies.app/' from origin 'https://stargate.finance' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Co",
+   "url": "https://stargate.finance/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://bsc-pokt.nodies.app/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+   "url": "https://assets.layerzero.network/icons/wallets/freighter/light.webp"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+   "url": "https://assets.layerzero.network/icons/wallets/lobstr/light.webp"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'nonce-ZGY2ZjE4ODUtMzU4NC00MTdjLTk5MjMtYzliYTIxMjJjMTAy' 'wasm-unsafe-eval' https://cdn.jsdelivr.net",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "1347672AA5EBF846DDBA0737100ED243",
+   "status": 200,
+   "url": "https://stargate.finance/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'nonce-ZGY2ZjE4ODUtMzU4NC00MTdjLTk5MjMtYzliYTIxMjJjMTAy' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://us-assets.i.posthog.com https://snaps.consensys.io 'report-sample'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://fonts.scalar.com https://fonts.reown.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https: wss:; frame-src https://verify.walletconnect.org https://secure.walletconnect.org https://connect.solflare.com https://id.porto.sh; frame-ancestors 'self' https://app.safe.global https://safe.onchainden.com https://safe.global https://blockscout.com https://pilot.gnosisguild.org https://safe.apechain.com https://safe.tac.build https://safe.somnia.network https://safe.zkverify.io https://safe.peaq.xyz https://safe.ethereal.trade/welcome; object-src 'none'; base-uri 'self'; form-action 'none'; worker-src 'self'; report-uri https://us.i.posthog.com/report/?token=phc_N9ftknp73qSwqQJHBgSEkgZih3ZNUVnL4mut1wz8cj7&sample_rate=1&v=1; report-to posthog",
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "1347672AA5EBF846DDBA0737100ED243",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://stargate.finance/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'nonce-ZGY2ZjE4ODUtMzU4NC00MTdjLTk5MjMtYzliYTIxMjJjMTAy' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://us-assets.i.posthog.com https://snaps.consensys.io 'report-sample'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://fonts.scalar.com https://fonts.reown.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https: wss:; frame-src https://verify.walletconnect.org https://secure.walletconnect.org https://connect.solflare.com https://id.porto.sh; frame-ancestors 'self' https://app.safe.global https://safe.onchainden.com https://safe.global https://blockscout.com https://pilot.gnosisguild.org https://safe.apechain.com https://safe.tac.build https://safe.somnia.network https://safe.zkverify.io https://safe.peaq.xyz https://safe.ethereal.trade/welcome; object-src 'none'; base-uri 'self'; form-action 'none'; worker-src 'self'; report-uri https://us.i.posthog.com/report/?token=phc_N9ftknp73qSwqQJHBgSEkgZih3ZNUVnL4mut1wz8cj7&sample_rate=1&v=1; report-to posthog",
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Bridge USDC, USDT, ETH, BTC & OFTs Across Chains",
+  "bodyLen": 220,
+  "nodes": 294,
+  "readyState": "complete",
+  "head": "Stake Overview Value Transfer API Resources Connect Wallet Advanced Settings Transfer Swap Loading... Max - Loading... Custom Address Loading... - Loading... Route - Total Fee - Time - Loading... Advanced Mode Powered by"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1261.84375,
+   "y": 32,
+   "top": 12
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 1,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 1056.8515625,
+   "y": 205,
+   "area": 1218.65625
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Account My Wallets 0x111...11111 EVM Assets Transactions Claim Tokens You are about to claim your unclaimed tokens. The tokens will be added to your wallet after the claim is processed. Claim Claim Tokens You are about to claim your unclaimed tokens. The tokens will be added to your wallet after the",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Bridge USDC, USDT, ETH, BTC & OFTs Across Chains",
+  "bodyLen": 603,
+  "nodes": 370,
+  "readyState": "complete",
+  "head": "Stake Overview Value Transfer API Resources 0x11...1111 0 Advanced Settings Transfer Swap From Not Selected Max - Loading... Custom Address To Not Selected - Loading... Route - Total Fee - Time - Select network Advanced "
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 6,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 11,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://stargate.finance/",
+ "ms": 16659
+}

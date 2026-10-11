@@ -1,0 +1,261 @@
+{
+ "siteId": "etherfi",
+ "url": "https://app.ether.fi/",
+ "arm": "control",
+ "started": "2026-10-11T01:06:35.997Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.ether.fi/"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.ether.fi/app/cash/safe"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://www.ether.fi/app/cash/safe"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://www.ether.fi/app/cash/safe"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.ether.fi/app/cash/safe"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://sd.prod.eu.ether.fi/assets/collector.min.8b3fea3.html?r=2026-09-14-8b3fea3#eyJsb2F"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.ether.fi/app/cash/safe"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.ether.fi/app/cash/safe"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://www.ether.fi/app/cash/api/telegram-support/pairing"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "B5D055C33E02377EDFED95A832DE4734",
+   "status": 200,
+   "url": "https://www.ether.fi/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  },
+  {
+   "frameId": "B5D055C33E02377EDFED95A832DE4734",
+   "status": 200,
+   "url": "https://www.ether.fi/app/cash/safe",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  },
+  {
+   "frameId": "C6CD1EAE048B6891799DAA1146E2D135",
+   "status": 200,
+   "url": "https://sd.prod.eu.ether.fi/assets/collector.min.8b3fea3.html?r=2026-09-14-8b3fea3",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "UploadServer"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "B5D055C33E02377EDFED95A832DE4734",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Open App"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://www.ether.fi/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "We use cookies 🍪 At ether.fi, we and our partners use cookies to enhance your experience, ensure security and performance, and to support our business. Certain cookies are essential for the functionality, improvement, and proper operation of our services. Manage Change Preferences Accept All",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Save, Grow, Spend. Do more with your crypto | ether.fi",
+  "bodyLen": 4313,
+  "nodes": 811,
+  "readyState": "complete",
+  "head": "Personal Business Earn Staking Open App Sign Up Download App Core Make Ether.fi your account for everyday money. Luxe A metal card, stronger rewards, and premium travel benefits. Pinnacle Unlimited lounges, dedicated sup"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Open App",
+   "tag": "A",
+   "x": 1256.9140625,
+   "y": 51.5,
+   "top": 31.5
+  },
+  "all": [
+   "2:Open App"
+  ]
+ },
+ "clicked1": "Open App",
+ "clickedTier": 2,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "find3": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Sign In",
+   "tag": "A",
+   "x": 611.5,
+   "y": 214,
+   "top": 192
+  },
+  "all": [
+   "2:Sign In"
+  ]
+ },
+ "ui1": {
+  "modal": "Membership Home Portfolio Cards Earn Markets Borrow Transactions Promotions Travel Refer & Earn Membership Home Portfolio Cards Earn Markets Borrow Transactions Promotions Travel Refer & Earn Cookie Preferences Choose which cookies you want to allow. We use cookies 🍪 At ether.fi, we and our partner",
+  "modalCount": 3,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "ether.fi Cash",
+  "bodyLen": 1519,
+  "nodes": 685,
+  "readyState": "complete",
+  "head": "Membership Home Portfolio Cards Earn Markets Borrow Transactions Promotions Travel Refer & Earn Get Started Portfolio Value · USD Sign In Deposit Send Buy Swap More Get the card Earn 3% cashback Verify Now Assets Deposit"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 14,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://www.ether.fi/app/cash/safe",
+ "ms": 10497
+}

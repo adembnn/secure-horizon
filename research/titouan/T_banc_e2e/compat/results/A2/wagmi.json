@@ -1,0 +1,141 @@
+{
+ "siteId": "wagmi",
+ "url": "https://wagmi.sh/",
+ "arm": "control",
+ "started": "2026-10-11T01:03:23.988Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://wagmi.sh/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://wagmi.sh/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://wagmi.sh/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "CA3A331357186781D1F521AD9EB574E5",
+   "status": 200,
+   "url": "https://wagmi.sh/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "CA3A331357186781D1F521AD9EB574E5",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://wagmi.sh/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Wagmi | Reactivity for Ethereum apps",
+  "bodyLen": 1554,
+  "nodes": 386,
+  "readyState": "complete",
+  "head": "Skip to content Search K Main Navigation React Core Tempo CLI Frameworks React Solid Vue More Discussions Release Notes Contributing Appearance Looking for the 2.x docs? Check out 2.x.wagmi.sh . Wagmi Reactivity for Ethe"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Wagmi | Reactivity for Ethereum apps",
+  "bodyLen": 1554,
+  "nodes": 386,
+  "readyState": "complete",
+  "head": "Skip to content Search K Main Navigation React Core Tempo CLI Frameworks React Solid Vue More Discussions Release Notes Contributing Appearance Looking for the 2.x docs? Check out 2.x.wagmi.sh . Wagmi Reactivity for Ethe"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://wagmi.sh/",
+ "ms": 6437
+}

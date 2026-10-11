@@ -2,7 +2,7 @@
  "siteId": "self-eip6963",
  "url": "http://127.0.0.1:8777/eip6963",
  "arm": "hardened",
- "started": "2026-10-11T00:10:45.150Z",
+ "started": "2026-10-11T01:15:59.075Z",
  "events": [
   {
    "t": "frame",
@@ -42,7 +42,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "902179F70ACF6E1EE097340CF451069D",
+   "frameId": "77140F94CB12F64C72251E8A72A37156",
    "status": 200,
    "url": "http://127.0.0.1:8777/eip6963",
    "mime": "text/html",
@@ -57,7 +57,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "902179F70ACF6E1EE097340CF451069D",
+ "mainFrameId": "77140F94CB12F64C72251E8A72A37156",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -93,6 +93,8 @@
   "overwritten": false,
   "req6963": 1,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -146,12 +148,15 @@
   "calls": [
    "eth_requestAccounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 1,
   "wreads": {
    "request": 1
   }
  },
+ "evN": 5,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -173,5 +178,5 @@
   "overwritten": false
  },
  "finalUrl": "http://127.0.0.1:8777/eip6963",
- "ms": 10925
+ "ms": 10616
 }

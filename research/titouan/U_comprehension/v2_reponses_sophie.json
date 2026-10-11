@@ -1,0 +1,547 @@
+{
+ "persona": "sophie_45_sous_pression_v2",
+ "reponses": [
+  {
+   "qid": "F01-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F01-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F01-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F02-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F02-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F02-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F03-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F03-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F03-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F05-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F05-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F05-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F06-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F06-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F06-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F07-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F07-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F07-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F08-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F08-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F08-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F09-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F09-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F09-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F10-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F11-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F11-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F11-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F12-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F12-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F12-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F13-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F13-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F13-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F14-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F14-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F14-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F15-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F15-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F15-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F16-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F16-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F16-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F17-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F17-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F17-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F18-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F18-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F18-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F19-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F19-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F19-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F20-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F20-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F20-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F21-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F21-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F21-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F22-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F22-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F22-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F23-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F23-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F23-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F24-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F24-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F24-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F25-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F25-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F25-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F26-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F26-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F26-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F27-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F27-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F27-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F28-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F28-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F28-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F29-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F29-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F29-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F30-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F30-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F30-Q3",
+   "choix": "A"
+  }
+ ],
+ "ressenti": [
+  {
+   "id": "F01",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Je veux seulement faire mon échange sur uniswap.org."
+  },
+  {
+   "id": "F02",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Signer ne coûte rien"
+  },
+  {
+   "id": "F03",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "uniswap.org pourra prendre tes 12 NFT"
+  },
+  {
+   "id": "F04",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "Tu recevras seulement 0,001 ETH pour ton NFT, qui vaut 4 ETH."
+  },
+  {
+   "id": "F05",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Je signe un message pour prouver que c'est bien moi."
+  },
+  {
+   "id": "F06",
+   "compris": "non",
+   "decision": "continuer",
+   "phrase_decisive": "Je me connecte à uniswap.org avec mon portefeuille."
+  },
+  {
+   "id": "F07",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "contrôle ton compte et tes 2 480 USDC"
+  },
+  {
+   "id": "F08",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "un inconnu pourra bouger les 2 480 USDC du compte"
+  },
+  {
+   "id": "F09",
+   "compris": "en partie",
+   "decision": "annuler",
+   "phrase_decisive": "Ce programme étranger pourra agir à ta place sur tes 2 480 USDC"
+  },
+  {
+   "id": "F10",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Le service m'invite à valider une mise à jour."
+  },
+  {
+   "id": "F11",
+   "compris": "en partie",
+   "decision": "annuler",
+   "phrase_decisive": "ce programme pourra tout faire à ta place"
+  },
+  {
+   "id": "F12",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Je fais un seul échange, comme le montre l'écran."
+  },
+  {
+   "id": "F13",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "Tes 2 480 USDC partiraient vers 0x7a3F…c91E, pas vers ton contact."
+  },
+  {
+   "id": "F14",
+   "compris": "non",
+   "decision": "continuer",
+   "phrase_decisive": "Cette ligne de mon historique vient de mon contact habituel."
+  },
+  {
+   "id": "F15",
+   "compris": "en partie",
+   "decision": "annuler",
+   "phrase_decisive": "une copie qui ne vaut rien"
+  },
+  {
+   "id": "F16",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "un jeton impossible à revendre"
+  },
+  {
+   "id": "F17",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "pas à toi"
+  },
+  {
+   "id": "F18",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "tu reçois seulement 310 USDC en échange"
+  },
+  {
+   "id": "F19",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "Un logiciel espion peut remplacer l'adresse copiée par la sienne."
+  },
+  {
+   "id": "F20",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "imite uniswap.org pour vider tes 2 480 USDC"
+  },
+  {
+   "id": "F21",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Le support me guide pour protéger mes fonds."
+  },
+  {
+   "id": "F22",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "Tu perds 2 480 USDC de plus et ne récupères jamais rien."
+  },
+  {
+   "id": "F23",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "Un vrai employeur ne te demande jamais de signer pour t'embaucher."
+  },
+  {
+   "id": "F24",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "J'envoie de l'argent à quelqu'un en qui j'ai confiance."
+  },
+  {
+   "id": "F25",
+   "compris": "non",
+   "decision": "continuer",
+   "phrase_decisive": "Aucune alerte ne s'affiche, donc je peux signer sans crainte."
+  },
+  {
+   "id": "F26",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Cette opération envoie 2 480 USDC à Paul, comme tu l'as dit."
+  },
+  {
+   "id": "F27",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "Ce cadeau autorise uniswap.org à prendre tes 2 480 USDC."
+  },
+  {
+   "id": "F28",
+   "compris": "oui",
+   "decision": "annuler",
+   "phrase_decisive": "Appelle ton proche au numéro habituel"
+  },
+  {
+   "id": "F29",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "Je déplace mes jetons vers Ethereum, comme prévu."
+  },
+  {
+   "id": "F30",
+   "compris": "en partie",
+   "decision": "continuer",
+   "phrase_decisive": "J'autorise un paiement unique pour cet abonnement."
+  }
+ ]
+}

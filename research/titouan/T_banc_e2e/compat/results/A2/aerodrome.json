@@ -1,0 +1,182 @@
+{
+ "siteId": "aerodrome",
+ "url": "https://aerodrome.finance/",
+ "arm": "control",
+ "started": "2026-10-11T01:11:30.164Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://aerodrome.finance/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://aerodrome.finance/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://aerodrome.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://aerodrome.finance/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-m5lAjXB3objB6iPM4xK5c8pGjYTrocMTkj25TxNCzcw=')",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "62CA3193E8A5EE4F1F9980BEFBF7EF71",
+   "status": 200,
+   "url": "https://aerodrome.finance/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker",
+  "worker",
+  "worker",
+  "worker",
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "62CA3193E8A5EE4F1F9980BEFBF7EF71",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://aerodrome.finance/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Aerodrome Finance",
+  "bodyLen": 1397,
+  "nodes": 636,
+  "readyState": "complete",
+  "head": "Aerodrome Finance Dashboard Swap Liquidity Vote Lock Incentivize Connect Aerodrome Finance Swap, deposit, take to the skies Aerodrome is a decentralized exchange where you can execute low-fee swaps, deposit tokens to ear"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect",
+   "tag": "BUTTON",
+   "x": 1251.0390625,
+   "y": 44,
+   "top": 24
+  },
+  "all": [
+   "1:Connect"
+  ]
+ },
+ "clicked1": "Connect",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Aerodrome Finance",
+  "bodyLen": 1439,
+  "nodes": 655,
+  "readyState": "complete",
+  "head": "Aerodrome Finance Dashboard Swap Liquidity Vote Lock Incentivize Connect Aerodrome Finance Swap, deposit, take to the skies Aerodrome is a decentralized exchange where you can execute low-fee swaps, deposit tokens to ear"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://aerodrome.finance/",
+ "ms": 8150
+}

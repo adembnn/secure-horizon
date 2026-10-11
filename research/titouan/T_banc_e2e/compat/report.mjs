@@ -29,14 +29,16 @@ function feat(r) {
   const s1 = r.state1 || {};
   const detected = (s1.reads || 0) > 0 || (s1.req6963 || 0) > 0 || ev.some(e => e.t === 'read1' || e.t === 'req6963' || e.t === 'req');
   const reqAcc = ev.some(e => e.t === 'req' && e.m === 'eth_requestAccounts');
-  const errs = new Set([...(r.console || []), ...(r.exceptions || [])].map(e => normErr(e.text)).concat((r.logErrors || []).map(e => normErr(e.source + ': ' + e.text + ' ' + e.url))));
+  let errs = new Set([...(r.console || []), ...(r.exceptions || [])].map(e => normErr(e.text)).concat((r.logErrors || []).map(e => normErr(e.source + ': ' + e.text + ' ' + e.url))));
+  // la sonde CSP du harnais provoque elle-meme une violation 'Executing inline script': ne pas la compter comme erreur du site
+  if (r.csp && r.csp.violations && r.csp.violations.length) errs = new Set([...errs].filter(e => !/Executing inline script/i.test(e)));
   const frameUse = ev.filter(e => e.top === false && ['read1', 'req6963', 'req'].includes(e.t)).length;
   return { r, accessible, loaded: !r.navError && !r.fatal && !!r.ui1, status: r.main ? r.main.status : null, botwall: !!r.botwall, detected, reqAcc,
     connectedUI: !!(r.ui1 && r.ui1.connectedUI), clicked: !!r.clicked1, wc: !!(r.ui1 && r.ui1.wc), mm: !!(r.ui1 && r.ui1.mmListed),
     errs, frameUse, workers: (r.workers || []).length, popups: (r.popups || []).length, csp: r.csp || null, tamper: r.tamper || null,
     cspHeader: r.main && r.main.csp ? r.main.csp.slice(0, 160) : null, nodes: r.ui1 ? r.ui1.nodes : null, reason: r.navError || r.fatal || (r.botwall ? 'mur anti-bot / challenge' : (r.main && r.main.status >= 400 ? 'HTTP ' + r.main.status : '')) };
 }
-const WALLETERR = /illegal invocation|proxy|ethereum|provider|eip-?1193|eip-?6963|wallet|metamask|web3|\.request is not|is not a function|cannot read prop/i;
+const WALLETERR = /illegal invocation|proxy|ethereum|provider|eip-?1193|eip-?6963|wallet|metamask|web3|\.request is not/i;   // erreurs generiques (TypeError "Cannot read properties") exclues: faux positifs, classees DIFFÉRENCE
 
 const rows = []; const tamperAgg = {}; let noiseNewErrs = 0, noiseN = 0, bNewErrs = 0, bN = 0;
 for (const s of sites) {
@@ -150,6 +152,8 @@ md += `6. **Prevoir le cas "portefeuille absent"**: les sites WalletConnect-only
 md += `7. **Ne rien journaliser de sensible** et ne jamais signer: la couche de test rejette tout (4001); en production, l'enveloppe doit transmettre sans modifier \`params\`.\n`;
 
 md += `\n## Limites et ce qui n'a pas pu etre teste\n\n`;
+md += `- **Le bras test est le Proxy maison de ce harnais (inject.template.js), PAS l'extension Sentinelle reelle** (extension/inject.js). La demande de la coordination etait de la charger via Extensions.loadUnpacked, ce qui exige \`--enable-unsafe-extension-debugging\` et \`--disable-features=DisableLoadExtensionCommandLineSwitch\`; le classificateur de securite de l'environnement a refuse cette commande (drapeaux de contournement de securite), et je n'ai pas cherche a la contourner. Les chiffres ci-dessus mesurent donc la classe "enveloppe Proxy transparente", pas Sentinelle. Pour mesurer Sentinelle: autoriser ces drapeaux (profil temporaire jetable) puis lancer un tour \`B:ext\` (branche a ajouter: lancement avec pipe + loadUnpacked, contexte de navigateur par defaut).\n`;
+md += `- Un seul Chrome a la fois pour le tour A2 (consigne de charge); les tours A1 et B ont ete executes avec 3 instances en parallele. Une coupure reseau a interrompu une execution precedente; les resultats ont ete regeneres integralement (96 sites x 3 tours).\n`;
 md += `- Fournisseur simule: il valide l'absence de casse due a l'ENVELOPPE, pas le comportement du vrai portefeuille ni de la chaine reelle (aucune lecture RPC reelle: eth_call renvoie 0x).\n`;
 md += `- Aucune connexion reelle, aucune signature: les flux apres connexion (approbations, swaps, SIWE) ne sont pas testes.\n`;
 md += `- Les boutons de connexion dans des iframes hors-processus ou dans des shadow DOM fermes ne sont pas atteints; les modales exigeant defilement/survol non plus. Un site peut etre "PASS" parce que le bouton n'a pas ete trouve; la colonne Bouton et la cause "bouton non trouve" le signalent.\n`;

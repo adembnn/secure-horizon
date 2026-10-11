@@ -1,0 +1,387 @@
+{
+ "siteId": "superrare",
+ "url": "https://superrare.com/",
+ "arm": "control",
+ "started": "2026-10-11T01:08:05.033Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://sdk.nsureapi.com/sdkIframe.html"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://superrare.prismic.io/prismic-toolbar/4.1.17/iframe.html"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://superrare.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://superrare.com/"
+  }
+ ],
+ "console": [],
+ "exceptions": [
+  {
+   "top": true,
+   "text": "Error: Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+  }
+ ],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://superrare.com/api/next/auth/validate"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute width: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://superrare.com/_next/static/chunks/048wakjyiux_k.js"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute height: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://superrare.com/_next/static/chunks/048wakjyiux_k.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://superrare.com/api/next/auth/validate"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://superrare.com/api/next/auth/validate"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://superrare.com/api/next/auth/validate"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://superrare.com/api/next/auth/validate"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://superrare.com/api/next/auth/validate"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://superrare.com/api/next/auth/validate"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "8275FBFEDF78DD9FEF238D743FC0BE66",
+   "status": 200,
+   "url": "https://superrare.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "0DFE5D76701D8B88ABD9CF9D9400CC1F",
+   "status": 200,
+   "url": "https://sdk.nsureapi.com/sdkIframe.html",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "AmazonS3"
+  },
+  {
+   "frameId": "F749F8B5E674C0D18E835F6CA5C558A0",
+   "status": 200,
+   "url": "https://superrare.prismic.io/prismic-toolbar/4.1.17/iframe.html",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": null
+  }
+ ],
+ "frames": 2,
+ "frameKinds": [
+  "iframe",
+  "iframe"
+ ],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "8275FBFEDF78DD9FEF238D743FC0BE66",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Log In",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://superrare.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "SuperRare | Digital and Physical Art Marketplace",
+  "bodyLen": 6693,
+  "nodes": 3037,
+  "readyState": "complete",
+  "head": "Drops Collect Trade Create Activity Leaderboard Editorial Log in Your browser does not support the video tag. ANIMALS by peakstarwave 1/1/100 | .025 ETH | Blind Mint BLOOD of my BLOOD by COMPUTERBLOOD & GLITTERGHOST Blin"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 11,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 2,
+   "text": "Log In",
+   "tag": "DIV",
+   "x": 1244.1484375,
+   "y": 32,
+   "top": 12
+  },
+  "all": [
+   "2:Log In",
+   "2:Log In"
+  ]
+ },
+ "clicked1": "Log In",
+ "clickedTier": 2,
+ "find2": {
+  "n": 4,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "WUI-TEXT",
+   "x": 595.3359375,
+   "y": 535,
+   "area": 1326.09375
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Sign In superrare needs to connect to your wallet Sign this message to prove you own this wallet and proceed. Canceling will disconnect you. Sign In superrare needs to connect to your wallet Sign this message to prove you own this wallet and proceed. Canceling will disconnect you.",
+  "modalCount": 2,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "SuperRare | Digital and Physical Art Marketplace",
+  "bodyLen": 6852,
+  "nodes": 3049,
+  "readyState": "complete",
+  "head": "Drops Collect Trade Create Activity Leaderboard Editorial Log in Your browser does not support the video tag. ANIMALS by peakstarwave 1/1/100 | .025 ETH | Blind Mint BLOOD of my BLOOD by COMPUTERBLOOD & GLITTERGHOST Blin"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 11,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 28,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://superrare.com/",
+ "ms": 11856
+}

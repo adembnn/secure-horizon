@@ -1,0 +1,517 @@
+{
+ "persona": "michel_68_retraite_v2",
+ "reponses": [
+  {
+   "qid": "F01-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F01-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F01-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F02-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F02-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F02-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F03-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F03-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F03-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F05-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F05-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F05-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F06-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F06-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F06-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F07-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F07-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F07-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F08-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F08-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F08-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F09-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F09-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F09-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F11-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F11-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F11-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F12-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F12-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F12-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F13-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F13-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F13-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F14-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F14-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F14-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F15-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F15-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F15-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F16-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F16-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F16-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F17-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F17-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F17-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F18-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F18-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F18-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F19-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F19-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F19-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F20-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F20-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F20-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F21-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F21-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F21-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F22-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F22-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F22-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F23-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F23-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F23-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F24-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F24-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F24-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F25-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F25-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F25-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F26-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F26-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F26-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F27-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F27-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F27-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F28-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F28-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F28-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F29-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F29-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F29-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F30-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F30-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F30-Q3",
+   "choix": "A"
+  }
+ ],
+ "ressenti": [
+  {
+   "id": "F01",
+   "compris": "oui",
+   "blocage": "Pas bloqué, mais je ne sais pas ce que veut dire USDC ni 'autoriser un montant'."
+  },
+  {
+   "id": "F02",
+   "compris": "en partie",
+   "blocage": "'Procuration' et 'signature gratuite' : je ne vois pas bien le lien avec mon argent."
+  },
+  {
+   "id": "F03",
+   "compris": "en partie",
+   "blocage": "Je ne sais pas ce qu'est un NFT ni une 'collection' ; je veux juste afficher, pas vendre."
+  },
+  {
+   "id": "F04",
+   "compris": "oui",
+   "blocage": "Clair : on me paie presque rien. Le mot NFT m'échappe un peu."
+  },
+  {
+   "id": "F05",
+   "compris": "en partie",
+   "blocage": "'Texte illisible' : je ne comprends pas pourquoi on me demande de signer un message."
+  },
+  {
+   "id": "F06",
+   "compris": "en partie",
+   "blocage": "Les deux adresses se ressemblent, j'ai du mal à voir la différence ; 'connecte' et 'portefeuille' flous."
+  },
+  {
+   "id": "F07",
+   "compris": "en partie",
+   "blocage": "'Contrôle ton compte' est abstrait ; je ne vois pas ce qu'est cette adresse 0x."
+  },
+  {
+   "id": "F08",
+   "compris": "en partie",
+   "blocage": "Je n'ai pas de compte partagé ; 'accès secret' et 'opération' sont vagues."
+  },
+  {
+   "id": "F09",
+   "compris": "en partie",
+   "blocage": "'Programme étranger' et 'pleins pouvoirs' : je ne sais pas ce que c'est concrètement."
+  },
+  {
+   "id": "F10",
+   "compris": "en partie",
+   "blocage": "'Mise à jour', 'fonctionnement' : trop vague, je ne vois pas le risque."
+  },
+  {
+   "id": "F11",
+   "compris": "en partie",
+   "blocage": "'Mise à niveau', 'plusieurs réseaux' : jargon, je saisis juste 'ça peut tout faire'."
+  },
+  {
+   "id": "F12",
+   "compris": "non",
+   "blocage": "'Envoi groupé' et 'actions rangées derrière' : je ne comprends pas comment c'est possible."
+  },
+  {
+   "id": "F13",
+   "compris": "en partie",
+   "blocage": "Je comprends l'adresse trompeuse mais pas la question sur les premières/dernières lettres."
+  },
+  {
+   "id": "F14",
+   "compris": "non",
+   "blocage": "Pourquoi envoyer 0 ? Je ne comprends pas l'intérêt, c'est contre-intuitif."
+  },
+  {
+   "id": "F15",
+   "compris": "en partie",
+   "blocage": "'Copie du jeton' et 'adresse officielle' : je ne sais pas ce qu'est l'adresse d'un jeton."
+  },
+  {
+   "id": "F16",
+   "compris": "oui",
+   "blocage": "Clair : je ne pourrai pas revendre. 'Test de revente' un peu bizarre."
+  },
+  {
+   "id": "F17",
+   "compris": "oui",
+   "blocage": "Le résultat va à quelqu'un d'autre, c'est clair."
+  },
+  {
+   "id": "F18",
+   "compris": "en partie",
+   "blocage": "'Perte maximale', 'robots' : je comprends que je reçois bien moins, pas comment l'éviter."
+  },
+  {
+   "id": "F19",
+   "compris": "en partie",
+   "blocage": "'Logiciel espion' remplace l'adresse : surprenant, je comprends à peine."
+  },
+  {
+   "id": "F20",
+   "compris": "oui",
+   "blocage": "Faux site avec une lettre changée ; je ferme, c'est clair."
+  },
+  {
+   "id": "F21",
+   "compris": "oui",
+   "blocage": "Style arnaque au téléphone que je connais bien."
+  },
+  {
+   "id": "F22",
+   "compris": "oui",
+   "blocage": "Clair, on ne paie pas pour être remboursé."
+  },
+  {
+   "id": "F23",
+   "compris": "oui",
+   "blocage": "Clair, mais je ne vois pas le lien embauche/signature."
+  },
+  {
+   "id": "F24",
+   "compris": "en partie",
+   "blocage": "Rien n'est dit de faux ; je ne vois pas bien ce qui m'alerte."
+  },
+  {
+   "id": "F25",
+   "compris": "en partie",
+   "blocage": "'Nous n'avons pas pu vérifier' : je ne sais pas si c'est grave ou non."
+  },
+  {
+   "id": "F26",
+   "compris": "en partie",
+   "blocage": "Écran rassurant, mais 'vérification limitée' est confus ; je suis tenté de signer."
+  },
+  {
+   "id": "F27",
+   "compris": "oui",
+   "blocage": "Cadeau contre signature : méfiance, ça sent l'arnaque."
+  },
+  {
+   "id": "F28",
+   "compris": "oui",
+   "blocage": "Appel au proche, c'est le bon réflexe."
+  },
+  {
+   "id": "F29",
+   "compris": "en partie",
+   "blocage": "'Polygon', 'Ethereum', 'réseau' : je ne sais pas ce que c'est."
+  },
+  {
+   "id": "F30",
+   "compris": "en partie",
+   "blocage": "'Prélever tous les 90 jours' compris, mais 'annuler' comment ? Je ne sais pas."
+  }
+ ]
+}

@@ -1,0 +1,193 @@
+{
+ "siteId": "zerion",
+ "url": "https://app.zerion.io/",
+ "arm": "control",
+ "started": "2026-10-11T01:08:55.604Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/trending"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.zerion.io/connect-wallet"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "0DA88173FEC17ADD78EB840E417B78DC",
+   "status": 200,
+   "url": "https://app.zerion.io/trending",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self' https://gnosis-safe.io https://dev.gnosis-safe.io https://app.safe.global https://platform.apps.ledger.com https://dapp-browser.apps.ledger.com https://*.blockscout.com chrome-extension://* moz-extension://*",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "0DA88173FEC17ADD78EB840E417B78DC",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.zerion.io/trending",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self' https://gnosis-safe.io https://dev.gnosis-safe.io https://app.safe.global https://platform.apps.ledger.com https://dapp-browser.apps.ledger.com https://*.blockscout.com chrome-extension://* moz-extension://*",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Trending | Zerion",
+  "bodyLen": 5858,
+  "nodes": 3512,
+  "readyState": "complete",
+  "head": "Connect Wallet Portfolio Following Favorites Trade Swap & Bridge Perps Earn Explore Trending Stocks Collections Premium Rewards 0.1 USD Connect Wallet Search / Portfolio Following Favorites Trade Swap & Bridge Perps Earn"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 16,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "A",
+   "x": 123.9921875,
+   "y": 45,
+   "top": 25
+  },
+  "all": [
+   "1:Connect Wallet",
+   "1:Connect wallet to manage your portfolio"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Portfolio Tracker by Zerion, Crypto Wallet for NFTs and DeFi",
+  "bodyLen": 2047,
+  "nodes": 1279,
+  "readyState": "complete",
+  "head": "Connect Wallet Portfolio Following Favorites Trade Swap & Bridge Perps Earn Explore Trending Stocks Collections Premium Rewards 0.1 USD Connect Wallet Search / Portfolio Following Favorites Trade Swap & Bridge Perps Earn"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 26,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 7,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.zerion.io/connect-wallet",
+ "ms": 11482
+}

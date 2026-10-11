@@ -1,0 +1,141 @@
+{
+ "siteId": "yearn",
+ "url": "https://yearn.fi/",
+ "arm": "control",
+ "started": "2026-10-11T01:04:32.326Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://yearn.fi/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://yearn.fi/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://yearn.fi/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "CFC114F59C8FEBDA3B06958006189FD6",
+   "status": 200,
+   "url": "https://yearn.fi/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self' https://app.safe.global https://eth.blockscout.com https://polygon.blockscout.com https://base.blockscout.com https://arbitrum.blockscout.com https://explorer.optimism.io https://dapps.coin98.com; report-uri https://o4510960324837376.ingest.us.sentry.io/api/4510960614375424/security/?sentry_key=6b1b2932f1532eff2227d01a122adbb4",
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "CFC114F59C8FEBDA3B06958006189FD6",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://yearn.fi/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self' https://app.safe.global https://eth.blockscout.com https://polygon.blockscout.com https://base.blockscout.com https://arbitrum.blockscout.com https://explorer.optimism.io https://dapps.coin98.com; report-uri https://o4510960324837376.ingest.us.sentry.io/api/4510960614375424/security/?sentry_key=6b1b2932f1532eff2227d01a122adbb4",
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Yearn Vaults",
+  "bodyLen": 1673,
+  "nodes": 486,
+  "readyState": "complete",
+  "head": "Ecosystem Resources $ 246,479,018 deposited in Yearn Vaults in Yearn Earn on your Crypto Yearn is DeFi's Yield Aggregator Explore Vaults $ 246,479,018 deposited in Yearn Vaults in Yearn Earn on your Crypto DeFi's most ba"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Yearn Vaults",
+  "bodyLen": 1673,
+  "nodes": 486,
+  "readyState": "complete",
+  "head": "Ecosystem Resources $ 246,479,018 deposited in Yearn Vaults in Yearn Earn on your Crypto Yearn is DeFi's Yield Aggregator Explore Vaults $ 246,479,018 deposited in Yearn Vaults in Yearn Earn on your Crypto DeFi's most ba"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://yearn.fi/",
+ "ms": 5212
+}

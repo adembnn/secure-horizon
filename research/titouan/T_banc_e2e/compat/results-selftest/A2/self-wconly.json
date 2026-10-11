@@ -2,7 +2,7 @@
  "siteId": "self-wconly",
  "url": "http://127.0.0.1:8777/wconly",
  "arm": "control",
- "started": "2026-10-11T00:09:41.681Z",
+ "started": "2026-10-11T01:14:58.349Z",
  "events": [
   {
    "t": "frame",
@@ -30,7 +30,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "045D145ACFCB42CF426FD1CAE3A2765A",
+   "frameId": "5E8831887B7CA893388C9CFA8D94B21D",
    "status": 200,
    "url": "http://127.0.0.1:8777/wconly",
    "mime": "text/html",
@@ -45,7 +45,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "045D145ACFCB42CF426FD1CAE3A2765A",
+ "mainFrameId": "5E8831887B7CA893388C9CFA8D94B21D",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -80,6 +80,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -124,10 +126,13 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
  },
+ "evN": 2,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -149,5 +154,5 @@
   "overwritten": false
  },
  "finalUrl": "http://127.0.0.1:8777/wconly",
- "ms": 7910
+ "ms": 7516
 }

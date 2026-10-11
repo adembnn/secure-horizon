@@ -1,0 +1,283 @@
+{
+ "siteId": "ethena",
+ "url": "https://app.ethena.fi/",
+ "arm": "control",
+ "started": "2026-10-11T01:06:04.228Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ethena.fi/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Loading the image 'https://v6.tag.adrsbl.io/v1/resolve?data=eyJhZmxpZCI6IjlkeGd5bG4xYzBwNG9iZWthajNyIn0%3D' violates the following Content Security Policy directive: \"img-src 'self' blob: data: gap: h",
+   "url": "https://app.ethena.fi/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://secure.adnxs.com/getuidp?callback=func' from origin 'https://app.ethena.fi' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the reque",
+   "url": "https://app.ethena.fi/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://secure.adnxs.com/getuidp?callback=func"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute width: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://app.ethena.fi/_next/static/chunks/7324.91cd801056bcf0d4.js?dpl=dpl_GXJ9Y3jMQVhnoQZ7MJGCnLkc8G2T"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute height: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://app.ethena.fi/_next/static/chunks/7324.91cd801056bcf0d4.js?dpl=dpl_GXJ9Y3jMQVhnoQZ7MJGCnLkc8G2T"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 500 ()",
+   "url": "https://eth.drpc.org/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "890577577C590A963085728FDCD77C30",
+   "status": 200,
+   "url": "https://app.ethena.fi/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.posthog.com https://tag.adrsbl.io https://cdn.id5-sync.com https://va.vercel-scripts.com/v1/script.debug.js https://va.vercel-scripts.com/v1/speed-insights/script.debug.js https://us-assets.i.posthog.com/static/dead-clicks-autocapture.js https://us-assets.i.posthog.com/array/ https://us-assets.i.posthog.com/array https://us-assets.i.posthog.com/static/toolbar.js https://us-assets.i.posthog.com/static/surveys.js https://connectors.walletconnect.org wss://*.walletconnect.org 'wasm-unsafe-eval' https://vercel.live https://prod-y-0ge.quill.run/js https://staging-r3jyf.quill.run/js; img-src 'self' blob: data: gap: https://app.hyperliquid.xyz https://app.hyperunit.xyz https://canarytokens.com https://explorer-api.walletconnect.com https://static.okx.com https://app.ethena.fi https://walletconnect.org https://walletconnect.com https://secure.walletconnect.com https://secure.walletconnect.org https://tokens-data.1inch.io https://tokens.1inch.io https://ipfs.io https://raw.githubusercontent.com/ https://s2.coinmarketcap.com/ https://static.debank.com/ https://assets.coingecko.com/ https://arweave.net/ https://optimistic.etherscan.io https://cdn.zerion.io https://euc.li https://wallet.tg https://tonkeeper.com https://static.mytonwallet.io https://tonhub.com https://public.bnbstatic.com/ https://img.bitgetimg.com https://wallet.ton.org https://ethena.fi/shared/ https://storage.googleapis.com/ https://s.pvcliping.com/ https://pub.tomo.inc/ https://cdn.mirailabs.co/ https://hk.tpstatic.net/ https://chain-cdn.uxuy.com/ https://app.tobiwallet.app/ https://xtonwallet.com/ https://img.gatedataimg.com/ https://static.nicegram.app/ https://cdn.echooo.xyz/ https://blitzwallet.cfd/wallet/public/ https://config.ton.org https://lifinance.github.io https://ethena.ghost.io https://storage.ghost.io https://api.sim.dune.com https://dune-echo-images.s3.eu-west-1.amazonaws.com https://tag.adrsbl.io https://api.adradv.io; style-src 'self' 'unsafe-inline' https://*.posthog.com https://fonts.googleapis.com https://us.posthog.com/static/toolbar.css; object-src 'none'; font-src 'self' https://fonts.gstatic.com data:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-src 'self' https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://connect.walletconnect.org https://connect.solflare.com/ https://widget.solflare.com/ https://vercel.live; frame-ancestors 'none'; connect-src *; manifest-src 'self' https://app.safe.global https://walletbot.me; upgrade-insecure-requests;",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "Vercel"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "890577577C590A963085728FDCD77C30",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.ethena.fi/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.posthog.com https://tag.adrsbl.io https://cdn.id5-sync.com https://va.vercel-scripts.com/v1/script.debug.js https://va.vercel-scripts.com/v1/speed-insights/script.debug.js https://us-assets.i.posthog.com/static/dead-clicks-autocapture.js https://us-assets.i.posthog.com/array/ https://us-assets.i.posthog.com/array https://us-assets.i.posthog.com/static/toolbar.js https://us-assets.i.posthog.com/static/surveys.js https://connectors.walletconnect.org wss://*.walletconnect.org 'wasm-unsafe-eval' https://vercel.live https://prod-y-0ge.quill.run/js https://staging-r3jyf.quill.run/js; img-src 'self' blob: data: gap: https://app.hyperliquid.xyz https://app.hyperunit.xyz https://canarytokens.com https://explorer-api.walletconnect.com https://static.okx.com https://app.ethena.fi https://walletconnect.org https://walletconnect.com https://secure.walletconnect.com https://secure.walletconnect.org https://tokens-data.1inch.io https://tokens.1inch.io https://ipfs.io https://raw.githubusercontent.com/ https://s2.coinmarketcap.com/ https://static.debank.com/ https://assets.coingecko.com/ https://arweave.net/ https://optimistic.etherscan.io https://cdn.zerion.io https://euc.li https://wallet.tg https://tonkeeper.com https://static.mytonwallet.io https://tonhub.com https://public.bnbstatic.com/ https://img.bitgetimg.com https://wallet.ton.org https://ethena.fi/shared/ https://storage.googleapis.com/ https://s.pvcliping.com/ https://pub.tomo.inc/ https://cdn.mirailabs.co/ https://hk.tpstatic.net/ https://chain-cdn.uxuy.com/ https://app.tobiwallet.app/ https://xtonwallet.com/ https://img.gatedataimg.com/ https://static.nicegram.app/ https://cdn.echooo.xyz/ https://blitzwallet.cfd/wallet/public/ https://config.ton.org https://lifinance.github.io https://ethena.ghost.io https://storage.ghost.io https://api.sim.dune.com https://dune-echo-images.s3.eu-west-1.amazonaws.com https://tag.adrsbl.io https://api.adradv.io; style-src 'self' 'unsafe-inline' https://*.posthog.com https://fonts.googleapis.com https://us.posthog.com/static/toolbar.css; object-src 'none'; font-src 'self' https://fonts.gstatic.com data:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-src 'self' https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://connect.walletconnect.org https://connect.solflare.com/ https://widget.solflare.com/ https://vercel.live; frame-ancestors 'none'; connect-src *; manifest-src 'self' https://app.safe.global https://walletbot.me; upgrade-insecure-requests;",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "App | Ethena",
+  "bodyLen": 738,
+  "nodes": 429,
+  "readyState": "complete",
+  "head": "Savings Swap Rewards Dashboards $5.3B 4.7% APY Connect Wallet 4.7 % APY Earning Made Easy Hold sUSDe and earn 4.7% APY - no claiming or complexity. Your balance compounds automatically, every second. Start Earning → Lear"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 24,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1232.140625,
+   "y": 56,
+   "top": 37
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 4,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "WUI-TEXT",
+   "x": 602.1953125,
+   "y": 292,
+   "area": 1375.03125
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Terms of Service & Privacy Policy I acknowledge and agree to the Terms of Service, Privacy Policy, and other terms of use detailed at https://docs.ethena.fi/resources/terms-of-service . Accept Reject",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "App | Ethena",
+  "bodyLen": 1590,
+  "nodes": 598,
+  "readyState": "complete",
+  "head": "Savings Swap Rewards Dashboards $5.3B 4.7% APY 0x11...1111 Total Value $0 sUSDe APY 4.7% Token icon Token Balance Daily Earnings APY sUSDe sUSDe $0 $0 0 $0 4.7% USDe USDe $1.00 $0 +$0 Potential - Loading Stake Unstake US"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 26,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 16,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.ethena.fi/",
+ "ms": 15914
+}

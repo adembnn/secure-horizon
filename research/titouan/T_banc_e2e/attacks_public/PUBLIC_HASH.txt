@@ -1,0 +1,6 @@
+SHA-256 de PUBLIC.jsonl (jeu REGRESSION_PUBLIQUE) :
+79b13a3eebdbbe3d449736be12043efee92f3be6940e40bb19b6e77794f9cbb6
+
+nb_cas=144
+graine=20261011
+Regle : jeu REGRESSION_PUBLIQUE, distinct de DEV et de TEST. Genere par gen_public.mjs AVANT toute mesure. L'ameliorateur ne le voit qu'APRES la premiere mesure (out/MESURE_001.*). Ne jamais regler un seuil dessus sans l'avoir signale (risque de sur-ajustement), ne jamais l'ecrire dans run/out/TACHES.md.

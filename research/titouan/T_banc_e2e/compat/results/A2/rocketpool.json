@@ -1,0 +1,158 @@
+{
+ "siteId": "rocketpool",
+ "url": "https://stake.rocketpool.net/",
+ "arm": "control",
+ "started": "2026-10-11T01:01:15.953Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://stake.rocketpool.net/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://stake.rocketpool.net/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://stake.rocketpool.net/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "28E03A293E81E298ECBE907EE86E3606",
+   "status": 200,
+   "url": "https://stake.rocketpool.net/",
+   "mime": "text/html",
+   "csp": "frame-ancestors https://app.safe.global/ https://dapp-browser.ledger.com https://dapp-browser.apps.ledger.com",
+   "cspRO": null,
+   "xfo": "ALLOW-FROM https://app.safe.global/ https://dapp-browser.apps.ledger.com https://dapp-browser.ledger.com",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "28E03A293E81E298ECBE907EE86E3606",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://stake.rocketpool.net/",
+  "mime": "text/html",
+  "csp": "frame-ancestors https://app.safe.global/ https://dapp-browser.ledger.com https://dapp-browser.apps.ledger.com",
+  "cspRO": null,
+  "xfo": "ALLOW-FROM https://app.safe.global/ https://dapp-browser.apps.ledger.com https://dapp-browser.ledger.com",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Stake - Rocket Pool",
+  "bodyLen": 865,
+  "nodes": 237,
+  "readyState": "complete",
+  "head": "Rocket Pool is a decentralised staking protocol providing liquid & node staking products for the Ethereum (ETH) ecosystem. Rocket Pool Open menu Stake ETH Balance: 0.00 ETH Max ≈ $2,504.09 USD Insufficient balance Switch"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 675.5,
+   "y": 808,
+   "top": 779
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "Connect Wallet I agree to our terms of service and privacy policy Connect Wallet I agree to our terms of service and privacy policy",
+  "modalCount": 2,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Stake - Rocket Pool",
+  "bodyLen": 1044,
+  "nodes": 238,
+  "readyState": "complete",
+  "head": "Rocket Pool is a decentralised staking protocol providing liquid & node staking products for the Ethereum (ETH) ecosystem. Rocket Pool Open menu Stake ETH Balance: 0.00 ETH Max ≈ $2,504.09 USD Insufficient balance Switch"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 4,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://stake.rocketpool.net/",
+ "ms": 9462
+}

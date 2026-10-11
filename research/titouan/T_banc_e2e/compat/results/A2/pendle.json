@@ -1,0 +1,173 @@
+{
+ "siteId": "pendle",
+ "url": "https://app.pendle.finance/",
+ "arm": "control",
+ "started": "2026-10-11T01:01:26.921Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.pendle.finance/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.pendle.finance/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.pendle.finance/trade/markets"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' https://www.googletagmanager.com https://tools.luckyorange.com https://cdn.mxpnl.com https://challen",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "A87080DEA61F78A1C0943D83A213A690",
+   "status": 200,
+   "url": "https://app.pendle.finance/",
+   "mime": "text/html",
+   "csp": "frame-ancestors https://app.safe.global https://coinshift.global https://*.coinshift.global http://localhost:5173 http://localhost:3000;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "A87080DEA61F78A1C0943D83A213A690",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.pendle.finance/",
+  "mime": "text/html",
+  "csp": "frame-ancestors https://app.safe.global https://coinshift.global https://*.coinshift.global http://localhost:5173 http://localhost:3000;",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Markets | Pendle",
+  "bodyLen": 4250,
+  "nodes": 1862,
+  "readyState": "complete",
+  "head": "Markets Limit Order Incentives Place limit orders, earn PENDLE! Highest Fixed Yield See All > sUSDx 52 days 18,91 % fixed APY reUSDe 59 days 18,46 % fixed APY USD3 66 days 15,05 % fixed APY Top New Pools See All > sUSDfr"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 3,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1275.1640625,
+   "y": 28,
+   "top": 14
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "ui1": {
+  "modal": "Connect Wallet I agree to our terms of service and privacy policy WalletConnect Connect Wallet I agree to our terms of service and privacy policy WalletConnect qr code",
+  "modalCount": 2,
+  "wc": true,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Markets | Pendle",
+  "bodyLen": 4384,
+  "nodes": 1870,
+  "readyState": "complete",
+  "head": "Markets Limit Order Incentives Place limit orders, earn PENDLE! Highest Fixed Yield See All > sUSDx 52 days 18,91 % fixed APY reUSDe 59 days 18,46 % fixed APY USD3 66 days 15,05 % fixed APY Top New Pools See All > sUSDfr"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 3,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 5,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.pendle.finance/trade/markets",
+ "ms": 11188
+}

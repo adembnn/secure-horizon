@@ -82,6 +82,12 @@ for (const fiche of doc.fiches) {
   for (const champ of ['menace', 'croit', 'reel', 'danger', 'action', 'gravite_phrase']) {
     verifierLigne(id, champ, fiche[champ]);
   }
+  if (fiche.variante_info) {
+    const v = fiche.variante_info;
+    if (v.gravite !== 'info') err(id, 'variante_info', 'la variante courte doit être de niveau info');
+    if (!Array.isArray(v.lignes) || v.lignes.length !== 2) err(id, 'variante_info', '2 lignes attendues');
+    else v.lignes.forEach((l, i) => verifierLigne(id, `variante_info.ligne${i + 1}`, l));
+  }
   if (typeof fiche.technique !== 'string' || !fiche.technique) err(id, 'technique', 'absent (nom interne)');
   if (!NIVEAUX.includes(fiche.gravite)) err(id, 'gravite', `niveau inconnu « ${fiche.gravite} »`);
   niveaux[fiche.gravite] = (niveaux[fiche.gravite] ?? 0) + 1;

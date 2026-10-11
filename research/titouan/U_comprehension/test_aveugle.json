@@ -2,9 +2,9 @@
  {
   "id": "F01",
   "ecran": {
-   "croit": "Je confirme mon échange sur uniswap.org, comme d'habitude.",
-   "reel": "Si tu signes, uniswap.org pourra retirer tes 2 480 USDC quand il veut.",
-   "danger": "Ce site demande un droit sans limite, bien plus que nécessaire.",
+   "croit": "Je veux seulement faire mon échange sur uniswap.org.",
+   "reel": "Tu donnes à uniswap.org le droit de prendre tes USDC sans limite.",
+   "danger": "Ce droit dure tant que tu ne le retires pas toi-même.",
    "action": "Refuse, ou autorise seulement 2 480 USDC, pas plus."
   },
   "questions": [
@@ -13,17 +13,17 @@
     "q": "Que peut faire ce site si tu signes ?",
     "options": {
      "A": "Rien du tout",
-     "B": "Dépenser tes jetons quand il veut",
-     "C": "T'envoyer des jetons"
+     "B": "T'envoyer des jetons",
+     "C": "Dépenser tes jetons quand il veut"
     }
    },
    {
     "qid": "F01-Q2",
-    "q": "Ce droit s'arrête quand ?",
+    "q": "Combien de temps ce droit dure-t-il ?",
     "options": {
-     "A": "Après l'échange",
-     "B": "Après une heure",
-     "C": "Quand tu le retires toi-même"
+     "A": "Pendant une heure seulement",
+     "B": "Jusqu'à la fin de l'échange",
+     "C": "Jusqu'à ce que tu le retires toi-même"
     }
    },
    {
@@ -50,9 +50,9 @@
     "qid": "F02-Q1",
     "q": "Pourquoi cette signature est-elle risquée, même gratuite ?",
     "options": {
-     "A": "Elle peut valoir un chèque signé",
+     "A": "Elle efface ton compte",
      "B": "Elle coûte très cher en frais",
-     "C": "Elle efface ton compte"
+     "C": "Elle peut valoir un chèque signé"
     }
    },
    {
@@ -97,9 +97,9 @@
     "qid": "F03-Q2",
     "q": "Cela inclut-il les NFT reçus plus tard ?",
     "options": {
-     "A": "Oui",
+     "A": "Seulement la moitié",
      "B": "Non",
-     "C": "Seulement la moitié"
+     "C": "Oui"
     }
    },
    {
@@ -117,18 +117,18 @@
   "id": "F04",
   "ecran": {
    "croit": "Je mets mon NFT en vente au prix que j'ai choisi.",
-   "reel": "Ton NFT sera vendu pour 2 480 USDC: n'importe qui pourra le prendre.",
-   "danger": "Le prix est glissé dans un message que presque personne ne lit.",
-   "action": "Annule, puis vérifie le prix de vente dans ton portefeuille."
+   "reel": "Tu recevras seulement 0,001 ETH pour ton NFT, qui vaut 4 ETH.",
+   "danger": "N'importe qui pourra l'acheter à ce prix dès que tu signes.",
+   "action": "Annule: ne signe pas une vente à un prix aussi bas."
   },
   "questions": [
    {
     "qid": "F04-Q1",
-    "q": "Combien reçois-tu pour ton NFT ?",
+    "q": "Que reçois-tu en échange de ton NFT si tu signes ?",
     "options": {
-     "A": "Presque rien",
-     "B": "Le prix du marché",
-     "C": "Le double"
+     "A": "Le double",
+     "B": "Sa valeur réelle",
+     "C": "Presque rien"
     }
    },
    {
@@ -136,8 +136,8 @@
     "q": "Qui peut acheter ton NFT à ce prix ?",
     "options": {
      "A": "Seulement toi",
-     "B": "N'importe qui",
-     "C": "Personne"
+     "B": "Personne",
+     "C": "N'importe qui"
     }
    },
    {
@@ -156,7 +156,7 @@
   "ecran": {
    "croit": "Je signe un message pour prouver que c'est bien moi.",
    "reel": "Ce texte illisible peut autoriser le retrait de tes 2 480 USDC.",
-   "danger": "Personne ne peut lire ce message, pas même nous.",
+   "danger": "Même sur un site connu, un texte illisible peut cacher un piège.",
    "action": "Ne signe pas un texte que tu ne peux pas lire."
   },
   "questions": [
@@ -180,11 +180,11 @@
    },
    {
     "qid": "F05-Q3",
-    "q": "Que fais-tu face à cette alerte ?",
+    "q": "Le site est connu, le texte est illisible. Que fais-tu ?",
     "options": {
-     "A": "Je signe si le site est connu",
-     "B": "Je refuse de signer",
-     "C": "Je signe deux fois"
+     "A": "Je refuse de signer",
+     "B": "Je signe, le site est connu",
+     "C": "Je signe en lisant en diagonale"
     }
    }
   ]
@@ -194,7 +194,7 @@
   "ecran": {
    "croit": "Je me connecte à uniswap.org avec mon portefeuille.",
    "reel": "Ce message te connecte à unlswap-app.com, pas à uniswap.org.",
-   "danger": "Un faux site imite uniswap.org pour récupérer ta connexion.",
+   "danger": "Les deux adresses se ressemblent: unlswap-app.com copie uniswap.org avec une lettre changée.",
    "action": "Ferme la page et ouvre uniswap.org depuis tes favoris."
   },
   "questions": [
@@ -211,9 +211,9 @@
     "qid": "F06-Q2",
     "q": "À quel site es-tu vraiment connecté ?",
     "options": {
-     "A": "À {site}",
-     "B": "À {site_reel}",
-     "C": "À aucun"
+     "A": "À unlswap-app.com",
+     "B": "À uniswap.org",
+     "C": "À aucun des deux"
     }
    },
    {
@@ -344,28 +344,28 @@
  {
   "id": "F10",
   "ecran": {
-   "croit": "Je valide une amélioration du service que j'utilise.",
-   "reel": "Si tu signes, le service sera remplacé: il pourra prendre tes USDC.",
-   "danger": "Le programme du service change, et le nouveau code est inconnu.",
-   "action": "Attends et vérifie l'annonce officielle du service avant de signer."
+   "croit": "Le service m'invite à valider une mise à jour.",
+   "reel": "Après ta signature, le service pourra prendre tes USDC, sans te demander.",
+   "danger": "Personne ne peut lire ce nouveau fonctionnement avant ta signature.",
+   "action": "Prends le temps: cherche l'annonce officielle du service avant de signer."
   },
   "questions": [
    {
     "qid": "F10-Q1",
     "q": "Que change cette opération ?",
     "options": {
-     "A": "Ton mot de passe",
-     "B": "Le programme du service",
+     "A": "Le fonctionnement du service",
+     "B": "Ton mot de passe",
      "C": "Ton adresse"
     }
    },
    {
     "qid": "F10-Q2",
-    "q": "Peut-on lire le nouveau code ?",
+    "q": "Peux-tu lire ce que le service fera après ?",
     "options": {
-     "A": "Pas ici, il est inconnu",
-     "B": "Oui, facilement",
-     "C": "Oui, en entier"
+     "A": "Non, c'est caché pour l'instant",
+     "B": "Oui, c'est affiché ici",
+     "C": "Oui, en entier sur le site"
     }
    },
    {
@@ -497,17 +497,17 @@
   "id": "F14",
   "ecran": {
    "croit": "Cette ligne de mon historique vient de mon contact habituel.",
-   "reel": "Cet envoi de 2 480 USDC vient d'un inconnu, pas de ton contact.",
-   "danger": "Un inconnu envoie zéro pour que son adresse apparaisse dans ton historique.",
-   "action": "Ne copie jamais d'adresse depuis ton historique; demande-la à ton contact."
+   "reel": "Un inconnu t'a envoyé 0 USDC pour apparaître dans ton historique.",
+   "danger": "Il imite ton contact: ton prochain envoi risque d'aller chez lui.",
+   "action": "Ne copie pas cette adresse; demande-la à ton contact."
   },
   "questions": [
    {
     "qid": "F14-Q1",
-    "q": "Pourquoi un inconnu t'envoie-t-il zéro ?",
+    "q": "Pourquoi un inconnu t'envoie-t-il un montant de zéro ?",
     "options": {
-     "A": "Pour te faire un cadeau",
-     "B": "Pour se glisser dans ton historique",
+     "A": "Pour apparaître dans ton historique",
+     "B": "Pour te faire un cadeau",
      "C": "Par erreur"
     }
    },
@@ -535,9 +535,9 @@
   "id": "F15",
   "ecran": {
    "croit": "J'achète le vrai USDC, celui que tout le monde connaît.",
-   "reel": "Tu paierais 2 480 USDC pour une copie sans valeur.",
-   "danger": "Un escroc a créé un jeton au même nom que le vrai.",
-   "action": "Annule et cherche le vrai jeton sur le site officiel."
+   "reel": "Tu paierais 2 480 USDC pour une copie qui ne vaut rien.",
+   "danger": "Le nom et le logo se copient: seule l'adresse officielle prouve.",
+   "action": "Annule et retrouve le vrai jeton depuis le site officiel du projet."
   },
   "questions": [
    {
@@ -553,9 +553,9 @@
     "qid": "F15-Q2",
     "q": "Qu'est-ce qui prouve qu'un jeton est le vrai ?",
     "options": {
-     "A": "Son nom",
-     "B": "Son logo",
-     "C": "Son adresse officielle"
+     "A": "Son adresse sur le site officiel",
+     "B": "Son nom",
+     "C": "Son logo"
     }
    },
    {
@@ -763,17 +763,17 @@
   "id": "F21",
   "ecran": {
    "croit": "Le support me guide pour protéger mes fonds.",
-   "reel": "Si tu envoies 2 480 USDC comme demandé, tu les perds pour toujours.",
-   "danger": "Un vrai support ne te demande jamais de déplacer tes fonds.",
+   "reel": "Tu envoies 2 480 USDC à un escroc: personne ne pourra les récupérer.",
+   "danger": "Un vrai support ne te demande jamais de signer ni d'envoyer.",
    "action": "Raccroche, puis rappelle toi-même le numéro officiel du service."
   },
   "questions": [
    {
     "qid": "F21-Q1",
-    "q": "Un vrai support te demande-t-il de déplacer tes fonds ?",
+    "q": "Un vrai support te demande-t-il de signer ou d'envoyer ?",
     "options": {
-     "A": "Parfois",
-     "B": "Jamais",
+     "A": "Jamais",
+     "B": "Parfois",
      "C": "Toujours"
     }
    },
@@ -801,8 +801,8 @@
   "id": "F22",
   "ecran": {
    "croit": "Je paie de petits frais pour récupérer l'argent perdu.",
-   "reel": "Tu paies 2 480 USDC de frais et le remboursement n'arrivera jamais.",
-   "danger": "Les escrocs ciblent ceux qui ont déjà perdu, puis demandent des frais.",
+   "reel": "Tu perds 2 480 USDC de plus et ne récupères jamais rien.",
+   "danger": "Aucun vrai service ne te fait payer pour te rembourser.",
    "action": "Ne paie rien d'avance: un vrai remboursement n'est jamais payant."
   },
   "questions": [
@@ -839,14 +839,14 @@
   "id": "F23",
   "ecran": {
    "croit": "Je valide mon embauche, comme me l'a dit le recruteur.",
-   "reel": "Tu autorises ce site à dépenser tes 2 480 USDC, sans aucun salaire.",
-   "danger": "Ce recruteur inconnu te demande de signer avant de t'embaucher.",
+   "reel": "Tu donnes à ce site le droit de prendre tes 2 480 USDC.",
+   "danger": "Un vrai employeur ne te demande jamais de signer pour t'embaucher.",
    "action": "Ne signe rien et vérifie l'entreprise sur son site officiel."
   },
   "questions": [
    {
     "qid": "F23-Q1",
-    "q": "Un vrai employeur te fait-il signer avec ton portefeuille ?",
+    "q": "Un vrai employeur te demande-t-il de signer pour t'embaucher ?",
     "options": {
      "A": "Jamais",
      "B": "Souvent",
@@ -878,8 +878,8 @@
   "ecran": {
    "croit": "J'envoie de l'argent à quelqu'un en qui j'ai confiance.",
    "reel": "Tu envoies 2 480 USDC à une adresse neuve, sans retour possible.",
-   "danger": "Tout semble correct, mais quelqu'un te guide et le montant est grand.",
-   "action": "Attends un jour et parle à un proche de confiance."
+   "danger": "Des escrocs gagnent ta confiance en ligne, puis demandent un gros envoi.",
+   "action": "Tu décides: vérifie qui te demande cet envoi, et pourquoi."
   },
   "questions": [
    {
@@ -904,9 +904,9 @@
     "qid": "F24-Q3",
     "q": "Que fais-tu face à cette alerte ?",
     "options": {
-     "A": "J'envoie tout",
-     "B": "J'envoie la moitié",
-     "C": "J'attends et j'en parle à un proche"
+     "A": "Je vérifie qui me demande cet envoi, et pourquoi",
+     "B": "J'envoie tout",
+     "C": "J'envoie la moitié"
     }
    }
   ]
@@ -914,10 +914,10 @@
  {
   "id": "F25",
   "ecran": {
-   "croit": "Je pense que cette opération est sûre, puisqu'aucune alerte n'apparaît.",
+   "croit": "Aucune alerte ne s'affiche, donc je peux signer sans crainte.",
    "reel": "Nous n'avons pas pu vérifier cette opération sur tes 2 480 USDC.",
-   "danger": "Notre vérification n'a pas fini, donc nous ne pouvons rien affirmer.",
-   "action": "Réessaie dans un instant, ou demande l'avis d'un proche."
+   "danger": "Elle peut être piégée comme elle peut être normale: nous l'ignorons.",
+   "action": "Réessaie dans un instant. Sans résultat, vérifie toi-même avant de signer."
   },
   "questions": [
    {
@@ -931,19 +931,19 @@
    },
    {
     "qid": "F25-Q2",
-    "q": "Une absence de réponse veut-elle dire que tout va bien ?",
+    "q": "Aucune alerte affichée veut-il dire que tout va bien ?",
     "options": {
-     "A": "Oui",
-     "B": "Parfois",
-     "C": "Non"
+     "A": "Non",
+     "B": "Oui",
+     "C": "Parfois"
     }
    },
    {
     "qid": "F25-Q3",
     "q": "Que fais-tu face à cette alerte ?",
     "options": {
-     "A": "Je signe vite",
-     "B": "Je réessaie ou je demande à un proche",
+     "A": "Je réessaie, puis je vérifie moi-même",
+     "B": "Je signe vite",
      "C": "J'ignore le message"
     }
    }
@@ -954,17 +954,17 @@
   "ecran": {
    "croit": "Je fais l'opération simple que j'ai demandée.",
    "reel": "Cette opération envoie 2 480 USDC à Paul, comme tu l'as dit.",
-   "danger": "Nous n'avons trouvé aucun signal; ce n'est pas une garantie.",
-   "action": "Vérifie une dernière fois le montant et le destinataire."
+   "danger": "Notre vérification est limitée: elle peut rater un piège.",
+   "action": "Contrôle toi-même le montant et le destinataire avant de signer."
   },
   "questions": [
    {
     "qid": "F26-Q1",
-    "q": "Aucun signal trouvé veut-il dire sans risque ?",
+    "q": "Notre vérification peut-elle rater un piège ?",
     "options": {
-     "A": "Oui",
-     "B": "Non, ce n'est pas une garantie",
-     "C": "Toujours"
+     "A": "Oui, elle peut en rater",
+     "B": "Non, jamais",
+     "C": "Seulement le week-end"
     }
    },
    {
@@ -1029,8 +1029,8 @@
   "id": "F28",
   "ecran": {
    "croit": "Un proche me demande de l'aide pour un envoi urgent.",
-   "reel": "Tes 2 480 USDC iraient à 0x7a3F…c91E, une adresse inconnue.",
-   "danger": "Un escroc peut se faire passer pour ton proche par message.",
+   "reel": "Tes 2 480 USDC partiraient chez un inconnu, sans retour possible.",
+   "danger": "Un escroc peut écrire avec le nom et la photo d'un proche.",
    "action": "Appelle ton proche au numéro habituel avant d'envoyer quoi que ce soit."
   },
   "questions": [
@@ -1066,18 +1066,18 @@
  {
   "id": "F29",
   "ecran": {
-   "croit": "Je déplace mes jetons vers l'autre réseau, comme prévu.",
-   "reel": "Tes 2 480 USDC arriveraient sur un autre réseau ou chez un inconnu.",
-   "danger": "L'arrivée choisie n'est pas celle que tu as demandée.",
-   "action": "Annule et vérifie le réseau d'arrivée avant de recommencer."
+   "croit": "Je déplace mes jetons vers Ethereum, comme prévu.",
+   "reel": "Tes 2 480 USDC arriveraient sur Polygon, pas sur Ethereum.",
+   "danger": "Chaque réseau est séparé: un envoi au mauvais endroit est souvent perdu.",
+   "action": "Annule et vérifie le réseau et l'adresse d'arrivée avant de recommencer."
   },
   "questions": [
    {
     "qid": "F29-Q1",
     "q": "Où risquent d'arriver tes jetons ?",
     "options": {
-     "A": "Chez toi",
-     "B": "Sur un autre réseau ou chez un inconnu",
+     "A": "Sur Polygon, pas où tu voulais",
+     "B": "Chez toi, sur Ethereum",
      "C": "Dans ton portefeuille"
     }
    },

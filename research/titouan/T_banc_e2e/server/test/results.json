@@ -1,0 +1,198 @@
+{
+ "date": "2026-10-11T01:29:17.385Z",
+ "node": "v24.18.1",
+ "summary": {
+  "passed": 32,
+  "failed": 0,
+  "total": 32,
+  "latency_ms_400_requests": {
+   "n": 400,
+   "p50": 26.7,
+   "p95": 36.36,
+   "max": 44.91
+  },
+  "levels_in_400": {
+   "danger": 200,
+   "attention": 100,
+   "unknown": 100
+  },
+  "first_17_requests_ms": [
+   56,
+   32.8,
+   27.3,
+   20.6,
+   33.4,
+   30.6,
+   22.6,
+   26.7,
+   22.1,
+   23,
+   28.2,
+   32.4,
+   27.9,
+   31.9
+  ]
+ },
+ "results": [
+  {
+   "name": "1 approve illimite -> critical + fiche F01 + 4 lignes",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=F01 56.0 ms"
+  },
+  {
+   "name": "2 permit EIP-2612 illimite (signature) -> critical + F02",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=F02 32.8 ms"
+  },
+  {
+   "name": "3 envoi simple a un contact connu -> pas critical, jamais ok",
+   "ok": true,
+   "info": "HTTP 200 level=attention niveau=info fiche=F26 27.3 ms"
+  },
+  {
+   "name": "4 setApprovalForAll -> critical + F03",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=F03 20.6 ms"
+  },
+  {
+   "name": "5 transferOwnership -> critical + F07",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=F07 33.4 ms"
+  },
+  {
+   "name": "6 adresse sosie du contact -> critical + F13 + address_diff",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=F13 30.6 ms"
+  },
+  {
+   "name": "7 intention \"je recois\" + approve illimite -> contradiction",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=F01 22.6 ms"
+  },
+  {
+   "name": "8 texte de page \"support / urgent\" + approve -> manipulation",
+   "ok": true,
+   "info": "HTTP 200 level=manipulation niveau=critical fiche=F01 26.7 ms"
+  },
+  {
+   "name": "9 methode inconnue -> non verifie (unknown/warn), pas ok",
+   "ok": true,
+   "info": "HTTP 200 level=unknown niveau=warn fiche=F25 22.1 ms"
+  },
+  {
+   "name": "10 ajout de reseau a symbole ETH usurpe -> critical",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=null 23.0 ms"
+  },
+  {
+   "name": "11 changement vers un reseau connu -> pas critical",
+   "ok": true,
+   "info": "HTTP 200 level=attention niveau=info fiche=F26 28.2 ms"
+  },
+  {
+   "name": "12 personal_sign simple -> pas ok",
+   "ok": true,
+   "info": "HTTP 200 level=attention niveau=info fiche=F26 32.4 ms"
+  },
+  {
+   "name": "13 eth_sign (signature aveugle) -> critical + F05",
+   "ok": true,
+   "info": "HTTP 200 level=danger niveau=critical fiche=F05 27.9 ms"
+  },
+  {
+   "name": "14 params absents/charabia -> pas de plantage, jamais ok",
+   "ok": true,
+   "info": "HTTP 200 level=unknown niveau=warn fiche=F25 31.9 ms"
+  },
+  {
+   "name": "15 JSON malforme -> HTTP 400",
+   "ok": true,
+   "info": "HTTP 400"
+  },
+  {
+   "name": "16 tableau JSON (pas un objet) -> HTTP 400",
+   "ok": true,
+   "info": "HTTP 400"
+  },
+  {
+   "name": "17 corps de 600 Ko -> HTTP 413 (ou connexion coupee)",
+   "ok": true,
+   "info": "HTTP 413"
+  },
+  {
+   "name": "18 Origin d'une page web (https://evil.example) -> HTTP 403, pas de CORS",
+   "ok": true,
+   "info": "HTTP 403"
+  },
+  {
+   "name": "19 Origin \"null\" (page file://) -> HTTP 403",
+   "ok": true,
+   "info": "HTTP 403"
+  },
+  {
+   "name": "20 Origin chrome-extension:// -> 200 et CORS limite a cette extension",
+   "ok": true,
+   "info": "HTTP 200 ACAO=chrome-extension://abcdefghijklmnopabcdefghijklmnop"
+  },
+  {
+   "name": "21 Preflight depuis une page web -> 403",
+   "ok": true,
+   "info": "HTTP 403"
+  },
+  {
+   "name": "22 en-tete Host different de 127.0.0.1 (DNS rebinding) -> 403",
+   "ok": true,
+   "info": "HTTP 403"
+  },
+  {
+   "name": "23 GET /health -> 200",
+   "ok": true,
+   "info": "HTTP 200"
+  },
+  {
+   "name": "24 route inconnue -> 404",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "25 le serveur ecoute sur 127.0.0.1 uniquement",
+   "ok": true,
+   "info": "{\"address\":\"127.0.0.1\",\"family\":\"IPv4\",\"port\":59238}"
+  },
+  {
+   "name": "26 400 requetes en serie : aucun niveau \"ok\"",
+   "ok": true,
+   "info": "{\"danger\":200,\"attention\":100,\"unknown\":100}"
+  },
+  {
+   "name": "27 latence bout en bout p95 < 100 ms et max < 3000 ms",
+   "ok": true,
+   "info": "{\"n\":400,\"p50\":26.7,\"p95\":36.36,\"max\":44.91}"
+  },
+  {
+   "name": "28 latence du moteur seule (champ latency_ms) < 50 ms sur la requete sosie",
+   "ok": true,
+   "info": "1 ms"
+  },
+  {
+   "name": "29 journal : chaine de hachage valide",
+   "ok": true,
+   "info": "{\"ok\":true,\"n\":415}"
+  },
+  {
+   "name": "30 journal : pas de parametres bruts, ni adresse du portefeuille",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "31 journal : une ligne modifiee est detectee",
+   "ok": true,
+   "info": "{\"ok\":false,\"n\":5,\"brokenAt\":6}"
+  },
+  {
+   "name": "32 journal desactive : aucun fichier cree",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

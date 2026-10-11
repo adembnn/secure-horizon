@@ -1,0 +1,257 @@
+{
+ "siteId": "pancake",
+ "url": "https://pancakeswap.finance/",
+ "arm": "control",
+ "started": "2026-10-11T01:04:52.926Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://pancakeswap.finance/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cm9jd1prg03msl80mz1jnuv9f/embedded-wallets?caid=b7b4f39a-6647-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_CONNECTION_RESET",
+   "url": "https://bsc-dataseed1.defibit.io/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_CONNECTION_RESET",
+   "url": "https://bsc-dataseed1.defibit.io/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://bscrpc.com/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "3AD0990F19925DB15B7C33CB15D6B013",
+   "status": 200,
+   "url": "https://pancakeswap.finance/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "B2006871F538C71579BB157FB07120C3",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cm9jd1prg03msl80mz1jnuv9f/embedded-wallets?caid=b7b4f39a-6647-4725-81f9-d32a843b3f61&client_id=client-WY5iumRXNUjYdviuz7nf3m3z3atS4iHaRMWLTekR5Qpjp",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:3000 https://pancakeswap.finance https://sol-swap.pancakeswap.finance https://web-git-feat-discord-flow-new.pancake.run https://web-git-feat-ifov2-dryrun.pancake.run https://web-git-feat-limit-orders.pancake.run https://web-git-feat-perps-aster-2.pancake.run https://web-git-feat-perps-aster.pancake.run https://web-git-feature-sol-position.pancake.run https://web-git-pan-11955-perps-phase-2.pancake.run https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-NzZhZDhhZGEtNjhhMS00NzA4LTg0OWQtZDRhN2JmNWUzNzlh'; style-src 'self' 'nonce-NzZhZDhhZGEtNjhhMS00NzA4LTg0OWQtZDRhN2JmNWUzNzlh'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "worker",
+  "worker",
+  "worker",
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "3AD0990F19925DB15B7C33CB15D6B013",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:Metamask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://pancakeswap.finance/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Home | PancakeSwap",
+  "bodyLen": 2359,
+  "nodes": 1060,
+  "readyState": "complete",
+  "head": "Trade Swap Trade tokens instantly across supported networks Perps Trade perpetual contracts with leverage Stocks Trade tokenized stocks on-chain Buy Crypto Go from cash to crypto instantly Pools Dual Investment Beta Port"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 10,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1259.421875,
+   "y": 35.5,
+   "top": 19.5
+  },
+  "all": [
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 4,
+  "pick": {
+   "text": "Metamask",
+   "tag": "DIV",
+   "x": 409.078125,
+   "y": 426.5,
+   "area": 1388.8125
+  }
+ },
+ "clicked2": "Metamask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Home | PancakeSwap",
+  "bodyLen": 2597,
+  "nodes": 1207,
+  "readyState": "complete",
+  "head": "Trade Swap Trade tokens instantly across supported networks Perps Trade perpetual contracts with leverage Stocks Trade tokenized stocks on-chain Buy Crypto Go from cash to crypto instantly Pools Dual Investment Beta Port"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 223,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 6,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 13,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://pancakeswap.finance/",
+ "ms": 13911
+}

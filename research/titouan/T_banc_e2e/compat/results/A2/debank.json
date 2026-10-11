@@ -1,0 +1,249 @@
+{
+ "siteId": "debank",
+ "url": "https://debank.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:58:45.828Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://debank.com/profile/0x1111111111111111111111111111111111111111"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' assets.debank.com 'nonce-2996948238' 'nonce-3661443193' https://www.youtube.com'. Either the 'unsafe",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "440F228C8DDCC4C0CC65C24B22074796",
+   "status": 200,
+   "url": "https://debank.com/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "dbkserver"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "440F228C8DDCC4C0CC65C24B22074796",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect Wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://debank.com/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "dbkserver"
+ },
+ "ui0": {
+  "modal": "We use cookies to improve your experience. Privacy Policy Reject Accept We use cookies to improve your experience. Privacy Policy Privacy Policy",
+  "modalCount": 6,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "DeBank | Your go-to portfolio tracker for Ethereum and EVM",
+  "bodyLen": 1689,
+  "nodes": 370,
+  "readyState": "complete",
+  "head": "Portfolio Community Portfolio API More Connect Wallet Whale Asset Tracking, Paid Consultations, and Web3 Dynamic Community Concise View of Portfolio Tracking Search address/Web3 ID Connect Wallet Tracking any Whale's Por"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 37,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect Wallet",
+   "tag": "BUTTON",
+   "x": 1227.5859375,
+   "y": 32,
+   "top": 21.5
+  },
+  "all": [
+   "1:Connect Wallet",
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "Connect Wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 3,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "SPAN",
+   "x": 420.3828125,
+   "y": 272.9921875,
+   "area": 1558.892822265625
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "We use cookies to improve your experience. Privacy Policy Reject Accept We use cookies to improve your experience. Privacy Policy Privacy Policy",
+  "modalCount": 6,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Portfolio of 0x1111…1111 | DeBank | Your go-to portfolio tracker for Ethereum and EVM",
+  "bodyLen": 1067,
+  "nodes": 576,
+  "readyState": "complete",
+  "head": "Portfolio Community Portfolio API More Search address / memo / Web3 ID 0x1111…1111 No ID 0x1111111111111111111111111111111111111111 This user has not added a bio yet $0 3689 days TVF $ 1,501 Followers 5 Following 0 Earni"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 39,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 14,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://debank.com/profile/0x1111111111111111111111111111111111111111",
+ "ms": 15337
+}

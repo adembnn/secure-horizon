@@ -1,0 +1,577 @@
+{
+ "persona": "karim_34_trader_v2",
+ "reponses": [
+  {
+   "qid": "F01-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F01-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F01-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F02-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F02-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F02-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F03-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F03-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F03-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F04-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F05-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F05-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F05-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F06-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F06-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F06-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F07-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F07-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F07-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F08-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F08-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F08-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F09-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F09-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F09-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F10-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F11-Q1",
+   "choix": "C"
+  },
+  {
+   "qid": "F11-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F11-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F12-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F12-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F12-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F13-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F13-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F13-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F14-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F14-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F14-Q3",
+   "choix": "B"
+  },
+  {
+   "qid": "F15-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F15-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F15-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F16-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F16-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F16-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F17-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F17-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F17-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F18-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F18-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F18-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F19-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F19-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F19-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F20-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F20-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F20-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F21-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F21-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F21-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F22-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F22-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F22-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F23-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F23-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F23-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F24-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F24-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F24-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F25-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F25-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F25-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F26-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F26-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F26-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F27-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F27-Q2",
+   "choix": "A"
+  },
+  {
+   "qid": "F27-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F28-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F28-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F28-Q3",
+   "choix": "C"
+  },
+  {
+   "qid": "F29-Q1",
+   "choix": "A"
+  },
+  {
+   "qid": "F29-Q2",
+   "choix": "C"
+  },
+  {
+   "qid": "F29-Q3",
+   "choix": "A"
+  },
+  {
+   "qid": "F30-Q1",
+   "choix": "B"
+  },
+  {
+   "qid": "F30-Q2",
+   "choix": "B"
+  },
+  {
+   "qid": "F30-Q3",
+   "choix": "A"
+  }
+ ],
+ "ressenti": [
+  {
+   "id": "F01",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Approve illimité : clair, je mets un cap ou je refuse. Texte correct, un peu long pour un écran.",
+   "irritant": false
+  },
+  {
+   "id": "F02",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Permit2 sans gas : je comprends. 'procuration signée' / 'chèque signé' ok mais 'ne signe pas sauf si demandé' c'est évident pour moi.",
+   "irritant": false
+  },
+  {
+   "id": "F03",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "setApprovalForAll : OK, texte juste. 'refuse sauf si tu veux vendre' : correct.",
+   "irritant": false
+  },
+  {
+   "id": "F04",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Vente à 0,001 ETH pour 4 ETH : alerte utile, je la vois sur Seaport. Rien à redire.",
+   "irritant": false
+  },
+  {
+   "id": "F05",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Blind signing. Sur un site connu je signerais parfois pour un login, mais 2 480 USDC en jeu et texte illisible : je refuse. Q3 est une question piège un peu scolaire.",
+   "irritant": false
+  },
+  {
+   "id": "F06",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Domaine typosquatté : utile. 'Ferme et ouvre tes favoris' ok mais un peu scolaire.",
+   "irritant": false
+  },
+  {
+   "id": "F07",
+   "compris": "en partie",
+   "decision": "annuler",
+   "pourquoi": "'Contrôle ton compte' vague : je comprends vaguement changement d'owner/delegation, pas précis. 'préviens un proche' infantilisant, énervant.",
+   "irritant": true
+  },
+  {
+   "id": "F08",
+   "compris": "en partie",
+   "decision": "annuler",
+   "pourquoi": "'compte partagé' = Safe je suppose, 'accès secret' dramatique ; 'opération de routine' prête à confusion. Demander aux membres : ok.",
+   "irritant": false
+  },
+  {
+   "id": "F09",
+   "compris": "en partie",
+   "decision": "annuler",
+   "pourquoi": "'programme étranger' et 'pleins pouvoirs' : flou, je devine delegatecall. 'quelqu'un de confiance' vague. Je annule parce que ça sonne grave, pas parce que c'est précis.",
+   "irritant": true
+  },
+  {
+   "id": "F10",
+   "compris": "non",
+   "decision": "annuler",
+   "pourquoi": "Texte vague : quel service ? quel contrat ? upgrade de proxy ? 'cherche l'annonce officielle' : je ne vais pas faire ça à chaque fois. J'annule faute d'info, mais ça m'énerve.",
+   "irritant": true
+  },
+  {
+   "id": "F11",
+   "compris": "en partie",
+   "decision": "annuler",
+   "pourquoi": "7702 delegation probablement. 'tout faire à ta place, partout' alarmiste mais je comprends. 'Un inconnu te l'a proposé' ne figure pas dans l'écran.",
+   "irritant": false
+  },
+  {
+   "id": "F12",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Multicall caché : utile si vraie. Je préférerais voir la liste des actions plutôt qu'un avertissement.",
+   "irritant": false
+  },
+  {
+   "id": "F13",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Address poisoning, je connais. Bonne alerte. 'lettre par lettre' ok.",
+   "irritant": false
+  },
+  {
+   "id": "F14",
+   "compris": "oui",
+   "decision": "continuer",
+   "pourquoi": "0 USDC dust : je connais, je ne copie jamais depuis l'historique. Alerte pour une ligne d'historique = bruit pour moi, je continue mon flow. Un peu infantilisant.",
+   "irritant": true
+  },
+  {
+   "id": "F15",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Faux USDC : je vérifie l'adresse du contrat de toute façon. Alerte utile quand même.",
+   "irritant": false
+  },
+  {
+   "id": "F16",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Honeypot : utile, la source (test de revente) rend ça crédible. Bien.",
+   "irritant": false
+  },
+  {
+   "id": "F17",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Destinataire de swap différent : excellent, on le rate dans l'UI.",
+   "irritant": false
+  },
+  {
+   "id": "F18",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Slippage énorme : OK mais 'robots' pour MEV est flou. Je baisse le slippage.",
+   "irritant": false
+  },
+  {
+   "id": "F19",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Clipper : plausible. 'par téléphone' lourd mais ok.",
+   "irritant": false
+  },
+  {
+   "id": "F20",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Phishing typosquat : OK. 'Un site officiel' en croit, tu ne peux pas savoir que je pense ça. Utile.",
+   "irritant": false
+  },
+  {
+   "id": "F21",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "L'outil ne peut pas savoir qu'il y a un faux support au téléphone : écran bizarre, condescendant. J'annule parce que je ne reconnais pas l'envoi.",
+   "irritant": true
+  },
+  {
+   "id": "F22",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Arnaque au recouvrement : évident, infantilisant, 'aucun vrai service ne te fait payer'. Je ne lirais pas.",
+   "irritant": true
+  },
+  {
+   "id": "F23",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Faux recruteur : évident pour moi, ton paternaliste, mais le droit de prendre les USDC est clair.",
+   "irritant": false
+  },
+  {
+   "id": "F24",
+   "compris": "oui",
+   "decision": "continuer",
+   "pourquoi": "Alerte 'rien n'est faux' : c'est du bruit, un gros envoi vers une adresse neuve je le fais tout le temps. 'Tu décides' = ok, mais je désactiverais si ça revient à chaque gros envoi.",
+   "irritant": true
+  },
+  {
+   "id": "F25",
+   "compris": "en partie",
+   "decision": "continuer",
+   "pourquoi": "'On n'a pas pu vérifier' : inutile, ça ne m'apprend rien. Je continue si je connais le contrat. Alerte de bruit, désactivation probable.",
+   "irritant": true
+  },
+  {
+   "id": "F26",
+   "compris": "oui",
+   "decision": "continuer",
+   "pourquoi": "Opération normale et vérifiée : l'alerte 'on peut rater un piège' c'est du bruit pur, je continue après avoir vérifié moi-même. Q3 hors sujet (rien de pressant à l'écran).",
+   "irritant": true
+  },
+  {
+   "id": "F27",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Faux airdrop avec approve : je connais, utile. Un peu grossier.",
+   "irritant": false
+  },
+  {
+   "id": "F28",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Arnaque de faux proche : l'écran ne peut pas savoir ça, ton moralisateur. J'annule car envoi vers inconnu.",
+   "irritant": true
+  },
+  {
+   "id": "F29",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Mauvais réseau de destination : utile, on se trompe de chaîne parfois. Bien.",
+   "irritant": false
+  },
+  {
+   "id": "F30",
+   "compris": "oui",
+   "decision": "annuler",
+   "pourquoi": "Abonnement 90 jours : 'paiement unique' contredit; je refuse si je n'ai pas demandé. Clair.",
+   "irritant": false
+  }
+ ]
+}

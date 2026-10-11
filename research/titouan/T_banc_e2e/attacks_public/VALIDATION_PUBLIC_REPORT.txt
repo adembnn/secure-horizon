@@ -1,0 +1,56 @@
+VALIDATION REGRESSION_PUBLIQUE (validate_public.mjs)
+cas=144 sha256=79b13a3eebdbbe3d449736be12043efee92f3be6940e40bb19b6e77794f9cbb6
+par etiquette : {"benin":70,"malveillant":72,"fraude_conforme":2}
+par etiquette/gravite attendue : {"benin/warn":21,"benin/ok":49,"malveillant/critical":65,"malveillant/warn":7,"fraude_conforme/warn":1,"fraude_conforme/ok":1}
+par plateforme : {"ethereum_seulement":18,"evm_toutes_chaines":116,"hors_perimetre_evm":6,"sans_requete_wallet":4}
+executables=134 non_executables=10 ; marques approximation=102
+
+par famille (n total / malveillant / benin / fraude_conforme / executable) :
+  A01   delegation_7702                                n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical [ethereum_seulement]
+  A02   batch_execute_7702                             n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical [ethereum_seulement]
+  A03   delegation_7702_chain0                         n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical [ethereum_seulement]
+  A04   signature_opaque_eth_sign                      n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical [ethereum_seulement]
+  A05   permit_2612                                    n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A06   permit2_allowance                              n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A07   permit2_signature_transfer                     n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A08   signature_differee                             n= 4 m=2 b=2 f=0 exec=2 grav_attendue=critical 
+  A09   simulation_evasion                             n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A10   evasion_interception                           n= 1 m=1 b=0 f=0 exec=0 grav_attendue=critical [sans_requete_wallet]
+  A11   empoisonnement_adresse                         n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A12   empoisonnement_safe_imbrique                   n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A13   clipper_remplacement                           n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A14   origine_legitime_charge_malveillante           n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A15   faux_revoke                                    n= 8 m=4 b=4 f=0 exec=8 grav_attendue=critical 
+  A16   chaine_neuve                                   n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A17   solana_tron_autorite                           n= 4 m=2 b=2 f=0 exec=0 grav_attendue=critical [hors_perimetre_evm]
+  A18   siwe_detourne                                  n= 4 m=2 b=2 f=0 exec=4 grav_attendue=warn 
+  A19   nft_listing_zero                               n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A20   batch_massif_troncature                        n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  A21   wallet_sendCalls_lot                           n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A22   permission_7715                                n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  A23   module_compte                                  n= 8 m=4 b=4 f=0 exec=8 grav_attendue=critical 
+  A24   faux_jeton_appat                               n= 4 m=2 b=2 f=0 exec=4 grav_attendue=warn 
+  A25   pont_destinataire                              n= 4 m=2 b=2 f=0 exec=4 grav_attendue=warn 
+  T2A1  faux_support_voix_clonee                       n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2A2  victime_coachee_fraude_conforme                n= 2 m=0 b=1 f=1 exec=2 grav_attendue=warn 
+  T2A3  pig_butchering_fraude_conforme                 n= 2 m=0 b=1 f=1 exec=2 grav_attendue=ok 
+  T2A4  faux_agent_trading_permit                      n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical/warn 
+  T2A5  faux_bot_arbitrage                             n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  T2B1  bitb_seed_phrase                               n= 1 m=1 b=0 f=0 exec=0 grav_attendue=critical [sans_requete_wallet]
+  T2B2  bitb_relais_permit                             n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2B3  clickjacking_overlay                           n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2B4  faux_popup_cadeau                              n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  T2C1  cloaking_extension                             n= 4 m=2 b=2 f=0 exec=4 grav_attendue=critical 
+  T2C2  toctou_proxy                                   n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2C3  extension_clone_sentinelle                     n= 1 m=1 b=0 f=0 exec=0 grav_attendue=critical [sans_requete_wallet]
+  T2C4  mise_a_jour_piegee                             n= 1 m=1 b=0 f=0 exec=0 grav_attendue=critical [sans_requete_wallet]
+  T2C5  desactivation_sur_ordre                        n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2D1  injection_pastedMessage                        n= 1 m=1 b=0 f=0 exec=1 grav_attendue=critical 
+  T2D2  injection_cachee_page                          n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2D3  paraphrase_llm_evasion_mots_cles               n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2D4  injection_memoire_agent                        n= 2 m=1 b=1 f=0 exec=2 grav_attendue=critical 
+  T2D5  benin_dur_phrase_ressemblant_a_injection       n= 1 m=0 b=1 f=0 exec=1 grav_attendue= 
+
+fiches couvertes : 44/44
+avertissements (0) : aucun
+erreurs (0) : aucune

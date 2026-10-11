@@ -2,7 +2,7 @@
  "siteId": "self-ok",
  "url": "http://127.0.0.1:8777/ok",
  "arm": "control",
- "started": "2026-10-11T00:07:25.455Z",
+ "started": "2026-10-11T01:12:48.476Z",
  "events": [
   {
    "t": "frame",
@@ -42,7 +42,7 @@
  ],
  "docs": [
   {
-   "frameId": "FEFF298675BD3BE6CE037E4E77C026BB",
+   "frameId": "22C749F94AAC456B32D86F4242820888",
    "status": 200,
    "url": "http://127.0.0.1:8777/ok",
    "mime": "text/html",
@@ -57,7 +57,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "FEFF298675BD3BE6CE037E4E77C026BB",
+ "mainFrameId": "22C749F94AAC456B32D86F4242820888",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -92,6 +92,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -138,10 +140,13 @@
   "calls": [
    "eth_requestAccounts"
   ],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
  },
+ "evN": 4,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -163,5 +168,5 @@
   "overwritten": false
  },
  "finalUrl": "http://127.0.0.1:8777/ok",
- "ms": 8050
+ "ms": 7820
 }

@@ -1,0 +1,186 @@
+{
+ "siteId": "guild",
+ "url": "https://guild.xyz/",
+ "arm": "control",
+ "started": "2026-10-11T01:09:10.543Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://guild.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://guild.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://guild.xyz/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://auth.guild.xyz/v1/me"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://auth.guild.xyz/v1/me"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://auth.guild.xyz/v1/me"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "25FCF42CB9EAD07C555EAB40879D908F",
+   "status": 200,
+   "url": "https://guild.xyz/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self'; frame-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: static.cloudflareinsights.com; connect-src *; worker-src 'self' blob:;",
+   "cspRO": null,
+   "xfo": "DENY",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [
+  ""
+ ],
+ "dialogs": 0,
+ "mainFrameId": "25FCF42CB9EAD07C555EAB40879D908F",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Sign in",
+  "option:Installed"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://guild.xyz/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self'; frame-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: static.cloudflareinsights.com; connect-src *; worker-src 'self' blob:;",
+  "cspRO": null,
+  "xfo": "DENY",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Guild - Build Engaged and Unified Communities | Community Management Platform",
+  "bodyLen": 2778,
+  "nodes": 723,
+  "readyState": "complete",
+  "head": "Guild Explorer Docs Team Pricing Sign in Guild Build engaged and unified communities One platform with 100+ integrations. Automated and engineered to scale from 100 to 1 million members. Create Guild Explore Explore Guil"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 3,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Sign in",
+   "tag": "BUTTON",
+   "x": 1062.8046875,
+   "y": 53.25,
+   "top": 33
+  },
+  "all": [
+   "2:Sign in"
+  ]
+ },
+ "clicked1": "Sign in",
+ "clickedTier": 2,
+ "find2": {
+  "n": 3,
+  "pick": {
+   "text": "Installed",
+   "tag": "DIV",
+   "x": 861.7890625,
+   "y": 335,
+   "area": 1354.125
+  }
+ },
+ "clicked2": "Installed",
+ "ui1": {
+  "modal": "Connecting to Base Account Follow the login process on your selected provider's interface... Connecting",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Guild - Build Engaged and Unified Communities | Community Management Platform",
+  "bodyLen": 2882,
+  "nodes": 785,
+  "readyState": "complete",
+  "head": "Guild Explorer Docs Team Pricing Sign in Guild Build engaged and unified communities One platform with 100+ integrations. Automated and engineered to scale from 100 to 1 million members. Create Guild Explore Explore Guil"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 4,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://guild.xyz/",
+ "ms": 14134
+}

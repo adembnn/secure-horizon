@@ -1,0 +1,207 @@
+{
+ "siteId": "corebridge",
+ "url": "https://core.app/bridge/",
+ "arm": "control",
+ "started": "2026-10-11T01:00:03.443Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://core.app/swap"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://core.app/swap"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://core.app/swap"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdvI-IqAAAAAIiR8bG7qcWfXEquyX8y"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://core.app/swap"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  }
+ ],
+ "console": [],
+ "exceptions": [
+  {
+   "top": true,
+   "text": "ProviderNotFoundError: Provider not found."
+  }
+ ],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/ph/e/?ip=0&_=1791680413033&ver=1.207.0&compression=gzip-js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/ph/i/v0/e/?ip=0&_=1791680413046&ver=1.207.0&compression=gzip-js"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "825CC6965A813941FCA4A2A678AF4A99",
+   "status": 200,
+   "url": "https://core.app/swap",
+   "mime": "text/html",
+   "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-0aeb13a265b6606677b1dabf9c978869' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-0aeb13a265b6606677b1dabf9c978869';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "0711C08F233EA30EBE0DACD2FDEC2411",
+   "status": 200,
+   "url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdvI-IqAAAAAIiR8bG7qcWfXEquyX8y5apyLHSf&co=aHR0cHM6Ly9jb3JlLmFwcDo0NDM.&hl=en&v=nY0xPItgwtlvjEjk2TqdwOQz&size=invisible&anchor-ms=20000&execute-ms=30000&cb=wuimgvudpqta",
+   "mime": "text/html",
+   "csp": "script-src 'report-sample' 'nonce-zvBGf8lblhElofWzsin3-A' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';object-src 'none';base-uri 'self';report-uri https://csp.withgoogle.com/csp/recaptcha/1",
+   "cspRO": null,
+   "xfo": null,
+   "server": "ESF"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "service_worker",
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "825CC6965A813941FCA4A2A678AF4A99",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://core.app/swap",
+  "mime": "text/html",
+  "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-0aeb13a265b6606677b1dabf9c978869' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-0aeb13a265b6606677b1dabf9c978869';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "Swap Swap tokens across chains quickly and securely Account Connect a wallet Account You pay USDC 0 USDC on Avalanche (C-Chain) You pay $0 USD 25% 50% Max Amount must be provided You receive AVAX 0 AVAX on Avalanche (C-Chain) You receive $0 USD Swap Swap Swap tokens across chains quickly and securel",
+  "modalCount": 3,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Swap Crypto Instantly | Core Wallet",
+  "bodyLen": 1097,
+  "nodes": 595,
+  "readyState": "complete",
+  "head": "Swap Search Connect wallet Connect wallet Portfolio Predictions Perps New Stake Earn Contacts Discover Signals Tools Download Connect wallet Download Core for Android Get started buying, swapping, sending and receiving c"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "Swap Swap tokens across chains quickly and securely Account Connect a wallet Account You pay USDC 0 USDC on Avalanche (C-Chain) You pay $0 USD 25% 50% Max Amount must be provided You receive AVAX 0 AVAX on Avalanche (C-Chain) You receive $0 USD Swap Swap Swap tokens across chains quickly and securel",
+  "modalCount": 3,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Swap Crypto Instantly | Core Wallet",
+  "bodyLen": 1097,
+  "nodes": 595,
+  "readyState": "complete",
+  "head": "Swap Search Connect wallet Connect wallet Portfolio Predictions Perps New Stake Earn Contacts Discover Signals Tools Download Connect wallet Download Core for Android Get started buying, swapping, sending and receiving c"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 10,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://core.app/swap",
+ "ms": 10548
+}

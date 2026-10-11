@@ -1,0 +1,550 @@
+{
+ "siteId": "gmx",
+ "url": "https://app.gmx.io/",
+ "arm": "control",
+ "started": "2026-10-11T01:01:39.611Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/cmov9f3bn00ga0bkwnxy3k96v/embedded-wallets?caid=faafc9a8-d0d4-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://newassets.hcaptcha.com/captcha/v1/e97a50d7ecb685043e82c9d7a6034c5c544521c1/static/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://newassets.hcaptcha.com/captcha/v1/e97a50d7ecb685043e82c9d7a6034c5c544521c1/static/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "wallet_switchEthereumChain",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "wallet_switchEthereumChain",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.gmx.io/trade"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://v6.tag.adrsbl.io/v1/resolve?data=eyJhZmxpZCI6InFyejJwZ3VzNTd3cXYwcTBxaGZiIn0%3D"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://secure.adnxs.com/getuidp?callback=func' from origin 'https://app.gmx.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requeste",
+   "url": "https://app.gmx.io/trade"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://secure.adnxs.com/getuidp?callback=func"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 429 ()",
+   "url": "https://bsc.drpc.org/"
+  },
+  {
+   "source": "worker",
+   "text": "Error: Multicall failed",
+   "url": "https://app.gmx.io/assets/multicall.worker-DzDap32i.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 429 ()",
+   "url": "https://eth.drpc.org/"
+  },
+  {
+   "source": "worker",
+   "text": "Error: Multicall failed",
+   "url": "https://app.gmx.io/assets/multicall.worker-DzDap32i.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 429 ()",
+   "url": "https://eth.drpc.org/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "524E32B7E9E325D5211F28E96CA404DA",
+   "status": 200,
+   "url": "https://app.gmx.io/trade",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://hcaptcha.com https://*.hcaptcha.com https://tag.adrsbl.io https://cdn.id5-sync.com https://js.intercomcdn.com https://widget.intercom.io https://js.stripe.com https://crypto-js.stripe.com; style-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com; img-src 'self' data: blob: https:; font-src 'self' data: https://js.intercomcdn.com; connect-src * wss: data: blob:; frame-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://hcaptcha.com https://*.hcaptcha.com https://intercom-sheets.com https://www.intercom-reachable.com https://js.stripe.com https://crypto-js.stripe.com; child-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org; worker-src 'self' blob:; media-src 'self' https://js.intercomcdn.com; manifest-src 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "2F602172D3C01AE1B57477875DB96575",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/cmov9f3bn00ga0bkwnxy3k96v/embedded-wallets?caid=faafc9a8-d0d4-47f5-ad95-57c65108b2bf",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://*.gmx-interface.pages.dev https://*.gmx.io https://gmx-interface.pages.dev https://gmx.io https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-MzMwOTE4ODItMThjZS00YTg4LWEwODQtMTBmMTkzNWMwZGI5'; style-src 'self' 'nonce-MzMwOTE4ODItMThjZS00YTg4LWEwODQtMTBmMTkzNWMwZGI5'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "1DB6DF730E35AEFBF9A4D1BB419BA796",
+   "status": 200,
+   "url": "https://app.gmx.io/charting_library/sameorigin",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://hcaptcha.com https://*.hcaptcha.com https://tag.adrsbl.io https://cdn.id5-sync.com https://js.intercomcdn.com https://widget.intercom.io https://js.stripe.com https://crypto-js.stripe.com; style-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com; img-src 'self' data: blob: https:; font-src 'self' data: https://js.intercomcdn.com; connect-src * wss: data: blob:; frame-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://hcaptcha.com https://*.hcaptcha.com https://intercom-sheets.com https://www.intercom-reachable.com https://js.stripe.com https://crypto-js.stripe.com; child-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org; worker-src 'self' blob:; media-src 'self' https://js.intercomcdn.com; manifest-src 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "34FB7B66168FA9B5D5377F22041DB00A",
+   "status": 200,
+   "url": "https://newassets.hcaptcha.com/captcha/v1/e97a50d7ecb685043e82c9d7a6034c5c544521c1/static/hcaptcha.html",
+   "mime": "text/html",
+   "csp": "report-uri https://sentry.hcaptcha.com/api/6/security/?sentry_key=30910f52569b4c17b1081ead2dae43b4&sentry_environment=prod&sentry_release=csp1;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "77789B1E4A6EB8BDFAEF99C7D83E4BB3",
+   "status": 200,
+   "url": "https://newassets.hcaptcha.com/captcha/v1/e97a50d7ecb685043e82c9d7a6034c5c544521c1/static/hcaptcha.html",
+   "mime": "text/html",
+   "csp": "report-uri https://sentry.hcaptcha.com/api/6/security/?sentry_key=30910f52569b4c17b1081ead2dae43b4&sentry_environment=prod&sentry_release=csp1;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 3,
+ "frameKinds": [
+  "iframe",
+  "iframe",
+  "iframe"
+ ],
+ "workers": [
+  "worker",
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "524E32B7E9E325D5211F28E96CA404DA",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.gmx.io/trade",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://hcaptcha.com https://*.hcaptcha.com https://tag.adrsbl.io https://cdn.id5-sync.com https://js.intercomcdn.com https://widget.intercom.io https://js.stripe.com https://crypto-js.stripe.com; style-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com; img-src 'self' data: blob: https:; font-src 'self' data: https://js.intercomcdn.com; connect-src * wss: data: blob:; frame-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://hcaptcha.com https://*.hcaptcha.com https://intercom-sheets.com https://www.intercom-reachable.com https://js.stripe.com https://crypto-js.stripe.com; child-src 'self' https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org; worker-src 'self' blob:; media-src 'self' https://js.intercomcdn.com; manifest-src 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "$ 82,878.22 | BTC USD | Decentralized perpetual exchange | GMX",
+  "bodyLen": 1277,
+  "nodes": 745,
+  "readyState": "complete",
+  "head": "Something went wrong Reload page Trade Trade Earn Earn Pools Pools Stats Stats Referrals Referrals Leaderboard Leaderboard Ecosystem Ecosystem Announcements Announcements Settings Settings BTC /USD [ BTC-USDC ] $ 82,878."
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 25,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect wallet",
+   "tag": "BUTTON",
+   "x": 1155.421875,
+   "y": 28,
+   "top": 8
+  },
+  "all": [
+   "1:Connect wallet",
+   "1:Connect wallet"
+  ]
+ },
+ "clicked1": "Connect wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 2,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "SPAN",
+   "x": 697,
+   "y": 358.5625,
+   "area": 4620
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "$ 82,867.55 | BTC USD | Decentralized perpetual exchange | GMX",
+  "bodyLen": 1523,
+  "nodes": 792,
+  "readyState": "complete",
+  "head": "Something went wrong Reload page Trade Trade Earn Earn Pools Pools Stats Stats Referrals Referrals Leaderboard Leaderboard Ecosystem Ecosystem Announcements Announcements Support New Support New Settings Settings BTC /US"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 27,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 4,
+  "calls": [
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "wallet_getCapabilities",
+   "wallet_switchEthereumChain",
+   "wallet_switchEthereumChain",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 48,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.gmx.io/trade",
+ "ms": 13691
+}

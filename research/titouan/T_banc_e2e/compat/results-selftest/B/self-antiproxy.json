@@ -2,7 +2,7 @@
  "siteId": "self-antiproxy",
  "url": "http://127.0.0.1:8777/antiproxy",
  "arm": "test",
- "started": "2026-10-11T00:08:38.105Z",
+ "started": "2026-10-11T01:13:57.478Z",
  "events": [
   {
    "t": "frame",
@@ -30,7 +30,7 @@
  "logErrors": [],
  "docs": [
   {
-   "frameId": "268137F2F6725068F10C0BE73010C323",
+   "frameId": "F8BD5BD10959E1E2C7D3844FC1C67D04",
    "status": 200,
    "url": "http://127.0.0.1:8777/antiproxy",
    "mime": "text/html",
@@ -45,7 +45,7 @@
  "workers": [],
  "popups": [],
  "dialogs": 0,
- "mainFrameId": "268137F2F6725068F10C0BE73010C323",
+ "mainFrameId": "F8BD5BD10959E1E2C7D3844FC1C67D04",
  "loadFired": true,
  "navError": null,
  "steps": [
@@ -80,6 +80,8 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {}
@@ -124,12 +126,15 @@
   "overwritten": false,
   "req6963": 0,
   "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
   "blockedSign": 0,
   "wcalls": 0,
   "wreads": {
    "request": 1
   }
  },
+ "evN": 3,
  "csp": {
   "inlineExecuted": true,
   "violations": [],
@@ -151,5 +156,5 @@
   "overwritten": false
  },
  "finalUrl": "http://127.0.0.1:8777/antiproxy",
- "ms": 7892
+ "ms": 7492
 }

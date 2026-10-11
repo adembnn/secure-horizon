@@ -1,44 +1,44 @@
 # U. Textes utilisateur par menace (Sentinelle)
 
-Date : 11/10/2026. Source de vérité : `U_textes_utilisateur.json`. Contrôle : `node check_textes.mjs`.
+Date : 11/10/2026 (v2 après test de compréhension en aveugle; ancienne version : `U_textes_utilisateur_v1.json`). Source de vérité : `U_textes_utilisateur.json`. Contrôle : `node check_textes.mjs`.
 
 Règles : 12 mots maximum par ligne (une variable compte pour un mot), tutoiement, aucun jargon, jamais de message vert ni de « OK ». Périmètre : 30 fiches tirées de SYNTHESE.md (R1 à R5), du banc E2E (44 familles, non toutes couvertes une à une) et des scénarios d'escroc S1 à S7.
 
-Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap.org), `{site_reel}` (ex. unlswap-app.com), `{adresse_debut}` (ex. 0x7a3F), `{adresse_fin}` (ex. c91E), `{jours}` (ex. 90), `{nombre}` (ex. 12), `{montant_recu}` (ex. 310 USDC), `{contact}` (ex. Paul).
+Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap.org), `{site_reel}` (ex. unlswap-app.com), `{adresse_debut}` (ex. 0x7a3F), `{adresse_fin}` (ex. c91E), `{jours}` (ex. 90), `{nombre}` (ex. 12), `{montant_recu}` (ex. 310 USDC), `{contact}` (ex. Paul), `{reseau_demande}` (ex. Ethereum), `{reseau_reel}` (ex. Polygon), `{prix_vente}` (ex. 0,001 ETH), `{valeur_nft}` (ex. 4 ETH).
 
 ## 1. Fiches
 
 | Id | Menace | Gravité | Tu crois | En réalité | D'où vient le danger | Que faire |
 |---|---|---|---|---|---|---|
-| F01 | Un site peut dépenser tous tes jetons sans limite | critical | Je confirme mon échange sur `{site}`, comme d'habitude. | Si tu signes, `{site}` pourra retirer tes `{montant}` `{jeton}` quand il veut. | Ce site demande un droit sans limite, bien plus que nécessaire. | Refuse, ou autorise seulement `{montant}` `{jeton}`, pas plus. |
+| F01 | Un site peut dépenser tous tes jetons sans limite | critical | Je veux seulement faire mon échange sur `{site}`. | Tu donnes à `{site}` le droit de prendre tes `{jeton}` sans limite. | Ce droit dure tant que tu ne le retires pas toi-même. | Refuse, ou autorise seulement `{montant}` `{jeton}`, pas plus. |
 | F02 | Une signature gratuite autorise un site à prendre tes jetons | critical | Je signe un simple message, sans payer de frais. | Cette signature gratuite laisse `{site}` prendre tes `{montant}` `{jeton}` pendant `{jours}` jours. | Signer ne coûte rien, mais ça vaut une procuration signée. | Ne signe pas, sauf si tu as demandé cette autorisation. |
 | F03 | Un site peut déplacer tous tes NFT d'une collection | critical | Je clique pour afficher mes NFT sur `{site}`. | Après ta signature, `{site}` pourra prendre tes `{nombre}` NFT et les futurs. | Ce droit couvre toute la collection, pas un seul NFT. | Refuse, sauf si tu veux vendre sur ce site précis. |
-| F04 | Ton NFT part en vente à prix nul, à ton insu | critical | Je mets mon NFT en vente au prix que j'ai choisi. | Ton NFT sera vendu pour `{montant}` `{jeton}`: n'importe qui pourra le prendre. | Le prix est glissé dans un message que presque personne ne lit. | Annule, puis vérifie le prix de vente dans ton portefeuille. |
-| F05 | Tu signes un message illisible | critical | Je signe un message pour prouver que c'est bien moi. | Ce texte illisible peut autoriser le retrait de tes `{montant}` `{jeton}`. | Personne ne peut lire ce message, pas même nous. | Ne signe pas un texte que tu ne peux pas lire. |
-| F06 | Un autre site que celui affiché te connecte à ton compte | warn | Je me connecte à `{site}` avec mon portefeuille. | Ce message te connecte à `{site_reel}`, pas à `{site}`. | Un faux site imite `{site}` pour récupérer ta connexion. | Ferme la page et ouvre `{site}` depuis tes favoris. |
+| F04 | Ton NFT part en vente presque gratuite, à ton insu | critical | Je mets mon NFT en vente au prix que j'ai choisi. | Tu recevras seulement `{prix_vente}` pour ton NFT, qui vaut `{valeur_nft}`. | N'importe qui pourra l'acheter à ce prix dès que tu signes. | Annule: ne signe pas une vente à un prix aussi bas. |
+| F05 | Tu signes un message illisible | critical | Je signe un message pour prouver que c'est bien moi. | Ce texte illisible peut autoriser le retrait de tes `{montant}` `{jeton}`. | Même sur un site connu, un texte illisible peut cacher un piège. | Ne signe pas un texte que tu ne peux pas lire. |
+| F06 | Un autre site que celui affiché te connecte à ton compte | warn | Je me connecte à `{site}` avec mon portefeuille. | Ce message te connecte à `{site_reel}`, pas à `{site}`. | Les deux adresses se ressemblent: `{site_reel}` copie `{site}` avec une lettre changée. | Ferme la page et ouvre `{site}` depuis tes favoris. |
 | F07 | Quelqu'un d'autre devient propriétaire de ton compte | critical | Je mets à jour les réglages de mon compte. | Si tu signes, `{adresse_debut}`…`{adresse_fin}` contrôle ton compte et tes `{montant}` `{jeton}`. | Tu ne pourras plus reprendre le contrôle une fois la signature faite. | Annule, sauf si c'est toi qui as décidé ce changement. |
 | F08 | Un accès secret est ajouté à ton compte partagé | critical | Je valide une opération de routine sur notre compte partagé. | Si tu signes, un inconnu pourra bouger les `{montant}` `{jeton}` du compte. | L'opération ajoute un accès secret à ce compte partagé. | Annule et demande aux autres membres s'ils connaissent cet ajout. |
 | F09 | Un programme étranger prend les commandes de ton compte | critical | Je valide une opération normale sur mon compte partagé. | Ce programme étranger pourra agir à ta place sur tes `{montant}` `{jeton}`. | L'opération lui prête les pleins pouvoirs de ton compte, sans limite. | Annule et fais vérifier cette opération par quelqu'un de confiance. |
-| F10 | Le programme d'un service que tu utilises est remplacé | critical | Je valide une amélioration du service que j'utilise. | Si tu signes, le service sera remplacé: il pourra prendre tes `{jeton}`. | Le programme du service change, et le nouveau code est inconnu. | Attends et vérifie l'annonce officielle du service avant de signer. |
+| F10 | Un service que tu utilises peut changer et te piéger | critical | Le service m'invite à valider une mise à jour. | Après ta signature, le service pourra prendre tes `{jeton}`, sans te demander. | Personne ne peut lire ce nouveau fonctionnement avant ta signature. | Prends le temps: cherche l'annonce officielle du service avant de signer. |
 | F11 | Ton compte confie ses pouvoirs à un programme inconnu | critical | Je mets à niveau mon compte pour de nouvelles fonctions. | Si tu signes, ce programme pourra tout faire à ta place, partout. | Ce droit dure jusqu'à ce que tu le retires, sur plusieurs réseaux. | Refuse, sauf si tu as choisi toi-même ce programme. |
 | F12 | Une seule signature cache plusieurs actions dont une dangereuse | critical | Je fais un seul échange, comme le montre l'écran. | Cet envoi groupé cache aussi une autorisation sur tes `{montant}` `{jeton}`. | L'écran montre une action, mais d'autres sont rangées derrière. | Annule et ne signe que l'action que tu as demandée. |
 | F13 | Une fausse adresse presque identique à celle de ton contact | critical | J'envoie à l'adresse que j'ai déjà utilisée, copiée de mon historique. | Tes `{montant}` `{jeton}` partiraient vers `{adresse_debut}`…`{adresse_fin}`, pas vers ton contact. | Un inconnu a glissé dans ton historique une adresse presque identique. | Annule, puis recopie l'adresse depuis une source sûre, lettre par lettre. |
-| F14 | Un envoi de zéro pour glisser un faux contact dans ton historique | warn | Cette ligne de mon historique vient de mon contact habituel. | Cet envoi de `{montant}` `{jeton}` vient d'un inconnu, pas de ton contact. | Un inconnu envoie zéro pour que son adresse apparaisse dans ton historique. | Ne copie jamais d'adresse depuis ton historique; demande-la à ton contact. |
-| F15 | Un faux jeton qui porte le même nom que le vrai | critical | J'achète le vrai `{jeton}`, celui que tout le monde connaît. | Tu paierais `{montant}` `{jeton}` pour une copie sans valeur. | Un escroc a créé un jeton au même nom que le vrai. | Annule et cherche le vrai jeton sur le site officiel. |
+| F14 | Un inconnu glisse son adresse dans ton historique avec un envoi nul | warn | Cette ligne de mon historique vient de mon contact habituel. | Un inconnu t'a envoyé 0 `{jeton}` pour apparaître dans ton historique. | Il imite ton contact: ton prochain envoi risque d'aller chez lui. | Ne copie pas cette adresse; demande-la à ton contact. |
+| F15 | Un faux jeton qui porte le même nom que le vrai | critical | J'achète le vrai `{jeton}`, celui que tout le monde connaît. | Tu paierais `{montant}` `{jeton}` pour une copie qui ne vaut rien. | Le nom et le logo se copient: seule l'adresse officielle prouve. | Annule et retrouve le vrai jeton depuis le site officiel du projet. |
 | F16 | Un jeton que tu pourras acheter mais jamais revendre | critical | J'achète ce jeton et je pourrai le revendre quand je veux. | Tu paierais `{montant}` `{jeton}` pour un jeton impossible à revendre. | Dans notre test de revente, la vente a échoué. | Annule: n'achète pas un jeton que tu ne pourras pas revendre. |
 | F17 | Ton échange envoie le résultat à une autre personne que toi | critical | Je change mes jetons et je les reçois sur mon compte. | Ton échange enverra les `{montant}` `{jeton}` reçus à `{adresse_debut}`…`{adresse_fin}`, pas à toi. | Le site a mis l'adresse d'une autre personne comme destinataire. | Annule et relance l'échange en vérifiant ta propre adresse. |
 | F18 | Un échange te rend beaucoup moins que ce que tu donnes | critical | J'échange `{montant}` `{jeton}` contre à peu près la même valeur. | Tu donnes `{montant}` `{jeton}` et tu reçois seulement `{montant_recu}` en échange. | Des robots profitent des échanges où le prix peut beaucoup bouger. | Annule, puis relance l'échange avec une perte maximale très faible. |
 | F19 | L'adresse que tu as collée n'est plus celle que tu as copiée | critical | Je colle l'adresse que j'ai copiée chez mon contact. | L'adresse collée a changé: tes `{montant}` `{jeton}` iraient à `{adresse_debut}`…`{adresse_fin}`. | Un logiciel espion peut remplacer l'adresse copiée par la sienne. | Annule, compare l'adresse complète avec celle de ton contact, par téléphone. |
 | F20 | Un faux site qui ressemble au vrai | critical | Je suis sur le site officiel de `{site}`. | Ce site, `{site_reel}`, imite `{site}` pour vider tes `{montant}` `{jeton}`. | L'adresse du site ressemble à la vraie, avec une lettre changée. | Ferme la page et ouvre `{site}` depuis tes favoris. |
-| F21 | Un faux support te guide pas à pas pour déplacer tes fonds | critical | Le support me guide pour protéger mes fonds. | Si tu envoies `{montant}` `{jeton}` comme demandé, tu les perds pour toujours. | Un vrai support ne te demande jamais de déplacer tes fonds. | Raccroche, puis rappelle toi-même le numéro officiel du service. |
-| F22 | Un faux remboursement te demande de payer des frais d'avance | critical | Je paie de petits frais pour récupérer l'argent perdu. | Tu paies `{montant}` `{jeton}` de frais et le remboursement n'arrivera jamais. | Les escrocs ciblent ceux qui ont déjà perdu, puis demandent des frais. | Ne paie rien d'avance: un vrai remboursement n'est jamais payant. |
-| F23 | Un faux recruteur te fait signer avec ton portefeuille | critical | Je valide mon embauche, comme me l'a dit le recruteur. | Tu autorises ce site à dépenser tes `{montant}` `{jeton}`, sans aucun salaire. | Ce recruteur inconnu te demande de signer avant de t'embaucher. | Ne signe rien et vérifie l'entreprise sur son site officiel. |
-| F24 | Un envoi important vers un nouveau contact qui te guide | warn | J'envoie de l'argent à quelqu'un en qui j'ai confiance. | Tu envoies `{montant}` `{jeton}` à une adresse neuve, sans retour possible. | Tout semble correct, mais quelqu'un te guide et le montant est grand. | Attends un jour et parle à un proche de confiance. |
-| F25 | Nous n'avons pas pu vérifier cette opération | warn | Je pense que cette opération est sûre, puisqu'aucune alerte n'apparaît. | Nous n'avons pas pu vérifier cette opération sur tes `{montant}` `{jeton}`. | Notre vérification n'a pas fini, donc nous ne pouvons rien affirmer. | Réessaie dans un instant, ou demande l'avis d'un proche. |
-| F26 | Aucun signal de danger trouvé | info | Je fais l'opération simple que j'ai demandée. | Cette opération envoie `{montant}` `{jeton}` à `{contact}`, comme tu l'as dit. | Nous n'avons trouvé aucun signal; ce n'est pas une garantie. | Vérifie une dernière fois le montant et le destinataire. |
+| F21 | Un faux support te guide pas à pas pour déplacer tes fonds | critical | Le support me guide pour protéger mes fonds. | Tu envoies `{montant}` `{jeton}` à un escroc: personne ne pourra les récupérer. | Un vrai support ne te demande jamais de signer ni d'envoyer. | Raccroche, puis rappelle toi-même le numéro officiel du service. |
+| F22 | Un faux remboursement te demande de payer des frais d'avance | critical | Je paie de petits frais pour récupérer l'argent perdu. | Tu perds `{montant}` `{jeton}` de plus et ne récupères jamais rien. | Aucun vrai service ne te fait payer pour te rembourser. | Ne paie rien d'avance: un vrai remboursement n'est jamais payant. |
+| F23 | Un faux recruteur te fait signer avec ton portefeuille | critical | Je valide mon embauche, comme me l'a dit le recruteur. | Tu donnes à ce site le droit de prendre tes `{montant}` `{jeton}`. | Un vrai employeur ne te demande jamais de signer pour t'embaucher. | Ne signe rien et vérifie l'entreprise sur son site officiel. |
+| F24 | Un envoi important vers un nouveau contact qui te guide | warn | J'envoie de l'argent à quelqu'un en qui j'ai confiance. | Tu envoies `{montant}` `{jeton}` à une adresse neuve, sans retour possible. | Des escrocs gagnent ta confiance en ligne, puis demandent un gros envoi. | Tu décides: vérifie qui te demande cet envoi, et pourquoi. |
+| F25 | Nous n'avons pas pu vérifier cette opération | warn | Aucune alerte ne s'affiche, donc je peux signer sans crainte. | Nous n'avons pas pu vérifier cette opération sur tes `{montant}` `{jeton}`. | Elle peut être piégée comme elle peut être normale: nous l'ignorons. | Réessaie dans un instant. Sans résultat, vérifie toi-même avant de signer. |
+| F26 | Aucun piège repéré, mais la vérification reste limitée | info | Je fais l'opération simple que j'ai demandée. | Cette opération envoie `{montant}` `{jeton}` à `{contact}`, comme tu l'as dit. | Notre vérification est limitée: elle peut rater un piège. | Contrôle toi-même le montant et le destinataire avant de signer. |
 | F27 | Un faux cadeau te fait donner accès à tes jetons | critical | Je réclame le cadeau gratuit annoncé par `{site}`. | Ce cadeau autorise `{site}` à prendre tes `{montant}` `{jeton}`. | Un vrai cadeau ne demande jamais l'accès à tes jetons. | Annule: personne ne donne de l'argent contre une signature. |
-| F28 | Un faux proche te demande un envoi urgent | critical | Un proche me demande de l'aide pour un envoi urgent. | Tes `{montant}` `{jeton}` iraient à `{adresse_debut}`…`{adresse_fin}`, une adresse inconnue. | Un escroc peut se faire passer pour ton proche par message. | Appelle ton proche au numéro habituel avant d'envoyer quoi que ce soit. |
-| F29 | Tes fonds partent sur un autre réseau ou chez un inconnu | critical | Je déplace mes jetons vers l'autre réseau, comme prévu. | Tes `{montant}` `{jeton}` arriveraient sur un autre réseau ou chez un inconnu. | L'arrivée choisie n'est pas celle que tu as demandée. | Annule et vérifie le réseau d'arrivée avant de recommencer. |
+| F28 | Un faux proche te demande un envoi urgent | critical | Un proche me demande de l'aide pour un envoi urgent. | Tes `{montant}` `{jeton}` partiraient chez un inconnu, sans retour possible. | Un escroc peut écrire avec le nom et la photo d'un proche. | Appelle ton proche au numéro habituel avant d'envoyer quoi que ce soit. |
+| F29 | Tes fonds arrivent sur un autre réseau que celui demandé | critical | Je déplace mes jetons vers `{reseau_demande}`, comme prévu. | Tes `{montant}` `{jeton}` arriveraient sur `{reseau_reel}`, pas sur `{reseau_demande}`. | Chaque réseau est séparé: un envoi au mauvais endroit est souvent perdu. | Annule et vérifie le réseau et l'adresse d'arrivée avant de recommencer. |
 | F30 | Un site pourra te prélever de l'argent régulièrement | warn | J'autorise un paiement unique pour cet abonnement. | `{site}` pourra prélever `{montant}` `{jeton}` tous les `{jours}` jours. | L'autorisation se répète seule, tant que tu ne l'annules pas. | Continue seulement si tu veux vraiment un abonnement avec ce site. |
 
 ## 2. Calibrage de la gravité
@@ -76,18 +76,29 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
 | F29 | critical | Un envoi vers le mauvais réseau est souvent irrécupérable. | pont inter-réseaux, destination inattendue |
 | F30 | warn | Dépenses répétées possibles: on te prévient, tu décides. | permission récurrente (prélèvements répétés) |
 
+## 2 bis. Variantes courtes (niveau info, site ou contact déjà connu)
+
+Pour un envoi ou un échange habituel vers un site connu, deux lignes discrètes remplacent la fiche complète, afin de ne pas lasser les utilisateurs avertis.
+
+| Id | Cas | Niveau | Ligne 1 | Ligne 2 |
+|---|---|---|---|---|
+| F01 | site connu, droit déjà utilisé avant | info | Droit sans limite demandé à `{site}`, site que tu utilises déjà. | Tu peux le limiter à `{montant}` `{jeton}` avant de signer. |
+| F02 | site connu, signature déjà utilisée avant | info | Signature gratuite: `{site}` pourra prendre tes `{jeton}` pendant `{jours}` jours. | Vérifie que tu l'as demandée toi-même. |
+| F03 | site connu où tu vends déjà tes NFT | info | `{site}` pourra déplacer tous tes NFT de la collection. | Tu peux refuser si tu ne vends rien. |
+| F26 | envoi habituel vers un contact connu | info | Envoi de `{montant}` `{jeton}` à `{contact}`. | Vérification limitée: contrôle toi-même le destinataire. |
+
 ## 3. Questions de compréhension (bonne réponse en gras)
 
 ### F01. Un site peut dépenser tous tes jetons sans limite
 
 1. Que peut faire ce site si tu signes ?
    - A) Rien du tout
-   - B) **Dépenser tes jetons quand il veut**
-   - C) T'envoyer des jetons
-2. Ce droit s'arrête quand ?
-   - A) Après l'échange
-   - B) Après une heure
-   - C) **Quand tu le retires toi-même**
+   - B) T'envoyer des jetons
+   - C) **Dépenser tes jetons quand il veut**
+2. Combien de temps ce droit dure-t-il ?
+   - A) Pendant une heure seulement
+   - B) Jusqu'à la fin de l'échange
+   - C) **Jusqu'à ce que tu le retires toi-même**
 3. Que fais-tu pour limiter le risque ?
    - A) **J'autorise seulement le montant utile**
    - B) J'autorise un montant illimité
@@ -96,9 +107,9 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
 ### F02. Une signature gratuite autorise un site à prendre tes jetons
 
 1. Pourquoi cette signature est-elle risquée, même gratuite ?
-   - A) **Elle peut valoir un chèque signé**
+   - A) Elle efface ton compte
    - B) Elle coûte très cher en frais
-   - C) Elle efface ton compte
+   - C) **Elle peut valoir un chèque signé**
 2. Pendant combien de temps ce site peut-il agir ?
    - A) Une seconde
    - B) **Jusqu'à la date indiquée**
@@ -115,24 +126,24 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - B) **Tous ceux de la collection**
    - C) Aucun
 2. Cela inclut-il les NFT reçus plus tard ?
-   - A) **Oui**
+   - A) Seulement la moitié
    - B) Non
-   - C) Seulement la moitié
+   - C) **Oui**
 3. Que fais-tu si tu veux juste regarder tes NFT ?
    - A) Je signe
    - B) J'attends un peu
    - C) **Je refuse**
 
-### F04. Ton NFT part en vente à prix nul, à ton insu
+### F04. Ton NFT part en vente presque gratuite, à ton insu
 
-1. Combien reçois-tu pour ton NFT ?
-   - A) **Presque rien**
-   - B) Le prix du marché
-   - C) Le double
+1. Que reçois-tu en échange de ton NFT si tu signes ?
+   - A) Le double
+   - B) Sa valeur réelle
+   - C) **Presque rien**
 2. Qui peut acheter ton NFT à ce prix ?
    - A) Seulement toi
-   - B) **N'importe qui**
-   - C) Personne
+   - B) Personne
+   - C) **N'importe qui**
 3. Que fais-tu si le prix te paraît faux ?
    - A) Je signe quand même
    - B) Je vends vite
@@ -148,10 +159,10 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - A) Oui, facilement
    - B) Oui, en payant
    - C) **Non**
-3. Que fais-tu face à cette alerte ?
-   - A) Je signe si le site est connu
-   - B) **Je refuse de signer**
-   - C) Je signe deux fois
+3. Le site est connu, le texte est illisible. Que fais-tu ?
+   - A) **Je refuse de signer**
+   - B) Je signe, le site est connu
+   - C) Je signe en lisant en diagonale
 
 ### F06. Un autre site que celui affiché te connecte à ton compte
 
@@ -160,9 +171,9 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - B) Oui, tout
    - C) Oui, un peu
 2. À quel site es-tu vraiment connecté ?
-   - A) À `{site}`
-   - B) **À `{site_reel}`**
-   - C) À aucun
+   - A) **À `{site_reel}`**
+   - B) À `{site}`
+   - C) À aucun des deux
 3. Que fais-tu face à cette alerte ?
    - A) Je continue
    - B) Je recommence
@@ -213,16 +224,16 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - B) Je signe vite
    - C) Je signe deux fois
 
-### F10. Le programme d'un service que tu utilises est remplacé
+### F10. Un service que tu utilises peut changer et te piéger
 
 1. Que change cette opération ?
-   - A) Ton mot de passe
-   - B) **Le programme du service**
+   - A) **Le fonctionnement du service**
+   - B) Ton mot de passe
    - C) Ton adresse
-2. Peut-on lire le nouveau code ?
-   - A) **Pas ici, il est inconnu**
-   - B) Oui, facilement
-   - C) Oui, en entier
+2. Peux-tu lire ce que le service fera après ?
+   - A) **Non, c'est caché pour l'instant**
+   - B) Oui, c'est affiché ici
+   - C) Oui, en entier sur le site
 3. Que fais-tu face à cette alerte ?
    - A) Je signe vite
    - B) **Je regarde l'annonce officielle d'abord**
@@ -273,11 +284,11 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - B) Sur un forum
    - C) **Auprès de mon contact, par un autre moyen**
 
-### F14. Un envoi de zéro pour glisser un faux contact dans ton historique
+### F14. Un inconnu glisse son adresse dans ton historique avec un envoi nul
 
-1. Pourquoi un inconnu t'envoie-t-il zéro ?
-   - A) Pour te faire un cadeau
-   - B) **Pour se glisser dans ton historique**
+1. Pourquoi un inconnu t'envoie-t-il un montant de zéro ?
+   - A) **Pour apparaître dans ton historique**
+   - B) Pour te faire un cadeau
    - C) Par erreur
 2. Que perds-tu si tu envoies à cette adresse ?
    - A) Rien
@@ -295,9 +306,9 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - B) **Non, c'est une copie**
    - C) Oui, il est très connu
 2. Qu'est-ce qui prouve qu'un jeton est le vrai ?
-   - A) Son nom
-   - B) Son logo
-   - C) **Son adresse officielle**
+   - A) **Son adresse sur le site officiel**
+   - B) Son nom
+   - C) Son logo
 3. Que fais-tu face à cette alerte ?
    - A) **Je cherche le vrai jeton sur le site officiel**
    - B) J'achète un peu
@@ -380,9 +391,9 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
 
 ### F21. Un faux support te guide pas à pas pour déplacer tes fonds
 
-1. Un vrai support te demande-t-il de déplacer tes fonds ?
-   - A) Parfois
-   - B) **Jamais**
+1. Un vrai support te demande-t-il de signer ou d'envoyer ?
+   - A) **Jamais**
+   - B) Parfois
    - C) Toujours
 2. Pourquoi cette personne te presse-t-elle ?
    - A) **Pour t'empêcher de réfléchir**
@@ -410,7 +421,7 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
 
 ### F23. Un faux recruteur te fait signer avec ton portefeuille
 
-1. Un vrai employeur te fait-il signer avec ton portefeuille ?
+1. Un vrai employeur te demande-t-il de signer pour t'embaucher ?
    - A) **Jamais**
    - B) Souvent
    - C) Toujours
@@ -434,9 +445,9 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - B) **Oui, même si elle est gentille**
    - C) Seulement si elle demande ta phrase secrète
 3. Que fais-tu face à cette alerte ?
-   - A) J'envoie tout
-   - B) J'envoie la moitié
-   - C) **J'attends et j'en parle à un proche**
+   - A) **Je vérifie qui me demande cet envoi, et pourquoi**
+   - B) J'envoie tout
+   - C) J'envoie la moitié
 
 ### F25. Nous n'avons pas pu vérifier cette opération
 
@@ -444,21 +455,21 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - A) Oui
    - B) **On ne le sait pas**
    - C) Non, c'est certain
-2. Une absence de réponse veut-elle dire que tout va bien ?
-   - A) Oui
-   - B) Parfois
-   - C) **Non**
+2. Aucune alerte affichée veut-il dire que tout va bien ?
+   - A) **Non**
+   - B) Oui
+   - C) Parfois
 3. Que fais-tu face à cette alerte ?
-   - A) Je signe vite
-   - B) **Je réessaie ou je demande à un proche**
+   - A) **Je réessaie, puis je vérifie moi-même**
+   - B) Je signe vite
    - C) J'ignore le message
 
-### F26. Aucun signal de danger trouvé
+### F26. Aucun piège repéré, mais la vérification reste limitée
 
-1. Aucun signal trouvé veut-il dire sans risque ?
-   - A) Oui
-   - B) **Non, ce n'est pas une garantie**
-   - C) Toujours
+1. Notre vérification peut-elle rater un piège ?
+   - A) **Oui, elle peut en rater**
+   - B) Non, jamais
+   - C) Seulement le week-end
 2. Que vérifies-tu toi-même ?
    - A) Rien
    - B) **Le montant et le destinataire**
@@ -498,11 +509,11 @@ Variables : `{montant}` (ex. 2 480), `{jeton}` (ex. USDC), `{site}` (ex. uniswap
    - B) Je réponds par message
    - C) **J'appelle mon proche au numéro habituel**
 
-### F29. Tes fonds partent sur un autre réseau ou chez un inconnu
+### F29. Tes fonds arrivent sur un autre réseau que celui demandé
 
 1. Où risquent d'arriver tes jetons ?
-   - A) Chez toi
-   - B) **Sur un autre réseau ou chez un inconnu**
+   - A) **Sur `{reseau_reel}`, pas où tu voulais**
+   - B) Chez toi, sur `{reseau_demande}`
    - C) Dans ton portefeuille
 2. Peut-on les récupérer facilement ensuite ?
    - A) Oui

@@ -1,0 +1,378 @@
+{
+ "siteId": "hyperliquid",
+ "url": "https://app.hyperliquid.xyz/",
+ "arm": "control",
+ "started": "2026-10-11T01:02:12.455Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://h20qtjygwppc.statuspage.io/embed/frame"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://auth.privy.io/apps/clmv1d6am07asib0fs4ss7w2x/embedded-wallets?caid=e54efa87-a22f-4"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.hyperliquid.xyz/trade"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "8429442EE43411E02A473946C299E3F6",
+   "status": 200,
+   "url": "https://app.hyperliquid.xyz/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "AmazonS3"
+  },
+  {
+   "frameId": "5472922BA0644E585AD61C69DB235C01",
+   "status": 200,
+   "url": "https://h20qtjygwppc.statuspage.io/embed/frame",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "AtlassianEdge"
+  },
+  {
+   "frameId": "5965652F1088AC66F7DDEB04903EAE55",
+   "status": 200,
+   "url": "https://auth.privy.io/apps/clmv1d6am07asib0fs4ss7w2x/embedded-wallets?caid=e54efa87-a22f-4126-aca5-702b5665b6a9",
+   "mime": "text/html",
+   "csp": "default-src 'none'; base-uri 'none'; frame-ancestors 'self' https://*.hyperliquid.xyz https://d3dwqkcc5hvwvk.cloudfront.net https://auth.privy.io; child-src 'none'; frame-src 'none'; connect-src 'self' https://auth.privy.io *.infura.io *.blastapi.io *.quiknode.pro *.rpc.privy.systems www.googleapis.com https://api.apple-cloudkit.com/database/1/; script-src 'self' 'unsafe-inline' https://auth.privy.io 'nonce-MDczYzEwOTMtZDFmNi00YzlmLWI5OWYtMTU5ZTcyYzAyMTlh'; style-src 'self' 'nonce-MDczYzEwOTMtZDFmNi00YzlmLWI5OWYtMTU5ZTcyYzAyMTlh'; font-src 'self'; img-src 'self'; manifest-src 'self'; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=pub3ed0be16dcee00054d67fd118ef8a00d&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=env%3Aprod%2Cversion%3A0.0.3;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 2,
+ "frameKinds": [
+  "iframe",
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "8429442EE43411E02A473946C299E3F6",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.hyperliquid.xyz/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "AmazonS3"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "85,098 | HYPE | Hyperliquid",
+  "bodyLen": 2338,
+  "nodes": 1195,
+  "readyState": "complete",
+  "head": "Announcements New order type: Trailing stop Available for perp markets only Manual borrowing now available Use HYPE and BTC as collateral to borrow USDC and USDT New listing: USELESS-USDC perps Trade Portfolio Earn Vault"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "Connect",
+   "tag": "BUTTON",
+   "x": 1233.0078125,
+   "y": 28,
+   "top": 11.5
+  },
+  "all": [
+   "1:Connect",
+   "1:Connect"
+  ]
+ },
+ "clicked1": "Connect",
+ "clickedTier": 1,
+ "find2": {
+  "n": 3,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 536.4375,
+   "y": 446,
+   "area": 1377.5
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Terms of Use, Privacy Policy, and Cookie Policy To proceed, review and accept the following: You acknowledge that you have read, understood, and agreed to the Terms of Use and Privacy Policy . This site uses cookies to ensure the best user experience. These cookies are strictly necessary or essentia",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "85,100 | HYPE | Hyperliquid",
+  "bodyLen": 3006,
+  "nodes": 1267,
+  "readyState": "complete",
+  "head": "Announcements New order type: Trailing stop Available for perp markets only Manual borrowing now available Use HYPE and BTC as collateral to borrow USDC and USDT New listing: USELESS-USDC perps Trade Portfolio Earn Vault"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 8,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 32,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.hyperliquid.xyz/trade",
+ "ms": 11973
+}

@@ -1,0 +1,141 @@
+{
+ "siteId": "synapse",
+ "url": "https://synapseprotocol.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:59:54.591Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://hypercall.xyz/synapse"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://hypercall.xyz/synapse"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://hypercall.xyz/synapse"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "271AE8F8EE1C0736B9B6EA8F6C14DEF3",
+   "status": 200,
+   "url": "https://hypercall.xyz/synapse",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "271AE8F8EE1C0736B9B6EA8F6C14DEF3",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://hypercall.xyz/synapse",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Synapse Protocol",
+  "bodyLen": 3813,
+  "nodes": 909,
+  "readyState": "complete",
+  "head": "is live — options on anything, starting with SpaceX. Defined risk. No liquidations. On Hyperliquid. Trade on Hypercall → About Bridge Swap Pools Stake $SYN Solana Bridge Secure cross-chain communication Synapse is the mo"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Synapse Protocol",
+  "bodyLen": 3813,
+  "nodes": 909,
+  "readyState": "complete",
+  "head": "is live — options on anything, starting with SpaceX. Defined risk. No liquidations. On Hyperliquid. Trade on Hypercall → About Bridge Swap Pools Stake $SYN Solana Bridge Secure cross-chain communication Synapse is the mo"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 2,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://hypercall.xyz/synapse",
+ "ms": 7347
+}
