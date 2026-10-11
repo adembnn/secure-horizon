@@ -1,7 +1,4 @@
 <title>Hold up Le gant C</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bowlby+One&display=swap">
 <style>
 /* Piste 3C, « L'affiche ». Monde : l'affiche en caractères de bois et la coupe d'un film muet, années 1930.
    Aucun trait, aucun contour : des aplats noirs et blancs. Aucune couleur.
@@ -11,8 +8,8 @@
   --page:#ffffff; --ink:#000000; --ink-2:#555555; --wash:#e6e6e6; --edge:#000000;
   --k:#000000; --k-ink:#ffffff; --k-2:#b3b3b3; --k-wash:#262626;
   --p:#ffffff; --p-ink:#000000; --p-2:#555555;
-  --title:"Bowlby One","Arial Black",Impact,sans-serif;
-  --text:"Atkinson Hyperlegible",Verdana,"Segoe UI",system-ui,sans-serif;
+  --title:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,"Helvetica Neue",sans-serif;
+  --text:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){ --page:#000000; --ink:#ffffff; --ink-2:#b3b3b3; --wash:#262626; --edge:#5a5a5a; }
@@ -30,7 +27,7 @@ button,textarea,input{font:inherit;color:inherit}
 
 /* ---- la planche */
 .sheet{padding:32px;max-width:1500px;margin:0 auto}
-.sheet h1{font:400 28px/34px var(--title)}
+.sheet h1{font:600 22px/30px var(--title)}
 .why{margin-top:12px;max-width:74ch}
 .why li{padding:3px 0}
 .shots{display:flex;flex-wrap:wrap;gap:36px 32px;align-items:flex-start;margin-top:36px}
@@ -41,80 +38,80 @@ button,textarea,input{font:inherit;color:inherit}
 
 /* ---- la fenêtre, 424 × 501. Noire. Blanche une seule fois. */
 .win{position:relative;width:424px;height:501px;overflow:hidden;display:flex;flex-direction:column;background:var(--k);color:var(--k-ink)}
-.top{padding:22px 24px 20px}
-.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;color:var(--k-2)}
+.top{padding:22px 24px 20px;text-align:center}
+.head{color:var(--k-2);font-size:14px}
 .head b{font-weight:400;color:var(--k-ink)}
-.say{margin-top:14px;font:400 30px/34px var(--title)}
-.sub{margin-top:6px;font-size:18px;line-height:24px}
-.body{flex:1;display:flex;flex-direction:column;padding:22px 24px 24px}
+.say{margin-top:14px;font:600 22px/28px var(--title)}
+.sub{margin-top:6px;font-size:15px;line-height:22px;color:var(--k-2)}
+.body{flex:1;display:flex;flex-direction:column;padding:22px 24px 24px;text-align:center}
 .mid{margin:auto 0}
 /* le mot souligné : le geste qui n'est pas celui que je te conseille */
 .mot{padding:0;border:0;background:none;color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer}
 .mot:hover,.mot.is-hover{text-decoration-thickness:4px}
 .mot[aria-disabled=true]{text-decoration:none;cursor:default}
 /* le bloc : le geste que je te conseille, toujours en bas à droite */
-.bloc{min-width:152px;height:50px;padding:0 24px;border:0;background:var(--k-ink);color:var(--k);font:400 18px/22px var(--title);cursor:pointer}
+.bloc{min-width:128px;height:40px;padding:0 20px;border:0;background:var(--k-ink);color:var(--k);font:600 15px/20px var(--title);cursor:pointer}
 .bloc:hover,.bloc.is-hover{background:#d9d9d9}
 .bloc:active,.bloc.is-press{transform:translateY(2px)}
 .bloc[aria-disabled=true]{background:var(--k-wash);color:var(--k-2);cursor:default}
 .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.foot>.mot{font-weight:700}
+.foot>.mot{font-weight:400}
 .foot p{color:var(--k-2)}
 .num{font-variant-numeric:tabular-nums}
 
 /* le papier : là où tu écris. Plein bord, pas de cadre. */
 .paper{flex:1;display:flex;flex-direction:column;padding:0 24px 24px;background:var(--p);color:var(--p-ink)}
-.paper textarea{display:block;flex:1;width:calc(100% + 48px);min-height:0;margin:0 -24px;padding:18px 24px 8px;resize:none;border:0;background:transparent;font-size:20px;line-height:28px;color:var(--p-ink);caret-color:var(--p-ink)}
+.paper textarea{display:block;flex:1;width:calc(100% + 48px);min-height:0;margin:0 -24px;padding:28px 24px 8px;resize:none;border:0;background:transparent;text-align:center;font-size:18px;line-height:26px;color:var(--p-ink);caret-color:var(--p-ink)}
 .paper textarea::placeholder{color:var(--p-2);opacity:1}
 .paper textarea:focus-visible{outline:none}
-.paper.err textarea::placeholder{color:var(--p-ink);font-weight:700}
+.paper.err textarea::placeholder{color:var(--p-ink);font-weight:600}
 .paper .foot p{color:var(--p-2)}
 .paper .bloc{background:var(--p-ink);color:var(--p)}
 .paper .bloc:hover,.paper .bloc.is-hover{background:#333}
 .paper .bloc[aria-disabled=true]{background:#dcdcdc;color:var(--p-2)}
 .paper :focus-visible{outline-color:var(--p-ink)}
 /* ce que j'ai compris : trois places fixes, sur le papier, sous ta phrase */
-.got{display:grid;grid-template-columns:repeat(3,1fr);column-gap:12px;margin-bottom:22px}
-.got-t{margin-bottom:6px;font-weight:700}
+.got{display:grid;grid-template-columns:repeat(3,1fr);column-gap:12px;margin-bottom:22px;text-align:center}
+.got-t{margin-bottom:6px;font-size:14px;color:var(--p-2);text-align:center}
 .got dt{font-size:14px;line-height:18px;color:var(--p-2)}
-.got dd{font-weight:700;line-height:22px;white-space:nowrap}
+.got dd{font-weight:400;line-height:22px;white-space:nowrap}
 .got dd.no{font-weight:400;color:var(--p-2)}
 .got .off{visibility:hidden}
 
 /* les réponses */
-.verdict{font:400 27px/35px var(--title)}
-.verdict.calm{font-size:23px;line-height:28px}
-.fact{margin-top:14px;font-size:18px;line-height:26px}
+.verdict{font:600 22px/28px var(--title)}
+.verdict.calm{font-size:20px;line-height:26px}
+.fact{margin-top:12px;font-size:16px;line-height:24px}
 .fact+.fact{margin-top:0}
-.fact.heavy{font-weight:700}
+.fact.heavy{font-weight:600}
 .fixed{margin-top:18px}
-.fixed b{display:block;font:400 18px/24px var(--title)}
+.fixed b{display:block;font:600 16px/24px var(--title)}
 .fixed span{color:var(--k-2)}
 /* la coupe : fenêtre blanche, gant noir */
-.win.cut{background:var(--p);color:var(--p-ink)}
+.win.cut{background:var(--k);color:var(--k-ink)}
 .win.cut .body{padding-top:10px}
-.win.cut .foot p{color:var(--p-2)}
-.win.cut .bloc{background:var(--p-ink);color:var(--p)}
-.win.cut :focus-visible{outline-color:var(--p-ink)}
+.win.cut .foot p{color:var(--k-2)}
+.win.cut .bloc{background:var(--k-ink);color:var(--k)}
+.win.cut :focus-visible{outline-color:var(--k-ink)}
 .gant{display:block}
-.win.cut .gant{width:176px;height:176px;margin:0 0 2px -24px}
+.win.cut .gant{width:88px;height:88px;margin:8px auto 10px}
 
 /* ---- popup et panneau */
 .pop{width:320px;background:var(--page);color:var(--ink)}
 .square{padding:18px 20px 20px;background:var(--k);color:var(--k-ink)}
-.name{font:400 15px/20px var(--title)}
-.state{margin-top:26px;font:400 23px/28px var(--title)}
+.name{font:600 14px/20px var(--title)}
+.state{margin-top:22px;font:600 18px/24px var(--title)}
 .state+p{margin-top:4px;color:var(--k-2)}
 .pad{padding:20px}
 /* l'interrupteur dit ses deux états en toutes lettres ; l'état en cours est en aplat */
 .sw{position:relative;display:grid;grid-template-columns:1fr 1fr;cursor:pointer}
 .sw input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
 .sw span{padding:10px 0;text-align:center;background:var(--wash);color:var(--ink-2)}
-.sw input:checked~.on,.sw input:not(:checked)~.off{background:var(--ink);color:var(--page);font-weight:700}
+.sw input:checked~.on,.sw input:not(:checked)~.off{background:var(--ink);color:var(--page);font-weight:600}
 .sw input:focus-visible~.on{outline:3px solid var(--ink);outline-offset:3px}
 .sw input:disabled~span{background:var(--wash);color:var(--ink-2);font-weight:400}
 .sw:has(input:disabled){cursor:default}
-.band{display:grid;grid-template-columns:52px 1fr;padding:10px 20px;background:var(--ink);color:var(--page)}
+.band{display:grid;grid-template-columns:52px 1fr;padding:10px 20px}
 .band b{display:block}
 .pop .band{margin-top:20px}
 .links{display:flex;gap:24px}
@@ -124,12 +121,12 @@ button,textarea,input{font:inherit;color:inherit}
 
 .panel{width:360px;height:680px;overflow:hidden;background:var(--page);color:var(--ink)}
 .panel .square{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px}
-.day{margin:22px 20px 6px;font:400 15px/20px var(--title)}
+.day{margin:22px 20px 6px;font:600 13px/20px var(--title);color:var(--ink-2)}
 .log time{font-variant-numeric:tabular-nums}
 .log li{display:grid;grid-template-columns:52px 1fr;padding:8px 20px}
 .log li:not(.band) time,.log li:not(.band) span{color:var(--ink-2)}
 .log b,.log i{display:block;font-weight:400;font-style:normal}
-.log .band b{font-weight:700}
+.log .band b{font-weight:600}
 .log .band{padding:10px 20px}
 .open{padding:0 20px}
 .open li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:6px 0}
@@ -139,11 +136,11 @@ button,textarea,input{font:inherit;color:inherit}
 
 /* ---- bienvenue : une affiche */
 .welcome{position:relative;width:1120px;height:620px;overflow:hidden;padding:64px 64px 0;background:var(--page);color:var(--ink)}
-.welcome h2{max-width:700px;font:400 46px/52px var(--title)}
-.welcome p{margin-top:24px;max-width:27em;font-size:20px;line-height:30px}
+.welcome h2{max-width:620px;font:600 30px/38px var(--title)}
+.welcome p{margin-top:20px;max-width:30em;font-size:17px;line-height:27px}
 .w-go{margin-top:36px;display:flex;align-items:center;gap:28px}
 .w-go .bloc{background:var(--ink);color:var(--page)}
-.welcome .gant{position:absolute;right:20px;bottom:-16px;width:440px;height:440px;color:var(--ink)}
+.welcome .gant{position:absolute;right:72px;bottom:72px;width:200px;height:200px;color:var(--ink)}
 
 /* ---- pièces détachées */
 .kit{width:1120px;background:var(--page);color:var(--ink)}
@@ -153,7 +150,7 @@ button,textarea,input{font:inherit;color:inherit}
 .kit-k .paper+.paper{margin-top:16px;height:96px}
 .row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
 .row+.row{margin-top:16px}
-.asks{display:flex;flex-wrap:wrap;gap:8px 36px;font:400 24px/30px var(--title)}
+.asks{display:flex;flex-wrap:wrap;gap:8px 36px;font:600 20px/28px var(--title)}
 .gots{display:grid;grid-template-columns:1fr 1fr;gap:0 2px;background:var(--p);color:var(--p-ink)}
 .gots .got{margin:0;padding:14px 24px}
 .kit-p{display:flex;flex-wrap:wrap;gap:32px 56px;padding:32px}
@@ -171,9 +168,9 @@ button,textarea,input{font:inherit;color:inherit}
 <header>
 <h1>Le gant, reprise C : l’affiche</h1>
 <ul class="why">
-<li>Plus de rouge, plus aucune couleur. « Ça ne correspond pas » se dit par une coupe : la fenêtre noire devient blanche, le gant paraît en noir. Dans le journal, la même inversion marque la ligne.</li>
-<li>Plus de Segoe gras. Les titres sont en Bowlby One (caractère d’affiche), le texte courant en Atkinson Hyperlegible, où un 0 ne se confond pas avec un O dans une adresse.</li>
-<li>Plus de cadres, de filets ni de boutons jumeaux : des aplats. Tu écris sur le papier blanc, le geste conseillé est un bloc en bas à droite, l’autre un mot souligné.</li>
+<li>Version calmée après tes retours : une seule police, celle du système, en graisses normales. Plus de caractère d’affiche.</li>
+<li>Le texte de la fenêtre est centré, ta phrase aussi.</li>
+<li>Plus d’inversion de toute la fenêtre ni de bandes noires dans le journal : le refus se dit par un petit gant et par la phrase.</li>
 </ul>
 </header>
 
@@ -221,7 +218,7 @@ button,textarea,input{font:inherit;color:inherit}
 </div>
 </div></div></figure>
 
-<figure class="shot"><figcaption>Ça ne correspond pas. La coupe : la fenêtre passe au blanc, le gant paraît.</figcaption><div class="box">
+<figure class="shot"><figcaption>Ça ne correspond pas. Le seul écran où le gant paraît.</figcaption><div class="box">
 <div class="win cut">
 <div class="body">
 <svg class="gant" aria-hidden="true"><use href="#gant-c"/></svg>
