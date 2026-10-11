@@ -77,3 +77,12 @@ Adem n'a bientôt plus de crédit ; un autre agent prend le relais. Tout est sur
   - l'ajout de Fuji avec son RPC officiel ;
   - la première mise en vente OpenSea ;
   - les fonctions swap*AVAX de LFJ/Pangolin, non décodées.
+- JURÉ SOCIAL (`redteam/jury_social.md`) : 42 contournements sur 74 attaques, dont 30 en `ok`. Priorités :
+  - brancher la classification du message collé : il n'est jamais lu, donc un faux support classique passe en ok ;
+  - intention dictée par l'escroc : 45 % du solde passe en ok ;
+  - le carnet empoisonné l'emporte sur l'historique ;
+  - sosies 4+3 et 2+5 ;
+  - écart de token (dit USDC, envoie AVAX ou USDT) non vérifié ;
+  - personal_sign et statement SIWE non analysés ;
+  - texte libre non lu ;
+  - pig butchering, étape 2.
