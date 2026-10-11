@@ -29,7 +29,7 @@ Réserves :
 
 Rendu vérifié par export PowerPoint en images, les huit slides relues.
 
-Le deck compte 7 slides depuis 11h35 : LI.FI est passé en slide 1 à la demande d'Adem, l'ancienne slide « C'est déjà arrivé » faisait doublon et a été retirée. Les numéros 6, 7 et 8 du tableau ci-dessus sont maintenant les slides 5, 6 et 7.
+À 11h35, LI.FI est passé en slide 1 à la demande d'Adem ; l'ancienne slide « C'est déjà arrivé » faisait doublon et a été retirée. Les lignes 6, 7 et 8 du tableau ci-dessus sont donc les slides 5, 6 et 8 du deck ; la slide 7 est le modèle économique (voir plus bas). Le deck compte 8 slides.
 
 `holdup.pdf` est fait des images exportées par PowerPoint : le texte y est dessiné dans la police du système de design, quel que soit le lecteur.
 
