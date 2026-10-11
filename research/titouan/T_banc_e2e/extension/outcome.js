@@ -21,8 +21,18 @@
  * The outcome is display only : the hold (hold_core.js) is driven by the level, never by the outcome. "match" is never
  * shown green and never says "sûr". */
 export const TEXT = {
-  question: (site) => (site ? 'Que veux-tu faire sur ' + site + ' ?' : 'Que veux-tu faire sur ce site ?'),
-  placeholder: 'Par exemple : échanger 50 USDC contre AVAX',
+  // The site is not in the title any more : it has its own line above it (`site` of the screen), so a long name never breaks the question.
+  question: () => 'Que veux-tu faire ?',
+  // The field opens empty : no example in it (a greyed example read as a sentence already written for the person).
+  placeholder: '',
+  noSite: 'Ce site',
+  // One follow-up, about the one thing that is missing (DESIGN.md). `what` : the sentence was not understood at all.
+  ask: { much: 'Combien ?', money: 'Quelle monnaie ?', who: 'À quelle adresse ?', against: 'Contre quoi ?', what: 'Que veux-tu faire, et pour combien ?' },
+  limit: (amount, symbol) => 'Limiter à ' + amount + ' ' + symbol + ' et envoyer',
+  limited: (amount, symbol) => 'Autorisation limitée à ' + amount + ' ' + symbol + '.',
+  prudent: 'Le plus prudent est de ne rien envoyer.',
+  noAnswer: 'La vérification n’a pas répondu.',
+  notUnderstood: 'Je n’ai pas compris ta phrase.',
   match: 'Ça correspond à ce que tu as écrit.',
   mismatch: 'Ça ne correspond pas à ce que tu as écrit.',
   unverifiable: 'Je n’ai pas pu vérifier cette demande.',
@@ -77,6 +87,34 @@ export function cleanLine(text) {
   s = s.replace(/^à ce site\b/, 'À ce site').replace(/(^|[.!?] )ce site/g, (all, a) => a + 'Ce site');
   return s.slice(0, 240);
 }
+// The words of the interface (DESIGN.md, lexicon) : the texts of the check are read as they are and said with the product's words.
+// Display only ; nothing here changes what was found.
+const WORDS = [
+  [/ Réduis le plafond à [^.]*?(?:\.\d[^.]*?)* dans ton portefeuille\./g, ''],
+  [/Cette signature donne accès à (.+?) et ne peut pas être limitée\./g, 'Si tu continues, ce site pourra prendre $1.'],
+  [/Je ne connais pas ce contrat \(0x[^)]{0,48}\)\./g, 'Je ne connais pas ce contrat.'],
+  [/Droit limité à /g, 'Autorisation limitée à '], [/le droit sera limité/g, 'l’autorisation sera limitée'],
+  [/Le droit est donné à/g, 'L’autorisation est donnée à'], [/qui reçoit le droit/g, 'qui reçoit l’autorisation'],
+  [/ce droit reste ouvert/g, 'cette autorisation reste ouverte'], [/au droit déjà donné/g, 'à l’autorisation déjà donnée'],
+  [/vérifier ce droit/g, 'vérifier cette autorisation'], [/un droit durable/g, 'une autorisation durable'],
+  [/Cette signature reste utilisable/g, 'Cette autorisation reste utilisable'],
+  [/(ni|pas) ce jeton/g, '$1 cette monnaie'], [/un autre jeton/g, 'une autre monnaie'], [/un jeton que je ne connais pas/g, 'une monnaie que je ne connais pas'],
+  [/ajouter un jeton/g, 'ajouter une monnaie'], [/Le jeton (0x\S+) se présente/g, 'La monnaie $1 se présente'], [/lire le jeton/g, 'lire la monnaie'],
+  [/unités du jeton/g, 'unités de la monnaie'], [/donner des jetons/g, 'donner de la monnaie'],
+  [/D’après la simulation, /g, 'D’après mon essai, '], [/La simulation échoue/g, 'Mon essai échoue']
+];
+export function wordsOf(text) {
+  let s = String(text == null ? '' : text);
+  for (const [re, to] of WORDS) s = s.replace(re, to);
+  s = s.replace(/(^|[.!?] )([a-zà-ÿ])/g, (all, a, b) => a + b.toUpperCase());
+  return s.replace(/\s{2,}/g, ' ').trim();
+}
+// "Tu as écrit 50 USDC. La demande donne accès à tout ton USDC." -> the two lines of a gap : what was written, what the request does.
+export function gapOf(line) {
+  const m = /^(Tu as écrit [^.]*(?:\.\d[^.]*)*\.)\s+(\S.*)$/.exec(String(line || ''));
+  return m ? { said: m[1], does: m[2] } : null;
+}
+const frAmount = (a) => String(a).replace('.', ',');
 export function lineOf(verdict) {
   if (verdict && verdict.written && typeof verdict.written.line === 'string' && verdict.written.line) return verdict.written.line.slice(0, 240);
   const t = verdict && verdict.texts && typeof verdict.texts.reel === 'string' ? verdict.texts.reel : verdict && verdict.real && typeof verdict.real.amount === 'string' ? verdict.real.amount : '';
@@ -103,8 +141,24 @@ export function addressesOf(verdict) {
 }
 
 // Everything the window needs for the answer screen, from a verdict and the stored intent.
+// How the sentence was classified (no model, Clef, Jev) is NOT sent to the window : it stays in the journal and in the side panel.
 export function answerOf(verdict, intent) {
   const outcome = outcomeOf(verdict, intent);
-  return { outcome, headline: TEXT[outcome], line: lineOf(verdict), fix: verdict && verdict.written && typeof verdict.written.fix === 'string' ? verdict.written.fix.slice(0, 120) : null, addresses: addressesOf(verdict), labels: { expected: verdict && verdict.written && verdict.written.address_diff ? TEXT.written : TEXT.expected, actual: TEXT.actual }, noModel: !!(intent && intent.text && intent.model === false),
-    model: intent && intent.text && intent.model === true && (intent.source === 'clef' || intent.source === 'jev') ? intent.source : null }; // which model classified the sentence (null : none) : the window says it
+  const w = verdict && verdict.written ? verdict.written : null;
+  // `line` : the sentence of the check, as it is. `show` : the same, in the words of the interface (what the window draws).
+  const line = lineOf(verdict), show = wordsOf(line);
+  const out = { outcome, headline: TEXT[outcome], line, show, fix: w && typeof w.fix === 'string' ? w.fix.slice(0, 120) : null, addresses: addressesOf(verdict),
+    labels: { expected: w && w.address_diff ? TEXT.written : TEXT.expected, actual: TEXT.actual }, noModel: !!(intent && intent.text && intent.model === false),
+    model: intent && intent.text && intent.model === true && (intent.source === 'clef' || intent.source === 'jev') ? intent.source : null }; // which model read the sentence (null : none)
+  if (outcome === 'mismatch') { const g = gapOf(show); if (g) { out.said = g.said; out.does = g.does; } }
+  if (outcome === 'unverifiable') {
+    // never a reassuring sentence here : the reason, then the prudent thing to do
+    const failed = !!(verdict && verdict.indeterminate && !(w && w.line));
+    const reason = failed ? TEXT.noAnswer : (!w || !w.line) && intent && intent.text && !intent.clear ? TEXT.notUnderstood : show;
+    out.show = (reason + ' ' + TEXT.prudent).slice(0, 300);
+    if (failed) out.retry = true;
+  }
+  // A wider permission that can be brought back to the written amount : offered as a gesture, never done without it (gatekeeper.js sets `offer`).
+  if (outcome === 'mismatch' && w && w.offer && w.offer.amount && w.offer.symbol) out.limit = { label: TEXT.limit(frAmount(w.offer.amount), w.offer.symbol), amount: String(w.offer.amount), symbol: String(w.offer.symbol) };
+  return out;
 }

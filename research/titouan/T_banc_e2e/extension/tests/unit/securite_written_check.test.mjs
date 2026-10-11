@@ -29,7 +29,11 @@ test('S2 : an unknown token address with the right amount and recipient is "not 
   const r = W.writtenCheck(tx({ to: FAKE, data: transfer(BOB, 20_000_000n) }), pay('USDC', '20'), W.tokensOf(undefined, '0x1'));
   assert.equal(r.outcome, 'unverifiable'); assert.match(r.line, /ne connais pas ce jeton/);
   const g = W.writtenCheck(tx({ to: FAKE, data: approve(SPENDER, 50_000_000n) }), { clear: true, kind: 'buy_or_swap', amount: '50', symbol: 'USDC' }, W.tokensOf(undefined, '0x1'));
-  assert.equal(g.outcome, 'unverifiable', 'a right on an unknown token is not "within the amount" either');
+  // boucle 2 : neither the token nor the contract that gets the right is known -> nothing bounds anything, "mismatch" (never "match")
+  assert.equal(g.outcome, 'mismatch', 'a right on an unknown token is not "within the amount" either'); assert.match(g.line, /ne connais ni ce jeton ni le contrat/);
+  // the same right on an unknown token, given to a contract of the public list : still "not verified"
+  const k = W.writtenCheck(tx({ to: FAKE, data: approve('0x000000000022d473030f116ddee9f6b43ac78ba3', 50_000_000n) }), { clear: true, kind: 'buy_or_swap', amount: '50', symbol: 'USDC' }, W.tokensOf(undefined, '0x1'));
+  assert.equal(k.outcome, 'unverifiable');
 });
 test('S2 : a token known by the built-in list or by the local context still matches, and a gap on an unknown token is still a gap', () => {
   assert.equal(W.writtenCheck(tx({ to: USDC, data: transfer(BOB, 20_000_000n) }), pay('USDC', '20'), W.tokensOf(undefined, '0x1')).outcome, 'match');

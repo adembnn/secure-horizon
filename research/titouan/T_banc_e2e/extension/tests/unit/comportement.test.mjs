@@ -82,6 +82,8 @@ async function gate(payload, { tab = TAB, origin = SITE, frame = 0 } = {}) {
   g.screen = async () => (await F.send({ type: 'hu.view', rid }, win())).view.screen;
   g.write = async (text) => { clock.advance(1000); const v = (await F.send({ type: 'hu.view', rid }, win())).view; return (await F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'answer', text }, win())).view.screen; };
   g.go = async (auto = false) => { clock.advance(1000); const v = (await F.send({ type: 'hu.view', rid }, win())).view; return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'continue', phraseOk: true, auto }, win()); };
+  // the gesture "Limiter à 50 USDC et envoyer"
+  g.limit = async () => { clock.advance(1000); const v = (await F.send({ type: 'hu.view', rid }, win())).view; return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'limit' }, win()); };
   g.cancel = async () => { const v = (await F.send({ type: 'hu.view', rid }, win())).view; return F.send({ type: 'hu.decision', rid, seq: v.seq, decision: 'cancel' }, win()); };
   g.poll = () => F.send({ type: 'hu.poll', rid }, page);
   g.wait = () => F.send({ type: 'hu.wait', rid }, win());
@@ -120,14 +122,19 @@ test('honest site, no token declared : one window, "Ça correspond" twice, both 
   assert.deepEqual(told('hu.closing').map((m) => [m.rid, m.why]), [[b.rid, 'allow']], 'the window was told, so its last message is shown before it closes');
 });
 
-test('unlimited right asked for an exchange : it is limited to 50, it matches, and the WALLET gets approve(spender, 50)', async () => {
+test('unlimited right asked for an exchange : it does NOT match, the limit is offered, and after that gesture the WALLET gets approve(spender, 50)', async () => {
   worker();
   const g = await gate(approve(MAX));
   const s = await g.write(SAID);
-  assert.equal(s.outcome, 'match'); assert.equal(s.headline, 'Ça correspond à ce que tu as écrit.');
-  assert.equal(s.line, LIMITED + ' Le jeton 0xc3c3…c3c3 se présente comme DUSDC.'); assert.equal(s.leftMs, 0);
-  const r = await g.go(true);
-  assert.equal(r.status, 'allow'); assert.equal(r.line, s.line, 'the window keeps the line while it waits for the exchange');
+  // founder's decision (11 Oct.) : nothing is limited without a gesture. The answer is "Ça ne correspond pas", with two lines and two gestures.
+  assert.equal(s.outcome, 'mismatch'); assert.equal(s.headline, 'Ça ne correspond pas à ce que tu as écrit.'); assert.ok(!s.autoMs);
+  assert.equal(s.said, 'Tu as écrit 50 USDC.'); assert.equal(s.does, 'La demande donne accès à tout ton USDC.');
+  assert.deepEqual(s.limit, { label: 'Limiter à 50 USDC et envoyer', amount: '50', symbol: 'USDC' });
+  // no way to send the unlimited right as it is from this screen, by a click or by itself
+  assert.equal((await g.go(true)).status, 'ignored'); clock.advance(60000); assert.equal((await g.go(false)).status, 'ignored');
+  assert.equal((await g.poll()).state, 'pending'); assert.equal((await g.poll()).params, undefined);
+  const r = await g.limit();
+  assert.equal(r.status, 'allow'); assert.equal(r.limited, 'Autorisation limitée à 50 USDC.', 'the window says it on its last screen');
   const p = await g.poll();
   assert.equal(p.state, 'allow'); assert.equal(p.params.length, 1);
   assert.equal(p.params[0].data, '0x095ea7b3' + pad(ROUTER) + pad(50n * U), 'the calldata handed to the wallet carries 50 USDC, same spender');
@@ -143,17 +150,21 @@ test('trap by signature : a Permit cannot be limited, it does not match and the 
   assert.equal((await g.go()).status, 'again'); assert.equal((await g.poll()).state, 'pending');
 });
 
-test('FRESH profile, nothing declared, the three modes : a right given to an address nobody knows never leaves without the delay', async () => {
-  // honest : approve of exactly 50 to the site's own contract. Nobody can say who that contract is : "not verified", 30 s, a gesture.
+test('FRESH profile, nothing declared, the three modes : a right BOUNDED by the written amount matches and says the contract is unknown ; an unbounded one never leaves without the delay', async () => {
+  // honest : approve of exactly 50 to the site's own contract. Nobody can say who that contract is : the line says so, the right is bounded.
   worker({ spenders: [] });
   assert.deepEqual(F.state.local, {}, 'nothing was set up');
   let g = await gate(approve(50n * U)); let s = await g.write(SAID);
-  assert.equal(s.outcome, 'unverifiable'); assert.equal(s.line, 'Tu donnes ce droit à 0xd4d4…d4d4, une adresse que je ne connais pas.'); assert.equal(s.leftMs, 30000); assert.ok(!s.autoMs);
-  assert.equal((await g.go(true)).status, 'again'); assert.equal((await g.poll()).state, 'pending');
-  // trap : unlimited right to an unknown address. "Continuer" is never active at once, and nothing goes by itself.
+  // Product decision (boucle2/JOURNAL.md, tour 4) : Hold up bounds what it lets through, it does not claim to recognise services. A right
+  // BOUNDED by the written amount matches, with no delay, and the line says the limit : the contract is unknown, it can take 50 USDC, no more.
+  assert.equal(s.outcome, 'match'); assert.equal(s.line, 'Je ne connais pas ce contrat (0xd4d4…d4d4). Il pourra prendre 50 USDC, pas plus. Le jeton 0xc3c3…c3c3 se présente comme DUSDC.'); assert.equal(s.leftMs, 0);
+  assert.equal(s.autoMs, 1000, 'it leaves by itself after one second, even to a contract Hold up does not know');
+  assert.match(s.show, /^Je ne connais pas ce contrat\. Il pourra prendre 50 USDC, pas plus\./, 'the frank line, as the window draws it');
+  assert.ok(!/s[ûu]re?\b/i.test(s.line.replace(/\bsur\b/g, '')), 'the line never says "sûr"');
+  // trap : unlimited right to an unknown address. Hold up limits it to the written amount (same decision : bounded after limitation) ;
+  // what is shown is the limited right, never the unlimited one. With the limitation switched off it does not match and it waits (next test).
   g = await gate(approve(MAX, THIEF), { tab: TAB + 1 }); s = await g.write(SAID);
-  assert.notEqual(s.outcome, 'match'); assert.equal(s.leftMs, 30000); assert.ok(!s.autoMs);
-  assert.equal((await g.go(true)).status, 'again'); assert.equal((await g.poll()).state, 'pending');
+  assert.equal(s.outcome, 'mismatch'); assert.ok(s.limit && s.limit.label === 'Limiter à 50 USDC et envoyer', 'offered, never done by itself'); assert.equal((await g.go(true)).status, 'ignored');
   // trap by signature
   g = await gate(permit(MAX), { tab: TAB + 2 }); s = await g.write(SAID);
   assert.equal(s.outcome, 'mismatch'); assert.equal(s.leftMs, 30000); assert.equal((await g.go(true)).status, 'again');
@@ -248,14 +259,24 @@ test('one window per operation : the wait ends by itself, closing the waiting wi
 // ------------------------------------------------------------------------------------------------ journal
 test('journal : who decided (the person, or the window by itself) and what was really sent (asked, limited) ; never an address', async () => {
   worker();
-  const g = await gate(approve(MAX)); await g.write(SAID); await g.go(true);
+  const g = await gate(approve(MAX)); await g.write(SAID); await g.limit();
+  const k = await gate(approve(50n * U), { tab: TAB + 6 }); await k.write(SAID); await k.go(true);
   const h = await gate(permit(MAX), { tab: TAB + 5 }); await h.write(SAID); clock.advance(31000); await h.go(false);
   const confirms = journal().filter((e) => e.type === 'decision' && e.decision === 'confirm');
-  assert.equal(confirms.length, 2);
-  assert.equal(confirms[0].by, 'auto'); assert.equal(confirms[0].gesture, false); assert.equal(confirms[0].outcome, 'match');
-  assert.deepEqual(confirms[0].sent, { limited: true, asked: 'sans limite', sent: '50 USDC' });
-  assert.ok(confirms[0].codes.includes('droit_limite') && confirms[0].codes.includes('envoi_automatique'));
-  assert.equal(confirms[1].by, 'human'); assert.equal(confirms[1].gesture, true); assert.equal(confirms[1].outcome, 'mismatch'); assert.deepEqual(confirms[1].sent, { limited: false });
+  assert.equal(confirms.length, 3);
+  // limited by the person's gesture : a human decision, what was shown was a mismatch, what left is the limited right
+  assert.equal(confirms[0].by, 'human'); assert.equal(confirms[0].actor, 'humain'); assert.equal(confirms[0].gesture, true); assert.equal(confirms[0].outcome, 'mismatch');
+  assert.deepEqual(confirms[0].sent, { limited: true, asked: 'sans limite', sent: '50 USDC' }); assert.deepEqual(confirms[0].limited, { symbol: 'USDC', amount: '50' });
+  assert.ok(confirms[0].codes.includes('droit_limite') && confirms[0].codes.includes('geste'));
+  // it matched and the window sent it on by itself : never written as a human confirmation
+  assert.equal(confirms[1].by, 'auto'); assert.equal(confirms[1].actor, 'auto'); assert.equal(confirms[1].gesture, false); assert.equal(confirms[1].outcome, 'match'); assert.ok(confirms[1].codes.includes('envoi_automatique'));
+  assert.equal(confirms[2].by, 'human'); assert.equal(confirms[2].gesture, true); assert.equal(confirms[2].outcome, 'mismatch'); assert.deepEqual(confirms[2].sent, { limited: false });
+  // the chained copy (journal_chain.js) : every line says who decided and which rules judged ; the line of the limit carries it
+  const ch = F.state.local.chain.entries;
+  assert.ok(ch.every((e) => ['humain', 'auto', 'holdup'].includes(e.by) && typeof e.rules === 'string' && e.rules.length > 0));
+  assert.ok(ch.some((e) => e.d === 'confirm' && e.by === 'humain' && e.limited === 'USDC:50'), 'limited by the gesture "Limiter à 50 USDC et envoyer"');
+  assert.ok(ch.some((e) => e.d === 'confirm' && e.by === 'auto' && e.limited === undefined), 'sent by the window itself : never a human confirmation');
+  assert.ok(journal().some((e) => e.type === 'verdict' && Number.isFinite(e.detect_ms)), 'the detection time (request received -> answer shown) is in the journal');
   const all = JSON.stringify([F.state.local.log, F.state.local.chain, F.state.local.confirms]).toLowerCase();
   for (const a of [ME, THIEF, ROUTER, TOKEN]) assert.ok(!all.includes(a.slice(2)), 'no address in the journal, its chained copy or the confirmations');
   assert.ok(!all.includes('échanger 50'), 'nor the sentence');
@@ -307,7 +328,11 @@ test('fallback in the page : the window\'s own sentences, no invented phrase, no
   assert.ok(journal().some((e) => e.type === 'ui_fallback'));
   const src = readFileSync(join(DIR, 'bridge.js'), 'utf8');
   for (const bad of ['<svg', 'DANGER', 'Danger', 'Stop. Ne signe pas', 'Tu as dit', 'En réalité', 'Je signe', 'linear-gradient', 'box-shadow:0 8px 30px', '#AF111E', '#1747A6', 'showChoices', 'Je reçois de l']) assert.ok(!src.includes(bad), 'bridge.js no longer holds : ' + bad);
-  const css = src.slice(src.indexOf('const CSS = `'), src.indexOf('const FALLBACK'));
+  const css = src.slice(src.indexOf('const CSS = /*@SHEET@*/`'), src.indexOf('const FALLBACK'));
+  assert.ok(css.length > 4000 && css.includes('.hu-over') && css.includes('.hu-cuff') && css.includes(':host') && !css.includes(':root'), 'the sheet of the design system, set in the closed shadow root');
+  { const { overlaySheet, withSheet } = await import(new URL('../../tools/gen_overlay_sheet.mjs', import.meta.url).href); if (overlaySheet && existsSync(join(DIR, 'ui', 'tokens.css'))) assert.equal(withSheet(src, overlaySheet(DIR)), src, 'bridge.js carries the sheets as they are now (tools/gen_overlay_sheet.mjs)'); }
+  for (const cls of ['hu-over-box', 'hu hu-k hu-win', 'hu-verdict', 'hu-line', 'hu-dock', 'hu-wait', "class: 'hu-cuff', type: 'button', id: 'cancel'", "class: 'hu-word', type: 'button', id: 'go'"]) assert.ok(src.includes(cls), 'the fallback is drawn with the classes of the window : ' + cls);
+  assert.ok(!/rgba\(0, ?0, ?0, ?0\.5{2}\)|border-radius:8px|font-weight:500/.test(src), 'nothing left of the former sheet');
   const colours = [...new Set(css.match(/#[0-9a-fA-F]{3,8}\b/g))];
   assert.ok(colours.every((c) => { const h = c.slice(1); const v = h.length === 3 ? [h[0], h[1], h[2]] : [h.slice(0, 2), h.slice(2, 4), h.slice(4, 6)]; return v[0] === v[1] && v[1] === v[2]; }), 'greys only : ' + colours.join(' '));
   assert.ok(src.includes("view.stage === 'verdict' && view.screen && view.screen.kind === 'answer'"), 'it draws the answer the worker wrote, nothing else');
@@ -337,17 +362,17 @@ const Q = { kind: 'question', title: 'Que veux-tu faire sur ce site ?', placehol
 const A = (o = {}) => Object.assign({ kind: 'answer', outcome: 'match', headline: 'Ça correspond à ce que tu as écrit.', line: 'La demande donne accès à 50 USDC, pas plus.', leftMs: 0 }, o);
 const type = (S, text) => { const f = S.find('textarea')[0]; f.value = text; f.listeners.input[0](); f.listeners.keydown[0]({ key: 'Enter', preventDefault() {} }); };
 
-test('timing : the loading state appears only after 150 ms of waiting ; a fast answer never flashes "Vérification…"', () => {
+test('timing : the loading state appears only after 150 ms of waiting ; a fast answer never flashes "Je compare…"', () => {
   let S = surface(); S.ui.show(Q, 'r:intent:1'); S.advance(2000); type(S, SAID);
   assert.deepEqual(S.calls, [['submit', SAID]]);
-  assert.equal(S.state(), 'question'); assert.ok(!S.texts().includes('Vérification…'), 'nothing changes on screen at once');
+  assert.equal(S.state(), 'question'); assert.ok(!S.texts().includes('Je compare…'), 'nothing changes on screen at once');
   S.advance(20); S.ui.show(A(), 'r:verdict:answer');
   assert.equal(S.state(), 'answer', 'answer after 20 ms : drawn directly'); assert.ok(S.texts().includes('Ça correspond à ce que tu as écrit.'));
-  S.advance(1000); assert.ok(!S.texts().includes('Vérification…'), 'and the loading state never came afterwards');
+  S.advance(1000); assert.ok(!S.texts().includes('Je compare…'), 'and the loading state never came afterwards');
   // slow answer : the loading state is drawn at 150 ms, and then stays 400 ms at least
   S = surface(); S.ui.show(Q, 'r:intent:1'); S.advance(2000); type(S, SAID);
   S.advance(149); assert.equal(S.state(), 'question');
-  S.advance(2); assert.equal(S.state(), 'checking'); assert.ok(S.texts().includes('Vérification…') && S.texts().includes('Je compare ta phrase à la demande.'));
+  S.advance(2); assert.equal(S.state(), 'checking'); assert.ok(S.texts().includes('Je compare…') && S.texts().includes('Je compare ta phrase à la demande.'));
   S.advance(100); S.ui.show(A(), 'r:verdict:answer');
   assert.equal(S.state(), 'checking', 'shown 100 ms ago : it is not replaced yet');
   S.advance(217); assert.equal(S.state(), 'checking'); assert.ok(!S.root.classList.contains('is-leaving'));
@@ -376,21 +401,25 @@ test('timing : "Ça correspond" stays one second, then the window continues by i
 
 test('surface : the waiting state of an operation, the step and the network in small print, the verdict-change hook, the written end of a delay', () => {
   const S = surface();
-  S.ui.show(A({ autoMs: 1000, network: 'Avalanche', noModel: true }), 'r1:verdict:answer');
-  assert.ok(S.texts().includes('Réseau : Avalanche.') && S.texts().includes('intention classée sans modèle'));
+  S.ui.show(A({ autoMs: 1000, network: 'Avalanche', noModel: true, read: { by: null, ms: null }, detectMs: 840 }), 'r1:verdict:answer');
+  // one discreet line says how the sentence was read ; the network is in the data, not drawn (design system : not on the screen)
+  assert.ok(S.texts().includes('Compris sans modèle') && !S.texts().some((t) => /Réseau|intention classée/.test(t)));
+  assert.equal(S.root.attrs['data-detect-ms'], '840');
+  { const S2 = surface(); S2.ui.show(A({ autoMs: 1000, read: { by: 'clef', ms: 412 } }), 'k'); assert.ok(S2.texts().includes('Compris par Clef en 0,4\u00a0s'), 'the measured time, never a fixed value'); }
   S.advance(1000);
-  S.ui.end('La demande part vers ton portefeuille.', { wait: true, line: LIMITED, waitText: 'J’attends la suite de l’opération.' });
+  S.ui.end('C’est parti vers ton portefeuille.', { wait: true, line: 'Autorisation limitée à 50 USDC. J’attends la suite de ton échange.', waitText: 'Rien d’autre ne partira sans vérification.' });
   assert.equal(S.state(), 'waiting'); assert.equal(S.ui.state(), 'waiting');
-  assert.deepEqual(S.texts(), ['La demande part vers ton portefeuille.', LIMITED, 'J’attends la suite de l’opération.', 'Fermer']);
+  assert.deepEqual(S.texts(), ['C’est parti vers ton portefeuille.', 'Autorisation limitée à 50\u00a0USDC. J’attends la suite de ton échange.', 'Rien d’autre ne partira sans vérification.', 'Fermer']);
   S.find('button')[0].listeners.click[0](); assert.deepEqual(S.calls.pop(), ['close'], 'Fermer closes ; it never cancels a request already sent');
   S.root.listeners.keydown[0]({ key: 'Escape', preventDefault() {} }); assert.deepEqual(S.calls.pop(), ['close']);
   S.advance(500);
   S.ui.show(A({ outcome: 'mismatch', headline: 'Ça ne correspond pas à ce que tu as écrit.', line: 'x', leftMs: 2000, step: 2 }), 'r2:verdict:answer');
   assert.equal(S.state(), 'answer'); assert.equal(S.root.attrs['data-outcome'], 'mismatch'); assert.equal(S.root.attrs['data-from-outcome'], 'match');
   assert.ok(S.root.classList.contains('is-verdict-change'));
-  assert.ok(S.texts().includes('Demande n° 2 de la même opération.'));
-  assert.ok(S.texts().includes('Continuer sera possible dans 2 s.'));
-  S.advance(2100); assert.ok(S.texts().includes('Tu peux continuer.'), 'the end of the delay is written on screen');
+  assert.ok(S.root.classList.contains('is-next'), 'the next request of the same operation arrives from the side');
+  assert.ok(S.texts().includes('Continuer') && S.texts().includes('dans ') && S.texts().includes('2'), 'the count is next to the gesture it holds');
+  assert.ok(!S.root.classList.contains('is-ready'));
+  S.advance(2100); assert.ok(S.root.classList.contains('is-ready') && S.texts().includes('Tu peux continuer.'), 'the end of the delay : the count fades (.is-ready) and it is announced');
   // an empty field is said in words
   const S3 = surface(); S3.ui.show(Q, 'k'); S3.find('textarea')[0].listeners.keydown[0]({ key: 'Enter', preventDefault() {} });
   assert.ok(S3.texts().includes('Écris d’abord ce que tu veux faire.')); assert.deepEqual(S3.calls, []);
@@ -406,7 +435,7 @@ test('a held request has a lifetime : nobody acts for 3 minutes, it is cancelled
   assert.equal((await g.poll()).state, 'deny', 'cancelled, and "Continuer" 312 s after the opening can no longer send it');
   assert.equal((await F.send({ type: 'hu.decision', rid: g.rid, seq: 2, decision: 'continue', phraseOk: true }, F.win(g.windowId(), g.rid))).status, 'ignored');
   assert.ok(told('hu.closing').some((m) => m.rid === g.rid && m.why === 'expired'), 'the window is told why');
-  assert.ok(readFileSync(join(DIR, 'window.js'), 'utf8').includes("expired: 'Cette demande a attendu trop longtemps. Elle est annulée, rien n’a été envoyé.'"));
+  assert.ok(readFileSync(join(DIR, 'window.js'), 'utf8').includes("expired: 'Demande expirée. Rien n’a été envoyé.'"));
   assert.ok(journal().some((e) => e.type === 'decision' && e.decision === 'cancel' && e.by === 'expired'));
   // a question nobody answers ends the same way
   const q = await gate(approve(50n * U), { tab: TAB + 3 });
@@ -432,11 +461,11 @@ test('a sentence longer than the limit is never checked cut : said before the li
   f.value = 'a'.repeat(460); f.listeners.input[0](); assert.ok(S.texts().includes('Il reste 40 signes.'));
   f.value = 'échanger 50 USDC contre AVAX ' + 'et puis '.repeat(70); f.listeners.input[0]();
   const n = f.value.replace(/\s+/g, ' ').trim().length;
-  assert.ok(S.texts().includes('Ta phrase fait ' + n + ' signes. Le maximum est 500 : raccourcis-la, je ne vérifie pas une phrase coupée.'));
+  assert.ok(S.texts().includes('Ta phrase fait ' + n + ' signes. Le maximum est 500\u00a0: raccourcis-la, je ne vérifie pas une phrase coupée.'));
   f.listeners.keydown[0]({ key: 'Enter', preventDefault() {} }); assert.deepEqual(S.calls, [], 'not sent');
   // the follow-up question recalls the first sentence and counts it in the limit
   const S2 = surface(); S2.ui.show({ kind: 'question', title: 'Combien, et de quel jeton ?', placeholder: '', first: 'échanger des dollars', max: 479 }, 'k2');
-  assert.ok(S2.texts().includes('Tu as écrit : « échanger des dollars »'));
+  assert.ok(S2.texts().includes('Tu as écrit ') && S2.texts().includes('« échanger des dollars »'), 'the first sentence is recalled above the follow-up');
   // whatever a window sends, the worker never judges a cut sentence
   worker();
   const g = await gate(approve(50n * U));
@@ -461,9 +490,10 @@ test('words : one name, a description with its accents, no developer word on any
   const strings = (src) => [...src.matchAll(/'((?:[^'\\\n]|\\.)*)'/g)].map((m) => m[1]).filter((s) => /[a-zà-ÿ]{3,} [a-zà-ÿ]{2,}/i.test(s));
   for (const s of strings(panel)) assert.ok(!/\.mjs|\(JSON\)|fournisseur|Danger|Manipulation|\bAttention\b/.test(s), 'side panel : ' + s);
   const screen = readFileSync(join(DIR, 'ui', 'screen.js'), 'utf8');
-  assert.ok(screen.includes("'intention classée sans modèle'") && screen.includes("'intention classée par Clef'"), 'kept, in the small print');
-  const css = readFileSync(join(DIR, 'ui', 'screen.css'), 'utf8');
-  assert.match(css, /\.hu-note \{[^}]*font-size: 12px/);
+  assert.ok(screen.includes("'Compris sans modèle'") && screen.includes("'Compris par '"), 'kept, as one discreet line');
+  const css = readFileSync(join(DIR, 'ui', 'components.css'), 'utf8');
+  assert.ok(!existsSync(join(DIR, 'ui', 'screen.css')) && /\.hu-next \{[^}]*color: var\(--hu-ink-2\)/.test(css), 'the sheets of the design system, the discreet line in grey');
+  assert.ok(!/#[0-9a-f]{3,6}\b/i.test(css.replace(/#(fff(fff)?|000(000)?)\b/gi, '')) && !/font-size:\s*1[0-1]px/.test(css), 'no colour, nothing under 12 px');
   // every sentence shown by the window, the fallback, the panel and the settings is French
   const shown = strings(screen).concat(strings(readFileSync(join(DIR, 'window.js'), 'utf8')), strings(readFileSync(join(DIR, 'options.js'), 'utf8')), strings(panel));
   for (const s of shown) assert.ok(!/\b(the|request|please|invalid|error|expected|unknown|cancel|failed)\b/i.test(s), 'English on a surface : ' + s);
@@ -472,8 +502,8 @@ test('words : one name, a description with its accents, no developer word on any
 test('settings : one page for every build, plain fields, French errors, and nothing false about the network', async () => {
   const html = readFileSync(join(DIR, 'options.html'), 'utf8');
   assert.ok(!/<textarea|JSON|Durées de démo|127\.0\.0\.1/.test(html), 'no JSON to write, no developer button, no claim about the network in the markup');
-  for (const id of ['askIntent', 'limitUnlimited', 'dangerWait', 'manipHold', 'contactName', 'contactAddress', 'addContact', 'mineAddress', 'addMine', 'spenderAddress', 'addSpender', 'save', 'net']) assert.ok(html.includes('id="' + id + '"'), id);
-  assert.ok(html.includes('prefers-color-scheme:dark'), 'it has a dark theme');
+  for (const id of ['askIntent', 'limitUnlimited', 'dangerWait', 'manipHold', 'contactName', 'contactAddress', 'addContact', 'mineAddress', 'addMine', 'spenderAddress', 'addSpender', 'exportLog', 'clearLog', 'net']) assert.ok(html.includes('id="' + id + '"'), id);
+  assert.ok(html.includes('ui/tokens.css') && html.includes('color-scheme') && !/<script>/.test(html) && !html.includes('id="save"'), 'the shared sheets (light and dark), no inline script, no save button');
   const src = join(DIR, '..', 'extension_standalone', 'src', 'options.html'), built = join(DIR, '..', 'src', 'options.html');
   assert.ok(!existsSync(src) && !existsSync(built), 'the old copy is gone');
   const sb = { console }; sb.window = sb; vm.createContext(sb); vm.runInContext(readFileSync(join(DIR, 'options.js'), 'utf8'), sb);
@@ -505,7 +535,7 @@ test('revocation with these changes : the right kept is the LIMITED one, a token
   const sent = [];
   const rpc = F.chrome.tabs.sendMessage;
   F.chrome.tabs.sendMessage = async (tabId, msg, opts) => { if (msg.type !== 'hu.revoke.run') return rpc(tabId, msg, opts); sent.push({ tabId, frameId: opts && opts.frameId, msg }); return msg.op === 'read' ? { state: 'read', result: '0x' + pad(allowance) } : { state: 'submitted' }; };
-  const g = await gate(approve(MAX)); await g.write(SAID); await g.go(true);
+  const g = await gate(approve(MAX)); await g.write(SAID); await g.limit();
   const kept = F.state.session['hu:grant:' + TAB];
   assert.equal(kept.length, 1); assert.equal(kept[0].result.status, 'revocable'); assert.equal(kept[0].result.oneClick, true);
   assert.equal(kept[0].result.grant.amount, String(50n * U), 'the right as it really went to the wallet : limited to 50');
@@ -525,7 +555,7 @@ test('revocation with these changes : the right kept is the LIMITED one, a token
   allowance = 0n; assert.equal((await F.send({ type: 'hu.revoke.check', tabId: TAB, id: got.grants[0].id }, PANEL())).state, 'zero');
 });
 
-test('revocation in the side panel : "Droits accordés" lists the right of the tab, "Révoquer" asks the worker with a tab and an id only, and says what the wallet answered', async () => {
+test('revocation in the side panel : "Ce que tu as laissé ouvert" lists the right of the tab, "Retirer l’autorisation" asks the worker with a tab and an id only, and says what the wallet answered', async () => {
   const SRC = readFileSync(join(DIR, 'ui', 'sidepanel.js'), 'utf8');
   const mk = (tag) => { const e = { tag, children: [], attrs: {}, listeners: {}, className: '', textContent: '',
     appendChild(c) { e.children.push(c); return c; }, removeChild(c) { e.children.splice(e.children.indexOf(c), 1); },
@@ -546,24 +576,25 @@ test('revocation in the side panel : "Droits accordés" lists the right of the t
   const panel = sb.HoldupPanel.mount({ createElement: mk }, root, { chrome, now: () => 1000, setTimeout: (f) => { later.push(f); } });
   await panel.render();
   const texts = () => all(root).map((e) => e.textContent).filter(Boolean);
-  assert.ok(texts().includes('Droits accordés'));
-  assert.ok(texts().includes('Cette demande donne à 0xd4d4…d4d4 le droit de dépenser tes USDC.'));
-  const buttons = () => all(root).filter((e) => e.tag === 'button' && e.textContent === 'Révoquer');
+  assert.ok(texts().includes('Ce que tu as laissé ouvert'));
+  assert.ok(texts().includes('app.exemple.org a une autorisation sur ton compte.'));
+  assert.ok(texts().includes('Cette signature reste valable tant que personne ne l’a envoyée.'), 'the worker’s own words for the off-chain grant');
+  const buttons = () => all(root).filter((e) => e.tag === 'button' && e.textContent === 'Retirer l’autorisation');
   assert.equal(buttons().length, 1, 'one button : the off-chain signature is explained, never offered as one click');
   assert.ok(texts().includes('Tu signes un permit sans effet.'));
-  assert.ok(texts().some((t) => /Ton portefeuille va afficher le nom du site/.test(t)), 'said BEFORE the click');
+  assert.ok(texts().includes('Ton portefeuille te demandera de confirmer.'), 'said BEFORE the click');
   await buttons()[0].listeners.click[0]();
   const sent = asked.filter((m) => m.type === 'hu.revoke.send');
   assert.equal(JSON.stringify(sent), JSON.stringify([{ type: 'hu.revoke.send', tabId: 7, id: 'aa11', index: 0 }]), 'a tab and an id, never a request');
-  assert.ok(texts().includes('Tu as rejeté la demande. Le droit est toujours actif.')); assert.equal(buttons().length, 1, 'the button stays');
-  answer = { state: 'submitted' }; await buttons()[0].listeners.click[0]();
-  assert.ok(texts().includes('Retrait envoyé à ton portefeuille.'));
-  assert.equal(later.length, 1); await later[0]();
-  assert.ok(texts().includes('Retrait envoyé à ton portefeuille. Le droit est à zéro.'));
+  assert.ok(texts().includes('Tu as refusé dans ton portefeuille. L’autorisation est toujours là.')); assert.equal(buttons().length, 1, 'the button stays');
   answer = { state: 'error', code: 'no_provider' }; await buttons()[0].listeners.click[0]();
   assert.ok(texts().includes('Ouvre à nouveau le site ou ton portefeuille, puis reviens ici.'));
-  const words = SRC.slice(SRC.indexOf('const REVOKE = {'), SRC.indexOf('// The site, never cut'));
-  assert.ok(!/\bOK\b|bloqu|sûr\b|protég|garanti|rembours/i.test(words), 'no promise'); assert.match(words, /Hold up ne signe jamais/);
+  answer = { state: 'submitted' }; await buttons()[0].listeners.click[0]();
+  assert.ok(texts().includes('En cours…') && buttons().length === 0, 'busy : the wallet has it, no button');
+  assert.equal(later.length, 2, 'the opening timer, then the re-read'); await later[1]();
+  assert.ok(texts().includes('app.exemple.org ne peut plus rien dépenser.') && texts().includes('Retirée'));
+  const words = SRC.slice(SRC.indexOf('const SAID = {'), SRC.indexOf('// The site, never cut'));
+  assert.ok(!/OK|bloqu|sûr|protég|garanti|rembours|Révoquer|droit|jeton/i.test(words), 'no promise, no old word');
 });
 
 test('build : the settings page, the revocation module and the engine are the ones of the sources', () => {

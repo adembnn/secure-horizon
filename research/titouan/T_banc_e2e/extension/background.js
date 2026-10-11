@@ -26,8 +26,8 @@ async function callCheck(body, cfg) {
   } finally { clearTimeout(timer); }
 }
 
-// Un clic sur l'icône ouvre le panneau latéral (geste dans l'extension seulement : jamais sur une demande de page).
-try { const p = chrome.sidePanel && chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+// Un clic sur l'icône ouvre le popup (popup.html) ; son mot « Journal » ouvre le panneau latéral (chrome.sidePanel.open, Chrome 116).
+try { const p = chrome.sidePanel && chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: false }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
 
 createGatekeeper({
   check: callCheck,
