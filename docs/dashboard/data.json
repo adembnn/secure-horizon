@@ -1,80 +1,67 @@
 {
-  "updated": "2026-10-11T02:35",
-  "headline": "Titouan a corrigé ses chiffres : 1 186 « attaques » étaient des révocations. Rappel réel du filet : 24 sur 33 vraies approbations malveillantes (73 %, IC 56-85 %). Le banc de bout en bout tourne : moteur 447 tests, extension 64 tests OK sur Chrome et Edge. Interface : direction Figma sobre choisie.",
+  "updated": "2026-10-11T04:50",
+  "headline": "Red team à grande échelle : environ 60 000 attaques testées en boîte noire sur le vrai moteur. Trou majeur trouvé : la signature permit (scène héros de la démo) ne sort jamais en critique. À corriger avant la démo. Passation en cours vers un nouvel agent.",
   "metrics": [
     {
-      "label": "Fichiers de recherche",
-      "value": "29"
+      "label": "Attaques red team testées",
+      "value": "≈ 60 000"
     },
     {
-      "label": "Agents lancés",
-      "value": "~200"
+      "label": "Cas écrits à l'aveugle",
+      "value": "8 575"
     },
     {
-      "label": "Décisions actées",
-      "value": "7"
-    },
-    {
-      "label": "Messages Adem → Titouan",
-      "value": "30"
-    },
-    {
-      "label": "Messages Titouan → Adem",
-      "value": "25"
-    },
-    {
-      "label": "Rappel filet (n=33)",
+      "label": "Rappel filet réel (n=33)",
       "value": "73 %"
     },
     {
-      "label": "Tests moteur",
-      "value": "447"
+      "label": "Fausses alertes jury (n=123)",
+      "value": "18 %"
+    },
+    {
+      "label": "Messages Adem → Titouan",
+      "value": "54"
     }
   ],
   "stages": [
     {
-      "name": "Direction grand public (D-007)",
-      "detail": "Barrière d'intention : dit / affiché / fait. Signature piégée, adresse piégée, faux support",
+      "name": "Direction D-007 + grilling",
+      "detail": "Extension navigateur, grille de réponse, Avalanche (Fuji + ancrage des verdicts)",
       "status": "done"
     },
     {
-      "name": "Recherche O (antériorité, Snaps, mesure, Clef/Jev, vocabulaire)",
-      "detail": "Aucun projet identique ; Snap = avertir, pas bloquer ; FP ≤ 1/1000 visé",
+      "name": "Design Figma sobre",
+      "detail": "Centré, adresses en grille 2×5 ; textes à préciser par menace",
       "status": "done"
     },
     {
-      "name": "Jurés v3 tour 1 (6 juges)",
-      "detail": "~60/100 ; faisabilité plafonnée tant que rien n'est mesuré",
+      "name": "Banc E2E (Titouan)",
+      "detail": "Moteur 447 tests, extension 64 tests ; DEV 100 % / 0 % après réglage",
       "status": "done"
     },
     {
-      "name": "Banc réel v0 (Titouan)",
-      "detail": "Corrigé : rappel 73 % sur 33 vraies approbations (révocations exclues)",
+      "name": "Jeux aveugles",
+      "detail": "v1 150 cas (hash publié) ; v2 8 425 cas, TEST gelé ab2aa0b4…",
       "status": "done"
     },
     {
-      "name": "T-101 contrats de démo",
-      "detail": "26 tests verts ; déploiement Fuji à faire (clé d'Adem)",
+      "name": "Red team en boîte noire",
+      "detail": "3 jurés + 7 fuzzers Opus ; registre BYPASS_REGISTRY.md",
       "status": "done"
     },
     {
-      "name": "T-103 comparateur + API",
-      "detail": "67 tests verts ; v2 (filet sans intention, réponse graduée, journal) chez Titouan",
-      "status": "doing"
-    },
-    {
-      "name": "Prototype extension (chemin critique)",
-      "detail": "Intercepte transactions et signatures, relaie après confirmation ; MetaMask normal sur Fuji",
+      "name": "Corriger les trous structurels",
+      "detail": "Permit = autorisation ; lots aussi stricts que le direct ; pay_someone ; poussière ; montant/token",
       "status": "next"
     },
     {
-      "name": "T-102 moteur d'effets, T-104 Snap, T-105 sites démo, T-106 banc",
-      "detail": "Lancés par Titouan sur son Claude",
+      "name": "Brancher Jev ou Clef pour de vrai",
+      "detail": "Clés à créer par un humain ; message collé jamais lu aujourd'hui",
       "status": "next"
     },
     {
-      "name": "Boucle : tester en réel → red team → juges → corriger",
-      "detail": "Pilotée par Titouan, notes sur résultats mesurés",
+      "name": "Passer les jeux aveugles une fois",
+      "detail": "Publier tous les chiffres, bons ou mauvais",
       "status": "next"
     },
     {
@@ -122,10 +109,10 @@
     }
   ],
   "pending": [
-    "Q9-Q13 du grilling",
-    "Étiqueter 200 tx à la main (Adem + Titouan) pour mesurer le gain de l'intention ?",
-    "Clé Cloudflare d'Adem pour Clef",
-    "Déploiement Fuji de T-101"
+    "Clé Cloudflare (Clef) ou TypeSafe (Jev) dans .env",
+    "Clé du wallet de test Fuji pour déployer et ancrer",
+    "Tutoiement ou vouvoiement",
+    "Que faire après les 10 min de retenue"
   ],
   "scores": {
     "labels": [
@@ -182,17 +169,17 @@
     "account": 1,
     "absent": 1
   },
-  "titouan": "R1-R8 : 22 cas de contrôle, 16 familles de signatures, 15 évasions. Clef ne génère pas de texte : il sert au message collé, aux domaines sosies et au texte de page ; les adresses sont notées par du code. Règle d'empoisonnement USENIX adoptée.",
+  "titouan": "Reçu MSG-048 à 054 : jeux aveugles v1/v2, failles jury, alerte permit. Chargé de corriger le moteur et de passer les jeux aveugles une seule fois.",
   "cap": {
-    "verdict": "EN ROUTE",
-    "time": "01:00",
+    "verdict": "À CORRIGER AVANT LA DÉMO",
+    "time": "04:50",
     "drifts": [
-      "Évaluation circulaire si on mesure sur nos propres cas",
-      "Snap non encore prouvé"
+      "Scène héros (permit) non détectée",
+      "Fausses alertes à 18 % sur opérations honnêtes"
     ],
     "fixes": [
-      "Jeu gelé + tx réelles C-Chain en lecture seule",
-      "Test Snap de 2 h avant le gros build"
+      "Plancher critique pour toute signature qui donne un droit",
+      "Corriger virgule décimale, poussière, intention « déposer »"
     ]
   },
   "log": [
@@ -240,6 +227,18 @@
         "Règle adresse sosie : USENIX (3 premiers + 4 derniers caractères, fenêtre de 20 min)",
         "Interface : direction Figma sobre et centrée, adresses en grille 2×5",
         "À venir : textes utilisateur précis par menace, testés sur les fausses victimes"
+      ]
+    },
+    {
+      "time": "04:50",
+      "title": "Red team massive et passation",
+      "items": [
+        "Signature permit jamais critique (377/377) : la scène héros de la démo est à corriger",
+        "Approve dans un lot : ok ou warn alors que critique en direct (fuzz encodage 2 141/3 669)",
+        "Intention : 46 % des envois vers un escroc non critiques (43 852 cas)",
+        "Jury faux positifs : 22 sur 123 opérations honnêtes en critique",
+        "Ce qui tient : Seaport, eth_sign, sosies forts, sendCalls, aucune fausse alerte sur les contacts",
+        "Passation écrite : coord/HANDOFF_ADEM_SESSION.md"
       ]
     }
   ]
