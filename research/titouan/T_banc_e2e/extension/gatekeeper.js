@@ -6,6 +6,8 @@
 import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_core.js';
 import { ENGINE_CHOICE, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
 import { TEXT, answerOf, siteName } from './outcome.js';
+import { effectCheck, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
+import { measure } from './effect_sim.js';
 
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const RANK = { attention: 1, unknown: 2, danger: 3, manipulation: 4 };
@@ -27,6 +29,18 @@ const INTENT_CHOICES = [
 const INTENT_ENGINE = { receive: 'receive', pay: 'pay', login: 'login', demande: 'asked', asked: 'asked', swap: null, other: null };
 const MAX_KEPT_BODY = 200000;   // above, the request body is not kept in the session storage : no intent question, no retry
 const WIN = { width: 440, height: 540 };
+const AUTO_MS = 1000;           // "Ça correspond" stays on screen this long, then the request goes to the wallet by itself
+// One written intent covers ONE operation : the requests that follow from the same tab, frame and origin (an approval, then the
+// exchange it prepares) are compared to the same sentence instead of asking again. It lasts 90 s after the last request it let
+// through : the time to confirm in the wallet and for that transaction to be mined before the site sends the next one (about
+// 2 s on Avalanche, 12 to 30 s on Ethereum, plus the reading of the wallet's own popup). Never more than 120 s after the
+// sentence was written, whatever happens. Past that, the question is asked again.
+const OP = { idleMs: 90000, maxMs: 120000 };
+const OP_KEY = 'hu:op:';
+const RPC_MS = 8000;            // one read relayed to the wallet's node (a trace of a few thousand steps takes 1 to 4 s on a local fork)
+// The engine could not READ the call (unknown function), and that is its only reason : the one case where a measured effect may
+// replace "not verified". An engine that failed, or any other finding, never qualifies.
+const unreadable = (v) => !!v && v.level === 'unknown' && v.indeterminate === true && v.opacity_only === true && Array.isArray(v.codes) && v.codes.length > 0;
 
 // --- social questions (escalation only : an answer can raise the level, never lower it) ---
 const SOCIAL_Q = {
@@ -163,17 +177,98 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     return Object.assign(interpret(raw, text), { text });
   }
   // Runs the engine with what was understood and keeps the strictest verdict (strict-only : a sentence never lowers a level).
-  async function judgeWithIntent(rec, intent, cfg) {
+  // -> { v, used } : `used` is what this request takes from the written amount (kept for the next requests of the same intent).
+  // `op` : the operation this request belongs to, when the sentence was written for an earlier request.
+  async function judgeWithIntent(rec, intent, cfg, op = null) {
     let v = rec.verdict;
-    const eff = v.effects || {};
-    if (!rec.body) return v;
+    if (!rec.body) return { v, used: null };
     const ask = (choice, kind) => safeCheck(Object.assign({}, rec.body, { intent: choice || undefined, intent_kind: kind, intent_text: intent.text,
       intent_amount: intent.amount, intent_symbol: intent.symbol }), cfg);
     if (intent.clear) v = stricter(v, await ask(ENGINE_CHOICE[intent.kind], intent.kind));
     if (intent.facts.receive && intent.kind !== 'asked_by_someone') v = stricter(v, await ask('receive', 'connect_or_accept_offer'));
-    // Nothing understood while a right is granted or funds leave : it cannot be said to match. At least "not verified" (same delay as Danger).
-    if (!intent.clear && (eff.grants_right || eff.funds_out) && RANK.unknown > (RANK[v.level] || 0)) v = Object.assign({}, v, { level: 'unknown' });
-    return v;
+    // What was written against what the request carries (amount of a spending right, recipient and amount of a payment) : same rule in both builds.
+    let tokens = {};
+    try { tokens = tokensOf((await chrome.storage.local.get('contexte')).contexte, rec.body.chainId); } catch (_) {}
+    // A call the request itself does not let us read (no right, no transfer in its own data) : its effect is measured by a dry run
+    // on the wallet's node. No measure = the checks below, as before.
+    let effect = null;
+    if (rec.body.method === 'eth_sendTransaction' && intent.amount && intent.symbol) {
+      const f = requestFacts(rec.body);
+      if (!f.grants.length && !f.sends.length) { try { effect = await measure(rec.body, rpcOf(rec.tabId, rec.frameId, rec.rid), tokens); } catch (_) { effect = null; } }
+    }
+    let w = effect && effect.ok ? effectCheck(effect, intent) : writtenCheck(rec.body, intent, tokens);
+    if (!w && effect && effect.failed) w = { outcome: 'unverifiable', line: 'La simulation échoue : le réseau refuserait cette demande telle quelle.' };
+    const used = usedBy(rec.body, effect);
+    if (op && !(w && w.outcome === 'mismatch')) { const over = operationCheck(await usedSoFar(op, rec), used, intent, tokens); if (over) w = over; }
+    if (w) {
+      // The engine already found worse on its own : its line stays, this check only adds its outcome.
+      const worse = w.outcome !== 'mismatch' && ((RANK[v.level] || 0) > RANK.unknown || v.intent_contradiction);
+      v = Object.assign({}, v, { written: worse ? { outcome: w.outcome } : w });
+      // What was found is a fact about the request : it is said as such, even when the engine could not read the rest of the call.
+      if (w.outcome === 'mismatch' && unreadable(v)) v.indeterminate = false;
+      if (w.outcome === 'mismatch' && RANK.danger > (RANK[v.level] || 0)) v.level = 'danger';
+      if (w.outcome === 'unverifiable' && RANK.unknown > (RANK[v.level] || 0)) v.level = 'unknown';
+      // Measured, and it is what was written : the call the engine could not read is no longer "not verified".
+      if (w.outcome === 'match' && w.measured && unreadable(v)) v = Object.assign({}, v, { level: 'attention', indeterminate: false, measured: true });
+    }
+    // Nothing understood, or still too vague after the one follow-up : it cannot be said to match. At least "not verified" (same delay as Danger),
+    // so a vague sentence never does better than no sentence at all.
+    if ((!intent.clear || intent.vague) && RANK.unknown > (RANK[v.level] || 0)) v = Object.assign({}, v, { level: 'unknown' });
+    return { v, used };
+  }
+
+  // ---------- reads relayed to the wallet's own node (bridge.js -> inject.js -> the provider the request came through) ----------
+  function rpcOf(tabId, frameId, rid) {
+    return (method, params) => new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('delai')), RPC_MS);
+      const done = (fn, x) => { clearTimeout(timer); fn(x); };
+      let p;
+      try { p = chrome.tabs.sendMessage(tabId, { type: 'hu.rpc', rid, method, params }, { frameId }); } catch (e) { return done(reject, e); }
+      Promise.resolve(p).then((r) => (r && r.ok === true ? done(resolve, r.result) : done(reject, new Error('lecture refusee'))), (e) => done(reject, e));
+    });
+  }
+
+  // ---------- one written intent, several requests ----------
+  const opKey = (tabId, frameId) => OP_KEY + tabId + ':' + frameId;
+  const opRead = async (k) => { try { return (await session.get(k))[k] || null; } catch (_) { return null; } };
+  // The operation still open for this tab, frame and origin, else null. Another origin, or too late : it is forgotten.
+  function opGet(tabId, frameId, origin, now) {
+    return store.lock(async () => {
+      const k = opKey(tabId, frameId), op = await opRead(k);
+      if (!op) return null;
+      if (op.origin !== origin || now < op.writtenAt || now - op.writtenAt > OP.maxMs || now - op.lastAt > OP.idleMs) { await session.remove(k); return null; }
+      return op;
+    });
+  }
+  // Only a sentence with an amount opens an operation : without an amount there is nothing to hold the next requests to.
+  function opOpen(rec, intent, now) {
+    if (!intent.clear || intent.vague || !intent.amount || !intent.symbol) return null;
+    const op = { origin: rec.origin, intent, writtenAt: now, lastAt: now, used: { grants: [], out: [] } };
+    return store.lock(async () => { await session.set({ [opKey(rec.tabId, rec.frameId)]: op }); return op; });
+  }
+  // A request of the operation goes to the wallet : what it takes is counted, and the 90 s start again from here.
+  function opSpend(rec, now) {
+    if (rec.opAt == null) return Promise.resolve();
+    return store.lock(async () => {
+      const k = opKey(rec.tabId, rec.frameId), op = await opRead(k);
+      if (!op || op.writtenAt !== rec.opAt || op.origin !== rec.origin) return;
+      if (rec.used) { op.used.grants.push(...rec.used.grants); op.used.out.push(...rec.used.out); }
+      op.lastAt = now;
+      await session.set({ [k]: op });
+    });
+  }
+  async function opDrop(tabId, keep) {
+    let all = {}; try { all = await session.get(null); } catch (_) {}
+    for (const k of Object.keys(all || {})) if (k.startsWith(OP_KEY + tabId + ':') && k !== keep) { try { await session.remove(k); } catch (_) {} }
+  }
+  // Already counted, plus what the other requests of the same operation still on screen would take.
+  async function usedSoFar(op, rec) {
+    const used = { grants: op.used.grants.slice(), out: op.used.out.slice() };
+    for (const r of await store.all()) {
+      if (r.rid === rec.rid || r.tabId !== rec.tabId || r.frameId !== rec.frameId || r.status !== 'pending' || r.opAt !== op.writtenAt || !r.used) continue;
+      used.grants.push(...r.used.grants); used.out.push(...r.used.out);
+    }
+    return used;
   }
 
   const fromExtensionPage = (s) => typeof s.url === 'string' && s.url.startsWith(selfUrl);
@@ -213,8 +308,13 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     view.message = message;
     // What the Hold up window draws (ui/screen.js). Two moments : the question, then the answer.
     const site = siteName(rec.site);
-    if (rec.stage === 'intent') view.screen = { kind: 'question', title: TEXT.question(site), placeholder: TEXT.placeholder };
-    else if (rec.stage === 'verdict') view.screen = Object.assign({ kind: 'answer', leftMs: Math.max(0, rec.friction.deadline - now) }, answerOf(rec.verdict, rec.intent));
+    // The question shows the site name only (origin given by the browser) : nothing of the request before the person has written.
+    if (rec.stage === 'intent') view.screen = { kind: 'question', title: rec.ask || TEXT.question(site), placeholder: TEXT.placeholder };
+    else if (rec.stage === 'verdict') {
+      view.screen = Object.assign({ kind: 'answer', leftMs: Math.max(0, rec.friction.deadline - now) }, answerOf(rec.verdict, rec.intent));
+      // It matches and no delay applies : no "Continuer", the window sends the request on after AUTO_MS (Annuler stays).
+      if (view.screen.outcome === 'match' && rec.friction.waitMs === 0 && !rec.friction.phrase) view.screen.autoMs = AUTO_MS;
+    }
     return view;
   }
 
@@ -234,7 +334,13 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
         ui = 'window'; windowId = win.id;
       } catch (e) { why = String(e && e.message || e).slice(0, 120); }
     }
-    const r = await store.advance(rec.rid, null, (x) => { x.ui = ui; x.windowId = windowId; });
+    // The in-page fallback has no free-text field : it never asks anything (no shortcut buttons, no "who asked you"). It shows the answer
+    // of a request nobody described : at least "not verified", with its delay.
+    const r = await store.advance(rec.rid, null, (x, now) => {
+      x.ui = ui; x.windowId = windowId;
+      if (ui === 'overlay' && x.stage === 'intent') enterVerdict(x, RANK.unknown > (RANK[x.verdict.level] || 0) ? Object.assign({}, x.verdict, { level: 'unknown' }) : x.verdict, cfg, now);
+    });
+    if (r.status === 'next' && ui === 'overlay' && rec.stage === 'intent') await journalStage(r.rec);
     if (r.status !== 'next' && windowId != null) { try { await chrome.windows.remove(windowId); } catch (_) {} } // decided meanwhile
     if (ui === 'overlay') await journal({ type: 'ui_fallback', origin: rec.origin, method: rec.method, why: why || 'inconnu', note: 'fenetre separee indisponible : fenetre affichee dans la page' });
     else nudge(rec.tabId, 0, { type: 'hu.banner' });
@@ -273,6 +379,8 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     if (typeof p.method !== 'string' || p.method.length > 80) return { done: true, allow: false, reason: 'demande-invalide' };
     if (!validRid(msg.rid)) return { done: true, allow: false, reason: 'demande-invalide' };
     const tabId = sender.tab.id, frameId = sender.frameId;
+    // A connection (Sign-In with Ethereum naming this very site, asked by the top frame) moves nothing and grants nothing : no window.
+    if (frameId === 0 && signIn(p.method, p.params, origin)) { await journal({ type: 'journal', origin, method: p.method, note: 'connexion reconnue : aucune fenetre', frame: 'top' }); return { done: true, allow: true }; }
     const old = await store.get(msg.rid);
     if (old) return old.tabId === tabId && old.frameId === frameId ? { pending: true } : { done: true, allow: false, reason: 'demande-invalide' };
 
@@ -283,10 +391,19 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     const eff = floor.effects || {};
     let kept = null;
     try { const s = JSON.stringify(body); if (s.length <= MAX_KEPT_BODY) kept = body; } catch (_) {}
-    const wantIntent = !!kept && INTENT_METHODS.has(p.method) && floor.level !== 'unknown'
-      && (cfg.askIntent === 'always' || (cfg.askIntent === 'rights_or_funds' && (eff.grants_right || eff.funds_out)));
+    // A transaction the engine cannot read is still asked about : its effect can be measured once the person has written.
+    const askable = !!kept && INTENT_METHODS.has(p.method) && cfg.askIntent !== 'never' && (floor.level !== 'unknown' || (unreadable(floor) && p.method === 'eth_sendTransaction'));
+    const wantIntent = askable && (cfg.askIntent === 'always' || (cfg.askIntent === 'rights_or_funds' && (eff.grants_right || eff.funds_out || floor.level === 'unknown')));
     const init = { body: kept, verdict: floor, level: floor.level, intent: null, grill: null, called: false };
-    if (wantIntent) { init.stage = 'intent'; init.shownAt = Date.now(); }
+    // The person wrote what they want a moment ago, on this very tab, frame and origin : not asked again. This request is checked
+    // on its own against the SAME sentence, and against what the earlier requests of that sentence already took.
+    const op = kept && INTENT_METHODS.has(p.method) && cfg.askIntent !== 'never' ? await opGet(tabId, frameId, origin, Date.now()) : null;
+    if (op) {
+      const j = await judgeWithIntent({ rid: msg.rid, tabId, frameId, body: kept, verdict: floor }, op.intent, cfg, op);
+      init.intent = op.intent; init.opAt = op.writtenAt; init.used = j.used;
+      enterVerdict(init, j.v, cfg, Date.now());
+      await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });
+    } else if (wantIntent) { init.stage = 'intent'; init.shownAt = Date.now(); }
     else applyPlan(init, planAfterIntent(floor, null, cfg), cfg, Date.now());
 
     const o = await store.open({ rid: msg.rid, tabId, frameId, origin, site: hostOf(origin), method: p.method, init });
@@ -320,13 +437,24 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     let r = null;
     if (rec.stage === 'intent' && d === 'answer' && typeof msg.text === 'string') {
       // the person WROTE what they want : classify, compare, go straight to the answer (no further question)
-      const text = cleanText(msg.text);
-      if (!text) return { status: 'ignored' };
+      if (!cleanText(msg.text)) return { status: 'ignored' };
+      const text = cleanText(rec.firstText ? rec.firstText + ' ' + msg.text : msg.text); // the answer to the follow-up completes the first sentence
       const intent = await understand(text);
       intent.choice = intent.clear ? (ENGINE_CHOICE[intent.kind] || 'other') : 'other';
-      const v = await judgeWithIntent(rec, intent, cfg);
+      const again = relance(intent);
+      if (again && !rec.asked) {
+        // Too vague (nothing understood, or no amount, or nobody to pay) : ONE follow-up question, in the same window, never two.
+        await journal({ type: 'decision', stage: 'intent', decision: 'relance', intent: intent.kind || 'unclear', classifier: intent.source, origin: rec.origin, method: rec.method, time_to_decision_ms: ttd, ui: rec.ui });
+        r = await store.advance(rid, seq, (x, now) => { x.asked = true; x.firstText = text; x.ask = again; x.shownAt = now; });
+        if (r.status !== 'next') return { status: 'ignored' };
+        if (testHook) runHook(rid);
+        return { status: 'next', view: viewOf(r.rec, cfg) };
+      }
+      if (again) intent.vague = true;
+      const { v, used } = await judgeWithIntent(rec, intent, cfg);
       await journal({ type: 'decision', stage: 'intent', decision: 'answer', intent: intent.kind || 'unclear', classifier: intent.source, facts: intent.facts, origin: rec.origin, method: rec.method, time_to_decision_ms: ttd, ui: rec.ui });
-      r = await store.advance(rid, seq, (x, now) => { x.intent = intent; enterVerdict(x, v, cfg, now); });
+      const op = await opOpen(rec, intent, Date.now());
+      r = await store.advance(rid, seq, (x, now) => { x.intent = intent; x.used = used; x.opAt = op ? op.writtenAt : null; enterVerdict(x, v, cfg, now); });
     } else if (rec.stage === 'intent' && d === 'answer') {
       const choice = msg.value in INTENT_ENGINE ? (msg.value === 'demande' ? 'asked' : msg.value) : 'other';
       const intent = { choice, message: typeof msg.message === 'string' ? msg.message.slice(0, 2000) : '' };
@@ -364,6 +492,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     } else if (rec.stage === 'verdict' && d === 'continue') {
       const s = await store.submit(rid, { seq, decision: 'continue', phraseOk: msg.phraseOk === true, by, meta: { screen: msg.screen } });
       if (s.status === 'allow') {
+        await opSpend(s.rec, Date.now());
         await journal({ type: 'decision', stage: 'verdict', decision: 'confirm', by, origin: rec.origin, method: rec.method, level: rec.level, indeterminate: !!rec.verdict.indeterminate,
           time_to_decision_ms: ttd, friction: { phrase: rec.friction.phrase, wait_ms: rec.friction.waitMs }, ui: rec.ui, total_ms: Date.now() - rec.createdAt });
         await closeUi(s.rec);
@@ -416,6 +545,14 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       if (rec && rec.tabId === sender.tab.id && rec.frameId === sender.frameId && rec.status === 'pending') await refuse(msg.rid, 'page-left');
       return { ok: true };
     },
+    // A page loads in this frame. An operation written for another origin does not survive it ; a new top page ends those of its frames.
+    'hu.page': async (msg, sender) => {
+      if (!fromPage(sender)) return { ok: false };
+      const k = opKey(sender.tab.id, sender.frameId), op = await opRead(k);
+      if (op && op.origin !== originOf(sender)) { try { await session.remove(k); } catch (_) {} }
+      if (sender.frameId === 0) await opDrop(sender.tab.id, k);
+      return { ok: true };
+    },
     // top frame : should the neutral banner be shown ?
     'hu.banner?': async (msg, sender) => {
       if (!fromPage(sender)) return { n: 0 };
@@ -460,6 +597,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
   });
   if (chrome.tabs && chrome.tabs.onRemoved) chrome.tabs.onRemoved.addListener((tabId) => {
     store.all().then((all) => { for (const r of all) if (r.tabId === tabId && r.status === 'pending') refuse(r.rid, 'tab-closed'); });
+    opDrop(tabId, null);
   });
   if (chrome.runtime.onStartup) chrome.runtime.onStartup.addListener(() => { sweep(); });
   if (!(chrome.storage && chrome.storage.session)) journal({ type: 'note', note: 'chrome.storage.session absent : la retenue ne survit pas a un arret du service worker' });

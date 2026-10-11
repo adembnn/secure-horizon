@@ -185,6 +185,25 @@ test('invariant : a declared kind without details never lowers the verdict (320 
   assert.equal(n, CASES.length * 4);
 });
 
+test('invariant : a vague text or a genre alone, given as an Intent object, never lowers the verdict (320 replayed cases, with and without facts)', async () => {
+  // counter-example found by pipeline/measure_vague.mjs : { kind: 'buy_or_swap' } alone removed kind_missing_unvouched_recipient and signed_right_not_intended
+  const run = makeEvaluatePlus(D); let n = 0;
+  const KINDS = ['pay_someone', 'send_to_my_account', 'buy_or_swap', 'connect_or_accept_offer', 'asked_by_someone'];
+  const VAGUE = [{}, { freeText: 'ok' }, { freeText: 'valider' }, { freeText: 'je sais pas' }, { freeText: 'faire la transaction' }, { freeText: 'continuer' }];
+  const empty = { isContract: {}, ageBlocks: {}, balances: {}, tokenMeta: {}, facts: {}, tokenInfo: {}, allowances: {}, missing: [], source: 'provider' };
+  for (const c of CASES) {
+    const { body, local } = input(c);
+    for (const live of [null, empty]) {
+      const none = benchLevel(await run(body, local, { live, classifier: false }));
+      for (const intent of [...VAGUE, ...KINDS.map((kind) => ({ kind }))]) {
+        const v = await run(body, local, { live, classifier: false, intent }); n++;
+        assert.ok(RK[benchLevel(v)] >= RK[none], `${c.id} : sans intention ${none}, avec ${JSON.stringify(intent)} ${benchLevel(v)}`);
+      }
+    }
+  }
+  assert.equal(n, CASES.length * 2 * 11);
+});
+
 test('known_protocols.json : every entry has a primary source, and the list is given to the product and to the detectors', async () => {
   const kp = JSON.parse(readFileSync(join(ROOT, 'pipeline', 'known_protocols.json'), 'utf8'));
   let n = 0;

@@ -5,6 +5,8 @@
  *   -------------------------------------------------------------------------------------
  *   'unknown', or verdict.indeterminate (engine down, unreadable request) -> 'unverifiable'
  *   nothing was written (question skipped by a setting, body too large)   -> 'unverifiable'
+ *   the written amount or recipient is not the request's (verdict.written) -> 'mismatch'
+ *   the sentence stayed too vague after the one follow-up (intent.vague)   -> never 'match'
  *   'manipulation'                                                        -> 'mismatch'
  *   'danger'                                                              -> 'mismatch', unless the written intent covers it (*)
  *   verdict.intent_contradiction (comparator : said X, does Y)            -> 'mismatch'
@@ -18,12 +20,12 @@
  * shown green and never says "sûr". */
 export const TEXT = {
   question: (site) => (site ? 'Que veux-tu faire sur ' + site + ' ?' : 'Que veux-tu faire sur ce site ?'),
-  placeholder: 'Par exemple : payer 20 USDC à Paul',
+  placeholder: 'Par exemple : échanger 50 USDC contre AVAX',
   match: 'Ça correspond à ce que tu as écrit.',
   mismatch: 'Ça ne correspond pas à ce que tu as écrit.',
   unverifiable: 'Je n’ai pas pu vérifier cette demande.',
   lineFallback: 'Je ne sais pas dire ce que fait cette demande.',
-  expected: 'Adresse que tu connais', actual: 'Adresse de cette demande'
+  expected: 'Adresse que tu connais', written: 'Adresse que tu as écrite', actual: 'Adresse de cette demande'
 };
 
 export function covers(intent, verdict) {
@@ -36,10 +38,11 @@ export function covers(intent, verdict) {
 export function outcomeOf(verdict, intent) {
   if (!verdict || verdict.level === 'unknown' || verdict.indeterminate) return 'unverifiable';
   if (!intent || !intent.text) return 'unverifiable';
-  if (verdict.level === 'manipulation') return 'mismatch';
-  if (verdict.level === 'danger') return covers(intent, verdict) ? 'match' : 'mismatch';
+  const w = verdict.written && verdict.written.outcome;
+  if (w === 'mismatch' || verdict.level === 'manipulation') return 'mismatch';
+  if (verdict.level === 'danger') return !intent.vague && w !== 'unverifiable' && covers(intent, verdict) ? 'match' : 'mismatch';
   if (verdict.intent_contradiction) return 'mismatch';
-  if (!intent.clear) return 'unverifiable';
+  if (!intent.clear || intent.vague || w === 'unverifiable') return 'unverifiable';
   return 'match';
 }
 
@@ -61,6 +64,7 @@ export function cleanLine(text) {
   return s.slice(0, 240);
 }
 export function lineOf(verdict) {
+  if (verdict && verdict.written && typeof verdict.written.line === 'string' && verdict.written.line) return verdict.written.line.slice(0, 240);
   const t = verdict && verdict.texts && typeof verdict.texts.reel === 'string' ? verdict.texts.reel : verdict && verdict.real && typeof verdict.real.amount === 'string' ? verdict.real.amount : '';
   return cleanLine(t) || TEXT.lineFallback;
 }
@@ -68,7 +72,7 @@ export function lineOf(verdict) {
 // Two addresses, each as 2 rows of 5 groups of 4 characters ; `diff` marks the characters that differ.
 const HEX40 = /^0x[0-9a-fA-F]{40}$/;
 export function addressesOf(verdict) {
-  const d = verdict && verdict.address_diff;
+  const d = verdict && ((verdict.written && verdict.written.address_diff) || verdict.address_diff);
   if (!d || !HEX40.test(d.expected || '') || !HEX40.test(d.actual || '')) return null;
   const a = d.expected.slice(2), b = d.actual.slice(2);
   const cells = (x, y) => Array.from({ length: 10 }, (_, g) => Array.from({ length: 4 }, (_, i) => ({ c: x[g * 4 + i], diff: x[g * 4 + i].toLowerCase() !== y[g * 4 + i].toLowerCase() })));
@@ -79,5 +83,5 @@ export function addressesOf(verdict) {
 // Everything the window needs for the answer screen, from a verdict and the stored intent.
 export function answerOf(verdict, intent) {
   const outcome = outcomeOf(verdict, intent);
-  return { outcome, headline: TEXT[outcome], line: lineOf(verdict), addresses: addressesOf(verdict), labels: { expected: TEXT.expected, actual: TEXT.actual }, noModel: !!(intent && intent.text && intent.model === false) };
+  return { outcome, headline: TEXT[outcome], line: lineOf(verdict), addresses: addressesOf(verdict), labels: { expected: verdict && verdict.written && verdict.written.address_diff ? TEXT.written : TEXT.expected, actual: TEXT.actual }, noModel: !!(intent && intent.text && intent.model === false) };
 }

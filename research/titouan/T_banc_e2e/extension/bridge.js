@@ -72,13 +72,27 @@
     function retry() { if (!waits.has(rid)) return; if (++tries > 5) return finish(rid, false, 'extension-indisponible'); setTimeout(attempt, 300 * tries); }
     attempt();
   }
+  // Reads asked by the service worker for a request still held here : relayed to inject.js, which asks the wallet's own node.
+  const reads = new Map(); let readN = 0;
+  function relayRead(msg, sendResponse) {
+    const w = waits.get(msg.rid);
+    if (!w || !port) { sendResponse({ ok: false }); return false; }
+    const n = ++readN;
+    const timer = setTimeout(() => { if (reads.delete(n)) sendResponse({ ok: false }); }, 9000);
+    reads.set(n, (m) => { clearTimeout(timer); sendResponse(m.ok === true ? { ok: true, result: m.result } : { ok: false }); });
+    try { port.postMessage({ t: 'rpc', id: w.id, n, method: msg.method, params: msg.params }); } catch (_) { reads.delete(n); clearTimeout(timer); sendResponse({ ok: false }); return false; }
+    return true; // answered later
+  }
   function onPortMsg(ev) {
     const m = ev.data; if (!m) return;
+    if (m.t === 'rpcResult') { const cb = reads.get(m.n); if (cb) { reads.delete(m.n); cb(m); } return; }
     if (m.t === 'gate') { port.postMessage({ t: 'ack', id: m.id }); startGate(m); }
     else if (m.t === 'notify') {
       send({ type: 'gate', payload: Object.assign({}, m.payload, { kind: 'journal' }), origin: location.origin, url: location.href }).catch(() => {});
     }
   }
+  // A page starts in this frame : an intent written for another origin on this tab must not follow the person here.
+  send({ type: 'hu.page' }).catch(() => {});
   // The page goes away : its pending requests are refused (their Hold up window closes).
   window.addEventListener('pagehide', () => { for (const rid of waits.keys()) send({ type: 'hu.abandon', rid }).catch(() => {}); }, true);
 
@@ -415,8 +429,9 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
     }, () => bannerSet(false));
   }
 
-  chrome.runtime.onMessage.addListener((msg) => {
+  chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (!msg) return false;
+    if (msg.type === 'hu.rpc') return relayRead(msg, sendResponse);
     if (msg.type === 'hu.result' && waits.has(msg.rid)) poll(msg.rid);           // the decision is ready : fetch it now
     else if (msg.type === 'hu.banner' && window === window.top) bannerCheck();
     return false;

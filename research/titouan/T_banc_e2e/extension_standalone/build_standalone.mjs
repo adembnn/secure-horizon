@@ -1,5 +1,5 @@
 // build_standalone.mjs - assemble extension_standalone/extension/ de facon reproductible (aucune date, aucun hasard : memes entrees => memes octets).
-// Entrees (LECTURE SEULE) : ../extension (bridge.js, inject.js, gatekeeper.js, hold_core.js, intent_text.js, keyword_intent.js, outcome.js, classifier_client.js, window.*, options.js, ui/screen.*), ../engine/src/*.mjs, ../engine/vendor/compare.ts, ../run/policy.mjs, ../../U_textes_utilisateur.json
+// Entrees (LECTURE SEULE) : ../extension (bridge.js, inject.js, gatekeeper.js, hold_core.js, intent_text.js, keyword_intent.js, outcome.js, written_check.js, effect_sim.js, classifier_client.js, window.*, options.js, ui/screen.*), ../engine/src/*.mjs, ../engine/vendor/compare.ts, ../run/policy.mjs, ../../U_textes_utilisateur.json
 // Entrees propres : src/ (background.js, sentinelle_core.js, manifest.json, options.html)
 // Sortie : extension/ (le dossier a charger dans chrome://extensions) + extension/BUILD_INFO.json (hachages)
 // Usage : node build_standalone.mjs        Node >= 23.2 (module.stripTypeScriptTypes). Aucun paquet, aucun reseau.
@@ -37,7 +37,7 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
-for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'classifier_client.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
+for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'classifier_client.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
 // 1 bis) surface de la fenetre (extension/ui) : la question ecrite puis la reponse. Systeme : docs/design/v5/DESIGN.md
 for (const f of ['screen.css', 'screen.js']) put('ui/' + f, src(join(ROOT, 'extension', 'ui', f)));
 // 2) fichiers propres a la version autonome

@@ -13,7 +13,10 @@ const O = await load('outcome.js');
 const I = await load('intent_text.js');
 const BENCH = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..'); // T_banc_e2e
 const EVIL = 'https://evil.example';
-const TX = { method: 'eth_sendTransaction', params: [{ from: '0x' + 'a1'.repeat(20), to: '0x' + 'b2'.repeat(20), value: '0x1' }], chainId: '0x7a69', from: '0x' + 'a1'.repeat(20) };
+// The request of these tests : a token transfer of 20 units (6 decimals) to TO. The sentence PAY describes it exactly.
+const ME = '0x' + 'a1'.repeat(20), TOKEN = '0x' + 'c3'.repeat(20), TO = '0x' + 'b2'.repeat(20);
+const TX = { method: 'eth_sendTransaction', params: [{ from: ME, to: TOKEN, data: '0xa9059cbb' + TO.slice(2).padStart(64, '0') + (20000000).toString(16).padStart(64, '0') }], chainId: '0x7a69', from: ME };
+const PAY = 'payer 20 USDC à ' + TO;
 const REEL = 'Cette demande envoie 20 USDC à ton contact.';
 const verdict = (level, extra = {}) => Object.assign({ level, texts: { croit: 'a', reel: REEL, danger: 'c', action: 'd' }, reasons: [],
   effects: { grants_right: false, funds_out: true }, risk_signals: [] }, extra);
@@ -36,14 +39,14 @@ async function gate(origin = EVIL) {
   return g;
 }
 const model = (kind, confidence, facts = {}) => async () => ({ source: 'clef', model: true, kind, confidence, facts: Object.assign({ asked: 0.02, receive: 0.02, grant: 0.02 }, facts) });
-async function write(g, text) { clock.advance(1000); return g.decide({ seq: 1, decision: 'answer', text }); }
+async function write(g, text, seq = 1) { clock.advance(1000); return g.decide({ seq, decision: 'answer', text }); }
 
 test('the window first asks one question with a free-text field, whatever the request (product default)', async () => {
   worker('attention', model('pay_someone', 0.9));
   const g = await gate('https://app.exemple.org');
   const v = await g.view();
   assert.equal(v.stage, 'intent');
-  assert.deepEqual(v.screen, { kind: 'question', title: 'Que veux-tu faire sur app.exemple.org ?', placeholder: 'Par exemple : payer 20 USDC à Paul' });
+  assert.deepEqual(v.screen, { kind: 'question', title: 'Que veux-tu faire sur app.exemple.org ?', placeholder: 'Par exemple : échanger 50 USDC contre AVAX' });
   assert.equal((await g.decide({ seq: 1, decision: 'continue', phraseOk: true })).status, 'ignored', 'no way forward without writing');
   assert.equal((await g.decide({ seq: 1, decision: 'answer', text: '   ' })).status, 'ignored', 'an empty sentence is not an answer');
   assert.equal((await g.poll()).state, 'pending');
@@ -52,7 +55,7 @@ test('the window first asks one question with a free-text field, whatever the re
 test('match : understood intent, nothing against it -> "Ça correspond à ce que tu as écrit."', async () => {
   worker('attention', model('pay_someone', 0.91));
   const g = await gate();
-  const r = await write(g, 'payer 20 USDC à Paul');
+  const r = await write(g, PAY);
   assert.equal(r.status, 'next');
   const s = r.view.screen;
   assert.equal(s.kind, 'answer'); assert.equal(s.outcome, 'match');
@@ -60,6 +63,7 @@ test('match : understood intent, nothing against it -> "Ça correspond à ce que
   assert.equal(s.line, REEL);
   assert.equal(s.leftMs, 0); assert.equal(s.noModel, false); assert.equal(s.addresses, null);
   assert.equal(seen[1].intent, 'pay'); assert.equal(seen[1].intent_kind, 'pay_someone'); assert.equal(seen[1].intent_amount, '20'); assert.equal(seen[1].intent_symbol, 'USDC');
+  assert.equal(s.autoMs, 1000, 'no Continuer : the window sends the request on by itself after about a second');
   clock.advance(1000);
   assert.equal((await g.decide({ seq: r.view.seq, decision: 'continue', phraseOk: true })).status, 'allow');
 });
@@ -86,17 +90,17 @@ test('mismatch : the engine contradicts the sentence -> "Ça ne correspond pas�
 test('a request the engine judges dangerous on its own is a mismatch, whatever was written', async () => {
   worker('danger', model('pay_someone', 0.95));
   const g = await gate();
-  assert.equal((await write(g, 'payer 20 USDC à Paul')).view.screen.outcome, 'mismatch');
+  assert.equal((await write(g, PAY)).view.screen.outcome, 'mismatch');
   F.killWorker(); worker('manipulation', model('pay_someone', 0.95));
   const m = await gate();
-  const r = await write(m, 'payer 20 USDC à Paul');
+  const r = await write(m, PAY);
   assert.equal(r.view.screen.outcome, 'mismatch'); assert.equal(r.view.screen.leftMs, 600000, '10 min hold unchanged');
 });
 
 test('strict-only : a reassuring classification never lowers the engine verdict', async () => {
   worker((b) => verdict(b.intent ? 'attention' : 'danger'), model('pay_someone', 0.99));
   const g = await gate();
-  const r = await write(g, 'tout va bien, payer Paul');
+  const r = await write(g, 'tout va bien, ' + PAY);
   assert.equal(r.view.verdict.level, 'danger'); assert.equal(r.view.screen.outcome, 'mismatch');
   assert.equal(I.stricter({ level: 'danger' }, { level: 'attention' }).level, 'danger');
   assert.equal(I.stricter({ level: 'attention' }, { level: 'danger' }).level, 'danger');
@@ -111,14 +115,16 @@ test('"someone told me to" and "I expect to receive" only add engine checks ; th
   F.killWorker(); seen = [];
   worker((b) => verdict(b.intent === 'receive' ? 'danger' : 'attention', { intent_contradiction: b.intent === 'receive' }), model('pay_someone', 0.9, { receive: 0.9 }));
   const b = await gate();
-  const rb = await write(b, 'toucher mon remboursement');
+  const rb = await write(b, 'toucher mon remboursement, ' + PAY);
   assert.deepEqual(seen.slice(1).map((x) => x.intent), ['pay', 'receive']); assert.equal(rb.view.screen.outcome, 'mismatch');
 });
 
 test('low confidence (< 0.6, the comparator threshold) is "no clear intent" : not verified, with the Danger delay', async () => {
   worker('attention', model('pay_someone', 0.41));
   const g = await gate();
-  const r = await write(g, 'euh');
+  const q = await write(g, 'euh');
+  assert.equal(q.view.stage, 'intent', 'one follow-up question first');
+  const r = await write(g, 'euh', q.view.seq);
   assert.equal(seen.length, 1, 'the engine is not asked with an intent nobody understood');
   assert.equal(r.view.verdict.level, 'unknown');
   assert.equal(r.view.screen.outcome, 'unverifiable'); assert.equal(r.view.screen.headline, 'Je n’ai pas pu vérifier cette demande.');
@@ -139,13 +145,15 @@ test('no relay (classify absent, throwing or answering nonsense) : the embedded 
   for (const classify of [null, async () => { throw new Error('ECONNREFUSED'); }, async () => 'ok']) {
     worker('attention', classify);
     const g = await gate();
-    const r = await write(g, 'payer 20 USDC à Paul');
+    const r = await write(g, PAY);
     assert.equal(r.view.screen.outcome, 'match'); assert.equal(r.view.screen.noModel, true);
     F.killWorker();
   }
   worker('attention', async () => ({ source: 'clef', model: true, kind: 'approve_everything', confidence: 1 }));
   const g = await gate();
-  assert.equal((await write(g, 'payer 20 USDC à Paul')).view.screen.outcome, 'unverifiable', 'a kind the product does not know is never an intent');
+  const q = await write(g, PAY);
+  assert.equal(q.view.screen.kind, 'question', 'not understood : one follow-up');
+  assert.equal((await write(g, PAY, q.view.seq)).view.screen.outcome, 'unverifiable', 'a kind the product does not know is never an intent');
   const k = await I.keywordClassify('je veux échanger mes AVAX contre des USDC');
   assert.equal(k.kind, 'buy_or_swap'); assert.equal(k.model, false);
   assert.equal((await I.keywordClassify('on m’a demandé de valider')).facts.asked, 1);

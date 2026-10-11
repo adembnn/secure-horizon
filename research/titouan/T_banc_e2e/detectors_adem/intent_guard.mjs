@@ -146,14 +146,18 @@ export const intentGuard = {
     const share = eff.shareOfBalancePct ?? ctx._sharePct;
     const strangers = outs.filter((o) => !vouched(ctx, o.to));
     const bare = !!kc && !(typeof process !== 'undefined' && process.env.HOLDUP_IG_BARE === '0') && !(isAddr(intent.counterpartyAddress) && strangers.some((o) => lc(o.to) === lc(intent.counterpartyAddress))); // the user did not name THIS recipient (an amount or a token says nothing about who is paid)
-    if (strangers.length && (kc === 'pay_someone' || !kc || (bare && kc !== 'buy_or_swap'))) {
+    // a swap said WITHOUT what nor how much ("échanger") is a genre alone : it vouches for nobody, so it must not do better than no intent at all
+    // (measured 2026-10-11, pipeline/RESULTATS_INTENTION_VAGUE.md). A swap with a token or an amount keeps the former behaviour.
+    const said = (x) => (typeof x === 'string' && x.trim() !== '') || typeof x === 'number';
+    const nudeSwap = kc === 'buy_or_swap' && !said(intent.token) && !said(intent.amount) && !said(intent.counterpartyLabel) && !said(intent.counterpartyAddress);
+    if (strangers.length && (kc === 'pay_someone' || !kc || (bare && (kc !== 'buy_or_swap' || nudeSwap)))) {
       const o = strangers[0];
       if (Number.isFinite(share) && share > 50) flags.push({ code: 'new_recipient_large_share', severity: 'critical', detail: `${lc(o.to)} n'est ni dans votre carnet, ni un destinataire déjà payé, et la demande déplace ${Number(share).toFixed(0)} % du solde` });
       else if (KM() === 'off') { /* rule (5) disabled */ }
       else if (!kc) flags.push({ code: 'kind_missing_unvouched_recipient', severity: KM(), detail: `aucune intention exploitable (type « ${String(raw)} ») et ${lc(o.to)} n'a jamais été payé par vous` });
       // a kind WITHOUT the recipient (the one-click answer of the extension, or a form where only the amount is typed) says nothing about who is paid : it must not make the verdict
       // weaker than no answer at all (invariant : adding intent information never lowers the level). Same rule, same code.
-      else if (bare) flags.push({ code: 'kind_missing_unvouched_recipient', severity: KM(), detail: `vous n'avez pas dit qui vous payez, et ${lc(o.to)} n'a jamais été payé par vous` });
+      else if (bare) flags.push({ code: 'kind_missing_unvouched_recipient', severity: KM(), detail: `vous n'avez pas dit ${nudeSwap ? 'quoi ni combien' : 'qui vous payez'}, et ${lc(o.to)} n'a jamais été payé par vous` });
     }
 
     // false-positive repair : the comparator's only critical is amount_exceeded and the amount typed ("1,000", "1k") covers what is sent

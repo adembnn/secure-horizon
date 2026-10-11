@@ -73,7 +73,7 @@ Quatre tailles de texte et un titre. Pas de capitales, pas d'italique.
 Il y en a six.
 
 1. **Fenêtre.** Fond uni. Le contenu en haut, les actions en bas.
-2. **Champ de la question.** Zone de texte de trois lignes, bord 1 px `--hu-edge`, encre au survol, bord encre doublé au focus. Entrée valide, Maj+Entrée va à la ligne. L'exemple (« Par exemple : payer 20 USDC à Paul ») est un exemple, le titre est le libellé.
+2. **Champ de la question.** Zone de texte de trois lignes, bord 1 px `--hu-edge`, encre au survol, bord encre doublé au focus. Entrée valide, Maj+Entrée va à la ligne. L'exemple (« Par exemple : échanger 50 USDC contre AVAX ») est un exemple, le titre est le libellé.
 3. **Bouton plein.** Fond encre, 48 px de haut. Un seul par écran.
 4. **Bouton discret.** Bord 1 px, fond transparent. Inactif : texte encre-2, bord `--hu-line`.
 5. **Ligne de preuve.** Une phrase, tirée des textes du moteur, corrigée à l'affichage (`outcome.js`, `cleanLine`).

@@ -133,13 +133,21 @@ const expect = (cond, what) => { log.push((cond ? 'ok    ' : 'ECHEC ') + what); 
     // B) a plain payment the person describes correctly
     w = await holdupWindow(ctx, () => sendTx(page, st.victim, FRIEND));
     await w.setViewportSize({ width: 360, height: 520 }); await shot(w, '8_question_360'); await w.setViewportSize(INNER);
-    await answer(w, 'payer 0,01 AVAX à un ami');
+    await answer(w, 'payer 0,01 AVAX à ' + FRIEND);
     s = await read(w);
     expect(s.outcome === 'match' && s.title === 'Ça correspond à ce que tu as écrit.', 'paiement : « ' + s.title + ' » / « ' + s.line + ' »');
-    expect(s.buttons.join(' | ') === 'Annuler | Continuer [principal]', 'boutons : ' + s.buttons.join(' | '));
+    expect(s.buttons.join(' | ') === 'Annuler', 'pas de bouton Continuer : ' + s.buttons.join(' | '));
     expect(!/vert|sûr/i.test(s.title + s.line), 'ni « sûr » ni vert');
-    await shot(w, '4_correspond');
-    expect(await cancel(w), 'Annuler ferme la fenêtre');
+    try { await w.screenshot({ path: join(OUT, '4_correspond.png') }); shots.push('4_correspond.png'); } catch (_) { log.push('capture 4_correspond : fenêtre déjà fermée'); }
+    await sleep(2600);
+    expect(w.isClosed(), 'correspond : la fenêtre se ferme toute seule');
+    expect(wallet.asked === 1, 'correspond : la demande part au portefeuille sans autre geste (' + wallet.asked + ')');
+    // B bis) a name without an address : the recipient cannot be checked
+    w = await holdupWindow(ctx, () => sendTx(page, st.victim, FRIEND));
+    await answer(w, 'payer 0,01 AVAX à un ami');
+    s = await read(w);
+    expect(s.outcome === 'unverifiable' && /adresse/.test(s.line), 'nom sans adresse : « ' + s.title + ' » / « ' + s.line + ' »');
+    expect(await cancel(w), 'Annuler ferme la fenêtre'); expect(wallet.asked === 1, 'rien de plus n’a atteint le portefeuille');
 
     // C) an address that looks like one the person knows (local context of the extension)
     await sw.evaluate((known) => chrome.storage.local.set({ contexte: { contacts: [{ label: 'Paul', address: known }], history: [{ address: known, direction: 'sortie', minutes_ago: 4000 }], protected: [], knownSpenders: [], tokens: [] } }), KNOWN);
@@ -153,7 +161,7 @@ const expect = (cond, what) => { log.push((cond ? 'ok    ' : 'ECHEC ') + what); 
     expect(await cancel(w), 'Annuler ferme la fenêtre');
     await sw.evaluate(() => chrome.storage.local.remove('contexte'));
   } catch (e) { failed++; log.push('ERREUR run 1 : ' + String(e && e.message).split('\n')[0]); }
-  expect(wallet.asked === 0, 'run 1 : aucune signature ni envoi demandé au portefeuille (' + wallet.asked + ')');
+  expect(wallet.asked === 1, 'run 1 : une seule demande a atteint le portefeuille, celle qui correspondait (' + wallet.asked + ')');
   await ctx.close(); await new Promise((r) => relay.close(r));
 }
 
@@ -162,19 +170,24 @@ const expect = (cond, what) => { log.push((cond ? 'ok    ' : 'ECHEC ') + what); 
   const { ctx, page, st, wallet } = await launch();
   try {
     let w = await holdupWindow(ctx, () => sendTx(page, st.victim, FRIEND));
-    await answer(w, 'bonjour');
+    await w.fill('.hu-field', 'bonjour'); await w.keyboard.press('Enter');
+    await w.waitForFunction(() => /combien/i.test((document.querySelector('.hu-title') || {}).textContent || '') && !document.querySelector('.hu-field').readOnly, null, { timeout: 10000 });
     let s = await read(w);
+    expect(s.title === 'Que veux-tu faire, et pour combien ?' && !s.outcome && !s.line, 'phrase vague : une relance, « ' + s.title + ' », champ vide, rien de la demande');
+    expect(await w.evaluate(() => document.querySelector('.hu-field').value) === '', 'relance : champ vide');
+    await shot(w, '7_relance');
+    await answer(w, 'bonjour');
+    s = await read(w);
     expect(s.outcome === 'unverifiable' && s.title === 'Je n’ai pas pu vérifier cette demande.', 'phrase incomprise : « ' + s.title + ' » / « ' + s.line + ' »');
     expect(s.quiet.includes('intention classée sans modèle'), 'sans relais : « ' + s.quiet.join(' | ') + ' »');
     await shot(w, '7_pas_pu_verifier');
     expect(await cancel(w), 'Annuler ferme la fenêtre');
     w = await holdupWindow(ctx, () => sendTx(page, st.victim, FRIEND));
-    await answer(w, 'payer 0,01 AVAX à un ami');
+    await answer(w, 'payer 0,01 AVAX à ' + FRIEND);
     s = await read(w);
     expect(s.outcome === 'match' && s.quiet.includes('intention classée sans modèle'), 'sans relais, paiement : « ' + s.title + ' » + « ' + s.quiet.join(' | ') + ' »');
-    await shot(w, '4_correspond_sans_modele');
-    await w.keyboard.press('Escape'); await sleep(1300);
-    expect(w.isClosed(), 'Échap annule');
+    await w.keyboard.press('Escape'); await sleep(1600);
+    expect(w.isClosed() && wallet.asked === 0, 'Échap pendant la seconde d’affichage annule : rien ne part');
   } catch (e) { failed++; log.push('ERREUR run 2 : ' + String(e && e.message).split('\n')[0]); }
   expect(wallet.asked === 0, 'run 2 : aucune signature ni envoi demandé au portefeuille (' + wallet.asked + ')');
   await ctx.close();

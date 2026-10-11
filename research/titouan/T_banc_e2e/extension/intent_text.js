@@ -102,11 +102,22 @@ export async function keywordClassify(text) {
   return { source: 'keywords', model: false, kind, confidence, facts };
 }
 
-// "20 USDC", "0,5 eth" : an amount is kept only when it is glued to a token symbol (a bare number could be anything).
-const AMOUNT_TOKEN = /(?:^|[^\w.,])(\d{1,12}(?:[.,]\d{1,8})?)\s?(ETH|BTC|USDT|USDC|AVAX|SOL|MATIC|POL|DAI|WETH|WBTC|WAVAX)\b/i;
+// "20 USDC", "0,5 eth", "1 000 USDC" : an amount is kept only when it is glued to a token symbol (a bare number could be anything).
+// Known symbols in any case ; any other symbol only in capitals ("50 JOE").
+const AMOUNT_KNOWN = /(?:^|[^\w.,])(\d{1,3}(?: \d{3})+|\d{1,12})([.,]\d{1,8})?\s?(ETH|BTC|USDT|USDC|AVAX|SOL|MATIC|POL|DAI|WETH|WBTC|WAVAX)\b/i;
+const AMOUNT_OTHER = /(?:^|[^\w.,])(\d{1,3}(?: \d{3})+|\d{1,12})([.,]\d{1,8})?\s?([A-Z][A-Z0-9]{1,7})(?![A-Za-z0-9])/;
+const ADDRESS = /0x[0-9a-fA-F]{40}(?![0-9a-fA-F])/g;
+// "à Paul", "vers mon Ledger", "to bob" : someone is named. Without a pasted address the recipient cannot be checked.
+const NAMED = /(?:^|\s)(?:à|a|au|aux|pour|vers|chez|to)\s+[\p{L}\d]/iu;
 export function extractFields(text) {
-  const m = cleanText(text).match(AMOUNT_TOKEN);
-  return m ? { amount: m[1].replace(',', '.'), symbol: m[2].toUpperCase() } : {};
+  const t = cleanText(text), out = {};
+  const m = t.match(AMOUNT_KNOWN) || t.match(AMOUNT_OTHER);
+  if (m) { out.amount = m[1].replace(/ /g, '') + (m[2] || '').replace(',', '.'); out.symbol = m[3].toUpperCase(); }
+  const found = [...new Set((t.match(ADDRESS) || []).map((a) => a.toLowerCase()))];
+  if (found.length === 1) out.address = found[0];
+  const rest = t.replace(ADDRESS, ' ').replace(AMOUNT_KNOWN, ' ').replace(AMOUNT_OTHER, ' ');
+  if (found.length > 1 || NAMED.test(rest.replace(/(?:contre|for).*$/i, ' '))) out.named = true;
+  return out;
 }
 
 // Whatever came back (relay or keyword path) -> what the gatekeeper uses. Unknown shapes are "not clear", never an intent.

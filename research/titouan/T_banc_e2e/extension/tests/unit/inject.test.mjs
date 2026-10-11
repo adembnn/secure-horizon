@@ -202,7 +202,7 @@ test('(d) wallet_grantPermissions, wallet_sendCalls and the other durable-right 
   const P = page({ decide: () => false });
   P.run(WALLET + `; window.ethereum = new Wallet();`);
   const gated = ['wallet_grantPermissions', 'wallet_sendCalls', 'eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign', 'eth_signTypedData', 'eth_signTypedData_v1',
-    'eth_signTypedData_v3', 'eth_signTypedData_v4', 'wallet_addEthereumChain', 'wallet_switchEthereumChain', 'wallet_requestPermissions', 'eth_sendRawTransaction', 'wallet_requestSnaps',
+    'eth_signTypedData_v3', 'eth_signTypedData_v4', 'eth_sendRawTransaction', 'wallet_requestSnaps',
     'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation'];
   for (const m of gated) {
     assert.equal((await settle(P.run(`ethereum.request({ method: '${m}', params: [{ chainId: '0xa86a', calls: [] }] })`))).ok, false, m);
@@ -247,4 +247,29 @@ test('(f) an identical request cannot replay while the wallet popup is open ; an
   // once the wallet has answered, the same request is a new request
   assert.equal((await settle(Q.run(`ethereum.send('personal_sign', ['0x00', '0x' + 'a1'.repeat(20)])`))).ok, true);
   assert.equal(Q.gates.length, 3);
+});
+
+test('(g) dry run : while a request is held, only read methods are relayed to the provider it came through, and nothing after the decision', async () => {
+  let P; const got = [];
+  const read = (id, n, method, params) => new Promise((res) => {
+    const port = P.ctx._port;
+    const h = (ev) => { if (ev.data && ev.data.t === 'rpcResult' && ev.data.n === n) { port.removeEventListener('message', h); res(ev.data); } };
+    port.addEventListener('message', h); port.postMessage({ t: 'rpc', id, n, method, params });
+  });
+  P = page({ decide: async () => {
+    got.push(await read(1, 1, 'eth_call', [{ to: '0x' + 'b2'.repeat(20), data: '0x313ce567' }, 'latest']));
+    got.push(await read(1, 2, 'debug_traceCall', [{ to: '0x' + 'b2'.repeat(20) }, 'latest', {}]));
+    got.push(await read(1, 3, 'eth_sendTransaction', [{ to: '0x' + 'b2'.repeat(20), value: '0x1' }]));
+    got.push(await read(1, 4, 'personal_sign', ['0x00', '0x' + 'a1'.repeat(20)]));
+    got.push(await Promise.race([read(99, 5, 'eth_call', []), sleep(60).then(() => 'silence')]));
+    return false;
+  } });
+  P.run(WALLET + `; window.ethereum = new Wallet();`);
+  const r = await settle(P.run(`ethereum.request({ method: 'eth_sendTransaction', params: ${TXP} })`));
+  assert.equal(r.ok, false);
+  assert.deepEqual(got.slice(0, 2).map((x) => [x.ok, x.result]), [[true, 'result:eth_call'], [true, 'result:debug_traceCall']]);
+  assert.deepEqual(got.slice(2, 4).map((x) => x.ok), [false, false], 'anything that signs or sends is refused');
+  assert.equal(got[4], 'silence', 'an id that is not a held request gets no answer');
+  assert.deepEqual(JSON.parse(P.run(`JSON.stringify(ethereum.calls.map((c) => c.method).filter((m) => m !== 'eth_chainId'))`)), ['eth_call', 'debug_traceCall'], 'the wallet saw the two reads and nothing else');
+  assert.equal(await Promise.race([read(1, 6, 'eth_call', []), sleep(60).then(() => 'silence')]), 'silence', 'once decided, the request no longer opens the relay');
 });

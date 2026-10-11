@@ -196,14 +196,14 @@
   },
   "intention_honnete": {
    "counts": {
-    "attrape_critical": 191,
-    "attrape_warn": 58,
-    "rate": 3,
+    "attrape_critical": 200,
+    "attrape_warn": 52,
+    "rate": 0,
     "inconnu": 0,
-    "fa_critical": 0,
+    "fa_critical": 7,
     "fa_warn_exces": 5,
     "fa_warn_toleree": 5,
-    "ok": 80,
+    "ok": 73,
     "ambigu_ok": 3,
     "ambigu_warn": 14,
     "ambigu_critical": 2,
@@ -222,25 +222,25 @@
     "n_ambigu": 19,
     "n_fraude_conforme": 24,
     "rappel_alerte": {
-     "k": 249,
+     "k": 252,
      "n": 252,
-     "rate": 0.9881,
-     "lo": 0.9656,
-     "hi": 0.9959
+     "rate": 1,
+     "lo": 0.985,
+     "hi": 1
     },
     "rappel_critical": {
-     "k": 191,
+     "k": 200,
      "n": 252,
-     "rate": 0.7579,
-     "lo": 0.7014,
-     "hi": 0.8067
+     "rate": 0.7937,
+     "lo": 0.7395,
+     "hi": 0.839
     },
     "rappel_hors_inconnu": {
-     "k": 249,
+     "k": 252,
      "n": 252,
-     "rate": 0.9881,
-     "lo": 0.9656,
-     "hi": 0.9959
+     "rate": 1,
+     "lo": 0.985,
+     "hi": 1
     },
     "inconnu_malveillant": {
      "k": 0,
@@ -250,25 +250,25 @@
      "hi": 0.015
     },
     "fausse_alerte_critical": {
-     "k": 0,
+     "k": 7,
      "n": 90,
-     "rate": 0,
-     "lo": 0,
-     "hi": 0.0409
+     "rate": 0.0778,
+     "lo": 0.0382,
+     "hi": 0.1519
     },
     "fausse_alerte_warn_ou_critical": {
-     "k": 10,
+     "k": 17,
      "n": 90,
-     "rate": 0.1111,
-     "lo": 0.0615,
-     "hi": 0.1926
+     "rate": 0.1889,
+     "lo": 0.1214,
+     "hi": 0.2818
     },
     "fausse_alerte_warn_exces_ou_critical": {
-     "k": 5,
+     "k": 12,
      "n": 90,
-     "rate": 0.0556,
-     "lo": 0.024,
-     "hi": 0.1235
+     "rate": 0.1333,
+     "lo": 0.0779,
+     "hi": 0.2187
     },
     "fraude_conforme_alerte": {
      "k": 18,
@@ -857,7 +857,9 @@
     "unexpected_approval"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-002",
@@ -907,7 +909,9 @@
     "unlimited_approval_swap"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-004",
@@ -932,7 +936,9 @@
     "unexpected_approval"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-006",
@@ -957,7 +963,9 @@
     "unlimited_approval_swap"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-007",
@@ -982,7 +990,9 @@
     "unexpected_approval"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-008",
@@ -1199,7 +1209,9 @@
     "unlimited_approval_swap"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-017",
@@ -1247,7 +1259,9 @@
     "unlimited_approval_swap"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-020",
@@ -1272,7 +1286,9 @@
     "unlimited_approval_swap"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-021",
@@ -1320,7 +1336,9 @@
     "unlimited_approval_swap"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "approve_erc20-029",
@@ -2816,7 +2834,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "ok",
     "_adem_catalogue": "ok"
    },
@@ -2854,7 +2872,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "ok",
     "_adem_catalogue": "ok"
    },
@@ -2892,7 +2910,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "ok",
     "_adem_catalogue": "ok"
    },
@@ -3264,7 +3282,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "ok",
     "_adem_catalogue": "ok"
    },
@@ -3321,7 +3339,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "ok",
     "_adem_catalogue": "ok"
    },
@@ -3397,7 +3415,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "ok",
     "_adem_catalogue": "ok"
    },
@@ -3454,7 +3472,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "ok",
     "_adem_catalogue": "ok"
    },
@@ -4014,7 +4032,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -4067,7 +4085,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -4117,7 +4135,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -4142,7 +4160,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -4167,7 +4185,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -4192,7 +4210,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "warn",
     "_adem_catalogue": "warn"
    },
@@ -4213,7 +4231,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "warn",
     "_adem_catalogue": "warn"
    },
@@ -4237,7 +4255,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "warn",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "warn",
     "_adem_catalogue": "warn"
    },
@@ -5174,7 +5192,9 @@
     "unexpected_approval"
    ],
    "opaque": false,
-   "polNotes": []
+   "polNotes": [
+    "F31:droit_plus_large_inconnu"
+   ]
   },
   {
    "id": "increase_allowance-006",
@@ -5254,7 +5274,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -5297,7 +5317,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -5318,7 +5338,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "ok",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },
@@ -7062,7 +7082,7 @@
    "levels": {
     "reference_simulation": "warn",
     "sans_intention": "ok",
-    "intention_honnete": "warn",
+    "intention_honnete": "critical",
     "intention_mensongere": "critical",
     "_adem_catalogue": "critical"
    },

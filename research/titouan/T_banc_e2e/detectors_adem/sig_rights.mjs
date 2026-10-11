@@ -74,6 +74,9 @@ export const sigRights = {
     if (request.method === 'eth_signTypedData_v4') {
       const td = parseTyped(request);
       const kind = intent && intent.kind;
+      // "échanger" alone (no token, no amount) says nothing about the right signed : it must not remove a flag raised when no intent is given
+      const said = (x) => (typeof x === 'string' && x.trim() !== '') || typeof x === 'number';
+      const swapSaid = SWAP_KINDS.has(kind) && (said(intent.token) || said(intent.amount));
       for (const g of grantsOf(td)) {
         const unl = g.allowed === true || effectivelyUnlimited(ctx, g.token, g.amount);
         const known = isKnown(ctx, g.spender);
@@ -81,7 +84,7 @@ export const sigRights = {
         const what = unl ? 'illimité' : 'limité';
         if (g.mode === 'transfer' && unl) flags.push({ code: 'signed_transfer_unlimited', severity: 'critical', detail: `la signature autorise ${who} à retirer un montant illimité de ${lc(g.token)}` });
         else if (!known && unl) flags.push({ code: 'signed_right_unlimited_unknown', severity: 'critical', detail: `la signature accorde un droit de dépense illimité sur ${lc(g.token)} à ${who}` });
-        else if (!known && !SWAP_KINDS.has(kind)) flags.push({ code: 'signed_right_not_intended', severity: 'critical', detail: `la signature accorde un droit de dépense (${what}) sur ${lc(g.token)} à ${who}, alors que l'intention déclarée n'est pas un échange` });
+        else if (!known && !swapSaid) flags.push({ code: 'signed_right_not_intended', severity: 'critical', detail: `la signature accorde un droit de dépense (${what}) sur ${lc(g.token)} à ${who}, alors que l'intention déclarée n'est pas un échange` });
         if (flags.length) break;
       }
     } else if (request.method === 'personal_sign') {

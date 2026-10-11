@@ -2,7 +2,8 @@
  *   HoldupScreen.mount(root, { onSubmit(text), onCancel(via), onContinue() }) -> { show(screen, key), end(text) }
  * `screen` comes from the service worker (gatekeeper.js viewOf -> view.screen) :
  *   { kind: 'question', title, placeholder }
- *   { kind: 'answer', outcome: 'match' | 'mismatch' | 'unverifiable', headline, line, addresses, labels, leftMs, noModel }
+ *   { kind: 'answer', outcome: 'match' | 'mismatch' | 'unverifiable', headline, line, addresses, labels, leftMs, noModel, autoMs }
+ *   autoMs (only with 'match' and no delay) : no "Continuer", onContinue() is called by itself after that time.
  * The worker stays the judge : this file only disables "Continuer" while the delay runs, the worker refuses it anyway. */
 (function (global) {
   'use strict';
@@ -61,7 +62,6 @@
       field.addEventListener('input', function () { if (!busy) setEnabled(go, !!field.value.trim()); });
       field.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); submit(); } });
       go.addEventListener('click', submit);
-      if (typeof s.value === 'string') { field.value = s.value; setEnabled(go, !!s.value.trim()); }
       if (s.checking) lock();
       try { field.focus({ preventScroll: true }); } catch (_) {}
       current.unlock = function () { busy = false; field.readOnly = false; go.textContent = T.check; status.hidden = true; setEnabled(go, !!field.value.trim()); };
@@ -80,6 +80,15 @@
       if (s.noModel) f.col.appendChild(el('p', 'hu-note', T.noModel));
       var live = el('span', 'hu-sr'); live.setAttribute('role', 'status'); f.col.appendChild(live);
       var match = s.outcome === 'match';
+      if (match && s.autoMs > 0) {
+        // It matches : the sentence stays about a second, then the request goes to the wallet by itself. No "Continuer" ; Annuler stays.
+        f.actions.appendChild(cancelButton(false));
+        var arm = function (ms) { if (timer) clearTimeout(timer); timer = setTimeout(function () { timer = null; if (!busy) { busy = true; on.onContinue(); } }, ms); };
+        arm(s.autoMs);
+        try { title.focus({ preventScroll: true }); } catch (_) {}
+        current.sync = function () { busy = false; arm(300); }; // the worker said "not yet" : asked again shortly
+        return;
+      }
       var cancel = cancelButton(!match), go = button(T.go, match);
       f.actions.appendChild(cancel); f.actions.appendChild(go);
       var until = Date.now() + Math.max(0, s.leftMs || 0);

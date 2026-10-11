@@ -27,7 +27,7 @@
   },
   {
    "file": "engine/src/fixes.mjs",
-   "sha256": "968790ecc1df25d6c4a2ef44db101f96274ead52dc4b73db9666235d4f0600f0"
+   "sha256": "7ac324e0123fa6ca23722965394975e226ce44d7dcad3dd3f35205d2ac617ab1"
   },
   {
    "file": "engine/src/keccak.mjs",
@@ -87,19 +87,23 @@
   },
   {
    "file": "extension_standalone/src/sentinelle_core.js",
-   "sha256": "0e7c74b89f254105704bcb8b1ba55b3a5c23c38ffe5bdfc87ad54e5fd9fd3822"
+   "sha256": "d8211f26b013610ac0438e914894bb39dddbcda75a4822b17692d9ff2f538130"
   },
   {
    "file": "extension/bridge.js",
-   "sha256": "1255f1febf11bc41c0c13e37933a84f739a2faafb861d03b91a34c35a5fbdc33"
+   "sha256": "465268ca79c74b57a5724b17015bfe2026bc6ab4c8290e3df8cc766f9ccabdef"
   },
   {
    "file": "extension/classifier_client.js",
    "sha256": "131390f4556cea734b9ff742e0ab7a4226356d151c6f8be91aed93e941e06e30"
   },
   {
+   "file": "extension/effect_sim.js",
+   "sha256": "5b6cd1bac3594178e64615012f1e306a4ae2ec43137054fc8a8070106c4f8a82"
+  },
+  {
    "file": "extension/gatekeeper.js",
-   "sha256": "3dc32cf63bf8f3a660fb7ffc3dfba1b19279c6d7a33c2e5019520275f9a11ada"
+   "sha256": "58390331b6f5d3dbd7d12f3213881e23291ac7f693c3de3dc266d7a4851fc2b6"
   },
   {
    "file": "extension/hold_core.js",
@@ -107,11 +111,11 @@
   },
   {
    "file": "extension/inject.js",
-   "sha256": "c436b83940da9f54e455c04084859098d2ca26efa6e9ae034c069c89c70a9fad"
+   "sha256": "0df04418345ca2fbb84c00ada03f3699310da55fba09b3abe82306e929e7f9d3"
   },
   {
    "file": "extension/intent_text.js",
-   "sha256": "f9f6f93fa4b636c7aae525b4e2642d557567fe0604b0f217413382c6d23d66c7"
+   "sha256": "f9dc55dcf9f23a479f8eca7e38954cf696071737a42b9c18436e11e609c73e67"
   },
   {
    "file": "extension/keyword_intent.js",
@@ -123,7 +127,7 @@
   },
   {
    "file": "extension/outcome.js",
-   "sha256": "3d0b197b083811872c98446c42b44dcfa2f43aa59be5089c871e63f64dd91f04"
+   "sha256": "db376f74f0b53bea2e687351e2693953bee5f26a9d887cedf9e637162edf1b4e"
   },
   {
    "file": "extension/ui/screen.css",
@@ -131,7 +135,7 @@
   },
   {
    "file": "extension/ui/screen.js",
-   "sha256": "d687a9fc4bb8b861de283f98f3a4dab97964157c53a166761d85365aae55668b"
+   "sha256": "b248cf2d90b90df75eab590f5962026882c10e32a275b9bab5f87e7eec4e606f"
   },
   {
    "file": "extension/window.css",
@@ -146,8 +150,12 @@
    "sha256": "d41eb7b68dabbce6e32754a1606d24dadabc451296985624108431ca91d2b3bd"
   },
   {
+   "file": "extension/written_check.js",
+   "sha256": "0c943c73d51e0be45d42b1168dd7c2e5479d45184ba5aa4b5a294f36059b39dd"
+  },
+  {
    "file": "run/policy.mjs",
-   "sha256": "a1cb1a0bcf0250042478c83fb052d40932cb324df88028767d736810999f6717"
+   "sha256": "35b1bf6a16b205427eebed44d15bc6a2a9a4ffa9a361bc18ff60be0e9d2fd7a9"
   }
  ],
  "outputs": [
@@ -158,8 +166,8 @@
   },
   {
    "file": "bridge.js",
-   "bytes": 32725,
-   "sha256": "1255f1febf11bc41c0c13e37933a84f739a2faafb861d03b91a34c35a5fbdc33"
+   "bytes": 33876,
+   "sha256": "465268ca79c74b57a5724b17015bfe2026bc6ab4c8290e3df8cc766f9ccabdef"
   },
   {
    "file": "classifier_client.js",
@@ -167,14 +175,19 @@
    "sha256": "131390f4556cea734b9ff742e0ab7a4226356d151c6f8be91aed93e941e06e30"
   },
   {
+   "file": "effect_sim.js",
+   "bytes": 11988,
+   "sha256": "5b6cd1bac3594178e64615012f1e306a4ae2ec43137054fc8a8070106c4f8a82"
+  },
+  {
    "file": "engine/policy.js",
-   "bytes": 14054,
-   "sha256": "0cac82f1a1a44b01aca7abc7c40114f1d92df013856c5a91e7cb97121550b2e5"
+   "bytes": 22739,
+   "sha256": "8ab94095b343586065be28870c60fd2fff4750fbaff740e74941cb5db3b387bf"
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 39912,
-   "sha256": "0e7c74b89f254105704bcb8b1ba55b3a5c23c38ffe5bdfc87ad54e5fd9fd3822"
+   "bytes": 40492,
+   "sha256": "d8211f26b013610ac0438e914894bb39dddbcda75a4822b17692d9ff2f538130"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -203,8 +216,8 @@
   },
   {
    "file": "engine/src/fixes.js",
-   "bytes": 804,
-   "sha256": "968790ecc1df25d6c4a2ef44db101f96274ead52dc4b73db9666235d4f0600f0"
+   "bytes": 825,
+   "sha256": "7ac324e0123fa6ca23722965394975e226ce44d7dcad3dd3f35205d2ac617ab1"
   },
   {
    "file": "engine/src/keccak.js",
@@ -268,8 +281,8 @@
   },
   {
    "file": "gatekeeper.js",
-   "bytes": 32477,
-   "sha256": "3dc32cf63bf8f3a660fb7ffc3dfba1b19279c6d7a33c2e5019520275f9a11ada"
+   "bytes": 43669,
+   "sha256": "58390331b6f5d3dbd7d12f3213881e23291ac7f693c3de3dc266d7a4851fc2b6"
   },
   {
    "file": "hold_core.js",
@@ -278,13 +291,13 @@
   },
   {
    "file": "inject.js",
-   "bytes": 25706,
-   "sha256": "c436b83940da9f54e455c04084859098d2ca26efa6e9ae034c069c89c70a9fad"
+   "bytes": 27126,
+   "sha256": "0df04418345ca2fbb84c00ada03f3699310da55fba09b3abe82306e929e7f9d3"
   },
   {
    "file": "intent_text.js",
-   "bytes": 9279,
-   "sha256": "f9f6f93fa4b636c7aae525b4e2642d557567fe0604b0f217413382c6d23d66c7"
+   "bytes": 10177,
+   "sha256": "f9dc55dcf9f23a479f8eca7e38954cf696071737a42b9c18436e11e609c73e67"
   },
   {
    "file": "keyword_intent.js",
@@ -308,8 +321,8 @@
   },
   {
    "file": "outcome.js",
-   "bytes": 5772,
-   "sha256": "3d0b197b083811872c98446c42b44dcfa2f43aa59be5089c871e63f64dd91f04"
+   "bytes": 6434,
+   "sha256": "db376f74f0b53bea2e687351e2693953bee5f26a9d887cedf9e637162edf1b4e"
   },
   {
    "file": "ui/screen.css",
@@ -318,8 +331,8 @@
   },
   {
    "file": "ui/screen.js",
-   "bytes": 7618,
-   "sha256": "d687a9fc4bb8b861de283f98f3a4dab97964157c53a166761d85365aae55668b"
+   "bytes": 8262,
+   "sha256": "b248cf2d90b90df75eab590f5962026882c10e32a275b9bab5f87e7eec4e606f"
   },
   {
    "file": "window.css",
@@ -335,8 +348,13 @@
    "file": "window.js",
    "bytes": 3943,
    "sha256": "d41eb7b68dabbce6e32754a1606d24dadabc451296985624108431ca91d2b3bd"
+  },
+  {
+   "file": "written_check.js",
+   "bytes": 19917,
+   "sha256": "0c943c73d51e0be45d42b1168dd7c2e5479d45184ba5aa4b5a294f36059b39dd"
   }
  ],
- "total_bytes": 439564,
- "tree_sha256": "72c1fc63523b7b3e63c7b0cf161338bf509181daac7dc10de98675f207d274b3"
+ "total_bytes": 496722,
+ "tree_sha256": "5d6134e3ffb76e4ac469ba2dba2ab4ff83d58ec3eb6a71d20f9c41ffab139223"
 }

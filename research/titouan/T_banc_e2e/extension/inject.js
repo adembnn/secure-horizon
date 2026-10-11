@@ -51,12 +51,27 @@
     const d = ev.data; if (!d || !pending.has(d.id)) return;
     const p = pending.get(d.id);
     if (d.t === 'ack') { p.acked = true; return; }
+    if (d.t === 'rpc') { serveRead(d, p); return; }
     if (d.t === 'result') { pending.delete(d.id); clearT(p.ackTimer); p.resolve(d); }
   }
-  function ask(kind, payload) {
+  // While a request is held, the service worker may ask for READS on the node of the wallet it came through (dry run of that
+  // very request : effect_sim.js). Only these two read-only methods, only for a request still waiting, only through its provider.
+  const READS = new Set(['debug_traceCall', 'eth_call']);
+  function serveRead(d, p) {
+    const reply = (ok, result) => { try { port.postMessage({ t: 'rpcResult', id: d.id, n: d.n, ok, result }); } catch (_) { try { port.postMessage({ t: 'rpcResult', id: d.id, n: d.n, ok: false }); } catch (__) {} } };
+    let call;
+    try {
+      const c = p.ctx;
+      const fn = !c ? null : typeof c.rawRequest === 'function' ? c.rawRequest : c.provider && typeof c.provider.request === 'function' ? c.provider.request : null;
+      if (!fn || typeof d.method !== 'string' || !READS.has(d.method)) return reply(false);
+      call = rApply(fn, c.provider, [{ method: d.method, params: snap(d.params) }]);
+    } catch (_) { return reply(false); }
+    NativePromise.resolve(call).then((r) => { let out; try { out = snap(r); } catch (_) { return reply(false); } reply(true, out); }, () => reply(false));
+  }
+  function ask(kind, payload, ctx) {
     return new NativePromise((resolve) => {
       const id = nextId++;
-      const entry = { resolve, acked: false };
+      const entry = { resolve, acked: false, ctx: ctx || null };
       entry.ackTimer = setT(() => {
         if (!entry.acked && pending.has(id)) { pending.delete(id); resolve({ allow: false, reason: 'bridge-unavailable' }); }
       }, 2500);
@@ -70,8 +85,9 @@
   // --- methodes surveillees ---
   const GATED = new Set(['eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign',
     'eth_signTypedData', 'eth_signTypedData_v1', 'eth_signTypedData_v3', 'eth_signTypedData_v4',
-    'wallet_sendCalls', 'wallet_addEthereumChain', 'wallet_switchEthereumChain',
-    'wallet_requestPermissions', 'eth_sendRawTransaction',
+    'wallet_sendCalls', 'eth_sendRawTransaction',
+    // connexion (eth_requestAccounts, wallet_requestPermissions), lectures et changement de reseau (wallet_switchEthereumChain,
+    // wallet_addEthereumChain) ne deplacent rien et n'accordent aucun droit de depense : ils passent directement, sans fenetre.
     // droits durables et dechiffrement : non decodes par le moteur, donc ecran "Non verifie" plutot que passage silencieux
     'wallet_grantPermissions', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
   const JOURNAL = new Set(['eth_requestAccounts']);
@@ -152,7 +168,7 @@
     const chainId = await chainOf(provider, rawRequest, guessChain(method, params));
     let from = guessFrom(method, params);
     if (!from) { try { from = provider.selectedAddress || null; } catch (_) {} }
-    return ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top });
+    return ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top }, { provider, rawRequest });
   }
 
   // --- enveloppes ---
