@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Piste A : paume de face, quatre doigts écartés. -->
+  <rect width="512" height="512" rx="72" fill="#000"/>
+  <g fill="#fff" stroke="#fff" stroke-linecap="round">
+    <path d="M256 290V100M200 300L142 140M312 300L370 140" stroke-width="84" fill="none"/>
+    <path d="M206 356Q118 346 84 272" stroke-width="74" fill="none"/>
+    <path stroke="none" d="M180 228H332A40 40 0 0 1 372 268V314A80 80 0 0 1 292 394H220A80 80 0 0 1 140 314V268A40 40 0 0 1 180 228Z"/>
+    <rect x="156" y="408" width="200" height="52" rx="26" stroke="none"/>
+  </g>
+</svg>
