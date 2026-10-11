@@ -203,7 +203,9 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       if (needFriction) {
         needMs = v.level === 'manipulation' ? cfg.manipulationHoldMs : (cfg.arm === 'B' ? cfg.frictionMs : 0);
         if (cfg.arm === 'C') { phraseOk = false; if (v.level === 'manipulation') needMs = cfg.manipulationHoldMs; }
+        if (typeof spec.holdLeftMs === 'number') needMs = Math.max(0, spec.holdLeftMs); // echeance tenue par le service worker (survit a son arret)
       }
+      const deferred = !!(needFriction && spec.holdDeferred); // retenue trop longue pour une seule demande : seulement "Annuler", on revient apres l heure
       const gate = h('div', { class: 'gate' });
       let input = null;
       if (needFriction && cfg.arm === 'C') {
@@ -219,6 +221,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
         bar = h('i');
         gate.append(h('div', { class: 'timer' }, timerT, h('div', { class: 'bar' }, bar)));
       }
+      if (deferred) gate.append(h('p', { class: 'fact', text: "Cette demande est retenue jusqu'à " + new Date(Date.now() + needMs).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ". Annule maintenant, puis relance-la après cette heure : le délai continue de courir même si tu fermes cette page." }));
       const status = h('p', { class: 'vh', role: 'status', 'aria-live': 'polite' });
       gate.append(status);
       if (needFriction) main.append(gate);
@@ -235,7 +238,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       const go = h('button', { class: 'btn ' + (v.level === 'attention' ? 'go' : 'quiet' + (isRed ? ' danger' : '')), type: 'button', id: 'go' });
       const goLabel = v.level === 'attention' ? "Oui, c'est bien ça, continuer" : v.level === 'unknown' ? 'Continuer sans vérification, à mes risques' : 'Continuer malgré le danger';
       go.textContent = goLabel;
-      const lockedBy = () => (needMs > 0 && performance.now() - t0 < needMs) || (input && !phraseOk);
+      const lockedBy = () => deferred || (needMs > 0 && performance.now() - t0 < needMs) || (input && !phraseOk);
       const refresh = () => { go.disabled = !!lockedBy(); };
       refresh();
       if (v.level === 'unknown') {

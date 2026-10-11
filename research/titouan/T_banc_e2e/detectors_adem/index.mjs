@@ -13,4 +13,5 @@ import { pastedMessage } from './pasted_message.mjs';
 import { batchRights } from './batch_rights.mjs';
 import { malformedCalldata } from './malformed_calldata.mjs';
 import { intentGuard } from './intent_guard.mjs';
-export const DETECTORS = [indirectPull, lookalikeKnown, spendRights, tokenGuard, simEvents, nftOrders, sigRights, batchRights, malformedCalldata, intentGuard, pastedMessage];
+import { controlShape } from './control_shape.mjs';
+export const DETECTORS = [indirectPull, lookalikeKnown, spendRights, tokenGuard, simEvents, nftOrders, sigRights, batchRights, malformedCalldata, intentGuard, controlShape, pastedMessage];
