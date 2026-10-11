@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Piste 3 : Le gant</title>
+<style>
+:root{--bg:#ffffff;--ink:#000000;--ink-2:#555555;--line:#000000;--soft:#d6d6d6;--edge:#000000;--wash:#eeeeee;--signal:#c4221a;--on:#ffffff;
+--k-bg:#000000;--k-ink:#ffffff;--k-ink-2:#b0b0b0;--k-soft:#3a3a3a;--k-wash:#1c1c1c;--k-signal:#ff6b5e;
+--sans:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#000000;--ink:#ffffff;--ink-2:#b0b0b0;--line:#ffffff;--soft:#3a3a3a;--edge:#8a8a8a;--wash:#1c1c1c;--signal:#ff6b5e;--on:#000000}}
+/* la fenêtre et les composants de la fenêtre sont toujours sur noir */
+.win,.cell.k{--bg:var(--k-bg);--ink:var(--k-ink);--ink-2:var(--k-ink-2);--line:var(--k-ink);--soft:var(--k-soft);--wash:var(--k-wash);--signal:var(--k-signal);--on:#000000;background:var(--bg);color:var(--ink)}
+.frame{font:15px/22px var(--sans)}
+.frame ::selection{background:var(--ink);color:var(--bg)}
+.frame :focus{outline:none}
+.frame :focus-visible,.frame .is-focus{outline:2px solid var(--ink);outline-offset:3px}
+.bar{flex:none;display:flex;align-items:center;gap:6px;height:48px;padding:0 20px 0 14px;background:#000;color:#fff}
+.bar .gant{color:#fff}
+.bar b{font-weight:700;font-size:16px}
+.bar .side{margin-left:auto;min-width:0;color:#b0b0b0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (prefers-color-scheme:dark){.pop .bar,.panel .bar{border-bottom:2px solid #fff}}
+.q,.verdict{font-size:30px;line-height:34px;font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+.verdict[data-o=mismatch]{color:var(--signal)}
+.stop{display:block;margin:-8px 0 8px -14px;color:var(--ink)}
+.explain{margin-top:16px;font-size:17px;line-height:24px;text-wrap:pretty}
+.explain span{display:block}
+.explain span+span{font-weight:700}
+.explain+.explain{margin-top:4px}
+.fix{color:var(--ink-2)}
+.phrase{margin-top:20px;font-size:14px;line-height:20px;color:var(--ink-2)}
+.phrase q{color:var(--ink);quotes:"« " " »"}
+.field{display:block;width:100%;min-height:108px;margin-top:20px;padding:12px;resize:none;font-size:18px;line-height:26px;color:var(--ink);caret-color:var(--ink);background:var(--bg);border:2px solid var(--ink);border-radius:0}
+.field::placeholder{color:var(--ink-2);opacity:1}
+.field:hover,.field.is-hover{background:var(--wash)}
+.field:focus,.field.is-focus{outline:2px solid var(--ink);outline-offset:3px}
+.field.is-error{border-width:4px;padding:10px}
+.note{margin-top:10px;font-size:14px;line-height:20px;color:var(--ink-2)}
+.err{margin-top:10px;font-size:14px;line-height:20px;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;font-size:15px;line-height:20px;font-weight:700;white-space:nowrap;cursor:pointer;color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:0}
+.btn:not([aria-disabled=true]):hover,.btn.is-hover{background:var(--wash)}
+.btn.pri{color:var(--on);background:var(--ink)}
+.btn.pri:not([aria-disabled=true]):hover,.btn.pri.is-hover{background:color-mix(in srgb,var(--ink) 80%,var(--bg))}
+.btn[aria-disabled=true]{cursor:default;color:var(--ink-2);border-color:var(--soft)}
+.btn.pri[aria-disabled=true]{background:var(--wash);color:var(--ink-2)}
+.btn.small{min-height:32px;padding:0 12px;font-size:14px}
+.sw{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:40px;height:22px;margin:5px 0;cursor:pointer;background:var(--bg);border:2px solid var(--ink);border-radius:0}
+.sw::before{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;background:var(--ink);transition:transform 160ms}
+.sw:checked{background:var(--ink)}
+.sw:checked::before{background:var(--on);transform:translateX(18px)}
+.sw:disabled{border-color:var(--soft);cursor:default}.sw:disabled::before{background:var(--soft)}
+.neg{color:var(--signal);font-weight:700}
+/* fenêtre */
+.main{flex:1;min-height:0;padding:20px 28px 0}
+.foot{flex:none;padding:0 28px 28px}
+.wait{margin-bottom:12px;font-size:14px;line-height:20px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hint{margin-top:12px;font-size:12px;line-height:16px;color:var(--ink-2)}
+/* popup */
+.pop-main{padding:20px}
+.state{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;align-items:start}
+.state-t{font-size:20px;line-height:24px;font-weight:700;letter-spacing:-.01em}
+.state-s{margin-top:6px;color:var(--ink-2)}
+.last{margin-top:20px;padding-top:12px;border-top:2px solid var(--line)}
+.pop h3,.panel h3{font-size:15px;line-height:22px;font-weight:700}
+.last p{margin-top:2px}
+.pop-foot{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px 20px}
+/* panneau */
+.panel-main{padding:0 20px 24px}
+.panel .sec{margin-top:20px}
+.panel h3{padding-bottom:8px;border-bottom:2px solid var(--line)}
+.log li{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--soft)}
+.log .s,.rights .s{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.log .t{grid-column:2;grid-row:1;font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.log .w{grid-column:1/-1;color:var(--ink-2)}
+.rights li{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--soft)}
+.rights .w{grid-column:1;color:var(--ink-2)}
+.rights .btn{grid-column:2;grid-row:1/3}
+.panel .note{font-size:13px}
+.panel-foot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+/* bienvenue : coupe franche, noir à gauche */
+.welcome{display:grid;grid-template-columns:400px minmax(0,1fr)}
+.welcome .side-k{background:#000;color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:center}
+.welcome .big{margin-left:-40px}
+.welcome-main{padding:48px 56px}
+@media (prefers-color-scheme:dark){.welcome .side-k{border-right:2px solid #fff}}
+.welcome h2{font-size:44px;line-height:46px;font-weight:700;letter-spacing:-.025em}
+.welcome .lead{margin-top:20px;max-width:56ch;font-size:17px;line-height:26px}
+.welcome .cols{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;margin-top:32px}
+.welcome h3{font-size:15px;line-height:22px;font-weight:700;padding-bottom:8px;border-bottom:2px solid var(--line);margin-bottom:6px}
+.welcome li{padding:5px 0}
+.welcome ol{counter-reset:n}.welcome ol li{counter-increment:n;display:grid;grid-template-columns:24px 1fr}
+.welcome ol li::before{content:counter(n);font-weight:700}
+.welcome .go{display:flex;gap:12px;margin-top:32px}
+/* composants */
+.kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.cell{padding:24px}
+.cell h3{font-size:12px;line-height:16px;font-weight:400;color:var(--ink-2);margin-bottom:10px}
+.cell .field{margin-top:0;min-height:76px}
+.cell .stack>*+*{margin-top:16px}
+.cell .line{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.cell .verdict{font-size:22px;line-height:26px}
+
+*,*::before,*::after{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/20px var(--sans);-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul,ol,figure{margin:0;padding:0}
+ul,ol{list-style:none}
+button,input,textarea{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sheet{padding:32px;max-width:1920px;margin:0 auto}
+.intro h1{font-size:24px;line-height:32px;font-weight:600}
+.intro dl{margin:12px 0 0;display:grid;grid-template-columns:max-content minmax(0,72ch);gap:4px 16px}
+.intro dt{color:var(--ink-2)}
+.intro dd{margin:0}
+.shots{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;margin-top:32px}
+.shot{max-width:100%}
+.shot figcaption{margin-bottom:8px;font:12px/16px var(--sans);color:var(--ink-2)}
+.box{max-width:100%;overflow:auto;border:1px solid var(--edge)}
+.frame{flex:none;position:relative;background:var(--bg);color:var(--ink)}
+.win{width:424px;height:501px;display:flex;flex-direction:column;overflow:hidden}
+.pop{width:320px}
+.panel{width:360px;height:680px;overflow:hidden}
+.welcome{width:1120px;height:620px;overflow:hidden}
+.kit{width:1120px}
+@media (max-width:520px){.sheet{padding:16px}.intro dl{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<!-- Logo Hold up, copié de docs/design/system/logo/ (logo_small.svg, logo.svg, logo_mono_*.svg). Règles : logo/LOGO.md. -->
+<symbol id="logo" viewBox="0 0 16 16"><rect width="16" height="16" rx="2.25" fill="#000"/><g fill="#fff"><path d="M4 3.5A1.5 1.5 0 0 1 7 3.5V7.5A.5 .5 0 0 0 8 7.5V2.5A1.5 1.5 0 0 1 11 2.5V7.5A.5 .5 0 0 0 12 7.5V4A1.5 1.5 0 0 1 15 4V9A3 3 0 0 1 12 12H7A3 3 0 0 1 4 9Z"/><path d="M5.6 9.6Q3.4 9.4 2.3 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><rect x="6" y="13" width="7" height="2" rx="1"/></g></symbol>
+<symbol id="logo-d" viewBox="0 0 512 512"><rect width="512" height="512" rx="72" fill="#000"/><g transform="translate(11 -56) rotate(8 256 256)" fill="#fff" stroke-linecap="round"><path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/><path d="M214 388Q122 374 86 282" fill="none" stroke="#fff" stroke-width="70"/><rect x="172" y="440" width="196" height="62" rx="24"/><path d="M170 322Q206 334 214 378" fill="none" stroke="#000" stroke-width="16"/></g></symbol>
+<mask id="pli" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="600"><rect width="512" height="600" fill="#fff"/><path d="M170 322Q206 334 214 378" fill="none" stroke="#000" stroke-width="16" stroke-linecap="round"/></mask>
+<symbol id="gant" viewBox="0 0 512 512"><g transform="translate(11 -56) rotate(8 256 256)" fill="currentColor" stroke-linecap="round" mask="url(#pli)"><path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/><path d="M214 388Q122 374 86 282" fill="none" stroke="currentColor" stroke-width="70"/><rect x="172" y="440" width="196" height="62" rx="24"/></g></symbol>
+</svg>
+<div class="sheet">
+<header class="intro">
+<h1>Piste 3. Le gant</h1>
+<dl>
+<dt>Fiche d’origine</dt><dd>teenage engineering (styles.refero.design) : aucun rayon, aucune ombre, des coupes franches entre une surface claire et une bande noire, la structure tenue par des filets.</dd>
+<dt>Parti pris</dt><dd>La fenêtre de vérification est le carré noir du logo, agrandi : toujours noire, texte blanc et gras, filets épais. Le gant ne se lève qu’une fois, quand la demande ne correspond pas. Les autres surfaces sont blanches sous une bande noire.</dd>
+<dt>Ce qu’on y perd</dt><dd>De la retenue : c’est la piste la plus dessinée, et une fenêtre noire même quand le système est en clair. Elle dépend de la qualité du dessin final du gant, et le gras partout pèse dans un panneau qu’on ouvre tous les jours.</dd>
+</dl>
+</header>
+<main class="shots">
+<figure class="shot"><figcaption>Question, 424 × 501</figcaption><div class="box"><div class="frame win" data-o=""><div class="bar"><svg class="gant" width="28" height="28" aria-hidden="true"><use href="#gant"/></svg><b>Hold up</b><span class="side">app.neve.exchange</span></div><div class="main"><h2 class="q" id="q3">Que veux-tu faire sur ce site ?</h2>
+<textarea class="field is-focus" rows="3" aria-labelledby="q3" placeholder="Par exemple : échanger 50 USDC contre AVAX">échanger 50 USDC contre AVAX</textarea>
+<p class="note">Écris-le avec tes mots. Hold up compare ta phrase à la demande du site.</p></div><div class="foot"><div class="actions"><button type="button" class="btn">Annuler</button><button type="button" class="btn pri">Vérifier</button></div><p class="hint">Entrée vérifie. Échap annule.</p></div></div></div></figure>
+<figure class="shot"><figcaption>Réponse : ça correspond, avec le droit limité</figcaption><div class="box"><div class="frame win" data-o="match"><div class="bar"><svg class="gant" width="28" height="28" aria-hidden="true"><use href="#gant"/></svg><b>Hold up</b><span class="side">app.neve.exchange</span></div><div class="main"><h2 class="verdict" data-o="match">Ça correspond à ce que tu as écrit.</h2>
+<p class="explain">La demande échange 50 USDC contre AVAX.</p>
+<p class="explain fix">Droit limité à 50 USDC. Le site demandait un accès sans limite.</p><p class="phrase">Ta phrase : <q>échanger 50 USDC contre AVAX</q></p></div><div class="foot"><div class="actions"><button type="button" class="btn">Annuler</button><button type="button" class="btn pri">Continuer</button></div><p class="hint">Entrée continue.</p></div></div></div></figure>
+<figure class="shot"><figcaption>Réponse : ça ne correspond pas</figcaption><div class="box"><div class="frame win" data-o="mismatch"><div class="bar"><svg class="gant" width="28" height="28" aria-hidden="true"><use href="#gant"/></svg><b>Hold up</b><span class="side">app.neve.exchange</span></div><div class="main"><svg class="gant stop" width="104" height="104" aria-hidden="true"><use href="#gant"/></svg><h2 class="verdict" data-o="mismatch">Ça ne correspond pas à ce que tu as écrit.</h2>
+<p class="explain"><span>Tu as écrit 50 USDC.</span><span>La demande donne accès à tout ton USDC.</span></p></div><div class="foot"><p class="wait" role="status">Continuer sera possible dans 24 s.</p><div class="actions"><button type="button" class="btn pri">Annuler</button><button type="button" class="btn" aria-disabled="true">Continuer</button></div><p class="hint">Échap annule.</p></div></div></div></figure>
+<figure class="shot"><figcaption>Réponse : pas pu vérifier</figcaption><div class="box"><div class="frame win" data-o="unverifiable"><div class="bar"><svg class="gant" width="28" height="28" aria-hidden="true"><use href="#gant"/></svg><b>Hold up</b><span class="side">app.neve.exchange</span></div><div class="main"><h2 class="verdict" data-o="unverifiable">Je n’ai pas pu vérifier cette demande.</h2>
+<p class="explain">Le moteur de vérification n’a pas répondu.</p>
+<p class="explain fix">Annule, puis relance l’opération sur le site pour réessayer.</p><p class="phrase">Ta phrase : <q>échanger 50 USDC contre AVAX</q></p></div><div class="foot"><p class="wait" role="status">Continuer sera possible dans 8 s.</p><div class="actions"><button type="button" class="btn pri">Annuler</button><button type="button" class="btn" aria-disabled="true">Continuer</button></div><p class="hint">Échap annule.</p></div></div></div></figure>
+<figure class="shot"><figcaption>Popup de la barre d’outils, actif, 320 de large</figcaption><div class="box"><div class="frame pop"><div class="bar"><svg class="gant" width="28" height="28" aria-hidden="true"><use href="#gant"/></svg><b>Hold up</b></div><div class="pop-main"><div class="state"><div><p class="state-t">Actif sur ce site</p><p class="state-s">Chaque demande de signature de app.neve.exchange passe par Hold up.</p></div><input type="checkbox" role="switch" class="sw" checked aria-label="Vérifier les demandes de ce site"></div><div class="last"><h3>Dernière vérification</h3><p><span class="neg">Ça ne correspondait pas.</span> Tu as annulé. Aujourd’hui à 14:32.</p></div></div><div class="pop-foot"><button type="button" class="btn small">Journal et droits</button><button type="button" class="btn small">Réglages</button></div></div></div></figure>
+<figure class="shot"><figcaption>Popup de la barre d’outils, en pause</figcaption><div class="box"><div class="frame pop"><div class="bar"><svg class="gant" width="28" height="28" aria-hidden="true"><use href="#gant"/></svg><b>Hold up</b></div><div class="pop-main"><div class="state"><div><p class="state-t">En pause sur ce site</p><p class="state-s">Les demandes de app.neve.exchange vont droit à ton portefeuille, sans vérification.</p></div><input type="checkbox" role="switch" class="sw" aria-label="Vérifier les demandes de ce site"></div><div class="last"><h3>Dernière vérification</h3><p><span class="neg">Ça ne correspondait pas.</span> Tu as annulé. Aujourd’hui à 14:32.</p></div></div><div class="pop-foot"><button type="button" class="btn small">Journal et droits</button><button type="button" class="btn small">Réglages</button></div></div></div></figure>
+<figure class="shot"><figcaption>Panneau latéral, 360 × 680</figcaption><div class="box"><div class="frame panel"><div class="bar"><svg class="gant" width="28" height="28" aria-hidden="true"><use href="#gant"/></svg><b>Hold up</b><span class="side">Actif</span></div><div class="panel-main"><section class="sec"><h3>Dernières vérifications</h3><ol class="log"><li><span class="t">14:32</span><span class="s">app.neve.exchange</span><span class="w"><span class="neg">Ne correspondait pas.</span> Annulée.</span></li><li><span class="t">14:30</span><span class="s">app.neve.exchange</span><span class="w">Correspondait. Continuée.</span></li><li><span class="t">11:07</span><span class="s">glacier-rewards.example</span><span class="w"><span class="neg">Ne correspondait pas.</span> Annulée.</span></li><li><span class="t">Hier</span><span class="s">app.neve.exchange</span><span class="w">Non vérifiée. Annulée.</span></li></ol></section>
+<section class="sec"><h3>Droits accordés</h3><ul class="rights"><li><span class="s">app.neve.exchange</span><span class="w">Peut dépenser jusqu’à 50 USDC.</span><button type="button" class="btn small">Révoquer</button></li><li><span class="s">old-farm.example</span><span class="w">Peut dépenser tout ton USDC, sans limite.</span><button type="button" class="btn small">Révoquer</button></li></ul><p class="note">Révoquer ouvre ton portefeuille : c’est lui qui signe.</p></section><div class="panel-foot"><button type="button" class="btn small">Effacer le journal</button><button type="button" class="btn small">Réglages</button></div></div></div></div></figure>
+<figure class="shot"><figcaption>Page de bienvenue, plein onglet (ici 1120 × 620)</figcaption><div class="box"><div class="frame welcome"><div class="side-k"><svg class="gant big" width="300" height="300" aria-hidden="true"><use href="#gant"/></svg></div><div class="welcome-main"><h2>Hold up est installé.</h2><p class="lead">Quand un site demande une signature à ton portefeuille, Hold up la retient. Tu écris ce que tu veux faire, avec tes mots. Hold up compare ta phrase à ce que la demande fait vraiment, puis te dit si ça correspond.</p><div class="cols"><div class="col"><h3>Ce qu’il ne fait pas</h3><ul><li>Il ne dit jamais qu’un site est sûr.</li><li>Il ne signe rien et n’envoie rien à ta place.</li><li>Il ne remplace pas ton portefeuille, qui te demandera encore de confirmer.</li></ul></div><div class="col"><h3>Pour l’essayer</h3><ol><li>Épingle Hold up à la barre d’outils du navigateur.</li><li>Ouvre la page d’essai et lance un échange.</li><li>Écris ce que tu veux faire, puis lis la réponse.</li></ol></div></div><div class="go"><button type="button" class="btn pri">Ouvrir la page d’essai</button><button type="button" class="btn">Ouvrir les réglages</button></div></div></div></div></figure>
+<figure class="shot"><figcaption>Composants</figcaption><div class="box"><div class="frame kit">
+<div class="cell k"><h3>Champ : vide, puis en erreur</h3><div class="stack"><textarea class="field" rows="2" aria-label="Champ vide" placeholder="Par exemple : échanger 50 USDC contre AVAX"></textarea><div><textarea class="field is-error" rows="2" aria-label="Champ en erreur" aria-invalid="true"></textarea><p class="err">Écris d’abord ce que tu veux faire.</p></div></div></div>
+<div class="cell k"><h3>Boutons : repos, survol, focus, inactif</h3><div class="stack"><div class="line"><button type="button" class="btn pri">Vérifier</button><button type="button" class="btn pri is-hover">Vérifier</button><button type="button" class="btn pri is-focus">Vérifier</button><button type="button" class="btn pri" aria-disabled="true">Vérifier</button></div><div class="line"><button type="button" class="btn">Annuler</button><button type="button" class="btn is-hover">Annuler</button><button type="button" class="btn is-focus">Annuler</button><button type="button" class="btn" aria-disabled="true">Continuer</button></div></div></div>
+<div class="cell k"><h3>Verdict : les trois réponses</h3><div class="stack"><p class="verdict" data-o="match">Ça correspond à ce que tu as écrit.</p><p class="verdict" data-o="mismatch">Ça ne correspond pas à ce que tu as écrit.</p><p class="verdict" data-o="unverifiable">Je n’ai pas pu vérifier cette demande.</p></div></div>
+<div class="cell"><h3>Ligne de journal</h3><ol class="log"><li><span class="t">14:32</span><span class="s">app.neve.exchange</span><span class="w"><span class="neg">Ne correspondait pas.</span> Annulée.</span></li><li><span class="t">14:30</span><span class="s">app.neve.exchange</span><span class="w">Correspondait. Continuée.</span></li></ol></div>
+<div class="cell"><h3>Interrupteur : actif, inactif, indisponible</h3><div class="line"><input type="checkbox" role="switch" class="sw" checked aria-label="Exemple actif"><input type="checkbox" role="switch" class="sw" aria-label="Exemple inactif"><input type="checkbox" role="switch" class="sw" disabled aria-label="Exemple indisponible"></div></div>
+<div class="cell k"><h3>Retenue</h3><div class="stack"><p class="wait" style="margin:0">Continuer sera possible dans 24 s.</p><p class="wait" style="margin-top:4px;color:var(--ink)">Tu peux continuer.</p></div></div>
+</div></div></figure>
+</main>
+</div>
+</body>
+</html>

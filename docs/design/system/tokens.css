@@ -1,0 +1,81 @@
+/* Hold up : jetons du système de design (docs/design/system/DESIGN.md).
+ * Noir, blanc, gris. Une seule couleur : --hu-signal, réservée aux mots du verdict négatif.
+ * Thème clair par défaut, thème sombre selon le système. data-theme="light|dark" sur <html> force un thème (planche, tests).
+ *
+ * Contrastes WCAG 2.x (calculés, voir DESIGN.md §3)
+ *   clair  : encre 21,00 · encre-2 6,69 (6,08 sur fond-2) · signal 5,85 · bord de contrôle 3,69
+ *   sombre : encre 18,43 · encre-2 8,33 (7,11 sur fond-2) · signal 7,52 · bord de contrôle 4,89 */
+:root {
+  /* couleurs */
+  --hu-bg: #ffffff;        /* fond de toute surface */
+  --hu-bg-2: #f4f4f4;      /* survol, bandeau, zone en retrait */
+  --hu-bg-3: #e6e6e6;      /* appui */
+  --hu-ink: #000000;       /* texte, bouton plein, focus */
+  --hu-ink-2: #5c5c5c;     /* texte secondaire, exemple, heure */
+  --hu-line: #e0e0e0;      /* filet de séparation, bord inactif (non porteur) */
+  --hu-edge: #858585;      /* bord d'un contrôle actif (3:1 au minimum) */
+  --hu-signal: #c4221a;    /* les mots du verdict négatif, rien d'autre */
+  --hu-on-ink: #ffffff;    /* texte sur bouton plein */
+
+  /* typographie : polices du système, aucune police téléchargée */
+  --hu-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
+  --hu-mono: "Cascadia Mono", "SF Mono", ui-monospace, Consolas, "Roboto Mono", monospace; /* adresses seulement */
+  --hu-text-xs: 12px;  --hu-lh-xs: 16px;   /* heure, indication, touche */
+  --hu-text-s: 14px;   --hu-lh-s: 20px;    /* base de l'application */
+  --hu-text-m: 16px;   --hu-lh-m: 24px;    /* champ d'intention, ligne d'explication */
+  --hu-text-l: 24px;   --hu-lh-l: 32px;    /* question, verdict, titre de page */
+  --hu-regular: 400;
+  --hu-strong: 600;
+
+  /* espacements : grille de 4 px */
+  --hu-1: 4px; --hu-2: 8px; --hu-3: 12px; --hu-4: 16px; --hu-5: 20px; --hu-6: 24px; --hu-8: 32px; --hu-12: 48px;
+
+  /* tailles */
+  --hu-control: 32px;      /* hauteur d'un bouton, d'un champ de réglage ; zone cliquable minimale */
+  --hu-row: 40px;          /* hauteur minimale d'une rangée de réglage ou de journal */
+
+  /* rayons */
+  --hu-r: 6px;             /* bouton, champ */
+  --hu-r-key: 4px;         /* touche de clavier */
+  --hu-r-full: 999px;      /* interrupteur et pastille d'icône seulement */
+
+  /* bordures et focus */
+  --hu-border: 1px;
+  --hu-focus: 2px;
+  --hu-focus-gap: 2px;
+
+  /* durées */
+  --hu-fast: 120ms;        /* couleur de fond, bord */
+  --hu-move: 160ms;        /* bouton de l'interrupteur */
+  --hu-ease: cubic-bezier(0.2, 0, 0, 1);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --hu-bg: #000000; --hu-bg-2: #171717; --hu-bg-3: #262626;
+    --hu-ink: #f0f0f0; --hu-ink-2: #a3a3a3;
+    --hu-line: #2e2e2e; --hu-edge: #7a7a7a;
+    --hu-signal: #ff6b5e; --hu-on-ink: #000000;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --hu-bg: #000000; --hu-bg-2: #171717; --hu-bg-3: #262626;
+  --hu-ink: #f0f0f0; --hu-ink-2: #a3a3a3;
+  --hu-line: #2e2e2e; --hu-edge: #7a7a7a;
+  --hu-signal: #ff6b5e; --hu-on-ink: #000000;
+  color-scheme: dark;
+}
+
+/* La pastille de l'icône de barre d'outils est dessinée par le navigateur : ses couleurs ne suivent pas le thème. */
+:root {
+  --hu-badge-ink: #000000;     /* demande en attente, non vérifiée, pause : texte blanc 21,00 */
+  --hu-badge-signal: #c4221a;  /* dernière réponse « ne correspond pas » : texte blanc 5,85 */
+  --hu-badge-text: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --hu-fast: 0ms; --hu-move: 0ms; }
+}
