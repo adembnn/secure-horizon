@@ -105,3 +105,10 @@ Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est pré
   - F1 : la poussière reçue est comptée comme une adresse connue, donc le vrai contact passe en critical (258/258) ; il faut tenir compte du sens des transactions ;
   - M4 : la liste blanche des routeurs s'applique à un simple envoi de fonds ;
   - M5 : « Payer mon Binance » contourne la règle « adresse jamais vue ».
+- JURÉ DEFI (`redteam/jury_defi.md`) : 31 contournements sur 60 attaques, 0 fausse alerte.
+  Deux angles morts structurels :
+  - un transferFrom sortant sous `pay_someone` passe en ok, même vers un inconnu ou un sosie, et jusqu'à 99 % du solde ;
+  - un approve(MAX) dans Multicall3 (à toute profondeur) tombe de critical à warn, parce que le plancher ne s'applique qu'à la racine.
+  Recommandations :
+  - plancher critical récursif dans les lots ;
+  - fail-closed sur decode_error, unknown_typed_data et blind_signature.
