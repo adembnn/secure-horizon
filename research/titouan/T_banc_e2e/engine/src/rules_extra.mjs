@@ -184,6 +184,18 @@ function libraryCalls(eff, request, ctx, flags) {
   recompute(eff);
 }
 
+// ---- F18 : envoi natif nu (sans calldata) vers un jeton du registre de référence : dépôt dans un jeton enveloppé (receive/fallback), le jeton de reçu est crédité à l'expéditeur.
+// Le comparateur déduirait « rien reçu en échange » alors que le contrat crédite un solde que la transaction ne montre pas.
+function wrapDeposit(eff, request, ctx, flags) {
+  if (request.method !== 'eth_sendTransaction') return;
+  const tx = request.params && request.params[0]; if (!tx || !tx.to) return;
+  const data = String(tx.data ?? tx.input ?? '0x'); if (data !== '0x' && data !== '') return;
+  if (eff.opaque || eff.approvals.length || (eff.controlChange || []).length || eff.delegation || eff.service) return;
+  if (!registryAddrs(ctx).includes(lc(tx.to))) return;
+  eff.service = { name: 'wrap_deposit', trusted: true };
+  flags.push({ code: 'service_call_decoded', severity: 'info', detail: 'envoi natif à un jeton du registre : dépôt, reçu crédité à l expéditeur' });
+}
+
 export function applyExtraRules(eff, request, ctx) {
   const flags = [];
   if (isOn('F11')) marketOrderProceeds(request, ctx, flags);
@@ -193,6 +205,7 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F7')) signedOrder(request, ctx, flags);
   if (isOn('F5')) serviceCall(eff, request, ctx);
   if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
+  if (isOn('F18')) wrapDeposit(eff, request, ctx, flags);
   addFlags(eff, flags);
   return eff;
 }

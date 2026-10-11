@@ -1,7 +1,7 @@
 const $ = (id) => document.getElementById(id);
 async function load() {
   const { cfg, contexte, log } = await chrome.storage.local.get(['cfg', 'contexte', 'log']);
-  $('cfg').value = JSON.stringify(cfg || { arm: 'A', frictionMs: 30000 }, null, 2);
+  $('cfg').value = JSON.stringify(cfg || { arm: 'B', frictionMs: 30000 }, null, 2);
   $('ctx').value = JSON.stringify(contexte || { contacts: [], history: [], protected: [], knownSpenders: [] }, null, 2);
   $('log').textContent = (log || []).slice(-30).map((e) => JSON.stringify(e)).join('\n');
 }

@@ -44,7 +44,8 @@ const ts = async b => parseInt((await rpc('eth_getBlockByNumber', [hex(b), false
 // ---------- 1. collecte ----------
 const head = parseInt(await rpc('eth_blockNumber', []), 16);
 const END = ENDARG === 'head' ? head : +ENDARG, START = END - BLOCKS + 1;
-const cache = path.join(OUT, `cache_${START}_${END}.json`);
+fs.mkdirSync(path.join(OUT, 'cache_'), { recursive: true });
+const cache = path.join(OUT, 'cache_', `cache_${START}_${END}.json`);
 let rows; // [block, tokenIdx(0 USDC/1 USDT), from, to, value, txhash, logIndex]
 if (!REFRESH && fs.existsSync(cache)) { rows = JSON.parse(fs.readFileSync(cache, 'utf8')); console.log('cache', rows.length); }
 else {

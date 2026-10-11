@@ -4,7 +4,7 @@
 import { check, indeterminate, emptyLocal, sanitizeLocalContext } from './engine/sentinelle_core.js';
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const DEFAULT_CFG = {
-  arm: 'A',                    // A sans delai, B delai (frictionMs), C phrase a retaper
+  arm: 'B',                    // A sans delai (temoin de l essai, jamais par defaut), B delai (frictionMs), C phrase a retaper
   frictionMs: 30000,
   manipulationHoldMs: 600000,
   timeoutMs: 3000,
@@ -22,7 +22,7 @@ async function getCfg() {
   const c = Object.assign({}, DEFAULT_CFG, cfg || {});
   c.grill = Object.assign({}, DEFAULT_CFG.grill, (cfg && cfg.grill) || {});
   c.contact = Object.assign({}, DEFAULT_CFG.contact, (cfg && cfg.contact) || {});
-  if (!c.testMode) c.auto = null; // le mode automatique n'existe que si testMode est vrai
+  c.testMode = false; c.auto = null; // build distribue : aucun mode automatique, quel que soit le contenu du stockage
   return c;
 }
 
@@ -56,6 +56,22 @@ async function localCheck(body) {
     return v;
   }
 }
+
+// --- retenue "manipulation" : l echeance vit dans chrome.storage.session (lue par le seul service worker, survit a son arret ; effacee a la fermeture du navigateur)
+const HOLD_INLINE_MAX_MS = 240000; // au-dela, la fenetre n offre que "Annuler" : la personne relance la demande apres l echeance (un evenement MV3 ne tient pas 10 min)
+const HOLD_GRACE_MS = 30 * 60000;  // une echeance depassee depuis plus de 30 min ne vaut plus : nouvelle retenue
+const holdMem = new Map();
+async function holdLeft(key, ms) {
+  const k = 'hold:' + key, now = Date.now();
+  let until;
+  try { until = (await chrome.storage.session.get(k))[k]; } catch (_) { until = holdMem.get(k); }
+  if (typeof until !== 'number' || now > until + HOLD_GRACE_MS || until - now > ms) {
+    until = now + ms;
+    try { await chrome.storage.session.set({ [k]: until }); } catch (_) { holdMem.set(k, until); }
+  }
+  return Math.max(0, until - now);
+}
+async function holdClear(key) { holdMem.delete('hold:' + key); try { await chrome.storage.session.remove('hold:' + key); } catch (_) {} }
 
 // --- fenetre : toujours dans la frame 0 de l'onglet, sinon dans la frame demandeuse ---
 async function ui(ctx, spec, cfg) {
@@ -174,13 +190,18 @@ async function handleGate(msg, sender) {
   await journal({ type: 'verdict', origin: msg.origin, method: p.method, level: verdict.level, indeterminate: !!verdict.indeterminate, why: verdict.why, latency_ms: verdict.latency_ms, grill: grillInfo, intent: intent ? intent.choice : null, frame: body.frame });
   // Il n'existe pas de verdict 'ok' : toute demande surveillee passe par la fenetre (niveau le plus bas = 'attention' / info).
 
+  const holdKey = () => (verdict.level === 'manipulation' && cfg.arm !== 'A' && !cfg.testMode ? [msg.origin, p.method, p.from || ''].join('|') : null);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const r = await ui(ctx, { kind: 'verdict', verdict, attempt }, cfg);
+    const spec = { kind: 'verdict', verdict, attempt }, hk = holdKey();
+    if (hk) { spec.holdLeftMs = await holdLeft(hk, cfg.manipulationHoldMs); spec.holdDeferred = spec.holdLeftMs > HOLD_INLINE_MAX_MS; }
+    const r = await ui(ctx, spec, cfg);
     const entry = { type: 'decision', stage: 'verdict', origin: msg.origin, method: p.method, level: verdict.level, indeterminate: !!verdict.indeterminate,
       decision: r.decision, time_to_decision_ms: r.time_to_decision_ms, friction_arm: cfg.arm, friction_ms: r.friction_ms, continue_enabled_after_ms: r.continue_enabled_after_ms,
       early_click_blocked: r.early_click_blocked, cancel_visible: r.cancel_visible, ui_frame: r.ui_frame, viewport: r.viewport, total_ms: Date.now() - tStart, frame: body.frame, grill: grillInfo, ui_error: r.error };
     await journal(entry);
     if (r.decision === 'retry') { verdict = await localCheck(body); continue; }
+    // l echeance est re-verifiee ici : un "confirm" recu avant la fin de la retenue est refuse
+    if (r.decision === 'confirm' && hk) { if ((await holdLeft(hk, cfg.manipulationHoldMs)) > 1000) return { allow: false, reason: 'denied' }; await holdClear(hk); }
     return r.decision === 'confirm' ? { allow: true } : { allow: false, reason: 'denied' };
   }
   return { allow: false, reason: 'denied' };

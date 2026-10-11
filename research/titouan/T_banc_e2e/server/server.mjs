@@ -109,7 +109,7 @@ function decode(method, params, ctx, body) {
   }
 }
 // copie de run_loop.mergeEffects (fusion des effets d'un lot)
-function mergeEffects(list) {
+export function mergeEffects(list) {
   if (list.length === 1) return list[0];
   const lvlOf = (flags) => (flags.some((f) => f.severity === 'critical') ? 'critical' : flags.some((f) => f.severity === 'warn') ? 'warn' : 'ok');
   const m = JSON.parse(JSON.stringify(list[0]));
@@ -141,7 +141,7 @@ function toIntent(body) {
   return null; // 'other', vague ou absent : plancher objectif du moteur seul
 }
 
-// <<PRESENTATION (bloc IDENTIQUE dans server/server.mjs et extension_standalone/src/sentinelle_core.js ; server/test/presentation.test.mjs verifie qu'il ne derive pas)
+// <<PRESENTATION (bloc autonome : webdemo/build_webdemo.mjs l'extrait avec le reste de server.mjs ; ne pas y mettre d'acces fichier ni reseau)
 // Choix de la fiche de texte et affichage. Depend de : FICHES (id -> fiche de U_textes_utilisateur.json), lc().
 const shortAddr = (a) => (a ? [a.slice(0, 6), a.slice(-4)] : ['', '']);
 function fill(line, v) {
@@ -288,6 +288,11 @@ export const SECOURS = {
   reseau_signature: { croit: 'Je signe un message sur mon réseau habituel.', reel: 'Cette signature vise un autre réseau que celui que tu utilises.',
     danger: 'Un message signé sur un autre réseau peut quand même te coûter.', action: 'Annule, sauf si tu connais ce réseau.' },
 };
+export const SECOURS_TITRE = { generique: 'Cette demande a des effets inattendus', inattendu_envoi: 'Cette demande fait partir de l’argent', rien_en_retour: 'Tu donnes sans rien recevoir',
+  montant_superieur: 'Le montant envoyé est plus grand que prévu', gros_solde: 'Une grande part de ton solde sort', connexion: 'Ce message de connexion est suspect', signature_site: 'Cette signature ne correspond pas au site',
+  signature_rejouable: 'Cette signature peut servir sur d’autres réseaux', ordre: 'Cet ordre contient des conditions inhabituelles', ordre_vide: 'Tu ne recevrais presque rien en échange',
+  compte_creation: 'Cette opération crée ou change un compte', reseau_signature: 'Cette signature vise un autre réseau' };
+export const TITRE_NON_VERIFIE = 'Je n’ai pas pu vérifier cette opération';
 const ACTION_SANS_MONTANT = "Refuse, ou autorise seulement ce qu'il faut pour cet échange."; // F01 quand le droit est sans limite : pas de montant précis à citer
 const REEL_AUCUN_SIGNAL = 'Nous n’avons trouvé aucun signal dangereux dans cette demande.';
 
@@ -382,7 +387,7 @@ export function evaluate(body, local = loadLocalContext()) {
   // --- echec d'analyse : jamais ok, jamais rouge non plus : "non verifie" (fiche F25)
   if (failure) {
     const t = Object.fromEntries(['croit', 'reel', 'danger', 'action'].map((k) => [k, fill(FICHES.F25[k], { jeton: 'jetons', montant: '' })]));
-    return { level: 'unknown', niveau: 'warn', indeterminate: true, why: failure, engine: 'sentinelle-local', fiche: 'F25', texts: t, reasons: [t.danger, t.action], raisons: [{ code: 'unverifiable', severity: 'warn', detail: failure }],
+    return { level: 'unknown', niveau: 'warn', indeterminate: true, why: failure, engine: 'sentinelle-local', fiche: 'F25', title: TITRE_NON_VERIFIE, opacity_only: true, texts: t, reasons: [t.danger, t.action], raisons: [{ code: 'unverifiable', severity: 'warn', detail: failure }],
       effects: { grants_right: false, funds_out: false }, risk_signals: [], latency_engine_ms: ms() };
   }
 
@@ -425,6 +430,11 @@ export function evaluate(body, local = loadLocalContext()) {
     codes, effects: { grants_right: grants, funds_out: funds },
     risk_signals: [], latency_engine_ms: 0,
   };
+  // titre = nom de la menace (UI_CONTRAT.md : "title") ; opacity_only : le seul motif est l'opacité (propagé du moteur s'il existe, sinon calculé)
+  const reasonCodes = [...flags.map((f) => f.code), ...pol.reasons.map((r) => r.code)];
+  out.opacity_only = typeof eff.opacityOnly === 'boolean' ? eff.opacityOnly : (niveau !== 'info' && reasonCodes.length > 0 && reasonCodes.every((c) => E.OPACITY_CODES.has(c)));
+  out.title = out.opacity_only ? TITRE_NON_VERIFIE : fid ? FICHES[fid].menace : (SECOURS_TITRE[pres.secours] || SECOURS_TITRE.generique);
+  if (scen) out.title = FICHES[scen].menace;
   if (why) { out.indeterminate = true; out.why = why; }
   if (niveau !== 'info') { out.said = { text: '', amount: texts.croit, detail: '' }; out.real = { text: '', amount: texts.reel, detail: '' }; out.lead = niveau === 'critical' ? 'Ce que tu penses faire et ce qui se passe vraiment ne correspondent pas.' : undefined; }
   else { out.said = { text: '', amount: texts.croit, detail: '' }; out.real = { text: '', amount: texts.reel, detail: '' }; }

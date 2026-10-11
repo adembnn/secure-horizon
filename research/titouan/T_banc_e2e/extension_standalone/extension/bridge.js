@@ -142,11 +142,19 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
     try { const sh = new CSSStyleSheet(); sh.replaceSync(CSS); root.adoptedStyleSheets = [sh]; } catch (_) { const st = document.createElement('style'); st.textContent = CSS; root.append(st); }
     const ov = h('div', { class: 'ov' });
     root.append(ov);
+    // Le support vit dans le DOM de la page : son style est force en ligne (!important en ligne > toute regle de la page) et repose s il est modifie.
+    host.style.cssText = 'all:initial!important;position:fixed!important;inset:0!important;z-index:2147483647!important;display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important;pointer-events:auto!important';
+    const wantStyle = host.style.cssText;
     const attach = () => (document.documentElement || document).append(host);
     attach();
     let rearm = 0;
-    const mo = new MutationObserver(() => { if (!host.isConnected && rearm++ < 100) attach(); });
+    const mo = new MutationObserver(() => {
+      if ((!host.isConnected || host.parentNode !== document.documentElement) && rearm++ < 100) attach();
+      if (host.style.cssText !== wantStyle) host.style.cssText = wantStyle;
+      for (const a of ['hidden', 'inert', 'class', 'popover']) if (host.hasAttribute(a)) host.removeAttribute(a);
+    });
     mo.observe(document, { childList: true, subtree: true });
+    mo.observe(host, { attributes: true });
     ov.addEventListener('keydown', (e) => e.stopPropagation(), true);
     ov.addEventListener('keyup', (e) => e.stopPropagation(), true);
     return { host, root, ov, close() { mo.disconnect(); host.remove(); } };
@@ -175,7 +183,8 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       win.append(h('div', { class: 'band ' + lv.cls }, svgEl(lv.icon), h('div', null, h('span', { class: 'tag', text: lv.tag }), h('h1', { id: 'h', text: lv.title }))));
       const main = h('main', { id: 'd' });
       const isRed = v.level === 'danger' || v.level === 'manipulation';
-      const needFriction = isRed && cfg.arm !== 'A';
+      // "Non verifie" recoit la meme friction que "Danger" : sinon une demande rendue illisible expres (trop grosse, format non gere) evite l ecran rouge ET le delai.
+      const needFriction = (isRed || v.level === 'unknown') && cfg.arm !== 'A';
       if (v.level === 'unknown') {
         main.append(h('p', { class: 'lead', text: "On n'a pas pu vérifier cette demande" + (v.why ? ' (' + v.why + ')' : '') + '. Ce n\'est ni un feu vert ni un feu rouge.' }));
         main.append(h('div', { class: 'unkbox', text: 'Demande : ' + ctx.method + '. Aucune vérification terminée : continue seulement si tu es sûr(e) de toi.' }));
@@ -203,7 +212,9 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       if (needFriction) {
         needMs = v.level === 'manipulation' ? cfg.manipulationHoldMs : (cfg.arm === 'B' ? cfg.frictionMs : 0);
         if (cfg.arm === 'C') { phraseOk = false; if (v.level === 'manipulation') needMs = cfg.manipulationHoldMs; }
+        if (typeof spec.holdLeftMs === 'number') needMs = Math.max(0, spec.holdLeftMs); // echeance tenue par le service worker (survit a son arret)
       }
+      const deferred = !!(needFriction && spec.holdDeferred); // retenue trop longue pour une seule demande : seulement "Annuler", on revient apres l heure
       const gate = h('div', { class: 'gate' });
       let input = null;
       if (needFriction && cfg.arm === 'C') {
@@ -219,6 +230,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
         bar = h('i');
         gate.append(h('div', { class: 'timer' }, timerT, h('div', { class: 'bar' }, bar)));
       }
+      if (deferred) gate.append(h('p', { class: 'fact', text: "Cette demande est retenue jusqu'à " + new Date(Date.now() + needMs).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ". Annule maintenant, puis relance-la après cette heure : le délai continue de courir même si tu fermes cette page." }));
       const status = h('p', { class: 'vh', role: 'status', 'aria-live': 'polite' });
       gate.append(status);
       if (needFriction) main.append(gate);
@@ -235,7 +247,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       const go = h('button', { class: 'btn ' + (v.level === 'attention' ? 'go' : 'quiet' + (isRed ? ' danger' : '')), type: 'button', id: 'go' });
       const goLabel = v.level === 'attention' ? "Oui, c'est bien ça, continuer" : v.level === 'unknown' ? 'Continuer sans vérification, à mes risques' : 'Continuer malgré le danger';
       go.textContent = goLabel;
-      const lockedBy = () => (needMs > 0 && performance.now() - t0 < needMs) || (input && !phraseOk);
+      const lockedBy = () => deferred || (needMs > 0 && performance.now() - t0 < needMs) || (input && !phraseOk);
       const refresh = () => { go.disabled = !!lockedBy(); };
       refresh();
       if (v.level === 'unknown') {
@@ -269,9 +281,10 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
         refresh(); markEnabled();
       }, 100);
       cancel.addEventListener('click', () => fin('cancel'));
-      go.addEventListener('click', () => { if (!go.disabled) fin('confirm'); });
+      // "Continuer" n accepte qu un vrai geste (isTrusted), et pas dans les 600 premieres ms : une touche ou un clic deja en cours quand la fenetre surgit ne vaut pas accord.
+      go.addEventListener('click', (e) => { if (go.disabled) return; if (!cfg.auto && (!e.isTrusted || performance.now() - t0 < 600)) return; fin('confirm'); });
       m.ov.addEventListener('keydown', (e) => { if (e.key === 'Escape') fin('cancel'); });
-      if (isRed || v.level === 'unknown') cancel.focus(); else go.focus();
+      cancel.focus(); // jamais de focus initial sur "Continuer" : Entree ou Espace tenue par la page annule, n approuve pas
       const cancelVisible = inViewport(cancel) && !cancel.disabled;
 
       // mode automatique (tests) : agit sur les vrais boutons
@@ -316,7 +329,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
       let done = false;
       const cancelVisible = inViewport(cancel);
       const fin = (r) => { if (done) return; done = true; m.close(); resolve(Object.assign({ time_to_decision_ms: Math.round(performance.now() - t0), cancel_visible: cancelVisible }, r)); };
-      ok.addEventListener('click', () => { const c = fs.querySelector('input:checked'); if (!c) return;
+      ok.addEventListener('click', (e) => { const c = fs.querySelector('input:checked'); if (!c || (!cfg.auto && !e.isTrusted)) return;
         fin(isIntent ? { decision: 'continue', intent: { choice: c.value, message: ta ? ta.value : '' } } : { decision: 'answer', option: c.value }); });
       cancel.addEventListener('click', () => fin({ decision: 'cancel' }));
       m.ov.addEventListener('keydown', (e) => { if (e.key === 'Escape') fin({ decision: 'cancel' }); });

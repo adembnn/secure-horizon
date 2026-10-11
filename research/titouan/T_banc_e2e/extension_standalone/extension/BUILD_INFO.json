@@ -47,7 +47,7 @@
   },
   {
    "file": "engine/src/rules_extra.mjs",
-   "sha256": "a8b6cc23a1f080b3d72db097192334230bc0b254488218dd76c8f63f9514615a"
+   "sha256": "d0fe16400b7c343c7f10274748425a4254dd505b403d3c03796926017e3640e1"
   },
   {
    "file": "engine/src/rules.mjs",
@@ -75,7 +75,7 @@
   },
   {
    "file": "extension_standalone/src/background.js",
-   "sha256": "2c217455535078852714fb9bd3f6e4db72bdbf64ebb005709909ed66008c2463"
+   "sha256": "fcdf131cdcdba577a1598e2d6fe0ab54fd2f21ac7b8d4e7c35f4ac6e2ae53feb"
   },
   {
    "file": "extension_standalone/src/manifest.json",
@@ -87,19 +87,19 @@
   },
   {
    "file": "extension_standalone/src/options.js",
-   "sha256": "91230999f37714fe131603b185bef05b0f20a30f329a6710179d91ff50c99736"
+   "sha256": "39f825437c4c65d3513b3a40a35becd63bd49a72d1ced802e01396fa03e445fd"
   },
   {
    "file": "extension_standalone/src/sentinelle_core.js",
-   "sha256": "6041b2c2c6f2d2f1202d16fb501b9771eb4df0b19afd1ea2cb1c1718e2bf04fc"
+   "sha256": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b"
   },
   {
    "file": "extension/bridge.js",
-   "sha256": "38af2885f89412cb3ed964dcd797e1d0844272c31e9ea2185ffd5b3369ea5324"
+   "sha256": "7ee99a765732107588a237bc562c9955441a154c6eb20aa22a9e7dc4dcb6a32d"
   },
   {
    "file": "extension/inject.js",
-   "sha256": "0c20d4bafeaf7384593a2fbee7ce2e21d08f63c1c92f22814e9751abb26b919f"
+   "sha256": "1827769c6ccb010a17619f866ef21e11e27af4d42501f7ea24854a89e7a81641"
   },
   {
    "file": "run/policy.mjs",
@@ -109,13 +109,13 @@
  "outputs": [
   {
    "file": "background.js",
-   "bytes": 12370,
-   "sha256": "2c217455535078852714fb9bd3f6e4db72bdbf64ebb005709909ed66008c2463"
+   "bytes": 14080,
+   "sha256": "fcdf131cdcdba577a1598e2d6fe0ab54fd2f21ac7b8d4e7c35f4ac6e2ae53feb"
   },
   {
    "file": "bridge.js",
-   "bytes": 28358,
-   "sha256": "38af2885f89412cb3ed964dcd797e1d0844272c31e9ea2185ffd5b3369ea5324"
+   "bytes": 30315,
+   "sha256": "7ee99a765732107588a237bc562c9955441a154c6eb20aa22a9e7dc4dcb6a32d"
   },
   {
    "file": "engine/policy.js",
@@ -124,8 +124,8 @@
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 35915,
-   "sha256": "6041b2c2c6f2d2f1202d16fb501b9771eb4df0b19afd1ea2cb1c1718e2bf04fc"
+   "bytes": 22306,
+   "sha256": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -179,8 +179,8 @@
   },
   {
    "file": "engine/src/rules_extra.js",
-   "bytes": 19359,
-   "sha256": "c93140986e0c239831f8f4c6b6163e47b576dda697e930319df13fb7aded7054"
+   "bytes": 20651,
+   "sha256": "ce5156ccaf397477f6ec9b1e31965227abbb505bebbe23194aa106eea8f8317c"
   },
   {
    "file": "engine/src/rules.js",
@@ -219,8 +219,8 @@
   },
   {
    "file": "inject.js",
-   "bytes": 19739,
-   "sha256": "0c20d4bafeaf7384593a2fbee7ce2e21d08f63c1c92f22814e9751abb26b919f"
+   "bytes": 20564,
+   "sha256": "1827769c6ccb010a17619f866ef21e11e27af4d42501f7ea24854a89e7a81641"
   },
   {
    "file": "manifest.json",
@@ -235,9 +235,9 @@
   {
    "file": "options.js",
    "bytes": 823,
-   "sha256": "91230999f37714fe131603b185bef05b0f20a30f329a6710179d91ff50c99736"
+   "sha256": "39f825437c4c65d3513b3a40a35becd63bd49a72d1ced802e01396fa03e445fd"
   }
  ],
- "total_bytes": 327812,
- "tree_sha256": "f32b2a31d6bdb4b40f420286ef6e1c3002f1754f0607e20afa81a88723cea31e"
+ "total_bytes": 319987,
+ "tree_sha256": "8a8bdaca2c260cba95541d5176849bd618ec950dc27d5995b49b4eee33ab8be0"
 }

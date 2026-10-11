@@ -184,6 +184,18 @@ function libraryCalls(eff, request, ctx, flags) {
   recompute(eff);
 }
 
+// ---- F18 : envoi natif nu (sans calldata) vers un jeton du registre de référence : dépôt dans un jeton enveloppé (receive/fallback), le jeton de reçu est crédité à l'expéditeur.
+// Le comparateur déduirait « rien reçu en échange » alors que le contrat crédite un solde que la transaction ne montre pas.
+function wrapDeposit(eff, request, ctx, flags) {
+  if (request.method !== 'eth_sendTransaction') return;
+  const tx = request.params && request.params[0]; if (!tx || !tx.to) return;
+  const data = String(tx.data ?? tx.input ?? '0x'); if (data !== '0x' && data !== '') return;
+  if (eff.opaque || eff.approvals.length || (eff.controlChange || []).length || eff.delegation || eff.service) return;
+  if (!registryAddrs(ctx).includes(lc(tx.to))) return;
+  eff.service = { name: 'wrap_deposit', trusted: true };
+  flags.push({ code: 'service_call_decoded', severity: 'info', detail: 'envoi natif à un jeton du registre : dépôt, reçu crédité à l expéditeur' });
+}
+
 export function applyExtraRules(eff, request, ctx) {
   const flags = [];
   if (isOn('F11')) marketOrderProceeds(request, ctx, flags);
@@ -193,6 +205,7 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F7')) signedOrder(request, ctx, flags);
   if (isOn('F5')) serviceCall(eff, request, ctx);
   if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
+  if (isOn('F18')) wrapDeposit(eff, request, ctx, flags);
   addFlags(eff, flags);
   return eff;
 }
@@ -200,6 +213,11 @@ export function applyExtraRules(eff, request, ctx) {
 // ---- F6 : changement / ajout de chaîne (wallet_switchEthereumChain / wallet_addEthereumChain). Aucun transfert, mais le RPC d'une chaîne ajoutée voit et peut falsifier
 // soldes et simulations. Registre PUBLIC de chaînes bien connues (identifiants de chaînes EVM publiques, pas des données du catalogue).
 const WELL_KNOWN_CHAINS = new Set([1, 10, 56, 100, 137, 250, 324, 1101, 5000, 8453, 34443, 42161, 42170, 42220, 43114, 59144, 81457, 534352, 7777777, 11155111]);
+// F17 : testnets publics majeurs (identifiants de chaînes EVM publiques) et hôtes RPC publics officiels des chaînes principales. Un site qui propose une chaîne publique connue avec son RPC officiel
+// ne fait rien de plus que ce que le portefeuille ferait seul ; un RPC d'un autre hôte reste signalé (il peut mentir sur soldes et simulations).
+const PUBLIC_TESTNETS = [43113, 17000, 84532, 421614, 11155420, 97, 80002, 59141, 534351, 168587773];
+const OFFICIAL_RPC_HOSTS = { 43114: ['api.avax.network'], 43113: ['api.avax-test.network'], 1: ['eth.llamarpc.com', 'cloudflare-eth.com', 'ethereum-rpc.publicnode.com', 'rpc.ankr.com', 'eth.merkle.io'], 8453: ['mainnet.base.org'], 10: ['mainnet.optimism.io'], 42161: ['arb1.arbitrum.io'], 137: ['polygon-rpc.com'], 56: ['bsc-dataseed.binance.org'] };
+const rpcHost = (u) => { try { return new URL(String(u)).hostname.toLowerCase(); } catch { return ''; } };
 const MAJOR_SYMBOLS = new Set(['ETH', 'WETH', 'BTC', 'WBTC', 'USDC', 'USDT', 'DAI', 'BNB', 'MATIC', 'POL', 'AVAX', 'SOL']);
 const ETH_FAMILY = new Set([1, 10, 324, 1101, 8453, 34443, 42161, 42170, 59144, 81457, 534352, 7777777, 11155111]);
 const toNum = (v) => { try { return typeof v === 'number' ? v : Number(BigInt(v)); } catch { return NaN; } };
@@ -211,15 +229,17 @@ export function analyzeChainRequest(request, ctx) {
   const f = (code, severity, detail) => flags.push({ code, severity, detail });
   if (!Number.isFinite(id)) f('chain_request_malformed', 'warn', 'chainId illisible');
   else if (request.method === 'wallet_switchEthereumChain') {
-    if (WELL_KNOWN_CHAINS.has(id)) f('chain_switch_known', 'info', `bascule vers la chaîne ${id} (registre public)`);
+    if (WELL_KNOWN_CHAINS.has(id) || (isOn('F17') && PUBLIC_TESTNETS.includes(id))) f('chain_switch_known', 'info', `bascule vers la chaîne ${id} (registre public)`);
     else f('chain_switch_unknown', 'warn', `bascule vers une chaîne ${id} hors registre public`);
   } else {
     const urls = Array.isArray(p.rpcUrls) ? p.rpcUrls : [];
     const sym = String(p.nativeCurrency && p.nativeCurrency.symbol || '').toUpperCase();
-    const known = WELL_KNOWN_CHAINS.has(id);
+    const known = WELL_KNOWN_CHAINS.has(id) || (isOn('F17') && PUBLIC_TESTNETS.includes(id));
+    const officialRpc = isOn('F17') && known && urls.length > 0 && urls.every((u) => (OFFICIAL_RPC_HOSTS[id] || []).includes(rpcHost(u)));
     if (!urls.length) f('chain_add_no_rpc', 'warn', 'ajout de chaîne sans RPC');
     if (urls.some((u) => !String(u).toLowerCase().startsWith('https://'))) f('chain_add_insecure_rpc', 'critical', 'RPC non chiffré (hors https)');
-    if (known) f('chain_add_known_id_custom_rpc', 'warn', `ajout de la chaîne publique ${id} avec un RPC fourni par le site (non vérifié par le portefeuille)`);
+    if (known && officialRpc) f('chain_add_known_official_rpc', 'info', `ajout de la chaîne publique ${id} avec un RPC public officiel`);
+    else if (known) f('chain_add_known_id_custom_rpc', 'warn', `ajout de la chaîne publique ${id} avec un RPC fourni par le site (non vérifié par le portefeuille)`);
     else {
       if (MAJOR_SYMBOLS.has(sym)) f('chain_add_native_symbol_spoof', 'critical', `chaîne ${id} hors registre qui se présente avec le symbole natif ${sym} : un RPC contrôlé par le site peut mentir sur soldes et simulations`);
       else f('chain_add_unknown', 'warn', `ajout d'une chaîne ${id} hors registre public avec un RPC fourni par le site`);

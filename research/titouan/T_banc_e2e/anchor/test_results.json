@@ -1,0 +1,51 @@
+{
+  "integrite": {
+    "entrees": 60,
+    "modifications": "180/180",
+    "modifRehashChaine": "177/180",
+    "modifRehashDerniereLigneNonDetecteeParChaineSeule": 3,
+    "suppressions": "59/60",
+    "derniereLigneSupprimeeNonVueParChaineSeule": 1,
+    "derniereDetecteeAvecCompteur": true,
+    "reordonnancements": "59/59",
+    "insertions": "12/12"
+  },
+  "minimisation": {
+    "adresseEnClair": false,
+    "texteLibre": false,
+    "refusHorsVocabulaire": "4/4"
+  },
+  "merkle": {
+    "entrees": 1000,
+    "preuvesValides": 1000,
+    "longueurMaxPreuve": 10,
+    "alteresRejetes": 1000,
+    "fausseRacineRejetee": 1000,
+    "autreEntreeRejetee": 1000,
+    "racine": "0x69c5eec43c31f37bb605babeb57deb2e10bb790351e0e1c50da945589f3d97ff"
+  },
+  "reproductibilite": {
+    "journauxIdentiquesOctet": true,
+    "racineCLI": true
+  },
+  "signature": {
+    "vecteurEIP155": true,
+    "topic0Anchored": "0xad42d05b81da73f1400bd8154686c38aeedbf95c68f3b4a2bd24bcf030d7935b",
+    "selecteurAnchor": "0xe44d7507"
+  },
+  "rejeu": {
+    "entrees": 300,
+    "ancrages": 3,
+    "modifSansRepar": "37/37",
+    "modifAvecRehash": "37/37",
+    "suppressionsTroncatures": "8/8",
+    "reordonnancement": true,
+    "verdictIntact": "identique"
+  },
+  "fujiReel": {
+    "blockNumber": 59289436,
+    "chainId": 43113
+  },
+  "echecs": 0,
+  "date": "2026-10-11T02:33:32.336Z"
+}
