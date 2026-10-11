@@ -8,7 +8,9 @@
     "test": "hardhat test",
     "chain:local": "node scripts/chain-local.js",
     "demo:deploy": "hardhat run scripts/demo/deploy-local.js",
-    "demo:fuji": "hardhat run scripts/demo/deploy-fuji.js --network fuji"
+    "demo:fuji": "node scripts/demo/deploy-fuji.js --network fuji",
+    "anchor:local": "hardhat --config hardhat.anchor.config.js run scripts/demo/anchor.js --network localhost",
+    "anchor:fuji": "hardhat --config hardhat.anchor.config.js run scripts/demo/anchor.js --network fuji"
   },
   "keywords": [],
   "author": "",

@@ -57,8 +57,31 @@ export function fujiKey() {
   return null;
 }
 
+// Output directory of the generated files (addresses.<kind>.json, context.local.json).
+// Default: this folder. HOLDUP_CHAIN_OUT_DIR redirects them (throwaway nodes, tests) so the
+// files of the live rehearsal are never overwritten. Read at call time on purpose.
+export function outDir() {
+  return process.env.HOLDUP_CHAIN_OUT_DIR ? path.resolve(process.env.HOLDUP_CHAIN_OUT_DIR) : chainDir;
+}
 export function addressesPath(kind = "local") {
-  return path.join(chainDir, `addresses.${kind}.json`);
+  return path.join(outDir(), `addresses.${kind}.json`);
+}
+export function contextPath() {
+  return path.join(outDir(), "context.local.json");
+}
+export function writeJson(file, data) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n");
+}
+
+/** Explicit network choice, never guessed: "--network local" or "--network fuji" (else throws). */
+export function parseNetwork(argv) {
+  const i = argv.lastIndexOf("--network");
+  const v = i >= 0 ? argv[i + 1] : undefined;
+  if (v !== "local" && v !== "fuji") {
+    throw new Error(`Pass --network local or --network fuji explicitly (got ${v === undefined ? "nothing" : JSON.stringify(v)}). No other network is accepted.`);
+  }
+  return v;
 }
 export function readAddresses(kind = "local") {
   const p = addressesPath(kind);
@@ -68,7 +91,11 @@ export function readAddresses(kind = "local") {
   return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 export function writeAddresses(kind, data) {
-  fs.writeFileSync(addressesPath(kind), JSON.stringify(data, null, 2) + "\n");
+  writeJson(addressesPath(kind), data);
+}
+export function tryReadAddresses(kind = "local") {
+  const p = addressesPath(kind);
+  return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : null;
 }
 
 /** Throws unless the RPC is the local node (127.0.0.1) or the public Fuji RPC. */
@@ -87,10 +114,22 @@ export function assertSafeRpc(rpcUrl) {
   return { local, fuji };
 }
 
-/** Build { provider, addresses, isLocal } for addresses.<kind>.json after safety checks. */
+/**
+ * Build { provider, addresses, kind, isLocal, isFuji, equivalent } for addresses.<kind>.json after
+ * safety checks. Behaviour follows `kind`, not the RPC host: kind "local" = local node (impersonation
+ * allowed), kind "fuji" = Fuji rules (deployer key, no impersonation). A fuji file pointing at 127.0.0.1
+ * is only accepted when it carries fujiEquivalent:true (written by `demo:fuji --network localhost`,
+ * used to rehearse the Fuji code paths on a local node). `equivalent` = that case.
+ */
 export async function makeContext(kind = "local") {
+  if (kind !== "local" && kind !== "fuji") throw new Error(`Refused: unknown network "${kind}" (local or fuji only).`);
   const addresses = readAddresses(kind);
   const { local } = assertSafeRpc(addresses.rpcUrl);
+  if (kind === "local" && !local) throw new Error("Refused: addresses.local.json must point at 127.0.0.1.");
+  const equivalent = kind === "fuji" && local;
+  if (equivalent && addresses.fujiEquivalent !== true) {
+    throw new Error("Refused: addresses.fuji.json points at 127.0.0.1 but is not a Fuji-equivalent test file.");
+  }
   const provider = new ethers.JsonRpcProvider(addresses.rpcUrl, undefined, { batchMaxCount: 1 });
   const net = await provider.getNetwork().catch(() => {
     throw new Error(`RPC ${addresses.rpcUrl} unreachable. ${local ? "Start the node: cd blockchain && npm run chain:local" : ""}`);
@@ -98,13 +137,31 @@ export async function makeContext(kind = "local") {
   if (Number(net.chainId) !== Number(addresses.chainId)) {
     throw new Error(`Chain id mismatch: RPC says ${net.chainId}, addresses file says ${addresses.chainId}. Redeploy.`);
   }
-  if (!local && Number(net.chainId) !== FUJI_CHAIN_ID) {
-    throw new Error(`Refused: remote chain id ${net.chainId} is not Fuji (${FUJI_CHAIN_ID}).`);
+  if (kind === "fuji" && !equivalent && Number(net.chainId) !== FUJI_CHAIN_ID) {
+    throw new Error(`Refused: chain id ${net.chainId} is not Fuji (${FUJI_CHAIN_ID}).`);
   }
-  return { provider, addresses, isLocal: local, kind };
+  return { provider, addresses, isLocal: kind === "local", isFuji: kind === "fuji", equivalent, kind };
 }
 
-/** Signer for the attacker side: unlocked collector account on the local node, deployer key on Fuji. */
+/** Deployer signer: unlocked account on a local node (or Fuji-equivalent test), FUJI key on Fuji. */
+export async function deployerSigner(ctx) {
+  if (ctx.isLocal || ctx.equivalent) {
+    const accts = (await ctx.provider.send("eth_accounts", [])).map((a) => a.toLowerCase());
+    if (!accts.includes(ctx.addresses.deployer.toLowerCase())) {
+      throw new Error("Deployer account is not unlocked on this node. Redeploy with npm run demo:deploy.");
+    }
+    return ctx.provider.getSigner(ctx.addresses.deployer);
+  }
+  const key = fujiKey();
+  if (!key) throw new Error("No FUJI_PRIVATE_KEY in environment: cannot send on Fuji.");
+  const w = new ethers.Wallet(key, ctx.provider);
+  if (ctx.addresses.deployer && w.address.toLowerCase() !== ctx.addresses.deployer.toLowerCase()) {
+    throw new Error(`FUJI_PRIVATE_KEY is ${w.address}, but the contracts were deployed by ${ctx.addresses.deployer}. Use the same key or redeploy with --fresh.`);
+  }
+  return w;
+}
+
+/** Attacker side: unlocked collector account locally; on Fuji the deployer key plays the relayer. */
 export async function attackerSigner(ctx) {
   if (ctx.isLocal) {
     const accts = (await ctx.provider.send("eth_accounts", [])).map((a) => a.toLowerCase());
@@ -113,13 +170,15 @@ export async function attackerSigner(ctx) {
     }
     return ctx.provider.getSigner(ctx.addresses.collector);
   }
-  const key = fujiKey();
-  if (!key) throw new Error("No FUJI_PRIVATE_KEY in environment: cannot send on Fuji.");
-  return new ethers.Wallet(key, ctx.provider);
+  return deployerSigner(ctx);
 }
 
-export function explorerTx(chainId, hash) {
-  return Number(chainId) === FUJI_CHAIN_ID ? `${FUJI_EXPLORER}/tx/${hash}` : "(local chain: no explorer)";
+/** Snowtrace link on Fuji (kind "fuji" or chain 43113), placeholder text on a local chain. */
+export function explorerTx(chainId, hash, kind) {
+  return kind === "fuji" || Number(chainId) === FUJI_CHAIN_ID ? `${FUJI_EXPLORER}/tx/${hash}` : "(local chain: no explorer)";
+}
+export function explorerAddress(chainId, address, kind) {
+  return kind === "fuji" || Number(chainId) === FUJI_CHAIN_ID ? `${FUJI_EXPLORER}/address/${address}` : "(local chain: no explorer)";
 }
 
 export function loadArtifact(name) {

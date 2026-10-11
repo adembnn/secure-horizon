@@ -1,9 +1,12 @@
 // Attacker side of the counterfactual (rehearsal on OUR OWN contracts only).
 // Given the victim's EIP-2612 permit signature, calls FreshDrainer.drainWithPermit on OUR DemoUSDC.
 //
-//   CLI :  node drain.mjs --owner 0x.. --value 2480000000 --deadline 1893456000 --signature 0x.. [--fuji]
-//          node drain.mjs --json permit.json [--fuji]
-//   HTTP:  node drain.mjs --serve [--fuji]     (127.0.0.1:8792, POST /drain, GET /state)
+//   CLI :  node drain.mjs --network local|fuji --owner 0x.. --value 2480000000 --deadline 1893456000 --signature 0x..
+//          node drain.mjs --network local|fuji --json permit.json
+//   HTTP:  node drain.mjs --network local|fuji --serve     (127.0.0.1:8792, POST /drain, GET /state)
+// --network is mandatory (never guessed). On Fuji the deployer key plays the attacker's relayer
+// (it pays the gas; the loot goes to the keyless collector address of addresses.fuji.json) and
+// every result prints a https://testnet.snowtrace.io/tx/ link.
 //
 // Refuses: any RPC that is not 127.0.0.1 or Fuji; any token other than addresses.usdc;
 // any spender other than addresses.drainer; any owner other than addresses.victim.
@@ -18,6 +21,7 @@ import {
   makeContext,
   attackerSigner,
   explorerTx,
+  parseNetwork,
 } from "./lib.mjs";
 
 const PORT = Number(process.env.HOLDUP_DRAIN_PORT || 8792);
@@ -91,7 +95,7 @@ export async function executeDrain(ctx, signer, rawReq) {
     .find((p) => p && p.name === "DrainedERC20");
   const result = {
     txHash: tx.hash,
-    explorer: explorerTx(addresses.chainId, tx.hash),
+    explorer: explorerTx(addresses.chainId, tx.hash, ctx.kind),
     block: receipt.blockNumber,
     drained: ev ? ev.args.amount.toString() : null,
     before: { victim: before.victim.toString(), collector: before.collector.toString() },
@@ -201,7 +205,7 @@ function parseArgs(argv) {
   const o = {};
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--fuji" || a === "--serve") o[a.slice(2)] = true;
+    if (a === "--serve") o[a.slice(2)] = true;
     else if (a.startsWith("--")) o[a.slice(2)] = argv[++i];
   }
   return o;
@@ -209,7 +213,9 @@ function parseArgs(argv) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const ctx = await makeContext(args.fuji ? "fuji" : "local");
+  const kind = parseNetwork(process.argv.slice(2));
+  delete args.network;
+  const ctx = await makeContext(kind);
   const signer = await attackerSigner(ctx);
   if (args.serve) return serve(ctx, signer);
   const raw = args.json ? JSON.parse(fs.readFileSync(args.json, "utf8")) : args;

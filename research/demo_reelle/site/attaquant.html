@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Console attaquant — démo Glacier Rewards</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body class="console">
+
+<div class="c-shell">
+  <div class="c-head">
+    <h1>Console de contrefactuel — ce que l'attaquant reçoit</h1>
+    <div class="c-head-right">
+      <div class="c-netswitch" role="group" aria-label="Réseau de démonstration">
+        <button type="button" id="net-local" data-net="local">Chaîne locale</button>
+        <button type="button" id="net-fuji" data-net="fuji">Avalanche Fuji</button>
+      </div>
+      <span class="c-net" id="chain-pill"><i></i><span id="chain-pill-text">Vérification du réseau…</span></span>
+    </div>
+  </div>
+
+  <div class="c-numbers">
+    <div class="c-num" id="victim-card">
+      <p class="who">Solde victime (DemoUSDC)</p>
+      <p class="val" id="victim-amount">—</p>
+      <p class="delta" id="victim-delta"></p>
+      <p class="addr" id="victim-addr">adresse : —</p>
+    </div>
+    <div class="c-num" id="attacker-card">
+      <p class="who">Solde attaquant (DemoUSDC)</p>
+      <p class="val" id="attacker-amount">—</p>
+      <p class="delta" id="attacker-delta"></p>
+      <p class="addr" id="attacker-addr">adresse : —</p>
+    </div>
+  </div>
+
+  <div class="c-line">
+    <h2>Chronologie</h2>
+    <ul class="c-events" id="timeline"><li class="c-empty">En attente d'une signature…</li></ul>
+  </div>
+
+  <p class="c-service" id="service-status"><i></i><span>Connexion au service local (127.0.0.1:8792)…</span></p>
+  <p class="c-warn" id="victim-mismatch-warn" hidden></p>
+</div>
+
+<footer class="disclaimer">Démonstration : site fictif, chaîne de test, contrats de test.</footer>
+
+<script src="./chain-utils.js"></script>
+<script src="./attaquant.js"></script>
+</body>
+</html>

@@ -47,34 +47,85 @@ notée `realUsdc` dans `addresses.local.json`.
    vrais fonds : ces clés sont publiques.
 3. Vérifier le solde dans `addresses.local.json` (`usdc`, `realUsdc` en mode fork).
 
+## 3 bis. Le faux contact (empoisonnement d'adresse)
+
+```bash
+# DEMO_CONTACT=0x... (optionnel : le vrai contact de la victime ; sinon une adresse neuve est générée et stockée)
+node research/demo_reelle/chain/lookalike.mjs --network local
+```
+
+Cherche par force brute (threads, 5 à 30 s) une adresse qui partage les 3 premiers et 3 derniers
+caractères hexa du contact, lui donne du gas, fait envoyer à la victime une poussière de
+0,001 DemoUSDC (elle apparaît dans l'historique du wallet) et, en local, fait d'abord envoyer 120 DemoUSDC
+de la victime au contact (usurpation locale) pour que le contact figure aussi dans l'historique.
+Écrit `contact` et `lookalike` (adresses seulement) dans `addresses.<réseau>.json` et génère
+`context.local.json` (contexte local de la victime, format de `server.mjs` : pointer dessus avec
+`SENTINELLE_CONTEXT=research/demo_reelle/chain/context.local.json`). La clé du sosie est jetable :
+jamais affichée, jamais écrite. Sur Fuji l'étape « victime -> contact » est sautée.
+
 ## 4. Jouer le contrefactuel (le "drain")
 
 ```bash
-node research/demo_reelle/chain/drain.mjs --serve
+node research/demo_reelle/chain/drain.mjs --network local --serve
 ```
 
 Sert `127.0.0.1:8792` : `GET /state` (soldes, dernier events, domaine EIP-712 à faire
 signer), `POST /drain` (CORS limité à `http://localhost:8791` et `http://127.0.0.1:8791`).
-Refuse tout RPC qui n'est pas `127.0.0.1` ou Fuji, et tout jeton autre que le DemoUSDC du
-fichier d'adresses.
+`--network local|fuji` est obligatoire (jamais deviné). Refuse tout RPC qui n'est pas
+`127.0.0.1` ou Fuji, et tout jeton autre que le DemoUSDC du fichier d'adresses. Sur Fuji, la clé du
+déployeur joue le relayeur de l'attaquant (elle paie le gas) et chaque résultat affiche un lien
+`https://testnet.snowtrace.io/tx/...`.
 
 ## 5. Rejouer en 10 secondes
 
 ```bash
-node research/demo_reelle/chain/reset.mjs
+node research/demo_reelle/chain/reset.mjs --network local
 ```
 
 Remet la victime à 2 480 DemoUSDC, révoque l'allowance, redéploie un FreshDrainer neuf.
+Sur Fuji (`--network fuji`) : remet le solde à 2 480 en mintant, redéploie un FreshDrainer, affiche les liens
+Snowtrace. Il ne peut PAS révoquer l'allowance de la victime ni vider le collecteur (sans clé) : si une
+allowance reste, le script l'affiche et l'humain doit appeler `approve(<ancien drainer>, 0)` sur le DemoUSDC
+depuis son propre wallet (Snowtrace > Write Contract). Inutile pour rejouer : le nouveau drainer est un autre spender.
 
-## 6. Fuji (optionnel)
+## 6. Ordre des commandes
+
+### Répétition locale
 
 ```bash
 cd blockchain
-FUJI_PRIVATE_KEY=... DEMO_VICTIM=0x... npm run demo:fuji
+HOLDUP_CHAIN_MODE=fork npm run chain:local        # terminal 1 (ou =plain hors-ligne)
+DEMO_VICTIM=0xTonWalletDeTest npm run demo:deploy -- --network localhost
+node ../research/demo_reelle/chain/lookalike.mjs --network local     # faux contact + poussière + context.local.json
+node ../research/demo_reelle/chain/drain.mjs --network local --serve  # console attaquant, terminal 2
+node ../research/demo_reelle/chain/reset.mjs --network local          # entre deux passages
+npm run anchor:local                                                  # optionnel : EvidenceAnchor, adresse sous "anchor"
 ```
 
-Sans clé ou avec un solde nul : message d'une ligne (adresse du déployeur si connue +
-lien du faucet), pas de trace d'erreur.
+Pour un nœud jetable (tests) : `HOLDUP_PORT=8548 HOLDUP_CHAIN_OUT_DIR=<dossier tmp>` redirige le nœud,
+les scripts Hardhat et tous les fichiers générés (`addresses.*.json`, `context.local.json`) : les fichiers
+de la répétition en cours ne sont pas touchés.
+
+### Fuji (une seule fois, quand le déployeur est financé)
+
+```bash
+cd blockchain
+# FUJI_PRIVATE_KEY dans .env (jamais commité). Financer le déployeur : https://build.avax.network/console/primary-network/faucet
+DEMO_VICTIM=0xTonWalletFuji npm run demo:fuji           # coût estimé affiché d'abord, abandon net si solde insuffisant
+#   options : -- --fresh (tout redéployer)  |  -- --fresh-drainer (FreshDrainer seul)
+#   DEMO_VICTIM_AVAX=0.2 (défaut) : AVAX de test envoyés à la victime, sauté si déjà couverts
+node ../research/demo_reelle/chain/lookalike.mjs --network fuji
+node ../research/demo_reelle/chain/drain.mjs --network fuji --serve
+node ../research/demo_reelle/chain/reset.mjs --network fuji
+npm run anchor:fuji                                     # optionnel
+```
+
+Relancer `demo:fuji` ne redéploie rien tant que les contrats ont du code (réutilise `addresses.fuji.json`).
+Le collecteur est une adresse neuve dont la clé n'existe nulle part (adresse seule dans le fichier) ; la clé du
+déployeur joue le relayeur. Les nouveaux contrats s'ajoutent à `blockchain/DEPLOYMENTS.md` avec leurs liens Snowtrace.
+
+Tester le chemin Fuji sans AVAX, sur un nœud local : `HOLDUP_CHAIN_OUT_DIR=<tmp> node scripts/demo/deploy-fuji.js --network localhost`
+(fichier marqué `fujiEquivalent`), puis `--network fuji` pour lookalike/drain/reset avec le même `HOLDUP_CHAIN_OUT_DIR`.
 
 ## Sécurité
 
