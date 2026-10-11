@@ -15,4 +15,5 @@ import { malformedCalldata } from './malformed_calldata.mjs';
 import { intentGuard } from './intent_guard.mjs';
 import { controlShape } from './control_shape.mjs';
 import { walletMethods } from './wallet_methods.mjs';
-export const DETECTORS = [indirectPull, lookalikeKnown, spendRights, tokenGuard, simEvents, nftOrders, sigRights, batchRights, malformedCalldata, intentGuard, controlShape, walletMethods, pastedMessage];
+import { dustGuard } from './dust_guard.mjs';
+export const DETECTORS = [indirectPull, lookalikeKnown, spendRights, tokenGuard, simEvents, nftOrders, sigRights, batchRights, malformedCalldata, intentGuard, controlShape, walletMethods, dustGuard, pastedMessage];

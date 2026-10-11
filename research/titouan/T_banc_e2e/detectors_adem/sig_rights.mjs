@@ -49,11 +49,17 @@ export function grantsOf(td) {
 
 const hexBytes = (h) => (typeof h === 'string' && /^0x([0-9a-fA-F]{2})*$/.test(h) ? Buffer.from(h.slice(2), 'hex') : null);
 const readable = (b) => { const s = b.toString('utf8'); return !s.includes('�') && !/[\x00-\x08\x0e-\x1f]/.test(s) ? s : null; };
-// selector + first argument = address left-padded to 32 bytes, at least one more (possibly truncated) word
+// [0..8 junk bytes] + selector + first argument = address left-padded to 32 bytes, at least one more (possibly truncated) word.
+// The junk prefix is the evasion (a 3-4 byte tag in front of the call hides the selector from a decoder that expects it at offset 0) ;
+// objection : "random binary can contain 12 zero bytes then 12 non-zero ones" : at one of 9 offsets, ~2^-100, and a hash has no zero run.
 export function looksLikeCalldata(b) {
-  if (!b || b.length < 4 + 32 + 20) return false;
-  if (!b.subarray(4, 16).every((x) => x === 0)) return false;
-  return b.subarray(16, 36).filter((x) => x !== 0).length >= 12;
+  if (!b) return false;
+  for (let s = 0; s <= 8; s++) {
+    if (b.length < s + 4 + 32 + 20) break;
+    if (!b.subarray(s + 4, s + 16).every((x) => x === 0)) continue;
+    if (b.subarray(s + 16, s + 36).filter((x) => x !== 0).length >= 12) return s;
+  }
+  return false;
 }
 
 const GRANT = /\b(authori[sz]\w*|grant\w*|approv\w*|permission\w*|allow\w*|migrat\w*|transfer\w*|autoris\w*|approuv\w*|accord\w*|transf[eè]r\w*)\b/i;
@@ -82,7 +88,8 @@ export const sigRights = {
       const b = hexBytes(request.params && request.params[0]);
       if (b) {
         const text = readable(b);
-        if (!text && looksLikeCalldata(b)) flags.push({ code: 'signed_calldata', severity: 'critical', detail: `le « message » à signer a la forme d'un appel de contrat (sélecteur 0x${b.subarray(0, 4).toString('hex')}, adresse 0x${b.subarray(16, 36).toString('hex')}) et non d'un texte` });
+        const off = !text ? looksLikeCalldata(b) : false;
+        if (off !== false) flags.push({ code: 'signed_calldata', severity: 'critical', detail: `le « message » à signer a la forme d'un appel de contrat (sélecteur 0x${b.subarray(off, off + 4).toString('hex')}${off ? `, après ${off} octets de préfixe` : ''}, adresse 0x${b.subarray(off + 16, off + 36).toString('hex')}) et non d'un texte` });
         else if (text && !SIWE.test(text) && GRANT.test(text) && ASSET.test(text)) flags.push({ code: 'signed_text_grants_assets', severity: 'critical', detail: 'le texte à signer dit accorder ou déplacer des actifs (repli par mots-clés, sans modèle)' });
       }
     }
