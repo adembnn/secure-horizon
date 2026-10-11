@@ -2,6 +2,20 @@
 
 Adem n'a bientôt plus de crédit ; un autre agent prend le relais. Tout est sur `main`.
 
+## ⚠️ ALERTE DÉMO : LE SCÉNARIO HÉROS NE MARCHE PAS (fuzz_sig, 11/10 ~04h30)
+Le permit EIP-2612 hors chaîne (signature d'une autorisation illimitée sur USDC vers un inconnu, avec l'intention « réclamer un airdrop ») sort TOUJOURS en warn ou ok, JAMAIS en critical (377 sur 377). C'est exactement la scène principale de la démo (drainer neuf, faux remboursement). Le moteur ne modélise pas une signature Permit comme une approbation : il ne compare ni `value` ni `spender` à l'intention.
+Même problème pour :
+- le DAI permit (174/174) ;
+- un ordre Blur à 0 (148/148) ;
+- un personal_sign dont l'hex encode un approve (193/193) ;
+- un personal_sign au texte trompeur, qui sort en ok dans 70 % des cas.
+Les variantes Permit2 tombent à warn si le montant est énorme sans être exactement 2^160-1.
+Correction : un plancher critical pour toute signature qui accorde un droit de dépense ou cède un actif. Concrètement :
+- décoder Permit et DAI permit comme des approbations ;
+- considérer qu'un montant ≥ 2^128 ou supérieur au solde équivaut à illimité ;
+- traiter un personal_sign dont l'hex décode en calldata comme la transaction sous-jacente.
+À vérifier avec `node redteam/check.mjs redteam/jury_fuzz_sig.jsonl` (1 101 cas qui doivent passer en critical) AVANT la démo. Les Seaport et eth_sign tiennent déjà (0 contournement).
+
 ## PRIORITÉ N°1 : BRANCHER JEV OU CLEF POUR DE VRAI (exigence d'Adem, le jury en a parlé)
 Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est présente dans l'environnement (CF_ACCOUNT_ID, CF_API_TOKEN, JEV_API_KEY sont absentes). De plus, la classification du message collé n'est pas branchée dans la chaîne du banc : le juré social montre qu'un faux support classique passe en `ok`.
 1. HUMAIN (Adem ou Titouan), environ 5 min, puisqu'un agent n'a pas le droit de créer de compte ni de saisir de clé :
