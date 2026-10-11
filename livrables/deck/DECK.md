@@ -12,7 +12,7 @@ Design : `docs/design/system/DESIGN.md`. Fond noir, texte blanc, deux gris, poli
 | 2 | « Tu écris. Je compare. Tu décides. » : deux écrans de la planche de design (question, « Ça ne correspond pas ») et les deux gestes : ne rien envoyer, ou limiter à 50 USDC puis envoyer ; rien ne part tout seul | `docs/design/system/planche.html` (système de design, en cours d'intégration) |
 | 3 | La scène racontée en trois temps (tu échanges 50, le site demande tout, il est piraté plus tard), puis « il te reste 0 USDC » sans Hold up, « 50 USDC » avec | `research/demo_reelle/site_echange/test/preuve_piratage.mjs` (chaîne locale) |
 | 4 | « Une autorisation déjà donnée ? Tu la retires. » : capture du panneau | `research/titouan/T_banc_e2e/extension/revoke.js`, `tests/unit/revoke.test.mjs` |
-| 6 | Deux mesures côte à côte. L'extension, réserve scellée de 2 673 paires : 75 % des non conformes attrapées (1 334 sur 1 789), 0 laissée passer, 25 % « pas pu vérifier », 14 % de fausses alertes (71 sur 515). Le moteur de comparaison, jeu aveugle de 250 cas : 87 %, 65 %, 15 % (seuil 10 %). Réserves écrites sur la slide : sans modèle, build 6b9de2f, fichier de décision modifié hors commit | `preuves/RESULTAT_RESERVE_MOTS.md`, `research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md` |
+| 6 | « Ce que l'extension a trouvé » : 1 334 demandes piégées attrapées sur 1 789, aucune passée sans alerte ; 14 % de fausses alertes (71 sur 515). Banc scellé de Titouan, ouvert une fois, extension sans modèle. Le jeu aveugle n'est plus sur la slide (notes orateur) | `preuves/RESULTAT_RESERVE_MOTS.md` |
 | 7 | « 36 parcours. Notre testeuse s'est fait piéger 4 fois. », les 4 fois après « Continuer » malgré l'alerte : capture réelle de l'extension pendant l'essai ; « Ce que Hold up ne fait pas encore », en deux phrases (la ligne « jamais essayé devant un vrai MetaMask » est retirée de la slide à la demande d'Adem, elle reste en notes orateur) | `coord/reports/testeurs/3_prudente_clavier.md`, `preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md` |
 | 8 | La phrase de fin d'Adem, seule (le modèle économique est en notes orateur) | `research/titouan/BM2/BM_MODELE.md`, `BM_LABEL.md` |
 
@@ -30,3 +30,5 @@ Réserves :
 Rendu vérifié par export PowerPoint en images, les huit slides relues.
 
 Le deck compte 7 slides depuis 11h35 : LI.FI est passé en slide 1 à la demande d'Adem, l'ancienne slide « C'est déjà arrivé » faisait doublon et a été retirée. Les numéros 6, 7 et 8 du tableau ci-dessus sont maintenant les slides 5, 6 et 7.
+
+`holdup.pdf` est fait des images exportées par PowerPoint : le texte y est dessiné dans la police du système de design, quel que soit le lecteur.

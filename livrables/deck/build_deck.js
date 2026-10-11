@@ -11,6 +11,7 @@ const PAGE = '000000', INK = 'FFFFFF', INK2 = 'B3B3B3', INK3 = '808080';
 const F = 'Segoe UI Variable Text', FB = 'Segoe UI Variable Text Semibold';
 const ROOT = path.join(__dirname, '..', '..');
 const CAP = path.join(ROOT, 'docs', 'design', 'system', 'captures');
+const NOTES_MESURE = "Deux mesures différentes, ne pas les mélanger. (1) Extension, réserve scellée (preuves/RESULTAT_RESERVE_MOTS.md, commit 61dbe40) : preuves/panel/RESERVE.jsonl, 2 673 paires, ouverte une fois le 11 oct. 2026. Demandes non conformes : 1 789, dont 1 334 attrapées (74,6 %), 0 laissée passer sans alerte, 455 en « je n'ai pas pu vérifier » (25,4 %). Demandes conformes : 515, dont 190 « ça correspond », 71 fausses alertes (13,8 % des conformes, 27,2 % des conformes vérifiées), 254 en « pas pu vérifier ». Réserves : lecture de la phrase par mots-clés seulement, le bras avec Clef n'a pas été terminé ; build 6b9de2f, d'avant le nouvel habillage ; un fichier du code de décision était modifié hors commit au lancement ; la réserve est consommée. (2) Moteur de comparaison côté serveur, jeu aveugle de 250 cas (150 arnaques, 100 jumeaux honnêtes) : 87,3 % signalées avec la phrase, 64,7 % sans, faux rouges 15,0 % pour un seuil fixé avant à 10 %, manqué ; auteur des cas : une IA de la même famille que celle qui nous a aidés. Ne jamais dire « l'extension attrape 87 % ». Ne pas citer A11 ni A12 de CHIFFRES.md.";
 const pres = new pptxgen();
 pres.layout = 'LAYOUT_16x9'; // 10 x 5.625
 pres.title = 'Hold up';
@@ -78,10 +79,8 @@ function bar(s, label, value, pct, y, color) {
   });
   txt(s, 'Sans Hold up, il te reste', 0.5, 2.55, 4.2, 0.35, { color: INK2 });
   txt(s, '0 USDC', 0.5, 2.9, 4.3, 1.0, big({ fontSize: 60 }));
-  txt(s, 'Le pirate se sert de l’accès illimité.', 0.5, 4.05, 4.2, 0.4, { fontSize: 14, color: INK2 });
   txt(s, 'Avec Hold up, il te reste', 5.3, 2.55, 4.2, 0.35, { color: INK2 });
   txt(s, '50 USDC', 5.3, 2.9, 4.3, 1.0, big({ fontSize: 60 }));
-  txt(s, 'Tu avais limité l’accès aux 50 de l’échange. Il n’y a plus rien à prendre.', 5.3, 4.05, 4.2, 0.6, { fontSize: 14, color: INK2 });
 }
 
 // 4 Après l'alerte
@@ -89,42 +88,25 @@ function bar(s, label, value, pct, y, color) {
   const s = slide('Une autorisation déjà donnée ?\nTu la retires.', 'research/titouan/T_banc_e2e/extension/revoke.js, tests/unit/revoke.test.mjs',
     "La révocation est branchée dans l'extension, panneau latéral (messages hu.revoke.*, extension/REVOKE_BRANCHEMENT.md). Hold up prépare la demande de retrait (approve à 0, setApprovalForAll false, Permit2 approve à 0) ; le portefeuille la signe, jamais Hold up. Un clic seulement si une transaction suffit. Permit EIP-2612, DAI et Permit2 signé : plusieurs étapes, pas de bouton. Jamais joué devant un vrai portefeuille. Dans le code le bouton s'appelle encore « Révoquer » : « Retirer l'autorisation » est le mot du système de design, et l'écran montré est celui du système de design. Étapes officielles après un vol, lues sur les pages officielles : research/titouan/T_banc_e2e/INCIDENT/INCIDENT_ETAPES.md.", { w: 5.6 });
   txt(s, 'Je prépare le retrait. Ton portefeuille le signe. Hold up ne signe jamais.', 0.5, 1.75, 5.2, 0.9, { fontSize: 18, color: INK2 });
-  txt(s, 'Jamais joué devant un vrai portefeuille.', 0.5, 4.35, 5.2, 0.4, { color: INK2 });
   s.addImage({ path: path.join(CAP, 'pan-ouvert_sombre.png'), x: 6.6, y: 0.4, w: 2.39, h: 4.5 });
 }
 
-// 6 Les deux mesures
+// 6 La mesure sur l'extension
 {
-  const s = slide('Mesuré : l’extension, et le moteur de comparaison', 'preuves/RESULTAT_RESERVE_MOTS.md, research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md',
-    "Deux mesures différentes, ne pas les mélanger. (1) Extension, réserve scellée (preuves/RESULTAT_RESERVE_MOTS.md, commit 61dbe40) : preuves/panel/RESERVE.jsonl, 2 673 paires, ouverte une fois le 11 oct. 2026. Demandes non conformes : 1 789, dont 1 334 attrapées (74,6 %), 0 laissée passer sans alerte, 455 en « je n'ai pas pu vérifier » (25,4 %). Demandes conformes : 515, dont 190 « ça correspond », 71 fausses alertes (13,8 % des conformes, 27,2 % des conformes vérifiées), 254 en « pas pu vérifier ». Réserves : lecture de la phrase par mots-clés seulement, le bras avec Clef n'a pas été terminé ; build 6b9de2f, d'avant le nouvel habillage ; un fichier du code de décision était modifié hors commit au lancement ; la réserve est consommée. (2) Moteur de comparaison côté serveur, jeu aveugle de 250 cas (150 arnaques, 100 jumeaux honnêtes) : 87,3 % signalées avec la phrase, 64,7 % sans, faux rouges 15,0 % pour un seuil fixé avant à 10 %, manqué ; auteur des cas : une IA de la même famille que celle qui nous a aidés. Ne jamais dire « l'extension attrape 87 % ». Ne pas citer A11 ni A12 de CHIFFRES.md.", { fs: 10 });
-  const rows = (x, list, y0) => list.forEach((r, i) => {
-    const y = y0 + i * 0.58;
-    txt(s, r[0], x, y, 1.25, 0.5, big({ fontSize: 26, valign: 'middle' }));
-    txt(s, r[1], x + 1.3, y, 2.95, 0.5, { fontSize: 13, color: INK2, valign: 'middle' });
-  });
-  txt(s, 'L’extension', 0.5, 1.2, 4.2, 0.35, big({ fontSize: 18 }));
-  txt(s, 'Réserve scellée, 2 673 paires, ouverte une fois.', 0.5, 1.58, 4.2, 0.3, { fontSize: 13, color: INK2 });
-  rows(0.5, [
-    ['75 %', 'des demandes non conformes attrapées (1 334 sur 1 789)'],
-    ['0', 'laissée passer sans alerte'],
-    ['25 %', '« Je n’ai pas pu vérifier »'],
-    ['14 %', 'de fausses alertes (71 sur 515 demandes conformes)'],
-  ], 2.0);
-  txt(s, 'Le moteur de comparaison', 5.3, 1.2, 4.2, 0.35, big({ fontSize: 18 }));
-  txt(s, 'Jeu aveugle de 250 cas, écrits sans voir nos règles.', 5.3, 1.58, 4.2, 0.3, { fontSize: 13, color: INK2 });
-  rows(5.3, [
-    ['87 %', 'des arnaques signalées avec la phrase'],
-    ['65 %', 'sans la phrase'],
-    ['15 %', 'd’opérations honnêtes arrêtées à tort (seuil fixé avant : 10 %)'],
-  ], 2.0);
-  txt(s, 'Extension mesurée sans modèle (mots-clés seuls), sur le build 6b9de2f d’avant le nouvel habillage, avec un fichier de décision modifié hors commit.', 0.5, 4.42, 9, 0.5, { fontSize: 12, color: INK2 });
+  const s = slide('Ce que l’extension a trouvé', 'preuves/RESULTAT_RESERVE_MOTS.md',
+    NOTES_MESURE);
+  txt(s, '1 334', 0.5, 1.25, 4.3, 1.3, big({ fontSize: 80 }));
+  txt(s, 'demandes piégées attrapées, sur 1 789. Aucune n’est passée sans alerte.', 0.5, 2.75, 4.0, 0.9, { color: INK2 });
+  txt(s, '14 %', 5.3, 1.25, 4.3, 1.3, big({ fontSize: 80 }));
+  txt(s, 'de fausses alertes : 71 demandes honnêtes sur 515.', 5.3, 2.75, 4.0, 0.9, { color: INK2 });
+  txt(s, 'Banc d’essai scellé, ouvert une seule fois. Extension sans modèle.', 0.5, 4.3, 9, 0.4, { fontSize: 14, color: INK2 });
 }
 
 // 7 Ce qui ne marche pas encore
 {
   const s = slide('36 parcours. Notre testeuse\ns’est fait piéger 4 fois.', 'coord/reports/testeurs/3_prudente_clavier.md, preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md',
     "La testeuse est un agent qui joue une personne prudente, au clavier : 36 parcours, piégée 4 fois en appuyant sur Continuer, actif tout de suite sur « Ça ne correspond pas » (capture réelle de l'extension, coord/reports/testeurs/3_captures/s05_08_f1_continuer_actif.png). Corrigé dans le commit b42792d : le geste attend, la demande expire à 3 minutes. Tests unitaires de l'extension rejoués le 11 oct. à 10h49 sur l'arbre de travail : 225 tests, 213 réussis, 12 en échec ; ne pas citer « 217 tests » sans le rejouer. Sur 58 paires d'essai : 18 contrôlées, 7 en partie, 20 non, 13 non distinguées (EXHAUSTIVITE_INTENTION.md). Hors périmètre : fraude voulue, Ledger direct, téléphone. Jamais essayé avec un vrai MetaMask. Ne pas dire « sécurisé ».", { w: 5.6 });
-  txt(s, 'Les 4 fois, elle avait lu « Ça ne correspond pas » et appuyé sur « Continuer » quand même. Jamais piégée sans ce geste. La testeuse est un agent qui joue une personne prudente, au clavier.', 0.5, 1.6, 5.4, 1.2, { fontSize: 14, color: INK2 });
+  txt(s, 'Les 4 fois : « Continuer » malgré l’alerte. La testeuse est un agent qui joue une personne prudente.', 0.5, 1.6, 5.4, 0.9, { color: INK2 });
   txt(s, 'Ce que Hold up ne fait pas encore', 0.5, 2.95, 5.4, 0.4, big({ fontSize: 18 }));
   txt(s, [
     { text: 'Je ne vérifie pas ce que tu reçois en échange.', options: { breakLine: true } },
