@@ -1,5 +1,7 @@
 # Pitch Hold up V3 (11/10/2026) : douleur chiffrée, constat, moindre privilège, couche indépendante
 
+> **Texte d'origine, non corrigé.** Les versions à dire sont `livrables/PITCH_5MIN.md`, `PITCH_3MIN.md` et `VIDEO_SCRIPT.md`, qui reprennent ce pitch avec les chiffres de `livrables/CHIFFRES.md`. Écarts relevés (détail dans `livrables/RAPPORT_MISE_A_JOUR_2.md`) : « 48 % » devient 47,6 % Ethereum et 34,2 % Avalanche ; « 38 % des pertes » devient 38 % du montant des 11 vols de plus d'un million (non repris à l'oral) ; « ce qu'ils ne peuvent pas savoir » est retiré ; « il n'a aucune raison de s'alarmer » devient « au mieux il signale une adresse sans historique » ; « 18 millisecondes » devient « médiane sous 50 ms » ; « la phrase est lue par un modèle hébergé » devient « seulement si le relais Clef est branché » ; « nous couvrons Detect et Respond » devient « se rattache à » ; le journal chaîné par hachage n'existe que dans la version serveur ; le 0,30 % d'Avalanche ne se dit qu'avec les 76,84 % d'avertissements ; ajout du contrôle scellé de la grille (86,6 % / 7,7 % / 1,3 %) et de l'aveu de la revue de sécurité.
+
 Base : PITCH_V2 (audit) + phrase d'Adem (coord/HANDOFF_ADEM_SESSION_2.md) + tournure de Titouan sur le moindre privilège. 5 minutes, environ 650 mots.
 Interdits respectés : pas de « à l'ère de l'IA », pas de « tendance en hausse », pas de « MetaMask ne le voit pas », pas de « bloque », pas de « rien ne quitte la machine ».
 
