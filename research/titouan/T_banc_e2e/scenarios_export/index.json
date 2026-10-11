@@ -1,0 +1,1288 @@
+{
+ "schema_version": 1,
+ "nom": "Hold up - export de scénarios (cas NON scellés uniquement)",
+ "total": 6456,
+ "par_source": {
+  "catalogue": 385,
+  "public": 144,
+  "v2": 5927
+ },
+ "sources": {
+  "catalogue": {
+   "fichier": "attacks/DEV.jsonl",
+   "sha256": "282cf318394d7c9143190c15a604f879dfa1eb901d75393829614a0542be67e3",
+   "n": 385,
+   "remarque": "attacks/cases.jsonl (589) = DEV (385) + TEST (204 scellés) : non lu"
+  },
+  "public": {
+   "fichier": "attacks_public/PUBLIC.jsonl",
+   "sha256": "79b13a3eebdbbe3d449736be12043efee92f3be6940e40bb19b6e77794f9cbb6",
+   "n": 144
+  },
+  "v2": {
+   "fichier": "blind_adem/v2/V2_DEV.jsonl",
+   "sha256": "eb2e7413847f189204717e1793f8a457fd183cd2f03a7781e505c473317d2eed",
+   "n": 5927,
+   "remarque": "V2_TEST.jsonl jamais lu"
+  },
+  "conversations": {
+   "fichier": "attacks/scenarios.json",
+   "sha256": "23c8b5baebfc3659a8084003d06147b04e2b43603dd00672305453921d4c566a",
+   "n": 8
+  }
+ },
+ "par_famille": {
+  "adresse_empoisonnee": {
+   "total": 18,
+   "par_source": {
+    "catalogue": 18
+   },
+   "par_etiquette": {
+    "malveillant": 15,
+    "ambigu": 3
+   }
+  },
+  "ambigu": {
+   "total": 226,
+   "par_source": {
+    "v2": 226
+   },
+   "par_etiquette": {
+    "ambigu": 226
+   }
+  },
+  "approve_erc20": {
+   "total": 32,
+   "par_source": {
+    "catalogue": 32
+   },
+   "par_etiquette": {
+    "malveillant": 20,
+    "benin": 12
+   }
+  },
+  "batch_execute_7702": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "batch_massif_troncature": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "benign_defi": {
+   "total": 1001,
+   "par_source": {
+    "v2": 1001
+   },
+   "par_etiquette": {
+    "benin": 1001
+   }
+  },
+  "benign_everyday": {
+   "total": 975,
+   "par_source": {
+    "v2": 975
+   },
+   "par_etiquette": {
+    "benin": 975
+   }
+  },
+  "benin_dur_phrase_ressemblant_a_injection": {
+   "total": 1,
+   "par_source": {
+    "public": 1
+   },
+   "par_etiquette": {
+    "benin": 1
+   }
+  },
+  "bitb_relais_permit": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "bitb_seed_phrase": {
+   "total": 1,
+   "par_source": {
+    "public": 1
+   },
+   "par_etiquette": {
+    "malveillant": 1
+   }
+  },
+  "blur": {
+   "total": 6,
+   "par_source": {
+    "catalogue": 6
+   },
+   "par_etiquette": {
+    "malveillant": 4,
+    "benin": 2
+   }
+  },
+  "chaine_neuve": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "changement_reseau": {
+   "total": 11,
+   "par_source": {
+    "catalogue": 11
+   },
+   "par_etiquette": {
+    "ambigu": 3,
+    "malveillant": 5,
+    "benin": 3
+   }
+  },
+  "clickjacking_overlay": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "clipper_remplacement": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "cloaking_extension": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "controle_admin": {
+   "total": 13,
+   "par_source": {
+    "catalogue": 13
+   },
+   "par_etiquette": {
+    "malveillant": 10,
+    "benin": 3
+   }
+  },
+  "cow_uniswapx": {
+   "total": 18,
+   "par_source": {
+    "catalogue": 18
+   },
+   "par_etiquette": {
+    "malveillant": 11,
+    "benin": 7
+   }
+  },
+  "dai_permit": {
+   "total": 8,
+   "par_source": {
+    "catalogue": 8
+   },
+   "par_etiquette": {
+    "malveillant": 8
+   }
+  },
+  "delegation_7702": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "delegation_7702_chain0": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "depot_exchange": {
+   "total": 6,
+   "par_source": {
+    "catalogue": 6
+   },
+   "par_etiquette": {
+    "benin": 6
+   }
+  },
+  "desactivation_sur_ordre": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "domaine_sosie": {
+   "total": 9,
+   "par_source": {
+    "catalogue": 9
+   },
+   "par_etiquette": {
+    "malveillant": 9
+   }
+  },
+  "empoisonnement_adresse": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "empoisonnement_safe_imbrique": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "ens_sosie": {
+   "total": 4,
+   "par_source": {
+    "catalogue": 4
+   },
+   "par_etiquette": {
+    "malveillant": 4
+   }
+  },
+  "envoi_contact": {
+   "total": 12,
+   "par_source": {
+    "catalogue": 12
+   },
+   "par_etiquette": {
+    "benin": 12
+   }
+  },
+  "erc4337_userop": {
+   "total": 16,
+   "par_source": {
+    "catalogue": 16
+   },
+   "par_etiquette": {
+    "malveillant": 11,
+    "ambigu": 2,
+    "benin": 3
+   }
+  },
+  "eth_sign_aveugle": {
+   "total": 6,
+   "par_source": {
+    "catalogue": 6
+   },
+   "par_etiquette": {
+    "malveillant": 6
+   }
+  },
+  "evasion_interception": {
+   "total": 1,
+   "par_source": {
+    "public": 1
+   },
+   "par_etiquette": {
+    "malveillant": 1
+   }
+  },
+  "extension_clone_sentinelle": {
+   "total": 1,
+   "par_source": {
+    "public": 1
+   },
+   "par_etiquette": {
+    "malveillant": 1
+   }
+  },
+  "faux_agent_trading_permit": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "faux_airdrop": {
+   "total": 5,
+   "par_source": {
+    "catalogue": 5
+   },
+   "par_etiquette": {
+    "malveillant": 5
+   }
+  },
+  "faux_bot_arbitrage": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "faux_concours": {
+   "total": 7,
+   "par_source": {
+    "catalogue": 7
+   },
+   "par_etiquette": {
+    "malveillant": 4,
+    "fraude_conforme": 3
+   }
+  },
+  "faux_jeton_appat": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "faux_popup_cadeau": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "faux_proche": {
+   "total": 8,
+   "par_source": {
+    "catalogue": 8
+   },
+   "par_etiquette": {
+    "malveillant": 5,
+    "fraude_conforme": 3
+   }
+  },
+  "faux_recruteur": {
+   "total": 5,
+   "par_source": {
+    "catalogue": 5
+   },
+   "par_etiquette": {
+    "fraude_conforme": 3,
+    "malveillant": 2
+   }
+  },
+  "faux_remboursement": {
+   "total": 4,
+   "par_source": {
+    "catalogue": 4
+   },
+   "par_etiquette": {
+    "malveillant": 4
+   }
+  },
+  "faux_revoke": {
+   "total": 8,
+   "par_source": {
+    "public": 8
+   },
+   "par_etiquette": {
+    "benin": 4,
+    "malveillant": 4
+   }
+  },
+  "faux_support": {
+   "total": 9,
+   "par_source": {
+    "catalogue": 9
+   },
+   "par_etiquette": {
+    "malveillant": 6,
+    "fraude_conforme": 3
+   }
+  },
+  "faux_support_voix_clonee": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "faux_token": {
+   "total": 4,
+   "par_source": {
+    "catalogue": 4
+   },
+   "par_etiquette": {
+    "malveillant": 4
+   }
+  },
+  "fraude_conforme": {
+   "total": 795,
+   "par_source": {
+    "v2": 795
+   },
+   "par_etiquette": {
+    "fraude_conforme": 795
+   }
+  },
+  "honeypot": {
+   "total": 6,
+   "par_source": {
+    "catalogue": 6
+   },
+   "par_etiquette": {
+    "malveillant": 6
+   }
+  },
+  "increase_allowance": {
+   "total": 4,
+   "par_source": {
+    "catalogue": 4
+   },
+   "par_etiquette": {
+    "malveillant": 4
+   }
+  },
+  "injection_cachee_page": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "injection_memoire_agent": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "injection_pastedMessage": {
+   "total": 1,
+   "par_source": {
+    "public": 1
+   },
+   "par_etiquette": {
+    "malveillant": 1
+   }
+  },
+  "kit_drainer": {
+   "total": 5,
+   "par_source": {
+    "catalogue": 5
+   },
+   "par_etiquette": {
+    "malveillant": 5
+   }
+  },
+  "mint_nft": {
+   "total": 8,
+   "par_source": {
+    "catalogue": 8
+   },
+   "par_etiquette": {
+    "benin": 8
+   }
+  },
+  "mise_a_jour_piegee": {
+   "total": 1,
+   "par_source": {
+    "public": 1
+   },
+   "par_etiquette": {
+    "malveillant": 1
+   }
+  },
+  "module_compte": {
+   "total": 8,
+   "par_source": {
+    "public": 8
+   },
+   "par_etiquette": {
+    "benin": 4,
+    "malveillant": 4
+   }
+  },
+  "multicall_cache": {
+   "total": 10,
+   "par_source": {
+    "catalogue": 10
+   },
+   "par_etiquette": {
+    "malveillant": 10
+   }
+  },
+  "nft_listing_zero": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "nouveau_contrat_legit": {
+   "total": 6,
+   "par_source": {
+    "catalogue": 6
+   },
+   "par_etiquette": {
+    "benin": 6
+   }
+  },
+  "onchain": {
+   "total": 961,
+   "par_source": {
+    "v2": 961
+   },
+   "par_etiquette": {
+    "malveillant": 961
+   }
+  },
+  "origine_legitime_charge_malveillante": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "paraphrase_llm_evasion_mots_cles": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "permission_7715": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "permit2_allowance": {
+   "total": 16,
+   "par_source": {
+    "catalogue": 12,
+    "public": 4
+   },
+   "par_etiquette": {
+    "malveillant": 14,
+    "benin": 2
+   }
+  },
+  "permit2_signature_transfer": {
+   "total": 11,
+   "par_source": {
+    "catalogue": 7,
+    "public": 4
+   },
+   "par_etiquette": {
+    "malveillant": 9,
+    "benin": 2
+   }
+  },
+  "permit_2612": {
+   "total": 19,
+   "par_source": {
+    "catalogue": 15,
+    "public": 4
+   },
+   "par_etiquette": {
+    "malveillant": 14,
+    "ambigu": 3,
+    "benin": 2
+   }
+  },
+  "personal_sign_opaque": {
+   "total": 4,
+   "par_source": {
+    "catalogue": 4
+   },
+   "par_etiquette": {
+    "benin": 4
+   }
+  },
+  "pig_butchering": {
+   "total": 9,
+   "par_source": {
+    "catalogue": 9
+   },
+   "par_etiquette": {
+    "fraude_conforme": 9
+   }
+  },
+  "pig_butchering_fraude_conforme": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "fraude_conforme": 1
+   }
+  },
+  "poison_sites_tokens": {
+   "total": 1056,
+   "par_source": {
+    "v2": 1056
+   },
+   "par_etiquette": {
+    "malveillant": 1056
+   }
+  },
+  "pont_destinataire": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "presse_papiers": {
+   "total": 4,
+   "par_source": {
+    "catalogue": 4
+   },
+   "par_etiquette": {
+    "malveillant": 4
+   }
+  },
+  "safe_execution": {
+   "total": 5,
+   "par_source": {
+    "catalogue": 5
+   },
+   "par_etiquette": {
+    "benin": 5
+   }
+  },
+  "safe_gouvernance": {
+   "total": 14,
+   "par_source": {
+    "catalogue": 14
+   },
+   "par_etiquette": {
+    "malveillant": 12,
+    "benin": 2
+   }
+  },
+  "seaport": {
+   "total": 14,
+   "par_source": {
+    "catalogue": 14
+   },
+   "par_etiquette": {
+    "malveillant": 14
+   }
+  },
+  "set_approval_for_all": {
+   "total": 9,
+   "par_source": {
+    "catalogue": 9
+   },
+   "par_etiquette": {
+    "malveillant": 9
+   }
+  },
+  "sig": {
+   "total": 913,
+   "par_source": {
+    "v2": 913
+   },
+   "par_etiquette": {
+    "malveillant": 913
+   }
+  },
+  "signature_differee": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "signature_opaque_eth_sign": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "simulation_evasion": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "siwe": {
+   "total": 14,
+   "par_source": {
+    "catalogue": 14
+   },
+   "par_etiquette": {
+    "malveillant": 6,
+    "benin": 8
+   }
+  },
+  "siwe_detourne": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "slippage": {
+   "total": 12,
+   "par_source": {
+    "catalogue": 12
+   },
+   "par_etiquette": {
+    "ambigu": 8,
+    "benin": 4
+   }
+  },
+  "solana_tron_autorite": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  },
+  "swap_connu": {
+   "total": 2,
+   "par_source": {
+    "catalogue": 2
+   },
+   "par_etiquette": {
+    "benin": 2
+   }
+  },
+  "swap_destinataire": {
+   "total": 12,
+   "par_source": {
+    "catalogue": 12
+   },
+   "par_etiquette": {
+    "malveillant": 12
+   }
+  },
+  "toctou_proxy": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "malveillant": 1
+   }
+  },
+  "urgence_bancaire": {
+   "total": 9,
+   "par_source": {
+    "catalogue": 9
+   },
+   "par_etiquette": {
+    "malveillant": 6,
+    "fraude_conforme": 3
+   }
+  },
+  "verifying_contract": {
+   "total": 3,
+   "par_source": {
+    "catalogue": 3
+   },
+   "par_etiquette": {
+    "benin": 3
+   }
+  },
+  "victime_coachee_fraude_conforme": {
+   "total": 2,
+   "par_source": {
+    "public": 2
+   },
+   "par_etiquette": {
+    "benin": 1,
+    "fraude_conforme": 1
+   }
+  },
+  "wallet_sendCalls_lot": {
+   "total": 4,
+   "par_source": {
+    "public": 4
+   },
+   "par_etiquette": {
+    "benin": 2,
+    "malveillant": 2
+   }
+  }
+ },
+ "n_familles": 90,
+ "n_sous_familles": 408,
+ "par_chaine": {
+  "1": {
+   "nom": "Ethereum",
+   "n": 1670,
+   "par_source": {
+    "catalogue": 385,
+    "public": 140,
+    "v2": 1145
+   }
+  },
+  "10": {
+   "nom": "Optimism",
+   "n": 6,
+   "par_source": {
+    "v2": 6
+   }
+  },
+  "137": {
+   "nom": "Polygon",
+   "n": 8,
+   "par_source": {
+    "v2": 8
+   }
+  },
+  "8453": {
+   "nom": "Base",
+   "n": 3,
+   "par_source": {
+    "v2": 3
+   }
+  },
+  "42161": {
+   "nom": "Arbitrum",
+   "n": 8,
+   "par_source": {
+    "v2": 8
+   }
+  },
+  "43113": {
+   "nom": "Avalanche Fuji (test)",
+   "n": 970,
+   "par_source": {
+    "v2": 970
+   }
+  },
+  "43114": {
+   "nom": "Avalanche C-Chain",
+   "n": 2960,
+   "par_source": {
+    "v2": 2960
+   }
+  },
+  "777001": {
+   "nom": "Réseau neuf fictif",
+   "n": 4,
+   "par_source": {
+    "public": 4
+   }
+  },
+  "aucune": {
+   "nom": "aucune",
+   "n": 827,
+   "par_source": {
+    "v2": 827
+   }
+  }
+ },
+ "avalanche": {
+  "total": 3930,
+  "c_chain_43114": 2960,
+  "fuji_43113": 970,
+  "part": 0.609,
+  "par_source": {
+   "v2": 3930
+  }
+ },
+ "par_niveau_attendu": {
+  "critical": 3596,
+  "ok": 1944,
+  "warn": 916
+ },
+ "par_etiquette": {
+  "ambigu": 245,
+  "benin": 2136,
+  "fraude_conforme": 821,
+  "malveillant": 3254
+ },
+ "etiquette_x_niveau_attendu": {
+  "ambigu|warn": 245,
+  "benin|ok": 1698,
+  "benin|warn": 438,
+  "fraude_conforme|critical": 349,
+  "fraude_conforme|ok": 246,
+  "fraude_conforme|warn": 226,
+  "malveillant|critical": 3247,
+  "malveillant|warn": 7
+ },
+ "par_methode": {
+  "(aucune)": 3,
+  "eth_sendTransaction": 4466,
+  "eth_sign": 58,
+  "eth_signTypedData_v4": 1320,
+  "personal_sign": 268,
+  "solana_signTransaction": 4,
+  "tron_signTransaction": 2,
+  "wallet_addEthereumChain": 48,
+  "wallet_requestExecutionPermissions": 4,
+  "wallet_sendCalls": 230,
+  "wallet_switchEthereumChain": 52,
+  "window.ethereum.request(override)": 1
+ },
+ "difficiles": 2079,
+ "benins_difficiles": 1621,
+ "avec_approximation": 3876,
+ "approximation_de_memoire": 1988,
+ "avec_contexte": 6456,
+ "avec_conversation": {
+  "S1": 152,
+  "S2": 4,
+  "S3": 5,
+  "S4": 9,
+  "S5": 81,
+  "S6": 8,
+  "S7": 43,
+  "S8": 51
+ },
+ "par_langue": {
+  "en": 2204,
+  "fr": 4252
+ },
+ "titres_sans_regle": [],
+ "moteur": {
+  "version_sha256": "3a209ae4d9f7f8006edf8eaad0a25869ddbf6422bd510b4616d5cb3d01d9aa46",
+  "fichiers": {
+   "engine/src/abi.mjs": "cb215b90b180391f160fb256f50ae4021100e0230274e0ff39672db2d3739647",
+   "engine/src/abi_encode.mjs": "ee593154d04e1b642b0b4c7f5a652f337fba9bce4434a0bd658d1edbb426dd55",
+   "engine/src/audit_selectors.mjs": "fe836c36e5b92fd2f5ffdf048ac952fdeabb9d11ef53ba14b4881b81158a140c",
+   "engine/src/calldata.mjs": "994b969530cd9fae0afa676a4320b0f9bf939a12bbafe8695742346ed4da266f",
+   "engine/src/eip712.mjs": "33748da09cc26f6885f36f5d2167087e52c3fd4a332c5e5ea959fed4cb3ca3d3",
+   "engine/src/engine.mjs": "3c2de1406af6b2bef12dcc2017945cd8267127250bb94bd7d2534e3ef140a295",
+   "engine/src/fixes.mjs": "968790ecc1df25d6c4a2ef44db101f96274ead52dc4b73db9666235d4f0600f0",
+   "engine/src/keccak.mjs": "5c3b9570cfe39ca8ff76f0a807e39b96c42d5ccc2b8b66e22accc6aa0cc6cf7c",
+   "engine/src/protocols_extra.mjs": "a1d1efd5532eb9d31ee03b07bcb9a512327b5a2383d4dc5d25ee317c0595f2c2",
+   "engine/src/registry.mjs": "e93b80f646cda08ac40678cb6bd75d5eb96e690c8312c44251eff83f4bb07ca2",
+   "engine/src/rlp.mjs": "1ad75bb91ec195935486805da3900ec4c26a7b459375ef3738c63218dd9ed0d9",
+   "engine/src/rpc.mjs": "fa1d4b269a47456fdebf1ddeba16bdda4ba0a17191191b07bd604984cbf98f88",
+   "engine/src/rules.mjs": "75914eca31de948b391a58ee4a3174d35acb4fe0f5fe5d04362253b745a896b3",
+   "engine/src/rules_extra.mjs": "bb33a6f73ce0d7b28364cf798849676102298289aa773dcb43c6c8cc13fdc51e",
+   "engine/src/typed.mjs": "2fe3bab036d140b3aae56374321fcde7c99ab7664a00714e68656cfaa0b4d172",
+   "engine/src/typehashes.mjs": "841b477f84c8ce236d87c47301628c0dda88728a03b2e97b85b247a5899731c0",
+   "engine/src/util.mjs": "006143001b9834d389369a43a51c95c7e411ba563014fed83a7c2b579a84610c",
+   "engine/vendor/compare.ts": "b8bf8c71bb0bf9f1540fa77c3bf239f2207aa604b62c7fce33fc72592b7a537d",
+   "run/policy.mjs": "10c4a08eeac60615dfedcff103e47af840c8bf3187375b0507e1fba8498eab38",
+   "server/server.mjs": "6a2ba903b21d941066374308394ab1fd898c4ab187a4db3ced8802020fb29720",
+   "U_textes_utilisateur.json": "9d927e1e036c7a83aa9e457d4c6ef050f9e802c7278a0e47a62e2ce93a479ad4"
+  },
+  "mode": "sans contexte du catalogue : server/server.mjs evaluate(body, contexte local vide), sans intention ni texte de page ; body = { origin, method, params, from, chainId }",
+  "date_figee_ms": 1791720000000,
+  "acceptation": {
+   "total": 6456,
+   "ok": 6442,
+   "non_verifiable": 14,
+   "exception_interne": 0,
+   "exception_levee": 0,
+   "remarque": "exception_levee = le moteur a lancé une exception ; exception_interne = exception attrapée par le moteur (verdict F25 « analyse impossible ») ; non_verifiable = méthode ou forme hors périmètre, refusée proprement"
+  },
+  "niveau_moteur": {
+   "critical": 2235,
+   "ok": 2460,
+   "warn": 1761
+  },
+  "concordance_avec_niveau_attendu": {
+   "egal": 3380,
+   "moins_severe": 2101,
+   "plus_severe": 975
+  },
+  "concordance_par_source": {
+   "catalogue": {
+    "egal": 223,
+    "plus_severe": 39,
+    "moins_severe": 123
+   },
+   "public": {
+    "egal": 71,
+    "plus_severe": 35,
+    "moins_severe": 38
+   },
+   "v2": {
+    "egal": 3086,
+    "plus_severe": 901,
+    "moins_severe": 1940
+   }
+  }
+ },
+ "inutilisables": [
+  {
+   "source": "public",
+   "id": "P-A08-B2",
+   "famille": "signature_differee",
+   "methode": "solana_signTransaction",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "nonce durable Solana (AdvanceNonceAccount) : hors perimetre EVM ; aucune requete EVM a decoder"
+  },
+  {
+   "source": "public",
+   "id": "P-A08-M2",
+   "famille": "signature_differee",
+   "methode": "solana_signTransaction",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "nonce durable Solana (AdvanceNonceAccount) : hors perimetre EVM ; aucune requete EVM a decoder"
+  },
+  {
+   "source": "public",
+   "id": "P-A10-M1",
+   "famille": "evasion_interception",
+   "methode": "window.ethereum.request(override)",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "infrastructure : window.ethereum.request surchargee cote page, aucune requete wallet a decoder (domaine extension/Adem) ; consequence = ne pas dependre d'un seul point d'interception"
+  },
+  {
+   "source": "public",
+   "id": "P-A17-B1",
+   "famille": "solana_tron_autorite",
+   "methode": "solana_signTransaction",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "source": "public",
+   "id": "P-A17-B2",
+   "famille": "solana_tron_autorite",
+   "methode": "tron_signTransaction",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "source": "public",
+   "id": "P-A17-M1",
+   "famille": "solana_tron_autorite",
+   "methode": "solana_signTransaction",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "source": "public",
+   "id": "P-A17-M2",
+   "famille": "solana_tron_autorite",
+   "methode": "tron_signTransaction",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "SetAuthority Solana / AccountPermissionUpdate Tron : hors perimetre EVM ; aucun decodeur EVM applicable"
+  },
+  {
+   "source": "public",
+   "id": "P-A22-B1",
+   "famille": "permission_7715",
+   "methode": "wallet_requestExecutionPermissions",
+   "rejouable": true,
+   "statut_moteur": "non_verifiable",
+   "raison": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "source": "public",
+   "id": "P-A22-B2",
+   "famille": "permission_7715",
+   "methode": "wallet_requestExecutionPermissions",
+   "rejouable": true,
+   "statut_moteur": "non_verifiable",
+   "raison": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "source": "public",
+   "id": "P-A22-M1",
+   "famille": "permission_7715",
+   "methode": "wallet_requestExecutionPermissions",
+   "rejouable": true,
+   "statut_moteur": "non_verifiable",
+   "raison": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "source": "public",
+   "id": "P-A22-M2",
+   "famille": "permission_7715",
+   "methode": "wallet_requestExecutionPermissions",
+   "rejouable": true,
+   "statut_moteur": "non_verifiable",
+   "raison": "methode wallet_requestExecutionPermissions non geree par le moteur d'effets"
+  },
+  {
+   "source": "public",
+   "id": "P-T2B1-M1",
+   "famille": "bitb_seed_phrase",
+   "methode": "(aucune)",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "aucune requete wallet : la page 'claim-drop.test' dessine une fausse fenetre et demande la seed phrase (12 mots synthetiques) ; Sentinelle (onTransaction/onSignature) ne voit rien ; hors perimetre declare"
+  },
+  {
+   "source": "public",
+   "id": "P-T2C3-M1",
+   "famille": "extension_clone_sentinelle",
+   "methode": "(aucune)",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "extension clone ('sentinelle-guard.test', host_permissions <all_urls>) : aucune requete wallet a analyser ; le clone REMPLACE la barriere (hors barriere)"
+  },
+  {
+   "source": "public",
+   "id": "P-T2C4-M1",
+   "famille": "mise_a_jour_piegee",
+   "methode": "(aucune)",
+   "rejouable": false,
+   "statut_moteur": "non_verifiable",
+   "raison": "chaine d'approvisionnement (mise a jour piegee v2.68 exfiltrant vers collect.test) : aucune requete wallet"
+  }
+ ],
+ "galerie": {
+  "n": 120,
+  "avalanche": 48,
+  "part_avalanche": 0.4,
+  "fuji": 12,
+  "par_niveau_attendu": {
+   "critical": 63,
+   "ok": 34,
+   "warn": 23
+  },
+  "par_etiquette": {
+   "ambigu": 10,
+   "benin": 39,
+   "fraude_conforme": 12,
+   "malveillant": 59
+  },
+  "par_source": {
+   "catalogue": 42,
+   "public": 30,
+   "v2": 48
+  },
+  "par_chaine": {
+   "1": 71,
+   "43113": 12,
+   "43114": 36,
+   "777001": 1
+  },
+  "benins_difficiles": 31,
+  "familles_representees": 79,
+  "familles_total": 90,
+  "familles_non_representees_faute_de_place": [
+   "batch_massif_troncature",
+   "benin_dur_phrase_ressemblant_a_injection",
+   "bitb_relais_permit",
+   "clickjacking_overlay",
+   "injection_pastedMessage"
+  ],
+  "familles_hors_perimetre_moteur": [
+   "bitb_seed_phrase",
+   "evasion_interception",
+   "extension_clone_sentinelle",
+   "mise_a_jour_piegee",
+   "permission_7715",
+   "solana_tron_autorite"
+  ],
+  "avec_conversation": 8,
+  "avec_approximation": 70,
+  "moteur_concordance": {
+   "egal": 66,
+   "moins_severe": 35,
+   "plus_severe": 19
+  },
+  "regle": "graine 20261011 ; 48 Avalanche (36 C-Chain + 12 Fuji) pris dans V2 (seule source ayant un chainId Avalanche) ; 72 autres = 1 scenario par famille couverte, glouton sur les niveaux / étiquettes / difficiles"
+ },
+ "sha256": {
+  "scenarios.json": "ae828d60bc379e2a5b315e2b0b67264a3e4593d487badffd329dc561ffbd2f26",
+  "gallery_120.json": "d7469827266bff6155fdc3e201468826319b4156ff92072e4d7178f22aa5b35e",
+  "conversations.json": "7fbbbdaa0a5b749fa84d0b827eda5c37ed841316e8fbe79120e06c73eff03d3b"
+ }
+}

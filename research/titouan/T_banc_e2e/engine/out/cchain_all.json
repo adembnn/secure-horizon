@@ -47,8 +47,8 @@
   "control_change": 3,
   "short_calldata": 1
  },
- "ms_total": 522,
- "us_per_tx": 83,
+ "ms_total": 587,
+ "us_per_tx": 93,
  "top_unknown_selectors": [
   [
    "0xa00597a0",

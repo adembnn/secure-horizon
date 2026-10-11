@@ -271,7 +271,7 @@ function signatureShapes(eff, request, ctx, flags) {
     if (typeof hex !== 'string' || !/^0x([0-9a-fA-F]{2})*$/.test(hex)) return;
     const b = Buffer.from(hex.slice(2), 'hex'); if (!b.length) return;
     const txt = b.toString('utf8');
-    const readable = !txt.includes('�') && !/[ --]/.test(txt);
+    const readable = !txt.includes('\uFFFD') && !/[\x00-\x08\x0e-\x1f]/.test(txt);
     if (!readable && isOn('F25')) {
       for (let o = 0; o <= 8; o++) {
         if (b.length < o + 4 + 32 + 20) break;
@@ -279,11 +279,32 @@ function signatureShapes(eff, request, ctx, flags) {
         if (b.subarray(o + 16, o + 36).filter((x) => x !== 0).length >= 12) { flags.push({ code: 'signed_calldata', severity: 'critical', detail: 'le « message » à signer a la forme d un appel de contrat (sélecteur + adresse alignée), pas d un texte' }); return; }
       }
     } else if (readable && isOn('F26')) {
-      const GRANT = /(authori[sz]w*|grantw*|approvw*|permissionw*|alloww*|migratw*|transferw*|autorisw*|approuvw*|accordw*|transf[eè]rw*)/i;
-      const ASSET = /(tokens?|nfts?|assets?|balances?|funds?|spending|jetons?|soldes?|fonds|avoirs?|d[ée]pense)/i;
+      const GRANT = /\b(authori[sz]\w*|grant\w*|approv\w*|permission\w*|allow\w*|migrat\w*|transfer\w*|autoris\w*|approuv\w*|accord\w*|transf[eè]r\w*)\b/i;
+      const ASSET = /\b(tokens?|nfts?|assets?|balances?|funds?|spending|jetons?|soldes?|fonds|avoirs?|d[ée]pense)\b/i;
       if (!/sign in with your ethereum account/i.test(txt) && GRANT.test(txt) && ASSET.test(txt)) flags.push({ code: 'signed_text_grants_assets', severity: 'critical', detail: 'le texte à signer dit accorder ou déplacer des actifs (repli par mots-clés)' });
     }
   }
+}
+
+// ---- F30 : message typé de pure signalisation hors chaîne (vote de gouvernance, abonnement, profil). Lu par sa FORME : domaine sans verifyingContract NI chainId (aucun contrat ne peut le
+// vérifier on-chain, aucun réseau n'est visé), le seul champ adresse est le signataire lui-même, et aucun champ ne désigne un dépensier, un destinataire ou un montant.
+// Dans ce cas, le moteur ne sait pas le nommer mais le message ne peut déplacer aucun actif : l'opacité est levée (info). Tout champ de type valeur/destinataire garde l'alerte.
+const MONEY_KEYS = /^(spender|operator|usr|to|recipient|receiver|beneficiary|amount|value|wad|allowed|sellAmount|buyAmount|token|tokens|permitted|details|offer|consideration|nonce|deadline|expiry|destination|target|data|calldata|call|calls|operations)$/i;
+function offchainSignaling(eff, request, ctx) {
+  if (request.method !== 'eth_signTypedData_v4' || !eff.opaque) return;
+  if (!(eff.signature && eff.signature.kind === 'unknown')) return;
+  let td; try { td = typeof request.params[1] === 'string' ? JSON.parse(request.params[1]) : request.params[1]; } catch { return; }
+  const d = td && td.domain; const m = td && td.message; if (!d || !m || typeof m !== 'object') return;
+  if (d.verifyingContract !== undefined || d.chainId !== undefined) return;
+  const self = lc(ctx.from); let ok = true;
+  const walk = (o, depth) => { if (!ok || depth > 4) { if (depth > 4) ok = false; return; } for (const [k, v] of Object.entries(o)) { if (MONEY_KEYS.test(k)) { ok = false; return; } if (typeof v === 'string' && isAddrS(v) && lc(v) !== self) { ok = false; return; } if (v && typeof v === 'object') walk(v, depth + 1); } };
+  walk(m, 0);
+  if (!ok) return;
+  const GONE = new Set(['unknown_typed_data', 'unknown_typed_data_addresses', 'opaque', 'domain_without_chainid']);
+  eff.risk_flags = eff.risk_flags.filter((f) => !GONE.has(f.code));
+  if (!eff.risk_flags.some((f) => f.code !== 'opaque' && OPACITY_CODES.has(f.code))) { eff.opaque = false; eff.opaqueReasons = []; }
+  eff.risk_flags.push({ code: 'offchain_signaling', severity: 'info', detail: 'message de signalisation hors chaîne (domaine sans contrat ni réseau, aucun champ de valeur ou de destinataire)' });
+  recompute(eff);
 }
 
 export function applyExtraRules(eff, request, ctx) {
@@ -297,6 +318,7 @@ export function applyExtraRules(eff, request, ctx) {
   if (isOn('F14')) libraryCalls(eff, request, ctx, flags);
   if (isOn('F18')) wrapDeposit(eff, request, ctx, flags);
   signatureShapes(eff, request, ctx, flags);
+  if (isOn('F30')) offchainSignaling(eff, request, ctx);
   if (isOn('F21') || isOn('F22') || isOn('F23')) lookalikeRules(eff, ctx, flags);
   addFlags(eff, flags);
   if (isOn('F22')) recompute(eff);

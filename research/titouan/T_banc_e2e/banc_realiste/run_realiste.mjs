@@ -3,7 +3,7 @@
 // mais en retirant du contexte ce que le PRODUIT (server/server.mjs, extension_standalone) ne peut pas fournir.
 // Lecture seule sur engine/, run/policy.mjs, server/, redteam/normalize_v2.mjs. Ne lit JAMAIS TEST.jsonl ni V2_TEST.jsonl.
 // Usage : node run_realiste.mjs        (POLICY_FIXES hérité de l'environnement, défaut = liste KEPT d'engine/src/fixes.mjs)
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL, domainToUnicode } from 'node:url';
@@ -21,13 +21,19 @@ const used = [
   'attacks/DEV.jsonl', 'attacks_public/PUBLIC.jsonl', 'blind_adem/v2/V2_DEV.jsonl', 'extension_standalone/src/sentinelle_core.js', 'run/run_loop.mjs',
 ];
 const hashAll = () => Object.fromEntries(used.map((f) => [f, sha(readFileSync(join(T, f)))]));
+// Un autre agent modifie engine/ et run/policy.mjs : on COPIE ces fichiers (lecture seule à la source) dans banc_realiste/snapshot/ et on mesure la copie,
+// pour qu'une mesure ne mélange jamais deux versions. Le hash de la copie est la « version mesurée » ; la comparaison avec la source à la fin dit si elle a bougé.
+const SNAP = join(HERE, 'snapshot');
+const snapFiles = [...readdirSync(join(ENG, 'src')).filter((f) => f.endsWith('.mjs')).map((f) => `engine/src/${f}`), 'engine/vendor/compare.ts', 'engine/vendor/types.ts', 'run/policy.mjs', 'redteam/normalize_v2.mjs'];
+for (const f of snapFiles) { mkdirSync(dirname(join(SNAP, f)), { recursive: true }); copyFileSync(join(T, f), join(SNAP, f)); }
 const hashesBefore = hashAll();
+const snapHashes = Object.fromEntries(snapFiles.map((f) => [f, sha(readFileSync(join(SNAP, f)))]));
 
-const E = await imp(join(ENG, 'src', 'engine.mjs'));
-const { compare } = await imp(join(ENG, 'vendor', 'compare.ts'));
-const { applyExtraRules, analyzeChainRequest } = await imp(join(ENG, 'src', 'rules_extra.mjs'));
-const { applyPolicy } = await imp(join(T, 'run', 'policy.mjs'));
-const { normalizeCase } = await imp(join(T, 'redteam', 'normalize_v2.mjs'));
+const E = await imp(join(SNAP, 'engine', 'src', 'engine.mjs'));
+const { compare } = await imp(join(SNAP, 'engine', 'vendor', 'compare.ts'));
+const { applyExtraRules, analyzeChainRequest } = await imp(join(SNAP, 'engine', 'src', 'rules_extra.mjs'));
+const { applyPolicy } = await imp(join(SNAP, 'run', 'policy.mjs'));
+const { normalizeCase } = await imp(join(SNAP, 'redteam', 'normalize_v2.mjs'));
 
 const RANK = { ok: 0, warn: 1, critical: 2 };
 const lc = (a) => (typeof a === 'string' ? a.toLowerCase() : a);
@@ -123,7 +129,7 @@ function buildCtxSpec(c, s) {
     history: s.prod ? history : undefined, contacts: s.prod ? contacts : undefined, tokenMeta, ageBlocks,
     codeOf: (a) => { a = lc(a); if (s.code && facts[a] && facts[a].isContract !== undefined) return !!facts[a].isContract; if (codeSet.has(a)) return true; return undefined; },
     expectedOut: s.quote && k.quote?.expected_out_units ? () => BigInt(k.quote.expected_out_units) : undefined,
-    _sharePct: s.bal ? k.share_of_balance_pct : undefined, _k, _facts: {}, _tokenInfo: {}, _book: contacts,
+    _sharePct: s.bal ? k.share_of_balance_pct : undefined, _k, _facts: s.look ? facts : {}, _tokenInfo: {}, _book: contacts,
   };
 }
 
@@ -145,6 +151,7 @@ const LEVELS = {
   S_site: { ...C0, site: true },
   S_sim: { ...C0, sim: true },
   S_quote: { ...C0, quote: true },
+  S_look: { ...C0, look: true },
   // contexte minimal en ligne, cumulatif, sur C
   O1: { ...C0, code: true },
   O2: { ...C0, code: true, age: true },
@@ -153,7 +160,7 @@ const LEVELS = {
   // liste statique livrée + tout le minimal en ligne
   D_O4: { ...C0, static: true, code: true, age: true, tok: true, bal: true },
   // tout sauf ce qu'aucune lecture simple ne donne : reconstitue le banc complet (auto-contrôle)
-  ALL: { ...C0, histIn: true, static: true, code: true, age: true, tok: true, bal: true, site: true, sim: true, quote: true },
+  ALL: { ...C0, histIn: true, static: true, code: true, age: true, tok: true, bal: true, site: true, sim: true, quote: true, look: true },
 };
 const LEVEL_DOC = {
   FULL: 'banc complet : tout le champ context du catalogue (âge, nature, solde, jetons, simulation de vente, protocoles connus du catalogue, carnet, historique entrant et sortant)',
@@ -164,7 +171,7 @@ const LEVEL_DOC = {
   D: 'C + liste STATIQUE livrée avec le produit : protocoles connus + jetons de référence du catalogue (borne haute optimiste : le catalogue connaît exactement les bons protocoles)',
   S_code: 'C + nature contrat/compte externe (eth_getCode) seule', S_age: 'C + âge du contrat seul', S_tok: 'C + symbol/decimals + registre de référence seuls',
   S_bal: 'C + part du solde seule', S_site: 'C + site attendu (claimed_site) et nom ENS voulu seuls (pas une lecture réseau : c\'est l\'intention de l\'utilisateur)',
-  S_sim: 'C + simulation de vente / taxes seules', S_quote: 'C + cotation attendue du swap seule',
+  S_sim: 'C + simulation de vente / taxes seules', S_quote: 'C + cotation attendue du swap seule', S_look: 'C + signalement « sosie d’une adresse connue » fourni par un indexeur / une surveillance du presse-papiers (counterparty_facts.lookalikeOf ; règle F21 du moteur)',
   O1: 'C + eth_getCode', O2: 'O1 + âge du contrat', O3: 'O2 + symbol/decimals (+ registre de référence statique)', O4: 'O3 + soldes (eth_getBalance / balanceOf)',
   D_O4: 'D + toutes les lectures O4', ALL: 'tout le catalogue reconstruit via le chemin « produit » (auto-contrôle : doit retrouver FULL)',
 };
@@ -251,6 +258,7 @@ function evalCase(c, levelName) {
   res.lv.intention_mensongere = pol(c.intent).level;
   const pi = productIntent(c);
   res.lv.intention_produit = pi ? pol(pi).level : floor;
+  res.codes = [...new Set([...eff.risk_flags.filter((f) => f.severity !== 'info').map((f) => f.code), ...vM0.reasons.map((r) => 'adem:' + r.code)])];
   res.opaque = eff.opaque ? 1 : 0;
   res.opacityOnly = floor !== 'ok' && eff.levelEvidence === 'ok' && vM0.level === 'ok' ? 1 : 0;
   // coût en lectures RPC si ce cas devait être complété en ligne (mesuré sur le niveau C : ce que le produit ignore encore)
@@ -277,6 +285,7 @@ for (const [ds, cases] of Object.entries(DATASETS)) {
       const r = evalCase(c, lvName);
       row.L[lvName] = ARMS.map((a) => CH[r.lv[a]]).join('') + (r.opaque ? 'O' : '-') + (r.opacityOnly ? 'P' : '-');
       if (lvName === 'C') row.cost = r.cost;
+      if (['FULL', 'B', 'C', 'D'].includes(lvName) && r.codes) (row.codes = row.codes || {})[lvName] = r.codes;
     }
     rows.push(row);
   }
@@ -289,8 +298,8 @@ const selfDiff = rows.filter((r) => r.L.ALL.slice(0, 4) !== r.L.FULL.slice(0, 4)
 
 const hashesAfter = hashAll();
 const drift = used.filter((f) => hashesBefore[f] !== hashesAfter[f]);
-const versions = { ts: new Date().toISOString(), POLICY_FIXES: process.env.POLICY_FIXES || '(défaut KEPT)', node: process.version, sha256_avant: hashesBefore, fichiers_modifies_pendant_la_mesure: drift };
+const versions = { ts: new Date().toISOString(), POLICY_FIXES: process.env.POLICY_FIXES || '(défaut KEPT)', node: process.version, sha256_copie_mesuree: snapHashes, sha256_source_au_debut: hashesBefore, sha256_source_a_la_fin: hashesAfter, source_modifiee_pendant_la_mesure: drift };
 writeFileSync(join(OUT, 'versions.json'), JSON.stringify(versions, null, 1));
 writeFileSync(join(OUT, 'cases.json'), JSON.stringify({ arms: ARMS, format: '4 lettres (une par bras : o=ok w=warn c=critical u=inconnu) puis O si moteur opaque, P si alerte par opacité seule', levels: LEVEL_DOC, rows }));
 writeFileSync(join(OUT, 'autocontrole_ALL_vs_FULL.json'), JSON.stringify({ n_diff: selfDiff.length, n: rows.length, diffs: selfDiff.slice(0, 200) }, null, 1));
-console.log(`OK ${rows.length} cas x ${Object.keys(LEVELS).length} niveaux en ${Date.now() - t0} ms ; ALL!=FULL sur ${selfDiff.length} cas ; fichiers modifiés pendant la mesure : ${drift.length ? drift.join(', ') : 'aucun'}`);
+console.log(`OK ${rows.length} cas x ${Object.keys(LEVELS).length} niveaux en ${Date.now() - t0} ms ; ALL!=FULL sur ${selfDiff.length} cas ; source modifiée pendant la mesure : ${drift.length ? drift.join(', ') : 'aucun'}`);

@@ -126,7 +126,7 @@ function evalCase(c) {
   const vM0 = compare(c.intent, eff); const vM = pol(c.intent);
   const hi = honestIntent(eff, ctx, c.intent.declaredAt); const vH = pol(hi);
   out.ademCodes = vM0.reasons.map((r) => r.code); out.polNotes = vM.notes;
-  out.levels.intention_honnete = vH.level; out.levels.intention_mensongere = vM.level;
+  out.levels.intention_honnete = vH.level; out.levels.intention_mensongere = vM.level; out.opacityOnly = !!vM.opacity_only;
   if (DUMP) out.dbg = { flags: eff.risk_flags.map((f) => `${f.code}/${f.severity}: ${f.detail}`), adem: vM0.reasons, adem_honnete: compare(hi, eff).reasons, counterparties: eff.counterparties, approvals: eff.approvals, outgoing: eff.outgoing, incoming: eff.incoming, opaque: eff.opaque, opaqueReasons: eff.opaqueReasons, controlChange: eff.controlChange, service: eff.service };
   return out;
 }
@@ -202,7 +202,7 @@ md += `## Ratés (malveillants en ok, catalogue) : ${miss.length}\n\n` + cnt(mis
 const unk = rows.filter((r) => r.levels[MAIN] === 'unknown');
 md += `\n## Inconnus : ${unk.length}\n\n` + cnt(unk, (r) => r.method + ' ' + (r.unsupported || r.error || '')).map(([k, n]) => `- ${k} : ${n}`).join('\n') + '\n';
 writeFileSync(join(OUT, `MESURE_${label}.md`), md);
-writeFileSync(join(OUT, `${label}.json`), JSON.stringify({ label, fixes: process.env.POLICY_FIXES || 'KEPT', groups, cases: rows.map(({ id, family, subfamily, label: lb, expected, avax, method, levels, floorCodes, ademCodes, polNotes, unsupported, error }) => ({ id, family, subfamily, label: lb, expected, avax, method, levels, floorCodes, ademCodes, polNotes, unsupported, error })) }));
+writeFileSync(join(OUT, `${label}.json`), JSON.stringify({ label, fixes: process.env.POLICY_FIXES || 'KEPT', groups, cases: rows.map(({ id, family, subfamily, label: lb, expected, avax, method, levels, floorCodes, ademCodes, polNotes, unsupported, error, opacityOnly }) => ({ id, family, subfamily, label: lb, expected, avax, method, levels, floorCodes, ademCodes, polNotes, unsupported, error, opacityOnly })) }));
 
 console.log(`[${label}] ${rows.length} cas, ${Date.now() - t0} ms`);
 for (const [g, v] of Object.entries(groups)) {
