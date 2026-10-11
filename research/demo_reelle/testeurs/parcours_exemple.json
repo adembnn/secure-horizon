@@ -1,0 +1,204 @@
+{
+  "parcours": [
+    {
+      "nom": "p01_honnete_T+R_chiffres",
+      "description": "Echange honnete, jetons declares (T+), phrase en chiffres, on laisse la fenetre se fermer seule.",
+      "site": "echange", "mode": "honnete", "etat": "T+R",
+      "intention": { "type": "echange", "usdc": 50 },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "echanger 50 USDC contre de l'AVAX" },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 5 }
+      ]
+    },
+    {
+      "nom": "p02_piege_echap",
+      "description": "Piege (droit illimite vers un contrat inconnu), installation neuve (T-), la personne ecrit puis appuie sur Echap.",
+      "site": "echange", "mode": "piege", "etat": "T-",
+      "intention": { "type": "echange", "usdc": 50 },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "echanger 50 USDC contre de l'AVAX", "vitesse_ms": 40 },
+        { "g": "entree" },
+        { "g": "echap" },
+        { "g": "attendre", "secondes": 1 }
+      ]
+    },
+    {
+      "nom": "p03_piege_continuer_clavier_zoom150",
+      "description": "Prudente au clavier : zoom 150 %, Tab/Entree seulement, elle valide Continuer malgre l'alerte.",
+      "site": "echange", "mode": "piege", "etat": "T+", "zoom": 150, "clavier_seul": true,
+      "reglages": { "askIntent": "always", "dangerWaitMs": 5000, "manipulationHoldMs": 30000, "limitUnlimited": true },
+      "intention": { "type": "echange", "usdc": 50 },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "Bonjour, je souhaite echanger 50 USDC contre de l'AVAX s'il vous plait" },
+        { "g": "entree" },
+        { "g": "clic", "texte": "Continuer", "valider": "Entree", "attendre_actif_s": 8 },
+        { "g": "attendre", "secondes": 3 }
+      ]
+    },
+    {
+      "nom": "p04_permit_sombre_attente",
+      "description": "Signature Permit illimitee, theme sombre, attente de securite ramenee a 5 s par les reglages, puis Continuer.",
+      "site": "echange", "mode": "piege", "via": "permit", "etat": "T+", "theme": "sombre",
+      "reglages": { "askIntent": "always", "dangerWaitMs": 5000, "manipulationHoldMs": 30000, "limitUnlimited": true },
+      "intention": { "type": "echange", "usdc": 50 },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "echanger 50 USDC" },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 6 },
+        { "g": "clic", "texte": "Continuer", "attendre_actif_s": 8 },
+        { "g": "attendre", "secondes": 2 }
+      ]
+    },
+    {
+      "nom": "p05_debutant_double_clic_croix",
+      "description": "Debutant presse : double-clic sur le site, Entree a vide, phrase approximative, ferme par la croix.",
+      "site": "echange", "mode": "piege", "etat": "T+",
+      "intention": { "type": "rien" },
+      "gestes": [
+        { "g": "operation", "double": true },
+        { "g": "entree" },
+        { "g": "ecrire", "texte": "swap" },
+        { "g": "entree" },
+        { "g": "fermer_fenetre" },
+        { "g": "attendre", "secondes": 1 }
+      ]
+    },
+    {
+      "nom": "p06_recharger_second_onglet",
+      "description": "Habitue : recharge la fenetre au milieu, ouvre un second onglet, relance l'operation depuis l'onglet 2.",
+      "site": "echange", "mode": "habituel", "etat": "T+",
+      "intention": { "type": "echange", "usdc": 50 },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "recharger", "cible": "fenetre" },
+        { "g": "ecrire", "texte": "50 usdc -> avax" },
+        { "g": "second_onglet" },
+        { "g": "relancer" },
+        { "g": "attendre", "secondes": 2 },
+        { "g": "onglet", "n": 1 },
+        { "g": "echap" },
+        { "g": "capture" }
+      ]
+    },
+    {
+      "nom": "p07_zoom200_sombre_petite_fenetre",
+      "description": "Zoom 200 %, theme sombre, puis fenetre reduite : la reponse reste-t-elle lisible ?",
+      "site": "echange", "mode": "piege", "etat": "T+", "zoom": 200, "theme": "sombre",
+      "intention": { "type": "echange", "usdc": 50 },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "echanger 50 USDC contre de l'AVAX" },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 1 },
+        { "g": "zoom", "pourcent": 100 },
+        { "g": "theme", "valeur": "clair" },
+        { "g": "taille", "cible": "fenetre", "largeur": 300, "hauteur": 400 },
+        { "g": "echap" }
+      ]
+    },
+    {
+      "nom": "p08_redemarrage_navigateur",
+      "description": "Le navigateur redemarre au milieu (profil garde, service worker relance), puis on recommence l'operation.",
+      "site": "echange", "mode": "piege", "etat": "T+",
+      "intention": { "type": "echange", "usdc": 50 },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "echanger 50 USDC" },
+        { "g": "redemarrer_navigateur" },
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "echanger 50 USDC" },
+        { "g": "entree" },
+        { "g": "echap" }
+      ]
+    },
+    {
+      "nom": "p09_envoi_destinataire_change",
+      "description": "Page d'envois : l'ecran affiche 5 USDC pour @ami, la page demande en fait l'envoi vers le collecteur. La personne continue.",
+      "site": "envois",
+      "reglages": { "askIntent": "always", "dangerWaitMs": 5000, "manipulationHoldMs": 30000, "limitUnlimited": true },
+      "params": { "action": "envoyer", "dest": "@ami", "montant": "5", "jeton": "usdc", "piege": "destinataire" },
+      "intention": { "type": "envoi", "jeton": "usdc", "montant": 5, "destinataire": "@ami" },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "envoyer 5 USDC a @ami" },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 1 },
+        { "g": "clic", "texte": "Continuer", "attendre_actif_s": 8 },
+        { "g": "attendre", "secondes": 2 }
+      ]
+    },
+    {
+      "nom": "p10_envoi_natif_honnete",
+      "description": "Envoi natif de 1 AVAX a @ami, la page envoie bien ce qu'elle affiche.",
+      "site": "envois", "etat": "T+",
+      "params": { "action": "envoyer", "dest": "@ami", "montant": "1", "jeton": "avax" },
+      "intention": { "type": "envoi", "jeton": "avax", "montant": 1, "destinataire": "@ami" },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "envoyer 1 AVAX a @ami" },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 4 }
+      ]
+    },
+    {
+      "nom": "p11_nft_toute_la_collection",
+      "description": "L'ecran dit : autoriser le NFT 0 pour @ami ; la page demande setApprovalForAll de toute la collection.",
+      "site": "envois",
+      "reglages": { "askIntent": "always", "dangerWaitMs": 5000, "manipulationHoldMs": 30000, "limitUnlimited": true },
+      "params": { "action": "nft", "nftid": "0", "dest": "@ami", "piege": "collection" },
+      "intention": { "type": "approbation_nft", "nft_id": 0, "pour": "@ami" },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "autoriser le NFT 0 pour @ami" },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 1 },
+        { "g": "clic", "texte": "Continuer", "attendre_actif_s": 8 },
+        { "g": "attendre", "secondes": 2 }
+      ]
+    },
+    {
+      "nom": "p12_formulaire_rempli_a_la_main",
+      "description": "On remplit le formulaire d'envois en tapant (remplir, choisir), montant a virgule, jeton WAVAX.",
+      "site": "envois", "etat": "T+",
+      "intention": { "type": "envoi", "jeton": "usdc", "montant": 2.5, "destinataire": "@ami2" },
+      "gestes": [
+        { "g": "remplir", "selecteur": "#dest", "valeur": "@ami2" },
+        { "g": "remplir", "selecteur": "#montant", "valeur": "2.5" },
+        { "g": "choisir", "selecteur": "#jeton", "valeur": "usdc" },
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "envoyer 2,5 usdc a @ami2", "vitesse_ms": 30 },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 4 }
+      ]
+    },
+    {
+      "nom": "p13_site_leurre_recompense",
+      "description": "Site leurre : la personne veut juste regarder si elle a une recompense, ne rien signer.",
+      "site": "leurre", "etat": "T+",
+      "intention": { "type": "rien" },
+      "gestes": [
+        { "g": "operation" },
+        { "g": "ecrire", "texte": "recuperer ma recompense" },
+        { "g": "entree" },
+        { "g": "attendre", "secondes": 1 },
+        { "g": "echap" }
+      ]
+    },
+    {
+      "nom": "p14_pages_de_l_extension",
+      "description": "Ouvre directement la page des reglages et le panneau lateral pour les lire (aucune operation).",
+      "site": "echange", "mode": "honnete", "theme": "sombre",
+      "intention": { "type": "rien" },
+      "gestes": [
+        { "g": "page_extension", "chemin": "options.html" },
+        { "g": "page_extension", "chemin": "ui/sidepanel.html" },
+        { "g": "capture" }
+      ]
+    }
+  ]
+}

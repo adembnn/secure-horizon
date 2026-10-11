@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Envois : page de test</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; margin: 0; background: #f6f7f9; color: #15191f; }
+  main { max-width: 520px; margin: 32px auto; padding: 0 16px; }
+  h1 { font-size: 20px; }
+  label { display: block; margin: 14px 0 4px; font-weight: 600; }
+  input, select { width: 100%; box-sizing: border-box; padding: 8px; font: inherit; }
+  button { margin-top: 18px; padding: 10px 18px; font: inherit; cursor: pointer; }
+  #recap, #etat { margin-top: 16px; padding: 10px; background: #fff; border: 1px solid #d5d9e0; min-height: 1.5em; overflow-wrap: anywhere; }
+  @media (prefers-color-scheme: dark) { body { background: #14171c; color: #e8ebf0; } #recap, #etat { background: #1d2128; border-color: #384050; } input, select { background: #1d2128; color: inherit; border: 1px solid #384050; } }
+</style>
+<script src="./chain-utils.js"></script>
+</head>
+<body>
+<main>
+  <h1>Envois et autorisations (page de test, chaîne locale)</h1>
+  <label for="action">Action</label>
+  <select id="action">
+    <option value="envoyer">Envoyer</option>
+    <option value="nft">Autoriser un NFT</option>
+    <option value="collection">Autoriser tous mes NFT</option>
+  </select>
+  <label for="dest">Destinataire</label>
+  <input id="dest" autocomplete="off" spellcheck="false">
+  <label for="montant">Montant</label>
+  <input id="montant" autocomplete="off" value="1">
+  <label for="jeton">Jeton</label>
+  <select id="jeton">
+    <option value="avax">AVAX</option>
+    <option value="usdc">USDC</option>
+    <option value="wavax">WAVAX</option>
+  </select>
+  <label for="nftid">Numéro du NFT</label>
+  <input id="nftid" autocomplete="off" value="0">
+  <p id="recap" aria-live="polite"></p>
+  <button id="envoyer" type="button">Valider</button>
+  <p id="etat" role="status"></p>
+</main>
+<script>
+/* Page de test NEUTRE sur la chaine locale. Parametres d'URL :
+   action=envoyer|nft|collection, dest=0x..., montant=5, jeton=avax|usdc|wavax, nftid=0   (pre-remplissent le formulaire)
+   piege=destinataire|montant|jeton|nft|collection  -> la page ENVOIE autre chose que ce qui est affiche :
+       destinataire : envoie a `autre` (par defaut l'adresse "collector" de la chaine locale)
+       montant      : envoie `facteur` fois le montant affiche (par defaut 10)
+       jeton        : envoie `autre_jeton` (par defaut usdc, ou avax si le jeton affiche est usdc) a la place
+       nft          : approuve le NFT `autre_nft` (par defaut 1) a la place de celui affiche
+       collection   : l'action affichee (envoyer ou nft) devient setApprovalForAll de toute la collection
+   autre=0x...  facteur=N  autre_jeton=...  autre_nft=N
+   Les adresses du contrat viennent de ./adresses.json (ecrit par monter.mjs). */
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var q = new URL(location.href).searchParams;
+  var A = null, DEC = { usdc: 6, wavax: 18, avax: 18 };
+  ["action", "dest", "montant", "jeton", "nftid"].forEach(function (k) { if (q.get(k) != null) $(k).value = q.get(k); });
+  function recap() {
+    var a = $("action").value;
+    $("recap").textContent = a === "envoyer" ? "Envoyer " + $("montant").value + " " + $("jeton").options[$("jeton").selectedIndex].text + " à " + $("dest").value
+      : a === "nft" ? "Autoriser le NFT n° " + $("nftid").value + " pour " + $("dest").value
+      : "Autoriser tous mes NFT pour " + $("dest").value;
+  }
+  ["action", "dest", "montant", "jeton", "nftid"].forEach(function (k) { $(k).addEventListener("input", recap); $(k).addEventListener("change", recap); });
+  recap();
+  function units(txt, dec) {
+    var s = String(txt).trim().replace(",", "."); if (!/^\d+(\.\d+)?$/.test(s)) throw new Error("montant invalide");
+    var p = s.split("."), f = (p[1] || "").padEnd(dec, "0").slice(0, dec);
+    return BigInt(p[0]) * 10n ** BigInt(dec) + BigInt(f || "0");
+  }
+  function state(t) { $("etat").textContent = t; }
+  function build() {
+    var action = $("action").value, dest = $("dest").value.trim(), montant = $("montant").value, jeton = $("jeton").value, nftid = $("nftid").value.trim();
+    var piege = (q.get("piege") || "").toLowerCase();
+    if (piege === "destinataire") dest = q.get("autre") || A.collector;
+    if (piege === "montant") montant = String(Number(String(montant).replace(",", ".")) * Number(q.get("facteur") || 10));
+    if (piege === "jeton") jeton = (q.get("autre_jeton") || (jeton === "usdc" ? "avax" : "usdc")).toLowerCase();
+    if (piege === "nft") nftid = q.get("autre_nft") || "1";
+    if (piege === "collection" && action !== "collection") action = "collection";
+    if (!/^0x[0-9a-fA-F]{40}$/.test(dest)) throw new Error("destinataire invalide");
+    if (action === "collection") return { to: A.nft, data: callData("setApprovalForAll(address,bool)", [encAddr(dest), encUint(1)]) };
+    if (action === "nft") return { to: A.nft, data: callData("approve(address,uint256)", [encAddr(dest), encUint(nftid)]) };
+    if (jeton === "avax") return { to: dest, value: toHex(units(montant, 18)), data: "0x" };
+    return { to: A[jeton], data: callData("transfer(address,uint256)", [encAddr(dest), encUint(units(montant, DEC[jeton]))]) };
+  }
+  function provider() { return window.ethereum || null; }
+  $("envoyer").addEventListener("click", async function () {
+    var b = $("envoyer"); b.disabled = true;
+    try {
+      var p = provider(); if (!p) { state("Aucun portefeuille."); b.disabled = false; return; }
+      var accts = await p.request({ method: "eth_requestAccounts" });
+      var tx = build(); tx.from = accts[0];
+      state("En attente du portefeuille…");
+      var h = await p.request({ method: "eth_sendTransaction", params: [tx] });
+      state("Envoyé : " + h);
+    } catch (e) {
+      state(e && (e.code === 4001 || /reject|denied|refus/i.test(e.message || "")) ? "Annulé." : "Impossible : " + (e && e.message ? e.message : e));
+    }
+    b.disabled = false;
+  });
+  fetch("./adresses.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (j) { A = j; if (!$("dest").value && q.get("dest") == null) $("dest").value = ""; recap(); })
+    .catch(function () { state("Adresses indisponibles."); $("envoyer").disabled = true; });
+})();
+</script>
+</body>
+</html>
