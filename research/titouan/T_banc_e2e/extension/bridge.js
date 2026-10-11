@@ -1,4 +1,4 @@
-/* Sentinelle - pont (monde isole, document_start, toutes frames).
+/* Hold up - pont (monde isole, document_start, toutes frames).
  * 1) recoit les demandes de inject.js par un MessageChannel prive et les envoie au service worker ;
  * 2) dans la frame 0, affiche la fenetre de confirmation dans un shadow DOM ferme (prototypes natifs de ce monde,
  *    donc non alteres par la page). Apparence : docs/design/modal/*.html. */
@@ -151,7 +151,7 @@ footer{padding:12px 16px 14px;border-top:1px solid var(--line-soft);display:flex
     ov.addEventListener('keyup', (e) => e.stopPropagation(), true);
     return { host, root, ov, close() { mo.disconnect(); host.remove(); } };
   }
-  function topBar(origin) { return h('div', { class: 'top' }, h('b', null, svgEl(SVG.shield), ' Sentinelle'), h('span', { class: 'site', text: origin })); }
+  function topBar(origin) { return h('div', { class: 'top' }, h('b', null, svgEl(SVG.shield), ' Hold up'), h('span', { class: 'site', text: origin })); }
   function inViewport(el) { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.top >= 0 && r.bottom <= innerHeight + 1 && r.left >= 0 && r.right <= innerWidth + 1; }
 
   function addrBlock(label, addr, other, bad) {

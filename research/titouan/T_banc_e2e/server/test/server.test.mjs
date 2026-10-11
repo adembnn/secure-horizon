@@ -1,4 +1,4 @@
-// Tests du serveur Sentinelle : demarre le VRAI serveur (port libre, journal temporaire) et lui envoie de vraies requetes HTTP.
+// Tests du serveur Hold up : demarre le VRAI serveur (port libre, journal temporaire) et lui envoie de vraies requetes HTTP.
 // Usage : node server/test/server.test.mjs      (aucun navigateur, aucun reseau externe, un seul processus Node)
 import http from 'node:http';
 import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
@@ -7,7 +7,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const { createSentinelleServer, verifyJournal, loadLocalContext } = await import(pathToFileURL(join(HERE, '..', 'server.mjs')).href);
+const { createHoldUpServer, verifyJournal, loadLocalContext } = await import(pathToFileURL(join(HERE, '..', 'server.mjs')).href);
 
 const tmp = mkdtempSync(join(tmpdir(), 'sentinelle-test-'));
 const PAUL = '0x1234567890abcdef1234567890abcdef12345678';
@@ -15,7 +15,7 @@ const SOSIE = '0x1234' + '9'.repeat(32) + '5678'; // meme debut (0x1234) et meme
 const ctxFile = join(tmp, 'ctx.json');
 writeFileSync(ctxFile, JSON.stringify({ contacts: [{ label: 'Paul', address: PAUL }], history: [{ address: PAUL, direction: 'sortie', amount: '0.1', minutes_ago: 5000 }] }));
 const journalFile = join(tmp, 'j', 'verdicts.jsonl');
-const s = await createSentinelleServer({ port: 0, journalFile, journalEnabled: true, local: loadLocalContext(ctxFile) });
+const s = await createHoldUpServer({ port: 0, journalFile, journalEnabled: true, local: loadLocalContext(ctxFile) });
 const BASE = `http://127.0.0.1:${s.port}`;
 
 const results = [];
@@ -101,7 +101,7 @@ check('30 journal : pas de parametres bruts, ni adresse du portefeuille', !readF
 const copy = join(tmp, 'tamper.jsonl'); const arr = [...lines]; const o = JSON.parse(arr[5]); o.entry.level = 'attention'; arr[5] = JSON.stringify(o); writeFileSync(copy, arr.join('\n') + '\n');
 check('31 journal : une ligne modifiee est detectee', verifyJournal(copy).ok === false, JSON.stringify(verifyJournal(copy)));
 const s2File = join(tmp, 'off', 'verdicts.jsonl');
-const s2 = await createSentinelleServer({ port: 0, journalFile: s2File, journalEnabled: false, local: loadLocalContext(ctxFile) });
+const s2 = await createHoldUpServer({ port: 0, journalFile: s2File, journalEnabled: false, local: loadLocalContext(ctxFile) });
 await fetch(`http://127.0.0.1:${s2.port}/check`, { method: 'POST', body: JSON.stringify(tx({ to: PAUL, value: '0x1', data: '0x' })) });
 check('32 journal desactive : aucun fichier cree', !existsSync(s2File));
 await s2.close();

@@ -21,7 +21,7 @@ export async function visit(conn, site, arm, opts = {}) {
   const T = Object.assign({ loadTimeout: 35000, settle: 4000, afterClick: 3000, hardCap: 110000 }, opts);
   const rec = { siteId: site.id, url: site.url, arm, started: new Date().toISOString(), events: [], console: [], exceptions: [], logErrors: [], docs: [],
     frames: 0, frameKinds: [], workers: [], popups: [], dialogs: 0, mainFrameId: null, loadFired: false, navError: null, steps: [] };
-  const injector = buildInjector(arm === 'ext' ? 'control' : arm);   // bras ext = meme fournisseur non enveloppe + VRAIE extension Sentinelle chargee dans Chrome
+  const injector = buildInjector(arm === 'ext' ? 'control' : arm);   // bras ext = meme fournisseur non enveloppe + VRAIE extension Hold up chargee dans Chrome
   const t0 = Date.now();
   let ctxId = null, targetId = null, topSid = null;
   const sessions = new Set();

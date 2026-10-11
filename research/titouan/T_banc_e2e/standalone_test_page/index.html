@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hold up - page de test</title>
+<style>
+body{font:17px/1.5 system-ui,sans-serif;max-width:640px;margin:24px auto;padding:0 16px;color:#1b1b1b}
+button{display:block;width:100%;margin:12px 0;padding:14px;font-size:17px;border:2px solid #333;border-radius:8px;background:#fff;cursor:pointer}
+button:hover{background:#f0f0f0}
+#sortie{white-space:pre-wrap;background:#f4f4f4;border-radius:8px;padding:12px;font:14px ui-monospace,monospace;min-height:5em}
+.note{color:#555;font-size:15px}
+</style></head>
+<body>
+<h1>Page de test de Hold up</h1>
+<p>Cette page contient un portefeuille <b>FACTICE</b> : il ne contient aucun argent, aucune clé, et ne signe rien. Il note seulement ce qu'on lui demande. Quand tu cliques sur un bouton, Hold up doit afficher sa fenêtre <b>avant</b> que le portefeuille factice reçoive la demande.</p>
+<button id="b1">1. Autoriser un droit illimité (piège)</button>
+<button id="b2">2. Signer un « permit » (piège)</button>
+<button id="b3">3. Envoyer 0,01 ETH (envoi simple)</button>
+<h2>Ce que le portefeuille factice a reçu</h2>
+<div id="sortie">(rien pour l'instant)</div>
+<p class="note">Résultat attendu : boutons 1 et 2 → fenêtre rouge « Danger » ; bouton 3 → fenêtre « À vérifier » (jamais verte). Si tu cliques sur « Annuler », la sortie ci-dessus doit rester vide ou afficher « refusé ».</p>
+<script>
+(function () {
+  var out = document.getElementById('sortie'), recus = [];
+  function show(msg) { out.textContent = msg; }
+  // Fournisseur factice injecté par la page, comme le ferait un portefeuille (EIP-1193).
+  var factice = {
+    isMetaMask: false, isFactice: true,
+    request: function (args) {
+      recus.push(args.method);
+      show('Le portefeuille factice a reçu : ' + args.method + '\n(rien n\'est signé, rien n\'est envoyé)\nTotal reçu : ' + recus.length);
+      if (args.method === 'eth_accounts' || args.method === 'eth_requestAccounts') return Promise.resolve(['0xa11ce00000000000000000000000000000000001']);
+      if (args.method === 'eth_chainId') return Promise.resolve('0x1');
+      return Promise.resolve('0x' + '00'.repeat(32));
+    },
+    on: function () {}, removeListener: function () {}
+  };
+  window.ethereum = factice;
+  var MOI = '0xa11ce00000000000000000000000000000000001', PIEGE = '0x' + 'b2'.repeat(20), USDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
+  function lance(p) { p.then(function () { }, function (e) { show('Demande refusée (code ' + (e && e.code) + ') : ' + (e && e.message ? e.message : 'annulée')); }); }
+  document.getElementById('b1').onclick = function () {
+    show('En attente de ta décision dans la fenêtre de Hold up…');
+    lance(window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: MOI, to: USDC, value: '0x0', chainId: '0x1',
+      data: '0x095ea7b3' + '000000000000000000000000' + PIEGE.slice(2) + 'f'.repeat(64) }] }));
+  };
+  document.getElementById('b2').onclick = function () {
+    show('En attente de ta décision dans la fenêtre de Hold up…');
+    var td = { types: { EIP712Domain: [{ name: 'name', type: 'string' }, { name: 'version', type: 'string' }, { name: 'chainId', type: 'uint256' }, { name: 'verifyingContract', type: 'address' }],
+      Permit: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }, { name: 'value', type: 'uint256' }, { name: 'nonce', type: 'uint256' }, { name: 'deadline', type: 'uint256' }] },
+      primaryType: 'Permit', domain: { name: 'USD Coin', version: '2', chainId: 1, verifyingContract: USDC },
+      message: { owner: MOI, spender: PIEGE, value: '115792089237316195423570985008687907853269984665640564039457584007913129639935', nonce: '0', deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935' } };
+    lance(window.ethereum.request({ method: 'eth_signTypedData_v4', params: [MOI, JSON.stringify(td)] }));
+  };
+  document.getElementById('b3').onclick = function () {
+    show('En attente de ta décision dans la fenêtre de Hold up…');
+    lance(window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: MOI, to: '0x13baa57127a952cc2065443714d4c823aacec5e7', value: '0x2386f26fc10000', data: '0x', chainId: '0x1' }] }));
+  };
+})();
+</script>
+</body></html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Page d'essai Sentinelle</title>
+<title>Page d'essai Hold up</title>
 <!-- FAUX portefeuille, defini par la page elle-meme AVANT tout le reste (comme le ferait MetaMask). Aucune cle, aucun argent, aucun reseau. -->
 <script>
 (function () {
@@ -49,10 +49,10 @@
 </head>
 <body>
 <main>
-  <h1>Page d'essai de Sentinelle</h1>
-  <p>Ce faux site te permet de vérifier que Sentinelle fonctionne. Il ne contient <strong>aucun vrai portefeuille</strong> : le portefeuille est un faux, créé par cette page. Rien ne peut être envoyé ni perdu.</p>
-  <div class="banner"><strong>Attendu :</strong> en cliquant sur un bouton ci-dessous, une fenêtre Sentinelle doit s'afficher <em>avant</em> que le faux portefeuille reçoive la demande. Si le faux portefeuille répond sans fenêtre, l'extension n'est pas active sur cette page.</div>
-  <p>Serveur Sentinelle : <span id="srv">vérification…</span></p>
+  <h1>Page d'essai de Hold up</h1>
+  <p>Ce faux site te permet de vérifier que Hold up fonctionne. Il ne contient <strong>aucun vrai portefeuille</strong> : le portefeuille est un faux, créé par cette page. Rien ne peut être envoyé ni perdu.</p>
+  <div class="banner"><strong>Attendu :</strong> en cliquant sur un bouton ci-dessous, une fenêtre Hold up doit s'afficher <em>avant</em> que le faux portefeuille reçoive la demande. Si le faux portefeuille répond sans fenêtre, l'extension n'est pas active sur cette page.</div>
+  <p>Serveur Hold up : <span id="srv">vérification…</span></p>
 
   <section class="card"><h2>1. Approve illimité</h2><p class="muted">Le site demande le droit de dépenser tous tes jetons USDC, sans limite. Attendu : fenêtre rouge.</p><button type="button" id="b-approve">Approve illimité</button></section>
   <section class="card"><h2>2. Signer un permit piège</h2><p class="muted">Une signature gratuite qui vaut procuration sur tes jetons. Attendu : fenêtre rouge.</p><button type="button" id="b-permit">Signer un permit piège</button></section>
@@ -76,8 +76,8 @@
   function go(label, args) {
     window.__log('Demande envoyée au portefeuille : ' + label);
     window.ethereum.request(args).then(
-      function () { window.__log("Résultat : la demande est allée jusqu'au faux portefeuille (tu as choisi de continuer, ou Sentinelle n'est pas active).", 'ok'); },
-      function (e) { window.__log('Résultat : demande refusée (code ' + (e && e.code) + '). ' + ((e && e.code === 4001) ? "Tu as annulé : rien n'a été envoyé au portefeuille." : ((e && e.code === 4900) ? "Sentinelle n'a pas pu vérifier et a bloqué par prudence." : (e && e.message) || '')), 'bad'); });
+      function () { window.__log("Résultat : la demande est allée jusqu'au faux portefeuille (tu as choisi de continuer, ou Hold up n'est pas active).", 'ok'); },
+      function (e) { window.__log('Résultat : demande refusée (code ' + (e && e.code) + '). ' + ((e && e.code === 4001) ? "Tu as annulé : rien n'a été envoyé au portefeuille." : ((e && e.code === 4900) ? "Hold up n'a pas pu vérifier et a bloqué par prudence." : (e && e.message) || '')), 'bad'); });
   }
   document.getElementById('b-approve').onclick = function () {
     go('approve illimité', { method: 'eth_sendTransaction', params: [{ from: ME, to: USDC, value: '0x0', data: '0x095ea7b3' + pad(SPENDER) + 'f'.repeat(64), chainId: '0x1' }] });

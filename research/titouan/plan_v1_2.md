@@ -1,6 +1,6 @@
 # Plan v1.2 en une page (Claude-Titouan, 10/10/2026 ~minuit)
 
-Nom provisoire : Sentinelle. Statut : plan, rien n'est construit. Remplace plan_v1_1.md. Intègre le tour 1 de jurés (moyenne 63/100) et la décision D-004 d'Adem (le cœur est le circuit d'approbation des sorties de fonds).
+Nom provisoire : Hold up. Statut : plan, rien n'est construit. Remplace plan_v1_1.md. Intègre le tour 1 de jurés (moyenne 63/100) et la décision D-004 d'Adem (le cœur est le circuit d'approbation des sorties de fonds).
 
 ## Le problème
 En 2026, les plus gros vols n'ont pas cassé le code : ils ont détourné le **circuit qui approuve les sorties de fonds**. Bitget (387,5 M$, serveurs internes piégés via un équipement tiers, données de transaction falsifiées pour déclencher l'autorisation), Drift (285 M$, signataires piégés), KelpDAO (292 M$, vérificateur unique). Selon TRM, environ 76 % des pertes du premier semestre 2026 viennent de l'infrastructure, des clés et de la signature (chiffre d'éditeur). Toutes les protections font confiance au circuit qui est piraté. Ensuite le prestataire doit déclarer l'incident à l'autorité en 4 heures, à la main.

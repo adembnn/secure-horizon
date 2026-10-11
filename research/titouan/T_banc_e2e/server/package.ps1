@@ -1,12 +1,12 @@
-# Cree dist\sentinelle-extension.zip (le dossier de l'extension SEULEMENT) et une copie propre dist\sentinelle-extension\ prete pour
+# Cree dist\hold-up-extension.zip (le dossier de l'extension SEULEMENT) et une copie propre dist\hold-up-extension\ prete pour
 # "Charger l'extension non empaquetee". Exclut : tests, faux moteur, notes de compatibilite, resultats, captures, fichiers de cles.
 # Usage : powershell -ExecutionPolicy Bypass -File server\package.ps1
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $src  = Join-Path $root 'extension'
 $dist = Join-Path $root 'dist'
-$stage = Join-Path $dist 'sentinelle-extension'
-$zip  = Join-Path $dist 'sentinelle-extension.zip'
+$stage = Join-Path $dist 'hold-up-extension'
+$zip  = Join-Path $dist 'hold-up-extension.zip'
 if (-not (Test-Path (Join-Path $src 'manifest.json'))) { throw "manifest.json introuvable dans $src" }
 New-Item -ItemType Directory -Force -Path $dist | Out-Null
 if (Test-Path $stage) { Remove-Item -Recurse -Force $stage }
@@ -35,7 +35,7 @@ if ($bad) { throw ('Motif de secret trouve dans : ' + ($bad.Path -join ', ')) }
 $mf = Get-Content -Raw -LiteralPath (Join-Path $stage 'manifest.json') | ConvertFrom-Json
 if (-not $mf.manifest_version) { throw 'manifest.json invalide' }
 
-# 3. Zip (le dossier sentinelle-extension\ a la racine de l'archive)
+# 3. Zip (le dossier hold-up-extension\ a la racine de l'archive)
 Compress-Archive -LiteralPath $stage -DestinationPath $zip -CompressionLevel Optimal
 $n = (Get-ChildItem -LiteralPath $stage -Recurse -File).Count
 $kb = [math]::Round((Get-Item $zip).Length / 1KB, 1)

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Sentinelle (autonome)",
+  "name": "Hold up (autonome)",
   "version": "0.2.0",
   "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles et explique en clair. Moteur embarque, aucun serveur, aucun acces reseau.",
   "minimum_chrome_version": "111",

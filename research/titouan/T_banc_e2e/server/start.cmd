@@ -1,5 +1,5 @@
 @echo off
-rem Lance le serveur local Sentinelle (127.0.0.1:8787). Double-clic possible. Ctrl+C pour arreter.
+rem Lance le serveur local Hold up (127.0.0.1:8787). Double-clic possible. Ctrl+C pour arreter.
 cd /d "%~dp0"
 where node >nul 2>nul
 if errorlevel 1 (

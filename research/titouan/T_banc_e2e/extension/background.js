@@ -1,4 +1,4 @@
-/* Sentinelle - service worker : interroge le moteur, mene le mini grilling, pilote la fenetre (frame 0), journalise. */
+/* Hold up - service worker : interroge le moteur, mene le mini grilling, pilote la fenetre (frame 0), journalise. */
 const API = 'http://127.0.0.1:8787';
 const LEVELS = ['ok', 'attention', 'danger', 'manipulation'];
 const DEFAULT_CFG = {

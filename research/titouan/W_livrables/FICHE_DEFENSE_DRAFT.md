@@ -1,6 +1,6 @@
-# Fiche de défense : Sentinelle (Track 1)
+# Fiche de défense : Hold up (Track 1)
 
-**Scénario de menace.** Camille reçoit un faux message de "support" et croit annuler un paiement. Le site sosie lui fait signer un droit de dépense illimité vers un compte externe, ou envoyer des fonds vers une adresse sosie. Sentinelle décode l'effet réel, le compare à l'intention déclarée, avertit ("tu as dit X, ça fait Y") et ralentit. Camille garde la décision.
+**Scénario de menace.** Camille reçoit un faux message de "support" et croit annuler un paiement. Le site sosie lui fait signer un droit de dépense illimité vers un compte externe, ou envoyer des fonds vers une adresse sosie. Hold up décode l'effet réel, le compare à l'intention déclarée, avertit ("tu as dit X, ça fait Y") et ralentit. Camille garde la décision.
 
 **NIST CSF 2.0 (identifiants à vérifier).** Detect : DE.AE (analyse d'événements), DE.CM (surveillance). Respond : réponse graduée, journal des décisions (RS.MA, à vérifier). Protect : PR.AT (sensibilisation au moment de l'action, à vérifier).
 

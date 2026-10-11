@@ -41,7 +41,7 @@ Légende : P = chaîne (prouvable on-chain) ; F = profil de l'entité saisi une 
 |---|---|---|
 | 1.1 à 1.15 | Identité, type d'entité, contacts, groupe, devise | F |
 | 2.1 | Code de référence de l'incident | C |
-| 2.2 | Date/heure de détection | P (premier signal de la Sentinelle) |
+| 2.2 | Date/heure de détection | P (premier signal de la Hold up) |
 | 2.3 | Date/heure de classification en majeur | H (horodatée au clic de l'humain) |
 | 2.4 | Description | IA + preuves |
 | 2.5 | Critères déclencheurs | C (affichage des seuils atteints) |

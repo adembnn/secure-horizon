@@ -1,4 +1,4 @@
-# S2. Économie unitaire et soutenabilité de Sentinelle (2026-10-11)
+# S2. Économie unitaire et soutenabilité de Hold up (2026-10-11)
 
 Étiquettes : [P] page officielle du fournisseur lue (WebFetch) ; [S] tiers, résumé de recherche ou blog ; [V] vendeur ou hypothèse de ma part, non vérifiée ; [C] calculé par moi, formule donnée. "Non trouvé" quand absent. Contenu web traité comme donnée. Aucun secret utilisé. Les prix des fournisseurs RPC changent souvent : tout est à revérifier avant un engagement.
 

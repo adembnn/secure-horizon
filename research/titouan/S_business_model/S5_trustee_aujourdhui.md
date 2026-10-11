@@ -1,4 +1,4 @@
-# S5. Trustee aujourd'hui : périmètre réel, trajectoire, recouvrement avec Sentinelle
+# S5. Trustee aujourd'hui : périmètre réel, trajectoire, recouvrement avec Hold up
 
 Date : 11 oct. 2026. Complète S4 (non refait). Aucun secret, aucune inscription, aucun téléchargement.
 Étiquettes : **[P]** source primaire lue par moi (page fetchée) ; **[S]** presse, résumé de moteur de recherche ou page tierce ; **[V]** jugement. "Non trouvé" = cherché sans résultat.
@@ -98,7 +98,7 @@ Pour le pitch : on peut dire "un outil qui lit l'annonce ; nous calculons ce que
 8. Société : SAS créée en nov. 2025, capital 1 000 €, 2-10 personnes ; presse limitée (Pépites, 5e de janvier 2026, et TSE).
 9. Feuille de route : plus d'utilisateurs, clients C2C, partenariats publics ; aucun signe crypto ou paiement (Trustee se positionne contre la fintech).
 10. Fondateurs : Boughanem (TSE, ML/RAG), Ourdane (COO), Baumard (DG légal, ingénieur logiciel Renault selon LinkedIn) ; pas de profil blockchain.
-11. Recouvrement avec Sentinelle : particulier, avertissement avant l'acte, extension, explicabilité ; tout le reste diffère (texte de vendeur contre effet on-chain, probabiliste contre déterministe, aucune mesure contre banc chiffré).
+11. Recouvrement avec Hold up : particulier, avertissement avant l'acte, extension, explicabilité ; tout le reste diffère (texte de vendeur contre effet on-chain, probabiliste contre déterministe, aucune mesure contre banc chiffré).
 12. À faire : relire le site, la FAQ et la fiche Chrome depuis un autre réseau avant d'afficher quoi que ce soit en slide ; ne pas conclure "Trustee ne mesure rien" ni "Trustee ne fera pas de crypto", seulement "non trouvé".
 
 ## Sources

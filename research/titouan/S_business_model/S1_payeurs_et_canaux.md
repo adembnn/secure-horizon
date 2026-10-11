@@ -1,4 +1,4 @@
-# S1. Payeurs et canaux : pistes de modèle économique pour Sentinelle (recherche du 11/10/2026)
+# S1. Payeurs et canaux : pistes de modèle économique pour Hold up (recherche du 11/10/2026)
 
 Étiquettes : [P] primaire (éditeur, régulateur, document officiel), [S] presse ou agrégateur, [V] vendeur (déclaration commerciale de la société concernée). "non trouvé" = absent des recherches. Les calculs marqués (calcul) sont les miens, à partir des chiffres cités. Les hypothèses sont signalées "HYP". Rien n'est inventé : quand un prix n'est pas public, c'est écrit.
 Point de départ lu : L_harpie_postmortem.md et L1 à L3 (Harpie fermé faute de modèle, revenu seulement après vol ; Wallet Guard, Fire, Pocket Universe, Blowfish absorbés à prix non divulgués ; Blockaid, Hypernative, Coincover survivent en B2B2C).
@@ -6,7 +6,7 @@ Point de départ lu : L_harpie_postmortem.md et L1 à L3 (Harpie fermé faute de
 ## 0. Trois faits qui changent la discussion (nouveaux par rapport à L1-L3)
 
 1. Core (le portefeuille d'Avalanche) a déjà intégré Blockaid : annonce du 5 juin 2024, alertes temps réel avant signature [P] https://blockaid.io/blog/blockaid-bolsters-security-on-avalanche-with-core-integration. Aucune condition commerciale publiée (non trouvé). Conséquence : on ne vend pas "un scanner de plus" à Core ; il faut vendre ce que Blockaid ne fait pas (l'écart entre l'intention dite et l'effet réel, la friction graduée, les pièces de plainte).
-2. Les produits grand public qui gagnent de l'argent le font surtout par une commission sur les swaps, pas par un abonnement : Revoke Sidekick Standard est financé par 0,8 % de frais sur certains swaps DEX, avec une couverture vol de 30 000 $ fournie par Fairside [P] https://revoke.cash/blog/2026/revoke-extension-update ; Kerberus Sentinel3 passe l'utilisateur en "Pro" par défaut avec "une petite commission sur certains swaps" (taux non trouvé) [P] https://docs.kerberus.com/kerberus/frequently-asked-questions/software-faq/is-there-a-cost-to-use-sentinel3 ; Rabby prend 0,25 % et MetaMask 0,875 % sur les swaps [S] (ethereum.org, support.metamask.io). Sentinelle n'intermédie aucun swap : ce flux de revenu lui est fermé, sauf à s'adosser à un portefeuille.
+2. Les produits grand public qui gagnent de l'argent le font surtout par une commission sur les swaps, pas par un abonnement : Revoke Sidekick Standard est financé par 0,8 % de frais sur certains swaps DEX, avec une couverture vol de 30 000 $ fournie par Fairside [P] https://revoke.cash/blog/2026/revoke-extension-update ; Kerberus Sentinel3 passe l'utilisateur en "Pro" par défaut avec "une petite commission sur certains swaps" (taux non trouvé) [P] https://docs.kerberus.com/kerberus/frequently-asked-questions/software-faq/is-there-a-cost-to-use-sentinel3 ; Rabby prend 0,25 % et MetaMask 0,875 % sur les swaps [S] (ethereum.org, support.metamask.io). Hold up n'intermédie aucun swap : ce flux de revenu lui est fermé, sauf à s'adosser à un portefeuille.
 3. La douleur chiffrée côté particulier : vols sur portefeuilles personnels 713 M$ en 2025 (20 % du total, 44 % en 2024), 158 000 incidents, au moins 80 000 victimes distinctes, "plus de victimes, montants plus petits" [S] Chainalysis via https://www.theblock.co/post/382477/crypto-hack-2025-chainalysis. Soit environ 8 900 $ par victime (calcul 713 M$ / 80 000). Scam Sniffer, périmètre plus étroit (drainers EVM par sites de phishing) : 83,85 M$ et 106 106 victimes en 2025, contre 494 M$ et plus de 332 000 portefeuilles en 2024 [S] https://drops.scamsniffer.io/scam-sniffer-2025-crypto-phishing-losses-fall-83-to-84-million/ ; soit environ 790 $ par victime (calcul). Les deux séries ne mesurent pas la même chose ; ne jamais les additionner. Dans les deux cas, la perte moyenne par particulier est trop basse pour justifier un abonnement élevé.
 
 ## 1. Qui paie réellement : fiche par payeur
@@ -166,7 +166,7 @@ Les chiffres sont des ordres de grandeur construits sur des repères publics, pa
 ### Scénario 3 (le moins défendable) : freemium avec modules premium et partenaire d'assurance
 - Logique : alerte à un proche, coffre, journal, couverture partenaire (modèles Revoke Standard avec Fairside, Kerberus avec Fairside, MetaMask Shield).
 - Ordre de grandeur : abonnements de 99 à 199 $/an (Revoke), 99 $/an (MetaMask), 120 $/an (Webacy Pro à 10 $/mois, calcul) ; Webacy déclare 500 k$ d'ARR pour 30 k utilisateurs ; 1 000 abonnés à 100 $/an = 100 k$/an (calcul HYP).
-- Limites : revenu déclenché par la peur après un vol (piège Harpie sous une autre forme) ; Ledger Recover rejeté ; taux de conversion publics : non trouvés ; les produits grand public rentables utilisent une commission sur swaps que Sentinelle n'a pas.
+- Limites : revenu déclenché par la peur après un vol (piège Harpie sous une autre forme) ; Ledger Recover rejeté ; taux de conversion publics : non trouvés ; les produits grand public rentables utilisent une commission sur swaps que Hold up n'a pas.
 - Défendabilité : faible comme modèle principal, acceptable comme extension future.
 
 ### Ce que le jury attaquera
@@ -186,7 +186,7 @@ Les chiffres sont des ordres de grandeur construits sur des repères publics, pa
 
 ## Résumé en 10 lignes
 1. Le particulier ne peut pas être le payeur : perte moyenne par victime d'environ 790 $ (Scam Sniffer 2025) à 8 900 $ (Chainalysis 2025), et l'abonnement de masse est faible (Webacy 500 k$ d'ARR pour 30 k utilisateurs, Ledger Recover rejeté).
-2. Les produits grand public qui gagnent de l'argent monétisent un swap (Revoke 0,8 %, Kerberus, Rabby 0,25 %, MetaMask 0,875 %) ; Sentinelle n'intermédie pas de swap et ne peut pas copier ce flux.
+2. Les produits grand public qui gagnent de l'argent monétisent un swap (Revoke 0,8 %, Kerberus, Rabby 0,25 %, MetaMask 0,875 %) ; Hold up n'intermédie pas de swap et ne peut pas copier ce flux.
 3. Les payeurs les plus motivés par une perte chiffrée sont les exchanges (Coinbase : 180 à 400 M$ de coûts en 2025) et les fintechs soumises au remboursement (Royaume-Uni : 173 M£ la première année ; UE : accord provisoire sur le PSR, texte final non vérifié).
 4. Les portefeuilles ont le budget mais rachètent (Wallet Guard, Blowfish), et Core a déjà Blockaid depuis juin 2024.
 5. Prix publics : seul GoPlus publie des paliers (199 à 3 499 $/mois, gratuit jusqu'à 150 k CU) ; Blockaid, Hypernative, Coincover, Hexagate, Kerberus API : non trouvés ; aucun prix par appel public.

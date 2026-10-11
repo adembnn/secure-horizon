@@ -1,4 +1,4 @@
-# S4. Trustee contre Sentinelle : comparateur, risque d'assimilation, extension comme support
+# S4. Trustee contre Hold up : comparateur, risque d'assimilation, extension comme support
 
 Date : 11 oct. 2026. Auteur : agent de recherche S4 (Claude). Aucun secret, aucune donnée personnelle.
 
@@ -39,11 +39,11 @@ Le brief interne (ctx_ideas) dit : besoin réel, utilisateur final évident, dé
 - Hors ESSEC, pour la culture Kryptosphère : Hackin'Dau (Dauphine, Chaire Fintech + Kryptosphère) 2024, gagnants Yielo (Blockchain x Finance) et Kaution (Blockchain x Général), jury Cédric Lion, Thomas de Phuoc (Kiln), Talam Diop [S, résumé de recherche] (https://dauphine.psl.eu/dauphine/media-et-communication/article/hackindau-2024-bravo-aux-equipes-gagnantes). Ce n'est pas le même jury : à ne pas extrapoler.
 - Ce que je peux dire honnêtement : **un seul point de données** (Trustee) sur ce jury. "Ce que le jury récompense" ne se déduit pas d'un seul gagnant [V].
 
-## 3. Comparateur détaillé Trustee contre Sentinelle
+## 3. Comparateur détaillé Trustee contre Hold up
 
-Légende : colonne Trustee = public (sauf mention [V]) ; colonne Sentinelle = documents du projet (intent-barrier.md, O, R, banc v0).
+Légende : colonne Trustee = public (sauf mention [V]) ; colonne Hold up = documents du projet (intent-barrier.md, O, R, banc v0).
 
-| Dimension | Trustee | Sentinelle | Lecture honnête |
+| Dimension | Trustee | Hold up | Lecture honnête |
 |---|---|---|---|
 | Problème et douleur | Acheter un objet à un faux vendeur sur une place de marché entre particuliers ; perte d'argent et de confiance [P] | Signer ou envoyer une opération crypto qui fait autre chose que ce qu'on croit (droit de dépense, drainer, sosie d'adresse, faux support) ; perte irréversible [doc projet] | Même famille émotionnelle ("on m'a arnaqué"), terrain différent. La douleur crypto est plus brutale (irréversible, pas de rétrofacturation) [V] |
 | Utilisateur | Acheteur C2C sur eBay et équivalents [P] ; ensuite plateformes et équipes Trust & Safety [P] | Particulier qui utilise un portefeuille ; en second, exchange/fintech via une API avant retrait [doc projet] | Les deux sont des particuliers "peu protégés". Trustee a un marché de masse (acheteurs), nous une niche moins large mais sans protection comparable [V] |
@@ -107,7 +107,7 @@ Légende : colonne Trustee = public (sauf mention [V]) ; colonne Sentinelle = do
 - Contre : surface d'attaque (extensions piégées, famille 12 du dossier R), installation, MV3, angle mort sur mobile et sur les envois lancés depuis l'interface du portefeuille.
 
 ### 7.2 Comment la présenter
-- Phrase : "Sentinelle est un moteur de décision avant signature. Il se branche à trois endroits : le portefeuille (Snap), le navigateur (extension, la seule à pouvoir retenir) et l'exchange (API avant retrait). C'est le même contrat d'interface Intent/Effects/Verdict pour les trois." Cela correspond à l'architecture déjà documentée (intent-barrier.md : API locale + moteur + comparateur).
+- Phrase : "Hold up est un moteur de décision avant signature. Il se branche à trois endroits : le portefeuille (Snap), le navigateur (extension, la seule à pouvoir retenir) et l'exchange (API avant retrait). C'est le même contrat d'interface Intent/Effects/Verdict pour les trois." Cela correspond à l'architecture déjà documentée (intent-barrier.md : API locale + moteur + comparateur).
 - Slide : un schéma à une ligne "un moteur, trois canaux", avec l'extension en seconde position, pas en titre.
 - Argument d'appui : **Trustee fait lui-même ce pas** (extension + appli mobile + B2B plateformes [P Pépites]). Dire "comme les meilleurs produits de protection, le canal n'est pas le produit" est cohérent et factuel.
 - Piège à éviter : si la démo live n'est qu'un pop-up d'extension, le jury retient "extension". Montrer au moins deux canaux dans la démo, même si l'un est une capture.

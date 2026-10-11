@@ -3,7 +3,7 @@
 Statut : plan, non répété. Les chiffres d'écran sont des cibles tant que le banc d'essai n'a pas tourné. Durées selon le Notion : round 1 de 5 min + 2 min de Q&R ; finale de 3 min + 3 min de Q&R (à reconfirmer sur place, des photos du lancement donnent d'autres formats).
 
 ## 1. Stratégie
-- **Phrase d'idée** : "Quand un coffre crypto est attaqué, Sentinelle plafonne la perte dans le contrat, puis remet au responsable un dossier de déclaration où chaque champ se prouve en un clic."
+- **Phrase d'idée** : "Quand un coffre crypto est attaqué, Hold up plafonne la perte dans le contrat, puis remet au responsable un dossier de déclaration où chaque champ se prouve en un clic."
 - **Chiffres** : "X € sauvés sur Y", mesuré sur Fuji, et la comparaison avec Bitget (moins de 0,3 % des fonds gelés en environ un jour, sources divergentes). Second chiffre : l'horloge de 4 heures.
 - **Moment wow** : écran partagé, deux coffres identiques, même attaque. À gauche (sans Guard) le compteur "perdu" grimpe ; à droite (avec Guard) le 3e retrait devient rouge, "BLOQUÉ par le plafond du contrat", et le compteur se fige. Lisible en 10 secondes, sans voix : c'est l'équivalent de la lisibilité de Trustee.
 - **Fil rouge** : Léa, responsable sécurité, dont l'enjeu est l'horloge de 4 h. Elle ouvre et ferme le pitch, ne parle jamais de "règles de détection".

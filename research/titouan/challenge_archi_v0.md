@@ -22,7 +22,7 @@ Le pitch (track1_4_pitches.md) vend un **leurre** ("un piège qui ne ment pas", 
 |---|---|---|
 | 1 | Périmètre trop large : traceur, demande de gel, registre des tiers, webhooks SIEM, MockBridge, simulateur, React/Tailwind, Bedrock | Couper : traceur, webhooks, MockBridge, SIEM. Registre des tiers réduit à 1 panneau lisant rôles et oracle. Tableau de bord = une page statique qui lit un JSON de rejeu |
 | 2 | Le traceur sur Fuji avec adresses simulées est du théâtre : il ne prouve rien | Supprimer. Garder un "paquet de gel" généré en document, sans prétendre tracer |
-| 3 | Le bot a le rôle pauser : s'il est compromis ou en panne, tout tombe (leçon Bitget) | Mettre le **plafond de sortie (L2) en dur dans le contrat**, actif sans la Sentinelle. La Sentinelle ne fait que resserrer. Pause pauser-only avec expiration |
+| 3 | Le bot a le rôle pauser : s'il est compromis ou en panne, tout tombe (leçon Bitget) | Mettre le **plafond de sortie (L2) en dur dans le contrat**, actif sans la Hold up. La Hold up ne fait que resserrer. Pause pauser-only avec expiration |
 | 4 | Détection triviale : un drain rapide (type Drift) se détecte avec n'importe quelle limite de débit. Le jury pondère la détection à 30 % | Ajouter des variantes difficiles : drain lent sous le seuil, fractionnement sur plusieurs adresses, changement de rôle légitime. Publier les ratés |
 | 5 | Circularité : on écrit les attaques et les règles | **Pré-enregistrer** le hash des règles sur Fuji avant d'écrire les attaques. Attaques écrites en aveugle |
 | 6 | Pas de précurseurs | Règle "changement de signataire / seuil / module / rôle hors timelock" avant le drain (Drift : nonces visibles le 23 mars, vol le 1er avril) |

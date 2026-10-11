@@ -1,4 +1,4 @@
-# Sentinelle (extension MV3) : compatibilité, limites, mode d'emploi du banc
+# Hold up (extension MV3) : compatibilité, limites, mode d'emploi du banc
 
 Date : 11 oct. 2026. Tout ce qui est marqué **testé** a été exécuté pour de vrai (Chrome 154.0.8037.98 et Edge 155.0.4283.45, headless, extension chargée, portefeuille simulé, faux moteur local). Tout ce qui est marqué **non testé** est une hypothèse, pas un résultat.
 

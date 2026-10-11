@@ -1,4 +1,4 @@
-/* Sentinelle (version AUTONOME) - service worker MV3 de type module.
+/* Hold up (version AUTONOME) - service worker MV3 de type module.
    Le moteur est EMBARQUE (engine/) : aucun serveur, aucun appel reseau. Il mene le mini grilling, pilote la fenetre (frame 0), journalise en local.
    Repli : si le moteur plante, le verdict est "indetermine" (traite comme un avertissement), jamais "ok". */
 import { check, indeterminate, emptyLocal, sanitizeLocalContext } from './engine/sentinelle_core.js';
@@ -195,6 +195,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 // Chauffe du moteur (le premier appel est plus lent) ; sans effet si cela echoue.
-try { check({ method: 'eth_sendTransaction', params: [{ from: '0x' + '1'.repeat(40), to: '0x' + '2'.repeat(40), value: '0x1', data: '0x' }], origin: 'https://warmup.local', chainId: '0x1' }); } catch (_) {}
+try { check({ method: 'eth_sendTransaction', params: [{ from: '0x' + '1'.repeat(40), to: '0x' + '2'.repeat(40), value: '0x1', data: '0x' }], chainId: '0x1' }); } catch (_) {}
 
 export { handleGate, localCheck };

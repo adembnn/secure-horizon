@@ -1,4 +1,4 @@
-# U5b - Signature sur mobile : où Sentinelle peut s'interposer
+# U5b - Signature sur mobile : où Hold up peut s'interposer
 
 Date de la recherche : 2026-10-11. Méthode : WebSearch/WebFetch uniquement, rien téléchargé ni installé.
 
@@ -35,7 +35,7 @@ Dans les deux cas, l'écran de confirmation est dans l'application du portefeuil
 - Fonctionne seulement si la dApp utilise AppKit et le portefeuille WalletKit.
 - États : VALID (Domain Match), UNKNOWN (Cannot Verify), INVALID (Domain Mismatch), isScam (Security Risk, signalé par Hexagate, ChainPatrol ou Hypernative).
 - Limites officielles : "pas à toute épreuve" ; les apps React Native et Swift affichent toujours "Cannot Verify" ; un seul domaine vérifiable ; la validation d'origine suppose un contexte navigateur ; MetaMask et Trust Wallet utilisent leurs propres méthodes ("External App") et la page signale un problème connu côté MetaMask Mobile en août 2026.
-- Utilité pour Sentinelle : l'origine de la requête est une donnée que le portefeuille possède (verifyContext) mais qu'un outil extérieur ne voit pas. C'est un signal à consommer côté portefeuille/SDK, pas un point d'interposition.
+- Utilité pour Hold up : l'origine de la requête est une donnée que le portefeuille possède (verifyContext) mais qu'un outil extérieur ne voit pas. C'est un signal à consommer côté portefeuille/SDK, pas un point d'interposition.
 
 ### 1.4 Presse-papiers et clippers
 - Les clippers (logiciels malveillants qui remplacent une adresse copiée) sont réels : alerte Binance du 13 sept. 2024 ; premier cas Android sur Google Play identifié par ESET en 2019 (se faisait passer pour MetaMask). [S] (The Hacker News, Threatpost, Immunefi).
@@ -72,7 +72,7 @@ Dans les deux cas, l'écran de confirmation est dans l'application du portefeuil
 - Discussion GitHub de mai 2023 : "no timeline" pour les Snaps sur mobile ; but de parité d'API. [P/S]
 - Dépôt metamask-mobile (mise à jour récente, versions 8.10 à 8.13, sept. 2026) : des Snaps natifs (Stellar ajouté en 8.10.0 ; solana 7.0.0, tron 4.0.0, bitcoin 3.1.0 dans une demande de fusion) sont embarqués côté mobile. Aucune mention de Snaps tiers, de transaction insights ou de liste d'autorisation. [P] (page GitHub des versions).
 - Conclusion : les Snaps existent dans le code mobile pour les chaînes non-EVM de MetaMask, mais je n'ai trouvé aucune preuve qu'un développeur tiers puisse y publier des "transaction insights" pour les utilisateurs de MetaMask Mobile. À TRAITER COMME NON DISPONIBLE tant qu'on n'a pas testé sur un appareil. [V]
-- Sur extension, l'API "transaction insights" (onTransaction) existe et peut afficher une alerte de gravité "critical" qui bloque derrière un modal. [P]. Donc un Snap Sentinelle sur l'extension MetaMask est une piste bureau, pas mobile.
+- Sur extension, l'API "transaction insights" (onTransaction) existe et peut afficher une alerte de gravité "critical" qui bloque derrière un modal. [P]. Donc un Snap Hold up sur l'extension MetaMask est une piste bureau, pas mobile.
 
 ### 1.10 Comptes intelligents (ERC-4337 / ERC-7579)
 - ERC-7579 : modules de type validateur, exécuteur, hook, fallback ; interopérabilité entre implémentations. Rhinestone fournit ModuleKit et un registre de modules audités ; adaptateur Safe7579 (28 constats d'audit sur une version antérieure). [S]
@@ -137,7 +137,7 @@ Colonnes : faisabilité technique / ce que l'outil voit / RETENIR la requête / 
 Classement par faisabilité en 36 h, puis par portée réelle.
 
 ### Option A - Application compagnon de vérification manuelle (faisabilité 36 h : élevée ; portée : faible à moyenne)
-- Principe : l'utilisateur colle (ou partage depuis l'appli du portefeuille via la feuille de partage) le payload/typed data/calldata ou l'URL ; Sentinelle décode, simule via une API, compare à l'intention déclarée ("je veux échanger X contre Y") et rend un verdict.
+- Principe : l'utilisateur colle (ou partage depuis l'appli du portefeuille via la feuille de partage) le payload/typed data/calldata ou l'URL ; Hold up décode, simule via une API, compare à l'intention déclarée ("je veux échanger X contre Y") et rend un verdict.
 - Voit : exactement ce qui est collé ; pas l'origine réelle sauf si l'utilisateur la donne. RETENIR : non, avertissement avant que l'utilisateur ne revienne signer.
 - Faisable en 36 h : réutiliser le moteur d'analyse de l'extension dans une application web adaptative (PWA) ou une appli simple ; pas de dépendance à un magasin, donc pas de risque de refus. [V]
 - Risques : friction ; l'utilisateur ne sait pas toujours copier le bon objet ; un faux verdict "sûr" est dangereux ; notre composant doit être minimal en permissions (aucune).
@@ -159,7 +159,7 @@ Hors classement : extension Safari iOS/Firefox Android = option de repli à faib
 Classement faisabilité 36 h : A > B (maquette) > C. Classement portée réelle : B > C ≈ A (A dépend de la discipline de l'utilisateur ; C est limité aux comptes intelligents).
 
 ### Ce qu'on peut dire honnêtement au jury sur le mobile
-1. Sentinelle est aujourd'hui une extension de bureau ; sur mobile, la signature se fait dans l'appli du portefeuille, que nous ne contrôlons pas.
+1. Hold up est aujourd'hui une extension de bureau ; sur mobile, la signature se fait dans l'appli du portefeuille, que nous ne contrôlons pas.
 2. Sur mobile, le bon point d'ancrage est le portefeuille lui-même (SDK/partenariat) : c'est ce qu'ont fait MetaMask et Coinbase avec Blockaid, et nous le présentons comme feuille de route B2B, pas comme livré.
 3. Ce que nous démontrons : le moteur de vérification (intention contre effet) sur un payload fourni, via une application compagnon ; pas une interception transparente de bout en bout.
 4. Nous écartons volontairement l'accessibilité Android, les VPN et les claviers, parce que ce sont les techniques des logiciels malveillants et qu'ils sont restreints par Google.

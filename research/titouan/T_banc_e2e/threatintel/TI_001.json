@@ -1,6 +1,6 @@
 {
  "meta": {
-  "titre": "Veille des menaces Sentinelle TI_001 (domaine A)",
+  "titre": "Veille des menaces Hold up TI_001 (domaine A)",
   "date_redaction": "2026-10-11",
   "perimetre": "Domaine A: drainers, typed data, permits/Permit2, 7702/7715/7579, wallet_sendCalls, sweepers, evasion de simulation, empoisonnement. Domaine B (ingenierie sociale, usurpation d'interface, extensions, classifieurs) delegue a Adem.",
   "methode": "Recherche web en lecture seule; aucune telechargement ni execution. Les syntheses de pages ont ete produites par un modele intermediaire de WebFetch/WebSearch, donc les details fins sont a reverifier avant usage en test. Les sources vendeurs de drainers (Quark, etc.) n'ont pas ete retenues comme preuve.",

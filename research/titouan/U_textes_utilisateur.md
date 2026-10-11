@@ -1,4 +1,4 @@
-# U. Textes utilisateur par menace (Sentinelle)
+# U. Textes utilisateur par menace (Hold up)
 
 Date : 11/10/2026 (v2 après test de compréhension en aveugle; ancienne version : `U_textes_utilisateur_v1.json`). Source de vérité : `U_textes_utilisateur.json`. Contrôle : `node check_textes.mjs`.
 

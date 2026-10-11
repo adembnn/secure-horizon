@@ -1,4 +1,4 @@
-# U3 - Efficacité mesurée des interventions (avertissement, friction, délai) et part des pertes évitable par Sentinelle
+# U3 - Efficacité mesurée des interventions (avertissement, friction, délai) et part des pertes évitable par Hold up
 
 Date : 2026-10-11. Méthode : WebSearch/WebFetch, plus lecture locale (pdftotext) de trois PDF primaires : OBIE février 2021, CeDEx Nottingham 2023-08, Guan et al. USENIX Security 2026. Fichiers internes lus d'abord : OB_snaps_et_avertissements.md, R8_grilling_intention_et_friction.md, REGLES_avertissements.md. Aucun secret lu ou écrit.
 
@@ -132,7 +132,7 @@ Point commun : aucun vendeur ne publie (i) le dénominateur "alertes montrées",
 
 ### d.1 Part des pertes par catégorie : périmètre et sources
 
-**Avertissement de périmètre.** Il n'existe pas de dénominateur unique. Je construis un périmètre "pertes de particuliers qui signent ou envoient de la crypto", en juxtaposant des sources hétérogènes (global et États-Unis). Les parts sont donc **[C] indicatives** ; la catégorie D (investissement) est surtout américaine (IC3) et ne dit pas quelle part est envoyée depuis un wallet-extension plutôt qu'un exchange, un distributeur de crypto ou une appli bancaire (tous hors de portée de Sentinelle).
+**Avertissement de périmètre.** Il n'existe pas de dénominateur unique. Je construis un périmètre "pertes de particuliers qui signent ou envoient de la crypto", en juxtaposant des sources hétérogènes (global et États-Unis). Les parts sont donc **[C] indicatives** ; la catégorie D (investissement) est surtout américaine (IC3) et ne dit pas quelle part est envoyée depuis un wallet-extension plutôt qu'un exchange, un distributeur de crypto ou une appli bancaire (tous hors de portée de Hold up).
 
 | Cat. | Chiffre 2025 retenu (M$) | Source | Étiquette |
 |---|---|---|---|
@@ -203,12 +203,12 @@ Sanity check avec la filière la mieux mesurée : A haut = 0,82 x 0,80 = 65,6 % 
 
 ### d.4 Ce que le tableau ne dit pas (à ne pas oublier au pitch)
 
-1. **Couverture** : tout est calculé en supposant que 100 % des victimes de la catégorie utilisent Sentinelle. Avec une part de marché c, multiplier par c. Pour D (investissement) et C (faux support), une grande part des envois part d'exchanges, de distributeurs de crypto ou d'applis bancaires, hors d'une extension de wallet ; non quantifiée (non trouvé).
+1. **Couverture** : tout est calculé en supposant que 100 % des victimes de la catégorie utilisent Hold up. Avec une part de marché c, multiplier par c. Pour D (investissement) et C (faux support), une grande part des envois part d'exchanges, de distributeurs de crypto ou d'applis bancaires, hors d'une extension de wallet ; non quantifiée (non trouvé).
 2. **Pertes incrémentales** : on applique les arrêts incrémentaux (net du témoin), mais une victime évitée peut être re-ciblée ; effet de substitution non mesuré.
 3. **Biais du labo** : les 3 plus grands effets (wallet 48,6 %, OBIE 82 %, CeDEx 94 %) viennent de labos avec argent fictif et sans coach ; Akhawe montre que le labo biaise (dans le sens inverse selon le cas). Le terrain Monzo (23-30 %, 60-70 % avec blocage) est plus bas pour un écran seul.
 4. **Faux positifs** : le coût est de -6 à -20 points de paiements légitimes (OBIE, bras CTA) et 2-4 % d'annulations bénignes (wallet) ; notre banc donne 0,23 % de FP en R3 seul et 3,15 % pour le filet complet. Le gain "R3 + friction forte" (0,23 % de FP) est donc le plus défendable ; le filet complet à 3,15 % doit rester sur une friction légère (jaune) pour éviter l'habituation.
 5. **Attaquant adaptatif** : le rappel du banc est mesuré sur des attaques publiques étiquetées (risque de circularité avec ScamSniffer, noté par S3) ; il baisse si les drainers contournent la règle "spender compte externe".
-6. **Petites parts, grand effet** : A et B pèsent 1,6 % du pool mais représentent la partie où Sentinelle a le plus de prise (38 % évitable). Le pitch honnête : **forte efficacité sur 146 M$ de pertes natives wallet, quasi nulle sur 7,2 Md$ de fraude conforme** ; chiffrer à ~1 % du global.
+6. **Petites parts, grand effet** : A et B pèsent 1,6 % du pool mais représentent la partie où Hold up a le plus de prise (38 % évitable). Le pitch honnête : **forte efficacité sur 146 M$ de pertes natives wallet, quasi nulle sur 7,2 Md$ de fraude conforme** ; chiffrer à ~1 % du global.
 
 ### d.5 Pistes pour monter D et C (hors rappel du banc)
 

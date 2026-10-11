@@ -139,7 +139,7 @@ Rappel d'échelle [C] : drainers de signature (EVM) 83,85 M$ ≈ 0,74 % de la fr
 - TAM bas = 57,7 × 0,6 = **34,6 M** ; TAM haut = 102,5 × 0,7 = **71,8 M** ; TAM central = moyenne = **53,2 M** [C].
 - Réserve : les MAU de MetaMask incluent des comptes automatisés / peu actifs ; Phantom, Coinbase Wallet / Base App et Rainbow ne sont pas ajoutés faute de part EVM sourcée (sous-estime le TAM).
 
-**SAM : extension de bureau avec flux dApp** (périmètre de Sentinelle : navigateur de bureau Chrome-compatible, requêtes via window.ethereum).
+**SAM : extension de bureau avec flux dApp** (périmètre de Hold up : navigateur de bureau Chrome-compatible, requêtes via window.ethereum).
 - MetaMask extension = 30 M × part extension (40 / 50 / 60 %) = 12 / 15 / 18 M [C, part = H].
 - Autres extensions EVM actives (Rabby, Phantom EVM, OKX, Coinbase, Trust, Core) = 2,5 / 4 / 6 M [H : somme de Rabby 0,5 à 1,2 ; OKX ~1 ; Phantom EVM, Coinbase, Trust, Core de 0,5 à 1,5 chacun].
 - SAM extensions = 14,5 / 19 / 24 M [C].

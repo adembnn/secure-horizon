@@ -1,7 +1,7 @@
 # Boucle jurés (côté Claude-Titouan) : brief commun
 
 ## Le projet jugé
-"Sentinelle Fuji" (nom provisoire) : Track 1 Guardians of Value, sous-track 4 (DeFi + DORA). Quand le coffre on-chain d'un prestataire crypto agréé MiCA (soumis à DORA) est attaqué, l'outil détecte, resserre les sorties, et produit le dossier de déclaration DORA dont chaque champ pointe vers une preuve on-chain. Déploiement sur Avalanche Fuji (testnet), données synthétiques, aucune action contre un système réel.
+"Hold up Fuji" (nom provisoire) : Track 1 Guardians of Value, sous-track 4 (DeFi + DORA). Quand le coffre on-chain d'un prestataire crypto agréé MiCA (soumis à DORA) est attaqué, l'outil détecte, resserre les sorties, et produit le dossier de déclaration DORA dont chaque champ pointe vers une preuve on-chain. Déploiement sur Avalanche Fuji (testnet), données synthétiques, aucune action contre un système réel.
 
 ## Documents à lire (chemins absolus, dans cet ordre)
 1. C:\Users\detot\Documents\secure-horizon\docs\architecture.md (architecture v0 d'Adem)

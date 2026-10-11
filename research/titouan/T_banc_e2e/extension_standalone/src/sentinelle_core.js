@@ -1,4 +1,4 @@
-// Sentinelle - moteur EMBARQUE (version autonome). Aucun reseau, aucun module Node : tourne dans un service worker MV3.
+// Hold up - moteur EMBARQUE (version autonome). Aucun reseau, aucun module Node : tourne dans un service worker MV3.
 // Meme chaine que server/server.mjs et run/run_loop.mjs : moteur d'effets (engine/src) -> comparateur d'Adem (vendor/compare, converti en JS)
 // -> politique (policy) -> textes clairs (fiches U_textes_utilisateur). Le niveau le plus bas est 'info' : 'ok' n'existe pas.
 import * as E from './src/engine.js';
@@ -228,7 +228,10 @@ function buildTexts(fid, eff, host, extras) {
     contact: extras.contactLabel || 'ton contact', reseau_demande: 'le réseau demandé', reseau_reel: 'un autre réseau',
     adresse: (cp && cp.address) || (cc && cc.subject) || (out0 && out0.to) || '',
   };
-  if (ap && ap.expiry) v.jours = String(Math.max(1, Math.round((ap.expiry - Math.floor(Date.now() / 1000)) / 86400)));
+  if (ap && ap.expiry) { // correctif par rapport au serveur : une echeance "infinie" (uint max) donnait "1.3e+72 jours"
+    const days = Math.round((Number(ap.expiry) - Math.floor(Date.now() / 1000)) / 86400);
+    v.jours = Number.isFinite(days) && days <= 3650 ? String(Math.max(1, days)) : 'un nombre illimité de';
+  }
   return { croit: fill(f.croit, v), reel: fill(f.reel, v), danger: fill(f.danger, v), action: fill(f.action, v) };
 }
 const PRESSURE = /(support|conseiller|urgent|vite|ne (le )?dis (rien|à personne|a personne)|anydesk|teamviewer|d[ée]place(r)? (tes|vos) fonds|remboursement|rembours|dernier avertissement|compte (sera )?(bloqu|suspendu)|act(?:ion)? imm[ée]diate|do not tell|don'?t tell anyone|urgent|refund|customer support)/i;
@@ -312,6 +315,11 @@ export function evaluate(body, local = emptyLocal()) {
 // Point d'entree du service worker : borne la taille, ne leve jamais, ne renvoie jamais 'ok'.
 export function check(body, local) {
   const t0 = now_ms();
+  const v = checkInner(body, local);
+  v.latency_ms = Math.round((now_ms() - t0) * 100) / 100;
+  return v;
+}
+function checkInner(body, local) {
   let v;
   try {
     let size = 0;
@@ -322,6 +330,5 @@ export function check(body, local) {
     v = indeterminate('erreur interne du moteur : ' + String(e && e.message || e).slice(0, 120));
   }
   if (!v || !['critical', 'warn', 'info'].includes(v.niveau) || !['attention', 'danger', 'manipulation', 'unknown'].includes(v.level)) v = indeterminate('verdict invalide');
-  v.latency_ms = Math.round((now_ms() - t0) * 100) / 100;
   return v;
 }

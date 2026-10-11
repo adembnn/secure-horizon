@@ -40,7 +40,7 @@ Date de la recherche : 11 oct. 2026. Étiquettes : **P** primaire, **S** seconda
 - Les 95 adresses « à activité sortante, médiane 4 tx » sont compatibles avec des adresses jetables de drainer ou avec des faux positifs de liste : à ne pas interpréter sans examen.
 
 ### 3.3 Wallets
-- Core : Blockaid intégré depuis juin 2024 (annonce commune Blockaid/Core, 5 juin 2024). Core protège donc déjà ses utilisateurs par simulation et alertes. Cela réduit la valeur marginale d'une barrière « simulation + alerte » **dans Core**. L'angle différenciant de Sentinelle (comparer l'**intention déclarée** à l'effet simulé) n'est pas dans cette offre telle que décrite.
+- Core : Blockaid intégré depuis juin 2024 (annonce commune Blockaid/Core, 5 juin 2024). Core protège donc déjà ses utilisateurs par simulation et alertes. Cela réduit la valeur marginale d'une barrière « simulation + alerte » **dans Core**. L'angle différenciant de Hold up (comparer l'**intention déclarée** à l'effet simulé) n'est pas dans cette offre telle que décrite.
 - Le wallet grand public de la cible (« nouveaux lambda ») utilise très probablement MetaMask sur la C-Chain : la protection exacte y est non vérifiée.
 
 ### 3.4 EIP-7702
@@ -79,7 +79,7 @@ Date de la recherche : 11 oct. 2026. Étiquettes : **P** primaire, **S** seconda
 ### Pour le pitch
 1. Ne **pas** annoncer de chiffre de pertes Avalanche. Dire : « Avalanche est peu documentée et mal couverte par les listes ; nous le montrons avec un cas réel ».
 2. Cadrage honnête et fort : la barrière d'intention protège même quand **aucune liste ne connaît l'attaque** (cas des 3 adresses non listées).
-3. Si le jury objecte « Core a déjà Blockaid » : répondre que Blockaid vérifie des menaces connues et simule, alors que Sentinelle compare avec ce que l'utilisateur voulait faire ; et que le cœur grand public MetaMask n'est pas couvert de la même façon (point à vérifier avant de l'affirmer).
+3. Si le jury objecte « Core a déjà Blockaid » : répondre que Blockaid vérifie des menaces connues et simule, alors que Hold up compare avec ce que l'utilisateur voulait faire ; et que le cœur grand public MetaMask n'est pas couvert de la même façon (point à vérifier avant de l'affirmer).
 4. Si le jury objecte « faible volume d'attaques sur Avalanche » : le reconnaître, citer la réserve de couverture des listes (2 530 adresses sans chaîne), et ouvrir sur le multi-chaîne EVM.
 
 ## 7. À faire pour lever les incertitudes (non fait)

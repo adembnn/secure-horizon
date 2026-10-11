@@ -1,4 +1,4 @@
-/* Sentinelle - injecteur (monde MAIN, document_start, toutes frames).
+/* Hold up - injecteur (monde MAIN, document_start, toutes frames).
  * Enveloppe les fournisseurs EIP-1193 sur place (Proxy "apply" sur les methodes), retient les
  * demandes sensibles jusqu'a la decision prise par bridge.js (monde isole) via un MessageChannel prive. */
 (() => {
@@ -102,7 +102,7 @@
     return null;
   }
   function rejection(reason) {
-    const e = new Error(reason === 'denied' ? 'User rejected the request.' : 'Sentinelle: verification indisponible, demande bloquee (' + reason + ').');
+    const e = new Error(reason === 'denied' ? 'User rejected the request.' : 'Hold up: verification indisponible, demande bloquee (' + reason + ').');
     e.code = reason === 'denied' ? 4001 : 4900; // 4001 = refus utilisateur, 4900 = deconnecte
     return e;
   }
@@ -170,7 +170,7 @@
         if (a0 && typeof a0 === 'object' && !Array.isArray(a0) && JOURNAL.has(a0.method)) notify({ method: a0.method, kind: 'journal' });
         // send(payload) synchrone sans rappel: impossible a retenir. Les portefeuilles ne le supportent pas pour les signatures.
         if (a0 && typeof a0 === 'object' && !Array.isArray(a0) && GATED.has(a0.method)) {
-          const e = new Error('Sentinelle: appel synchrone send(payload) non supporte pour ' + a0.method); e.code = 4900; throw e;
+          const e = new Error('Hold up: appel synchrone send(payload) non supporte pour ' + a0.method); e.code = 4900; throw e;
         }
         return rApply(t, thisArg, args);
       }

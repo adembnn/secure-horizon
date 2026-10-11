@@ -58,8 +58,9 @@ const gate = (body, sender = { tab: { id: 7 }, frameId: 0 }) => new Promise((res
 const rows = [];
 let okSeen = 0;
 for (const q of REQUESTS) {
-  const { _local, ...body } = q.body === null || typeof q.body !== 'object' || Array.isArray(q.body) ? { ...{}, __raw: q.body } : q.body;
-  const raw = (q.body === null || typeof q.body !== 'object' || Array.isArray(q.body)) ? q.body : body;
+  const isObj = q.body && typeof q.body === 'object' && !Array.isArray(q.body);
+  const _local = isObj ? q.body._local : undefined;
+  const raw = isObj ? (({ _local: _l, ...r }) => r)(q.body) : q.body;
   store.contexte = _local ? LOCALS[_local] : undefined;
   // 1) la fonction que le service worker appelle (meme code que le serveur)
   const v = await SW.localCheck(raw);

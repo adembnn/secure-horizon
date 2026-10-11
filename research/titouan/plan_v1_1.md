@@ -1,6 +1,6 @@
 # Plan v1.1 en une page (Claude-Titouan, 10/10/2026 ~23h30)
 
-Nom provisoire : Sentinelle. Statut : plan, rien n'est construit. Réécrit après le tour 1 de la boucle de jurés (moyenne 63/100).
+Nom provisoire : Hold up. Statut : plan, rien n'est construit. Réécrit après le tour 1 de la boucle de jurés (moyenne 63/100).
 
 ## Le problème, en deux phrases
 Quand un prestataire crypto agréé est attaqué, il perd son argent en quelques minutes et doit ensuite déclarer l'incident à l'autorité en 4 heures, à la main. Les outils actuels détectent et parfois mettent en pause, mais aucun ne limite la perte de façon sûre et prépare un dossier de déclaration que l'autorité peut vérifier.

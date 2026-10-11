@@ -1,0 +1,47 @@
+{
+ "fichiers_analyses": 26,
+ "constantes_64_hex_publiques": 0,
+ "constats": {},
+ "manifeste": [
+  {
+   "name": "manifest_version 3",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "service worker de type module",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "permissions = [storage] seulement",
+   "pass": true,
+   "detail": "[\"storage\"]"
+  },
+  {
+   "name": "aucun host_permissions",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucune permission optionnelle",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "pas de externally_connectable / web_accessible_resources / update_url",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "CSP : script-src self, connect-src none, aucun http dans la CSP",
+   "pass": true,
+   "detail": "script-src 'self'; object-src 'self'; connect-src 'none'"
+  },
+  {
+   "name": "seuls bridge.js / inject.js en scripts de contenu, fichiers presents",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}

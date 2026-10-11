@@ -1,4 +1,4 @@
-# Sentinelle (brouillon de README jury)
+# Hold up (brouillon de README jury)
 
 Statut : brouillon du 11 oct. 2026, écrit à partir des fichiers de mesure du repo. Les chemins sont relatifs à la racine du repo. Tout chiffre est suivi de sa source. Ce qui n'est pas mesuré est dit "non mesuré". Aucune promesse de résultat.
 
@@ -6,7 +6,7 @@ Statut : brouillon du 11 oct. 2026, écrit à partir des fichiers de mesure du r
 
 Un particulier qui signe dans son portefeuille voit des octets, pas des conséquences. Un faux support, un faux concours ou un site sosie lui fait signer un droit de dépense (approve, permit) ou envoyer des fonds à une adresse piégée. Il croit faire une chose simple. La transaction en fait une autre.
 
-Sentinelle compare ce que la personne dit vouloir faire avec ce que la transaction fait réellement. Si les deux ne correspondent pas, elle avertit en reprenant ses mots ("tu as dit X, ça fait Y") et elle ralentit la décision. Elle ne retire jamais le choix à l'utilisateur.
+Hold up compare ce que la personne dit vouloir faire avec ce que la transaction fait réellement. Si les deux ne correspondent pas, elle avertit en reprenant ses mots ("tu as dit X, ça fait Y") et elle ralentit la décision. Elle ne retire jamais le choix à l'utilisateur.
 
 ## 2. Cible
 
@@ -76,14 +76,14 @@ Les guides `INSTALL_FR.md` et `INSTALL_STANDALONE_FR.md` n'existaient pas à la 
    Il écoute sur `http://127.0.0.1:8787`. Option `--no-journal` pour désactiver le journal. Contrôle : `GET /health`.
 2. Préparer le dossier de l'extension :
    `powershell -ExecutionPolicy Bypass -File server\package.ps1`
-   Cela crée `dist\sentinelle-extension` et `dist\sentinelle-extension.zip` (sans tests, sans faux moteur).
-3. Dans Chrome ou Edge : `chrome://extensions`, activer le mode développeur, "Charger l'extension non empaquetée", choisir `dist\sentinelle-extension`.
+   Cela crée `dist\hold-up-extension` et `dist\hold-up-extension.zip` (sans tests, sans faux moteur).
+3. Dans Chrome ou Edge : `chrome://extensions`, activer le mode développeur, "Charger l'extension non empaquetée", choisir `dist\hold-up-extension`.
 4. Vérifier le journal à tout moment :
    `node server/server.mjs --verify-journal` affiche "journal OK" ou la ligne où la chaîne est cassée.
 
 ### 4.2 Version autonome
 
-Moteur embarqué dans l'extension, aucun serveur, aucun réseau sortant. Code source : `research/titouan/T_banc_e2e/extension_standalone/src/` (`sentinelle_core.js`, `background.js`). Zip et guide : en cours, voir `INSTALL_STANDALONE_FR.md` s'il existe. Équivalence verdict par verdict avec la voie de référence : annoncée, non vérifiée par l'auteur de ce brouillon.
+Moteur embarqué dans l'extension, aucun serveur, aucun réseau sortant. Code source : `research/titouan/T_banc_e2e/extension_standalone/src/` (`hold-up_core.js`, `background.js`). Zip et guide : en cours, voir `INSTALL_STANDALONE_FR.md` s'il existe. Équivalence verdict par verdict avec la voie de référence : annoncée, non vérifiée par l'auteur de ce brouillon.
 
 ### 4.3 Réglages de test
 

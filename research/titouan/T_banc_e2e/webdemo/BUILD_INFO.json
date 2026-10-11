@@ -1,0 +1,184 @@
+{
+ "build": "holdup-webdemo",
+ "sources": [
+  {
+   "file": "../U_textes_utilisateur.json",
+   "sha256": "df179340f30d32893eedda1d3f8c6df17d4fd5e133310c8e10b96b08221cbc62"
+  },
+  {
+   "file": "attacks_public/PUBLIC.jsonl",
+   "sha256": "79b13a3eebdbbe3d449736be12043efee92f3be6940e40bb19b6e77794f9cbb6"
+  },
+  {
+   "file": "engine/src/abi_encode.mjs",
+   "sha256": "ee593154d04e1b642b0b4c7f5a652f337fba9bce4434a0bd658d1edbb426dd55"
+  },
+  {
+   "file": "engine/src/abi.mjs",
+   "sha256": "cb215b90b180391f160fb256f50ae4021100e0230274e0ff39672db2d3739647"
+  },
+  {
+   "file": "engine/src/calldata.mjs",
+   "sha256": "994b969530cd9fae0afa676a4320b0f9bf939a12bbafe8695742346ed4da266f"
+  },
+  {
+   "file": "engine/src/eip712.mjs",
+   "sha256": "33748da09cc26f6885f36f5d2167087e52c3fd4a332c5e5ea959fed4cb3ca3d3"
+  },
+  {
+   "file": "engine/src/engine.mjs",
+   "sha256": "3c2de1406af6b2bef12dcc2017945cd8267127250bb94bd7d2534e3ef140a295"
+  },
+  {
+   "file": "engine/src/fixes.mjs",
+   "sha256": "e8e692e3f88898cda6e90a18dbb284003f4ae4442e2a4746e9564dba190e524a"
+  },
+  {
+   "file": "engine/src/keccak.mjs",
+   "sha256": "5c3b9570cfe39ca8ff76f0a807e39b96c42d5ccc2b8b66e22accc6aa0cc6cf7c"
+  },
+  {
+   "file": "engine/src/registry.mjs",
+   "sha256": "e93b80f646cda08ac40678cb6bd75d5eb96e690c8312c44251eff83f4bb07ca2"
+  },
+  {
+   "file": "engine/src/rlp.mjs",
+   "sha256": "1ad75bb91ec195935486805da3900ec4c26a7b459375ef3738c63218dd9ed0d9"
+  },
+  {
+   "file": "engine/src/rules_extra.mjs",
+   "sha256": "760cb700251f821d6c31c34dc4ae143033dfebcf1289ac2f7cdd5d9b69ad11f7"
+  },
+  {
+   "file": "engine/src/rules.mjs",
+   "sha256": "75914eca31de948b391a58ee4a3174d35acb4fe0f5fe5d04362253b745a896b3"
+  },
+  {
+   "file": "engine/src/typed.mjs",
+   "sha256": "2fe3bab036d140b3aae56374321fcde7c99ab7664a00714e68656cfaa0b4d172"
+  },
+  {
+   "file": "engine/src/typehashes.mjs",
+   "sha256": "841b477f84c8ce236d87c47301628c0dda88728a03b2e97b85b247a5899731c0"
+  },
+  {
+   "file": "engine/src/util.mjs",
+   "sha256": "006143001b9834d389369a43a51c95c7e411ba563014fed83a7c2b579a84610c"
+  },
+  {
+   "file": "engine/vendor/compare.ts",
+   "sha256": "b8bf8c71bb0bf9f1540fa77c3bf239f2207aa604b62c7fce33fc72592b7a537d"
+  },
+  {
+   "file": "engine/vendor/types.ts",
+   "sha256": "b4317f9301d1910f07f5c9af4925363c5da6e9c4203529e4daba43afa7eb6983"
+  },
+  {
+   "file": "extension_standalone/src/sentinelle_core.js",
+   "sha256": "73b00aefd2eb5deba84e12952130336eb91abe6a48e268f4513977ad199acb65"
+  },
+  {
+   "file": "run/policy.mjs",
+   "sha256": "b3395421813cd7403bead543843dbd7375f378f62c97ce87b684c5a22165396c"
+  }
+ ],
+ "outputs": [
+  {
+   "file": "engine/policy.js",
+   "bytes": 5737,
+   "sha256": "b132e86a5c4b513f73a025966debb2c3eee7023f451ecae1ff064fb04a4fa042"
+  },
+  {
+   "file": "engine/sentinelle_core.js",
+   "bytes": 22309,
+   "sha256": "73b00aefd2eb5deba84e12952130336eb91abe6a48e268f4513977ad199acb65"
+  },
+  {
+   "file": "engine/src/abi_encode.js",
+   "bytes": 2206,
+   "sha256": "5891306e106216c964b3f78cef96fefe0c118f493808925ec1e012b2465b01fe"
+  },
+  {
+   "file": "engine/src/abi.js",
+   "bytes": 5381,
+   "sha256": "7bb2470709dba339830d33d852a4114a8adc54840327f57ccb5eea469d1a66de"
+  },
+  {
+   "file": "engine/src/calldata.js",
+   "bytes": 29327,
+   "sha256": "04b3e4ad3ccaf1076d8dcf96a6ccd29dd9449ff6bf452e6b05eaa0778aec3719"
+  },
+  {
+   "file": "engine/src/eip712.js",
+   "bytes": 3235,
+   "sha256": "af92dca89035280ce88b232dd4ccb37b1a3cb3fc85d616dde461d2eb14244c95"
+  },
+  {
+   "file": "engine/src/engine.js",
+   "bytes": 15041,
+   "sha256": "5773faa9321635e74faf4c2dc6e330bc253c1d6dd3458625387ff9846fb2fda3"
+  },
+  {
+   "file": "engine/src/fixes.js",
+   "bytes": 618,
+   "sha256": "e8e692e3f88898cda6e90a18dbb284003f4ae4442e2a4746e9564dba190e524a"
+  },
+  {
+   "file": "engine/src/keccak.js",
+   "bytes": 3140,
+   "sha256": "5c3b9570cfe39ca8ff76f0a807e39b96c42d5ccc2b8b66e22accc6aa0cc6cf7c"
+  },
+  {
+   "file": "engine/src/registry.js",
+   "bytes": 11238,
+   "sha256": "a600d72c4a2e41621d52af00a0a07024766b4837335495684b18cb1c7169f561"
+  },
+  {
+   "file": "engine/src/rlp.js",
+   "bytes": 3349,
+   "sha256": "8cae28ca2a16ccb8450244083f46adcd0941d5347f392ec77f94978f4c8049b6"
+  },
+  {
+   "file": "engine/src/rules_extra.js",
+   "bytes": 14016,
+   "sha256": "3c38b59c2ca2bed10ef39321e4746acd5d88b7d95fd58e6c48a213277eaadb53"
+  },
+  {
+   "file": "engine/src/rules.js",
+   "bytes": 7451,
+   "sha256": "0d03ed10e9b8935594cb25d85ddb17390b700233508157dc09e7ae440955c485"
+  },
+  {
+   "file": "engine/src/typed.js",
+   "bytes": 18099,
+   "sha256": "628ac2311f8fb992b65aa8ef0229bf72aecd29dbf2b24fec44f4d87f57a16088"
+  },
+  {
+   "file": "engine/src/typehashes.js",
+   "bytes": 4258,
+   "sha256": "4759d9f724ab7fa39a694ed9d8ff403af31a402011f2bef93f06b70debe44d06"
+  },
+  {
+   "file": "engine/src/util.js",
+   "bytes": 2138,
+   "sha256": "374f3b6ef10d512b1070d404b79c1e567be40aa66a233db20906b714d8be50b4"
+  },
+  {
+   "file": "engine/textes.js",
+   "bytes": 31233,
+   "sha256": "155c5f20c3ec560234ae641c64a0f1f3173d4b153f309d8a376f410669b0989b"
+  },
+  {
+   "file": "engine/vendor/compare.js",
+   "bytes": 13511,
+   "sha256": "21ee157ec239ac4bf0ae3cf0f40f13ba5048d44bf6834c3ead42fbdefc9d10ac"
+  },
+  {
+   "file": "js/exemples_public.js",
+   "bytes": 12133,
+   "sha256": "287ca2780020efc9727937b6ee27d8c5bfbe832c2677664cfc9c3392719141a5"
+  }
+ ],
+ "total_bytes": 204420,
+ "tree_sha256": "6598e952631da8b1406438b5abcc150dcda324237372e069bc77565ac62a0464"
+}

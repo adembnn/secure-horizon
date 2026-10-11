@@ -118,6 +118,7 @@ for (const c of list) c.distinctVictimsOfS = sCount.get(c.S).size;
 for (const c of list) {
   if (c.priorRelationSosie > 0) c.auto = 'faux_positif';
   else if (c.batchSize >= 5 || c.distinctVictimsOfS >= 2) c.auto = 'empoisonnement_probable';
+  else if (c.p >= 4 && c.s >= 4 && (c.kinds.includes('out_zero') || c.events.every(e => e.v <= 0.0003))) c.auto = 'empoisonnement_probable'; // 4+4 + zero forge ou poussiere <0.0003 USD
   else if (c.p + c.s >= 9 && c.kinds.some(k => k !== 'out_zero')) c.auto = 'empoisonnement_probable';
   else c.auto = 'indetermine';
 }
@@ -125,10 +126,12 @@ for (const c of list) {
 // ---------- 3. comparaison de seuils + controle par collision aleatoire ----------
 const n44 = list.filter(c => c.p >= 4 && c.s >= 4).length;
 const relaxed = detect(3, 3, real); const relaxed2 = detect(2, 3, real);
+const trueS = new Set(list.map(c => c.S));
+const cntNull = (P, S, rs) => [...detect(P, S, rs).cands.values()].filter(c => !trueS.has(c.S)).length;
 const rnd = rng(SEED);
 function shuffleB() { const Bs = real.map(r => r[3]); for (let i = Bs.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [Bs[i], Bs[j]] = [Bs[j], Bs[i]]; } return real.map((r, i) => [r[0], r[1], r[2], Bs[i], r[4], r[5], r[6]]); }
 const REPS = 10, ctrl = { '3+4': [], '3+3': [], '2+3': [] };
-for (let i = 0; i < REPS; i++) { const sh = shuffleB(); ctrl['3+4'].push(detect(3, 4, sh).cands.size); ctrl['3+3'].push(detect(3, 3, sh).cands.size); ctrl['2+3'].push(detect(2, 3, sh).cands.size); }
+for (let i = 0; i < REPS; i++) { const sh = shuffleB(); ctrl['3+4'].push(cntNull(3, 4, sh)); ctrl['3+3'].push(cntNull(3, 3, sh)); ctrl['2+3'].push(cntNull(2, 3, sh)); }
 const pHit = (P, S) => Math.pow(16, -(P + S)) * (15 / 16) * (15 / 16);
 // ---------- 4. echantillon pour validation manuelle + tx.from ----------
 const r2 = rng(SEED + 7);
@@ -139,13 +142,15 @@ async function isContract(a) { if (codeCache.has(a)) return codeCache.get(a); co
 const blockTs = new Map(); async function bts(b) { if (!blockTs.has(b)) { blockTs.set(b, await ts(b)); await sleep(250); } return blockTs.get(b); }
 for (const c of sample) {
   c.isContract = { A: await isContract(c.A), B: await isContract(c.B), S: await isContract(c.S) };
+  { const e0 = c.events[0]; const t = await rpc('eth_getTransactionByHash', [e0.tx]); await sleep(250); c.txFromIsVictim = t ? t.from.toLowerCase() === c.A : null; c.txFromIsSosie = t ? t.from.toLowerCase() === c.S : null; }
   c.delaySecExact = (await bts(Math.min(...c.events.map(e => e.b)))) - (await bts(c.realBlock));
 }
 // campagnes: tx.from des transactions de poison (echantillon)
 const poisonTx = [...new Set(list.flatMap(c => c.events.map(e => e.tx)))];
 const txs = pick(poisonTx).slice(0, TXSAMPLE); const txFrom = new Map();
 for (const h of txs) { const t = await rpc('eth_getTransactionByHash', [h]); await sleep(300); if (t) txFrom.set(h, { from: t.from.toLowerCase(), to: (t.to || '').toLowerCase() }); }
-const camp = new Map(); for (const [, v] of txFrom) { const o = camp.get(v.from) || { txs: 0, tos: new Set() }; o.txs++; o.tos.add(v.to); camp.set(v.from, o); }
+const txVictims = new Map(); for (const c of list) for (const e of c.events) { if (!txVictims.has(e.tx)) txVictims.set(e.tx, new Set()); txVictims.get(e.tx).add(c.A); }
+const camp = new Map(); for (const [h, v] of txFrom) { const o = camp.get(v.from) || { txs: 0, tos: new Set(), victims: new Set() }; o.txs++; o.tos.add(v.to); for (const a of txVictims.get(h) || []) o.victims.add(a); camp.set(v.from, o); }
 // ScamSniffer (comptes seulement)
 let ss = new Set(); try { ss = new Set(JSON.parse(fs.readFileSync(path.join(__dir, '..', '..', 'bench', 'data', 'address.json'), 'utf8')).map(x => x.toLowerCase())); } catch { }
 const sosies = new Set(list.map(c => c.S)), victims = new Set(list.map(c => c.A));
@@ -169,8 +174,10 @@ const summary = {
   zeroEvents: sum(list.map(c => c.events.filter(e => e.kind !== 'in_dust').length)),
   victimSentToSosie: { count: lost.length, usd: +sum(lost.map(c => c.victimSentToSosieUSD)).toFixed(2) },
   delaySecEst: { median: sortedDelay[Math.floor(list.length / 2)], max: sortedDelay[list.length - 1] },
-  campaigns: { txSampled: txs.length, poisonTxDistinct: poisonTx.length, distinctTxSenders: camp.size, senders: [...camp.entries()].map(([k, v]) => ({ sender: k.slice(0, 6) + '..' + k.slice(-4), txs: v.txs, tos: v.tos.size })).sort((a, b) => b.txs - a.txs).slice(0, 15) },
+  campaigns: { txSampled: txs.length, poisonTxDistinct: poisonTx.length, distinctTxSenders: camp.size, senders: [...camp.entries()].map(([k, v]) => ({ sender: k.slice(0, 6) + '..' + k.slice(-4), txs: v.txs, tos: v.tos.size, victims: v.victims.size })).sort((a, b) => b.txs - a.txs).slice(0, 15) },
   scamsniffer: inSS,
+  dustValueTop: Object.entries(list.flatMap(c => c.events).filter(e => e.kind === 'in_dust').reduce((m, e) => (m[e.v] = (m[e.v] || 0) + 1, m), {})).sort((a, b) => b[1] - a[1]).slice(0, 6),
+  sampleChecks: { n: sample.length, txFromIsVictim: sample.filter(c => c.txFromIsVictim).length, outZeroInSample: sample.filter(c => c.kinds.includes('out_zero')).length, outZeroForged: sample.filter(c => c.kinds.includes('out_zero') && c.events[0].kind === 'out_zero' && c.txFromIsVictim === false).length, contractSosie: sample.filter(c => c.isContract.S).length, contractB: sample.filter(c => c.isContract.B).length, contractA: sample.filter(c => c.isContract.A).length },
 };
 fs.writeFileSync(path.join(OUT, 'summary.json'), JSON.stringify(summary, null, 1));
 fs.writeFileSync(path.join(OUT, 'candidates.json'), JSON.stringify(list));

@@ -42,7 +42,7 @@ Plafond de sortie en dur (6/7), dossier DORA avec preuve par champ et deux lectu
 Une démo unique de 2 à 3 minutes, sur Fuji avec liens Snowtrace, qui se lit sans narration : le coffre se vide en direct, le plafond bloque dès le 3e retrait, un compteur "X € sauvés sur Y", une comparaison mesurée avec un cas réel (Bitget : moins de 0,3 % gelé en un jour), un clic sur un champ du dossier ouvre la transaction, puis un tableau de métriques avec les ratés. Le juré Avalanche : sans lien Snowtrace, sous 65. Le juré AMF : mettre le moteur en échec devant lui sur trois cas limites avec les deux lectures.
 
 ## Comparaison avec Trustee (juré Kryptosphère)
-Trustee : un utilisateur normal, un clic, un score lisible, une explication, compris en 10 secondes. Sentinelle : B2B réglementé, formulaire de 60 champs. "Trustee gagnerait au pitch aujourd'hui", sauf si la démo transforme la conformité en spectacle visible (argent sauvé, champ prouvé en un clic, phrase "voilà pourquoi on a bloqué" à l'écran).
+Trustee : un utilisateur normal, un clic, un score lisible, une explication, compris en 10 secondes. Hold up : B2B réglementé, formulaire de 60 champs. "Trustee gagnerait au pitch aujourd'hui", sauf si la démo transforme la conformité en spectacle visible (argent sauvé, champ prouvé en un clic, phrase "voilà pourquoi on a bloqué" à l'écran).
 
 ## Décision pour le tour 2
 Réécrire le plan en une page lisible (plan_v1_1.md), appliquer les remèdes 1 à 7 et les défenses contre les attaques sur le système, puis refaire noter par les mêmes 7 jurés. Objectif : passer de 63 à 72 ou plus, et surtout voir si les jurés trouvent de nouveaux défauts plutôt que les mêmes.

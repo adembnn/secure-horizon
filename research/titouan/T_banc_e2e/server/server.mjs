@@ -1,4 +1,4 @@
-// Sentinelle - serveur local /check. Node >= 22 (type stripping .ts), zero dependance, 127.0.0.1 UNIQUEMENT.
+// Hold up - serveur local /check. Node >= 22 (type stripping .ts), zero dependance, 127.0.0.1 UNIQUEMENT.
 // Appelle le VRAI moteur d'effets (engine/src), le comparateur d'Adem (engine/vendor/compare.ts, non modifie) et la politique (run/policy.mjs),
 // les memes fonctions que run/run_loop.mjs, mais sans lire aucun jeu de cas et sans reseau (contexte hors ligne).
 // Usage : node server/server.mjs            (journal actif)       node server/server.mjs --no-journal
@@ -338,7 +338,7 @@ export function verifyJournal(file) {
 
 // ------------------------------------------------------------------ serveur HTTP
 const EXT_ORIGIN = /^chrome-extension:\/\/[a-p]{32}$/;
-export function createSentinelleServer({ port = 8787, journalFile, journalEnabled = true, local = loadLocalContext(), extId = process.env.SENTINELLE_EXT_ID } = {}) {
+export function createHoldUpServer({ port = 8787, journalFile, journalEnabled = true, local = loadLocalContext(), extId = process.env.SENTINELLE_EXT_ID } = {}) {
   const journal = makeJournal(journalFile || join(HERE, '..', 'journal', 'verdicts.jsonl'), journalEnabled);
   const stats = { n: 0 };
   const srv = http.createServer((req, res) => {
@@ -408,10 +408,10 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   try {
     // chauffe (premier appel du moteur plus lent)
     evaluate({ method: 'eth_sendTransaction', params: [{ from: '0x' + '1'.repeat(40), to: '0x' + '2'.repeat(40), value: '0x1', data: '0x' }], origin: 'https://warmup.local', chainId: '0x1' });
-    const s = await createSentinelleServer({ port, journalFile: jf, journalEnabled: jOn });
-    console.log(`Sentinelle : serveur pret sur http://127.0.0.1:${s.port}  (journal ${jOn ? jf : 'desactive'}). Ctrl+C pour arreter.`);
+    const s = await createHoldUpServer({ port, journalFile: jf, journalEnabled: jOn });
+    console.log(`Hold up : serveur pret sur http://127.0.0.1:${s.port}  (journal ${jOn ? jf : 'desactive'}). Ctrl+C pour arreter.`);
   } catch (e) {
-    console.error(e.code === 'EADDRINUSE' ? `Le port ${port} est deja utilise (un autre serveur Sentinelle tourne peut-etre). Ferme-le puis relance.` : 'Echec du demarrage : ' + e.message);
+    console.error(e.code === 'EADDRINUSE' ? `Le port ${port} est deja utilise (un autre serveur Hold up tourne peut-etre). Ferme-le puis relance.` : 'Echec du demarrage : ' + e.message);
     process.exit(1);
   }
 }

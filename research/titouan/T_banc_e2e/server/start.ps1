@@ -1,4 +1,4 @@
-# Lance le serveur local Sentinelle (127.0.0.1:8787). Usage : powershell -File server\start.ps1  [--no-journal]
+# Lance le serveur local Hold up (127.0.0.1:8787). Usage : powershell -File server\start.ps1  [--no-journal]
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 $node = Get-Command node -ErrorAction SilentlyContinue

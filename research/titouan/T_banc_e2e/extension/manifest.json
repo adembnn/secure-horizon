@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Sentinelle",
+  "name": "Hold up",
   "version": "0.1.0",
   "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles jusqu'a la decision de la personne.",
   "minimum_chrome_version": "111",

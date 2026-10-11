@@ -1,4 +1,4 @@
-# U5a - Extensions de navigateur sur mobile en 2026 : Sentinelle peut-elle exister sur téléphone ?
+# U5a - Extensions de navigateur sur mobile en 2026 : Hold up peut-elle exister sur téléphone ?
 
 Date de la recherche : 11 octobre 2026. Auteur : agent de recherche (sans téléchargement ni installation).
 
@@ -64,7 +64,7 @@ Limites honnêtes : certaines pages officielles (Apple Developer, Android Author
 | Vivaldi / Edge / Yandex / Quetta Android (Chromium) | OUI en principe (Chromium 111+) | `world: MAIN` Chrome 111 [P BCD]. Mais les builds mobiles sont jeunes ou expérimentaux : à tester, non vérifié. |
 | Chrome Android, Chrome iOS, Brave Android, DuckDuckGo | NON | Pas d'extensions. |
 
-Conclusion partielle : la mécanique de Sentinelle (script MAIN à document_start qui enveloppe `window.ethereum` et écoute EIP-6963) est techniquement possible sur Firefox Android et Safari iOS 18, et probablement sur les Chromium Android récents.
+Conclusion partielle : la mécanique de Hold up (script MAIN à document_start qui enveloppe `window.ethereum` et écoute EIP-6963) est techniquement possible sur Firefox Android et Safari iOS 18, et probablement sur les Chromium Android récents.
 
 ### 2.2 Mais y a-t-il un fournisseur à envelopper ?
 
@@ -77,7 +77,7 @@ C'est le point bloquant. Un wrapper n'a de sens que si un portefeuille injecte `
 - Alerte : une fiche AMO "Meta Flask: (ETH, BSC, SOL)" (créée le 6 octobre 2026, 0 utilisateur, non signée par Mozilla, fichier nommé "crossposterl-1.5.2.xpi", langue par défaut fr, compat Android 142+) se présente comme une distribution "canary" de MetaMask. Elle ne correspond pas au profil d'un produit MetaMask officiel (nom de fichier incohérent, non signée). Ne pas l'installer ; signaler comme risque d'usurpation (non vérifié davantage). Une autre fiche "Approval Scanner PermitDecoder" (Android 142+, 0 utilisateur, créée en mai 2026) décode les signatures EIP-712 : concurrent potentiel de niche, aucune traction.
 - Safari iOS : [S] des portefeuilles-extensions Safari existent : Dawn (portefeuille Ethereum iOS avec extension Safari, [V]), Tokenary/Big Wallet de lil.org ("connect like metamask in safari", iOS/macOS/visionOS, [P] dépôt GitHub lu ; l'App Store n'a pas pu être lu), projets expérimentaux (Safari Wallet de Balance, JankyMask, [S/P README]). Phantom : pas d'extension Safari ([S], mars 2026) ; Rainbow : Chrome, Brave, Edge, Firefox, Arc seulement ([S]) ; Coinbase : non trouvé. Ces portefeuilles Safari, pour l'essentiel, sont des produits de niche.
 - Portefeuilles avec navigateur intégré : le grand public mobile passe par l'app du portefeuille. Trust Wallet a retiré son navigateur dApp d'iOS (règle 4.7 d'Apple) ; Android non affecté ([V] forum communautaire Trust Wallet, en 2020) ; Coinbase Wallet avait annoncé retirer le dApp browser d'iOS fin 2019 ([S] The Block). Ces deux informations sont anciennes ; l'état 2026 n'est pas confirmé. Dans un navigateur intégré, aucune extension tierce ne peut s'exécuter : le code de la page est lancé dans la WebView de l'application.
-- WalletConnect : le portefeuille est dans une autre app ; la page ne reçoit pas `window.ethereum`. Sentinelle (qui enveloppe EIP-1193) ne voit pas ces requêtes. [V] Pocket Universe l'écrit lui-même : "doesn't work with WalletConnect".
+- WalletConnect : le portefeuille est dans une autre app ; la page ne reçoit pas `window.ethereum`. Hold up (qui enveloppe EIP-1193) ne voit pas ces requêtes. [V] Pocket Universe l'écrit lui-même : "doesn't work with WalletConnect".
 
 Donc : sur mobile, la combinaison "extension de navigateur + portefeuille extension qui injecte window.ethereum" n'existe pratiquement que sur Safari iOS avec des portefeuilles de niche (Dawn, Tokenary) et, à la marge, sur Vivaldi/Edge Android si l'utilisateur y installe MetaMask depuis le Chrome Web Store (non testé, non confirmé : l'extension MetaMask mobile-Chromium n'a pas de source).
 
@@ -104,7 +104,7 @@ Retour d'usage et nombre d'utilisateurs mobiles de ces extensions : non trouvé 
 ### 4.1 Firefox Android
 - Coût : AMO gratuit (aucun frais mentionné dans la doc de soumission lue, ni de délai de revue), compte Mozilla.
 - Travail : (a) manifest compatible Firefox : `background.scripts` en event page au lieu de `service_worker` ; `browser_specific_settings.gecko` et `gecko_android` ; (b) `web-ext lint` ; (c) interface responsive (popup/options) ; (d) test sur téléphone via `web-ext run -t firefox-android` ; (e) choisir la compatibilité Android au téléversement.
-- Obstacle majeur non technique : il n'y a quasiment pas de portefeuille EVM grand public sur Firefox Android (section 2.2). Sentinelle serait un wrapper sans objet à envelopper, sauf si l'utilisateur injecte un portefeuille tiers peu fiable. Le seul bénéfice serait la détection de sites/dApps qui utilisent des fournisseurs injectés par page.
+- Obstacle majeur non technique : il n'y a quasiment pas de portefeuille EVM grand public sur Firefox Android (section 2.2). Hold up serait un wrapper sans objet à envelopper, sauf si l'utilisateur injecte un portefeuille tiers peu fiable. Le seul bénéfice serait la détection de sites/dApps qui utilisent des fournisseurs injectés par page.
 - Délai réaliste : ESTIMATION 2 à 5 jours pour un build fonctionnel sur un Android de test, +revue AMO (délai non trouvé). Usage réel visé : quasi nul.
 
 ### 4.2 Safari iOS
@@ -115,12 +115,12 @@ Retour d'usage et nombre d'utilisateurs mobiles de ces extensions : non trouvé 
 - Délai réaliste : ESTIMATION 3 à 6 semaines pour une v1 prête App Store (apprentissage Xcode compris), 1 à 2 semaines pour un prototype sur simulateur/appareil si un Mac est disponible.
 
 ### 4.3 Chromium Android (Vivaldi, Edge, Yandex, Quetta)
-- L'extension actuelle (MV3) pourrait marcher telle quelle ou presque ; compatibilité non vérifiée. Vivaldi 8.2 (10 septembre 2026) est la voie la plus simple : Chrome Web Store, "Add to Vivaldi". Le Chrome Web Store n'a rien à changer côté Sentinelle.
+- L'extension actuelle (MV3) pourrait marcher telle quelle ou presque ; compatibilité non vérifiée. Vivaldi 8.2 (10 septembre 2026) est la voie la plus simple : Chrome Web Store, "Add to Vivaldi". Le Chrome Web Store n'a rien à changer côté Hold up.
 - Mais ces navigateurs sont marginaux, et sans portefeuille injecté pertinent (MetaMask depuis le Chrome Web Store ? non vérifié sur Vivaldi/Edge Android ; popup et UI desktop mal adaptés au tactile : "Not all desktop extensions work on mobile").
 
 ### 4.4 Ce qu'on peut tester en 36 h (honnêtement)
 Sans Mac (le cas de Titouan) :
-1. Sur un téléphone Android (si disponible) : installer Vivaldi 8.2 ou Firefox Android et charger Sentinelle (Vivaldi : via Chrome Web Store ou chargement non empaqueté si l'option existe : non vérifié ; Firefox : `web-ext run -t firefox-android` après adaptation MV3 -> event page). Vérifier trois choses : (a) le script MAIN s'exécute à document_start, (b) `window.ethereum` est vu/enveloppé quand un portefeuille est présent, (c) l'UI d'avertissement est lisible à 375 px.
+1. Sur un téléphone Android (si disponible) : installer Vivaldi 8.2 ou Firefox Android et charger Hold up (Vivaldi : via Chrome Web Store ou chargement non empaqueté si l'option existe : non vérifié ; Firefox : `web-ext run -t firefox-android` après adaptation MV3 -> event page). Vérifier trois choses : (a) le script MAIN s'exécute à document_start, (b) `window.ethereum` est vu/enveloppé quand un portefeuille est présent, (c) l'UI d'avertissement est lisible à 375 px.
 2. Test réel de la question centrale : sur ce même téléphone, essayer d'installer un portefeuille EVM dans le navigateur. Sur Firefox Android, s'attendre à ne pas en trouver ; sur Vivaldi, essayer MetaMask du Chrome Web Store (résultat inconnu).
 3. Mesure d'audience : combien de testeurs/amis crypto utilisent déjà une extension sur navigateur mobile ? (probablement zéro).
 Avec un Mac : prototype Safari iOS sur simulateur en 1 à 2 jours (avec Dawn ou Tokenary comme portefeuille Safari de test).
@@ -138,7 +138,7 @@ Aucune source primaire trouvée qui chiffre la part des utilisateurs crypto util
 - [S, faible] CoinLaw (agrégateur, source non citée) : extensions ~12 % de l'usage des wallets, mobile ~78 % des utilisateurs de hot wallets en 2025. Chiffres non sourcés, à ne pas citer comme faits.
 - [S] Reown (rapport 2025 State of Onchain UX, cité par Benzinga) : 62 % de 1 000 utilisateurs actifs US/UK gèrent plus de deux portefeuilles mobiles. Sondage sur échantillon restreint, cité en seconde main.
 
-ESTIMATION (non sourcée, à valider) : la part des utilisateurs crypto mobiles qui utilisent un navigateur mobile ordinaire AVEC une extension portefeuille injecté est très probablement inférieure à 1-2 % de l'ensemble des utilisateurs mobiles, car (1) Chrome/Safari/Brave n'ont pas (Chrome, Brave) ou presque pas (Safari) de portefeuilles majeurs en extension sur mobile, (2) Firefox Android n'a pas MetaMask/Rabby, (3) les portefeuilles majeurs fournissent un navigateur intégré ou WalletConnect. Le gros du trafic mobile passe par l'application du portefeuille, où Sentinelle ne peut pas s'exécuter.
+ESTIMATION (non sourcée, à valider) : la part des utilisateurs crypto mobiles qui utilisent un navigateur mobile ordinaire AVEC une extension portefeuille injecté est très probablement inférieure à 1-2 % de l'ensemble des utilisateurs mobiles, car (1) Chrome/Safari/Brave n'ont pas (Chrome, Brave) ou presque pas (Safari) de portefeuilles majeurs en extension sur mobile, (2) Firefox Android n'a pas MetaMask/Rabby, (3) les portefeuilles majeurs fournissent un navigateur intégré ou WalletConnect. Le gros du trafic mobile passe par l'application du portefeuille, où Hold up ne peut pas s'exécuter.
 
 ---
 
@@ -186,5 +186,5 @@ Part des particuliers mobiles réellement touchée par une version mobile d'exte
 8. Aucun produit de sécurité crypto n'a d'extension mobile : Pocket Universe annonce une "bêta iOS" sans produit, Wallet Guard fermé le 31 mars 2025, Kerberus/Scam Sniffer/Revoke.cash sont desktop ; Blockaid agit à l'intérieur des portefeuilles.
 9. Aucune statistique fiable sur la part des utilisateurs mobiles avec extension ("non trouvé") ; estimation : bien moins de 2 %.
 10. Portage : Firefox Android 2 à 5 jours, Safari iOS 3 à 6 semaines pour une v1 (1 à 2 semaines pour un prototype avec un Mac) ; Titouan est sous Windows donc Safari iOS exige un Mac.
-11. En 36 h : tester Sentinelle sur Android (Firefox via web-ext, Vivaldi) pour documenter la compatibilité, sans produit.
+11. En 36 h : tester Hold up sur Android (Firefox via web-ext, Vivaldi) pour documenter la compatibilité, sans produit.
 12. Verdict : compatible EN PARTIE (Firefox Android, Safari iOS, Chromium Android récents), mais touche presque aucun particulier mobile ; mieux vaut passer par une intégration portefeuille/API que par une extension mobile.

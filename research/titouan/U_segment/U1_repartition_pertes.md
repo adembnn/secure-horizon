@@ -1,6 +1,6 @@
 # U1. Répartition des pertes des particuliers par mécanisme, 2023 à 2026 (recherche du 11/10/2026)
 
-Contexte : Sentinelle (extension pour particuliers : intention, décodage de l'effet réel, friction). Lu avant : R_cas_complexes/SYNTHESE.md, R5, J_wallets_perso/SYNTHESE.md, K_delais_drainers.md. Ce rapport complète et corrige certains chiffres de ces fichiers (voir section 13).
+Contexte : Hold up (extension pour particuliers : intention, décodage de l'effet réel, friction). Lu avant : R_cas_complexes/SYNTHESE.md, R5, J_wallets_perso/SYNTHESE.md, K_delais_drainers.md. Ce rapport complète et corrige certains chiffres de ces fichiers (voir section 13).
 
 ## 0. Conventions et honnêteté
 - [P] primaire lu par moi : pages Scam Sniffer (rapports 2023, 2024, 2025), pages Chainalysis (hacks/vol 2026, scams 2026), PDF FBI IC3 2024 et 2025 (téléchargés, texte extrait, tableaux relus), article arXiv 2501.16681 v3 (USENIX Security 2025), page CertiK Hack3d 2025, page SlowMist 2025.
@@ -227,7 +227,7 @@ Usurpation public              2,5 %  #
 Phishing/Spoofing (proxy a)    1,0 %  .
 Autres                        ≈ 7,4 % [C : 100 - somme des lignes ci-dessus]
 ```
-Lecture : les deux bases disent la même chose : la catégorie que Sentinelle peut couvrir via la signature (a) pèse moins de 1 % à environ 2 % des pertes mesurées ; (c) et (d) pèsent 10 % et plus de 70 %. Voir R/SYNTHESE : "~84 M$ contre ≥ 14 Md$" cohérent.
+Lecture : les deux bases disent la même chose : la catégorie que Hold up peut couvrir via la signature (a) pèse moins de 1 % à environ 2 % des pertes mesurées ; (c) et (d) pèsent 10 % et plus de 70 %. Voir R/SYNTHESE : "~84 M$ contre ≥ 14 Md$" cohérent.
 
 ### 11.4 Par année (ordres de grandeur, pour la tendance)
 | | 2023 | 2024 | 2025 | 2026 (partiel) |
@@ -262,7 +262,7 @@ Lecture : les deux bases disent la même chose : la catégorie que Sentinelle pe
 - K2 : "65 à 73 % non ventilées" reste vrai ; j'ajoute que Scam Sniffer 2023 ne ventile que 13 victimes.
 - Le pourcentage de drainers dans les pertes de particuliers (≈ 0,6 % de B ; 0,7 % de la base FBI si on compare 84 à 11 366) est inférieur aux 10,4 % "hors chaîne" de K2, qui est une part de 84 M$, pas du total.
 
-## 14. Implications pour Sentinelle (courtes, non décisionnelles)
+## 14. Implications pour Hold up (courtes, non décisionnelles)
 - La couverture par analyse de signature (a, b) vise < 2 % des pertes mesurées en valeur, mais plusieurs centaines de milliers de victimes (106 106 drainers + ≈ 2 750 par an de poisoning, perte moyenne faible) : valeur par utilisateur faible, volume élevé.
 - Les mécanismes à forte valeur (c, d, e) échappent à l'analyse de la transaction (R5). Les signaux de destinataire neuf, ratio du solde et appartenance de l'adresse (R5/B2) sont les seuls leviers : à tester.
 - L'âge compte : 39 % des pertes crypto américaines viennent des 60+ (perte moyenne ≈ 99 500 $) ; segment à examiner pour l'acquisition (extension pour proches).
