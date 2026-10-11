@@ -1,0 +1,33 @@
+# preuves/ : ce qui n'est pas commité se régénère.
+# La règle générale du dépôt ignore déjà *.jsonl.
+
+# Les trois parts du panel (15 Mo) : régénérées à l'octet près par `node preuves/panel/gen_panel.mjs`
+# (graine fixe). Leurs empreintes, elles, sont commitées : panel/*_SHA256.txt et panel/PANEL_STATS.json.
+panel/REGLAGE.jsonl
+panel/CONTROLE.jsonl
+panel/RESERVE.jsonl
+
+# Sorties volumineuses, réécrites par `node --no-warnings preuves/banc.mjs`
+out/detail/
+out/etats/
+out/regen/
+out/ERREURS.jsonl
+
+# Copies figées du code mesuré : l'état de référence est le build du commit 7a5eadc
+out/instantane/
+
+# Cache des réponses de Clef-flash (ni phrase ni clé, mais 4 Mo). Sans lui, le bras « clef » demande la clé
+# et environ 10 000 appels : `node --env-file=.env --no-warnings preuves/banc.mjs`
+out/cache_clef.json
+
+# Restes de mise au point
+out/_*.cjs
+out/essai_decideur.mjs
+out/journal_execution.txt
+
+# Gardé malgré la règle *.jsonl : les faux positifs et faux négatifs du contrôle (300 Ko), pour remonter d'un chiffre à un cas
+!out/ERREURS_panel_controle.jsonl
+
+# Gardé malgré la règle *.log : le journal des ouvertures du contrôle et de la réserve
+!panel/OUVERTURES.log
+out/RESULTATS.json
