@@ -1,14 +1,14 @@
 // Plays the swap scene in real Chromium with the built extension and a simulated in-page wallet (fresh local key, local chain only).
 import { createRequire } from 'node:module';
 import { mkdirSync, readdirSync, rmSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
-const [,, pwDir, chromeExe, outDir, repoRoot, mode, intentText] = process.argv; // mode: honnete | piege | permit
+import { join, resolve } from 'node:path';
+const [,, pwDir, chromeExe, outDir, repoRoot, mode, intentText, extDir] = process.argv; // mode: honnete | piege | permit ; extDir (optional): extension folder to load
 const require = createRequire(join(pwDir, 'package.json'));
 const { chromium } = require(pwDir);
 const req2 = createRequire(join(repoRoot, 'blockchain', 'package.json'));
 const { ethers } = req2('ethers');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const ext = join(repoRoot, 'research/titouan/T_banc_e2e/extension_standalone/extension');
+const ext = extDir ? resolve(extDir) : join(repoRoot, 'research/titouan/T_banc_e2e/extension_standalone/extension');
 const dir = join(outDir, 'neve_' + mode); rmSync(dir, { recursive: true, force: true }); mkdirSync(dir, { recursive: true });
 const profile = join(outDir, 'profile_neve_' + mode); rmSync(profile, { recursive: true, force: true });
 const addr = JSON.parse(readFileSync(join(repoRoot, 'research/demo_reelle/chain/addresses.local.json'), 'utf8'));
@@ -63,6 +63,8 @@ try {
     const field = pop.locator('textarea, input[type="text"], input:not([type])').first();
     if (await field.count()) { await field.fill(intentText); await sleep(700); await field.press('Enter'); } else log.push('pas de champ de saisie');
     await sleep(900);
+    for (const t1 = Date.now(); !pop.isClosed() && Date.now() - t1 < 3000 && !(await pop.locator('[data-outcome]').count().catch(() => 1));) await sleep(100); // the answer screen (the relay has up to 2 s)
+    log.push(`fenêtre ${round + 1} classification: ` + (pop.isClosed() ? '(fermée)' : (await pop.locator('.hu-note').allInnerTexts().catch(() => [])).join(' | ') || '(aucune ligne)'));
     log.push(`fenêtre ${round + 1} après saisie: ` + (pop.isClosed() ? '(fermée)' : (await txt(pop)).slice(0, 400)));
     if (!pop.isClosed()) await pop.screenshot({ path: join(outDir, `neve_${mode}_${++shot}_verdict.png`) }).catch(() => {});
     await sleep(3500);

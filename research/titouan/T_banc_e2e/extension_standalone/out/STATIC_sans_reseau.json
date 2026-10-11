@@ -1,0 +1,92 @@
+{
+ "fichiers_analyses": 49,
+ "constantes_64_hex_publiques": 0,
+ "constats": {},
+ "manifeste": [
+  {
+   "name": "manifest_version 3",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "service worker de type module",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "permissions = [storage, alarms, sidePanel] seulement (le panneau latéral ne demande aucun accès réseau ni aucun site)",
+   "pass": true,
+   "detail": "[\"storage\",\"alarms\",\"sidePanel\"]"
+  },
+  {
+   "name": "aucune host_permission",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun appel reseau dans le dossier (le client du relais est un stub)",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "name": "aucune cle d identifiant dans le manifeste",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucune permission optionnelle",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "pas de externally_connectable / web_accessible_resources / update_url",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "CSP : script-src self, connect-src 'none'",
+   "pass": true,
+   "detail": "script-src 'self'; object-src 'self'; connect-src 'none'"
+  },
+  {
+   "name": "seuls bridge.js / inject.js en scripts de contenu, fichiers presents",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page options.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page ui/sidepanel.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page window.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun crochet de test dans le service worker livre",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aucun fichier ne pose le crochet de test ni un mode auto",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "fenetre presente (window.html + ui/screen.*)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "le moteur embarque se charge et repond (aucune erreur de syntaxe dans engine/)",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}

@@ -22,9 +22,13 @@ Les chiffres (tous dans [livrables/CHIFFRES.md](livrables/CHIFFRES.md)) : en 202
 
 Scènes de démo : voir `pitch/DEMO_SCENES.md`. Héros : « échanger 50 USDC » face à un droit illimité (site Neve). Second exemple : le signataire aveugle, d'après le cas Bybit de 2025 (scène synthétique). Troisième : « me connecter » qui signe un droit.
 
-## Installation (produit figé : extension autonome, sans serveur)
+## Installation (produit figé : extension autonome et relais local du modèle)
 
-L'extension contient son moteur. Rien à lancer à côté, pas d'Internet nécessaire, aucune clé.
+L'extension contient son moteur. La phrase écrite est classée par le modèle Clef à travers un relais local, qui détient seul les clés (fichier `.env`, jamais dans l'extension). Sans relais, l'extension marche, lit la phrase par mots-clés et l'écran le dit.
+
+**Étape 1 : lancer le relais** (racine du dépôt, terminal qui reste ouvert) : `node --env-file=.env research/demo_reelle/classifieur/relay.mjs`. Il écoute sur `127.0.0.1:8789` seulement. Pour n'accepter que l'extension livrée, définir avant `HOLDUP_EXTENSION_ID=amiobigoknpbnkhfhidhdobjnmdciioe`.
+
+**Étape 2 : charger l'extension.**
 
 1. Récupère le paquet `research/titouan/T_banc_e2e/dist/hold-up-standalone.zip` et dézippe-le, ou utilise le dossier `research/titouan/T_banc_e2e/extension_standalone/extension`.
 2. Dans Chrome ou Edge : `chrome://extensions`, active **Mode développeur**, clique **Charger l'extension non empaquetée**, choisis le dossier.
@@ -34,7 +38,7 @@ L'extension contient son moteur. Rien à lancer à côté, pas d'Internet néces
 
 Pas à pas complet, démo locale (`node scripts/demo.mjs`, Node 22.18 ou plus) et dépannage : [livrables/INSTALLATION.md](livrables/INSTALLATION.md).
 
-**Ce qui sort de la machine.** Le build autonome n'a aucun accès réseau (aucune permission d'hôte, `connect-src 'none'`, aucun `fetch`) : ni la phrase ni la demande ne le quittent. La phrase part vers un modèle hébergé si, et seulement si, le relais Clef est branché, ce qui n'est pas le cas du build autonome. Minimisation et durée de conservation chez le fournisseur ne sont pas rédigées. Pour réécrire un droit, l'extension interroge le nœud du portefeuille, comme le ferait la page.
+**Ce qui sort de la machine.** Une seule chose sort de l'extension : la phrase écrite, vers le relais local (une seule permission d'hôte, `connect-src http://127.0.0.1:8789`, un seul `fetch`) ; le relais l'envoie au modèle Clef. Ni l'adresse du compte ni la demande ne quittent le navigateur. La fenêtre affiche « intention classée par Clef » ou « intention classée sans modèle ». Un build de repli sans aucun réseau existe (`build_standalone.mjs --no-network`, `dist/hold-up-sans-reseau.zip`). Minimisation et durée de conservation chez le fournisseur ne sont pas rédigées. Pour réécrire un droit, l'extension interroge le nœud du portefeuille, comme le ferait la page.
 
 **À ne pas oublier.** Jamais essayé avec un vrai portefeuille. Une revue de sécurité interne ([research/titouan/T_banc_e2e/security_review2/REVUE.md](research/titouan/T_banc_e2e/security_review2/REVUE.md)) a trouvé des contournements possibles, dont un critique ; les corrections sont en cours. Ne pas utiliser avec de vrais fonds.
 

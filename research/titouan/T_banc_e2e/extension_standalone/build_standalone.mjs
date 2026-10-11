@@ -3,7 +3,11 @@
 // Entrees propres : src/ (background.js, sentinelle_core.js, manifest.json, options.html)
 // Sortie : extension/ (le dossier a charger dans chrome://extensions) + extension/BUILD_INFO.json (hachages)
 // Usage : node build_standalone.mjs        Node >= 23.2 (module.stripTypeScriptTypes). Aucun paquet, aucun reseau.
-//         node build_standalone.mjs --test-hook   ecrit extension_test/ (JAMAIS le dossier livre) : meme code + un crochet de reponse automatique
+//         Build LIVRE PAR DEFAUT : la phrase ecrite part au relais local (classifier_client.js -> http://127.0.0.1:8789, qui detient seul les cles
+//         du modele Clef). Manifeste : une seule permission d'hote et connect-src http://127.0.0.1:8789, rien d'autre. Le moteur reste embarque.
+//         node build_standalone.mjs --no-network  ecrit extension_sans_reseau/ (repli) : seules differences = le client du relais est un module vide,
+//         le manifeste n'a ni permission d'hote ni cle d'identifiant, et connect-src vaut 'none'. La phrase est alors lue par mots-cles.
+//         node build_standalone.mjs --test-hook   ecrit extension_test/ (JAMAIS le dossier livre) : le build sans reseau + un crochet de reponse automatique
 //         pour le banc de test, lu dans le service worker seulement (globalThis.__holdupTestHook), qu'aucune page ni aucun reglage ne peut poser.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -14,7 +18,9 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');                 // T_banc_e2e
 const TEST_HOOK = process.argv.includes('--test-hook');
-const OUT = join(HERE, TEST_HOOK ? 'extension_test' : 'extension');
+const NO_NETWORK = TEST_HOOK || process.argv.includes('--no-network');
+const OUT_NAME = TEST_HOOK ? 'extension_test' : NO_NETWORK ? 'extension_sans_reseau' : 'extension';
+const OUT = join(HERE, OUT_NAME);
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const rd = (p) => readFileSync(p);
 const written = [];
@@ -38,14 +44,39 @@ mkdirSync(OUT, { recursive: true });
 
 // 1) fichiers de l'extension d'origine, copies tels quels (jamais modifies)
 for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'intent_text.js', 'keyword_intent.js', 'outcome.js', 'written_check.js', 'effect_sim.js', 'journal_chain.js', 'window.html', 'window.css', 'window.js', 'options.js']) put(f, src(join(ROOT, 'extension', f)));
-// Zero network in the standalone build : the relay client is replaced by a stub that never calls anything (the keyword parser answers),
-// and the manifest grants no host and sets connect-src 'none'. The source file ../extension/classifier_client.js is hashed but not shipped.
-src(join(ROOT, 'extension', 'classifier_client.js'));
-put('classifier_client.js', ['/* Hold up (standalone) - no network. The written intent is classified by the embedded keyword parser. */', 'export const RELAY = null;', 'export const RELAY_TIMEOUT_MS = 0;', 'export async function classifyViaRelay() { return null; }', ''].join(String.fromCharCode(10)));
+// Default build : the relay client is shipped as is (its only call : the written sentence, to the loopback relay).
+// --no-network : it is replaced by a stub that never calls anything (the keyword parser answers), and the manifest grants no host
+// and sets connect-src 'none'. The source file ../extension/classifier_client.js is then hashed but not shipped.
+const client = src(join(ROOT, 'extension', 'classifier_client.js'));
+if (!NO_NETWORK) put('classifier_client.js', client);
+else put('classifier_client.js', ['/* Hold up (standalone) - no network. The written intent is classified by the embedded keyword parser. */', 'export const RELAY = null;', 'export const RELAY_TIMEOUT_MS = 0;', 'export async function classifyViaRelay() { return null; }', ''].join(String.fromCharCode(10)));
 // 1 bis) surface de la fenetre (extension/ui) : la question ecrite puis la reponse. Systeme : docs/design/v5/DESIGN.md
 for (const f of ['screen.css', 'screen.js', 'sidepanel.html', 'sidepanel.css', 'sidepanel.js']) put('ui/' + f, src(join(ROOT, 'extension', 'ui', f)));
+for (const f of ['icon16.png', 'icon32.png', 'icon48.png', 'icon128.png']) put('icons/' + f, src(join(ROOT, 'extension', 'icons', f)));
 // 2) fichiers propres a la version autonome
-put('manifest.json', src(join(HERE, 'src', 'manifest.json')));
+let extensionId = null;
+{
+  // src/manifest.json est le manifeste du build par defaut. --no-network en retire exactement trois choses (chaque motif doit exister une fois).
+  let mf = src(join(HERE, 'src', 'manifest.json')).toString('utf8');
+  const RELAY = 'http://127.0.0.1:8789';
+  if (NO_NETWORK) {
+    const NL = mf.includes(String.fromCharCode(13, 10)) ? String.fromCharCode(13, 10) : String.fromCharCode(10);
+    const cut = (from, to) => { if (mf.split(from).length !== 2) throw new Error('manifeste : motif attendu une seule fois : ' + from); mf = mf.split(from).join(to); };
+    cut(NL + '  "key": "' + JSON.parse(mf).key + '",', '');
+    cut(NL + '  "host_permissions": [' + NL + '    "' + RELAY + '/*"' + NL + '  ],', '');
+    cut('connect-src ' + RELAY + '"', 'connect-src ' + "'none'" + '"');
+    cut('"name": "Hold up (autonome)"', '"name": "Hold up (sans reseau)"');
+    cut('Reseau : relais local seulement.', 'Aucun acces reseau.');
+  }
+  const j = JSON.parse(mf);
+  const csp = j.content_security_policy.extension_pages;
+  if (NO_NETWORK ? (mf.includes('http') || 'host_permissions' in j || 'key' in j || !/connect-src 'none'$/.test(csp))
+    : (JSON.stringify(j.host_permissions) !== JSON.stringify([RELAY + '/*']) || !csp.endsWith('; connect-src ' + RELAY) || (csp.match(/https?:/g) || []).length !== 1)) throw new Error('manifeste inattendu pour ce build');
+  // Identifiant de l'extension : derive de la cle PUBLIQUE du manifeste (32 premiers demi-octets du SHA-256, ecrits de a a p). Aucune cle privee
+  // n'existe dans le depot : elle n'a servi qu'a tirer cette cle publique et n'a jamais ete ecrite. Le relais peut epingler cet identifiant.
+  if (j.key) extensionId = [...createHash('sha256').update(Buffer.from(j.key, 'base64')).digest('hex').slice(0, 32)].map((h) => String.fromCharCode(97 + parseInt(h, 16))).join('');
+  put('manifest.json', mf);
+}
 {
   // Le crochet de test n'existe que dans le build --test-hook. Dans le build livre le marqueur est retire : createGatekeeper ne recoit que le moteur.
   const MARK = '/*@TEST_HOOK@*/';
@@ -85,6 +116,6 @@ put('engine/policy.js', rewriteImports(src(join(ROOT, 'run', 'policy.mjs')).toSt
 // 7) trace du build (sans date : reproductible)
 written.sort((a, b) => a.file.localeCompare(b.file));
 const total = written.reduce((n, f) => n + f.bytes, 0);
-const info = { build: TEST_HOOK ? 'holdup-standalone-TEST-HOOK (ne pas livrer)' : 'holdup-standalone', sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
+const info = { build: TEST_HOOK ? 'holdup-standalone-TEST-HOOK (ne pas livrer)' : NO_NETWORK ? 'holdup-sans-reseau' : 'holdup-standalone', network: NO_NETWORK ? 'none' : 'relais local 127.0.0.1:8789, phrase ecrite seulement', extension_id: extensionId, sources: sources.sort((a, b) => a.file.localeCompare(b.file)), outputs: written, total_bytes: total, tree_sha256: sha(written.map((f) => f.file + ':' + f.sha256).join('\n')) };
 writeFileSync(join(OUT, 'BUILD_INFO.json'), JSON.stringify(info, null, 1));
-console.log(`extension_standalone/${TEST_HOOK ? 'extension_test' : 'extension'} : ${written.length} fichiers, ${total} octets, arbre ${info.tree_sha256.slice(0, 16)}`);
+console.log(`extension_standalone/${OUT_NAME} : ${written.length} fichiers, ${total} octets, arbre ${info.tree_sha256.slice(0, 16)}${extensionId ? ', identifiant ' + extensionId : ''}`);

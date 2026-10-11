@@ -1,0 +1,255 @@
+/* Hold up : composants et surfaces. Dépend de tokens.css. Règles : docs/design/system/DESIGN.md.
+ * Tout est préfixé hu-. Aucune ombre, aucun dégradé, aucune icône, aucune image hormis le logo.
+ * Les classes .is-hover, .is-active et .is-focus ne servent qu'à la galerie (components.html) : elles figent un état pour la revue. */
+
+/* ------------------------------------------------------------------ socle */
+.hu, .hu *, .hu *::before, .hu *::after { box-sizing: border-box; }
+.hu {
+  margin: 0;
+  background: var(--hu-bg); color: var(--hu-ink);
+  font-family: var(--hu-sans); font-size: var(--hu-text-s); line-height: var(--hu-lh-s); font-weight: var(--hu-regular);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  accent-color: var(--hu-ink); caret-color: var(--hu-ink);
+  scrollbar-color: var(--hu-edge) transparent; scrollbar-width: thin;
+}
+.hu ::selection { background: var(--hu-ink); color: var(--hu-bg); }
+.hu [hidden] { display: none !important; }
+.hu p, .hu h1, .hu h2, .hu h3, .hu ul, .hu ol, .hu dl, .hu dd { margin: 0; padding: 0; }
+.hu ul, .hu ol { list-style: none; }
+.hu button, .hu input, .hu select, .hu textarea { font: inherit; color: inherit; }
+.hu-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* focus : le même partout, 2 px d'encre à 2 px du bord */
+.hu :focus { outline: none; }
+.hu :focus-visible, .hu .is-focus { outline: var(--hu-focus) solid var(--hu-ink); outline-offset: var(--hu-focus-gap); }
+
+/* ------------------------------------------------------------------ texte */
+.hu-title { font-size: var(--hu-text-l); line-height: var(--hu-lh-l); font-weight: var(--hu-strong); letter-spacing: -0.01em; text-wrap: balance; overflow-wrap: anywhere; }
+.hu-h { font-size: var(--hu-text-s); line-height: var(--hu-lh-s); font-weight: var(--hu-strong); }
+.hu-2 { color: var(--hu-ink-2); }
+.hu-small { font-size: var(--hu-text-xs); line-height: var(--hu-lh-xs); color: var(--hu-ink-2); }
+.hu-num { font-variant-numeric: tabular-nums; }
+.hu-link { color: var(--hu-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; border-radius: 2px; cursor: pointer; background: none; border: 0; padding: 0; }
+.hu-link:hover, .hu-link.is-hover { text-decoration-thickness: 2px; }
+
+/* touche de clavier, dans un bouton ou dans une phrase */
+.hu-kbd {
+  display: inline-block; min-width: 20px; padding: 0 4px; margin-left: var(--hu-2);
+  font-family: var(--hu-sans); font-size: var(--hu-text-xs); line-height: 16px; font-weight: var(--hu-regular); text-align: center;
+  border: var(--hu-border) solid color-mix(in srgb, currentColor 45%, transparent); border-radius: var(--hu-r-key);
+}
+p .hu-kbd, li .hu-kbd { margin: 0 2px; }
+
+/* ------------------------------------------------------------------ boutons */
+.hu-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: var(--hu-control); min-width: 80px; padding: 0 var(--hu-3);
+  font-size: var(--hu-text-s); line-height: var(--hu-lh-s); font-weight: var(--hu-strong); white-space: nowrap; cursor: pointer;
+  color: var(--hu-ink); background: transparent; border: var(--hu-border) solid var(--hu-edge); border-radius: var(--hu-r);
+  transition: background-color var(--hu-fast) var(--hu-ease), border-color var(--hu-fast) var(--hu-ease);
+}
+.hu-btn:not([aria-disabled="true"]):not(:disabled):hover, .hu-btn.is-hover { background: var(--hu-bg-2); border-color: var(--hu-ink); }
+.hu-btn:not([aria-disabled="true"]):not(:disabled):active, .hu-btn.is-active { background: var(--hu-bg-3); border-color: var(--hu-ink); }
+.hu-btn--primary { color: var(--hu-on-ink); background: var(--hu-ink); border-color: var(--hu-ink); }
+.hu-btn--primary:not([aria-disabled="true"]):not(:disabled):hover, .hu-btn--primary.is-hover { background: color-mix(in srgb, var(--hu-ink) 82%, var(--hu-bg)); border-color: transparent; }
+.hu-btn--primary:not([aria-disabled="true"]):not(:disabled):active, .hu-btn--primary.is-active { background: color-mix(in srgb, var(--hu-ink) 66%, var(--hu-bg)); border-color: transparent; }
+.hu-btn[aria-disabled="true"], .hu-btn:disabled { cursor: default; color: var(--hu-ink-2); background: transparent; border-color: var(--hu-line); }
+.hu-btn--primary[aria-disabled="true"], .hu-btn--primary:disabled { color: var(--hu-ink-2); background: var(--hu-bg-2); border-color: var(--hu-bg-2); }
+
+/* ------------------------------------------------------------------ champ d'intention */
+.hu-field {
+  display: block; width: 100%; min-height: 104px; padding: 10px var(--hu-3); resize: none;
+  font-size: var(--hu-text-m); line-height: var(--hu-lh-m); color: var(--hu-ink);
+  background: var(--hu-bg); border: var(--hu-border) solid var(--hu-edge); border-radius: var(--hu-r);
+  transition: border-color var(--hu-fast) var(--hu-ease);
+}
+.hu-field::placeholder { color: var(--hu-ink-2); opacity: 1; }
+.hu-field:hover, .hu-field.is-hover { border-color: var(--hu-ink); }
+.hu-field:focus, .hu-field.is-focus { outline: var(--hu-focus) solid var(--hu-ink); outline-offset: var(--hu-focus-gap); border-color: var(--hu-ink); }
+.hu-field[aria-invalid="true"], .hu-field.is-error { border-color: var(--hu-ink); box-shadow: inset 0 0 0 1px var(--hu-ink); }
+.hu-field[readonly] { color: var(--hu-ink-2); border-color: var(--hu-line); background: var(--hu-bg-2); }
+.hu-field:disabled { color: var(--hu-ink-2); border-color: var(--hu-line); background: var(--hu-bg-2); }
+.hu-field-note { margin-top: var(--hu-2); font-size: var(--hu-text-s); line-height: var(--hu-lh-s); color: var(--hu-ink-2); }
+
+/* message d'erreur : ce qui manque, puis quoi faire. Jamais en couleur : le signal est réservé au verdict. */
+.hu-error { margin-top: var(--hu-2); font-size: var(--hu-text-s); line-height: var(--hu-lh-s); font-weight: var(--hu-strong); color: var(--hu-ink); }
+.hu-error span { font-weight: var(--hu-regular); }
+
+/* ------------------------------------------------------------------ verdict, explication, retenue */
+.hu-verdict { font-size: var(--hu-text-l); line-height: var(--hu-lh-l); font-weight: var(--hu-strong); letter-spacing: -0.01em; text-wrap: balance; }
+.hu-verdict[data-outcome="mismatch"] { color: var(--hu-signal); }
+
+.hu-explain { margin-top: var(--hu-4); font-size: var(--hu-text-m); line-height: var(--hu-lh-m); text-wrap: pretty; overflow-wrap: anywhere; }
+.hu-explain > span { display: block; }
+.hu-explain strong { font-weight: var(--hu-strong); }
+.hu-explain + .hu-explain { margin-top: var(--hu-2); }
+.hu-explain--fix { color: var(--hu-ink-2); }
+
+.hu-phrase { margin-top: var(--hu-6); padding-top: var(--hu-4); border-top: var(--hu-border) solid var(--hu-line); color: var(--hu-ink-2); overflow-wrap: anywhere; }
+.hu-phrase q { color: var(--hu-ink); quotes: "« " " »"; }
+
+.hu-wait { min-height: var(--hu-lh-s); font-variant-numeric: tabular-nums; color: var(--hu-ink-2); }
+.hu-wait[data-state="open"] { color: var(--hu-ink); }
+
+/* ------------------------------------------------------------------ journal et droits */
+.hu-log { border-top: var(--hu-border) solid var(--hu-line); }
+.hu-log-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--hu-3); align-items: baseline;
+  min-height: var(--hu-row); padding: 10px 0; border-bottom: var(--hu-border) solid var(--hu-line);
+}
+.hu-log-site { font-weight: var(--hu-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; direction: rtl; text-align: left; } /* un hôte long garde sa fin : c'est elle qui dit le vrai domaine */
+.hu-log-site bdi { direction: ltr; unicode-bidi: isolate; }
+.hu-log-time { font-size: var(--hu-text-xs); line-height: var(--hu-lh-xs); color: var(--hu-ink-2); font-variant-numeric: tabular-nums; }
+.hu-log-what { grid-column: 1 / -1; color: var(--hu-ink-2); }
+.hu-log-row[data-outcome="mismatch"] .hu-log-verdict { color: var(--hu-signal); }
+.hu-log-row[data-outcome="unverifiable"] .hu-log-verdict { color: var(--hu-ink); }
+
+.hu-right-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--hu-3); align-items: center;
+  min-height: var(--hu-row); padding: 10px 0; border-bottom: var(--hu-border) solid var(--hu-line);
+}
+.hu-right-site { font-weight: var(--hu-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hu-right-what { color: var(--hu-ink-2); }
+
+/* état vide : une phrase qui dit ce qui viendra ici, sans dessin */
+.hu-empty { padding: var(--hu-4) 0; border-top: var(--hu-border) solid var(--hu-line); border-bottom: var(--hu-border) solid var(--hu-line); }
+.hu-empty p + p { color: var(--hu-ink-2); }
+
+/* ------------------------------------------------------------------ bandeau d'état */
+.hu-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--hu-4);
+  min-height: var(--hu-row); padding: var(--hu-2) var(--hu-4);
+  background: var(--hu-bg-2); border-bottom: var(--hu-border) solid var(--hu-line);
+}
+.hu-banner strong { font-weight: var(--hu-strong); }
+.hu-banner .hu-btn { flex: none; background: var(--hu-bg); }
+
+/* ------------------------------------------------------------------ réglages */
+.hu-setting {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--hu-6); align-items: center;
+  min-height: var(--hu-row); padding: var(--hu-3) 0; border-bottom: var(--hu-border) solid var(--hu-line);
+}
+.hu-setting-label { display: block; font-weight: var(--hu-regular); cursor: default; }
+.hu-setting-hint { display: block; margin-top: 2px; font-size: var(--hu-text-xs); line-height: var(--hu-lh-xs); color: var(--hu-ink-2); max-width: 56ch; }
+.hu-setting .hu-error { grid-column: 1 / -1; }
+
+/* interrupteur : une case à cocher avec role="switch". Espace bascule. La zone cliquable fait 36 × 32. */
+.hu-switch {
+  appearance: none; -webkit-appearance: none; position: relative; flex: none; display: block;
+  width: 36px; height: 20px; margin: 6px 0; cursor: pointer;
+  background: var(--hu-bg); border: var(--hu-border) solid var(--hu-edge); border-radius: var(--hu-r-full);
+  transition: background-color var(--hu-fast) var(--hu-ease), border-color var(--hu-fast) var(--hu-ease);
+}
+.hu-switch::after { content: ""; position: absolute; inset: -7px 0; } /* étend la zone cliquable à 32 px de haut */
+.hu-switch::before {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: var(--hu-r-full);
+  background: var(--hu-edge); transition: transform var(--hu-move) var(--hu-ease), background-color var(--hu-fast) var(--hu-ease);
+}
+.hu-switch:hover, .hu-switch.is-hover { border-color: var(--hu-ink); }
+.hu-switch:hover::before, .hu-switch.is-hover::before { background: var(--hu-ink); }
+.hu-switch:checked { background: var(--hu-ink); border-color: var(--hu-ink); }
+.hu-switch:checked::before { background: var(--hu-on-ink); transform: translateX(16px); }
+.hu-switch:checked:hover, .hu-switch:checked.is-hover { background: color-mix(in srgb, var(--hu-ink) 82%, var(--hu-bg)); border-color: transparent; }
+.hu-switch:checked:hover::before, .hu-switch:checked.is-hover::before { background: var(--hu-on-ink); }
+.hu-switch:disabled { cursor: default; border-color: var(--hu-line); background: var(--hu-bg-2); }
+.hu-switch:disabled::before { background: var(--hu-line); }
+.hu-switch:disabled:checked { background: var(--hu-bg-3); border-color: var(--hu-bg-3); }
+.hu-switch:disabled:checked::before { background: var(--hu-bg); }
+
+/* champ de réglage : nombre, texte court, liste */
+.hu-input, .hu-select {
+  display: block; height: var(--hu-control); padding: 0 var(--hu-2);
+  font-size: var(--hu-text-s); line-height: var(--hu-lh-s); color: var(--hu-ink);
+  background: var(--hu-bg); border: var(--hu-border) solid var(--hu-edge); border-radius: var(--hu-r);
+  transition: border-color var(--hu-fast) var(--hu-ease);
+}
+.hu-input { width: 72px; text-align: right; font-variant-numeric: tabular-nums; }
+.hu-input::-webkit-inner-spin-button, .hu-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.hu-select { min-width: 280px; padding-right: var(--hu-8); cursor: pointer; appearance: none; -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--hu-ink) 50%), linear-gradient(135deg, var(--hu-ink) 50%, transparent 50%);
+  background-position: right 15px center, right 10px center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; } /* chevron dessiné : deux triangles, pas un dégradé visible */
+.hu-input:hover, .hu-select:hover, .hu-input.is-hover, .hu-select.is-hover { border-color: var(--hu-ink); }
+.hu-input[aria-invalid="true"], .hu-input.is-error { border-color: var(--hu-ink); box-shadow: inset 0 0 0 1px var(--hu-ink); }
+.hu-input:disabled, .hu-select:disabled { color: var(--hu-ink-2); border-color: var(--hu-line); background-color: var(--hu-bg-2); cursor: default; }
+.hu-unit { display: inline-flex; align-items: center; gap: var(--hu-2); color: var(--hu-ink-2); }
+
+/* ------------------------------------------------------------------ icône de barre d'outils (maquette de la barre du navigateur) */
+.hu-logo { display: block; flex: none; width: 20px; height: 20px; border-radius: 4px; box-shadow: 0 0 0 1px var(--hu-line); } /* filet : le carré noir reste lisible sur fond noir */
+.hu-toolbar { display: inline-flex; align-items: center; justify-content: center; position: relative; width: 32px; height: 32px; border-radius: var(--hu-r); background: var(--hu-bg-2); }
+.hu-toolbar img { width: 16px; height: 16px; border-radius: 3px; }
+.hu-toolbar[data-state="paused"] img { opacity: 0.4; filter: grayscale(1); }
+.hu-badge {
+  position: absolute; right: 1px; bottom: 1px; min-width: 14px; height: 12px; padding: 0 3px;
+  font-size: 9px; line-height: 12px; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums;
+  color: var(--hu-badge-text); background: var(--hu-badge-ink); border-radius: 3px;
+}
+.hu-badge[data-outcome="mismatch"] { background: var(--hu-badge-signal); }
+
+/* ================================================================== surfaces */
+
+/* barre d'en-tête commune : logo, nom, puis le site ou l'état à droite */
+.hu-bar { flex: none; display: flex; align-items: center; gap: var(--hu-2); height: 44px; padding: 0 var(--hu-4); border-bottom: var(--hu-border) solid var(--hu-line); }
+.hu-bar-name { font-weight: var(--hu-strong); }
+.hu-bar-side { margin-left: auto; min-width: 0; color: var(--hu-ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 1. fenêtre de vérification : 440 × 540 dehors, environ 424 × 501 dedans. Contenu en haut, actions en bas à droite. */
+.hu-window { display: flex; flex-direction: column; width: 100vw; height: 100vh; overflow: hidden; }
+.hu-window-main { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: var(--hu-6) var(--hu-6) var(--hu-4); }
+.hu-window-main .hu-field { margin-top: var(--hu-4); }
+.hu-window-foot { flex: none; padding: var(--hu-3) var(--hu-4) var(--hu-4); border-top: var(--hu-border) solid var(--hu-line); }
+.hu-window-foot .hu-wait { margin-bottom: var(--hu-3); }
+.hu-actions { display: flex; justify-content: flex-end; gap: var(--hu-2); }
+.hu-end { margin: auto; padding: var(--hu-8); max-width: 320px; font-size: var(--hu-text-m); line-height: var(--hu-lh-m); text-wrap: balance; }
+
+/* 2. panneau latéral : largeur donnée par le navigateur (320 au minimum, 360 par défaut) */
+.hu-panel { min-width: 320px; }
+.hu-panel-main { padding: 0 var(--hu-4) var(--hu-8); }
+.hu-panel-main > section { margin-top: var(--hu-6); }
+.hu-panel-main .hu-h { margin-bottom: var(--hu-2); }
+.hu-panel-foot { display: flex; gap: var(--hu-2); margin-top: var(--hu-6); }
+
+/* 3. popup de l'icône : 320 de large, hauteur selon le contenu */
+.hu-popup { width: 320px; }
+.hu-popup-main { padding: var(--hu-4); }
+.hu-popup-state { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--hu-4); align-items: start; }
+.hu-popup-state .hu-state { font-size: var(--hu-text-m); line-height: var(--hu-lh-m); font-weight: var(--hu-strong); overflow-wrap: anywhere; }
+.hu-popup-state p + p { margin-top: var(--hu-1); color: var(--hu-ink-2); }
+.hu-popup-last { margin-top: var(--hu-4); padding-top: var(--hu-3); border-top: var(--hu-border) solid var(--hu-line); }
+.hu-popup-last .hu-h { margin-bottom: var(--hu-1); }
+.hu-popup-last [data-outcome="mismatch"] { color: var(--hu-signal); }
+.hu-popup-foot { display: flex; gap: var(--hu-2); padding: var(--hu-3) var(--hu-4) var(--hu-4); border-top: var(--hu-border) solid var(--hu-line); }
+.hu-popup-foot .hu-btn { flex: 1; }
+
+/* 4. pages plein onglet : réglages, bienvenue. Bureau seulement : largeur minimale 960, aucune variante étroite. */
+.hu-page { min-width: 960px; min-height: 100vh; }
+.hu-page-main { max-width: 880px; margin: 0 auto; padding: var(--hu-12) var(--hu-8) 64px; }
+.hu-page-main > .hu-title + p { margin-top: var(--hu-2); color: var(--hu-ink-2); max-width: 64ch; }
+.hu-section { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: var(--hu-8); margin-top: var(--hu-12); }
+.hu-section > .hu-h { padding-top: var(--hu-3); }
+.hu-section-body { border-top: var(--hu-border) solid var(--hu-line); }
+.hu-section-body > p { padding: var(--hu-3) 0; }
+.hu-saved { margin-left: var(--hu-4); color: var(--hu-ink-2); }
+
+/* bienvenue : le texte à gauche, la vraie fenêtre de question à droite, inerte */
+.hu-welcome { display: grid; grid-template-columns: minmax(0, 1fr) 426px; column-gap: 64px; align-items: start; max-width: 1040px; margin: 0 auto; padding: 64px var(--hu-8); }
+.hu-welcome .hu-title + p { margin-top: var(--hu-4); font-size: var(--hu-text-m); line-height: var(--hu-lh-m); max-width: 52ch; }
+.hu-welcome h2 { margin-top: var(--hu-8); margin-bottom: var(--hu-2); }
+.hu-welcome li { position: relative; padding: 6px 0 6px var(--hu-6); max-width: 60ch; }
+.hu-welcome ul li::before { content: ""; position: absolute; left: 4px; top: 15px; width: 8px; height: 1px; background: var(--hu-ink); }
+.hu-welcome ol { counter-reset: pas; }
+.hu-welcome ol li { counter-increment: pas; }
+.hu-welcome ol li::before { content: counter(pas) "."; position: absolute; left: 0; font-variant-numeric: tabular-nums; color: var(--hu-ink-2); }
+.hu-welcome-actions { display: flex; gap: var(--hu-2); margin-top: var(--hu-6); }
+.hu-preview { margin: 0; }
+.hu-preview-frame { width: 426px; height: 503px; border: var(--hu-border) solid var(--hu-edge); overflow: hidden; }
+.hu-preview-frame .hu-window { width: 424px; height: 501px; }
+.hu-preview figcaption { margin-top: var(--hu-2); font-size: var(--hu-text-xs); line-height: var(--hu-lh-xs); color: var(--hu-ink-2); }
+
+/* ------------------------------------------------------------------ contraste forcé, mouvement réduit */
+@media (forced-colors: active) {
+  .hu-btn--primary { border-color: ButtonText; }
+  .hu-btn[aria-disabled="true"], .hu-btn:disabled { color: GrayText; border-color: GrayText; }
+  .hu-switch:checked { background: Highlight; }
+  .hu-verdict[data-outcome="mismatch"] { color: CanvasText; }
+}
+@media (prefers-reduced-motion: reduce) { .hu *, .hu *::before, .hu *::after { transition: none !important; animation: none !important; } }

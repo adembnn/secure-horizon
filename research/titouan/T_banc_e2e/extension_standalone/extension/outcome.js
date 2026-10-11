@@ -93,5 +93,6 @@ export function addressesOf(verdict) {
 // Everything the window needs for the answer screen, from a verdict and the stored intent.
 export function answerOf(verdict, intent) {
   const outcome = outcomeOf(verdict, intent);
-  return { outcome, headline: TEXT[outcome], line: lineOf(verdict), fix: verdict && verdict.written && typeof verdict.written.fix === 'string' ? verdict.written.fix.slice(0, 120) : null, addresses: addressesOf(verdict), labels: { expected: verdict && verdict.written && verdict.written.address_diff ? TEXT.written : TEXT.expected, actual: TEXT.actual }, noModel: !!(intent && intent.text && intent.model === false) };
+  return { outcome, headline: TEXT[outcome], line: lineOf(verdict), fix: verdict && verdict.written && typeof verdict.written.fix === 'string' ? verdict.written.fix.slice(0, 120) : null, addresses: addressesOf(verdict), labels: { expected: verdict && verdict.written && verdict.written.address_diff ? TEXT.written : TEXT.expected, actual: TEXT.actual }, noModel: !!(intent && intent.text && intent.model === false),
+    model: intent && intent.text && intent.model === true && (intent.source === 'clef' || intent.source === 'jev') ? intent.source : null }; // which model classified the sentence (null : none) : the window says it
 }

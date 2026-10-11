@@ -152,8 +152,8 @@ test('no relay (classify absent, throwing or answering nonsense) : the embedded 
   worker('attention', async () => ({ source: 'clef', model: true, kind: 'approve_everything', confidence: 1 }));
   const g = await gate();
   const q = await write(g, PAY);
-  assert.equal(q.view.screen.kind, 'question', 'not understood : one follow-up');
-  assert.equal((await write(g, PAY, q.view.seq)).view.screen.outcome, 'unverifiable', 'a kind the product does not know is never an intent');
+  assert.equal(q.view.screen.noModel, true, 'a kind the product does not know is never an intent : the keyword parser answers, and the window says so');
+  assert.equal(q.view.screen.model, null); assert.equal(q.view.screen.outcome, 'match');
   const k = await I.keywordClassify('je veux échanger mes AVAX contre des USDC');
   assert.equal(k.kind, 'buy_or_swap'); assert.equal(k.model, false);
   assert.equal((await I.keywordClassify('on m’a demandé de valider')).facts.asked, 1);

@@ -32,6 +32,20 @@ const sp = (args) => spawnSync(process.execPath, ['--no-warnings', ...args], { e
   ok(b1.status === 0 && b2.status === 0, 'build_standalone.mjs s execute sans erreur', b1.stderr + b2.stderr);
   ok(t1 === t2, 'build reproductible (2 constructions => meme hachage d arbre)', t1.slice(0, 16));
   R.tree_sha256 = t2;
+  // build de repli --no-network : reproductible lui aussi, et il ne differe du build livre que par le client du relais et le manifeste
+  const NN = join(SA, 'extension_sans_reseau'), treeNN = () => JSON.parse(readFileSync(join(NN, 'BUILD_INFO.json'), 'utf8')).tree_sha256;
+  const n1 = sp([join(SA, 'build_standalone.mjs'), '--no-network']); const u1 = treeNN();
+  const n2 = sp([join(SA, 'build_standalone.mjs'), '--no-network']); const u2 = treeNN();
+  ok(n1.status === 0 && n2.status === 0 && u1 === u2 && treeOf() === t2, 'build --no-network reproductible, ecrit dans extension_sans_reseau/, le dossier livre est inchange', u1.slice(0, 16));
+  const outs = (d) => new Map(JSON.parse(readFileSync(join(d, 'BUILD_INFO.json'), 'utf8')).outputs.map((o) => [o.file, o.sha256]));
+  const a = outs(EXT), b = outs(NN);
+  const diff = [...new Set([...a.keys(), ...b.keys()])].filter((k) => a.get(k) !== b.get(k)).sort();
+  ok(JSON.stringify(diff) === '["classifier_client.js","manifest.json"]', 'les deux builds ne different que par classifier_client.js et manifest.json', diff.join(', '));
+  for (const [flag, label] of [[null, 'build livre'], ['--no-network', 'build sans reseau']]) {
+    const s = spawnSync(process.execPath, [join(HERE, 'static_check.mjs'), ...(flag ? [flag] : [])], { encoding: 'utf8' });
+    ok(s.status === 0, 'controle statique (' + label + ') : ' + (flag ? "aucun reseau, connect-src 'none'" : 'un seul appel, vers le relais local ; connect-src limite au relais'), (s.stdout || '').split('\n').filter((l) => l.startsWith('ECHEC')).join(' | '));
+  }
+  R.tree_sha256_sans_reseau = u2;
 }
 
 // ------------------------------------------------------------------ B) service worker dans Node avec un faux chrome
@@ -43,8 +57,9 @@ globalThis.chrome = F.chrome;
 // horloge pilotee : les delais de friction sont de vraies echeances absolues, on avance le temps au lieu d'attendre
 const realNow = Date.now; let skew = 0; Date.now = () => realNow() + skew;
 // aucun reseau : on piege fetch/XHR/WebSocket pour PROUVER qu'ils ne sont jamais appeles
-let netCalls = 0;
-globalThis.fetch = () => { netCalls++; throw new Error('RESEAU INTERDIT'); };
+// Seule sortie admise dans le build livre : la phrase ecrite, vers le relais local. Ici le relais "ne repond pas" (le repli par mots-cles joue).
+let netCalls = 0, relayCalls = 0; const relayBodies = [];
+globalThis.fetch = (url, init) => { if (url === 'http://127.0.0.1:8789/classify') { relayCalls++; relayBodies.push(String(init && init.body)); } else netCalls++; throw new Error('RESEAU INTERDIT'); };
 globalThis.XMLHttpRequest = function () { netCalls++; throw new Error('RESEAU INTERDIT'); };
 globalThis.WebSocket = function () { netCalls++; throw new Error('RESEAU INTERDIT'); };
 
@@ -128,7 +143,8 @@ ok(rows.filter((r) => 'fenetre' in r).every((r) => r.fenetre && !r.transmis_sans
 const nonConf = rows.filter((r) => !r.conforme);
 R.notes.push('Attentes de detection non satisfaites parmi les ' + rows.length + ' requetes types : ' + (nonConf.map((r) => `${r.name} (obtenu ${r.niveau}/${r.level}, attendu ${r.attendu})`).join(' ; ') || 'aucune'));
 ok(nonConf.filter((r) => r.attendu === 'unknown').length === 0, 'les requetes malformees / trop volumineuses / non gerees donnent "indetermine" (warn)', nonConf.filter((r) => r.attendu === 'unknown').map((r) => r.name).join(' | '));
-ok(netCalls === 0, 'aucun appel reseau (fetch/XHR/WebSocket piegés) pendant toutes les requetes', String(netCalls));
+ok(netCalls === 0, 'aucun appel reseau hors relais local (fetch/XHR/WebSocket piegés) pendant toutes les requetes', String(netCalls));
+ok(relayBodies.every((b) => { try { return Object.keys(JSON.parse(b)).join() === 'text'; } catch (_) { return false; } }), 'appels au relais local : le corps ne contient que { text } (' + relayCalls + ' appel(s))');
 R.requests = rows;
 store.contexte = undefined;
 

@@ -75,9 +75,9 @@ export function allowed(req, env = process.env) {
 export function createRelay({ env = process.env, fetchImpl = fetch, log = () => {} } = {}) {
   const hits = [];
   const send = (res, status, body) => { const s = JSON.stringify(body); res.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'content-length': Buffer.byteLength(s), 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' }); res.end(s); };
-  return http.createServer((req, res) => {
+  const server = http.createServer((req, res) => {
     const no = allowed(req, env);
-    if (no) { req.resume(); return send(res, 403, { error: no }); }
+    if (no) { req.resume(); log('refused ' + no); return send(res, 403, { error: no }); } // the reason only : never the caller's text
     const path = String(req.url || '').split('?')[0];
     if (req.method === 'GET' && path === '/health') return send(res, 200, { ok: true, provider: providerOf(env) });
     if (path !== '/classify') { req.resume(); return send(res, 404, { error: 'not-found' }); }
@@ -100,6 +100,17 @@ export function createRelay({ env = process.env, fetchImpl = fetch, log = () => 
       send(res, 200, out);
     });
   });
+  // a caller that sends its headers or its body too slowly is dropped : the service answers in 1.5 s, nothing legitimate takes longer to ask
+  server.headersTimeout = 5000; server.requestTimeout = 10000; server.keepAliveTimeout = 5000; server.maxHeadersCount = 50;
+  return server;
+}
+
+// Which extension may call, as a sentence for the start line. HOLDUP_EXTENSION_ID pins one identifier (32 letters a-p, shown in chrome://extensions).
+export function pinOf(env = process.env) {
+  const id = String(env.HOLDUP_EXTENSION_ID || '').trim();
+  if (!id) return { pinned: false, valid: true, text: 'toute extension locale peut appeler (HOLDUP_EXTENSION_ID non défini)' };
+  if (!/^[a-p]{32}$/.test(id)) return { pinned: true, valid: false, text: 'HOLDUP_EXTENSION_ID invalide (32 lettres de a à p attendues) : aucune extension ne sera acceptée' };
+  return { pinned: true, valid: true, text: 'seule l’extension ' + id + ' peut appeler' };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -107,6 +118,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   server.on('error', (e) => { console.error('relais : ' + (e && e.code === 'EADDRINUSE' ? `le port ${PORT} est déjà pris` : String(e && e.message))); process.exit(1); });
   server.listen(PORT, HOST, () => {
     const p = providerOf();
-    console.log(`Relais de classification Hold up sur http://${HOST}:${PORT} (fournisseur : ${p === 'keywords' ? 'mots-clés, aucune clé configurée' : p}, budget ${BUDGET_MS} ms)`);
+    console.log(`Relais de classification Hold up sur http://${HOST}:${PORT} (fournisseur : ${p === 'keywords' ? 'mots-clés, aucune clé configurée' : p}, budget ${BUDGET_MS} ms) ; ${pinOf().text}`);
   });
 }

@@ -4,7 +4,7 @@
  * the page side from the storage. Nothing here keeps a decision in memory : the worker can die at any time.
  * Fallback : if the window cannot be created, the in-page overlay of bridge.js is used and the journal says so. */
 import { HoldStore, LIMITS, enterVerdict, frictionFor, validRid } from './hold_core.js';
-import { ENGINE_CHOICE, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
+import { ENGINE_CHOICE, KINDS, MODEL_MIN, NO_MATCH, cleanText, interpret, keywordClassify, stricter } from './intent_text.js';
 import { TEXT, answerOf, siteName } from './outcome.js';
 import { canCorrect, effectCheck, limitPlan, limitText, operationCheck, relance, requestFacts, signIn, tokensOf, usedBy, writtenCheck } from './written_check.js';
 import { measure } from './effect_sim.js';
@@ -226,7 +226,18 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     let raw = null;
     if (classify) { try { raw = await classify(text); } catch (_) { raw = null; } }
     if (!raw || typeof raw !== 'object') raw = await keywordClassify(text);
-    return Object.assign(interpret(raw, text), { text });
+    let intent = interpret(raw, text);
+    if (intent.model) {
+      // A model answer is used only when it is coherent and above MODEL_MIN : a kind the product knows, or a confident "none".
+      // Anything else (unknown kind, no probability, below the threshold) : the keyword parser answers, and the window says so.
+      const p = typeof raw.confidence === 'number' && Number.isFinite(raw.confidence) ? raw.confidence : -1;
+      const kw = interpret(await keywordClassify(text), text);
+      if (!(p >= MODEL_MIN && (KINDS.includes(raw.kind) || raw.kind === NO_MATCH))) intent = kw;
+      // "the person wants to give a permission" is the one fact that can make a dangerous request read as expected (outcome.js, covers()) :
+      // the model alone never grants it, the words must say it too. The model can only make things stricter or more precise.
+      else if (intent.facts.grant && !kw.facts.grant) intent.facts.grant = false;
+    }
+    return Object.assign(intent, { text });
   }
   // Runs the engine with what was understood and keeps the strictest verdict (strict-only : a sentence never lowers a level).
   // -> { v, used, rewrite } : `used` is what this request takes from the written amount (kept for the next requests of the same intent).

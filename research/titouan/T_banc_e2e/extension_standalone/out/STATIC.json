@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 45,
+ "fichiers_analyses": 49,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -19,14 +19,24 @@
    "detail": "[\"storage\",\"alarms\",\"sidePanel\"]"
   },
   {
-   "name": "aucune host_permission",
+   "name": "une seule host_permission : le relais local",
+   "pass": true,
+   "detail": "[\"http://127.0.0.1:8789/*\"]"
+  },
+  {
+   "name": "un seul appel reseau dans le dossier livre : fetch(RELAY + /classify) dans classifier_client.js",
+   "pass": true,
+   "detail": "1"
+  },
+  {
+   "name": "le client du relais n envoie que { text } : ni en-tete d autorisation, ni cookie, ni cle",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "aucun appel reseau dans le dossier livre (le client du relais est un stub)",
+   "name": "cle du manifeste : cle PUBLIQUE seulement (SubjectPublicKeyInfo RSA), aucune cle privee dans le dossier",
    "pass": true,
-   "detail": "0"
+   "detail": ""
   },
   {
    "name": "aucune permission optionnelle",
@@ -39,9 +49,9 @@
    "detail": ""
   },
   {
-   "name": "CSP : script-src self, connect-src 'none'",
+   "name": "CSP : script-src self, connect-src http://127.0.0.1:8789 et rien d autre",
    "pass": true,
-   "detail": "script-src 'self'; object-src 'self'; connect-src 'none'"
+   "detail": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:8789"
   },
   {
    "name": "seuls bridge.js / inject.js en scripts de contenu, fichiers presents",
