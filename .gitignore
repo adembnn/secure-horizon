@@ -24,6 +24,7 @@ logs/
 # Exception : jeux de test synthétiques (aucune donnée réelle, aucun secret)
 !research/titouan/T_banc_e2e/blind_adem/**/*.jsonl
 !research/titouan/T_banc_e2e/attacks/*.jsonl
+!research/titouan/T_banc_e2e/redteam/jury_*.jsonl
 
 # Local
 node_modules/
