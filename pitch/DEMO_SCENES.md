@@ -1,17 +1,21 @@
-# Hold up : scènes de démo (alignées sur PITCH_V6, 11 oct. 2026)
+# Hold up : scènes de démo (11 oct. 2026, mises à jour vers 11h20 après MSG-080)
 
-Source du récit : `research/titouan/PITCH_V6_TITOUAN.md`, section « 1:45 à 2:45. La démo » (la V7 pourra la remplacer : refaire cet alignement). Scripts chronométrés : `livrables/PITCH_5MIN.md` et `livrables/PITCH_3MIN.md`. Vidéo : `livrables/VIDEO_SCRIPT.md`. Chiffres : `livrables/CHIFFRES.md`. Décisions : `coord/DECISIONS.md` (D-009, D-013).
+Source du récit : `livrables/PITCH_5MIN.md` et `livrables/PITCH_3MIN.md` (scripts chronométrés), gestes prouvés dans `livrables/pitch_v7/DEMO_DEROULE.md`. Vidéo : `livrables/VIDEO_SCRIPT.md`. Chiffres : `METRIQUES.md` (fait foi), puis `livrables/CHIFFRES.md`.
 
-Règle commune : chaîne locale pour la démo, Fuji à décider (D-013). La phrase est lue en local par mots-clés, dans le navigateur. L'API d'alertes de MetaMask ne sert ni les chaînes locales ni Fuji : ce que MetaMask affiche ou n'affiche pas sur notre démo ne prouve rien. Notre affirmation sur MetaMask vient de son code public, lu le 11 oct. 2026 (`research/demo_reelle/RECHERCHE_metamask_couverture.md`). Un essai réel sur Sepolia, chaîne servie par l'API, reste à faire.
+Écran clé de l'extension livrée, à citer tel quel : « Ça ne correspond pas à ce que tu as écrit. », le gant, et le bouton « Limiter à 50 USDC et envoyer » : la personne clique, rien ne part tout seul. Boutons « Annuler » et « Continuer ». Panneau latéral : « Retirer l'autorisation ». La démo web (`research/titouan/T_banc_e2e/webdemo/`) garde son libellé « Révoquer ce droit » : secours seulement.
+
+Décisions : `coord/DECISIONS.md` (D-009, D-013, D-015, D-016).
+
+Règle commune : copie locale d'Avalanche pour la démo, rien sur Fuji (D-016). La phrase est lue par mots-clés dans le navigateur, ou envoyée au modèle Clef par le relais local si sa clé est branchée (D-015). L'API d'alertes de MetaMask ne sert ni les chaînes locales ni Fuji : ce que MetaMask affiche ou n'affiche pas sur notre démo ne prouve rien. Notre affirmation sur MetaMask vient de son code public, lu le 11 oct. 2026 (`research/demo_reelle/RECHERCHE_metamask_couverture.md`). Un essai réel sur Sepolia, chaîne servie par l'API, reste à faire.
 
 Trois scènes, dans cet ordre. Durée visée : 1 minute en tout.
 
 ## Scène 1 : « échanger 50 USDC » face à un droit illimité (en direct)
 - Site : Neve, `research/demo_reelle/site_echange/`, port 8793.
 - Je tape « échanger 50 USDC contre AVAX » avant de voir la demande.
-- `?mode=piege` : le site demande un droit illimité au routeur. Attendu : « Ça ne correspond pas à ce que tu as écrit. » Ligne : tu as écrit 50 USDC, la demande donne accès à tout ton USDC. Le portefeuille ne s'ouvre pas. Selon PITCH_V6 : routeur connu, avertissement léger ; adresse neuve, rouge (à rejouer avant de le dire).
+- `?mode=piege` : le site demande un droit illimité au routeur. Attendu : « Ça ne correspond pas à ce que tu as écrit. » Ligne : tu as écrit 50 USDC, la demande donne accès à tout ton USDC. Le gant. Rien ne part : la personne choisit « Annuler » ou « Limiter à 50 USDC et envoyer » (elle clique, l'autorisation part limitée à 50). Selon PITCH_V6 : routeur connu, avertissement léger ; adresse neuve, rouge (à rejouer avant de le dire).
 - `?mode=piege&via=permit` : même demande par signature. Attendu : « Ça ne correspond pas », avec la ligne « cette signature ne peut pas être limitée ».
-- `?mode=honnete` : le site demande 50 USDC, pas plus. Attendu : « Ça correspond », le portefeuille s'ouvre seul après une seconde. La demande initiale est correcte, puis la seconde (l'échange) est couverte par la même phrase.
+- `?mode=honnete` : le site demande 50 USDC, pas plus. Attendu : « Ça correspond », puis « Continuer » (si le build ferme encore la fenêtre seul après une seconde, ne pas le commenter). La demande initiale est correcte, puis la seconde (l'échange) est couverte par la même phrase.
 - Phrase sûre, seulement pour une adresse que MetaMask ne liste pas comme malveillante : « MetaMask affiche illimité sans alerte et ne sait ni combien tu voulais donner ni à qui. »
 - Prouve : l'écart entre une phrase et un droit. Ne prouve pas : le comportement de MetaMask en production, la précision d'un modèle, l'acceptation par des personnes.
 - État : jouée dans un Chromium avec l'extension avant les derniers correctifs. Relancer les tests de l'extension et rejouer les trois modes avant de présenter.
@@ -27,10 +31,10 @@ Trois scènes, dans cet ordre. Durée visée : 1 minute en tout.
 - MetaMask, d'après son code public : décode un Permit en demande de plafond de dépense et informe. Il ne compare pas avec « me connecter ». Les messages de connexion valides (SIWE) ne passent pas par l'analyse Blockaid.
 
 ## Après l'alerte
-- La personne annule ou continue : elle garde le dernier geste, Annuler reste visible, aucun écran n'est vert.
+- La personne annule, continue, ou clique sur « Limiter à 50 USDC et envoyer » : elle garde le dernier geste, Annuler reste visible, aucun écran n'est vert, rien ne part tout seul.
 - Chaque décision laisse une ligne datée. L'extension autonome garde 500 lignes locales, chaînées par hachage comme la version serveur (`journal_chain.js`, 7 tests, export JSON, `verify_journal.mjs`). Pas d'ancrage sur une blockchain (D-017).
-- Révocation d'un droit en un clic et preuve ancrée : prototypes, pas dans la démo. Ne pas les montrer comme faits. L'ancrage sur Fuji est codé, pas déployé.
-- Le panneau latéral (clic sur l'icône de l'extension) montre le journal des décisions.
+- Le panneau latéral (clic sur l'icône de l'extension) montre « Ce que tu as laissé ouvert » avec le bouton « Retirer l'autorisation », et le journal des décisions. Hold up prépare le retrait, le portefeuille le signe. Branché et testé en Node, jamais essayé dans un vrai Chrome avec un vrai portefeuille : le dire.
+- Preuve ancrée : non faite. L'ancrage sur Fuji est codé, pas déployé.
 
 ## Limites (à dire pour finir, diapo « ce qu'on ne couvre pas »)
 - Fraude voulue : la personne veut vraiment faire le paiement, la demande correspond. Hors périmètre.
@@ -38,7 +42,7 @@ Trois scènes, dans cet ordre. Durée visée : 1 minute en tout.
 - Un escroc qui souffle la phrase exacte : la comparaison ne voit rien, les règles de base voient encore un droit illimité vers une adresse inconnue.
 - Contrat qui change à l'exécution : Added Protection de MetaMask le traite mieux. Ne pas le revendiquer.
 - Ledger direct, mobile, bouton Envoyer du portefeuille : hors périmètre.
-- Point faible chiffré : sur le jeu aveugle de 250 cas, notre moteur de comparaison (pas l'extension) met 15,0 % des opérations honnêtes en rouge, 30 % avec au moins une alerte. Seuil de 10 % non atteint.
+- Point faible chiffré : notre moteur de comparaison, jeu aveugle de 250 cas (pas l'extension), met 15,0 % des opérations honnêtes en rouge, 30 % avec au moins une alerte. Seuil de 10 % non atteint.
 - Pas d'essai avec un vrai portefeuille : ne pas montrer ce qui n'a pas été vu.
 
 ## À ne pas montrer ni dire
