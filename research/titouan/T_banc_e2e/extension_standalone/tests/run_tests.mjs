@@ -40,10 +40,13 @@ const sp = (args) => spawnSync(process.execPath, ['--no-warnings', ...args], { e
   const outs = (d) => new Map(JSON.parse(readFileSync(join(d, 'BUILD_INFO.json'), 'utf8')).outputs.map((o) => [o.file, o.sha256]));
   const a = outs(EXT), b = outs(NN);
   const diff = [...new Set([...a.keys(), ...b.keys()])].filter((k) => a.get(k) !== b.get(k)).sort();
-  ok(JSON.stringify(diff) === '["classifier_client.js","manifest.json"]', 'les deux builds ne different que par classifier_client.js et manifest.json', diff.join(', '));
+  // background.js : une seule ligne differe, celle qui donne au garde-barriere la lecture directe de la chaine (absente du build sans reseau).
+  ok(JSON.stringify(diff) === '["background.js","classifier_client.js","manifest.json"]', 'les deux builds ne different que par background.js (lecture de la chaine), classifier_client.js et manifest.json', diff.join(', '));
+  { const lines = (d) => readFileSync(join(d, 'background.js'), 'utf8').split(String.fromCharCode(10)).map((l) => l.replace(String.fromCharCode(13), '')); const x = lines(EXT), y = lines(NN); const changed = x.map((l, n) => [l, y[n]]).filter(([p, q]) => p !== q);
+    ok(x.length === y.length && changed.length === 1 && changed[0][0].startsWith('const readChain = (body) => chainFacts(') && changed[0][1] === 'const readChain = null;', 'background.js : la seule ligne qui differe est celle de la lecture de chaine', String(changed.length)); }
   for (const [flag, label] of [[null, 'build livre'], ['--no-network', 'build sans reseau']]) {
     const s = spawnSync(process.execPath, [join(HERE, 'static_check.mjs'), ...(flag ? [flag] : [])], { encoding: 'utf8' });
-    ok(s.status === 0, 'controle statique (' + label + ') : ' + (flag ? "aucun reseau, connect-src 'none'" : 'un seul appel, vers le relais local ; connect-src limite au relais'), (s.stdout || '').split('\n').filter((l) => l.startsWith('ECHEC')).join(' | '));
+    ok(s.status === 0, 'controle statique (' + label + ') : ' + (flag ? "aucun reseau, connect-src 'none'" : 'deux sorties : la phrase vers le relais local, la demande vers le RPC public Avalanche et Fuji ; connect-src limite a ces trois origines'), (s.stdout || '').split('\n').filter((l) => l.startsWith('ECHEC')).join(' | '));
   }
   R.tree_sha256_sans_reseau = u2;
 }

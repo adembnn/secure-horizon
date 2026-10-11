@@ -463,7 +463,9 @@ export function evaluate(body, local = loadLocalContext()) {
 
   const contact = (() => { const o = (eff.outgoing || [])[0]; return (o && local.contacts.find((c) => c.address === lc(o.to))) || null; })(); // destinataire présent dans le carnet
   const lookalike = (eff.counterparties || []).find((c) => c.lookalikeOf);
-  const pt = typeof body.pageText === 'string' ? body.pageText.slice(0, 4000) : '';
+  // The words of the page are NOT evidence (founder's decision, 11 Oct.) : same rule as the embedded engine (extension_standalone/src/sentinelle_core.js).
+  // The verdict comes from the request itself. body.pageText is ignored.
+  const pt = '';
   const press = (funds || grants) && pt ? findPressure(pt) : null;
   const pres = present({ eff, S, niveau, method, host, chainId: chainId ?? eff.chainId, contact, intentText: body.intent_text, funds, opaque });
   let { fid, texts, source } = pres;

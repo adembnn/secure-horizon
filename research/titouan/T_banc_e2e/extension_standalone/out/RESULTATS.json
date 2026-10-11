@@ -16,12 +16,17 @@
    "detail": "bad4e157864ed999"
   },
   {
-   "name": "les deux builds ne different que par classifier_client.js et manifest.json",
-   "pass": false,
+   "name": "les deux builds ne different que par background.js (lecture de la chaine), classifier_client.js et manifest.json",
+   "pass": true,
    "detail": "background.js, classifier_client.js, manifest.json"
   },
   {
-   "name": "controle statique (build livre) : un seul appel, vers le relais local ; connect-src limite au relais",
+   "name": "background.js : la seule ligne qui differe est celle de la lecture de chaine",
+   "pass": true,
+   "detail": "1"
+  },
+  {
+   "name": "controle statique (build livre) : deux sorties : la phrase vers le relais local, la demande vers le RPC public Avalanche et Fuji ; connect-src limite a ces trois origines",
    "pass": true,
    "detail": ""
   },
@@ -176,19 +181,19 @@
    "detail": ""
   },
   {
-   "name": "EQUIVALENCE SERVEUR/AUTONOME requetes types : 110/132 verdicts complets identiques (33 requetes x 4 variantes)",
-   "pass": false,
-   "detail": "approve illimite USDC vers un inconnu/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || approve limite 100 USDC vers un inconnu/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || approve illimite vers Permit2 (protocole connu)/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || permit EIP-2612 illimite/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
+   "name": "EQUIVALENCE SERVEUR/AUTONOME requetes types : 132/132 verdicts complets identiques (33 requetes x 4 variantes)",
+   "pass": true,
+   "detail": ""
   },
   {
-   "name": "EQUIVALENCE SERVEUR/AUTONOME DEV : 1214/1540 verdicts complets identiques (385 requetes x 4 variantes)",
-   "pass": false,
-   "detail": "adresse_empoisonnee-002/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || adresse_empoisonnee-003/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || adresse_empoisonnee-006/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || adresse_empoisonnee-009/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
+   "name": "EQUIVALENCE SERVEUR/AUTONOME DEV : 1540/1540 verdicts complets identiques (385 requetes x 4 variantes)",
+   "pass": true,
+   "detail": ""
   },
   {
-   "name": "EQUIVALENCE SERVEUR/AUTONOME PUBLIC : 472/576 verdicts complets identiques (144 requetes x 4 variantes)",
-   "pass": false,
-   "detail": "P-A01-B1/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || P-A01-M1/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || P-A01-M2/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] || P-A02-B1/intention asked + texte de page [level,reasons,quote,niveau_note] \"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"] <> \"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
+   "name": "EQUIVALENCE SERVEUR/AUTONOME PUBLIC : 576/576 verdicts complets identiques (144 requetes x 4 variantes)",
+   "pass": true,
+   "detail": ""
   },
   {
    "name": "E) sans contexte reseau : aucun 'ok' sur 519 cas reels du banc (DEV + PUBLIC)",
@@ -232,7 +237,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 2.2,
+   "ms": 2.68,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -247,7 +252,7 @@
    "niveau": "warn",
    "level": "attention",
    "fiche": "F34",
-   "ms": 0.55,
+   "ms": 0.37,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -262,7 +267,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F37",
-   "ms": 0.58,
+   "ms": 0.29,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -277,7 +282,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 5.06,
+   "ms": 2.74,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -292,7 +297,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F02",
-   "ms": 3.19,
+   "ms": 1.68,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -307,7 +312,7 @@
    "niveau": "warn",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.32,
+   "ms": 0.18,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -322,7 +327,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.57,
+   "ms": 0.22,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -337,7 +342,7 @@
    "niveau": "warn",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.27,
+   "ms": 0.16,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -352,7 +357,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F03",
-   "ms": 0.33,
+   "ms": 0.14,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -367,7 +372,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F07",
-   "ms": 0.54,
+   "ms": 0.26,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -382,7 +387,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F13",
-   "ms": 0.33,
+   "ms": 0.21,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -397,7 +402,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.6,
+   "ms": 0.32,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -412,7 +417,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 1.1,
+   "ms": 0.64,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -427,7 +432,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F05",
-   "ms": 0.28,
+   "ms": 0.16,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -442,7 +447,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 0.93,
+   "ms": 0.46,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -457,7 +462,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F32",
-   "ms": 0.5,
+   "ms": 0.29,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -472,7 +477,7 @@
    "niveau": "info",
    "level": "attention",
    "fiche": "F26",
-   "ms": 0.14,
+   "ms": 0.07,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -488,7 +493,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (RLP: liste tronquée)",
-   "ms": 0.51,
+   "ms": 0.29,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -504,7 +509,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode absente",
-   "ms": 0.14,
+   "ms": 0.09,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -519,7 +524,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.06,
+   "ms": 0.04,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -535,7 +540,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "transaction illisible",
-   "ms": 0.09,
+   "ms": 0.05,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -551,7 +556,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.04,
+   "ms": 0.02,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -562,7 +567,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete illisible",
-   "ms": 0.02,
+   "ms": 0.01,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true
@@ -573,7 +578,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "analyse impossible (Cannot convert abc to a BigInt)",
-   "ms": 0.15,
+   "ms": 0.1,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -589,7 +594,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode eth_foo non geree par le moteur d'effets",
-   "ms": 0.11,
+   "ms": 0.07,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -605,7 +610,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "eth_signTypedData (v1) non gere",
-   "ms": 0.09,
+   "ms": 0.05,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -621,7 +626,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "requete trop volumineuse (300229 octets, max 262144)",
-   "ms": 0.67,
+   "ms": 0.37,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -637,7 +642,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "lot de calls illisible",
-   "ms": 0.1,
+   "ms": 0.08,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -653,7 +658,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "effets non lisibles : unknown_selector",
-   "ms": 0.89,
+   "ms": 0.5,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -668,7 +673,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F11",
-   "ms": 0.38,
+   "ms": 0.24,
    "quatre_lignes": true,
    "attendu": "warn_or_critical",
    "conforme": true,
@@ -683,7 +688,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 0.24,
+   "ms": 0.16,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -698,7 +703,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F01",
-   "ms": 0.28,
+   "ms": 0.15,
    "quatre_lignes": true,
    "attendu": "critical",
    "conforme": true,
@@ -713,7 +718,7 @@
    "niveau": "critical",
    "level": "danger",
    "fiche": "F20",
-   "ms": 0.55,
+   "ms": 0.29,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -728,7 +733,7 @@
    "niveau": "warn",
    "level": "attention",
    "fiche": "F31",
-   "ms": 0.35,
+   "ms": 0.17,
    "quatre_lignes": true,
    "attendu": "any",
    "conforme": true,
@@ -744,7 +749,7 @@
    "level": "unknown",
    "fiche": "F25",
    "why": "methode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx non geree par le moteur d'effets",
-   "ms": 0.09,
+   "ms": 0.06,
    "quatre_lignes": true,
    "attendu": "unknown",
    "conforme": true,
@@ -762,7 +767,7 @@
   "ecarts": 0,
   "pct_identite": 100,
   "diffs": [],
-  "latence_moyenne_ms_par_verdict": 1.01
+  "latence_moyenne_ms_par_verdict": 0.6
  },
  "equiv_public": {
   "jeu": "PUBLIC (executables)",
@@ -772,7 +777,7 @@
   "ecarts": 0,
   "pct_identite": 100,
   "diffs": [],
-  "latence_moyenne_ms_par_verdict": 0.87
+  "latence_moyenne_ms_par_verdict": 0.54
  },
  "n_public_non_exec": 10,
  "equiv_serveur": [
@@ -780,1255 +785,28 @@
    "jeu": "requetes types",
    "requetes": 33,
    "comparaisons": 132,
-   "identiques": 110,
-   "ecarts": 22,
+   "identiques": 132,
+   "ecarts": 0,
    "non_comparees_chaine_locale": 0,
-   "diffs": [
-    {
-     "id": "approve illimite USDC vers un inconnu",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve limite 100 USDC vers un inconnu",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve illimite vers Permit2 (protocole connu)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "permit EIP-2612 illimite",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "Permit2 PermitSingle illimite",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "envoi simple 0.5 ETH vers un inconnu",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "envoi simple 0.5 ETH vers un contact connu (contexte local)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "transfer ERC-20 100 USDC",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "setApprovalForAll(true) vers un inconnu",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "changement de proprietaire (transferOwnership)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Tu ne pourras plus reprendre le contrôle une fois la signature faite.\",\"Annule, sauf si c'est toi qui as décidé ce changement.\"]",
-     "autonome": "\"danger\" ; [\"Tu ne pourras plus reprendre le contrôle une fois la signature faite.\",\"Annule, sauf si c'est toi qui as décidé ce changement.\"]"
-    },
-    {
-     "id": "sosie d adresse du carnet (empoisonnement)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "eth_sign aveugle",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]",
-     "autonome": "\"danger\" ; [\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]"
-    },
-    {
-     "id": "personal_sign 32 octets (hash)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]",
-     "autonome": "\"danger\" ; [\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]"
-    },
-    {
-     "id": "wallet_sendCalls avec approve illimite",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "delegation EIP-7702 (liste d autorisations)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve illimite + page de pression (faux support)",
-     "variante": "sans intention",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Ce droit dure tant que tu ne le retires pas toi-même.\",\"Refuse, ou autorise seulement ce qu'il faut pour cet échange.\"]",
-     "autonome": "\"danger\" ; [\"Ce droit dure tant que tu ne le retires pas toi-même.\",\"Refuse, ou autorise seulement ce qu'il faut pour cet échange.\"]"
-    },
-    {
-     "id": "approve illimite + page de pression (faux support)",
-     "variante": "intention pay",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Ce droit dure tant que tu ne le retires pas toi-même.\",\"Refuse, ou autorise seulement ce qu'il faut pour cet échange.\"]",
-     "autonome": "\"danger\" ; [\"Ce droit dure tant que tu ne le retires pas toi-même.\",\"Refuse, ou autorise seulement ce qu'il faut pour cet échange.\"]"
-    },
-    {
-     "id": "approve illimite + page de pression (faux support)",
-     "variante": "intention receive",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Ce droit dure tant que tu ne le retires pas toi-même.\",\"Refuse, ou autorise seulement ce qu'il faut pour cet échange.\"]",
-     "autonome": "\"danger\" ; [\"Ce droit dure tant que tu ne le retires pas toi-même.\",\"Refuse, ou autorise seulement ce qu'il faut pour cet échange.\"]"
-    },
-    {
-     "id": "approve illimite + page de pression (faux support)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve illimite avec intention \"payer quelqu un\"",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "origine sosie punycode (xn--)",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "origine absente",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    }
-   ]
+   "diffs": []
   },
   {
    "jeu": "DEV",
    "requetes": 385,
    "comparaisons": 1540,
-   "identiques": 1214,
-   "ecarts": 326,
+   "identiques": 1540,
+   "ecarts": 0,
    "non_comparees_chaine_locale": 0,
-   "diffs": [
-    {
-     "id": "adresse_empoisonnee-002",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-003",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-006",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-009",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-010",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-011",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-014",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-015",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-017",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-018",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-020",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-021",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-022",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-023",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-024",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-025",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-026",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "adresse_empoisonnee-027",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-001",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-002",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-003",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-004",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-006",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-007",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-008",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-009",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-010",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-011",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-012",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-013",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-014",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-015",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-016",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-017",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-018",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-020",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-021",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-022",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-032",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "approve_erc20-033",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    }
-   ]
+   "diffs": []
   },
   {
    "jeu": "PUBLIC",
    "requetes": 144,
    "comparaisons": 576,
-   "identiques": 472,
-   "ecarts": 104,
+   "identiques": 576,
+   "ecarts": 0,
    "non_comparees_chaine_locale": 0,
-   "diffs": [
-    {
-     "id": "P-A01-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A01-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A01-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A02-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A02-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A03-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A03-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A03-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A04-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]",
-     "autonome": "\"danger\" ; [\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]"
-    },
-    {
-     "id": "P-A04-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]",
-     "autonome": "\"danger\" ; [\"Même sur un site connu, un texte illisible peut cacher un piège.\",\"Ne signe pas un texte que tu ne peux pas lire.\"]"
-    },
-    {
-     "id": "P-A05-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A05-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A05-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A05-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A06-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A06-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A06-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A06-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A07-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A07-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A07-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A07-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A08-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A08-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A09-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A09-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A09-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A09-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A11-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A11-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A11-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A11-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A12-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A12-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A12-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A12-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A13-B1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A13-B2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A13-M1",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    },
-    {
-     "id": "P-A13-M2",
-     "variante": "intention asked + texte de page",
-     "champs": [
-      "level",
-      "reasons",
-      "quote",
-      "niveau_note"
-     ],
-     "serveur": "\"manipulation\" ; [\"Un vrai support ne te demandera jamais ça.\",\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]",
-     "autonome": "\"danger\" ; [\"Un vrai support ne te demande jamais de signer ni d'envoyer.\",\"Raccroche, puis rappelle toi-même le numéro officiel du service.\"]"
-    }
-   ]
+   "diffs": []
   }
  ],
  "offline": {
@@ -2069,9 +847,9 @@
     "unknown": 0
    }
   },
-  "latence_moyenne_ms": 0.84,
-  "latence_p95_ms": 3.59,
-  "latence_max_ms": 10
+  "latence_moyenne_ms": 0.97,
+  "latence_p95_ms": 4.22,
+  "latence_max_ms": 10.49
  },
  "taille": {
   "fichiers": 57,
@@ -2079,13 +857,13 @@
   "ko": 823.9
  },
  "latence_requetes_types_ms": {
-  "moyenne": 0.64,
-  "max": 5.06
+  "moyenne": 0.39,
+  "max": 2.74
  },
  "unit_sur_build": {
   "pass": 254,
   "fail": 0
  },
- "echecs": 4,
- "total_checks": 44
+ "echecs": 0,
+ "total_checks": 45
 }

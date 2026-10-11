@@ -50,7 +50,8 @@ const withPaul = { contacts: [{ address: PAUL, label: 'Paul' }], history: [], pr
   check('3c accents : "dernier avertissement", "déplace tes fonds", NFD', !!S.findPressure('Déplace tes fonds'.normalize('NFD')) && !!S.findPressure('ACTION IMMÉDIATE'));
   const fp = S.evaluate(approve(MAXU, { pageText: 'Ton ami t’invite à visiter la boutique' }), L0);
   const tp = S.evaluate(approve(MAXU, { pageText: 'Agissez vite, contactez le support' }), L0);
-  check('3d page "invite/visite" : pas de manipulation ; page "vite/support" : manipulation', fp.level !== 'manipulation' && tp.level === 'manipulation', fp.level + '/' + tp.level);
+  // Founder's decision, 11 Oct. : the words of the page are not evidence. The same request gets the same verdict whatever the page says.
+  check('3d le texte de la page ne change pas le verdict : "invite/visite" et "vite/support" donnent le meme niveau, jamais manipulation', fp.level !== 'manipulation' && tp.level !== 'manipulation' && fp.level === tp.level && tp.quote === undefined, fp.level + '/' + tp.level);
   check('3e remboursement + envoi : fiche F22 ; support + envoi : F21', S.evaluate(send(OTHER, '0x16345785d8a0000', { pageText: 'Remboursement : paie les frais vite' }), L0).fiche === 'F22' || S.findPressure('Remboursement').fiche === 'F22');
 }
 // ---- (4) droit illimite : pas de "autorise seulement jetons"
