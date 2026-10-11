@@ -1,131 +1,235 @@
 /* Hold up - injecteur (monde MAIN, document_start, toutes frames).
  * Enveloppe les fournisseurs EIP-1193 sur place (Proxy "apply" sur les methodes), retient les
- * demandes sensibles jusqu'a la decision prise par bridge.js (monde isole) via un MessageChannel prive. */
+ * demandes sensibles jusqu'a la decision prise par bridge.js (monde isole) via un MessageChannel prive.
+ *
+ * Regle de durcissement (revue de securite n2, S1) : ce fichier partage les prototypes natifs avec la page (Set, Map, Array,
+ * Promise, MessagePort, Function, Object...). La page peut les modifier APRES nous. Donc : (1) toute methode native utilisee est
+ * capturee ici, au demarrage, sous forme "decurryfiee" (uncurry) ; (2) apres la zone NATIVES, aucun appel de methode d'un objet
+ * que la page peut modifier dans les chemins de securite (ni .has/.get/.then/.map/.call, ni for...of, ni destructuration,
+ * ni Object.assign, ni Promise.*) ; (3) les objets internes sont a prototype nul ; (4) la decision n'est crue que si le message
+ * porte le jeton aleatoire donne par bridge.js dans "ready". Un test statique (securite_s1_*.test.mjs) le verifie. */
 (() => {
   'use strict';
+  /* NATIVES-BEGIN */
   const W = window;
-  // --- references natives capturees avant tout code de la page ---
   const O = Object, R = Reflect, P = Proxy;
-  const defProp = O.defineProperty, gopd = O.getOwnPropertyDescriptor, getProto = O.getPrototypeOf;
-  const hasOwn = (o, k) => O.prototype.hasOwnProperty.call(o, k);
-  const rApply = R.apply, rGet = R.get;
+  const NativePromise = Promise, WM = WeakMap, WS = WeakSet, MapC = Map, SetC = Set, ErrorC = Error, Str = String;
+  const fnCall = Function.prototype.call, fnBind = Function.prototype.bind;
+  const uncurry = fnBind.bind(fnCall); // uncurry(f)(self, ...args) === f.call(self, ...args), sans jamais relire .call
+  const defProp = O.defineProperty, gopd = O.getOwnPropertyDescriptor, getProto = O.getPrototypeOf, objCreate = O.create;
+  const keysOf = O.keys, freeze = O.freeze, isArr = Array.isArray;
+  const hasOwnU = uncurry(O.prototype.hasOwnProperty);
+  const rApply = R.apply, rGet = R.get, rSet = R.set, rOwnKeys = R.ownKeys, rDelete = R.deleteProperty;
   const JSONs = JSON.stringify, JSONp = JSON.parse;
-  const NativePromise = Promise, WM = WeakMap, WS = WeakSet;
-  const setT = W.setTimeout.bind(W), clearT = W.clearTimeout.bind(W), setI = W.setInterval.bind(W);
+  const mapGet = uncurry(MapC.prototype.get), mapSet = uncurry(MapC.prototype.set), mapHas = uncurry(MapC.prototype.has), mapDel = uncurry(MapC.prototype.delete);
+  const setHas = uncurry(SetC.prototype.has);
+  const wmGet = uncurry(WM.prototype.get), wmSet = uncurry(WM.prototype.set), wmHas = uncurry(WM.prototype.has), wmDel = uncurry(WM.prototype.delete);
+  const wsHas = uncurry(WS.prototype.has), wsAdd = uncurry(WS.prototype.add);
+  const thenOf = uncurry(NativePromise.prototype.then);
+  const pResolve = NativePromise.resolve; // appele par rApply(pResolve, NativePromise, [x])
+  const chCode = uncurry(String.prototype.charCodeAt);
+  const setT = W.setTimeout.bind(W), clearT = W.clearTimeout.bind(W), setI = W.setInterval.bind(W), clearI = W.clearInterval.bind(W);
   const postMsg = W.postMessage.bind(W);
+  const dispatchEv = typeof W.dispatchEvent === 'function' ? W.dispatchEvent.bind(W) : () => true;
   const MC = W.MessageChannel;
+  const CE = W.CustomEvent;
   const addL = W.addEventListener.bind(W);
   const origToString = Function.prototype.toString;
   const origDefine = O.defineProperty, origDefineMany = O.defineProperties, origReflectDefine = R.defineProperty;
+  // Lecture de MessageEvent.data par le getter d'origine (la page peut redefinir le getter du prototype).
+  const dataDesc = W.MessageEvent && W.MessageEvent.prototype ? gopd(W.MessageEvent.prototype, 'data') : undefined;
+  const dataGet = dataDesc && typeof dataDesc.get === 'function' ? dataDesc.get : null;
+  const stopImm = W.Event && W.Event.prototype && typeof W.Event.prototype.stopImmediatePropagation === 'function' ? uncurry(W.Event.prototype.stopImmediatePropagation) : (ev) => ev.stopImmediatePropagation(); // repli : environnement de test sans Event
+  // MessagePort : methodes lues sur le prototype du PREMIER port cree (avant toute page).
+  let portPost = null, portListen = null, portStart = null;
+  /* NATIVES-END */
+
+  // --- aides sans appel de methode modifiable ---
+  const isObj = (x) => !!x && (typeof x === 'object' || typeof x === 'function');
+  // propriete propre en donnee (jamais l'heritage de Object.prototype, que la page peut empoisonner)
+  function own(o, k) { if (!isObj(o)) return undefined; const d = gopd(o, k); return d && hasOwnU(d, 'value') ? d.value : undefined; }
+  function setOwn(o, k, v) { defProp(o, k, { __proto__: null, value: v, writable: true, enumerable: true, configurable: true }); return o; }
+  // copie d'un descripteur lu : prototype nul, sinon get/set/value heritage d'Object.prototype se melangent au descripteur
+  function getDesc(o, k) {
+    const d = gopd(o, k); if (!d) return d;
+    const out = { __proto__: null };
+    if (hasOwnU(d, 'get')) out.get = d.get;
+    if (hasOwnU(d, 'set')) out.set = d.set;
+    if (hasOwnU(d, 'value')) out.value = d.value;
+    if (hasOwnU(d, 'writable')) out.writable = d.writable;
+    if (hasOwnU(d, 'enumerable')) out.enumerable = d.enumerable;
+    if (hasOwnU(d, 'configurable')) out.configurable = d.configurable;
+    return out;
+  }
+  const decision = (allow, reason, params) => ({ __proto__: null, allow, reason, params });
+  const rejected = (e) => new NativePromise((_, rj) => { rj(e); });
+  const toPromise = (x) => rApply(pResolve, NativePromise, [x]);
+  // resolves our outer promise with the wallet's answer WITHOUT looking up .then on it (the page may have replaced Promise.prototype.then)
+  const settleWith = (resolve, reject, r) => { thenOf(toPromise(r), resolve, reject); };
+  const dataOf = (ev) => { try { return dataGet ? rApply(dataGet, ev, []) : ev.data; } catch (_) { return undefined; } };
 
   // --- masquage : les enveloppes se presentent comme les fonctions d'origine ---
   const masks = new WM();
   const tsProxy = new P(origToString, {
-    apply(t, thisArg, args) { const o = masks.get(thisArg); return rApply(t, o !== undefined ? o : thisArg, args); }
+    __proto__: null,
+    apply(t, thisArg, args) { const o = wmGet(masks, thisArg); return rApply(t, o !== undefined ? o : thisArg, args); }
   });
-  masks.set(tsProxy, origToString);
-  const tsDesc = gopd(Function.prototype, 'toString');
-  defProp(Function.prototype, 'toString', { value: tsProxy, writable: tsDesc.writable, enumerable: tsDesc.enumerable, configurable: tsDesc.configurable });
-  const maskedProxy = (target, handler) => { const p = new P(target, handler); masks.set(p, target); return p; };
+  wmSet(masks, tsProxy, origToString);
+  const tsDesc = getDesc(Function.prototype, 'toString');
+  defProp(Function.prototype, 'toString', { __proto__: null, value: tsProxy, writable: tsDesc.writable, enumerable: tsDesc.enumerable, configurable: tsDesc.configurable });
+  const maskedProxy = (target, handler) => { const p = new P(target, handler); wmSet(masks, p, target); return p; };
 
   // --- canal prive vers bridge.js ---
-  const pending = new Map();
-  let port = null, readyResolve, readyFlag = false;
-  const ready = new NativePromise((res) => { readyResolve = res; });
+  const pending = new MapC();
+  const readyQueue = new MapC();
+  let port = null, readyFlag = false, token = '', qn = 0, qdone = 0;
   let nextId = 1;
+  function whenReady(fn) { if (readyFlag) { fn(); return; } mapSet(readyQueue, qn++, fn); }
+  function flushReady() { while (qdone < qn) { const fn = mapGet(readyQueue, qdone); mapDel(readyQueue, qdone); qdone++; try { fn(); } catch (_) {} } }
   function connect() {
     let tries = 0;
     const attempt = () => {
       if (readyFlag || tries++ > 60) return;
       const ch = new MC();
-      ch.port1.onmessage = (ev) => {
-        const d = ev.data;
-        if (d && d.t === 'ready') { if (!readyFlag) { readyFlag = true; port = ch.port1; port.onmessage = onPort; readyResolve(); } }
-      };
+      if (!portPost) {
+        const pr = getProto(ch.port1);
+        portPost = uncurry(pr.postMessage); portListen = uncurry(pr.addEventListener);
+        portStart = typeof pr.start === 'function' ? uncurry(pr.start) : null;
+      }
+      const p1 = ch.port1;
+      portListen(p1, 'message', (ev) => {
+        if (readyFlag) return;
+        const d = dataOf(ev);
+        if (own(d, 't') !== 'ready') return;
+        const k = own(d, 'k');
+        // le premier "ready" qui porte un jeton gagne ; sans jeton (pont ancien ou forge) : jamais cru, la demande echoue ferme
+        if (typeof k !== 'string' || k.length < 16) return;
+        readyFlag = true; token = k; port = p1;
+        portListen(p1, 'message', onPort);
+        if (portStart) portStart(p1);
+        flushReady();
+      });
+      if (portStart) portStart(p1);
       try { postMsg({ __sentinelle: 'hello' }, '*', [ch.port2]); } catch (_) {}
       setT(attempt, 25);
     };
     attempt();
   }
   function onPort(ev) {
-    const d = ev.data; if (!d || !pending.has(d.id)) return;
-    const p = pending.get(d.id);
-    if (d.t === 'ack') { p.acked = true; return; }
-    if (d.t === 'rpc') { serveRead(d, p); return; }
-    if (d.t === 'result') { pending.delete(d.id); clearT(p.ackTimer); p.resolve(d); }
+    const d = dataOf(ev); if (!isObj(d)) return;
+    if (own(d, 'k') !== token) return; // message sans le jeton du pont : ignore
+    const id = own(d, 'id'); if (typeof id !== 'number' || !mapHas(pending, id)) return;
+    const p = mapGet(pending, id), t = own(d, 't');
+    if (t === 'ack') { p.acked = true; return; }
+    if (t === 'rpc') { serveRead(d, p); return; }
+    if (t === 'result') {
+      mapDel(pending, id); clearT(p.ackTimer);
+      const allow = own(d, 'allow') === true, reason = own(d, 'reason');
+      let params; if (allow) { const pp = own(d, 'params'); if (isArr(pp)) { try { params = clone(pp); } catch (_) {} } }
+      try { p.cb(decision(allow, typeof reason === 'string' ? reason : '', params)); } catch (_) {}
+    }
   }
   // While a request is held, the service worker may ask for READS on the node of the wallet it came through (dry run of that
   // very request : effect_sim.js). Only these two read-only methods, only for a request still waiting, only through its provider.
-  const READS = new Set(['debug_traceCall', 'eth_call']);
+  const READS = new SetC(['debug_traceCall', 'eth_call']);
   function serveRead(d, p) {
-    const reply = (ok, result) => { try { port.postMessage({ t: 'rpcResult', id: d.id, n: d.n, ok, result }); } catch (_) { try { port.postMessage({ t: 'rpcResult', id: d.id, n: d.n, ok: false }); } catch (__) {} } };
+    const nn = own(d, 'n'), rid = own(d, 'id'), method = own(d, 'method');
+    const reply = (ok, result) => {
+      try { portPost(port, { t: 'rpcResult', id: rid, n: nn, k: token, ok, result }); } catch (_) { try { portPost(port, { t: 'rpcResult', id: rid, n: nn, k: token, ok: false }); } catch (__) {} }
+    };
     let call;
     try {
       const c = p.ctx;
       const fn = !c ? null : typeof c.rawRequest === 'function' ? c.rawRequest : c.provider && typeof c.provider.request === 'function' ? c.provider.request : null;
-      if (!fn || typeof d.method !== 'string' || !READS.has(d.method)) return reply(false);
-      call = rApply(fn, c.provider, [{ method: d.method, params: snap(d.params) }]);
+      if (!fn || typeof method !== 'string' || !setHas(READS, method)) return reply(false);
+      call = rApply(fn, c.provider, [{ method, params: clone(own(d, 'params')) }]);
     } catch (_) { return reply(false); }
-    NativePromise.resolve(call).then((r) => { let out; try { out = snap(r); } catch (_) { return reply(false); } reply(true, out); }, () => reply(false));
+    let pr; try { pr = toPromise(call); } catch (_) { return reply(false); }
+    thenOf(pr, (r) => { let out; try { out = snap(r); } catch (_) { return reply(false); } reply(true, out); }, () => reply(false));
   }
-  function ask(kind, payload, ctx) {
-    return new NativePromise((resolve) => {
-      const id = nextId++;
-      const entry = { resolve, acked: false, ctx: ctx || null };
-      entry.ackTimer = setT(() => {
-        if (!entry.acked && pending.has(id)) { pending.delete(id); resolve({ allow: false, reason: 'bridge-unavailable' }); }
-      }, 2500);
-      pending.set(id, entry);
-      ready.then(() => { try { port.postMessage({ t: kind, id, payload }); } catch (_) { pending.delete(id); resolve({ allow: false, reason: 'bridge-unavailable' }); } });
+  function ask(kind, payload, ctx, cb) {
+    const id = nextId++;
+    const entry = { cb, acked: false, ctx: ctx || null, ackTimer: 0 };
+    entry.ackTimer = setT(() => {
+      if (!entry.acked && mapHas(pending, id)) { mapDel(pending, id); try { cb(decision(false, 'bridge-unavailable', undefined)); } catch (_) {} }
+    }, 2500);
+    mapSet(pending, id, entry);
+    whenReady(() => {
+      try { portPost(port, { t: kind, id, k: token, payload }); } catch (_) { if (mapHas(pending, id)) { mapDel(pending, id); clearT(entry.ackTimer); try { cb(decision(false, 'bridge-unavailable', undefined)); } catch (__) {} } }
     });
   }
-  function notify(payload) { ready.then(() => { try { port.postMessage({ t: 'notify', id: 0, payload }); } catch (_) {} }); }
+  function notify(payload) { whenReady(() => { try { portPost(port, { t: 'notify', id: 0, k: token, payload }); } catch (_) {} }); }
   connect();
 
   // --- methodes surveillees ---
-  const GATED = new Set(['eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign',
+  const GATED = new SetC(['eth_sendTransaction', 'eth_signTransaction', 'eth_sign', 'personal_sign',
     'eth_signTypedData', 'eth_signTypedData_v1', 'eth_signTypedData_v3', 'eth_signTypedData_v4',
     'wallet_sendCalls', 'eth_sendRawTransaction',
     // connexion (eth_requestAccounts, wallet_requestPermissions), lectures et changement de reseau (wallet_switchEthereumChain,
     // wallet_addEthereumChain) ne deplacent rien et n'accordent aucun droit de depense : ils passent directement, sans fenetre.
     // droits durables et dechiffrement : non decodes par le moteur, donc ecran "Non verifie" plutot que passage silencieux
     'wallet_grantPermissions', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
-  const JOURNAL = new Set(['eth_requestAccounts']);
-  const HEX20 = /^0x[0-9a-fA-F]{40}$/;
+  const JOURNAL = new SetC(['eth_requestAccounts']);
+  function isHex20(s) {
+    if (typeof s !== 'string' || s.length !== 42 || chCode(s, 0) !== 48 || (chCode(s, 1) | 32) !== 120) return false;
+    for (let i = 2; i < 42; i++) { const c = chCode(s, i); if (!((c >= 48 && c <= 57) || (c >= 65 && c <= 70) || (c >= 97 && c <= 102))) return false; }
+    return true;
+  }
 
-  // Inert deep copy, frozen : what is judged is exactly what is forwarded.
-  const freeze = O.freeze, isArr = Array.isArray, keysOf = O.keys;
+  // Inert deep copy, frozen : what is judged is exactly what is forwarded. The copy is rebuilt structurally (own data properties),
+  // never by a second JSON round trip : an inherited toJSON planted on Object.prototype could return another content each time.
   function deepFreeze(x) { if (x && typeof x === 'object') { const ks = keysOf(x); for (let i = 0; i < ks.length; i++) deepFreeze(x[ks[i]]); freeze(x); } return x; }
   function snap(x) { return JSONp(JSONs(x === undefined ? null : x)); }
-  function thaw(x) { return JSONp(JSONs(x)); } // fresh mutable copy for the wallet (some wallets normalise the object in place)
+  function clone(x) {
+    if (x === null || typeof x !== 'object') return x;
+    if (isArr(x)) { const n = x.length, out = []; for (let i = 0; i < n; i++) setOwn(out, i, clone(own(x, i))); return out; }
+    const ks = keysOf(x), out = {};
+    for (let i = 0; i < ks.length; i++) setOwn(out, ks[i], clone(own(x, ks[i])));
+    return out;
+  }
+  const thaw = clone; // fresh mutable copy for the wallet (some wallets normalise the object in place)
+  // a gated request always carries its own "params" : otherwise the wallet would read it from Object.prototype (page-controlled, may change at each read)
+  function pinParams(o) { if (isObj(o) && !isArr(o) && !hasOwnU(o, 'params')) setOwn(o, 'params', undefined); return o; }
+  // stable text of a JSON-like value, without toJSON / toString of any object
+  function ser(x) {
+    if (x === undefined || x === null) return 'null';
+    if (typeof x !== 'object') return JSONs(x) === undefined ? 'null' : JSONs(x);
+    let s = '';
+    if (isArr(x)) { s = '['; for (let i = 0; i < x.length; i++) s = s + (i ? ',' : '') + ser(own(x, i)); return s + ']'; }
+    const ks = keysOf(x); s = '{';
+    for (let i = 0; i < ks.length; i++) s = s + (i ? ',' : '') + JSONs(ks[i]) + ':' + ser(own(x, ks[i]));
+    return s + '}';
+  }
   function guessFrom(method, params) {
     try {
-      const p = Array.isArray(params) ? params : [];
-      if (p[0] && typeof p[0] === 'object' && typeof p[0].from === 'string') return p[0].from;
-      for (const v of p) if (typeof v === 'string' && HEX20.test(v)) return v;
+      const p = isArr(params) ? params : null; if (!p) return null;
+      const p0 = own(p, 0);
+      if (isObj(p0) && typeof own(p0, 'from') === 'string') return own(p0, 'from');
+      for (let i = 0; i < p.length; i++) { const v = own(p, i); if (isHex20(v)) return v; }
     } catch (_) {}
     return null;
   }
   function guessChain(method, params) {
     try {
-      const p = Array.isArray(params) ? params : [];
-      if (p[0] && typeof p[0] === 'object' && p[0].chainId != null) return String(p[0].chainId);
+      const p = isArr(params) ? params : null; if (!p) return null;
+      const p0 = own(p, 0);
+      if (isObj(p0)) { const c = own(p0, 'chainId'); if (c != null) return Str(c); }
     } catch (_) {}
     return null;
   }
-  async function chainOf(provider, rawRequest, hint) {
-    if (hint) return hint;
-    try { if (provider && provider.chainId) return String(provider.chainId); } catch (_) {}
-    if (typeof rawRequest === 'function') {
-      try {
-        return await NativePromise.race([rApply(rawRequest, provider, [{ method: 'eth_chainId' }]), new NativePromise((r) => setT(() => r(null), 800))]);
-      } catch (_) {}
-    }
-    return null;
+  // calls cb(chainId | null) exactly once
+  function chainOf(provider, rawRequest, hint, cb) {
+    if (hint) { cb(hint); return; }
+    try { if (provider && provider.chainId) { cb(Str(provider.chainId)); return; } } catch (_) {}
+    if (typeof rawRequest !== 'function') { cb(null); return; }
+    let settled = false, tm = 0;
+    const fin = (v) => { if (settled) return; settled = true; clearT(tm); cb(v); };
+    tm = setT(() => fin(null), 800);
+    try { thenOf(toPromise(rApply(rawRequest, provider, [{ method: 'eth_chainId' }])), (v) => fin(v), () => fin(null)); } catch (_) { fin(null); }
   }
   function rejection(reason) {
-    const e = new Error(reason === 'denied' ? 'User rejected the request.' : 'Hold up: verification indisponible, demande bloquee (' + reason + ').');
-    e.code = reason === 'denied' ? 4001 : 4900; // 4001 = refus utilisateur, 4900 = deconnecte
+    const e = new ErrorC(reason === 'denied' ? 'User rejected the request.' : 'Hold up: verification indisponible, demande bloquee (' + reason + ').');
+    setOwn(e, 'code', reason === 'denied' ? 4001 : 4900); // 4001 = refus utilisateur, 4900 = deconnecte
     return e;
   }
   // Avoids a second window when a wrapped method of a wallet calls another wrapped one (legacy send() -> request(),
@@ -137,21 +241,20 @@
   const passes = new WM(); // provider -> WeakMap(forwarded object -> key)
   const NOPROV = {};
   let forwarding = 0;
-  const provKey = (prov) => (prov && (typeof prov === 'object' || typeof prov === 'function') ? prov : NOPROV);
-  const chainTag = (prov) => { try { const c = prov && prov.chainId; return c == null ? '' : String(c); } catch (_) { return ''; } };
-  const keyOf = (prov, m, p) => { try { return chainTag(prov) + '|' + m + '|' + JSONs(p === undefined ? null : p); } catch (_) { return null; } };
-  const isObj = (x) => !!x && (typeof x === 'object' || typeof x === 'function');
+  const provKey = (prov) => (isObj(prov) ? prov : NOPROV);
+  const chainTag = (prov) => { try { const c = prov && prov.chainId; return c == null ? '' : Str(c); } catch (_) { return ''; } };
+  const keyOf = (prov, m, p) => { try { return chainTag(prov) + '|' + m + '|' + ser(p); } catch (_) { return null; } };
   function grant(prov, k, objs) {
     if (k === null) return () => {};
-    const o = provKey(prov); let m = passes.get(o); if (!m) { m = new WM(); passes.set(o, m); }
-    const mine = []; for (const x of objs) if (isObj(x)) { m.set(x, k); mine.push(x); }
-    return () => { for (const x of mine) if (m.get(x) === k) m.delete(x); };
+    const o = provKey(prov); let m = wmGet(passes, o); if (!m) { m = new WM(); wmSet(passes, o, m); }
+    for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x)) wmSet(m, x, k); }
+    return () => { for (let i = 0; i < objs.length; i++) { const x = objs[i]; if (isObj(x) && wmGet(m, x) === k) wmDel(m, x); } };
   }
   function takePass(prov, obj, k) {
     if (forwarding <= 0 || !isObj(obj) || k === null) return false;
-    const m = passes.get(provKey(prov));
-    if (!m || m.get(obj) !== k) return false;
-    m.delete(obj);
+    const m = wmGet(passes, provKey(prov));
+    if (!m || wmGet(m, obj) !== k) return false;
+    wmDel(m, obj);
     return true;
   }
   // Forwards with a pass that dies as soon as the wallet has answered (or thrown).
@@ -160,49 +263,58 @@
     let r;
     forwarding++;
     try { r = fn(); } catch (e) { revoke(); throw e; } finally { forwarding--; }
-    NativePromise.resolve(r).then(revoke, revoke);
+    try { thenOf(toPromise(r), revoke, revoke); } catch (_) { revoke(); }
     return r;
   }
 
   // Request limited by Hold up (Q17) : the worker answers with the params to forward, only for a transaction or a batch of calls.
   function limited(r, method) {
     if (!r || !isArr(r.params) || (method !== 'eth_sendTransaction' && method !== 'wallet_sendCalls')) return undefined;
-    try { return snap(r.params); } catch (_) { return undefined; }
+    return r.params; // already a structural copy (onPort)
   }
-  async function gate(provider, rawRequest, method, params, entryPoint) {
-    const chainId = await chainOf(provider, rawRequest, guessChain(method, params));
-    let from = guessFrom(method, params);
-    if (!from) { try { from = provider.selectedAddress || null; } catch (_) {} }
-    return ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top }, { provider, rawRequest });
+  function gate(provider, rawRequest, method, params, entryPoint, cb) {
+    chainOf(provider, rawRequest, guessChain(method, params), (chainId) => {
+      let from = guessFrom(method, params);
+      if (!from) { try { from = provider.selectedAddress || null; } catch (_) {} }
+      ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top }, { provider, rawRequest }, cb);
+    });
   }
 
   // --- enveloppes ---
   function wrapRequest(target) {
     return maskedProxy(target, {
+      __proto__: null,
       apply(t, thisArg, args) {
         const a = args[0];
         if (!a || (typeof a !== 'object' && typeof a !== 'function')) return rApply(t, thisArg, args);
         // L'objet de la page n'est lu qu'UNE fois (un getter ou un Proxy sur "method" peut mentir d'une lecture a l'autre) :
         // la decision ET la transmission au portefeuille se font sur la meme copie inerte.
         let full;
-        try { full = deepFreeze(snap(a)); } catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
+        try { full = deepFreeze(snap(a)); } catch (_) { return rejected(rejection('params-illisibles')); }
         if (isArr(full)) { // request([...]) is not EIP-1193 : a batch that carries a gated method is refused, never forwarded blind
-          for (let i = 0; i < full.length; i++) if (full[i] && typeof full[i] === 'object' && GATED.has(full[i].method)) return NativePromise.reject(rejection('lot-non-supporte'));
+          for (let i = 0; i < full.length; i++) { const it = full[i]; if (it && typeof it === 'object' && setHas(GATED, own(it, 'method'))) return rejected(rejection('lot-non-supporte')); }
           return rApply(t, thisArg, [thaw(full)]);
         }
-        if (!full || typeof full !== 'object' || typeof full.method !== 'string') return rApply(t, thisArg, [thaw(full)]);
-        const method = full.method, params = full.params;
-        if (JOURNAL.has(method)) { notify({ method, params, kind: 'journal' }); return rApply(t, thisArg, [thaw(full)]); }
-        if (!GATED.has(method)) return rApply(t, thisArg, [thaw(full)]);
+        if (!full || typeof full !== 'object') return rApply(t, thisArg, [thaw(full)]);
+        const method = own(full, 'method');
+        if (typeof method !== 'string') return rejected(rejection('params-illisibles')); // no own method : the wallet would read one from Object.prototype
+        const params = own(full, 'params');
+        if (setHas(JOURNAL, method)) { notify({ method, params, kind: 'journal' }); return rApply(t, thisArg, [thaw(full)]); }
+        if (!setHas(GATED, method)) return rApply(t, thisArg, [thaw(full)]);
         const k = keyOf(thisArg, method, params);
         // Internal call of the wallet with an object we forwarded ourselves : same content, same provider, once.
         let ap; try { ap = a.params; } catch (_) {}
-        if (takePass(thisArg, a, k) || takePass(thisArg, ap, k)) return rApply(t, thisArg, [thaw(full)]);
-        return gate(thisArg, t, method, params, 'request').then((r) => {
-          if (!r.allow) throw rejection(r.reason || 'denied');
-          const out = thaw(full);
-          const lim = limited(r, method); if (lim !== undefined) out.params = lim;
-          return fwd(thisArg, keyOf(thisArg, method, out.params), [out, out.params], () => rApply(t, thisArg, [out]));
+        if (takePass(thisArg, a, k) || takePass(thisArg, ap, k)) return rApply(t, thisArg, [pinParams(thaw(full))]);
+        return new NativePromise((resolve, reject) => {
+          gate(thisArg, t, method, params, 'request', (r) => {
+            try {
+              if (!r.allow) { reject(rejection(r.reason || 'denied')); return; }
+              const out = pinParams(thaw(full));
+              const lim = limited(r, method); if (lim !== undefined) setOwn(out, 'params', lim);
+              const op = own(out, 'params');
+              settleWith(resolve, reject, fwd(thisArg, keyOf(thisArg, method, op), [out, op], () => rApply(t, thisArg, [out])));
+            } catch (e) { reject(e); }
+          });
         });
       }
     });
@@ -211,16 +323,21 @@
 
   function wrapSend(target) {
     return maskedProxy(target, {
+      __proto__: null,
       apply(t, thisArg, args) {
         const a0 = args[0], a1 = args[1];
         if (typeof a0 === 'string') { // send(method, params) -> Promise
-          if (JOURNAL.has(a0)) { notify({ method: a0, kind: 'journal' }); return rApply(t, thisArg, args); }
-          if (!GATED.has(a0)) return rApply(t, thisArg, args);
-          let params; try { params = a1 === undefined ? undefined : snap(a1); } catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
-          return gate(thisArg, null, a0, params, 'send').then((r) => {
-            if (!r.allow) throw rejection(r.reason || 'denied');
-            const lim = limited(r, a0), p2 = lim !== undefined ? lim : params;
-            return fwd(thisArg, keyOf(thisArg, a0, p2), [p2], () => rApply(t, thisArg, [a0, p2]));
+          if (setHas(JOURNAL, a0)) { notify({ method: a0, kind: 'journal' }); return rApply(t, thisArg, args); }
+          if (!setHas(GATED, a0)) return rApply(t, thisArg, args);
+          let params; try { params = a1 === undefined ? undefined : snap(a1); } catch (_) { return rejected(rejection('params-illisibles')); }
+          return new NativePromise((resolve, reject) => {
+            gate(thisArg, null, a0, params, 'send', (r) => {
+              try {
+                if (!r.allow) { reject(rejection(r.reason || 'denied')); return; }
+                const lim = limited(r, a0), p2 = lim !== undefined ? lim : params;
+                settleWith(resolve, reject, fwd(thisArg, keyOf(thisArg, a0, p2), [p2], () => rApply(t, thisArg, [a0, p2])));
+              } catch (e) { reject(e); }
+            });
           });
         }
         if (a0 && typeof a0 === 'object' && typeof a1 === 'function') return legacyAsync(t, thisArg, a0, a1, 'send');
@@ -228,10 +345,13 @@
         // Meme regle que request() : une seule lecture, decision et transmission sur la copie (objet seul ou lot).
         if (a0 && (typeof a0 === 'object' || typeof a0 === 'function')) {
           let s; try { s = snap(a0); } catch (_) { throw rejection('params-illisibles'); }
-          for (const it of (Array.isArray(s) ? s : [s])) {
+          const list = isArr(s) ? s : [s];
+          for (let i = 0; i < list.length; i++) {
+            const it = list[i];
             if (!it || typeof it !== 'object') continue;
-            if (JOURNAL.has(it.method)) notify({ method: it.method, kind: 'journal' });
-            if (GATED.has(it.method)) { const e = new Error('Hold up: appel synchrone send(payload) non supporte pour ' + it.method); e.code = 4900; throw e; }
+            const m = own(it, 'method');
+            if (setHas(JOURNAL, m)) notify({ method: m, kind: 'journal' });
+            if (setHas(GATED, m)) { const e = new ErrorC('Hold up: appel synchrone send(payload) non supporte pour ' + m); setOwn(e, 'code', 4900); throw e; }
           }
           return rApply(t, thisArg, [s]);
         }
@@ -241,6 +361,7 @@
   }
   function wrapSendAsync(target) {
     return maskedProxy(target, {
+      __proto__: null,
       apply(t, thisArg, args) {
         const a0 = args[0], cb = args[1];
         if (a0 && typeof a0 === 'object' && typeof cb === 'function') return legacyAsync(t, thisArg, a0, cb, 'sendAsync');
@@ -249,45 +370,89 @@
     });
   }
   function legacyAsync(t, thisArg, payload, cb, entry) {
-    let items, isBatch = Array.isArray(payload);
+    const isBatch = isArr(payload); let items;
     try { items = snap(isBatch ? payload : [payload]); } catch (_) { return cb(rejection('params-illisibles'), respErr(null, 'x')); }
-    const decisions = items.map((it, i) => {
-      if (!it || typeof it.method !== 'string') return NativePromise.resolve({ allow: true });
-      if (JOURNAL.has(it.method)) { notify({ method: it.method, kind: 'journal' }); return NativePromise.resolve({ allow: true }); }
-      if (!GATED.has(it.method)) return NativePromise.resolve({ allow: true });
-      // internal call of the wallet (send(payload, cb) -> sendAsync(payload, cb)) with an object we forwarded
-      let orig, op; try { orig = isBatch ? payload[i] : payload; op = orig && orig.params; } catch (_) {}
-      const k = keyOf(thisArg, it.method, it.params);
-      if (takePass(thisArg, orig, k) || takePass(thisArg, op, k)) return NativePromise.resolve({ allow: true });
-      return gate(thisArg, null, it.method, it.params, entry);
-    });
-    // decisions sequentielles pour ne pas empiler plusieurs fenetres
-    NativePromise.all(decisions).then((rs) => {
-      const forward = [], idx = [];
-      items.forEach((it, i) => { if (rs[i].allow) { const lim = it && limited(rs[i], it.method); forward.push(lim !== undefined ? Object.assign({}, it, { params: lim }) : it); idx.push(i); } });
-      const out = new Array(items.length);
-      rs.forEach((r, i) => { if (!r.allow) out[i] = respErr(items[i] && items[i].id, r.reason || 'denied'); });
-      if (!forward.length) {
-        const firstErr = out.find(Boolean);
-        return isBatch ? cb(null, out) : cb(rejection(rs[0].reason || 'denied'), firstErr);
+    const n = items.length, rs = { __proto__: null };
+    let left = n;
+    const settle = (i, r) => { rs[i] = r; if (--left === 0) after(); };
+    const after = () => {
+      const forward = [], idx = { __proto__: null }; let nf = 0;
+      for (let i = 0; i < n; i++) {
+        const r = rs[i];
+        if (r && r.allow === true) {
+          const it = items[i], m = isObj(it) ? own(it, 'method') : undefined;
+          let item = it;
+          const lim = isObj(it) ? limited(r, m) : undefined;
+          if (lim !== undefined) { item = clone(it); setOwn(item, 'params', lim); }
+          if (setHas(GATED, m)) pinParams(item);
+          setOwn(forward, nf, item); idx[nf] = i; nf++;
+        }
       }
-      const revokes = forward.map((it) => (it && GATED.has(it.method) ? grant(thisArg, keyOf(thisArg, it.method, it.params), [it, it.params]) : null));
+      const out = [];
+      for (let i = 0; i < n; i++) {
+        const r = rs[i];
+        setOwn(out, i, r && r.allow === true ? undefined : respErr(isObj(items[i]) ? own(items[i], 'id') : undefined, (r && r.reason) || 'denied'));
+      }
+      if (!nf) {
+        let firstErr; for (let i = 0; i < n; i++) { if (own(out, i)) { firstErr = own(out, i); break; } }
+        return isBatch ? cb(null, out) : cb(rejection((rs[0] && rs[0].reason) || 'denied'), firstErr);
+      }
+      const revokes = { __proto__: null };
+      for (let j = 0; j < nf; j++) { const it = forward[j]; revokes[j] = isObj(it) && setHas(GATED, own(it, 'method')) ? grant(thisArg, keyOf(thisArg, own(it, 'method'), own(it, 'params')), [it, own(it, 'params')]) : null; }
       const done = (err, resp) => {
-        revokes.forEach((rv) => { if (rv) rv(); });
+        for (let j = 0; j < nf; j++) { if (revokes[j]) revokes[j](); }
         if (!isBatch) return cb(err, resp);
-        const arr = Array.isArray(resp) ? resp : [];
-        idx.forEach((orig, j) => { out[orig] = arr[j] !== undefined ? arr[j] : arr.find((x) => x && forward[j] && x.id === forward[j].id); });
+        const arr = isArr(resp) ? resp : [];
+        for (let j = 0; j < nf; j++) {
+          let v = arr[j];
+          if (v === undefined) { const fid = isObj(forward[j]) ? own(forward[j], 'id') : undefined; for (let q = 0; q < arr.length; q++) { const x = arr[q]; if (x && forward[j] && x.id === fid) { v = x; break; } } }
+          setOwn(out, idx[j], v);
+        }
         cb(err, out);
       };
       forwarding++;
-      try { rApply(t, thisArg, [isBatch ? forward : forward[0], done]); } catch (e) { forwarding--; revokes.forEach((rv) => { if (rv) rv(); }); cb(e, respErr(null, 'x')); return; }
+      try { rApply(t, thisArg, [isBatch ? forward : forward[0], done]); } catch (e) {
+        forwarding--; for (let j = 0; j < nf; j++) { if (revokes[j]) revokes[j](); }
+        cb(e, respErr(null, 'x')); return;
+      }
       forwarding--;
-    }, () => cb(rejection('bridge-unavailable'), respErr(null, 'x')));
+    };
+    if (n === 0) { after(); return; }
+    for (let i = 0; i < n; i++) {
+      const it = items[i];
+      const m = isObj(it) ? own(it, 'method') : undefined;
+      if (typeof m !== 'string') { settle(i, decision(true, '', undefined)); continue; }
+      if (setHas(JOURNAL, m)) { notify({ method: m, kind: 'journal' }); settle(i, decision(true, '', undefined)); continue; }
+      if (!setHas(GATED, m)) { settle(i, decision(true, '', undefined)); continue; }
+      // internal call of the wallet (send(payload, cb) -> sendAsync(payload, cb)) with an object we forwarded
+      let orig, op; try { orig = isBatch ? payload[i] : payload; op = orig && orig.params; } catch (_) {}
+      const k = keyOf(thisArg, m, own(it, 'params'));
+      if (takePass(thisArg, orig, k) || takePass(thisArg, op, k)) { settle(i, decision(true, '', undefined)); continue; }
+      ((idx) => { gate(thisArg, null, m, own(it, 'params'), entry, (r) => settle(idx, r)); })(i);
+    }
+  }
+  // Internal entry points of some wallets (MetaMask style _rpcRequest(payload, cb), _rpcEngine.handle(payload, cb)) : same
+  // rules as the public ones, chosen by the shape of the call.
+  function wrapInternal(target) {
+    return maskedProxy(target, {
+      __proto__: null,
+      apply(t, thisArg, args) {
+        const a0 = args[0], a1 = args[1];
+        if (a0 && typeof a0 === 'object' && typeof a1 === 'function') return legacyAsync(t, thisArg, a0, a1, 'internal');
+        let m; try { m = isObj(a0) ? a0.method : undefined; } catch (_) {}
+        if (typeof m === 'string' && setHas(GATED, m)) { // gated shape that cannot be held : refused, never forwarded blind
+          const e = new ErrorC('Hold up: point d entree interne non supporte pour ' + m); setOwn(e, 'code', 4900);
+          return rejected(e);
+        }
+        return rApply(t, thisArg, args);
+      }
+    });
   }
   function wrapEnable(target) {
-    return maskedProxy(target, { apply(t, thisArg, args) { notify({ method: 'eth_requestAccounts', kind: 'journal', via: 'enable' }); return rApply(t, thisArg, args); } });
+    return maskedProxy(target, { __proto__: null, apply(t, thisArg, args) { notify({ method: 'eth_requestAccounts', kind: 'journal', via: 'enable' }); return rApply(t, thisArg, args); } });
   }
-  const WRAPPERS = { request: wrapRequest, send: wrapSend, sendAsync: wrapSendAsync, enable: wrapEnable };
+  const WRAPPERS = { __proto__: null, request: wrapRequest, send: wrapSend, sendAsync: wrapSendAsync, enable: wrapEnable, _rpcRequest: wrapInternal, handle: wrapInternal };
+  const PROVIDER_METHODS = ['request', 'send', 'sendAsync', 'enable', '_rpcRequest'];
 
   // --- patch sur place d'un fournisseur ---
   const wrappedFns = new WS();     // enveloppes deja posees
@@ -296,23 +461,23 @@
   const fallbackCache = new WM();
   // Wraps the method on ONE owner. true = wrapped (or nothing to wrap), false = this owner cannot be patched.
   function patchOwn(owner, name) {
-    const d = gopd(owner, name);
+    const d = getDesc(owner, name);
     if (!d) return true;
     if (d.get || d.set) { // accessor : the returned value is wrapped
-      if (d.get && patchedGetters.has(d.get)) return true;
+      if (d.get && wsHas(patchedGetters, d.get)) return true;
       if (!d.get || !d.configurable) return false;
       const cache = new WM();
       const g = d.get;
-      const get = function () { const f = rApply(g, this, []); if (typeof f !== 'function') return f; if (wrappedFns.has(f)) return f; let w = cache.get(f); if (!w) { w = WRAPPERS[name](f); wrappedFns.add(w); cache.set(f, w); } return w; };
-      patchedGetters.add(get);
-      try { defProp(owner, name, { get, set: d.set, enumerable: d.enumerable, configurable: true }); return true; } catch (_) { return false; }
+      const get = function () { const f = rApply(g, this, []); if (typeof f !== 'function') return f; if (wsHas(wrappedFns, f)) return f; let w = wmGet(cache, f); if (!w) { w = WRAPPERS[name](f); wsAdd(wrappedFns, w); wmSet(cache, f, w); } return w; };
+      wsAdd(patchedGetters, get);
+      try { defProp(owner, name, { __proto__: null, get, set: d.set, enumerable: d.enumerable, configurable: true }); return true; } catch (_) { return false; }
     }
     const f = d.value;
-    if (typeof f !== 'function' || wrappedFns.has(f)) return true;
+    if (typeof f !== 'function' || wsHas(wrappedFns, f)) return true;
     if (!d.writable && !d.configurable) return false;
     const w = WRAPPERS[name](f);
-    wrappedFns.add(w);
-    try { defProp(owner, name, { value: w, writable: d.writable, enumerable: d.enumerable, configurable: d.configurable }); } catch (_) { return false; }
+    wsAdd(wrappedFns, w);
+    try { defProp(owner, name, { __proto__: null, value: w, writable: d.writable, enumerable: d.enumerable, configurable: d.configurable }); } catch (_) { return false; }
     return true;
   }
   // Every owner of the method is wrapped, from the instance up the whole prototype chain : a wallet that rebinds
@@ -321,57 +486,61 @@
   function patchMethod(provider, name) {
     let ok = true, depth = 0;
     for (let o = provider; o && o !== O.prototype && o !== Function.prototype && depth < 32; o = getProto(o), depth++) {
-      let own = false; try { own = hasOwn(o, name); } catch (_) {}
-      if (!own) continue;
+      let own_ = false; try { own_ = hasOwnU(o, name); } catch (_) {}
+      if (!own_) continue;
       let done = false; try { done = patchOwn(o, name); } catch (_) { done = false; }
       if (!done) ok = false;
     }
     return ok;
   }
   function fallbackProxy(raw) {
-    let px = fallbackCache.get(raw); if (px) return px;
+    let px = wmGet(fallbackCache, raw); if (px) return px;
     const cache = new WM();
-    const shadow = O.create(raw); // cible vide: evite les invariants des proprietes gelees
+    const shadow = objCreate(raw); // cible vide: evite les invariants des proprietes gelees
     const wrapFn = (k, v) => {
-      if (typeof v !== 'function' || !WRAPPERS[k]) return v;
-      if (wrappedFns.has(v)) return v;
-      let w = cache.get(v); if (!w) { w = WRAPPERS[k](v); cache.set(v, w); } return w;
+      if (typeof v !== 'function' || typeof k !== 'string' || !WRAPPERS[k] || k === 'handle') return v;
+      if (wsHas(wrappedFns, v)) return v;
+      let w = wmGet(cache, v); if (!w) { w = WRAPPERS[k](v); wmSet(cache, v, w); } return w;
     };
     px = new P(shadow, {
+      __proto__: null,
       get(t, k) { return wrapFn(k, rGet(raw, k, raw)); },
-      set(t, k, v) { return R.set(raw, k, v, raw); },
+      set(t, k, v) { return rSet(raw, k, v, raw); },
       has(t, k) { return k in raw; },
-      ownKeys() { return R.ownKeys(raw); },
-      deleteProperty(t, k) { return R.deleteProperty(raw, k); },
+      ownKeys() { return rOwnKeys(raw); },
+      deleteProperty(t, k) { return rDelete(raw, k); },
       getPrototypeOf() { return getProto(raw); },
       getOwnPropertyDescriptor(t, k) {
-        const d = gopd(raw, k); if (!d) return d;
-        const c = O.assign({}, d, { configurable: true });
-        if ('value' in c) c.value = wrapFn(k, c.value);
-        return c;
+        const d = getDesc(raw, k); if (!d) return d;
+        d.configurable = true;
+        if (hasOwnU(d, 'value')) d.value = wrapFn(k, d.value);
+        return d;
       }
     });
-    fallbackCache.set(raw, px);
+    wmSet(fallbackCache, raw, px);
     return px;
   }
   function wrapProvider(p) {
-    if (!p || (typeof p !== 'object' && typeof p !== 'function')) return p;
-    if (patched.has(p)) { try { if (Array.isArray(p.providers)) wrapProviders(p.providers); } catch (_) {} return patched.get(p); }
+    if (!isObj(p)) return p;
+    if (wmHas(patched, p)) { try { if (isArr(p.providers)) wrapProviders(p.providers); } catch (_) {} return wmGet(patched, p); }
     let ok = true;
-    for (const name of ['request', 'send', 'sendAsync', 'enable']) {
+    for (let i = 0; i < PROVIDER_METHODS.length; i++) {
+      const name = PROVIDER_METHODS[i];
       let has = false; try { has = typeof p[name] === 'function' || name in p; } catch (_) {}
       if (!has) continue;
       let ownerOk = false; try { ownerOk = patchMethod(p, name); } catch (_) { ownerOk = false; }
-      if (!ownerOk) ok = false;
+      if (!ownerOk && name !== '_rpcRequest') ok = false;
     }
+    // inner JSON-RPC engine of MetaMask-like wallets (best effort : a failure here does not change how the provider is exposed)
+    try { const eng = p._rpcEngine; if (isObj(eng) && typeof eng.handle === 'function') patchMethod(eng, 'handle'); } catch (_) {}
     const result = ok ? p : fallbackProxy(p);
-    patched.set(p, result);
-    try { if (Array.isArray(p.providers)) wrapProviders(p.providers); } catch (_) {}
+    wmSet(patched, p, result);
+    try { if (isArr(p.providers)) wrapProviders(p.providers); } catch (_) {}
     return result;
   }
   function wrapProviders(arr) {
     for (let i = 0; i < arr.length; i++) {
-      try { const r = wrapProvider(arr[i]); if (r !== arr[i]) arr[i] = r; } catch (_) {}
+      try { const r = wrapProvider(arr[i]); if (r !== arr[i]) setOwn(arr, i, r); } catch (_) {}
     }
   }
   function looksLikeProvider(v) {
@@ -379,7 +548,7 @@
   }
 
   // --- window.ethereum : accesseur pour attraper les affectations tardives ---
-  let current; let ext = null; let slotInstalled = false;
+  let current; let ext = null;
   const slotGet = function () {
     let v = ext && ext.get ? rApply(ext.get, W, []) : current;
     if (looksLikeProvider(v)) { const r = wrapProvider(v); return r; }
@@ -390,16 +559,18 @@
     if (looksLikeProvider(v)) wrapProvider(v);
   };
   function installSlot() {
-    const d = gopd(W, 'ethereum');
+    const d = getDesc(W, 'ethereum');
     if (d && (d.get === slotGet)) return;
     if (d) { // valeur ou accesseur deja present: on le reprend
-      if ('value' in d) current = d.value; else { ext = { get: d.get, set: d.set }; }
-      if (!d.configurable) { // impossible de remplacer: on se contente d'envelopper
-        try { wrapProvider('value' in d ? d.value : slotGet()); } catch (_) {}
+      if (hasOwnU(d, 'value')) current = d.value; else { ext = { get: d.get, set: d.set }; }
+      if (!d.configurable) {
+        // impossible de remplacer l'emplacement : on envelopper en place. Si le fournisseur n'est pas patchable sur place
+        // (methode non reinscriptible), la page garde l'objet brut : limite connue, voir RAPPORT_SECURITE_CORRECTIFS.md (S10).
+        try { wrapProvider(hasOwnU(d, 'value') ? d.value : slotGet()); } catch (_) {}
         return;
       }
     }
-    try { origDefine(W, 'ethereum', { get: slotGet, set: slotSet, enumerable: true, configurable: true }); slotInstalled = true; } catch (_) {}
+    try { origDefine(W, 'ethereum', { __proto__: null, get: slotGet, set: slotSet, enumerable: true, configurable: true }); } catch (_) {}
     if (looksLikeProvider(current)) wrapProvider(current);
   }
   installSlot();
@@ -410,32 +581,40 @@
     if ('value' in desc) { current = desc.value; ext = null; if (looksLikeProvider(current)) wrapProvider(current); }
     else { ext = { get: desc.get, set: desc.set }; try { const v = slotGet(); void v; } catch (_) {} }
   }
+  const argAt = (args, i) => (args.length > i ? args[i] : undefined);
   O.defineProperty = maskedProxy(origDefine, {
+    __proto__: null,
     apply(t, thisArg, args) {
-      const [o, k, desc] = args;
+      const o = argAt(args, 0), k = argAt(args, 1), desc = argAt(args, 2);
       if (o === W && k === 'ethereum' && desc && typeof desc === 'object') { installSlot(); takeOver(desc); return o; }
       const r = rApply(t, thisArg, args);
       // other provider globals (window.avalanche of Core, ...) : wrapped in place as soon as they are defined
-      if (o === W && typeof k === 'string' && GLOBALS.has(k)) { try { scanGlobal(k); } catch (_) {} }
+      if (o === W && typeof k === 'string' && setHas(GLOBALS, k)) { try { scanGlobal(k); } catch (_) {} }
       return r;
     }
   });
   R.defineProperty = maskedProxy(origReflectDefine, {
+    __proto__: null,
     apply(t, thisArg, args) {
-      const [o, k, desc] = args;
+      const o = argAt(args, 0), k = argAt(args, 1), desc = argAt(args, 2);
       if (o === W && k === 'ethereum' && desc && typeof desc === 'object') { installSlot(); takeOver(desc); return true; }
-      return rApply(t, thisArg, args);
+      const r = rApply(t, thisArg, args);
+      if (o === W && typeof k === 'string' && setHas(GLOBALS, k)) { try { scanGlobal(k); } catch (_) {} }
+      return r;
     }
   });
   O.defineProperties = maskedProxy(origDefineMany, {
+    __proto__: null,
     apply(t, thisArg, args) {
-      const [o, props] = args;
-      if (o === W && props && typeof props === 'object' && hasOwn(props, 'ethereum')) {
+      const o = argAt(args, 0), props = argAt(args, 1);
+      if (o === W && props && typeof props === 'object' && hasOwnU(props, 'ethereum')) {
         installSlot(); takeOver(props.ethereum);
-        const rest = {}; for (const k of O.keys(props)) if (k !== 'ethereum') rest[k] = props[k];
+        const rest = {}, ks = keysOf(props); for (let i = 0; i < ks.length; i++) if (ks[i] !== 'ethereum') setOwn(rest, ks[i], props[ks[i]]);
         return rApply(t, thisArg, [o, rest]);
       }
-      return rApply(t, thisArg, args);
+      const r = rApply(t, thisArg, args);
+      if (o === W && props && typeof props === 'object') { const ks = keysOf(props); for (let i = 0; i < ks.length; i++) if (setHas(GLOBALS, ks[i])) { try { scanGlobal(ks[i]); } catch (_) {} } }
+      return r;
     }
   });
 
@@ -443,15 +622,15 @@
   const reannounced = new WS();
   const onAnnounce = (ev) => {
     try {
-      if (reannounced.has(ev)) return;
+      if (wsHas(reannounced, ev)) return;
       const d = ev.detail; if (!d || !d.provider) return;
       const r = wrapProvider(d.provider);
       if (r !== d.provider) { // fournisseur non patchable sur place: on remplace l'annonce par un proxy
-        ev.stopImmediatePropagation();
+        stopImm(ev);
         const info = d.info;
-        const ne = new CustomEvent('eip6963:announceProvider', { detail: O.freeze({ info, provider: r }) });
-        reannounced.add(ne);
-        setT(() => W.dispatchEvent(ne), 0);
+        const ne = new CE('eip6963:announceProvider', { detail: freeze({ info, provider: r }) });
+        wsAdd(reannounced, ne);
+        setT(() => dispatchEv(ne), 0);
       }
     } catch (_) {}
   };
@@ -459,37 +638,52 @@
 
   // --- provider globals other than window.ethereum. 'avalanche' is Core, the Avalanche wallet. ---
   const GLOBAL_NAMES = ['avalanche', 'core', 'okxwallet', 'trustwallet', 'coinbaseWalletExtension', 'rabby', 'BinanceChain', 'tokenpocket', 'bitkeep', 'phantom', 'solflare', 'evmproviders'];
-  const GLOBALS = new Set(GLOBAL_NAMES);
+  const GLOBALS = new SetC(GLOBAL_NAMES);
+  // Names that only ever hold an EVM provider : a capture accessor is put on them while they are free (no race with the sweep).
+  // 'core', 'phantom', 'solflare' are left to the sweep : dapps test them with "in window" and use non EVM members.
+  const TRAP_NAMES = ['avalanche', 'okxwallet', 'trustwallet', 'coinbaseWalletExtension', 'rabby', 'BinanceChain', 'tokenpocket', 'bitkeep'];
+  function wrapGlobalValue(v) {
+    if (!isObj(v)) return v;
+    let r = v;
+    if (looksLikeProvider(v)) r = wrapProvider(v);
+    try { if (looksLikeProvider(v.ethereum)) wrapProvider(v.ethereum); } catch (_) {}
+    return r;
+  }
   function scanGlobal(n) {
     let v; try { v = W[n]; } catch (_) { return; }
-    if (!v || (typeof v !== 'object' && typeof v !== 'function')) return;
+    if (!isObj(v)) return;
     if (looksLikeProvider(v)) wrapProvider(v);
     try { if (looksLikeProvider(v.ethereum)) wrapProvider(v.ethereum); } catch (_) {}
-    if (n === 'evmproviders') { try { for (const k of O.keys(v)) if (looksLikeProvider(v[k])) wrapProvider(v[k]); } catch (_) {} }
+    if (n === 'evmproviders') { try { const ks = keysOf(v); for (let i = 0; i < ks.length; i++) if (looksLikeProvider(v[ks[i]])) wrapProvider(v[ks[i]]); } catch (_) {} }
   }
-  // Late assignment (window.avalanche = provider) : caught at once by an accessor, when the name is still free.
-  for (const n of ['avalanche']) {
-    try {
-      if (gopd(W, n)) continue;
-      let val;
-      origDefine(W, n, { get() { return val; }, set(x) { val = x; try { if (looksLikeProvider(x)) wrapProvider(x); } catch (_) {} }, enumerable: true, configurable: true });
-    } catch (_) {}
+  // Late assignment (window.rabby = provider) : caught at once by an accessor, when the name is still free.
+  function trapFree() {
+    for (let i = 0; i < TRAP_NAMES.length; i++) {
+      const n = TRAP_NAMES[i];
+      try {
+        if (gopd(W, n)) continue;
+        let val;
+        origDefine(W, n, { __proto__: null, get() { return isObj(val) ? wrapGlobalValue(val) : val; }, set(x) { val = x; try { wrapGlobalValue(x); } catch (_) {} }, enumerable: true, configurable: true });
+      } catch (_) {}
+    }
   }
+  trapFree();
 
   // --- balayage de rattrapage: delete+reassign, globales proprietaires, web3 legacy ---
   function scan() {
     try {
       addL('eip6963:announceProvider', onAnnounce, true); // document.open() efface les ecouteurs de window: on les repose (sans doublon)
       installSlot();
-      const d = gopd(W, 'ethereum');
-      if (d && 'value' in d && looksLikeProvider(d.value)) wrapProvider(d.value);
-      for (const n of GLOBAL_NAMES) scanGlobal(n);
+      const d = getDesc(W, 'ethereum');
+      if (d && hasOwnU(d, 'value') && looksLikeProvider(d.value)) wrapProvider(d.value);
+      trapFree();
+      for (let i = 0; i < GLOBAL_NAMES.length; i++) scanGlobal(GLOBAL_NAMES[i]);
       let w3; try { w3 = W.web3; } catch (_) {}
       if (w3 && looksLikeProvider(w3.currentProvider)) wrapProvider(w3.currentProvider);
     } catch (_) {}
   }
   let scans = 0;
-  const iv = setI(() => { scan(); if (++scans > 200) { W.clearInterval(iv); setI(scan, 2000); } }, 150);
+  const iv = setI(() => { scan(); if (++scans > 600) { clearI(iv); setI(scan, 2000); } }, 50);
   addL('DOMContentLoaded', scan, true);
   addL('load', scan, true);
   scan(); // providers already injected by a wallet that ran before this script

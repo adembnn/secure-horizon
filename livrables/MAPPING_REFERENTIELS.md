@@ -8,13 +8,13 @@ Règle : seuls figurent des identifiants dont le nom a été relu sur le site of
 | # | Fonction | État | NIST CSF 2.0 | ATT&CK | D3FEND | OWASP Agentic |
 |---|---|---|---|---|---|---|
 | 1 | Interception de la demande du site avant le portefeuille (extension MV3) | livré, jamais essayé avec un vrai portefeuille | DE.CM-09 | T1657 Financial Theft | aucun retenu | ASI02 par analogie, seulement si un agent signe |
-| 2 | Lecture de la phrase écrite : type, montant, jeton, adresse (code d'abord, modèle pour le type) | livré ; précision du modèle non mesurée par nous | DE.AE-07 (contexte intégré à l'analyse) | T1204 User Execution (la personne exécute ce qu'on lui présente) | aucun retenu | ASI01 par analogie : écart entre le but écrit et l'action |
+| 2 | Lecture de la phrase écrite : type, montant, jeton, adresse (code d'abord ; mots-clés dans le build autonome, modèle seulement si le relais Clef est branché) | livré ; mesuré sur la grille (contrôle scellé, même auteur) | DE.AE-07 (contexte intégré à l'analyse) | T1204 User Execution (la personne exécute ce qu'on lui présente) | aucun retenu | ASI01 par analogie : écart entre le but écrit et l'action |
 | 3 | Décodage de l'effet réel de la demande (calldata, données typées, droits accordés, fonds sortants) | livré | DE.AE-02 | T1657 | aucun retenu | aucun |
 | 4 | Comparaison phrase contre effet : « ça correspond » ou « ça ne correspond pas » | livré, mesuré sur des cas écrits par nous | DE.AE-02, DE.AE-07 | T1566 Phishing ; T1684.001 Impersonation (l'interface qui se fait passer pour une étape normale) | aucun retenu | ASI01 par analogie |
-| 5 | Alerte et correction proposée (montant écrit à la place du droit illimité, si c'est une transaction) | alerte livrée ; correction : en cours, non vérifiée | RS.MI-01, au sens large | T1657 (perte évitée) | aucun retenu | aucun |
-| 6 | Conservation des signaux que le portefeuille donne déjà | livré (le moteur ne descend jamais sous le plancher du portefeuille : garde-fou en cours d'application, non vérifié) | DE.AE-07 | T1657 | aucun retenu | aucun |
+| 5 | Alerte et correction proposée (montant écrit à la place du droit illimité, si c'est une transaction) | alerte livrée ; remplacement sous conditions prouvé en Node, pas dans un vrai Chrome | RS.MI-01, au sens large | T1657 (perte évitée) | aucun retenu | aucun |
+| 6 | Conservation des signaux que le portefeuille donne déjà | livré (le moteur ne descend jamais sous le plancher du portefeuille : garde-fou branché dans le pipeline, non vérifié dans l'extension) | DE.AE-07 | T1657 | aucun retenu | aucun |
 | 7 | Droit limité au montant écrit (moindre privilège) | fonction secondaire ; impossible pour une signature | PR.AA-05 (Protect : le règlement demande Detect ou Respond, donc pas l'axe principal) | sans objet | aucun retenu | ASI03 par analogie, seulement si un agent accorde le droit |
-| 8 | Journal chaîné par hachage, une ligne par décision | livré | PR.PS-04, RS.AN-06 | T1070 Indicator Removal (la chaîne rend un retrait visible) | aucun retenu | aucun |
+| 8 | Journal chaîné par hachage, une ligne par décision | livré dans la version serveur ; le build autonome garde 500 lignes non chaînées | PR.PS-04, RS.AN-06 | T1070 Indicator Removal (la chaîne rend un retrait visible) | aucun retenu | aucun |
 | 9 | Ancrage de la racine sur Avalanche Fuji | contrat et vérificateur écrits ; aucune transaction Fuji dans le dépôt | RS.AN-06 | T1070 | aucun retenu | aucun |
 
 Notes.

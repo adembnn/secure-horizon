@@ -3,11 +3,14 @@
   "name": "Hold up",
   "version": "0.2.0",
   "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles jusqu'a la decision de la personne.",
-  "minimum_chrome_version": "111",
+  "minimum_chrome_version": "114",
   "permissions": [
     "storage",
-    "alarms"
+    "alarms",
+    "sidePanel"
   ],
+  "action": { "default_title": "Hold up" },
+  "side_panel": { "default_path": "ui/sidepanel.html" },
   "host_permissions": [
     "http://127.0.0.1:8787/*",
     "http://127.0.0.1:8789/*"

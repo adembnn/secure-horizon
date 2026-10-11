@@ -37,7 +37,7 @@ const hex = (s) => '0x' + Buffer.from(s, 'utf8').toString('hex');
 const siwe = (domain, uri) => domain + ' wants you to sign in with your Ethereum account:\n' + ME + '\n\nConnexion au site.\n\nURI: ' + uri + '\nVersion: 1\nChain ID: 43113\nNonce: 8f3a91c27be04d55\nIssued At: 2026-10-11T06:00:00Z';
 
 let F, clock, n = 0, engineCalls;
-beforeEach(() => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; engineCalls = 0; });
+beforeEach(async () => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; engineCalls = 0; await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [{ address: USDC, symbol: 'USDC', decimals: 6 }] } }); });
 afterEach(() => { clock.restore(); delete globalThis.chrome; });
 function worker(level = 'attention', extra = {}) {
   const stub = async () => ({ level, texts: { croit: 'a', reel: 'Ligne du moteur.', danger: 'c', action: 'd' }, reasons: [], effects: { grants_right: true, funds_out: false }, risk_signals: [], ...extra });
@@ -347,6 +347,7 @@ test('Q16 : the delay stays when the engine itself found something else (look-al
 });
 
 test('Q17 : the node is asked for the token when the local context does not know it', async () => {
+  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [] } });
   worker();
   const abi = (s) => '0x' + pad(32n) + pad(BigInt(s.length)) + Buffer.from(s).toString('hex').padEnd(64, '0');
   F.chrome.tabs.sendMessage = async (tabId, msg) => {

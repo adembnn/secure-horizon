@@ -43,7 +43,7 @@ for (const f of ['bridge.js', 'inject.js', 'gatekeeper.js', 'hold_core.js', 'int
 src(join(ROOT, 'extension', 'classifier_client.js'));
 put('classifier_client.js', ['/* Hold up (standalone) - no network. The written intent is classified by the embedded keyword parser. */', 'export const RELAY = null;', 'export const RELAY_TIMEOUT_MS = 0;', 'export async function classifyViaRelay() { return null; }', ''].join(String.fromCharCode(10)));
 // 1 bis) surface de la fenetre (extension/ui) : la question ecrite puis la reponse. Systeme : docs/design/v5/DESIGN.md
-for (const f of ['screen.css', 'screen.js']) put('ui/' + f, src(join(ROOT, 'extension', 'ui', f)));
+for (const f of ['screen.css', 'screen.js', 'sidepanel.html', 'sidepanel.css', 'sidepanel.js']) put('ui/' + f, src(join(ROOT, 'extension', 'ui', f)));
 // 2) fichiers propres a la version autonome
 put('manifest.json', src(join(HERE, 'src', 'manifest.json')));
 {

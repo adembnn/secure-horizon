@@ -26,6 +26,9 @@ async function callCheck(body, cfg) {
   } finally { clearTimeout(timer); }
 }
 
+// Un clic sur l'icône ouvre le panneau latéral (geste dans l'extension seulement : jamais sur une demande de page).
+try { const p = chrome.sidePanel && chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+
 createGatekeeper({
   check: callCheck,
   classify: classifyViaRelay,

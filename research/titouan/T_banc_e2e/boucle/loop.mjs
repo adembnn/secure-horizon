@@ -41,7 +41,7 @@ const resume = (j) => ({ reg: j.mesure.reglage.score, val: j.mesure.validation.s
 
 function classer(j) { // pertes réglage par famille (jeu|famille) puis sous-famille
   const fam = {};
-  for (const [k, v] of Object.entries(j.mesure.reglage.pertes)) { const [jeu, f] = k.split('|'); const kk = `${jeu}|${f}`; fam[kk] = (fam[kk] || 0) + v; }
+  for (const [k, v] of Object.entries(j.mesure.reglage.pertesA || j.mesure.reglage.pertes)) { const [jeu, f] = k.split('|'); const kk = `${jeu}|${f}`; fam[kk] = (fam[kk] || 0) + v; }
   return Object.entries(fam).sort((a, b) => b[1] - a[1]);
 }
 async function propositions() {

@@ -1,0 +1,82 @@
+{
+ "choix": {
+  "id": "P04",
+  "cible": [
+   "^GRILLE[|](depot|echange|envoi_jeton)"
+  ],
+  "hypothese": "Un dépôt ou remboursement décodé (supply, repay : paramètres actif et montant) fait partir le montant de l'utilisateur vers le protocole, même si le calldata n'est pas un transfert : ce montant et ce jeton sont enregistrés (service.spent) et comparés à l'intention écrite (montant dit, jeton dit) comme toute autre sortie.",
+  "edits": [
+   {
+    "file": "engine/src/protocols_extra.mjs",
+    "find": "  T('supply(address asset,uint256 amount,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'] }),",
+    "replace": "  T('supply(address asset,uint256 amount,address onBehalfOf,uint16 referralCode)', 'deposit', { ben: ['onBehalfOf'], spend: ['asset', 'amount'] }),"
+   },
+   {
+    "file": "engine/src/protocols_extra.mjs",
+    "find": "  T('repay(address asset,uint256 amount,uint256 interestRateMode,address onBehalfOf)', 'repay', { ben: ['onBehalfOf'] }),",
+    "replace": "  T('repay(address asset,uint256 amount,uint256 interestRateMode,address onBehalfOf)', 'repay', { ben: ['onBehalfOf'], spend: ['asset', 'amount'] }),"
+   },
+   {
+    "file": "engine/src/protocols_extra.mjs",
+    "find": "  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries: resolved, minOutZero };",
+    "replace": "  const spent = [];\n  if (e.spend) { const t = get(args, e.spend[0]), a = get(args, e.spend[1]); if (typeof t === 'string' && typeof a === 'bigint') spent.push({ token: lc(t), amountRaw: a }); }\n  return { name: e.name, kind: e.kind, severe: SEVERE.has(e.kind), beneficiaries: resolved, minOutZero, spent };"
+   },
+   {
+    "file": "engine/src/protocols_extra.mjs",
+    "find": "      out.beneficiaries.push(...r.beneficiaries); out.minOutZero = out.minOutZero || r.minOutZero; out.severe = out.severe || r.severe; out.inner.push(r.name);",
+    "replace": "      out.beneficiaries.push(...r.beneficiaries); out.minOutZero = out.minOutZero || r.minOutZero; out.severe = out.severe || r.severe; out.inner.push(r.name); (out.spent ||= []).push(...(r.spent || []));"
+   },
+   {
+    "file": "engine/src/rules_extra.mjs",
+    "find": "import { lc } from './util.mjs';",
+    "replace": "import { lc, tokenInfo, fmtUnits } from './util.mjs';"
+   },
+   {
+    "file": "engine/src/rules_extra.mjs",
+    "find": "  eff.service = eff.service || { name: decoded[0].name, trusted: true };",
+    "replace": "  eff.service = eff.service || { name: decoded[0].name, trusted: true };\n  { // montants que le service tire du compte (dépôt, remboursement) : jeton et montant lisibles, comparés ensuite à l'intention\n    const spent = [];\n    for (const r of decoded) for (const s of r.spent || []) { const inf = tokenInfo(ctx, s.token); if (inf.decimals != null) spent.push({ token: s.token, symbol: inf.symbol, std: 'erc20', amount: fmtUnits(s.amountRaw, inf.decimals) }); }\n    if (spent.length) eff.service.spent = spent;\n  }"
+   },
+   {
+    "file": "run/policy.mjs",
+    "find": "    const moneyOut = (eff.outgoing || []).filter((o) => (o.std === 'native' || o.std === 'erc20' || o.std === undefined) && !feeToProtocol(o));",
+    "replace": "    const moneyOut = [...(eff.outgoing || []), ...((eff.service && eff.service.spent) || [])].filter((o) => (o.std === 'native' || o.std === 'erc20' || o.std === undefined) && !feeToProtocol(o));"
+   }
+  ]
+ },
+ "avant": {
+  "reg": 74.42101491719043,
+  "val": 75.91401529944342,
+  "jeuxReg": {
+   "DEV": 85.34,
+   "PUBLIC": 71.15,
+   "V2_DEV": 89.24,
+   "DECALAGE": 71.29,
+   "GRILLE": 55.09
+  },
+  "jeuxVal": {
+   "DEV": 88.46,
+   "PUBLIC": 71.25,
+   "V2_DEV": 89.79,
+   "DECALAGE": 70.81,
+   "GRILLE": 59.26
+  }
+ },
+ "apres": {
+  "reg": 74.8531219406018,
+  "val": 76.4029041883323,
+  "jeuxReg": {
+   "DEV": 85.34,
+   "PUBLIC": 71.15,
+   "V2_DEV": 89.24,
+   "DECALAGE": 71.29,
+   "GRILLE": 57.25
+  },
+  "jeuxVal": {
+   "DEV": 88.46,
+   "PUBLIC": 71.25,
+   "V2_DEV": 89.79,
+   "DECALAGE": 70.81,
+   "GRILLE": 61.71
+  }
+ }
+}

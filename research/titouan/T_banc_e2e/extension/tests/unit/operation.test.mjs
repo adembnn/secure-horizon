@@ -54,7 +54,7 @@ function node(trace, allowance = 0n) {
 }
 
 let F, clock, n = 0;
-beforeEach(() => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; });
+beforeEach(async () => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [{ address: USDC, symbol: 'USDC', decimals: 6 }] } }); });
 afterEach(() => { clock.restore(); delete globalThis.chrome; });
 // The engine stub reads approvals and typed data, and cannot read the opaque call (same marks as the embedded engine).
 function worker(rpc = null) {
@@ -250,6 +250,7 @@ test('fix 2 : a payment through an unreadable call is held to the written addres
 
 // ------------------------------------------------------------------------------------------------ 3) the advice follows the nature of the request
 test('fix 3 : a transaction can be capped in the wallet, a signature cannot : no advice nobody can follow', async () => {
+  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [] } });
   worker();
   const line = async (payload) => { n += 5; return (await (await gate(payload, { tab: 200 + n })).write(SAID)).line; };
   assert.equal(await line(approve(MAX)), 'Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. Réduis le plafond à 50 USDC dans ton portefeuille.');
@@ -260,5 +261,6 @@ test('fix 3 : a transaction can be capped in the wallet, a signature cannot : no
     assert.ok(!/plafond|portefeuille|Réduis/.test(l));
   }
   assert.equal(await line(permit(500n * U)), 'Tu as écrit 50 USDC. Cette signature donne accès à 500 USDC et ne peut pas être limitée.');
+  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [{ address: USDC, symbol: 'USDC', decimals: 6 }] } });
   assert.equal(await line(permit(50n * U)), 'La demande donne accès à 50 USDC, pas plus.');
 });

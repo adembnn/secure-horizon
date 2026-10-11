@@ -28,7 +28,35 @@ const INTENT_CHOICES = [
   { value: 'receive', label: 'Recevoir' }, { value: 'pay', label: 'Payer' }, { value: 'swap', label: 'Échanger' },
   { value: 'login', label: 'Me connecter' }, { value: 'demande', label: 'On me l’a demandé' }];
 const INTENT_ENGINE = { receive: 'receive', pay: 'pay', login: 'login', demande: 'asked', asked: 'asked', swap: null, other: null };
-const MAX_KEPT_BODY = 200000;   // above, the request body is not kept in the session storage : no intent question, no retry
+const MAX_KEPT_BODY = 200000;   // above, the request body is slimmed to the fields that matter (S7) ; if it is still too big : "not verified", held, no question
+// S7 : the fields of a transaction or of a batch that the engine and the written check actually read. A page cannot pad a request with
+// a useless field to push it over MAX_KEPT_BODY and skip the question : the padding is dropped, the question is asked.
+const TX_KEYS = ['from', 'to', 'value', 'data', 'input', 'gas', 'gasLimit', 'gasPrice', 'maxFeePerGas', 'maxPriorityFeePerGas', 'nonce', 'chainId', 'type'];
+const pick = (o, keys) => { const out = {}; if (o && typeof o === 'object') for (const k of keys) if (o[k] !== undefined) out[k] = o[k]; return out; };
+function slimBody(body) {
+  const p = body && Array.isArray(body.params) ? body.params : null;
+  if (!p) return null;
+  const out = Object.assign({}, body);
+  if (body.method === 'eth_sendTransaction' || body.method === 'eth_signTransaction') out.params = [pick(p[0], TX_KEYS)];
+  else if (body.method === 'wallet_sendCalls') {
+    const c = p[0] && typeof p[0] === 'object' ? p[0] : {};
+    out.params = [Object.assign(pick(c, ['version', 'from', 'chainId', 'atomicRequired', 'id']), { calls: Array.isArray(c.calls) ? c.calls.map((x) => pick(x, ['to', 'value', 'data', 'input'])) : [] })];
+  } else return null;
+  return out;
+}
+const TOO_BIG_LINE = 'Cette demande est trop grande pour que je la lise en entier.';
+// S4 : the danger (or attention) of the engine is only the gap the correction removes : a right wider than the written amount.
+// Any other finding (a flagged spender, a signal, a contradiction, a danger nobody explains) keeps its delay and its phrase.
+const GAP_CODES = new Set(['unlimited_allowance', 'external_spender', 'unlimited_approval_swap', 'approval_exceeds_intent', 'F31:droit_plus_large_inconnu']);
+function onlyTheGap(floor, v) {
+  if (!floor || !v) return false;
+  for (const x of [floor, v]) if ((x.risk_signals || []).length || x.intent_contradiction || x.address_diff || x.indeterminate) return false;
+  if (floor.level !== 'attention' && floor.level !== 'danger') return false;
+  const codes = (x) => (Array.isArray(x.codes) ? x.codes : []);
+  for (const x of [floor, v]) for (const c of codes(x)) if (!GAP_CODES.has(c)) return false;
+  if (floor.level === 'danger' && !codes(floor).length) return false; // a danger nobody explains stays a danger
+  return true;
+}
 const WIN = { width: 440, height: 540 };
 const AUTO_MS = 1000;           // "Ça correspond" stays on screen this long, then the request goes to the wallet by itself
 // One written intent covers ONE operation : the requests that follow from the same tab, frame and origin (an approval, then the
@@ -205,7 +233,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     // Q17 : a spending right wider than the written amount, in a transaction : Hold up writes the amount into the request itself,
     // only when that amount is certain. Otherwise the line keeps its advice (cap it in the wallet).
     let rewrite = null;
-    if (w && w.fixable && cfg.limitUnlimited !== false) {
+    if (w && w.fixable && cfg.limitUnlimited !== false && !rec.slim) { // a slimmed body is never written back into the request
       const chain = {};
       try {
         const need = [...new Set(requestFacts(rec.body).grants.map((g) => g.token).filter((t) => t && !tokens[t]))].slice(0, 4);
@@ -218,7 +246,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
       }
     }
     const used = usedBy(rewrite ? Object.assign({}, rec.body, { params: rewrite.params }) : rec.body, effect);
-    let relief = !!(w && w.fixable);
+    let relief = !!(w && w.fixable) && !rec.slim;
     if (op && !(w && w.outcome === 'mismatch')) { const over = operationCheck(await usedSoFar(op, rec), used, intent, tokens); if (over) { w = over; rewrite = null; relief = false; } }
     if (w) {
       // The engine already found worse on its own : its line stays, this check only adds its outcome.
@@ -236,7 +264,7 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     if ((!intent.clear || intent.vague) && RANK.unknown > (RANK[v.level] || 0)) v = Object.assign({}, v, { level: 'unknown' });
     // Q16 : for this one gap there is no waiting time, only the correction. Not when anything else is wrong with the request.
     if (relief && canCorrect(intent) && v.written && v.written.outcome === 'mismatch' && ['attention', 'danger'].includes(v.level) && !v.indeterminate
-      && !v.intent_contradiction && !v.address_diff && !(v.risk_signals || []).includes('lookalike')) v = Object.assign({}, v, { relief: true });
+      && !v.intent_contradiction && !v.address_diff && !(v.risk_signals || []).includes('lookalike') && onlyTheGap(rec.verdict, v)) v = Object.assign({}, v, { relief: true });
     else rewrite = rewrite && v.written && v.written.limited ? rewrite : null;
     return { v, used, rewrite };
   }
@@ -411,19 +439,24 @@ export function createGatekeeper({ check, classify = null, onJournal = null, tes
     const cfg = await getCfg();
     const body = { origin, url: typeof sender.url === 'string' ? sender.url : origin, method: p.method, params: p.params, chainId: p.chainId, from: p.from,
       pageText: typeof msg.pageText === 'string' ? msg.pageText.slice(0, 4000) : undefined, topOrigin: msg.topOrigin, frame: frameId === 0 ? 'top' : 'child' };
-    const floor = await safeCheck(body, cfg);
+    let floor = await safeCheck(body, cfg);
+    let kept = null, slim = false, tooBig = false;
+    try {
+      if (JSON.stringify(body).length <= MAX_KEPT_BODY) kept = body;
+      else { const sl = slimBody(body); if (sl && JSON.stringify(sl).length <= MAX_KEPT_BODY) { kept = sl; slim = true; } else tooBig = true; }
+    } catch (_) { tooBig = true; }
+    // Too big to be read even slimmed : fail closed. At least "not verified" (same delay as Danger), held, never a plain "attention" (S7).
+    if (tooBig && RANK.unknown > (RANK[floor.level] || 0)) floor = Object.assign({}, floor, { level: 'unknown', indeterminate: true, why: 'demande trop grande', written: { outcome: 'unverifiable', line: TOO_BIG_LINE } });
     const eff = floor.effects || {};
-    let kept = null;
-    try { const s = JSON.stringify(body); if (s.length <= MAX_KEPT_BODY) kept = body; } catch (_) {}
     // A transaction the engine cannot read is still asked about : its effect can be measured once the person has written.
     const askable = !!kept && INTENT_METHODS.has(p.method) && cfg.askIntent !== 'never' && (floor.level !== 'unknown' || (unreadable(floor) && p.method === 'eth_sendTransaction'));
     const wantIntent = askable && (cfg.askIntent === 'always' || (cfg.askIntent === 'rights_or_funds' && (eff.grants_right || eff.funds_out || floor.level === 'unknown')));
-    const init = { body: kept, verdict: floor, level: floor.level, intent: null, grill: null, called: false };
+    const init = { body: kept, slim, verdict: floor, level: floor.level, intent: null, grill: null, called: false };
     // The person wrote what they want a moment ago, on this very tab, frame and origin : not asked again. This request is checked
     // on its own against the SAME sentence, and against what the earlier requests of that sentence already took.
     const op = kept && INTENT_METHODS.has(p.method) && cfg.askIntent !== 'never' ? await opGet(tabId, frameId, origin, Date.now()) : null;
     if (op) {
-      const j = await judgeWithIntent({ rid: msg.rid, tabId, frameId, body: kept, verdict: floor }, op.intent, cfg, op);
+      const j = await judgeWithIntent({ rid: msg.rid, tabId, frameId, body: kept, verdict: floor, slim }, op.intent, cfg, op);
       init.intent = op.intent; init.opAt = op.writtenAt; init.used = j.used; init.rewrite = j.rewrite;
       enterVerdict(init, j.v, cfg, Date.now());
       await journal({ type: 'decision', stage: 'intent', decision: 'same_intent', intent: op.intent.kind || 'unclear', origin, method: p.method, age_ms: Date.now() - op.writtenAt });

@@ -125,7 +125,7 @@ function couv(lv) { return lv === 'ok' ? 0 : lv === 'critical' ? CONFIG.COUV_CRI
 
 // rows : cas déjà évalués (filtrés par part). Renvoie { score, jeux: {nom: {score, R, F, C, n}}, pertes: {cle: points} }
 export function calculer(rows) {
-  const jeux = {}, pertes = {}, nJeux = new Set(rows.map((r) => r.jeu)).size;
+  PA = {}; const jeux = {}, pertes = {}, nJeux = new Set(rows.map((r) => r.jeu)).size;
   for (const nom of new Set(rows.map((r) => r.jeu))) {
     const rs = rows.filter((r) => r.jeu === nom);
     const J = JEUX.find((j) => j.nom === nom);
@@ -137,18 +137,19 @@ export function calculer(rows) {
     let tot = 0; const det = { R: 0, F: 0, C: 0 };
     for (const [arm, wa] of Object.entries(poids)) {
       let R = 0, F = 0, C = 0;
-      for (const r of S) { const cr = credit(r, r.res[arm]); R += (r.w * cr) / (sumW || 1); const l = kBase * wa * (r.w * (1 - cr)) / (sumW || 1) / nJeux; add(pertes, r, l); }
-      for (const r of B) { const p = penalite(r, r.res[arm]); F += p / (B.length || 1); const l = kBase * wa * CONFIG.LAMBDA * p / (B.length || 1) / nJeux; add(pertes, r, l); }
-      for (const r of U) { const cv = couv(r.res[arm]); C += cv / U.length; const l = 100 * CONFIG.POIDS_COUV * wa * (1 - cv) / U.length / nJeux; add(pertes, r, l); }
+      for (const r of S) { const cr = credit(r, r.res[arm]); R += (r.w * cr) / (sumW || 1); const l = kBase * wa * (r.w * (1 - cr)) / (sumW || 1) / nJeux; add(pertes, r, l, arm); }
+      for (const r of B) { const p = penalite(r, r.res[arm]); F += p / (B.length || 1); const l = kBase * wa * CONFIG.LAMBDA * p / (B.length || 1) / nJeux; add(pertes, r, l, arm); }
+      for (const r of U) { const cv = couv(r.res[arm]); C += cv / U.length; const l = 100 * CONFIG.POIDS_COUV * wa * (1 - cv) / U.length / nJeux; add(pertes, r, l, arm); }
       const sc = kBase * (R - CONFIG.LAMBDA * F) + (hasU ? 100 * CONFIG.POIDS_COUV * C : 0);
       tot += wa * sc; det.R += wa * R; det.F += wa * F; det.C += wa * C;
     }
     jeux[nom] = { score: tot, R: det.R, F: det.F, C: hasU ? det.C : null, n: rs.length, nS: S.length, nB: B.length, nU: U.length };
   }
   const noms = Object.keys(jeux);
-  return { score: noms.reduce((s, n) => s + jeux[n].score, 0) / (noms.length || 1), jeux, pertes };
+  return { score: noms.reduce((s, n) => s + jeux[n].score, 0) / (noms.length || 1), jeux, pertes, pertesA: PA };
 }
-function add(P, r, l) { if (l <= 0) return; const k = `${r.jeu}|${r.fam}|${r.sub}`; P[k] = (P[k] || 0) + l; }
+function add(P, r, l, arm) { if (l <= 0) return; const k = `${r.jeu}|${r.fam}|${r.sub}`; P[k] = (P[k] || 0) + l; if (!(r.jeu === 'DECALAGE' && arm === 'type')) PA[k] = (PA[k] || 0) + l; }
+let PA = {}; // pertes atteignables : sans le bras « type seul » du décalage (un montant ne peut pas se lire dans un type)
 
 export function mesurer(rows) {
   const reg = rows.filter((r) => r.part !== 2), val = rows.filter((r) => r.part === 2);

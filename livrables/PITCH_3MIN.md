@@ -1,18 +1,17 @@
 # Pitch finale : 3 min + 3 min de questions (dimanche 15h25, Grand Amphi)
 
-Même produit, même répartition. Une seule scène en live (le héros, deux modes), le reste en slides. Grande salle : la vidéo de secours n'a pas de son, chaque plan porte sa légende. Chiffres : `livrables/CHIFFRES.md` seulement.
-Débit : moins de 18 mots par 10 secondes. Le texte dit fait environ 380 mots.
+Même produit, même base (`research/titouan/PITCH_V3_TITOUAN.md` corrigé), même répartition. Une seule scène en live (le héros, deux modes), le reste en slides. Grande salle : la vidéo de secours n'a pas de son, chaque plan porte sa légende. Chiffres : `livrables/CHIFFRES.md` seulement.
+Débit : environ 105 mots par minute, avec une quarantaine de secondes de silence pour la démo. Le texte dit fait 320 mots (compté par script).
 
 | Temps | Qui | À l'écran | Live ou vidéo | Texte dit |
 |---|---|---|---|---|
-| 0:00 à 0:20 | Titouan | Slide 1 | Slide | « Camille veut échanger 50 USDC. Le site lui demande un droit sur tout son USDC. MetaMask affiche illimité sans alerte et ne sait ni combien elle voulait donner ni à qui. » |
-| 0:20 à 1:10 | Adem | Neve, mode piège, puis mode honnête | Live | « J'écris d'abord : échanger 50 USDC. Piège : ça ne correspond pas, la demande donne accès à tout l'USDC. Honnête : ça correspond, le portefeuille s'ouvre seul après une seconde. » |
-| 1:10 à 1:35 | Adem | Slide 3 : coffre à signatures multiples | Slide | « Même idée pour un signataire aveugle, d'après le cas Bybit de 2025. Scène synthétique : je veux virer 20 USDC, la charge est un appel délégué. Ça ne correspond pas. » |
-| 1:35 à 2:05 | Titouan | Slide 5 | Slide | « Nos mesures sont sur des cas écrits par nous : 228 écarts signalés sur 228, test de couverture. Le jeu aveugle n'est pas passé. En conditions produit, 13,9 % d'honnêtes reçoivent un écran rouge. » |
-| 2:05 à 2:35 | Titouan | Slide 7 | Slide | « La personne garde le dernier geste. Montants et adresses sont lus par du code. Chaque décision laisse une ligne rejouable par un auditeur. Nous ne nous déclarons conformes à aucun texte. » |
-| 2:35 à 2:50 | Titouan | Slide 8 | Slide | « Hors périmètre : la fraude voulue, l'intention vague, le contrat qui change à l'exécution, le Ledger direct. » |
-| 2:50 à 3:00 | Adem | Slide 9 | Slide | « Deux ingénieurs, aucun test avec une vraie personne. Écrivez votre phrase et attaquez-nous. » |
+| 0:00 à 0:25 | Adem | Neve, la demande avec « illimité » | Live | « Je veux échanger 50 USDC. Le site me demande un droit sur tout mon USDC, sans date de fin. D'après le code public de MetaMask, il l'affiche sans alerte propre à ce montant. Il ne sait pas que j'ai voulu 50. » |
+| 0:25 à 0:50 | Titouan | Slide 1 | Slide | « Tout service peut être compromis. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre. Dans nos échantillons de blocs, 47,6 % des droits de dépense sont illimités sur Ethereum, 34,2 % sur Avalanche. En 2025, 83,85 millions de dollars perdus par signature, selon ScamSniffer : une borne basse. » |
+| 0:50 à 1:40 | Adem | Neve, mode piège, puis mode honnête ; slide Bybit | Live, puis slide | « Hold up est une couche indépendante, devant le portefeuille. J'écris : échanger 50 USDC. Piège : ça ne correspond pas, la demande donne tout l'USDC. Même phrase, site honnête : ça correspond, le portefeuille s'ouvre seul. Et sans phrase, un plancher de règles : un appel délégué, comme chez Bybit, c'est danger. Scène synthétique, adresses factices. » |
+| 1:40 à 2:15 | Titouan | Slide 5 | Slide | « Contrôle scellé de 1 079 paires, même auteur que les règles : le code seul attrape 86,6 % des écarts, avec 7,7 % de fausses alertes. Avec un modèle qui classe et le code qui compare, 1,3 %. Conditions du produit, banc synthétique : 13,9 % de rouges sur des honnêtes. Avalanche réel, 6 325 transactions : 0,30 % de rouges, 76,84 % d'avertissements. Jeu aveugle : pas passé. » |
+| 2:15 à 2:40 | Titouan | Slide 7 | Slide | « Réponse graduée, jamais de vert. La personne garde le dernier geste. Chaque décision laisse une ligne datée, chaînée par hachage dans la version serveur, pas encore dans l'autonome. Aucune conformité déclarée. Version autonome sans réseau ; avec le relais Clef, la phrase part vers un modèle hébergé. » |
+| 2:40 à 3:00 | Adem | Slide 9 | Slide | « Jamais essayé avec un vrai portefeuille, rien sur Fuji, failles trouvées par notre revue en cours de correction. Fraude voulue et Ledger direct : hors périmètre. Hold up ne lui laisse que ce que tu as écrit vouloir faire. Écrivez votre phrase, attaquez-nous. » |
 
-Questions (3 min) : `livrables/QR_JURY.md`. Garder Neve ouvert en mode honnête pour répondre à « et la fausse alerte ? » par l'exemple.
-Coupes si on est en retard : retirer la slide Bybit (1:10 à 1:35), jamais le contraste piège contre honnête.
+Questions (3 min) : `livrables/QR_JURY.md`. Garder Neve ouvert en mode honnête pour répondre à « et les fausses alertes ? » par l'exemple.
+Coupes si on est en retard : retirer la slide Bybit (dans 0:50 à 1:40), jamais le contraste piège contre honnête, ni l'aveu des 13,9 % et des 76,84 %.
 Fuji n'est pas déployé : ne pas dire « sur Fuji ».

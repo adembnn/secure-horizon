@@ -50,7 +50,17 @@ export function outcomeOf(verdict, intent) {
 const LOCAL_HOST = /(?:https?:\/\/)?(?:localhost|127(?:\.\d{1,3}){3}|\[::1\]|0\.0\.0\.0)(?::\d{1,5})?/gi;
 export const isLocalHost = (site) => { LOCAL_HOST.lastIndex = 0; const s = String(site || ''); const m = s.match(LOCAL_HOST); return !!m && m[0].length === s.length; };
 // A loopback address is not a name a person knows : "ce site". A real host is shown as is.
-export const siteName = (site) => (!site || isLocalHost(site) ? '' : String(site).slice(0, 80));
+// S9 : never cut from the right (the real domain is at the right end). A long host keeps its last two labels whole and loses the middle.
+export function siteName(site) {
+  if (!site || isLocalHost(site)) return '';
+  const s = String(site);
+  if (s.length <= 80) return s;
+  const labels = s.split('.');
+  let tail = labels.slice(-2).join('.');
+  for (let i = 3; i <= labels.length; i++) { const t = labels.slice(-i).join('.'); if (t.length > 50) break; tail = t; }
+  const room = 80 - tail.length - 1;
+  return (room > 0 ? s.slice(0, room) : '') + '…' + tail;
+}
 export function cleanLine(text) {
   let s = String(text == null ? '' : text);
   s = s.replace(LOCAL_HOST, 'ce site');

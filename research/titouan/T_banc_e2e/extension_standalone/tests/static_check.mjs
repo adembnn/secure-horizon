@@ -66,7 +66,7 @@ m('manifest_version 3', mf.manifest_version === 3);
 m('service worker de type module', mf.background && mf.background.type === 'module' && mf.background.service_worker === 'background.js');
 // storage : reglages, journal local et demandes retenues (storage.session) ; alarms : echeances de la retenue quand le service worker est arrete.
 // La fenetre de verdict (chrome.windows.create d'une page de l'extension) et les messages vers l'onglet demandeur ne demandent aucune permission.
-m('permissions = [storage, alarms] seulement', JSON.stringify(mf.permissions) === '["storage","alarms"]', JSON.stringify(mf.permissions));
+m('permissions = [storage, alarms, sidePanel] seulement (le panneau latéral ne demande aucun accès réseau ni aucun site)', JSON.stringify(mf.permissions) === '["storage","alarms","sidePanel"]', JSON.stringify(mf.permissions));
 m('aucune host_permission', !('host_permissions' in mf) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
 m('aucun appel reseau dans le dossier livre (le client du relais est un stub)', relayFetch === 0, String(relayFetch));
 m('aucune permission optionnelle', !('optional_permissions' in mf));

@@ -75,11 +75,11 @@
   },
   {
    "file": "extension_standalone/src/background.js",
-   "sha256": "47adc73e940a40ed8c0693d5d0fbe7dfd5e19f60bd51bffb4ea75c967df0fb1d"
+   "sha256": "5e8957f113bdaa861af120c42012af00ae4b695232162fb9fc7ac117169974c3"
   },
   {
    "file": "extension_standalone/src/manifest.json",
-   "sha256": "06473dda4bbd6fc948665cfbbeb91d43b2a659fa9455a8ded7f3f55e6e467103"
+   "sha256": "4a36db6a1c520fa4f11edc469ac46f0d115140d4b3e9a92338f9ac104d9113ca"
   },
   {
    "file": "extension_standalone/src/options.html",
@@ -91,7 +91,7 @@
   },
   {
    "file": "extension/bridge.js",
-   "sha256": "888a6c9ed5ba547bdf654a130da615a07996ccc72bb77b2f2fbab8195ac2c10f"
+   "sha256": "ce6f1ca55ade76fd85b8dd681b5a2ced0e09b8b79a9712849a032079289c5475"
   },
   {
    "file": "extension/classifier_client.js",
@@ -103,7 +103,7 @@
   },
   {
    "file": "extension/gatekeeper.js",
-   "sha256": "3e227bf422b71df3ce1d3832b2792dff8fbbc039300bbf3a322a20636c5ba957"
+   "sha256": "23c9a6cf44ef8dc15b9bab54f6d42a5545d0f7c35ffa8bc718b9fef6cebdefa9"
   },
   {
    "file": "extension/hold_core.js",
@@ -111,7 +111,7 @@
   },
   {
    "file": "extension/inject.js",
-   "sha256": "7352123d31007cd3c60b37c74c3bd5f6d3214ff748627378a314f6994f9b969d"
+   "sha256": "d76b135dfc1c502150a2bc3fae285d64a41239095d1582c896dd7078d7213c0a"
   },
   {
    "file": "extension/intent_text.js",
@@ -127,7 +127,7 @@
   },
   {
    "file": "extension/outcome.js",
-   "sha256": "a44e820a9663390a232dbd0063b3f042c2701878a132edc41c77519030e28eeb"
+   "sha256": "96a6993f4cf751df4ef230cafcc0be0fb881f4997a998d5f507b0ed9e0103ca0"
   },
   {
    "file": "extension/ui/screen.css",
@@ -136,6 +136,18 @@
   {
    "file": "extension/ui/screen.js",
    "sha256": "630ab48bd32e124f2e9d613097ceafe41fe9270556d084a1574f7519ee2b2929"
+  },
+  {
+   "file": "extension/ui/sidepanel.css",
+   "sha256": "6c348a22d3836404914993d233791a4e3cf0ffb49fca61f562398d08b4c2b3ac"
+  },
+  {
+   "file": "extension/ui/sidepanel.html",
+   "sha256": "087ea8adddf8ae51a3ab4258f9870669fd7bc47b28dbbc9a445bf5365482a626"
+  },
+  {
+   "file": "extension/ui/sidepanel.js",
+   "sha256": "1ddb4dce21aaa2a3511e52040ae86acc018749a2faf734a4e9462dfb3fb1bdcb"
   },
   {
    "file": "extension/window.css",
@@ -151,7 +163,7 @@
   },
   {
    "file": "extension/written_check.js",
-   "sha256": "ebabaa02025fcdc5ea49b4a116daf36875fa0302bed45d8dca7289a6ced4c0b9"
+   "sha256": "a006e2fb519be231199cbf664127819367114568bcf112628e627edfe1ccf2a6"
   },
   {
    "file": "run/policy.mjs",
@@ -161,13 +173,13 @@
  "outputs": [
   {
    "file": "background.js",
-   "bytes": 2116,
-   "sha256": "296189a7585814cd0bd30d3b0558f54c2e23a2c853cf8808f31e551fb4c1db79"
+   "bytes": 2393,
+   "sha256": "1d490f6baad31fbe2fc8406670650d6d6a4130ac645d6382334b7b076893eee2"
   },
   {
    "file": "bridge.js",
-   "bytes": 34457,
-   "sha256": "888a6c9ed5ba547bdf654a130da615a07996ccc72bb77b2f2fbab8195ac2c10f"
+   "bytes": 34980,
+   "sha256": "ce6f1ca55ade76fd85b8dd681b5a2ced0e09b8b79a9712849a032079289c5475"
   },
   {
    "file": "classifier_client.js",
@@ -281,8 +293,8 @@
   },
   {
    "file": "gatekeeper.js",
-   "bytes": 46660,
-   "sha256": "3e227bf422b71df3ce1d3832b2792dff8fbbc039300bbf3a322a20636c5ba957"
+   "bytes": 49665,
+   "sha256": "23c9a6cf44ef8dc15b9bab54f6d42a5545d0f7c35ffa8bc718b9fef6cebdefa9"
   },
   {
    "file": "hold_core.js",
@@ -291,8 +303,8 @@
   },
   {
    "file": "inject.js",
-   "bytes": 28237,
-   "sha256": "7352123d31007cd3c60b37c74c3bd5f6d3214ff748627378a314f6994f9b969d"
+   "bytes": 40003,
+   "sha256": "d76b135dfc1c502150a2bc3fae285d64a41239095d1582c896dd7078d7213c0a"
   },
   {
    "file": "intent_text.js",
@@ -306,8 +318,8 @@
   },
   {
    "file": "manifest.json",
-   "bytes": 1085,
-   "sha256": "06473dda4bbd6fc948665cfbbeb91d43b2a659fa9455a8ded7f3f55e6e467103"
+   "bytes": 1203,
+   "sha256": "4a36db6a1c520fa4f11edc469ac46f0d115140d4b3e9a92338f9ac104d9113ca"
   },
   {
    "file": "options.html",
@@ -321,8 +333,8 @@
   },
   {
    "file": "outcome.js",
-   "bytes": 6640,
-   "sha256": "a44e820a9663390a232dbd0063b3f042c2701878a132edc41c77519030e28eeb"
+   "bytes": 7119,
+   "sha256": "96a6993f4cf751df4ef230cafcc0be0fb881f4997a998d5f507b0ed9e0103ca0"
   },
   {
    "file": "ui/screen.css",
@@ -333,6 +345,21 @@
    "file": "ui/screen.js",
    "bytes": 8699,
    "sha256": "630ab48bd32e124f2e9d613097ceafe41fe9270556d084a1574f7519ee2b2929"
+  },
+  {
+   "file": "ui/sidepanel.css",
+   "bytes": 2434,
+   "sha256": "6c348a22d3836404914993d233791a4e3cf0ffb49fca61f562398d08b4c2b3ac"
+  },
+  {
+   "file": "ui/sidepanel.html",
+   "bytes": 295,
+   "sha256": "087ea8adddf8ae51a3ab4258f9870669fd7bc47b28dbbc9a445bf5365482a626"
+  },
+  {
+   "file": "ui/sidepanel.js",
+   "bytes": 6984,
+   "sha256": "1ddb4dce21aaa2a3511e52040ae86acc018749a2faf734a4e9462dfb3fb1bdcb"
   },
   {
    "file": "window.css",
@@ -351,10 +378,10 @@
   },
   {
    "file": "written_check.js",
-   "bytes": 25395,
-   "sha256": "ebabaa02025fcdc5ea49b4a116daf36875fa0302bed45d8dca7289a6ced4c0b9"
+   "bytes": 29305,
+   "sha256": "a006e2fb519be231199cbf664127819367114568bcf112628e627edfe1ccf2a6"
   }
  ],
- "total_bytes": 509959,
- "tree_sha256": "dbedea9ba8f9cbaf512ab3ce30e338cd5c4a07423611ef14c9b5d5da1566052c"
+ "total_bytes": 539750,
+ "tree_sha256": "465479baf4032633c7aacbd5e58d24f22e217de71e7062c4d8638331e4b41e2d"
 }

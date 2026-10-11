@@ -22,7 +22,7 @@ const verdict = (level, extra = {}) => Object.assign({ level, texts: { croit: 'a
   effects: { grants_right: false, funds_out: true }, risk_signals: [] }, extra);
 
 let F, clock, seen, n = 0;
-beforeEach(() => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; seen = []; });
+beforeEach(async () => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; seen = []; await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [{ address: TOKEN, symbol: 'USDC', decimals: 6 }] } }); });
 afterEach(() => { clock.restore(); delete globalThis.chrome; });
 function worker(engine, classify) {
   const check = async (body) => { seen.push(body); const v = typeof engine === 'function' ? engine(body) : engine; return typeof v === 'string' ? verdict(v) : v; };

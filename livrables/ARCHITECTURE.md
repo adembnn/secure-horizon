@@ -161,7 +161,7 @@ Réponse (champs principaux) : `level` (`attention`, `danger`, `manipulation`, `
 
 - Les chiffres de détection viennent de jeux écrits par nous, sans jeu aveugle passé : voir le [README](../README.md#chiffres-mesurés-avec-leur-jeu-et-leurs-limites).
 - Les fausses alertes sont élevées sur des opérations honnêtes (plus de la moitié avertie sur certains jeux). Pour une plateforme, cela veut dire une file de retraits retenus à traiter.
-- Le produit avertit et ralentit, il ne bloque pas. Si un client doit être empêché, c'est à la plateforme de décider de la politique.
+- Le produit avertit et ralentit, il n'empêche rien. Si un client doit être empêché, c'est à la plateforme de décider de la politique.
 - Aucune donnée ne quitte le poste dans la version actuelle : le serveur est local, l'extension autonome n'a aucun accès réseau, le journal ne contient ni texte libre ni adresse en clair.
 
 ## 6. Ce qui est sur la chaîne

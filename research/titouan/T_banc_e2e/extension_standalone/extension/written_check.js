@@ -28,6 +28,18 @@ const UNLIMITED_FROM = 2n ** 128n; // nobody owns that much of anything : from h
 const SYMBOL_DECIMALS = { USDC: 6, USDT: 6, WBTC: 8, BTC: 8 };
 const TOKEN_ONLY = new Set(['USDC', 'USDT', 'DAI', 'WETH', 'WBTC', 'WAVAX']); // never the network's own currency
 const PAY_KINDS = new Set(['pay_someone', 'send_to_my_account']);
+export const MAX_CALLS = 256; // wallet_sendCalls : every call up to here is read ; more = not verified (S8)
+// Tokens this build knows by their ADDRESS (same list as the embedded engine, Ethereum and Avalanche C). Only these can ever "match" a written symbol (S2).
+export const BUILTIN_TOKENS = Object.freeze({
+  '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48': { symbol: 'USDC', decimals: 6 },
+  '0xdac17f958d2ee523a2206206994597c13d831ec7': { symbol: 'USDT', decimals: 6 },
+  '0x6b175474e89094c44da98b954eedeac495271d0f': { symbol: 'DAI', decimals: 18 },
+  '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2': { symbol: 'WETH', decimals: 18 },
+  '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599': { symbol: 'WBTC', decimals: 8 },
+  '0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e': { symbol: 'USDC', decimals: 6 },
+  '0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7': { symbol: 'USDT', decimals: 6 },
+  '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7': { symbol: 'WAVAX', decimals: 18 }
+});
 
 // ---------------------------------------------------------------- Sign-In with Ethereum (EIP-4361)
 function messageText(m) {
@@ -66,19 +78,36 @@ export function relance(intent) {
 const big = (v) => { try { return typeof v === 'bigint' ? v : v == null || v === '' ? 0n : BigInt(v); } catch (_) { return null; } };
 const word = (data, i) => data.slice(10 + 64 * i, 74 + 64 * i);
 const addrOf = (w) => '0x' + w.slice(24);
-function txFacts(tx, out) {
-  if (!tx || typeof tx !== 'object') return;
-  const to = HEX20.test(String(tx.to || '')) ? lc(tx.to) : null;
-  const data = typeof tx.data === 'string' && tx.data.length > 2 ? tx.data : typeof tx.input === 'string' ? tx.input : '0x';
-  const value = big(tx.value);
-  if (!to) return;
-  if (!/^0x[0-9a-fA-F]*$/.test(data) || data.length < 10) { if (value && value > 0n) out.sends.push({ token: null, to, raw: value }); return; }
+// Reads the data of ONE call into out ; true when it is a call this file knows how to read (approve, transfer, transferFrom...).
+function dataFacts(data, to, out) {
+  if (!/^0x[0-9a-fA-F]*$/.test(data) || data.length < 10) return false;
   const sel = data.slice(0, 10).toLowerCase(), args = (data.length - 10) / 64;
   const amount = (i) => { try { return BigInt('0x' + word(data, i)); } catch (_) { return null; } };
   if ((sel === '0x095ea7b3' || sel === '0x39509351') && args >= 2) { // approve(spender, amount), increaseAllowance(spender, added)
     const raw = amount(1); if (raw != null && raw > 0n) out.grants.push({ token: to, spender: addrOf(word(data, 0)), raw, unlimited: raw >= UNLIMITED_FROM });
-  } else if (sel === '0xa9059cbb' && args >= 2) { const raw = amount(1); if (raw != null) out.sends.push({ token: to, to: addrOf(word(data, 0)), raw }); } // transfer(to, amount)
-  else if (sel === '0x23b872dd' && args >= 3) { const raw = amount(2); if (raw != null) out.sends.push({ token: to, to: addrOf(word(data, 1)), raw }); } // transferFrom(from, to, amount)
+    return true;
+  }
+  if (sel === '0xa9059cbb' && args >= 2) { const raw = amount(1); if (raw != null) out.sends.push({ token: to, to: addrOf(word(data, 0)), raw }); return true; } // transfer(to, amount)
+  if (sel === '0x23b872dd' && args >= 3) { const raw = amount(2); if (raw != null) out.sends.push({ token: to, to: addrOf(word(data, 1)), raw }); return true; } // transferFrom(from, to, amount)
+  return false;
+}
+// One call. S3 : the native value is always counted when the call has no data, short data, or data this file reads (a transfer(...) that
+// also carries 1 ETH sends 1 ETH). A call with data nobody here can read keeps its value out of the facts : its effect is measured (effect_sim.js).
+// S8 : "data" and "input" are both read ; when they differ, the request is ambiguous (the wallet may prefer either) and can never match.
+function txFacts(tx, out) {
+  if (!tx || typeof tx !== 'object') return;
+  const to = HEX20.test(String(tx.to || '')) ? lc(tx.to) : null;
+  const d1 = typeof tx.data === 'string' ? tx.data : null, d2 = typeof tx.input === 'string' ? tx.input : null;
+  if (d1 !== null && d2 !== null && lc(d1) !== lc(d2)) out.ambiguous = true;
+  const payloads = [];
+  if (d1 !== null && d1.length > 2) payloads.push(d1);
+  if (d2 !== null && d2.length > 2 && (d1 === null || lc(d2) !== lc(d1))) payloads.push(d2);
+  const value = big(tx.value);
+  if (value == null && tx.value != null && tx.value !== '') out.ambiguous = true; // an amount nobody can read
+  if (!to) return;
+  let readable = payloads.length === 0;
+  for (const p of payloads) { if (p.length < 10 && /^0x[0-9a-fA-F]*$/.test(p)) readable = true; else if (dataFacts(p, to, out)) readable = true; }
+  if (readable && value && value > 0n) out.sends.push({ token: null, to, raw: value });
 }
 function typedFacts(params, out) {
   let td = params.find((p) => (p && typeof p === 'object' && !Array.isArray(p)) || (typeof p === 'string' && !HEX20.test(p)));
@@ -97,11 +126,15 @@ function typedFacts(params, out) {
   else if (/^Permit(Batch)?(Witness)?TransferFrom$/.test(String(td.primaryType))) for (const x of each(m.permitted)) grant(x.token, m.spender, x.amount);
 }
 export function requestFacts(body) {
-  const out = { grants: [], sends: [] };
+  const out = { grants: [], sends: [], tooBig: false, ambiguous: false };
   const method = body && typeof body.method === 'string' ? body.method : '', params = body && Array.isArray(body.params) ? body.params : [];
   try {
     if (method === 'eth_sendTransaction' || method === 'eth_signTransaction') txFacts(params[0], out);
-    else if (method === 'wallet_sendCalls') { const calls = params[0] && Array.isArray(params[0].calls) ? params[0].calls.slice(0, 64) : []; for (const c of calls) txFacts(c, out); }
+    else if (method === 'wallet_sendCalls') { // S8 : every call is read, up to a high limit ; beyond it the request is "not verified", never "match"
+      const calls = params[0] && Array.isArray(params[0].calls) ? params[0].calls : [];
+      if (calls.length > MAX_CALLS) out.tooBig = true;
+      for (let i = 0; i < calls.length && i < MAX_CALLS; i++) txFacts(calls[i], out);
+    }
     else if (/^eth_signTypedData/.test(method)) typedFacts(params, out);
   } catch (_) { /* unreadable : no fact, the engine verdict stands */ }
   return out;
@@ -124,6 +157,7 @@ export function tokensOf(contexte, chainId) {
   let chain; try { chain = chainId == null || chainId === '' ? undefined : Number(BigInt(chainId)); } catch (_) { chain = undefined; }
   const list = contexte && typeof contexte === 'object' && Array.isArray(contexte.tokens) ? contexte.tokens.slice(0, 5000) : [];
   const map = {};
+  for (const a of Object.keys(BUILTIN_TOKENS)) map[a] = { symbol: BUILTIN_TOKENS[a].symbol, decimals: BUILTIN_TOKENS[a].decimals };
   for (const t of list) {
     if (!t || !HEX20.test(String(t.address || '')) || typeof t.symbol !== 'string' || !/^[A-Za-z0-9.$_-]{1,12}$/.test(t.symbol) || !Number.isInteger(t.decimals) || t.decimals < 0 || t.decimals > 36) continue;
     let own; try { own = t.chainId == null || t.chainId === '' ? undefined : Number(BigInt(t.chainId)); } catch (_) { own = undefined; }
@@ -131,17 +165,30 @@ export function tokensOf(contexte, chainId) {
   }
   return map;
 }
-// The asset of the request, as the person can read it. A token the local context does not know is read with the symbol written.
+// The asset of the request, as the person can read it. A token nobody here knows by its address (built-in list, local context) is NOT read
+// with the symbol written : it is flagged `unknown`, and a request that carries one can never match (S2). Its amount is still compared,
+// with the usual decimals of the written symbol, so that a clear gap is still reported as a gap.
 function assetOf(token, written, tokens) {
   if (token == null) return TOKEN_ONLY.has(written) ? { symbol: null, decimals: 18, other: true } : { symbol: written, decimals: 18 };
   const known = tokens && tokens[token];
   if (known) return { symbol: known.symbol, decimals: known.decimals, other: known.symbol.toUpperCase() !== written };
-  return { symbol: written, decimals: SYMBOL_DECIMALS[written] != null ? SYMBOL_DECIMALS[written] : 18 };
+  return { symbol: written, decimals: SYMBOL_DECIMALS[written] != null ? SYMBOL_DECIMALS[written] : 18, unknown: true };
 }
 
+// A request that cannot be read in full, or that carries a token nobody here knows, never matches : at most "not verified" (S2, S8).
 export function writtenCheck(body, intent, tokens = {}) {
   if (!intent || !intent.amount || !intent.symbol) return null;
-  const facts = requestFacts(body);
+  const facts = requestFacts(body), flags = { unknown: false };
+  const r = writtenCore(facts, intent, tokens, flags);
+  const why = facts.tooBig ? 'Cette demande contient trop d’appels pour que je les lise tous.' : facts.ambiguous ? 'Cette demande se lit de deux façons différentes : je ne peux pas la vérifier.' : null;
+  if (r && r.outcome === 'match') {
+    if (why) return { outcome: 'unverifiable', line: why };
+    if (flags.unknown) return { outcome: 'unverifiable', line: 'Je ne connais pas ce jeton : je ne peux pas vérifier qu’il s’agit bien de ' + intent.symbol + '.' };
+  }
+  if (!r && why && (facts.grants.length || facts.sends.length)) return { outcome: 'unverifiable', line: why };
+  return r;
+}
+function writtenCore(facts, intent, tokens, flags) {
   const said = 'Tu as écrit ' + fr(intent.amount) + ' ' + intent.symbol + '.';
   const reduce = ' Réduis le plafond à ' + fr(intent.amount) + ' ' + intent.symbol + ' dans ton portefeuille.';
   let line = null;
@@ -151,6 +198,7 @@ export function writtenCheck(body, intent, tokens = {}) {
   // 1) a spending right against the written amount
   for (const g of facts.grants) {
     const a = assetOf(g.token, intent.symbol, tokens), want = toRaw(intent.amount, a.decimals);
+    if (a.unknown) flags.unknown = true;
     // A transaction's ceiling can be edited in the wallet before confirming ; a signature's cannot.
     if (g.unlimited) return { outcome: 'mismatch', line: said + (g.signed ? ' Cette signature donne accès à tout ton ' + a.symbol + ' et ne peut pas être limitée.' : ' La demande donne accès à tout ton ' + a.symbol + '.' + reduce), ...(g.signed ? {} : { fixable }) };
     if (a.other) return { outcome: 'mismatch', line: said + ' La demande donne accès à ' + fromRaw(g.raw, a.decimals) + ' ' + a.symbol + '.' };
@@ -162,6 +210,7 @@ export function writtenCheck(body, intent, tokens = {}) {
     if (!facts.sends.length) return facts.grants.length ? { outcome: 'match', line } : { outcome: 'unverifiable', line: 'Je ne retrouve pas ce paiement dans la demande.' };
     for (const s of facts.sends) {
       const a = assetOf(s.token, intent.symbol, tokens), want = toRaw(intent.amount, a.decimals);
+      if (a.unknown) flags.unknown = true;
       if (a.other) return { outcome: 'mismatch', line: said + ' La demande envoie ' + (a.symbol ? fromRaw(s.raw, a.decimals) + ' ' + a.symbol : 'la monnaie du réseau') + '.' };
       if (want == null || s.raw !== want) return { outcome: 'mismatch', line: said + ' La demande envoie ' + fromRaw(s.raw, a.decimals) + ' ' + a.symbol + '.' };
       if (intent.address && lc(s.to) !== lc(intent.address)) return { outcome: 'mismatch', line: 'Le destinataire de la demande n’est pas l’adresse que tu as écrite.', address_diff: { expected: intent.address, actual: s.to } };
@@ -262,12 +311,13 @@ export function limitPlan(body, intent, tokens = {}, chain = {}) {
   const method = body.method, params = Array.isArray(body.params) ? body.params : [];
   let calls;
   if (method === 'eth_sendTransaction') calls = params[0] && typeof params[0] === 'object' ? [params[0]] : [];
-  else if (method === 'wallet_sendCalls') calls = params[0] && Array.isArray(params[0].calls) ? params[0].calls.slice(0, 64) : [];
+  else if (method === 'wallet_sendCalls') calls = params[0] && Array.isArray(params[0].calls) ? params[0].calls : [];
   else return null;
   const facts = requestFacts(body);
+  if (facts.tooBig || facts.ambiguous || calls.length > MAX_CALLS) return null; // not read in full, or read two ways : never rewritten
   if (facts.sends.length || !facts.grants.length || facts.grants.some((g) => g.signed)) return null;
   let copy; try { copy = JSON.parse(JSON.stringify(body.params)); } catch (_) { return null; }
-  const ccalls = method === 'eth_sendTransaction' ? [copy[0]] : copy[0].calls.slice(0, 64);
+  const ccalls = method === 'eth_sendTransaction' ? [copy[0]] : copy[0].calls;
   let changed = 0;
   for (let i = 0; i < calls.length; i++) {
     const tx = calls[i], ctx = ccalls[i];

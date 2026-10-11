@@ -3,11 +3,14 @@
   "name": "Hold up (autonome)",
   "version": "0.3.0",
   "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles et explique en clair. Moteur embarque. Aucun acces reseau.",
-  "minimum_chrome_version": "111",
+  "minimum_chrome_version": "114",
   "permissions": [
     "storage",
-    "alarms"
+    "alarms",
+    "sidePanel"
   ],
+  "action": { "default_title": "Hold up" },
+  "side_panel": { "default_path": "ui/sidepanel.html" },
   "background": {
     "service_worker": "background.js",
     "type": "module"
