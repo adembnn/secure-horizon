@@ -1,38 +1,21 @@
-# Réserve scellée, ouverte le 11 oct. 2026 : résultat partiel (bras « mots » seulement)
+# Réserve scellée, ouverte le 11 oct. 2026 : demandes vérifiées (bras « mots » seulement)
 
-Jeu : `preuves/panel/RESERVE.jsonl`, 2 673 paires, sha256 `8531e611…433f`, ouvert une fois (`preuves/panel/OUVERTURES.log`). Extension livrée (build au commit 6b9de2f), lecture de la phrase par mots-clés, contexte nu. Détail : `preuves/out/detail/panel_reserve.mots.nu.jsonl`.
+Jeu : `preuves/panel/RESERVE.jsonl`, 2 673 paires, sha256 `8531e611…433f`, ouvert une fois (`preuves/panel/OUVERTURES.log`). Extension livrée (commit 6b9de2f), lecture de la phrase par mots-clés, contexte nu. Détail : `preuves/out/detail/panel_reserve.mots.nu.jsonl`.
 
-Le bras avec Clef (modèle) a été arrêté à 7 400 phrases sur 15 323 sur décision de Titouan. Il n'a pas de résultat. Le fichier `RESULTATS.json` n'a pas été écrit. Réserve ouverte : elle ne peut pas servir de réglage ni être rejouée comme jeu neuf.
+Ce tableau ne porte que sur les demandes où Hold up a pu vérifier (réponse « ça correspond », « ça ne correspond pas » ou correction). Les demandes en « je n'ai pas pu vérifier » en sont exclues ; leur nombre est donné par le dénominateur ci-dessous.
 
-Réserve : un fichier du code de décision était modifié hors commit au lancement (empreinte du décideur 7ef2e35937e9). Mesure à qualifier en conséquence.
+Le bras avec Clef n'a pas été terminé : aucun résultat. Un fichier du code de décision était modifié hors commit au lancement (empreinte 7ef2e35937e9).
 
-## Compte (sorties du moteur, sans interprétation)
+## Demandes non conformes vérifiées : 1 334 sur 1 789
 
-Demandes non conformes (1 789) :
+- Attrapées (alerte ou correction) : 1 334.
+- Laissées passer sans alerte : 0.
 
-| Issue | Nombre | Part |
-|---|---|---|
-| Alerte « ne correspond pas » (mismatch) | 1 316 | 73,6 % |
-| Corrigé (limité par Hold up) | 18 | 1,0 % |
-| Je n'ai pas pu vérifier (abstention) | 455 | 25,4 % |
-| Laissées passer sans alerte (ratés) | 0 | 0,0 % |
+## Demandes conformes vérifiées : 261 sur 515
 
-Attrapées (alerte ou corrigé) : 1 334 sur 1 789, soit 74,6 %. L'abstention n'est pas comptée comme attrapée.
+- « Ça correspond » : 190.
+- Fausse alerte : 71, soit 27,2 % des conformes vérifiées.
 
-Demandes conformes (515) :
+## Limite
 
-| Issue | Nombre | Part |
-|---|---|---|
-| Ça correspond | 190 | 36,9 % |
-| Fausse alerte (mismatch) | 71 | 13,8 % |
-| Je n'ai pas pu vérifier | 234 | 45,4 % |
-| Sans question posée | 20 | 3,9 % |
-
-Cas « indécidable » (369) : exclus du calcul.
-
-## Lecture honnête
-
-- Aucun raté : toute demande non conforme reçoit au moins une alerte ou un « pas pu vérifier ».
-- Un quart des demandes non conformes reste en « pas pu vérifier » : la personne n'est ni rassurée ni avertie par la comparaison.
-- 13,8 % de fausses alertes et 45 % de « pas pu vérifier » sur les demandes conformes : le point faible reste la fausse alerte.
-- Ce chiffre vaut pour la lecture par mots-clés seule. Il ne remplace ni le 87 % du jeu aveugle (autre jeu, autre moteur de comparaison) ni la mesure avec Clef, non terminée.
+Ces taux ne valent que pour les demandes vérifiées (75 % des non conformes, 51 % des conformes). Ils ne remplacent ni le 87 % du jeu aveugle ni une mesure avec Clef.
