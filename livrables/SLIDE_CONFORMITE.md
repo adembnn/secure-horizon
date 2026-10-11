@@ -24,7 +24,7 @@ Le porteur de portefeuille n'est pas une entité régulée. Le lecteur régulé 
 4. « Sur l'IA : un modèle hébergé lit la phrase, seule. Il ne lit pas les montants ni les adresses, du code s'en charge, et il ne peut pas baisser une alerte du code. Sur notre jeu aveugle, il n'apporte pas de gain net mesurable : ce qui compte est la phrase et le code qui compare. Quand il hésite, la réponse est : je n'ai pas pu vérifier. »
 5. « Nous ne déclarons Hold up conforme à aucun de ces textes. Nous donnons à un prestataire des éléments de preuve pour son propre dossier. »
 
-Question probable : « Et l'ancrage sur Avalanche ? » Réponse : la racine du journal peut être écrite sur Fuji pour qu'un tiers détecte une réécriture complète. Le contrat et le vérificateur existent, testés sur une copie locale ; le déploiement Fuji est préparé et répété, non exécuté (D-016). Ce serait un réseau de test : le mécanisme, pas une valeur légale.
+Question probable : « Et l'ancrage sur Avalanche ? » Réponse : décision D-017, pas d'ancrage sur une blockchain pour la démo ni pour le rendu. La traçabilité repose sur le journal chaîné par hachage, son export JSON, la vérification hors ligne et la fiche technique. Limite dite : une réécriture complète ou la suppression des dernières lignes ne se détecte pas sans ancrage externe, évolution possible non faite.
 
 Question probable : « Si votre modèle se trompe, qui est responsable ? » Voir `livrables/QR_JURY.md`, question 12, et `livrables/EXPLICABILITE.md` section 5.
 

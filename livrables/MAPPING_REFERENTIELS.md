@@ -15,7 +15,7 @@ Règle : seuls figurent des identifiants dont le nom a été relu sur le site of
 | 6 | Conservation des signaux que le portefeuille donne déjà | livré (le moteur ne descend jamais sous le plancher du portefeuille : garde-fou branché dans le pipeline, non vérifié dans l'extension) | DE.AE-07 | T1657 | aucun retenu | aucun |
 | 7 | Droit limité au montant écrit (moindre privilège) | fonction secondaire ; impossible pour une signature | PR.AA-05 (Protect : le règlement demande Detect ou Respond, donc pas l'axe principal) | sans objet | aucun retenu | ASI03 par analogie, seulement si un agent accorde le droit |
 | 8 | Journal chaîné par hachage, une ligne par décision | livré dans la version serveur et dans le build autonome (journal_chain.js, 500 lignes, export JSON et vérification hors ligne) | PR.PS-04, RS.AN-06 | T1070 Indicator Removal (la chaîne rend un retrait visible) | aucun retenu | aucun |
-| 9 | Ancrage de la racine sur Avalanche Fuji | contrat et vérificateur écrits ; aucune transaction Fuji dans le dépôt | RS.AN-06 | T1070 | aucun retenu | aucun |
+| 9 | Ancrage de la racine sur une blockchain | décision D-017 : non retenu pour la démo ni pour le rendu ; contrat et vérificateur écrits, jamais déployés sur Fuji | RS.AN-06 | T1070 | aucun retenu | aucun |
 
 Notes.
 - RS.MI-01 est libellé « Incidents are contained ». Une alerte avant signature n'est pas un incident déclaré : nous le citons au sens large.
