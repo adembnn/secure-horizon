@@ -134,12 +134,15 @@
     return maskedProxy(target, {
       apply(t, thisArg, args) {
         const a = args[0];
-        if (!a || typeof a !== 'object' || typeof a.method !== 'string') return rApply(t, thisArg, args);
-        let method, params, full;
-        try { method = String(a.method); params = a.params === undefined ? undefined : snap(a.params); full = snap(a); full.method = method; if (params !== undefined) full.params = params; }
-        catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
+        if (!a || (typeof a !== 'object' && typeof a !== 'function')) return rApply(t, thisArg, args);
+        // L'objet de la page n'est lu qu'UNE fois (un getter ou un Proxy sur "method" peut mentir d'une lecture a l'autre) :
+        // la decision ET la transmission au portefeuille se font sur la meme copie inerte.
+        let full;
+        try { full = snap(a); } catch (_) { return NativePromise.reject(rejection('params-illisibles')); }
+        if (!full || typeof full !== 'object' || typeof full.method !== 'string') return rApply(t, thisArg, [full]);
+        const method = full.method, params = full.params;
         if (JOURNAL.has(method)) { notify({ method, params, kind: 'journal' }); return rApply(t, thisArg, [full]); }
-        if (!GATED.has(method)) return rApply(t, thisArg, args);
+        if (!GATED.has(method)) return rApply(t, thisArg, [full]);
         const k = keyOf(method, params);
         return gate(thisArg, t, method, params, 'request').then((r) => {
           if (!r.allow) throw rejection(r.reason || 'denied');
@@ -167,10 +170,16 @@
           });
         }
         if (a0 && typeof a0 === 'object' && typeof a1 === 'function') return legacyAsync(t, thisArg, a0, a1, 'send');
-        if (a0 && typeof a0 === 'object' && !Array.isArray(a0) && JOURNAL.has(a0.method)) notify({ method: a0.method, kind: 'journal' });
         // send(payload) synchrone sans rappel: impossible a retenir. Les portefeuilles ne le supportent pas pour les signatures.
-        if (a0 && typeof a0 === 'object' && !Array.isArray(a0) && GATED.has(a0.method)) {
-          const e = new Error('Hold up: appel synchrone send(payload) non supporte pour ' + a0.method); e.code = 4900; throw e;
+        // Meme regle que request() : une seule lecture, decision et transmission sur la copie (objet seul ou lot).
+        if (a0 && (typeof a0 === 'object' || typeof a0 === 'function')) {
+          let s; try { s = snap(a0); } catch (_) { throw rejection('params-illisibles'); }
+          for (const it of (Array.isArray(s) ? s : [s])) {
+            if (!it || typeof it !== 'object') continue;
+            if (JOURNAL.has(it.method)) notify({ method: it.method, kind: 'journal' });
+            if (GATED.has(it.method)) { const e = new Error('Hold up: appel synchrone send(payload) non supporte pour ' + it.method); e.code = 4900; throw e; }
+          }
+          return rApply(t, thisArg, [s]);
         }
         return rApply(t, thisArg, args);
       }
