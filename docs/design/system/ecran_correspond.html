@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Hold up Ça correspond</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+</head>
+<body class="hu pl">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<!-- Le gant : copie de docs/design/system/logo/logo_mono_blanc.svg (main seule ; le pli du pouce est tracé de la couleur du fond, sans masque : moins cher à peindre). L'icône : logo_small.svg. -->
+<symbol id="hu-glove" viewBox="0 0 512 512"><g transform="translate(11 -56) rotate(8 256 256)" fill="currentColor" stroke-linecap="round"><path d="M150 150A38 38 0 0 1 226 150V272A8 8 0 0 0 242 272V122A35 35 0 0 1 312 122V272A8 8 0 0 0 328 272V160A31 31 0 0 1 390 160V330C390 388 350 424 300 424H236C180 424 150 400 150 340Z"/><path d="M214 388Q122 374 86 282" fill="none" stroke="currentColor" stroke-width="70"/><rect x="172" y="440" width="196" height="62" rx="24"/><path d="M170 322Q206 334 214 378" fill="none" stroke="var(--hu-page)" stroke-width="16"/></g></symbol>
+<symbol id="hu-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2.25" fill="#000"/><g fill="#fff"><path d="M4 3.5A1.5 1.5 0 0 1 7 3.5V7.5A.5 .5 0 0 0 8 7.5V2.5A1.5 1.5 0 0 1 11 2.5V7.5A.5 .5 0 0 0 12 7.5V4A1.5 1.5 0 0 1 15 4V9A3 3 0 0 1 12 12H7A3 3 0 0 1 4 9Z"/><path d="M5.6 9.6Q3.4 9.4 2.3 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><rect x="6" y="13" width="7" height="2" rx="1"/></g></symbol>
+</svg>
+<h1 class="pl-title">Ça correspond</h1>
+<main class="pl-views">
+<figure class="pl-view" id="v-c-simple" style="--w:424"><figcaption>Ça correspond. Pas de bouton : la demande part seule après une seconde.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win" data-outcome="match"><div class="hu-stage">
+<p class="hu-head"><b>app.neve.exchange</b></p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+</div></div>
+</div></figure>
+
+<figure class="pl-view" id="v-c-limite" style="--w:424"><figcaption>Ça correspond, et j’ai limité le droit que le site demandait.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win" data-outcome="match"><div class="hu-stage">
+<p class="hu-head"><b>app.neve.exchange</b></p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
+<p class="hu-fix hu-m" style="--hu-i:2"><b>Droit limité à 50 USDC</b><span>Le site demandait tout ton USDC.</span></p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+</div></div>
+</div></figure>
+
+<figure class="pl-view" id="v-c-etape1" style="--w:424"><figcaption>Une opération en deux demandes : la première. La fenêtre reste ouverte pour la seconde.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win" data-outcome="match"><div class="hu-stage">
+<p class="hu-head"><b>app.neve.exchange</b>, demande 1 sur 2</p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">Cette demande laisse le site prendre 50 USDC, pas plus.</p>
+<p class="hu-next hu-m" style="--hu-i:2">Ensuite, l’échange contre AVAX.</p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+</div></div>
+</div></figure>
+
+<figure class="pl-view" id="v-c-etape2" style="--w:424"><figcaption>La seconde demande, dans la même fenêtre. Je ne repose pas la question.</figcaption><div class="pl-frame" style="--w:424;--h:501">
+<div class="hu hu-k hu-win" data-outcome="match"><div class="hu-stage">
+<p class="hu-head"><b>app.neve.exchange</b>, demande 2 sur 2</p>
+<div class="hu-mid">
+<h1 class="hu-verdict hu-m" tabindex="-1">Ça correspond à ce que tu as écrit.</h1>
+<p class="hu-line hu-m" style="--hu-i:1">La demande échange 50 USDC contre AVAX.</p>
+</div>
+<div class="hu-dock"><button type="button" class="hu-word">Annuler</button><p class="hu-leave">Ça part vers ton portefeuille.</p></div>
+</div></div>
+</div></figure>
+</main>
+</body>
+</html>
