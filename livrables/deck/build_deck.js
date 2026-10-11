@@ -99,7 +99,7 @@ function bar(s, label, value, pct, y, color) {
   txt(s, 'demandes piégées attrapées, sur 1 789. Aucune n’est passée sans alerte.', 0.5, 2.75, 4.0, 0.9, { color: INK2 });
   txt(s, '14 %', 5.3, 1.25, 4.3, 1.3, big({ fontSize: 80 }));
   txt(s, 'de fausses alertes : 71 demandes honnêtes sur 515.', 5.3, 2.75, 4.0, 0.9, { color: INK2 });
-  txt(s, 'Banc d’essai scellé, ouvert une seule fois. Extension sans modèle.', 0.5, 4.3, 9, 0.4, { fontSize: 14, color: INK2 });
+  txt(s, 'Banc d’essai scellé, ouvert une seule fois.', 0.5, 4.3, 9, 0.4, { fontSize: 14, color: INK2 });
 }
 
 // 7 Ce qui ne marche pas encore
