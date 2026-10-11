@@ -32,6 +32,29 @@ try {
   }
 } finally { $za.Dispose(); $fs.Dispose() }
 
+# 3) le zip EST le dossier : chaque entree est relue et comparee, octet pour octet (SHA-256), au fichier du dossier construit a l'instant.
+#    Un ecart = echec, zip supprime. Puis l'empreinte du zip est ecrite PAR CE SCRIPT a cote du zip (dist<nom>.BUILD_INFO.json) avec la trace
+#    du build (arbre, sorties). Aucun document ne doit recopier une empreinte a la main : il renvoie a ce fichier.
+$sha = [System.Security.Cryptography.SHA256]::Create()
+$hex = { param($bytes) -join ($sha.ComputeHash($bytes) | ForEach-Object { $_.ToString('x2') }) }
+$folder = @{}
+Get-ChildItem $ext -Recurse -File | ForEach-Object { $folder[$_.FullName.Substring($ext.Length + 1).Replace([char]92, [char]47)] = (& $hex ([System.IO.File]::ReadAllBytes($_.FullName))) }
+$zr = [System.IO.Compression.ZipFile]::OpenRead($zip)
+$inZip = @{}
+try {
+  foreach ($e in $zr.Entries) {
+    $ms = New-Object System.IO.MemoryStream; $st = $e.Open(); $st.CopyTo($ms); $st.Dispose()
+    $inZip[$e.FullName.Substring($name.Length + 1)] = (& $hex $ms.ToArray()); $ms.Dispose()
+  }
+} finally { $zr.Dispose() }
+$diff = @(); foreach ($k in ($folder.Keys + $inZip.Keys | Sort-Object -Unique)) { if ($folder[$k] -ne $inZip[$k]) { $diff += $k } }
+if ($diff.Count -gt 0) { Remove-Item -LiteralPath $zip -Force; throw ('le zip ne correspond pas au dossier construit : ' + ($diff -join ', ')) }
+
 $h = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLower()
 $n = (Get-ChildItem $ext -Recurse -File).Count
-"{0} cree : {1} fichiers, {2:N1} Ko, SHA-256 {3}" -f $zip, $n, ((Get-Item $zip).Length / 1KB), $h
+$build = Get-Content (Join-Path $ext 'BUILD_INFO.json') -Raw | ConvertFrom-Json
+$info = [ordered]@{ zip = (Split-Path -Leaf $zip); zip_sha256 = $h; zip_octets = (Get-Item $zip).Length; fichiers = $n; dossier = (Split-Path -Leaf $ext);
+  identique_au_dossier = $true; tree_sha256 = $build.tree_sha256; build = $build.build; network = $build.network; extension_id = $build.extension_id; outputs = $build.outputs }
+$infoPath = Join-Path $dist ($name + '.BUILD_INFO.json')
+[System.IO.File]::WriteAllText($infoPath, ($info | ConvertTo-Json -Depth 6), (New-Object System.Text.UTF8Encoding($false)))
+"{0} cree : {1} fichiers, {2:N1} Ko, SHA-256 {3} (identique au dossier, empreinte ecrite dans {4})" -f $zip, $n, ((Get-Item $zip).Length / 1KB), $h, $infoPath

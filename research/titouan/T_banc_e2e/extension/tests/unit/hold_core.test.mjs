@@ -48,8 +48,11 @@ test('demo durations change the numbers, not the mechanism, and have a floor', (
 test('a pending request is not an allow ; the page gets "pending" until a human decides', async () => {
   const s = setup(); await open(s, 'attention');
   assert.equal((await s.store.poll(RID, WHO)).state, 'pending');
-  s.clock.t += 10 * 60000;
+  s.clock.t += 2 * 60000;
   assert.equal((await s.store.poll(RID, WHO)).state, 'pending');
+  // nobody acts : three minutes after its screen appeared the request is cancelled, never sent
+  s.clock.t += 61000;
+  assert.equal((await s.store.poll(RID, WHO)).state, 'deny');
 });
 
 test('attention : continue is accepted after the minimum display time, never before', async () => {

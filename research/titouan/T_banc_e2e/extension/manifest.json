@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Hold up",
   "version": "0.2.0",
-  "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles jusqu'a la decision de la personne.",
+  "description": "Écris ce que tu veux faire. Hold up te dit si la demande de signature correspond.",
   "minimum_chrome_version": "114",
   "permissions": [
     "storage",

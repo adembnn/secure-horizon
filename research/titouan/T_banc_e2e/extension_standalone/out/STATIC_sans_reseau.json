@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 49,
+ "fichiers_analyses": 50,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -85,6 +85,11 @@
   },
   {
    "name": "le moteur embarque se charge et repond (aucune erreur de syntaxe dans engine/)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "le moteur embarque s execute sans exception sur 12 demandes variees (dont des demandes sans aucun signal)",
    "pass": true,
    "detail": ""
   }

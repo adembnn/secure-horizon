@@ -4,12 +4,15 @@
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { join } from 'node:path';
+import { existsSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { makeChrome, fakeClock, load, DIR, EXT_URL, EXT_ID } from './fake_chrome.mjs';
 import { page, sleep, cleanAll, WALLET, TOKEN as BRIDGE_TOKEN } from './securite_page.mjs';
 
 after(cleanAll);
-const { selectorOf } = await import(pathToFileURL(join(DIR, '..', 'engine', 'src', 'keccak.mjs')).href);
+// the engine sits next to extension/ in the sources, and inside the folder (engine/src/*.js) in a built copy
+const KECCAK = existsSync(join(DIR, 'engine', 'src', 'keccak.js')) ? join(DIR, 'engine', 'src', 'keccak.js') : join(DIR, '..', 'engine', 'src', 'keccak.mjs');
+const { selectorOf } = await import(pathToFileURL(KECCAK).href);
 const R = await load('revoke.js');
 
 const ME = '0x' + 'a1'.repeat(20), SPENDER = '0x' + 'd4'.repeat(20), USDC = '0x' + 'c3'.repeat(20), TOKEN2 = '0x' + 'e5'.repeat(20);

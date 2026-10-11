@@ -20,7 +20,7 @@ afterEach(() => { clock.restore(); delete globalThis.chrome; });
 // A worker life. `engine` : level, verdict object or function(body).
 function worker(engine = 'attention', opts = {}) {
   const check = async (body) => { seen.push(body); const v = typeof engine === 'function' ? engine(body) : engine; return typeof v === 'string' ? verdict(v) : v; };
-  return createGatekeeper(Object.assign({ check }, opts));
+  return createGatekeeper(Object.assign({ check, closeMs: 0 }, opts));
 }
 const newRid = () => 'rid-test-' + String(++n).padStart(4, '0');
 async function gate(tabId = 7, origin = EVIL, extra = {}, payload = TX) {

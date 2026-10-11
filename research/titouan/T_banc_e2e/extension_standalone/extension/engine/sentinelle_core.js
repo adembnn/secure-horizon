@@ -494,7 +494,7 @@ export function evaluate(body, local = emptyLocal()) {
   }
   const codes = [...new Set([...flags.map((f) => f.code), ...pol.reasons.map((r) => r.code), ...pol.notes])];
   const S = new Set(codes);
-  const niveau = seaportCrit ? 'critical' : pol.level === 'critical' ? 'critical' : pol.level === 'warn' ? 'warn' : 'info'; // 'ok' n'existe pas : le plus bas est 'info'
+  let niveau = seaportCrit ? 'critical' : pol.level === 'critical' ? 'critical' : pol.level === 'warn' ? 'warn' : 'info'; // 'ok' n'existe pas : le plus bas est 'info'
   const grants = !!((eff.approvals || []).length || eff.delegation || (eff.controlChange || []).length || (eff.signature && ['permit', 'permit2', 'blind', 'eth_sign'].includes(eff.signature.kind)));
   const funds = (eff.outgoing || []).length > 0;
   const opaque = !!(eff.opaque || (eff.opaqueReasons || []).length);

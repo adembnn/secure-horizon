@@ -193,7 +193,9 @@
     // connexion (eth_requestAccounts, wallet_requestPermissions), lectures et changement de reseau (wallet_switchEthereumChain)
     // ne deplacent rien (wallet_addEthereumChain, lui, est retenu : un noeud RPC choisi par la page voit et peut falsifier tout le reste) et n'accordent aucun droit de depense : ils passent directement, sans fenetre.
     // droits durables et dechiffrement : non decodes par le moteur, donc ecran "Non verifie" plutot que passage silencieux
-    'wallet_addEthereumChain', 'wallet_grantPermissions', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
+    // wallet_requestExecutionPermissions (ERC-7715, the current name of wallet_grantPermissions) asks for a lasting right ; wallet_watchAsset puts a
+    // token under a name the SITE chooses into the wallet's list : both are held. wallet_switchEthereumChain passes (the window names the network).
+    'wallet_addEthereumChain', 'wallet_grantPermissions', 'wallet_requestExecutionPermissions', 'wallet_watchAsset', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
   const JOURNAL = new SetC(['eth_requestAccounts']);
   function isHex20(s) {
     if (typeof s !== 'string' || s.length !== 42 || chCode(s, 0) !== 48 || (chCode(s, 1) | 32) !== 120) return false;

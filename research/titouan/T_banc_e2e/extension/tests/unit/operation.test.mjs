@@ -20,9 +20,9 @@ const U = 10n ** 6n, E18 = 10n ** 18n, MAX = 2n ** 256n - 1n;
 const send = (to, data) => ({ method: 'eth_sendTransaction', params: [{ from: ME, to, data }], chainId: '0xa869', from: ME });
 const approve = (amount, spender = ROUTER, token = USDC) => send(token, '0x095ea7b3' + pad(spender) + pad(amount));
 const opaque = (amount) => send(ROUTER, '0x5c11d795' + pad(amount) + pad(0n)); // a function no registry knows
-const permit = (value) => ({ method: 'eth_signTypedData_v4', chainId: '0xa869', from: ME, params: [ME, JSON.stringify({
+const permit = (value, deadline = '1999999999') => ({ method: 'eth_signTypedData_v4', chainId: '0xa869', from: ME, params: [ME, JSON.stringify({
   types: { EIP712Domain: [], Permit: [] }, primaryType: 'Permit', domain: { name: 'USD Coin', version: '2', chainId: 43113, verifyingContract: USDC },
-  message: { owner: ME, spender: ROUTER, value: value.toString(), nonce: '0', deadline: '1999999999' } })] });
+  message: { owner: ME, spender: ROUTER, value: value.toString(), nonce: '0', deadline } })] });
 const permit2 = (amount) => ({ method: 'eth_signTypedData_v4', chainId: '0xa869', from: ME, params: [ME, JSON.stringify({
   types: { EIP712Domain: [], PermitSingle: [] }, primaryType: 'PermitSingle', domain: { name: 'Permit2', chainId: 43113, verifyingContract: '0x' + '22'.repeat(20) },
   message: { details: { token: USDC, amount: amount.toString(), expiration: '1999999999', nonce: '0' }, spender: ROUTER, sigDeadline: '1999999999' } })] });
@@ -54,7 +54,7 @@ function node(trace, allowance = 0n) {
 }
 
 let F, clock, n = 0;
-beforeEach(async () => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [{ address: USDC, symbol: 'USDC', decimals: 6 }] } }); });
+beforeEach(async () => { clock = fakeClock(); F = makeChrome(); globalThis.chrome = F.chrome; await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [ROUTER], tokens: [{ address: USDC, symbol: 'USDC', decimals: 6 }] } }); });
 afterEach(() => { clock.restore(); delete globalThis.chrome; });
 // The engine stub reads approvals and typed data, and cannot read the opaque call (same marks as the embedded engine).
 function worker(rpc = null) {
@@ -65,12 +65,12 @@ function worker(rpc = null) {
     try { return { ok: true, result: await rpc(msg.method, msg.params) }; } catch (_) { return { ok: false }; }
   };
   const base = { texts: { reel: 'Ligne du moteur.' }, reasons: [], risk_signals: [] };
-  createGatekeeper({ check: async (body) => (String(body.params[0] && body.params[0].data || '').startsWith('0x5c11d795')
+  createGatekeeper({ closeMs: 0, check: async (body) => (String(body.params[0] && body.params[0].data || '').startsWith('0x5c11d795')
     ? { ...base, level: 'unknown', indeterminate: true, opacity_only: true, codes: ['unknown_selector', 'opaque'], effects: { grants_right: false, funds_out: false } }
     : { ...base, level: 'attention', effects: { grants_right: true, funds_out: false } }) });
   return relayed;
 }
-const winOf = (rid) => { for (const [id, o] of F.state.windows) if (o.url.endsWith('window.html#' + rid)) return id; return null; };
+const winOf = (rid) => { const r = F.state.session['hu:req:' + rid]; if (r && r.windowId != null && F.state.windows.has(r.windowId)) return r.windowId; for (const [id, o] of F.state.windows) if (o.url.endsWith('window.html#' + rid)) return id; return r && r.windowId != null ? r.windowId : null; };
 async function gate(payload, { tab = TAB, origin = SITE, frame = 0 } = {}) {
   const rid = 'rid-op-' + String(++n).padStart(6, '0'), page = F.page(tab, origin, frame);
   const r = await F.send({ type: 'gate', rid, payload: Object.assign({ kind: 'gate' }, payload) }, page);
@@ -250,7 +250,7 @@ test('fix 2 : a payment through an unreadable call is held to the written addres
 
 // ------------------------------------------------------------------------------------------------ 3) the advice follows the nature of the request
 test('fix 3 : a transaction can be capped in the wallet, a signature cannot : no advice nobody can follow', async () => {
-  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [] } });
+  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [ROUTER], tokens: [] } });
   worker();
   const line = async (payload) => { n += 5; return (await (await gate(payload, { tab: 200 + n })).write(SAID)).line; };
   assert.equal(await line(approve(MAX)), 'Tu as écrit 50 USDC. La demande donne accès à tout ton USDC. Réduis le plafond à 50 USDC dans ton portefeuille.');
@@ -261,6 +261,6 @@ test('fix 3 : a transaction can be capped in the wallet, a signature cannot : no
     assert.ok(!/plafond|portefeuille|Réduis/.test(l));
   }
   assert.equal(await line(permit(500n * U)), 'Tu as écrit 50 USDC. Cette signature donne accès à 500 USDC et ne peut pas être limitée.');
-  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [], tokens: [{ address: USDC, symbol: 'USDC', decimals: 6 }] } });
-  assert.equal(await line(permit(50n * U)), 'La demande donne accès à 50 USDC, pas plus.');
+  await F.chrome.storage.local.set({ contexte: { contacts: [], history: [], protected: [], knownSpenders: [ROUTER], tokens: [{ address: USDC, symbol: 'USDC', decimals: 6 }] } });
+  assert.equal(await line(permit(50n * U, '1760000600')), 'La demande donne accès à 50 USDC, pas plus.'); // a signature usable for ten minutes ; one usable for years is a mismatch of its own (written_check.js)
 });

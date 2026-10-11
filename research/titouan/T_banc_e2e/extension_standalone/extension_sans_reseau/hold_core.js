@@ -8,7 +8,7 @@
 export const KEY = 'hu:req:';
 export const LIMITS = {
   minShowMs: 600,            // a click or a key already on its way when the screen appears is not a consent
-  expireAfterMs: 30 * 60000, // an undecided request is refused this long after its friction deadline
+  expireAfterMs: 180000,     // a request nobody acts on is cancelled (never sent) 3 min after its screen appeared, or after the end of its delay
   orphanMs: 180000,          // the page stopped asking for its answer (closed, navigated) : refused
   seenEveryMs: 5000,         // how often a poll refreshes lastSeen in the storage
   keepDecidedMs: 120000,     // a decided record nobody acknowledged is dropped after this

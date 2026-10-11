@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Hold up (sans reseau)",
+  "name": "Hold up",
   "version": "0.3.0",
-  "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles et explique en clair. Moteur embarque. Aucun acces reseau.",
+  "description": "Écris ce que tu veux faire. Hold up te dit si la demande de signature correspond.",
   "minimum_chrome_version": "114",
   "permissions": [
     "storage",

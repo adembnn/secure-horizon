@@ -132,6 +132,7 @@
   function onPort(ev) {
     const d = dataOf(ev); if (!isObj(d)) return;
     if (own(d, 'k') !== token) return; // message sans le jeton du pont : ignore
+    if (own(d, 't') === 'revoke') { runRevoke(d); return; }
     const id = own(d, 'id'); if (typeof id !== 'number' || !mapHas(pending, id)) return;
     const p = mapGet(pending, id), t = own(d, 't');
     if (t === 'ack') { p.acked = true; return; }
@@ -192,7 +193,9 @@
     // connexion (eth_requestAccounts, wallet_requestPermissions), lectures et changement de reseau (wallet_switchEthereumChain)
     // ne deplacent rien (wallet_addEthereumChain, lui, est retenu : un noeud RPC choisi par la page voit et peut falsifier tout le reste) et n'accordent aucun droit de depense : ils passent directement, sans fenetre.
     // droits durables et dechiffrement : non decodes par le moteur, donc ecran "Non verifie" plutot que passage silencieux
-    'wallet_addEthereumChain', 'wallet_grantPermissions', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
+    // wallet_requestExecutionPermissions (ERC-7715, the current name of wallet_grantPermissions) asks for a lasting right ; wallet_watchAsset puts a
+    // token under a name the SITE chooses into the wallet's list : both are held. wallet_switchEthereumChain passes (the window names the network).
+    'wallet_addEthereumChain', 'wallet_grantPermissions', 'wallet_requestExecutionPermissions', 'wallet_watchAsset', 'wallet_requestSnaps', 'eth_decrypt', 'eth_getEncryptionPublicKey', 'eth_sendUserOperation', 'eth_signUserOperation']);
   const JOURNAL = new SetC(['eth_requestAccounts']);
   function isHex20(s) {
     if (typeof s !== 'string' || s.length !== 42 || chCode(s, 0) !== 48 || (chCode(s, 1) | 32) !== 120) return false;
@@ -291,6 +294,50 @@
     return r;
   }
 
+  // --- revocation prepared by Hold up (revoke.js) ---
+  // Only through the private port (bridge token), only asked by the service worker. The request goes to the ORIGINAL request
+  // method of the provider that carried the last allowed request of this frame (never the wrapper : no new hold, no loop).
+  // A wallet that re-enters a wrapped method synchronously with the very object we forwarded uses the one-shot pass (fwd).
+  // A wallet that re-enters later with a copy is gated again ; its gate message then carries the token of the service worker,
+  // only for the exact same content, once, for 8 s. The page never sees the token and cannot add it : the gate payload is built here.
+  let lastCtx = null, arm = null;
+  function remember(provider, rawRequest) { if (isObj(provider)) lastCtx = { __proto__: null, provider, rawRequest: typeof rawRequest === 'function' ? rawRequest : null }; }
+  function armedFor(provider, method, params) {
+    const a = arm;
+    if (!a || a.prov !== provKey(provider)) return null;
+    const k = keyOf(provider, method, params);
+    if (k === null || k !== a.key) return null;
+    arm = null; // once
+    return a.tok;
+  }
+  function errCode(e) { let c; try { c = own(e, 'code'); if (c === undefined && isObj(e)) c = e.code; } catch (_) {} return typeof c === 'number' ? c : undefined; }
+  function runRevoke(d) {
+    const n = own(d, 'n'), op = own(d, 'op'), method = own(d, 'method'), tok = own(d, 'tok');
+    const reply = (state, code, result) => { try { portPost(port, { t: 'revokeResult', n, k: token, state, code, result }); } catch (_) {} };
+    if (!((op === 'send' && method === 'eth_sendTransaction') || (op === 'read' && method === 'eth_call'))) { reply('error', 'refused'); return; }
+    const c = lastCtx;
+    if (!c || !isObj(c.provider)) { reply('error', 'no_provider'); return; }
+    let raw = c.rawRequest;
+    if (typeof raw !== 'function') { // the last request came through send / sendAsync : the original request method behind our wrapper
+      let f; try { f = c.provider.request; } catch (_) {}
+      raw = typeof f === 'function' && wsHas(wrappedFns, f) ? wmGet(masks, f) : null;
+    }
+    if (typeof raw !== 'function') { reply('error', 'no_provider'); return; }
+    let params; try { params = clone(own(d, 'params')); } catch (_) { params = undefined; }
+    if (!isArr(params)) { reply('error', 'refused'); return; }
+    const out = {}; setOwn(out, 'method', method); setOwn(out, 'params', params);
+    const prov = c.provider, k = keyOf(prov, method, params);
+    if (op === 'send') { const mine = { __proto__: null, prov: provKey(prov), key: k, tok: typeof tok === 'string' ? tok : '' }; arm = mine; setT(() => { if (arm === mine) arm = null; }, 8000); }
+    let r;
+    try { r = fwd(prov, k, [out, params], () => rApply(raw, prov, [out])); } catch (e) { reply(errCode(e) === 4001 ? 'rejected' : 'error', errCode(e)); return; }
+    let pr; try { pr = toPromise(r); } catch (_) { reply('error', undefined); return; }
+    thenOf(pr, (v) => {
+      if (op !== 'read') { reply('submitted', undefined); return; }
+      let s; try { s = snap(v); } catch (_) { s = null; }
+      reply('read', undefined, typeof s === 'string' ? s : null);
+    }, (e) => { const code = errCode(e); reply(op === 'send' && code === 4001 ? 'rejected' : 'error', code); });
+  }
+
   // Request limited by Hold up (Q17) : the worker answers with the params to forward, only for a transaction or a batch of calls.
   function limited(r, method) {
     if (!r || !isArr(r.params) || (method !== 'eth_sendTransaction' && method !== 'wallet_sendCalls')) return undefined;
@@ -303,9 +350,16 @@
       if (!from) { try { from = provider.selectedAddress || null; } catch (_) {} }
       // S11 : after an "allow" (it can come minutes later) the network is read again. If the page switched it meanwhile, the request
       // is refused : the same bytes on another network are another request.
-      ask('gate', { method, params, chainId, from, entryPoint, topLevel: W === W.top }, { provider, rawRequest }, (r) => {
-        if (!r.allow || chainId == null) { cb(r); return; }
-        chainOf(provider, rawRequest, null, (now) => { cb(now != null && normChain(now) !== normChain(chainId) ? decision(false, 'reseau-change', undefined) : r); });
+      const payload = { method, params, chainId, from, entryPoint, topLevel: W === W.top };
+      const rt = armedFor(provider, method, params);
+      if (rt) setOwn(payload, 'revokeToken', rt);
+      ask('gate', payload, { provider, rawRequest }, (r) => {
+        if (!r.allow || chainId == null) { if (r.allow) remember(provider, rawRequest); cb(r); return; }
+        chainOf(provider, rawRequest, null, (now) => {
+          const moved = now != null && normChain(now) !== normChain(chainId);
+          if (!moved) remember(provider, rawRequest);
+          cb(moved ? decision(false, 'reseau-change', undefined) : r);
+        });
       });
     });
   }

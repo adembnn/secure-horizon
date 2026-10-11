@@ -108,6 +108,39 @@ m('fenetre presente (window.html + ui/screen.*)', ['window.html', 'window.js', '
   catch (e) { err = String(e && e.message || e).slice(0, 160); }
   m('le moteur embarque se charge et repond (aucune erreur de syntaxe dans engine/)', !err, err);
 }
+// Le moteur embarque est EXECUTE sur un petit lot de demandes variees, dont des demandes sans aucun signal (envoi simple, droit borne) :
+// une exception dans evaluate() ne se voit pas a l'import, elle donne un verdict « erreur interne du moteur » (donc « pas pu verifier »
+// sans question pour tout le monde). Bug du 11 oct. : `const niveau` reaffecte. Aucun paquet n'est produit si ce controle echoue.
+{
+  const { pathToFileURL } = await import('node:url');
+  const A = '0x' + 'a1'.repeat(20), B = '0x' + 'b2'.repeat(20), T = '0x' + 'c3'.repeat(20), w = (x) => String(x).replace(/^0x/, '').padStart(64, '0');
+  const tx = (o) => ({ origin: 'https://site.exemple', method: 'eth_sendTransaction', chainId: '0xa86a', from: A, params: [Object.assign({ from: A }, o)] });
+  const typed = (primaryType, message, domain) => ({ origin: 'https://site.exemple', method: 'eth_signTypedData_v4', chainId: '0x1', from: A, params: [A, JSON.stringify({ types: { EIP712Domain: [] }, primaryType, domain, message })] });
+  const LOT = {
+    'envoi simple de monnaie du reseau (aucun signal)': tx({ to: B, value: '0x2386f26fc10000' }),
+    'envoi sans valeur ni donnees': tx({ to: B, value: '0x0', data: '0x' }),
+    'transfert de jeton': tx({ to: T, data: '0xa9059cbb' + w(B) + w('0x2faf080') }),
+    'droit borne': tx({ to: T, data: '0x095ea7b3' + w(B) + w('0x2faf080') }),
+    'droit illimite': tx({ to: T, data: '0x095ea7b3' + w(B) + 'f'.repeat(64) }),
+    'droit sur une collection': tx({ to: T, data: '0xa22cb465' + w(B) + w('0x1') }),
+    'appel inconnu': tx({ to: B, data: '0x5c11d795' + w('0x1') }),
+    'signature Permit': typed('Permit', { owner: A, spender: B, value: '50000000', nonce: '0', deadline: '1999999999' }, { name: 'USD Coin', version: '2', chainId: 1, verifyingContract: T }),
+    'message signe': { origin: 'https://site.exemple', method: 'personal_sign', chainId: '0x1', from: A, params: ['0x626f6e6a6f7572', A] },
+    'eth_sign': { origin: 'https://site.exemple', method: 'eth_sign', chainId: '0x1', from: A, params: [A, '0x' + '11'.repeat(32)] },
+    'lot de deux appels': { origin: 'https://site.exemple', method: 'wallet_sendCalls', chainId: '0x1', from: A, params: [{ from: A, calls: [{ to: T, data: '0x095ea7b3' + w(B) + w('0x1') }, { to: B, value: '0x1' }] }] },
+    'avec une phrase ecrite': Object.assign(tx({ to: B, value: '0x2386f26fc10000' }), { intent: 'pay', intent_kind: 'pay_someone', intent_text: 'envoyer 0,01 AVAX à ' + B, intent_amount: '0.01', intent_symbol: 'AVAX' })
+  };
+  const bad = [];
+  try {
+    const core = await import(pathToFileURL(join(EXT, 'engine', 'sentinelle_core.js')).href);
+    for (const name of Object.keys(LOT)) {
+      let v; try { v = core.check(LOT[name], core.emptyLocal()); } catch (e) { bad.push(name + ' : exception ' + String(e && e.message || e).slice(0, 80)); continue; }
+      if (!v || !['attention', 'danger', 'manipulation', 'unknown'].includes(v.level)) bad.push(name + ' : verdict invalide');
+      else if (/erreur interne du moteur|verdict invalide|moteur indisponible/.test(String(v.why || ''))) bad.push(name + ' : ' + String(v.why).slice(0, 100));
+    }
+  } catch (e) { bad.push('chargement : ' + String(e && e.message || e).slice(0, 120)); }
+  m('le moteur embarque s execute sans exception sur ' + Object.keys(LOT).length + ' demandes variees (dont des demandes sans aucun signal)', bad.length === 0, bad.join(' | '));
+}
 
 const byKind = {}; for (const f of findings) (byKind[f.kind] = byKind[f.kind] || []).push(f);
 const kinds = ['secret', 'code_dynamique', 'code_distant', 'reseau', 'url_externe'];
