@@ -1,0 +1,563 @@
+{
+ "phrase": "aucun réglage après ouverture; chiffres publiés tels quels",
+ "meta": {
+  "date": "2026-10-11T06:57:43.486Z",
+  "sha256_cas": "a16787be5988e211ab69f6b1ba25b72dbe7499e13e09b7314c767878f8186333",
+  "sha256_moteur": "8344b31fde1f738eedc905cfb18b5704c56374c933501b66bcaa659605b9a715",
+  "sha256_lanceur": "901cb7c1a93a03a11cdb6c5d264d6466c9434152d0cba5cd26311c6f5310acf9",
+  "git_head": "d6b5973e9c7f5a670a0de579a53187e152f9fdde",
+  "git_sale": 86,
+  "essai": true
+ },
+ "criteres": {
+  "rappel_min": 0.8,
+  "fausse_alerte_rouge_max": 0.1
+ },
+ "complet": true,
+ "clef": {
+  "appels_reels": 7,
+  "cache": 3,
+  "erreurs": 0,
+  "quota": false
+ },
+ "global": {
+  "a": {
+   "n_mal": 5,
+   "n_ben": 5,
+   "signales": 4,
+   "rouges": 4,
+   "fa_rouge": 0,
+   "fa_warn_rouge": 0,
+   "non_mesures": 0,
+   "dec_ne_mal": 4,
+   "dec_inv_mal": 1,
+   "dec_ok_mal": 0,
+   "dec_ne_ben": 0,
+   "dec_inv_ben": 1,
+   "dec_ok_ben": 4
+  },
+  "b": {
+   "n_mal": 5,
+   "n_ben": 5,
+   "signales": 4,
+   "rouges": 4,
+   "fa_rouge": 0,
+   "fa_warn_rouge": 0,
+   "non_mesures": 0,
+   "dec_ne_mal": 4,
+   "dec_inv_mal": 1,
+   "dec_ok_mal": 0,
+   "dec_ne_ben": 0,
+   "dec_inv_ben": 1,
+   "dec_ok_ben": 4
+  },
+  "c": {
+   "n_mal": 5,
+   "n_ben": 5,
+   "signales": 3,
+   "rouges": 2,
+   "fa_rouge": 0,
+   "fa_warn_rouge": 0,
+   "non_mesures": 0
+  }
+ },
+ "par_famille": {
+  "swap_droit_illimite": {
+   "a": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "b": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "c": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0
+   }
+  },
+  "destinataire_tiers": {
+   "a": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "b": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "c": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 0,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0
+   }
+  },
+  "login_signe_droit": {
+   "a": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "b": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "c": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0
+   }
+  },
+  "montant_plus_grand": {
+   "a": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "b": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 1,
+    "rouges": 1,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 1,
+    "dec_inv_mal": 0,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 0,
+    "dec_ok_ben": 1
+   },
+   "c": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 0,
+    "rouges": 0,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0
+   }
+  },
+  "chaine_domaine_different": {
+   "a": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 0,
+    "rouges": 0,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 0,
+    "dec_inv_mal": 1,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 1,
+    "dec_ok_ben": 0
+   },
+   "b": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 0,
+    "rouges": 0,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0,
+    "dec_ne_mal": 0,
+    "dec_inv_mal": 1,
+    "dec_ok_mal": 0,
+    "dec_ne_ben": 0,
+    "dec_inv_ben": 1,
+    "dec_ok_ben": 0
+   },
+   "c": {
+    "n_mal": 1,
+    "n_ben": 1,
+    "signales": 0,
+    "rouges": 0,
+    "fa_rouge": 0,
+    "fa_warn_rouge": 0,
+    "non_mesures": 0
+   }
+  }
+ },
+ "monotonie": {
+  "a_sous_plancher": [],
+  "b_sous_plancher": []
+ },
+ "echecs": {
+  "a": {
+   "mal_non_signales": [
+    "ES-CH-M01"
+   ],
+   "mal_signales_pas_rouges": [],
+   "ben_rouges": [],
+   "ben_warn": []
+  },
+  "b": {
+   "mal_non_signales": [
+    "ES-CH-M01"
+   ],
+   "mal_signales_pas_rouges": [],
+   "ben_rouges": [],
+   "ben_warn": []
+  },
+  "c": {
+   "mal_non_signales": [
+    "ES-CH-M01",
+    "ES-MT-M01"
+   ],
+   "mal_signales_pas_rouges": [
+    "ES-DT-M01"
+   ],
+   "ben_rouges": [],
+   "ben_warn": []
+  }
+ },
+ "verdicts": {
+  "a": "CRITÈRES ATTEINTS (rappel 80.0 % >= 80.0 % ; faux rouges 0.0 % <= 10.0 %)",
+  "b": "CRITÈRES ATTEINTS (rappel 80.0 % >= 80.0 % ; faux rouges 0.0 % <= 10.0 %)",
+  "c": "CRITÈRES NON ATTEINTS (rappel 60.0 % < 80.0 % ; faux rouges 0.0 % <= 10.0 %)"
+ },
+ "non_pris_en_charge": [],
+ "erreurs": [],
+ "lignes": [
+  {
+   "id": "ES-CH-B01",
+   "family": "chaine_domaine_different",
+   "sub": "switch_autre_chaine",
+   "label": "benign",
+   "twin_of": "ES-CH-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "ES-CH-M01",
+   "family": "chaine_domaine_different",
+   "sub": "switch_autre_chaine",
+   "label": "malicious",
+   "twin_of": "ES-CH-B01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "inverifiable",
+    "why": "aucun effet visible",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "ES-DT-B01",
+   "family": "destinataire_tiers",
+   "sub": "transfert_autre_adresse",
+   "label": "benign",
+   "twin_of": "ES-DT-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "ES-DT-M01",
+   "family": "destinataire_tiers",
+   "sub": "transfert_autre_adresse",
+   "label": "malicious",
+   "twin_of": "ES-DT-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "warn",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "warn"
+   }
+  },
+  {
+   "id": "ES-LG-B01",
+   "family": "login_signe_droit",
+   "sub": "typed_permit",
+   "label": "benign",
+   "twin_of": "ES-LG-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "ES-LG-M01",
+   "family": "login_signe_droit",
+   "sub": "typed_permit",
+   "label": "malicious",
+   "twin_of": "ES-LG-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "connect_or_accept_offer"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "type compris « connect_or_accept_offer », demande de type « right »",
+    "kind": "connect_or_accept_offer"
+   },
+   "c": {
+    "level": "critical"
+   }
+  },
+  {
+   "id": "ES-MT-B01",
+   "family": "montant_plus_grand",
+   "sub": "x10",
+   "label": "benign",
+   "twin_of": "ES-MT-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "ES-MT-M01",
+   "family": "montant_plus_grand",
+   "sub": "x10",
+   "label": "malicious",
+   "twin_of": "ES-MT-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "ok",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "pay_someone"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "ES-SW-B01",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max",
+   "label": "benign",
+   "twin_of": "ES-SW-M01",
+   "unsupported": null,
+   "a": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "ok",
+    "floor": "ok",
+    "decision": "correspond",
+    "why": "conforme",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "ok"
+   }
+  },
+  {
+   "id": "ES-SW-M01",
+   "family": "swap_droit_illimite",
+   "sub": "approve_max",
+   "label": "malicious",
+   "twin_of": "ES-SW-B01",
+   "unsupported": null,
+   "a": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "b": {
+    "level": "critical",
+    "floor": "critical",
+    "decision": "ne_correspond_pas",
+    "why": "le comparateur lève un écart avec l intention (niveau critical)",
+    "kind": "buy_or_swap"
+   },
+   "c": {
+    "level": "critical"
+   }
+  }
+ ]
+}

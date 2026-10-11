@@ -29,6 +29,7 @@ const sha = (buf) => createHash('sha256').update(buf).digest('hex');
 const die = (msg, code = 2) => { console.error(msg); process.exit(code); };
 
 if (flag('force') || args.some((a) => /^--force/.test(a))) die('Il n\'existe pas d\'option --force. Le verrou ne se lève qu\'à la main. Arrêt.');
+if (process.env.HOLDUP_CHAINE_RACINE && !ESSAI && !flag('dry-run')) die('HOLDUP_CHAINE_RACINE est réservé au faux jeu. Arrêt.');
 if (opt('clef-mock') && !ESSAI) die('--clef-mock est réservé au faux jeu (avec --cases). Arrêt.');
 if (!flag('dry-run') && !ESSAI && (opt('sha') || opt('out') || opt('cache'))) die('Sur le vrai jeu, aucune option de chemin n\'est admise. Arrêt.');
 
@@ -131,7 +132,6 @@ journal(`## ${reprise ? 'Reprise' : 'Ouverture'} ${date}${ESSAI ? ' (MODE ESSAI,
   - groupe moteur (engine/src, engine/vendor, run/policy.mjs, run/arms.mjs, pipeline/evaluate_plus.mjs, pipeline/intent_clef.mjs, known_protocols.json, normalize_v2.mjs, detectors_adem/*, extension/*.js) : ${hg.groupes.moteur}
   - groupe standalone (extension_standalone/extension/**, dist/hold-up-standalone*.zip) : ${hg.groupes.standalone}
 - sha256 du lanceur (chaine/*, mesure.mjs, ouvrir_une_fois.mjs) : ${hg.groupes.lanceur}
-- Critères du verdict : ${JSON.stringify((await import(pathToFileURL(join(HERE, 'mesure.mjs')).href)).CRITERES)}
 
 <details><summary>Fichiers hashés</summary>
 
@@ -150,6 +150,7 @@ ${fmtFichiers(hg.fichiers.lanceur)}
 let resume = '';
 try {
   const M = await import(pathToFileURL(join(HERE, 'mesure.mjs')).href);
+  journal(`Critères du verdict (publiés avant ouverture) : ${JSON.stringify(M.CRITERES)}`);
   const cas = readFileSync(CASES, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l));
   cas.forEach(M.validerCas);
   if (new Set(cas.map((c) => c.id)).size !== cas.length) throw new Error('identifiants en double');

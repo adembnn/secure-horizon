@@ -1,0 +1,1 @@
+{"ok":true,"answers":{"kind":{"choice":"pay_someone","probabilities":{"pay_someone":0.85,"send_to_my_account":0.02,"buy_or_swap":0.05,"connect_or_accept_offer":0.05,"asked_by_someone":0.01,"none":0.02}},"gives_amount":{"noul":0.95},"expects_no_spend":{"noul":0.05},"asked_by_someone":{"noul":0.02},"too_vague":{"noul":0.03}},"usage":null,"model":"mock"}

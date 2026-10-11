@@ -18,7 +18,8 @@ export async function withCloudflare(fn) { NET.cloudflareOpen = true; try { retu
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(HERE, '..', '..', '..'); // T_banc_e2e : moteur VIVANT (pas la copie figée de pipeline/grille/snapshot)
+// T_banc_e2e : moteur VIVANT (pas la copie figée de pipeline/grille/snapshot). HOLDUP_CHAINE_RACINE sert aux essais seulement : le lanceur le refuse sur le vrai jeu.
+const ROOT = process.env.HOLDUP_CHAINE_RACINE ? process.env.HOLDUP_CHAINE_RACINE : join(HERE, '..', '..', '..');
 const imp = (rel) => import(pathToFileURL(join(ROOT, rel)).href);
 export const A = await imp('run/arms.mjs');
 export const IC = await imp('pipeline/intent_clef.mjs');
