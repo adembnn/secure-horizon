@@ -1,3 +1,5 @@
+> **PÉRIMÉ le 11/10/2026 : voir livrables\**
+
 # Hiérarchie de l'information : seulement ce qui compte (v0, à affiner par l'expert UX)
 
 Règle d'Adem : « mettre en avant sur l'interface UNIQUEMENT les infos importantes pour l'utilisateur ».

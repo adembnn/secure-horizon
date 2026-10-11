@@ -1,3 +1,5 @@
+> **PÉRIMÉ le 11/10/2026 : voir livrables\**
+
 # Sentinelle : maquettes de l'extension (HTML/CSS autonome)
 
 Ouvrir les fichiers directement dans un navigateur. Aucun import externe, aucune dépendance. Marques, sites et adresses fictifs (domaines `.example`).

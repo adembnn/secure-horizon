@@ -1,3 +1,5 @@
+> **PÉRIMÉ le 11/10/2026 : voir livrables\**
+
 > **OBSOLÈTE (11 oct. 2026).** Écrit pour l'ancien produit (nom Sentinelle, retenue graduée, deux portes, chiffres retirés). Ne pas s'en servir en préparation. Version à jour : `livrables/QR_JURY.md`, chiffres : `livrables/CHIFFRES.md`.
 
 # Sentinelle face au jury : attaques, réponses, aveux

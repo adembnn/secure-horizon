@@ -1,3 +1,5 @@
+> **PÉRIMÉ le 11/10/2026 : voir livrables\**
+
 # Références choisies par Adem (styles.refero.design), relevées le 11/10/2026
 
 Consigne d'Adem : « épuré et sobre ». Les trois premières références ci-dessous sont celles des trois directions à construire. Suis leur DO/DON'T à la lettre et ne mélange pas les références.

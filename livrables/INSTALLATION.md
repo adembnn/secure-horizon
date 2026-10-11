@@ -10,7 +10,7 @@ Mis à jour le 11 oct. 2026 pour le produit figé. Hold up est une extension Chr
 |---|---|---|
 | Chrome ou Edge | 111 ou plus | Le seul prérequis pour installer l'extension. |
 | Node.js | 22.18 ou plus | Seulement pour la démo locale (section 4), la reconstruction (Node 23.2 ou plus) et les tests. Seul Node 25.6.0 sous Windows 11 a été essayé pour la démo. |
-| Internet | première fois seulement | Uniquement pour `npm install` de la chaîne locale (section 4). L'extension, elle, n'en a pas besoin. |
+| Internet | à l'installation seulement | Uniquement pour `npm install` de la chaîne locale (section 4). L'extension, elle, n'en a pas besoin. |
 
 ## 2. Installer l'extension
 
@@ -25,14 +25,15 @@ Deux sources, le même contenu.
 3. Clique **Charger l'extension non empaquetée** et choisis le dossier `hold-up-standalone` (ou le dossier du dépôt).
 4. La carte « Hold up (autonome) » apparaît. Aucun bouton rouge « Erreurs » ne doit s'afficher. S'il y en a un, ouvre-le et note le message : l'installation s'arrête là.
 5. Si tu travailles sur une page locale `file://`, ouvre « Détails » sur la carte et active **Autoriser l'accès aux URL de fichier**. Une page servie en `http://` n'en a pas besoin.
-6. Recharge l'onglet de la page à essayer après chaque rechargement de l'extension. Une seule version de Hold up à la fois dans Chrome : désactive l'ancienne version avec serveur (dossier `extension/`) si elle est chargée.
+6. Panneau latéral : un clic sur l'icône de Hold up (barre d'outils, ou menu des extensions) ouvre le panneau latéral, qui montre le journal des décisions. Les questions et les alertes de signature, elles, s'affichent dans une fenêtre séparée devant la page.
+7. Recharge l'onglet de la page à essayer après chaque rechargement de l'extension. Une seule version de Hold up à la fois dans Chrome : désactive l'ancienne version avec serveur (dossier `extension/`) si elle est chargée.
 
 Reconstruire depuis les sources (facultatif) : `node research/titouan/T_banc_e2e/extension_standalone/build_standalone.mjs`, puis `node research/titouan/T_banc_e2e/extension_standalone/tests/static_check.mjs` (doit finir sans ligne `ECHEC`). Créer le zip : `powershell -ExecutionPolicy Bypass -File research/titouan/T_banc_e2e/extension_standalone/package_standalone.ps1`.
 
 ## 3. Vérifier avec la page de test (faux portefeuille)
 
 1. Ouvre `research/titouan/T_banc_e2e/standalone_test_page/index.html` dans Chrome (glisser dans la fenêtre). La page contient un portefeuille factice : aucun argent, aucune clé, rien n'est signé.
-2. Clique sur chaque bouton. La fenêtre Hold up (fenêtre séparée, au premier plan) pose d'abord « Que veux-tu faire ? » pour une demande qui accorde un droit ou déplace des fonds ; réponds par une phrase, par exemple « échanger 50 USDC ». Elle affiche ensuite un verdict.
+2. Clique sur chaque bouton. La fenêtre Hold up (fenêtre séparée, devant la page) pose d'abord « Que veux-tu faire ? » pour une demande qui accorde un droit ou déplace des fonds ; réponds par une phrase, par exemple « échanger 50 USDC ». Elle affiche ensuite un verdict.
 
 | Bouton | Ce que tu dois voir |
 |---|---|
@@ -60,7 +61,7 @@ Le script lance `npm install` dans `blockchain/` s'il manque (Internet, environ 
 
 Pointer un portefeuille sur la chaîne locale : portefeuille **jetable**, profil Chrome de test, jamais ta vraie phrase secrète. Ajoute le réseau (RPC `http://127.0.0.1:8545`, chaîne `31337`, symbole `AVAX`) et importe un seul compte de test Hardhat (clés publiques, affichées au démarrage du nœud). Remise à zéro entre deux passages : `node research/demo_reelle/chain/reset.mjs --network local`.
 
-Fuji : rien n'est déployé (`blockchain/DEPLOYMENTS.md` ne contient que son en-tête). La démo se joue en local et ne se présente jamais comme jouée sur Fuji.
+Fuji : rien n'est déployé (`blockchain/DEPLOYMENTS.md` ne contient que son en-tête). Chaîne locale pour la démo, Fuji à décider (D-013) : la démo ne se présente jamais comme jouée sur Fuji.
 
 ## 5. Ce qui sort de la machine
 
@@ -79,7 +80,7 @@ Ce qui reste, et ce qu'il faut savoir :
 |---|---|---|
 | Aucune fenêtre Hold up | extension désactivée, page ouverte avant le chargement, ou page `file://` sans l'autorisation | Recharger l'onglet ; activer « Autoriser l'accès aux URL de fichier » ; mieux, servir la page en http |
 | Bouton « Erreurs » sur la carte | build incomplet | Reconstruire (section 2), relancer le contrôle statique |
-| La fenêtre ne s'ouvre pas au premier plan | Chrome a refusé la fenêtre séparée | L'écran s'affiche dans la page (repli journalisé) : à signaler |
+| La fenêtre ne s'ouvre pas devant la page | Chrome a refusé la fenêtre séparée | L'écran s'affiche dans la page (repli journalisé) : à signaler |
 | `Node … est trop ancien` | Node avant 22.18 (démo) ou 23.2 (reconstruction) | Mettre Node à jour |
 | `[ECHEC] chaîne locale : pas prêt` | port 8545 pris | `logs/demo/chain.log` ; libérer le port ou `HOLDUP_PORT=8548 node scripts/demo.mjs` |
 | 2 tests du moteur échouent sur un clone neuf | fichiers `bench/data/*.json` ignorés par git | Attendu, sans effet sur la démo |

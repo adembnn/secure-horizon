@@ -1,3 +1,5 @@
+> **PÉRIMÉ le 11/10/2026 : voir livrables\**
+
 > **OBSOLÈTE (11 oct. 2026).** Concerne la piste 4 (DeFi + DORA), abandonnée par D-007 puis D-009. Conservé comme recherche. Produit actuel : `README.md` et `livrables/`.
 
 # Comprendre la piste 4 : détection et réponse DeFi + DORA

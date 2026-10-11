@@ -1,56 +1,69 @@
-# Product
+# Product : Hold up
 
 <!-- impeccable:product-schema 1 -->
 
-## Platform
+Produit figé le 11 oct. 2026 (voir `coord/HANDOFF_ADEM_SESSION_2.md`). Nom : Hold up (ex-Sentinelle, disponibilité du nom non vérifiée). Plateforme : extension Chrome ou Edge, Manifest V3, ordinateur uniquement. Chiffres : uniquement `livrables/CHIFFRES.md`.
 
-web
+## Le problème
 
-## Stack
-Délégué par Adem, qui demande plusieurs maquettes pour juger sur le rendu : extension navigateur Manifest V3. L'interface est injectée dans la page via Shadow DOM, en HTML/CSS et TypeScript sans framework. Elle doit être légère et ne pas entrer en conflit avec le site, parce qu'elle s'affiche au moment critique de la signature. La stack ne change pas le rendu visuel ; ce sont les maquettes qui tranchent.
+Un particulier qui signe dans son portefeuille voit des octets, pas des conséquences. Il veut échanger 50 USDC, le site lui demande un droit de dépense illimité présenté comme une étape normale. Tout service peut être compromis un jour. Ce jour-là, la personne perd ce qu'elle lui a laissé le droit de prendre.
 
-## Users
-Grand public sous pression (confirmé par Adem) : un particulier avec un wallet crypto normal (MetaMask, Rabby, Core), pas technique, parfois âgé. Il est souvent au moment où un escroc le presse : au téléphone, dans un chat de faux support, sur un faux site de remboursement. Il doit comprendre en quelques secondes ce qui ne va pas, et pouvoir annuler sans se sentir bête.
+Qui : un particulier avec un portefeuille ordinaire (MetaMask, Rabby, Core), pas technique, parfois sous pression (faux support, faux remboursement). Public secondaire : le jury du hackathon Secure Horizons.
 
-Public secondaire, pour la démo : le jury du hackathon Secure Horizons, qui regarde l'écran projeté.
+## Le produit
 
-## Product Purpose
-Sentinelle s'interpose juste avant qu'une personne signe ou envoie de la crypto depuis un site. Elle lui demande, en mots simples, ce qu'elle veut faire, calcule ce que l'opération fait réellement, et retient la demande si les deux divergent : « Tu as dit X. En réalité, Y. »
+Hold up est une couche indépendante, posée devant le portefeuille que la personne utilise déjà. Au moindre privilège : elle ne laisse passer que ce que la personne a écrit vouloir faire.
 
-Réussir, c'est qu'une victime manipulée s'arrête, et qu'un utilisateur honnête ne soit presque jamais dérangé.
+1. Pour une demande qui déplace de la valeur ou accorde un droit, une fenêtre demande « Que veux-tu faire sur ce site ? » avant de montrer la demande. Champ de texte libre, sans bouton ni pré-remplissage.
+2. Du code lit le montant, le jeton et l'adresse écrits, décode ce que la demande fait vraiment, et compare.
+3. Trois réponses : « Ça correspond » (le portefeuille s'ouvre seul après une seconde), « Ça ne correspond pas » (alerte d'une ligne, Annuler visible), « Je n'ai pas pu vérifier ». Jamais de vert.
+4. En plus, des règles de base indépendantes de la phrase : droit illimité vers une adresse inconnue, appel délégué, changement de contrôle du compte, signature illisible. Une phrase exacte soufflée par un escroc ne les désactive pas.
+5. Un panneau latéral s'ouvre au clic sur l'icône de l'extension et montre le journal des décisions. Les décisions de signature restent dans la fenêtre séparée.
+6. Chaque décision laisse une ligne datée (500 lignes locales dans l'extension autonome).
 
-## Positioning
-Les scanners existants (Blockaid, Rabby, MetaMask) jugent la réputation d'une adresse ou affichent un bilan technique. Sentinelle compare l'intention déclarée par la personne avec l'effet réel. Elle traite aussi la manipulation elle-même (« on m'a demandé de le faire »), et ses taux de fausses alertes sont mesurés et publiés.
+## Ce qu'il fait et ne fait pas
 
-## Operating Context
-- L'interface apparaît par-dessus un site tiers, juste avant la fenêtre du wallet, souvent pendant un appel ou une conversation avec un escroc.
-- Elle comprend :
-  - un bandeau avant tout clic quand le site est suspect ;
-  - une question d'intention quand l'opération donne un droit ou fait sortir des fonds ;
-  - des écrans de niveau Manipulation (demande retenue 10 min, geste qui coupe le lien avec l'escroc), Danger (phrase à retaper puis 30 s), Attention (1 clic) et « vérification impossible », jamais vert ;
-  - le miroir Dit / Affiché / Fait ;
-  - une popup d'extension.
-- Démo sur Avalanche Fuji, avec des sites et des marques fictifs.
+| Il fait | Il ne fait pas |
+|---|---|
+| Retient une demande du site avant qu'elle atteigne le portefeuille | Ne tient aucune clé, ne signe rien, ne remplace pas le portefeuille |
+| Compare la phrase écrite à l'effet de la demande | Ne couvre pas la fraude voulue (la personne veut vraiment ce paiement) |
+| Dit « Ça ne correspond pas » même sur un site connu si le droit dépasse le montant écrit | Ne couvre pas un Ledger branché en direct, le mobile, ni le bouton Envoyer du portefeuille |
+| Dit qu'une signature (Permit) ne peut pas être limitée | Ne prétend pas limiter un droit donné par signature |
+| Tourne sans serveur ni réseau dans la version autonome | N'a pas encore été essayé avec un vrai portefeuille |
 
-## Capabilities and Constraints
-- Elle peut retenir la requête du site avant qu'elle n'atteigne le wallet. Elle ne peut pas empêcher les envois faits depuis le bouton Envoyer du wallet. Elle n'existe pas sur mobile.
-- Elle n'affiche jamais « protégé » ni « bloqué » : elle avertit, ralentit et explique. Le bouton Annuler est toujours visible et ne pénalise jamais.
-- Les réponses de l'utilisateur ne peuvent que relever le niveau d'alerte, jamais l'abaisser.
-- Zéro jargon dans l'interface : pas de « permit », « approve » ni « EIP-712 ».
-- Undecided : nom définitif, voix, identité visuelle (à construire avec Adem) ; ce qui se passe au bout des 10 min ; les cas exacts de la barrière de 30 s.
+Lecture de la phrase : dans la version autonome, par mots-clés dans le navigateur. Un modèle hébergé (Clef) ne lit la phrase que si le relais est branché, ce qui n'est pas le cas de la version autonome.
 
-## Evidence on Hand
-- `docs/BRIEF_direction.md` (problème chiffré, 3 arnaques).
-- `docs/design/REGLES_avertissements.md` (règles sourcées : Annuler en bouton principal, forcer la lecture plutôt qu'ajouter des clics, 47 % des outrepassements en moins de 1,5 s).
-- Banc réel de Titouan (`research/titouan/bench/`).
-- Aucun témoignage d'utilisateur, aucun client, aucune mesure d'efficacité de nos écrans : ne rien inventer.
+## Positionnement par rapport à MetaMask
 
-## Product Principles
-1. La personne garde la main : on retient et on explique, on ne décide jamais à sa place.
-2. Parler avec ses mots à elle, pas avec ceux de la blockchain.
+MetaMask couvre déjà l'adresse sosie, l'envoi vers une adresse jamais vue, les alertes de sécurité sur transactions et signatures, et l'affichage lisible des Permit (D-009). Nous ne présentons rien de cela comme un apport, et le RPC de garde n'est plus une porte du produit.
+
+Phrase retenue : « MetaMask te prévient de ce qu'il reconnaît ; Hold up vérifie que la demande est celle que tu as écrite. » D'après le code public de MetaMask lu le 11 oct. 2026, un droit illimité est affiché sans alerte propre à ce montant et sans lien avec ce que la personne voulait donner. C'est une lecture de code, pas un essai à l'écran. Le moindre privilège n'est pas nouveau (Matcha, LI.FI, Talisman, Permit2) : l'apport est l'assemblage (phrase libre avant la demande, sur toute demande, comparée à l'effet, avec un plancher de règles).
+
+## Modèle
+
+Gratuit pour construire une base d'utilisateurs, puis des partenaires. Pas d'abonnement des particuliers, pas de publicité faite par nous. Idée mise en parenthèse : aucun modèle abouti n'est pitché.
+
+## Limites
+
+- Jamais essayé avec un vrai portefeuille. La démo tourne sur une chaîne locale pour la démo, Fuji à décider (D-013). L'API d'alertes de MetaMask ne sert pas ces chaînes : son silence là ne prouve rien.
+- Fausses alertes : en conditions produit synthétiques, 13,9 % des opérations honnêtes en rouge et 54,2 % avec au moins un avertissement. C'est la limite principale (fatigue d'alerte).
+- Jeu aveugle de 250 cas d'un autre auteur : non passé (D-012). Les mesures sont sur nos cas ou un contrôle scellé aux mêmes auteurs.
+- Revue de sécurité interne : contournements trouvés, dont un critique ; corrections non vérifiées dans un navigateur. Ne pas utiliser avec de vrais fonds.
+- Aucun test avec des personnes, aucun client, aucune mesure d'efficacité de nos écrans : ne rien inventer.
+- Journal chaîné par hachage : présent dans la version serveur seulement ; non affirmé pour la version autonome.
+
+## Principes
+
+1. La personne garde la main : on retient et on explique, on ne décide pas à sa place. Annuler est toujours visible.
+2. Parler avec ses mots à elle : pas de « permit », « approve » ni « EIP-712 » dans l'interface.
 3. Être rare pour être cru : chaque fausse alerte use la confiance.
-4. Ne jamais rassurer à tort : l'incertitude ne s'affiche jamais en vert.
-5. Rompre la pression de l'escroc, pas seulement informer.
+4. Ne jamais rassurer à tort : l'incertitude ne s'affiche jamais en vert. Une intention ne baisse jamais un verdict.
+5. Accessibilité : textes grands, contraste AA, cibles larges, clavier, lecteurs d'écran, aucune information portée par la seule couleur.
 
-## Accessibility & Inclusion
-Public âgé et sous stress : textes grands, contraste AA minimum, cibles larges, navigation au clavier, lecteurs d'écran (alertdialog, minuteur annoncé), aucune information portée par la seule couleur.
+## Historique des décisions
+
+- D-003 à D-007 (10 oct.) : piste DeFi et DORA, puis coffre et limite on-chain, puis barrière d'intention pour le grand public. Abandonnés comme cœur : coffre, réponse après coup, institutions.
+- D-008 (11 oct.) : deux portes (extension et RPC de garde), démo sur Fuji. Remplacé en partie par D-009 et D-013.
+- D-009 (11 oct.) : après essai avec un vrai MetaMask, adresse sosie, envoi vers une adresse jamais vue et Permit lisible retirés des apports ; plus de RPC de garde dans les scènes.
+- Périmé et retiré de ce document : démo sur Fuji (reportée, D-013), Snap comme chemin critique (le produit figé est une extension), barrière d'intention à choix et question « quelqu'un me guide », carnet d'adresses, attente de 10 min et barrière de 30 s (une attente sur l'écart de montant reste une question ouverte, Q16).
+- D-010 à D-013 (11 oct.) : pitch V6, positionnement « couche indépendante, moindre privilège », jeu aveugle à ouvrir une fois, cible Fuji reportée. Détail : `coord/DECISIONS.md`.

@@ -1,3 +1,5 @@
+> **PÉRIMÉ le 11/10/2026 : voir livrables\**
+
 # Sentinelle : maquettes de la fenêtre d'extension
 
 Six écrans HTML/CSS autonomes (un fichier chacun, aucune dépendance, aucune police externe), largeur 400 px, clair et sombre automatiques (`prefers-color-scheme`). Le bouton « Aperçu » en haut sert seulement à basculer le thème pendant la revue. Données, sites et monnaie sont fictifs : sites en `.example`, monnaie « USDX », adresses inventées.

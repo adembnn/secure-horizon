@@ -30,6 +30,7 @@ L'extension contient son moteur. Rien à lancer à côté, pas d'Internet néces
 2. Dans Chrome ou Edge : `chrome://extensions`, active **Mode développeur**, clique **Charger l'extension non empaquetée**, choisis le dossier.
 3. La carte « Hold up (autonome) » doit apparaître sans bouton « Erreurs ». Pour une page locale `file://`, active « Autoriser l'accès aux URL de fichier ».
 4. Vérifie avec `research/titouan/T_banc_e2e/standalone_test_page/index.html` (faux portefeuille, rien n'est signé).
+5. Panneau latéral : un clic sur l'icône de Hold up (barre d'outils, ou menu des extensions) ouvre le panneau latéral, qui montre le journal des décisions. Les questions et les alertes de signature, elles, s'affichent dans une fenêtre séparée devant la page.
 
 Pas à pas complet, démo locale (`node scripts/demo.mjs`, Node 22.18 ou plus) et dépannage : [livrables/INSTALLATION.md](livrables/INSTALLATION.md).
 
@@ -62,7 +63,7 @@ Un seul tableau fait foi : [livrables/CHIFFRES.md](livrables/CHIFFRES.md), avec 
 
 - Cas écrits par nous : 228 écarts sur 228 signalés, 0 fausse alerte rouge sur 166 honnêtes. C'est un test de couverture.
 - Contrôle scellé (1 079 paires phrase / demande, même auteur pour les phrases et les règles, une seule mesure par bras) : le code seul attrape 86,6 % des écarts avec 7,7 % de fausses alertes ; un modèle qui classe puis le code qui compare, 86,6 % avec 1,3 % ; le modèle seul comme juge, 64,4 %. Le jeu aveugle de 250 cas, d'un autre auteur, n'est pas encore passé.
-- En conditions produit (banc synthétique) : rappel rouge 71,3 %, 13,9 % des opérations honnêtes en rouge, 54,2 % avec au moins un avertissement. C'est la première limite.
+- En conditions produit (banc synthétique) : rappel rouge 71,3 %, 13,9 % des opérations honnêtes en rouge, 54,2 % avec au moins un avertissement. C'est la limite principale.
 - Trafic réel Avalanche, 6 325 transactions (légitime présumé) : 19 rouges (0,30 %), mais 76,84 % d'avertissements, surtout de l'opacité.
 - Pipeline strict : aucune arnaque ratée de plus, aucun cas sous le plancher, aucun « ok » produit par la couche.
 - Sur nos cas actuels, la phrase libre n'arrête aucune des 298 arnaques vertes sans intention : les textes se réduisent à « virement ».
@@ -72,7 +73,7 @@ Un seul tableau fait foi : [livrables/CHIFFRES.md](livrables/CHIFFRES.md), avec 
 
 - **Jamais essayé avec un vrai portefeuille.** Aucun résultat dans `research/titouan/T_banc_e2e/essai_reel/ESSAI_REEL_RESULTATS.csv`. La démo tourne sur une chaîne locale, que l'API d'alertes de MetaMask ne sert pas (Fuji non plus) : son silence là ne prouve rien.
 - **Revue de sécurité.** Contournements trouvés, dont un critique (une page qui remplace des fonctions natives). Corrections en cours, non vérifiées dans un navigateur. Nous ne disons pas « sécurisé ».
-- **Rien n'est déployé sur Fuji.** `blockchain/DEPLOYMENTS.md` ne contient que son en-tête. Sans ancrage, le journal de la version serveur détecte une ligne modifiée ou retirée au milieu, pas une réécriture complète.
+- **Rien n'est déployé sur Fuji.** Chaîne locale pour la démo, Fuji à décider (D-013). `blockchain/DEPLOYMENTS.md` ne contient que son en-tête. Sans ancrage, le journal de la version serveur détecte une ligne modifiée ou retirée au milieu, pas une réécriture complète.
 - **Hors périmètre.** Fraude consentie (la personne veut vraiment faire ce paiement), intention vague, contrat qui change à l'exécution (MetaMask le traite mieux avec Added Protection), Ledger branché directement, mobile, envois lancés depuis le bouton Envoyer du portefeuille.
 - **Une signature ne se limite pas.** Un droit donné par Permit n'a pas de plafond modifiable : Hold up alerte et le dit.
 - **Fausses alertes élevées.** La fatigue d'alerte est la limite principale.

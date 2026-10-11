@@ -1,3 +1,5 @@
+> **PÉRIMÉ le 11/10/2026 : voir livrables\**
+
 # Hiérarchie de l'information : v1 (passe expert UX, corrige la v0)
 
 Règle d'Adem : l'interface ne montre QUE ce qui compte pour la personne. Test appliqué à chaque élément : « sans lui, la personne décide-t-elle mal en 3 secondes ? » Si non, il part (ou il va derrière « Pourquoi ? »).
