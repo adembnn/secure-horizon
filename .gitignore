@@ -25,6 +25,12 @@ logs/
 !research/titouan/T_banc_e2e/blind_adem/**/*.jsonl
 !research/titouan/T_banc_e2e/attacks/*.jsonl
 !research/titouan/T_banc_e2e/redteam/jury_*.jsonl
+# Requis par des tests (moteur, pipeline, build autonome, démo web) : 144 cas synthétiques, générés avec une graine fixe
+# par attacks_public/gen_public.mjs, empreinte dans attacks_public/PUBLIC_HASH.txt.
+!research/titouan/T_banc_e2e/attacks_public/PUBLIC.jsonl
+# Volontairement RESTÉ ignoré : redteam/V2_DEV_norm.jsonl (21 Mo, copie normalisée de blind_adem/v2/V2_DEV.jsonl qui, lui, est suivi).
+# Il se régénère : node scripts/verifier_installation.mjs --donnees   (ou npm run donnees)
+# Jamais désignorés ici : blind_decalage/CASES.jsonl, blind_adem/v2/V2_TEST.jsonl, attacks/TEST.jsonl (jeux scellés).
 
 # Local
 node_modules/
@@ -50,3 +56,4 @@ research/demo_reelle/rpc_garde/context.local.json
 research/demo_reelle/rpc_garde/journal/
 research/titouan/T_banc_e2e/journal/
 blockchain/.env
+research/demo_reelle/site_echange/addresses.local.json

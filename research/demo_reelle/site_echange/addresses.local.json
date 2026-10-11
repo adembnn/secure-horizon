@@ -1,9 +1,0 @@
-{
-  "chainId": 43114,
-  "rpcUrl": "http://127.0.0.1:8545",
-  "usdc": "0x7c07edcB223c16d4b2fB373C476030c41f8027ae",
-  "wavax": "0x69FDC34D9deC661EB590515a5194Ce19d52B4596",
-  "router": "0xF6987b595D4196A40db287ef77eEf181BB045272",
-  "drainer": "0xdAf3111808eecF33B542EFE8D133Df420089759E",
-  "collector": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
-}
