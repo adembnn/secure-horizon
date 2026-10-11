@@ -1,5 +1,5 @@
 {
- "fichiers_analyses": 40,
+ "fichiers_analyses": 43,
  "constantes_64_hex_publiques": 0,
  "constats": {},
  "manifeste": [
@@ -14,9 +14,9 @@
    "detail": ""
   },
   {
-   "name": "permissions = [storage, alarms] seulement",
+   "name": "permissions = [storage, alarms, sidePanel] seulement (le panneau latéral ne demande aucun accès réseau ni aucun site)",
    "pass": true,
-   "detail": "[\"storage\",\"alarms\"]"
+   "detail": "[\"storage\",\"alarms\",\"sidePanel\"]"
   },
   {
    "name": "aucune host_permission",
@@ -50,6 +50,11 @@
   },
   {
    "name": "page options.html : scripts locaux, rien en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "page ui/sidepanel.html : scripts locaux, rien en ligne",
    "pass": true,
    "detail": ""
   },
