@@ -43,10 +43,10 @@ function bar(s, label, value, pct, y, color) {
 // 1 Le postulat
 {
   const s = slide('', 'research/demo_reelle/RECHERCHE_douleurs_secondaires.md, research/titouan/Z_approbations/onchain/result_avax.json',
-    "Trame d'Adem (livrables/pitch_v7/PITCH_ADEM.md) : en 2026, on ne peut plus promettre qu'un site est sûr. 21 novembre 2025, le site d'Aerodrome est détourné (DNS modifié) : 81 minutes entre le changement et le signalement du domaine, environ 700 000 $ de pertes. Mesure de Blockaid sur son propre délai : source intéressée, le dire si on demande. Postulat : tout service en ligne finira par être compromis ; la question devient « qu'est-ce que je lui ai laissé le droit de prendre ce jour-là ». Sur Avalanche C-Chain, 34,2 % [33,6 ; 34,9] des droits de dépense non nuls lus sont illimités (7 103 sur 20 753) : mesure interne, des événements et non des personnes. Nous adressons Avalanche : ne pas citer Ethereum. Aerodrome n'est pas sur Avalanche : c'est un exemple de site détourné, pas une mesure de notre chaîne. CHIFFRES.md B16 et B1.", { fs: 10 });
-  txt(s, '81 minutes', 0.5, 0.75, 9, 1.8, big({ fontSize: 110 }));
-  txt(s, 'Aerodrome est piraté. Personne ne le signale pendant 81 minutes.', 0.5, 2.85, 9, 0.5, big({ fontSize: 20 }));
-  txt(s, 'Novembre 2025. Tout service en ligne finira par être piraté.', 0.5, 3.45, 9, 0.4, { color: INK2 });
+    "Trame d'Adem (livrables/pitch_v7/PITCH_ADEM.md, bloc 2). LI.FI, 16 juillet 2024 : 11,6 M$ pris à 153 portefeuilles qui avaient laissé une approbation illimitée, rien aux approbations finies, selon le rapport de LI.FI (li.fi/knowledge-hub/incident-report-16th-july, source éditeur ; CHIFFRES.md B7). À dire si on le demande : le montant fini était déjà le réglage par défaut de LI.FI, les 153 avaient choisi l'illimité ; et c'est sur plusieurs chaînes, pas un chiffre Avalanche. Postulat : tout service en ligne finira par être piraté ; la question devient « qu'est-ce que je lui ai laissé le droit de prendre ce jour-là ». Sur Avalanche C-Chain, 34,2 % [33,6 ; 34,9] des droits de dépense non nuls lus sont illimités (7 103 sur 20 753) : mesure interne, des événements et non des personnes. Ne pas citer Ethereum.", { fs: 10 });
+  txt(s, '153', 0.5, 0.6, 9, 2.0, big({ fontSize: 130 }));
+  txt(s, 'portefeuilles vidés chez LI.FI en juillet 2024 : 11,6 millions de dollars.', 0.5, 2.85, 9, 0.5, big({ fontSize: 20 }));
+  txt(s, 'Tous avaient laissé une autorisation illimitée. Ceux qui l’avaient limitée n’ont rien perdu.', 0.5, 3.45, 9, 0.4, { color: INK2 });
   txt(s, 'Sur Avalanche, une autorisation sur trois est illimitée.', 0.5, 3.95, 9, 0.4, { color: INK2 });
 }
 
@@ -91,17 +91,6 @@ function bar(s, label, value, pct, y, color) {
   txt(s, 'Je prépare le retrait. Ton portefeuille le signe. Hold up ne signe jamais.', 0.5, 1.75, 5.2, 0.9, { fontSize: 18, color: INK2 });
   txt(s, 'Jamais joué devant un vrai portefeuille.', 0.5, 4.35, 5.2, 0.4, { color: INK2 });
   s.addImage({ path: path.join(CAP, 'pan-ouvert_sombre.png'), x: 6.6, y: 0.4, w: 2.39, h: 4.5 });
-}
-
-// 5 Le fait
-{
-  const s = slide('C’est déjà arrivé : LI.FI, juillet 2024', 'livrables/CHIFFRES.md, ligne B7. Rapport : li.fi/knowledge-hub/incident-report-16th-july',
-    "LI.FI, 16 juillet 2024 : 11,6 M$ pris à 153 portefeuilles en approbation illimitée, rien aux approbations finies, selon le rapport de LI.FI (source éditeur). Les victimes avaient choisi l'illimité alors que le défaut était fini. Chiffres sur la slide, pas à l'oral (quatre chiffres seulement).");
-  txt(s, 'Autorisations illimitées', 0.5, 1.6, 4.3, 0.4, { color: INK2 });
-  txt(s, 'vidées', 0.5, 2.0, 4.3, 1.3, big({ fontSize: 60 }));
-  txt(s, 'Autorisations limitées', 5.3, 1.6, 4.2, 0.4, { color: INK2 });
-  txt(s, 'rien perdu', 5.3, 2.0, 4.3, 1.3, big({ fontSize: 60 }));
-  txt(s, '153 portefeuilles, 11,6 M$, selon le rapport de LI.FI.', 0.5, 3.8, 9, 0.4, { color: INK2 });
 }
 
 // 6 Jeu aveugle
