@@ -95,3 +95,13 @@ Constat (11/10 ~04h20) : ni Jev ni Clef ne sont appelés. Aucune clé n'est pré
   - personal_sign et statement SIWE non analysés ;
   - texte libre non lu ;
   - pig butchering, étape 2.
+- FUZZ ADRESSES (`redteam/jury_fuzz_address.md`) : 8 360 cas testés, 3 466 contournements (381 représentants).
+  Ce qui tient :
+  - sosie fort (préfixe ≥ 3 et suffixe ≥ 4) : 1403/1403 ;
+  - adresse choisie dans le carnet : 1014/1014 ;
+  - aucune fausse alerte sur les vrais contacts qui partagent 1 à 3 caractères.
+  Trous :
+  - M1 « Payer Paul » sans counterpartyAddress : le label n'est jamais cherché dans le carnet, n'importe quelle adresse passe ;
+  - F1 : la poussière reçue est comptée comme une adresse connue, donc le vrai contact passe en critical (258/258) ; il faut tenir compte du sens des transactions ;
+  - M4 : la liste blanche des routeurs s'applique à un simple envoi de fonds ;
+  - M5 : « Payer mon Binance » contourne la règle « adresse jamais vue ».
