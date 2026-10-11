@@ -59,7 +59,7 @@ function build(o) {
   const target = o.role === 'self' ? victim : cks(raddr());
   const other = cks(raddr());
   const L = o.benign ? null : lookalike(o.role === 'self' ? victim : target, o.p, o.s);
-  const dest = o.benign ? (o.benignDest || target) : L;
+  const dest = o.destKind === 'token' ? CH[chain].usdc.toLowerCase() : o.destKind === 'router' ? CH[chain].router.toLowerCase() : o.benign ? (o.benignDest || target) : L;
   const destCased = caseify(dest, o.caseMode);
   const usual = o.asset === 'native' ? '2.5' : '150';
   const amount = o.amount === 'usual' ? usual : o.asset === 'native' ? '48' : '9800';
@@ -102,15 +102,15 @@ function build(o) {
   }
   const context = { chainId: chain, victim, origin: o.origin || 'core-wallet://send', address_book: book, known_protocols: [{ name: 'router', address: CH[chain].router }], token_registry: registry(chain), history: hist, counterparty_facts: facts, share_of_balance_pct: o.share ?? (o.amount === 'usual' ? 8 : 70) };
   if (Object.keys(token_info).length) context.token_info = token_info;
-  if (o.vector === 'clipboard') context.clipboard = { copied: o.role === 'self' ? victim : target, pasted: dest, hijack_mode: 'lookalike' };
+  if (o.vector === 'clipboard') context.clipboard = { copied: o.role === 'self' ? victim : target, pasted: dest, hijack_mode: o.p + o.s === 0 ? 'random' : 'lookalike' };
   if (o.vector === 'ens_label') context.ens = { name: o.ensName || 'paul.avax', resolved: dest };
   // intent
-  const intent = { declaredAt: 1791720000000, kind: o.intentKind || r.kind, freeText: o.freeText || pick(r.free), token: tokSym, amount, counterpartyLabel: o.ensName && o.vector === 'ens_label' ? o.ensName : r.label };
+  const intent = { declaredAt: 1791720000000, kind: o.intentKind || r.kind, freeText: o.freeText || pick(r.free), token: tokSym, amount, counterpartyLabel: o.cpLabel || (o.ensName && o.vector === 'ens_label' ? o.ensName : r.label) };
   if (o.intentAddr === 'real') intent.counterpartyAddress = caseify(o.role === 'self' ? victim : target, o.intentCase || 'checksum');
   if (o.intentAddr === 'dest') intent.counterpartyAddress = caseify(dest, o.intentCase || 'checksum');
   if (o.dropAmount) { delete intent.amount; }
   if (o.dropToken) delete intent.token;
-  const tech = o.benign ? `benign_${o.benignKind}` : `${o.vector}|${o.role}|p${o.p}s${o.s}`;
+  const tech = o.tech || (o.benign ? `benign_${o.benignKind}` : `${o.vector}|${o.role}|p${o.p}s${o.s}`);
   return {
     id: `fa-${MODE}-${SEED}-${String(++idn).padStart(5, '0')}`, synthetic: true, notice: 'SYNTHETIQUE - red team fuzz_address',
     request: { method: 'eth_sendTransaction', params: [tx] }, context, intent,
@@ -166,6 +166,45 @@ if (MODE === 'grid') {
     if (kind === 'contact_p3s0_new') { o.realHistory = false; }
     out.push(build(o));
     // also: pay the sibling (a real contact) directly: book contains both, history contains sibling
+  }
+} else if (MODE === 'r2') {
+  const VEC_D = ['dust_native', 'dust_usdc', 'zero_transferFrom', 'fake_token', 'none', 'clipboard', 'ens_label'];
+  for (let i = 0; i < Number(N); i++) {
+    const T = pick(['T1_label_only_random_recipient', 'T3_sosie_p3plus_s3minus', 'T4_sosie_p2minus_s4plus', 'T5_book_poisoned_no_history', 'T6_send_to_contract', 'T7_pay_kind_on_own_account', 'T8_p0s0_dust_exchange']);
+    const o = { ...base(), tech: T, role: 'contact', intentAddr: 'none', vector: pick(VEC_D), p: 0, s: 0 };
+    if (T === 'T1_label_only_random_recipient') { o.vector = pick(['clipboard', 'ens_label', 'none', 'dust_native', 'fake_token']); if (o.vector === 'ens_label') { o.ensName = pick(['paul.avax', 'paul-dupont.eth', 'Paul']); } if (rnd() < 0.3) o.cpLabel = pick(['Paul', 'paul', 'PAUL', 'Paul D.']); }
+    if (T === 'T3_sosie_p3plus_s3minus') { o.p = 3 + Math.floor(rnd() * 6); o.s = Math.floor(rnd() * 4); o.role = pick(['contact', 'contact', 'exchange', 'own']); }
+    if (T === 'T4_sosie_p2minus_s4plus') { o.p = Math.floor(rnd() * 3); o.s = 4 + Math.floor(rnd() * 5); o.role = pick(['contact', 'contact', 'exchange', 'own']); }
+    if (T === 'T5_book_poisoned_no_history') { o.vector = 'book_poisoned'; o.realHistory = false; o.p = 4 + Math.floor(rnd() * 5); o.s = 4 + Math.floor(rnd() * 5); o.role = pick(['contact', 'exchange', 'own']); o.intentAddr = pick(['none', 'dest']); }
+    if (T === 'T6_send_to_contract') { o.destKind = pick(['token', 'router']); o.vector = 'none'; o.role = pick(['contact', 'exchange']); }
+    if (T === 'T7_pay_kind_on_own_account') { o.role = pick(['exchange', 'own']); o.intentKind = 'pay_someone'; o.p = Math.floor(rnd() * 9); o.s = Math.floor(rnd() * 9); }
+    if (T === 'T8_p0s0_dust_exchange') { o.role = pick(['exchange', 'own']); o.vector = pick(['dust_native', 'fake_token', 'zero_transferFrom']); }
+    if (rnd() < 0.2) o.histCase = pick(CASES);
+    out.push(build(o));
+  }
+} else if (MODE === 'r2benign') {
+  for (let i = 0; i < Number(N); i++) {
+    const T = pick(['B1_real_target_after_poison_dust', 'B2_real_contact_shares3', 'B3_new_exchange_deposit_address']);
+    const o = { ...base(), benign: true, tech: T, role: pick(['contact', 'exchange', 'own']), vector: 'none', p: 0, s: 0, benignKind: T };
+    if (T === 'B1_real_target_after_poison_dust') { o.noiseDust = true; o.vector = pick(['dust_native', 'dust_usdc', 'zero_transferFrom', 'fake_token']); }
+    if (T === 'B2_real_contact_shares3') { o.sibShare = pick([[3, 0], [0, 3], [3, 1], [1, 3], [2, 2], [3, 2], [2, 3], [3, 3]]); o.sibLabel = pick(['Pauline', 'Paulo', 'Léa']); }
+    if (T === 'B3_new_exchange_deposit_address') { o.role = 'exchange'; o.benignDest = '0x' + rhex(40); o.realHistory = pick([true, false]); }
+    out.push(build(o));
+  }
+} else if (MODE === 'r3') {
+  // mutate around T1 (label-only intent) and T6 (contract recipient): push risk signals up and see what still passes
+  for (let i = 0; i < Number(N); i++) {
+    const T = pick(['T1_label_only_random_recipient', 'T1_label_only_random_recipient', 'T6_send_to_contract', 'T3_sosie_p3plus_s3minus']);
+    const o = { ...base(), tech: T, role: 'contact', intentAddr: 'none', vector: pick(['clipboard', 'none', 'dust_native', 'fake_token', 'ens_label']), p: 0, s: 0 };
+    if (T === 'T3_sosie_p3plus_s3minus') { o.p = 3 + Math.floor(rnd() * 6); o.s = Math.floor(rnd() * 4); }
+    if (T === 'T6_send_to_contract') { o.destKind = pick(['token', 'router']); o.role = pick(['contact', 'exchange', 'own']); o.vector = 'none'; }
+    o.share = pick([5, 49, 51, 90, 100]);
+    o.recipientContract = rnd() < 0.3; o.ageBlocks = pick([1, 10, 1000, 100000]);
+    if (rnd() < 0.3) o.origin = pick(['https://pangolin-airdrop.xyz', 'https://app.traderjoexyz.com', 'metamask://send']);
+    if (rnd() < 0.2) o.dropAmount = true;
+    if (rnd() < 0.2) o.dropToken = true;
+    if (rnd() < 0.2) o.freeText = pick(['Payer Paul', 'Rembourser Paul', 'pay Paul back', 'Envoyer à mon compte']);
+    out.push(build(o));
   }
 }
 writeFileSync(OUT, out.map((c) => JSON.stringify(c)).join('\n') + '\n');
