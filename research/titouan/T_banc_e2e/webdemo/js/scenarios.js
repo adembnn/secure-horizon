@@ -106,12 +106,12 @@ const NEW = [
   { id: 'coffre_delegatecall', groupe: G2, synthetique: true, titre: 'Le virement cache un appel délégué', site: 'Interface de coffre à signatures multiples (fictive)', origin: 'https://coffre-demo.example', intentHonnete: 'pay',
     resume: 'L’écran du coffre affiche un virement de 20 USDC. La charge signée est un appel délégué vers un contrat inconnu', ecrit: 'Envoyer 20 USDC à Paul',
     affiche: [['Opération', 'Virement'], ['Montant', '20 USDC'], ['Destinataire', 'Paul'], ['Signatures', '3 sur 3']],
-    brut: [['Réseau', 'Ethereum (fictif)'], ['À', SAFE], ['Fonction', 'execTransaction (coffre)'], ['Données', 'illisibles pour le portefeuille']],
+    brut: [['Réseau', 'Ethereum (fictif)'], ['À', SAFE], ['Fonction', 'execTransaction (coffre)'], ['Données', 'non décodées par le faux portefeuille']],
     body: safeBody(SAFE_EVIL, 1) },
   { id: 'coffre_conforme', groupe: G2, synthetique: true, titre: 'Version conforme : vrai virement de 20 USDC', site: 'Interface de coffre à signatures multiples (fictive)', origin: 'https://coffre-demo.example', intentHonnete: 'pay',
     resume: 'Même écran, même coffre. Cette fois la charge est bien un virement de 20 USDC à Paul', ecrit: 'Envoyer 20 USDC à Paul',
     affiche: [['Opération', 'Virement'], ['Montant', '20 USDC'], ['Destinataire', 'Paul'], ['Signatures', '3 sur 3']],
-    brut: [['Réseau', 'Ethereum (fictif)'], ['À', SAFE], ['Fonction', 'execTransaction (coffre)'], ['Données', 'illisibles pour le portefeuille']],
+    brut: [['Réseau', 'Ethereum (fictif)'], ['À', SAFE], ['Fonction', 'execTransaction (coffre)'], ['Données', 'non décodées par le faux portefeuille']],
     body: safeBody(USDC, 0) },
 ];
 const EDIT = {
@@ -124,7 +124,7 @@ const EDIT = {
   changement_proprietaire: { ecrit: 'Me connecter pour mettre à jour mon compte' },
 };
 const ORDER = [G1, G2, G3, G4];
-export const SCENARIOS = [...NEW, ...BASE.map((s) => ({ groupe: G4, ...s, ...(EDIT[s.id] || {}) }))]
+export const SCENARIOS = [...NEW, ...BASE.filter((s) => !NEW.some((x) => x.id === s.id)).map((s) => ({ groupe: G4, ...s, ...(EDIT[s.id] || {}) }))]
   .sort((a, b) => ORDER.indexOf(a.groupe) - ORDER.indexOf(b.groupe));
 export const GROUPES = ORDER;
 export const localOf = (s) => (s && s.local) || LOCAL;

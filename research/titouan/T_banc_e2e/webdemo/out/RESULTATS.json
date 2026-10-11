@@ -31,12 +31,12 @@
    "detail": ""
   },
   {
-   "name": "119 cas de test (>= 30) : 13 scenes x 6 intentions + requetes types + malformees",
+   "name": "113 cas de test (>= 30) : 13 scenes x 6 intentions + requetes types + malformees",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "'ok' ne sort jamais : 0 sur 119 verdicts (niveau et level)",
+   "name": "'ok' ne sort jamais : 0 sur 113 verdicts (niveau et level)",
    "pass": true,
    "detail": ""
   },
@@ -46,13 +46,13 @@
    "detail": ""
   },
   {
-   "name": "verdicts IDENTIQUES a la voie de reference (server/server.mjs) : 119/119",
+   "name": "verdicts IDENTIQUES a la voie de reference (server/server.mjs) : 113/113",
    "pass": true,
    "detail": ""
   },
   {
    "name": "les 13 scenarios, reponse honnete : niveaux attendus (4 sans signal, 1 attention, 7 danger, 1 manipulation)",
-   "pass": false,
+   "pass": true,
    "detail": "{\"echange_honnete\":\"info\",\"echange_routeur_connu\":\"attention\",\"echange_droit_illimite\":\"danger\",\"coffre_delegatecall\":\"danger\",\"coffre_conforme\":\"info\",\"permit_piege\":\"danger\",\"envoi_simple\":\"info\",\"echange_legitime\":\"info\",\"droit_illimite\":\"danger\",\"tous_les_nft\":\"danger\",\"adresse_sosie\":\"danger\",\"changement_proprietaire\":\"danger\",\"faux_support\":\"manipulation\"}"
   },
   {
@@ -206,13 +206,103 @@
    "detail": ""
   },
   {
+   "name": "scene 1 temps 1 : routeur connu => « Ça ne correspond pas. », niveau Attention (pas Danger), « Tu peux limiter » 50 USDC",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 temps 1 : pas d attente (Q16), bouton « Limiter à 50 USDC », Annuler visible",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 temps 1 : Annuler marche, niveau enregistre = attention",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 : apres « Limiter », la demande relue dit « Ça correspond… pas une garantie », jamais OK ni vert",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 : Continuer apres limitation => decision enregistree comme limitee",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 : autre reponse que l intention ecrite => ni comparaison ni bouton de limitation",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 temps 2 : adresse neuve => « Ça ne correspond pas. », Danger, pas de limitation, Continuer bloque (10 s au moins)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 : temps 2 (adresse neuve) au moins aussi haut que temps 1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 : site honnete (droit de 50 USDC) => « Ça correspond… pas une garantie », Continuer sans attente",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 1 : site honnete, Continuer fonctionne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 2 : virement affiche 20 USDC, charge = appel delegue vers contrat inconnu => Danger (F09, delegatecall_unknown_target)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 2 : sans phrase, Danger quand meme (plancher), et la page le dit",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 2 : reponse « Autre » => Danger inchange",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 2 conforme : Aucun signal trouvé, « vérification limitée », « pas une garantie », jamais OK ni sûr",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scene 3 : « me connecter » + Permit => « Ça ne correspond pas. », Danger, aucune limitation proposee pour une signature (F02)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "garde des trois phrases : « Je n ai pas pu verifier cette demande. » (illisible), jamais « Ça correspond »",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "app.js : syntaxe valide, 22 identifiants HTML tous presents",
    "pass": true,
    "detail": ""
   },
   {
    "name": "app.js : 13 scenarios affiches",
-   "pass": false,
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : les 2 scenes du coffre portent l etiquette « Scène synthétique, adresses factices »",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "app.js : la scene du coffre montre l ecran du coffre (virement 20 USDC) et ce que recoit le portefeuille",
+   "pass": true,
    "detail": ""
   },
   {
@@ -311,7 +401,7 @@
    "detail": ""
   },
   {
-   "name": "taille du site : 35 fichiers, 357 Ko (environ 117 Ko compresses)",
+   "name": "taille du site : 35 fichiers, 360 Ko (environ 118 Ko compresses)",
    "pass": true,
    "detail": ""
   }
@@ -324,18 +414,18 @@
  "scenarios": {
   "filtres_par_la_couche_http_du_serveur": 3,
   "correctif_jours_absorbe": 0,
-  "cas": 119,
-  "identiques": 119,
+  "cas": 113,
+  "identiques": 113,
   "ecarts": [],
   "niveaux_affiches": {
    "info": 28,
    "attention": 4,
-   "danger": 70,
+   "danger": 64,
    "manipulation": 4,
    "unknown": 13
   },
-  "ms_total": 293,
-  "ms_par_verdict": 2.46
+  "ms_total": 314,
+  "ms_par_verdict": 2.78
  },
  "niveaux_scenarios": {
   "echange_honnete": "info",
@@ -404,8 +494,8 @@
  },
  "taille": {
   "fichiers_publies": 35,
-  "octets_total": 365827,
-  "octets_gzip_estimes": 119940,
+  "octets_total": 368888,
+  "octets_gzip_estimes": 120814,
   "plus_gros": [
    {
     "f": "engine/sentinelle_core.js",
@@ -429,6 +519,6 @@
    }
   ]
  },
- "echecs": 2,
- "verifications": 63
+ "echecs": 0,
+ "verifications": 81
 }

@@ -258,6 +258,69 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
     const box = document.createElement('div'); box.append(...parts.top); const tt = box.textContent; ALLTXT.push(tt);
     const css = readFileSync(join(WD, 'css', 'holdup.css'), 'utf8'); const rule = (css.match(/\.match-yes\s*\{[^}]*\}/) || [''])[0];
     ok(M.displayLevel(vi).key === 'info' && tt.includes('Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.') && rule.length > 0 && !/green|#0[0-9a-f]{5}|#[0-9a-f]{2}[c-f][0-9a-f]{3}/i.test(rule), '« Ça correspond » ne s affiche qu avec « pas une garantie » et sans style vert'); }
+  // 4c) scenes du pitch : on joue la fenetre comme une personne (question, reponse honnete, lecture, bouton)
+  const play = async (id, { choice, ask = true, act = null, delaySec = 5 }) => {
+    const s = sc(id); const shots = [];
+    const p = HU.holdRequest({ body: s.body, local: S.localOf(s), delaySec, askIntent: ask, siteLabel: s.site, intentDetails: s.intentDetails || null, ecrit: s.ecrit || '', honnete: s.intentHonnete, corrige: s.corrige || null });
+    if (ask) { shots.push(txt()); choose(choice || S.INTENTS.find((x) => x[0] === s.intentHonnete)[1]); }
+    shots.push(txt()); ALLTXT.push(txt());
+    if (act) { const r = act(shots); if (r) shots.push(...r); }
+    if (!dom.body.children.length) return { shots, r: await p };
+    btn('Annuler').click(); return { shots, r: await p };
+  };
+  { // temps 1 : routeur connu
+    let s1 = null;
+    const a = await play('echange_routeur_connu', { act: (shots) => { s1 = { cont: btn('Continuer quand même'), fix: btn('Limiter à 50 USDC') }; const t1 = txt();
+      ok(t1.includes('Ça ne correspond pas.') && t1.includes('Attention') && t1.includes('Tu peux limiter le droit') && !t1.includes('Danger'), 'scene 1 temps 1 : routeur connu => « Ça ne correspond pas. », niveau Attention (pas Danger), « Tu peux limiter » 50 USDC');
+      ok(!!s1.fix && !!s1.cont && !s1.cont.disabled && !!btn('Annuler'), 'scene 1 temps 1 : pas d attente (Q16), bouton « Limiter à 50 USDC », Annuler visible'); } });
+    ok(a.r.decision === 'cancel' && a.r.level === 'attention', 'scene 1 temps 1 : Annuler marche, niveau enregistre = attention');
+    // limiter : la meme demande avec 50 USDC
+    const p2 = HU.holdRequest({ body: sc('echange_routeur_connu').body, local: S.localOf(sc('echange_routeur_connu')), delaySec: 5, askIntent: true, intentDetails: sc('echange_routeur_connu').intentDetails, ecrit: sc('echange_routeur_connu').ecrit, honnete: 'swap', corrige: sc('echange_routeur_connu').corrige });
+    choose('Échanger'); btn('Limiter à 50 USDC').click(); const t2 = txt(); ALLTXT.push(t2);
+    ok(t2.includes('Droit limité à 50 USDC.') && t2.includes('Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.') && t2.includes('Aucun signal trouvé') && !btn('Limiter à 50 USDC') && !!btn('Continuer') && !btn('Continuer').disabled, 'scene 1 : apres « Limiter », la demande relue dit « Ça correspond… pas une garantie », jamais OK ni vert');
+    btn('Continuer').click(); const r2 = await p2;
+    ok(r2.decision === 'sign' && r2.limited === true, 'scene 1 : Continuer apres limitation => decision enregistree comme limitee');
+    // sans la phrase ecrite (autre reponse) : pas de bouton de limitation, pas de baisse
+    const b = await play('echange_routeur_connu', { choice: 'Payer' });
+    ok(!b.shots[1].includes('Limiter à') && !b.shots[1].includes('Ce que tu voulais'), 'scene 1 : autre reponse que l intention ecrite => ni comparaison ni bouton de limitation');
+  }
+  { // temps 2 : adresse neuve, danger, pas de limitation
+    let waits = null;
+    const a = await play('echange_droit_illimite', { delaySec: 0, act: () => { const c = btn('Continuer quand même'); waits = !!c && c.disabled; } });
+    ok(a.shots[1].includes('Ça ne correspond pas.') && a.shots[1].includes('Danger') && !a.shots[1].includes('Limiter à') && waits === true, 'scene 1 temps 2 : adresse neuve => « Ça ne correspond pas. », Danger, pas de limitation, Continuer bloque (10 s au moins)');
+    // le niveau du temps 2 est au moins celui du temps 1
+    const rank = { info: 0, attention: 1, danger: 2 };
+    ok(rank[a.r.level] >= rank.attention, 'scene 1 : temps 2 (adresse neuve) au moins aussi haut que temps 1');
+  }
+  { // site honnete
+    const a = await play('echange_honnete', { act: () => { ok(txt().includes('Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.') && !!btn('Continuer') && !btn('Continuer quand même'), 'scene 1 : site honnete (droit de 50 USDC) => « Ça correspond… pas une garantie », Continuer sans attente'); btn('Continuer').click(); } });
+    ok(a.r.decision === 'sign', 'scene 1 : site honnete, Continuer fonctionne');
+  }
+  { // coffre : delegatecall, avec et sans phrase
+    const a = await play('coffre_delegatecall', {});
+    const t = a.shots[1];
+    ok(t.includes('Ça ne correspond pas.') && t.includes('Danger') && t.includes('Envoyer 20 USDC à Paul') && /programme étranger|appel délégué|pleins pouvoirs/i.test(t + (a.r.verdict.texts.reel || '')) && a.r.verdict.fiche === 'F09' && a.r.verdict.codes.includes('delegatecall_unknown_target'), 'scene 2 : virement affiche 20 USDC, charge = appel delegue vers contrat inconnu => Danger (F09, delegatecall_unknown_target)');
+    const n = await play('coffre_delegatecall', { ask: false, delaySec: 0 });
+    ok(n.r.level === 'danger' && n.shots[0].includes('Danger') && n.shots[0].includes('Tu n’as pas écrit ce que tu voulais faire') && !n.shots[0].includes('Ça correspond'), 'scene 2 : sans phrase, Danger quand meme (plancher), et la page le dit');
+    const o = await play('coffre_delegatecall', { choice: 'Autre' });
+    ok(o.r.level === 'danger', 'scene 2 : reponse « Autre » => Danger inchange');
+  }
+  { // coffre conforme : info limitee, jamais vert
+    const a = await play('coffre_conforme', { act: () => { btn('Continuer') && 0; } });
+    const t = a.shots[1];
+    ok(a.r.level === 'info' && t.includes('Aucun signal trouvé') && /vérification est limitée/.test(t) && t.includes('Ça correspond, d’après ce que Hold up sait lire. Ce n’est pas une garantie.') && !/\bOK\b|sûr|protégé/.test(t), 'scene 2 conforme : Aucun signal trouvé, « vérification limitée », « pas une garantie », jamais OK ni sûr');
+  }
+  { // me connecter : Permit
+    const a = await play('permit_piege', {});
+    const t = a.shots[1];
+    ok(t.includes('Ça ne correspond pas.') && t.includes('Me connecter à ce site') && t.includes('Danger') && !t.includes('Limiter à') && a.r.verdict.fiche === 'F02', 'scene 3 : « me connecter » + Permit => « Ça ne correspond pas. », Danger, aucune limitation proposee pour une signature (F02)');
+  }
+  { // la troisieme reponse : « Je n'ai pas pu vérifier »
+    const UI = await imp(join(WD, 'js', 'ui.js')); const vu = M.check({}, M.emptyLocal());
+    const a = document.createElement('div'); a.append(...UI.verdictParts(vu, { compare: { voulu: 'Envoyer 1 ETH' } }).top);
+    const b = document.createElement('div'); b.append(...UI.verdictParts(vu, {}).top);
+    ok(M.displayLevel(vu).key === 'unknown' && a.textContent.includes('Je n’ai pas pu vérifier cette demande.') && b.textContent.includes('Je n’ai pas pu vérifier cette demande.') && !/Ça correspond/.test(a.textContent + b.textContent), 'garde des trois phrases : « Je n ai pas pu verifier cette demande. » (illisible), jamais « Ça correspond »');
+  }
   // 5) page : tous les identifiants utilises par app.js existent dans index.html
   const html = readFileSync(join(WD, 'index.html'), 'utf8'); const app = readFileSync(join(WD, 'js', 'app.js'), 'utf8');
   const ids = [...app.matchAll(/\$\('#([\w-]+)'\)/g)].map((m) => m[1]); const missingIds = [...new Set(ids)].filter((i) => !new RegExp('id="' + i + '"').test(html) && !new RegExp("id: '" + i + "'").test(app));
@@ -277,6 +340,9 @@ ok(netCalls === 0, 'aucun appel reseau pendant l equivalence PUBLIC/DEV');
   const btns = () => [...dom.body.querySelectorAll('button')];
   const scen = dom.body.querySelectorAll('.scen');
   ok(scen.length === 13, 'app.js : 13 scenarios affiches');
+  ok(dom.body.querySelectorAll('.scen-syn').length === 2 && dom.body.querySelectorAll('.scen-syn').every((e) => e.textContent === 'Scène synthétique, adresses factices'), 'app.js : les 2 scenes du coffre portent l etiquette « Scène synthétique, adresses factices »');
+  scen.find((b) => b.getAttribute('data-id') === 'coffre_delegatecall').click();
+  ok(E('wallet-req').textContent.includes('Scène synthétique, adresses factices') && E('wallet-req').textContent.includes('Virement') && E('wallet-req').textContent.includes('20 USDC') && E('wallet-req').textContent.includes('execTransaction') && !/null|undefined/.test(E('wallet-req').textContent), 'app.js : la scene du coffre montre l ecran du coffre (virement 20 USDC) et ce que recoit le portefeuille');
   // un scenario piege, de bout en bout
   scen.find((b) => b.getAttribute('data-id') === 'tous_les_nft').click();
   ok(E('wallet-req').textContent.includes('Signer') && E('wallet-req').textContent.includes('mint-gratuit-demo.example') && E('wallet-req').textContent.includes('Rejeter'), 'app.js : le faux portefeuille affiche la requete avec Signer / Rejeter');

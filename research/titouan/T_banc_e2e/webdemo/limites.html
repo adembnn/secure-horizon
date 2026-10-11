@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<title>Hold up — limites</title>
+<title>Hold up : limites</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="css/holdup.css">
 </head>
@@ -20,8 +20,33 @@
   </ul></nav>
 </div></header>
 <main class="wrap prose">
-  <h1>Ce que Hold up ne fait pas</h1>
-  <p class="lede">Hold up avertit, ralentit et explique. Il ne garantit rien. Voici, sans détour, ce qu’il ne couvre pas.</p>
+  <h1>Ce que cette démo est, et ce qu’elle n’est pas</h1>
+  <p class="lede">Hold up avertit, ralentit et explique. Il ne garantit rien. Cette page dit sans détour ce que tu regardes et ce qu’il ne couvre pas.</p>
+
+  <h2>Ce que cette démo est</h2>
+  <ul>
+    <li>Une chaîne simulée dans ton navigateur. Un faux site envoie une demande de signature à un faux portefeuille, tous deux écrits dans la page.</li>
+    <li>Le vrai moteur de Hold up (le même code que le banc de test), exécuté dans la page, avec ses vraies règles. Il lit la demande, la compare à la phrase que tu as écrite, et répond : « Ça correspond », « Ça ne correspond pas » ou « Je n’ai pas pu vérifier ».</li>
+    <li>Treize scènes. Trois viennent du pitch : échanger 50 USDC (en deux temps, plus la version honnête), un coffre à signatures multiples, « me connecter » avec un Permit. Les autres sont des cas de test du moteur.</li>
+    <li>Sans appel réseau une fois la page chargée : le navigateur refuserait tout envoi (politique <code>connect-src 'none'</code>). Rien n’est envoyé, rien n’est signé.</li>
+  </ul>
+
+  <h2>Ce que cette démo n’est pas</h2>
+  <ul>
+    <li>Pas une chaîne. Aucun bloc, aucun contrat réel, aucun solde réel. Les adresses, les sites et le portefeuille sont inventés.</li>
+    <li>Pas un portefeuille. Aucune clé, aucune signature. « Continuer quand même » ne signe rien.</li>
+    <li>Pas l’extension. Elle n’a jamais été essayée ici avec un vrai MetaMask, Core ou Rabby, et rien n’est testé sur Fuji. Cette page ne prouve pas que l’extension retienne toutes les demandes d’un vrai site.</li>
+    <li>Pas une mesure. Chaque scène a été choisie pour montrer un cas. Ça ne dit rien du nombre d’arnaques repérées en vrai.</li>
+    <li>Pas un événement réel rejoué. La scène du coffre a la même forme qu’un incident public de 2025 : l’écran montre un virement, la charge signée est autre chose. Elle est synthétique, avec des adresses factices. Elle montre le décodage, pas une attaque de bout en bout.</li>
+  </ul>
+
+  <h2>Ce que les scènes ne montrent pas</h2>
+  <ul>
+    <li>Le droit limité à 50 USDC (« Limiter à 50 USDC ») est calculé dans la page. Dans l’extension, ce remplacement n’a été prouvé que dans des tests sous Node, pas avec un vrai portefeuille. Un vrai portefeuille peut afficher son plafond autrement.</li>
+    <li>Le routeur « connu » de la scène 1 est une adresse inventée, ajoutée à la liste des contrats que l’utilisateur fictif a déjà utilisés. Sans cette liste, la même demande passe en Danger. Sans ta phrase, ce routeur connu ne déclenche aucune alerte : c’est elle qui fait voir l’écart.</li>
+    <li>Dans la scène du coffre, le niveau Danger ne dépend pas de ta phrase. C’est un plancher de règles : un appel délégué vers un contrat inconnu. La version conforme reste « Aucun signal trouvé », avec la mention que la vérification est limitée. Ce n’est jamais un feu vert.</li>
+    <li>Un coffre qui parle à un matériel (USB, Ledger) sans passer par le portefeuille du navigateur n’est pas vu par une extension.</li>
+  </ul>
 
   <h2>Ce que MetaMask fait déjà</h2>
   <ul>
@@ -74,7 +99,7 @@
     <li>« Aucun signal trouvé » ne veut jamais dire « sûr ». Il n’y a pas de vert et pas de mot « protégé ».</li>
     <li>Tu peux toujours continuer après le délai. Hold up ne décide pas à ta place.</li>
     <li>Les textes viennent de fiches rédigées d’avance. Certaines phrases sont approximatives (par exemple un montant en ETH natif affiché comme « NATIVE », ou « ton contact » pour une adresse que le moteur ne connaît pas).</li>
-    <li>La réponse « Autre » n’est pas traduite en intention pour le comparateur : le verdict repose alors seulement sur le moteur d’effets. « Échanger une crypto » est lue par le comparateur ; le détail dit (jeton, montant, jeton reçu) n’est transmis que dans la scène « échanger 50 USDC ».</li>
+    <li>La réponse « Autre » n’est pas traduite en intention pour le comparateur : le verdict repose alors seulement sur le moteur d’effets. « Échanger une crypto » est lue par le comparateur ; le détail dit (jeton, montant, jeton reçu) n’est transmis que dans les scènes « échanger 50 USDC ».</li>
     <li>Le délai de 10 min du produit pour le niveau Manipulation est raccourci à 30 s dans la démo.</li>
     <li>Aucune mesure d’efficacité sur de vraies personnes n’a été faite : les chiffres disponibles viennent de jeux de cas synthétiques.</li>
   </ul>

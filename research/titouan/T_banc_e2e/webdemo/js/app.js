@@ -64,7 +64,7 @@ function select(id) {
   if (!selected) { box.append(h('p', { class: 'muted' }, 'Choisis un scénario à gauche : le faux site demande une signature à ce faux portefeuille.')); return; }
   const s = selected;
   const rows = (list) => h('dl', { class: 'raw' }, list.map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, h('code', {}, v)))));
-  box.append(
+  box.append(h('div', { class: 'req' },
     s.synthetique ? h('p', { class: 'syn' }, 'Scène synthétique, adresses factices. Elle montre le décodage, pas une attaque de bout en bout.') : null,
     h('p', { class: 'req-from' }, h('b', {}, s.site), ' · ', h('code', {}, s.origin)),
     h('p', { class: 'req-what' }, 'Ce que le site te dit : ' + s.resume),
@@ -73,7 +73,7 @@ function select(id) {
     h('p', { class: 'muted hint' }, hintOf(s)),
     h('div', { class: 'wallet-actions' },
       h('button', { class: 'btn btn-wallet-no', type: 'button', onclick: () => { $('#wallet-out').textContent = 'Tu as rejeté la demande dans le portefeuille. Rien n’a été signé.'; } }, 'Rejeter'),
-      h('button', { class: 'btn btn-wallet-yes', type: 'button', id: 'sign-btn', onclick: () => sign(s) }, 'Signer')));
+      h('button', { class: 'btn btn-wallet-yes', type: 'button', id: 'sign-btn', onclick: () => sign(s) }, 'Signer'))));
 }
 // Phrase d'aide sous la requête : la reponse honnete, et ce que la scene montre en plus.
 function hintOf(s) {

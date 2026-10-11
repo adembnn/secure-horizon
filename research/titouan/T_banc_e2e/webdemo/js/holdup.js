@@ -78,7 +78,7 @@ export function holdRequest({ body, local, delaySec = 5, askIntent = true, siteL
       // Q16 : quand le seul ecart est « droit plus large que le montant ecrit » (transaction) et qu'une correction existe, pas d'attente : la correction suffit.
       const canFix = !fixed && !!corrige && showWritten && lv.key === 'attention' && (v.raisons || []).some((r) => r.code === 'approval_exceeds_intent');
       const delay = canFix ? 0 : frictionSeconds(lv.key, delaySec); state.delay = delay;
-      const compare = showWritten ? { voulu: ecrit, fix: fixed ? corrige.label + '.' : canFix ? 'Tu peux limiter le droit à ce que tu as écrit : ' + corrige.label.replace(/^Droit limité à /, '') + '.' : '' } : null;
+      const compare = showWritten ? { voulu: ecrit, fix: fixed ? corrige.label + '.' : canFix ? 'Tu peux limiter le droit à ' + corrige.label.replace(/^Droit limité à /, '') + ', comme tu l’as écrit.' : '' } : null;
       const parts = verdictParts(v, { body: b, local, intentKey: askIntent ? state.intentKey : null, ids: true, compare });
       const bodyKids = [h('div', { id: 'hu-desc' }, parts.top)];
       let timerBig = null;

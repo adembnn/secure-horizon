@@ -8,10 +8,25 @@ Un lien, rien à installer. Le jury ouvre la page, choisit un scénario, clique 
 
 | Page | Contenu |
 |---|---|
-| `index.html#demo` | Faux site + faux portefeuille, 9 scénarios en un clic (envoi simple, échange légitime, « échanger 50 USDC » où le site réclame un droit illimité, droit illimité vers un site piège, signature de permit piège, autorisation de tous les NFT, changement de propriétaire du compte, faux support, et un envoi vers une adresse proche de celle d'un contact, gardé comme cas de test du moteur, pas comme apport de Hold up). Au clic sur « Signer » : question d'intention, puis « Tu crois / En vrai » (4 lignes de texte clair), niveau, friction (délai réglable, Annuler toujours visible), panneau « Voir les preuves techniques » pour le jury technique. La scène « échanger 50 USDC » affiche en plus l'intention écrite contre l'effet réel (« Ce que tu voulais » / « Ce que la demande fait ») et conclut « Ça ne correspond pas. » ; si rien n'est vu, la phrase est « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. », jamais un OK ni un vert. |
+| `index.html#demo` | Faux site + faux portefeuille, 13 scènes en un clic, rangées par rubrique (voir « Les scènes du pitch » plus bas) ; liste des cas du moteur : (envoi simple, échange légitime, « échanger 50 USDC » où le site réclame un droit illimité, droit illimité vers un site piège, signature de permit piège, autorisation de tous les NFT, changement de propriétaire du compte, faux support, et un envoi vers une adresse proche de celle d'un contact, gardé comme cas de test du moteur, pas comme apport de Hold up). Au clic sur « Signer » : question d'intention, puis « Tu crois / En vrai » (4 lignes de texte clair), niveau, friction (délai réglable, Annuler toujours visible), panneau « Voir les preuves techniques » pour le jury technique. La scène « échanger 50 USDC » affiche en plus l'intention écrite contre l'effet réel (« Ce que tu voulais » / « Ce que la demande fait ») et conclut « Ça ne correspond pas. » ; si rien n'est vu, la phrase est « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. », jamais un OK ni un vert. |
 | `index.html#colle` | « Colle une transaction » : on colle une requête `eth_sendTransaction` ou `eth_signTypedData_v4` (ou une transaction / un message seul) et on lit le verdict. Marche sur téléphone : c'est la version « application compagnon » sans installation. 16 exemples synthétiques du jeu public. |
 | `index.html#journal` | Journal local dans le navigateur, chaîné par hachage (SHA-256 de la ligne précédente + celle-ci). Bouton « Retoucher une ligne » pour montrer que la chaîne se casse. |
 | `limites.html` | Page « Limites » honnête. |
+
+## Les scènes du pitch
+
+| Rubrique | Scène | Ce qu'on voit |
+|---|---|---|
+| 1 · Échanger 50 USDC | Site honnête | Le site demande exactement 50 USDC à un routeur connu : « Ça correspond, d'après ce que Hold up sait lire. Ce n'est pas une garantie. » |
+| | Temps 1 · routeur connu | Droit illimité vers un routeur de la liste « déjà utilisés » : « Ça ne correspond pas. », niveau Attention (pas Danger), « Tu peux limiter le droit à 50 USDC », bouton « Limiter à 50 USDC », pas d'attente (Q16). Le clic relit la demande limitée : « Ça correspond… ». Sans ta phrase, ce routeur passe sans alerte. |
+| | Temps 2 · adresse neuve | Même demande vers une adresse inconnue : « Ça ne correspond pas. », Danger, 10 s au moins avant « Continuer quand même », aucune limitation proposée. |
+| 2 · Coffre à signatures multiples | Le virement cache un appel délégué | L'écran du coffre affiche un virement de 20 USDC, la charge est un appel délégué vers un contrat inconnu : Danger (fiche F09), même sans phrase (plancher). Étiquette « Scène synthétique, adresses factices ». |
+| | Version conforme | Même coffre, vrai virement de 20 USDC à Paul : « Aucun signal trouvé », « notre vérification est limitée », jamais vert. |
+| 3 · Me connecter | La page réclame un Permit | « Me connecter à ce site » contre un Permit illimité : « Ça ne correspond pas. », Danger. Aucune limitation : pour une signature il n'y a rien à corriger. |
+
+La troisième réponse, « Je n'ai pas pu vérifier cette demande. », s'affiche pour toute demande illisible (mode « Colle une transaction », un exemple du jeu public, et un test). Aucune scène ne la provoque.
+
+Le routeur « connu » (`0xe5e5…`) et le coffre (`0x5afe…`) sont des adresses inventées. La logique de limitation (`corrige` dans `js/scenarios.js`, bouton dans `js/holdup.js`) n'est pas le code de l'extension : c'est la même demande, réécrite avec 50 USDC, relue par le même moteur.
 
 ## Publier sur Vercel (site statique, aucun build)
 
@@ -56,7 +71,7 @@ Tous les chemins sont relatifs : la page marche aussi sous `https://compte.githu
 
 ```
 node --no-warnings webdemo/build_webdemo.mjs          # régénère engine/ et js/exemples_public.js (reproductible, hachages dans BUILD_INFO.json)
-node --no-warnings webdemo/tests/run_webdemo_tests.mjs # 63 vérifications, écrit out/RESULTATS.json
+node --no-warnings webdemo/tests/run_webdemo_tests.mjs # 81 vérifications, écrit out/RESULTATS.json
 ```
 
 Node 23.2 ou plus (`module.stripTypeScriptTypes`). Aucun paquet, aucun réseau.
@@ -78,7 +93,7 @@ Comment c'est fabriqué : `engine/src/*.mjs` est copié tel quel (seuls les suff
 - **Intention en texte libre non mesurée.** La démo propose des réponses à choix fermé. Clef et Jev n'ont jamais été appelés faute de clé : ne jamais écrire « Clef classe l'intention » sans mesure.
 - **Hors démo, le produit livré rate beaucoup.** 41,2 % de rappel sur 6 191 arnaques synthétiques (`redteam/PRODUIT_VS_BANC.md`, photo du 11 oct.). Sans le contexte du banc : rappel 99,2 % → 83,8 %, fausses alertes critical 0,9 % → 13,9 % (`banc_realiste/BANC_REALISTE.md`).
 - **Pas d'efficacité mesurée sur de vraies personnes** : les chiffres viennent de jeux de cas synthétiques écrits par l'équipe.
-- L'interface n'a pas été vérifiée à l'œil dans un vrai navigateur par l'auteur de cette page : la logique de la fenêtre et de la page est exécutée dans un mini-DOM de test sous Node, pas dans Chrome ni Safari. La mise en page (surtout sur téléphone) reste à regarder.
+- L'interface a été regardée à 1280 px dans le navigateur intégré (page, limites, fenêtre : question, « Ça ne correspond pas », limitation, coffre conforme). Pas vérifiée sur Safari, Firefox ni téléphone : la mise en page étroite reste à regarder. La logique est aussi exécutée dans un mini-DOM de test sous Node.
 
 ## Approximations connues (voir aussi `limites.html`)
 

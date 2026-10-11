@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="light">
-<title>Hold up — démo</title>
+<title>Hold up : démo</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="css/holdup.css">
 <script type="module" src="js/app.js"></script>
@@ -21,15 +21,15 @@
     <li><a href="limites.html">Limites</a></li>
   </ul></nav>
 </div></header>
-<div class="notice"><div class="wrap"><p>Démo : tout est fictif (site, portefeuille, adresses). Le moteur tourne dans cette page, aucune donnée n’est envoyée à un serveur. Ce n’est pas l’extension.</p></div></div>
+<div class="notice"><div class="wrap"><p>Chaîne simulée dans ton navigateur. Aucun vrai portefeuille, aucune clé, rien n’est envoyé. Ce n’est pas l’extension. <a href="limites.html">Ce que la démo est, et n’est pas.</a></p></div></div>
 
 <main class="wrap">
   <section id="view-demo" aria-labelledby="h-demo">
-    <h1 id="h-demo">Une signature piégée, retenue avant d’arriver au portefeuille</h1>
-    <p class="lede">Un portefeuille te prévient de ce qu’il reconnaît. Hold up vérifie ce que tu voulais faire : tu écris ton intention, il la compare à ce que la demande fait vraiment. Choisis un scénario. Le faux site demande une signature au faux portefeuille. Quand tu cliques sur « Signer », Hold up retient la demande et répond : ça correspond, ou ça ne correspond pas.</p>
+    <h1 id="h-demo">Une demande de signature, retenue avant le portefeuille</h1>
+    <p class="lede">Un portefeuille te prévient de ce qu’il reconnaît. Hold up compare ce que tu voulais faire à ce que la demande fait vraiment. Choisis une scène. Un faux site demande une signature à un faux portefeuille. Quand tu cliques sur « Signer », Hold up retient la demande et répond de l’une des trois façons : « Ça correspond », « Ça ne correspond pas », ou « Je n’ai pas pu vérifier ».</p>
     <div class="cols">
       <div>
-        <h2>1. Le faux site propose</h2>
+        <h2>1. Choisis une scène</h2>
         <ol id="scen-list"></ol>
         <div class="cfg">
           <label>Délai avant « Continuer quand même » :
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="card wallet">
-        <h2>2. Le faux portefeuille reçoit</h2>
+        <h2>2. Le faux portefeuille reçoit la demande</h2>
         <p id="wallet-id"></p>
         <div id="wallet-req"></div>
         <p id="wallet-out" role="status" aria-live="polite"></p>
