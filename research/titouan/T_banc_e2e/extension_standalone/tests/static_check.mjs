@@ -1,11 +1,14 @@
 // Controle statique du dossier extension/ : aucun secret, aucun eval / new Function / import dynamique, aucune URL externe, aucune API reseau, manifeste minimal.
-// Usage : node tests/static_check.mjs     (code retour 1 si un controle echoue)
+// Usage : node tests/static_check.mjs                (build livre par defaut, dossier extension/ : un seul appel reseau, vers le relais local)
+//         node tests/static_check.mjs --no-network   (build de repli, dossier extension_sans_reseau/ : aucun reseau)
+//         (code retour 1 si un controle echoue)
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const EXT = join(resolve(HERE, '..'), 'extension');
+const NO_NETWORK = process.argv.includes('--no-network');
+const EXT = join(resolve(HERE, '..'), NO_NETWORK ? 'extension_sans_reseau' : 'extension');
 const files = [];
 (function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : files.push(p); } })(EXT);
 const rel = (p) => relative(EXT, p).replace(/\\/g, '/');
@@ -67,12 +70,22 @@ m('service worker de type module', mf.background && mf.background.type === 'modu
 // storage : reglages, journal local et demandes retenues (storage.session) ; alarms : echeances de la retenue quand le service worker est arrete.
 // La fenetre de verdict (chrome.windows.create d'une page de l'extension) et les messages vers l'onglet demandeur ne demandent aucune permission.
 m('permissions = [storage, alarms, sidePanel] seulement (le panneau latéral ne demande aucun accès réseau ni aucun site)', JSON.stringify(mf.permissions) === '["storage","alarms","sidePanel"]', JSON.stringify(mf.permissions));
-m('aucune host_permission', !('host_permissions' in mf) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
-m('aucun appel reseau dans le dossier livre (le client du relais est un stub)', relayFetch === 0, String(relayFetch));
+if (NO_NETWORK) {
+  m('aucune host_permission', !('host_permissions' in mf) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
+  m('aucun appel reseau dans le dossier (le client du relais est un stub)', relayFetch === 0, String(relayFetch));
+  m('aucune cle d identifiant dans le manifeste', !('key' in mf));
+} else {
+  m('une seule host_permission : le relais local', JSON.stringify(mf.host_permissions) === JSON.stringify([RELAY_URL + '/*']) && !('optional_host_permissions' in mf), JSON.stringify(mf.host_permissions));
+  m('un seul appel reseau dans le dossier livre : fetch(RELAY + /classify) dans ' + RELAY_FILE, relayFetch === 1, String(relayFetch));
+  const client = readFileSync(join(EXT, RELAY_FILE), 'utf8');
+  m('le client du relais n envoie que { text } : ni en-tete d autorisation, ni cookie, ni cle', client.includes('body: JSON.stringify({ text: cleanText(text) })') && client.includes("credentials: 'omit'") && client.includes("redirect: 'error'") && !/authorization|bearer|api[_-]?key|cookie/i.test(client));
+  m('cle du manifeste : cle PUBLIQUE seulement (SubjectPublicKeyInfo RSA), aucune cle privee dans le dossier', typeof mf.key === 'string' && /^MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A[A-Za-z0-9+/]+=*$/.test(mf.key) && mf.key.length < 400);
+}
 m('aucune permission optionnelle', !('optional_permissions' in mf));
 m('pas de externally_connectable / web_accessible_resources / update_url', !('externally_connectable' in mf) && !('web_accessible_resources' in mf) && !('update_url' in mf));
 const csp = (mf.content_security_policy || {}).extension_pages || '';
-m("CSP : script-src self, connect-src 'none'", /script-src 'self'/.test(csp) && /connect-src 'none'(;|$)/.test(csp) && !/https?:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp), csp);
+if (NO_NETWORK) m("CSP : script-src self, connect-src 'none'", /script-src 'self'/.test(csp) && /connect-src 'none'(;|$)/.test(csp) && !/https?:|unsafe-eval|unsafe-inline|wasm-unsafe/.test(csp), csp);
+else m('CSP : script-src self, connect-src ' + RELAY_URL + ' et rien d autre', csp === "script-src 'self'; object-src 'self'; connect-src " + RELAY_URL, csp);
 m('seuls bridge.js / inject.js en scripts de contenu, fichiers presents', (mf.content_scripts || []).every((c) => c.js.every((f) => files.some((p) => rel(p) === f))));
 
 // pages de l'extension : scripts locaux seulement, aucun script en ligne, aucun gestionnaire en attribut
@@ -103,5 +116,5 @@ let fail = 0;
 for (const k of kinds) { const n = (byKind[k] || []).length; console.log(`${n === 0 ? 'ok    ' : 'ECHEC '} ${k} : ${n} occurrence(s)`); if (n) { fail++; byKind[k].slice(0, 15).forEach((f) => console.log(`        ${f.file}:${f.line}  ${f.txt}`)); } }
 for (const c of mcheck) { console.log(`${c.pass ? 'ok    ' : 'ECHEC '} manifeste : ${c.name}${c.detail ? ' (' + c.detail + ')' : ''}`); if (!c.pass) fail++; }
 console.log(`info : ${files.length} fichiers analyses ; ${hex64} constante(s) 0x+64 hex (aucune n'est assignee a un nom de secret)`);
-writeFileSync(join(resolve(HERE, '..'), 'out', 'STATIC.json'), JSON.stringify(res, null, 1));
+writeFileSync(join(resolve(HERE, '..'), 'out', NO_NETWORK ? 'STATIC_sans_reseau.json' : 'STATIC.json'), JSON.stringify(res, null, 1));
 process.exit(fail ? 1 : 0);

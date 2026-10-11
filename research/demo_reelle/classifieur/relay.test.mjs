@@ -174,3 +174,29 @@ test('HTTP : Host and Origin checks, size limit, and no key in any answer or log
     assert.equal((await call(p, { body: { text: TEXT }, headers: { origin: 'chrome-extension://' + 'b'.repeat(32) } })).status, 403);
   } finally { await new Promise((r) => pinned.close(r)); }
 });
+
+// ---- who may call, said at start ; refusals are logged by reason only ; the rate limit holds
+import { pinOf, RATE_PER_MIN } from './relay.mjs';
+test('HOLDUP_EXTENSION_ID : pinned, absent or malformed (fails closed) ; a refusal is logged without the text ; rate limit', async () => {
+  const ID = 'amiobigoknpbnkhfhidhdobjnmdciioe'; // identifier of the shipped build (public key of its manifest)
+  assert.deepEqual([pinOf({}).pinned, pinOf({}).valid], [false, true]);
+  assert.deepEqual([pinOf({ HOLDUP_EXTENSION_ID: ID }).pinned, pinOf({ HOLDUP_EXTENSION_ID: ID }).valid], [true, true]);
+  assert.equal(pinOf({ HOLDUP_EXTENSION_ID: 'not-an-id' }).valid, false);
+  const logs = [];
+  const f = mockFetch(() => json(200, { answers: answers('pay_someone', 0.9) }));
+  for (const [pin, origin, status] of [[ID, 'chrome-extension://' + ID, 200], [ID, 'chrome-extension://' + 'b'.repeat(32), 403], ['not-an-id', 'chrome-extension://' + ID, 403], [ID, 'moz-extension://' + ID, 403], [ID, 'chrome-extension://' + ID + '.evil.example', 403]]) {
+    const server = createRelay({ env: { ...CF, HOLDUP_EXTENSION_ID: pin }, fetchImpl: f, log: (l) => logs.push(l) });
+    await new Promise((r) => server.listen(0, '127.0.0.1', r));
+    try { assert.equal((await call(server.address().port, { body: { text: TEXT }, headers: { origin } })).status, status, pin + ' ' + origin); }
+    finally { await new Promise((r) => server.close(r)); }
+  }
+  assert.equal(logs.filter((l) => l === 'refused bad-origin').length, 4);
+  assert.ok(logs.every((l) => !l.includes('Paul') && !l.includes(CF.CF_API_TOKEN)), 'neither the text nor a key in the log');
+  const server = createRelay({ env: {}, fetchImpl: f });
+  await new Promise((r) => server.listen(0, '127.0.0.1', r));
+  try {
+    const port = server.address().port;
+    const all = await Promise.all(Array.from({ length: RATE_PER_MIN + 5 }, () => call(port, { body: { text: 'payer' }, headers: { connection: 'close' } })));
+    assert.equal(all.filter((r) => r.status === 200).length, RATE_PER_MIN); assert.equal(all.filter((r) => r.status === 429).length, 5);
+  } finally { await new Promise((r) => server.close(r)); }
+});

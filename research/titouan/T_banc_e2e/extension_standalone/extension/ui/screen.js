@@ -2,13 +2,13 @@
  *   HoldupScreen.mount(root, { onSubmit(text), onCancel(via), onContinue() }) -> { show(screen, key), end(text) }
  * `screen` comes from the service worker (gatekeeper.js viewOf -> view.screen) :
  *   { kind: 'question', title, placeholder }
- *   { kind: 'answer', outcome: 'match' | 'mismatch' | 'unverifiable', headline, line, addresses, labels, leftMs, noModel, autoMs }
+ *   { kind: 'answer', outcome: 'match' | 'mismatch' | 'unverifiable', headline, line, addresses, labels, leftMs, noModel, model, autoMs }
  *   autoMs (only with 'match' and no delay) : no "Continuer", onContinue() is called by itself after that time.
  * The worker stays the judge : this file only disables "Continuer" while the delay runs, the worker refuses it anyway. */
 (function (global) {
   'use strict';
   var T = { cancel: 'Annuler', check: 'Vérifier', checking: 'Vérification…', go: 'Continuer', comparing: 'Je compare ta phrase à la demande.',
-    noModel: 'intention classée sans modèle', ready: 'Tu peux continuer.' };
+    noModel: 'intention classée sans modèle', byModel: { clef: 'intention classée par Clef', jev: 'intention classée par Jev' }, ready: 'Tu peux continuer.' };
 
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
   // "Continuer sera possible dans 24 s." : one quiet line, no clock face.
@@ -82,6 +82,7 @@
         f.col.appendChild(addressBlock(s.labels.actual, s.addresses.actual, s.addresses.actualFull));
       }
       if (s.noModel) f.col.appendChild(el('p', 'hu-note', T.noModel));
+      else if (s.model && T.byModel[s.model]) f.col.appendChild(el('p', 'hu-note', T.byModel[s.model]));
       var live = el('span', 'hu-sr'); live.setAttribute('role', 'status'); f.col.appendChild(live);
       var match = s.outcome === 'match';
       if (match && s.autoMs > 0) {
