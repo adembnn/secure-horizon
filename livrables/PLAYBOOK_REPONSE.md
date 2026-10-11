@@ -14,7 +14,7 @@ Une demande de signature ou de transaction passe par l'extension avant d'atteind
 | Ça ne correspond pas | Alerte avec une ligne : ce que la personne a écrit, ce que la demande donne. Annuler est visible. Pour une transaction qui accorde un droit plus large que le montant écrit, Hold up remplace lui-même le droit par ce montant sous conditions (une seule somme lisible, jeton connu, rien d'autre ne sort ; ligne « Droit limité à 50 USDC », prouvé en Node, pas dans un vrai Chrome) ; sinon la ligne dit comment le ramener. Pour une signature, elle dit que le droit ne peut pas être limité. |
 | Pas pu vérifier | Phrase trop vague après une relance, appel illisible, adresse non écrite. La fenêtre le dit. Elle n'affiche jamais « correspond » par défaut. |
 
-Durée de retenue après une alerte : sur l'écart « montant écrit contre droit plus large » d'une transaction, plus d'attente de 30 s (Q16, appliqué) ; dans les autres cas, ne pas citer de durée. Dans tous les cas : une ligne de verdict et une ligne de décision dans un journal local. Version autonome : 500 lignes, non chaînées. Version serveur : chaîné par hachage (sha256).
+Durée de retenue après une alerte : sur l'écart « montant écrit contre droit plus large » d'une transaction, plus d'attente de 30 s (Q16, appliqué) ; dans les autres cas, ne pas citer de durée. Dans tous les cas : une ligne de verdict et une ligne de décision dans un journal local. Version autonome : 500 lignes, chaînées par hachage (`extension/journal_chain.js`). Version serveur : chaîné par hachage (sha256).
 
 ## 3. Ce qui reste humain
 
@@ -48,7 +48,7 @@ Journal chaîné (version serveur seulement) ; ancrage de la racine de Merkle pa
 
 ## 8. Limites
 
-- Avant ancrage, le détenteur du fichier peut réécrire tout le journal. Dans le build autonome, il n'y a pas de chaîne du tout.
+- Avant ancrage, le détenteur du fichier peut réécrire tout le journal. Dans le build autonome, la chaîne couvre les 500 dernières lignes.
 - Verdict et décision sont appariés par site, méthode et ordre, faute d'identifiant de requête.
 - `revoke.mjs` lit les événements depuis un bloc donné ; sur un RPC public la plage est plafonnée. Le retrait coûte des frais et arrive souvent après le vol.
 - Fiches et retraits en ligne de commande, sans bouton dans l'extension.

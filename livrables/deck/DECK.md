@@ -1,16 +1,31 @@
-# Deck Hold up : 9 slides (pitch V7)
+# Deck Hold up : 8 slides (système de design Hold up)
 
-Base : `research/titouan/PITCH_V7_TITOUAN.md` (fusion du pitch d'Adem, des notes du round 3 et du jeu aveugle) et `livrables/PITCH_5MIN.md`. Chiffres : `livrables/CHIFFRES.md` seulement. Le fichier `holdup.pptx` est généré par `livrables/deck/build_deck.js` (`NODE_PATH=<dossier node_modules avec pptxgenjs> node livrables/deck/build_deck.js`). Régénéré le 11 oct. 2026 avec `Documents\Ghg_tracker\node_modules`, sans installer de paquet. Les notes orateur sont dans `build_deck.js`.
-La démo elle-même se joue dans le navigateur (deux fenêtres Neve) : les slides 1 à 4 servent de secours et de support, les cartons 5 à 9 sont projetés pendant la partie de Titouan.
+Le fichier `holdup.pptx` est généré par `livrables/deck/build_deck.js` (`NODE_PATH=<dossier node_modules avec pptxgenjs> node livrables/deck/build_deck.js`). Régénéré le 11 oct. 2026 à 10h53, sans paquet ajouté au dépôt. Les notes orateur sont dans `build_deck.js`.
 
-1. **Tout service peut être compromis.** Neve, droit sur tout l'USDC ; 48 % de droits illimités sur Ethereum (mesure interne) ; les clés de la maison au plombier.
-2. **Écrire, comparer, laisser décider.** J'écris, la demande arrive, Hold up. « Ça correspond, d'après ce que Hold up sait lire » : pas une garantie. Règles de base sans phrase.
-3. **Le même site, piraté.** Sans Hold up : 100 USDC, 0 USDC (script qui lit la chaîne). Avec Hold up : ça ne correspond pas, Annuler, ou droit limité à 50 USDC. Légende : compte de test, copie locale d'Avalanche, portefeuille simulé.
-4. **Après l'alerte : révoquer en un clic.** Révoquer, fiche d'incident, cahier rejouable. Pied : démo web, portefeuille simulé, pas encore dans l'extension.
-5. **C'est déjà arrivé.** LI.FI : droits illimités vidés, droits limités rien perdu (153 portefeuilles, 11,6 M$ en petit, non dits à l'oral).
-6. **Notre preuve : un jeu aveugle.** Barres 65 % (sans phrase) et 87 % (avec) ; 10 % (seuil) contre 15 % (mesuré). Limite écrite : auteur de la même famille de modèles.
-7. **La phrase, le code, le cahier.** Trois colonnes. Aucune conformité déclarée.
-8. **Contrôlé aujourd'hui, pas encore.** Deux colonnes, d'après les 58 paires d'essai. Copie locale d'Avalanche, Fuji préparé non exécuté.
-9. **Cesser de donner plus que nécessaire.** Gratuit pour la personne ; API verdict avant retrait, licence SDK, mandats pour agents ; pilotes recherchés ; phrase de fin d'Adem.
+Règle du deck : une phrase, une preuve montrée, et en pied de chaque slide « Dans le dépôt : » suivi du fichier où le jury vérifie. Tous les chemins cités sont suivis par git (contrôlé par `git ls-files`). Le détail et les réserves vont dans les notes orateur.
 
-Contrôles : aucune slide ne contient un chiffre absent de `CHIFFRES.md`, ni « jamais de vert », « bloque », « sécurisé », « premier », ni le 1,3 %. Rendu image non vérifié (pas de LibreOffice sur la machine) : ouvrir dans PowerPoint avant de projeter, surtout les slides 6 (barres) et 9.
+Design : `docs/design/system/DESIGN.md`. Fond noir, texte blanc, deux gris, police du système de design (`tokens.css`, `--hu-font` : Segoe UI Variable Text, graisses 400 et 600). La police n'est pas embarquée dans le `.pptx` : sur une machine sans Segoe UI Variable, projeter `holdup.pdf`, qui l'embarque. Aucune couleur, aucune carte, aucun filet, aucune colonne de texte. Mots du lexique : « autorisation », « retirer ».
+
+| # | Ce qui est montré | Dans le dépôt |
+|---|---|---|
+| 1 | « 81 minutes » en très grand : Aerodrome piraté, personne ne le signale (trame d'Adem). En second : une autorisation sur trois est illimitée sur Avalanche. Aucune mention d'Ethereum | `research/demo_reelle/RECHERCHE_douleurs_secondaires.md` (C.1), `result_avax.json` |
+| 2 | « Tu écris. Je compare. Tu décides. » : deux écrans de la planche de design (question, « Ça ne correspond pas ») et les deux gestes : ne rien envoyer, ou limiter à 50 USDC puis envoyer ; rien ne part tout seul | `docs/design/system/planche.html` (système de design, en cours d'intégration) |
+| 3 | La scène racontée en trois temps (tu échanges 50, le site demande tout, il est piraté plus tard), puis « il te reste 0 USDC » sans Hold up, « 50 USDC » avec | `research/demo_reelle/site_echange/test/preuve_piratage.mjs` (chaîne locale) |
+| 4 | « Une autorisation déjà donnée ? Tu la retires. » : capture du panneau | `research/titouan/T_banc_e2e/extension/revoke.js`, `tests/unit/revoke.test.mjs` |
+| 5 | LI.FI, juillet 2024 : illimitées vidées, limitées rien perdu | `livrables/CHIFFRES.md` B7, rapport de LI.FI |
+| 6 | Jeu aveugle, 250 cas, moteur de comparaison : 65 % et 87 % ; seuil 10 %, mesuré 15 % | `research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md`, `preuves/ECARTS_LIVRABLES.md` |
+| 7 | « 36 parcours. Notre testeuse s'est fait piéger 4 fois. », les 4 fois après « Continuer » malgré l'alerte : capture réelle de l'extension pendant l'essai ; « Ce que Hold up ne fait pas encore », en trois phrases | `coord/reports/testeurs/3_prudente_clavier.md`, `preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md` |
+| 8 | La phrase de fin d'Adem, seule (le modèle économique est en notes orateur) | `research/titouan/BM2/BM_MODELE.md`, `BM_LABEL.md` |
+
+Retiré parce que non vérifiable tel quel :
+- « 217 tests, 44 contrôles sur 44 » : rejoué le 11 oct. à 10h49 sur l'arbre de travail (`node --test tests/unit/*.test.mjs` dans `research/titouan/T_banc_e2e/extension/`), le résultat est 225 tests, 213 réussis, 12 en échec.
+- La slide « La phrase, le code, le cahier » (trois colonnes de texte) : son contenu est dans les notes de la slide 2.
+- Toute phrase laissant entendre que l'extension attrape 87 % : le jeu aveugle mesure le moteur de comparaison, pas l'extension livrée.
+
+Réserves :
+- `preuve_piratage.mjs` demande une chaîne locale déployée (`npm run demo:deploy -- --network localhost`) : le jury ne le rejoue pas en une commande.
+- Les écrans des slides 2 et 4 sont ceux du système de design, pas encore tous dans le code ; l'interface réelle de l'extension est celle de la slide 7, et son bouton s'appelle encore « Révoquer ».
+- La testeuse est un agent qui joue un personnage, pas une personne : c'est écrit sur la slide.
+- `PITCH_5MIN.md` annonce encore un carton « la phrase, le code, le cahier » et dit « révoquer », « droit », « cent, zéro » : à aligner.
+
+Rendu vérifié par export PowerPoint en images, les huit slides relues.
