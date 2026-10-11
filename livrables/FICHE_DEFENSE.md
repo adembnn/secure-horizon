@@ -1,31 +1,40 @@
-# Fiche de défense : Hold up (Track 1, Guardians of Value)
+# Fiche de défense : Hold up
 
-**Cible.** Toute personne qui veut garder la main sur ce qu'elle autorise sur la blockchain.
-**Menace.** Un site compromis. Camille veut échanger 50 USDC ; le site demande un droit illimité, ou une signature « de connexion » qui accorde un droit. MetaMask affiche « illimité » sans alerte pour une adresse non listée (code public, non observé à l'écran).
-**Réponse.** Extension Chrome devant le portefeuille, sans clé ni signature. Camille écrit ce qu'elle veut faire ; du code lit montant, jeton et adresse et répond « Ça correspond » (sans garantie), « Ça ne correspond pas à ce que tu as écrit. » (le gant, Annuler visible) ou « Je n'ai pas pu vérifier ». Sur une transaction, le bouton « Limiter à 50 USDC et envoyer » ramène l'autorisation au montant écrit : Camille clique, rien ne part tout seul. Boutons « Annuler » et « Continuer ». Panneau latéral : « Retirer l'autorisation » (branché, testé en Node, jamais dans un vrai Chrome).
-**Démo.** Même site Neve, piraté : sans Hold up, un droit illimité vide le compte de test, 100 vers 0 (`research/demo_reelle/site_echange/test/preuve.mjs`, hors navigateur) ; avec, « Ça ne correspond pas à ce que tu as écrit. », puis Annuler ou « Limiter à 50 USDC et envoyer ». Preuve rejouable du site piraté plus tard (`preuve_piratage.mjs`) : sans Hold up, après l'échange de 50, le pirate prend les 50 restants (50 vers 0) ; avec l'autorisation limitée à 50, il prend 0. Portefeuille simulé, chaîne locale.
+**Pour toute personne qui veut garder la main sur ce qu'elle autorise sur la blockchain.** Avalanche.
 
-**Métriques** (référence : `METRIQUES.md`). Un seul chiffre de détection : le jeu aveugle, mesuré par notre moteur de comparaison, pas par l'extension livrée.
+## Problème
 
-| Mesure | Valeur |
-|---|---|
-| **Jeu aveugle, moteur de comparaison (pas l'extension)**, 250 cas, code seul : 150 arnaques, 100 jumeaux, autre auteur, ouvert une fois, moteur figé | Rappel **87,3 %** [81,1 ; 91,7] ; faux rouges **15,0 %** [9,3 ; 23,3] ; faux avertissement ou rouge 30 % |
-| Précision, même jeu (60 % d'arnaques, pas la précision réelle) | Signalés justes 131/161 = **81,4 %** ; rouges justes 114/129 = **88,4 %** |
-| Plancher sans phrase | Rappel 64,7 %. Gain de la phrase : +34 arnaques signalées |
-| Critères publiés avant | Rappel au moins 80 % : **atteint**. Faux rouges au plus 10 % : **non atteint** |
-| **Extension livrée, contrôle scellé de 2 662 paires**, sans modèle, build qui plantait sur 19,5 % des demandes | Attrapé **49,4 %** [47,1 ; 51,8] ; raté 2,7 % ; « pas pu vérifier » 31,2 % ; en panne 16,7 % ; fausses alertes **8,2 %** [6,1 ; 10,8] |
-| Extension, réserve scellée de 2 673 paires, ouverte une fois : sans modèle, build `6b9de2f` antérieur au build livré, un fichier de décision modifié hors commit | Attrapé **74,6 %** ; raté 0 ; « pas pu vérifier » 25,4 % ; fausses alertes **13,8 %** (71/515 ; 27,2 % des 261 vérifiées) ; conformes non vérifiées 49,3 % (254/515) (`preuves/RESULTAT_RESERVE_MOTS.md`) |
-| **Temps de détection** (code de l'extension sous Node, sans fenêtre) | Local : p50 2,0 ms, p95 13,0 ms (n = 2 662). Avec le modèle : p50 387 ms, p95 1 436 ms (n = 2 101). De la demande du site au verdict affiché, dans un navigateur : non mesuré de façon reproductible |
-| **Temps de réponse** | Automatique : celui du verdict. Humain (un geste : Annuler, Continuer ou « Limiter à 50 USDC et envoyer ») : non mesuré, aucun essai avec des personnes |
+Camille veut échanger 50 USDC. Le site est compromis. Il lui demande une autorisation illimitée, ou une signature de « connexion » qui accorde en fait un droit.
 
-**Limites du jeu aveugle.** Auteur : une IA de la même famille que la nôtre. Cas synthétiques, mesurés en Node sur le moteur de comparaison, pas sur l'extension ni dans Chrome. L'extension livrée, mesurée elle-même, fait moins bien (ligne du contrôle scellé ci-dessus). Points faibles : achat NFT à prix quasi nul (11 des 15 faux rouges), jeton différent (63 %).
+34 % des autorisations de dépense lues sur Avalanche sont illimitées, une sur trois. Statut : notre mesure, sur un échantillon de blocs (7 103 sur 20 753), des événements et non des personnes.
 
-**Où va la phrase.** La phrase écrite, avec ce que la personne y a mis, part du navigateur vers un relais local qui garde la clé, puis vers le modèle hébergé. Ni l'adresse du compte ni la demande du site ne sont envoyées. Sur le jeu aveugle, le modèle n'a baissé aucune alerte du plancher (moteur de comparaison). Dans l'extension, avec le modèle, les ratés montent de 2,7 % à 3,7 %.
+## Solution
 
-**Trace.** Journal chaîné exportable, vérifiable hors ligne, y compris dans le build autonome : ligne modifiée, retirée ou déplacée au milieu détectée. Fiche technique de traçabilité faite (qui a agi, d'où ça vient, quand, règles, preuve de chaîne) : `node livrables/outils/fiche_tracabilite.mjs holdup-journal.json --n 4 --out fiche.html`, depuis `research/titouan/T_banc_e2e` (exemple : `exemple/fiche_ligne4.html`). Champs « qui a décidé », « droit limité », « règles » : en cours d'ajout. Pas d'ancrage (D-017) : une réécriture complète ne se voit pas. Deux inexactitudes connues du journal (passage automatique noté comme confirmation humaine ; limitation à 50 non notée).
-**Modèle économique (hypothèse à valider avec des pilotes, aucun revenu aujourd'hui).** Gratuit pour les personnes. Plus tard, une plateforme qui demande l'autorisation exacte (50 USDC pour un échange de 50, pas « tout, pour toujours ») pourra afficher « Vérifié par Hold up ». C'est elle qui paie. Critères publics, mesurés sur ses vraies demandes, pas de classement payé.
-**Qui lit l'alerte.** L'équipe fraude de la plateforme qui intègre Hold up ; pour un particulier, la personne elle-même.
+Hold up est une extension Chrome placée devant le portefeuille. Elle n'a ni clé ni signature. Camille écrit ce qu'elle veut faire. Le code lit montant, jeton et adresse de la demande, puis répond : « Ça correspond », « Ça ne correspond pas à ce que tu as écrit » ou « Je n'ai pas pu vérifier ».
 
-**Ce qu'on ne couvre pas.** Sur 58 paires d'essai, 18 contrôlées : ni sens d'un échange, ni durée, ni destinataire d'un droit (perte bornée, pas évitée). Hold up ne reconnaît pas un contrat malveillant, il borne ce qu'on lui laisse. Un droit sans échéance reçoit « ça correspond » dans 21 cas sur 43 du contrôle. Phrases de test écrites par des agents ; jeux conçus par notre équipe. Rien sur un réseau public. Fraude voulue, Ledger direct, téléphone. Jamais essayé avec un vrai MetaMask ; Fuji non déployé ; revue de sécurité non vérifiée dans Chrome. Aucune conformité déclarée (`SLIDE_CONFORMITE.md`).
+**Automatique.** Si ça correspond, le portefeuille s'ouvre seul. Sinon, une alerte affiche une ligne : ce qui est écrit, ce que la demande donne. Annuler reste visible. Si le droit demandé dépasse le montant écrit, la ligne propose de le ramener à 50 USDC. Le bouton « Retirer l'autorisation » défait un droit déjà donné.
 
-**Référentiels.** NIST CSF 2.0 : DE.AE-02, DE.AE-07, DE.CM-09, RS.MI-01, RS.AN-06, PR.PS-04. ATT&CK : T1657, T1566, T1204 (`MAPPING_REFERENTIELS.md`).
+**Humain.** Camille décide : Annuler, Continuer ou limiter. Rien ne part sans son clic. Qui est alerté : elle seule sur le moment. Ensuite, l'équipe fraude de la plateforme qui intègre Hold up lit le journal. Pour un particulier, c'est lui-même.
+
+**Documenté.** Chaque décision entre dans un journal chaîné. Il s'exporte et se vérifie hors ligne : une ligne modifiée, retirée ou déplacée au milieu est détectée. Une fiche de traçabilité dit qui a agi, d'où vient la demande, quand.
+
+**Modèle économique (hypothèse, aucun revenu aujourd'hui).** Gratuit pour les personnes. Plus tard, une plateforme qui demande l'autorisation exacte (50 USDC pour un échange de 50, pas « tout, pour toujours ») pourra afficher « Vérifié par Hold up ». C'est elle qui paie. Critères publics, mesurés sur ses vraies demandes, pas de classement payé.
+
+## Tests et résultats
+
+Un jeu aveugle de 250 cas : 150 arnaques, 100 demandes honnêtes jumelles. Auteur différent de celui des règles. Ouvert une seule fois. Mesuré sur notre moteur de comparaison, pas sur l'extension.
+
+- **87 %** des demandes dangereuses sont signalées (131 sur 150). Statut : jeu aveugle synthétique, écrit par une IA de la même famille que la nôtre.
+- **65 %** sans la phrase de Camille (97 sur 150). Statut : même mesure. La phrase ajoute 34 arnaques signalées.
+- **15 %** de fausses alertes rouges sur les demandes honnêtes. Statut : même mesure. Notre objectif était 10 % au plus : non atteint.
+
+Preuve rejouable, portefeuille simulé, chaîne locale : sans Hold up, un site piraté vide le compte de test (100 vers 0). Avec le droit limité à 50, le pirate prend 0.
+
+## Limites connues
+
+- Pas d'essai réel avec un vrai MetaMask. Le bouton « Retirer l'autorisation » est testé hors navigateur, jamais dans un vrai Chrome.
+- Pas d'ancrage du journal sur une blockchain (décision D-017). Une réécriture complète du fichier ne se voit pas.
+- Fraude consentie non couverte : si la personne veut vraiment envoyer, Hold up ne l'arrête pas.
+- Le modèle de langage peut dégrader certains résultats. Dans l'extension, les ratés montent de 2,7 % à 3,7 %.
+- 15 % de fausses alertes rouges, au-dessus de notre objectif.
+- Ni le sens d'un échange, ni la durée, ni le destinataire d'un droit.
