@@ -1,0 +1,205 @@
+{
+ "siteId": "1inch",
+ "url": "https://app.1inch.io/",
+ "arm": "control",
+ "started": "2026-10-11T00:55:13.290Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://1inch.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://1inch.com/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://1inch.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://1inch.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://1inch.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://1inch.com/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "835A3D49C1058EE33A8D1394E1624559",
+   "status": 200,
+   "url": "https://1inch.com/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'self' https://gnosis-safe.io https://dev.gnosis-safe.io https://dapp-browser.apps.ledger.com https://ledger-live-platform-apps.vercel.app https://bsc.gnosis-safe.io https://polygon.gnosis-safe.io https://tmm.world https://chamberfi.com https://dh-pre-prod.vercel.app/ https://app.safe.global https://*.coinshift.xyz https://connect.trezor.io https://verify.walletconnect.com https://wallet-v2.blocto.app https://1inch.cloudflareaccess.com https://buy.moonpay.com https://*.blockscout.com https://1inch.github.io https://connect.solflare.com https://1inch.com https://staging.1inch.com; frame-src data: blob: 'self' https://challenges.cloudflare.com https://app.safe.global https://*.coinshift.xyz https://connect.trezor.io https://verify.walletconnect.com https://wallet-v2.blocto.app https://dapp-browser.apps.ledger.com https://1inch.cloudflareaccess.com https://buy.moonpay.com https://sdk.prod.innerworks.me https://verify.walletconnect.org https://connect.solflare.com https://subscribe-forms.beehiiv.com https://www.youtube.com https://chamberfi.com https://youtube.com;",
+   "cspRO": "default-src 'self';base-uri 'self';object-src 'none';form-action 'self';script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' 'report-sample' https://widget.intercom.io https://js.intercomcdn.com https://static.moonpay.com https://www.gstatic.com www.googletagmanager.com https://cdn.rudderlabs.com;style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com;font-src 'self' data: https://fonts.reown.com https://fonts.gstatic.com https://fonts.intercomcdn.com;img-src 'self' data: blob: https:;media-src 'self' data: blob: https://cdn.1inch.com https://storage.ghost.io;worker-src 'self' blob:;frame-src data: blob: 'self' https://challenges.cloudflare.com https://app.safe.global https://*.coinshift.xyz https://connect.trezor.io https://verify.walletconnect.com https://wallet-v2.blocto.app https://dapp-browser.apps.ledger.com https://1inch.cloudflareaccess.com https://buy.moonpay.com https://sdk.prod.innerworks.me https://verify.walletconnect.org https://connect.solflare.com https://subscribe-forms.beehiiv.com https://www.youtube.com https://chamberfi.com https://youtube.com;connect-src *, connect-src 'self' api.safe.global https://*.1inch.io wss://*.1inch.io https://*.1inch.com wss://*.1inch.com https://1inch-network.ghost.io api.lever.co https://*.ingest.us.sentry.io https://api-eu.mixpanel.com https://api.rudderstack.com https://cdn.rudderlabs.com https://*.walletconnect.org wss://*.walletconnect.org api.web3modal.org https://*.coinbase.com wss://www.walletlink.org https://www.walletlink.org https://*.ledger.com wss://*.ledger.com https://cloud-sync-backend.api.aws.prd.ldg-tech.com www.googletagmanager.com www.google-analytics.com analytics.google.com region1.analytics.google.com stats.g.doubleclick.net https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://sdk.prod.innerworks.me https://*.intercom.io wss://*.intercom.io https://*.intercomcdn.com ethereum.publicnode.com bsc-dataseed1.ninicoin.io polygon.drpc.org mainnet.optimism.io arb1.arbitrum.io rpc.gnosischain.com api.avax.network mainnet.era.zksync.io mainnet.base.org rpc.linea.build mainnet.unichain.org rpc.soniclabs.com rpc.mainnet.chain.robinhood.com rpc.monad.xyz evm.cronos.org rpc.hyperliquid.xyz api.merkl.xyz robinhoodchain.blockscout.com",
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "835A3D49C1058EE33A8D1394E1624559",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://1inch.com/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'self' https://gnosis-safe.io https://dev.gnosis-safe.io https://dapp-browser.apps.ledger.com https://ledger-live-platform-apps.vercel.app https://bsc.gnosis-safe.io https://polygon.gnosis-safe.io https://tmm.world https://chamberfi.com https://dh-pre-prod.vercel.app/ https://app.safe.global https://*.coinshift.xyz https://connect.trezor.io https://verify.walletconnect.com https://wallet-v2.blocto.app https://1inch.cloudflareaccess.com https://buy.moonpay.com https://*.blockscout.com https://1inch.github.io https://connect.solflare.com https://1inch.com https://staging.1inch.com; frame-src data: blob: 'self' https://challenges.cloudflare.com https://app.safe.global https://*.coinshift.xyz https://connect.trezor.io https://verify.walletconnect.com https://wallet-v2.blocto.app https://dapp-browser.apps.ledger.com https://1inch.cloudflareaccess.com https://buy.moonpay.com https://sdk.prod.innerworks.me https://verify.walletconnect.org https://connect.solflare.com https://subscribe-forms.beehiiv.com https://www.youtube.com https://chamberfi.com https://youtube.com;",
+  "cspRO": "default-src 'self';base-uri 'self';object-src 'none';form-action 'self';script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' 'report-sample' https://widget.intercom.io https://js.intercomcdn.com https://static.moonpay.com https://www.gstatic.com www.googletagmanager.com https://cdn.rudderlabs.com;style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com;font-src 'self' data: https://fonts.reown.com https://fonts.gstatic.com https://fonts.intercomcdn.com;img-src 'self' data: blob: https:;media-src 'self' data: blob: https://cdn.1inch.com https://storage.ghost.io;worker-src 'self' blob:;frame-src data: blob: 'self' https://challenges.cloudflare.com https://app.safe.global https://*.coinshift.xyz https://connect.trezor.io https://verify.walletconnect.com https://wallet-v2.blocto.app https://dapp-browser.apps.ledger.com https://1inch.cloudflareaccess.com https://buy.moonpay.com https://sdk.prod.innerworks.me https://verify.walletconnect.org https://connect.solflare.com https://subscribe-forms.beehiiv.com https://www.youtube.com https://chamberfi.com https://youtube.com;connect-src *, connect-src 'self' api.safe.global https://*.1inch.io wss://*.1inch.io https://*.1inch.com wss://*.1inch.com https://1inch-network.ghost.io api.lever.co https://*.ingest.us.sentry.io https://api-eu.mixpanel.com https://api.rudderstack.com https://cdn.rudderlabs.com https://*.walletconnect.org wss://*.walletconnect.org api.web3modal.org https://*.coinbase.com wss://www.walletlink.org https://www.walletlink.org https://*.ledger.com wss://*.ledger.com https://cloud-sync-backend.api.aws.prd.ldg-tech.com www.googletagmanager.com www.google-analytics.com analytics.google.com region1.analytics.google.com stats.g.doubleclick.net https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://sdk.prod.innerworks.me https://*.intercom.io wss://*.intercom.io https://*.intercomcdn.com ethereum.publicnode.com bsc-dataseed1.ninicoin.io polygon.drpc.org mainnet.optimism.io arb1.arbitrum.io rpc.gnosischain.com api.avax.network mainnet.era.zksync.io mainnet.base.org rpc.linea.build mainnet.unichain.org rpc.soniclabs.com rpc.mainnet.chain.robinhood.com rpc.monad.xyz evm.cronos.org rpc.hyperliquid.xyz api.merkl.xyz robinhoodchain.blockscout.com",
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "1inch | Swap Crypto Tokens at the Best Rates in DeFi",
+  "bodyLen": 4709,
+  "nodes": 975,
+  "readyState": "complete",
+  "head": "Skip to main content Learn more Personal Personal Business Swap Trade Limit Market Terminal Aqua About Create position Positions overview Incentives Leaderboard Learn Portfolio Go to... Connect wallet Swap Trade Limit Ma"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 55,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect wallet",
+   "tag": "BUTTON",
+   "x": 1162.4375,
+   "y": 36,
+   "top": 16
+  },
+  "all": [
+   "1:Connect wallet"
+  ]
+ },
+ "clicked1": "Connect wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 3,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 938.6875,
+   "y": 536,
+   "area": 2097
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "1inch | Swap Crypto Tokens at the Best Rates in DeFi",
+  "bodyLen": 4706,
+  "nodes": 995,
+  "readyState": "complete",
+  "head": "Skip to main content Learn more Personal Personal Business Swap Trade Limit Market Terminal Aqua About Create position Positions overview Incentives Leaderboard Learn Portfolio Go to... 0x1111…1111 Swap Trade Limit Marke"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 60,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 10,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://1inch.com/",
+ "ms": 11968
+}

@@ -11,6 +11,7 @@ const WARN_CODES = new Set(['new_contract', 'high_balance_share', 'unlimited_app
 const sevOfReason = (code) => (WARN_CODES.has(code) ? 'warn' : 'critical');
 const ademLevel = (reasons) => reasons.reduce((m, r) => worst(m, r.sev || sevOfReason(r.code)), 'ok');
 
+const ZERO_ADDR = '0x' + '0'.repeat(40);
 const isKnownProtocol = (ctx, a) => !!a && (ctx.knownSpenders || []).includes(String(a).toLowerCase());
 
 export function applyPolicy({ eff, adem, ctx, intent, request }) {
@@ -34,8 +35,8 @@ export function applyPolicy({ eff, adem, ctx, intent, request }) {
 
   // ---- F4 : une délégation EIP-7702 vers une implémentation de la liste connue (auditée) sur une chaîne précise n'est pas un abandon de compte à un inconnu :
   // warn (à confirmer) au lieu de critical. chain_id = 0 (toutes chaînes) et cible inconnue restent critical.
-  if (isOn('F4') && eff.delegation && isKnownProtocol(ctx, eff.delegation.to) && !(eff.delegations || []).some((d) => d.chainId === 0 && String(d.to) !== '0x0000000000000000000000000000000000000000')) {
-    const allKnown = (eff.delegations || []).filter((d) => String(d.to) !== '0x0000000000000000000000000000000000000000').every((d) => isKnownProtocol(ctx, d.to));
+  if (isOn('F4') && eff.delegation && isKnownProtocol(ctx, eff.delegation.to) && !(eff.delegations || []).some((d) => d.chainId === 0 && String(d.to) !== ZERO_ADDR)) {
+    const allKnown = (eff.delegations || []).filter((d) => String(d.to) !== ZERO_ADDR).every((d) => isKnownProtocol(ctx, d.to));
     if (allKnown) {
       flags = flags.map((f) => (f.code === 'delegation_7702' && f.severity === 'critical' ? { ...f, severity: 'warn' } : f));
       reasons = reasons.map((r) => (r.code === 'unexpected_delegation' || r.code === 'unexpected_delegation_connect' ? { ...r, sev: 'warn' } : r));

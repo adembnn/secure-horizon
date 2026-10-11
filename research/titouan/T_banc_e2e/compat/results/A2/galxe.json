@@ -1,0 +1,238 @@
+{
+ "siteId": "galxe",
+ "url": "https://app.galxe.com/",
+ "arm": "control",
+ "started": "2026-10-11T00:56:44.192Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "personal_sign",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_revokePermissions",
+   "top": true,
+   "f": "https://app.galxe.com/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 401 ()",
+   "url": "https://bscrpc.com/"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "079EC59C9A07E14E46252D2BF581BDB5",
+   "status": 200,
+   "url": "https://app.galxe.com/",
+   "mime": "text/html",
+   "csp": "frame-ancestors 'none';",
+   "cspRO": "default-src https: 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.galxe.com *.galxestatic.com *.google-analytics.com openfpcdn.io *.googletagmanager.com telegram.org *.geetest.com *.geevisit.com *.gsensebot.com *.particle.network www.gstatic.com app.intercom.io widget.intercom.io js.intercomcdn.com; connect-src 'self' ws: wss: relay.walletconnect.com data: galxe.com *.galxe.com *.galaxy.eco *.google-analytics.com *.particle.network *.intercom.io *.space.id *.telegram.org *.onflow.org www.googletagmanager.com *.latch.io *.galxestatic.com li.quest *.walletconnect.com *.binance.info pbs.twimg.com static.geetest.com s2.coinmarketcap.com static.debank.com raw.githubusercontent.com *.telegram.org telegram.org via.intercom.io api.intercom.io api.au.intercom.io api.eu.intercom.io api-iam.intercom.io api-iam.eu.intercom.io api-iam.au.intercom.io api-ping.intercom.io *.intercom-messenger.com wss://*.intercom-messenger.com nexus-websocket-a.intercom.io wss://nexus-websocket-a.intercom.io nexus-websocket-b.intercom.io wss://nexus-websocket-b.intercom.io nexus-europe-websocket.intercom.io wss://nexus-europe-websocket.intercom.io nexus-australia-websocket.intercom.io wss://nexus-australia-websocket.intercom.io uploads.intercomcdn.com uploads.intercomcdn.eu uploads.au.intercomcdn.com uploads.eu.intercomcdn.com uploads.intercomusercontent.com; img-src 'self' https: data: blob: *.galxe.com *.galxestatic.com *.cloudfront.net *.google-analytics.com js.intercomcdn.com static.intercomassets.com downloads.intercomcdn.com downloads.intercomcdn.eu downloads.au.intercomcdn.com uploads.intercomusercontent.com gifs.intercomcdn.com video-messages.intercomcdn.com messenger-apps.intercom.io messenger-apps.eu.intercom.io messenger-apps.au.intercom.io *.intercom-attachments-1.com *.intercom-attachments.eu *.au.intercom-attachments.com *.intercom-attachments-2.com *.intercom-attachments-3.com *.intercom-attachments-4.com *.intercom-attachments-5.com *.intercom-attachments-6.com *.intercom-attachments-7.com *.intercom-attachments-8.com *.intercom-attachments-9.com static.intercomassets.eu static.au.intercomassets.com; style-src 'self' 'unsafe-inline' *.galxe.com *.galxestatic.com *.particle.network *.googleapis.com cdn.jsdelivr.net at.alicdn.com static.geetest.com; font-src 'self' data: *.gstatic.com *.googleapis.com cdn.jsdelivr.net *.galxestatic.com at.alicdn.com js.intercomcdn.com fonts.intercomcdn.com; child-src 'self' intercom-sheets.com www.intercom-reporting.com www.youtube.com player.vimeo.com fast.wistia.net; form-action 'self' intercom.help api-iam.intercom.io api-iam.eu.intercom.io api-iam.au.intercom.io; media-src 'self' js.intercomcdn.com downloads.intercomcdn.com downloads.intercomcdn.eu downloads.au.intercomcdn.com; frame-ancestors 'none';",
+   "xfo": "deny",
+   "server": "istio-envoy"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "079EC59C9A07E14E46252D2BF581BDB5",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Log in",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.galxe.com/",
+  "mime": "text/html",
+  "csp": "frame-ancestors 'none';",
+  "cspRO": "default-src https: 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.galxe.com *.galxestatic.com *.google-analytics.com openfpcdn.io *.googletagmanager.com telegram.org *.geetest.com *.geevisit.com *.gsensebot.com *.particle.network www.gstatic.com app.intercom.io widget.intercom.io js.intercomcdn.com; connect-src 'self' ws: wss: relay.walletconnect.com data: galxe.com *.galxe.com *.galaxy.eco *.google-analytics.com *.particle.network *.intercom.io *.space.id *.telegram.org *.onflow.org www.googletagmanager.com *.latch.io *.galxestatic.com li.quest *.walletconnect.com *.binance.info pbs.twimg.com static.geetest.com s2.coinmarketcap.com static.debank.com raw.githubusercontent.com *.telegram.org telegram.org via.intercom.io api.intercom.io api.au.intercom.io api.eu.intercom.io api-iam.intercom.io api-iam.eu.intercom.io api-iam.au.intercom.io api-ping.intercom.io *.intercom-messenger.com wss://*.intercom-messenger.com nexus-websocket-a.intercom.io wss://nexus-websocket-a.intercom.io nexus-websocket-b.intercom.io wss://nexus-websocket-b.intercom.io nexus-europe-websocket.intercom.io wss://nexus-europe-websocket.intercom.io nexus-australia-websocket.intercom.io wss://nexus-australia-websocket.intercom.io uploads.intercomcdn.com uploads.intercomcdn.eu uploads.au.intercomcdn.com uploads.eu.intercomcdn.com uploads.intercomusercontent.com; img-src 'self' https: data: blob: *.galxe.com *.galxestatic.com *.cloudfront.net *.google-analytics.com js.intercomcdn.com static.intercomassets.com downloads.intercomcdn.com downloads.intercomcdn.eu downloads.au.intercomcdn.com uploads.intercomusercontent.com gifs.intercomcdn.com video-messages.intercomcdn.com messenger-apps.intercom.io messenger-apps.eu.intercom.io messenger-apps.au.intercom.io *.intercom-attachments-1.com *.intercom-attachments.eu *.au.intercom-attachments.com *.intercom-attachments-2.com *.intercom-attachments-3.com *.intercom-attachments-4.com *.intercom-attachments-5.com *.intercom-attachments-6.com *.intercom-attachments-7.com *.intercom-attachments-8.com *.intercom-attachments-9.com static.intercomassets.eu static.au.intercomassets.com; style-src 'self' 'unsafe-inline' *.galxe.com *.galxestatic.com *.particle.network *.googleapis.com cdn.jsdelivr.net at.alicdn.com static.geetest.com; font-src 'self' data: *.gstatic.com *.googleapis.com cdn.jsdelivr.net *.galxestatic.com at.alicdn.com js.intercomcdn.com fonts.intercomcdn.com; child-src 'self' intercom-sheets.com www.intercom-reporting.com www.youtube.com player.vimeo.com fast.wistia.net; form-action 'self' intercom.help api-iam.intercom.io api-iam.eu.intercom.io api-iam.au.intercom.io; media-src 'self' js.intercomcdn.com downloads.intercomcdn.com downloads.intercomcdn.eu downloads.au.intercomcdn.com; frame-ancestors 'none';",
+  "xfo": "deny",
+  "server": "istio-envoy"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Galxe - Your Web3 Growth Engine",
+  "bodyLen": 7855,
+  "nodes": 2862,
+  "readyState": "complete",
+  "head": "Gravity L1 Mainnet is live. Alpha Mainnet is sunsetting — bridge & unstake before Nov. 1. Explore Earn Identity About More Network Log in Explore Quests Spaces Your Web3 Growth Engine Previous Join AVA Smart Program & Wi"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Log in",
+   "tag": "BUTTON",
+   "x": 1288.8984375,
+   "y": 86,
+   "top": 68
+  },
+  "all": [
+   "2:Log in"
+  ]
+ },
+ "clicked1": "Log in",
+ "clickedTier": 2,
+ "find2": {
+  "n": 5,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 399.4765625,
+   "y": 409,
+   "area": 1516.96875
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Galxe - Your Web3 Growth Engine",
+  "bodyLen": 7899,
+  "nodes": 2876,
+  "readyState": "complete",
+  "head": "Gravity L1 Mainnet is live. Alpha Mainnet is sunsetting — bridge & unstake before Nov. 1. Explore Earn Identity About More Network Log in Explore Quests Spaces Your Web3 Growth Engine Previous Join AVA Smart Program & Wi"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 5,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 3,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "personal_sign",
+   "wallet_revokePermissions"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 1,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 13,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.galxe.com/",
+ "ms": 14645
+}

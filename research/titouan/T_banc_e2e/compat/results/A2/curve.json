@@ -1,0 +1,387 @@
+{
+ "siteId": "curve",
+ "url": "https://curve.finance/",
+ "arm": "control",
+ "started": "2026-10-11T00:54:59.268Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://www.curve.finance/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://www.curve.finance/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://www.curve.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_call",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_call",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_feeHistory",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_getBlockByNumber",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_gasPrice",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_maxPriorityFeePerGas",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  },
+  {
+   "t": "req",
+   "m": "eth_call",
+   "top": true,
+   "f": "https://www.curve.finance/dex/ethereum/swap"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "Error during init Error: unsupported operation (operation=\"eth_getBlockByNumber\", info={ \"error\": { \"code\": -32601, \"message\": \"The method eth_getBlockByNumber does not exist / is not available\" }, \"payload\": { \"id\": 6, \"jsonrpc\": \"2.0\", \"method\": \"eth_getBlockByNumber\", \"params\": [ \"latest\", false "
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [],
+ "docs": [
+  {
+   "frameId": "86E4820707FA16CBA3A7072167758473",
+   "status": 200,
+   "url": "https://www.curve.finance/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "86E4820707FA16CBA3A7072167758473",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:CONNECT WALLET",
+  "option:Browser Wallet"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://www.curve.finance/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Swap - Curve",
+  "bodyLen": 972,
+  "nodes": 547,
+  "readyState": "complete",
+  "head": "Make sure you are on the right domain Always carefully check that your URL is https://www.curve.finance/. Dashboard retirement As part of ongoing maintenance and improvements on the website, the DEX dashboard has been re"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 6,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_call"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 2,
+  "pick": {
+   "tier": 1,
+   "text": "CONNECT WALLET",
+   "tag": "BUTTON",
+   "x": 1258.578125,
+   "y": 142,
+   "top": 122
+  },
+  "all": [
+   "1:CONNECT WALLET",
+   "1:Connect Wallet"
+  ]
+ },
+ "clicked1": "CONNECT WALLET",
+ "clickedTier": 1,
+ "find2": {
+  "n": 4,
+  "pick": {
+   "text": "Browser Wallet",
+   "tag": "P",
+   "x": 697.5,
+   "y": 398.421875,
+   "area": 6960
+  }
+ },
+ "clicked2": "Browser Wallet",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Swap - Curve",
+  "bodyLen": 1055,
+  "nodes": 554,
+  "readyState": "complete",
+  "head": "There is an issue connecting to the API. Please try to switch your RPC in your wallet settings. Make sure you are on the right domain Always carefully check that your URL is https://www.curve.finance/. Dashboard retireme"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 22,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_call",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_call",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_feeHistory",
+   "eth_chainId",
+   "eth_getBlockByNumber",
+   "eth_gasPrice",
+   "eth_maxPriorityFeePerGas",
+   "eth_chainId",
+   "eth_call"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 35,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://www.curve.finance/dex/ethereum/swap",
+ "ms": 12509
+}

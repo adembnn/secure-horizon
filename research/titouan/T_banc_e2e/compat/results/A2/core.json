@@ -1,0 +1,201 @@
+{
+ "siteId": "core",
+ "url": "https://core.app/",
+ "arm": "control",
+ "started": "2026-10-11T00:58:22.440Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://core.app/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://core.app/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://core.app/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://core.app/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdvI-IqAAAAAIiR8bG7qcWfXEquyX8y"
+  }
+ ],
+ "console": [],
+ "exceptions": [
+  {
+   "top": true,
+   "text": "ProviderNotFoundError: Provider not found."
+  }
+ ],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/watchlist/trending?network=eip155:43114"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/watchlist/trending?network=eip155:43114"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/ph/i/v0/e/?ip=0&_=1791680313275&ver=1.207.0&compression=gzip-js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://proxy-api.avax.network/watchlist/trending?network=eip155:43114"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "69D7AEC854EE8DE524083D1167B9AE76",
+   "status": 200,
+   "url": "https://core.app/",
+   "mime": "text/html",
+   "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-7b6236ac20f888e237d9a3c4b5219410' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-7b6236ac20f888e237d9a3c4b5219410';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "35FFB8F72A99AF0ED2A3172C0B6B1BFB",
+   "status": 200,
+   "url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdvI-IqAAAAAIiR8bG7qcWfXEquyX8y5apyLHSf&co=aHR0cHM6Ly9jb3JlLmFwcDo0NDM.&hl=en&v=nY0xPItgwtktOA7U0o-VsaLz&size=invisible&anchor-ms=20000&execute-ms=30000&ovv=CAB5am5W&cb=nl3qsx9chtqp",
+   "mime": "text/html",
+   "csp": "script-src 'report-sample' 'nonce-TPlX-UL65lawS5t1dmP2hg' 'unsafe-inline' 'strict-dynamic' https: http: 'unsafe-eval';object-src 'none';base-uri 'self';report-uri https://csp.withgoogle.com/csp/recaptcha/1",
+   "cspRO": null,
+   "xfo": null,
+   "server": "ESF"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "69D7AEC854EE8DE524083D1167B9AE76",
+ "loadFired": true,
+ "navError": null,
+ "steps": [],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://core.app/",
+  "mime": "text/html",
+  "csp": "default-src 'self' https://*.avax.network https://*.avax-test.network;font-src 'report-sample' 'self' https://core.app https://charting.core.app https://fonts.gstatic.com;img-src 'self' data: blob: https: ipfs:;object-src 'none';script-src 'report-sample' 'self' 'strict-dynamic' 'nonce-7b6236ac20f888e237d9a3c4b5219410' https://static.cloudflareinsights.com https://www.recaptcha.net https://www.google.com https://gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;script-src-attr 'nonce-7b6236ac20f888e237d9a3c4b5219410';style-src 'self' https: 'unsafe-inline';connect-src 'self' data: https: wss: ipfs:;frame-src 'self' blob: https://www.youtube.com https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org https://app.halliday.xyz https://meldcrypto.com https://exchange.mercuryo.io;media-src 'self' https://videos.ctfassets.net https://ipfs.io;base-uri 'self' https://charting.core.app;form-action 'self' https://appleid.apple.com/auth/authorize https://accounts.google.com/o/oauth2/auth;frame-ancestors 'self' https://www.google.com;report-to csp-endpoint;report-uri https://o1300201.ingest.us.sentry.io/api/6776931/security/?sentry_key=57a8de972beb4638b122c85db253cdde&sentry_release=v1.297.3-d183462",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Core Wallet. Buy, Sell & Manage Crypto | Free Crypto Wallet",
+  "bodyLen": 2151,
+  "nodes": 749,
+  "readyState": "complete",
+  "head": "Search Connect wallet Connect wallet Portfolio Predictions Perps New Stake Earn Contacts Discover Signals Tools Download Connect wallet Download Core for Android Get started buying, swapping, sending and receiving crypto"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Core Wallet. Buy, Sell & Manage Crypto | Free Crypto Wallet",
+  "bodyLen": 2151,
+  "nodes": 749,
+  "readyState": "complete",
+  "head": "Search Connect wallet Connect wallet Portfolio Predictions Perps New Stake Earn Contacts Discover Signals Tools Download Connect wallet Download Core for Android Get started buying, swapping, sending and receiving crypto"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 2,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 7,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://core.app/",
+ "ms": 11575
+}

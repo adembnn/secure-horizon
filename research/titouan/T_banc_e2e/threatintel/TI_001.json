@@ -1,0 +1,849 @@
+{
+ "meta": {
+  "titre": "Veille des menaces Sentinelle TI_001 (domaine A)",
+  "date_redaction": "2026-10-11",
+  "perimetre": "Domaine A: drainers, typed data, permits/Permit2, 7702/7715/7579, wallet_sendCalls, sweepers, evasion de simulation, empoisonnement. Domaine B (ingenierie sociale, usurpation d'interface, extensions, classifieurs) delegue a Adem.",
+  "methode": "Recherche web en lecture seule; aucune telechargement ni execution. Les syntheses de pages ont ete produites par un modele intermediaire de WebFetch/WebSearch, donc les details fins sont a reverifier avant usage en test. Les sources vendeurs de drainers (Quark, etc.) n'ont pas ete retenues comme preuve.",
+  "limites": [
+   "Aucun rapport primaire Scam Sniffer 2026 trouve (dernier complet: bilan 2025).",
+   "Le contenu detaille du preprint arXiv 2512.12174 n'a pas pu etre lu (PDF compresse); seules les synthèses indirectes sont utilisees.",
+   "Selecteurs et constantes cites de memoire a verifier (4byte / sources): approve 0x095ea7b3, transferFrom 0x23b872dd, permit(2612) 0xd505accf, setApprovalForAll 0xa22cb465, enableModule 0x610b5925, isValidSignature magique 0x1626ba7e, Permit2 0x000000000022D473030F116dDEE9F6B43aC78BA3, installModule(uint256,address,bytes) a verifier.",
+   "Non trouve: incident reel nomme sur wallet_sendCalls, ERC-7715, ERC-7579 module malveillant (cote retail), ENS poisoning, zero-day Seaport confirme, voix clonee poussant une signature precise.",
+   "Un fichier TI_001.* n'existait pas au moment de la reprise (dossier absent)."
+  ]
+ },
+ "techniques": [
+  {
+   "id": "A01",
+   "nom": "Sweeper EIP-7702 : delegation de l'EOA vers un contrat balayeur (CrimeEnjoyor et descendants)",
+   "date": "mai 2025 -> toujours actif 2026 (autorisation signee, persiste jusqu'a revocation)",
+   "sources": [
+    {
+     "url": "https://cointelegraph.com/news/wintermute-crimeenjoyor-flags-malicious-ethereum-contracts",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://flowseekerlab.io/eip-7702-delegation-phishing-scam/",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://arxiv.org/abs/2512.12174",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://drops.scamsniffer.io/scam-sniffer-2025-crypto-phishing-losses-fall-83-to-84-million/",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Requete: tx de type 0x04 (SET_CODE) avec authorization_list = tuples (chain_id, address, nonce, y_parity, r, s), ou signature d'un hash d'autorisation prefixe 0x05 (eth_sign / wallet_signAuthorization). Si accepte, le code de l'EOA devient 0xef0100||adresse_delegue. Le delegue (sweeper) renvoie tout ETH/token entrant et peut etre invoque par n'importe qui. Wintermute: >97% des delegations observees apres Pectra pointaient vers un meme code balayeur (chiffre de 80% puis 97%, non verifie par nous). Victime voit: ecran generique 'signer' ou 'Unknown signature type' + hex brut, rarement l'adresse du delegue.",
+   "vu_par_decodeur_niveau1": "Un decodeur qui ne connait que approve/permit/transfer voit une signature opaque ou rien (le champ 'to' est souvent l'EOA elle-meme, value 0, data vide): aucune regle 'droit illimite' ne se declenche.",
+   "contournement_possible": "Delegue = contrat jeune ou deja ancien et reutilise (pas 'jeune'); adresse non sosie; pas de compte externe visible; requete passee par eth_sign sur hash 0x05 plutot que par eth_sendTransaction; MetaMask/Rabby refusent type-4 venant d'un dApp (testes) donc la demande arrive par chemins non standard; Trust Wallet convertit silencieusement type-4 en type-0 (aucune erreur renvoyee, le dApp ne sait pas) [P: test d'un tiers].",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "moyenne-haute (sources vendeurs + 1 preprint)",
+   "note": "",
+   "cas_test": {
+    "famille": "delegation_7702",
+    "payload_brut_approx": "{\"method\":\"eth_sendTransaction\",\"params\":[{\"type\":\"0x04\",\"from\":\"0xVICTIME\",\"to\":\"0xVICTIME\",\"value\":\"0x0\",\"authorizationList\":[{\"chainId\":\"0x1\",\"address\":\"0xDELEGUE_BALAYEUR\",\"nonce\":\"0x..\",\"yParity\":\"0x0\",\"r\":\"0x..\",\"s\":\"0x..\"}]}]}",
+    "intention_soufflee": "Page 'Vérifier mon portefeuille / activer le compte intelligent / réclamer un airdrop'",
+    "etiquette": "DANGER:delegation_compte_complet",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A02",
+   "nom": "Delegation vers un delegue LEGITIME (MetaMask Delegator) puis batch execute choisi par l'attaquant",
+   "date": "24 mai 2025 (146 551 USD, Inferno Drainer selon SlowMist/ScamSniffer); aout 2025 (1,54 M USD, 'faux swap Uniswap')",
+   "sources": [
+    {
+     "url": "https://drops.scamsniffer.io/scam-sniffer-2025-crypto-phishing-losses-fall-83-to-84-million/",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://chainplay.gg/blog/ethereum-eip7702-phishing-heist-146k/",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://eprint.iacr.org/2026/2060.pdf",
+     "etiquette": "P"
+    }
+   ],
+   "mecanisme": "L'adresse delegue est l'implementation officielle (liste blanche de la wallet) donc 'pas de contrat jeune/inconnu'. La charge malveillante est dans le calldata du execute(batch) signe: N approvals/transferts vers l'attaquant empaquetes dans un appel unique, sans popup par jeton. Selon l'analyse formelle DelegProof (eprint 2026/2060) un delegue honnete exige une signature par operation; un delegue malveillant n'impose rien.",
+   "vu_par_decodeur_niveau1": "Voit 'execute(...)' vers un contrat reconnu/verifie: reputation positive, aucun droit illimite explicite dans le niveau superieur.",
+   "contournement_possible": "Il faut decoder RECURSIVEMENT le tableau de calls (cible, selecteur, valeur) et appliquer les regles a chaque sous-appel; une regle appliquee seulement a la tx externe est contournee. Le sosie 4+4 et l'age du contrat ne servent a rien (destinataires dans les sous-appels).",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "moyenne-haute",
+   "note": "",
+   "cas_test": {
+    "famille": "batch_execute_7702",
+    "payload_brut_approx": "{\"to\":\"0xVICTIME(delegue=MetaMaskDelegator)\",\"data\":\"execute(((to,value,data)[]))\",\"calls\":[{\"to\":\"USDC\",\"data\":\"0x095ea7b3<spender=ATTAQUANT><max>\"},{\"to\":\"WETH\",\"data\":\"0x095ea7b3<ATTAQUANT><max>\"},{\"to\":\"stETH\",\"data\":\"approve ATTAQUANT\"}]}",
+    "intention_soufflee": "Swap 'Uniswap-like' ou claim de jetons",
+    "etiquette": "DANGER:batch_approvals_illimites",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A03",
+   "nom": "Autorisation 7702 chain_id = 0 (valable sur toutes les chaines, rejouable)",
+   "date": "documente decembre 2025 (preprint) ; usage reel non confirme",
+   "sources": [
+    {
+     "url": "https://arxiv.org/abs/2512.12174",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://zelcore.io/academy/security/eip-7702-delegation-phishing-risk",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Le tuple d'autorisation porte chain_id=0: la meme signature est valide sur chaque chaine EVM. Un seul clic sur L2 peu chere peut delegater l'EOA partout; revoquer sur une chaine ne revoque pas les autres.",
+   "vu_par_decodeur_niveau1": "chain_id apparait comme un entier dans un tuple: un decodeur de premier niveau l'ignore; le montage 'une signature = toutes chaines' n'est pas signale.",
+   "contournement_possible": "Les regles par chaine (liste noire, age du contrat) ne voient qu'une chaine alors que l'effet est multi-chaine; delegue pouvant etre benin sur la chaine affichee et malveillant ailleurs (meme adresse deployee differemment).",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "moyenne (le recoupement d'usage reel manque)",
+   "note": "",
+   "cas_test": {
+    "famille": "delegation_7702_chain0",
+    "payload_brut_approx": "{\"authorizationList\":[{\"chainId\":\"0x0\",\"address\":\"0xDELEGUE\",\"nonce\":\"0x0\",...}]}",
+    "intention_soufflee": "Mise a niveau du portefeuille",
+    "etiquette": "DANGER:delegation_multi_chaines",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A04",
+   "nom": "Requete 7702 par chemins non standard: eth_sign sur hash 0x05, 'Unknown signature type', wallet_signAuthorization",
+   "date": "tests 2026 (MetaMask 13.47.0, Rabby, Trust Wallet), article dev.to",
+   "sources": [
+    {
+     "url": "https://dev.to/semanticsentry/eip-7702-in-practice-testing-three-browser-extension-wallets-5g8e",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://github.com/Semantic-Sentry/eip7702-wallet-research",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "MetaMask: rejette type-4 d'un dApp ('External EIP-7702 transactions are not supported'), wallet_signAuthorization = -32601. Rabby: eth_sign sur le hash d'autorisation -> avertit puis, si l'utilisateur continue, affiche 'Unknown signature type' + hex. Trust Wallet: abaisse silencieusement en type 0. Donc l'attaquant essaie plusieurs voies jusqu'a ce que l'une passe et le dApp ne recoit pas de signal clair de succes/echec.",
+   "vu_par_decodeur_niveau1": "Selon la voie: prompt 'sign message' avec 32 octets hex; aucun mot 'delegation'. Les regles qui s'appuient sur des methodes typées (eth_signTypedData_v4) ne voient pas eth_sign.",
+   "contournement_possible": "Notre outil doit reconnaitre un hash 32 octets ayant l'ancetre keccak256(0x05||rlp(chain,address,nonce)) -- impossible a prouver depuis le hash seul; il faut intercepter le dApp en amont (requete + contexte) ou traiter eth_sign comme DANGER par defaut. Un dApp peut aussi preparer le hash cote client et le presenter comme 'message de verification'.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "moyenne (test tiers sur un jeu de versions)",
+   "note": "",
+   "cas_test": {
+    "famille": "signature_opaque_eth_sign",
+    "payload_brut_approx": "{\"method\":\"eth_sign\",\"params\":[\"0xVICTIME\",\"0x<32 octets = hash 0x05 d'une autorisation>\"]}",
+    "intention_soufflee": "Verification de portefeuille / captcha",
+    "etiquette": "DANGER:signature_aveugle",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A05",
+   "nom": "Permit EIP-2612 (et variantes DAI / ERC-20 permit) : approbation hors chaine, montant max, echeance lointaine",
+   "date": "toute 2025-2026 ; 6,5 M USD stETH/aEthWBTC (sept 2025) ; ~1,22 M aPlaUSDT0 (nov 2025) ; 1,76 M USDC (mars 2026, S)",
+   "sources": [
+    {
+     "url": "https://drops.scamsniffer.io/scam-sniffer-2025-crypto-phishing-losses-fall-83-to-84-million/",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://www.cryptopolitan.com/phishing-victim-loses-1-08m-malicious-permit/",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "eth_signTypedData_v4 avec types Permit{owner,spender,value,nonce,deadline}; domain = jeton. Valeur 2^256-1 ou solde total; deadline tres lointaine; spender = attaquant (parfois un contrat adaptateur). Aucun gaz, aucune tx visible, execution differee par l'attaquant avec permit()+transferFrom (0xd505accf / 0x23b872dd). Scam Sniffer: type de signature dominant; Permit/Permit2 = 38% des gros cas 2025. Les jetons enveloppes de dette Aave (aXxx) sont aussi touches.",
+   "vu_par_decodeur_niveau1": "Un decodeur sachant lire Permit voit 'value = max' -> alerte. Mais pour montant exact (= solde de la victime, valeur 'raisonnable') la regle 'droit illimite' ne se declenche pas.",
+   "contournement_possible": "Montant = exactement le solde ou une fraction; spender = EOA frais (pas 'compte externe' si l'outil ne reconnait pas) ou contrat deja deploye depuis des semaines (pas 'jeune'); deadline court (1 h) mais suffisant; jeton 'wrapper' dont domain.name est un faux nom.",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "haute",
+   "note": "",
+   "cas_test": {
+    "famille": "permit_2612",
+    "payload_brut_approx": "{\"primaryType\":\"Permit\",\"domain\":{\"name\":\"USD Coin\",\"verifyingContract\":\"0xTOKEN\"},\"message\":{\"owner\":\"0xV\",\"spender\":\"0xATT\",\"value\":\"<solde exact>\",\"nonce\":\"..\",\"deadline\":\"1795000000\"}}",
+    "intention_soufflee": "Se connecter / reclamer / 'verifier la propriete'",
+    "etiquette": "DANGER:permit_vers_tiers",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A06",
+   "nom": "Permit2 AllowanceTransfer: PermitSingle / PermitBatch, expiration et montant maximum",
+   "date": "ex. ~1 M USD (juil 2026, S), 196 k USD $VIRTUAL, LINK 167 342 USD (signature du 18 aout 2025 signalee le 4 oct 2026)",
+   "sources": [
+    {
+     "url": "https://en.cryptonomist.ch/2026/07/09/uniswap-permit2-phishing-risk/",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://www.maxavery.org/blog/approval-phishing-drainer-economy/",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://drops.scamsniffer.io/scam-sniffer-2025-crypto-phishing-losses-fall-83-to-84-million/",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Pre-requis: la victime a deja approuve Permit2 (0x000000000022D473030F116dDEE9F6B43aC78BA3) pour le jeton. La signature PermitSingle{details{token,amount(uint160),expiration(uint48),nonce},spender,sigDeadline} ou PermitBatch{details[]} donne un sous-droit a 'spender' au nom de Permit2. Un seul message peut viser plusieurs jetons (Batch). Execution differee. Le spender est enfoui profondement dans le typed-data.",
+   "vu_par_decodeur_niveau1": "Lecture partielle: voit 'Permit2' (nom de confiance, contrat verifie) et peut classer comme usage normal d'un swap.",
+   "contournement_possible": "Le contrat verificateur est legitime (Permit2): c'est le SPENDER dans le message qu'il faut evaluer; si l'outil juge sur verifyingContract, il dit 'sur'. amount = 2^160-1 ou solde; expiration = 2^48-1. Compte externe masque en 'routeur' avec nom imite.",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "haute",
+   "note": "",
+   "cas_test": {
+    "famille": "permit2_allowance",
+    "payload_brut_approx": "{\"primaryType\":\"PermitSingle\",\"domain\":{\"name\":\"Permit2\",\"chainId\":1,\"verifyingContract\":\"0x000000000022D473030F116dDEE9F6B43aC78BA3\"},\"message\":{\"details\":{\"token\":\"0xTOKEN\",\"amount\":\"1461501637330902918203684832716283019655932542975\",\"expiration\":\"281474976710655\",\"nonce\":0},\"spender\":\"0xATT\",\"sigDeadline\":\"..\"}}",
+    "intention_soufflee": "Swap 'Uniswap' ou 'activer le jeton'",
+    "etiquette": "DANGER:permit2_droit_illimite",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A07",
+   "nom": "Permit2 SignatureTransfer (PermitTransferFrom / Batch / WitnessTransferFrom): variantes que les listes de noms ratent",
+   "date": "constate dans un depot de portefeuille (PR GitHub, date non verifiee) ; variante 2024 'witness' non trouvee en rapport primaire",
+   "sources": [
+    {
+     "url": "https://github.com/VEYRNOX/veyrnox/pull/2359",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://www.maxavery.org/blog/approval-phishing-drainer-economy/",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "Types PermitTransferFrom{permitted{token,amount},spender,nonce,deadline} (et Batch..., et ...Witness avec champ 'witness' de type arbitraire fourni par le spender). Le montant permis est tire une seule fois par le spender mais pour un montant pouvant couvrir tout le solde. La variante Witness permet de cacher des champs que l'UI ne comprend pas.",
+   "vu_par_decodeur_niveau1": "Un outil qui reconnait seulement 'PermitSingle' ou 'PermitTransferFrom' par NOM ne classe pas 'PermitBatchWitnessTransferFrom' -> tombe en 'OK' (cas observe dans la PR citee).",
+   "contournement_possible": "Changer le primaryType ou ajouter un witness avec type inconnu. Corrective: verifier la STRUCTURE (champs token/amount/spender/deadline) et pas le nom; classer par defaut 'inconnu = danger' pour tout typed-data dont domain.verifyingContract = Permit2.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "faible-moyenne (une seule source, [S])",
+   "note": "",
+   "cas_test": {
+    "famille": "permit2_signature_transfer",
+    "payload_brut_approx": "{\"primaryType\":\"PermitBatchWitnessTransferFrom\",\"domain\":{\"verifyingContract\":\"0x...22D4...\"},\"message\":{\"permitted\":[{\"token\":\"A\",\"amount\":\"<solde>\"},{\"token\":\"B\",\"amount\":\"<solde>\"}],\"spender\":\"0xATT\",\"nonce\":\"..\",\"deadline\":\"..\",\"witness\":{\"x\":\"..\"}}}",
+    "intention_soufflee": "Claim d'airdrop multi-jetons",
+    "etiquette": "DANGER:permit2_variante_non_reconnue",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A08",
+   "nom": "Signature gardee, execution retardee (approbations/permit differes) ; durable nonce Solana",
+   "date": "Drift 1er avril 2026 (~285 M USD, signatures de comite collectees dès le 23 mars) ; DrainSol pre-signe 5 juillet 2026 (14 s apres reclamation de frais)",
+   "sources": [
+    {
+     "url": "https://blocksec.com/blog/drift-protocol-incident-multisig-governance-compromise-via-durable-nonce-exploitation",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://www.coindesk.com/tech/2026/04/02/how-a-solana-feature-designed-for-convenience-let-an-attacker-drain-usd270-million-from-drift",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://voicebox.sh/blog/wallet-drain-post-mortem",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "Solana: transaction signee avec un nonce durable (AdvanceNonceAccount en tete) reste valide jusqu'a avancement du nonce: 'signature != intention presente'. EVM: Permit/Permit2 a deadline lointaine et expiration max jouent le meme role. L'attaquant attend un solde plus eleve ou un evenement declencheur (le 'bon moment').",
+   "vu_par_decodeur_niveau1": "Au moment de signer, la simulation ne montre rien de grave (parfois: transfert 0, compte de nonce), la perte arrive des jours plus tard.",
+   "contournement_possible": "Simulation a l'instant T inoperante; il faut des regles de STRUCTURE: nonce durable avec autorite tierce, deadline > N jours, expiration max, 'transaction sans effet immediat mais droit ouvert'.",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "moyenne (Drift = gouvernance, extrapolation retail)",
+   "note": "",
+   "cas_test": {
+    "famille": "signature_differee",
+    "payload_brut_approx": "Solana: instructions [SystemProgram.AdvanceNonceAccount(authority=ATT?), ...tx pre-signee]; EVM: Permit{deadline=2^256-1}",
+    "intention_soufflee": "Signer un message de verification (aucun gaz)",
+    "etiquette": "DANGER:droit_differe_non_borne",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A09",
+   "nom": "Drainer sensible a la simulation (TOCTOU / 'bitflip' / 'red pill') : contrat qui se comporte bien dans le fork",
+   "date": "Solana Aqua/Vanish fev 2024 (Blowfish); EVM: affirmations de kits et de vendeurs 2024-2026",
+   "sources": [
+    {
+     "url": "https://blockaid.io/blog/dissecting-toctou-attacks-how-wallet-drainers-exploit-solanas-transaction-timing",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://cointelegraph.com/news/scam-as-a-service-new-solana-drainers-identified",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://threesigma.xyz/blog/opsec/ai-phishing-wallet-drainers-eip7702-part-2",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Mecanisme: 1) la victime signe une tx dont le resultat simule est benin; 2) l'attaquant, dans une tx separee, modifie la condition lue (stockage, oracle, bloc, tx.origin, coinbase, BALANCE) ou le code (proxy/selfdestruct); 3) il soumet la tx signee, qui a present vide le compte. Variante 'detecteur de simulation': le contrat teste bloc/gas/origine et se comporte differemment en simulation. Sur EVM ceci n'est vraiment possible que si la tx signee dépend de l'etat de contrats modifiables par l'attaquant (delegatecall vers proxy modifiable, appel externe conditionnel).",
+   "vu_par_decodeur_niveau1": "Simulation -> 'aucun transfert sortant', 'solde inchange' : feu vert.",
+   "contournement_possible": "Verdict base sur effet simule = contournable. Parades: signaler delegatecall/proxy modifiable/upgradeable, appels vers adresse non verifiee, dependance a block.timestamp/coinbase/number/origin; rejouer a des blocs futurs (etat+1, +N) et sous 2-3 configurations d'environnement; refuser quand le fork est instable.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "moyenne (1 evenement primaire documente; EVM = declaratif)",
+   "note": "",
+   "cas_test": {
+    "famille": "simulation_evasion",
+    "payload_brut_approx": "tx a un contrat dont la sortie depend de SLOAD controle par l'attaquant; calldata 'swap' ; bytecode contenant ORIGIN/COINBASE/TIMESTAMP puis CALL conditionnel",
+    "intention_soufflee": "Swap/mint tres simple",
+    "etiquette": "DANGER:comportement_dependant_etat",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A10",
+   "nom": "Surcharge du RPC / du fournisseur pour cacher la tx aux outils anti-phishing (Angel Drainer)",
+   "date": "analyse d'avril 2024 (B. Mueller), recitee par FailSafe ; non revalide en 2026",
+   "sources": [
+    {
+     "url": "https://getfailsafe.com/wallet-drainers-bypassing-blockchain-security-software",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Le script de drainer remplace/masque la requete cote page pour que les extensions de securite lisent un RPC different ou ne voient pas l'interaction; seule la liste noire de domaine reste. (A confirmer: la page FailSafe a ete lue en resume indirect; l'URL directe a renvoye 404 dans ma 1ere tentative. A reverifier.)",
+   "vu_par_decodeur_niveau1": "L'extension ne voit rien de la requete (bypass total) ou voit une version propre.",
+   "contournement_possible": "Chevauche avec le domaine B (extensions) -> delegue a Adem; ici seulement la consequence: notre decodeur ne doit PAS dependre d'un seul point d'interception ; croiser avec ce que le portefeuille affiche reellement.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "faible (source vendeur indirecte)",
+   "note": "",
+   "cas_test": {
+    "famille": "evasion_interception",
+    "payload_brut_approx": "dApp: window.ethereum.request surchargee; requete envoyee via postMessage / provider alternatif",
+    "intention_soufflee": "n/a (infrastructure)",
+    "etiquette": "DANGER:interception_contournee",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A11",
+   "nom": "Empoisonnement d'adresse massif apres Fusaka + interception de 'transaction test' + dusting de longue duree",
+   "date": "Fusaka 3 dec 2025 ; 628 k tentatives (nov 2025) -> 3,4 M (janv 2026) ; 50 M USDT (dec 2025) ; 4 556 ETH ~12,4 M USD (30 janv 2026)",
+   "sources": [
+    {
+     "url": "https://blockaid.io/blog/address-poisoning-the-growing-threat-draining-millions-from-crypto-users",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://avoid.net/mass-address-poisoning-campaign-ethereum-2025-2026",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "Le bot detecte une 'tx test' ou toute activite, emet un transfert de poussiere (0 ou 1 wei, ou faux jeton avec Transfer logge 'from=sosie') depuis une adresse vanity correspondant aux 4-5 premiers/derniers caracteres de la contrepartie reelle. Avec generation GPU cet appariement est bon marche; dusting repete 2 mois jusqu'a remonter en tete de l'historique, dernier dusting ~32 h avant le vol. Un contrat envoie ~3 M de poussieres a >1 M d'adresses pour ~5 175 USD.",
+   "vu_par_decodeur_niveau1": "Voit un transfert simple d'USDT/ETH vers une adresse inconnue: ni droit illimite ni contrat jeune.",
+   "contournement_possible": "Si la regle sosie est '4+4' un attaquant avec 5+5 / 6+6 ou entrelace des caracteres internes passe de justesse; si l'outil ne compare qu'a la liste des destinataires 'connus' et que le vrai est absent de l'historique recent, il ne voit pas de sosie. Parade: comparer a TOUT l'historique long (>12 mois), carnet d'adresses, ENS, et marquer 'destinataire apparu seulement par un transfert entrant non sollicite' ; gerer jetons faux (event Transfer sans appel reel) et montants zero.",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "haute pour l'existence, moyenne pour les chiffres",
+   "note": "",
+   "cas_test": {
+    "famille": "empoisonnement_adresse",
+    "payload_brut_approx": "{\"to\":\"0xA1B2...9F8E(vanity)\",\"data\":\"0xa9059cbb<dest>00..montant_gros\",\"historique\":[\"0xA1B2...9F8E recu 0 USDT il y a 2 j\"]}",
+    "intention_soufflee": "Renvoyer des fonds a mon courtier / 'adresse habituelle'",
+    "etiquette": "DANGER:sosie_adresse",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A12",
+   "nom": "Empoisonnement via fonction de plateforme: Safes 'imbriques' sosies pre-signes",
+   "date": "depuis >= 26 janvier 2026 ; ~15 000 proxys malveillants identifies",
+   "sources": [
+    {
+     "url": "https://blockaid.io/blog/address-poisoning-the-growing-threat-draining-millions-from-crypto-users",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "N'importe qui peut creer un Safe et y mettre un Safe existant comme proprietaire: le nouveau Safe apparait comme 'Safe imbrique' dans l'interface du parent, sans autorisation des signataires. L'attaquant cree en masse des Safes dont l'adresse ressemble a celles de vrais sous-comptes et y pre-signe un transfert de balayage: tout fonds envoye est vide immediatement.",
+   "vu_par_decodeur_niveau1": "Adresse legitimement affichee par l'interface Safe; contrat Safe proxy verifie (code standard connu).",
+   "contournement_possible": "Contrat standard, ancien ou nom 'inconnu' : toute regle 'contrat jeune / non verifie' echoue. Il faut verifier que les proprietaires du Safe destinataire incluent bien ceux attendus et qu'aucune transaction pre-signee/ module n'existe; ou comparer avec la liste des sous-comptes legitimes.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "moyenne",
+   "note": "",
+   "cas_test": {
+    "famille": "empoisonnement_safe_imbrique",
+    "payload_brut_approx": "{\"to\":\"0xSAFE_SOSIE(proxy 0x1a0..)\",\"value\":\"..\",\"contexte\":\"liste Safes imbriques\"}",
+    "intention_soufflee": "Alimenter mon sous-compte de tresorerie",
+    "etiquette": "DANGER:sosie_safe",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A13",
+   "nom": "Clippers 2026: remplacement a la volee avec adresse 'ressemblante' choisie parmi un stock",
+   "date": "Microsoft 17 juin 2026 (depuis fev 2026) ; Check Point 17 juin 2026 (15 500 adresses integrees)",
+   "sources": [
+    {
+     "url": "https://www.microsoft.com/en-us/security/blog/2026/06/17/crypto-clipper-uses-tor-worm-like-propagation-for-persistence-control/",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://research.checkpoint.com/2026/from-stars-to-upvotes-fake-reputation-fueling-a-crypto-clipboard-hijacker/",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://www.mcafee.com/blogs/other-blogs/mcafee-labs/crypto-clipper-wallet-swapping-browser-extension-malware/",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Presse-papiers surveille ~toutes les 500 ms; si le format correspond (BTC legacy/P2SH/bech32/Taproot, Tron 34 car., Monero 95) l'adresse est remplacee par une adresse du stock dont les 2 premiers (legacy/Tron) ou le dernier caractere (bech32) coincident. Check Point: stock de ~15 000 BTC et ~500 ETH. Variante extension navigateur: la copie envoie l'adresse au backend qui renvoie le remplacement (McAfee). Linux: ClipXDaemon (Cyble, 2026).",
+   "vu_par_decodeur_niveau1": "La transaction est un simple transfert vers l'adresse que la victime n'a pas choisie.",
+   "contournement_possible": "Le sosie est volontairement faible (1-2 car.) donc detecte seulement par comparaison avec l'adresse reellement copiee, pas par '4+4'. L'outil doit memoriser l'adresse copiee/saisie dans la page (si observable) et comparer a celle qui est signee; sur EVM, alerter si la cible est 'jamais vue' et que le dernier mot de l'interface n'est pas un nom ENS/carnet.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "haute",
+   "note": "",
+   "cas_test": {
+    "famille": "clipper_remplacement",
+    "payload_brut_approx": "{\"to\":\"0xDESTINATION_REMPLACEE\",\"copie_observee\":\"0xDESTINATION_VOULUE\"}",
+    "intention_soufflee": "Payer mon proprietaire / mon courtier",
+    "etiquette": "DANGER:destination_differente_de_copie",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A14",
+   "nom": "Drainer servi depuis un domaine legitime : XSS reflechi (Perpetual Drainer) et detournement DNS (CoW Swap)",
+   "date": "SEAL advisory 17 mars 2025 ; CoW Swap 14 avril 2026 (detournement du domaine cow.fi, ~500 k USD selon un chercheur)",
+   "sources": [
+    {
+     "url": "https://radar.securityalliance.org/2025-03-perpetual-drainer",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://www.theblock.co/post/397432/cow-swap-pauses-protocol-amid-domain-hijacking",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "L'origine vue par le portefeuille est LEGITIME. Perpetual Drainer: lien vers un XSS reflechi sur un site reputé, qui charge le script du drainer et remplace le DOM par un faux 'connect wallet' ; CoW Swap: le domaine pointe temporairement vers un clone qui demande approbations/seed phrase.",
+   "vu_par_decodeur_niveau1": "Origine = site connu/liste blanche; contrat de la tx = routeur reel; la charge (spender / destinataire) est le seul indice.",
+   "contournement_possible": "Toute regle 'domaine reputee = sur' est contournee. Il faut evaluer la CHARGE (qui recoit le droit) independamment de l'origine; alerte 'spender nouveau pour ce site' (comparer avec les spenders habituels du protocole).",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "haute (2 incidents dont 1 primaire)",
+   "note": "",
+   "cas_test": {
+    "famille": "origine_legitime_charge_malveillante",
+    "payload_brut_approx": "{\"origin\":\"https://swap.cow.fi\",\"tx\":{\"to\":\"0xTOKEN\",\"data\":\"0x095ea7b3<spender=ATT><max>\"}}",
+    "intention_soufflee": "Faire un echange sur un site de confiance",
+    "etiquette": "DANGER:spender_inedit_sur_site_connu",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A15",
+   "nom": "Faux sites 'revoke / migration / compensation' lances dans les heures suivant un hack",
+   "date": "avril 2026 (Blockaid: 5 vagues liees a des exploits; mois record >629 M USD de pertes)",
+   "sources": [
+    {
+     "url": "https://blockaid.io/blog/how-wallet-drainers-use-fake-revoke-sites-and-twitter-phishing-to-exploit-victims",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Apres un incident, les equipes conseillent de revoquer; les drainers enregistrent des domaines sosie et diffusent des pubs/posts X. Une 'revocation' presentee par la fausse page est en realite approve(max) / Permit2 / setApprovalForAll vers l'attaquant, ou une demande de seed.",
+   "vu_par_decodeur_niveau1": "L'intention soufflee est 'revoquer', un decodeur qui lit la fonction voit 'approve' avec value > 0 : bon indice, mais seulement si l'outil confronte intention et effet.",
+   "contournement_possible": "Si l'outil s'appuie sur l'intention affichee par la page, il est trompe ; un vrai 'revoke' = approve(spender, 0) ; tout 'revoke' avec montant > 0 ou signature = DANGER. Cas aussi: revoke 7702 legitime (adresse zero) vs. delegation vers attaquant presentee comme 'revoke'.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "moyenne",
+   "note": "",
+   "cas_test": {
+    "famille": "faux_revoke",
+    "payload_brut_approx": "{\"to\":\"0xTOKEN\",\"data\":\"0x095ea7b3<spender=ATT><2^256-1>\"}",
+    "intention_soufflee": "Je revoque mes approbations suite au hack de X",
+    "etiquette": "DANGER:revoke_qui_donne_droit",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A16",
+   "nom": "Drainers pre-positionnes sur lancements de chaines/airdrops (dApps et jetons avant le mainnet)",
+   "date": "rapport Blockaid 24 juin 2026 (periode 2025 - debut 2026) ; operateurs annoncent le support 3 a 23 jours apres le mainnet",
+   "sources": [
+    {
+     "url": "https://blockaid.io/blog/how-wallet-drainers-exploit-new-blockchain-launches",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Des dApps malveillantes sont publiees avant/au lancement ; sur une nouvelle chaine il n'y a pas de reputation (contrats tous 'jeunes', listes noires vides). Support EVM ajoute par simple RPC + chainId. Kits cites: Quark, Anthill (a 'bypass EIP-7702'), AngelFerno.",
+   "vu_par_decodeur_niveau1": "Sur chaine nouvelle les contrats legitimes eux-memes sont jeunes: la regle 'contrat jeune' genere des faux positifs, donc souvent desactivee.",
+   "contournement_possible": "Depend de la reputation: aucune sur chaine neuve. Prevoir regles sans reputation (structure du droit: illimite, tiers, expiration, selecteurs).",
+   "gravite_proposee": "MOYENNE",
+   "fiabilite": "moyenne",
+   "note": "",
+   "cas_test": {
+    "famille": "chaine_neuve",
+    "payload_brut_approx": "meme payload qu'A05/A06 avec chainId d'une chaine < 3 mois",
+    "intention_soufflee": "Reclamer mon airdrop de lancement",
+    "etiquette": "DANGER:droit_sans_reputation",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A17",
+   "nom": "Prise de controle de compte Solana / Tron : SetAuthority (owner), assign, permissions multisig",
+   "date": "alertes SlowMist (plusieurs, date non verifiee 2025-2026)",
+   "sources": [
+    {
+     "url": "https://slowmist.medium.com/beware-of-solana-phishing-attacks-wallet-owner-permissions-may-be-altered-708bbb30518e",
+     "etiquette": "P"
+    }
+   ],
+   "mecanisme": "Solana: instruction SPL Token SetAuthority(AccountOwner) ou System assign : l'owner du compte est remplace, les transferts/revocations deviennent impossibles. Tron: AccountPermissionUpdate reconfigure les cles actives. Presente comme airdrop, whitelist ou staking.",
+   "vu_par_decodeur_niveau1": "Pas de transfert visible: effet de 'zero valeur sortante' (simulation propre).",
+   "contournement_possible": "Les regles basees sur sorties de fonds ne voient rien. Il faut une table d'instructions a haut risque (SetAuthority, Assign, AccountPermissionUpdate).",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "moyenne",
+   "note": "",
+   "cas_test": {
+    "famille": "solana_tron_autorite",
+    "payload_brut_approx": "Solana ix: SetAuthority{authorityType:AccountOwner,newAuthority:ATT}",
+    "intention_soufflee": "Rejoindre la whitelist",
+    "etiquette": "DANGER:changement_proprietaire",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A18",
+   "nom": "SIWE / personal_sign deguise ('verifier le portefeuille') ; message qui ne respecte pas EIP-4361",
+   "date": "avis fev 2026 (Internet Computer) ; pas de campagne drainer 2026 nommee trouvee",
+   "sources": [
+    {
+     "url": "https://eips.ethereum.org/EIPS/eip-4361",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://forum.dfinity.org/t/security-advisory-sign-in-with-ethereum-bitcoin-solana-siw-e-b-s-prone-to-phishing/64050",
+     "etiquette": "P"
+    }
+   ],
+   "mecanisme": "Le message dit 'X wants you to sign in with your Ethereum account' mais le domaine du message differe de l'origine, ou le texte contient une instruction (autorisation, vente) en clair, ou encore c'est un hash opaque. La norme prescrit aux portefeuilles de verifier l'origine et d'alerter si la formule est presente sans respecter le format.",
+   "vu_par_decodeur_niveau1": "personal_sign texte: un decodeur n'extrait pas de montant; il le prend pour un 'login'.",
+   "contournement_possible": "Verifier domaine du message vs origine, nonce, expiration, 'Resources' (liens) ; refuser un message SIWE sur domaine different ; un 'login' dont le ressource pointe vers un contrat; l'utilisateur peut cliquer 'proceder' malgre l'avertissement MetaMask.",
+   "gravite_proposee": "MOYENNE",
+   "fiabilite": "moyenne",
+   "note": "",
+   "cas_test": {
+    "famille": "siwe_detourne",
+    "payload_brut_approx": "{\"method\":\"personal_sign\",\"params\":[\"evil.example wants you to sign in with your Ethereum account:\\n0xV\\n\\nURI: https://evil.example\\nNonce: ..\\nResources: ...\",\"0xV\"],\"origin\":\"https://legit.example\"}",
+    "intention_soufflee": "Se connecter",
+    "etiquette": "ATTENTION:domaine_message_different",
+    "gravite_attendue": "MOYENNE"
+   }
+  },
+  {
+   "id": "A19",
+   "nom": "Offres NFT near-zero / listings Seaport et Blur 'root signature' (regression connue)",
+   "date": "2023 (cas 0xQuit 239 676 USD) ; nouvelle vague 2026 non trouvee ; rumeur de zero-day Seaport vendu 100 000 USD (fev 2026, non verifiee)",
+   "sources": [
+    {
+     "url": "https://support.metamask.io/stay-safe/protect-yourself/nfts/nft-listing-scams/",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://defihacklabs.substack.com/p/user-asset-security-lesson-7-offline",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "Signature Seaport (OrderComponents: offer = NFT, consideration = 0 ou 1 wei vers l'attaquant) ou signature racine Blur (bulk order). Aucune tx ; l'attaquant achete l'objet immediatement.",
+   "vu_par_decodeur_niveau1": "Typed-data Seaport: un decodeur qui ne decode pas 'consideration' voit un 'ordre de marche' normal.",
+   "contournement_possible": "Prix tres bas pas toujours 0 ; ordres groupes (Merkle root) cachent le contenu. Regle: somme consideration pour le vendeur << valeur de l'offre.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "haute pour la technique, ancienne",
+   "note": "",
+   "cas_test": {
+    "famille": "nft_listing_zero",
+    "payload_brut_approx": "{\"primaryType\":\"OrderComponents\",\"message\":{\"offer\":[{\"token\":\"BAYC\",\"identifier\":\"..\"}],\"consideration\":[{\"amount\":\"1\",\"recipient\":\"0xV\"}]}}",
+    "intention_soufflee": "Verifier mon eligibilite a un airdrop NFT",
+    "etiquette": "DANGER:vente_a_prix_nul",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A20",
+   "nom": "Ledger: troncature du compteur de tableau en clear-signing (LSB-024) -> l'ecran montre 1 operation sur plus de 255",
+   "date": "signalement 28 mars 2026, bulletin 27 aout 2026, correctif Ethereum app 1.22.3 (25 aout 2026)",
+   "sources": [
+    {
+     "url": "https://donjon.ledger.com/lsb/024/",
+     "etiquette": "P"
+    }
+   ],
+   "mecanisme": "Le parseur generique de transactions stocke un compteur 16 bits dans un champ 8 bits : un tableau de 257 elements est compte comme 1 ; l'ecran n'affiche que le dernier element mais la signature couvre tout. Pre-conditions: hote compromis et descripteur ERC-7730 iterant un tableau controle par l'attaquant. Sans blind signing ni acces physique.",
+   "vu_par_decodeur_niveau1": "Notre outil, si il lit le calldata complet, voit 257 operations ; mais si il ne limite pas le nombre de sous-appels analyses ou affiche 'N operations' comme resume anodin il rejoue le defaut de l'ecran.",
+   "contournement_possible": "L'outil ne doit jamais tronquer: toute liste de >N (p.ex. 8) operations = DANGER ; verifier le decompte total ; inverser le principe: ce que la machine ne sait pas montrer entierement, elle le refuse.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "haute (primaire, correctif publie)",
+   "note": "",
+   "cas_test": {
+    "famille": "batch_massif_troncature",
+    "payload_brut_approx": "multicall/execute avec tableau de 257 calls dont 256 approve(ATT,max) et 1 benin affiche",
+    "intention_soufflee": "Operation de maintenance multisig",
+    "etiquette": "DANGER:lot_demesure_non_affichable",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A21",
+   "nom": "wallet_sendCalls (EIP-5792) : lot avec appel anodin au milieu et approbations/transferts caches",
+   "date": "risque decrit ; AUCUN incident 2026 portant le nom wallet_sendCalls trouve",
+   "sources": [
+    {
+     "url": "https://eips.ethereum.org/EIPS/eip-5792",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://www.5hz.io/blog/eip-5792-wallet-call-api-batch-transactions-explained",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Requete: {version, chainId, from, calls:[{to,value,data}], capabilities, atomicRequired}. Le portefeuille execute les appels dans l'ordre sur la chaine/adresse demandees ; la norme n'impose pas de decodage de chaque appel. Un swap legitime au milieu masque approve(attaquant,max) et un transfert final. Avec un compte 7702/4337 le lot s'execute atomiquement avec un seul ecran.",
+   "vu_par_decodeur_niveau1": "Le premier niveau decode le premier appel ou un resume 'N appels' sans parcourir chaque element.",
+   "contournement_possible": "Regles par appel necessaires + agrégat (somme des sorties potentielles apres tous les appels). Capacites (paymaster, auxiliaryFunds) peuvent masquer des couts. Lot melangeant cibles reputees et attaquant.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "faible-moyenne (conceptuel)",
+   "note": "",
+   "cas_test": {
+    "famille": "wallet_sendCalls_lot",
+    "payload_brut_approx": "{\"method\":\"wallet_sendCalls\",\"params\":[{\"version\":\"2.0.0\",\"chainId\":\"0x1\",\"from\":\"0xV\",\"calls\":[{\"to\":\"ROUTER\",\"data\":\"swap..\"},{\"to\":\"USDC\",\"data\":\"0x095ea7b3<ATT><max>\"},{\"to\":\"ATT\",\"value\":\"0x...\"}],\"atomicRequired\":true}]}",
+    "intention_soufflee": "Swap en un clic",
+    "etiquette": "DANGER:lot_avec_droit_illimite",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A22",
+   "nom": "ERC-7715 / permissions executables (spend permission, session keys) trop larges ou mal liees",
+   "date": "norme en evolution ; AUCUN vol 2026 documente trouve",
+   "sources": [
+    {
+     "url": "https://eips.ethereum.org/EIPS/eip-7715",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://ethereum-magicians.org/t/erc-7715-grant-permissions-from-wallets/20100",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "Une dApp obtient une permission durable (cible, selecteur, plafond, expiration, session key) pour agir sans popup. Methode citee par les sources: wallet_grantPermissions (anciennes versions) / wallet_requestExecutionPermissions (version actuelle de la page EIP). Piege signale: permission liee uniquement a un selecteur sans cible ni contrainte de calldata devient plus large que voulu.",
+   "vu_par_decodeur_niveau1": "Ecran de permission 'Autoriser X a depenser jusqu'a ...': peut etre lisible mais sans scope reel (cible = contrat proxy).",
+   "contournement_possible": "Ex.: plafond enorme, expiration 'jamais', cible = adaptateur qui transfere tout, ou enregistre un second signataire. Nécessite regles specifiques: plafond relatif au solde, expiration max, cible non allowlistee.",
+   "gravite_proposee": "HAUTE",
+   "fiabilite": "faible (aucun cas reel)",
+   "note": "",
+   "cas_test": {
+    "famille": "permission_7715",
+    "payload_brut_approx": "{\"method\":\"wallet_requestExecutionPermissions\",\"params\":[[{\"chainId\":\"0x1\",\"to\":\"0xSESSIONKEY_ATT\",\"permission\":{\"type\":\"native-token-allowance\",\"data\":{\"allowance\":\"<tout>\"}},\"rules\":[{\"type\":\"expiry\",\"data\":{\"timestamp\":4102444800}}]}]]}",
+    "intention_soufflee": "Autoriser les 'transactions automatiques' d'un jeu/bot",
+    "etiquette": "DANGER:permission_durable_large",
+    "gravite_attendue": "HAUTE"
+   }
+  },
+  {
+   "id": "A23",
+   "nom": "ERC-7579 / Safe: installation d'un module ou d'un executor malveillant (prise de controle du compte)",
+   "date": "SquidRouterModule 25 mai 2026 (~3,2 M USD, 86 comptes) ; Gnosis Pay Delay module 1er juin 2026 (~265 k USD)",
+   "sources": [
+    {
+     "url": "https://blog.trailofbits.com/2026/03/11/six-mistakes-in-erc-4337-smart-accounts/",
+     "etiquette": "P"
+    },
+    {
+     "url": "https://www.openfort.io/blog/smart-wallet-security-best-practices",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Appels de gestion: installModule(uint256,address,bytes) (ERC-7579, selecteur a verifier), enableModule(address) (Safe, 0x610b5925), setFallbackHandler, changement de proprietaire. Le module a le droit d'executer des appels au nom du compte; un module peut aussi bloquer la desinstallation. Dans le cas Gnosis Pay, des contrats ecrits pour toujours renvoyer la valeur magique EIP-1271 (0x1626ba7e) faisaient accepter n'importe quelle signature. Les sources du cas SquidRouter indiquent un module non cree par Safe ni Squid.",
+   "vu_par_decodeur_niveau1": "Appel a l'adresse du compte lui-meme (to = propre compte), value 0, selecteur de gestion peu connu: aucune regle de transfert ni de droit illimite.",
+   "contournement_possible": "Il faut des selecteurs de gouvernance de compte comme classe a part (enableModule, installModule, addOwner/swapOwner, changeThreshold, setGuard, setFallbackHandler, delegatecall) avec adresses cible resolues; module 'verifie' ne suffit pas.",
+   "gravite_proposee": "CRITIQUE",
+   "fiabilite": "moyenne (deux incidents, details de cause peu clairs)",
+   "note": "",
+   "cas_test": {
+    "famille": "module_compte",
+    "payload_brut_approx": "{\"to\":\"0xSAFE_VICTIME\",\"data\":\"0x610b5925<module=ATT>\"}",
+    "intention_soufflee": "Activer une fonction 'paiements recurrents'",
+    "etiquette": "DANGER:module_inconnu_sur_mon_compte",
+    "gravite_attendue": "CRITIQUE"
+   }
+  },
+  {
+   "id": "A24",
+   "nom": "Faux jetons et airdrops (honeypots recents, transferts entrants bait)",
+   "date": "BIRB (janv 2026, S) ; 'FBI token' TRC-20 (mars 2026, S/V, non verifie) ; honeypots actifs",
+   "sources": [
+    {
+     "url": "https://malwaretips.com/blogs/moonbirds-birb-airdrop-scam",
+     "etiquette": "S"
+    },
+    {
+     "url": "https://www.kerberus.com/learn/honeypot-crypto-scam/",
+     "etiquette": "V"
+    }
+   ],
+   "mecanisme": "Jeton recu sans demande dont le site de 'reclamation' demande une signature (A05/A06/A01) ou dont le transfert/vente echoue en mangeant le gaz ; logique de blocage de vente (liste noire, taxe 100 %, selection par taille) activee apres montee de la liquidite.",
+   "vu_par_decodeur_niveau1": "Le jeton 'recu' semble avoir une valeur ; le decodeur voit un 'transfer' ou 'approve' de ce jeton vers un routeur: aucun droit sur d'autres actifs.",
+   "contournement_possible": "Honeypot ne se detecte pas par bytecode seul (obfuscation); la bonne parade est une simulation d'achat+vente a chaud et des heuristiques (taxe, blacklist, owner non renonce). Un jeton 'cadeau' est un appat ; la perte vient de la signature suivante.",
+   "gravite_proposee": "MOYENNE",
+   "fiabilite": "faible-moyenne",
+   "note": "",
+   "cas_test": {
+    "famille": "faux_jeton_appat",
+    "payload_brut_approx": "approve(JETON_FAUX, ROUTEUR_inconnu, max) ou vente simulee qui revert",
+    "intention_soufflee": "Vendre/reclamer mon airdrop",
+    "etiquette": "ATTENTION:jeton_appat_non_vendable",
+    "gravite_attendue": "MOYENNE"
+   }
+  },
+  {
+   "id": "A25",
+   "nom": "Messages inter-chaines / ponts : forgeries au niveau protocole (non visibles dans une signature retail)",
+   "date": "Kelp DAO (avril 2026, ~292 M USD), Hyperbridge (avril, ~2,5 M), Verus-Ethereum (mai, 11,6 M), CrossCurve (fev, ~3 M), TAC (mai)",
+   "sources": [
+    {
+     "url": "https://www.halborn.com/blog/post/explained-the-crosscurve-hack-february-2026",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://1inch.com/blog/post/the-biggest-bridge-hacks-in-2026",
+     "etiquette": "V"
+    },
+    {
+     "url": "https://www.theblock.co/news/ecosystems/2026-05-17-verus-ethereum-bridge-exploit-401571",
+     "etiquette": "S"
+    }
+   ],
+   "mecanisme": "Pertes dues a des messages cross-chain falsifies ou mal verifies (DVN unique, nonces, faux depots), pas a une signature piege du particulier. Pour un outil retail, le vecteur proche est l'usage de faux ponts (non trouve en 2026 avec rapport primaire) et les frais de gaz/'receiver' mal destines.",
+   "vu_par_decodeur_niveau1": "Rien de particulier: depot normal vers un pont.",
+   "contournement_possible": "Hors perimetre d'un outil de signature, sauf: 'pont' dont l'adresse de destination ou l'adresse de reception sur la chaine d'arrivee est un tiers ; verifier que le destinataire cross-chain = la victime.",
+   "gravite_proposee": "FAIBLE",
+   "fiabilite": "faible",
+   "note": "",
+   "cas_test": {
+    "famille": "pont_destinataire",
+    "payload_brut_approx": "bridge.deposit(destChain, recipient=ATT, amount)",
+    "intention_soufflee": "Passer mes fonds sur L2",
+    "etiquette": "ATTENTION:destinataire_pont_tiers",
+    "gravite_attendue": "MOYENNE"
+   }
+  }
+ ],
+ "top20": [
+  {
+   "rang": 1,
+   "id": "A14",
+   "raison": "Charge malveillante sur origine legitime (XSS/DNS): annule toute regle de reputation du domaine."
+  },
+  {
+   "rang": 2,
+   "id": "A02",
+   "raison": "7702 vers delegue legitime + batch: aucune regle jeune/liste noire; il faut decoder recursivement."
+  },
+  {
+   "rang": 3,
+   "id": "A01",
+   "raison": "Delegation 7702 vers sweeper: signature opaque, effet total, persistant."
+  },
+  {
+   "rang": 4,
+   "id": "A06",
+   "raison": "Permit2 AllowanceTransfer: verifyingContract benin, la charge est le spender."
+  },
+  {
+   "rang": 5,
+   "id": "A05",
+   "raison": "Permit EIP-2612 au montant exact du solde: contourne 'droit illimite'."
+  },
+  {
+   "rang": 6,
+   "id": "A08",
+   "raison": "Signatures differees (nonce durable, deadline lointaine): la simulation n'y voit rien."
+  },
+  {
+   "rang": 7,
+   "id": "A11",
+   "raison": "Empoisonnement d'adresse massif 4-5 car. et dusting long: contourne sosie 4+4 et historique court."
+  },
+  {
+   "rang": 8,
+   "id": "A23",
+   "raison": "Modules / owner swap / enableModule sur son propre compte: aucune valeur transferee."
+  },
+  {
+   "rang": 9,
+   "id": "A17",
+   "raison": "SetAuthority/AccountPermissionUpdate: effets sans sortie de fonds."
+  },
+  {
+   "rang": 10,
+   "id": "A13",
+   "raison": "Clipper: sosie de 1-2 caracteres, detecte seulement en confrontant la copie."
+  },
+  {
+   "rang": 11,
+   "id": "A12",
+   "raison": "Safes imbriques sosies pre-signes: contrats standards, anciens."
+  },
+  {
+   "rang": 12,
+   "id": "A09",
+   "raison": "Contrats sensibles a la simulation / TOCTOU."
+  },
+  {
+   "rang": 13,
+   "id": "A20",
+   "raison": "Lot de >255 operations (troncature d'ecran de portefeuille materiel)."
+  },
+  {
+   "rang": 14,
+   "id": "A21",
+   "raison": "wallet_sendCalls: lot melangeant un appel anodin et des approbations."
+  },
+  {
+   "rang": 15,
+   "id": "A07",
+   "raison": "Permit2 SignatureTransfer / Witness: variantes non reconnues par nom."
+  },
+  {
+   "rang": 16,
+   "id": "A04",
+   "raison": "Chemins non standard (eth_sign sur hash 0x05, silent downgrade)."
+  },
+  {
+   "rang": 17,
+   "id": "A15",
+   "raison": "Faux 'revoke' apres un hack: intention contredisant l'effet."
+  },
+  {
+   "rang": 18,
+   "id": "A03",
+   "raison": "chain_id = 0: multi-chaine, regles par chaine aveugles."
+  },
+  {
+   "rang": 19,
+   "id": "A22",
+   "raison": "ERC-7715: permissions durables larges (risque pres du reel mais sans cas)."
+  },
+  {
+   "rang": 20,
+   "id": "A19",
+   "raison": "Offres NFT near-zero: ancienne mais toujours efficace sur outils qui ne decodent pas Seaport."
+  }
+ ],
+ "hors_perimetre_vers_adem": [
+  {
+   "sujet": "Contournement de modules d'extension (postMessage, interception partielle)",
+   "source": "https://revoke.cash/blog/2024/pentesters-guide-exploiting-browser-extensions",
+   "etiquette": "P"
+  },
+  {
+   "sujet": "Injection d'instructions contre des agents IA qui paient (Zscaler 6 juil 2026: 4/26 modeles ont paye; Sonnet 4.5 et GPT-5.4 ont pris un faux DeBank pour le vrai)",
+   "source": "https://www.securityweek.com/prompt-injection-attacks-trick-ai-agents-into-making-crypto-payments/",
+   "etiquette": "S"
+  },
+  {
+   "sujet": "Extensions factices Rabby/OKX sur Firefox (oct 2026), Socket aout 2026",
+   "source": "https://thehackernews.com/2026/10/16-malicious-firefox-extensions-pose-as.html",
+   "etiquette": "S"
+  },
+  {
+   "sujet": "Usurpation d'interface Safe (Bybit fev 2025) ; Trezor/Ledger faux support par courrier (mars 2026)",
+   "source": "https://www.cysecurity.news/2026/03/trezor-and-ledger-impersonated-in.html",
+   "etiquette": "S"
+  }
+ ]
+}

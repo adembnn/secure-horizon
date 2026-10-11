@@ -1,0 +1,360 @@
+{
+ "siteId": "cow",
+ "url": "https://swap.cow.fi/",
+ "arm": "control",
+ "started": "2026-10-11T00:55:26.763Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://swap.cow.fi/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://swap.cow.fi/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://swap.cow.fi/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://www.googletagmanager.com/ns.html?id=GTM-TBX4BV5M"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "wallet_getCapabilities",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "%c[COW][Wallet] font-weight: bold; color: #dc2626 Error: Failed to fetch wallet capabilities\n    at Object.read (https://swap.cow.fi/static/index-BcPtFszq.js:7583:58084) Object"
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://v6.tag.adrsbl.io/v1/resolve?data=eyJhZmxpZCI6InFhcTNqaGR2MjNrcWIyZWFyam9zIn0%3D"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://secure.adnxs.com/getuidp?callback=func' from origin 'https://swap.cow.fi' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the request",
+   "url": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://secure.adnxs.com/getuidp?callback=func"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute width: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://swap.cow.fi/static/property-CnFDNXw5.js"
+  },
+  {
+   "source": "rendering",
+   "text": "Error: <svg> attribute height: Unexpected end of attribute. Expected length, \"\".",
+   "url": "https://swap.cow.fi/static/property-CnFDNXw5.js"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "49247953D91CCAF8FF5FF97894920B71",
+   "status": 200,
+   "url": "https://swap.cow.fi/",
+   "mime": "text/html",
+   "csp": "default-src 'self'; script-src 'self' https://*.cow.fi https://telegram.org https://*.appzi.io https://www.googletagmanager.com https://challenges.cloudflare.com https://s3.amazonaws.com https://www.redditstatic.com https://www.google-analytics.com https://www.clarity.ms https://tag.safary.club https://static.ads-twitter.com https://scripts.clarity.ms https://api.hypelab.com https://googleads.g.doubleclick.net https://tag.adrsbl.io https://cdn.spindl.xyz https://r2.ixncdn.com https://cdn.id5-sync.com 'unsafe-eval' 'unsafe-inline'; style-src * 'unsafe-inline'; img-src 'self' data: blob: https:; font-src * data:; connect-src *; media-src * data: blob:; frame-src *; frame-ancestors *; worker-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "Vercel"
+  },
+  {
+   "frameId": "983956ACCDFDDA3A4BA6CF6038B527C1",
+   "status": 200,
+   "url": "https://www.googletagmanager.com/ns.html?id=GTM-TBX4BV5M",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": null,
+   "server": "Google Tag Manager"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "service_worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "49247953D91CCAF8FF5FF97894920B71",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect wallet",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://swap.cow.fi/",
+  "mime": "text/html",
+  "csp": "default-src 'self'; script-src 'self' https://*.cow.fi https://telegram.org https://*.appzi.io https://www.googletagmanager.com https://challenges.cloudflare.com https://s3.amazonaws.com https://www.redditstatic.com https://www.google-analytics.com https://www.clarity.ms https://tag.safary.club https://static.ads-twitter.com https://scripts.clarity.ms https://api.hypelab.com https://googleads.g.doubleclick.net https://tag.adrsbl.io https://cdn.spindl.xyz https://r2.ixncdn.com https://cdn.id5-sync.com 'unsafe-eval' 'unsafe-inline'; style-src * 'unsafe-inline'; img-src 'self' data: blob: https:; font-src * data:; connect-src *; media-src * data: blob:; frame-src *; frame-ancestors *; worker-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests;",
+  "cspRO": null,
+  "xfo": null,
+  "server": "Vercel"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Swap - CoW Swap | The smartest way to trade cryptocurrencies",
+  "bodyLen": 295,
+  "nodes": 228,
+  "readyState": "complete",
+  "head": "Go to: CoW Swap Trade Account Learn More Ethereum Refer Connect wallet Swap Limit TWAP Cross-chain swaps are here Mooove between any chain, hassle-free Swap now © CoW DAO - 2026 Visit external site: CoW Swap Visit extern"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 30,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect wallet",
+   "tag": "BUTTON",
+   "x": 1225.59375,
+   "y": 38,
+   "top": 17
+  },
+  "all": [
+   "1:Connect wallet"
+  ]
+ },
+ "clicked1": "Connect wallet",
+ "clickedTier": 1,
+ "find2": {
+  "n": 4,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "WUI-TEXT",
+   "x": 602.8359375,
+   "y": 259,
+   "area": 1326.09375
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "Get trade alerts When orders fill or expire Enable trade alerts Not now",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": true,
+  "mmListed": false,
+  "title": "Swap - CoW Swap | The smartest way to trade cryptocurrencies",
+  "bodyLen": 366,
+  "nodes": 270,
+  "readyState": "complete",
+  "head": "Go to: CoW Swap Trade Account Learn More Ethereum Refer 0x1111...1111 Swap Limit TWAP Cross-chain swaps are here Mooove between any chain, hassle-free Swap now © CoW DAO - 2026 Visit external site: CoW Swap Visit externa"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 43,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "wallet_getCapabilities",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 25,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,autoRefreshOnNetworkChange,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": false,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://swap.cow.fi/#/1/swap/WETH/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+ "ms": 14384
+}

@@ -1,8 +1,8 @@
 {
  "stats": {
   "rpc": {
-   "network": 264,
-   "cached": 26,
+   "network": 0,
+   "cached": 290,
    "errors": 0
   }
  },

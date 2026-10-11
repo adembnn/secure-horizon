@@ -1,0 +1,304 @@
+{
+ "siteId": "layer3",
+ "url": "https://layer3.xyz/",
+ "arm": "control",
+ "started": "2026-10-11T00:57:00.343Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://layer3.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://layer3.xyz/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://layer3.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://layer3.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://layer3.xyz/"
+  }
+ ],
+ "console": [
+  {
+   "top": true,
+   "text": "[Verisoul] Invalid project_id: 24f62464-a3a5-4c8f-a111-8f86b7124305. Check the custom hostname project mapping or explicit project override."
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "javascript",
+   "text": "Access to manifest at 'https://app.layer3.xyz/manifest.webmanifest' (redirected from 'https://layer3.xyz/manifest.webmanifest') from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Ac",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/manifest.webmanifest"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to font at 'https://app.layer3.xyz/fonts/inter-semibold.woff2' from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the reques",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/fonts/inter-semibold.woff2"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to font at 'https://app.layer3.xyz/fonts/inter-medium.woff2' from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requeste",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/fonts/inter-medium.woff2"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to font at 'https://app.layer3.xyz/fonts/inter-regular.woff2' from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the request",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/fonts/inter-regular.woff2"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to manifest at 'https://app.layer3.xyz/manifest.webmanifest' (redirected from 'https://layer3.xyz/manifest.webmanifest') from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Ac",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/manifest.webmanifest"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to XMLHttpRequest at 'https://app.layer3.xyz/cdn-cgi/rum?' (redirected from 'https://layer3.xyz/cdn-cgi/rum?') from origin 'https://layer3.xyz' has been blocked by CORS policy: Request header f",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/cdn-cgi/rum?"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://app.layer3.xyz/api/trpc/dev.getWebsocketLoadTestingConfig?input=%7B%22json%22%3Anull%2C%22meta%22%3A%7B%22values%22%3A%5B%22undefined%22%5D%7D%7D' (redirected from 'https:/",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/api/trpc/dev.getWebsocketLoadTestingConfig?input=%7B%22json%22%3Anull%2C%22meta%22%3A%7B%22values"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to font at 'https://app.layer3.xyz/fonts/inconsolata-light.ttf' from origin 'https://layer3.xyz' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the reque",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/fonts/inconsolata-light.ttf"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "chrome-extension://invalid/"
+  },
+  {
+   "source": "javascript",
+   "text": "Access to fetch at 'https://app.layer3.xyz/api/trpc/walletModal.getDefaultConnectOptionIds?batch=1&input=%7B%220%22%3A%7B%22json%22%3Anull%2C%22meta%22%3A%7B%22values%22%3A%5B%22undefined%22%5D%7D%7D%",
+   "url": "https://layer3.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "url": "https://app.layer3.xyz/api/trpc/walletModal.getDefaultConnectOptionIds?batch=1&input=%7B%220%22%3A%7B%22json%22%3Anull%2"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "7F63066E73F04263EE397B7D32A95381",
+   "status": 200,
+   "url": "https://layer3.xyz/",
+   "mime": "text/html",
+   "csp": null,
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 0,
+ "frameKinds": [],
+ "workers": [
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "7F63066E73F04263EE397B7D32A95381",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Log in"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://layer3.xyz/",
+  "mime": "text/html",
+  "csp": null,
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Layer3 - Discover onchain finance with one app",
+  "bodyLen": 1784,
+  "nodes": 403,
+  "readyState": "complete",
+  "head": "Log in Sign up Discover onchain finance with one app Explore crypto using the Layer3 Wallet, your gateway to the onchain economy. Get Started Platform Features Everything you need Discover, trade, stake, and earn. Layer3"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 2,
+   "text": "Log in",
+   "tag": "BUTTON",
+   "x": 1193.671875,
+   "y": 38,
+   "top": 18
+  },
+  "all": [
+   "2:Log in"
+  ]
+ },
+ "clicked1": "Log in",
+ "clickedTier": 2,
+ "find2": {
+  "n": 0,
+  "pick": null
+ },
+ "find3": {
+  "n": 0,
+  "pick": null,
+  "all": []
+ },
+ "ui1": {
+  "modal": "Connect Wallet Ethereum Solana Bitcoin By connecting your wallet, you agree to our Terms of Service and our Privacy Policy .",
+  "modalCount": 1,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Layer3 - Discover onchain finance with one app",
+  "bodyLen": 1957,
+  "nodes": 435,
+  "readyState": "complete",
+  "head": "Log in Sign up Discover onchain finance with one app Explore crypto using the Layer3 Wallet, your gateway to the onchain economy. Get Started Platform Features Everything you need Discover, trade, stake, and earn. Layer3"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 4,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 1,
+  "calls": [
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 10,
+ "csp": {
+  "inlineExecuted": true,
+  "violations": [],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://layer3.xyz/",
+ "ms": 8688
+}

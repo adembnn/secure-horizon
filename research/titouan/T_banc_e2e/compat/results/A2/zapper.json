@@ -1,0 +1,248 @@
+{
+ "siteId": "zapper",
+ "url": "https://zapper.xyz/",
+ "arm": "control",
+ "started": "2026-10-11T00:58:35.528Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://zapper.xyz/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/p2f0x"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": false,
+   "f": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/p2f0x"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:srcdoc"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://zapper.xyz/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://zapper.xyz/"
+  }
+ ],
+ "console": [
+  {
+   "top": false,
+   "text": "%c%d font-size:0;color:transparent NaN"
+  },
+  {
+   "top": false,
+   "text": "%c%d font-size:0;color:transparent NaN"
+  }
+ ],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://zapper.xyz/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://zapper.xyz/favicon.ico"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://zapper.xyz/favicon.ico"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-7hvG2109zgMP0DNVntCQuy' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
+   "url": ""
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'nonce-7hvG2109zgMP0DNVntCQuy' 'unsafe-eval' https://challenges.cloudflare.com'. Either the 'unsafe-inline'",
+   "url": ""
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "B3F588B36A81C780C118AE07AEE8780E",
+   "status": 403,
+   "url": "https://zapper.xyz/",
+   "mime": "text/html",
+   "csp": "default-src 'none'; script-src 'nonce-7hvG2109zgMP0DNVntCQuy' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+   "cspRO": null,
+   "xfo": "SAMEORIGIN",
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "099E8C0ECF40A0BE3BD738B1959B12E9",
+   "status": 200,
+   "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/p2f0x/0x4AAAAAAADnPIDROrmt1Wwj/light/fbE/new/normal?lang=auto",
+   "mime": "text/html",
+   "csp": "default-src 'none'; script-src 'nonce-Gg3tGFN8FO0BNt4c7yTibO' 'unsafe-eval'; script-src-attr 'none'; worker-src blob:; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://hagen.challenges.cloudflare.com https://brunhild.challenges.cloudflare.com https://valid.alg13.dnstest.challenges.cloudflare.com https://invalid.alg13.dnstest.challenges.cloudflare.com https://dual-valid.mldsa44.dnstest.challenges.cloudflare.com https://valid.mldsa44.dnstest.challenges.cloudflare.com https://dnstest.dev; frame-src 'self' blob:; child-src 'self' blob:; form-action 'none'; base-uri 'self'; trusted-types nAZtB7 default; require-trusted-types-for 'script'; sandbox allow-same-origin allow-scripts allow-popups allow-forms",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [
+  "worker",
+  "worker",
+  "worker",
+  "worker"
+ ],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "B3F588B36A81C780C118AE07AEE8780E",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "botwall: pas d interaction"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 403,
+  "url": "https://zapper.xyz/",
+  "mime": "text/html",
+  "csp": "default-src 'none'; script-src 'nonce-7hvG2109zgMP0DNVntCQuy' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+  "cspRO": null,
+  "xfo": "SAMEORIGIN",
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Just a moment...",
+  "bodyLen": 315,
+  "nodes": 47,
+  "readyState": "complete",
+  "head": "zapper.xyz Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting fo"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": true,
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "Just a moment...",
+  "bodyLen": 315,
+  "nodes": 47,
+  "readyState": "complete",
+  "head": "zapper.xyz Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting fo"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 0,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 0,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 13,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem",
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://zapper.xyz/",
+ "ms": 6133
+}

@@ -1,0 +1,504 @@
+{
+ "siteId": "ens",
+ "url": "https://app.ens.domains/",
+ "arm": "control",
+ "started": "2026-10-11T00:57:31.296Z",
+ "events": [
+  {
+   "t": "frame",
+   "top": true,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "read1",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req6963",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "https://verify.walletconnect.com/9b14144d470af1e03ab9d88aaa127332"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "frame",
+   "top": false,
+   "f": "about:blank"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "wallet_requestPermissions",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_requestAccounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_chainId",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  },
+  {
+   "t": "req",
+   "m": "eth_accounts",
+   "top": true,
+   "f": "https://app.ens.domains/"
+  }
+ ],
+ "console": [],
+ "exceptions": [],
+ "logErrors": [
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": "https://app.ens.domains/"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": "https://app.ens.domains/"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/flags/?v=2&config=true&ip=0&_=1791680252027&ver=1.276.0&compression=base64"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/array/phc_Fgf9Nr86STb590T6qQQ5XI3G63UQ4LQGyA1aKS5ROvS/config.js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?ip=0&_=1791680252112&ver=1.276.0&compression=gzip-js"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/array/phc_Fgf9Nr86STb590T6qQQ5XI3G63UQ4LQGyA1aKS5ROvS/config?ip=0&_=1791680252193&ver=1.276.0"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?retry_count=1&ip=0&_=1791680255243&ver=1.276.0"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?ip=0&_=1791680259808&ver=1.276.0"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?ip=0&_=1791680259952&ver=1.276.0"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/flags/?v=2&config=true&ip=0&_=1791680260039&ver=1.276.0&compression=base64"
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?retry_count=1&ip=0&_=1791680261261&ver=1.276.0"
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": ""
+  },
+  {
+   "source": "security",
+   "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://",
+   "url": ""
+  },
+  {
+   "source": "network",
+   "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+   "url": "https://jakob.ens.domains/e/?ip=0&_=1791680262933&ver=1.276.0"
+  }
+ ],
+ "docs": [
+  {
+   "frameId": "29B07DCF5270B375D3D73BA6DC3C0D74",
+   "status": 200,
+   "url": "https://app.ens.domains/",
+   "mime": "text/html",
+   "csp": "worker-src 'self' blob: https://app.beta.usecapsule.com https://app.usecapsule.com; script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://app.intercom.io https://widget.intercom.io https://js.intercomcdn.com https://app.beta.usecapsule.com https://app.usecapsule.com 'wasm-unsafe-eval' 'sha256-UyYcl+sKCF/ROFZPHBlozJrndwfNiC5KT5ZZfup/pPc=' 'sha256-84jekTLuMPFFzbBxEFpoUhJbu81z5uBinvhIKKkAPxg='; frame-ancestors 'self' https://app.safe.global;",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  },
+  {
+   "frameId": "71292421C1395E4AC7D393FF61B71AE9",
+   "status": 200,
+   "url": "https://verify.walletconnect.com/9b14144d470af1e03ab9d88aaa127332",
+   "mime": "text/html",
+   "csp": "frame-ancestors https://*.app.ens.domains https://app.ens.domains https://localhost:* http://localhost:* https://*.localhost:* http://*.localhost:* https://127.0.0.1:* http://127.0.0.1:*",
+   "cspRO": null,
+   "xfo": null,
+   "server": "cloudflare"
+  }
+ ],
+ "frames": 1,
+ "frameKinds": [
+  "iframe"
+ ],
+ "workers": [],
+ "popups": [],
+ "dialogs": 0,
+ "mainFrameId": "29B07DCF5270B375D3D73BA6DC3C0D74",
+ "loadFired": true,
+ "navError": null,
+ "steps": [
+  "click:Connect",
+  "option:MetaMask"
+ ],
+ "loadTimedOut": false,
+ "main": {
+  "status": 200,
+  "url": "https://app.ens.domains/",
+  "mime": "text/html",
+  "csp": "worker-src 'self' blob: https://app.beta.usecapsule.com https://app.usecapsule.com; script-src 'self' plausible.io jakob.ens.domains https://static.cloudflareinsights.com *.ens-app-v3.pages.dev https://app.intercom.io https://widget.intercom.io https://js.intercomcdn.com https://app.beta.usecapsule.com https://app.usecapsule.com 'wasm-unsafe-eval' 'sha256-UyYcl+sKCF/ROFZPHBlozJrndwfNiC5KT5ZZfup/pPc=' 'sha256-84jekTLuMPFFzbBxEFpoUhJbu81z5uBinvhIKKkAPxg='; frame-ancestors 'self' https://app.safe.global;",
+  "cspRO": null,
+  "xfo": null,
+  "server": "cloudflare"
+ },
+ "ui0": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "ENS",
+  "bodyLen": 694,
+  "nodes": 343,
+  "readyState": "complete",
+  "head": "Connect Your web3 username Your identity across web3, one name for all your crypto addresses, and your decentralised website. Name search ENSv2 is coming! Updates to pricing, discounts and grace period Learn more ENS use"
+ },
+ "state0": {
+  "mode": "control",
+  "reads": 22,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "botwall": false,
+ "find1": {
+  "n": 1,
+  "pick": {
+   "tier": 1,
+   "text": "Connect",
+   "tag": "BUTTON",
+   "x": 1229,
+   "y": 104,
+   "top": 80
+  },
+  "all": [
+   "1:Connect"
+  ]
+ },
+ "clicked1": "Connect",
+ "clickedTier": 1,
+ "find2": {
+  "n": 15,
+  "pick": {
+   "text": "MetaMask",
+   "tag": "DIV",
+   "x": 426.2109375,
+   "y": 310,
+   "area": 1725.28125
+  }
+ },
+ "clicked2": "MetaMask",
+ "ui1": {
+  "modal": "",
+  "modalCount": 0,
+  "wc": false,
+  "connectedUI": false,
+  "mmListed": false,
+  "title": "ENS",
+  "bodyLen": 743,
+  "nodes": 385,
+  "readyState": "complete",
+  "head": "My Names 0x111...11111 Your web3 username Your identity across web3, one name for all your crypto addresses, and your decentralised website. Name search ENSv2 is coming! Updates to pricing, discounts and grace period Lea"
+ },
+ "state1": {
+  "mode": "control",
+  "reads": 22,
+  "sets": 0,
+  "overwritten": false,
+  "req6963": 2,
+  "calls": [
+   "eth_chainId",
+   "wallet_requestPermissions",
+   "eth_requestAccounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_chainId",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts",
+   "eth_accounts"
+  ],
+  "extReads": 0,
+  "extReq6963": 0,
+  "blockedSign": 0,
+  "wcalls": 0,
+  "wreads": {}
+ },
+ "evN": 41,
+ "csp": {
+  "inlineExecuted": false,
+  "violations": [
+   "script-src-elem",
+   "script-src-elem"
+  ],
+  "threw": null
+ },
+ "tamper": {
+  "type": "object",
+  "ours": true,
+  "tag": "[object Object]",
+  "own": "_metamask,chainId,isMetaMask,networkVersion,request,selectedAddress",
+  "proto": "MockProvider",
+  "reqNative": false,
+  "reqName": "request",
+  "reqLen": 1,
+  "reqStable": true,
+  "onReturnsSelf": true,
+  "same6963": true,
+  "isMetaMask": true,
+  "overwritten": false
+ },
+ "finalUrl": "https://app.ens.domains/",
+ "ms": 11783
+}

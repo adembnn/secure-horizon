@@ -104,9 +104,9 @@
     "rate": 32,
     "inconnu": 11,
     "fa_critical": 0,
-    "fa_warn_exces": 9,
+    "fa_warn_exces": 5,
     "fa_warn_toleree": 5,
-    "ok": 73,
+    "ok": 77,
     "ambigu_ok": 3,
     "ambigu_warn": 11,
     "ambigu_critical": 2,
@@ -160,18 +160,18 @@
      "hi": 0.0409
     },
     "fausse_alerte_warn_ou_critical": {
-     "k": 14,
+     "k": 10,
      "n": 90,
-     "rate": 0.1556,
-     "lo": 0.095,
-     "hi": 0.2443
+     "rate": 0.1111,
+     "lo": 0.0615,
+     "hi": 0.1926
     },
     "fausse_alerte_warn_exces_ou_critical": {
-     "k": 9,
+     "k": 5,
      "n": 90,
-     "rate": 0.1,
-     "lo": 0.0535,
-     "hi": 0.1792
+     "rate": 0.0556,
+     "lo": 0.024,
+     "hi": 0.1235
     },
     "fraude_conforme_alerte": {
      "k": 13,
@@ -201,9 +201,9 @@
     "rate": 25,
     "inconnu": 11,
     "fa_critical": 0,
-    "fa_warn_exces": 9,
+    "fa_warn_exces": 5,
     "fa_warn_toleree": 5,
-    "ok": 73,
+    "ok": 77,
     "ambigu_ok": 0,
     "ambigu_warn": 14,
     "ambigu_critical": 2,
@@ -257,18 +257,18 @@
      "hi": 0.0409
     },
     "fausse_alerte_warn_ou_critical": {
-     "k": 14,
+     "k": 10,
      "n": 90,
-     "rate": 0.1556,
-     "lo": 0.095,
-     "hi": 0.2443
+     "rate": 0.1111,
+     "lo": 0.0615,
+     "hi": 0.1926
     },
     "fausse_alerte_warn_exces_ou_critical": {
-     "k": 9,
+     "k": 5,
      "n": 90,
-     "rate": 0.1,
-     "lo": 0.0535,
-     "hi": 0.1792
+     "rate": 0.0556,
+     "lo": 0.024,
+     "hi": 0.1235
     },
     "fraude_conforme_alerte": {
      "k": 21,
@@ -298,9 +298,9 @@
     "rate": 22,
     "inconnu": 11,
     "fa_critical": 0,
-    "fa_warn_exces": 9,
+    "fa_warn_exces": 5,
     "fa_warn_toleree": 5,
-    "ok": 73,
+    "ok": 77,
     "ambigu_ok": 0,
     "ambigu_warn": 14,
     "ambigu_critical": 2,
@@ -354,18 +354,18 @@
      "hi": 0.0409
     },
     "fausse_alerte_warn_ou_critical": {
-     "k": 14,
+     "k": 10,
      "n": 90,
-     "rate": 0.1556,
-     "lo": 0.095,
-     "hi": 0.2443
+     "rate": 0.1111,
+     "lo": 0.0615,
+     "hi": 0.1926
     },
     "fausse_alerte_warn_exces_ou_critical": {
-     "k": 9,
+     "k": 5,
      "n": 90,
-     "rate": 0.1,
-     "lo": 0.0535,
-     "hi": 0.1792
+     "rate": 0.0556,
+     "lo": 0.024,
+     "hi": 0.1235
     },
     "fraude_conforme_alerte": {
      "k": 21,
@@ -5657,14 +5657,12 @@
    "category": "benin",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
     "_adem_catalogue": "critical"
    },
-   "floorCodes": [
-    "service_beneficiary_not_self"
-   ],
+   "floorCodes": [],
    "ademCodes": [
     "first_seen_recipient"
    ],
@@ -5682,14 +5680,12 @@
    "category": "benin",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
     "_adem_catalogue": "critical"
    },
-   "floorCodes": [
-    "service_beneficiary_not_self"
-   ],
+   "floorCodes": [],
    "ademCodes": [
     "no_incoming"
    ],
@@ -5730,14 +5726,12 @@
    "category": "benin",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
     "_adem_catalogue": "critical"
    },
-   "floorCodes": [
-    "service_beneficiary_not_self"
-   ],
+   "floorCodes": [],
    "ademCodes": [
     "first_seen_recipient"
    ],
@@ -5755,14 +5749,12 @@
    "category": "benin",
    "levels": {
     "reference_simulation": "warn",
-    "sans_intention": "warn",
-    "intention_honnete": "warn",
-    "intention_mensongere": "warn",
+    "sans_intention": "ok",
+    "intention_honnete": "ok",
+    "intention_mensongere": "ok",
     "_adem_catalogue": "critical"
    },
-   "floorCodes": [
-    "service_beneficiary_not_self"
-   ],
+   "floorCodes": [],
    "ademCodes": [
     "no_incoming"
    ],

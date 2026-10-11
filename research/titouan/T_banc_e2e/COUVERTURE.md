@@ -230,3 +230,25 @@ Les identifiants de cas TEST ne sont volontairement pas listés ici (détail sce
 | 11_parcours_conformes | 13 | 9 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 (0/0/0) | 4 (0/4) |
 | benin | 78 | 0 | 0 | 0 | 0 | 1 | 78 | 18 | 4 | 18 | 0 (0/0/0) | 0 (0/0) |
 
+
+## Boucle d'amélioration (politique + règles) — DEV uniquement, TEST jamais ouvert ni lu par cette boucle
+
+Mesure par `node run/ab.mjs <label> <correctifs>` (mode `run_loop.mjs --dry`, qui ne lit pas TEST.jsonl et n'écrit ni round ni COUVERTURE). Le tour officiel `run_loop.mjs` (qui régénère ce fichier) n'a PAS été relancé ici car il vérifie le hash de TEST.jsonl en le lisant ; à relancer par Titouan. Détail ligne à ligne : `run/out/JOURNAL.md`.
+
+Bras intention_mensongère, DEV (n=385 ; 252 malveillants, 90 bénins) — courbe de compromis (correctifs cumulés) :
+
+| étape | rappel (critical ou warn) | rappel critical | fausse alerte critical | warn+critical sur bénins |
+|---|---|---|---|---|
+| base | 89.3 % (225/252) | 79.0 % | 21.1 % (19/90) | 26.7 % (24/90) |
+| +F1 no_incoming ignoré si effets incomplets (cible connue) | 89.3 % | 79.0 % | 7.8 % (7/90) | 26.7 % |
+| +F2 first_seen ignoré pour protocole connu | 89.3 % | 79.0 % | 5.6 % (5/90) | 26.7 % |
+| +F3 contrôle vers titulaire connu = warn | 89.3 % | 79.0 % | 0.0 % (0/90) | 26.7 % |
+| +F4 7702 vers implémentation connue = warn (non mesurable DEV) | 89.3 % | 79.0 % | 0.0 % | 26.7 % |
+| +F5 décodage mint/stake/pont/nom vers protocole connu | 89.3 % | 79.0 % | 0.0 % | 11.1 % (10/90) |
+| +F6 changement/ajout de chaîne | 91.3 % (230) | 81.0 % | 0.0 % | 11.1 % |
+| +F7 ordres CoW/UniswapX (sortie tiers, prix aberrant) | 93.7 % (236) | 83.3 % | 0.0 % | 11.1 % |
+| +F8 faux jeton (sosie de symbole) et honeypot (vente impossible/taxe) | 97.6 % (246) | 87.3 % | 0.0 % | 11.1 % |
+| +F9 site/ENS sosie (claimed_site, ens) | 97.6 % | 88.9 % | 0.0 % | 11.1 % |
+| +F10 droit illimité étranger dans un lot (warn) | 100.0 % (252) | 88.9 % | 0.0 % (0/90) | 11.1 % (10/90) |
+
+Le compromis rappel / fausses alertes n'est pas une vraie frontière sur DEV : les correctifs F1 à F5 réduisent les fausses alertes sans toucher au rappel, F6 à F10 augmentent le rappel sans fausse alerte. Seule concession mesurée : la variante large de F1 (ignorer no_incoming pour tout appel opaque, cible inconnue comprise) faisait passer 3 malveillants de critical à warn (rappel critical 79.0 → 77.8 %) ; écartée. Limites : le catalogue est synthétique et non aveugle, les règles F5 à F10 visent des motifs présents dans DEV (surajustement possible, F10 en particulier), 5 bénins restent en warn par opacité honnête (typed data Blur et UserOperation non décodés) et 5 en warn toléré (administration). Le jeu DEV ne contient aucun cas EIP-7702, aucun bénin Multicall3, aucun bénin avec claimed_site/ens : F4, F9, F10 ne sont pas validées contre les fausses alertes.
