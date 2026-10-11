@@ -1,0 +1,1460 @@
+{
+ "intention_mensongere": {
+  "fa_critical_unites_top": [
+   {
+    "unit": "V2_DEV:benign_everyday/self_transfer_large",
+    "n_ben": 75,
+    "crit_full": 0,
+    "crit_B": 75,
+    "crit_C": 0,
+    "nouveaux_critical_B": 75,
+    "supprimes_par": {
+     "C": 75,
+     "D": 75,
+     "S_code": 75,
+     "S_age": 75,
+     "S_tok": 75,
+     "S_bal": 75,
+     "S_look": 75,
+     "O4": 75,
+     "D_O4": 75
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_everyday/nft_listing_seaport",
+    "n_ben": 75,
+    "crit_full": 0,
+    "crit_B": 75,
+    "crit_C": 75,
+    "nouveaux_critical_B": 75,
+    "supprimes_par": {
+     "C": 0,
+     "D": 75,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 75
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_everyday/exchange_deposit_known",
+    "n_ben": 74,
+    "crit_full": 0,
+    "crit_B": 74,
+    "crit_C": 0,
+    "nouveaux_critical_B": 74,
+    "supprimes_par": {
+     "C": 74,
+     "D": 74,
+     "S_code": 74,
+     "S_age": 74,
+     "S_tok": 74,
+     "S_bal": 74,
+     "S_look": 74,
+     "O4": 74,
+     "D_O4": 74
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_everyday/nft_setapprovalforall_marketplace",
+    "n_ben": 60,
+    "crit_full": 0,
+    "crit_B": 60,
+    "crit_C": 60,
+    "nouveaux_critical_B": 60,
+    "supprimes_par": {
+     "C": 0,
+     "D": 60,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 60
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/liquidity_approve_lp",
+    "n_ben": 10,
+    "crit_full": 0,
+    "crit_B": 10,
+    "crit_C": 10,
+    "nouveaux_critical_B": 10,
+    "supprimes_par": {
+     "C": 0,
+     "D": 10,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 10
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/benqi_approve_qi",
+    "n_ben": 8,
+    "crit_full": 0,
+    "crit_B": 8,
+    "crit_C": 8,
+    "nouveaux_critical_B": 8,
+    "supprimes_par": {
+     "C": 0,
+     "D": 8,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 8
+    }
+   },
+   {
+    "unit": "DEV:depot_exchange",
+    "n_ben": 6,
+    "crit_full": 0,
+    "crit_B": 6,
+    "crit_C": 0,
+    "nouveaux_critical_B": 6,
+    "supprimes_par": {
+     "C": 6,
+     "D": 6,
+     "S_code": 6,
+     "S_age": 6,
+     "S_tok": 6,
+     "S_bal": 6,
+     "S_look": 6,
+     "O4": 6,
+     "D_O4": 6
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/wrap_deposit_plain_transfer",
+    "n_ben": 11,
+    "crit_full": 0,
+    "crit_B": 9,
+    "crit_C": 9,
+    "nouveaux_critical_B": 9,
+    "supprimes_par": {
+     "C": 0,
+     "D": 0,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 9,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 9,
+     "D_O4": 9
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/bridge_stargate",
+    "n_ben": 27,
+    "crit_full": 0,
+    "crit_B": 22,
+    "crit_C": 14,
+    "nouveaux_critical_B": 22,
+    "supprimes_par": {
+     "C": 8,
+     "D": 22,
+     "S_code": 8,
+     "S_age": 8,
+     "S_tok": 8,
+     "S_bal": 8,
+     "S_look": 8,
+     "O4": 8,
+     "D_O4": 22
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/bridge_core_eth_to_avax",
+    "n_ben": 18,
+    "crit_full": 0,
+    "crit_B": 14,
+    "crit_C": 14,
+    "nouveaux_critical_B": 14,
+    "supprimes_par": {
+     "C": 0,
+     "D": 14,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 14
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/approve_unlimited_router",
+    "n_ben": 59,
+    "crit_full": 0,
+    "crit_B": 45,
+    "crit_C": 45,
+    "nouveaux_critical_B": 45,
+    "supprimes_par": {
+     "C": 0,
+     "D": 45,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 45
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/permit2_signature",
+    "n_ben": 46,
+    "crit_full": 0,
+    "crit_B": 26,
+    "crit_C": 26,
+    "nouveaux_critical_B": 26,
+    "supprimes_par": {
+     "C": 0,
+     "D": 26,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 26
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/aave_gateway_approve_aToken",
+    "n_ben": 14,
+    "crit_full": 0,
+    "crit_B": 7,
+    "crit_C": 7,
+    "nouveaux_critical_B": 7,
+    "supprimes_par": {
+     "C": 0,
+     "D": 7,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 7
+    }
+   },
+   {
+    "unit": "DEV:nouveau_contrat_legit",
+    "n_ben": 6,
+    "crit_full": 0,
+    "crit_B": 2,
+    "crit_C": 2,
+    "nouveaux_critical_B": 2,
+    "supprimes_par": {
+     "C": 0,
+     "D": 2,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 2
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/bridge_cctp",
+    "n_ben": 35,
+    "crit_full": 0,
+    "crit_B": 11,
+    "crit_C": 11,
+    "nouveaux_critical_B": 11,
+    "supprimes_par": {
+     "C": 0,
+     "D": 11,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 11
+    }
+   }
+  ],
+  "causes_FA_critical": {
+   "FULL": [
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ],
+    [
+     "external_spender",
+     10
+    ],
+    [
+     "adem:unexpected_approval",
+     10
+    ],
+    [
+     "adem:no_incoming",
+     1
+    ]
+   ],
+   "B": [
+    [
+     "adem:first_seen_recipient",
+     214
+    ],
+    [
+     "external_spender",
+     211
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "adem:unexpected_outgoing",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "unknown_selector",
+     37
+    ],
+    [
+     "opaque",
+     37
+    ],
+    [
+     "adem:amount_exceeded",
+     31
+    ],
+    [
+     "adem:unexpected_approval",
+     21
+    ],
+    [
+     "slippage_unbounded",
+     15
+    ],
+    [
+     "adem:no_incoming",
+     10
+    ]
+   ],
+   "C": [
+    [
+     "external_spender",
+     211
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "adem:unexpected_outgoing",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "adem:first_seen_recipient",
+     34
+    ],
+    [
+     "adem:amount_exceeded",
+     31
+    ],
+    [
+     "unknown_selector",
+     29
+    ],
+    [
+     "opaque",
+     29
+    ],
+    [
+     "adem:unexpected_approval",
+     21
+    ],
+    [
+     "slippage_unbounded",
+     15
+    ],
+    [
+     "adem:no_incoming",
+     10
+    ]
+   ],
+   "D": [
+    [
+     "adem:no_incoming",
+     10
+    ],
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ],
+    [
+     "external_spender",
+     10
+    ],
+    [
+     "adem:unexpected_approval",
+     10
+    ]
+   ]
+  },
+  "causes_FA_warn_ou_critical": {
+   "FULL": [
+    [
+     "adem:high_balance_share",
+     144
+    ],
+    [
+     "slippage_unbounded",
+     94
+    ],
+    [
+     "opaque",
+     67
+    ],
+    [
+     "high_balance_share",
+     67
+    ],
+    [
+     "unknown_selector",
+     61
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "unlimited_allowance",
+     26
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     24
+    ],
+    [
+     "adem:unexpected_approval",
+     21
+    ],
+    [
+     "chain_add_unknown",
+     19
+    ],
+    [
+     "adem:no_incoming",
+     13
+    ],
+    [
+     "external_spender",
+     12
+    ],
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ]
+   ],
+   "B": [
+    [
+     "opaque",
+     666
+    ],
+    [
+     "unknown_selector",
+     660
+    ],
+    [
+     "external_spender",
+     355
+    ],
+    [
+     "adem:first_seen_recipient",
+     214
+    ],
+    [
+     "adem:no_incoming",
+     195
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "slippage_unbounded",
+     81
+    ],
+    [
+     "adem:unexpected_outgoing",
+     77
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "adem:amount_exceeded",
+     31
+    ],
+    [
+     "adem:unexpected_approval",
+     21
+    ]
+   ],
+   "C": [
+    [
+     "opaque",
+     666
+    ],
+    [
+     "unknown_selector",
+     660
+    ],
+    [
+     "external_spender",
+     355
+    ],
+    [
+     "adem:no_incoming",
+     195
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "slippage_unbounded",
+     81
+    ],
+    [
+     "adem:unexpected_outgoing",
+     77
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "adem:first_seen_recipient",
+     34
+    ],
+    [
+     "adem:amount_exceeded",
+     31
+    ],
+    [
+     "adem:unexpected_approval",
+     21
+    ]
+   ]
+  },
+  "codes_FULL_des_detections_perdues_en_B": [
+   [
+    "lookalike_reported",
+    74
+   ],
+   [
+    "adem:lookalike_address",
+    74
+   ],
+   [
+    "high_balance_share",
+    57
+   ],
+   [
+    "adem:high_balance_share",
+    57
+   ],
+   [
+    "address_poisoning",
+    37
+   ],
+   [
+    "token_sell_tax_extreme",
+    22
+   ],
+   [
+    "token_unsellable",
+    21
+   ],
+   [
+    "lookalike_address",
+    14
+   ],
+   [
+    "site_origin_mismatch",
+    10
+   ],
+   [
+    "adem:new_contract",
+    5
+   ],
+   [
+    "token_symbol_impersonation",
+    5
+   ],
+   [
+    "ens_name_lookalike",
+    4
+   ]
+  ],
+  "codes_FULL_des_critical_perdus_en_B": [
+   [
+    "adem:high_balance_share",
+    137
+   ],
+   [
+    "lookalike_reported",
+    101
+   ],
+   [
+    "adem:lookalike_address",
+    101
+   ],
+   [
+    "high_balance_share",
+    98
+   ],
+   [
+    "site_origin_mismatch",
+    92
+   ],
+   [
+    "adem:no_incoming",
+    68
+   ],
+   [
+    "opaque",
+    51
+   ],
+   [
+    "external_spender",
+    40
+   ],
+   [
+    "token_unsellable",
+    38
+   ],
+   [
+    "address_poisoning",
+    37
+   ],
+   [
+    "token_sell_tax_extreme",
+    35
+   ],
+   [
+    "service_recipient_not_self",
+    31
+   ],
+   [
+    "adem:new_contract",
+    24
+   ],
+   [
+    "far_expiry",
+    24
+   ]
+  ],
+  "n_critical_perdus_B": 325,
+  "n_detections_perdues_B": 138
+ },
+ "intention_produit": {
+  "fa_critical_unites_top": [
+   {
+    "unit": "V2_DEV:benign_everyday/nft_listing_seaport",
+    "n_ben": 75,
+    "crit_full": 0,
+    "crit_B": 75,
+    "crit_C": 75,
+    "nouveaux_critical_B": 75,
+    "supprimes_par": {
+     "C": 0,
+     "D": 75,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 75
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_everyday/nft_setapprovalforall_marketplace",
+    "n_ben": 60,
+    "crit_full": 0,
+    "crit_B": 60,
+    "crit_C": 60,
+    "nouveaux_critical_B": 60,
+    "supprimes_par": {
+     "C": 0,
+     "D": 60,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 60
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/liquidity_approve_lp",
+    "n_ben": 10,
+    "crit_full": 0,
+    "crit_B": 10,
+    "crit_C": 10,
+    "nouveaux_critical_B": 10,
+    "supprimes_par": {
+     "C": 0,
+     "D": 10,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 10
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/benqi_approve_qi",
+    "n_ben": 8,
+    "crit_full": 0,
+    "crit_B": 8,
+    "crit_C": 8,
+    "nouveaux_critical_B": 8,
+    "supprimes_par": {
+     "C": 0,
+     "D": 8,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 8
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/approve_unlimited_router",
+    "n_ben": 59,
+    "crit_full": 0,
+    "crit_B": 45,
+    "crit_C": 45,
+    "nouveaux_critical_B": 45,
+    "supprimes_par": {
+     "C": 0,
+     "D": 45,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 45
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/permit2_signature",
+    "n_ben": 46,
+    "crit_full": 0,
+    "crit_B": 26,
+    "crit_C": 26,
+    "nouveaux_critical_B": 26,
+    "supprimes_par": {
+     "C": 0,
+     "D": 26,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 26
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/aave_gateway_approve_aToken",
+    "n_ben": 14,
+    "crit_full": 0,
+    "crit_B": 7,
+    "crit_C": 7,
+    "nouveaux_critical_B": 7,
+    "supprimes_par": {
+     "C": 0,
+     "D": 7,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 7
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/permit_eip2612_router",
+    "n_ben": 30,
+    "crit_full": 0,
+    "crit_B": 9,
+    "crit_C": 9,
+    "nouveaux_critical_B": 9,
+    "supprimes_par": {
+     "C": 0,
+     "D": 9,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 9
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/swap_uniswap_ur",
+    "n_ben": 51,
+    "crit_full": 0,
+    "crit_B": 15,
+    "crit_C": 15,
+    "nouveaux_critical_B": 15,
+    "supprimes_par": {
+     "C": 0,
+     "D": 15,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 15
+    }
+   },
+   {
+    "unit": "V2_DEV:benign_defi/increase_allowance",
+    "n_ben": 26,
+    "crit_full": 0,
+    "crit_B": 6,
+    "crit_C": 6,
+    "nouveaux_critical_B": 6,
+    "supprimes_par": {
+     "C": 0,
+     "D": 6,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 6
+    }
+   },
+   {
+    "unit": "DEV:approve_erc20",
+    "n_ben": 12,
+    "crit_full": 0,
+    "crit_B": 0,
+    "crit_C": 0,
+    "nouveaux_critical_B": 0,
+    "supprimes_par": {
+     "C": 0,
+     "D": 0,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 0
+    }
+   },
+   {
+    "unit": "DEV:cow_uniswapx",
+    "n_ben": 7,
+    "crit_full": 0,
+    "crit_B": 0,
+    "crit_C": 0,
+    "nouveaux_critical_B": 0,
+    "supprimes_par": {
+     "C": 0,
+     "D": 0,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 0
+    }
+   },
+   {
+    "unit": "DEV:depot_exchange",
+    "n_ben": 6,
+    "crit_full": 0,
+    "crit_B": 0,
+    "crit_C": 0,
+    "nouveaux_critical_B": 0,
+    "supprimes_par": {
+     "C": 0,
+     "D": 0,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 0
+    }
+   },
+   {
+    "unit": "DEV:envoi_contact",
+    "n_ben": 12,
+    "crit_full": 0,
+    "crit_B": 0,
+    "crit_C": 0,
+    "nouveaux_critical_B": 0,
+    "supprimes_par": {
+     "C": 0,
+     "D": 0,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 0
+    }
+   },
+   {
+    "unit": "DEV:mint_nft",
+    "n_ben": 8,
+    "crit_full": 0,
+    "crit_B": 0,
+    "crit_C": 0,
+    "nouveaux_critical_B": 0,
+    "supprimes_par": {
+     "C": 0,
+     "D": 0,
+     "S_code": 0,
+     "S_age": 0,
+     "S_tok": 0,
+     "S_bal": 0,
+     "S_look": 0,
+     "O4": 0,
+     "D_O4": 0
+    }
+   }
+  ],
+  "causes_FA_critical": {
+   "FULL": [
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ],
+    [
+     "external_spender",
+     10
+    ],
+    [
+     "adem:unexpected_approval",
+     10
+    ]
+   ],
+   "B": [
+    [
+     "external_spender",
+     200
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "adem:unexpected_outgoing",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "slippage_unbounded",
+     15
+    ],
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ],
+    [
+     "adem:unexpected_approval",
+     10
+    ],
+    [
+     "control_change",
+     9
+    ],
+    [
+     "far_expiry",
+     9
+    ],
+    [
+     "delegation_7702",
+     3
+    ],
+    [
+     "adem:unexpected_delegation_connect",
+     2
+    ]
+   ],
+   "C": [
+    [
+     "external_spender",
+     200
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "adem:unexpected_outgoing",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "slippage_unbounded",
+     15
+    ],
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ],
+    [
+     "adem:unexpected_approval",
+     10
+    ],
+    [
+     "far_expiry",
+     9
+    ],
+    [
+     "control_change",
+     4
+    ],
+    [
+     "delegation_7702",
+     3
+    ],
+    [
+     "adem:unexpected_delegation_connect",
+     2
+    ]
+   ],
+   "D": [
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ],
+    [
+     "external_spender",
+     10
+    ],
+    [
+     "adem:unexpected_approval",
+     10
+    ]
+   ]
+  },
+  "causes_FA_warn_ou_critical": {
+   "FULL": [
+    [
+     "slippage_unbounded",
+     94
+    ],
+    [
+     "adem:high_balance_share",
+     75
+    ],
+    [
+     "opaque",
+     67
+    ],
+    [
+     "high_balance_share",
+     67
+    ],
+    [
+     "unknown_selector",
+     61
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "chain_add_unknown",
+     19
+    ],
+    [
+     "unlimited_allowance",
+     15
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     13
+    ],
+    [
+     "external_spender",
+     12
+    ],
+    [
+     "adem:no_incoming",
+     12
+    ],
+    [
+     "adem:asked_by_someone_outgoing",
+     10
+    ],
+    [
+     "adem:unexpected_approval",
+     10
+    ]
+   ],
+   "B": [
+    [
+     "opaque",
+     666
+    ],
+    [
+     "unknown_selector",
+     660
+    ],
+    [
+     "external_spender",
+     355
+    ],
+    [
+     "adem:no_incoming",
+     185
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "slippage_unbounded",
+     81
+    ],
+    [
+     "adem:unexpected_outgoing",
+     77
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "adem:first_seen_recipient",
+     36
+    ],
+    [
+     "adem:unexpected_approval",
+     21
+    ],
+    [
+     "far_expiry",
+     20
+    ]
+   ],
+   "C": [
+    [
+     "opaque",
+     666
+    ],
+    [
+     "unknown_selector",
+     660
+    ],
+    [
+     "external_spender",
+     355
+    ],
+    [
+     "adem:no_incoming",
+     185
+    ],
+    [
+     "unlimited_allowance",
+     130
+    ],
+    [
+     "adem:unlimited_approval_swap",
+     105
+    ],
+    [
+     "slippage_unbounded",
+     81
+    ],
+    [
+     "adem:unexpected_outgoing",
+     77
+    ],
+    [
+     "domain_verifier_unexpected",
+     75
+    ],
+    [
+     "approval_for_all",
+     60
+    ],
+    [
+     "adem:unexpected_approval_connect",
+     60
+    ],
+    [
+     "adem:unexpected_approval",
+     21
+    ],
+    [
+     "adem:first_seen_recipient",
+     20
+    ],
+    [
+     "far_expiry",
+     20
+    ]
+   ]
+  },
+  "codes_FULL_des_detections_perdues_en_B": [
+   [
+    "adem:lookalike_address",
+    298
+   ],
+   [
+    "lookalike_reported",
+    278
+   ],
+   [
+    "high_balance_share",
+    232
+   ],
+   [
+    "adem:high_balance_share",
+    232
+   ],
+   [
+    "address_poisoning",
+    197
+   ],
+   [
+    "adem:first_seen_recipient",
+    175
+   ],
+   [
+    "lookalike_address",
+    69
+   ],
+   [
+    "adem:wrong_recipient",
+    57
+   ],
+   [
+    "adem:no_incoming",
+    49
+   ],
+   [
+    "token_symbol_impersonation",
+    46
+   ],
+   [
+    "adem:new_contract",
+    32
+   ],
+   [
+    "token_unsellable",
+    32
+   ],
+   [
+    "site_origin_mismatch",
+    31
+   ],
+   [
+    "token_sell_tax_extreme",
+    30
+   ]
+  ],
+  "codes_FULL_des_critical_perdus_en_B": [
+   [
+    "adem:lookalike_address",
+    325
+   ],
+   [
+    "lookalike_reported",
+    305
+   ],
+   [
+    "adem:high_balance_share",
+    274
+   ],
+   [
+    "high_balance_share",
+    226
+   ],
+   [
+    "adem:first_seen_recipient",
+    205
+   ],
+   [
+    "address_poisoning",
+    197
+   ],
+   [
+    "site_origin_mismatch",
+    139
+   ],
+   [
+    "adem:no_incoming",
+    76
+   ],
+   [
+    "lookalike_address",
+    69
+   ],
+   [
+    "opaque",
+    65
+   ],
+   [
+    "token_symbol_impersonation",
+    58
+   ],
+   [
+    "token_unsellable",
+    55
+   ],
+   [
+    "adem:wrong_recipient",
+    54
+   ],
+   [
+    "token_sell_tax_extreme",
+    54
+   ]
+  ],
+  "n_critical_perdus_B": 673,
+  "n_detections_perdues_B": 502
+ }
+}

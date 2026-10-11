@@ -1,0 +1,733 @@
+{
+ "date": "2026-10-11T02:56:17.874Z",
+ "node": "v24.18.1",
+ "sets": {
+  "DEV": {
+   "requetes": 385,
+   "comparees": 385,
+   "identiques": 385,
+   "ecarts": 0,
+   "filtrees_http_serveur": 0,
+   "filtrees_noyau_indetermine": 0,
+   "filtrees_noyau_pas_indetermine": [],
+   "champs": {
+    "niveau": 0,
+    "level": 0,
+    "title": 0,
+    "texts": 0,
+    "fiche": 0,
+    "reasons": 0,
+    "opacity_only": 0
+   },
+   "complet_identique": 385,
+   "niveaux_serveur": {
+    "info": 120,
+    "critical": 193,
+    "warn": 72
+   },
+   "niveaux_noyau": {
+    "info": 120,
+    "critical": 193,
+    "warn": 72
+   }
+  },
+  "PUBLIC": {
+   "requetes": 144,
+   "comparees": 144,
+   "identiques": 144,
+   "ecarts": 0,
+   "filtrees_http_serveur": 0,
+   "filtrees_noyau_indetermine": 0,
+   "filtrees_noyau_pas_indetermine": [],
+   "champs": {
+    "niveau": 0,
+    "level": 0,
+    "title": 0,
+    "texts": 0,
+    "fiche": 0,
+    "reasons": 0,
+    "opacity_only": 0
+   },
+   "complet_identique": 144,
+   "niveaux_serveur": {
+    "critical": 51,
+    "info": 44,
+    "warn": 49
+   },
+   "niveaux_noyau": {
+    "critical": 51,
+    "info": 44,
+    "warn": 49
+   }
+  },
+  "SCENARIOS_1500": {
+   "requetes": 1500,
+   "comparees": 1500,
+   "identiques": 1496,
+   "ecarts": 4,
+   "filtrees_http_serveur": 0,
+   "filtrees_noyau_indetermine": 0,
+   "filtrees_noyau_pas_indetermine": [],
+   "champs": {
+    "niveau": 4,
+    "level": 4,
+    "title": 0,
+    "texts": 0,
+    "fiche": 0,
+    "reasons": 0,
+    "opacity_only": 0
+   },
+   "complet_identique": 1496,
+   "niveaux_serveur": {
+    "critical": 699,
+    "info": 433,
+    "warn": 368
+   },
+   "niveaux_noyau": {
+    "critical": 695,
+    "info": 433,
+    "warn": 372
+   }
+  },
+  "MALFORMEES": {
+   "requetes": 40,
+   "comparees": 35,
+   "identiques": 35,
+   "ecarts": 0,
+   "filtrees_http_serveur": 5,
+   "filtrees_noyau_indetermine": 5,
+   "filtrees_noyau_pas_indetermine": [],
+   "champs": {
+    "niveau": 0,
+    "level": 0,
+    "title": 0,
+    "texts": 0,
+    "fiche": 0,
+    "reasons": 0,
+    "opacity_only": 0
+   },
+   "complet_identique": 35,
+   "niveaux_serveur": {
+    "warn": 18,
+    "info": 15,
+    "critical": 2
+   },
+   "niveaux_noyau": {
+    "warn": 23,
+    "info": 15,
+    "critical": 2
+   }
+  },
+  "V2_DEV_COMPLET_SUPPLEMENT": {
+   "requetes": 5927,
+   "comparees": 5927,
+   "identiques": 5909,
+   "ecarts": 18,
+   "filtrees_http_serveur": 0,
+   "filtrees_noyau_indetermine": 0,
+   "filtrees_noyau_pas_indetermine": [],
+   "champs": {
+    "niveau": 18,
+    "level": 18,
+    "title": 0,
+    "texts": 0,
+    "fiche": 0,
+    "reasons": 0,
+    "opacity_only": 0
+   },
+   "complet_identique": 5908,
+   "niveaux_serveur": {
+    "warn": 1450,
+    "critical": 2702,
+    "info": 1775
+   },
+   "niveaux_noyau": {
+    "warn": 1468,
+    "critical": 2684,
+    "info": 1775
+   }
+  }
+ },
+ "ok_leak": {
+  "count": 0,
+  "exemples": []
+ },
+ "niveaux": {
+  "niveau": {
+   "info": 4774,
+   "critical": 7272,
+   "warn": 3941
+  },
+  "level": {
+   "attention": 6104,
+   "danger": 6430,
+   "unknown": 2611,
+   "manipulation": 842
+  }
+ },
+ "total": {
+  "comparees": 2064,
+  "identiques": 2060,
+  "ecarts": 4,
+  "identiques_tous_champs": 2060,
+  "taux_identite_pct": 99.81,
+  "taux_identite_tous_champs_pct": 99.81
+ },
+ "causes": {
+  "regle_seaport": {
+   "n": 0,
+   "exemples": []
+  },
+  "texte": {
+   "n": 0,
+   "exemples": []
+  },
+  "fiche": {
+   "n": 0,
+   "exemples": []
+  },
+  "titre": {
+   "n": 0,
+   "exemples": []
+  },
+  "opacite": {
+   "n": 0,
+   "exemples": []
+  },
+  "contexte": {
+   "n": 4,
+   "exemples": [
+    {
+     "set": "SCENARIOS_1500",
+     "id": "V2-SIG-01114",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "SCENARIOS_1500",
+     "id": "V2-SIG-01162",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "SCENARIOS_1500",
+     "id": "V2-SIG-01165",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "SCENARIOS_1500",
+     "id": "V2-SIG-01125",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    }
+   ]
+  },
+  "reasons": {
+   "n": 0,
+   "exemples": []
+  },
+  "autre_champ": {
+   "n": 0,
+   "exemples": []
+  },
+  "hors_champs_demandes": {
+   "n": 0,
+   "exemples": []
+  }
+ },
+ "causes_v2_complet": {
+  "regle_seaport": {
+   "n": 0,
+   "exemples": []
+  },
+  "texte": {
+   "n": 0,
+   "exemples": []
+  },
+  "fiche": {
+   "n": 0,
+   "exemples": []
+  },
+  "titre": {
+   "n": 0,
+   "exemples": []
+  },
+  "opacite": {
+   "n": 0,
+   "exemples": []
+  },
+  "contexte": {
+   "n": 18,
+   "exemples": [
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01097",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0x1",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01098",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01106",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa869",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01114",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01115",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa869",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01118",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0x1",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01122",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0x1",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01125",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01127",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    },
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01136",
+     "cause": "contexte",
+     "fields": [
+      "niveau",
+      "level"
+     ],
+     "method": "personal_sign",
+     "chainId": "0xa86a",
+     "serveur": {
+      "niveau": "critical",
+      "level": "danger"
+     },
+     "noyau": {
+      "niveau": "warn",
+      "level": "attention"
+     }
+    }
+   ]
+  },
+  "reasons": {
+   "n": 0,
+   "exemples": []
+  },
+  "autre_champ": {
+   "n": 0,
+   "exemples": []
+  },
+  "hors_champs_demandes": {
+   "n": 1,
+   "exemples": [
+    {
+     "set": "V2_DEV_COMPLET_SUPPLEMENT",
+     "id": "V2-SIG-01164",
+     "cause": "hors_champs_demandes",
+     "fields": [
+      "raisons",
+      "codes",
+      "lead"
+     ]
+    }
+   ]
+  }
+ },
+ "statique": {
+  "testMode": [],
+  "fetch": [],
+  "XMLHttpRequest": [],
+  "WebSocket": [],
+  "sendBeacon": [],
+  "EventSource": [],
+  "eval": [],
+  "newFunction": [],
+  "importScripts": [],
+  "http_url": []
+ },
+ "statique_noyau_seul": {
+  "testMode": 0,
+  "fetch": 0,
+  "XMLHttpRequest": 0,
+  "WebSocket": 0,
+  "sendBeacon": 0,
+  "EventSource": 0,
+  "eval": 0,
+  "newFunction": 0,
+  "importScripts": 0,
+  "http_url": 0
+ },
+ "manifest": {
+  "manifest_version": 3,
+  "name": "Hold up (autonome)",
+  "version": "0.3.0",
+  "description": "S'interpose entre un site et le portefeuille : retient les demandes sensibles et explique en clair. Moteur embarque, aucun serveur, aucun acces reseau.",
+  "minimum_chrome_version": "111",
+  "permissions": [
+   "storage",
+   "alarms"
+  ],
+  "background": {
+   "service_worker": "background.js",
+   "type": "module"
+  },
+  "options_page": "options.html",
+  "content_security_policy": {
+   "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'none'"
+  },
+  "content_scripts": [
+   {
+    "matches": [
+     "<all_urls>"
+    ],
+    "js": [
+     "bridge.js"
+    ],
+    "run_at": "document_start",
+    "all_frames": true,
+    "match_about_blank": true,
+    "match_origin_as_fallback": true
+   },
+   {
+    "matches": [
+     "<all_urls>"
+    ],
+    "js": [
+     "inject.js"
+    ],
+    "run_at": "document_start",
+    "world": "MAIN",
+    "all_frames": true,
+    "match_about_blank": true,
+    "match_origin_as_fallback": true
+   }
+  ]
+ },
+ "core_ok_literal": [
+  "3: // -> politique (policy) -> textes clairs (fiches U_textes_utilisateur). Le niveau le plus bas est 'info' : 'ok' n'existe pas.",
+  "110: const lvlOf = (flags) => (flags.some((f) => f.severity === 'critical') ? 'critical' : flags.some((f) => f.severity === 'warn') ? 'warn' : 'o",
+  "445: const niveau = seaportCrit ? 'critical' : pol.level === 'critical' ? 'critical' : pol.level === 'warn' ? 'warn' : 'info'; // 'ok' n'existe p",
+  "489: // Point d'entree du service worker : borne la taille, ne leve jamais, ne renvoie jamais 'ok'."
+ ],
+ "build_obsolete": [
+  {
+   "file": "engine/src/fixes.mjs",
+   "etat": "source modifiee depuis le build"
+  },
+  {
+   "file": "engine/src/rules_extra.mjs",
+   "etat": "source modifiee depuis le build"
+  },
+  {
+   "file": "run/policy.mjs",
+   "etat": "source modifiee depuis le build"
+  }
+ ],
+ "build_sources_n": 34,
+ "zip": {
+  "existe": true,
+  "mtime": "2026-10-11T01:39:34.718Z",
+  "octets": 97935,
+  "extraction": "ok",
+  "fichiers_dossier": 35,
+  "fichiers_zip": 26,
+  "identiques": 13,
+  "ecarts": [
+   {
+    "f": "BUILD_INFO.json",
+    "etat": "contenu different"
+   },
+   {
+    "f": "background.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "bridge.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "engine/policy.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "engine/sentinelle_core.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "engine/src/fixes.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "engine/src/protocols_extra.js",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "engine/src/rules_extra.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "engine/textes.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "engine/textes.json",
+    "etat": "contenu different"
+   },
+   {
+    "f": "gatekeeper.js",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "hold_core.js",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "inject.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "manifest.json",
+    "etat": "contenu different"
+   },
+   {
+    "f": "options.html",
+    "etat": "contenu different"
+   },
+   {
+    "f": "options.js",
+    "etat": "contenu different"
+   },
+   {
+    "f": "ui/verdict.css",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "ui/verdict.html",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "ui/verdict.js",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "window.css",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "window.html",
+    "etat": "absent du zip"
+   },
+   {
+    "f": "window.js",
+    "etat": "absent du zip"
+   }
+  ],
+  "prefixe": "hold-up-standalone/",
+  "dossier_mtime_max": "2026-10-11T02:49:35.334Z"
+ },
+ "latence": {
+  "n": 1500,
+  "mediane_ms": 0.301,
+  "p95_ms": 5.963,
+  "max_ms": 14.844,
+  "mediane_interne_ms": 0.3,
+  "p95_interne_ms": 5.96,
+  "chauffe": 60
+ },
+ "net_calls": 0
+}

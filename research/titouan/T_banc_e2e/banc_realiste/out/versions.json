@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-11T02:45:54.924Z",
+ "ts": "2026-10-11T02:49:44.988Z",
  "POLICY_FIXES": "(défaut KEPT)",
  "node": "v24.18.1",
  "sha256_copie_mesuree": {
@@ -78,8 +78,10 @@
   "attacks/DEV.jsonl": "282cf318394d7c9143190c15a604f879dfa1eb901d75393829614a0542be67e3",
   "attacks_public/PUBLIC.jsonl": "79b13a3eebdbbe3d449736be12043efee92f3be6940e40bb19b6e77794f9cbb6",
   "blind_adem/v2/V2_DEV.jsonl": "eb2e7413847f189204717e1793f8a457fd183cd2f03a7781e505c473317d2eed",
-  "extension_standalone/src/sentinelle_core.js": "0d3072e288c03c52e38ec9eedef6cf55b7b39062f1854e930c0c1dd8363a576b",
+  "extension_standalone/src/sentinelle_core.js": "4cfe7c10f2abe24a31a910f5ed5190b50ce7f47620edabc720f0598bff1a5ba7",
   "run/run_loop.mjs": "fa04e8c5b0e7b293ead7976b3107a2bdc2852510b8764ab63848cc3403481684"
  },
- "source_modifiee_pendant_la_mesure": []
+ "source_modifiee_pendant_la_mesure": [
+  "extension_standalone/src/sentinelle_core.js"
+ ]
 }

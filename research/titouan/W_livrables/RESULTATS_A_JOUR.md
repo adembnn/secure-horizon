@@ -1,92 +1,217 @@
 # Résultats à jour : tous les chiffres, leur source, leur statut
 
-Date : 11 oct. 2026, rédigé à partir des fichiers du repo. Intervalles : Wilson 95 %, sauf mention. Chemins relatifs à `research/titouan/`. `T` = `T_banc_e2e/`.
+Mise à jour du 11 oct. 2026 (après la boucle V2, le trafic réel moteur actuel, le banc en conditions produit). Intervalles : Wilson 95 %, sauf mention. Chemins relatifs à `research/titouan/`. `T` = `T_banc_e2e/`. Le produit s'appelle Hold up. Les noms de fichiers du code gardent parfois l'ancien nom (`sentinelle_core.js`).
 
 Statuts :
 - **RÉEL** : mesuré sur du trafic ou des sites réels.
 - **SYNTH** : mesuré sur des cas synthétiques (écrits par nous ou par des agents). Mesure la couverture et la non-régression, pas la robustesse face à un attaquant réel.
+- **RÉGLÉ** : le jeu a servi à régler les règles. Le chiffre est optimiste par construction.
 - **HYPO** : cible, estimation ou ordre de grandeur sans mesure.
 - **LIT** : chiffre d'une source externe, non revérifié ici, pas une mesure de Hold up.
 - **RETIRÉ** : à ne plus citer.
 
-Règle de lecture : "rappel" = malveillant en warn ou critical. "Fausse alerte critical" = cas bénin classé critical. Les deux colonnes RÉEL et SYNTH ne se mélangent pas.
+Règle de lecture : "rappel" = malveillant en warn ou critical. "Fausse alerte critical" = cas bénin classé critical. Les deux colonnes ne se mélangent jamais.
 
-## A. Taux mesurés sur données réelles
+Règle d'honnêteté : aucun chiffre de la colonne synthétique n'est un test indépendant. V2_DEV a servi à régler les règles. Le test indépendant est V2_TEST, ouvert une seule fois, à la fin. Il n'est pas encore ouvert.
 
-| Chiffre | Valeur | n | Source | Statut | Réserves |
-|---|---|---|---|---|---|
-| Filet v0 (5 règles, sans intention), alertes sur trafic C-Chain présumé légitime | 0,28 % [0,18 ; 0,45] | 6 325 tx, 1 500 blocs | `bench/RAPPORT_banc_reel_v0.md` | RÉEL | "Légitime" présumé. Ce n'est pas l'outil complet : ni intention, ni simulation, ni comparateur. |
-| Même filet sur Ethereum, alertes sur trafic présumé légitime, après correction | 2,98 % (avant correction 3,15 %) ; règle R3 0,27 % | 43 075 tx, 200 blocs | `bench/RAPPORT_banc_reel_v0.md`, section CORRECTION MAJEURE | RÉEL | Taux 11 fois plus haut qu'en C-Chain : dépend fortement de la chaîne. |
-| Rappel du filet v0 sur droits de dépense directs réels signés par la victime (Ethereum) | 24/33 = 72,7 % [55,8 ; 84,9] | 33 | `bench/RAPPORT_banc_reel_v0.md`, section CORRECTION MAJEURE | RÉEL | Petit n. Étiquettes ScamSniffer (tiers, construction inconnue), règle R3 possiblement circulaire. 170 spenders, concentration forte. Jeu surtout composé de drainers déjà listés, donc ne valide pas un drainer neuf. |
-| Compatibilité de la couche d'interposition, 96 sites réels | PASS 81, DIFFÉRENCE 8, CASSE 0, inaccessibles 7 ; casse 0/89 [0,0 ; 4,1 %] ; 0/65 [0,0 ; 5,6 %] parmi les sites qui détectent un portefeuille | 89 accessibles | `T/compat/COMPAT_REEL.md` | RÉEL | Le bras test est un Proxy du banc, PAS l'extension Hold up. Fournisseur simulé, aucune connexion ni signature réelle. Échantillon de commodité. Un site peut être PASS parce que le bouton de connexion n'a pas été trouvé. |
-| Casse ou différence | 8/89 = 9,0 % [4,6 ; 16,7] | 89 | `T/compat/COMPAT_REEL.md` | RÉEL | idem |
-| Bruit A/A (erreur console nouvelle sans aucune différence d'injection) | 9/86 = 10,5 % [5,6 ; 18,7] ; bras test 6/89 = 6,7 % | 86 et 89 | `T/compat/COMPAT_REEL.md` | RÉEL | idem |
-| Empoisonnement d'adresse sur la C-Chain (campagne août à déc. 2025) | 36 744 adresses visées, 248 053 envois de poussière, 51 625,61 USDC volés | n/a | `U_segment/U4_menaces_avalanche.md` | RÉEL (source unique) | Rapport d'un analyste indépendant, non audité. Les 3 adresses ne sont ni dans la liste ScamSniffer ni signalées par GoPlus. |
-| Scan réel du poisoning C-Chain avec la règle prefixe/suffixe | non mesuré | n/a | dossier `T/realscan/out` vide à la rédaction | en cours | À ajouter quand livré. |
+---
 
-## B. Couverture sur cas synthétiques
+# COLONNE SYNTHÉTIQUE (cas écrits par nous, jeux réglés)
 
-| Chiffre | Valeur | n | Source | Statut | Réserves |
-|---|---|---|---|---|---|
-| TEST ouvert une fois (R003), bras intention soufflée : rappel | 94,5 % [88,6 ; 97,5] (104/110) ; critical seul 83,6 % [75,6 ; 89,4] | 110 malveillants | `T/COUVERTURE.md` | SYNTH | Mesuré avant les correctifs F1 à F10. Ne décrit pas les règles actuelles. Non rouvert. |
-| TEST, fausses alertes critical | 23,1 % [15,1 ; 33,6] (18/78) ; warn ou critical brut 51,3 % [40,4 ; 62,1] ; au-delà du toléré 28,2 % | 78 bénins | `T/COUVERTURE.md` | SYNTH | Bénins difficiles. Un listing Seaport honnête et un mint NFT sortaient critical. Très au-dessus de la cible. |
-| TEST, plancher sans intention | rappel 91,8 % [85,2 ; 95,6] (101/110) ; fausses alertes critical 5,1 % [2,0 ; 12,5] (4/78) | 110 et 78 | `T/COUVERTURE.md` | SYNTH | Le plancher a moins de fausses alertes critical que le bras avec intention soufflée. |
-| TEST, simulation seule (référence) | rappel 25,4 % [18,2 ; 34,3] (28/110) | 110 | `T/COUVERTURE.md` | SYNTH | Montre ce que décoder les effets apporte face à une simulation de solde. |
-| TEST hors EIP-7702 | rappel 93,4 % [86,4 ; 96,9] (85/91) ; fausses alertes critical 19,4 % (14/72) | 91 et 72 | `T/COUVERTURE.md` | SYNTH | EIP-7702 est absent de la C-Chain. |
-| TEST famille EIP-7702 | rappel 19/19 [83,2 ; 100] ; fausses alertes critical 4/6 | 19 et 6 | `T/COUVERTURE.md` | SYNTH | Hors DEV. Non pertinent pour la C-Chain. |
-| TEST, fraude conforme alertée | 4/4 [51,0 ; 100] | 4 | `T/COUVERTURE.md` | SYNTH | n trop petit pour conclure. |
-| DEV avant boucle, bras intention soufflée | rappel 89,3 % [84,9 ; 92,5] (225/252) ; fausses alertes critical 21,1 % [14,0 ; 30,6] (19/90) ; warn ou critical sur bénins 26,7 % (24/90) | 252 et 90 | `T/COUVERTURE.md` | SYNTH | Jeu sur lequel on règle. |
-| DEV avant boucle, plancher | rappel 85,3 % [80,4 ; 89,2] (215/252) ; fausses alertes critical 5,6 % (5/90) | idem | `T/COUVERTURE.md` | SYNTH | idem |
-| DEV, fraude conforme alertée (bras honnête) | 87,5 % [69,0 ; 95,7] (21/24) ; 3 passent sans alerte | 24 | `T/COUVERTURE.md` | SYNTH | Rappel élevé surtout par signaux de destinataire et d'ampleur. Ne dit rien sur un vrai conseiller. |
-| Fixtures publiques, bras honnête : rappel | 95,4 % [87,3 ; 98,4] (62/65) ; critical seul 66,1 % [54,0 ; 76,5] | 65 malveillants | `T/attacks_public/out/MESURE_001.md` | SYNTH | Fixtures écrites par nous d'après des motifs publics. 4 inconnus (méthode `wallet_requestExecutionPermissions` non gérée). 10 cas non exécutables. |
-| Fixtures publiques, fausses alertes | critical 3,0 % [0,8 ; 10,3] (2/67) ; au-delà du toléré 13,4 % [7,2 ; 23,6] (9/67) ; warn ou critical 35,8 % (24/67) | 67 | `T/attacks_public/out/MESURE_001.md` | SYNTH | Bras "catalogue" : critical 7,5 % (5/67). |
-| Fixtures publiques, applicable C-Chain (hors Ethereum seul) | rappel honnête 94,6 % [85,4 ; 98,2] (53/56) | 56 | `T/attacks_public/out/MESURE_001.md` | SYNTH | |
-| Jeu aveugle V1 (150 cas) | non mesuré | 150 | `coord/INBOX.md` MSG-048, MSG-050 | à passer une fois | |
-| Jeu aveugle V2 d'Adem, TEST gelé | non mesuré | 2 498 (TEST) sur 8 425 | `coord/INBOX.md` MSG-052 ; `T/blind_adem/v2/BRIEF.md` | à ouvrir une fois | Réserves d'Adem : adresses et ABI de mémoire, proportions irréalistes, messages écrits par IA. Test de réalisme sur fork et pondération par poids réels des familles demandés, non faits. |
-| Comparateur d'Adem seul contre avec plancher objectif | 21/30 contre 29/30 | 30 | `coord/INBOX.md` POINT-20MIN 02h23 | SYNTH, petit n | Annoncé dans INBOX, non rejoué ici. |
-| Moteur d'effets, tests unitaires | 447/447 passent | 447 | `T/engine/test/` | SYNTH (tests) | Rejoués pour ce livrable le 11 oct. Les tests valident le code, pas la détection. |
-| Extension, batterie de tests (Chrome 154 et Edge 155) | 64 PASS, 0 FAIL, 2 LIMITE sur chaque | 66 | `T/extension/COMPAT.md` | SYNTH (portefeuille simulé) | Jamais testée avec un vrai portefeuille. Moteur de test jouet pour la plomberie. |
-| Serveur local, tests | 33/33 | 33 | `T/server/test/results.json` | SYNTH | |
+## S1. V2_DEV, état final des règles : SYNTHÉTIQUE ET RÉGLÉ
 
-## C. Temps de détection et de réponse
+Jeu : V2_DEV, 5 927 cas (2 930 malveillants, 1 976 bénins, 795 fraudes conformes, 226 ambigus). Source : `T/run/out/v2/MESURE_FINAL.md` (généré par `run/run_v2.mjs`), journal de la boucle dans `T/run/out/JOURNAL.md`, section "Boucle V2". Correctifs F1 à F19 et F21 à F30 gardés, F20 annulé. V2_TEST jamais lu (empreinte vérifiée seulement). Contexte complet du banc : voir S4 pour ce que le produit voit vraiment.
 
-| Chiffre | Valeur | n | Source | Statut | Réserves |
-|---|---|---|---|---|---|
-| Latence du verdict, serveur local | médiane 25,94 ms, p95 38,73 ms, max 106,36 ms | 400 | `T/server/test/results.json` | SYNTH (requêtes synthétiques) | Hors ligne, sans RPC, sans fork, sans modèle. Requête d'amorçage 121,3 ms. Ne mesure ni le navigateur ni l'utilisateur. |
-| Délai d'API dépassé | "Non vérifié" après 3 s (3011 ms mesuré) | 1 | `T/extension/COMPAT.md` | SYNTH | |
-| Retenue de 10 minutes | testée avec 2 s | 1 | `T/extension/COMPAT.md` | non mesuré | Le service worker MV3 peut s'arrêter avant. |
-| Temps de décision de l'utilisateur | journalisé, aucune valeur | 0 | `T/extension/COMPAT.md` | non mesuré | Aucun test avec des personnes. |
-| Détection ou réponse sur Fuji | non mesuré | 0 | n/a | non mesuré | |
+| Bras | Rappel (warn ou critical) | Rappel critical | Fausses alertes critical | Warn ou critical brut sur bénins |
+|---|---|---|---|---|
+| catalogue (outil complet) | 99,7 % [99,5 ; 99,9] (2922/2930) | 95,1 % [94,2 ; 95,8] (2786/2930) | 1,0 % [0,7 ; 1,6] (20/1976) | 19,2 % [17,5 ; 21,0] (379/1976) |
+| honnête | 98,9 % [98,5 ; 99,2] (2898/2930) | 88,3 % [87,1 ; 89,4] | 1,2 % [0,8 ; 1,8] (24/1976) | 18,8 % [17,2 ; 20,6] |
+| plancher seul (sans intention) | 98,9 % [98,5 ; 99,2] (2898/2930) | 88,3 % [87,1 ; 89,4] | 0,0 % [0,0 ; 0,2] (0/1976) | 14,7 % [13,2 ; 16,4] (291/1976) |
 
-## D. Cibles et hypothèses (pas des mesures)
+Statut : SYNTH et RÉGLÉ. Réserves :
+- Les règles ont été ajustées en regardant ces mêmes cas. Le chiffre peut baisser sur V2_TEST.
+- 8 malveillants ratés dans le bras catalogue. 0 inconnu.
+- Au-delà de la sévérité tolérée : 10,1 % [8,8 ; 11,5] (199/1976) pour le bras catalogue.
+- Le warn ou critical brut reste à 19,2 %, au-dessus de la cible de 15 %. La frontière est décrite dans le journal : minimum reçu à 0 sur 94 bénins, setApprovalForAll vers un marché (60), appels Odos non décodables. On ne l'atteint qu'en acceptant des risques réels.
+- Fraude conforme alertée : 76,5 % [73,4 ; 79,3] (608/795) pour le bras catalogue, 45,0 % (358/795) pour le plancher. Ce taux vient surtout des signaux de destinataire et d'ampleur. Il ne dit rien sur un vrai conseiller.
+- Les auteurs des cas ne sont pas aveugles. Adresses et ABI parfois écrites de mémoire (champ `approximation`). Messages d'escroc écrits par une IA. Proportions des familles non réalistes.
+
+Par chaîne (même source, bras catalogue) :
+
+| Portée | Rappel | Fausses alertes critical | Warn ou critical brut |
+|---|---|---|---|
+| Avalanche (43114 et 43113) | 99,6 % [99,2 ; 99,8] (1588/1594) | 1,0 % [0,6 ; 1,6] (15/1502) | 18,0 % (271/1502) |
+| Autres chaînes | 99,9 % [99,5 ; 100] (1334/1336) | 1,1 % [0,5 ; 2,4] (5/474) | 22,8 % (108/474) |
+
+## S2. Fixtures publiques
+
+| Chiffre | Valeur | n | Source | Statut |
+|---|---|---|---|---|
+| Rappel, bras honnête et catalogue | 95,4 % [87,3 ; 98,4] (62/65) | 65 malveillants | `T/attacks_public/out/MESURE_001.md` ; `T/run/out/JOURNAL.md` (état final) | SYNTH |
+| Fausses alertes critical, bras catalogue, avant les correctifs V2 | 7,5 % [3,2 ; 16,3] (5/67) | 67 bénins | `T/attacks_public/out/MESURE_001.md` (fichier non régénéré, il décrit l'état d'avant) | SYNTH |
+| Fausses alertes critical, après les correctifs V2 | 1,5 % | 67 bénins | `T/run/out/JOURNAL.md` (F21 à F23 : 2 faux positifs supprimés) | SYNTH, RÉGLÉ |
+| Applicable C-Chain (hors EIP-7702) | rappel 94,6 % [85,4 ; 98,2] (53/56) | 56 | `T/attacks_public/out/MESURE_001.md` | SYNTH |
+
+Réserves : fixtures écrites par nous d'après des motifs publics. 4 cas inconnus (méthode `wallet_requestExecutionPermissions` non gérée), 10 cas non exécutables. Le fichier MESURE_001.md n'a pas été régénéré après la boucle V2 : ses taux de fausses alertes sont ceux d'avant.
+
+## S3. TEST ouvert une fois avant : CONTAMINÉ
+
+Le jeu TEST (R003) a été ouvert une fois, avant les correctifs F1 à F10. Il a ensuite servi à orienter des correctifs. Il ne compte plus comme test indépendant. À citer seulement comme "ancien état, contaminé".
+
+| Chiffre | Valeur | n | Source |
+|---|---|---|---|
+| Rappel, bras intention soufflée | 94,5 % [88,6 ; 97,5] (104/110) | 110 | `T/COUVERTURE.md` |
+| Fausses alertes critical | 23,1 % [15,1 ; 33,6] (18/78) | 78 | `T/COUVERTURE.md` |
+| Plancher sans intention | rappel 91,8 % [85,2 ; 95,6] (101/110) ; fausses alertes critical 5,1 % [2,0 ; 12,5] (4/78) | 110 et 78 | `T/COUVERTURE.md` |
+| Simulation seule (référence) | rappel 25,4 % [18,2 ; 34,3] (28/110) | 110 | `T/COUVERTURE.md` |
+
+## S4. Banc en conditions produit : l'écart avec le banc complet
+
+Question : le banc donne aux règles un contexte (âge du contrat, solde, jetons, liste de protocoles) que le produit n'a pas. Que devient la mesure quand on retire ce contexte ? Source : `T/banc_realiste/out/TAB_TOTAUX_produit.md`, `EN_LIGNE_produit.md`, définition des niveaux dans `T/banc_realiste/CONTEXTE_PRODUIT.md`. Il n'y a pas de rapport rédigé `BANC_REALISTE.md`. Résultat provisoire : les fichiers du dossier ont été régénérés le 11 oct. à 04 h 54, à relire avant toute citation.
+
+Bras "intention produit" (l'intention est réduite à ce que le produit sait exprimer). V2_DEV, jeu réglé :
+
+| Niveau de contexte | Rappel | Fausses alertes critical | Warn ou critical brut |
+|---|---|---|---|
+| Banc complet (FULL) | 99,6 % [99,3 ; 99,8] (2918/2930) | 1,0 % (20/1976) | 15,2 % (301/1976) |
+| Produit, réglage par défaut (B) | 84,0 % [82,6 ; 85,2] (2460/2930) | 14,4 % [12,9 ; 16,0] (285/1976) | 54,9 % (1084/1976) |
+| Avec carnet et historique saisis (C) | 92,4 % [91,3 ; 93,3] (2706/2930) | 14,4 % (285/1976) | 54,9 % |
+| Liste statique livrée (D), borne haute optimiste | 90,3 % [89,2 ; 91,4] (2647/2930) | 1,0 % (20/1976) | 17,1 % (337/1976) |
+
+Lecture :
+- Le chiffre de 1,0 % de fausses alertes critical n'est vrai que si le produit fournit le contexte du banc. Au réglage par défaut, il est de 14,4 % sur ce jeu.
+- Une liste statique de protocoles livrée avec le produit ramène les fausses alertes critical vers 1,0 %. Elle est ici construite à partir du catalogue lui-même : c'est une borne haute, pas une couverture mesurée.
+- Les lectures en ligne minimales (nature du contrat, âge, jetons, soldes) montent le rappel. Sur tout le jeu (DEV, PUBLIC, V2_DEV), l'ajout de ces lectures à la liste statique donne un rappel de 95,1 % [94,4 ; 95,8] avec 0,9 % de fausses alertes critical (`EN_LIGNE_produit.md`, ligne D_O4).
+- Le banc ne mesure pas le texte de la page, la règle Seaport propre au serveur, ni la friction.
+
+## S5. Autres mesures synthétiques
 
 | Chiffre | Valeur | Source | Statut |
 |---|---|---|---|
-| Cible fausses alertes critical | 1/1000 avec borne | `O_barriere_intention.md` | HYPO, non sourcée, NON atteinte (TEST 23,1 %) |
+| Scénarios exportés | 6 456 scénarios (385 catalogue, 144 public, 5 927 V2) ; 3 930 sur Avalanche (60,9 %) ; 14 inutilisables (10 sans requête EVM, 4 en ERC-7715) ; 6 442 acceptés par le moteur | `T/scenarios_export/README_EXPORT_FR.md` | SYNTH, tous synthétiques |
+| Moteur d'effets, tests unitaires | 447/447 passent (rejoués le 11 oct.) | `T/engine/test/` | SYNTH (les tests valident le code, pas la détection) |
+| Serveur local, tests | 33/33 passent (rejoués le 11 oct.) | `T/server/test/server.test.mjs` | SYNTH |
+| Serveur, tests de présentation | 30/31 (rejoués le 11 oct.). Échec : le test 7a, 7 codes de raison récents du moteur n'ont pas d'entrée dans la table de textes (`lookalike_reported`, `lookalike_weak`, `signed_transfer_unlimited`, `signed_right_unlimited_unknown`, `signed_calldata`, `signed_text_grants_assets`, `offchain_signaling`) | `T/server/test/presentation.test.mjs` | SYNTH. L'annonce "31/31" de INBOX n'est pas reproduite |
+| Latence du verdict, serveur local | médiane 30,5 ms, p95 35,8 ms, max 39,3 ms (400 requêtes) | `T/server/test/results.json` (rejoué le 11 oct.) | SYNTH. Hors ligne, sans RPC, sans fork, sans modèle. Les valeurs varient d'un run à l'autre (25,9 ms et 38,7 ms au run précédent) |
+| Journal ancré, intégrité et Merkle | 42 vérifications OK, 0 échec | `T/anchor/ANCHOR_README.md` | SYNTH. Contrat non compilé chez nous. Compilé et déployé sur nœud local par Adem (`coord/INBOX.md` MSG-058), rejeu annoncé dans `coord/reports/critere_reponse.md`, non rejoué ici. Aucun déploiement sur Fuji listé |
+| Extension, batterie de tests (Chrome 154 et Edge 155) | 64 PASS, 0 FAIL, 2 LIMITE sur chaque | `T/extension/COMPAT.md` | SYNTH (portefeuille simulé), version d'avant les changements d'Adem |
+| Comparateur d'Adem seul contre avec plancher objectif | 21/30 contre 29/30 | `coord/INBOX.md` POINT-20MIN 02h23 | SYNTH, petit n, non rejoué ici |
+| Retenue de 10 minutes | testée avec 2 s ; retenue persistante (chrome.alarms, stockage) ajoutée par Adem (commit e0a89a7) | `T/extension/COMPAT.md` ; `coord/INBOX.md` MSG-056 | non rejoué ici |
+| Détection de la voie de réponse (côté Adem) | matrice graduée, fiche d'incident, retrait de droits, ancrage sur chaîne locale, 23 tests | `coord/reports/critere_reponse.md` | non rejoué ici |
+
+---
+
+# COLONNE DONNÉES RÉELLES
+
+## R1. Trafic réel, moteur actuel (politique sans intention, sans contexte)
+
+Source : `T/realtraffic/REALTRAFFIC.md`. Moteur et politique (correctifs F1 à F10 actifs au moment de la mesure), sans comparateur, sans intention, sans historique, sans carnet, sans RPC. Trafic de blocs aléatoires, "légitime" présumé.
+
+| Chiffre | Valeur | n | Statut |
+|---|---|---|---|
+| C-Chain, alertes critical | 0,30 % [0,19 ; 0,47] (19) | 6 325 tx, 1 500 blocs | RÉEL |
+| C-Chain, warn | 76,84 % [75,78 ; 77,86] | idem | RÉEL |
+| C-Chain, ok | 22,66 % | idem | RÉEL |
+| Part des alertes C-Chain qui sont de l'opacité seule ("je n'ai pas pu décoder") | 95,8 % (76,8 % sur Ethereum) | idem | RÉEL |
+| Part de trafic C-Chain en appels opaques | 74,5 % (28,8 % sur Ethereum) | idem | RÉEL |
+| Ethereum, alertes critical | 3,33 % [2,91 ; 3,82] (200) | 6 000 tx tirées, 200 blocs | RÉEL |
+| Transferts natifs et ERC-20 | 0 % d'alerte (21 % du trafic C-Chain, 61 % d'Ethereum) | idem | RÉEL |
+| Revue manuelle des 19 critical C-Chain | 2 fausses alertes confirmées (10,5 % [2,9 ; 31,4]), 2 alertes utiles, 15 indéterminées | 19 | RÉEL, un seul relecteur |
+| Revue manuelle des critical Ethereum | 13/20 fausses alertes (65 %) | 20 | RÉEL, un seul relecteur |
+| Latence du moteur seul | médiane 0,037 ms, p95 0,20 ms (C-Chain) | 6 325 | RÉEL, en mémoire, hors réseau |
+
+Réserves :
+- Ce n'est pas du trafic de portefeuilles d'utilisateurs : il contient des robots (MEV, arbitrage) et des bundlers. La part d'opacité est gonflée par ce trafic.
+- Le "légitime" est présumé. Aucune étiquette de vérité.
+- Le critère "fausse alerte" repose sur un proxy de popularité et sur la reconnaissance de protocoles par un seul relecteur.
+- La liste de protocoles connus du mode B est circulaire (dérivée de l'échantillon). Ne pas la citer comme une couverture.
+- Les attaques ne sont pas mesurées ici. Aucun rappel.
+- Le taux de fausses alertes critical sur Ethereum (environ 2,2 % du trafic) n'atteint pas la cible de 1 pour 1 000.
+
+## R2. Filet v0 et droits de dépense réels
+
+| Chiffre | Valeur | n | Source | Statut |
+|---|---|---|---|---|
+| Filet v0 (5 règles, sans intention), alertes sur trafic C-Chain présumé légitime | 0,28 % [0,18 ; 0,45] | 6 325 tx | `bench/RAPPORT_banc_reel_v0.md` | RÉEL |
+| Même filet, Ethereum, après correction | 2,98 % (3,15 % avant) ; règle R3 0,27 % | 43 075 tx, 200 blocs | idem, CORRECTION MAJEURE | RÉEL |
+| Rappel du filet v0 sur droits de dépense directs réels (Ethereum) | 24/33 = 72,7 % [55,8 ; 84,9] | **n = 33** | idem, CORRECTION MAJEURE | RÉEL |
+
+Réserves : n = 33 seulement (le jeu de 1 354 contenait des révocations comptées à tort). Étiquettes ScamSniffer (tiers), 170 spenders, forte concentration, surtout des drainers déjà listés. Ne valide pas un drainer neuf.
+
+## R3. Compatibilité sur 96 sites réels
+
+Source : `T/compat/COMPAT_REEL.md`.
+
+| Chiffre | Valeur | Statut |
+|---|---|---|
+| Sites testés | 96 : PASS 81, DIFFÉRENCE 8, CASSE 0, inaccessibles 7 | RÉEL |
+| Taux de casse | 0/89 = 0,0 % [0,0 ; 4,1] ; 0/65 [0,0 ; 5,6] parmi les sites qui détectent un portefeuille | RÉEL |
+| Casse ou différence | 8/89 = 9,0 % [4,6 ; 16,7] | RÉEL |
+| Bruit A/A (erreur console nouvelle sans aucune différence d'injection) | 9/86 = 10,5 % [5,6 ; 18,7] ; bras test 6/89 = 6,7 % | RÉEL |
+
+Réserve centrale : le bras test est un **Proxy de substitution** du banc, pas l'extension Hold up. Le fournisseur de portefeuille est simulé. Aucune connexion ni signature réelle. Échantillon de commodité. Un site peut être PASS parce que le bouton de connexion n'a pas été trouvé.
+
+## R4. Empoisonnement d'adresse sur la C-Chain
+
+| Chiffre | Valeur | Source | Statut |
+|---|---|---|---|
+| Campagne août à déc. 2025 | 36 744 adresses visées, 248 053 envois de poussière, 51 625,61 USDC volés | `U_segment/U4_menaces_avalanche.md` | RÉEL (source unique, rapport d'un analyste, non audité) |
+| Scan à nous, 300 000 blocs C-Chain (du 7 au 11 oct. 2026) | 517 487 transferts USDC et USDT lus. 2 170 paires candidates avec la règle préfixe 3 et suffixe 4. Un tirage mélangé de contrôle en trouve 1 en moyenne (10 tirages). 475 jugées probables, 1 695 indéterminées par la règle automatique. Aucun envoi d'une victime vers un sosie observé dans la fenêtre | `T/realscan/out/summary.json` | RÉEL, **résumé machine seulement** |
+
+Réserves : il n'y a pas de rapport rédigé (`REALSCAN_POISONING.md` n'existe pas). Un "candidat" n'est pas une attaque confirmée. Le scan n'a pas été relu à la main. Ne pas en tirer un taux de détection.
+
+---
+
+# CE QUI N'EST PAS MESURÉ
+
+| Sujet | État |
+|---|---|
+| V2_TEST (2 498 cas sur 8 425, jeu gelé, empreinte publiée) | À ouvrir **une seule fois, à la fin**. Aucun résultat. Risque de procédure : `V2_TEST.jsonl` est suivi par git (relevé par Adem, `coord/INBOX.md` MSG-055), alors qu'on dit qu'il n'a jamais été lu |
+| Jeu aveugle V1 (150 cas) | À passer une fois. Aucun résultat |
+| Essai réel avec MetaMask | Jamais joué. Le protocole est écrit (`T/essai_reel/ESSAI_REEL_METAMASK.md`). Tous les "attendus" sont des prévisions tirées du code. Aucun contrat de démo listé dans `blockchain/DEPLOYMENTS.md` ; le déployeur Fuji n'avait pas d'AVAX de test (MSG-057) |
+| Extension réelle dans Chrome sur des sites réels | Non mesuré. La compatibilité sur 96 sites utilise un Proxy du banc. L'extension a été testée avec un portefeuille simulé seulement |
+| Utilisateurs réels | Aucun test avec des personnes. Le test de compréhension (`U_comprehension/`) utilise des personas simulés : NON CONCLUANT, aucun taux n'est cité. Temps de décision : non mesuré |
+| Rappel sur un drainer neuf réel | Non mesuré. Les données réelles sont surtout des drainers déjà listés |
+| Fraude conforme (transfert valide sous guidance d'un escroc) | Mesure synthétique seulement. Invisible par construction quand rien ne distingue l'envoi |
+| Latence avec simulation, fork, RPC de contexte | Non mesurée. Seule la latence locale hors ligne est mesurée |
+| Détection et réponse sur Fuji | Non mesurées |
+| Efficacité d'un avertissement sur des personnes réelles | Non mesurée. Les chiffres de la littérature (section D) ne sont pas les nôtres |
+
+---
+
+# D. Cibles et hypothèses (pas des mesures)
+
+| Chiffre | Valeur | Source | Statut |
+|---|---|---|---|
+| Cible fausses alertes critical | 1 pour 1 000 avec borne | `O_barriere_intention.md` | HYPO, non sourcée, NON atteinte (trafic réel Ethereum 3,33 % de critical ; banc produit au réglage par défaut 14,4 %) |
 | Cible rappel | 90 % sur familles connues, 70 % sur inédites | `O_barriere_intention.md` | HYPO |
-| Cible de `docs/intent-barrier.md` | FN = 0 sur démo, FP critical sous 2 %, p95 sous 1,5 s | `docs/intent-barrier.md` | HYPO, FP critical sous 2 % non atteint sur TEST |
+| Cible de `docs/intent-barrier.md` | FN = 0 sur démo, FP critical sous 2 %, p95 sous 1,5 s | `docs/intent-barrier.md` | HYPO |
+| Warn ou critical brut sur bénins | cible 15 % ou moins ; mesuré 19,2 % sur V2_DEV | `T/run/out/JOURNAL.md` | non atteinte |
 | 30 s (niveau Danger) et 10 min (manipulation) | durées de friction | `docs/design/REGLES_avertissements.md` | HYPO, aucune preuve publiée |
 | Borne de confiance | 3 000 transactions légitimes sans alerte pour affirmer moins de 0,1 % | `O_barriere_intention.md` | calcul (règle de 3), pas un résultat |
-| Effet d'un avertissement en simulation de portefeuille | annulation 1,3 % (témoin), 19,7 % (passif), 32,9 % (délai 5 s), 48,6 % (actif sur le spender) | `U_segment/U3_efficacite_interventions.md` | LIT (laboratoire, non revérifié ici) |
-| Fraude avec geste d'annulation (banque simulée) | 22 % à 4 % | `U_segment/U3_efficacite_interventions.md` | LIT (OBIE 2021, laboratoire) |
+| Effet d'un avertissement en simulation de portefeuille | annulation 1,3 % (témoin), 19,7 % (passif), 32,9 % (délai 5 s), 48,6 % (actif sur le spender) | `U_segment/U3_efficacite_interventions.md` | LIT (laboratoire) |
+| Fraude avec geste d'annulation (banque simulée) | 22 % à 4 % | `U_segment/U3_efficacite_interventions.md` | LIT (OBIE 2021) |
 | Outrepassement des avertissements navigateur | SSL 70,2 % Chrome contre 33,0 % Firefox | `docs/design/REGLES_avertissements.md` | LIT (Akhawe et Felt 2013) |
 | Pertes ScamSniffer | 83,85 M$ en 2025 (106 k victimes) | `U_segment/U4_menaces_avalanche.md` | LIT |
 
-## E. Chiffres RETIRÉS (ne plus jamais les citer)
+---
 
-| Chiffre | Pourquoi retiré | Source de la correction | Remplacé par |
-|---|---|---|---|
-| **80,4 % de rappel de la règle R3** (compte externe), avec 0,23 % de faux positifs | Le jeu "d'attaques" de 1 354 transactions contenait 1 186 `approve(..., 0)`, c'est-à-dire des révocations, comptées à tort comme des droits. | `bench/RAPPORT_banc_reel_v0.md`, CORRECTION MAJEURE | n = 33 droits directs réels ; rappel du filet 72,7 % [55,8 ; 84,9] ; R3 sur légitime 0,27 % |
-| **81,9 %** de rappel du filet complet (1 354 transactions) | Même cause. | idem | 24/33 = 72,7 % |
-| 89,3 % sur les "1 219 approbations directes" | Même jeu contaminé par les révocations. | idem | n = 33 |
-| 88,2 % de rappel et 0,39 % de FP pour "compte externe OU contrat jeune" | Calculé sur le jeu contaminé. Le gain venait entièrement de R3. | `bench/RAPPORT_banc_reel_v0.md`, addendum 1 | à refaire sur les droits réels |
-| Signal "contrat jeune" (1,2 % des attaques visent un contrat de moins de 7 jours) | Jeu contaminé en partie. Résultat de toute façon négatif. | idem | à refaire, ne pas citer |
-| **Preuve sociale 99 %** (approbateurs antérieurs) | Le signal a été calculé sur le même jeu contaminé. Le rapport dit qu'il est "à REFAIRE sur les droits réels seulement et ne doit pas être cité". Le chiffre 99 % n'a pas été retrouvé dans les fichiers lus pour ce livrable. | `bench/RAPPORT_banc_reel_v0.md`, CORRECTION MAJEURE | rien |
-| **Signal nonce du spender** (rappel 87 %, 44 % de faux positifs chez les spenders externes légitimes) | Même jeu contaminé. Le nonce ne tenait déjà pas : résultat négatif. | idem | rien |
-| Ligne "R3 80 % rappel / 0,23 % FP (Ethereum)" de la matrice des familles | Reprise du chiffre faux. | `R_cas_complexes/SYNTHESE.md` (matrice, famille 1) | 72,7 % sur n = 33 |
-| Part de pertes évitable "environ 1 % (0,2 à 5 %)" du périmètre global et "environ 38 % (13 à 72 %)" du périmètre natif portefeuille | Calculées avec les rappels 80 % et 82 %, maintenant retirés. | `U_segment/U3_efficacite_interventions.md`, constat 4 | à recalculer avec 72,7 % [55,8 ; 84,9] et n = 33 |
-| DEV après les correctifs F1 à F10 : rappel 100,0 % (252/252) et fausses alertes critical 0/90 | Obtenus en réglant les règles sur ce même jeu. F10 a été motivé par les 6 cas qu'il rattrape. F4, F9 et F10 ne sont pas validées contre les fausses alertes (aucun bénin concerné dans DEV). Sur TEST, avant correctifs, les fausses alertes critical étaient de 23,1 %. | `T/COUVERTURE.md`, section boucle ; `T/run/out/JOURNAL.md` | TEST à rouvrir sur un jeu neuf, ou V2_TEST ouvert une fois |
-| Taux de compréhension des écrans (tests v1 et v2) | Réponses de personas simulés (étudiante, trader, etc.), pas de personnes. Questions à choix qui guident la réponse. n faible. Aucun taux n'est présenté comme preuve. | `U_comprehension/` (réponses et `grade.mjs`) | test avec de vraies personnes, non fait |
-| Objectifs "FP critical sous 1/1000" et "FN = 0" présentés comme acquis | Ce sont des cibles, non atteintes. | `O_barriere_intention.md`, `docs/intent-barrier.md` | voir section D |
+# E. Chiffres RETIRÉS (ne plus jamais les citer)
 
-Rappel de ce qui reste valable de l'ancien rapport : le droit illimité (R1) est inutile comme alerte critique seule (normal sur Ethereum, 2,27 % du trafic) ; la délégation EIP-7702 est trop fréquente en légitime (0,56 % sur Ethereum) pour être critique seule ; la liste ScamSniffer mélange drainers et adresses d'empoisonnement (`bench/RAPPORT_banc_reel_v0.md`).
+| Chiffre | Pourquoi retiré | Source de la correction |
+|---|---|---|
+| **80,4 % de rappel de la règle R3** (compte externe), avec 0,23 % de faux positifs | Le jeu "d'attaques" de 1 354 transactions contenait 1 186 `approve(..., 0)`, c'est-à-dire des révocations, comptées à tort comme des droits. | `bench/RAPPORT_banc_reel_v0.md`, CORRECTION MAJEURE |
+| **81,9 %** de rappel du filet complet (1 354 transactions) | Même cause. | idem |
+| 89,3 % sur les "1 219 approbations directes" | Même jeu contaminé. | idem |
+| 88,2 % de rappel et 0,39 % de FP pour "compte externe OU contrat jeune" | Calculé sur le jeu contaminé. | idem, addendum 1 |
+| Signal "contrat jeune" (1,2 % des attaques) | Jeu contaminé en partie. Résultat négatif de toute façon. | idem |
+| **Preuve sociale 99 %** (approbateurs antérieurs) | Calculée sur le même jeu contaminé. À refaire sur les droits réels, ne pas citer. | idem |
+| **Signal nonce du spender** (rappel 87 %, 44 % de faux positifs) | Même jeu contaminé. Résultat négatif. | idem |
+| Ligne "R3 80 % rappel / 0,23 % FP (Ethereum)" de la matrice des familles | Reprise du chiffre faux. | `R_cas_complexes/SYNTHESE.md` |
+| Parts de pertes évitables "environ 1 %" (global) et "environ 38 %" (natif portefeuille) | Calculées avec les rappels retirés. | `U_segment/U3_efficacite_interventions.md`, constat 4 |
+| DEV après F1 à F10 : "100 %" de rappel et "0/90" de fausses alertes critical | Obtenus en réglant les règles sur ce même jeu. Sur TEST, avant correctifs, les fausses alertes critical étaient de 23,1 %. À ne pas citer comme résultat. | `T/COUVERTURE.md`, section boucle ; `T/run/out/JOURNAL.md` |
+| Taux de compréhension des écrans (tests v1 et v2) | Réponses de personas simulés, questions à choix qui guident la réponse, n faible. Non concluant. | `U_comprehension/` |
+| Objectifs "FP critical sous 1/1000" et "FN = 0" présentés comme acquis | Ce sont des cibles, non atteintes. | `O_barriere_intention.md` |
+| TEST ouvert une fois, 94,5 % et 23,1 % | Pas retiré, mais **contaminé** : à citer seulement comme ancien état (section S3), jamais comme test indépendant. | `T/COUVERTURE.md` |
+
+Ce qui reste valable de l'ancien rapport : le droit illimité (R1) est inutile comme alerte critique seule (2,27 % du trafic Ethereum) ; la délégation EIP-7702 est trop fréquente en légitime (0,56 % sur Ethereum) pour être critique seule ; la liste ScamSniffer mélange drainers et adresses d'empoisonnement (`bench/RAPPORT_banc_reel_v0.md`).

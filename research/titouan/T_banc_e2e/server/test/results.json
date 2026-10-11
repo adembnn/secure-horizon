@@ -1,5 +1,5 @@
 {
- "date": "2026-10-11T02:34:51.362Z",
+ "date": "2026-10-11T02:53:40.440Z",
  "node": "v24.18.1",
  "summary": {
   "passed": 33,
@@ -7,9 +7,9 @@
   "total": 33,
   "latency_ms_400_requests": {
    "n": 400,
-   "p50": 31.75,
-   "p95": 42.93,
-   "max": 51.08
+   "p50": 30.48,
+   "p95": 35.76,
+   "max": 39.26
   },
   "levels_in_400": {
    "danger": 200,
@@ -17,92 +17,92 @@
    "unknown": 100
   },
   "first_17_requests_ms": [
-   78.6,
-   35.9,
-   24.9,
-   28.6,
-   32.6,
-   21,
-   40.5,
-   37.4,
-   36.9,
-   29.3,
-   23.8,
-   35.3,
-   30.9,
-   36.8
+   81.6,
+   38.2,
+   23.9,
+   30.1,
+   31.9,
+   19.8,
+   22.2,
+   36.8,
+   20.3,
+   34.5,
+   18.9,
+   27.6,
+   29.1,
+   19.1
   ]
  },
  "results": [
   {
    "name": "1 approve illimite -> critical + fiche F01 + 4 lignes",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F01 78.6 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F01 81.6 ms"
   },
   {
    "name": "2 permit EIP-2612 illimite (signature) -> critical + F02",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F02 35.9 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F02 38.2 ms"
   },
   {
    "name": "3 envoi simple a un contact connu -> pas critical, jamais ok",
    "ok": true,
-   "info": "HTTP 200 level=attention niveau=info fiche=F26 24.9 ms"
+   "info": "HTTP 200 level=attention niveau=info fiche=F26 23.9 ms"
   },
   {
    "name": "4 setApprovalForAll -> critical + F03",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F03 28.6 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F03 30.1 ms"
   },
   {
    "name": "5 transferOwnership -> critical + F07",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F07 32.6 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F07 31.9 ms"
   },
   {
    "name": "6 adresse sosie du contact -> critical + F13 + address_diff",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F13 21.0 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F13 19.8 ms"
   },
   {
    "name": "7 intention \"je recois\" + approve illimite -> contradiction",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F01 40.5 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F01 22.2 ms"
   },
   {
    "name": "8 texte de page \"support / urgent\" + approve -> manipulation",
    "ok": true,
-   "info": "HTTP 200 level=manipulation niveau=critical fiche=F01 37.4 ms"
+   "info": "HTTP 200 level=manipulation niveau=critical fiche=F01 36.8 ms"
   },
   {
    "name": "9 methode inconnue -> non verifie (unknown/warn), pas ok",
    "ok": true,
-   "info": "HTTP 200 level=unknown niveau=warn fiche=F25 36.9 ms"
+   "info": "HTTP 200 level=unknown niveau=warn fiche=F25 20.3 ms"
   },
   {
    "name": "10 ajout de reseau a symbole ETH usurpe -> critical",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F32 29.3 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F32 34.5 ms"
   },
   {
    "name": "11 changement vers un reseau connu -> pas critical",
    "ok": true,
-   "info": "HTTP 200 level=attention niveau=info fiche=F26 23.8 ms"
+   "info": "HTTP 200 level=attention niveau=info fiche=F26 18.9 ms"
   },
   {
    "name": "12 personal_sign simple -> pas ok",
    "ok": true,
-   "info": "HTTP 200 level=attention niveau=info fiche=F26 35.3 ms"
+   "info": "HTTP 200 level=attention niveau=info fiche=F26 27.6 ms"
   },
   {
    "name": "13 eth_sign (signature aveugle) -> critical + F05",
    "ok": true,
-   "info": "HTTP 200 level=danger niveau=critical fiche=F05 30.9 ms"
+   "info": "HTTP 200 level=danger niveau=critical fiche=F05 29.1 ms"
   },
   {
    "name": "14 params absents/charabia -> pas de plantage, jamais ok",
    "ok": true,
-   "info": "HTTP 200 level=unknown niveau=warn fiche=F25 36.8 ms"
+   "info": "HTTP 200 level=unknown niveau=warn fiche=F25 19.1 ms"
   },
   {
    "name": "15 JSON malforme -> HTTP 400",
@@ -162,7 +162,7 @@
   {
    "name": "25 le serveur ecoute sur 127.0.0.1 uniquement",
    "ok": true,
-   "info": "{\"address\":\"127.0.0.1\",\"family\":\"IPv4\",\"port\":61999}"
+   "info": "{\"address\":\"127.0.0.1\",\"family\":\"IPv4\",\"port\":52977}"
   },
   {
    "name": "26 400 requetes en serie : aucun niveau \"ok\"",
@@ -172,12 +172,12 @@
   {
    "name": "27 latence bout en bout p95 < 100 ms et max < 3000 ms",
    "ok": true,
-   "info": "{\"n\":400,\"p50\":31.75,\"p95\":42.93,\"max\":51.08}"
+   "info": "{\"n\":400,\"p50\":30.48,\"p95\":35.76,\"max\":39.26}"
   },
   {
    "name": "28 latence du moteur seule (champ latency_ms) < 50 ms sur la requete sosie",
    "ok": true,
-   "info": "1.19 ms"
+   "info": "0.83 ms"
   },
   {
    "name": "29 journal : chaine de hachage valide",

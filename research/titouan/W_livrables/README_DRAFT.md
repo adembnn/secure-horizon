@@ -55,19 +55,20 @@ Principes de conception :
 
 | Brique | État | Source |
 |---|---|---|
-| Moteur d'effets, 447 tests unitaires | fait, 447/447 rejoués par l'auteur du livrable | `research/titouan/T_banc_e2e/engine/test/` |
-| Serveur local `/check`, journal chaîné par hachage, vérificateur | fait | `research/titouan/T_banc_e2e/server/server.mjs` |
-| Extension MV3 (Chrome, Edge) avec portefeuille simulé | faite, 64 PASS sur 66, 2 LIMITE | `research/titouan/T_banc_e2e/extension/COMPAT.md` |
-| Extension autonome (moteur embarqué, sans réseau) | en cours, dossier `out/` vide à la rédaction | `research/titouan/T_banc_e2e/extension_standalone/` |
-| Ancrage de la racine du journal sur Fuji (contrat, script, rejeu) | en cours, dossier `anchor/` absent à la rédaction | `coord/INBOX.md` MSG-051 et réponse de Titouan |
-| Contrats déployés sur Fuji | non listés : `blockchain/DEPLOYMENTS.md` est vide | `blockchain/DEPLOYMENTS.md` |
-| Essai avec un vrai MetaMask sur Fuji | jamais fait ; protocole en préparation, à jouer par un humain | `coord/INBOX.md` MSG-053 |
+| Moteur d'effets, 447 tests unitaires | fait, 447/447 rejoués le 11 oct. | `research/titouan/T_banc_e2e/engine/test/` |
+| Serveur local `/check`, journal chaîné par hachage, vérificateur | fait, 33/33 tests rejoués le 11 oct. Tests de présentation : 30/31 (le test 7a échoue : 7 codes de raison récents sans texte) | `research/titouan/T_banc_e2e/server/` |
+| Extension MV3 (Chrome, Edge) avec portefeuille simulé | batterie de 66 tests : 64 PASS, 2 LIMITE (état d'avant les changements d'Adem : fenêtre de verdict séparée, retenue persistante, commit e0a89a7, non rejoués ici) | `research/titouan/T_banc_e2e/extension/COMPAT.md`, `coord/INBOX.md` MSG-056, MSG-057 |
+| Extension autonome (moteur embarqué, sans réseau) | construite par Adem (fichiers générés présents) ; équivalence avec le serveur annoncée, non vérifiée ici | `research/titouan/T_banc_e2e/extension_standalone/`, `coord/INBOX.md` MSG-058 |
+| Journal ancré : racine de Merkle, preuves, vérificateur | 42 vérifications OK. Contrat compilé et déployé sur un nœud local par Adem (`npm run anchor:local`). Pas compilé chez nous. Rejeu dans `coord/reports/critere_reponse.md`, non rejoué ici | `research/titouan/T_banc_e2e/anchor/ANCHOR_README.md`, `coord/INBOX.md` MSG-058 |
+| Contrats déployés sur Fuji | aucun listé : `blockchain/DEPLOYMENTS.md` ne contient que l'en-tête. Le déployeur n'avait pas d'AVAX de test (MSG-057) | `blockchain/DEPLOYMENTS.md` |
+| Démo réelle (décision d'Adem, D-008) | un moteur, deux portes (extension et RPC de garde), réplique locale de la chaîne, vrai portefeuille. Le RPC de garde a 15 tests sur 15 côté Adem, non rejoués ici | `coord/INBOX.md` MSG-056 à MSG-058 |
+| Essai avec un vrai MetaMask sur Fuji | jamais fait ; protocole écrit, à jouer par une personne | `research/titouan/T_banc_e2e/essai_reel/ESSAI_REEL_METAMASK.md` |
 
 ## 4. Installation
 
 Prérequis : Node 22 ou plus (24 utilisé ici), Chrome ou Edge. Aucun `npm install` n'est nécessaire : le moteur et le serveur n'ont aucune dépendance.
 
-Les guides `INSTALL_FR.md` et `INSTALL_STANDALONE_FR.md` n'existaient pas à la rédaction. Quand ils seront écrits, ils font foi. En attendant, les étapes ci-dessous viennent des scripts du repo.
+Les guides `research/titouan/T_banc_e2e/INSTALL_FR.md` et `INSTALL_STANDALONE_FR.md` existent maintenant. Ils font foi. Les étapes ci-dessous viennent des scripts du repo et n'ont pas été relues contre ces guides.
 
 ### 4.1 Version avec serveur local
 
@@ -83,7 +84,7 @@ Les guides `INSTALL_FR.md` et `INSTALL_STANDALONE_FR.md` n'existaient pas à la 
 
 ### 4.2 Version autonome
 
-Moteur embarqué dans l'extension, aucun serveur, aucun réseau sortant. Code source : `research/titouan/T_banc_e2e/extension_standalone/src/` (`hold-up_core.js`, `background.js`). Zip et guide : en cours, voir `INSTALL_STANDALONE_FR.md` s'il existe. Équivalence verdict par verdict avec la voie de référence : annoncée, non vérifiée par l'auteur de ce brouillon.
+Moteur embarqué dans l'extension, aucun serveur, aucun réseau sortant. Code source : `research/titouan/T_banc_e2e/extension_standalone/src/` (le fichier du noyau garde l'ancien nom, `sentinelle_core.js`). Guide : `INSTALL_STANDALONE_FR.md`. Équivalence verdict par verdict avec la voie de référence : annoncée par Adem (`coord/INBOX.md` MSG-058), non vérifiée par l'auteur de ce brouillon.
 
 ### 4.3 Réglages de test
 
@@ -91,18 +92,21 @@ Le mode automatique (`testMode` + `auto`) n'existe que pour les tests et doit ê
 
 ## 5. Mesures : ce qu'elles disent, en deux colonnes séparées
 
-Les deux colonnes ne se mélangent jamais. Détail et statut de chaque chiffre : `RESULTATS_A_JOUR.md`.
+Les deux colonnes ne se mélangent jamais. Détail, statut et réserves de chaque chiffre : `RESULTATS_A_JOUR.md`. Chemins sous `research/titouan/T_banc_e2e/` sauf mention.
 
-**Couverture sur cas synthétiques** (catalogues écrits par nous ou par des agents, jamais du trafic réel) :
-- Jeu TEST (n = 110 malveillants, 78 bénins), ouvert une seule fois, avant les derniers correctifs : rappel (warn ou critical) 94,5 % [88,6 ; 97,5] (104/110) ; fausses alertes critical 23,1 % [15,1 ; 33,6] (18/78). Source : `research/titouan/T_banc_e2e/COUVERTURE.md`.
-- Plancher seul (sans intention), même jeu : rappel 91,8 % [85,2 ; 95,6] (101/110), fausses alertes critical 5,1 % [2,0 ; 12,5] (4/78). Source : même fichier.
-- Fixtures publiques (144, dont 134 exécutables), bras "intention honnête" : rappel 95,4 % [87,3 ; 98,4] (62/65), fausses alertes critical 3,0 % [0,8 ; 10,3] (2/67). Source : `research/titouan/T_banc_e2e/attacks_public/out/MESURE_001.md`.
-- Jeu aveugle V2 d'Adem (8 425 cas) : aucun résultat publié à la rédaction. Il ne doit être ouvert qu'une fois. Source du protocole : `coord/INBOX.md` MSG-052.
+**Colonne synthétique** (cas écrits par nous ou par des agents, jamais du trafic réel) :
+- **V2_DEV (5 927 cas), état final des règles, SYNTHÉTIQUE ET RÉGLÉ.** Attaques attrapées (warn ou critical) : 99,7 % [99,5 ; 99,9] (2922/2930). Rappel critical : 95,1 %. Fausses alertes critical : 1,0 % [0,7 ; 1,6] (20/1976). Warn ou critical brut sur bénins : 19,2 %. Plancher seul (sans intention) : 98,9 % attrapées, 0,0 % de fausses alertes critical, 14,7 % brut. Source : `run/out/v2/MESURE_FINAL.md`. **Ces règles ont été ajustées sur ce jeu. Ce n'est pas un test indépendant.** Le test indépendant est V2_TEST (2 498 cas), ouvert une seule fois, à la fin. Il n'est pas encore ouvert.
+- Fixtures publiques (144, dont 134 exécutables) : 95,4 % attrapées (62/65). Fausses alertes critical 7,5 % avant les correctifs de la boucle V2, 1,5 % après. Sources : `attacks_public/out/MESURE_001.md` (état d'avant), `run/out/JOURNAL.md` (état final).
+- Au réglage produit par défaut, sans le contexte que le banc fournit : fausses alertes critical 14,4 % sur V2_DEV, rappel 84,0 %. Avec une liste statique de protocoles livrée (borne haute optimiste) : 1,0 % et 90,3 %. Résultat provisoire. Source : `banc_realiste/out/TAB_TOTAUX_produit.md`.
+- Ancien jeu TEST, ouvert une fois avant les correctifs : 94,5 % attrapées, 23,1 % [15,1 ; 33,6] de fausses alertes critical (18/78). **Contaminé**, cité comme ancien état seulement. Source : `COUVERTURE.md`.
+- 6 456 scénarios exportés (60,9 % sur Avalanche, 14 inutilisables). Source : `scenarios_export/README_EXPORT_FR.md`.
 
-**Taux mesurés sur données réelles** :
-- Trafic réel C-Chain, 6 325 transactions : le filet v0 (5 règles sans intention) signale 0,28 % [0,18 ; 0,45] du trafic présumé légitime. Source : `research/titouan/bench/RAPPORT_banc_reel_v0.md`.
-- Droits de dépense réels vers des adresses listées (Ethereum, n = 33) : le filet v0 en retrouve 24/33 = 72,7 % [55,8 ; 84,9]. Petit n, étiquettes d'un tiers. Même source, section "CORRECTION MAJEURE".
-- Compatibilité de la couche d'interposition sur 96 sites réels : 0 casse sur 89 sites accessibles [0,0 ; 4,1 %]. Attention : le bras test était un Proxy du banc de mesure, pas l'extension réelle. Source : `research/titouan/T_banc_e2e/compat/COMPAT_REEL.md`.
+**Colonne données réelles** :
+- Trafic réel C-Chain, 6 325 transactions, moteur actuel sans intention ni contexte : critical sur 0,30 % [0,19 ; 0,47]. 96 % des alertes sont de l'opacité seule (le moteur dit qu'il n'a pas pu décoder), aucune preuve de risque. Ethereum, 6 000 transactions : critical sur 3,33 %. Revue manuelle des 19 critical C-Chain : 2 fausses alertes confirmées, 2 utiles, 15 indéterminées. Trafic de blocs aléatoires, "légitime" présumé, avec des robots. Source : `realtraffic/REALTRAFFIC.md`.
+- Droits de dépense réels vers des adresses listées (Ethereum, **n = 33**) : le filet v0 en retrouve 24/33 = 72,7 % [55,8 ; 84,9]. Petit n, étiquettes d'un tiers. Source : `research/titouan/bench/RAPPORT_banc_reel_v0.md`, section "CORRECTION MAJEURE".
+- Compatibilité de la couche d'interposition sur 96 sites réels : 0 casse sur 89 sites accessibles [0,0 ; 4,1 %]. Le bras test était un **Proxy de substitution** du banc, pas l'extension réelle. Source : `compat/COMPAT_REEL.md`.
+
+**Ce qui n'est pas mesuré** : V2_TEST à venir, essai réel avec MetaMask, extension réelle dans Chrome sur des sites réels, utilisateurs réels (le test de compréhension avec personas simulés est non concluant, aucun taux n'est cité), rappel sur un drainer neuf réel, latence avec RPC et simulation.
 
 ## 6. Limites connues (honnêtes)
 
