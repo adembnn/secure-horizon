@@ -10,7 +10,7 @@ D'après le code public de MetaMask, il affiche ce plafond sans alerte propre à
 ## 0:30 à 1:15. La douleur et le constat
 « En 2025, les arnaques par signature ont coûté 84 millions de dollars à plus de 100 000 victimes. Trois des onze vols de plus d'un million de dollars sont passés par une signature qui donne le droit de dépenser.
 Tout service peut être compromis un jour : un contrat exploité, une interface détournée comme chez Bybit, environ 1,5 milliard. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre.
-Dans nos mesures, 48 % des droits accordés sur Ethereum sont illimités, 34 % sur Avalanche. Échantillons non représentatifs. C'est donner un double de toutes les clés de la maison au plombier. Le principe de sécurité, c'est de ne laisser que la clé dont il a besoin, pour le temps qu'il lui faut. »
+Dans nos mesures, 48 % des droits accordés sur Ethereum sont illimités, 34 % sur Avalanche. Échantillons non représentatifs. C'est donner un double de toutes les clés de la maison au plombier. On ne lui laisse que la clé dont il a besoin. »
 
 ## 1:15 à 2:00. La solution
 « Hold up est une extension de navigateur, posée devant le portefeuille que vous avez déjà : MetaMask, Core, Rabby. Elle ne tient pas vos clés.
@@ -19,19 +19,19 @@ Deux : indépendamment de votre phrase, des règles de base. Un droit illimité 
 
 ## 2:00 à 3:10. La démo
 « Scène un, en direct, sur une chaîne locale. J'écris : échanger 50 USDC. Le site demande un droit illimité. Hold up : ça ne correspond pas. Tu as écrit 50, la demande donne tout. Vers un routeur connu, c'est un avertissement léger. Vers une adresse neuve, c'est rouge.
-Scène deux, synthétique, adresses factices, inspirée de Bybit. Un coffre à plusieurs signataires affiche un virement de 20 USDC. La charge est un programme étranger qui prend le contrôle du coffre. Danger, même sans phrase.
+Scène deux, synthétique, inspirée de Bybit : un coffre affiche un virement de 20 USDC, la charge réelle donne le contrôle du coffre à un programme étranger. Danger, même sans phrase.
 Scène trois : je veux me connecter, la page réclame une signature qui donne le droit de dépenser. Ça ne correspond pas. »
 
 ## 3:10 à 4:00. Ce qu'on a mesuré
-« Le statut de chaque chiffre. Sur une grille de 1 079 paires phrase et demande, écrites par nous, contrôle scellé et ouvert une fois : on attrape 86,6 % des divergences, avec 1,3 % de fausses alertes quand un modèle classe la phrase. Sur 410 cas construits, 228 sur 228 avec l'intention détaillée : un test de couverture, pas un test indépendant. Un jeu aveugle de 250 cas est scellé et sera ouvert une fois.
+« Le statut de chaque chiffre. Sur une grille de 1 079 paires phrase et demande, écrites par nous, contrôle scellé et ouvert une fois : on attrape 86,6 % des divergences, avec 1,3 % de fausses alertes quand un modèle classe la phrase. Nos 410 cas de réglage sont à 100 % : un test de couverture, pas un test indépendant. Un jeu aveugle de 250 cas est scellé.
 Notre point faible : dans les conditions du produit, 54 % des opérations honnêtes reçoivent au moins un avertissement. Avec une liste de protocoles connus, le meilleur cas mesuré tombe à 17 %. C'est notre travail principal.
-Sur 6 325 transactions réelles d'Avalanche, 0,30 % d'alertes rouges, mais 77 % d'avertissements, presque tous des appels qu'on ne sait pas lire. Verdict local en moins de 50 millisecondes. »
+Sur 6 325 transactions réelles d'Avalanche : 0,30 % d'alertes rouges, 77 % d'avertissements, presque tous des appels illisibles. Verdict local en moins de 50 millisecondes. »
 
 ## 4:00 à 4:45. Données, responsabilité, conformité
-« Ce qui sort de la machine : dans la version livrée, rien. Un relais optionnel envoie la phrase seule, jamais les montants ni les adresses, à un modèle hébergé. S'il tombe, un repli local prend le relais, et sinon l'écran dit : je n'ai pas pu vérifier. Jamais de vert.
-La phrase est une donnée, jamais une instruction : le modèle répond par des questions fermées, et sur 19 paires de test avec consigne injectée, une seule dérive.
-Si le modèle se trompe : il ne lit que le sens de la phrase. Les montants et adresses sont lus par du code. La personne garde le dernier geste. Chaque décision est écrite dans un journal chaîné par hachage : une ligne modifiée ou retirée se détecte, mais le rejeu est partiel.
-Nous couvrons Detect et Respond du NIST CSF 2.0. Nous ne revendiquons ni DORA ni MiCA : ces cadres relèvent de l'organisation qui déploie. Le même moteur pourrait servir de contrôle avant retrait pour une plateforme : non construit. »
+« Ce qui sort de la machine : dans la version livrée, rien. Un relais optionnel envoie la phrase seule à un modèle hébergé, jamais les montants ni les adresses. S'il tombe, un repli local prend le relais, sinon l'écran dit : je n'ai pas pu vérifier. Jamais de vert.
+La phrase est une donnée, jamais une instruction : le modèle répond par des questions fermées.
+Si le modèle se trompe : il ne lit que le sens de la phrase. Les montants et adresses sont lus par du code. La personne garde le dernier geste. Chaque décision laisse une ligne dans un journal chaîné par hachage : une ligne modifiée se détecte.
+Nous couvrons Detect et Respond du NIST CSF 2.0. Nous ne revendiquons ni DORA ni MiCA : ces cadres relèvent de l'organisation qui déploie. »
 
 ## 4:45 à 5:00. Limites et conclusion
 « Nous ne couvrons pas la fraude que vous voulez vraiment faire, ni un Ledger branché directement. Essai réel avec MetaMask : à faire. MetaMask vous prévient de ce qu'il reconnaît. Hold up vérifie ce que vous vouliez faire. »
