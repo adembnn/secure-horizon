@@ -87,7 +87,7 @@
   },
   {
    "file": "extension_standalone/src/sentinelle_core.js",
-   "sha256": "610793eb5f0c50e43f7e759a7259ed4cae29d640d993a5becc0911d09d785e8e"
+   "sha256": "0e7c74b89f254105704bcb8b1ba55b3a5c23c38ffe5bdfc87ad54e5fd9fd3822"
   },
   {
    "file": "extension/bridge.js",
@@ -173,8 +173,8 @@
   },
   {
    "file": "engine/sentinelle_core.js",
-   "bytes": 39643,
-   "sha256": "610793eb5f0c50e43f7e759a7259ed4cae29d640d993a5becc0911d09d785e8e"
+   "bytes": 39912,
+   "sha256": "0e7c74b89f254105704bcb8b1ba55b3a5c23c38ffe5bdfc87ad54e5fd9fd3822"
   },
   {
    "file": "engine/src/abi_encode.js",
@@ -337,6 +337,6 @@
    "sha256": "d41eb7b68dabbce6e32754a1606d24dadabc451296985624108431ca91d2b3bd"
   }
  ],
- "total_bytes": 439295,
- "tree_sha256": "6fba8a235edc3b71d0a24c56bdb449deeac4a182b057b8ec57a0efd02a0d3b86"
+ "total_bytes": 439564,
+ "tree_sha256": "72c1fc63523b7b3e63c7b0cf161338bf509181daac7dc10de98675f207d274b3"
 }
