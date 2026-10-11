@@ -8,13 +8,13 @@ Design : `docs/design/system/DESIGN.md`. Fond noir, texte blanc, deux gris, poli
 
 | # | Ce qui est montré | Dans le dépôt |
 |---|---|---|
-| 1 | « 34 % » en très grand : autorisations illimitées lues sur Avalanche, une sur trois. Aucune mention d'Ethereum (décision d'Adem : nous adressons Avalanche) | `research/titouan/Z_approbations/onchain/result_avax.json` |
+| 1 | « 81 minutes » en très grand : Aerodrome piraté, personne ne le signale (trame d'Adem). En second : une autorisation sur trois est illimitée sur Avalanche. Aucune mention d'Ethereum | `research/demo_reelle/RECHERCHE_douleurs_secondaires.md` (C.1), `result_avax.json` |
 | 2 | « Tu écris. Je compare. Tu décides. » : deux écrans de la planche de design (question, « Ça ne correspond pas ») et les deux gestes : ne rien envoyer, ou limiter à 50 USDC puis envoyer ; rien ne part tout seul | `docs/design/system/planche.html` (système de design, en cours d'intégration) |
-| 3 | « Le même site, piraté plus tard » : 50 → 0 sans Hold up, 50 → 50 avec | `research/demo_reelle/site_echange/test/preuve_piratage.mjs` (chaîne locale) |
+| 3 | La scène racontée en trois temps (tu échanges 50, le site demande tout, il est piraté plus tard), puis « il te reste 0 USDC » sans Hold up, « 50 USDC » avec | `research/demo_reelle/site_echange/test/preuve_piratage.mjs` (chaîne locale) |
 | 4 | « Une autorisation déjà donnée ? Tu la retires. » : capture du panneau | `research/titouan/T_banc_e2e/extension/revoke.js`, `tests/unit/revoke.test.mjs` |
 | 5 | LI.FI, juillet 2024 : illimitées vidées, limitées rien perdu | `livrables/CHIFFRES.md` B7, rapport de LI.FI |
 | 6 | Jeu aveugle, 250 cas, moteur de comparaison : 65 % et 87 % ; seuil 10 %, mesuré 15 % | `research/titouan/T_banc_e2e/blind_decalage/run/RESULTAT.md`, `preuves/ECARTS_LIVRABLES.md` |
-| 7 | « Notre testeuse s'est fait piéger 4 fois » : capture réelle de l'extension pendant l'essai ; « Ce que Hold up ne fait pas encore », en trois phrases | `coord/reports/testeurs/3_prudente_clavier.md`, `preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md` |
+| 7 | « 36 parcours. Notre testeuse s'est fait piéger 4 fois. », les 4 fois après « Continuer » malgré l'alerte : capture réelle de l'extension pendant l'essai ; « Ce que Hold up ne fait pas encore », en deux phrases (la ligne « jamais essayé devant un vrai MetaMask » est retirée de la slide à la demande d'Adem, elle reste en notes orateur) | `coord/reports/testeurs/3_prudente_clavier.md`, `preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md` |
 | 8 | La phrase de fin d'Adem, seule (le modèle économique est en notes orateur) | `research/titouan/BM2/BM_MODELE.md`, `BM_LABEL.md` |
 
 Retiré parce que non vérifiable tel quel :

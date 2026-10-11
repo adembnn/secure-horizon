@@ -30,7 +30,7 @@ const big = (o) => Object.assign({ fontFace: FB }, o || {});
 function slide(say, repo, notes, o) {
   const s = pres.addSlide({ masterName: 'HOLDUP' });
   if (say) txt(s, say, 0.5, 0.4, (o && o.w) || 9, 0.6, big({ fontSize: 28 }));
-  txt(s, 'Dans le dépôt : ' + repo, 0.5, 5.1, 8.4, 0.25, { fontSize: 11, color: INK2 });
+  txt(s, 'Dans le dépôt : ' + repo, 0.5, 5.1, 8.4, 0.25, { fontSize: (o && o.fs) || 11, color: INK2 });
   s.addNotes(notes);
   return s;
 }
@@ -40,13 +40,14 @@ function bar(s, label, value, pct, y, color) {
   txt(s, value, 3.35 + 5.0 * pct, y, 1.4, 0.5, big({ fontSize: 26, valign: 'middle', color }));
 }
 
-// 1 Le constat
+// 1 Le postulat
 {
-  const s = slide('', 'research/titouan/Z_approbations/onchain/result_avax.json',
-    "Deux fenêtres, le même site, l'un piraté : à l'œil, impossible à dire. Ce jour-là, on perd ce qu'on lui a laissé le droit de prendre. Sur Avalanche C-Chain, 34,2 % [33,6 ; 34,9] des droits de dépense non nuls lus sont illimités (7 103 sur 20 753, 40 fenêtres de 500 blocs) : mesure interne, des événements et non des personnes, non représentative. Dire « une sur trois », jamais « la norme ». Nous adressons Avalanche : ne pas citer Ethereum. Méthode : Z4_illimite_par_plateforme.md dans le même dossier ; livrables/CHIFFRES.md B1.");
-  txt(s, '34 %', 0.5, 0.9, 9, 2.0, big({ fontSize: 130 }));
-  txt(s, 'des autorisations de dépense lues sur Avalanche sont illimitées.', 0.5, 3.15, 9, 0.5, big({ fontSize: 20 }));
-  txt(s, 'Une sur trois. Notre mesure, sur un échantillon de blocs.', 0.5, 3.75, 9, 0.4, { color: INK2 });
+  const s = slide('', 'research/demo_reelle/RECHERCHE_douleurs_secondaires.md, research/titouan/Z_approbations/onchain/result_avax.json',
+    "Trame d'Adem (livrables/pitch_v7/PITCH_ADEM.md) : en 2026, on ne peut plus promettre qu'un site est sûr. 21 novembre 2025, le site d'Aerodrome est détourné (DNS modifié) : 81 minutes entre le changement et le signalement du domaine, environ 700 000 $ de pertes. Mesure de Blockaid sur son propre délai : source intéressée, le dire si on demande. Postulat : tout service en ligne finira par être compromis ; la question devient « qu'est-ce que je lui ai laissé le droit de prendre ce jour-là ». Sur Avalanche C-Chain, 34,2 % [33,6 ; 34,9] des droits de dépense non nuls lus sont illimités (7 103 sur 20 753) : mesure interne, des événements et non des personnes. Nous adressons Avalanche : ne pas citer Ethereum. Aerodrome n'est pas sur Avalanche : c'est un exemple de site détourné, pas une mesure de notre chaîne. CHIFFRES.md B16 et B1.", { fs: 10 });
+  txt(s, '81 minutes', 0.5, 0.75, 9, 1.8, big({ fontSize: 110 }));
+  txt(s, 'Aerodrome est piraté. Personne ne le signale pendant 81 minutes.', 0.5, 2.85, 9, 0.5, big({ fontSize: 20 }));
+  txt(s, 'Novembre 2025. Tout service en ligne finira par être piraté.', 0.5, 3.45, 9, 0.4, { color: INK2 });
+  txt(s, 'Sur Avalanche, une autorisation sur trois est illimitée.', 0.5, 3.95, 9, 0.4, { color: INK2 });
 }
 
 // 2 Le produit : les trois écrans
@@ -63,14 +64,24 @@ function bar(s, label, value, pct, y, color) {
 
 // 3 La scène prouvée
 {
-  const s = slide('Le même site, piraté plus tard', 'research/demo_reelle/site_echange/test/preuve_piratage.mjs (chaîne locale, compte de test)',
-    "Scène prouvée sur la chaîne (livrables/pitch_v7/DEMO_DEROULE.md, H2 et H3) : site honnête qui demande l'illimité, piraté plus tard. Sans Hold up : 100, 50 après l'échange, puis 0. Avec : autorisation ramenée à 50, consommée par l'échange, le compte garde 50. Le parcours avec Hold up est joué dans un vrai Chromium (film_scene.mjs), le « sans » sur la chaîne seulement. Le script demande une chaîne locale déployée (npm run demo:deploy -- --network localhost) : le jury ne le rejoue pas en une commande. Copie locale d'Avalanche, rien sur Fuji (D-016). Phrase exacte : « sans Hold up il te reste zéro, avec Hold up tu gardes 50 ».");
-  txt(s, 'Sans Hold up', 0.5, 1.45, 4.2, 0.4, { color: INK2 });
-  txt(s, '50 → 0', 0.5, 1.85, 4.3, 1.5, big({ fontSize: 64 }));
-  txt(s, 'Autorisation illimitée : le pirate vide le compte.', 0.5, 3.2, 4.0, 0.8, { color: INK2 });
-  txt(s, 'Avec Hold up', 5.3, 1.45, 4.2, 0.4, { color: INK2 });
-  txt(s, '50 → 50', 5.3, 1.85, 4.3, 1.5, big({ fontSize: 64 }));
-  txt(s, 'Autorisation limitée à 50 USDC, consommée par l’échange : rien à prendre.', 5.3, 3.2, 4.0, 0.8, { color: INK2 });
+  const s = slide('Tu échanges 50 USDC. Plus tard, le site est piraté.', 'research/demo_reelle/site_echange/test/preuve_piratage.mjs (chaîne locale, compte de test)',
+    "Scène prouvée sur la chaîne (livrables/pitch_v7/DEMO_DEROULE.md, H2 et H3) : site honnête qui demande l'illimité, piraté plus tard. Le compte part de 100 USDC. Sans Hold up : 50 après l'échange, puis 0 après le piratage. Avec : autorisation limitée à 50 par le geste « Limiter à 50 USDC et envoyer », consommée par l'échange, le compte garde 50. Le parcours avec Hold up est joué dans un vrai Chromium (film_scene.mjs), le « sans » sur la chaîne seulement. Le script demande une chaîne locale déployée (npm run demo:deploy -- --network localhost) : le jury ne le rejoue pas en une commande. Copie locale d'Avalanche, rien sur Fuji (D-016).");
+  const steps = [
+    ['1', 'Tu as 100 USDC. Tu en échanges 50 sur un site honnête.'],
+    ['2', 'Pour le faire, le site te demande l’accès à tout ton USDC, sans date de fin.'],
+    ['3', 'Plus tard, ce site est piraté. Il te restait 50 USDC.'],
+  ];
+  steps.forEach((c, i) => {
+    const x = 0.5 + i * 3.1;
+    txt(s, c[0], x, 1.25, 0.35, 0.4, big({ fontSize: 18 }));
+    txt(s, c[1], x + 0.35, 1.27, 2.45, 0.9, { fontSize: 14, color: INK2 });
+  });
+  txt(s, 'Sans Hold up, il te reste', 0.5, 2.55, 4.2, 0.35, { color: INK2 });
+  txt(s, '0 USDC', 0.5, 2.9, 4.3, 1.0, big({ fontSize: 60 }));
+  txt(s, 'Le pirate se sert de l’accès illimité.', 0.5, 4.05, 4.2, 0.4, { fontSize: 14, color: INK2 });
+  txt(s, 'Avec Hold up, il te reste', 5.3, 2.55, 4.2, 0.35, { color: INK2 });
+  txt(s, '50 USDC', 5.3, 2.9, 4.3, 1.0, big({ fontSize: 60 }));
+  txt(s, 'Tu avais limité l’accès aux 50 de l’échange. Il n’y a plus rien à prendre.', 5.3, 4.05, 4.2, 0.6, { fontSize: 14, color: INK2 });
 }
 
 // 4 Après l'alerte
@@ -107,13 +118,12 @@ function bar(s, label, value, pct, y, color) {
 
 // 7 Ce qui ne marche pas encore
 {
-  const s = slide('Notre testeuse s’est fait\npiéger 4 fois', 'coord/reports/testeurs/3_prudente_clavier.md, preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md',
+  const s = slide('36 parcours. Notre testeuse\ns’est fait piéger 4 fois.', 'coord/reports/testeurs/3_prudente_clavier.md, preuves/exhaustivite/EXHAUSTIVITE_INTENTION.md',
     "La testeuse est un agent qui joue une personne prudente, au clavier : 36 parcours, piégée 4 fois en appuyant sur Continuer, actif tout de suite sur « Ça ne correspond pas » (capture réelle de l'extension, coord/reports/testeurs/3_captures/s05_08_f1_continuer_actif.png). Corrigé dans le commit b42792d : le geste attend, la demande expire à 3 minutes. Tests unitaires de l'extension rejoués le 11 oct. à 10h49 sur l'arbre de travail : 225 tests, 213 réussis, 12 en échec ; ne pas citer « 217 tests » sans le rejouer. Sur 58 paires d'essai : 18 contrôlées, 7 en partie, 20 non, 13 non distinguées (EXHAUSTIVITE_INTENTION.md). Hors périmètre : fraude voulue, Ledger direct, téléphone. Jamais essayé avec un vrai MetaMask. Ne pas dire « sécurisé ».", { w: 5.6 });
-  txt(s, 'Un agent qui joue une personne prudente, au clavier. « Continuer » était actif tout de suite. Corrigé depuis.', 0.5, 1.75, 5.2, 1.0, { color: INK2 });
+  txt(s, 'Les 4 fois, elle avait lu « Ça ne correspond pas » et appuyé sur « Continuer » quand même. Jamais piégée sans ce geste. La testeuse est un agent qui joue une personne prudente, au clavier.', 0.5, 1.6, 5.4, 1.2, { fontSize: 14, color: INK2 });
   txt(s, 'Ce que Hold up ne fait pas encore', 0.5, 2.95, 5.4, 0.4, big({ fontSize: 18 }));
   txt(s, [
     { text: 'Je ne vérifie pas ce que tu reçois en échange.', options: { breakLine: true } },
-    { text: 'Je n’ai jamais été essayé devant un vrai MetaMask.', options: { breakLine: true } },
     { text: 'Je ne couvre ni un Ledger en direct, ni le téléphone.' },
   ], 0.5, 3.45, 5.4, 1.5, { color: INK2, paraSpaceAfter: 8 });
   s.addImage({ path: path.join(ROOT, 'coord', 'reports', 'testeurs', '3_captures', 's05_08_f1_continuer_actif.png'), x: 6.3, y: 0.5, w: 3.2, h: 3.74 });
